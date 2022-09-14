@@ -1,4 +1,7 @@
 @extends('layouts.auth')
+
+@section('title','Cinevesture-Login')
+
 @section('content')
     <div class="container signup-container">
         <div class="row">
