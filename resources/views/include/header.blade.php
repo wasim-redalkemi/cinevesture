@@ -1,5 +1,5 @@
 @section('header')
-<header>
+<header class="Header_main_container">
     <div class="container">
       <div class="row">
         <div class="col-md-12">

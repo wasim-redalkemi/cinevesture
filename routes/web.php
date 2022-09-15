@@ -26,6 +26,10 @@ Route::get('/user-portfolio', function () {
     return view('user.profile_portfolio');
 });
 
+Route::get('/test-blade', function () {
+    return view('user.organisation');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
