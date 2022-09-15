@@ -22,6 +22,9 @@ Route::get('/otp', function () {
 Route::get('/main', function () {
     return view('main');
 });
+Route::get('/user-portfolio', function () {
+    return view('user.profile_portfolio');
+});
 
 Auth::routes();
 

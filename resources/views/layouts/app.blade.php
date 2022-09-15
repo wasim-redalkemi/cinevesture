@@ -17,7 +17,7 @@
     @yield('css')
 </head>
 
-<body>
+<body class="{{ $class ?? '' }}">
      <div id="app">
 
         <main class="">

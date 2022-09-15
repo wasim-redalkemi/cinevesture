@@ -2,7 +2,6 @@ body {
     background: rgb(28,3,48) !important;
     font-family: 'Open Sans';
     font-size: 100%;
-    color: white;
 }
 
 /* header  */
@@ -68,7 +67,7 @@ body {
     height: 2.5rem;
     line-height: 114%;
     border-radius: 4px;
-    /* width: 9rem; */
+    width: 9rem;
 }
 
 .search ::placeholder {
@@ -800,6 +799,9 @@ body {
     border-radius: 50%;
     border:none
 }
+.ml_10 {
+    margin-left: 10px !important;
+}
 
 /* profile pages  */
 
@@ -840,6 +842,7 @@ body {
 .sidebar_contanr_hr {
     border-bottom: 1px solid #D2D2D2;
     margin: 0;
+    background-color: transparent;
 }
 .profile_text h1{
     font-weight: 600;
@@ -847,6 +850,20 @@ body {
     line-height: 124%;
     letter-spacing: -0.01em;
     color: #1C0330;
+}
+.profile_cmn_head_text {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 150%;
+    color: #1C0330;
+}
+.profile_upload_text {
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 126%;
+    letter-spacing: 0.033em;
+    color: #000000;
+    margin-top: 8px;
 }
 .upload_img_container {
     border: 1px dashed #4D0D8A;
@@ -895,4 +912,33 @@ body {
 .profile_dropdown_menu li {
    color: #4D0D8A;
    padding: 5px;
+}
+.cancel_btn {
+    background: transparent;
+    border: none;
+    color: #4D0D8A !important;
+    font-weight: 700;
+}
+.save_add_btn {
+    padding: 6px 16px;
+    background: #FAF8FB;
+    border-radius: 4px;
+    height: 40px;
+    border: none;
+    color: #971E9B;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+}
+.profile_upload_container {
+    opacity: 0.5;
+    border: 1px dashed #4D0D8A;
+    filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 172px;
+    margin-top: 16px;
 }
