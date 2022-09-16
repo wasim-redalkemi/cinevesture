@@ -25,6 +25,24 @@ Route::get('/main', function () {
 Route::get('/user-portfolio', function () {
     return view('user.profile_portfolio');
 });
+Route::get('/user-qualification', function () {
+    return view('user.profile_qualification');
+});
+Route::get('/profile-setup', function () {
+    return view('user.profile_setup');
+});
+Route::get('/profile-experience', function () {
+    return view('user.profile_experience');
+});
+Route::get('/guide-profile', function () {
+    return view('user.guide_profile');
+});
+Route::get('/profile-view', function () {
+    return view('user.profile_view');
+});
+Route::get('/profile-contact', function () {
+    return view('user.profile_contact');
+});
 
 Auth::routes();
 

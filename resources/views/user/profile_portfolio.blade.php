@@ -2,6 +2,10 @@
 
 @section('title','Cinevesture-portfolio')
 
+@section('header')
+    @include('include.header')
+@endsection
+
 @section('content')
     <section class="profile-section">
         <div class="container">
@@ -14,14 +18,13 @@
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Add Portfolio</div>
                             <div><i class="fa fa-trash-o  deep-pink icon-size" aria-hidden="true"></i></div>
-                            </div>
+                        </div>
 
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="profile_input">
                                     <label>Project Title</label>
-                                    <input type="text" class="form-control" placeholder="Project Title"
-                                        aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" placeholder="Project Title" aria-label="Username" aria-describedby="basic-addon1">
                                 </div>
                             </div>
                         </div>
@@ -143,8 +146,7 @@
                                 </div>
                                 <div class="profile_upload_text"> Upload JPG or PNG, 400x400 PX</div>
                             </div>
-                        </div>
-                        
+                        </div>                        
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-end mt-4">
@@ -152,13 +154,15 @@
                                 <button class="save_add_btn">Save & add another</button>
                                 <button class="guide_profile_btn mx-3">Save</button>
                                 </div>
-                                </div>
                             </div>
-
-
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        </section>
-        @endsection
+    </section>
+@endsection
+
+@section('footer')
+    @include('include.footer')
+@endsection
