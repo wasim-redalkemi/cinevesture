@@ -6,7 +6,7 @@
 <div class="container signup-container">
     <div class="row">
         <div class="col-md-12">
-            <div class="signup-text"> Sign Up</div>
+            <div class="signup-text mt-5"> Sign Up</div>
         </div>
         <div class="col-lg-6 col-sm-6 mt-2 mt-lg-5 pt-2 pt-lg-5">
             <input type="text" class="w-100" placeholder="First Name">
@@ -31,7 +31,7 @@
                 up
                 with google</button>
         </div>
-        <div class="help-text mt-2 mt-lg-5">Need Help ?</div>
+        <div class="help-text mt-2 mt-lg-4">Need Help ?</div>
         <div class="bottom-container mb-5">
             <div class="aleady-text">Already have an account ?<span class="mx-3 sign_now_text">Login here</span>
             </div>

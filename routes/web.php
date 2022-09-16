@@ -44,6 +44,10 @@ Route::get('/profile-contact', function () {
     return view('user.profile_contact');
 });
 
+Route::get('/test-blade', function () {
+    return view('user.organisation');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

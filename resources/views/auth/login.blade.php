@@ -6,9 +6,9 @@
     <div class="container signup-container">
         <div class="row">
             <div class="col-md-12">
-                <div class="signup-text"> Log in</div>
+                <div class="signup-text mt-5 mt-md-5"> Log in</div>
             </div>
-            <div class="col-12 mt-2 mt-lg-5 pt-2 pt-lg-5">
+            <div class="col-12 mt-2 mt-lg-5 pt-5 pt-lg-5">
                 <input type="text" class="w-100" placeholder="Email">
             </div>
             <div class="col-12 mt-2 mt-lg-5">
