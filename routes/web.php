@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -13,57 +16,60 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 Auth::routes();
 
-Route::get('/', function () {
-    return view('auth.login');
-});
-Route::get('/otp', function () {
-    return view('auth.auth_otp');
-});
-Route::get('/main', function () {
-    return view('main');
-});
-Route::get('/user-portfolio', function () {
-    return view('user.profile_portfolio');
-});
-Route::get('/user-qualification', function () {
-    return view('user.profile_qualification');
-});
-Route::get('/profile-setup', function () {
-    return view('user.profile_setup');
-});
-Route::get('/profile-experience', function () {
-    return view('user.profile_experience');
-});
-Route::get('/guide-profile', function () {
-    return view('user.guide_profile');
-});
-Route::get('/profile-view', function () {
-    return view('user.profile_view');
-});
-Route::get('/profile-contact', function () {
-    return view('user.profile_contact');
-});
-Route::get('/searchpage', function () {
-    return view('user.searchpage');
-});
+
 
 Route::get('/test-blade', function () {
     return view('user.organisation');
 });
+Route::get('/verify-otp/{user}',  [RegisterController::class, 'verifyOtpView'])->name('verifyOtpView');
+Route::post('verify-otp', [RegisterController::class, 'verifyOtp'])->name('verify-otp');
+// Route::get('/email/verify', function () {
+//     return view('auth.verify-email');
+// })->middleware('auth')->name('verification.notice');
+
+Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],function(){
+
+    Route::get('/', function () {
+        return view('auth.login');
+    });
+    
+    // Route::get('/otp', function () {
+    //     return view('auth.auth_otp');
+    // });
+    Route::get('/main', function () {
+        return view('main');
+    });
+
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+    Route::get('/user-portfolio', function () {
+        return view('user.profile_portfolio');
+    });
+    Route::get('/user-qualification', function () {
+        return view('user.profile_qualification');
+    });
+    Route::get('/profile-setup', function () {
+        return view('user.profile_setup');
+    });
+    Route::get('/profile-experience', function () {
+        return view('user.profile_experience');
+    });
+    Route::get('/guide-profile', function () {
+        return view('user.guide_profile');
+    });
+    Route::get('/profile-view', function () {
+        return view('user.profile_view');
+    });
+    Route::get('/profile-contact', function () {
+        return view('user.profile_contact');
+    });
+    Route::get('/searchpage', function () {
+        return view('user.searchpage');
+    });
+});
 
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
