@@ -1058,3 +1058,34 @@ body {
     border-radius: 4px;
     justify-content: space-between;
 }
+.preview_headtext {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 100%;
+    letter-spacing: 0.0025em;
+    color: #971E9B;
+    margin-top: 14px;
+}
+.preview_subtext{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 158%;
+    letter-spacing: 0.0075em;
+    color: #1C0330;
+    margin-top: 8px;
+}
+.mt_35 {
+    margin-top: 30%;
+}
+.deactivate_btn {
+    padding: 6px 16px;
+    height: 40px;
+    background: #FAF8FB;
+    border-radius: 4px;
+    border: none;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.054em;
+    color: #C13D4F;
+}

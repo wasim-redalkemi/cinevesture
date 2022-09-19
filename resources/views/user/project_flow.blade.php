@@ -568,6 +568,93 @@
 </section>
 
 
+<!-- Preview section  -->
+<section>
+<div class="container profile_wraper profile_wraper_padding  mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div><p class="flow_step_text"> Overview</p></div>
+                <div class="preview_headtext">Project Name</div>
+                <div class="preview_subtext">Test</div>
+                <div class="preview_headtext">Types of projects</div>
+                <div class="preview_subtext">COntent</div>
+                <div class="preview_headtext">Who are you litning this project as</div>
+                <div class="preview_subtext">Individual</div>
+                <div class="preview_headtext">Language</div>
+                <div class="preview_subtext">English</div>
+                <div class="preview_headtext">Country</div>
+                <div class="preview_subtext">United State</div>
+                <div class="preview_headtext">Locations</div>
+                <div class="preview_subtext">Santa</div>
+            </div>
+        </div>
+</div>
+<div class="container profile_wraper profile_wraper_padding  mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div><p class="flow_step_text"> Overview</p></div>
+                <div class="preview_headtext">Project Name</div>
+                <div class="preview_subtext">Test</div>
+                <div class="preview_headtext">Types of projects</div>
+                <div class="preview_subtext">COntent</div>
+                <div class="preview_headtext">Who are you litning this project as</div>
+                <div class="preview_subtext">Individual</div>
+                <div class="preview_headtext">Language</div>
+                <div class="preview_subtext">English</div>
+                <div class="preview_headtext">Country</div>
+                <div class="preview_subtext">United State</div>
+                <div class="preview_headtext">Locations</div>
+                <div class="preview_subtext">Santa</div>
+                <div class="justify-content-end"><button class="save_add_btn">Edit</button></div>
+            </div>
+        </div>
+</div>
+<div class="container profile_wraper profile_wraper_padding  mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div><p class="flow_step_text"> Overview</p></div>
+                <div class="preview_headtext">Project Name</div>
+                <div class="preview_subtext">Test</div>
+                <div class="preview_headtext">Types of projects</div>
+                <div class="preview_subtext">COntent</div>
+                <div class="preview_headtext">Who are you litning this project as</div>
+                <div class="preview_subtext">Individual</div>
+                <div class="preview_headtext">Language</div>
+                <div class="preview_subtext">English</div>
+                <div class="preview_headtext">Country</div>
+                <div class="preview_subtext">United State</div>
+                <div class="preview_headtext">Locations</div>
+                <div class="preview_subtext">Santa</div>
+                <div class="justify-content-end"><button class="save_add_btn">Edit</button></div>
+            </div>
+        </div>
+</div><div class="container profile_wraper profile_wraper_padding  mt-4">
+        <div class="row">
+            <div class="col-md-12">
+                <div><p class="flow_step_text"> Details</p></div>
+                <div class="preview_headtext">Category</div>
+                <div class="preview_subtext">Feature</div>
+                <div class="preview_headtext">Genre</div>
+                <div class="d-flex mt-2">
+                    <button class="curv_cmn_btn">Adventure</button>
+                    <button class="curv_cmn_btn mx-3">Biography</button>
+
+                </div>
+                <div class="preview_headtext">Who are you litning this project as</div>
+                <div class="preview_subtext">Individual</div>
+                <div class="preview_headtext">Language</div>
+                <div class="preview_subtext">English</div>
+                <div class="preview_headtext">Country</div>
+                <div class="preview_subtext">United State</div>
+                <div class="preview_headtext">Locations</div>
+                <div class="preview_subtext">Santa</div>
+                <div class="justify-content-end"><button class="save_add_btn">Edit</button></div>
+            </div>
+        </div>
+</div>
+</section>
+
+
 @endsection
 
 @section('footer')
