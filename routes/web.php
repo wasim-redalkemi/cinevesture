@@ -23,7 +23,7 @@ Auth::routes();
 
 
 Route::get('/test-blade', function () {
-    return view('user.organisation');
+    return view('user.setting');
 });
 Route::get('/verify-otp/{user}',  [RegisterController::class, 'verifyOtpView'])->name('verifyOtpView');
 Route::post('verify-otp', [RegisterController::class, 'verifyOtp'])->name('verify-otp');
