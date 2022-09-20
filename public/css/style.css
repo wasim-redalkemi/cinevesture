@@ -269,7 +269,13 @@ body {
     margin-top: 0;
 }
 
-
+.text_decor_none {
+    text-decoration: none;
+    color: white;
+}
+.btn:focus  {
+ box-shadow: none !important;
+}
 /* footer  */
 
 .footer {
@@ -315,6 +321,7 @@ body {
 .auth_section {
     background: #33084C !important;
     padding: 0 35%;
+    min-height: 100vh;
 }
 
 .before_login_section {

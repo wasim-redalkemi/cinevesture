@@ -27,7 +27,7 @@ Route::get('/user-portfolio', function () {
 });
 
 Route::get('/test-blade', function () {
-    return view('auth.register');
+    return view('user.project_flow');
 });
 
 Auth::routes();

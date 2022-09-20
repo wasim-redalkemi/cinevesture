@@ -27,7 +27,7 @@
 
             <div class="help-text mt-2 mt-lg-3 text-center">Forgot password ?</div>
             <div class="bottom-container mb-5 pb-5">
-                <div class="aleady-text">New to Cinevesture? <span class="mx-2 sign_now_text">Sign Up </span>now
+                <div class="aleady-text">New to Cinevesture? <span class="mx-2 sign_now_text"><a href="" class="text_decor_none"> Sign Up </a></span>now
                 </div>
                 <div class="my-3 proctect_by_capta_text">
                     This site is protected by reCAPTCHA and with Google Privacy
