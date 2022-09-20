@@ -133,7 +133,7 @@ class RegisterController extends Controller
     {
         $otp = new Otp();
         $otp->user_id = $user->id;
-        $otp->otp = 123456;
+        $otp->otp = rand(100000,999999);
         $otp->save();
         return $otp->otp;
     }
@@ -172,7 +172,8 @@ class RegisterController extends Controller
                         // return redirect()->route("verify-otp",["id"=>$userObj]);
                         // return redirect()->route("verify-otp/user",["user"=>$userObj]);
                         $user = $userObj;
-                        return view('auth.otp',compact('user'));
+                        $msg = 'Inavlid otp!';
+                        return view('auth.otp',compact('user','msg'));
                      }
 
                     //  dd($userObj->otp);

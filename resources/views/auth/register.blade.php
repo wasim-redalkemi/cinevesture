@@ -3,9 +3,9 @@
 @section('title','Cinevesture-Register')
 
 @section('content')
-<section class="auth_section h-100">
-<div class="container signup-container h-100">
-    <div class="row h-100">
+<section class="auth_section">
+<div class="container signup-container">
+    <div class="row">
         <div class="col-md-12">
             <div class="signup-text mt-5"> Sign Up</div>
         </div>
@@ -59,7 +59,7 @@
         </div>
         <div class="help-text mt-2 mt-lg-4">Need Help ?</div>
         <div class="bottom-container mb-5">
-            <div class="aleady-text">Already have an account ?<span class="mx-3 sign_now_text">Login here</span>
+            <div class="aleady-text">Already have an account ?<a href="{{route('login')}}"><span class="mx-3 sign_now_text text-white">Login here</span></a>
             </div>
             <div class="my-3">
                 This site is protected by reCAPTCHA and with Google Privacy

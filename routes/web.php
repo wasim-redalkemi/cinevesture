@@ -35,14 +35,14 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 
     Route::get('/', function () {
         return view('auth.login');
-    });
+    })->name('login');
     
     // Route::get('/otp', function () {
     //     return view('auth.auth_otp');
     // });
     Route::get('/main', function () {
         return view('main');
-    });
+    })->name('main');
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 

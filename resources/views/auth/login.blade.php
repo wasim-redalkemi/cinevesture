@@ -45,7 +45,7 @@
                 {{-- <div class="help-text mt-2 mt-lg-3 text-center">Forgot password ?</div> --}}
                 <div class="help-text mt-2 mt-lg-3 text-center">
                     @if (Route::has('password.request'))
-                        <a class="btn btn-link" style="color: white" href="{{ route('password.request') }}">
+                        <a class="btn-link" style="color: white" href="{{ route('password.request') }}">
                             {{ __('Forgot password ?') }}
                         </a>
                     @endif
@@ -53,7 +53,7 @@
                 <div class="bottom-container mb-3">
                     <div class="aleady-text">New to Cinevesture?<span class="mx-2 sign_now_text">
                     @if (Route::has('password.request'))
-                        <a class="btn btn-link" style="color: white; padding: 0" href="{{ route('register') }}">
+                        <a class="btn-link text-white"href="{{ route('register') }}">
                             {{ __('Sign Up') }}
                         </a>
                     @endif
