@@ -30,7 +30,12 @@
                     </div>
                     <div class="row mt-md-5 pt-md-5 mt-0 pt-0">
                         <div class="col-md-2">
-                            <button class="deactivate_btn">Logout</button>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                
+                                <button class="deactivate_btn" type="submit">{{ __('Logout') }} </button>
+                            </form>
+                            {{-- <button class="deactivate_btn">Logout</button> --}}
                         </div>
                         <div class="col-md-5 mt-2 mt-md-0">
                             <button class="deactivate_btn">Deactivate account</button>

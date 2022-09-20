@@ -35,6 +35,6 @@
     <hr class="sidebar_contanr_hr">
     <div class="sidebar_contant"><a href="">Membership & Billing</a></div>
     <hr class="sidebar_contanr_hr">
-    <div class="sidebar_contant"><a href="">Settings</a></div>
+    <div class="sidebar_contant"><a href="{{ route('setting-page')}}">Settings</a></div>
     <hr class="sidebar_contanr_hr">
 </div>

@@ -270,8 +270,8 @@ body {
 }
 
 .text_decor_none {
-    text-decoration: none;
-    color: white;
+    text-decoration: none !important;
+    color: white !important;
 }
 .btn:focus  {
  box-shadow: none !important;
@@ -754,7 +754,7 @@ body {
 }
 
 .bg_white .guide_profile_section {
-    padding: 5% 10%;
+    padding: 5% 8%;
 }
 .guide_profile_section .content_wraper {
     background: #FFFFFF;

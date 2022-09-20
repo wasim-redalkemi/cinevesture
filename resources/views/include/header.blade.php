@@ -55,7 +55,33 @@
             <i class="fa fa-user-circle mx-2"
               style="font-size:25px; color: #DD45B3;background-color: white; border-radius: 50%;border:none"
               aria-hidden="true"></i>
-            <span>Profile</span>
+              <a href="{{ route('setting-page')}}" class="text_decor_none">
+                <span>Profile</span>
+              </a>
+        </div>
+        <div>
+          @if(session('message'))
+                    <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+                        <ul class="list-unstyled">
+                            {{ session('message') }}
+                        </ul>
+                        <button type="button" class="close mt-3" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
+                @if($errors->count() > 0)
+                    <div class="alert alert-danger alert-dismissible fade show m-3">
+                        <ul class="list-unstyled pt-3">
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                        <button type="button" class="close mt-3" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                @endif
         </div>
         </nav>
       </div>
