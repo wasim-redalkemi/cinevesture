@@ -3,6 +3,7 @@
 @section('title','Cinevesture-Login')
 
 @section('content')
+<section class="auth_section">
     <div class="container signup-container">
         <div class="row">
             <div class="col-md-12">
@@ -65,5 +66,6 @@
                 </div>
             </form>
         </div>
-    </div>       
+    </div>   
+</section>    
 @endsection

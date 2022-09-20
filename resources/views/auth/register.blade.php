@@ -3,8 +3,9 @@
 @section('title','Cinevesture-Register')
 
 @section('content')
-<div class="container signup-container">
-    <div class="row">
+<section class="auth_section h-100">
+<div class="container signup-container h-100">
+    <div class="row h-100">
         <div class="col-md-12">
             <div class="signup-text mt-5"> Sign Up</div>
         </div>
@@ -71,4 +72,4 @@
         </div>
     </div>
 </div>
-@endsection 
+
