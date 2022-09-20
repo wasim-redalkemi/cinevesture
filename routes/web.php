@@ -46,7 +46,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-    Route::get('/user-portfolio', function () {
+    Route::get('/', function () {
         return view('user.profile_portfolio');
     });
     Route::get('/user-qualification', function () {
@@ -60,16 +60,19 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     });
     Route::get('/guide-profile', function () {
         return view('user.guide_profile');
-    });
+    })->name('guide-profile');
     Route::get('/profile-view', function () {
         return view('user.profile_view');
-    });
+    })->name('profile-view');
     Route::get('/profile-contact', function () {
         return view('user.profile_contact');
     });
     Route::get('/searchpage', function () {
         return view('user.searchpage');
     });
+    Route::get('/setting-page', function () {
+        return view('user.setting');
+    })->name('setting-page');
 });
 
 

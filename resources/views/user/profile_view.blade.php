@@ -1,4 +1,4 @@
-@extends('layouts.app',['class' => 'bg_white'])
+@extends('layouts.app',['class' => 'main'])
 
 @section('title','Cinevesture-profile-view')
 
@@ -58,7 +58,7 @@
                         </div>
                         <div class="col-lg-6 col-md-12 px-3">
                             <div class="public-head-subimage">
-                                <img src="./assets/images/Rectangle 43.png" width=100%>
+                                <img src="{{ asset('public/images/asset/Rectangle 43.png') }}" width=100%>
                             </div>
                             <div class="d-flex my-4 align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
@@ -117,18 +117,18 @@
                         <h1 class="public-heading-text"> Gallery</h1>
                         <div class="public-head-subtext mt-3">Videos</div>
                         <div class="row">
-                            <div class="col-lg-3 col-sm-4 mt-sm-2 mt-3"><img src="./assets/images/Rectangle 42.png"
+                            <div class="col-lg-3 col-sm-4 mt-sm-2 mt-3"><img src="{{ asset('public/images/asset/Rectangle 42.png') }}"
                                     alt="image" width=100%></div>
-                            <div class="col-lg-3 col-sm-4 mt-sm-2 mt-3"><img src="./assets/images/Rectangle 43.png"
+                            <div class="col-lg-3 col-sm-4 mt-sm-2 mt-3"><img src="{{ asset('public/images/asset/Rectangle 43.png') }}"
                                     alt="image" width=100%></div>
-                            <div class="col-lg-3 col-sm-4 mt-sm-2 mt-3"><img src="./assets/images/Rectangle 44.png"
+                            <div class="col-lg-3 col-sm-4 mt-sm-2 mt-3"><img src="{{ asset('public/images/asset/Rectangle 44.png') }}"
                                     alt="image" width=100%></div>
                         </div>
                         <div class="public-head-subtext mt-3">Photos</div>
                         <div class="row">
-                            <div class="col-lg-3 col-sm-6 mt-sm-2 mt-3"><img src="./assets/images/Rectangle 44.png"
+                            <div class="col-lg-3 col-sm-6 mt-sm-2 mt-3"><img src="{{ asset('public/images/asset/Rectangle 44.png') }}"
                                     alt="image" width=100%></div>
-                            <div class="col-lg-3 col-sm-6 mt-sm-2 mt-3"><img src="./assets/images/Rectangle 47.png"
+                            <div class="col-lg-3 col-sm-6 mt-sm-2 mt-3"><img src="{{ asset('public/images/asset/Rectangle 47.png') }}"
                                     alt="image" width=100%></div>
                         </div>
                     </div>
@@ -142,7 +142,7 @@
                             <div class="col-lg-3 col-sm-6 mt-sm-2 mt-2">
                                 <div class="d-flex pdf-container">
                                     <div class="icon">
-                                        <img src="./assets/images/pdf-icon.png">
+                                        <img src="{{ asset('public/images/asset/pdf-icon.png') }}">
                                     </div>
                                     <div class="public-subheading-text mx-2">
                                         <div>Lorem ipson pdf </div>
@@ -153,7 +153,7 @@
                             <div class="col-lg-3 col-sm-6 mt-sm-2 mt-2">
                                 <div class="d-flex pdf-container">
                                     <div class="icon">
-                                        <img src="./assets/images/pdf-icon.png">
+                                        <img src="{{ asset('public/images/asset/pdf-icon.png') }}">
                                     </div>
                                     <div class="public-subheading-text mx-2">
                                         <div>Lorem ipson pdf </div>
@@ -275,7 +275,7 @@
                                 <div class="item">
                                     <div class="slider img-container">
                                         <div class="img-container">
-                                            <img src="./assets/images/ba947a848086b8f90238636dcf7efdb5 1.png" width=100%
+                                            <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" width=100%
                                                 height=100% alt="image">
                                         </div>
                                         <div class="secondry-card-top-container w-100">
@@ -292,12 +292,12 @@
                             </div>
                             <div class="col-4">
                                 <div class="item">
-                                    <img src="./assets/images/download (3) 2.png" width=100% height=100% alt="image">
+                                    <img src="{{ asset('public/images/asset/download (3) 2.png') }}" width=100% height=100% alt="image">
                                 </div>
                             </div>
                             <div class="col-4">
                                 <div class="item">
-                                    <img src="./assets/images/43710-posts 2.png" width=100% height=100% alt="image">
+                                    <img src="{{ asset('public/images/asset/43710-posts 2.png') }}" width=100% height=100% alt="image">
                                 </div>
                             </div>
                         </div>

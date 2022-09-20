@@ -15,11 +15,6 @@
   <div class="main-body">
     <section class="section">
       <div class="sub-section">
-        <form method="POST" action="{{ route('logout') }}">
-          @csrf
-          
-          <button class="btn  btn-danger" type="submit">{{ __('logout ?') }} </button>
-      </form>
         <div class="main_slider owl-carousel">
           <div class="item">
             <div class="home-upper-slider">
