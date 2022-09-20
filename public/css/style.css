@@ -312,6 +312,11 @@ body {
 
 /* sign up/ in  */
 
+.auth_section {
+    background: #33084C !important;
+    padding: 0 35%;
+}
+
 .before_login_section {
     padding: 5% 30%;
 }
@@ -322,7 +327,8 @@ body {
 }
 
 .signup-container {
-    background: rgb(28,3,48);
+    background: #33084C !important;
+    /* padding: 0 35%; */
 }
 .signup-text {
     font-weight: 600;
@@ -1024,6 +1030,9 @@ body {
     border: 2px solid #971E9B;
     background-color: #971E9B;
     width: 14%;
+}
+.w_14 {
+    width: 17%;
 }
 .flow_step_text {
     font-weight: 400;
