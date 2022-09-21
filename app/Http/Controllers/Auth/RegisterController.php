@@ -106,7 +106,7 @@ class RegisterController extends Controller
         }
         
         // return $this->verifyOtpView($user->id);
-        return view('auth.otp',compact('user'));
+        return redirect()->route('otp-view', ['email' => $user->email]);
 
     }
 
@@ -155,7 +155,9 @@ class RegisterController extends Controller
                  'email.exists' => 'Something went wrong. Try again.'
              ]);
              if ($validator->fails()) {
-                 // return $this->returnResponse(false, 'ERR031', $validator->errors()->first(), null, null);
+                  return redirect()->route('verify_otp');
+                
+                return back()->with('error','You are not logged in or Your session has expired');
              } else {
                  $userObj = User::query()
                      ->where("email", $request->email)
@@ -164,47 +166,31 @@ class RegisterController extends Controller
                      $otpObj = Otp::query()
                          ->where("user_id", $userObj->id)
                          ->where("otp", $request->otp)
-                         // ->where("otp_type", $request->otp_type)
                          ->first();
                      if (empty($otpObj)) {
-                        //  return $this->returnResponse(false, "ERR033", config('error_codes.verify_otp.ERR033'), null, null);
-                        // throw new Exception('Wrong in otp.');
-                        // return redirect()->route("verify-otp",["id"=>$userObj]);
-                        // return redirect()->route("verify-otp/user",["user"=>$userObj]);
-                        $user = $userObj;
-                        $msg = 'Inavlid otp!';
-                        return view('auth.otp',compact('user','msg'));
+                        return back()->with('error','You are not logged in or Your session has expired');
                      }
 
-                    //  dd($userObj->otp);
-                    // if($otpObj->otp == $userObj->otp)
-                    // {
                         $userObj->email_verified_at = Carbon::now();
                         $userObj->save();
                         $this->guard()->login($userObj);
                 
                         return $request->wantsJson()
                                     ? new JsonResponse([], 201)
-                                    : redirect($this->redirectPath());
-                    // }
-                    // else {
-                    //     throw new Exception('Wrong in otp.');
-                    //     return back();
-                    // }
-
-                    
+                                    : redirect($this->redirectPath());                    
                       
                  }else{
                      // return $this->returnResponse(false, "ERR032", config('error_codes.verify_otp.ERR032'), null, null);
                  }
              }
          } catch (Exception $e) {
-             return $this->returnResponse(false, "ERR011", $e->getMessage(), null, null);
+            return back()->withError('You are not logged in or Your session has expired');
          }
        
      }
 
-     public function verifyOtpView(User $user){
+     public function verifyOtpView(Request $request){
+        $user = User::query()->where('email',$request->email)->first();
         return view('auth.otp',compact('user'));
      }
 

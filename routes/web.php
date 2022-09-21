@@ -25,8 +25,8 @@ Auth::routes();
 Route::get('/test-blade', function () {
     return view('user.project_flow');
 });
-Route::get('/verify-otp/{user}',  [RegisterController::class, 'verifyOtpView'])->name('verifyOtpView');
 Route::post('verify-otp', [RegisterController::class, 'verifyOtp'])->name('verify-otp');
+Route::get('otp', [RegisterController::class, 'verifyOtpView'])->name('otp-view');
 // Route::get('/email/verify', function () {
 //     return view('auth.verify-email');
 // })->middleware('auth')->name('verification.notice');
@@ -37,9 +37,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         return view('auth.login');
     })->name('login');
     
-    // Route::get('/otp', function () {
-    //     return view('auth.auth_otp');
-    // });
+   
     Route::get('/main', function () {
         return view('main');
     })->name('main');

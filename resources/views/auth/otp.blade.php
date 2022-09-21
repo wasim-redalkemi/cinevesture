@@ -13,7 +13,24 @@
             </div>
             <div class="col-12 mt-2 mt-lg-5 pt-2 pt-lg-5">
                 <input type="hidden" name = "email" value = "{{$user->email}}">
-                <input type="password" class="w-100" name="otp" placeholder="Please Enter OTP">
+                <input type="password" class="w-100 {{ $errors->has('otp') ? ' is-invalid' : '' }}" name="otp" placeholder="Please Enter OTP" required>
+              
+                {{-- @if ($errors->has('otp'))
+                <span class="invalid-feedback" style="display: block;" role="alert">
+                    <strong>{{ $errors->first('otp') }}</strong>
+                </span>
+            @endif --}}
+            @if(session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+@endif
+                {{-- @error('otp')
+                    <span class="invalid-feedback" role="alert">
+                        <strong>{{ $msg }}</strong>
+                    </span>
+                @enderror --}}
+              
             </div>
             <div class="col-12 mt-2 mt-lg-5">
                 <button class="w-100">Submit</button>
