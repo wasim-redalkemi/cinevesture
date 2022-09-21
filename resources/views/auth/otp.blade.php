@@ -5,6 +5,7 @@
 @section('content')
 <section class="auth_section">
     <div class="container signup-container">
+    @include('include.flash_message')
         <form method="POST" action="{{ route('verify-otp') }}">
             @csrf
         <div class="row">
