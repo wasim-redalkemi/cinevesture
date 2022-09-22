@@ -427,9 +427,11 @@ body {
 
 .side-bar-cmn-part {
     padding: 1.5rem !important;
-    background: #FAF8FB;
+    background: #FFFFFF;
     border-radius: 4px;
-    height: 80vh
+    height: 80vh;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+
 }
 
 .search-box-container {
@@ -756,6 +758,12 @@ body {
 .candy-pink {
     color: #DD45B3 !important;
 }
+.deep-aubergine {
+    color: #33084C;
+}
+.Deep-aubergine {
+    border: 1px solid #33084C !important;
+}
 .Aubergine {
     color: #4D0D8A;
 }
@@ -763,7 +771,7 @@ body {
 .bg_white .guide_profile_section {
     padding: 2% 8%;
 }
-.guide_profile_section .content_wraper {
+.guide_profile_section .content_wraper, .job_wraper {
     background: #FFFFFF;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 4px;
@@ -855,6 +863,9 @@ body {
     background: #FFFFFF;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
     border-radius: 4px;
+}
+.br_0 {
+    border-radius: 0 !important;
 }
 .sidebar_contant {
     padding: 10px;
@@ -1144,4 +1155,12 @@ body {
     margin: 30px;
     padding: 30px !important;
     min-height: 70vh;
+}
+.upload_resume_text {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 114%;
+    letter-spacing: 0.054em;
+    font-feature-settings: 'ss01' on;
+    color: #4D0D8A;
 }

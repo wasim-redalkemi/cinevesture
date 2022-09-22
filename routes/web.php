@@ -74,8 +74,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         return view('job.myjob');
     })->name('myjob');
     
-    Route::get('/membership&billing-page', function () {
-        return view('membership_billing.membership&billing');
+    Route::get('/search_result', function () {
+        return view('job/post_a_job');
     })->name('myjob');
     Route::get('/searchpage', function () {
         return view('user.searchpage');
