@@ -70,6 +70,16 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     Route::get('/searchpage', function () {
         return view('user.searchpage');
     });
+    Route::get('/myjob', function () {
+        return view('job.myjob');
+    })->name('myjob');
+    
+    Route::get('/membership&billing-page', function () {
+        return view('membership_billing.membership&billing');
+    })->name('myjob');
+    Route::get('/searchpage', function () {
+        return view('user.searchpage');
+    })->name('myjob');
     Route::get('/setting-page', function () {
         return view('user.setting');
     })->name('setting-page');
