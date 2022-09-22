@@ -1,11 +1,14 @@
-@extends('layouts.auth')
+@extends('layouts.app')
 
 @section('title','Cinevesture-Otp')
 
 @section('content')
 <section class="auth_section">
+    
     <div class="container signup-container">
-    @include('include.flash_message')
+        <div class="hide-me">
+            @include('include.flash_message')
+        </div>
         <form method="POST" action="{{ route('verify-otp') }}">
             @csrf
         <div class="row">
@@ -16,22 +19,11 @@
                 <input type="hidden" name = "email" value = "{{$user->email}}">
                 <input type="password" class="w-100 {{ $errors->has('otp') ? ' is-invalid' : '' }}" name="otp" placeholder="Please Enter OTP" required>
               
-                {{-- @if ($errors->has('otp'))
+                @if ($errors->has('otp'))
                 <span class="invalid-feedback" style="display: block;" role="alert">
                     <strong>{{ $errors->first('otp') }}</strong>
                 </span>
-            @endif --}}
-            @if(session()->has('message'))
-    <div class="alert alert-success">
-        {{ session()->get('message') }}
-    </div>
-@endif
-                {{-- @error('otp')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $msg }}</strong>
-                    </span>
-                @enderror --}}
-              
+                @endif              
             </div>
             <div class="col-12 mt-2 mt-lg-5">
                 <button class="w-100">Submit</button>

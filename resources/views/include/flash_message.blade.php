@@ -9,6 +9,8 @@
 <div class="alert alert-danger alert-block">
 	<span><i class="bx bx-x-circle"></i></span>
         <strong> {{ $message }}</strong>
+	<button type="button" class="close" data-dismiss="alert"><i class="bx bx-x-circle"></i></button>	
+
 </div>
 @endif
 
@@ -27,3 +29,12 @@
 	<strong> {{ $message }}</strong>
 </div>
 @endif
+@section('scripts')
+<script>
+	$(document).ready(function() {
+		$('.close').on('click', function() {
+			$(".hide-me").hide();
+		});
+	});
+</script>
+@endsection

@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\OtpController;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route;  
 
 /*
 |--------------------------------------------------------------------------
@@ -25,11 +25,8 @@ Auth::routes();
 Route::get('/test-blade', function () {
     return view('user.project_flow');
 });
-Route::post('verify-otp', [RegisterController::class, 'verifyOtp'])->name('verify-otp');
-Route::get('otp', [RegisterController::class, 'verifyOtpView'])->name('otp-view');
-// Route::get('/email/verify', function () {
-//     return view('auth.verify-email');
-// })->middleware('auth')->name('verification.notice');
+Route::post('verify-otp', [RegisterController::class, 'otpVerify'])->name('verify-otp');
+Route::get('otp-view', [RegisterController::class, 'index'])->name('otp-view');
 
 Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],function(){
 
@@ -40,9 +37,9 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
    
     Route::get('/main', function () {
         return view('main');
-    })->name('main');
+    })->name('main')->middleware("profileVerification");
 
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware("profileVerification");
 
     Route::get('/', function () {
         return view('user.profile_portfolio');
