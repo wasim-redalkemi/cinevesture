@@ -18,15 +18,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 
 
 Route::get('/test-blade', function () {
     return view('user.project_flow');
 });
-Route::post('verify-otp', [RegisterController::class, 'otpVerify'])->name('verify-otp');
-Route::get('otp-view', [RegisterController::class, 'index'])->name('otp-view');
+
+Route::middleware(['guest'])->group(function () {
+    // routes that require user to be authenticated
+    Route::post('verify-otp', [RegisterController::class, 'otpVerify'])->name('verify-otp');
+    Route::get('otp-view', [RegisterController::class, 'index'])->name('otp-view');    
+});
+
+
 
 Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],function(){
 
