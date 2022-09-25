@@ -23,15 +23,20 @@
                             </div>
                         </div>
                         <div class="col-md-8">
-                            <div class="guide_profile_main_text pt-3">Lorem ipsum</div>
+                            <div class="guide_profile_main_text pt-3">{{$user->name}}</div>
                             <div class="guide_profile_main_subtext">Lorem ipsum dolor sit amet, consectetur adipiscing
                                 elit.</div>
                             <div><button class="guide_profile_btn mt-2">Contact </button></div>
                         </div>
-                        <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
+                        {{-- <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
                             <i class="fa fa-heart icon-size Aubergine" aria-hidden="true"></i>
                             <button class="verified_cmn_btn mx-3"> <i class="fa fa-check-circle hot-pink mx-1"
                                     aria-hidden="true"></i> VERIFIED</button>
+                        </div> --}}
+                        <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
+                            <a href="{{ route('profile-create')}}">
+                                <button class="guide_profile_btn mt-2">Edit </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -56,7 +61,7 @@
                                 <button class="curv_cmn_btn mx-2">Skills 1</button>
                                 </div>
                             <div class="guide_profile_main_text mt-3">Available to Work In</div>
-                            <div class="guide_profile_main_subtext Aubergine_at_night mt-2">Sample Location</div>
+                            <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ $user->available_to_work_in }}</div>
                             <div class="guide_profile_main_text mt-3">Languages Spoken</div>
                             <div class="guide_profile_main_subtext Aubergine_at_night mt-2">Language 1</div>
                             <div class="guide_profile_main_subtext Aubergine_at_night mt-1">Language 2</div>
@@ -64,11 +69,11 @@
                         <div class="col-md-6">
                             <div class="guide_profile_main_text mt-3"><p> Social Profile</p></div>
                             <div class="guide_profile_main_subtext mt-3">IMDB Profile</div>
-                            <div class="guide_profile_main_subtext deep-pink mt-1">https://www.cinevesture.com</div>
+                            <div class="guide_profile_main_subtext deep-pink mt-1">{{ $user->imdb_profile }}</div>
                             <div class="guide_profile_main_subtext mt-3">LinkedIn Profile</div>
-                            <div class="guide_profile_main_subtext deep-pink">https://www.cinevesture.com</div>
+                            <div class="guide_profile_main_subtext deep-pink">{{ $user->linkedin_profile }}</div>
                             <div class="guide_profile_main_subtext mt-3">Website</div>
-                            <div class="guide_profile_main_subtext deep-pink mt-1">https://www.cinevesture.com</div>
+                            <div class="guide_profile_main_subtext deep-pink mt-1">{{ $user->website }}</div>
                         </div>
                     </div>
                 </div>
@@ -83,10 +88,7 @@
                             </div>
                             <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation
-                                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                    {{ $user->about }}
                                 </p>
                             </div>
                         </div>

@@ -6,7 +6,7 @@
     <hr class="sidebar_contanr_hr">
     <div class="sidebar_contant"><a href="">Projects</a></div>
     <hr class="sidebar_contanr_hr">
-    <div class="sidebar_contant"><a href="">Profile</a></div>
+    <div class="sidebar_contant"><a href="{{ route('profile-create')}}">Profile</a></div>
     <hr class="sidebar_contanr_hr">
     <div class="sidebar_contant"><a href="">Organisation</a></div>
     <hr class="sidebar_contanr_hr">

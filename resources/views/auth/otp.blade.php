@@ -4,12 +4,12 @@
 
 @section('content')
 <section class="auth_section">
-    
+    <div class="hide-me">
+        @include('include.flash_message')
+    </div>
     <div class="container signup-container">
-        <div class="hide-me">
-            @include('include.flash_message')
-        </div>
-        <form method="POST" action="{{ route('verify-otp') }}">
+        
+        <form method="POST" enctype="multipart/form-data" action="{{ route('verify-otp') }}">
             @csrf
         <div class="row">
             <div class="col-md-12">

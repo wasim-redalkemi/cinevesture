@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\OtpController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;  
 
@@ -16,15 +16,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/', function () {
+    return view('auth.login');
+});
 
 Auth::routes(['verify' => true]);
 
 
-
-Route::get('/test-blade', function () {
-    return view('user.project_flow');
-});
 
 Route::middleware(['guest'])->group(function () {
     // routes that require user to be authenticated
@@ -33,44 +31,14 @@ Route::middleware(['guest'])->group(function () {
 });
 
 
-
 Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],function(){
+ 
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/profile-view', [ProfileController::class, 'profileView'])->name('profile-view');
+    Route::get('/profile-create', [ProfileController::class, 'profileCreate'])->name('profile-create');
+    Route::post('/profile-store', [ProfileController::class, 'profileStore'])->name('profile-store');
+    // Route::post('/profile-update', [ProfileController::class, 'profileUpdate'])->name('profile-update');
 
-    Route::get('/', function () {
-        return view('auth.login');
-    })->name('login');
-    
-   
-    Route::get('/main', function () {
-        return view('main');
-    })->name('main')->middleware("profileVerification");
-
-    Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware("profileVerification");
-
-    Route::get('/', function () {
-        return view('user.profile_portfolio');
-    });
-    Route::get('/user-qualification', function () {
-        return view('user.profile_qualification');
-    });
-    Route::get('/profile-setup', function () {
-        return view('user.profile_setup');
-    });
-    Route::get('/profile-experience', function () {
-        return view('user.profile_experience');
-    });
-    Route::get('/guide-profile', function () {
-        return view('user.guide_profile');
-    })->name('guide-profile');
-    Route::get('/profile-view', function () {
-        return view('user.profile_view');
-    })->name('profile-view');
-    Route::get('/profile-contact', function () {
-        return view('user.profile_contact');
-    });
-    Route::get('/searchpage', function () {
-        return view('user.searchpage');
-    });
     Route::get('/setting-page', function () {
         return view('user.setting');
     })->name('setting-page');

@@ -55,7 +55,7 @@
             <i class="fa fa-user-circle mx-2"
               style="font-size:25px; color: #DD45B3;background-color: white; border-radius: 50%;border:none"
               aria-hidden="true"></i>
-              <a href="{{ route('setting-page')}}" class="text_decor_none">
+              <a href="{{ route('profile-view')}}" class="text_decor_none">
                 <span>Profile</span>
               </a>
         </div>

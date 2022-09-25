@@ -2,12 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\Otp;
 use App\Models\User;
 use Closure;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class ProfileVerification
 {
@@ -21,27 +19,27 @@ class ProfileVerification
     public function handle(Request $request, Closure $next)
     {  
         try{
-        if(auth()->user())
-        {
-            // $data = session()->all();
-            // dd($data);
-            $user = User::query()->find(auth()->user()->id);
-            // dd($user->email_verified_at);              
-        
-            if (empty($user->email_verified_at) || ($user->email_verified_at == NULL)) {
-                
-                return redirect()->route('otp-view', ['email' =>$user->email]);
-            }
-            $request->session()->put('access', 'otpNotVerify');
-                
-            return redirect()->route('otp-view');                
+            if(auth()->user()) {
+                $user = User::query()->find(auth()->user()->id);
+                // dd($user->email_verified_at);              
+            
+                if ($user->is_profile_complete == '0') {
 
-        }
+                    return redirect()->route('profile-create');
+                    // return view('user.profile_setup');
+                    // return route('profile-create');
+                    // return view('user.profile_setup', compact('user'));
+                }else{
+                    return view('user.guide_profile', compact('user')); 
+                }
+            }else{
+                return $next($request);
+            }
         }
         catch(Exception $e){
-            dd($e->getMessage());
+            return back()->withError($e->getMessage());
         }
-        }
+    }
 }
        
 
