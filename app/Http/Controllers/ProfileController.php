@@ -6,15 +6,22 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\StoreProfileUpdate;
+use App\Models\UserExperience;
+use App\Models\UserPortfolio;
+use App\Models\UserQualification;
 use Exception;
 use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller
-{
+{   // View routes function
     public function profileView(Request $request)
     {
         $user = User::query()->find(auth()->user()->id);
-        return view('user.guide_profile', compact('user')); 
+        
+        $portfolio = UserPortfolio::query()->where('user_id',$user->id)->get();
+        $experience = UserExperience::query()->where('user_id',$user->id)->get();
+        $qualification = UserQualification::query()->where('user_id',$user->id)->get();
+        return view('user.guide_profile', compact('user','portfolio','experience','qualification')); 
     }
 
     public function profileCreate()
@@ -23,6 +30,8 @@ class ProfileController extends Controller
         return view('user.profile_setup', compact('user'));
     }
 
+
+    //
     public function profileStore(Request $request)
     {
         try {
@@ -43,8 +52,9 @@ class ProfileController extends Controller
             $user->website = $request->website;
             // $user->video = $request->video;
             if($user->save()){
-                Session::flash('response', ['text'=>'Profile added successfully','type'=>'success']);
-                return view('user.guide_profile', compact('user'));
+                // Session::flash('response', ['text'=>'Profile added successfully','type'=>'success']);
+                $portfolio = $user;
+                return view('user.profile_portfolio', compact('portfolio'));
             }else {
                 return back()->withError('Somethig went wrong ,please try again.');
             }            

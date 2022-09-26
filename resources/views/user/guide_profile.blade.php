@@ -13,6 +13,8 @@
                 @include('include.profile_sidebar')
             </div>
             <div class="col-md-9 mt-3 mt-sm-0">
+
+
                 <div class="content_wraper">
             <div class="guide_profile_subsection">
                 <div class="container">
@@ -23,7 +25,7 @@
                             </div>
                         </div>
                         <div class="col-md-8">
-                            <div class="guide_profile_main_text pt-3">{{$user->name}}</div>
+                            <div class="guide_profile_main_text pt-3">{{$user->first_name.' '.$user->last_name}}</div>
                             <div class="guide_profile_main_subtext">Lorem ipsum dolor sit amet, consectetur adipiscing
                                 elit.</div>
                             <div><button class="guide_profile_btn mt-2">Contact </button></div>
@@ -180,10 +182,11 @@
                             <div class="guide_profile_main_text deep-pink font_18">
                                 <h1>Experiences</h1>
                             </div>
-                            <div class="guide_profile_main_subtext mt-4">This is Tile</div>
+                            @foreach ($experience as $k=>$v)
+                            <div class="guide_profile_main_subtext mt-4">{{ $v->job_title}}</div>
                             <div class="guide_profile_main_subtext candy-pink mt-2">
-                                Location | Start Date | End Date <br>
-                                Company | Employment Type
+                                {{$v->employement_type_id}} | {{$v->start_date}} | {{$v->end_date}} <br>
+                                {{$v->company}} | {{$v->employement_type_id}}
                             </div>
                             <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
@@ -192,6 +195,8 @@
                                     ullamco laboris nisi ut aliquip ex ea commodo consequat.
                                 </p>
                             </div>
+                            @endforeach
+                            
                             <div class="guide_profile_main_subtext mt-4">This is Tile</div>
                             <div class="guide_profile_main_subtext candy-pink mt-2">
                                 Location | Start Date | End Date <br>
@@ -216,17 +221,16 @@
                             <div class="guide_profile_main_text deep-pink font_18">
                                 <h1>Qualifications</h1>
                             </div>
-                            <div class="guide_profile_main_subtext mt-4">School</div>
+                            @foreach ($qualification as $k=>$v)
+                            <div class="guide_profile_main_subtext mt-4">{{$v->institue_name}}</div>
                             <div class="guide_profile_main_subtext candy-pink mt-2">
-                                Degree | Field of Study | Start | End
+                                {{$v->degree_name}} | {{$v->feild_of_study}} | {{$v->start_year}} | {{$v->end_year}}
                             </div>
                             <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut
-                                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                </p>
+                                <p>{{$v->description}}</p>
                             </div>
+                            @endforeach
+                            
                             <div class="guide_profile_main_subtext mt-4">School</div>
                             <div class="guide_profile_main_subtext candy-pink mt-2">
                                 Degree | Field of Study | Start | End
@@ -251,7 +255,7 @@
                                 <h1>Endorsements</h1>
                             </div>
                             <div>
-                                <button class="guide_profile_btn">Endorse</button>
+                                {{-- <button class="guide_profile_btn">Endorse</button> --}}
                                 </div>
                             </div>
                             </div>

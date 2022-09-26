@@ -14,7 +14,7 @@
                     @include('include.profile_sidebar')
                 </div>
                 <div class="col-md-9">
-                    <div class=float-left "hide-me">
+                    <div class="hide-me float-left">
                             @include('include.flash_message')
                         </div>
                         <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('profile-store') }}">
@@ -47,21 +47,21 @@
                                     <div class="col-md-3">
                                         <div class="profile_input">
                                             <label>First Name</label>
-                                            <input type="text" class="form-control" placeholder="{{ __('First Name') }}" name="first_name"
+                                            <input type="text" class="form-control" placeholder="{{ __('First Name') }}" name="first_name" value="{{ $user->first_name }}"
                                                 aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="profile_input">
                                             <label>Last Name</label>
-                                            <input type="text" class="form-control" placeholder="{{ __('Last Name') }}" name="last_name"
+                                            <input type="text" class="form-control" placeholder="{{ __('Last Name') }}" name="last_name" value="{{ $user->last_name }}"
                                                 aria-label="Username" aria-describedby="basic-addon1">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="profile_input">
                                             <label>Job Title</label>
-                                            <input type="text" class="form-control" placeholder="Job Title" name="job_title"
+                                            <input type="text" class="form-control" placeholder="Job Title" name="job_title" {{ $user->job_title }} value="{{ $user->job_title }}"
                                                 aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                         </div>
                                     </div>
@@ -70,7 +70,7 @@
                                     <div class="col-md-3">
                                         <div class="profile_input">
                                             <label>Age</label>
-                                            <input type="number" class="form-control" placeholder="Age" name="age" aria-label="Username"
+                                            <input type="number" class="form-control" placeholder="Age" name="age" aria-label="Username" value="{{ $user->age }}"
                                                 aria-describedby="basic-addon1" required autofocus>
                                         </div>
                                     </div>
@@ -221,7 +221,7 @@
                                     <div class="col-md-12">
                                         <div class="profile_input">
                                             <label>About</label>
-                                            <textarea class="form-control" name="about" aria-label="With textarea"></textarea>
+                                            <textarea class="form-control" name="about" aria-label="With textarea">{{ $user->about }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -254,21 +254,21 @@
                                     <div class="col-md-3">
                                         <div class="profile_input">
                                             <label>IMDB Profile</label>
-                                            <input type="text" class="form-control" placeholder="IMDB Profile" name="imdb_profile"
+                                            <input type="text" class="form-control" placeholder="IMDB Profile" name="imdb_profile" value="{{ $user->imdb_profile }}"
                                                 aria-label="Username" aria-describedby="basic-addon1">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="profile_input">
                                             <label>LinkedIn Profile</label>
-                                            <input type="text" class="form-control" placeholder="LinkedIn Profile" name="linkedin_profile"
+                                            <input type="text" class="form-control" placeholder="LinkedIn Profile" name="linkedin_profile" value="{{ $user->linkedin_profile }}
                                                 aria-label="Username" aria-describedby="basic-addon1">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="profile_input">
                                             <label>Website</label>
-                                            <input type="text" class="form-control" placeholder="Website" aria-label="Username" name="website"
+                                            <input type="text" class="form-control" placeholder="Website" aria-label="Username" name="website" value="{{ $user->website }}
                                                 aria-describedby="basic-addon1">
                                         </div>
                                     </div>
@@ -277,7 +277,7 @@
                                     <div class="col-md-3">
                                         <div class="profile_input">
                                             <label>Introduction Video</label>
-                                            <input type="text" class="form-control" placeholder="Paste link here" name="video"
+                                            <input type="text" class="form-control" placeholder="Paste link here" name="video" value="{{ $user->video }}
                                                 aria-label="Username" aria-describedby="basic-addon1">
                                         </div>
                                     </div>
@@ -286,7 +286,7 @@
                                     <div class="col-md-12">
                                         <div class="d-flex justify-content-end mt-md-0 mt-4">
                                             <button class="cancel_btn">Cancel</button>
-                                            <button class="guide_profile_btn mx-3">Save</button>
+                                            <button type="submit" class="guide_profile_btn mx-3">Save</button>
                                         </div>
                                     </div>
                                 </div>

@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PortfolioController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;  
 
@@ -38,6 +40,16 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     Route::get('/profile-create', [ProfileController::class, 'profileCreate'])->name('profile-create');
     Route::post('/profile-store', [ProfileController::class, 'profileStore'])->name('profile-store');
     // Route::post('/profile-update', [ProfileController::class, 'profileUpdate'])->name('profile-update');
+
+    Route::get('/portfolio-add', [PortfolioController::class, 'index'])->name('portfolio-add');
+    Route::post('/portfolio-store', [PortfolioController::class, 'store'])->name('portfolio-store');
+
+    Route::get('/experience-add', [UserController::class, 'experienceAdd'])->name('experience-add');
+    Route::post('/experience-store', [UserController::class, 'experienceStore'])->name('experience-store');
+
+    Route::get('/qualification-add', [UserController::class, 'qualificationAdd'])->name('qualification-add');
+    Route::post('/qualification-store', [UserController::class, 'qualificationStore'])->name('qualification-store');
+
 
     Route::get('/setting-page', function () {
         return view('user.setting');
