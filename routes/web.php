@@ -74,8 +74,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         return view('job.myjob');
     })->name('myjob');
     
-    Route::get('/search_result', function () {
-        return view('job/post_a_job');
+    Route::get('/job_succes_modal', function () {
+        return view('modal.publish_job');
     })->name('myjob');
     Route::get('/searchpage', function () {
         return view('user.searchpage');

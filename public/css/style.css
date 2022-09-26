@@ -924,11 +924,13 @@ body {
     letter-spacing: 0.018em;
     color: #787885;
 }
-.profile_input input {
+.profile_input input, select {
     background: #FFFFFF;
     width: 100%;
     border: 1px solid #4D0D8A;
     border-radius: 4px;
+    height: 40px;
+    /* color: #BDBDBD; */
 }
 .profile_input textarea {
     background: #FFFFFF;
@@ -1163,4 +1165,69 @@ body {
     letter-spacing: 0.054em;
     font-feature-settings: 'ss01' on;
     color: #4D0D8A;
+}
+/* modal style */
+.modal_container {
+    background: #33084C;
+    text-align: center;
+    padding: 10%;
+}
+.modal_container .icon_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    Width:140px;
+    Height:140px;
+    border-radius: 100%;
+    margin: 0 auto;
+}
+.done {
+    background-color: #72C850;
+}
+.warning {
+    background-color: #FF6660;
+}
+.icon_container .icon_style {
+    color: #FFFFFF;
+    font-size: 80px;
+}
+.modal_container .head_text {
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 110%;
+    color: #FAF8FB;
+}
+.modal_container .sub_text {
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 158%;
+    letter-spacing: 0.004em;
+    color: #FAF8FB;
+}
+.submit_btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 16px;
+    background: #DD45B3;
+    border-radius: 4px;
+    margin: 0 auto;
+    border: none;
+}
+.cancel_btn {
+    padding: 6px 16px;
+    font-size: 14px;
+    background: #FAF8FB;
+    border-radius: 4px;
+    color: #1C0330;
+    border: none;
+}
+.delete_btn {
+    padding: 6px 16px;
+    font-size: 14px;
+    background: #C13D4F;
+    border-radius: 4px;
+    color: #EEEDE8;
+    border: none;
 }
