@@ -7,6 +7,7 @@
 @endsection
 
 @section('content')
+<section class="main-body">
     <div class="container">
         <div class="row">
             <div class="col-12 result-text">
@@ -16,7 +17,6 @@
 
             </div>
         </div>
-        <section>
             <div class="row mt-4">
                 <div class="col-md-3 side-bar-cmn-part">
                     <div class="search-box-container">
@@ -322,8 +322,8 @@
                 </ul>
             </nav>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
 @endsection
 
 @section('footer')
