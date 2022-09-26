@@ -61,6 +61,9 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     Route::get('/guide-profile', function () {
         return view('user.guide_profile');
     })->name('guide-profile');
+    Route::get('/user-profile', function () {
+        return view('user.user_profile');
+    })->name('guide-profile');
     Route::get('/profile-view', function () {
         return view('user.profile_view');
     })->name('profile-view');
