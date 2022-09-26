@@ -51,15 +51,13 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Start Date</label>
-                                    <input type="text" class="form-control" placeholder="DD/MM/YY" aria-label="Username"
-                                        aria-describedby="basic-addon1">
+                                    <input type = "date" name = "date"> 
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>End Date</label>
-                                    <input type="text" class="form-control" placeholder="DD/MM/YY" aria-label="Username"
-                                        aria-describedby="basic-addon1">
+                                    <input type = "date" name = "date"> 
                                 </div>
                             </div>
                         </div>

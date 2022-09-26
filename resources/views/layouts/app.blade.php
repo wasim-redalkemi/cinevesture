@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="{{ asset('public/css/owl.carousel.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('public/css/owl.theme.default.min.css') }}" />
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+  
+    <link rel = "stylesheet" href = "https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
     @yield('css')
 </head>
@@ -35,6 +37,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
     <script src="{{ asset('public/js/owl.carousel.min.js') }}"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>  
+  <script src ="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
     @yield('scripts')
 </body>
 

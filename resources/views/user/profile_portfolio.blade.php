@@ -64,8 +64,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Completion Date</label>
-                                    <input type="text" class="form-control" placeholder="First Name"
-                                    aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type = "date" name = "date"> 
                                 </div>
                             </div>
                         </div>
