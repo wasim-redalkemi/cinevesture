@@ -32,87 +32,36 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="profile_input">
-                                        <label>Description</label>
-                                    <textarea class="form-control" name="description" aria-label="With textarea">{{ $portfolio->description }}</textarea>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                            <div class="profile_input">
+                                <label for="lang">Project specific Skills</label>
+                                <select name="languages" id="lang">
+                                    <option value="test1">test 1</option>
+                                    <option value="test2">test 2</option>
+                                    <option value="test3">test 3</option>
+                                </select>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="profile_input">
-                                        <label>Project specific Skills</label>
-                                        <div class="dropdown profile_dropdown_btn">
-                                            <button
-                                                class="btn dropdown-toggle d-flex align-items-center profile_dropdown_btn"
-                                                href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Genres
-                                            </button>
-                                            <ul class="dropdown-menu w-100 profile_dropdown_menu">
-                                                <li>
-                                                    Features
-                                                </li>
-                                                <li>
-                                                    Animation
-                                                </li>
-                                                <li>
-                                                    Biography
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="profile_input">
-                                        <label>Project specific Skills</label>
-                                        <div class="dropdown profile_dropdown_btn">
-                                            <button
-                                                class="btn dropdown-toggle d-flex align-items-center profile_dropdown_btn"
-                                                href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Genres
-                                            </button>
-                                            <ul class="dropdown-menu w-100 profile_dropdown_menu">
-                                                <li>
-                                                    Features
-                                                </li>
-                                                <li>
-                                                    Animation
-                                                </li>
-                                                <li>
-                                                    Biography
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                            <div class="profile_input">
+                                <label for="lang">Project Location (Where it took place)</label>
+                                <select name="languages" id="lang">
+                                    <option value="test1">test 1</option>
+                                    <option value="test2">test 2</option>
+                                    <option value="test3">test 3</option>
+                                </select>
                             </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="profile_input">
-                                        <label>Project Location (Where it took place)</label>
-                                        <div class="dropdown profile_dropdown_btn">
-                                            <button
-                                                class="btn dropdown-toggle d-flex align-items-center profile_dropdown_btn"
-                                                href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Genres
-                                            </button>
-                                            <ul class="dropdown-menu w-100 profile_dropdown_menu">
-                                                <li>
-                                                    Features
-                                                </li>
-                                                <li>
-                                                    Animation
-                                                </li>
-                                                <li>
-                                                    Biography
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="profile_input">
+                                    <label>Completion Date</label>
+                                    <input type = "date" name = "date"> 
                                 </div>
                             </div>
                             <div class="row">

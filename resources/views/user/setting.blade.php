@@ -28,7 +28,7 @@
                     <div class="d-flex align-items-center">
                         <div class="preview_subtext mt-2">***********</div> <span class="profile_upload_text aubergine mx-3">Change Password</span>
                     </div>
-                    <div class="row mt-md-5 pt-md-5 mt-0 pt-0">
+                    <div class="row mt_35">
                         <div class="col-md-2">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf

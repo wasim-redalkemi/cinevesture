@@ -168,7 +168,7 @@
         </div>
       </div>
 
-      <div class="home_subsection">
+      <div class="home_subsection pb-5">
         <div class="container">
           <div class="row">
             <div class="col-md-12 carousel-header-text">

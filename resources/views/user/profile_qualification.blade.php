@@ -30,6 +30,68 @@
                                     <div class="profile_input">
                                         <label> Institute</label>
                                         <input type="text" class="form-control" placeholder="Institute" name="institue_name" value="{{ $qualification->institue_name}}" aria-label="Username" aria-describedby="basic-addon1">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="profile_input">
+                                    <label> Institute</label>
+                                    <input type="text" class="form-control" placeholder="Institute"
+                                        aria-label="Username" aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="profile_input">
+                                    <label>Degree</label>
+                                    <input type="text" class="form-control" placeholder="Company" aria-label="Username"
+                                        aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="profile_input">
+                                    <label>Field of Study</label>
+                                    <input type="text" class="form-control" placeholder="Location" aria-label="Username"
+                                        aria-describedby="basic-addon1">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="profile_input">
+                                    <label>Start Date</label>
+                                    <input type = "date" name = "date"> 
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="profile_input">
+                                    <label>End Date</label>
+                                    <input type = "date" name = "date"> 
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="profile_input">
+                                    <label>Employment Type</label>
+                                    <div class="dropdown profile_dropdown_btn">
+                                        <button
+                                            class="btn dropdown-toggle d-flex align-items-center profile_dropdown_btn"
+                                            href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Genres
+                                        </button>
+                                        <ul class="dropdown-menu w-100 profile_dropdown_menu">
+                                            <li>
+                                                Features
+                                            </li>
+                                            <li>
+                                                Animation
+                                            </li>
+                                            <li>
+                                                Biography
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
