@@ -144,41 +144,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                        {{-- <div class="guide_profile_subsection">
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="guide_profile_main_text mb-2">Project</div>
-                                        <div class="project owl-carousel owl-theme">
-                                            <div class="item">
-                                                <img src="{{ asset('public/images/asset/download (3) 1.png') }}">
-                                                <div class="guide_profile_main_subtext">Title</div>
-                                            </div>
-                                            <div class="item">
-                                                <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1 (1).png') }}">
-                                                <div class="guide_profile_main_subtext">Title</div>
-                                            </div>
-                                            <div class="item">
-                                                <img src="{{ asset('public/images/asset/download (3) 7.png') }}">
-                                                <div class="guide_profile_main_subtext">Title</div>
-                                            </div>
-                                            <div class="item">
-                                                <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1 (1).png') }}">
-                                                <div class="guide_profile_main_subtext">Title</div>
-                                            </div>
-                                            <div class="item">
-                                                <img src="{{ asset('public/images/asset/download (3) 7.png') }}">
-                                                <div class="guide_profile_main_subtext">Title</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
-
-       
+                    </div>    
 
             <div class="guide_profile_subsection">
                 <div class="container">
