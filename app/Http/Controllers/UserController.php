@@ -97,7 +97,8 @@ class UserController extends Controller
     public function experienceAdd(Request $request)
     {
         $user = User::query()->find(auth()->user()->id);
-        return view('user.profile_experience', compact('user'));
+        $experience = $user;
+        return view('user.profile_experience', compact('experience'));
     }
 
     public function experienceStore(Request $request)
@@ -111,7 +112,7 @@ class UserController extends Controller
             $experience->country_id = $request->country_id;
             $experience->start_date = $request->start_date;
             $experience->end_date = $request->end_date;
-            $experience->employement_type_id = 'Panjab';
+            $experience->employement_type_id = 'Freelancer';
             $experience->description = $request->description;
            
             if($experience->save()){
@@ -141,9 +142,7 @@ class UserController extends Controller
             
             $qualification = new UserQualification();
             $qualification->user_id = $user->id;
-            $qualification->institute_id = '5';
             $qualification->institue_name = $request->institue_name;
-            $qualification->degree_id = '6';
             $qualification->degree_name = $request->degree_name;
             $qualification->feild_of_study = $request->feild_of_study;
             $qualification->start_year = $request->start_year;

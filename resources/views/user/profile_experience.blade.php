@@ -14,13 +14,13 @@
                     @include('include.profile_sidebar')
                 </div>
                 <div class="col-md-9">
+                    <div class="hide-me">
+                        @include('include.flash_message')
+                    </div>
                     <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Add Experience</div>
                             <div><i class="fa fa-trash-o  deep-pink icon-size" aria-hidden="true"></i></div>
-                        </div>
-                        <div class="hide-me float-left">
-                            @include('include.flash_message')
                         </div>
                         <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('experience-store') }}">
                             @csrf
@@ -33,58 +33,8 @@
                                             aria-label="Username" aria-describedby="basic-addon1">
                                     </div>
                                 </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="profile_input">
-                                    <label>Job Title</label>
-                                    <input type="text" class="form-control" placeholder="Job Title"
-                                        aria-label="Username" aria-describedby="basic-addon1">
-                                </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="profile_input">
-                                    <label>Company</label>
-                                    <input type="text" class="form-control" placeholder="Company" aria-label="Username"
-                                        aria-describedby="basic-addon1">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="profile_input">
-                                    <label>Location</label>
-                                    <input type="text" class="form-control" placeholder="Location" aria-label="Username"
-                                        aria-describedby="basic-addon1">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3">
-                                <div class="profile_input">
-                                    <label>Start Date</label>
-                                    <input type = "date" name = "date">  
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="profile_input">
-                                    <label>End Date</label>
-                                    <input type = "date" name = "date"> 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                            <div class="profile_input">
-                                <label for="lang">Employment Type</label>
-                                <select name="languages" id="lang">
-                                    <option value="test1">test 1</option>
-                                    <option value="test2">test 2</option>
-                                    <option value="test3">test 3</option>
-                                </select>
-                            </div>
-                            </div>
+                      
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="profile_input">
@@ -118,25 +68,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="profile_input">
-                                        <label>Employment Type</label>
-                                        <div class="dropdown profile_dropdown_btn">
-                                            <button
-                                                class="btn dropdown-toggle d-flex align-items-center profile_dropdown_btn"
-                                                href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Genres
-                                            </button>
-                                            <ul class="dropdown-menu w-100 profile_dropdown_menu">
-                                                <li>
-                                                    Features
-                                                </li>
-                                                <li>
-                                                    Animation
-                                                </li>
-                                                <li>
-                                                    Biography
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        <label for="lang">Employment Type</label>
+                                        <select name="languages" id="lang">
+                                            <option value="test1">test 1</option>
+                                            <option value="test2">test 2</option>
+                                            <option value="test3">test 3</option>
+                                        </select>
                                     </div>
                                 </div>
                             </div>
@@ -153,7 +90,7 @@
                                     <div class="d-flex justify-content-end mt-4">
                                         <button class="cancel_btn mx-3">Cancel</button>
                                         <button class="save_add_btn">Save & add another</button>
-                                        <button type="submit" class="guide_profile_btn mx-3">Save</button>
+                                        <button type="submit" class="guide_profile_btn mx-3">Save & next</button>
                                     </div>
                                 </div>
                             </div>
@@ -165,23 +102,27 @@
     </section>
 @endsection
 
-<script>
-$(function(){
-        
-        let datePicker = document.getElementById('datePicker');
-        let picker = new Litepicker({
-            element: datePicker,
-            format: 'DD MMMM YYYY'
+@section('scripts')
+    <script>
+        $(function() {
+
+            let datePicker = document.getElementById('datePicker');
+            let picker = new Litepicker({
+                element: datePicker,
+                format: 'DD MMMM YYYY'
+            });
+
+            let dateRangePicker = document.getElementById('dateRangePicker');
+            let pickerRange = new Litepicker({
+                element: dateRangePicker,
+                format: 'DD MMMM YYYY',
+                singleMode: false,
+            });
         });
-        
-        let dateRangePicker = document.getElementById('dateRangePicker');
-        let pickerRange = new Litepicker({
-            element: dateRangePicker,
-            format: 'DD MMMM YYYY',
-            singleMode: false,
-        });
-    });
-</script>
+    </script>
+@endsection
+
+
 
 @section('footer')
     @include('include.footer')

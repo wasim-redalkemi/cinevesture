@@ -17,7 +17,8 @@ class PortfolioController extends Controller
     public function index()
     {
         $user = User::query()->find(auth()->user()->id);
-        return view('user.profile_portfolio', compact('user'));
+        $portfolio = $user;
+        return view('user.profile_portfolio', compact('portfolio'));
     }
 
     /**
