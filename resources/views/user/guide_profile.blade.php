@@ -26,9 +26,12 @@
                         </div>
                         <div class="col-md-8">
                             <div class="guide_profile_main_text pt-3">{{$user->first_name.' '.$user->last_name}}</div>
-                            <div class="guide_profile_main_subtext">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                elit.</div>
-                            <div><button class="guide_profile_btn mt-2">Contact </button></div>
+                            {{-- <div class="guide_profile_main_subtext">Lorem ipsum dolor sit amet, consectetur adipiscing
+                                elit.</div> --}}
+                            <div class="guide_profile_main_subtext candy-pink mt-2">
+                                {{empty($user->age)?'age':$user->age;}} | {{empty($user->gender)?'gender':$user->gender;}} | {{empty($user->gender_pronouns)?'gender-pronouns':$user->gender_pronouns;}}
+                            </div>
+                            {{-- <div><button class="guide_profile_btn mt-2">Contact </button></div> --}}
                         </div>
                         {{-- <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
                             <i class="fa fa-heart icon-size Aubergine" aria-hidden="true"></i>
@@ -57,16 +60,16 @@
                                 <p> Skils</p>
                             </div>
                             <div class="d-flex mt-3">
-                                <button class="curv_cmn_btn">Skills 1</button>
+                                {{-- <button class="curv_cmn_btn">Skills 1</button>
                                 <button class="curv_cmn_btn mx-2">Skills 1</button>
                                 <button class="curv_cmn_btn">Skills 1</button>
-                                <button class="curv_cmn_btn mx-2">Skills 1</button>
+                                <button class="curv_cmn_btn mx-2">Skills 1</button> --}}
                                 </div>
                             <div class="guide_profile_main_text mt-3">Available to Work In</div>
                             <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ $user->available_to_work_in }}</div>
                             <div class="guide_profile_main_text mt-3">Languages Spoken</div>
-                            <div class="guide_profile_main_subtext Aubergine_at_night mt-2">Language 1</div>
-                            <div class="guide_profile_main_subtext Aubergine_at_night mt-1">Language 2</div>
+                            <div class="guide_profile_main_subtext Aubergine_at_night mt-2">Hindi</div>
+                            <div class="guide_profile_main_subtext Aubergine_at_night mt-1">English</div>
                         </div>
                         <div class="col-md-6">
                             <div class="guide_profile_main_text mt-3"><p> Social Profile</p></div>
@@ -185,30 +188,13 @@
                             @foreach ($experience as $k=>$v)
                             <div class="guide_profile_main_subtext mt-4">{{ $v->job_title}}</div>
                             <div class="guide_profile_main_subtext candy-pink mt-2">
-                                {{$v->employement_type_id}} | {{$v->start_date}} | {{$v->end_date}} <br>
+                                {{$v->country_id}} | {{date('d-m-Y',strtotime($v->start_date))}} | {{date('d-m-Y',strtotime($v->end_date))}} <br>
                                 {{$v->company}} | {{$v->employement_type_id}}
                             </div>
                             <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut
-                                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                </p>
+                                <p>{{$v->description}}</p>
                             </div>
-                            @endforeach
-                            
-                            <div class="guide_profile_main_subtext mt-4">This is Tile</div>
-                            <div class="guide_profile_main_subtext candy-pink mt-2">
-                                Location | Start Date | End Date <br>
-                                Company | Employment Type
-                            </div>
-                            <div class="guide_profile_main_subtext Aubergine_at_night mt-2"> 
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut
-                                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                </p>
-                            </div>
+                            @endforeach                            
                         </div>
                     </div>
                 </div>
@@ -230,18 +216,6 @@
                                 <p>{{$v->description}}</p>
                             </div>
                             @endforeach
-                            
-                            <div class="guide_profile_main_subtext mt-4">School</div>
-                            <div class="guide_profile_main_subtext candy-pink mt-2">
-                                Degree | Field of Study | Start | End
-                            </div>
-                            <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut
-                                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                </p>
-                            </div>
                         </div>
                     </div>
                 </div>
