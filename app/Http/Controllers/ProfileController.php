@@ -49,7 +49,18 @@ class ProfileController extends Controller
             $user->imdb_profile = $request->imdb_profile;
             $user->linkedin_profile = $request->linkedin_profile;
             $user->website = $request->website;
-            // $user->video = $request->video;
+            $user->intro_video_link = $request->intro_video_link;
+
+            $file = $request->file('profile_image');
+            $originalFile = $file->getClientOriginalName();
+            $fileExt = pathinfo($originalFile, PATHINFO_EXTENSION);
+            $fileName = pathinfo($originalFile, PATHINFO_FILENAME);
+            $nameStr = date('_YmdHis');
+            $newName = $fileName.$nameStr.'.'.$fileExt;
+            $locationPath  = "user";
+            $uploadFile = $this->uploadFile($locationPath , $file,$newName);
+            $user->profile_image = $uploadFile;
+
             if($user->save()){
                 $portfolio = $user;
                 return view('user.profile_portfolio', compact('portfolio'));

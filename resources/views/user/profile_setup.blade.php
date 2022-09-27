@@ -24,7 +24,7 @@
                             <div class="profile_text">
                                 <h1>Profile</h1>
                             </div>
-                            <div class="d-flex">
+                            {{-- <div class="d-flex">
 
                                 <div class="upload_img_container">
                                     <div for="file-input" class="d-none">
@@ -38,6 +38,29 @@
                                 </div>
 
 
+                                <div class="mx-4 d-flex align-items-center">
+                                    <div>
+                                        <div class="search-head-subtext Aubergine_at_night">
+                                            Upload Profile Picture
+                                        </div>
+                                        <div class="search-head-subtext deep-pink">
+                                            Delete
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> --}}
+
+                            <div class="d-flex">
+                                <div class="upload_img_container">
+                                    <img src="" id="previewImg" onclick="document.getElementById('imgInp').click();">
+                                    <div for="file-input" class="d-none">
+                                        <input type="file" onchange="uploadProfileImage(this)" name="profile_image" accept=".jpg,.jpeg,.png" id="imgInp">
+                                    </div>
+                                    <div onclick="document.getElementById('imgInp').click();" class="pointer">
+                                        <div class="text-center"> <i class="fa fa-plus-circle mx-2 profile_icon deep-pink pointer" aria-hidden="true"></i></div>
+                                        <div>Upload</div>
+                                    </div>
+                                </div>
                                 <div class="mx-4 d-flex align-items-center">
                                     <div>
                                         <div class="search-head-subtext Aubergine_at_night">
@@ -115,9 +138,9 @@
                                     <div class="profile_input">
                                         <label for="lang">Located in</label>
                                         <select name="Located_in" id="lang">
-                                            <option value="test1">test 1</option>
-                                            <option value="test2">test 2</option>
-                                            <option value="test3">test 3</option>
+                                            <option value="Mumbai">Mumbai</option>
+                                            <option value="Kanpur">Kanpur</option>
+                                            <option value="Delhi">Delhi</option>
                                         </select>
                                     </div>
                                 </div>
@@ -145,9 +168,9 @@
                                     <div class="profile_input">
                                         <label for="lang">Country</label>
                                         <select name="country" id="lang">
-                                            <option value="test1">test 1</option>
-                                            <option value="test2">test 2</option>
-                                            <option value="test3">test 3</option>
+                                            <option value="India">India</option>
+                                            <option value="Japan">Japan</option>
+                                            <option value="Nepan">Nepan</option>
                                         </select>
                                     </div>
                                 </div>
@@ -196,7 +219,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>Introduction Video</label>
-                                        <input type="text" class="form-control" placeholder="Paste link here" name="video" value="{{ $user->video }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control" placeholder="Paste link here" name="intro_video_link" value="{{ $user->intro_video_link }}" aria-label="Username" aria-describedby="basic-addon1">
                                     </div>
                                 </div>
                             </div>
@@ -214,22 +237,28 @@
             </div>
         </div>        
     </section>
-@endsection
-
-@section('scripts')
-<script>
-    var imgInp = $("#imgInp");
-    var blah = $("#blah");
-
-    imgInp.onchange = evt => {
-        const [file] = imgInp.files
-        if (file) {
-            blah.src = URL.createObjectURL(file)
+    
+{{-- @section('scripts') --}}
+<script type="text/javascript">
+    // $(document).ready(function()
+    // {
+        // alert('test');
+        function uploadProfileImage(e) {
+            // debugger
+            var reader = new FileReader();
+            reader.onload = function() {
+                var output = document.getElementById('previewImg');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(e.files[0]);
         }
-    }
+    // });
 </script>
+{{-- @endsection --}}
 @endsection
 
 @section('footer')
     @include('include.footer')
 @endsection
+
+

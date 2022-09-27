@@ -913,6 +913,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
 }
 .profile_input {
     margin-top: 16px;
@@ -1230,4 +1231,11 @@ body {
     border-radius: 4px;
     color: #EEEDE8;
     border: none;
+}
+
+.sidebar_contant a:hover {text-decoration: none !important;}
+@media (min-width: 1200px) {
+.container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 1225px !important;
+}
 }
