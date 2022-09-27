@@ -9,7 +9,7 @@
             <div class="col-md-12">
                 <div class="signup-text mt-5 mt-md-5"> Log in</div>
             </div>
-            <form method="POST" action="{{ route('login') }}">
+            <form method="POST" enctype="multipart/form-data" action="{{ route('login') }}">
                 @csrf
 
                 <div class="col-12 mt-2 mt-lg-5 pt-5 pt-lg-5">

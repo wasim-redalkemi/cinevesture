@@ -2,9 +2,11 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PortfolioController;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Route;  
 
 /*
 |--------------------------------------------------------------------------
@@ -16,73 +18,39 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
-Auth::routes();
-
-
-
-Route::get('/test-blade', function () {
-    return view('user.project_flow');
+Route::get('/', function () {
+    return view('auth.login');
 });
-Route::get('/verify-otp/{user}',  [RegisterController::class, 'verifyOtpView'])->name('verifyOtpView');
-Route::post('verify-otp', [RegisterController::class, 'verifyOtp'])->name('verify-otp');
-// Route::get('/email/verify', function () {
-//     return view('auth.verify-email');
-// })->middleware('auth')->name('verification.notice');
+
+Auth::routes(['verify' => true]);
+
+
+
+Route::middleware(['guest'])->group(function () {
+    // routes that require user to be authenticated
+    Route::post('verify-otp', [RegisterController::class, 'otpVerify'])->name('verify-otp');
+    Route::get('otp-view', [RegisterController::class, 'index'])->name('otp-view');    
+});
+
 
 Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],function(){
-
-    Route::get('/', function () {
-        return view('auth.login');
-    })->name('login');
-    
-    // Route::get('/otp', function () {
-    //     return view('auth.auth_otp');
-    // });
-    Route::get('/main', function () {
-        return view('main');
-    })->name('main');
-
+ 
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/profile-view', [ProfileController::class, 'profileView'])->name('profile-view');
+    Route::get('/profile-create', [ProfileController::class, 'profileCreate'])->name('profile-create');
+    Route::post('/profile-store', [ProfileController::class, 'profileStore'])->name('profile-store');
+    // Route::post('/profile-update', [ProfileController::class, 'profileUpdate'])->name('profile-update');
 
-    Route::get('/', function () {
-        return view('user.profile_portfolio');
-    });
-    Route::get('/user-qualification', function () {
-        return view('user.profile_qualification');
-    });
-    Route::get('/profile-setup', function () {
-        return view('user.profile_setup');
-    });
-    Route::get('/profile-experience', function () {
-        return view('user.profile_experience');
-    });
-    Route::get('/guide-profile', function () {
-        return view('user.guide_profile');
-    })->name('guide-profile');
-    Route::get('/user-profile', function () {
-        return view('user.user_profile');
-    })->name('guide-profile');
-    Route::get('/profile-view', function () {
-        return view('user.profile_view');
-    })->name('profile-view');
-    Route::get('/profile-contact', function () {
-        return view('user.profile_contact');
-    });
-    Route::get('/searchpage', function () {
-        return view('user.searchpage');
-    });
-    Route::get('/myjob', function () {
-        return view('job.myjob');
-    })->name('myjob');
-    
-    Route::get('/job_succes_modal', function () {
-        return view('modal.publish_job');
-    })->name('myjob');
-    Route::get('/searchpage', function () {
-        return view('user.searchpage');
-    })->name('myjob');
+    Route::get('/portfolio-add', [PortfolioController::class, 'index'])->name('portfolio-add');
+    Route::post('/portfolio-store', [PortfolioController::class, 'store'])->name('portfolio-store');
+
+    Route::get('/experience-add', [UserController::class, 'experienceAdd'])->name('experience-add');
+    Route::post('/experience-store', [UserController::class, 'experienceStore'])->name('experience-store');
+
+    Route::get('/qualification-add', [UserController::class, 'qualificationAdd'])->name('qualification-add');
+    Route::post('/qualification-store', [UserController::class, 'qualificationStore'])->name('qualification-store');
+
+
     Route::get('/setting-page', function () {
         return view('user.setting');
     })->name('setting-page');

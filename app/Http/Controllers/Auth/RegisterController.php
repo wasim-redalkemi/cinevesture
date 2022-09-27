@@ -3,14 +3,16 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\OtpController;
 use App\Models\Otp;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use App\Notifications\InvoicePaid;
+
 use App\Notifications\VerifyOtp;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -95,18 +97,23 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
-        $otp = $this->createOtp($user);
+        $otp = OtpController::createOtp($user);
         $collect  = collect();
         $collect->put('otp',$otp);
         $user->notify(new VerifyOtp($collect));
-        
+// dd(session()->all());
+        // $request->session()->push('email', $user->email);
+        // session()->forget('key');
+        // dd(session()->pull('email', 'default'));
 
         if ($response = $this->registered($request, $user)) {
             return $response;
         }
+                
+                
         
         // return $this->verifyOtpView($user->id);
-        return view('auth.otp',compact('user'));
+        return redirect()->route('otp-view', ['email' => $user->email]);
 
     }
 
@@ -129,82 +136,60 @@ class RegisterController extends Controller
         
     }
 
-    public function createOtp($user)
-    {
-        $otp = new Otp();
-        $otp->user_id = $user->id;
-        $otp->otp = rand(100000,999999);
-        $otp->save();
-        return $otp->otp;
-    }
+ 
 
 
      // view OTP
-     public function verifyOtp(Request $request)
+     public function otpVerify(Request $request)
      {  
          try {
              // validate request data.
              $validator = Validator::make($request->all(), [
                  'email' => 'required|email|exists:users,email',
-                 'otp' => 'required|numeric',
              ], [
-                 'otp.required' => 'OTP is Required',
-                 'otp.numeric' => 'OTP is invalid.',
                  'email.required' => 'Something went wrong. Try again.',
                  'email.email' => 'Something went wrong. Try again.',
                  'email.exists' => 'Something went wrong. Try again.'
              ]);
              if ($validator->fails()) {
-                 // return $this->returnResponse(false, 'ERR031', $validator->errors()->first(), null, null);
+                return back()->withErrors($validator->errors()->messages())->withInput();
              } else {
                  $userObj = User::query()
                      ->where("email", $request->email)
                      ->first();
-                 if (!empty($userObj)) {
-                     $otpObj = Otp::query()
-                         ->where("user_id", $userObj->id)
-                         ->where("otp", $request->otp)
-                         // ->where("otp_type", $request->otp_type)
-                         ->first();
-                     if (empty($otpObj)) {
-                        //  return $this->returnResponse(false, "ERR033", config('error_codes.verify_otp.ERR033'), null, null);
-                        // throw new Exception('Wrong in otp.');
-                        // return redirect()->route("verify-otp",["id"=>$userObj]);
-                        // return redirect()->route("verify-otp/user",["user"=>$userObj]);
-                        $user = $userObj;
-                        $msg = 'Inavlid otp!';
-                        return view('auth.otp',compact('user','msg'));
-                     }
-
-                    //  dd($userObj->otp);
-                    // if($otpObj->otp == $userObj->otp)
-                    // {
+                     if (!empty($userObj)) {
+                        $otpObj = Otp::query()
+                            ->where("user_id", $userObj->id)
+                            ->where("otp", $request->otp)
+                            ->latest()
+                            ->first();
+            
+                        if (empty($otpObj)) {
+                        return back()->with('error','Invalid otp.');
+                        }
+    
                         $userObj->email_verified_at = Carbon::now();
                         $userObj->save();
                         $this->guard()->login($userObj);
                 
                         return $request->wantsJson()
                                     ? new JsonResponse([], 201)
-                                    : redirect($this->redirectPath());
-                    // }
-                    // else {
-                    //     throw new Exception('Wrong in otp.');
-                    //     return back();
-                    // }
-
-                    
+                                    : redirect($this->redirectPath());                    
                       
                  }else{
                      // return $this->returnResponse(false, "ERR032", config('error_codes.verify_otp.ERR032'), null, null);
                  }
              }
          } catch (Exception $e) {
-             return $this->returnResponse(false, "ERR011", $e->getMessage(), null, null);
+            return back()->withError('Somethig went wrong.');
          }
        
      }
 
-     public function verifyOtpView(User $user){
+     public function index(Request $request){
+        // echo 'test1212';
+        // die;
+        $user = User::query()->where('email',$request->email)->first();
         return view('auth.otp',compact('user'));
      }
 

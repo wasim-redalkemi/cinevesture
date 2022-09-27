@@ -12,7 +12,7 @@
               <img src="{{ asset('public/images/asset/Logo-white-trans.png') }}" width="220" height="75" alt="image">
             </a>
             <div class="collapse navbar-collapse justify-content-center" id="navbarTogglerDemo01">
-              <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+              <ul class="navbar-nav mt-2 mt-lg-0">
                 <li>
                   <a class="header-nav-link active" href="#">Project</a>
                 </li>
@@ -55,7 +55,7 @@
             <i class="fa fa-user-circle mx-2"
               style="font-size:25px; color: #DD45B3;background-color: white; border-radius: 50%;border:none"
               aria-hidden="true"></i>
-              <a href="{{ route('setting-page')}}" class="text_decor_none">
+              <a href="{{ route('profile-view')}}" class="text_decor_none">
                 <span>Profile</span>
               </a>
         </div>

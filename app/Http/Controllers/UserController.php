@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Otp;
 use App\Models\User;
-use Carbon\Carbon;
+use App\Models\UserExperience;
+use App\Models\UserPortfolio;
+use App\Models\UserQualification;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -87,6 +89,76 @@ class UserController extends Controller
     {
         //
     }
+
+
+
+    // User profile experience
+
+    public function experienceAdd(Request $request)
+    {
+        $user = User::query()->find(auth()->user()->id);
+        $experience = $user;
+        return view('user.profile_experience', compact('experience'));
+    }
+
+    public function experienceStore(Request $request)
+    {
+        try {
+            $user = User::query()->find(auth()->user()->id);
+            $experience = new UserExperience();
+            $experience->user_id = $user->id;
+            $experience->job_title = $request->job_title;
+            $experience->comapny = $request->comapny;
+            $experience->country_id = $request->country_id;
+            $experience->start_date = $request->start_date;
+            $experience->end_date = $request->end_date;
+            $experience->employement_type_id = 'Freelancer';
+            $experience->description = $request->description;
+           
+            if($experience->save()){
+                $qualification = $experience;
+                return view('user.profile_qualification', compact('qualification'));
+            }else {
+                return back()->withError('Somethig went wrong ,please try again.');
+            }            
+        } catch (Exception $e) {
+            return back()->withError('Somethig went wrong.');
+        }
+    }
+
+    // User profile qualification
+
+    public function qualificationAdd(Request $request)
+    {
+        $user = User::query()->find(auth()->user()->id);
+        $qualification =$user;
+        return view('user.profile_qualification', compact('qualification'));
+    }
+
+    public function qualificationStore(Request $request)
+    {
+        try {
+            $user = User::query()->find(auth()->user()->id);
+            
+            $qualification = new UserQualification();
+            $qualification->user_id = $user->id;
+            $qualification->institue_name = $request->institue_name;
+            $qualification->degree_name = $request->degree_name;
+            $qualification->feild_of_study = $request->feild_of_study;
+            $qualification->start_year = $request->start_year;
+            $qualification->end_year = $request->end_year;
+            $qualification->description = $request->description;
+           
+            if($qualification->save()){
+                return redirect()->route('profile-view');
+            }else {
+                return back()->withError('Somethig went wrong ,please try again.');
+            }            
+        } catch (Exception $e) {
+            return back()->withError('Somethig went wrong.');
+        }
+    }
+
 
    
 }

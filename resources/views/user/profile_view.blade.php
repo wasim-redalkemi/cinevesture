@@ -14,6 +14,9 @@
             <div class="public-head-container">
                 <div class="container">
                     <div class="row">
+                        <div class="hide-me">
+                            @include('include.flash_message')
+                        </div>
                         <div class="col-md-6 col-sm-12 text-center  text-lg-start">
                             <div class="verified-text-area">
                                 <div class="public-head-text">Into the wild</div>

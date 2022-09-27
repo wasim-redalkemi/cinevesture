@@ -1236,4 +1236,13 @@ body {
     color: #EEEDE8;
     border: none;
 }
+
+.sidebar_contant a:hover {text-decoration: none !important;}
+
+@media (min-width: 600px) {
+.container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 1365px !important;
+}
+
+}
 .sidebar_content a:hover {text-decoration: none !important;}
