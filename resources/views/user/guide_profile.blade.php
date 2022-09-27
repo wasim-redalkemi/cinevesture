@@ -21,8 +21,22 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div class="user_profile_container">
-                                {{-- <img src="{{ asset('public/images/asset/user-profile.png') }}" /> --}}
-                                <img src="{{Storage::url($user->profile_image)}}"  class = "prod-img" alt="product-image" style="max-height:100px;width:100%;">
+                                <?php
+                                    if(empty($user->profile_image))
+                                    {
+                                        ?>
+                                            <img src="{{ asset('public/images/asset/user-profile.png') }}" />
+                                        <?php
+                                    }
+                                    else 
+                                    {
+                                        ?>
+                                            <img src="{{Storage::url($user->profile_image)}}"  class = "prod-img" alt="product-image" style="max-height:100px;width:100%;">
+                                        <?php
+                                    }
+
+
+                                ?>
                             </div>
                         </div>
                         <div class="col-md-8">
@@ -58,7 +72,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="guide_profile_main_text mt-3">
-                                <p> Skils</p>
+                                <p> Skills</p>
                             </div>
                             <div class="d-flex mt-3">
                                 {{-- <button class="curv_cmn_btn">Skills 1</button>

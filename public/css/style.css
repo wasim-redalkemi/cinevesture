@@ -1234,8 +1234,10 @@ body {
 }
 
 .sidebar_contant a:hover {text-decoration: none !important;}
-@media (min-width: 1200px) {
+
+@media (min-width: 600px) {
 .container, .container-lg, .container-md, .container-sm, .container-xl {
-    max-width: 1225px !important;
+    max-width: 1365px !important;
 }
+
 }
