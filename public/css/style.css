@@ -242,7 +242,9 @@ body {
     cursor: pointer;
     font-size: 20px;
 }
-
+.home-dropdown a:hover {
+    color: #4D0D8A;
+}
 .home-dropdown ul {
     padding: 8px 0px;
     width: 10rem;
@@ -867,10 +869,10 @@ body {
 .br_0 {
     border-radius: 0 !important;
 }
-.sidebar_contant {
+.sidebar_content {
     padding: 10px;
 }
-.sidebar_contant a {
+.sidebar_content a {
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
@@ -879,10 +881,11 @@ body {
     color: #1C0330;
     text-decoration: none;
 }
-.sidebar_contanr_hr {
+.sidebar_content_hr {
     border-bottom: 1px solid #D2D2D2;
     margin: 0;
     background-color: transparent;
+    border-top: none !important;
 }
 .profile_text h1{
     font-weight: 600;
@@ -913,6 +916,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    object-fit: contain;
+    overflow: hidden;
 }
 .profile_input {
     margin-top: 16px;
@@ -1231,3 +1236,4 @@ body {
     color: #EEEDE8;
     border: none;
 }
+.sidebar_content a:hover {text-decoration: none !important;}

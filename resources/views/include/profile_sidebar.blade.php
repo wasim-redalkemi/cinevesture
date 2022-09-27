@@ -1,16 +1,16 @@
 <div class="profile_side_bar">
-    <div class="sidebar_contant mb-3 d-flex">
+    <div class="sidebar_content mb-3 d-flex">
         <i class="fa fa-user-circle mx-2 profile_icon" aria-hidden="true"></i>
         <a href="">Profile</a>
     </div>
-    <hr class="sidebar_contanr_hr">
-    <div class="sidebar_contant"><a href="">Projects</a></div>
-    <hr class="sidebar_contanr_hr">
-    <div class="sidebar_contant"><a href="">Profile</a></div>
-    <hr class="sidebar_contanr_hr">
-    <div class="sidebar_contant"><a href="">Organisation</a></div>
-    <hr class="sidebar_contanr_hr">
-    <!-- <div class="sidebar_contant"><a href="">My Jobs</a></div> -->
+    <hr class="sidebar_content_hr">
+    <div class="sidebar_content"><a href="">Projects</a></div>
+    <hr class="sidebar_content_hr">
+    <div class="sidebar_content"><a href="">Profile</a></div>
+    <hr class="sidebar_content_hr">
+    <div class="sidebar_content"><a href="">Organisation</a></div>
+    <hr class="sidebar_content_hr">
+    <!-- <div class="sidebar_content"><a href="">My Jobs</a></div> -->
     <div class="dropdown search-page">
         <button class="btn dropdown-toggle w-100 border-0 ml_10" type="button" data-bs-toggle="dropdown"
             aria-expanded="false">
@@ -28,13 +28,13 @@
             </li>
         </ul>
     </div>
-    <hr class="sidebar_contanr_hr">
-    <div class="sidebar_contant"><a href="">Endorsements </a></div>
-    <hr class="sidebar_contanr_hr">
-    <div class="sidebar_contant"><a href="">Favourites</a></div>
-    <hr class="sidebar_contanr_hr">
-    <div class="sidebar_contant"><a href="">Membership & Billing</a></div>
-    <hr class="sidebar_contanr_hr">
-    <div class="sidebar_contant"><a href="{{ route('setting-page')}}">Settings</a></div>
-    <hr class="sidebar_contanr_hr">
+    <hr class="sidebar_content_hr">
+    <div class="sidebar_content"><a href="">Endorsements </a></div>
+    <hr class="sidebar_content_hr">
+    <div class="sidebar_content"><a href="">Favourites</a></div>
+    <hr class="sidebar_content_hr">
+    <div class="sidebar_content"><a href="">Membership & Billing</a></div>
+    <hr class="sidebar_content_hr">
+    <div class="sidebar_content"><a href="{{ route('setting-page')}}">Settings</a></div>
+    <hr class="sidebar_content_hr">
 </div>

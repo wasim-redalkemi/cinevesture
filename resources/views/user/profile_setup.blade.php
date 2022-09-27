@@ -21,12 +21,12 @@
                     <div class="d-flex">
 
                         <div class="upload_img_container">
+                            <img src="" id="previewImg" onclick="document.getElementById('imgInp').click();">
                             <div for="file-input" class="d-none">
-                                <input type="file" name="image[]" accept=".jpg,.jpeg,.png" id="imgInp" multiple="multiple">
-                                <img src="" id="blah">
+                                <input type="file" onchange="uploadProfileImage(this)" name="image" accept=".jpg,.jpeg,.png" id="imgInp">
                             </div>
                             <div onclick="document.getElementById('imgInp').click();" class="pointer">
-                                <div class="text-center"> <i class="fa fa-plus-circle mx-2 profile_icon deep-pink" aria-hidden="true"></i></div>
+                                <div class="text-center"> <i class="fa fa-plus-circle mx-2 profile_icon deep-pink pointer" aria-hidden="true"></i></div>
                                 <div>Upload</div>
                             </div>
                         </div>
@@ -69,30 +69,43 @@
                         <div class="col-md-3">
                             <div class="profile_input">
                                 <label for="lang">Age</label>
-                                <select name="languages" id="lang">
-                                    <option value="test1">test 1</option>
-                                    <option value="test2">test 2</option>
-                                    <option value="test3">test 3</option>
+                                <select name="Age" id="Age">
+                                    <option value="18 - 24">18 - 24</option>
+                                    <option value="25 - 29">25 - 29</option>
+                                    <option value="30 - 34">30 - 34</option>
+                                    <option value="35 - 39">35 - 39</option>
+                                    <option value="40 - 44">40 - 44</option>
+                                    <option value="45 - 49">45 - 49</option>
+                                    <option value="50 - 54">50 - 54</option>
+                                    <option value="55 - 59">55 - 59</option>
+                                    <option value="30 - 34">60+</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="profile_input">
-                                <label for="lang">Gander</label>
-                                <select name="languages" id="lang">
-                                    <option value="test1">test 1</option>
-                                    <option value="test2">test 2</option>
-                                    <option value="test3">test 3</option>
+                                <label for="Gender">Gender</label>
+                                <select name="Gender" id="Gender">
+                                    <option value="Man">Man</option>
+                                    <option value="Woman">Woman</option>
+                                    <option value="Non Binary">Non Binary</option>
+                                    <option value="Transgender">Transgender</option>
+                                    <option value="Gender Non-conforming ">Gender Non-conforming </option>
+                                    <option value="Prefer Not To Say">Prefer Not To Say</option>
+                                    <option value="Other">Other</option>
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="profile_input">
                                 <label for="lang">Gender Pronouns</label>
-                                <select name="languages" id="lang">
-                                    <option value="test1">test 1</option>
-                                    <option value="test2">test 2</option>
-                                    <option value="test3">test 3</option>
+                                <select name="Gender Pronounce" id="Gender Pronounce">
+                                    <option value="He/Him/His">He/Him/His</option>
+                                    <option value="She/Her/Hers">She/Her/Hers</option>
+                                    <option value="They/Them/Theirs">They/Them/Theirs</option>
+                                    <option value="Ze/Hir/Hirs">Ze/Hir/Hirs</option>
+                                    <option value="Prefer not to say">Prefer not to say</option>
+                                    <option value="Other">Other</option>
                                 </select>
                             </div>
                         </div>
@@ -145,7 +158,7 @@
                         <div class="col-md-12">
                             <div class="profile_input">
                                 <label>About</label>
-                                <textarea class="form-control" aria-label="With textarea"></textarea>
+                                <textarea class="form-control" name="" aria-label="With textarea"></textarea>
                             </div>
                         </div>
                     </div>
@@ -205,14 +218,14 @@
 @endsection
 
 <script>
-    var imgInp = $("#imgInp");
-    var blah = $("#blah");
-
-    imgInp.onchange = evt => {
-        const [file] = imgInp.files
-        if (file) {
-            blah.src = URL.createObjectURL(file)
-        }
+    function uploadProfileImage(e) {
+        // debugger
+        var reader = new FileReader();
+        reader.onload = function() {
+            var output = document.getElementById('previewImg');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(e.files[0]);
     }
 </script>
 
