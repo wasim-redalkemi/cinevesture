@@ -30,7 +30,7 @@ class ProfileVerification
                     // return route('profile-create');
                     // return view('user.profile_setup', compact('user'));
                 }else{
-                    return view('user.guide_profile', compact('user')); 
+                    return view('user.profile_private_view', compact('user')); 
                 }
             }else{
                 return $next($request);

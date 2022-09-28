@@ -21,7 +21,7 @@ class ProfileController extends Controller
         $portfolio = UserPortfolio::query()->where('user_id',$user->id)->get();
         $experience = UserExperience::query()->where('user_id',$user->id)->get();
         $qualification = UserQualification::query()->where('user_id',$user->id)->get();
-        return view('user.guide_profile', compact('user','portfolio','experience','qualification')); 
+        return view('user.profile_private_view', compact('user','portfolio','experience','qualification')); 
     }
 
     public function profileCreate()

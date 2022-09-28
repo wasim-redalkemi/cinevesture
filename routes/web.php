@@ -36,19 +36,26 @@ Route::middleware(['guest'])->group(function () {
 Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],function(){
  
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('/profile-view', [ProfileController::class, 'profileView'])->name('profile-view');
-    Route::get('/profile-create', [ProfileController::class, 'profileCreate'])->name('profile-create');
-    Route::post('/profile-store', [ProfileController::class, 'profileStore'])->name('profile-store');
-    // Route::post('/profile-update', [ProfileController::class, 'profileUpdate'])->name('profile-update');
 
-    Route::get('/portfolio-add', [PortfolioController::class, 'index'])->name('portfolio-add');
-    Route::post('/portfolio-store', [PortfolioController::class, 'store'])->name('portfolio-store');
+    Route::group(['prefix'=>'user'],function()
+	{	
+		Route::get('/profile-private-show', [UserController::class, 'profilePrivateShow'])->name('profile-private-show');
+		Route::get('/profile-public-show', [UserController::class, 'profilePublicShow'])->name('profile-public-show');
+        Route::get('/profile-create', [UserController::class, 'profileCreate'])->name('profile-create');
+        Route::post('/profile-store', [UserController::class, 'profileStore'])->name('profile-store');
 
-    Route::get('/experience-add', [UserController::class, 'experienceAdd'])->name('experience-add');
-    Route::post('/experience-store', [UserController::class, 'experienceStore'])->name('experience-store');
+        Route::get('/portfolio-create', [UserController::class, 'portfolioCreate'])->name('portfolio-create');
+        Route::post('/portfolio-store', [UserController::class, 'portfolioStore'])->name('portfolio-store');
 
-    Route::get('/qualification-add', [UserController::class, 'qualificationAdd'])->name('qualification-add');
-    Route::post('/qualification-store', [UserController::class, 'qualificationStore'])->name('qualification-store');
+        Route::get('/experience-create', [UserController::class, 'experienceCreate'])->name('experience-create');
+        Route::post('/experience-store', [UserController::class, 'experienceStore'])->name('experience-store');
+
+        Route::get('/qualification-create', [UserController::class, 'qualificationCreate'])->name('qualification-create');
+        Route::post('/qualification-store', [UserController::class, 'qualificationStore'])->name('qualification-store');
+        Route::get('/profile_view_new', function () {
+            return view('user.user_profile');
+        });		
+	});
 
 
     Route::get('/setting-page', function () {
