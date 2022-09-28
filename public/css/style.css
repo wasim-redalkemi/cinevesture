@@ -1022,6 +1022,8 @@ body {
     border: 1px solid #FAF8FB;
     border-radius: 99px;
     padding: 5px;
+    height: 30px;
+    width: 30px;
 }
 
 /* project page */
@@ -1253,3 +1255,6 @@ body {
 
 }
 .sidebar_content a:hover {text-decoration: none !important;}
+.font_12 {
+    font-size: 12px !important;
+}
