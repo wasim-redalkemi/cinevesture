@@ -25,7 +25,7 @@
                       aria-expanded="false">
                       Training
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu px-3">
                       <li>
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                         <label class="form-check-label mx-2" for="flexCheckDefault">

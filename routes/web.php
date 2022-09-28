@@ -54,6 +54,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     Route::get('/setting-page', function () {
         return view('user.setting');
     })->name('setting-page');
+
+    Route::get('/profile_public_view', function () {
+        return view('user.profile_public_view');
+    })->name('profile_public_view');
 });
-
-
