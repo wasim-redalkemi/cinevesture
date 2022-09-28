@@ -3,15 +3,19 @@
 @section('title','Cinevesture-portfolio')
 
 @section('header')
-@include('include.header')
+    @include('include.header')
 @endsection
 
 @section('content')
-
-<body class="bg_white">
     <section class="guide_profile_section">
-        <div class="mb-3"> <i class="fa fa-arrow-left" aria-hidden="true"></i> <span class="back_btn_profile"> Back</span></div>
-        <div class="content_wraper">
+        <div class="row">
+            <div class="col-md-3">
+                @include('include.profile_sidebar')
+            </div>
+            <div class="col-md-9 mt-3 mt-sm-0">
+
+
+                <div class="content_wraper">
             <div class="guide_profile_subsection">
                 <div class="container">
                     <div class="row">
@@ -30,18 +34,29 @@
                                             <img src="{{Storage::url($user->profile_image)}}"  class = "prod-img" alt="product-image" style="max-height:100px;width:100%;">
                                         <?php
                                     }
+
+
                                 ?>
                             </div>
                         </div>
                         <div class="col-md-8">
                             <div class="guide_profile_main_text pt-3">{{$user->first_name.' '.$user->last_name}}</div>
-                                <div class="guide_profile_main_subtext">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                    elit.</div>
-                            <div><button class="guide_profile_btn mt-2">Contact </button></div>
+                            {{-- <div class="guide_profile_main_subtext">Lorem ipsum dolor sit amet, consectetur adipiscing
+                                elit.</div> --}}
+                            <div class="guide_profile_main_subtext candy-pink mt-2">
+                                {{empty($user->age)?'age':$user->age;}} | {{empty($user->gender)?'gender':$user->gender;}} | {{empty($user->gender_pronouns)?'gender-pronouns':$user->gender_pronouns;}}
+                            </div>
+                            {{-- <div><button class="guide_profile_btn mt-2">Contact </button></div> --}}
                         </div>
-                        <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
+                        {{-- <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
                             <i class="fa fa-heart icon-size Aubergine" aria-hidden="true"></i>
-                            <button class="verified_cmn_btn mx-3"> <i class="fa fa-check-circle hot-pink mx-1" aria-hidden="true"></i> VERIFIED</button>
+                            <button class="verified_cmn_btn mx-3"> <i class="fa fa-check-circle hot-pink mx-1"
+                                    aria-hidden="true"></i> VERIFIED</button>
+                        </div> --}}
+                        <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
+                            <a href="{{ route('profile-create')}}">
+                                <button class="guide_profile_btn mt-2">Edit </button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -57,14 +72,14 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="guide_profile_main_text mt-3">
-                                <p> Skils</p>
+                                <p> Skills</p>
                             </div>
                             <div class="d-flex mt-3">
-                                <button class="curv_cmn_btn">Skills 1</button>
+                                {{-- <button class="curv_cmn_btn">Skills 1</button>
                                 <button class="curv_cmn_btn mx-2">Skills 1</button>
                                 <button class="curv_cmn_btn">Skills 1</button>
-                                <button class="curv_cmn_btn mx-2">Skills 1</button>
-                            </div>
+                                <button class="curv_cmn_btn mx-2">Skills 1</button> --}}
+                                </div>
                             <div class="guide_profile_main_text mt-3">Available to Work In</div>
                             <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ $user->available_to_work_in }}</div>
                             <div class="guide_profile_main_text mt-3">Languages Spoken</div>
@@ -72,9 +87,7 @@
                             <div class="guide_profile_main_subtext Aubergine_at_night mt-1">English</div>
                         </div>
                         <div class="col-md-6">
-                            <div class="guide_profile_main_text mt-3">
-                                <p> Social Profile</p>
-                            </div>
+                            <div class="guide_profile_main_text mt-3"><p> Social Profile</p></div>
                             <div class="guide_profile_main_subtext mt-3">IMDB Profile</div>
                             <div class="guide_profile_main_subtext deep-pink mt-1">{{ $user->imdb_profile }}</div>
                             <div class="guide_profile_main_subtext mt-3">LinkedIn Profile</div>
@@ -110,57 +123,28 @@
                 </div>
             </div>
 
-            <div class="guide_profile_subsection">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="guide_profile_main_text mb-2">Portfolio</div>
-                            <div class="portfolio owl-carousel owl-theme">
-                                @foreach ($portfolio as $k=>$v)
-                                <div class="item">
-                                    <img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}">
-                                    <div class="guide_profile_main_subtext">{{$v->project_title}}</div>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="guide_profile_subsection">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="guide_profile_main_text mb-2">Project</div>
-                            <div class="project owl-carousel owl-theme">
-                                <div class="item">
-                                    <img src="{{ asset('public/images/asset/download (3) 7.png') }}">
-                                    <div class="guide_profile_main_subtext">Title</div>
-                                </div>
-                                <div class="item">
-                                    <img src="{{ asset('public/images/asset/download (3) 7.png') }}">
-                                    <div class="guide_profile_main_subtext">Title</div>
-                                </div>
-                                <div class="item">
-                                    <img src="{{ asset('public/images/asset/download (3) 7.png') }}">
-                                    <div class="guide_profile_main_subtext">Title</div>
-                                </div>
-                                <div class="item">
-                                    <img src="{{ asset('public/images/asset/download (3) 7.png') }}">
-                                    <div class="guide_profile_main_subtext">Title</div>
-                                </div>
-                                <div class="item">
-                                    <img src="{{ asset('public/images/asset/download (3) 7.png') }}">
-                                    <div class="guide_profile_main_subtext">Title</div>
+                    <div class="guide_profile_subsection">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="guide_profile_main_text mb-2">Portfolio</div>
+                                    <div class="portfolio owl-theme">
+                                        <?php
+                                            foreach($portfolio as $k=>$v)
+                                            {
+                                                ?>
+                                                    <div class="item">
+                                                        <img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}">
+                                                        <div class="guide_profile_main_subtext">{{$v->project_title}}</div>
+                                                    </div>
+                                                <?php
+                                            }    
+                                        ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-
-
+                    </div>    
 
             <div class="guide_profile_subsection">
                 <div class="container">
@@ -178,7 +162,7 @@
                             <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
                                 <p>{{$v->description}}</p>
                             </div>
-                            @endforeach  
+                            @endforeach                            
                         </div>
                     </div>
                 </div>
@@ -213,41 +197,38 @@
                                 <h1>Endorsements</h1>
                             </div>
                             <div>
-                                <button class="guide_profile_btn">Endorse</button>
+                                {{-- <button class="guide_profile_btn">Endorse</button> --}}
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
+                            </div>
+                            <div class="row mt-3">
                         <div class="col-md-3">
                             <div class="guide_profile_main_text deep-pink">John doe</div>
                             <div class="guide_profile_main_subtext Aubergine_at_night">Chief Officer</div>
                             <div class="guide_profile_main_subtext Aubergine_at_night">10TH JULY 2021</div>
                         </div>
                         <div class="col-md-9">
-                            <div class="guide_profile_main_subtext Aubergine_at_night">
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation.
-                                </p>
+                            <div class="guide_profile_main_subtext Aubergine_at_night"> <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                                exercitation.
+                            </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
+        </div>
+        </div>
         </div>
     </section>
+@endsection
 
-
-
-    @endsection
-
-    @section('footer')
+@section('footer')
     @include('include.footer')
-    @endsection
+@endsection
 
-    @section('scripts')
+@section('scripts')
 
     <script type="text/javascript">
         $(".portfolio.owl-carousel").owlCarousel({
@@ -260,12 +241,8 @@
             margin: 10,
             items: 5,
             responsive: {
-                480: {
-                    items: 3
-                },
-                768: {
-                    items: 4
-                },
+                480: { items: 3 },
+                768: { items: 4 },
                 1024: {
                     items: 5
                 }
@@ -281,16 +258,12 @@
             margin: 10,
             items: 3,
             responsive: {
-                480: {
-                    items: 1
-                },
-                768: {
-                    items: 2
-                },
+                480: { items: 1 },
+                768: { items: 2 },
                 1024: {
                     items: 3
                 }
             },
         });
     </script>
-    @endsection
+@endsection
