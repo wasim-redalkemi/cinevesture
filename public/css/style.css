@@ -1,6 +1,6 @@
 body {
     background: rgb(28,3,48) !important;
-    font-family: 'Open Sans';
+    font-family: 'Open Sans' !important;
     font-size: 100%;
 }
 
@@ -787,26 +787,41 @@ body {
     border-radius: 100%;
     border: none;
     display: flex;
-    background: #212B36;
+    background: transparent;
     inline-size: fit-content;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    min-height: 110px;
+    border: 1px solid;
 }
 
 .guide_profile_main_text {
+    font-style: normal;
     font-weight: 600;
     font-size: 18px;
     line-height: 150%;
     letter-spacing: 0.0075em;
     color: #33084C;
 }
+.style_ilatian {
+    font-style: italic !important;
+}
+.mt__3 {
+    margin-top: -3px;
+}
 .font_24 h1 {
     font-size: 24px ;
+}
+.font_12 {
+    font-size: 12px !important;
 }
 
 .font_18 h1 {
     font-size: 18px ;
+}
+.w_80 {
+    max-width: 500px;
 }
 .Aubergine_at_night {
     color: #1C0330 !important;
@@ -896,6 +911,13 @@ body {
 }
 .profile_cmn_head_text {
     font-weight: 700;
+    font-size: 18px;
+    line-height: 150%;
+    color: #1C0330;
+}
+.back_btn_profile {
+    letter-spacing: 0.0075em;
+    font-weight: 600;
     font-size: 18px;
     line-height: 150%;
     color: #1C0330;
@@ -1015,6 +1037,8 @@ body {
     border: 1px solid #FAF8FB;
     border-radius: 99px;
     padding: 5px;
+    height: 30px;
+    width: 30px;
 }
 
 /* project page */
@@ -1118,6 +1142,14 @@ body {
 .mt_35 {
     margin-top: 30% !important;
 }
+.tile_text {
+    font-weight: 600;
+  font-size: 18px;
+  line-height: 150%;
+  letter-spacing: 0.0075em;
+  color: #33084C;
+  }
+  
 .deactivate_btn {
     padding: 6px 16px;
     height: 40px;
@@ -1129,6 +1161,10 @@ body {
     text-align: center;
     letter-spacing: 0.054em;
     color: #C13D4F;
+}
+
+button, input, optgroup, select, textarea {
+    padding-left: 5px;
 }
 
 /* posted job section */
@@ -1246,3 +1282,63 @@ body {
 
 }
 .sidebar_content a:hover {text-decoration: none !important;}
+.font_12 {
+    font-size: 12px !important;
+}
+  .select2-results__option:before {
+    content: "";
+    display: inline-block;
+    position: relative;
+    height: 20px;
+    width: 20px;
+    border: 1px solid #4D0D8A;;
+    border-radius: 4px;
+    background-color: #FFFFFF;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+  .select2-results__option[aria-selected=true]:before {
+    font-family:fontAwesome;
+    content: "\f00c";
+    color: #FFFFFF;
+    background-color: #4D0D8A;;
+    border: 0;
+    display: inline-block;
+    text-align: center;
+    margin-right: 8px;
+  }
+  .select2-container--open .select2-dropdown--below {
+      border-radius: 6px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  }
+  .select2-container--default .select2-selection--multiple {
+    border: 1px solid #4D0D8A !important;
+    border-radius: 4px !important;
+    height: 40px !important;
+  }
+  .select2-container .select2-search--inline .select2-search__field {
+    margin-top: 0 !important;
+  }
+  .select2-container--default .select2-search--inline .select2-search__field  {
+    padding-left: 10px !important;
+  }
+  .select2-results__option {
+    color: #4D0D8A !important;
+    font-weight: 300 !important;
+  }
+  .select2-container--default .select2-results>.select2-results__options {
+    width: 100% !important
+  }
+
+
+  .skill_container {
+    float: left;
+    margin: 0px 5px 10px 0px;
+  }
+  .clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+
