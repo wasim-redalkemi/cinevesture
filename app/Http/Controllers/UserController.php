@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Otp;
+use App\Models\MasterCountry;
+use App\Models\MasterLanguage;
+use App\Models\MasterSkill;
+use App\Models\MasterState;
 use App\Models\User;
 use App\Models\UserExperience;
+use App\Models\UserLanguage;
 use App\Models\UserPortfolio;
 use App\Models\UserQualification;
+use App\Models\UserSkill;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -99,8 +104,21 @@ class UserController extends Controller
         $portfolio = UserPortfolio::query()->where('user_id',$user->id)->get();
         $experience = UserExperience::query()->where('user_id',$user->id)->get();
         $qualification = UserQualification::query()->where('user_id',$user->id)->get();
+        $user_country = MasterCountry::query()->where('id',$user->country_id)->first();
+        // $user_state = MasterState::query()->where('id',$user->state_id)->first();
+        $user_skills = UserSkill::query()
+        ->with('getSkills')
+        ->where('user_id',$user->id)
+        ->get()
+        ->toArray();
+
+        $user_languages = UserLanguage::query()
+        ->with('getLanguages')
+        ->where('user_id',$user->id)
+        ->get()
+        ->toArray();
       
-        return view('user.profile_private_view', compact('user','portfolio','experience','qualification')); 
+        return view('user.profile_private_view', compact('user','portfolio','experience','qualification','user_country','user_skills','user_languages')); 
     }
 
     public function profilePublicShow(Request $request)
@@ -116,7 +134,12 @@ class UserController extends Controller
     public function profileCreate()
     {
         $user = User::query()->find(auth()->user()->id);
-        return view('user.profile_setup', compact('user'));
+        $skills = MasterSkill::query()->get();
+        $languages = MasterLanguage::query()->get();
+        $country = MasterCountry::query()->get();
+        $state = MasterState::query()->get();
+
+        return view('user.profile_setup', compact('user','skills','languages','country','state'));
     }
 
 
@@ -133,13 +156,14 @@ class UserController extends Controller
             $user->gender_pronouns = $request->gender_pronouns;
             $user->about=$request->about;
             $user->available_to_work_in=$request->available_to_work_in;
-            $user->country=$request->country;
+            $user->country_id=$request->Located_in;
+            $user->state_id=$request->state;
             $user->imdb_profile = $request->imdb_profile;
             $user->linkedin_profile = $request->linkedin_profile;
             $user->website = $request->website;
             $user->intro_video_link = $request->intro_video_link;
 
-            if($request->hasFile('logo')) {
+            if($request->hasFile('profile_image')) {
 
                 $file = $request->file('profile_image');
                 $originalFile = $file->getClientOriginalName();
@@ -152,9 +176,20 @@ class UserController extends Controller
                 $user->profile_image = $uploadFile;
             }
             if($user->save()){
-                $portfolio = $user;
+                foreach ($request->skills as $k => $v) {
+                    $userSkills = new UserSkill();
+                    $userSkills->user_id = $user->id;
+                    $userSkills->skill_id = $v;
+                    $userSkills->save();
+                }
+                foreach ($request->languages as $k => $v) {
+                    $userLanguages = new UserLanguage();
+                    $userLanguages->user_id = $user->id;
+                    $userLanguages->language_id = $v;
+                    $userLanguages->save();
+                }
                 // return view('user.profile_portfolio', compact('portfolio'))->with("success","Portfolio updated successfully.");
-                return redirect()->route('portfolio-create')->with("success","Portfolio updated successfully.");
+                return redirect()->route('portfolio-create')->with("success","User details updated successfully.");
 
             }else {
                 return back()->withError('Somethig went wrong ,please try again.');
