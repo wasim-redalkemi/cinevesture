@@ -72,7 +72,10 @@
                         </div>
                     </div>
                     <div class="associate_text mt-4">Associated with the project (Optional)</div>
-                    <div class="row">
+
+
+                    <div class="input_fields_wrap" >
+                    <div class="row" name="mytext[]">
                         <div class="col-md-3">
                             <div class="profile_input">
                                 <label>Title</label>
@@ -89,7 +92,14 @@
                             <i class="fa fa-times-circle deep-pink icon-size" aria-hidden="true"></i>
                         </div>
                     </div>
-                    <div class="row">
+                </div>
+                <div class="add_field_button mt-3">
+                            <button class="save_add_btn">Add another</button>
+                        </div>
+
+                    
+
+                    <!-- <div class="row">
                         <div class="col-md-3">
                             <div class="profile_input">
                                 <label>Title</label>
@@ -107,7 +117,7 @@
                                 <button class="save_add_btn">Add another</button>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row">
                         <div class="col-md-12">
                             <div class="d-flex justify-content-end mt-5 pt-5 pb-md-0">
@@ -139,5 +149,29 @@
         allowClear: true,
         tags: true
     });
+
+    $(document).ready(function() {
+   
+$(document).ready(function() {
+    var max_fields      = 10; //maximum input boxes allowed
+    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
+    var add_button      = $(".add_field_button"); //Add button ID
+
+    var x = 1; //initlal text box count
+    $(add_button).click(function(e){ //on add input button click
+        e.preventDefault();
+        if(x < max_fields){ //max input box allowed
+            x++; //text box increment
+            $(wrapper).append('<div class="add_new"> <div class="row total_data" name="mytext[]"><div class="col-md-3"><div class="profile_input"><label>Title</label><input type="text" class="form-control" name="" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1"></div></div><div class="col-md-3"><div class="profile_input"><label>Name</label><input type="text" class="form-control" name="" placeholder="Locations (Optional)" aria-label="Username" aria-describedby="basic-addon1"></div></div><div class="col-md-3  d-flex align-items-end pb-2 mt-2 mt-md-0"><i class="fa fa-times-circle deep-pink icon-size remove_field" aria-hidden="true"></i></div></div></div>'); //add input box
+        }
+    });
+
+    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+        e.preventDefault(); 
+        $(this).parents('.add_new').remove(); 
+        x--;
+    })
+});
+});
 </script>
 @endsection
