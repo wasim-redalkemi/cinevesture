@@ -25,7 +25,7 @@
                       aria-expanded="false">
                       Training
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu px-3">
                       <li>
                         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                         <label class="form-check-label mx-2" for="flexCheckDefault">
@@ -55,7 +55,7 @@
             <i class="fa fa-user-circle mx-2"
               style="font-size:25px; color: #DD45B3;background-color: white; border-radius: 50%;border:none"
               aria-hidden="true"></i>
-              <a href="{{ route('profile-view')}}" class="text_decor_none">
+              <a href="{{ route('profile-private-show')}}" class="text_decor_none">
                 <span>Profile</span>
               </a>
         </div>
