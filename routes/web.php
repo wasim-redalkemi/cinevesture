@@ -56,4 +56,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     })->name('setting-page');
 });
 
+Route::get('/test', function () {
+    return view('user.project.project_overview');
+});
+
 
