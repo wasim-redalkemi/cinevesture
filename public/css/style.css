@@ -875,6 +875,7 @@ body {
 }
 .profile_wraper_padding {
     padding: 22px 30px !important;
+    margin: 10px 0px 50px 0;
 }
 .profile_wraper {
     background: #FFFFFF;
@@ -1079,13 +1080,21 @@ body {
     font-weight: 400;
     font-size: 25px;
     color: white;
+    margin: auto;
     background: #971E9B;
 }
 .flow_hr {
     opacity: 0.5;
     border: 2px solid #971E9B;
     background-color: #971E9B;
-    width: 14%;
+    width: 100%;
+    margin: -3% -1.5% 0 -1.5%;
+}
+.ml__3 {
+    margin-left: -3%;
+}
+.mr__3 {
+    margin-right: -3%;
 }
 .w_14 {
     width: 17%;
