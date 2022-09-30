@@ -139,7 +139,7 @@ class UserController extends Controller
         $country = MasterCountry::query()->get();
         $state = MasterState::query()->get();
 
-        return view('user.profile_setup', compact('user','skills','languages','country','state'));
+        return view('user.profile_create', compact('user','skills','languages','country','state'));
     }
 
 

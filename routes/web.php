@@ -2,9 +2,8 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\PortfolioController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;  
@@ -53,6 +52,12 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 
         Route::get('/qualification-create', [UserController::class, 'qualificationCreate'])->name('qualification-create');
         Route::post('/qualification-store', [UserController::class, 'qualificationStore'])->name('qualification-store');        		
+	});
+
+    Route::group(['prefix'=>'project'],function()
+	{	
+        Route::get('/project-create', [ProjectController::class, 'projectViewRender'])->name('project-create');
+        Route::post('/project-overview-store', [ProjectController::class, 'projectStore'])->name('project-overview-store');
 	});
 
 
