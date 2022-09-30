@@ -44,12 +44,12 @@
 
 <!-- Preview section  -->
 <section>
-    <div class="container profile_wraper profile_wraper_padding  mt-4">
+    <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div>
+                <div class=" profile_wraper profile_wraper_padding  mt-4">
                     <p class="flow_step_text"> Overview</p>
-                </div>
+               
                 <div class="preview_headtext">Project Name</div>
                 <div class="preview_subtext">Test</div>
                 <div class="preview_headtext">Types of projects</div>
@@ -61,14 +61,20 @@
                 <div class="preview_headtext">Country</div>
                 <div class="preview_subtext">United State</div>
                 <div class="preview_headtext">Locations</div>
-                <div class="preview_subtext">Santa</div>
+                <div class="preview_subtext pb-3">Santa</div>
+                <div class="row">
+                    <div class="com-md-12">
+                        <div class="justify-content-end"><button class="save_add_btn float-end">Edit</button></div>
+                    </div>
+                </div>
             </div>
-            <div class="justify-content-end"><button class="save_add_btn float-end mt-3">Edit</button></div>
         </div>
     </div>
-    <div class="container profile_wraper profile_wraper_padding  mt-4">
+    </div>
+    <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <div class="profile_wraper profile_wraper_padding  mt-4">
                 <div>
                     <p class="flow_step_text"> Details</p>
                 </div>
@@ -93,14 +99,20 @@
                     <div> Editor - Name</div>
                     <div> Actor - Name</div>
                 </div>
+                <div class="row">
+                    <div class="com-md-12">
+                        <div class="justify-content-end"><button class="save_add_btn float-end">Edit</button></div>
+                    </div>
+                </div>
             </div>
-            <div class="justify-content-end"><button class="save_add_btn float-end mt-3">Edit</button></div>
+        </div>
         </div>
     </div>
 
-    <div class="container profile_wraper profile_wraper_padding  mt-4">
+    <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <div class="profile_wraper profile_wraper_padding  mt-4">
                 <div>
                     <p class="flow_step_text"> Description</p>
                 </div>
@@ -114,18 +126,23 @@
                 <div class="preview_subtext">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     <br> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                 </div>
-                <div class="justify-content-end"><button class="save_add_btn float-end mt-3">Edit</button></div>
-            </div>
-        </div>
-    </div>
-    <div class="container profile_wraper profile_wraper_padding  mt-4">
-        <div class="row">
-            <div class="col-md-12">
-                <div>
-                    <p class="flow_step_text"> Description</p>
+                <div class="row">
+                    <div class="com-md-12">
+                        <div class="justify-content-end"><button class="save_add_btn float-end">Edit</button></div>
+                    </div>
                 </div>
             </div>
         </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="profile_wraper profile_wraper_padding  mt-4">
+                <div>
+                    <p class="flow_step_text"> Description</p>
+                </div>
+        
         <div class="preview_headtext mb-3">Video</div>
         <div class="row">
             <div class="col-md-3">
@@ -179,10 +196,14 @@
                 </div>
             </div>
         </div>
+        </div>
+        </div>
+        </div>
     </div>
-    <div class="container profile_wraper profile_wraper_padding  mt-4">
+    <div class="container">
         <div class="row">
             <div class="col-md-12">
+                <div class="profile_wraper profile_wraper_padding  mt-4">
                 <div>
                     <p class="flow_step_text"> Requirements & Milestones</p>
                 </div>
@@ -213,8 +234,13 @@
                     <div class="col-4 col-md-3 preview_subtext">2,000,000.00</div>
                     <div class="col-4 col-md-3 preview_subtext">2,000,000.00</div>
                 </div>
-                <div class="justify-content-end"><button class="save_add_btn float-end mt-3">Edit</button></div>
+                <div class="row">
+                    <div class="com-md-12">
+                        <div class="justify-content-end"><button class="save_add_btn float-end">Edit</button></div>
+                    </div>
+                </div>
             </div>
+        </div>
         </div>
     </div>
 
