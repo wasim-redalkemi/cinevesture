@@ -84,14 +84,16 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="profile_input">
-                                    <label for="lang">Gander</label>
-                                    <select name="gender" id="lang">
-                                        <option value="women">Women</option>
-                                        <option value="gender_non_confirming">Gender Non Confirming</option>
-                                        <option value="prefer_not_to_say">Prefer Not To Say</option>
-                                    </select>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="profile_input">
+                                        <label for="lang">Located in</label>
+                                        <select name="Located_in" id="lang">
+                                            @foreach ($country as $k=>$v)
+                                                <option value="{{ $v->id }}">{{  $v->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -103,26 +105,27 @@
                                         <option value="they/them/theirs">they/them/theirs</option>
                                     </select>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="profile_input">
-                                    <label for="lang">Located in</label>
-                                    <select name="Located_in" id="lang">
-                                        <option value="Mumbai">Mumbai</option>
-                                        <option value="Kanpur">Kanpur</option>
-                                        <option value="Delhi">Delhi</option>
-                                    </select>
+                                <div class="col-md-4">
+                                    <div class="profile_input">
+                                        <label for="lang">Languse Spoken</label>
+                                        <select name="languages[]" id="lang" multiple>
+                                            @foreach ($languages as $k=>$v)
+                                                <option value="{{ $v->id }}">{{  $v->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="profile_input">
-                                    <label for="lang">Availabe to work in</label>
-                                    <select name="available_to_work_in" id="lang">
-                                        <option value="virtually">Virtually</option>
-                                        <option value="physically">Physically</option>
-                                    </select>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="profile_input">
+                                        <label for="lang">State</label>
+                                        <select name="state" id="lang">
+                                            @foreach ($state as $k=>$v)
+                                                <option value="{{ $v->id }}">{{  $v->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -135,16 +138,16 @@
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="profile_input">
-                                    <label for="lang">Country</label>
-                                    <select name="country" id="lang">
-                                        <option value="India">India</option>
-                                        <option value="Japan">Japan</option>
-                                        <option value="Nepan">Nepan</option>
-                                    </select>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="profile_input">
+                                        <label for="lang">Skills</label>
+                                        <select name="skills[]" id="lang" multiple>
+                                            @foreach ($skills as $k=>$v)
+                                                <option value="{{ $v->id }}">{{  $v->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>

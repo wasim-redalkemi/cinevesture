@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PortfolioController;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;  
 
@@ -51,18 +52,17 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/experience-store', [UserController::class, 'experienceStore'])->name('experience-store');
 
         Route::get('/qualification-create', [UserController::class, 'qualificationCreate'])->name('qualification-create');
-        Route::post('/qualification-store', [UserController::class, 'qualificationStore'])->name('qualification-store');
-        Route::get('/profile_view_new', function () {
-            return view('user.user_profile');
-        });		
+        Route::post('/qualification-store', [UserController::class, 'qualificationStore'])->name('qualification-store');        		
 	});
 
 
     Route::get('/setting-page', function () {
         return view('user.setting');
     })->name('setting-page');
-
-    Route::get('/user_profile', function () {
-        return view('user.user_profile');
-    })->name('profile_public_view');
 });
+
+Route::get('/test', function () {
+    return view('user.project.project_overview');
+});
+
+

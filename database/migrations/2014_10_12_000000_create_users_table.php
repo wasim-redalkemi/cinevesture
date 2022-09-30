@@ -30,7 +30,8 @@ class CreateUsersTable extends Migration
             $table->enum('gender_pronouns',['he/him/his','she/her/hers','they/them/theirs','ze/hir/hirs','prefer_not_to_say','other'])->nullable();
             $table->enum('available_to_work_in',['virtually','physically'])->nullable();
             $table->string('about')->nullable();
-            $table->string('country')->nullable();
+            $table->string('country_id')->nullable();
+            $table->string('state_id')->nullable();
             $table->string('job_title',50)->nullable();
             $table->string('imdb_profile',255)->nullable();
             $table->string('linkedin_profile',255)->nullable();

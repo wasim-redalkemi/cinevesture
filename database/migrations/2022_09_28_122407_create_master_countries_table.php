@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOtpsTable extends Migration
+class CreateMasterCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateOtpsTable extends Migration
      */
     public function up()
     {
-        Schema::create('otps', function (Blueprint $table) {
+        Schema::create('master_countries', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id',20);
-            $table->integer('otp');
-            $table->bigInteger('expiry_date');
+            $table->string('name',255);
+            $table->string('country_code',5);
 
             $table->timestamps();
             $table->softDeletes();
@@ -31,6 +30,6 @@ class CreateOtpsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('otps');
+        Schema::dropIfExists('master_countries');
     }
 }
