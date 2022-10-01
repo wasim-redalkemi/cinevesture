@@ -57,7 +57,10 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     Route::group(['prefix'=>'project'],function()
 	{	
         Route::get('/project-create', [ProjectController::class, 'projectViewRender'])->name('project-create');
-        Route::post('/project-overview-store', [ProjectController::class, 'projectStore'])->name('project-overview-store');
+        Route::post('/project-overview-store', [ProjectController::class, 'overviewStore'])->name('project-overview-store');
+        Route::post('/project-details-store/{id}', [ProjectController::class, 'detailsStore'])->name('project-details-store');
+        Route::post('/project-description-store/{id}', [ProjectController::class, 'descriptionStore'])->name('project-description-store');
+        Route::post('/project-milestone-store/{id}', [ProjectController::class, 'milestoneStore'])->name('project-milestone-store');
 	});
 
 

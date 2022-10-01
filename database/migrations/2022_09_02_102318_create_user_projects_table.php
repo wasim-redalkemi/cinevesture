@@ -22,17 +22,15 @@ class CreateUserProjectsTable extends Migration
             $table->string('project_name',255);
             $table->string('project_type_id',20);
             $table->enum('listing_project_as',['individual','organization']);
-            $table->string('country_id',20);
-            $table->string('language_type',20);
             $table->string('location',255)->nullable();
             $table->string('category_id',20)->nullable();
-            $table->float('duration')->nullable();
-            $table->float('total_budget');
-            $table->float('financing_secured');
-            $table->string('logline',500);
-            $table->string('synopsis',1000);
-            $table->string('director_statement',1000);
-            $table->string('project_stage_id',20);
+            $table->string('duration')->nullable();
+            $table->float('total_budget')->nullable();
+            $table->float('financing_secured')->nullable();
+            $table->string('logline',500)->nullable();
+            $table->string('synopsis',1000)->nullable();
+            $table->string('director_statement',1000)->nullable();
+            $table->string('project_stage_id',20)->nullable();
             $table->string('stage_of_funding_id',20)->nullable();
             $table->string('crowdfund_link',255)->nullable();
 
