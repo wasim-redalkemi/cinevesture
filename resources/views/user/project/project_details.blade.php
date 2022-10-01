@@ -167,7 +167,7 @@ $(document).ready(function() {
     });
 
     $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
-        e.preventDefault(); 
+        e.preventDefault();
         $(this).parents('.add_new').remove(); 
         x--;
     })
