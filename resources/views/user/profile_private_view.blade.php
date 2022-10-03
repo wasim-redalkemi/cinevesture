@@ -71,13 +71,15 @@
                                 <div class="guide_profile_main_text mt-3">
                                     <p> Skills</p>
                                 </div>
-                                <div class="d-flex mt-3">
+                                <div class="">
                                     @if (count($user_skills)>0)
                                         @foreach ($user_skills as $k=>$v)
-                                            <button class="curv_cmn_btn">
+                                            <button class="curv_cmn_btn skill_container">
                                                 {{ $v['get_skills']['name'] }}
-                                            </button>  
-                                        @endforeach                                        
+                                            </button>                                                
+                                                                                            
+                                        @endforeach  
+                                        <div class="clearfix"></div>
                                     @else
                                         <span><b>-</b></span>
                                     @endif
@@ -115,6 +117,7 @@
                                     @else
                                         <span><b>-</b></span>
                                     @endif
+                                </div>
                                 <div class="guide_profile_main_subtext mt-3">Website</div>
                                 <div class="guide_profile_main_subtext deep-pink mt-1">
                                     @if (isset($user->website))
