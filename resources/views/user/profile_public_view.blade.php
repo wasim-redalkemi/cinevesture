@@ -14,6 +14,9 @@
         <div class="content_wraper">
             <div class="guide_profile_subsection">
                 <div class="container">
+                    <div class="hide-me">
+                        @include('include.flash_message')
+                    </div>
                     <div class="row">
                         <div class="col-md-2">
                             <div class="user_profile_container">

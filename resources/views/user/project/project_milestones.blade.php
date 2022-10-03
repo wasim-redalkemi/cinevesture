@@ -7,39 +7,7 @@
 @endsection
 
 @section('content')
-<section class="">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center">
-                <div class="d-flex align-items-center justify-content-center mt-5">
-                    <div class="flow_container">1</div>
-                    <hr class="flow_hr">
-                    <div class="flow_container opacity-50">2</div>
-                    <hr class="flow_hr">
-                    <div class="flow_container opacity-50">3</div>
-                    <hr class="flow_hr">
-                    <div class="flow_container opacity-50">4</div>
-                    <hr class="flow_hr">
-                    <div class="flow_container opacity-50">5</div>
-                    <hr class="flow_hr">
-                    <div class="flow_container opacity-50">6</div>
-                </div>
-                <!-- <div class=" mt-2">
-                <div class="d-flex align-items-center">
-                    <div class="w_14">Overview</div>
-                    <div class="w_14">Details</div>
-                    <div class="w_14">Description</div>
-                    <div class="w_14">Gallery</div>
-                    <div class="w_14">Requirements & Milestones</div>
-                    <div class="w_14">Preview</div>
-                </div>
-                </div> -->
-
-
-            </div>
-        </div>
-    </div>
-</section>
+@include('user.project.project_pagination')
 
 
 <!-- Requirements section -->
@@ -56,10 +24,10 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Project Stage *</label>
-                                        <select name="project_stage_id" id="lang">
-                                            <option value="Development">Development</option>
-                                            <option value="Pre-production">Pre-production</option>
-                                        </select>
+                                    <select name="project_stage_id" id="lang">
+                                        <option value="Development">Development</option>
+                                        <option value="Pre-production">Pre-production</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -143,8 +111,18 @@
 @section('footer')
 @include('include.footer')
 @endsection
+@push('scripts')
+<script>
+    $(".js-select2").select2({
+      closeOnSelect: false,
+      placeholder: "Placeholder",
+      allowClear: true,
+      tags: true
+  });
+</script>
+@endpush
 
-@section('scripts')
+{{-- @section('')
 <script>
       $(".js-select2").select2({
         closeOnSelect: false,
@@ -153,4 +131,4 @@
         tags: true
     });
 </script>
-@endsection
+@endsection --}}

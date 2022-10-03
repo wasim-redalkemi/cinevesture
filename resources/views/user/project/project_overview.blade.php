@@ -1,6 +1,6 @@
 @extends('layouts.app',['class' => 'bg_white'])
 
-@section('title','Cinevesture-organisation')
+@section('title','Project-overview')
 
 @section('header')
 @include('include.header')
@@ -122,7 +122,18 @@
 @include('include.footer')
 @endsection
 
-@section('scripts')
+@push('scripts')
+<script>
+    $(".js-select2").select2({
+      closeOnSelect: false,
+      placeholder: "Placeholder",
+      allowClear: true,
+      tags: true
+  });
+</script>
+@endpush
+
+{{-- @section('scripts')
 <script>
       $(".js-select2").select2({
         closeOnSelect: false,
@@ -131,4 +142,4 @@
         tags: true
     });
 </script>
-@endsection
+@endsection --}}

@@ -67,6 +67,7 @@ class LoginController extends Controller
         }
        
             $user = User::query()->where('email',$request->email)->first();
+            
            
             if (!$user->email_verified_at) {
                 $otp = OtpController::createOtp($user);
@@ -115,5 +116,22 @@ class LoginController extends Controller
             ? new JsonResponse([], 204)
             : redirect('login');
      
+    }
+
+        /**
+     * Validate the user login request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    protected function validateLogin(Request $request)
+    {
+        $request->validate([
+            $this->username() => 'required|string|exists:users,email',
+            'password' => 'required|string',
+        
+        ],[$this->username().'.exists'=>"Email does not exist."]);
     }
 }
