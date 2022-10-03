@@ -8,6 +8,7 @@
 
 @section('content')
     <section class="guide_profile_section">
+        <div class="conatiner">
         <div class="row">
             <div class="col-md-3">
                 @include('include.profile_sidebar')
@@ -218,6 +219,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
         </div>
         </div>

@@ -31,7 +31,7 @@
                                     <div for="file-input" class="d-none">
                                         <input type="file" onchange="uploadProfileImage(this)" name="profile_image" accept=".jpg,.jpeg,.png" id="imgInp">
                                     </div>
-                                    <div onclick="document.getElementById('imgInp').click();" class="pointer">
+                                    <div class="pointer">
                                         <div class="text-center"> <i class="fa fa-plus-circle mx-2 profile_icon deep-pink pointer" aria-hidden="true"></i></div>
                                         <div>Upload</div>
                                     </div>
@@ -163,7 +163,7 @@
                                 <div class="col-md-12">
                                     <div class="profile_input">
                                         <label for="lang">Skills</label>
-                                        <select name="skills[]" id="lang" multiple>
+                                        <select name="skills[]" class="js-select2" id="lang" multiple>
                                             @foreach ($skills as $k=>$v)
                                                 <option value="{{ $v->id }}">{{  $v->name }}</option>
                                             @endforeach
@@ -213,19 +213,27 @@
             </div>
         </div>        
     </section>
-    
-    <script type="text/javascript">
-        function uploadProfileImage(e) {
-            var reader = new FileReader();
-            reader.onload = function() {
-                var output = document.getElementById('previewImg');
-                output.src = reader.result;
-            };
-            reader.readAsDataURL(e.files[0]);
-        }
-    </script>
 @endsection
 
 @section('footer')
     @include('include.footer')
 @endsection
+@push('scripts')
+<script type="text/javascript">
+    function uploadProfileImage(e) {
+        var reader = new FileReader();
+        reader.onload = function() {
+            var output = document.getElementById('previewImg');
+            output.src = reader.result;
+        };
+        reader.readAsDataURL(e.files[0]);
+    }
+
+    $(".js-select2").select2({
+        closeOnSelect: false,
+        placeholder: "Select option",
+        allowClear: true,
+        tags: true
+    });
+</script>
+@endpush
