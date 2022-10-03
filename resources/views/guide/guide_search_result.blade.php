@@ -18,7 +18,7 @@
                         <button class="search-btn"></button>
                     </form>
                 </div>
-                <div class="dropdown search-page mt-3">
+                <!-- <div class="dropdown search-page mt-3">
                     <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Genres
                     </button>
@@ -27,8 +27,8 @@
                         <li><a class="dropdown-item" href="#">Another action</a></li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
-                </div>
-                <div class="dropdown search-page">
+                </div> -->
+                <!-- <div class="dropdown search-page">
                     <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Categories
                     </button>
@@ -37,7 +37,7 @@
                         <li><a class="dropdown-item" href="#">Another action</a></li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
-                </div>
+                </div> -->
                 <div class="dropdown search-page">
                     <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Location
@@ -48,7 +48,7 @@
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </div>
-                <div class="dropdown search-page">
+                <!-- <div class="dropdown search-page">
                     <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Workspace Type
                     </button>
@@ -57,7 +57,7 @@
                         <li><a class="dropdown-item" href="#">Another action</a></li>
                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                     </ul>
-                </div>
+                </div> -->
                 <div class="dropdown search-page">
                     <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Skills
