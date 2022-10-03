@@ -1012,6 +1012,7 @@ body {
     align-items: center;
     height: 172px;
     margin-top: 16px;
+    overflow: hidden;
 }
 
 /* Organisation page */
@@ -1117,8 +1118,8 @@ body {
     letter-spacing: 0.0025em;
     color: #1C0330;
 }
-.h_78 {
-    height: 78%;
+.h_66 {
+    height: 194px !important;
 }
 .h_69 {
     height: 69px;
