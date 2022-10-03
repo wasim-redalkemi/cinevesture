@@ -13,6 +13,9 @@
             @include('include.profile_sidebar')
         </div>
         <div class="col-md-9 mt-3 mt-sm-0">
+            <div class="hide-me">
+                @include('include.flash_message')
+            </div>
             <div class="content_wraper">
                 <div class="guide_profile_subsection">
                     <div class="container">

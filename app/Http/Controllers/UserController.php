@@ -147,7 +147,7 @@ class UserController extends Controller
     {
         try {
             $user = User::query()->find(auth()->user()->id);
-            
+
             $user->first_name = $request->first_name;
             $user->last_name = $request->last_name;
             $user->job_title = $request->job_title;
@@ -203,8 +203,10 @@ class UserController extends Controller
     public function portfolioCreate(Request $request)
     {
         $user = User::query()->find(auth()->user()->id);
+        $country = MasterCountry::query()->get();
+
         $portfolio = $user;
-        return view('user.profile_portfolio', compact('portfolio'));
+        return view('user.profile_portfolio', compact('portfolio','country'));
     }
 
     public function portfolioStore(Request $request)
@@ -217,8 +219,8 @@ class UserController extends Controller
             $portfolio->project_title = $request->project_title;
             $portfolio->description = $request->description;
             $portfolio->completion_date = $request->completion_date;
-            $portfolio->project_country_id = '5';
-            // $portfolio->video = $request->video;
+            $portfolio->project_country_id = $request->project_country_id;
+            $portfolio->video = $request->video;
            
             if($portfolio->save()){
                 $experience = $portfolio;

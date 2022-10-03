@@ -29,8 +29,13 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Job Title</label>
-                                        <input type="text" class="form-control" placeholder="Job Title" name="job_title" value="{{ $experience->job_title }}"
+                                        <input type="text" class="form-control @error('intro_video_link') is-invalid @enderror" placeholder="Job Title" name="job_title" value="{{ $experience->job_title }}"
                                             aria-label="Username" aria-describedby="basic-addon1">
+                                        @error('intro_video_link')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -39,7 +44,12 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Company</label>
-                                        <input type="text" class="form-control" placeholder="Company" name="comapny" value="{{ $experience->comapny }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control @error('comapny') is-invalid @enderror" placeholder="Company" name="comapny" value="{{ $experience->comapny }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        @error('comapny')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -47,7 +57,12 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Location</label>
-                                        <input type="text" class="form-control" placeholder="Location" name="country_id" value="{{ $experience->country_id }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control @error('country_id') is-invalid @enderror" placeholder="Location" name="country_id" value="{{ $experience->country_id }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        @error('country_id')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -55,13 +70,23 @@
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>Start Date</label>
-                                        <input type="date" class="form-control" placeholder="DD/MM/YY" name="start_date" value="{{ $experience->start_date }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="date" class="form-control @error('start_date') is-invalid @enderror" placeholder="DD/MM/YY" name="start_date" value="{{ $experience->start_date }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        @error('start_date')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>End Date</label>
-                                        <input type="date" class="form-control" placeholder="DD/MM/YY" name="end_date" value="{{ $experience->end_date }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="date" class="form-control @error('end_date') is-invalid @enderror" placeholder="DD/MM/YY" name="end_date" value="{{ $experience->end_date }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        @error('end_date')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -69,11 +94,16 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label for="lang">Employment Type</label>
-                                        <select name="languages" id="lang">
+                                        <select name="languages" class="@error('languages') is-invalid @enderror" id="lang">
                                             <option value="test1">test 1</option>
                                             <option value="test2">test 2</option>
                                             <option value="test3">test 3</option>
                                         </select>
+                                        @error('languages')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -81,7 +111,12 @@
                                 <div class="col-md-12">
                                     <div class="profile_input">
                                         <label>Description</label>
-                                        <textarea class="form-control" name="description" aria-label="With textarea">{{ $experience->description }}</textarea>
+                                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" aria-label="With textarea">{{ $experience->description }}</textarea>
+                                        @error('description')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>

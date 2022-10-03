@@ -67,6 +67,7 @@ class LoginController extends Controller
         }
        
             $user = User::query()->where('email',$request->email)->first();
+            
            
             if (!$user->email_verified_at) {
                 $otp = OtpController::createOtp($user);

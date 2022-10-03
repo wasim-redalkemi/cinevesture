@@ -1,6 +1,6 @@
 @extends('layouts.app',['class' => 'bg_white'])
 
-@section('title','Cinevesture-organisation')
+@section('title','Project-details')
 
 @section('header')
 @include('include.header')
@@ -18,7 +18,7 @@
                 <div class="profile_wraper profile_wraper_padding mt-4">
                     <form role="form" method="POST" enctype="multipart/form-data" action="{{route('project-details-store',['id' => $user->id ])}}">
                         @csrf
-                        
+
                         <p class="flow_step_text"> Details</p>
                         <div class="row">
                             <div class="col-md-6">

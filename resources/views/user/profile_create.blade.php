@@ -29,7 +29,12 @@
                                 <div class="upload_img_container">
                                     <img src="" id="previewImg" onclick="document.getElementById('imgInp').click();">
                                     <div for="file-input" class="d-none">
-                                        <input type="file" onchange="uploadProfileImage(this)" name="profile_image" accept=".jpg,.jpeg,.png" id="imgInp">
+                                        <input type="file" onchange="uploadProfileImage(this)" name="profile_image" class="@error('profile_image') is-invalid @enderror" accept=".jpg,.jpeg,.png" id="imgInp">
+                                        @error('profile_image')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror 
                                     </div>
                                     <div onclick="document.getElementById('imgInp').click();" class="pointer">
                                         <div class="text-center"> <i class="fa fa-plus-circle mx-2 profile_icon deep-pink pointer" aria-hidden="true"></i></div>
@@ -52,22 +57,37 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>First Name</label>
-                                        <input type="text" class="form-control" placeholder="{{ __('First Name') }}" name="first_name" value="{{ $user->first_name }}"
+                                        <input type="text" class="form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name" value="{{ $user->first_name }}"
                                             aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                        @error('first_name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>Last Name</label>
-                                        <input type="text" class="form-control" placeholder="{{ __('Last Name') }}" name="last_name" value="{{ $user->last_name }}"
+                                        <input type="text" class="form-control @error('last_name') is-invalid @enderror" placeholder="{{ __('Last Name') }}" name="last_name" value="{{ $user->last_name }}"
                                             aria-label="Username" aria-describedby="basic-addon1">
+                                        @error('last_name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>Job Title</label>
-                                        <input type="text" class="form-control" placeholder="Job Title" name="job_title" {{ $user->job_title }} value="{{ $user->job_title }}"
+                                        <input type="text" class="form-control @error('job_title') is-invalid @enderror" placeholder="Job Title" name="job_title" {{ $user->job_title }} value="{{ $user->job_title }}"
                                             aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                        @error('job_title')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -75,7 +95,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input" style="max-height:300px;overflow:auto;">
                                         <label for="lang">Age</label>
-                                        <select name="age" id="lang">
+                                        <select name="age" class="@error('age') is-invalid @enderror" id="lang">
                                             <?php
                                                 for($i=18;$i<=100;$i++)
                                                 {
@@ -85,26 +105,41 @@
                                                 }
                                             ?>
                                         </select>
+                                        @error('age')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label for="lang">Gander</label>
-                                        <select name="gender" id="lang">
+                                        <select name="gender" class="@error('gender') is-invalid @enderror" id="lang">
                                             <option value="women">Women</option>
                                             <option value="gender_non_confirming">Gender Non Confirming</option>
                                             <option value="prefer_not_to_say">Prefer Not To Say</option>
                                         </select>
+                                        @error('gender')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label for="lang">Gender Pronouns</label>
-                                        <select name="gender_pronouns" id="lang">
+                                        <select name="gender_pronouns" class="@error('gender_pronouns') is-invalid @enderror" id="lang">
                                             <option value="he/him/his">he/him/his</option>
                                             <option value="she/her/hers">she/her/hers</option>
                                             <option value="they/them/theirs">they/them/theirs</option>
                                         </select>
+                                        @error('gender_pronouns')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -112,30 +147,45 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label for="lang">Located in</label>
-                                        <select name="Located_in" id="lang">
+                                        <select name="Located_in" class="@error('Located_in') is-invalid @enderror" id="lang">
                                             @foreach ($country as $k=>$v)
                                                 <option value="{{ $v->id }}">{{  $v->name }}</option>
                                             @endforeach
                                         </select>
+                                        @error('Located_in')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label for="lang">Availabe to work in</label>
-                                        <select name="available_to_work_in" id="lang">
+                                        <select name="available_to_work_in" class="@error('available_to_work_in') is-invalid @enderror" id="lang">
                                             <option value="virtually">Virtually</option>
                                             <option value="physically">Physically</option>
                                         </select>
+                                        @error('available_to_work_in')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label for="lang">Languse Spoken</label>
-                                        <select name="languages[]" id="lang" multiple>
+                                        <select name="languages[]" class="@error('languages') is-invalid @enderror" id="lang" multiple>
                                             @foreach ($languages as $k=>$v)
                                                 <option value="{{ $v->id }}">{{  $v->name }}</option>
                                             @endforeach
                                         </select>
+                                        @error('languages')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -143,11 +193,16 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label for="lang">State</label>
-                                        <select name="state" id="lang">
+                                        <select name="state" class="@error('state') is-invalid @enderror" id="lang">
                                             @foreach ($state as $k=>$v)
                                                 <option value="{{ $v->id }}">{{  $v->name }}</option>
                                             @endforeach
                                         </select>
+                                        @error('state')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -155,7 +210,12 @@
                                 <div class="col-md-12">
                                     <div class="profile_input">
                                         <label>About</label>
-                                        <textarea class="form-control" name="about" aria-label="With textarea">{{ $user->about }}</textarea>
+                                        <textarea class="form-control @error('about') is-invalid @enderror" name="about" aria-label="With textarea">{{ $user->about }}</textarea>
+                                        @error('about')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -163,11 +223,16 @@
                                 <div class="col-md-12">
                                     <div class="profile_input">
                                         <label for="lang">Skills</label>
-                                        <select name="skills[]" id="lang" multiple>
+                                        <select name="skills[]" class="@error('skills') is-invalid @enderror" id="lang" multiple>
                                             @foreach ($skills as $k=>$v)
                                                 <option value="{{ $v->id }}">{{  $v->name }}</option>
                                             @endforeach
                                         </select>
+                                        @error('skills')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -175,19 +240,34 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>IMDB Profile</label>
-                                        <input type="text" class="form-control" placeholder="IMDB Profile" name="imdb_profile" value="{{ $user->imdb_profile }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control @error('imdb_profile') is-invalid @enderror" placeholder="IMDB Profile" name="imdb_profile" value="{{ $user->imdb_profile }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        @error('imdb_profile')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>LinkedIn Profile</label>
-                                        <input type="text" class="form-control" placeholder="LinkedIn Profile" name="linkedin_profile" value="{{ $user->linkedin_profile }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control @error('linkedin_profile') is-invalid @enderror" placeholder="LinkedIn Profile" name="linkedin_profile" value="{{ $user->linkedin_profile }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        @error('linkedin_profile')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>Website</label>
-                                        <input type="text" class="form-control" placeholder="Website" aria-label="Username" name="website" value="{{ $user->website }}" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control @error('website') is-invalid @enderror" placeholder="Website" aria-label="Username" name="website" value="{{ $user->website }}" aria-describedby="basic-addon1">
+                                        @error('website')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -195,7 +275,12 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>Introduction Video</label>
-                                        <input type="text" class="form-control" placeholder="Paste link here" name="intro_video_link" value="{{ $user->intro_video_link }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="{{ $user->intro_video_link }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        @error('intro_video_link')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
