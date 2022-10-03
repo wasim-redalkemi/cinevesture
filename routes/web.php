@@ -70,7 +70,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 });
 
 Route::get('/test', function () {
-    return view('user.project.project_overview');
+    return view('user.project.project_gallery');
 });
 
 
