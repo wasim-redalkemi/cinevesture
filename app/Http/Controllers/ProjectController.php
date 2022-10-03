@@ -136,7 +136,7 @@ class ProjectController extends Controller
                 $description->director_statement = $request->director_statement;
                 if($description->update()) {
                     
-                    return redirect()->route('project-create',['nextPage' => 'Req&milestone'])->with("success","Project description updated successfully.");
+                    return redirect()->route('project-create',['nextPage' => 'Gallery'])->with("success","Project description updated successfully.");
                 } else {
                     return back()->with("error","Please overview phase fill.");
                 }
@@ -159,7 +159,6 @@ class ProjectController extends Controller
     //             if($gallery->update()) {
                     
     //                 return redirect()->route('project-create',['nextPage' => 'Req & milestone'])->with("success","Project description updated successfully.");
-    //                 // return redirect()->route('project-create',['nextPage' => 'Gallery'])->with("success","Project description updated successfully.");
     //             } else {
     //                 return back()->with("error","Please overview phase fill.");
     //             }
