@@ -7,9 +7,7 @@
 @endsection
 
 @section('content')
-<section class="">
-
-</section>
+@include('user.project.project_pagination')
 
 
 <!-- Gallery section -->

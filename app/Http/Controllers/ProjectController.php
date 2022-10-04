@@ -18,14 +18,29 @@ use Illuminate\Http\Request;
 
 class ProjectController extends Controller
 {
+    public function projectList()
+    {
+        try {
+            $user = User::query()->find(auth()->user()->id);
+        
+            $UserProject = UserProject::query()->where('user_id',$user->id)->get();
+
+            return view('user.project.project',compact('user','UserProject'));
+
+        } catch (Exception $e) {
+            return back()->withError('Somethig went wrong.');
+        }
+    }
     public function projectViewRender($nextPage = '')
     {
-        
         try {
             $user = User::query()->find(auth()->user()->id);
             $languages = MasterLanguage::query()->get();
             $country = MasterCountry::query()->get();
             $lookingFor = MasterLookingFor::query()->get();
+            $UserProject = UserProject::query()->get();
+            $projectCountries = ProjectCountry::query()->get();
+           
             if (isset($_REQUEST['nextPage'])) {
                 $nextPage = $_REQUEST['nextPage'];
             }
@@ -44,7 +59,7 @@ class ProjectController extends Controller
                     return view('user.project.project_milestones', compact('user','languages','country','lookingFor'));
                     break;
                 case 'Preview':
-                    return view('user.project.project_preview', compact('user','languages','country'));
+                    return view('user.project.project_preview', compact('user','languages','country','lookingFor','UserProject'));
                     break;            
                 default:
                     return view('user.project.project_overview', compact('user','languages','country'));

@@ -112,8 +112,10 @@
                                             </span>
                                         @enderror
                                     </div>
+                                </div>
+                                <div class="col-md-3 d-flex align-items-end">
                                     <button class="save_add_btn">Add another</button>
-                                </div>                                                               
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-5">

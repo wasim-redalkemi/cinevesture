@@ -176,7 +176,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label for="lang">Languse Spoken</label>
-                                        <select name="languages[]" class="@error('languages') is-invalid @enderror" id="lang" multiple>
+                                        <select name="languages[]" class="js-select2 @error('languages') is-invalid @enderror" id="lang" multiple>
                                             @foreach ($languages as $k=>$v)
                                                 <option value="{{ $v->id }}">{{  $v->name }}</option>
                                             @endforeach

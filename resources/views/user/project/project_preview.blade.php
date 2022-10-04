@@ -7,39 +7,7 @@
 @endsection
 
 @section('content')
-<section class="">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 text-center">
-                <div class="d-flex align-items-center justify-content-center mt-5">
-                    <div class="flow_container">1</div>
-                    <hr class="flow_hr">
-                    <div class="flow_container opacity-50">2</div>
-                    <hr class="flow_hr">
-                    <div class="flow_container opacity-50">3</div>
-                    <hr class="flow_hr">
-                    <div class="flow_container opacity-50">4</div>
-                    <hr class="flow_hr">
-                    <div class="flow_container opacity-50">5</div>
-                    <hr class="flow_hr">
-                    <div class="flow_container opacity-50">6</div>
-                </div>
-                <!-- <div class=" mt-2">
-                <div class="d-flex align-items-center">
-                    <div class="w_14">Overview</div>
-                    <div class="w_14">Details</div>
-                    <div class="w_14">Description</div>
-                    <div class="w_14">Gallery</div>
-                    <div class="w_14">Requirements & Milestones</div>
-                    <div class="w_14">Preview</div>
-                </div>
-                </div> -->
-
-
-            </div>
-        </div>
-    </div>
-</section>
+@include('user.project.project_pagination')
 
 
 <!-- Preview section  -->
@@ -49,19 +17,25 @@
             <div class="col-md-12">
                 <div class=" profile_wraper profile_wraper_padding  mt-4">
                     <p class="flow_step_text"> Overview</p>
-               
+               @php
+                   echo '<pre>';
+                    print_r($UserProject);
+                    die;
+               @endphp
+               @foreach ($UserProject as $k=>$v)
                 <div class="preview_headtext">Project Name</div>
-                <div class="preview_subtext">Test</div>
+                <div class="preview_subtext">{{$v->project_name}}</div>
                 <div class="preview_headtext">Types of projects</div>
-                <div class="preview_subtext">COntent</div>
-                <div class="preview_headtext">Who are you litning this project as</div>
-                <div class="preview_subtext">Individual</div>
+                <div class="preview_subtext">{{ $v->project_type_id }}</div>
+                <div class="preview_headtext">Who are you listning this project as</div>
+                <div class="preview_subtext">{{ $v->listing_project_as }}</div>
                 <div class="preview_headtext">Language</div>
                 <div class="preview_subtext">English</div>
                 <div class="preview_headtext">Country</div>
-                <div class="preview_subtext">United State</div>
+                <div class="preview_subtext">{{ $v->location }}</div>
                 <div class="preview_headtext">Locations</div>
-                <div class="preview_subtext pb-3">Santa</div>
+                <div class="preview_subtext pb-3">{{ $v->location }}</div>
+               @endforeach
                 <div class="row">
                     <div class="com-md-12">
                         <div class="justify-content-end"><button class="save_add_btn float-end">Edit</button></div>

@@ -111,12 +111,15 @@ class UserController extends Controller
         ->where('user_id',$user->id)
         ->get()
         ->toArray();
+        
 
         $user_languages = UserLanguage::query()
         ->with('getLanguages')
         ->where('user_id',$user->id)
         ->get()
         ->toArray();
+
+       
       
         return view('user.profile_private_view', compact('user','portfolio','experience','qualification','user_country','user_skills','user_languages')); 
     }
@@ -176,12 +179,16 @@ class UserController extends Controller
                 $user->profile_image = $uploadFile;
             }
             if($user->save()){
+                UserSkill::query()->where('user_id',auth()->user()->id)->delete();
+                
                 foreach ($request->skills as $k => $v) {
                     $userSkills = new UserSkill();
                     $userSkills->user_id = $user->id;
                     $userSkills->skill_id = $v;
                     $userSkills->save();
                 }
+                UserLanguage::query()->where('user_id',auth()->user()->id)->delete();
+
                 foreach ($request->languages as $k => $v) {
                     $userLanguages = new UserLanguage();
                     $userLanguages->user_id = $user->id;
