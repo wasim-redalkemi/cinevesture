@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IndustryGuideController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
@@ -62,6 +63,13 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/project-gallery-store/{id}', [ProjectController::class, 'galleryStore'])->name('project-gallery-store');
         Route::post('/project-description-store/{id}', [ProjectController::class, 'descriptionStore'])->name('project-description-store');
         Route::post('/project-milestone-store/{id}', [ProjectController::class, 'milestoneStore'])->name('project-milestone-store');
+	});
+
+    Route::group(['prefix'=>'industry-guide'],function()
+	{	
+        Route::get('/show', [IndustryGuideController::class, 'show'])->name('guide-view');
+        Route::post('/filter', [IndustryGuideController::class, 'index'])->name('filter-profile');
+       
 	});
 
 
