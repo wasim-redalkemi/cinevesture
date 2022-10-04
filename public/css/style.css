@@ -1,6 +1,6 @@
 body {
     background: rgb(28,3,48) !important;
-    font-family: 'Open Sans' !important;
+    /* font-family: 'Open Sans' !important; */
     font-size: 100%;
 }
 
@@ -78,6 +78,21 @@ body {
 
 .search ::placeholder {
     color: #FFFFFF !important;
+}
+
+.mt-4-5{
+    margin-top: 2.5rem !important;
+}
+
+.outline{
+    outline: 0 !important;
+}
+
+.for_authtoast {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    z-index: 1;
 }
 
 /* home page  */
@@ -323,7 +338,7 @@ body {
 
 .auth_section {
     background: #33084C !important;
-    padding: 0 35%;
+    padding: 0 28%;
     min-height: 100vh;
 }
 
@@ -342,7 +357,7 @@ body {
 }
 .signup-text {
     font-weight: 600;
-    font-size: 36px;
+    font-size: 28px;
     line-height: 124%;
     letter-spacing: -0.01em;
     text-align: center;
@@ -1350,5 +1365,6 @@ button, input, optgroup, select, textarea {
     clear: both;
     display: table;
   }
+
 
 
