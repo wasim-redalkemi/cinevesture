@@ -10,6 +10,7 @@ use App\Models\ProjectCountry;
 use App\Models\ProjectGenre;
 use App\Models\ProjectLanguage;
 use App\Models\ProjectLookingFor;
+use App\Models\ProjectMedia;
 use App\Models\ProjectMilestone;
 use App\Models\User;
 use App\Models\UserProject;
@@ -146,27 +147,80 @@ class ProjectController extends Controller
         }
     }
 
-    // public function galleryStore(Request $request,$id)
-    // {
-    //     try {
-    //         $user = User::query()->find(auth()->user()->id);
-    //         $gallery = UserProject::query()->find($id)->latest()->first();
-    //         if (isset($gallery)) {
-                
-    //             $gallery->logline = $request->logline;
-    //             $gallery->synopsis = $request->synopsis;
-    //             $gallery->director_statement = $request->director_statement;
-    //             if($gallery->update()) {
-                    
-    //                 return redirect()->route('project-create',['nextPage' => 'Req & milestone'])->with("success","Project description updated successfully.");
-    //             } else {
-    //                 return back()->with("error","Please overview phase fill.");
-    //             }
-    //         }
-    //     } catch (Exception $e) {
-    //         return back()->withError('Somethig went wrong.');
-    //     }
-    // }    
+    public function galleryStore(Request $request,$id)
+    {
+        try {
+                $user = User::query()->find(auth()->user()->id);
+                $project = UserProject::query()->find($id)->latest()->first();
+                if(!empty($project)) 
+                {
+                    $data_to_insert = [];
+                    $i=0;
+                    foreach($request->toArray() as $k => $v) 
+                    {
+                        $i++;
+                        $video_file_name = 'project_video_link_'.$i;
+                        if(!empty($request->$video_file_name)) 
+                        {
+                            $data_to_insert[] = [
+                                'file_type' => 'video',
+                                'file_link' => $request->$video_file_name
+                            ];
+                        }
+
+                        $image_file_name = 'project_image_'.$i;
+                        if($request->hasFile($image_file_name)) 
+                        {
+                            $file = $request->file($image_file_name);
+                            $originalFile = $file->getClientOriginalName();
+                            $fileExt = pathinfo($originalFile, PATHINFO_EXTENSION);
+                            $fileName = pathinfo($originalFile, PATHINFO_FILENAME);
+                            $nameStr = date('_YmdHis');
+                            $newName = $fileName.$nameStr.'.'.$fileExt;
+                            $locationPath  = "project/image";
+                            $uploadFile = $this->uploadFile($locationPath , $file,$newName);
+                            $data_to_insert[] = [
+                                'file_type' => 'image',
+                                'file_link' => $newName
+                            ];
+                        }
+
+                        $docs_file_name = 'project_docs_'.$i;
+                        if($request->hasFile($docs_file_name)) 
+                        {
+                            $file = $request->file($docs_file_name);
+                            $originalFile = $file->getClientOriginalName();
+                            $fileExt = pathinfo($originalFile, PATHINFO_EXTENSION);
+                            $fileName = pathinfo($originalFile, PATHINFO_FILENAME);
+                            $nameStr = date('_YmdHis');
+                            $newName = $fileName.$nameStr.'.'.$fileExt;
+                            $locationPath  = "project/docs";
+                            $uploadFile = $this->uploadFile($locationPath , $file,$newName);
+                            $data_to_insert[] = [
+                                'file_type' => 'image',
+                                'file_link' => $newName
+                            ];
+                        }
+                    } 
+
+                    ProjectMedia::query()->where('project_id',$project->id)->delete();
+                    foreach($data_to_insert as $k => $v)
+                    {
+                        $projectMedia = new ProjectMedia();
+                        $projectMedia->project_id = $project->id;
+                        $projectMedia->file_type = $v['file_type'];
+                        $projectMedia->file_link = $v['file_link'];
+                        $projectMedia->save();
+                    }
+                    return redirect()->route('project-create',['nextPage' => 'Req&milestone'])->with("success","Project media updated successfully.");
+                }
+            } 
+            catch (Exception $e) 
+            {
+                return back()->withError('Somethig went wrong.');
+            }
+    }
+
     public function milestoneStore(Request $request,$id)
     {
         try {
