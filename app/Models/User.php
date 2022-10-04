@@ -39,4 +39,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function country()
+    {
+        return $this->hasOne(MasterCountry::class,'country_id');
+    }
+
+    public function skill()
+    {
+        return $this->hasMany(UserSkill::class,'user_id');
+    }
 }

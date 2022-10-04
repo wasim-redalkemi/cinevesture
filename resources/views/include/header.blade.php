@@ -17,7 +17,7 @@
                   <a class="header-nav-link active" href="#">Project</a>
                 </li>
                 <li>
-                  <a class="header-nav-link" href="#">Industry Guide</a>
+                  <a class="header-nav-link" href="{{route('guide-view')}}">Industry Guide</a>
                 </li>
                 <li>
                   <div class="dropdown home-dropdown">
