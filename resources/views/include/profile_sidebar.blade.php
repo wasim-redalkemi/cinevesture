@@ -4,7 +4,7 @@
         <a href="">Profile</a>
     </div>
     <hr class="sidebar_content_hr">
-    <div class="sidebar_content"><a href="">Projects</a></div>
+    <div class="sidebar_content"><a href="{{ route('project-list')}}">Projects</a></div>
     <hr class="sidebar_content_hr">
     <div class="sidebar_content"><a href="">Profile</a></div>
     <hr class="sidebar_content_hr">

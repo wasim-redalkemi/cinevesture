@@ -25,25 +25,25 @@
                                 <h1>Profile</h1>
                             </div>
 
-                            <div class="d-flex">
+                            <div class="d-flex custom_file_explorer">
                                 <div class="upload_img_container">
-                                    <img src="" id="previewImg" onclick="document.getElementById('imgInp').click();">
+                                    <img src="" class="upload_preview">
                                     <div for="file-input" class="d-none">
-                                        <input type="file" onchange="uploadProfileImage(this)" name="profile_image" class="@error('profile_image') is-invalid @enderror" accept=".jpg,.jpeg,.png" id="imgInp">
+                                        <input type="file" name="profile_image" class="@error('profile_image') is-invalid @enderror file_element" accept=".jpg,.jpeg,.png">
                                         @error('profile_image')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror 
                                     </div>
-                                    <div class="pointer">
+                                    <div class="pointer open_file_explorer">
                                         <div class="text-center"> <i class="fa fa-plus-circle mx-2 profile_icon deep-pink pointer" aria-hidden="true"></i></div>
                                         <div>Upload</div>
                                     </div>
                                 </div>
                                 <div class="mx-4 d-flex align-items-center">
                                     <div>
-                                        <div class="search-head-subtext Aubergine_at_night">
+                                        <div class="search-head-subtext Aubergine_at_night open_file_explorer">
                                             Upload Profile Picture
                                         </div>
                                         <div class="search-head-subtext deep-pink">
@@ -51,14 +51,15 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>                            
                             <div class="profile_upload_text"> Upload JPG or PNG, 400x400 PX</div>
+
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>First Name</label>
                                         <input type="text" class="form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name" value="{{ $user->first_name }}"
-                                            aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                            aria-label="Username" aria-describedby="basic-addon1" autofocus>
                                         @error('first_name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -176,7 +177,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label for="lang">Languse Spoken</label>
-                                        <select name="languages[]" class="@error('languages') is-invalid @enderror" id="lang" multiple>
+                                        <select name="languages[]" class="js-select2 @error('languages') is-invalid @enderror" id="lang" multiple>
                                             @foreach ($languages as $k=>$v)
                                                 <option value="{{ $v->id }}">{{  $v->name }}</option>
                                             @endforeach
@@ -305,14 +306,24 @@
 @endsection
 @push('scripts')
 <script type="text/javascript">
-    function uploadProfileImage(e) {
-        var reader = new FileReader();
-        reader.onload = function() {
-            var output = document.getElementById('previewImg');
-            output.src = reader.result;
-        };
-        reader.readAsDataURL(e.files[0]);
-    }
+    $(document).ready(function()
+    {
+        $('.open_file_explorer').click(function(e) 
+        {
+            $(this).parents('.custom_file_explorer').find('.file_element').click();
+        });
+
+        $('.file_element').change(function()
+        {
+            var output = $(this).parents('.custom_file_explorer').find('.upload_preview');
+            const file = this.files;
+            var reader = new FileReader();
+            reader.onload = function() {
+                output.attr('src',reader.result);
+            };
+            reader.readAsDataURL(file[0]);
+        });
+    });
 
     $(".js-select2").select2({
         closeOnSelect: false,

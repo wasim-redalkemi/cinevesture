@@ -218,7 +218,7 @@
               </div>
               <div>
                 <button class="header-search-btn mx-3">Search</button>
-                <button class="add-proj-btn my-2 my-sm-0 mr-0" type="submit">Add a Project</button>
+                <button class="add-proj-btn my-2 my-sm-0 mr-0" type="submit"><a class="btn-link text_decor_none" href="{{ route('project-create')}}">Add a Project</a></button>
               </div>
             </div>
           </div>
