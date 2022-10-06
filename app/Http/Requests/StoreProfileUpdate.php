@@ -47,6 +47,5 @@ class StoreProfileUpdate extends FormRequest
             'profile_image.required' => 'Profile Image is required',
             'age.integer' => 'Age must be integer.',
         ];
-            
     }
 }

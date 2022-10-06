@@ -95,9 +95,10 @@
                                     <div class="profile_input">
                                         <label for="lang">Employment Type</label>
                                         <select name="languages" class="@error('languages') is-invalid @enderror" id="lang">
-                                            <option value="test1">test 1</option>
-                                            <option value="test2">test 2</option>
-                                            <option value="test3">test 3</option>
+                                            <option value="Full-time">Full-time</option>
+                                            <option value="Contract">Contract</option>
+                                            <option value="Internship">Internship</option>
+                                            <option value="Part-time">Part-time</option>
                                         </select>
                                         @error('languages')
                                             <span class="invalid-feedback" role="alert">

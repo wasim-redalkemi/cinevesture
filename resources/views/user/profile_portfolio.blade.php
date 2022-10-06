@@ -55,10 +55,10 @@
                                 <div class="col-md-6">
                                 <div class="profile_input">
                                     <label for="lang">Project specific Skills</label>
-                                    <select name="project_specific_skills" class="@error('project_specific_skills') is-invalid @enderror" id="lang">
-                                        <option value="test1">test 1</option>
-                                        <option value="test2">test 2</option>
-                                        <option value="test3">test 3</option>
+                                    <select name="project_specific_skills_id[]" class="js-select2 @error('project_specific_skills') is-invalid @enderror" id="lang">
+                                        @foreach ($skills as $k=>$v)
+                                            <option value="{{ $v->id }}">{{ $v->name }}</option>
+                                        @endforeach
                                     </select>
                                     @error('project_specific_skills')
                                         <span class="invalid-feedback" role="alert">
@@ -117,18 +117,6 @@
                                     <button class="save_add_btn">Add another</button>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-5">
-                                <div class="profile_upload_container ">
-                                    <div>
-                                        <div class="text-center"> <i class="fa fa-plus-circle mx-2 profile_icon deep-pink"
-                                                aria-hidden="true"></i></div>
-                                        <div>Upload</div>
-                                    </div>
-                                    </div>
-                                    <div class="profile_upload_text"> Upload JPG or PNG, 1600*900 PX, max size 4MB</div>
-                                </div>
-                            </div>                        
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-end mt-4">
