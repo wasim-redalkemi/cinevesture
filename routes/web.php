@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\IndustryGuideController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\PortfolioController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;  
@@ -58,12 +58,32 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/qualification-store', [UserController::class, 'qualificationStore'])->name('qualification-store');        		
 	});
 
+    Route::group(['prefix'=>'project'],function()
+	{	
+        Route::get('/project-list', [ProjectController::class, 'projectList'])->name('project-list');
+        Route::get('/project-create', [ProjectController::class, 'projectViewRender'])->name('project-create');
+        Route::post('/project-overview-store', [ProjectController::class, 'overviewStore'])->name('project-overview-store');
+        Route::post('/project-details-store/{id}', [ProjectController::class, 'detailsStore'])->name('project-details-store');
+        Route::post('/project-gallery-store/{id}', [ProjectController::class, 'galleryStore'])->name('project-gallery-store');
+        Route::post('/project-description-store/{id}', [ProjectController::class, 'descriptionStore'])->name('project-description-store');
+        Route::post('/project-milestone-store/{id}', [ProjectController::class, 'milestoneStore'])->name('project-milestone-store');
+	});
+
+    Route::group(['prefix'=>'industry-guide'],function()
+	{	
+        Route::get('/show', [IndustryGuideController::class, 'show'])->name('guide-view');
+        Route::get('/filter', [IndustryGuideController::class, 'index'])->name('filter-profile');
+       
+	});
+
 
     Route::get('/setting-page', function () {
         return view('user.setting');
     })->name('setting-page');
 });
 
-
+Route::get('/test', function () {
+    return view('user.user_profile');
+});
 
 

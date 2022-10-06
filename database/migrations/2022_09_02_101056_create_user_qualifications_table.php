@@ -16,8 +16,6 @@ class CreateUserQualificationsTable extends Migration
         Schema::create('user_qualifications', function (Blueprint $table) {
             $table->id();
             $table->string('user_id',20);
-            $table->string('institute_id',255)->nullable();
-            $table->string('degree_id',255)->nullable();
             $table->string('institue_name',500)->nullable();
             $table->string('degree_name',500)->nullable();
             $table->string('feild_of_study',50);

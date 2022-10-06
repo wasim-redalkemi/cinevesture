@@ -2,9 +2,10 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateInstitutesTable extends Migration
+class CreateCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +14,27 @@ class CreateInstitutesTable extends Migration
      */
     public function up()
     {
-        Schema::create('institutes', function (Blueprint $table) {
+        Schema::create('categories', function (Blueprint $table) {
             $table->id();
-            $table->string('name',500);
-
+            $table->string('name',255);
             $table->timestamps();
-            $table->softDeletes();
         });
+
+        DB::table('categories')->insert([
+            [ 'name' => 'Features'],
+            [ 'name' => 'Animation'],
+            ['name'=>'Biography']
+          
+        ]);
     }
 
-    /**	
+    /**
      * Reverse the migrations.
      *
      * @return void
      */
     public function down()
     {
-        Schema::dropIfExists('institutes');
+        Schema::dropIfExists('category');
     }
 }

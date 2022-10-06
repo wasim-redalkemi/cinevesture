@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProfileUpdate;
 use App\Models\MasterCountry;
 use App\Models\MasterLanguage;
 use App\Models\MasterSkill;
@@ -111,12 +112,15 @@ class UserController extends Controller
         ->where('user_id',$user->id)
         ->get()
         ->toArray();
+        
 
         $user_languages = UserLanguage::query()
         ->with('getLanguages')
         ->where('user_id',$user->id)
         ->get()
         ->toArray();
+
+       
       
         return view('user.profile_private_view', compact('user','portfolio','experience','qualification','user_country','user_skills','user_languages')); 
     }
@@ -139,15 +143,15 @@ class UserController extends Controller
         $country = MasterCountry::query()->get();
         $state = MasterState::query()->get();
 
-        return view('user.profile_setup', compact('user','skills','languages','country','state'));
+        return view('user.profile_create', compact('user','skills','languages','country','state'));
     }
 
 
-    public function profileStore(Request $request)
+    public function profileStore(StoreProfileUpdate $request)
     {
         try {
             $user = User::query()->find(auth()->user()->id);
-            
+
             $user->first_name = $request->first_name;
             $user->last_name = $request->last_name;
             $user->job_title = $request->job_title;
@@ -176,12 +180,16 @@ class UserController extends Controller
                 $user->profile_image = $uploadFile;
             }
             if($user->save()){
+                UserSkill::query()->where('user_id',auth()->user()->id)->delete();
+                
                 foreach ($request->skills as $k => $v) {
                     $userSkills = new UserSkill();
                     $userSkills->user_id = $user->id;
                     $userSkills->skill_id = $v;
                     $userSkills->save();
                 }
+                UserLanguage::query()->where('user_id',auth()->user()->id)->delete();
+
                 foreach ($request->languages as $k => $v) {
                     $userLanguages = new UserLanguage();
                     $userLanguages->user_id = $user->id;
@@ -203,8 +211,10 @@ class UserController extends Controller
     public function portfolioCreate(Request $request)
     {
         $user = User::query()->find(auth()->user()->id);
+        $country = MasterCountry::query()->get();
+
         $portfolio = $user;
-        return view('user.profile_portfolio', compact('portfolio'));
+        return view('user.profile_portfolio', compact('portfolio','country'));
     }
 
     public function portfolioStore(Request $request)
@@ -217,8 +227,8 @@ class UserController extends Controller
             $portfolio->project_title = $request->project_title;
             $portfolio->description = $request->description;
             $portfolio->completion_date = $request->completion_date;
-            $portfolio->project_country_id = '5';
-            // $portfolio->video = $request->video;
+            $portfolio->project_country_id = $request->project_country_id;
+            $portfolio->video = $request->video;
            
             if($portfolio->save()){
                 $experience = $portfolio;
@@ -298,8 +308,5 @@ class UserController extends Controller
         } catch (Exception $e) {
             return back()->withError('Somethig went wrong.');
         }
-    }
-
-
-   
+    }   
 }

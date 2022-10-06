@@ -1,0 +1,87 @@
+<script>
+        $(document).ready(function(){
+            //For albhabates
+            $(".alphabets-only").on("input",function(){
+                $(this).val($(this).val().replace(/[^A-z ]/g,''));
+            });
+
+            //For emails only
+            $(".email-only").on("keyup",function(){
+                var EMAIL_REGEXP = /^[_a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+(\.[_a-z0-9]+)*@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9]+)*(\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)$/;
+                var $el = $(this);
+                var form = $el[0].form;
+                var sdgfsj = $el.val();
+                var submitBtn = $(form).find('button[type="submit"]');
+                var isMatchRegex = EMAIL_REGEXP.test($el.val());                
+                if (isMatchRegex || $el.val() == '') {
+                    $el.css("border", "");
+                     submitBtn.removeAttr('disabled');
+                    $el.parent().find('span').remove();
+                } else if (isMatchRegex == false) {
+                    $el.css("border", "2px solid red");
+                    submitBtn.attr('disabled', 'disabled');
+                    if ($el.parent().find('span').length == 0) {
+                        $(`<span class="e-err" style="color: red;margin:0px;">Please provide a valid E-Mail Address.</span>`).insertAfter($el);
+                        // $el.parent().append('<p class="e-err" style="color: red;">Please provide a valid email id.</p>')
+                    }
+                }
+            });
+
+            // password 8 chr
+
+               $(".password-only").on("keyup",function(){
+                var EMAIL_REGEXP = /^[A-Za-z\d]{8,}$/;
+                var $el = $(this);
+                var form = $el[0].form;
+                var sdgfsj = $el.val();
+                var submitBtn = $(form).find('button[type="submit"]');
+                var isMatchRegex = EMAIL_REGEXP.test($el.val());                
+                if (isMatchRegex || $el.val() == '') {
+                    $el.css("border", "");
+                     submitBtn.removeAttr('disabled');
+                    $el.parent().find('span').remove();
+                } else if (isMatchRegex == false) {
+                    $el.css("border", "2px solid red");
+                    submitBtn.attr('disabled', 'disabled');
+                    if ($el.parent().find('span').length == 0) {
+                        $(`<span class="e-err" style="color: red;margin:0px;">Password must be at least 8 characters.</span>`).insertAfter($el);
+                        // $el.parent().append('<p class="e-err" style="color: red;">Please provide a valid email id.</p>')
+                    }
+                }
+            });
+
+
+            //For Numbers only
+            $(".numbers-only").on("input",function(){
+                $(this).val($(this).val().replace(/[^0-9]/g,''));
+            });
+
+            //For float only
+            $(".float").on("input",function(){
+                $(this).val($(this).val().replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1'));
+            });
+
+            //For alpha numeric with special chars(- _.,'") only
+            $(".alpha-numeric-sc").on("input",function(){
+                $(this).val($(this).val().replace(/[^A-z0-9- _.,'"]/g,''));
+            });
+
+            //For alpha chars with special chars(- _.,'") only
+            $(".alpha-sc").on("input",function(){
+                $(this).val($(this).val().replace(/[^A-z- _.,'"]/g,''));
+            });
+
+            //For alpha numeric with - only
+            $(".alpha-numeric-dash").on("input",function(){
+                $(this).val($(this).val().replace(/[^A-z0-9-]/g,''));
+            });
+
+            //For alpha numeric
+            $(".alpha-numeric").on("input",function(){
+                $(this).val($(this).val().replace(/[^A-z0-9]/g,''));
+            });
+        });
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+</script>

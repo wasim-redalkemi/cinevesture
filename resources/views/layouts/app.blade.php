@@ -49,6 +49,6 @@
     @yield('scripts')
     @stack('scripts')
 </body>
-
+@include('include.validator-scripts')
 </html>
 

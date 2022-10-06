@@ -80,6 +80,21 @@ body {
     color: #FFFFFF !important;
 }
 
+.mt-4-5{
+    margin-top: 2.5rem !important;
+}
+
+.outline{
+    outline: 0 !important;
+}
+
+.for_authtoast {
+    position: absolute;
+    right: 12px;
+    top: 12px;
+    z-index: 1;
+}
+
 /* home page  */
 
 .main-body {
@@ -323,7 +338,7 @@ body {
 
 .auth_section {
     background: #33084C !important;
-    padding: 0 35%;
+    padding: 0 28%;
     min-height: 100vh;
 }
 
@@ -348,7 +363,7 @@ body {
 }
 .signup-text {
     font-weight: 600;
-    font-size: 36px;
+    font-size: 28px;
     line-height: 124%;
     letter-spacing: -0.01em;
     text-align: center;
@@ -777,7 +792,7 @@ body {
 }
 
 .bg_white .guide_profile_section {
-    padding: 2% 8%;
+    padding: 2%
 }
 .guide_profile_section .content_wraper, .job_wraper {
     background: #FFFFFF;
@@ -1355,6 +1370,7 @@ button, input, optgroup, select, textarea {
     clear: both;
     display: table;
   }
+
 
 
 .input_wraper {

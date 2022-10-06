@@ -24,27 +24,28 @@ class StoreProfileUpdate extends FormRequest
     public function rules()
     {
         return [
-            'profile_image' => 'required',
+            'profile_image' => 'nullable',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
-            'job_title' => 'required|unique:posts|max:255',
-            'age' => 'required|integer',
-            'gender' => 'required|string',
-            'gender_pronouns' => 'required|string',
-            'located_in' => 'required|string',
-            'about' => 'required|string',
-            'available_to_work_in' => 'required|string',
-            'language' => 'required|string',
-            'skills' => 'required|string',
-            'imdb_profile' => 'required|string',
-            'linkedin_profile' => 'required|string',
-            'website' => 'required|email|string',
+            'job_title' => 'max:255',
+            'age' => 'integer',
+            'gender' => 'string',
+            'gender_pronouns' => 'string',
+            'located_in' => 'string',
+            'about' => 'string',
+            'available_to_work_in' => 'string',
+            'languages.*' => 'nullable',
+            'skills.*' => 'nullable',
+            'imdb_profile' => 'string',
+            'linkedin_profile' => 'string',
+            'website' => 'string',
         ];
     }
     public function messages()
     {
         return [
-            'profile_image' => 'Profile image must.',
+            'profile_image.required' => 'Profile Image is required',
+            'age.integer' => 'Age must be integer.',
         ];
             
     }

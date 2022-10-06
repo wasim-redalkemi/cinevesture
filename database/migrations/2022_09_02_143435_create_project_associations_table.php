@@ -16,8 +16,8 @@ class CreateProjectAssociationsTable extends Migration
         Schema::create('project_associations', function (Blueprint $table) {
             $table->id();
             $table->string('project_id',20);
-            $table->string('project_title',255);
-            $table->string('project_name',255);
+            $table->string('project_associate_title',255);
+            $table->string('project_associate_name',255);
 
             $table->timestamps();
             $table->softDeletes();

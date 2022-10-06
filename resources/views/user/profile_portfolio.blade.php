@@ -29,7 +29,12 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Project Title</label>
-                                        <input type="text" class="form-control" placeholder="Project Title" name="project_title" value="{{ $portfolio->project_title }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control @error('project_title') is-invalid @enderror" placeholder="Project Title" name="project_title" value="{{ $portfolio->project_title }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        @error('project_title')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -37,7 +42,12 @@
                                 <div class="col-md-12">
                                     <div class="profile_input">
                                         <label>Description</label>
-                                    <textarea class="form-control" name="description" aria-label="With textarea">{{ $portfolio->description }}</textarea>
+                                    <textarea class="form-control @error('description') is-invalid @enderror" name="description" aria-label="With textarea">{{ $portfolio->description }}</textarea>
+                                    @error('description')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                     </div>
                                 </div>
                             </div>                        
@@ -45,11 +55,16 @@
                                 <div class="col-md-6">
                                 <div class="profile_input">
                                     <label for="lang">Project specific Skills</label>
-                                    <select name="languages" id="lang">
+                                    <select name="project_specific_skills" class="@error('project_specific_skills') is-invalid @enderror" id="lang">
                                         <option value="test1">test 1</option>
                                         <option value="test2">test 2</option>
                                         <option value="test3">test 3</option>
                                     </select>
+                                    @error('project_specific_skills')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 </div>
                             </div>
@@ -57,11 +72,16 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label for="lang">Project Location (Where it took place)</label>
-                                        <select name="languages" id="lang">
-                                            <option value="test1">test 1</option>
-                                            <option value="test2">test 2</option>
-                                            <option value="test3">test 3</option>
+                                        <select name="project_country_id" class="@error('project_country_id') is-invalid @enderror" id="lang">
+                                        @foreach ($country as $k=>$v)
+                                            <option value="{{ $v->id }}">{{  $v->name }}</option>
+                                        @endforeach
                                         </select>
+                                        @error('project_country_id')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>                            
@@ -69,8 +89,13 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>Completion Date</label>
-                                        <input type="date" class="form-control" placeholder="First Name" name="completion_date" value="{{ $portfolio->completion_date }}
+                                        <input type="date" class="form-control @error('completion_date') is-invalid @enderror" placeholder="First Name" name="completion_date" value="{{ $portfolio->completion_date }}
                                         aria-label="Username" aria-describedby="basic-addon1">
+                                        @error('completion_date')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -79,9 +104,16 @@
                                     <div class="profile_input">
                                         <div><label>Project Files</label></div>
                                         <label class="mt-3">Video Link</label>
-                                        <input type="text" class="form-control" placeholder="Paste link here" name="video" value="{{ $portfolio->description }}"
+                                        <input type="text" class="form-control @error('video') is-invalid @enderror" placeholder="Paste link here" name="video" value="{{ $portfolio->description }}"
                                         aria-label="Username" aria-describedby="basic-addon1">
+                                        @error('video')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
+                                </div>
+                                <div class="col-md-3 d-flex align-items-end">
                                     <button class="save_add_btn">Add another</button>
                                 </div>                                                
                             </div>
