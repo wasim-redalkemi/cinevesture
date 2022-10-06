@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProfileUpdate;
 use App\Models\MasterCountry;
 use App\Models\MasterLanguage;
 use App\Models\MasterSkill;
@@ -146,7 +147,7 @@ class UserController extends Controller
     }
 
 
-    public function profileStore(Request $request)
+    public function profileStore(StoreProfileUpdate $request)
     {
         try {
             $user = User::query()->find(auth()->user()->id);

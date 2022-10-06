@@ -37,6 +37,7 @@ class IndustryGuideController extends Controller
     public function index(Request $request)
     {
        try{
+        
         $validator = Validator::make($request->all(), [
             'search' => 'nullable',
             'locations.*' => 'nullable|exists:countries,name',

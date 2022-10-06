@@ -59,7 +59,7 @@
                                     <div class="profile_input">
                                         <label>First Name</label>
                                         <input type="text" class="form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name" value="{{ $user->first_name }}"
-                                            aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                            aria-label="Username" aria-describedby="basic-addon1" autofocus>
                                         @error('first_name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

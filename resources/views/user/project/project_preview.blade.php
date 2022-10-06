@@ -17,11 +17,6 @@
             <div class="col-md-12">
                 <div class=" profile_wraper profile_wraper_padding  mt-4">
                     <p class="flow_step_text"> Overview</p>
-               @php
-                   echo '<pre>';
-                    print_r($UserProject);
-                    die;
-               @endphp
                @foreach ($UserProject as $k=>$v)
                 <div class="preview_headtext">Project Name</div>
                 <div class="preview_subtext">{{$v->project_name}}</div>

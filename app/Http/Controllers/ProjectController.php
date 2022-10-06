@@ -261,7 +261,6 @@ class ProjectController extends Controller
                     $projectMilestone->traget_date = $request->traget_date;
                     $projectMilestone->complete = $request->complete;
                     $projectMilestone->save();
-                    
                     return redirect()->route('project-create',['nextPage' => 'Preview'])->with("success","Project milestones updated successfully.");
                 } else {
                     return back()->with("error","Please overview phase fill.");
