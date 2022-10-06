@@ -37,7 +37,7 @@
                     </button>
                 </div>
                 <div class="col-12 mt-2">
-                    <button class="w-100"> <img src="{{asset('public/images/asset/google.png')}}" width="24" width="24" class="mx-3">Log
+                    <button class="with_google_btn"> <img src="{{asset('public/images/asset/google.png')}}" width="24" width="24" class="mx-3">Log
                         In
                         with google</button>
                 </div>

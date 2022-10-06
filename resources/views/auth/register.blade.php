@@ -53,7 +53,7 @@
             </div>
         </form>
         <div class="col-12 mt-2">
-            <button class="w-100"> <img src="{{ asset('public/images/asset/google.png') }}" width="24" width="24" class="mx-3">Sign
+            <button class="with_google_btn"> <img src="{{ asset('public/images/asset/google.png') }}" width="24" width="24" class="mx-3">Sign
                 up
                 with google</button>
         </div>

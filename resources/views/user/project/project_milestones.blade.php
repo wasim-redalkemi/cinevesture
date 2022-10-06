@@ -36,7 +36,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="profile_input">
+                                <div class="mt_16">
                                     <label>Looking for *</label>
                                     <select name="loking_for[]" class="js-select2" multiple="multiple">
                                         @foreach ($lookingFor as $k=>$v)

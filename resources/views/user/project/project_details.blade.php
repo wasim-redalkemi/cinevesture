@@ -40,7 +40,7 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="profile_input">
+                                <div class="mt_16">
                                     <label>Genre *</label>
                                     <select class="js-select2" name="gener[]" multiple="multiple">
                                             <option value="O1" data-badge="">Option1</option>

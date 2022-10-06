@@ -154,7 +154,7 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="document_pdf">
-                    <div class="upload_loder">
+                    <div class="upload_loader">
                         <i class="fa fa-file-text deep-pink icon-size" aria-hidden="true"></i>
                     </div>
                     <div>
