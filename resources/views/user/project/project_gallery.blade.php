@@ -22,10 +22,7 @@
                         <div class="guide_profile_main_text Aubergine_at_night mt-2">Videos</div>
                         <div class="add_video_wrap">
                             <div class="row col_wrap">
-                                <div class="col-md-3">
-                                    {{-- <input type="text" name="project_video_link_1" placeholder="video link 1">
-                                    <input type="text" name="project_video_link_2" placeholder="video link 2">
-                                    <input type="text" name="project_video_link_3" placeholder="video link 3"> --}}
+                                {{-- <div class="col-md-3">
                                     <div class="img-container h_66">
                                         <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
                                         <div class="project_card_data w-100 h-100">
@@ -35,13 +32,13 @@
                                         </div>
                                     </div>
                                     <div class="profile_input">
-                                        {{-- <input type="text" class="form-control" name="project_video_link_1" placeholder="Video Title"> --}}
+                                        <input type="text" class="form-control" name="project_video_link_1" placeholder="Video Title">
                                     </div>
                                     <div class="d-flex mt-5 mt-md-3">
                                         <div> <input type="radio" class="checkbox_btn" name="" aria-label=""></div>
                                         <div class="verified-text mx-2"> Make Feature Vedio</div>
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="col-md-3">
                                     <div class="profile_upload_container h_66 mt-3 mt-md-0">
@@ -68,14 +65,11 @@
                                 </div>
                             </div>
                         </div>
+                        <br>
                         <div class="guide_profile_main_text Aubergine_at_night mt-2">Photos</div>
                         <div class="">
                             <div class="row col_wrap">
-                                <div class="col-md-3">
-                                    
-                                    {{-- <input type="file" name="project_image_1" placeholder="video link 1">
-                                    <input type="file" name="project_image_2" placeholder="video link 2">
-                                    <input type="file" name="project_image_3" placeholder="video link 3"> --}}
+                                {{-- <div class="col-md-3">
                                     <div class="img-container h_66">
                                         <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
                                         <div class="project_card_data w-100 h-100">
@@ -91,9 +85,8 @@
                                         <input type="radio" class="checkbox_btn" name="" aria-label="">
                                         <div class="verified-text mx-2">Make thumbnail Image</div>
                                     </div>
-                                </div>
-                                <div class="col-md-3">
-                                    
+                                </div> --}}
+                                <div class="col-md-3">                                    
                                     <div class="profile_upload_container h_66 mt-3 mt-md-0">
                                         <img src="" id="previewImg">                                    
                                         <div for="file-input input_wrap" class="d-none">
@@ -116,13 +109,10 @@
                                 </div>
                             </div>
                         </div>
+                        <br>
                         <div class="guide_profile_main_text Aubergine_at_night mt-3 mb-2">Documents</div>
                         <div class="row col_wrap">
-                            <div class="col-md-3">
-                                
-                                {{-- <input type="file" name="project_docs_1" placeholder="video link 1">
-                                <input type="file" name="project_docs_2" placeholder="video link 2">
-                                <input type="file" name="project_docs_3" placeholder="video link 3"> --}}
+                            {{-- <div class="col-md-3">
                                 <div class="document_pdf">
                                     <div class="upload_loder">
                                         <i class="fa fa-file-text deep-pink icon-size" aria-hidden="true"></i>
@@ -133,7 +123,7 @@
                                     </div>
                                     <div><i class="fa fa-times" aria-hidden="true"></i></div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="col-md-3">
                                 <div class="profile_upload_container h_69 mt-3 mt-md-0 d-flx">
                                     {{-- <input class="d-none" id="previewPdf" type="file" name="project_docs_1" /> --}}
