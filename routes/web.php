@@ -22,6 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth.login');
 });
+Route::get('/test', function () {
+    return view('user.project.project_gallery');
+});
 
 Auth::routes(['verify' => true]);
 
@@ -69,7 +72,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     Route::group(['prefix'=>'industry-guide'],function()
 	{	
         Route::get('/show', [IndustryGuideController::class, 'show'])->name('guide-view');
-        Route::post('/filter', [IndustryGuideController::class, 'index'])->name('filter-profile');
+        Route::get('/filter', [IndustryGuideController::class, 'index'])->name('filter-profile');
        
 	});
 

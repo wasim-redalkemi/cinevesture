@@ -9,7 +9,7 @@
               <span class="navbar-toggler-icon"></span>
             </button>
             <a class="navbar-logo" href="#">
-              <img src="{{ asset('public/images/asset/Logo-white-trans.png') }}" width="220" height="75" alt="image">
+              <img src="{{ asset('images/asset/Logo-white-trans.png') }}" width="220" height="75" alt="image">
             </a>
             <div class="collapse navbar-collapse justify-content-center" id="navbarTogglerDemo01">
               <ul class="navbar-nav mt-2 mt-lg-0">

@@ -101,10 +101,6 @@ class RegisterController extends Controller
         $collect  = collect();
         $collect->put('otp',$otp);
         $user->notify(new VerifyOtp($collect));
-// dd(session()->all());
-        // $request->session()->push('email', $user->email);
-        // session()->forget('key');
-        // dd(session()->pull('email', 'default'));
 
         if ($response = $this->registered($request, $user)) {
             return $response;
@@ -174,14 +170,14 @@ class RegisterController extends Controller
                 
                         return $request->wantsJson()
                                     ? new JsonResponse([], 201)
-                                    : redirect($this->redirectPath());                    
+                                    : redirect($this->redirectPath())->with('success','OTP send successfully.');                    
                       
                  }else{
                      // return $this->returnResponse(false, "ERR032", config('error_codes.verify_otp.ERR032'), null, null);
                  }
              }
          } catch (Exception $e) {
-            return back()->withError('Somethig went wrong.');
+            return back()->with('error','Somethig went wrong.');
          }
        
      }

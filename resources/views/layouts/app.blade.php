@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title> @yield('title',config('app.name', 'Cinevesture'))</title>
 
-    <link rel="stylesheet" href="{{ asset('public/css/style.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
 
 
     
@@ -21,8 +21,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
-    <link rel="stylesheet" href="{{ asset('public/css/owl.carousel.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('public/css/owl.theme.default.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}" />
 
     @yield('css')
 </head>
@@ -43,12 +43,12 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script src="{{ asset('public/js/owl.carousel.min.js') }}"></script>
+    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
 
     @yield('scripts')
     @stack('scripts')
 </body>
-
+@include('include.validator-scripts')
 </html>
 

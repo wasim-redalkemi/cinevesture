@@ -7,48 +7,48 @@
 <div class="container signup-container">
     <div class="row">
         <div class="col-md-12">
-            <div class="signup-text mt-5"> Sign Up</div>
+            <div class="signup-text mt-4-5"> Sign Up</div>
         </div>
         <form method="POST" enctype="multipart/form-data" action="{{ route('register') }}">
             @csrf
             <div class="row">
-                <div class="col-lg-6 col-sm-6 mt-2 mt-lg-5 pt-2 pt-lg-5">
-                    <input type="text" class="w-100 @error('first_name') is-invalid @enderror" name="first_name" placeholder="First Name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
+                <div class="col-lg-6 col-sm-6 mt-2 mt-lg-5 mb-lg-5 pt-2">
+                    <input type="text" class="alphabets-only outline w-100 @error('first_name') is-invalid @enderror" name="first_name" placeholder="First Name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
                     @error('first_name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror     
                 </div>
-                <div class="col-lg-6 col-sm-6 mt-2 mt-lg-5 pt-2 pt-lg-5">
-                    <input type="text" class="w-100 @error('last_name') is-invalid @enderror" name="last_name" placeholder="Last Name" value="{{ old('last_name') }}" autocomplete="last_name" autofocus>
+                <div class="col-lg-6 col-sm-6 mt-2 mt-lg-5 mb-lg-5 pt-2">
+                    <input type="text" class="alphabets-only outline w-100 @error('last_name') is-invalid @enderror" name="last_name" placeholder="Last Name" value="{{ old('last_name') }}" autocomplete="last_name" autofocus>
                     @error('last_name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror     
                 </div>
-                <div class="col-12 mt-2 mt-lg-5">
-                    <input type="text" class="w-100 @error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                <div class="col-12 mt-2 mb-lg-5">
+                    <input type="text" class="email-only outline w-100 @error('email') is-invalid @enderror" placeholder="Email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                     @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
                     @enderror
                 </div>
-                <div class="col-12 mt-2 mt-lg-5">
-                    <input type="password" class="w-100 @error('password') is-invalid @enderror" placeholder="Password" name="password" required autocomplete="new-password">
+                <div class="col-12 mt-2 mb-lg-5">
+                    <input type="password" class="password-only outline w-100 @error('password') is-invalid @enderror" placeholder="Password" name="password" required autocomplete="new-password">
                     @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
                 </div>
-                <div class="col-12 mt-2 mt-lg-5">
-                    <input type="password" class="w-100" placeholder="Re Enter Password" name="password_confirmation" required autocomplete="new-password">
+                <div class="col-12 mt-2">
+                    <input type="password" class="password-only outline w-100" placeholder="Re Enter Password" name="password_confirmation" required autocomplete="new-password">
                 </div>
                 <div class="col-12 mt-2 mt-lg-5">
-                    <button type="submit" class="w-100">{{ __('Create Account') }}</button>
+                    <button type="submit" class="outline w-100">{{ __('Create Account') }}</button>
                 </div>
             </div>
         </form>
@@ -72,4 +72,4 @@
         </div>
     </div>
 </div>
-
+@endsection
