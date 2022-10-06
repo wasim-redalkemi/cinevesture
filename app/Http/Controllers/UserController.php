@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\UserExperience;
 use App\Models\UserLanguage;
 use App\Models\UserPortfolio;
+use App\Models\UserPortfolioImage;
 use App\Models\UserPortfolioSpecificSkills;
 use App\Models\UserQualification;
 use App\Models\UserSkill;
@@ -255,12 +256,46 @@ class UserController extends Controller
                         $user_portfolio_specific_skills->project_specific_skills_id = $v;
                         $user_portfolio_specific_skills->save();
                     }
+                }            
+            }
+            
+            $data_to_insert = [];
+            $i=0;
+            foreach($request->toArray() as $k => $v) 
+            {
+                $i++;
+                $video_file_name = 'project_image_'.$i;
+                
+
+                $image_file_name = 'project_image_'.$i;
+                if($request->hasFile($image_file_name)) 
+                {
+                    $file = $request->file($image_file_name);
+                    $originalFile = $file->getClientOriginalName();
+                    $fileExt = pathinfo($originalFile, PATHINFO_EXTENSION);
+                    $fileName = pathinfo($originalFile, PATHINFO_FILENAME);
+                    $nameStr = date('_YmdHis');
+                    $newName = $fileName.$nameStr.'.'.$fileExt;
+                    $locationPath  = "project/image";
+                    $uploadFile = $this->uploadFile($locationPath , $file,$newName);
+                    $data_to_insert[] = [
+                        'file_type' => 'image',
+                        'file_link' => $newName
+                    ];
+                }                            
+
+                UserPortfolioImage::query()->where('portfolio_id',$portfolio->id)->delete();
+                foreach($data_to_insert as $k => $v)
+                {
+                    $projectMedia = new UserPortfolioImage();
+                    $projectMedia->portfolio_id = $portfolio->id;
+                    $projectMedia->file_type = $v['file_type'];
+                    $projectMedia->file_link = $v['file_link'];
+                    $projectMedia->save();
                 }
-                $experience = $portfolio;
-                return view('user.profile_experience', compact('experience'));
-            }else {
-                return back()->withError('Somethig went wrong ,please try again.');
-            }            
+            }               
+            $experience = $portfolio;
+            return view('user.profile_experience', compact('experience'));
         } catch (Exception $e) {
             return back()->withError('Somethig went wrong.');
         }
