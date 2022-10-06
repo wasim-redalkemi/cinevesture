@@ -52,9 +52,9 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://local.cinevesture.com/'),
+    'url' => env('APP_URL'),
 
-    'asset_url' => env('ASSET_URL', 'http://local.cinevesture.com/'),
+    'asset_url' => env('ASSET_URL'),
 
     /*
     |--------------------------------------------------------------------------

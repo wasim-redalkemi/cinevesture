@@ -3,7 +3,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-3 text-center d-flex align-items-center col-md-4">
-          <img src="{{ asset('public/images/asset/Logo-white-trans.png') }}" width="225" height="76" alt="image">
+          <img src="{{ asset('images/asset/Logo-white-trans.png') }}" width="225" height="76" alt="image">
         </div>
         <div class="col-lg-9 col-md-8">
           <div class="row">

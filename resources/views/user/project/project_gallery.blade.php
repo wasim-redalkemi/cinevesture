@@ -24,7 +24,7 @@
                         <div class="row col_wrap">
                             <div class="col-md-3">
                                 <div class="img-container h_66">
-                                    <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
+                                    <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
                                     <div class="project_card_data w-100 h-100">
                                         <div>
                                             <i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -70,7 +70,7 @@
                         <div class="row col_wrap">
                             <div class="col-md-3">
                                 <div class="img-container h_66">
-                                    <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
+                                    <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
                                     <div class="project_card_data w-100 h-100">
                                         <div>
                                             <i class="fa fa-trash-o" aria-hidden="true"></i>
@@ -111,33 +111,45 @@
                     </div>
                     <div class="guide_profile_main_text Aubergine_at_night mt-3 mb-2">Documents</div>
                     <div class="row col_wrap">
-                        <div class="col-md-3">
-                            <div class="document_pdf">
+                        <!-- <div class="col-md-3">
+                            <div class="document_doc" id="dochide">
                                 <div class="upload_loder">
                                     <i class="fa fa-file-text deep-pink icon-size" aria-hidden="true"></i>
                                 </div>
                                 <div>
-                                    <div class="guide_profile_main_subtext Aubergine_at_night">Lorem ipsum.pdf</div>
+                                    <div class="guide_profile_main_subtext Aubergine_at_night">Lorem ipsum.doc</div>
                                     <div class="proctect_by_capta_text Aubergine_at_night">64.32 KB</div>
                                 </div>
                                 <div><i class="fa fa-times" aria-hidden="true"></i></div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-3">
-                            <div class="profile_upload_container h_69 mt-3 mt-md-0 d-flx">
-                                <input class="d-none" id="previewPdf" type="file" name="upload" />
-                                <div for="file-input" class="d-none">
-                                    <input type="file" onchange="uploadPdfFile(this)" name="" id="pdfInp" accept="application/pdf,application/vnd.ms-excel">
+                            <div class="profile_upload_container h_69 mt-3 mt-md-0 d-flx" id="upload_doc">
+                                <div for="file-input" class="d-none input-doc">
+                                    <input type="file" onchange="uploadDocFile(this)" name="" id="docInp" accept="application/doc,application/vnd.ms-excel">
                                 </div>
-                                <div onclick="document.getElementById('pdfInp').click();">
+                                <div onclick="uploadDocFile()">
                                     <i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true"></i>
                                 </div>
-                                <div onclick="document.getElementById('pdfInp').click();" class=" movie_name_text mx-3 mt-0">Upload file</div>
+                                <div onclick="document.getElementById('docInp').click();" class=" movie_name_text mx-3 mt-0">Upload file</div>
                             </div>
-                            <div class="profile_upload_text">Upload PDF only</div>
+                            <!-- <div class="profile_upload_text" id="upload_doc">Upload PDF only</div> -->
+
+
+                            <div class="document_doc" id="uploaded_doc">
+                                <div class="upload_loder">
+                                    <i class="fa fa-file-text deep-pink icon-size" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <div class="guide_profile_main_subtext Aubergine_at_night">Lorem ipsum.doc</div>
+                                    <div class="proctect_by_capta_text Aubergine_at_night">64.32 KB</div>
+                                </div>
+                                <div><i class="fa fa-times" aria-hidden="true"></i></div>
+                            </div>
+
                         </div>
 
-                        <div class="col-md-3 add_pdf_btn d-flex align-items-end">
+                        <div class="col-md-3 add_doc_btn d-flex align-items-end">
                             <div class="add_video_field mb-3">
                                 <button class="save_add_btn">Add another</button>
                             </div>
@@ -167,12 +179,13 @@
 
 @section('scripts')
 <script>
-    // for pdf
-    function uploadPdfFile(e) {
+    // for doc
+    function uploadDocFile(e) {
         var reader = new FileReader();
         reader.onload = function() {
-            var output = document.getElementById('previewPdf');
+            var output = document.getElementById('previewDoc');
             output.src = reader.result;
+            console.log(output.src, "output.srcoutput.srcoutput.srcoutput.src")
         };
         reader.readAsDataURL(e.files[0]);
     }
@@ -196,9 +209,17 @@
     }
 
     
-    $('.profile_upload_container').on("click",function(e) {
-        $(this).find('input[type="file"]').click();
-    });
+    $("#uploaded_doc").hide();
+    $('.profile_upload_container #docInp').on("change",function(e) {
+        // console.log(this.id);
+        $("#upload_doc").hide();
+        $("#uploaded_doc").show();
+  });
+
+ 
+        
+ 
+
     $('.profile_upload_container .imgInp').on('click',function(e) {
         e.stopPropagation();
     });
@@ -232,7 +253,7 @@
                 e.preventDefault();
                 if (x < max_fields) { //max input box allowed
                     x++; //text box increment
-                    $('<div class="add_new col-md-3"> <div> <div class="profile_upload_container h_69 w-100 mt-3 mt-md-0 -flx"><div id="previewPdf"></div><div for="file-input" class="d-none"><input type="file" onchange="uploadPdfFile(this)" name="" id="pdfInp"></div><div onclick="document.getElementById("pdfInp").click();"><i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true"></i></div><div onclick="document.getElementById("pdfInp").click();" class="movie_name_text mx-3 mt-0">Upload file</div></div><div class="profile_upload_text">Upload PDF only</div></div></div>').insertBefore('.add_pdf_btn');
+                    $('<div class="add_new col-md-3"> <div> <div class="profile_upload_container h_69 w-100 mt-3 mt-md-0 -flx"><div id="previewDoc"></div><div for="file-input" class="d-none"><input type="file" onchange="uploadDocFile(this)" name="" id="docInp"></div><div onclick="document.getElementById("docInp").click();"><i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true"></i></div><div onclick="document.getElementById("docInp").click();" class="movie_name_text mx-3 mt-0">Upload file</div></div><div class="profile_upload_text">Upload PDF only</div></div></div>').insertBefore('.add_doc_btn');
                 }
             });
 
@@ -244,5 +265,7 @@
             })
         // });
     });
+
+
 </script>
 @endsection

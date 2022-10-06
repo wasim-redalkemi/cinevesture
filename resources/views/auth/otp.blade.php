@@ -3,10 +3,10 @@
 @section('title','Cinevesture-Otp')
 
 @section('content')
+<div class="hide-me animation for_authtoast">
+    @include('include.flash_message')
+</div>
 <section class="auth_section">
-    <div class="hide-me">
-        @include('include.flash_message')
-    </div>
     <div class="container signup-container">
         
         <form method="POST" enctype="multipart/form-data" action="{{ route('verify-otp') }}">
@@ -33,3 +33,10 @@
     </div>
 </section>
 @endsection
+@push('scripts')
+<script>
+$(document).ready(function(){
+        $("#error-toast").toast("show");
+});
+</script>
+@endpush
