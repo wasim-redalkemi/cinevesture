@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class UserPortfolio extends Model
 {
     use HasFactory;
+    public function getPortfolio()
+    {
+        return $this->hasMany(UserPortfolioImage::class,'portfolio_id');
+    }
 }
