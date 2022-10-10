@@ -3,11 +3,10 @@
 @section('title','Cinevesture-Otp')
 
 @section('content')
-<div class="for_authtoast">
+<div class="hide-me animation for_authtoast">
     @include('include.flash_message')
 </div>
 <section class="auth_section">
-    
     <div class="container signup-container">
         
         <form method="POST" enctype="multipart/form-data" action="{{ route('verify-otp') }}">
@@ -46,7 +45,6 @@
     </div>
 </section>
 @endsection
-
 @push('scripts')
 <script>
 

@@ -22,6 +22,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth.login');
 });
+Route::get('/test', function () {
+    return view('user.project.project_gallery');
+});
 
 Auth::routes(['verify' => true]);
 
