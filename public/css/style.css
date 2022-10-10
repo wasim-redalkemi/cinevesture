@@ -88,6 +88,16 @@ body {
     outline: 0 !important;
 }
 
+.otp-timer {
+
+    padding-right: 10px;
+
+}
+
+.disable-resend {
+    color: #FAF8FB !important;
+}
+
 .for_authtoast {
     position: absolute;
     right: 12px;

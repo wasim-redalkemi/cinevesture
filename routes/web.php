@@ -33,7 +33,9 @@ Auth::routes(['verify' => true]);
 Route::middleware(['guest'])->group(function () {
     // routes that require user to be authenticated
     Route::post('verify-otp', [RegisterController::class, 'otpVerify'])->name('verify-otp');
-    Route::get('otp-view', [RegisterController::class, 'index'])->name('otp-view');    
+    Route::get('otp-view', [RegisterController::class, 'index'])->name('otp-view'); 
+    Route::get('resend-otp/{email?}', [RegisterController::class, 'resendOtp'])->name('resend-otp'); 
+
 });
 
 

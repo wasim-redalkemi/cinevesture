@@ -34,16 +34,15 @@
                             <div class="col-md-2">
                                 <div class="user_profile_container">
                                     @if (empty($user->profile_image))
-                                        <img src="{{ asset('public/images/asset/user-profile.png') }}" />
+                                        <img src="{{ asset('public/images/asset/100_no_img.jpg') }}" />
                                     @else
-                                        <img src="{{Storage::url($user->profile_image)}}"  class = "prod-img" alt="product-image" style="max-height:100px;width:100%;">
+                                        <img src="{{ Storage::url($user->profile_image) }}"  class = "prod-img" alt="product-image" style="max-height:100px;width:100%;">
                                     @endif                                    
                                 </div>
                             </div>
                             <div class="col-md-10">
                                 <div class="guide_profile_main_text pt-3">
                                     {{ (isset($user->job_title))?ucfirst($user->first_name).' '.ucfirst($user->last_name):'Name'; }}
-                                    {{-- {{ucfirst($user->first_name).' '.ucfirst($user->last_name)}} --}}
                                 </div>
                                 <div class="guide_profile_main_subtext aubergine">
                                     <i>{{empty($user->age)?'Age':$user->age;}} </i>

@@ -117,7 +117,7 @@
                                     <button class="save_add_btn">Add another</button>
                                 </div>                                                
                             </div>
-                            <div class="row">
+                            {{-- <div class="row">
                                 <div class="col-md-5">
                                 <div class="profile_upload_container ">
                                     <div>
@@ -128,7 +128,12 @@
                                     </div>
                                     <div class="profile_upload_text"> Upload JPG or PNG, 1600*900 PX, max size 4MB</div>
                                 </div>
-                            </div>                        
+                            </div>                         --}}
+                            <div>
+                                <input type="file" name="project_image_1">
+                                <input type="file" name="project_image_2">
+                                <input type="file" name="project_image_3">
+                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-end mt-4">

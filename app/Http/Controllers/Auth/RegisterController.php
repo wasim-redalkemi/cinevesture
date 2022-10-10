@@ -109,7 +109,7 @@ class RegisterController extends Controller
                 
         
         // return $this->verifyOtpView($user->id);
-        return redirect()->route('otp-view', ['email' => $user->email]);
+        return redirect()->route('otp-view', ['email' => $user->email])->with('success','OTP send successfully to your email.');
 
     }
 
@@ -187,6 +187,28 @@ class RegisterController extends Controller
         // die;
         $user = User::query()->where('email',$request->email)->first();
         return view('auth.otp',compact('user'));
+     }
+
+     public function resendOtp($email = null){
+       $user =  User::query()->where('email',$email)->first();
+       if($user){
+           if(!$user->email_verified_at){
+            $userOtp = Otp::query()->where('user_id',$user->id)->latest()->first();
+            $otp = OtpController::createOtp($user);
+            $userOtp->otp = $otp;
+            $userOtp->save();
+            $collect  = collect();
+            $collect->put('otp',$otp);
+            $user->notify(new VerifyOtp($collect));
+            return back()->with('success','OTP Re-Send successfully.');
+           }else{
+            return back()->with('error','Something went wrong. Please try again later.');
+           }
+           
+        
+       }else{
+        return back()->with('error','Something went wrong. Please try again later.');
+       }
      }
 
 }
