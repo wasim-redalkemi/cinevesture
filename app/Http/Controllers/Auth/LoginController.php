@@ -70,11 +70,11 @@ class LoginController extends Controller
             
            
             if (!$user->email_verified_at) {
-                $otp = OtpController::createOtp($user);
+                $otp = OtpController::createOtp($user,'S'); // S for signup and verify otp.
                 $collect  = collect();
                 $collect->put('otp',$otp);
                 $user->notify(new VerifyOtp($collect));
-                return redirect()->route('otp-view', ['email' =>$user->email]);
+                return redirect()->route('otp-view', ['email' =>$user->email,'type'=>'S']);
             }
         
         if ($this->attemptLogin($request)) {

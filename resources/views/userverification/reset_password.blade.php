@@ -10,7 +10,14 @@
 
 <section>
     <div class="container cmn_verification_container">
-        <div class="row">
+    <div class="hide-me animation for_authtoast">
+    @include('include.flash_message')
+    </div>
+    <form method="POST" enctype="multipart/form-data" action="{{ route('verify-otp') }}">
+        @csrf
+        <input type="hidden" id = "email" name = "email" value = "{{$user->email}}">
+        <input type="hidden" id = "type" name = "type" value = "{{$type}}">
+    <div class="row">
             <div class="col-md-12">
                 <div class="flow_step_text">Enter OTP we emailed to you</div>
                 <div class="row">
@@ -30,6 +37,8 @@
                 </div>
             </div>
         </div>
+    </form>
+      
     </div>
 </section>
 
