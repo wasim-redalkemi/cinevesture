@@ -106,6 +106,10 @@ class UserController extends Controller
         try {
             $user = User::query()->find(auth()->user()->id);        
             $portfolio = UserPortfolio::query()->where('user_id',$user->id)->get();
+            $portfolio_ids = [];
+            foreach ($portfolio as $k => $v) {           
+                $portfolio_ids[] = $v->id;
+            }
             $experience = UserExperience::query()->where('user_id',$user->id)->get();
             $qualification = UserQualification::query()->where('user_id',$user->id)->get();
             $user_country = MasterCountry::query()->where('id',$user->country_id)->first();
@@ -120,9 +124,15 @@ class UserController extends Controller
             ->with('getLanguages')
             ->where('user_id',$user->id)
             ->get()
-            ->toArray();       
+            ->toArray();
+            
+            $user_portfolio = UserPortfolio::query()
+            ->with('getPortfolio')
+            ->whereIn('id', $portfolio_ids)
+            ->get()
+            ->toArray();
       
-            return view('user.profile_private_view', compact('user','portfolio','experience','qualification','user_country','user_skills','user_languages'));
+            return view('user.profile_private_view', compact('user','portfolio','experience','qualification','user_country','user_skills','user_languages','user_portfolio'));
         
         } catch (Exception $e) {
             return back()->withError('Somethig went wrong.');
@@ -280,7 +290,7 @@ class UserController extends Controller
                     $uploadFile = $this->uploadFile($locationPath , $file,$newName);
                     $data_to_insert[] = [
                         'file_type' => 'image',
-                        'file_link' => $newName
+                        'file_link' => $uploadFile
                     ];
                 }                            
 

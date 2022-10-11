@@ -167,8 +167,8 @@
                                     <div class="contact-page-text deep-pink mb-2">Portfolio </div>
                                     <div class="mx-3 icon_container"><a href=""><i class="fa fa-plus deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                 </div>
-                                <div class="portfolio owl-carousel owl-theme">
-                                    @foreach ($portfolio as $k=>$v)
+                                <div class="portfolio owl-theme">
+                                    {{-- @foreach ($portfolio as $k=>$v)
                                         <div class="item">
                                             <img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}">
                                             <div class="d-flex justify-content-between mt-2">
@@ -176,7 +176,35 @@
                                                 <div class="icon_container"> <a href=""><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                             </div>
                                         </div>
-                                    @endforeach
+                                    @endforeach --}}
+                                    @if (count($user_portfolio)>0)
+                                        @foreach ($user_portfolio as $k=>$v)
+                                            @foreach ($v['get_portfolio'] as $k1=>$v1)
+                                                @if ($k1==0)
+                                                    <div class="item">                                                
+                                                        <img src="{{ Storage::url($v1['file_link']) }}">                                            
+                                                        
+                                                        <div class="d-flex justify-content-between mt-2">
+                                                            <div class="organisation_cmn_text">{{ (isset($v['project_title']))?$v['project_title']:'Project Title'; }}</div>
+                                                            <div class="icon_container"> <a href=""><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
+                                                        </div>
+                                                    </div>
+                                                {{-- @else
+                                                    <div class="item">                                                
+                                                        <img src="{{ asset('public/images/asset/100_no_img.jpg') }}">                                            
+                                                        
+                                                        <div class="d-flex justify-content-between mt-2">
+                                                            <div class="organisation_cmn_text">Project Title</div>
+                                                            <div class="icon_container"> <a href=""><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
+                                                        </div>
+                                                    </div>     --}}
+                                                @endif
+                                            @endforeach                                                                                            
+                                        @endforeach
+                                        <div class="clearfix"></div>
+                                    @else
+                                        <span><b>-</b></span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
