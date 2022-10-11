@@ -72,11 +72,14 @@ class OtpController extends Controller
         }    
     }
 
-    public static function createOtp($user)
-    {
-        $otp = new Otp();
+    public static function createOtp($user,$type)
+    {   $otp = Otp::query()->where('user_id',$user->id)->where('type',$type)->latest()->first();
+        if(!$otp){
+           $otp = new Otp();
+        }
         $otp->user_id = $user->id;
         $otp->otp = rand(100000,999999);
+        $otp->type = $type;
         $otp->expiry_date = Carbon::now()->addMinutes(5)->timestamp;
         $otp->save();
         return $otp->otp;
