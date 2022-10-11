@@ -17,6 +17,7 @@
             </div>
             <div class="col-12 mt-2 mt-lg-5 pt-2 pt-lg-5">
                 <input type="hidden" id = "email" name = "email" value = "{{$user->email}}">
+                <input type="hidden" id = "type" name = "type" value = "{{$type}}">
                 <input type="password" class="w-100 {{ $errors->has('otp') ? ' is-invalid' : '' }}" name="otp" placeholder="Please Enter OTP" required>
               
                 @if ($errors->has('otp'))
@@ -33,7 +34,7 @@
                         </div>
                         <div id="after-timer" style="display: none">
 
-                            <a id = "resend" href = "{{ route('resend-otp',['email'=>$user->email]) }}" style="cursor: pointer; color:#971e9b">Resend OTP</a>
+                            <a id = "resend" href = "{{ route('resend-otp',['email'=>$user->email,'type'=>$type]) }}" style="cursor: pointer; color:#971e9b">Resend OTP</a>
                         </div>
                     </div>
                     

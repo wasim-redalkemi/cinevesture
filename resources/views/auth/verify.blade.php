@@ -2,6 +2,9 @@
 
 @section('content')
 <div class="container">
+<div class="hide-me animation for_authtoast">
+    @include('include.flash_message')
+   </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
@@ -18,7 +21,7 @@
                     {{ __('If you did not receive the email') }},
                     <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
                         @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
+                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here') }}</button>.
                     </form>
                 </div>
             </div>
