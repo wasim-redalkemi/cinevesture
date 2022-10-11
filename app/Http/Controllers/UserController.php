@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostUserPortfolioRequest;
 use App\Http\Requests\StoreProfileUpdate;
 use App\Models\MasterCountry;
 use App\Models\MasterLanguage;
@@ -11,6 +12,8 @@ use App\Models\User;
 use App\Models\UserExperience;
 use App\Models\UserLanguage;
 use App\Models\UserPortfolio;
+use App\Models\UserPortfolioImage;
+use App\Models\UserPortfolioSpecificSkills;
 use App\Models\UserQualification;
 use App\Models\UserSkill;
 use Exception;
@@ -100,50 +103,71 @@ class UserController extends Controller
     // View routes function
     public function profilePrivateShow(Request $request)
     {
-        $user = User::query()->find(auth()->user()->id);
-        
-        $portfolio = UserPortfolio::query()->where('user_id',$user->id)->get();
-        $experience = UserExperience::query()->where('user_id',$user->id)->get();
-        $qualification = UserQualification::query()->where('user_id',$user->id)->get();
-        $user_country = MasterCountry::query()->where('id',$user->country_id)->first();
-        // $user_state = MasterState::query()->where('id',$user->state_id)->first();
-        $user_skills = UserSkill::query()
-        ->with('getSkills')
-        ->where('user_id',$user->id)
-        ->get()
-        ->toArray();
-        
+        try {
+            $user = User::query()->find(auth()->user()->id);        
+            $portfolio = UserPortfolio::query()->where('user_id',$user->id)->get();
+            $portfolio_ids = [];
+            foreach ($portfolio as $k => $v) {           
+                $portfolio_ids[] = $v->id;
+            }
+            $experience = UserExperience::query()->where('user_id',$user->id)->get();
+            $qualification = UserQualification::query()->where('user_id',$user->id)->get();
+            $user_country = MasterCountry::query()->where('id',$user->country_id)->first();
+            // $user_state = MasterState::query()->where('id',$user->state_id)->first();
+            $user_skills = UserSkill::query()
+            ->with('getSkills')
+            ->where('user_id',$user->id)
+            ->get()
+            ->toArray();            
 
-        $user_languages = UserLanguage::query()
-        ->with('getLanguages')
-        ->where('user_id',$user->id)
-        ->get()
-        ->toArray();
-
-       
+            $user_languages = UserLanguage::query()
+            ->with('getLanguages')
+            ->where('user_id',$user->id)
+            ->get()
+            ->toArray();
+            
+            $user_portfolio = UserPortfolio::query()
+            ->with('getPortfolio')
+            ->whereIn('id', $portfolio_ids)
+            ->get()
+            ->toArray();
       
-        return view('user.profile_private_view', compact('user','portfolio','experience','qualification','user_country','user_skills','user_languages')); 
-    }
+            return view('user.profile_private_view', compact('user','portfolio','experience','qualification','user_country','user_skills','user_languages','user_portfolio'));
+        
+        } catch (Exception $e) {
+            return back()->withError('Somethig went wrong.');
+        }
+    }   
+    
 
     public function profilePublicShow(Request $request)
     {
-        $user = User::query()->find(auth()->user()->id);
+        try {            
         
-        $portfolio = UserPortfolio::query()->where('user_id',$user->id)->get();
-        $experience = UserExperience::query()->where('user_id',$user->id)->get();
-        $qualification = UserQualification::query()->where('user_id',$user->id)->get();
-        return view('user.profile_public_view', compact('user','portfolio','experience','qualification')); 
+            $user = User::query()->find(auth()->user()->id);
+
+            $portfolio = UserPortfolio::query()->where('user_id',$user->id)->get();
+            $experience = UserExperience::query()->where('user_id',$user->id)->get();
+            $qualification = UserQualification::query()->where('user_id',$user->id)->get();
+            return view('user.profile_public_view', compact('user','portfolio','experience','qualification')); 
+        } catch (Exception $e) {
+            return back()->withError('Somethig went wrong.');
+        }
     }
 
     public function profileCreate()
     {
-        $user = User::query()->find(auth()->user()->id);
-        $skills = MasterSkill::query()->get();
-        $languages = MasterLanguage::query()->get();
-        $country = MasterCountry::query()->get();
-        $state = MasterState::query()->get();
+        try {
+            $user = User::query()->find(auth()->user()->id);
+            $skills = MasterSkill::query()->get();
+            $languages = MasterLanguage::query()->get();
+            $country = MasterCountry::query()->get();
+            $state = MasterState::query()->get();
 
-        return view('user.profile_create', compact('user','skills','languages','country','state'));
+            return view('user.profile_create', compact('user','skills','languages','country','state'));
+        } catch (Exception $e) {
+            return back()->withError('Somethig went wrong.');
+        }
     }
 
 
@@ -179,26 +203,26 @@ class UserController extends Controller
                 $uploadFile = $this->uploadFile($locationPath , $file,$newName);
                 $user->profile_image = $uploadFile;
             }
-            if($user->save()){
-                UserSkill::query()->where('user_id',auth()->user()->id)->delete();
-                
-                foreach ($request->skills as $k => $v) {
-                    $userSkills = new UserSkill();
-                    $userSkills->user_id = $user->id;
-                    $userSkills->skill_id = $v;
-                    $userSkills->save();
+            if($user->save()) {
+                if (isset($request->skills)) {
+                    UserSkill::query()->where('user_id',auth()->user()->id)->delete();                
+                    foreach ($request->skills as $k => $v) {
+                        $userSkills = new UserSkill();
+                        $userSkills->user_id = $user->id;
+                        $userSkills->skill_id = $v;
+                        $userSkills->save();
+                    }
                 }
-                UserLanguage::query()->where('user_id',auth()->user()->id)->delete();
-
-                foreach ($request->languages as $k => $v) {
-                    $userLanguages = new UserLanguage();
-                    $userLanguages->user_id = $user->id;
-                    $userLanguages->language_id = $v;
-                    $userLanguages->save();
+                if (isset($request->languages)) {
+                    UserLanguage::query()->where('user_id',auth()->user()->id)->delete();
+                    foreach ($request->languages as $k => $v) {
+                        $userLanguages = new UserLanguage();
+                        $userLanguages->user_id = $user->id;
+                        $userLanguages->language_id = $v;
+                        $userLanguages->save();
+                    }
                 }
-                // return view('user.profile_portfolio', compact('portfolio'))->with("success","Portfolio updated successfully.");
                 return redirect()->route('portfolio-create')->with("success","User details updated successfully.");
-
             }else {
                 return back()->withError('Somethig went wrong ,please try again.');
             }            
@@ -210,33 +234,78 @@ class UserController extends Controller
     // User profile Portfolio
     public function portfolioCreate(Request $request)
     {
-        $user = User::query()->find(auth()->user()->id);
-        $country = MasterCountry::query()->get();
-
-        $portfolio = $user;
-        return view('user.profile_portfolio', compact('portfolio','country'));
+        try {
+            $user = User::query()->find(auth()->user()->id);
+            $country = MasterCountry::query()->get();
+            $skills = MasterSkill::query()->get();
+            $portfolio = $user;
+            return view('user.profile_portfolio', compact('portfolio','country','skills'));
+        } catch (Exception $e) {
+            return back()->withError('Somethig went wrong.');
+        }
     }
 
-    public function portfolioStore(Request $request)
+    public function portfolioStore(PostUserPortfolioRequest $request)
     {
         try {
             $user = User::query()->find(auth()->user()->id);
             $portfolio = new UserPortfolio();
             $portfolio->user_id = $user->id;
             $portfolio->project_title = $request->project_title;
-            $portfolio->project_title = $request->project_title;
             $portfolio->description = $request->description;
             $portfolio->completion_date = $request->completion_date;
             $portfolio->project_country_id = $request->project_country_id;
             $portfolio->video = $request->video;
-           
+                       
             if($portfolio->save()){
-                $experience = $portfolio;
-                // Session::flash('response', ['text'=>'Profile added successfully','type'=>'success']);
-                return view('user.profile_experience', compact('experience'));
-            }else {
-                return back()->withError('Somethig went wrong ,please try again.');
-            }            
+                if (isset($request->project_specific_skills_id)) {
+                    UserPortfolioSpecificSkills::query()->where('portfolio_id',$portfolio->id)->delete();
+                    foreach ($request->project_specific_skills_id as $k => $v) {
+                        $user_portfolio_specific_skills = new UserPortfolioSpecificSkills();
+                        $user_portfolio_specific_skills->portfolio_id = $portfolio->id;
+                        $user_portfolio_specific_skills->project_specific_skills_id = $v;
+                        $user_portfolio_specific_skills->save();
+                    }
+                }            
+            }
+            
+            $data_to_insert = [];
+            $i=0;
+            foreach($request->toArray() as $k => $v) 
+            {
+                $i++;
+                $video_file_name = 'project_image_'.$i;
+                
+
+                $image_file_name = 'project_image_'.$i;
+                if($request->hasFile($image_file_name)) 
+                {
+                    $file = $request->file($image_file_name);
+                    $originalFile = $file->getClientOriginalName();
+                    $fileExt = pathinfo($originalFile, PATHINFO_EXTENSION);
+                    $fileName = pathinfo($originalFile, PATHINFO_FILENAME);
+                    $nameStr = date('_YmdHis');
+                    $newName = $fileName.$nameStr.'.'.$fileExt;
+                    $locationPath  = "project/image";
+                    $uploadFile = $this->uploadFile($locationPath , $file,$newName);
+                    $data_to_insert[] = [
+                        'file_type' => 'image',
+                        'file_link' => $uploadFile
+                    ];
+                }                            
+
+                UserPortfolioImage::query()->where('portfolio_id',$portfolio->id)->delete();
+                foreach($data_to_insert as $k => $v)
+                {
+                    $projectMedia = new UserPortfolioImage();
+                    $projectMedia->portfolio_id = $portfolio->id;
+                    $projectMedia->file_type = $v['file_type'];
+                    $projectMedia->file_link = $v['file_link'];
+                    $projectMedia->save();
+                }
+            }               
+            $experience = $portfolio;
+            return view('user.profile_experience', compact('experience'));
         } catch (Exception $e) {
             return back()->withError('Somethig went wrong.');
         }
@@ -247,9 +316,13 @@ class UserController extends Controller
 
     public function experienceCreate(Request $request)
     {
-        $user = User::query()->find(auth()->user()->id);
-        $experience = $user;
-        return view('user.profile_experience', compact('experience'));
+        try {
+            $user = User::query()->find(auth()->user()->id);
+            $experience = $user;
+            return view('user.profile_experience', compact('experience'));
+        } catch (Exception $e) {
+            return back()->withError('Somethig went wrong.');
+        }
     }
 
     public function experienceStore(Request $request)
@@ -281,9 +354,13 @@ class UserController extends Controller
 
     public function qualificationCreate(Request $request)
     {
-        $user = User::query()->find(auth()->user()->id);
-        $qualification =$user;
-        return view('user.profile_qualification', compact('qualification'));
+        try {
+            $user = User::query()->find(auth()->user()->id);
+            $qualification =$user;
+            return view('user.profile_qualification', compact('qualification'));
+        } catch (Exception $e) {
+            return back()->withError('Somethig went wrong.');
+        }
     }
 
     public function qualificationStore(Request $request)
@@ -308,5 +385,7 @@ class UserController extends Controller
         } catch (Exception $e) {
             return back()->withError('Somethig went wrong.');
         }
-    }   
+    } 
+    
+
 }

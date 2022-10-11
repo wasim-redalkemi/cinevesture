@@ -174,11 +174,11 @@ class ProjectController extends Controller
                     foreach($request->toArray() as $k => $v) 
                     {
                         $i++;
-                        $video_file_name = 'project_video_link_'.$i;
+                        $video_file_name = 'img_1'.$i;
                         if(!empty($request->$video_file_name)) 
                         {
                             $data_to_insert[] = [
-                                'file_type' => 'video',
+                                'file_type' => 'image',
                                 'file_link' => $request->$video_file_name
                             ];
                         }
@@ -198,24 +198,7 @@ class ProjectController extends Controller
                                 'file_type' => 'image',
                                 'file_link' => $newName
                             ];
-                        }
-
-                        $docs_file_name = 'project_docs_'.$i;
-                        if($request->hasFile($docs_file_name)) 
-                        {
-                            $file = $request->file($docs_file_name);
-                            $originalFile = $file->getClientOriginalName();
-                            $fileExt = pathinfo($originalFile, PATHINFO_EXTENSION);
-                            $fileName = pathinfo($originalFile, PATHINFO_FILENAME);
-                            $nameStr = date('_YmdHis');
-                            $newName = $fileName.$nameStr.'.'.$fileExt;
-                            $locationPath  = "project/docs";
-                            $uploadFile = $this->uploadFile($locationPath , $file,$newName);
-                            $data_to_insert[] = [
-                                'file_type' => 'image',
-                                'file_link' => $newName
-                            ];
-                        }
+                        }                        
                     } 
 
                     ProjectMedia::query()->where('project_id',$project->id)->delete();

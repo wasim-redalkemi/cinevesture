@@ -7,7 +7,7 @@ use App\Http\Controllers\OtpController;
 use App\Models\Otp;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
-
+use Illuminate\Support\Str;   
 use App\Notifications\VerifyOtp;
 use Carbon\Carbon;
 use Exception;
@@ -16,6 +16,7 @@ use Illuminate\Contracts\Session\Session;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -78,15 +79,15 @@ class RegisterController extends Controller
         $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
-            'name'=>$data['first_name']." ".$data['last_name'],
+            'name' => $data['first_name'] . " " . $data['last_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
 
-       return $user;
+        return $user;
     }
 
-        /**
+    /**
      * Handle a registration request for the application.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -97,20 +98,20 @@ class RegisterController extends Controller
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
-        $otp = OtpController::createOtp($user);
+        $otp_type = 'S'; // S for signup
+        $otp = OtpController::createOtp($user, $otp_type);
         $collect  = collect();
-        $collect->put('otp',$otp);
+        $collect->put('otp', $otp);
         $user->notify(new VerifyOtp($collect));
 
         if ($response = $this->registered($request, $user)) {
             return $response;
         }
-                
-                
-        
-        // return $this->verifyOtpView($user->id);
-        return redirect()->route('otp-view', ['email' => $user->email]);
 
+
+
+        // return $this->verifyOtpView($user->id);
+        return redirect()->route('otp-view', ['email' => $user->email, 'type' => $otp_type])->with('success', 'OTP send successfully to your email.');
     }
 
     //  API register
@@ -120,73 +121,111 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
         $collect  = collect();
-        $collect->put('otp','123456');
+        $collect->put('otp', '123456');
         $user->notify(new VerifyOtp($collect));
-        
+
 
         if ($response = $this->registered($request, $user)) {
             return $response;
         }
-        
+
         return [$user];
-        
     }
 
- 
 
 
-     // view OTP
-     public function otpVerify(Request $request)
-     {  
-         try {
-             // validate request data.
-             $validator = Validator::make($request->all(), [
-                 'email' => 'required|email|exists:users,email',
-             ], [
-                 'email.required' => 'Something went wrong. Try again.',
-                 'email.email' => 'Something went wrong. Try again.',
-                 'email.exists' => 'Something went wrong. Try again.'
-             ]);
-             if ($validator->fails()) {
+
+    // view OTP
+    public function otpVerify(Request $request)
+    {
+        try {
+            // validate request data.
+            $validator = Validator::make($request->all(), [
+                'email' => 'required|email|exists:users,email',
+                'type' => 'required',
+            ], [
+                'email.required' => 'Something went wrong. Try again.',
+                'email.email' => 'Something went wrong. Try again.',
+                'email.exists' => 'Something went wrong. Try again.',
+                'type.required' => 'Something went wrong. Try again. '
+            ]);
+            if ($validator->fails()) {
                 return back()->withErrors($validator->errors()->messages())->withInput();
-             } else {
-                 $userObj = User::query()
-                     ->where("email", $request->email)
-                     ->first();
-                     if (!empty($userObj)) {
-                        $otpObj = Otp::query()
-                            ->where("user_id", $userObj->id)
-                            ->where("otp", $request->otp)
-                            ->latest()
-                            ->first();
-            
-                        if (empty($otpObj)) {
-                        return back()->with('error','Invalid otp.');
-                        }
-    
-                        $userObj->email_verified_at = Carbon::now();
-                        $userObj->save();
-                        $this->guard()->login($userObj);
-                
-                        return $request->wantsJson()
-                                    ? new JsonResponse([], 201)
-                                    : redirect($this->redirectPath())->with('success','OTP send successfully.');                    
-                      
-                 }else{
-                     // return $this->returnResponse(false, "ERR032", config('error_codes.verify_otp.ERR032'), null, null);
-                 }
-             }
-         } catch (Exception $e) {
-            return back()->with('error','Somethig went wrong.');
-         }
-       
-     }
+            } else {
+                $userObj = User::query()
+                    ->where("email", $request->email)
+                    ->first();
+                $otpObj = Otp::query()
+                    ->where("user_id", $userObj->id)
+                    ->where("otp", $request->otp)
+                    ->where("type", $request->type)
+                    ->latest()
+                    ->first();
 
-     public function index(Request $request){
+                if (empty($otpObj)) {
+                    return back()->with('error', 'Invalid otp.');
+                }
+                if($request->type == 'F'){
+                     $token = Str::random(60);
+                    DB::table('password_resets')->insert([
+                        'email' => $request->email,
+                        'token' => $token,
+                        'created_at' => Carbon::now()
+                    ]);
+                 $token = $token;
+                 $email = $request->email;
+                    return view('auth.passwords.reset',compact(['token','email']));
+                    
+
+
+                }elseif($request->type == 'S')
+                {
+                    $userObj->email_verified_at = Carbon::now();
+                    $userObj->save();
+                    $this->guard()->login($userObj);
+
+                }
+                elseif($request->type == 'R')
+                {
+                    return view('auth.passwords.reset');
+
+                }
+                else{
+                    return back()->with('error', 'Somethig went wrong.');
+                }
+              
+              
+            }
+        } catch (Exception $e) {
+            return back()->with('error', 'Somethig went wrong.');
+        }
+    }
+
+    public function index(Request $request)
+    {   
         // echo 'test1212';
         // die;
-        $user = User::query()->where('email',$request->email)->first();
-        return view('auth.otp',compact('user'));
-     }
+        $type= $request->type;
+        $user = User::query()->where('email', $request->email)->first();
+        return view('auth.otp', compact('user','type'));
+    }
 
+
+    public function resendOtp($email = null,$type = null)
+    {   
+        $user =  User::query()->where('email', $email)->first();
+        if ($user) {
+            if (!$user->email_verified_at) {
+                $otp = OtpController::createOtp($user, $type);
+                $collect  = collect();
+                $collect->put('otp', $otp);
+                $user->notify(new VerifyOtp($collect));
+                return back()->with('success', 'OTP Re-Send successfully.');
+            } else {
+                return back()->with('error', 'Something went wrong. Please try again later.');
+            }
+        } else {
+            return back()->with('error', 'Something went wrong. Please try again later.');
+        }
+    }
 }
