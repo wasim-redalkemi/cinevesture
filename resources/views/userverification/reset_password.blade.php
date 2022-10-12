@@ -22,7 +22,7 @@
                         <div class="col-md-3 mt-3">
                             <div class="profile_input">
                                 <label>Enter OTP</label>
-                                <input type="password" class="w-100 {{ $errors->has('otp') ? ' is-invalid' : '' }}" name="otp" placeholder="Please Enter OTP" required>
+                                <input type="password" class="numbers-only outline w-100 {{ $errors->has('otp') ? ' is-invalid' : '' }}" name="otp" placeholder="Please Enter OTP" required>
 
                                 @if ($errors->has('otp'))
                                 <span class="invalid-feedback" style="display: block;" role="alert">

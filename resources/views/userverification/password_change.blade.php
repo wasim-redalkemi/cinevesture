@@ -22,7 +22,7 @@
                     <div class="col-md-5 mt-3">
                         <div class="profile_input">
                             <label>Enter New Password</label>
-                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+                            <input id="password" type="password" class="password-only outline  @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
 @error('password')
     <span class="invalid-feedback" role="alert">
@@ -36,14 +36,14 @@
                     <div class="col-md-5 mt-2">
                         <div class="profile_input">
                             <label>Confirm New Password</label>
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            <input id="password-confirm" type="password" class="password-only outline " name="password_confirmation" required autocomplete="new-password">
                         </div>
                     </div>
                 </div>
                 <div class="row mt-4">
                     <div class="col-md-5">
                         <div class="d-flex justify-content-end">
-                        <button class="cancel_btn mx-3">Cancel</button>
+                        <a class="cancel_btn mx-3" style="text-decoration:none" href="{{route('setting-page')}}">Cancel</a>
                         <button class="guide_profile_btn">Verify</button>
                         </div>
                     </div>
