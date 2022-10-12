@@ -163,7 +163,7 @@ class RegisterController extends Controller
                     ->first();
 
                 if (!$otpObj) {
-                    return back()->with('error', 'Invalid otp.');
+                    return back()->with('error', 'Invalid OTP.');
                 }
                 if($request->type == 'F'){
                      $token = Str::random(60);

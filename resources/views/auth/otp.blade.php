@@ -18,7 +18,7 @@
             <div class="col-12 mt-2 mt-lg-5 pt-2 pt-lg-5">
                 <input type="hidden" id = "email" name = "email" value = "{{$user->email}}">
                 <input type="hidden" id = "type" name = "type" value = "{{$type}}">
-                <input type="password" class="w-100 {{ $errors->has('otp') ? ' is-invalid' : '' }}" name="otp" placeholder="Please Enter OTP" required>
+                <input type="password" class="outline w-100 {{ $errors->has('otp') ? ' is-invalid' : '' }}" name="otp" placeholder="Please Enter OTP" required>
               
                 @if ($errors->has('otp'))
                 <span class="invalid-feedback" style="display: block;" role="alert">
@@ -29,7 +29,7 @@
             <div class="resend-div mt-4 mb-4 text-center">
                         <div id="before-timer" class="font-14">
                         <span class="disable-resend">Resend OTP in </span></span>
-                            <span class="otp-timer" style=" color: #FAF8FB">00:<span id="time">5</span>
+                            <span class="otp-timer" style=" color: #FAF8FB">00:<span id="time">20</span>
                             
                         </div>
                         <div id="after-timer" style="display: none">
@@ -77,7 +77,7 @@ $(".inputs").keyup(function (e) {
      
 
     function timer(){
-        let timing = 5;
+        let timing = 20;
         let myTimer;
         let timeToAppend;
         myTimer = setInterval(function() {
