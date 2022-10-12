@@ -2,11 +2,11 @@
 
 @section('content')
 <section class="auth_section">
+<div class="hide-me animation for_authtoast">
+           @include('include.flash_message')
+       </div>
     <div class="container signup-container">
         <div class="row">
-        <div class="hide-me animation for_authtoast">
-    @include('include.flash_message')
-</div>
             <div class="col-md-12">
                 <div class="signup-text mt-5 mt-md-5"> Forgot Password</div>
             </div>
@@ -37,3 +37,16 @@
     </div>
     @endsection
 
+    @push('scripts')
+<script>
+
+$(document).ready(function(){
+   
+        $("#error-toast").toast("show");
+        $("#success-toast").toast("show");
+        
+     
+
+});
+</script>
+@endpush
