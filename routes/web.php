@@ -83,9 +83,11 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     Route::group(['prefix'=>'settings'],function()
 	{	
         Route::get('/password-reset-otp', [ResetPasswordController::class, 'restPasswordOtpView'])->name('password-reset-otp');
-        Route::get('/password-change', [ResetPasswordController::class, 'restPasswordView'])->name('password-change');
+        Route::get('/password-change-view', [ResetPasswordController::class, 'restPasswordView'])->name('password-change-view');
         Route::post('/verify-otp',[OtpController::class, 'otpVerify'])->name('verify-otp-after-login');
         Route::get('/create-reset-Otp',[ResetPasswordController::class, 'createResetOtp'])->name('create-reset-otp');
+        Route::post('/password-change', [ResetPasswordController::class, 'resetPasswordCreate'])->name('password-change');
+
  
 	});
 

@@ -33,10 +33,10 @@ class OtpController extends Controller
                     ->first();
 
                 if (!$otpObj) {
-                    return back()->with('error', 'Invalid otp.');
+                    return back()->with('error', 'Invalid OTP.');
                 }
                
-                 return redirect()->route('password-change');
+                 return redirect()->route('password-change-view');
               
             
         } catch (Exception $e) {

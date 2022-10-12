@@ -11,13 +11,24 @@
 <section>
     <div class="container cmn_verification_container">
         <div class="row">
+        <div class="hide-me animation for_authtoast">
+            @include('include.flash_message')
+        </div>
+        <form method="POST" action="{{ route('password-change') }}">
+            @csrf
             <div class="col-md-12">
                 <div class="flow_step_text">Change Password</div>
                 <div class="row">
                     <div class="col-md-5 mt-3">
                         <div class="profile_input">
                             <label>Enter New Password</label>
-                            <input type="text" class="form-control" placeholder="Enter Password" name="" aria-describedby="basic-addon1">
+                            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+@error('password')
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $message }}</strong>
+    </span>
+@enderror
                         </div>
                     </div>
                 </div>
@@ -25,7 +36,7 @@
                     <div class="col-md-5 mt-2">
                         <div class="profile_input">
                             <label>Confirm New Password</label>
-                            <input type="text" class="form-control" placeholder="Enter new password" name="" aria-describedby="basic-addon1">
+                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                         </div>
                     </div>
                 </div>
@@ -38,6 +49,7 @@
                     </div>
                 </div>
             </div>
+          </form>
         </div>
     </div>
 </section>
@@ -47,3 +59,13 @@
 @section('footer')
 @include('include.footer')
 @endsection
+@push('scripts')
+<script>
+    $(document).ready(function() {
+
+        $("#error-toast").toast("show");
+        $("#success-toast").toast("show");
+
+    });
+</script>
+@endpush
