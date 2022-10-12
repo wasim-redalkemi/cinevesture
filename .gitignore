@@ -50,3 +50,5 @@ Thumbs.db
 .env
 
 /vendor
+/dev_local_data
+/public/storage
