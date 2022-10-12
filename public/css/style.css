@@ -52,6 +52,10 @@ body {
     text-decoration: none;
 }
 
+.invalid-feedback{
+    color: #DD45B3 !important;
+}
+
 .header-search-btn {
     width: 4rem;
     height: 2.5rem;
