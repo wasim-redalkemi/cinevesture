@@ -70,6 +70,12 @@ body {
     border: none;
 }
 
+.reset-password{
+    background-color: white !important;
+    outline: none !important;
+
+}
+
 .add-proj-btn {
     border: 1px solid #DD45B3;
     color: #DD45B3;
