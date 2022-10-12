@@ -26,7 +26,7 @@
 
                 </div>
                 <div class="col-12 mt-2 mt-lg-5">
-                    <input type="password" class="password-only outline w-100 @error('password') is-invalid @enderror" name="password" placeholder="Password" required autocomplete="current-password">
+                    <input type="password" class="outline w-100 @error('password') is-invalid @enderror" name="password" placeholder="Password" required autocomplete="current-password">
                         @error('password')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
