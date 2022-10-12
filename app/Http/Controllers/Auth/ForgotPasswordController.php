@@ -53,7 +53,7 @@ class ForgotPasswordController extends Controller
         // );
         $user = User::query()->where('email',$request->email)->first();
         if(!$user){
-             return back()->with('error','Email address doe not exist.');
+             return back()->with('error','Email address does not exist.');
         }
         $otp = OtpController::createOtp($user,'F'); // F for Forgot pasword
         $collect  = collect();
