@@ -54,3 +54,16 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+<script>
+
+$(document).ready(function(){
+   
+        $("#error-toast").toast("show");
+        $("#success-toast").toast("show");
+        
+     
+
+});
+</script>
+@endpush
