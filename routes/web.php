@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndustryGuideController;
+use App\Http\Controllers\OtpController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
@@ -31,13 +32,13 @@ Auth::routes(['verify' => true]);
 
 
 
-Route::middleware(['guest'])->group(function () {
+
     // routes that require user to be authenticated
     Route::post('verify-otp', [RegisterController::class, 'otpVerify'])->name('verify-otp');
     Route::get('otp-view', [RegisterController::class, 'index'])->name('otp-view'); 
     Route::get('resend-otp/{email?}/{type?}', [RegisterController::class, 'resendOtp'])->name('resend-otp'); 
 
-});
+    
 
 
 Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],function(){
@@ -82,7 +83,11 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     Route::group(['prefix'=>'settings'],function()
 	{	
         Route::get('/password-reset-otp', [ResetPasswordController::class, 'restPasswordOtpView'])->name('password-reset-otp');
-        Route::get('/password-reset', [ResetPasswordController::class, 'restPasswordView'])->name('password-reset');
+        Route::get('/password-change-view', [ResetPasswordController::class, 'restPasswordView'])->name('password-change-view');
+        Route::post('/verify-otp',[OtpController::class, 'otpVerify'])->name('verify-otp-after-login');
+        Route::get('/create-reset-Otp',[ResetPasswordController::class, 'createResetOtp'])->name('create-reset-otp');
+        Route::post('/password-change', [ResetPasswordController::class, 'resetPasswordCreate'])->name('password-change');
+
  
 	});
 

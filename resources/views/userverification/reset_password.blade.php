@@ -10,35 +10,39 @@
 
 <section>
     <div class="container cmn_verification_container">
-    <div class="hide-me animation for_authtoast">
-    @include('include.flash_message')
-    </div>
-    <form method="POST" enctype="multipart/form-data" action="{{ route('verify-otp') }}">
-        @csrf
-        <input type="hidden" id = "email" name = "email" value = "{{$user->email}}">
-        <input type="hidden" id = "type" name = "type" value = "{{$type}}">
-    <div class="row">
-            <div class="col-md-12">
-                <div class="flow_step_text">Enter OTP we emailed to you</div>
-                <div class="row">
-                    <div class="col-md-3 mt-3">
-                        <div class="profile_input">
-                            <label>Enter OTP</label>
-                            <input type="password" class="form-control" placeholder="Enter OTP" name="" aria-describedby="basic-addon1">
+        <div class="hide-me animation for_authtoast">
+            @include('include.flash_message')
+        </div>
+        <form method="POST" action="{{ route('verify-otp-after-login') }}">
+            @csrf
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="flow_step_text">Enter OTP we emailed to you</div>
+                    <div class="row">
+                        <div class="col-md-3 mt-3">
+                            <div class="profile_input">
+                                <label>Enter OTP</label>
+                                <input type="password" class="numbers-only outline w-100 {{ $errors->has('otp') ? ' is-invalid' : '' }}" name="otp" placeholder="Please Enter OTP" required>
+
+                                @if ($errors->has('otp'))
+                                <span class="invalid-feedback" style="display: block;" role="alert">
+                                    <strong>{{ $errors->first('otp') }}</strong>
+                                </span>
+                                @endif
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row mt-4">
-                    <div class="col-md-3">
-                        <div class="d-flex justify-content-end">
-                        <button class="guide_profile_btn">Confirm</button>
+                    <div class="row mt-4">
+                        <div class="col-md-3">
+                            <div class="d-flex justify-content-end">
+                                <button class="guide_profile_btn">Confirm</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
-      
+        </form>
+
     </div>
 </section>
 
@@ -47,3 +51,13 @@
 @section('footer')
 @include('include.footer')
 @endsection
+@push('scripts')
+<script>
+    $(document).ready(function() {
+
+        $("#error-toast").toast("show");
+        $("#success-toast").toast("show");
+
+    });
+</script>
+@endpush

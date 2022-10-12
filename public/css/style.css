@@ -52,6 +52,10 @@ body {
     text-decoration: none;
 }
 
+.invalid-feedback{
+    color: #DD45B3 !important;
+}
+
 .header-search-btn {
     width: 4rem;
     height: 2.5rem;
@@ -64,6 +68,12 @@ body {
     font-size: 14px;
     margin-right: 1rem;
     border: none;
+}
+
+.reset-password{
+    background-color: white !important;
+    outline: none !important;
+
 }
 
 .add-proj-btn {
@@ -967,12 +977,13 @@ body {
     color: #1C0330;
 }
 .profile_upload_text {
-    font-weight: 300;
+    font-weight: 500;
     font-size: 12px;
     line-height: 126%;
     letter-spacing: 0.033em;
     color: #000000;
     margin-top: 8px;
+    text-decoration: none;
 }
 .upload_img_container {
     border: 1px dashed #4D0D8A;
