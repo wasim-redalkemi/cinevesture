@@ -64,20 +64,25 @@ class ResetPasswordController extends Controller
 
 
     // reset password otp views
-       public function restPasswordOtpView()
+       public function createResetOtp()
        {    $user = User::find(auth()->user()->id);
             $otp = OtpController::createOtp($user,'R'); // F for Forgot pasword
             $collect  = collect();
             $collect->put('otp',$otp);
             $user->notify(new VerifyOtp($collect));
             $type = 'R' ; // R for reset 
-           return view('userverification.reset_password',compact(['user','type']));
+           return redirect()->route('password-reset-otp');
+       }
+
+       public function restPasswordOtpView()
+       {
+        return view('userverification.reset_password');
        }
 
     // reset password View
     public function restPasswordView()
     {  
-        return view('userverification.password_change',compact(['user','type']));
+        return view('userverification.password_change');
     }
     
 
