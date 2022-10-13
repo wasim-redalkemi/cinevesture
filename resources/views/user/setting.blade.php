@@ -9,6 +9,9 @@
 @section('content')
 
 <section class="profile-section">
+<div class="hide-me animation for_authtoast">
+            @include('include.flash_message')
+        </div>
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -26,7 +29,7 @@
                     </div>
                     <div class="guide_profile_main_text mt-4">Password</div>
                     <div class="d-flex align-items-center">
-                        <div class="preview_subtext mt-2">***********</div> <span class="profile_upload_text aubergine mx-3"><a href="{{route('password-reset-otp')}}">Change Password</a></span>
+                        <div class="preview_subtext mt-2">***********</div> <a class="profile_upload_text aubergine mx-3" href = "{{route('create-reset-otp')}}">Change Password</a>
                     </div>
                     <div class="row mt_35">
                         <div class="col-md-2">
@@ -52,3 +55,13 @@
 @section('footer')
 @include('include.footer')
 @endsection
+@push('scripts')
+<script>
+    $(document).ready(function() {
+
+        $("#error-toast").toast("show");
+        $("#success-toast").toast("show");
+
+    });
+</script>
+@endpush

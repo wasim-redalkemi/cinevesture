@@ -162,8 +162,8 @@ class RegisterController extends Controller
                     ->latest()
                     ->first();
 
-                if (empty($otpObj)) {
-                    return back()->with('error', 'Invalid otp.');
+                if (!$otpObj) {
+                    return back()->with('error', 'Invalid OTP.');
                 }
                 if($request->type == 'F'){
                      $token = Str::random(60);
@@ -183,11 +183,7 @@ class RegisterController extends Controller
                     $userObj->email_verified_at = Carbon::now();
                     $userObj->save();
                     $this->guard()->login($userObj);
-
-                }
-                elseif($request->type == 'R')
-                {
-                    return view('auth.passwords.reset');
+                    return redirect('home');
 
                 }
                 else{

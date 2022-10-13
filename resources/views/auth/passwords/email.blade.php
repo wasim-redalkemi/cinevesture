@@ -1,47 +1,52 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <form method="POST" enctype="multipart/form-data" action="{{ route('password.email') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
+<section class="auth_section">
+<div class="hide-me animation for_authtoast">
+           @include('include.flash_message')
+       </div>
+    <div class="container signup-container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="signup-text mt-5 mt-md-5"> Forgot Password</div>
+            </div>
+            <div class="col-md-12">
+                <form method="POST" enctype="multipart/form-data" action="{{ route('password.email') }}" class="mt-lg-5 pt-lg-5">
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-12 mb-3">
+                            <div class="profile_input">
+                                <input id="email" type="email" placeholder="Email" name ="email" required class=" email-only outline  @error('email') is-invalid @enderror">
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
+                        
+                        <div class="col-md-12">
+                            <button type="submit" class="outline w-100">
+                                Receive OTP
+                            </button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
-</div>
-@endsection
+    @endsection
+
+    @push('scripts')
+<script>
+
+$(document).ready(function(){
+   
+        $("#error-toast").toast("show");
+        $("#success-toast").toast("show");
+        
+     
+
+});
+</script>
+@endpush
