@@ -19,17 +19,17 @@
                     </div>
                     <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
                         <div class="d-flex justify-content-between">
-                            <div class="profile_cmn_head_text">Add Experience</div>
+                            <div class="profile_cmn_head_text">Edit Experience</div>
                             <div><i class="fa fa-trash-o  deep-pink icon-size" aria-hidden="true"></i></div>
                         </div>
-                        <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('experience-store') }}">
+                        <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('experience-edit-store',['id'=>$UserExperienceData->id]) }}">
                             @csrf
 
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Job Title</label>
-                                        <input type="text" class="form-control @error('intro_video_link') is-invalid @enderror" placeholder="Job Title" name="job_title" value="{{ $experience->job_title }}"
+                                        <input type="text" class="form-control @error('intro_video_link') is-invalid @enderror" placeholder="Job Title" name="job_title" value="{{ $UserExperienceData->job_title }}"
                                             aria-label="Username" aria-describedby="basic-addon1">
                                         @error('intro_video_link')
                                             <span class="invalid-feedback" role="alert">
@@ -44,7 +44,7 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Company</label>
-                                        <input type="text" class="form-control @error('comapny') is-invalid @enderror" placeholder="Company" name="comapny" value="{{ $experience->comapny }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control @error('comapny') is-invalid @enderror" placeholder="Company" name="comapny" value="{{ $UserExperienceData->comapny }}" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('comapny')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -57,7 +57,7 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Location</label>
-                                        <input type="text" class="form-control @error('country_id') is-invalid @enderror" placeholder="Location" name="country_id" value="{{ $experience->country_id }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control @error('country_id') is-invalid @enderror" placeholder="Location" name="country_id" value="{{ $UserExperienceData->country_id }}" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('country_id')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -70,7 +70,7 @@
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>Start Date</label>
-                                        <input type="date" class="form-control @error('start_date') is-invalid @enderror" placeholder="DD/MM/YY" name="start_date" value="{{ $experience->start_date }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="date" class="form-control @error('start_date') is-invalid @enderror" placeholder="DD/MM/YY" name="start_date" value="{{ date("Y-m-d",strtotime($UserExperienceData->start_date)) }}" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('start_date')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -81,7 +81,7 @@
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>End Date</label>
-                                        <input type="date" class="form-control @error('end_date') is-invalid @enderror" placeholder="DD/MM/YY" name="end_date" value="{{ $experience->end_date }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="date" class="form-control @error('end_date') is-invalid @enderror" placeholder="DD/MM/YY" name="end_date" value="{{ date("Y-m-d",strtotime($UserExperienceData->end_date)) }}" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('end_date')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -95,10 +95,34 @@
                                     <div class="profile_input">
                                         <label for="lang">Employment Type</label>
                                         <select name="employement_type_id" class="@error('employement_type_id') is-invalid @enderror" id="lang">
-                                            <option value="Full-time">Full-time</option>
-                                            <option value="Contract">Contract</option>
-                                            <option value="Internship">Internship</option>
-                                            <option value="Part-time">Part-time</option>
+                                            <option 
+                                            @php
+                                            if ($UserExperienceData == $UserExperienceData->employement_type_id) {
+                                                echo 'selected';
+                                            }
+                                            @endphp
+                                             value="Full-time">Full-time</option>
+                                            <option
+                                            @php
+                                            if ($UserExperienceData == $UserExperienceData->employement_type_id) {
+                                                echo 'selected';
+                                            }
+                                            @endphp
+                                             value="Contract">Contract</option>
+                                            <option
+                                            @php
+                                            if ($UserExperienceData == $UserExperienceData->employement_type_id) {
+                                                echo 'selected';
+                                            }
+                                            @endphp
+                                             value="Internship">Internship</option>
+                                            <option
+                                            @php
+                                            if ($UserExperienceData == $UserExperienceData->employement_type_id) {
+                                                echo 'selected';
+                                            }
+                                            @endphp
+                                             value="Part-time">Part-time</option>
                                         </select>
                                         @error('employement_type_id')
                                             <span class="invalid-feedback" role="alert">
@@ -112,7 +136,7 @@
                                 <div class="col-md-12">
                                     <div class="profile_input">
                                         <label>Description</label>
-                                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" aria-label="With textarea">{{ $experience->description }}</textarea>
+                                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" aria-label="With textarea">{{ $UserExperienceData->description }}</textarea>
                                         @error('description')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -126,7 +150,7 @@
                                     <div class="d-flex justify-content-end mt-4">
                                         <button class="cancel_btn mx-3">Cancel</button>
                                         <button class="save_add_btn">Save & add another</button>
-                                        <input type="hidden" name="flag" value="<?=request('flag')?>">
+                                        <input type="hidden" name="experience_id" value="{{ $UserExperienceData->id }}">
                                         <button type="submit" class="guide_profile_btn mx-3">Save & next</button>
                                     </div>
                                 </div>

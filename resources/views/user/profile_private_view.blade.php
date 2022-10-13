@@ -87,9 +87,6 @@
                                 <div class="guide_profile_main_text mt-3">Available to Work In</div>
                                 <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (isset($user->available_to_work_in))?$user->available_to_work_in:'-'; }}</div>
                                 <div class="guide_profile_main_text mt-3">Languages Spoken</div>
-                                {{-- @foreach ($user_languages as $k=>$v)
-                                    <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ $v['get_languages']['name'] }}</div>
-                                @endforeach --}}
                                 @if (count($user_languages)>0)
                                     @foreach ($user_languages as $k=>$v)
                                         <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ $v['get_languages']['name'] }}</div> 
@@ -165,41 +162,25 @@
                             <div class="col-md-12">
                                 <div class="d-flex">
                                     <div class="contact-page-text deep-pink mb-2">Portfolio </div>
-                                    <div class="mx-3 icon_container"><a href=""><i class="fa fa-plus deep-pink pointer font_12" aria-hidden="true"></i></a></div>
+                                    <div class="mx-3 icon_container"><a href="{{ route('portfolio-create',['flag'=>'privateView']) }}"><i class="fa fa-plus deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                 </div>
                                 <div class="portfolio owl-theme">
-                                    {{-- @foreach ($portfolio as $k=>$v)
-                                        <div class="item">
-                                            <img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}">
+                                    @if (count($portfolio)>0)
+                                        @foreach ($portfolio as $k=>$v)
+                                        @php
+                                            $img  = '';
+                                            if(isset($v['get_portfolio'][0]['file_link']))
+                                            {
+                                                $img = Storage::url($v['get_portfolio'][0]['file_link']);
+                                            }
+                                        @endphp                                            
+                                        <div class="item">                                                
+                                            <img src="<?php echo $img?>">
                                             <div class="d-flex justify-content-between mt-2">
-                                                <div class="organisation_cmn_text">{{ (isset($user->project_title))?$user->project_title:'Project Title'; }}</div>
-                                                <div class="icon_container"> <a href=""><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
+                                                <div class="organisation_cmn_text">{{$v['project_title']}}</div>
+                                                <div class="icon_container"> <a href="{{ route('portfolio-edit', ['id'=>$v['id']]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                             </div>
                                         </div>
-                                    @endforeach --}}
-                                    @if (count($user_portfolio)>0)
-                                        @foreach ($user_portfolio as $k=>$v)
-                                            @foreach ($v['get_portfolio'] as $k1=>$v1)
-                                                @if ($k1==0)
-                                                    <div class="item">                                                
-                                                        <img src="{{ Storage::url($v1['file_link']) }}">                                            
-                                                        
-                                                        <div class="d-flex justify-content-between mt-2">
-                                                            <div class="organisation_cmn_text">{{ (isset($v['project_title']))?$v['project_title']:'Project Title'; }}</div>
-                                                            <div class="icon_container"> <a href=""><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
-                                                        </div>
-                                                    </div>
-                                                {{-- @else
-                                                    <div class="item">                                                
-                                                        <img src="{{ asset('public/images/asset/100_no_img.jpg') }}">                                            
-                                                        
-                                                        <div class="d-flex justify-content-between mt-2">
-                                                            <div class="organisation_cmn_text">Project Title</div>
-                                                            <div class="icon_container"> <a href=""><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
-                                                        </div>
-                                                    </div>     --}}
-                                                @endif
-                                            @endforeach                                                                                            
                                         @endforeach
                                         <div class="clearfix"></div>
                                     @else
@@ -219,13 +200,13 @@
                                     <div class="contact-page-text deep-pink font_18">
                                         Experiences
                                     </div>
-                                    <div class="mx-3 icon_container"><a href=""><i class="fa fa-plus deep-pink pointer font_12" aria-hidden="true"></i></a></div>
+                                    <div class="mx-3 icon_container"><a href="{{ route('experience-create',['flag'=>'privateView']) }}"><i class="fa fa-plus deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                 </div>
                                 @foreach ($experience as $k=>$v)
 
                                 <div class="d-flex align-items-end">
                                     <div class="guide_profile_main_subtext mt-1">{{ $v->job_title }}</div>
-                                    <div class="icon_container mx-3"><a href=""><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
+                                    <div class="icon_container mx-3"><a href="{{ route('experience-edit', ['id'=>$v->id]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                 </div>
                                 <div class="guide_profile_main_subtext candy-pink mt-2">
                                     {{$v->country_id}} | {{date('d-m-Y',strtotime($v->start_date))}} | {{date('d-m-Y',strtotime($v->end_date))}} <br>
@@ -248,12 +229,12 @@
                                     <div class="contact-page-text deep-pink font_18">
                                         Qualifications
                                     </div>
-                                    <div class="mx-3 icon_container"><a href=""><i class="fa fa-plus deep-pink pointer font_12" aria-hidden="true"></i></a></div>
+                                    <div class="mx-3 icon_container"><a href="{{ route('qualification-create',['flag'=>'privateView']) }}"><i class="fa fa-plus deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                 </div>
                                 @foreach ($qualification as $k=>$v)
                                 <div class="d-flex align-items-end">
                                     <div class="guide_profile_main_subtext mt-1">{{$v->institue_name}}</div>
-                                    <div class="icon_container mx-3"><a href=""><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
+                                    <div class="icon_container mx-3"><a href="{{ route('qualification-edit', ['id'=>$v->id]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                 </div>                                
                                 <div class="guide_profile_main_subtext candy-pink mt-2">
                                     {{$v->degree_name}} | {{$v->feild_of_study}} | {{$v->start_year}} | {{$v->end_year}}
@@ -306,7 +287,7 @@
 @section('scripts')
 
 <script type="text/javascript">
-    $(".portfolio.owl-carousel").owlCarousel({
+    $(".owl-carousel").owlCarousel({
         center: true,
         autoPlay: 3000,
         autoplay: true,
@@ -326,6 +307,25 @@
                 items: 5
             }
         },
+    });
+
+
+    $(".portfolio.owl-carousel").owlCarousel({
+      center: true,
+      autoPlay: 1000,
+      autoplay: true,
+      loop: true,
+      nav: true,
+      margin: 20,
+      center: true,
+      items: 4,
+      responsive: {
+        480: { items: 1 },
+        768: { items: 2 },
+        1024: {
+          items: 4
+        }
+      },
     });
 </script>
 @endsection

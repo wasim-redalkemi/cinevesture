@@ -463,7 +463,8 @@ body {
 }
 ::placeholder {
     /* Microsoft Edge */
-    color: #4D0D8A;
+    /* color: #4D0D8A; */
+    color: black;
 }
 
 
