@@ -59,7 +59,7 @@
                                     <div class="profile_input">
                                         <label>First Name</label>
                                         <input type="text" class="form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name" value="{{ $user->first_name }}"
-                                            aria-label="Username" aria-describedby="basic-addon1" autofocus>
+                                            aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                         @error('first_name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -71,7 +71,7 @@
                                     <div class="profile_input">
                                         <label>Last Name</label>
                                         <input type="text" class="form-control @error('last_name') is-invalid @enderror" placeholder="{{ __('Last Name') }}" name="last_name" value="{{ $user->last_name }}"
-                                            aria-label="Username" aria-describedby="basic-addon1">
+                                            aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                         @error('last_name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -115,11 +115,15 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="profile_input">
-                                        <label for="lang">Gander</label>
+                                        <label for="lang">Gender</label>
                                         <select name="gender" class="@error('gender') is-invalid @enderror" id="lang">
-                                            <option value="women">Women</option>
+                                            <option value="man">Man</option>
+                                            <option value="woman">Woman</option>
+                                            <option value="non_binary">Non binary</option>
+                                            <option value="transgender">Transgender</option>
                                             <option value="gender_non_confirming">Gender Non Confirming</option>
                                             <option value="prefer_not_to_say">Prefer Not To Say</option>
+                                            <option value="other">Other</option>
                                         </select>
                                         @error('gender')
                                             <span class="invalid-feedback" role="alert">
@@ -132,9 +136,12 @@
                                     <div class="profile_input">
                                         <label for="lang">Gender Pronouns</label>
                                         <select name="gender_pronouns" class="@error('gender_pronouns') is-invalid @enderror" id="lang">
-                                            <option value="he/him/his">he/him/his</option>
-                                            <option value="she/her/hers">she/her/hers</option>
-                                            <option value="they/them/theirs">they/them/theirs</option>
+                                            <option value="he/him/his">He/him/His</option>
+                                            <option value="she/her/hers">She/Her/Hers</option>
+                                            <option value="they/them/theirs">They/Them/Theirs</option>
+                                            <option value="ze/hir/hirs">Ze/Hir/Hirs</option>
+                                            <option value="prefer_not_to_say">Prefer Not To Say</option>
+                                            <option value="other">Other</option>
                                         </select>
                                         @error('gender_pronouns')
                                             <span class="invalid-feedback" role="alert">
@@ -176,7 +183,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mt_16">
-                                        <label for="lang">Languse Spoken</label>
+                                        <label for="lang">Languase Spoken</label>
                                         <select name="languages[]" class="js-select2 @error('languages') is-invalid @enderror" id="lang" multiple>
                                             @foreach ($languages as $k=>$v)
                                                 <option value="{{ $v->id }}">{{  $v->name }}</option>
@@ -327,7 +334,7 @@
 
     $(".js-select2").select2({
         closeOnSelect: false,
-        placeholder: "Select option",
+        placeholder: "Select",
         allowClear: true,
         tags: false
     });

@@ -253,12 +253,10 @@ class UserController extends Controller
             if($portfolio->save()){
                 if (isset($request->project_specific_skills_id)) {
                     UserPortfolioSpecificSkills::query()->where('portfolio_id',$portfolio->id)->delete();
-                    foreach ($request->project_specific_skills_id as $k => $v) {
-                        $user_portfolio_specific_skills = new UserPortfolioSpecificSkills();
-                        $user_portfolio_specific_skills->portfolio_id = $portfolio->id;
-                        $user_portfolio_specific_skills->project_specific_skills_id = $v;
-                        $user_portfolio_specific_skills->save();
-                    }
+                    $user_portfolio_specific_skills = new UserPortfolioSpecificSkills();
+                    $user_portfolio_specific_skills->portfolio_id = $portfolio->id;
+                    $user_portfolio_specific_skills->project_specific_skills_id = $request->project_specific_skills_id;
+                    $user_portfolio_specific_skills->save();
                 }            
             }
             
@@ -289,7 +287,7 @@ class UserController extends Controller
             foreach($data_to_insert as $k => $v)
             {
                 $projectMedia = new UserPortfolioImage();
-                $projectMedia->portfolio_id = $request->portfolio_id;
+                $projectMedia->portfolio_id = $portfolio->id;
                 $projectMedia->file_type = $v['file_type'];
                 $projectMedia->file_link = $v['file_link'];
                 $projectMedia->save();
@@ -346,11 +344,11 @@ class UserController extends Controller
             $portfolio->video = $request->video;
                        
             if($portfolio->update()){
-                if (isset($request->project_specific_skills)) {
+                if (isset($request->project_specific_skills_id)) {
                     UserPortfolioSpecificSkills::query()->where('portfolio_id',$request->portfolio_id)->delete();
                     $user_portfolio_specific_skills = new UserPortfolioSpecificSkills();
                     $user_portfolio_specific_skills->portfolio_id = $request->portfolio_id;
-                    $user_portfolio_specific_skills->project_specific_skills_id = $request->project_specific_skills;
+                    $user_portfolio_specific_skills->project_specific_skills_id = $request->project_specific_skills_id;
                     $user_portfolio_specific_skills->save();                    
                 }            
             }

@@ -44,8 +44,7 @@ class StoreProfileUpdate extends FormRequest
     public function messages()
     {
         return [
-            'profile_image.required' => 'Profile Image is required',
-            'age.integer' => 'Age must be integer.',
+         
         ];
     }
 }

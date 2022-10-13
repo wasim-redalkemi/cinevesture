@@ -16,13 +16,70 @@ class MasterSkillSeeder extends Seeder
     {
         DB::table('master_skills')->insert([
             [
-                'name' => 'Acting',
+                'name' => 'Action & Adventure',
             ],
             [
-                'name' => 'Dancing',
+                'name' => 'Animation',
             ],
             [
-                'name' => 'Singing',
+                'name' => 'Award Winners',
+            ],
+            [
+                'name' => 'Biography',
+            ],
+            [
+                'name' => 'Comedy',
+            ],
+            [
+                'name' => 'Children',
+            ],
+            [
+                'name' => 'Crime',
+            ],
+            [
+                'name' => 'Dark Humour',
+            ],
+            [
+                'name' => 'Dystopia',
+            ],
+            [
+                'name' => 'Fantasy',
+            ],
+            [
+                'name' => 'Film Noir',
+            ],
+            [
+                'name' => 'Historical/Period Film',
+            ],
+            [
+                'name' => 'Horror',
+            ],
+            [
+                'name' => 'Magical Realism',
+            ],
+            [
+                'name' => 'Romance',
+            ],
+            [
+                'name' => 'Magical Realism',
+            ],
+            [
+                'name' => 'Sports',
+            ],
+            [
+                'name' => 'Spy',
+            ],
+            [
+                'name' => 'Suspense/ Mystery',
+            ],
+            [
+                'name' => 'Thriller',
+            ],
+            [
+                'name' => 'Western',
+            ],
+            [
+                'name' => 'Other',
             ]
         ]);
     }

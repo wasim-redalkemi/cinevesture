@@ -14,10 +14,10 @@
                     @include('include.profile_sidebar')
                 </div>
                 <div class="col-md-9">
-                    <div class="hide-me">
-                        @include('include.flash_message')
-                    </div>
                     <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
+                        <div class="hide-me">
+                            @include('include.flash_message')
+                        </div>
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Add Portfolio</div>
                             <div><i class="fa fa-trash-o  deep-pink icon-size" aria-hidden="true"></i></div>
@@ -55,12 +55,12 @@
                                 <div class="col-md-6">
                                 <div class="profile_input">
                                     <label for="lang">Project specific Skills</label>
-                                    <select name="project_specific_skills" class="@error('project_specific_skills') is-invalid @enderror" id="lang">
+                                    <select name="project_specific_skills_id" class="@error('project_specific_skills_id') is-invalid @enderror" id="lang">
                                         @foreach ($skills as $k=>$v)
                                                 <option value="{{ $v->id }}">{{  $v->name }}</option>
                                             @endforeach
                                     </select>
-                                    @error('project_specific_skills')
+                                    @error('project_specific_skills_id')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
