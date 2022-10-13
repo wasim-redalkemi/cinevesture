@@ -175,7 +175,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="profile_input">
+                                    <div class="mt_16">
                                         <label for="lang">Languse Spoken</label>
                                         <select name="languages[]" class="js-select2 @error('languages') is-invalid @enderror" id="lang" multiple>
                                             @foreach ($languages as $k=>$v)
@@ -222,7 +222,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="profile_input">
+                                    <div class="mt_16">
                                         <label for="lang">Skills</label>
                                         <select name="skills[]" class="js-select2" id="lang" multiple>
                                             @foreach ($skills as $k=>$v)
@@ -329,7 +329,7 @@
         closeOnSelect: false,
         placeholder: "Select option",
         allowClear: true,
-        tags: true
+        tags: false
     });
 </script>
 @endpush

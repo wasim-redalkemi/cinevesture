@@ -65,7 +65,7 @@
 
                         <div class="row">
                             <div class="col-md-3">
-                                <div class="profile_input">
+                                <div class="mt_16">
                                     <label>Select Country *</label>
                                     <select class="js-select2" name="countries[]" multiple="multiple">
                                         @foreach ($country as $k=>$v)
@@ -78,7 +78,7 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="profile_input">
+                                <div class="mt_16">
                                     <label>Select Language *</label>
                                     <select class="js-select2" name="languages[]" multiple="multiple">
                                         @foreach ($languages as $k=>$v)

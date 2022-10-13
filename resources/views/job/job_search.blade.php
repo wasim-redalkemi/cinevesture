@@ -40,7 +40,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="profile_input mt-0">
+                                <div class="mt-0">
                                     <select class="js-select2" multiple="multiple">
                                         <option value="Hindi" data-badge="">Hindi</option>
                                         <option value="English" data-badge="">English</option>
@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="profile_input mt-0">
+                                <div class=" mt-0">
                                     <select class="js-select2" multiple="multiple">
                                         <option value="Hindi" data-badge="">Hindi</option>
                                         <option value="English" data-badge="">English</option>

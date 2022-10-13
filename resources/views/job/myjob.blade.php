@@ -413,7 +413,7 @@
 
                             <div class="row">
                                 <div class="col-lg-3 col-sm-6 mt-sm-2 mt-2">
-                                    <div class="d-flex pdf-container">
+                                    <div class="d-flex doc_container">
                                         <div class="icon">
                                             <img src="{{ asset('public/images/asset/pdf-icon.png') }}">
                                         </div>
