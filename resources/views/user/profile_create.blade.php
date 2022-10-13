@@ -115,7 +115,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="profile_input">
-                                        <label for="lang">Gander</label>
+                                        <label for="lang">Gender</label>
                                         <select name="gender" class="@error('gender') is-invalid @enderror" id="lang">
                                             <option value="women">Women</option>
                                             <option value="gender_non_confirming">Gender Non Confirming</option>
@@ -176,7 +176,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mt_16">
-                                        <label for="lang">Languse Spoken</label>
+                                        <label for="lang">Languages Spoken</label>
                                         <select name="languages[]" class="js-select2 @error('languages') is-invalid @enderror" id="lang" multiple>
                                             @foreach ($languages as $k=>$v)
                                                 <option value="{{ $v->id }}">{{  $v->name }}</option>
