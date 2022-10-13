@@ -18,7 +18,6 @@ class CreateUserPortfoliosTable extends Migration
             $table->string('user_id',20);
             $table->string('project_title',100)->nullable();
             $table->string('description',1000)->nullable();
-            $table->string('project_specific_skills_id',255)->nullable();
             $table->string('project_country_id',20)->nullable();
             $table->timestamp('completion_date')->nullable();
             $table->string('video')->nullable();
