@@ -27,7 +27,7 @@
 
                             <div class="d-flex custom_file_explorer">
                                 <div class="upload_img_container">
-                                    <img src="" class="upload_preview">
+                                    <img src="<?php if (!empty($user->profile_image)){echo Storage::url($user->profile_image); }?>" class="upload_preview">                                        
                                     <div for="file-input" class="d-none">
                                         <input type="file" name="profile_image" class="@error('profile_image') is-invalid @enderror file_element" accept=".jpg,.jpeg,.png">
                                         @error('profile_image')
