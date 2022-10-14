@@ -7,6 +7,9 @@
 @endsection
 
 @section('content')
+<div class="hide-me animation for_authtoast">
+    @include('include.flash_message')
+</div>
     <section class="profile-section">
         <div class="container">
             <div class="row">
@@ -15,9 +18,6 @@
                 </div>
                 <div class="col-md-9">
                     <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
-                        <div class="hide-me">
-                            @include('include.flash_message')
-                        </div>
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Add Portfolio</div>
                             <div><i class="fa fa-trash-o  deep-pink icon-size" aria-hidden="true"></i></div>
