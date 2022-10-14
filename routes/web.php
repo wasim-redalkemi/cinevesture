@@ -24,10 +24,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('auth.login');
 });
-Route::get('/test', function () {
-    return view('user.project.project_gallery');
-});
-
 Auth::routes(['verify' => true]);
 
 
@@ -101,6 +97,12 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     Route::get('/setting-page', function () {
         return view('user.setting');
     })->name('setting-page');
+    Route::get('/forgot-password-page', function () {
+        return view('auth.passwords/forgot');
+    })->name('forgot-password-page');
+    Route::get('/reset-password-page', function () {
+        return view('auth.passwords/reset_public');
+    })->name('reset-password-page');
 });
 
 Route::get('/test', function () {

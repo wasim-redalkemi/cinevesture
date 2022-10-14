@@ -183,7 +183,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="mt_16">
-                                        <label for="lang">Languase Spoken</label>
+                                        <label for="lang">Languages Spoken</label>
                                         <select name="languages[]" class="js-select2 @error('languages') is-invalid @enderror" id="lang" multiple>
                                             @foreach ($languages as $k=>$v)
                                                 <option value="{{ $v->id }}">{{  $v->name }}</option>
