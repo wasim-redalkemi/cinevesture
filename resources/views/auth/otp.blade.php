@@ -98,7 +98,4 @@ $(".inputs").keyup(function (e) {
     }
  
 </script>
-
-
-</script>
 @endpush

@@ -13,10 +13,7 @@
                 <div class="col-md-3">
                     @include('include.profile_sidebar')
                 </div>
-                <div class="col-md-9"> 
-                    <div class="hide-me">
-                        @include('include.flash_message')
-                    </div>                   
+                <div class="col-md-9">                   
                     <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
                         <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('profile-store') }}">
                             @csrf
@@ -83,7 +80,7 @@
                                     <div class="profile_input">
                                         <label>Job Title</label>
                                         <input type="text" class="form-control @error('job_title') is-invalid @enderror" placeholder="Job Title" name="job_title" {{ $user->job_title }} value="{{ $user->job_title }}"
-                                            aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                            aria-label="Username" aria-describedby="basic-addon1" autofocus>
                                         @error('job_title')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -97,14 +94,15 @@
                                     <div class="profile_input" style="max-height:300px;overflow:auto;">
                                         <label for="lang">Age</label>
                                         <select name="age" class="@error('age') is-invalid @enderror" id="lang">
-                                            <?php
-                                                for($i=18;$i<=100;$i++)
-                                                {
-                                                    ?>
-                                                        <option value="<?php echo $i;?>"><?php echo $i;?></option>
-                                                    <?php
-                                                }
-                                            ?>
+                                            <option value="18-24">18-24</option>
+                                            <option value="25-29">25-29</option>
+                                            <option value="30-34">30-34</option>
+                                            <option value="35-39">35-39</option>
+                                            <option value="40-44">40-44</option>
+                                            <option value="45-49">45-49</option>
+                                            <option value="50-54">50-54</option>
+                                            <option value="55-59">55-59</option>
+                                            <option value="60+">60+</option>
                                         </select>
                                         @error('age')
                                             <span class="invalid-feedback" role="alert">
@@ -313,6 +311,12 @@
 @endsection
 @push('scripts')
 <script type="text/javascript">
+
+    $(document).ready(function(){
+        $("#error-toast").toast("show");
+        $("#success-toast").toast("show");
+    });
+
     $(document).ready(function()
     {
         $('.open_file_explorer').click(function(e) 

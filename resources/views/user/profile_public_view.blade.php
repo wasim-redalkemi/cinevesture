@@ -14,7 +14,7 @@
         <div class="content_wraper">
             <div class="guide_profile_subsection">
                 <div class="container">
-                    <div class="hide-me">
+                    <div class="hide-me animation for_authtoast">
                         @include('include.flash_message')
                     </div>
                     <div class="row">
@@ -297,3 +297,12 @@
         });
     </script>
     @endsection
+
+    @push('scripts')
+    <script>
+        $(document).ready(function(){
+            $("#error-toast").toast("show");
+            $("#success-toast").toast("show");
+        });
+    </script>
+    @endpush
