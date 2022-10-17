@@ -53,19 +53,34 @@ UllYCuOShcMrS2lSzm
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>First Name</label>
-                                    <input type="text" class="form-control" placeholder="{{ __('First Name') }}" name="first_name" value="{{ $user->first_name }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                    <input type="text" class="name-only form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name" value="{{ $user->first_name }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                    @error('first_name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Last Name</label>
-                                    <input type="text" class="form-control" placeholder="{{ __('Last Name') }}" name="last_name" value="{{ $user->last_name }}" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control name-only @error('last_name') is-invalid @enderror" placeholder="{{ __('Last Name') }}" name="last_name" value="{{ $user->last_name }}" aria-label="Username" aria-describedby="basic-addon1">
+                                    @error('last_name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Job Title</label>
-                                    <input type="text" class="form-control" placeholder="Job Title" name="job_title" {{ $user->job_title }} value="{{ $user->job_title }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                    <input type="text" class="form-control" placeholder="Job Title" name="job_title"  value="{{ $user->job_title }}" aria-label="Username" aria-describedby="basic-addon1">
+                                    @error('job_title')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -74,6 +89,7 @@ UllYCuOShcMrS2lSzm
                                 <div class="profile_input" style="max-height:300px;overflow:auto;">
                                     <label for="lang">Age</label>
                                     <select name="age" id="lang">
+                                    <option value="">Select</option>
                                         <?php
                                         for ($i = 18; $i <= 100; $i++) {
                                         ?>
@@ -89,6 +105,8 @@ UllYCuOShcMrS2lSzm
                                     <div class="profile_input">
                                         <label for="lang">Located in</label>
                                         <select name="Located_in" id="lang">
+                                        <option value="">Select</option>
+ 
                                             @foreach ($country as $k=>$v)
                                                 <option value="{{ $v->id }}">{{  $v->name }}</option>
                                             @endforeach
@@ -116,6 +134,7 @@ UllYCuOShcMrS2lSzm
                                     </div>
                                 </div>
                             </div>
+                            @if()
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="profile_input">

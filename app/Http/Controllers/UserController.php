@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostUserPortfolioRequest;
 use App\Http\Requests\StoreProfileUpdate;
+use App\Models\AgeRange;
 use App\Models\MasterCountry;
 use App\Models\MasterLanguage;
 use App\Models\MasterSkill;
@@ -152,15 +153,17 @@ class UserController extends Controller
     public function profileCreate()
     {
         try {
-            $user = User::query()->find(auth()->user()->id);
+            $user = User::query()->with(['country','language'])->find(auth()->user()->id);
             $skills = MasterSkill::query()->get();
             $languages = MasterLanguage::query()->get();
             $country = MasterCountry::query()->get();
             $state = MasterState::query()->get();
+            $age = AgeRange::query()->get();
 
-            return view('user.profile_create', compact('user','skills','languages','country','state'));
+            return view('user.profile_create', compact(['user','skills','languages','country','state','age']));
         } catch (Exception $e) {
-            return back()->withError('Somethig went wrong.');
+            dd($e->getMessage());
+            return back()->withError('error','Somethig went wrong.');
         }
     }
 

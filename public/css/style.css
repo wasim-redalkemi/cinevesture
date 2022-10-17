@@ -103,6 +103,9 @@ body {
     padding-right: 10px;
 
 }
+.display-none{
+    display: none;
+}
 
 .disable-resend {
     color: #FAF8FB !important;

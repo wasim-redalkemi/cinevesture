@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserLanguagesTable extends Migration
+class CreateAgeRangeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,12 @@ class CreateUserLanguagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_languages', function (Blueprint $table) {
+        Schema::create('age_range', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id',20);
-            $table->string('language_id',20);
+            $table->string('range');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
-    
 
     /**
      * Reverse the migrations.
@@ -30,6 +27,6 @@ class CreateUserLanguagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_languages');
+        Schema::dropIfExists('age_range');
     }
 }

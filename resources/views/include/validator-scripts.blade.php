@@ -15,9 +15,9 @@
                     submitBtn.attr('disabled', 'disabled');
                     if ($e.parent().find('span').length == 0) {
                         if($(this).attr("name") == 'first_name'){
-                            $(`<span class="e-err" style="color: #DD45B3;margin:0px;">Please enter first name</span>`).insertAfter($e);
+                            $(`<span class="e-err" style="color: #DD45B3; font-weight:600 ;margin:0px;">Please enter first name</span>`).insertAfter($e);
                         }else{
-                            $(`<span class="e-err" style="color: #DD45B3;margin:0px;">Please enter last name</span>`).insertAfter($e);
+                            $(`<span class="e-err" style="color: #DD45B3; font-weight:600 ;margin:0px;">Please enter last name</span>`).insertAfter($e);
                         }
                         
                     }  
@@ -49,7 +49,7 @@
                     $el.css("border", "2px solid #4D0D8A");
                     submitBtn.attr('disabled', 'disabled');
                     if ($el.parent().find('span').length == 0) {
-                        $(`<span class="e-err" style="color: #DD45B3;margin:0px;">Please provide a valid E-Mail Address.</span>`).insertAfter($el);
+                        $(`<span class="e-err" style="color: #DD45B3; font-weight:600 ;margin:0px;">Please provide a valid E-Mail Address.</span>`).insertAfter($el);
                         // $el.parent().append('<p class="e-err" style="color: red;">Please provide a valid email id.</p>')
                     }
                 }
@@ -74,10 +74,10 @@
                     if ($el.parent().find('span').length == 0) {
                         if($(this).attr("name") == 'password_confirmation'){
                             if($(this).val() != $('#password').val()){
-                                $(`<span class="e-err" style="color: #DD45B3;;margin:0px;">The passwords you entered do not match. Please re-enter your password</span>`).insertAfter($el);
+                                $(`<span class="e-err" style="color: #DD45B3; font-weight:600 ;;margin:0px;">The passwords you entered do not match. Please re-enter your password</span>`).insertAfter($el);
                             }
                         }else{
-                           $(`<span class="e-err" style="color: #DD45B3;;margin:0px;">Use 8 or more characters with a mix of letters, numbers & symbols</span>`).insertAfter($el);
+                           $(`<span class="e-err" style="color: #DD45B3; font-weight:600 ;;margin:0px;">Use 8 or more characters with a mix of letters, numbers & symbols</span>`).insertAfter($el);
                         }
                         
                         // $el.parent().append('<p class="e-err" style="color: red;">Please provide a valid email id.</p>')

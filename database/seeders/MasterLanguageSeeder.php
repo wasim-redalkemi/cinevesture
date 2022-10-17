@@ -15,12 +15,28 @@ class MasterLanguageSeeder extends Seeder
     public function run()
     {
         DB::table('master_languages')->insert([
-            [
-                'name' => 'Hindi',
-            ],
-            [
-                'name' => 'English',
-            ]
+            ['name' => 'Assamese',],
+            ['name' => 'Bengali'],
+            ['name' => 'Bodo'],
+            ['name' => 'Dogri'],
+            ['name' => 'Gujarati',],
+            ['name' => 'Hindi'],
+            ['name' => 'Kannada'],
+            ['name' => 'Kashmiri'],
+            ['name' => 'Konkani',],
+            ['name' => 'Maithili'],
+            ['name' => 'Malayalam'],
+            ['name' => 'Manipuri'],
+            ['name' => 'Marathi',],
+            ['name' => 'Nepali'],
+            ['name' => 'Odia'],
+            ['name' => 'Punjabi'],
+            ['name' => 'Sanskrit',],
+            ['name' => 'Santhali'],
+            ['name' => 'Tamil'],
+            ['name' => 'Telugu'],
+            ['name' => 'Urdu',],
+            ['name' => 'Sindhi'],
         ]);
     }
 }

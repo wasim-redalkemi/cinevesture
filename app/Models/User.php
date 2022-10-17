@@ -42,11 +42,18 @@ class User extends Authenticatable
 
     public function country()
     {
-        return $this->hasOne(MasterCountry::class,'country_id');
+        return $this->hasOne(MasterCountry::class,'id','country_id');
     }
 
     public function skill()
     {
         return $this->hasMany(UserSkill::class,'user_id');
     }
+
+    public function language()
+    {
+        return $this->hasMany(UserLanguage::class,'user_id');
+    }
+
+
 }
