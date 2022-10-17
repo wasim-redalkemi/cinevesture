@@ -154,3 +154,12 @@
 @section('footer')
     @include('include.footer')
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function(){
+        $("#error-toast").toast("show");
+        $("#success-toast").toast("show");
+    });
+</script>
+@endpush

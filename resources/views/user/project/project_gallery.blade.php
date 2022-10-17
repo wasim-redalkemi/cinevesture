@@ -7,6 +7,9 @@
 @endsection
 
 @section('content')
+<div class="hide-me animation for_authtoast">
+    @include('include.flash_message')
+</div>
 @include('user.project.project_pagination')
 
 
@@ -141,6 +144,12 @@
 
 @section('scripts')
 <script>
+
+    $(document).ready(function(){
+        $("#error-toast").toast("show");
+        $("#success-toast").toast("show");
+    });
+    
     $(document).ready(function() {
         $('.doc_container').hide();
         $('.open_file_explorer').click(function(e) {

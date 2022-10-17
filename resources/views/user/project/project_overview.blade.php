@@ -7,6 +7,9 @@
 @endsection
 
 @section('content')
+<div class="hide-me animation for_authtoast">
+    @include('include.flash_message')
+</div>
 @include('user.project.project_pagination')
 
 
@@ -15,9 +18,6 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="hide-me">
-                    @include('include.flash_message')
-                </div>
                 <div class="profile_wraper profile_wraper_padding mt-4">
                     <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('project-overview-store') }}">
                         @csrf
@@ -124,6 +124,12 @@
 
 @push('scripts')
 <script>
+
+    $(document).ready(function(){
+        $("#error-toast").toast("show");
+        $("#success-toast").toast("show");
+    });
+
     $(".js-select2").select2({
       closeOnSelect: false,
       placeholder: "Placeholder",

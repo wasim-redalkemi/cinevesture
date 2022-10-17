@@ -7,6 +7,9 @@
 @endsection
 
 @section('content')
+<div class="hide-me animation for_authtoast">
+    @include('include.flash_message')
+</div>
 @include('user.project.project_pagination')
 
 
@@ -143,6 +146,12 @@
 
 @section('scripts')
 <script>
+
+    $(document).ready(function(){
+        $("#error-toast").toast("show");
+        $("#success-toast").toast("show");
+    });
+
       $(".js-select2").select2({
         closeOnSelect: false,
         placeholder: "Placeholder",

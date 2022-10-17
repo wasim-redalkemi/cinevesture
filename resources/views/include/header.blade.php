@@ -59,30 +59,6 @@
                 <span>Profile</span>
               </a>
         </div>
-        <div>
-          @if(session('message'))
-                    <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
-                        <ul class="list-unstyled">
-                            {{ session('message') }}
-                        </ul>
-                        <button type="button" class="close mt-3" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                @endif
-                @if($errors->count() > 0)
-                    <div class="alert alert-danger alert-dismissible fade show m-3">
-                        <ul class="list-unstyled pt-3">
-                            @foreach($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                        <button type="button" class="close mt-3" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                @endif
-        </div>
         </nav>
       </div>
     </div>

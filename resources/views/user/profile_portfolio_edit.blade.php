@@ -15,9 +15,6 @@
                 </div>
                 <div class="col-md-9">
                     <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
-                        <div class="hide-me">
-                            @include('include.flash_message')
-                        </div>
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Edit Portfolio</div>
                             <div><i class="fa fa-trash-o  deep-pink icon-size" aria-hidden="true"></i></div>
@@ -168,4 +165,13 @@
 @section('footer')
     @include('include.footer')
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function(){
+        $("#error-toast").toast("show");
+        $("#success-toast").toast("show");
+    });
+</script>
+@endpush
 

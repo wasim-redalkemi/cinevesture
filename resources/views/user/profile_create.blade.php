@@ -13,10 +13,7 @@
                 <div class="col-md-3">
                     @include('include.profile_sidebar')
                 </div>
-                <div class="col-md-9"> 
-                    <div class="hide-me">
-                        @include('include.flash_message')
-                    </div>                   
+                <div class="col-md-9">                   
                     <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
                         <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('profile-store') }}">
                             @csrf
@@ -331,6 +328,12 @@
 @endsection
 @push('scripts')
 <script type="text/javascript">
+
+    $(document).ready(function(){
+        $("#error-toast").toast("show");
+        $("#success-toast").toast("show");
+    });
+
     $(document).ready(function()
     {   
         $('.open_file_explorer').click(function(e) 
