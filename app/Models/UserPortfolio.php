@@ -12,4 +12,9 @@ class UserPortfolio extends Model
     {
         return $this->hasMany(UserPortfolioImage::class,'portfolio_id');
     }
+
+    public function getPortfolioSkill()
+    {
+        return $this->hasOne(UserPortfolioSpecificSkills::class,'portfolio_id');
+    }
 }

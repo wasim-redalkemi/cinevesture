@@ -85,6 +85,13 @@
                 }
             });
 
+            // is_check
+        
+            $(".ischeck").on("input",function(){
+                $(this).removeClass("is-invalid");
+            });
+            
+
 
             //For Numbers only
             $(".numbers-only").on("input",function(){

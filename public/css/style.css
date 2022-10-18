@@ -1339,7 +1339,7 @@ button, input, optgroup, select, textarea {
     border: none;
 }
 .cancel_btn {
-    padding: 6px 16px;
+    padding: 9px 16px;
     font-size: 14px;
     background: #FAF8FB;
     border-radius: 4px;

@@ -18,9 +18,9 @@ class CreateUserQualificationsTable extends Migration
             $table->string('user_id',20);
             $table->string('institue_name',500)->nullable();
             $table->string('degree_name',500)->nullable();
-            $table->string('feild_of_study',50);
-            $table->year('start_year');
-            $table->year('end_year');
+            $table->string('feild_of_study',50)->nullable();
+            $table->year('start_year')->nullable();
+            $table->year('end_year')->nullable();
             $table->string('description',1000)->nullable();
 
             $table->timestamps();
