@@ -189,7 +189,7 @@
                                         <select name="languages[]" class="js-select2 @error('languages') is-invalid @enderror" id="lang" multiple>
                                             @foreach ($languages as $k=>$v)
                                               <?php $flag = 0;?>
-                                             @if(isset($user->language[0]))
+                                             @if($user->language[0])
                                               @foreach($user->language as $key=>$val)
                                                 @if($v->id == $val->language_id)
                                                 <option value="{{ $v->id }}" selected>{{  $v->name }}</option>
