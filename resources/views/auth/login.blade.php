@@ -5,9 +5,9 @@
 @section('content')
 <section class="auth_section">
     <div class="container signup-container">
-    <div class="hide-me animation for_authtoast">
-    @include('include.flash_message')
-   </div>
+        <div class="hide-me animation for_authtoast">
+            @include('include.flash_message')
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="signup-text mt-5 mt-md-5"> Log in</div>

@@ -187,20 +187,18 @@ class RegisterController extends Controller
 
                 }
                 else{
-                    return back()->with('error', 'Somethig went wrong.');
+                    return back()->with( 'error','Somethig went wrong.');
                 }
               
               
             }
         } catch (Exception $e) {
-            return back()->with('error', 'Somethig went wrong.');
+            return back()->with( 'error','Somethig went wrong.');
         }
     }
 
     public function index(Request $request)
     {   
-        // echo 'test1212';
-        // die;
         $type= $request->type;
         $user = User::query()->where('email', $request->email)->first();
         return view('auth.otp', compact('user','type'));

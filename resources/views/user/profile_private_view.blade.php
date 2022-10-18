@@ -9,14 +9,14 @@
 @section('content')
 <section class="guide_profile_section">
     <div class="container">
+        <div class="hide-me animation for_authtoast">
+            @include('include.flash_message')
+        </div>
     <div class="row">
         <div class="col-md-3">
             @include('include.profile_sidebar')
         </div>
         <div class="col-md-9 mt-3 mt-sm-0">
-            <div class="hide-me">
-                @include('include.flash_message')
-            </div>
             <div class="content_wraper">
                 <div class="guide_profile_subsection">
                     <div class="container">
@@ -202,20 +202,25 @@
                                     </div>
                                     <div class="mx-3 icon_container"><a href="{{ route('experience-create',['flag'=>'privateView']) }}"><i class="fa fa-plus deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                 </div>
-                                @foreach ($experience as $k=>$v)
+                                @if (count($experience)>0)
+                                    @foreach ($experience as $k=>$v)
 
-                                <div class="d-flex align-items-end">
-                                    <div class="guide_profile_main_subtext mt-1">{{ $v->job_title }}</div>
-                                    <div class="icon_container mx-3"><a href="{{ route('experience-edit', ['id'=>$v->id]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
-                                </div>
-                                <div class="guide_profile_main_subtext candy-pink mt-2">
-                                    {{$v->country_id}} | {{date('d-m-Y',strtotime($v->start_date))}} | {{date('d-m-Y',strtotime($v->end_date))}} <br>
-                                    {{$v->company}} | {{$v->employement_type_id}}
-                                </div>
-                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
-                                    <p>{{$v->description}}</p>
-                                </div>
-                                @endforeach                                
+                                    <div class="d-flex align-items-end">
+                                        <div class="guide_profile_main_subtext mt-1">{{ $v->job_title }}</div>
+                                        <div class="icon_container mx-3"><a href="{{ route('experience-edit', ['id'=>$v->id]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
+                                    </div>
+                                    <div class="guide_profile_main_subtext candy-pink mt-2">
+                                        {{$v->country_id}} | {{date('d-m-Y',strtotime($v->start_date))}} | {{date('d-m-Y',strtotime($v->end_date))}} <br>
+                                        {{$v->company}} | {{$v->employement_type_id}}
+                                    </div>
+                                    <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
+                                        <p>{{$v->description}}</p>
+                                    </div>
+                                    @endforeach
+                                    <div class="clearfix"></div>
+                                @else
+                                    <span><b>-</b></span>
+                                @endif                                
                             </div>
                         </div>
                     </div>
@@ -231,18 +236,23 @@
                                     </div>
                                     <div class="mx-3 icon_container"><a href="{{ route('qualification-create',['flag'=>'privateView']) }}"><i class="fa fa-plus deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                 </div>
-                                @foreach ($qualification as $k=>$v)
-                                <div class="d-flex align-items-end">
-                                    <div class="guide_profile_main_subtext mt-1">{{$v->institue_name}}</div>
-                                    <div class="icon_container mx-3"><a href="{{ route('qualification-edit', ['id'=>$v->id]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
-                                </div>                                
-                                <div class="guide_profile_main_subtext candy-pink mt-2">
-                                    {{$v->degree_name}} | {{$v->feild_of_study}} | {{$v->start_year}} | {{$v->end_year}}
-                                </div>
-                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
-                                    <p>{{$v->description}}</p>
-                                </div>
-                                @endforeach
+                                @if (count($qualification)>0)
+                                    @foreach ($qualification as $k=>$v)
+                                    <div class="d-flex align-items-end">
+                                        <div class="guide_profile_main_subtext mt-1">{{$v->institue_name}}</div>
+                                        <div class="icon_container mx-3"><a href="{{ route('qualification-edit', ['id'=>$v->id]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
+                                    </div>                                
+                                    <div class="guide_profile_main_subtext candy-pink mt-2">
+                                        {{$v->degree_name}} | {{$v->feild_of_study}} | {{$v->start_year}} | {{$v->end_year}}
+                                    </div>
+                                    <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
+                                        <p>{{$v->description}}</p>
+                                    </div>
+                                    @endforeach
+                                    <div class="clearfix"></div>
+                                @else
+                                    <span><b>-</b></span>
+                                @endif 
                             </div>
                         </div>
                     </div>
@@ -287,6 +297,12 @@
 @section('scripts')
 
 <script type="text/javascript">
+
+    $(document).ready(function(){
+        $("#error-toast").toast("show");
+        $("#success-toast").toast("show");
+    });
+
     $(".owl-carousel").owlCarousel({
         center: true,
         autoPlay: 3000,

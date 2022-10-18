@@ -7,6 +7,9 @@
 @endsection
 
 @section('content')
+<div class="hide-me animation for_authtoast">
+    @include('include.flash_message')
+</div>
     <header>
         <nav class="navbar navbar-expand-lg header">
             <div class="container">
@@ -109,3 +112,12 @@
 @section('footer')
     @include('include.footer')
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function(){
+        $("#error-toast").toast("show");
+        $("#success-toast").toast("show");
+    });
+</script>
+@endpush

@@ -28,7 +28,7 @@ class StoreProfileUpdate extends FormRequest
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'job_title' => 'max:255',
-            'age' => 'integer',
+            'age' => 'string',
             'gender' => 'string',
             'gender_pronouns' => 'string',
             'located_in' => 'string',

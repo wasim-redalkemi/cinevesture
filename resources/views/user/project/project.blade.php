@@ -11,19 +11,16 @@
 @endsection
 
 @section('content')
+<div class="hide-me animation for_authtoast">
+    @include('include.flash_message')
+</div>
 <section class="profile-section">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
                 @include('include.profile_sidebar')
             </div>
-            <div class="col-md-9">
-            {{-- @php
-                 echo '<pre>';
-            print_r($UserProject)
-            die;
-            @endphp --}}
-            
+            <div class="col-md-9">            
                 <div class="d-flex justify-content-between my-3">
                     <div class="profile_text"><h1>Project</h1></div>
                     <button class="guide_profile_btn h_40"><a class="btn-link text_decor_none" href="{{ route('project-create')}}">Add a Project</a></button>
@@ -179,5 +176,11 @@
 @include('include.footer')
 @endsection
 
-@section('scripts')
-@endsection
+@push('scripts')
+<script>
+    $(document).ready(function(){
+        $("#error-toast").toast("show");
+        $("#success-toast").toast("show");
+    });
+</script>
+@endpush
