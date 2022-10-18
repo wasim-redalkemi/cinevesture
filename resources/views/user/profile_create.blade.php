@@ -188,20 +188,7 @@
                                         <label for="lang">Languages Spoken</label>
                                         <select name="languages[]" class="js-select2 @error('languages') is-invalid @enderror" id="lang" multiple>
                                             @foreach ($languages as $k=>$v)
-                                              <?php $flag = 0;?>
-                                             @if($user->language[0])
-                                              @foreach($user->language as $key=>$val)
-                                                @if($v->id == $val->language_id)
-                                                <option value="{{ $v->id }}" selected>{{  $v->name }}</option>
-                                                <?php $flag = 1;?>
-                                                @break
-                                                @endif
-                                                
-                                                @endforeach
-                                            @endif
-                                                @if( $flag == 0)
-                                                <option value="{{ $v->id }}">{{  $v->name }}</option>
-                                                @endif
+                                                <option value="{{ $v->id }}" @if(in_array($v->id,$user->language))selected @endif>{{  $v->name }}</option>                                        
                                             @endforeach
                                         </select>
                                         @error('languages')
@@ -249,21 +236,8 @@
                                         <label for="lang">Skills</label>
                                         <select name="skills[]" class="outline ischeck js-select2" id="lang" multiple>
                                         @foreach ($skills as $k=>$v)
-                                              <?php $flag = 0;?>
-                                             @if(isset($user->skill[0]))
-                                              @foreach($user->skill as $key=>$val)
-                                                @if($v->id == $val->skill_id)
-                                                <option value="{{ $v->id }}" selected>{{  $v->name }}</option>
-                                                <?php $flag = 1;?>
-                                                @break
-                                                @endif
-                                                
-                                                @endforeach
-                                            @endif
-                                                @if( $flag == 0)
-                                                <option value="{{ $v->id }}">{{  $v->name }}</option>
-                                                @endif
-                                            @endforeach
+                                            <option value="{{ $v->id }}" @if(in_array($v->id,$user->skill))selected @endif>{{  $v->name }}</option>                                        
+                                        @endforeach
                                         </select>
                                         @error('skills')
                                             <span class="invalid-feedback" role="alert">

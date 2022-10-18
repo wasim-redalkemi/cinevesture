@@ -154,6 +154,21 @@ class UserController extends Controller
     {
         try {
             $user = User::query()->with(['country','language','skill'])->find(auth()->user()->id);
+            
+            $temp_lang = [];
+            foreach($user->language as $k=>$v)
+            {
+                array_push($temp_lang,$v->language_id);
+            }
+            $user->language = $temp_lang;
+            
+            $temp_skill = [];
+            foreach($user->skill as $k=>$v)
+            {
+                array_push($temp_skill,$v->skill_id);
+            }
+            $user->skill = $temp_skill;
+
             $skills = MasterSkill::query()->get();
             $languages = MasterLanguage::query()->get();
             $country = MasterCountry::query()->get();
