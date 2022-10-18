@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\OrganisationService;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,6 +15,6 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // User::factory(10)->create();
-        $this->call([UserSeeder::class,MasterSkillSeeder::class,MasterLanguageSeeder::class,MasterCountrySeeder::class,MasterStateSeeder::class,MasterLookingForSeeder::class]);
+        $this->call([UserSeeder::class,OrganisationServiceSeeder::class,AgeRangeSeeder::class,MasterSkillSeeder::class,MasterLanguageSeeder::class,MasterCountrySeeder::class,MasterStateSeeder::class,MasterLookingForSeeder::class]);
     }
 }
