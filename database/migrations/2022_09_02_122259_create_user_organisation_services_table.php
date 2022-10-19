@@ -15,8 +15,8 @@ class CreateUserOrganisationServicesTable extends Migration
     {
         Schema::create('user_organisation_services', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id',20);
-            $table->string('organisation_services_id',20);
+            $table->string('organisation_id',20);
+            $table->string('services_id',20);
 
             $table->timestamps();
             $table->softDeletes();

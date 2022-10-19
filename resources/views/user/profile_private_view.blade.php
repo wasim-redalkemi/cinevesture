@@ -1,6 +1,6 @@
 @extends('layouts.app',['class' => 'bg_white'])
 
-@section('title','Cinevesture-portfolio')
+@section('title','Cinevesture-private-view')
 
 @section('header')
 @include('include.header')

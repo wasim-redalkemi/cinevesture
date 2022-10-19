@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IndustryGuideController;
+use App\Http\Controllers\OrganisationController;
 use App\Http\Controllers\OtpController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\UserController;
@@ -95,6 +96,15 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/password-change', [ResetPasswordController::class, 'resetPasswordCreate'])->name('password-change');
 
  
+	});
+
+    Route::group(['prefix'=>'organisation'],function()
+	{	
+        Route::get('/private-view',[OrganisationController::class, 'index'])->name('organisation-private-view');
+        Route::get('/create',[OrganisationController::class, 'create'])->name('organisation-create');
+        Route::post('/store', [OrganisationController::class, 'store'])->name('organisation-store');
+        Route::get('/edit/{id}', [OrganisationController::class, 'edit'])->name('organisation-edit');
+        Route::post('/update/{id}', [OrganisationController::class, 'update'])->name('organisation-update');
 	});
 
     

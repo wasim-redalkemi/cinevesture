@@ -15,7 +15,7 @@ class CreateUserOrganisationLanguagesTable extends Migration
     {
         Schema::create('user_organisation_languages', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id',20);
+            $table->string('organisation_id',20);
             $table->string('language_id',20);
 
             $table->timestamps();
