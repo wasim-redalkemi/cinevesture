@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\PostUserPortfolioRequest;
 use App\Http\Requests\StoreProfileUpdate;
+use App\Models\AgeRange;
 use App\Models\MasterCountry;
 use App\Models\MasterLanguage;
 use App\Models\MasterSkill;
@@ -130,7 +131,7 @@ class UserController extends Controller
             return view('user.profile_private_view', compact('user','portfolio','experience','qualification','user_country','user_skills','user_languages'));
         
         } catch (Exception $e) {
-            return back()->withError('Somethig went wrong.');
+            return back()->withError('error','Somethig went wrong.');
         }
     }   
     
@@ -145,22 +146,37 @@ class UserController extends Controller
             $qualification = UserQualification::query()->where('user_id',$user->id)->get();
             return view('user.profile_public_view', compact('user','portfolio','experience','qualification')); 
         } catch (Exception $e) {
-            return back()->withError('Somethig went wrong.');
+            return back()->withError('error','Somethig went wrong.');
         }
     }
 
     public function profileCreate()
     {
         try {
-            $user = User::query()->find(auth()->user()->id);
+            $user = User::query()->with(['country','language','skill'])->find(auth()->user()->id);
+            
+            $temp_lang = [];
+            foreach($user->language as $k=>$v)
+            {
+                array_push($temp_lang,$v->language_id);
+            }
+            $user->language = $temp_lang;
+            
+            $temp_skill = [];
+            foreach($user->skill as $k=>$v)
+            {
+                array_push($temp_skill,$v->skill_id);
+            }
+            $user->skill = $temp_skill;
+
             $skills = MasterSkill::query()->get();
             $languages = MasterLanguage::query()->get();
             $country = MasterCountry::query()->get();
             $state = MasterState::query()->get();
-
-            return view('user.profile_create', compact('user','skills','languages','country','state'));
+            $age = AgeRange::query()->get();
+            return view('user.profile_create', compact(['user','skills','languages','country','state','age']));
         } catch (Exception $e) {
-            return back()->withError('Somethig went wrong.');
+            return back()->withError('error','Somethig went wrong.');
         }
     }
 
@@ -217,10 +233,10 @@ class UserController extends Controller
                 }
                 return redirect()->route('portfolio-create')->with("success","User details updated successfully.");
             }else {
-                return back()->withError('Somethig went wrong ,please try again.');
+                return back()->withError('error','Somethig went wrong ,please try again.');
             }            
         } catch (Exception $e) {
-            return back()->withError('Somethig went wrong.');
+            return back()->withError('error','Somethig went wrong.');
         }
     }
 
@@ -234,15 +250,22 @@ class UserController extends Controller
             $portfolio = $user;
             return view('user.profile_portfolio', compact('portfolio','country','skills'));
         } catch (Exception $e) {
-            return back()->withError('Somethig went wrong.');
+            return back()->withError('error','Somethig went wrong.');
         }
     }
 
     public function portfolioStore(PostUserPortfolioRequest $request)
     {
         try {
+            if(!$request->project_title && !$request->description && !$request->completion_date && !$request->project_country_id && 
+            !$request->video && !$request->project_image_1 && !$request->project_image_2 &&!$request->project_image_3 ) {
+                return redirect()->route('experience-create');
+            }
+            
+
             $user = User::query()->find(auth()->user()->id);
             $portfolio = new UserPortfolio();
+           
             $portfolio->user_id = $user->id;
             $portfolio->project_title = $request->project_title;
             $portfolio->description = $request->description;
@@ -296,9 +319,9 @@ class UserController extends Controller
             if ($request->flag == 'privateView') {
                 return redirect()->route('profile-private-show')->with("success","Portfolio added successfully.");
             }
-            return view('user.profile_experience', compact('experience'));
+            return redirect()->route('experience-create')->with("success","User Portfolio updated successfully.");
         } catch (Exception $e) {
-            return back()->withError('Somethig went wrong.');
+            return back()->withError('error','Somethig went wrong.');
         }
     }
 
@@ -327,7 +350,7 @@ class UserController extends Controller
             }            
             
         } catch (Exception $e) {
-            return back()->withError('Somethig went wrong.');
+            return back()->withError('error','Somethig went wrong.');
         }
     }
 
@@ -387,7 +410,7 @@ class UserController extends Controller
             }
             return redirect()->route('profile-private-show')->with("success","Portfolio updated successfully.");
         } catch (Exception $e) {
-            return back()->withError('Somethig went wrong.');
+            return back()->withError('error','Somethig went wrong.');
         }
     }
 
@@ -399,15 +422,19 @@ class UserController extends Controller
         try {
             $user = User::query()->find(auth()->user()->id);
             $experience = $user;
-            return view('user.profile_experience', compact('experience'));
+            return view('user.profile_experience');
         } catch (Exception $e) {
-            return back()->withError('Somethig went wrong.');
+            return back()->withError('error','Somethig went wrong.');
         }
     }
 
     public function experienceStore(Request $request)
     {
         try {
+            if(!$request->job_title && !$request->comapny && !$request->country_id && !$request->start_date && 
+            !$request->end_date && !$request->employement_type_id && !$request->description ) {
+                return redirect()->route('qualification-create');
+            }
             $user = User::query()->find(auth()->user()->id);
             $experience = new UserExperience();
             $experience->user_id = $user->id;
@@ -425,11 +452,12 @@ class UserController extends Controller
                     return redirect()->route('profile-private-show')->with("success","Experience added successfully.");
                 }
                 return view('user.profile_qualification', compact('qualification'));
+                return redirect()->route('qualification-create')->with("success","Experience added successfully.");
             }else {
                 return back()->withError('Somethig went wrong ,please try again.');
             }            
         } catch (Exception $e) {
-            return back()->withError('Somethig went wrong.');
+            return back()->withError('error','Somethig went wrong.');
         }
     }
 
@@ -444,7 +472,7 @@ class UserController extends Controller
                 return view('user.profile_experience_edit', compact('UserExperienceData'));
             }            
         } catch (Exception $e) {
-            return back()->withError('Somethig went wrong.');
+            return back()->withError('error','Somethig went wrong.');
         }
     }
 
@@ -467,7 +495,7 @@ class UserController extends Controller
                 return back()->withError('Somethig went wrong ,please try again.');
             }            
         } catch (Exception $e) {
-            return back()->withError('Somethig went wrong.');
+            return back()->withError('error','Somethig went wrong.');
         }
     }
 
@@ -480,7 +508,7 @@ class UserController extends Controller
             $qualification =$user;
             return view('user.profile_qualification', compact('qualification'));
         } catch (Exception $e) {
-            return back()->withError('Somethig went wrong.');
+            return back()->withError('error','Somethig went wrong.');
         }
     }
 
@@ -504,10 +532,10 @@ class UserController extends Controller
                 }
                 return redirect()->route('profile-private-show');
             }else {
-                return back()->withError('Somethig went wrong ,please try again.');
+                return back()->withError('error','Somethig went wrong ,please try again.');
             }            
         } catch (Exception $e) {
-            return back()->withError('Somethig went wrong.');
+            return back()->withError('error','Somethig went wrong.');
         }
     }
     
@@ -517,7 +545,7 @@ class UserController extends Controller
             $UserQualificationData = UserQualification::query()->where('id',$id)->first();
             return view('user.profile_qualification_edit', compact('UserQualificationData'));
         } catch (Exception $e) {
-            return back()->withError('Somethig went wrong.');
+            return back()->withError('error','Somethig went wrong.');
         }
     }
 
@@ -540,7 +568,7 @@ class UserController extends Controller
                 return back()->withError('Somethig went wrong ,please try again.');
             }            
         } catch (Exception $e) {
-            return back()->withError('Somethig went wrong.');
+            return back()->withError('error','Somethig went wrong.');
         }
     }
     

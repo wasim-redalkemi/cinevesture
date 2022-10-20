@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container">
-<div class="hide-me animation for_authtoast">
-    @include('include.flash_message')
-   </div>
+    <div class="hide-me animation for_authtoast">
+        @include('include.flash_message')
+    </div>
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">

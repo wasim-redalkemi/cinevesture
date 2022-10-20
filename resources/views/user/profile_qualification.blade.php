@@ -7,6 +7,9 @@
 @endsection
 
 @section('content')
+<div class="hide-me animation for_authtoast">
+    @include('include.flash_message')
+</div>
     <section class="profile-section">
         <div class="container">
             <div class="row">
@@ -14,9 +17,6 @@
                     @include('include.profile_sidebar')
                 </div>
                 <div class="col-md-9">
-                    <div class="hide-me">
-                        @include('include.flash_message')
-                    </div>
                     <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Add Qualification</div>
@@ -124,3 +124,12 @@
 @section('footer')
     @include('include.footer')
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function(){
+        $("#error-toast").toast("show");
+        $("#success-toast").toast("show");
+    });
+</script>
+@endpush

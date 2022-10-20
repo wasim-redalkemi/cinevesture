@@ -17,7 +17,6 @@ class CreateUserLanguagesTable extends Migration
             $table->id();
             $table->string('user_id',20);
             $table->string('language_id',20);
-
             $table->timestamps();
             $table->softDeletes();
         });

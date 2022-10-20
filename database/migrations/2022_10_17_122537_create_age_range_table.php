@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrganisationServicesTable extends Migration
+class CreateAgeRangeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,20 @@ class CreateOrganisationServicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('organisation_services', function (Blueprint $table) {
+        Schema::create('age_range', function (Blueprint $table) {
             $table->id();
-            $table->string('name',100);
-
+            $table->string('range');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
-    /**	
+    /**
      * Reverse the migrations.
      *
      * @return void
      */
     public function down()
     {
-        Schema::dropIfExists('organisation_services');
+        Schema::dropIfExists('age_range');
     }
 }
