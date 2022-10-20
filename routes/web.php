@@ -116,7 +116,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 });
 
 Route::get('/test', function () {
-    return view('user.user_profile');
+    return view('organisation.organisation');
 });
 
 
