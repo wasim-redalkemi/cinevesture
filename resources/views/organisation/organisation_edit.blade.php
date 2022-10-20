@@ -3,7 +3,7 @@
 @section('title','Cinevesture-organisation')
 
 @section('header')
-    @include('include.header')
+@include('include.header')
 @endsection
 
 @section('content')
@@ -43,22 +43,16 @@
                         <div class="col-md-4">
                             <div class="profile_input">
                                 <label>Organisation Type</label>
-                                <div class="dropdown profile_dropdown_btn">
-                                    <button class="btn dropdown-toggle d-flex align-items-center profile_dropdown_btn" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Genres
-                                    </button>
-                                    <ul class="dropdown-menu w-100 profile_dropdown_menu">
-                                        <li>
-                                            Features
-                                        </li>
-                                        <li>
-                                            Animation
-                                        </li>
-                                        <li>
-                                            Biography
-                                        </li>
-                                    </ul>
-                                </div>
+                                <select name="Organisation" class="@error('Organisation') is-invalid @enderror" id="lang">
+                                    <option value="man">Man</option>
+                                    <option value="woman">Woman</option>
+                                    <option value="non_binary">Non binary</option>
+                                </select>
+                                @error('Organisation')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -74,22 +68,16 @@
                         <div class="col-md-6">
                             <div class="profile_input">
                                 <label>Services</label>
-                                <div class="dropdown profile_dropdown_btn">
-                                    <button class="btn dropdown-toggle d-flex align-items-center profile_dropdown_btn" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Genres
-                                    </button>
-                                    <ul class="dropdown-menu w-100 profile_dropdown_menu">
-                                        <li>
-                                            Features
-                                        </li>
-                                        <li>
-                                            Animation
-                                        </li>
-                                        <li>
-                                            Biography
-                                        </li>
-                                    </ul>
-                                </div>
+                                <select name="Services" class="@error('Services') is-invalid @enderror" id="lang">
+                                    <option value="man">Man</option>
+                                    <option value="woman">Woman</option>
+                                    <option value="non_binary">Non binary</option>
+                                </select>
+                                @error('Services')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -97,64 +85,46 @@
                         <div class="col-md-3">
                             <div class="profile_input">
                                 <label>Located In</label>
-                                <div class="dropdown profile_dropdown_btn">
-                                    <button class="btn dropdown-toggle d-flex align-items-center profile_dropdown_btn" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Genres
-                                    </button>
-                                    <ul class="dropdown-menu w-100 profile_dropdown_menu">
-                                        <li>
-                                            Features
-                                        </li>
-                                        <li>
-                                            Animation
-                                        </li>
-                                        <li>
-                                            Biography
-                                        </li>
-                                    </ul>
-                                </div>
+                                <select name="Located" class="@error('Located') is-invalid @enderror" id="lang">
+                                    <option value="man">Man</option>
+                                    <option value="woman">Woman</option>
+                                    <option value="non_binary">Non binary</option>
+                                </select>
+                                @error('Services')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $Located }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="profile_input">
                                 <label>Available To Work In</label>
-                                <div class="dropdown profile_dropdown_btn">
-                                    <button class="btn dropdown-toggle d-flex align-items-center profile_dropdown_btn" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Genres
-                                    </button>
-                                    <ul class="dropdown-menu w-100 profile_dropdown_menu">
-                                        <li>
-                                            Features
-                                        </li>
-                                        <li>
-                                            Animation
-                                        </li>
-                                        <li>
-                                            Biography
-                                        </li>
-                                    </ul>
-                                </div>
+                                <select name="Available" class="@error('Available') is-invalid @enderror" id="lang">
+                                    <option value="man">Man</option>
+                                    <option value="woman">Woman</option>
+                                    <option value="non_binary">Non binary</option>
+                                </select>
+                                @error('Available')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="col-md-3">
                             <div class="profile_input">
                                 <label>Languages Spoken</label>
-                                <div class="dropdown profile_dropdown_btn">
-                                    <button class="btn dropdown-toggle d-flex align-items-center profile_dropdown_btn" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Genres
-                                    </button>
-                                    <ul class="dropdown-menu w-100 profile_dropdown_menu">
-                                        <li>
-                                            Features
-                                        </li>
-                                        <li>
-                                            Animation
-                                        </li>
-                                        <li>
-                                            Biography
-                                        </li>
-                                    </ul>
-                                </div>
+                                <select name="Languages" class="@error('Languages') is-invalid @enderror" id="lang">
+                                    <option value="man">Man</option>
+                                    <option value="woman">Woman</option>
+                                    <option value="non_binary">Non binary</option>
+                                </select>
+                                @error('Languages')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                     </div>
@@ -201,11 +171,12 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-12 d-flex my-2 align-items-center">
+                        <div class="col-md-12 d-flex my-3 align-items-center">
                             <div class="organisation_cmn_text deep-pink">
                                 <h6>Team members</h6>
                             </div>
-                            <div class="mx-5 icon_container"><i class="fa fa-plus icon-size deep-pink" aria-hidden="true"></i></div>
+                            <!-- <div class="mx-5 icon_container"><i class="fa fa-plus icon-size deep-pink" aria-hidden="true"></i></div> -->
+                            <div class="mx-5 icon_container"> <span class="icon-size deep-pink">+</span></div>
                         </div>
                         <div class="col-md-3">
                             <div><img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="w-100"></div>
@@ -240,5 +211,5 @@
 @endsection
 
 @section('footer')
-  @include('include.footer')      
+@include('include.footer')
 @endsection

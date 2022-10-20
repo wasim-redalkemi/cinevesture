@@ -20,7 +20,9 @@
                     <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Add Portfolio</div>
-                            <div><i class="fa fa-trash-o  deep-pink icon-size" aria-hidden="true"></i></div>
+                          <div class="icon_container">
+                          <img src="{{ asset('public/images/asset/delete-icon.svg') }}"/>
+                          </div> 
                         </div>                        
                         <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('portfolio-store') }}">
                             @csrf
@@ -147,6 +149,8 @@
                     </div>
                 </div>
             </div>
+            <!-- modal -->
+            
         </div>
     </section>
 @endsection

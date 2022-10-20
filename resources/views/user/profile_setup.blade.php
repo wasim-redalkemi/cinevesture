@@ -28,7 +28,7 @@ UllYCuOShcMrS2lSzm
 
                         <div class="d-flex">
                             <div class="upload_img_container">
-                                <img src="" id="previewImg" onclick="document.getElementById('imgInp').click();">
+                                <img src="" id="previewImg" class="user_imge" onclick="document.getElementById('imgInp').click();">
                                 <div for="file-input" class="d-none">
                                     <input type="file" onchange="uploadProfileImage(this)" name="profile_image" accept=".jpg,.jpeg,.png" id="imgInp">
                                 </div>
@@ -37,12 +37,12 @@ UllYCuOShcMrS2lSzm
                                     <div>Upload</div>
                                 </div>
                             </div>
-                            <div class="mx-4 d-flex align-items-center">
+                            <div class="mx-4 d-flex align-items-center delete_file">
                                 <div>
                                     <div class="search-head-subtext Aubergine_at_night">
                                         Upload Profile Picture
                                     </div>
-                                    <div class="search-head-subtext deep-pink">
+                                    <div class="search-head-subtext deep-pink dlt_btn">
                                         Delete
                                     </div>
                                 </div>
@@ -231,6 +231,11 @@ UllYCuOShcMrS2lSzm
         };
         reader.readAsDataURL(e.files[0]);
     }
+    $('.delete_file').on('click','.dlt_btn',function(){ 
+       alert
+    }
+    )
+
 
     $(".js-select2").select2({
         closeOnSelect: false,

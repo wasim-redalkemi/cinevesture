@@ -43,10 +43,10 @@
                                 </div>
                                 <div class="mx-4 d-flex align-items-center">
                                     <div>
-                                        <div class="search-head-subtext Aubergine_at_night open_file_explorer">
+                                        <div class="search-head-subtext Aubergine_at_night open_file_explorer pointer">
                                             Upload Profile Picture
                                         </div>
-                                        <div class="search-head-subtext deep-pink">
+                                        <div class="search-head-subtext deep-pink pointer">
                                             Delete
                                         </div>
                                     </div>
@@ -101,7 +101,7 @@
                                                 for($i=18;$i<=100;$i++)
                                                 {
                                                     ?>
-                                                        <option value="<?php echo $i;?>"><?php echo $i;?></option>
+                                                        <option value="<?php echo $i;?>" class="select_option"><?php echo $i;?></option>
                                                     <?php
                                                 }
                                             ?>
@@ -184,7 +184,7 @@
                                 <div class="col-md-4">
                                     <div class="mt_16">
                                         <label for="lang">Languages Spoken</label>
-                                        <select name="languages[]" class="js-select2 @error('languages') is-invalid @enderror" id="lang" multiple>
+                                        <select name="languages[]" class="js-select2 @error('languages') is-invalid @enderror w-100" id="lang" multiple>
                                             @foreach ($languages as $k=>$v)
                                                 <option value="{{ $v->id }}">{{  $v->name }}</option>
                                             @endforeach
@@ -231,7 +231,7 @@
                                 <div class="col-md-12">
                                     <div class="mt_16">
                                         <label for="lang">Skills</label>
-                                        <select name="skills[]" class="js-select2" id="lang" multiple>
+                                        <select name="skills[]" class="js-select2 w-100" id="lang" multiple>
                                             @foreach ($skills as $k=>$v)
                                                 <option value="{{ $v->id }}">{{  $v->name }}</option>
                                             @endforeach

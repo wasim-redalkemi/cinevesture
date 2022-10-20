@@ -100,7 +100,7 @@
                                     <p> Social Profile</p>
                                 </div>
                                 <div class="guide_profile_main_subtext mt-3">IMDB Profile</div>
-                                <div class="guide_profile_main_subtext deep-pink mt-1">
+                                <div class="guide_profile_main_subtext deep-pink mt-1 pointer">
                                     @if (isset($user->imdb_profile))
                                         {{ $user->imdb_profile }}                                        
                                     @else
@@ -108,7 +108,7 @@
                                     @endif
                                 </div>
                                 <div class="guide_profile_main_subtext mt-3">LinkedIn Profile</div>
-                                <div class="guide_profile_main_subtext deep-pink">
+                                <div class="guide_profile_main_subtext deep-pink pointer">
                                     @if (isset($user->linkedin_profile))
                                         {{ $user->linkedin_profile }}                                        
                                     @else
@@ -116,7 +116,7 @@
                                     @endif
                                 </div>
                                 <div class="guide_profile_main_subtext mt-3">Website</div>
-                                <div class="guide_profile_main_subtext deep-pink mt-1">
+                                <div class="guide_profile_main_subtext deep-pink mt-1 pointer">
                                     @if (isset($user->website))
                                         {{ $user->website }}                                        
                                     @else
@@ -174,8 +174,8 @@
                                                 $img = Storage::url($v['get_portfolio'][0]['file_link']);
                                             }
                                         @endphp                                            
-                                        <div class="item">                                                
-                                            <img src="<?php echo $img?>">
+                                        <div class="item portfolio_item">                                                
+                                            <img src="<?php echo $img?>" class="portfolio_img">
                                             <div class="d-flex justify-content-between mt-2">
                                                 <div class="organisation_cmn_text">{{$v['project_title']}}</div>
                                                 <div class="icon_container"> <a href="{{ route('portfolio-edit', ['id'=>$v['id']]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>

@@ -17,7 +17,7 @@
                 <div class="guide_profile_subsection">
                     <div class="container">
                         <div class="row">
-                            <div class="com-md-12 d-flex justify-content-between align-items-center">
+                            <div class="col-md-12 d-flex justify-content-between align-items-center">
                                 <div class="profile_text">
                                     <h1>
                                         Organisation
@@ -27,7 +27,7 @@
                             </div>
                             <div class="col-md-2">
                                 <div class="user_profile_container">
-                                    <img src="{{ asset('public/images/asset/photo-1500648767791-00dcc994a43e 1.png') }}" />
+                                    <img src="{{ asset('public/images/asset/photo-1500648767791-00dcc994a43e 1.png') }}" class="user_imge" />
                                 </div>
                             </div>
                             <div class="col-md-8">
@@ -110,15 +110,6 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="preview_headtext">Email</div>
-                                <div class="movie_name_text ">www.www.com</div>
-                                <div class="preview_headtext">Website</div>
-                                <div class="movie_name_text ">www.www.com</div>
-                                <div class="preview_headtext">Services</div>
-                                <div class="d-flex mt-3">
-                                    <div> <button class="curv_cmn_btn">Special 1</button></div>
-                                    <div> <button class="curv_cmn_btn mx-3">Special 1</button></div>
-                                </div>
                                 <div class="d-flex align-items-center">
                                     <div class="preview_headtext">Team size</div>
                                     <div class="associate_text mt-3 mx-3">20</div>
@@ -152,10 +143,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
             </div>
         </div>
     </div>
