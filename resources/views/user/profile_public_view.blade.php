@@ -30,7 +30,7 @@
                                     else 
                                     {
                                         ?>
-                                            <img src="{{Storage::url($user->profile_image)}}"  class = "prod-img" alt="product-image" style="max-height:100px;width:100%;">
+                                            <img src="{{Storage::url($user->profile_image)}}"  class = "prod-img" alt="product-image" style="height:100%;width:100%;">
                                         <?php
                                     }
                                 ?>

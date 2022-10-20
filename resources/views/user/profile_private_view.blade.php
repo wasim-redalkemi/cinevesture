@@ -34,9 +34,9 @@
                             <div class="col-md-2">
                                 <div class="user_profile_container">
                                     @if (empty($user->profile_image))
-                                        <img src="{{ asset('public/images/asset/100_no_img.jpg') }}" />
+                                        <img src="{{ asset('public/images/asset/100_no_img.jpg') }}"/>
                                     @else
-                                        <img src="{{ Storage::url($user->profile_image) }}"  class = "prod-img" alt="product-image" style="max-height:100px;width:100%;">
+                                        <img src="{{ Storage::url($user->profile_image) }}"  class = "prod-img" alt="product-image" style="height:100%;width:100%;object-fit: cover;">
                                     @endif                                    
                                 </div>
                             </div>
