@@ -11,6 +11,7 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
 class ResetPasswordController extends Controller
@@ -43,7 +44,14 @@ class ResetPasswordController extends Controller
      */
     public function reset(Request $request)
     {   
-        
+        $validator = Validator::make($request->all(), [
+            'password' => 'required|string|min:8|confirmed',
+            'password_confirmation' => 'required|string||min:8'
+        ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors()->messages())->withInput();
+        }
+       
         // $request->validate($this->rules(), $this->validationErrorMessages());
         // Here we will attempt to reset the user's password. If it is successful we
         // will update the password on an actual user model and persist it to the
@@ -90,7 +98,14 @@ class ResetPasswordController extends Controller
     }
 
     public function resetPasswordCreate(Request $request)
-    {
+    {   
+        $validator = Validator::make($request->all(), [
+            'password' => 'required|string|min:8|confirmed',
+            'password_confirmation' => 'required|string||min:8'
+        ]);
+        if ($validator->fails()) {
+            return back()->withErrors($validator->errors()->messages())->withInput();
+        }
         $user = User::find(auth()->user()->id);
         $this->setUserPassword($user, $request->password);
 

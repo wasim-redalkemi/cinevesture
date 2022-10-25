@@ -7,6 +7,7 @@ use App\Http\Controllers\IndustryGuideController;
 use App\Http\Controllers\OrganisationController;
 use App\Http\Controllers\OtpController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SettingController;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -104,9 +105,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 	});
 
     
-    Route::get('/setting-page', function () {
-        return view('user.setting');
-    })->name('setting-page');
+    Route::get('/setting-page',[SettingController::class, 'index'])->name('setting-page');
     Route::get('/forgot-password-page', function () {
         return view('auth.passwords/forgot');
     })->name('forgot-password-page');

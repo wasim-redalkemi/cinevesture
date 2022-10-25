@@ -107,7 +107,7 @@
                                     <div class="profile_input">
                                         <div><label>Project Files</label></div>
                                         <label class="mt-3">Video Link</label>
-                                        <input type="text" class="outline ischeck form-control @error('video') is-invalid @enderror" placeholder="Paste link here" name="video" value="<?php if(isset($portfolio)){ echo($portfolio->video); }?>"
+                                        <input type="text" class="outline is-invalid-remove form-control @error('video') is-invalid @enderror" placeholder="Paste link here" name="video" value="<?php if(isset($portfolio)){ echo($portfolio->video); }?>"
                                         aria-label="Username" aria-describedby="basic-addon1">
                                         @error('video')
                                             <span class="invalid-feedback" role="alert">

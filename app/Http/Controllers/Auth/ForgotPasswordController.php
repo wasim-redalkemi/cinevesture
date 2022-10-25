@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\OtpController;
 use App\Models\User;
 use App\Notifications\VerifyOtp;
+use Exception;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Password;
@@ -25,7 +26,7 @@ class ForgotPasswordController extends Controller
     |
     */
 
-     /**
+    /**
      * Display the form to request a password reset link.
      *
      * @return \Illuminate\View\View
@@ -43,26 +44,32 @@ class ForgotPasswordController extends Controller
      */
     public function sendResetLinkEmail(Request $request)
     {
-        $this->validateEmail($request);
+        try {
 
-        // We will send the password reset link to this user. Once we have attempted
-        // to send the link, we will examine the response then see the message we
-        // need to show to the user. Finally, we'll send out a proper response.
-        // $response = $this->broker()->sendResetLink(
-        //     $this->credentials($request)
-        // );
-        $user = User::query()->where('email',$request->email)->first();
-        if(!$user){
-             return back()->with('error','Email address does not exist.');
+
+            $this->validateEmail($request);
+
+            // We will send the password reset link to this user. Once we have attempted
+            // to send the link, we will examine the response then see the message we
+            // need to show to the user. Finally, we'll send out a proper response.
+            // $response = $this->broker()->sendResetLink(
+            //     $this->credentials($request)
+            // );
+            $user = User::query()->where('email', $request->email)->first();
+            if (!$user) {
+                return back()->with('error', 'Email address does not exist.');
+            }
+            $otp = OtpController::createOtp($user, 'F'); // F for Forgot pasword
+            $collect  = collect();
+            $collect->put('otp', $otp);
+            $user->notify(new VerifyOtp($collect));
+            $response = "passwords.sent";
+            return $response == Password::RESET_LINK_SENT
+                ? $this->sendResetLinkResponse($request, $response)
+                : $this->sendResetLinkFailedResponse($request, $response);
+        } catch (Exception $e) {
+            return back()->with('error', 'Something went wrong. Please try again.');
         }
-        $otp = OtpController::createOtp($user,'F'); // F for Forgot pasword
-        $collect  = collect();
-        $collect->put('otp',$otp);
-        $user->notify(new VerifyOtp($collect));
-        $response = "passwords.sent";
-        return $response == Password::RESET_LINK_SENT
-                    ? $this->sendResetLinkResponse($request, $response)
-                    : $this->sendResetLinkFailedResponse($request, $response);
     }
 
     /**
@@ -97,8 +104,8 @@ class ForgotPasswordController extends Controller
     protected function sendResetLinkResponse(Request $request, $response)
     {
         return $request->wantsJson()
-                    ? new JsonResponse(['message' => trans($response)], 200)
-                    : redirect()->route('otp-view', ['email' => $request->email, 'type' => 'F'])->with('success', 'OTP send successfully to your email.');
+            ? new JsonResponse(['message' => trans($response)], 200)
+            : redirect()->route('otp-view', ['email' => $request->email, 'type' => 'F'])->with('success', 'OTP send successfully to your email.');
     }
 
     /**
@@ -119,8 +126,8 @@ class ForgotPasswordController extends Controller
         }
 
         return back()
-                ->withInput($request->only('email'))
-                ->withErrors(['email' => trans($response)]);
+            ->withInput($request->only('email'))
+            ->withErrors(['email' => trans($response)]);
     }
 
     /**

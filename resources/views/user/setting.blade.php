@@ -25,11 +25,11 @@
                     </div>
                     <div class="guide_profile_main_text mt-4">Email Id</div>
                     <div class="d-flex align-items-center">
-                        <div class="preview_subtext mt-2">a********@gmail.com</div> <span class="profile_upload_text aubergine mx-3">Change Email</span>
+                        <div class="preview_subtext mt-2">{{$email}}</div> <span class="profile_upload_text aubergine mx-3">Change Email</span>
                     </div>
                     <div class="guide_profile_main_text mt-4">Password</div>
                     <div class="d-flex align-items-center">
-                        <div class="preview_subtext mt-2">***********</div> <a class="profile_upload_text aubergine mx-3" href = "{{route('create-reset-otp')}}">Change Password</a>
+                        <div class="preview_subtext mt-2">{{$password}}</div> <a class="profile_upload_text aubergine mx-3" href = "{{route('create-reset-otp')}}">Change Password</a>
                     </div>
                     <div class="row mt_35">
                         <div class="col-md-2">
