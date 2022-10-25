@@ -21,7 +21,7 @@
                     @enderror     
                 </div>
                 <div class="col-lg-6 col-sm-6 mt-2 mt-4-5 pt-2">
-                    <input type="text" class="name-only is-invalid-remove alphabets-only outline w-100 @error('last_name') is-invalid @enderror" name="last_name" placeholder="Last Name" value="{{ old('last_name') }}" autocomplete="last_name" autofocus>
+                    <input type="text" class="name-only is-invalid-remove alphabets-only outline w-100 @error('last_name') is-invalid @enderror" required name="last_name" placeholder="Last Name" value="{{ old('last_name') }}" autocomplete="last_name" autofocus>
                     @error('last_name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
