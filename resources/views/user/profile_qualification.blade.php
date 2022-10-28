@@ -20,7 +20,9 @@
                     <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Add Qualification</div>
-                            <div><i class="fa fa-trash-o  deep-pink icon-size" aria-hidden="true"></i></div>
+                            <div class="icon_container">
+                          <img src="{{ asset('public/images/asset/delete-icon.svg') }}"/>
+                          </div> 
                         </div>                       
                         <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('qualification-store') }}">
                             @csrf
@@ -42,7 +44,7 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Degree</label>
-                                        <input type="text" class="form-control @error('degree_name') is-invalid @enderror" placeholder="Company" aria-label="Username" name="degree_name" value="{{ $qualification->degree_name}}" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control @error('degree_name') is-invalid @enderror" placeholder="Degree" aria-label="" name="degree_name" value="{{ $qualification->degree_name}}" aria-describedby="basic-addon1">
                                         @error('degree_name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -55,7 +57,7 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Field of Study</label>
-                                        <input type="text" class="form-control @error('feild_of_study') is-invalid @enderror" placeholder="Feild of study" aria-label="Username" name="feild_of_study" value="{{ $qualification->feild_of_study}}" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control @error('feild_of_study') is-invalid @enderror" placeholder="Field of Study" aria-label="Username" name="feild_of_study" value="{{ $qualification->feild_of_study}}" aria-describedby="basic-addon1">
                                         @error('feild_of_study')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
