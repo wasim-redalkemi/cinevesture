@@ -120,8 +120,10 @@
                                         @foreach ($country as $k=>$v)                                            
                                             <option
                                             @php
-                                            if ($UserOrganisation->location_in == $v->id) {
+                                            if(isset($UserOrganisation->location_in)){
+                                                if ($UserOrganisation->location_in == $v->id) {
                                                 echo 'selected';
+                                            }
                                             }
                                             @endphp value="{{ $v->id }}">{{ $v->name }}</option>
                                         @endforeach
@@ -138,11 +140,18 @@
                                     <label>Available To Work In</label>
                                     <select name="available_to_work_in" class="@error('available_to_work_in') is-invalid @enderror" id="" required autofocus>
                                         <option value="">Select</option>
-                                        <option @if("virtually" == $UserOrganisation->available_to_work_in)
-                                            {{'selected'}}
+                                        <option @if(isset($UserOrganisation->available_to_work_in)){
+                                            if ("virtually" == $UserOrganisation->available_to_work_in)) {
+                                                {{'selected'}}
+                                            }
+                                            }
                                         @endif value="virtually">Virtually</option>
                                         <option 
-                                        @if("physically" == $UserOrganisation->available_to_work_in)
+                                        @if(isset($UserOrganisation->available_to_work_in)){
+                                            if ("physically" == $UserOrganisation->available_to_work_in)) {
+                                                {{'selected'}}
+                                            }
+                                            }
                                             {{'selected'}}
                                         @endif value="physically">Physically</option>
                                     </select>
