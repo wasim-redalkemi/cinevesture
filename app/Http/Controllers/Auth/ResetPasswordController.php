@@ -9,7 +9,6 @@ use App\Notifications\VerifyOtp;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Auth\ResetsPasswords;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
@@ -70,24 +69,30 @@ class ResetPasswordController extends Controller
         $response == Password::PASSWORD_RESET
                     ? $this->sendResetResponse($request, $response)
                     : $this->sendResetFailedResponse($request, $response);
-
-    }
-
-     /**
-     * Get the response for a successful password reset.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $response
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
-     */
-    protected function sendResetResponse(Request $request, $response)
-    {
-        if ($request->wantsJson()) {
-            return new JsonResponse(['message' => trans($response)], 200);
+        // $this->guard()->login($user);
+        if($response == "passwords.token"){
+            return back()->with('error', 'Something went wrong, Please try again later.');
+        }else{
+            return redirect('login')->with('success', 'Password reset successfully.');
         }
 
-        return redirect($this->redirectPath())
-                            ->with('status', trans($response));
+        // $status = Password::reset(
+        //     $request->only('email', 'password', 'password_confirmation', 'token'),
+        //     function ($user, $password) {
+        //         $user->forceFill([
+        //             'password' => Hash::make($password)
+        //         ])->setRememberToken(Str::random(60));
+     
+        //         $user->save();
+     
+        //         event(new PasswordReset($user));
+        //     }
+        // );
+     
+        // return $status === Password::PASSWORD_RESET
+        //             ? redirect()->route('login')->with('success', __($status))
+        //             : back()->with('error',"Something went wrong. Please try again later.");
+
     }
 
         /**
