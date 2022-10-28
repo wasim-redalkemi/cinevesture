@@ -25,7 +25,7 @@ class PostUserPortfolioRequest extends FormRequest
     {
         return [
             'project_title' => 'nullable|max:255',
-            'description' => 'nullable|max:350',
+            'description' => 'nullable|max:600',
             'project_country_id' => 'nullable|integer',
             'completion_date' => 'nullable',
             'video' => 'nullable|url',
@@ -34,7 +34,7 @@ class PostUserPortfolioRequest extends FormRequest
     public function messages()
     {
         return [
-            'description.max' => 'Description maximum 350 character',
+            'description.max' => 'Maximum 600 character are allowed',
         ];            
     }
 }
