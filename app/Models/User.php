@@ -60,7 +60,7 @@ class User extends Authenticatable
 
     public function sendPasswordResetNotification($token)
     {
-        $otp = OtpController::createOtp($this, 'F'); // F for Forgot pasword
+        $otp = OtpController::createOtp($this, 'F',$token); // F for Forgot pasword
         $collect  = collect();
         $collect->put('otp', $otp);
         $this->notify(new VerifyOtp($collect));

@@ -166,14 +166,10 @@ class RegisterController extends Controller
                     return back()->with('error', 'Invalid OTP.');
                 }
                 if($request->type == 'F'){
-                    //  $token = bcrypt(Str::random(64));
-
-                    $user = DB::table('password_resets')->where('email', '=', $request->email)->first();
-                    // $userObj->remember_token = $token;
-                    // $userObj->save();
-                 $token = $user->token;
+                    
+                 $token = $otpObj->token;
                  $email = $request->email;
-                 return redirect()->route('reset-password-view',['token' => $token, 'email' => $email])->with('success', 'OTP verified successfully.');
+                 return redirect()->route('password.reset',['token' => $token,'email'=>$email])->with('success', 'OTP verified successfully.');
                 
                 }elseif($request->type == 'S')
                 {

@@ -9,12 +9,12 @@ use App\Notifications\VerifyOtp;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-
 class ResetPasswordController extends Controller
 {
     /*
@@ -70,31 +70,65 @@ class ResetPasswordController extends Controller
         $response == Password::PASSWORD_RESET
                     ? $this->sendResetResponse($request, $response)
                     : $this->sendResetFailedResponse($request, $response);
-        // $this->guard()->login($user);
-        if($response == "passwords.token"){
-            return back()->with('error', 'Something went wrong, Please try again later.');
-        }else{
-            return redirect('login')->with('success', 'Password reset successfully. Please Login.');
-        }
-
-        // $status = Password::reset(
-        //     $request->only('email', 'password', 'password_confirmation', 'token'),
-        //     function ($user, $password) {
-        //         $user->forceFill([
-        //             'password' => Hash::make($password)
-        //         ])->setRememberToken(Str::random(60));
-     
-        //         $user->save();
-     
-        //         event(new PasswordReset($user));
-        //     }
-        // );
-     
-        // return $status === Password::PASSWORD_RESET
-        //             ? redirect()->route('login')->with('success', __($status))
-        //             : back()->with('error',"Something went wrong. Please try again later.");
 
     }
+
+     /**
+     * Get the response for a successful password reset.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  string  $response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     */
+    protected function sendResetResponse(Request $request, $response)
+    {
+        if ($request->wantsJson()) {
+            return new JsonResponse(['message' => trans($response)], 200);
+        }
+
+        return redirect($this->redirectPath())
+                            ->with('status', trans($response));
+    }
+
+        /**
+     * Reset the given user's password.
+     *
+     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
+     * @param  string  $password
+     * @return void
+     */
+    protected function resetPassword($user, $password)
+    {
+        $this->setUserPassword($user, $password);
+
+        $user->setRememberToken(Str::random(60));
+
+        $user->save();
+
+        event(new PasswordReset($user));
+
+        $this->guard()->login($user);
+
+    }
+
+
+    /**
+     * Display the password reset view for the given token.
+     *
+     * If no token is present, display the link request form.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showResetForm(Request $request,$token)
+    {
+        //$token = $request->route()->parameter('token');
+
+        return view('auth.passwords.reset')->with(
+            ['token' => $token, 'email' => $request->email]
+        );
+    }
+
 
     // reset password otp views
     public function createResetOtp()
