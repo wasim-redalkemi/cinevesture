@@ -56,7 +56,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>First Name</label>
-                                        <input type="text" class="outline ischeck name-only form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name" value="{{ $user->first_name }}"
+                                        <input type="text" class="outline is-invalid-remove name-only form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name" value="{{ $user->first_name }}"
                                             aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                         @error('first_name')
                                             <span class="invalid-feedback" role="alert">
@@ -68,7 +68,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>Last Name</label>
-                                        <input type="text" class="outline ischeck name-only form-control @error('last_name') is-invalid @enderror" placeholder="{{ __('Last Name') }}" name="last_name" value="{{ $user->last_name }}"
+                                        <input type="text" class="outline is-invalid-remove name-only form-control @error('last_name') is-invalid @enderror" placeholder="{{ __('Last Name') }}" name="last_name" value="{{ $user->last_name }}"
                                             aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                         @error('last_name')
                                             <span class="invalid-feedback" role="alert">
@@ -80,7 +80,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>Job Title</label>
-                                        <input type="text" class="outline ischeck form-control @error('job_title') is-invalid @enderror" placeholder="Job Title" name="job_title" value="{{ $user->job_title }}"
+                                        <input type="text" class="outline is-invalid-remove form-control @error('job_title') is-invalid @enderror" placeholder="Job Title" name="job_title" value="{{ $user->job_title }}"
                                             aria-label="Username" aria-describedby="basic-addon1"  autofocus>
                                         @error('job_title')
                                             <span class="invalid-feedback" role="alert">
@@ -106,7 +106,7 @@
                                             ?>
 =======
                                       
-                                        <select name="age" class="outline ischeck @error('age') is-invalid @enderror" id="lang">
+                                        <select name="age" class="outline is-invalid-remove @error('age') is-invalid @enderror" id="lang">
                                         <option value="">Select</option>
                                               
                                               @foreach($age as $a)
@@ -126,7 +126,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label for="lang">Gender</label>
-                                        <select name="gender" class="outline ischeck @error('gender') is-invalid @enderror" id="lang">
+                                        <select name="gender" class="outline is-invalid-remove @error('gender') is-invalid @enderror" id="lang">
                                         <option value="">Select</option>
                                             <option value="man"<?php if("man"== $user->gender){echo('selected');} ?>>Man</option>
                                             <option value="woman"<?php if("woman" == $user->gender){echo('selected');} ?>>Woman</option>
@@ -146,7 +146,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label for="lang">Gender Pronouns</label>
-                                        <select name="gender_pronouns" class="outline ischeck @error('gender_pronouns') is-invalid @enderror" id="lang">
+                                        <select name="gender_pronouns" class="outline is-invalid-remove @error('gender_pronouns') is-invalid @enderror" id="lang">
                                         <option value="">Select</option>
                                             <option value="he/him/his"<?php if("he/him/his" == $user->gender_pronouns){echo('selected');} ?>>He/him/His</option>
                                             <option value="she/her/hers"<?php if("she/her/hers" == $user->gender_pronouns){echo('selected');} ?>>She/Her/Hers</option>
@@ -167,7 +167,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label for="lang">Located in</label>
-                                        <select name="Located_in" id="located_in" class="outline ischeck @error('Located_in') is-invalid @enderror" id="lang">
+                                        <select name="Located_in" id="located_in" class="outline is-invalid-remove @error('Located_in') is-invalid @enderror" id="lang">
                                         <option value="">Select</option>
                                             @foreach ($country as $k=>$v)
                                                 <option value="{{ $v->id }}"<?php if(isset($user->country) && $user->country->id == $v->id){echo('selected');} ?>>{{  $v->name }}</option>
@@ -183,7 +183,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label for="lang">Availabe to work in</label>
-                                        <select name="available_to_work_in" class="outline ischeck @error('available_to_work_in') is-invalid @enderror" id="lang">
+                                        <select name="available_to_work_in" class="outline is-invalid-remove @error('available_to_work_in') is-invalid @enderror" id="lang">
                                         <option value="">Select</option>
                                             <option value="virtually"<?php if("virtually" == $user->available_to_work_in){echo('selected');} ?>>Virtually</option>
                                             <option value="physically"<?php if("physically" == $user->available_to_work_in){echo('selected');} ?>>Physically</option>
@@ -215,7 +215,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label for="lang">State</label>
-                                        <select name="state" id= "state"class="outline ischeck @error('state') is-invalid @enderror" id="lang">
+                                        <select name="state" id= "state"class="outline is-invalid-remove @error('state') is-invalid @enderror" id="lang">
                                         <option value="">Select</option>
                                             @foreach ($state as $k=>$v)
                                                 <option value="{{ $v->id }}">{{  $v->name }}</option>
@@ -233,7 +233,7 @@
                                 <div class="col-md-12">
                                     <div class="profile_input">
                                         <label>About</label>
-                                        <textarea class="outline ischeck form-control @error('about') is-invalid @enderror" name="about" aria-label="With textarea">{{ $user->about }}</textarea>
+                                        <textarea class="outline is-invalid-remove form-control @error('about') is-invalid @enderror" name="about" aria-label="With textarea">{{ $user->about }}</textarea>
                                         @error('about')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -272,7 +272,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>IMDB Profile</label>
-                                        <input type="text" class="outline ischeck form-control @error('imdb_profile') is-invalid @enderror" placeholder="IMDB Profile" name="imdb_profile" value="{{ $user->imdb_profile }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="outline is-invalid-remove form-control @error('imdb_profile') is-invalid @enderror" placeholder="IMDB Profile" name="imdb_profile" value="{{ $user->imdb_profile }}" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('imdb_profile')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -283,7 +283,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>LinkedIn Profile</label>
-                                        <input type="text" class="outline ischeck form-control @error('linkedin_profile') is-invalid @enderror" placeholder="LinkedIn Profile" name="linkedin_profile" value="{{ $user->linkedin_profile }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="outline is-invalid-remove form-control @error('linkedin_profile') is-invalid @enderror" placeholder="LinkedIn Profile" name="linkedin_profile" value="{{ $user->linkedin_profile }}" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('linkedin_profile')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -294,7 +294,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>Website</label>
-                                        <input type="text" class="outline ischeck form-control @error('website') is-invalid @enderror" placeholder="Website" aria-label="Username" name="website" value="{{ $user->website }}" aria-describedby="basic-addon1">
+                                        <input type="text" class="outline is-invalid-remove form-control @error('website') is-invalid @enderror" placeholder="Website" aria-label="Username" name="website" value="{{ $user->website }}" aria-describedby="basic-addon1">
                                         @error('website')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -307,7 +307,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>Introduction Video</label>
-                                        <input type="text" class="outline ischeck form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="{{ $user->intro_video_link }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="outline is-invalid-remove form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="{{ $user->intro_video_link }}" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('intro_video_link')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

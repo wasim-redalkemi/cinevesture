@@ -1,6 +1,6 @@
 @extends('layouts.app',['class' => 'bg_white'])
 
-@section('title','Cinevesture-portfolio')
+@section('title','Cinevesture-organisation')
 
 @section('header')
 @include('include.header')
@@ -23,17 +23,18 @@
                                         Organisation
                                     </h1>
                                 </div>
-                                <div><button class="guide_profile_btn">Edit</button></div>
+                                <div><button class="guide_profile_btn"><a class="btn-link text_decor_none" href="{{ route('organisation-create')}}">Edit</a></button></div>
                             </div>
+                            
                             <div class="col-md-2">
                                 <div class="user_profile_container">
-                                    <img src="{{ asset('public/images/asset/photo-1500648767791-00dcc994a43e 1.png') }}" class="user_imge" />
+                                    <img src="{{ asset('public/images/asset/photo-1500648767791-00dcc994a43e 1.png') }}" />
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <div class="preview_headtext">Name</div>
-                                <div class="guide_profile_main_subtext">Organization type</div>
-                                <div class="guide_profile_main_subtext">Located in</div>
+                                <div class="preview_headtext">{{ (isset($UserOrganisation->name))?$UserOrganisation->name:'Name'; }}</div>
+                                <div class="guide_profile_main_subtext">{{ (isset($UserOrganisation->organisation_type))?$UserOrganisation->organisation_type:'Organisation type'; }}</div>
+                                <div class="guide_profile_main_subtext">{{ (isset($UserOrganisation['country']['name']))?$UserOrganisation['country']['name']:'Located In'; }}</div>
                             </div>
                         </div>
                     </div>
@@ -49,30 +50,38 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="guide_profile_main_text mt-3">
-                                    <p> Skils</p>
+                                    <p> Services</p>
                                 </div>
                                 <div class="d-flex mt-3">
-                                    <button class="curv_cmn_btn">Skills 1</button>
-                                    <button class="curv_cmn_btn mx-2">Skills 1</button>
-                                    <button class="curv_cmn_btn">Skills 1</button>
-                                    <button class="curv_cmn_btn mx-2">Skills 1</button>
+                                    @if (isset($UserOrganisation->organizationServices))
+                                        @foreach ($UserOrganisation->organizationServices as $k => $organizationService)
+                                            <button class="curv_cmn_btn">{{ (isset($organizationService->services->name))?$organizationService->services->name:'-'; }}</button>
+                                        @endforeach
+                                    @else
+                                    <span><b>-</b></span>
+                                @endif
                                 </div>
-                                <div class="guide_profile_main_text mt-3">Available to Work In</div>
-                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">Sample Location</div>
+                                <div class="guide_profile_main_text mt-3">Availabe To Work In</div>
+                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (isset($UserOrganisation->available_to_work_in))?$UserOrganisation->available_to_work_in:'-'; }}</div>
                                 <div class="guide_profile_main_text mt-3">Languages Spoken</div>
-                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">Language 1</div>
-                                <div class="guide_profile_main_subtext Aubergine_at_night mt-1">Language 2</div>
+                                @if (isset($UserOrganisation->organizationServices))
+                                    @foreach ($UserOrganisation->organizationLanguages as $k => $organizationLanguage)                                    
+                                        <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (isset($organizationLanguage->languages->name))?$organizationLanguage->languages->name:'-'; }}</div>
+                                    @endforeach
+                                @else
+                                    <span><b>-</b></span>
+                                @endif
                             </div>
                             <div class="col-md-6">
                                 <div class="guide_profile_main_text mt-3">
                                     <p> Social Profile</p>
                                 </div>
                                 <div class="guide_profile_main_subtext mt-3">IMDB Profile</div>
-                                <div class="guide_profile_main_subtext deep-pink mt-1">https://www.cinevesture.com</div>
+                                <div class="guide_profile_main_subtext deep-pink mt-1">{{ (isset($UserOrganisation->imdb_profile))?$UserOrganisation->imdb_profile:'-'; }}</div>
                                 <div class="guide_profile_main_subtext mt-3">LinkedIn Profile</div>
-                                <div class="guide_profile_main_subtext deep-pink">https://www.cinevesture.com</div>
+                                <div class="guide_profile_main_subtext deep-pink">{{ (isset($UserOrganisation->linkedin_profile))?$UserOrganisation->linkedin_profile:'-'; }}</div>
                                 <div class="guide_profile_main_subtext mt-3">Website</div>
-                                <div class="guide_profile_main_subtext deep-pink mt-1">https://www.cinevesture.com</div>
+                                <div class="guide_profile_main_subtext deep-pink mt-1">{{ (isset($UserOrganisation->website))?$UserOrganisation->website:'-'; }}</div>
                             </div>
                         </div>
                     </div>
@@ -87,16 +96,15 @@
                                 </div>
                                 <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
                                     <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                        exercitation
-                                        ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                                        {{ (isset($UserOrganisation->about))?$UserOrganisation->about:'-'; }}
                                     </p>
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="guide_profile_main_text deep-pink mb-2">Introduction Video</div>
-                                <div><img src="{{ asset('public/images/asset/67a6c213a22d2ba4c3982a55d828b5c7 1.png') }}" class="w-100"></div>
+                                <div>
+                                    <iframe width=100% height="300" src="{{isset($UserOrganisation->intro_video_link)?$UserOrganisation->intro_video_link:'https://www.youtube.com/embed/bDMwlH1FTpk'}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
                                 <div class="d-flex justify-content-between mt-3">
                                     <div class="organisation_cmn_text">Title</div>
                                     <div class="icon_container"><i class="fa fa-pencil deep-pink" aria-hidden="true"></i></div>
@@ -112,7 +120,7 @@
                             <div class="col-md-12">
                                 <div class="d-flex align-items-center">
                                     <div class="preview_headtext">Team size</div>
-                                    <div class="associate_text mt-3 mx-3">20</div>
+                                    <div class="associate_text mt-3 mx-3">{{isset($UserOrganisation->team_size)?$UserOrganisation->team_size:'-'}}</div>
                                 </div>
                                 <div class="preview_headtext mb-3">Team members</div>
                                 <div class="row">

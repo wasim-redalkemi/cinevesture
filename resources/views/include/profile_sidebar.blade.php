@@ -8,7 +8,7 @@
     <hr class="sidebar_content_hr">
     <div class="sidebar_content"><a href="{{ route('profile-create') }}">Profile</a></div>
     <hr class="sidebar_content_hr">
-    <div class="sidebar_content"><a href="">Organisation</a></div>
+    <div class="sidebar_content"><a href="{{ route('organisation-private-view') }}">Organisation</a></div>
     <hr class="sidebar_content_hr">
     <!-- <div class="sidebar_content"><a href="">My Jobs</a></div> -->
     <div class="dropdown search-page">

@@ -22,7 +22,7 @@
                         @enderror
                     </div>
                     <div class="col-md-12 mb-3">
-                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password" required autocomplete="new-password">
+                        <input id="password" type="password" class="password-only is-invalid-remove form-control @error('password') is-invalid @enderror" name="password" placeholder="Password" required autocomplete="new-password">
                         @error('password')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -30,7 +30,7 @@
                         @enderror
                     </div>
                     <div class="col-md-12 mb-3">
-                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new-password">
+                        <input id="password-confirm" type="password" class="password-only is-invalid-remove form-control" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new-password">
                     </div>
                     <div class="col-md-12 mb-3">
                         <button type="submit" class="btn btn-primary">

@@ -16,7 +16,7 @@
                     <div class="row">
                         <div class="col-md-12 mb-3">
                             <div class="profile_input">
-                                <input id="email" type="email" placeholder="Email" name ="email" required class=" email-only outline  @error('email') is-invalid @enderror">
+                                <input id="email" type="email" placeholder="Email" name ="email" required class="is-invalid-remove email-only outline  @error('email') is-invalid @enderror">
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
