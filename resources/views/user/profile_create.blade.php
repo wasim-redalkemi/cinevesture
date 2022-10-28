@@ -25,7 +25,7 @@
 
                             <div class="d-flex custom_file_explorer">
                                 <div class="upload_img_container">
-                                    <img src="<?php if (!empty($user->profile_image)){echo Storage::url($user->profile_image); }?>" class="upload_preview">                                        
+                                    <img src="<?php if (!empty($user->profile_image)){echo Storage::url($user->profile_image); }?>" class="upload_preview for_show" width="100%" height="100%">                                        
                                     <div for="file-input" class="d-none">
                                         <input type="file" name="profile_image" class="@error('profile_image') is-invalid @enderror file_element" accept=".jpg,.jpeg,.png">
                                         @error('profile_image')
@@ -34,7 +34,7 @@
                                             </span>
                                         @enderror 
                                     </div>
-                                    <div class="pointer open_file_explorer">
+                                    <div class="pointer open_file_explorer for_hide">
                                         <div class="text-center"> <i class="fa fa-plus-circle mx-2 profile_icon deep-pink pointer" aria-hidden="true"></i></div>
                                         <div>Upload</div>
                                     </div>
@@ -94,27 +94,14 @@
                                 <div class="col-md-4">
                                     <div class="profile_input" style="max-height:300px;overflow:auto;">
                                         <label for="lang">Age</label>
-<<<<<<< HEAD
-                                        <select name="age" class="@error('age') is-invalid @enderror" id="lang">
-                                            <?php
-                                                for($i=18;$i<=100;$i++)
-                                                {
-                                                    ?>
-                                                        <option value="<?php echo $i;?>" class="select_option"><?php echo $i;?></option>
-                                                    <?php
-                                                }
-                                            ?>
-=======
-                                      
+                           
                                         <select name="age" class="outline is-invalid-remove @error('age') is-invalid @enderror" id="lang">
                                         <option value="">Select</option>
                                               
                                               @foreach($age as $a)
                                               <option value="{{$a->id}}" <?php if($a->id == $user->age){echo('selected');} ?> ><?php echo $a->range;?></option>
                                               @endforeach
-                                               
-                                           
->>>>>>> 07e09c061adb179dbb89f80702b867a2e1bbfa23
+                                                                                       
                                         </select>
                                         @error('age')
                                             <span class="invalid-feedback" role="alert">
@@ -182,7 +169,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="profile_input">
-                                        <label for="lang">Availabe to work in</label>
+                                        <label for="lang">Availabe To Work In</label>
                                         <select name="available_to_work_in" class="outline is-invalid-remove @error('available_to_work_in') is-invalid @enderror" id="lang">
                                         <option value="">Select</option>
                                             <option value="virtually"<?php if("virtually" == $user->available_to_work_in){echo('selected');} ?>>Virtually</option>
@@ -246,17 +233,11 @@
                                 <div class="col-md-12">
                                     <div class="mt_16">
                                         <label for="lang">Skills</label>
-<<<<<<< HEAD
-                                        <select name="skills[]" class="js-select2 w-100" id="lang" multiple>
-                                            @foreach ($skills as $k=>$v)
-                                                <option value="{{ $v->id }}">{{  $v->name }}</option>
-                                            @endforeach
-=======
                                         <select name="skills[]" class="outline ischeck js-select2" id="lang" multiple>
                                         @foreach ($skills as $k=>$v)
                                             <option value="{{ $v->id }}" @if(in_array($v->id,$user->skill))selected @endif>{{  $v->name }}</option>                                        
                                         @endforeach
->>>>>>> 07e09c061adb179dbb89f80702b867a2e1bbfa23
+
                                         </select>
                                         @error('skills')
                                             <span class="invalid-feedback" role="alert">
@@ -343,6 +324,7 @@
         $("#success-toast").toast("show");
     });
 
+    $('.for_show').css('display', 'none');
     $(document).ready(function()
     {   
         $('.open_file_explorer').click(function(e) 
@@ -359,6 +341,8 @@
                 output.attr('src',reader.result);
             };
             reader.readAsDataURL(file[0]);
+            $('.for_hide').css('display', 'none');
+            $('.for_show').css('display', 'block');
         });
     });
 
