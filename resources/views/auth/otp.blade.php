@@ -29,7 +29,7 @@
             <div class="resend-div mt-4 mb-4 text-center">
                         <div id="before-timer" class="font-14">
                         <span class="disable-resend">Resend OTP in </span></span>
-                            <span class="otp-timer" style=" color: #FAF8FB">00:<span id="time">20</span>
+                            <span class="otp-timer" style=" color: #FAF8FB">00:<span id="time">30</span>
                             
                         </div>
                         <div id="after-timer" style="display: none">
@@ -77,7 +77,7 @@ $(".inputs").keyup(function (e) {
      
 
     function timer(){
-        let timing = 20;
+        let timing = 30;
         let myTimer;
         let timeToAppend;
         myTimer = setInterval(function() {

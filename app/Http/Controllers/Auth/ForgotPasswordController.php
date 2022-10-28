@@ -15,6 +15,9 @@ use Illuminate\Validation\ValidationException;
 
 class ForgotPasswordController extends Controller
 {
+
+
+    use SendsPasswordResetEmails;
     /*
     |--------------------------------------------------------------------------
     | Password Reset Controller
@@ -140,5 +143,5 @@ class ForgotPasswordController extends Controller
         return Password::broker();
     }
 
-    use SendsPasswordResetEmails;
+    
 }
