@@ -102,7 +102,7 @@
                                 <div class="guide_profile_main_subtext mt-3">IMDB Profile</div>
                                 <div class="guide_profile_main_subtext deep-pink mt-1 pointer">
                                     @if (isset($user->imdb_profile))
-                                        {{ $user->imdb_profile }}                                        
+                                        <a href="{{ $user->imdb_profile }}" >{{ $user->imdb_profile }}</a>                                      
                                     @else
                                         <span><b>-</b></span>
                                     @endif
@@ -110,7 +110,8 @@
                                 <div class="guide_profile_main_subtext mt-3">LinkedIn Profile</div>
                                 <div class="guide_profile_main_subtext deep-pink pointer">
                                     @if (isset($user->linkedin_profile))
-                                        {{ $user->linkedin_profile }}                                        
+                                        {{ $user->linkedin_profile }}  
+                                        <a href="{{ $user->linkedin_profile }}" >{{ $user->linkedin_profile }}</a>                                         
                                     @else
                                         <span><b>-</b></span>
                                     @endif
@@ -118,7 +119,8 @@
                                 <div class="guide_profile_main_subtext mt-3">Website</div>
                                 <div class="guide_profile_main_subtext deep-pink mt-1 pointer">
                                     @if (isset($user->website))
-                                        {{ $user->website }}                                        
+                                        {{ $user->website }}     
+                                        <a href="{{ $user->website }}" >{{ $user->website }}</a>                                 
                                     @else
                                         <span><b>-</b></span>
                                     @endif

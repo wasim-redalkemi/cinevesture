@@ -120,7 +120,7 @@
                                             <option value="woman"<?php if("woman" == $user->gender){echo('selected');} ?>>Woman</option>
                                             <option value="non_binary"<?php if("non_binary" == $user->gender){echo('selected');} ?>>Non binary</option>
                                             <option value="transgender"<?php if("transgender" == $user->gender){echo('selected');} ?>>Transgender</option>
-                                            <option value="gender_non_confirming"<?php if("gender_non_confirming" == $user->gender){echo('selected');} ?>>Gender Non Confirming</option>
+                                            <option value="gender_non_confirming"<?php if("gender_non_confirming" == $user->gender){echo('selected');} ?>>Gender-Non-Confirming</option>
                                             <option value="prefer_not_to_say"<?php if("prefer_not_to_say" == $user->gender){echo('selected');} ?>>Prefer Not To Say</option>
                                             <option value="other"<?php if("other" == $user->gender){echo('selected');} ?>>Other</option>
                                         </select>
