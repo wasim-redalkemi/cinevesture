@@ -169,7 +169,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="profile_input">
-                                        <label for="lang">Availabe To Work In</label>
+                                        <label for="lang">Available To Work In</label>
                                         <select name="available_to_work_in" class="outline is-invalid-remove @error('available_to_work_in') is-invalid @enderror" id="lang">
                                         <option value="">Select</option>
                                             <option value="virtually"<?php if("virtually" == $user->available_to_work_in){echo('selected');} ?>>Virtually</option>
