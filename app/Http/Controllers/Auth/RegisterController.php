@@ -166,18 +166,15 @@ class RegisterController extends Controller
                     return back()->with('error', 'Invalid OTP.');
                 }
                 if($request->type == 'F'){
-                     $token = Str::random(60);
-                    DB::table('password_resets')->insert([
-                        'email' => $request->email,
-                        'token' => $token,
-                        'created_at' => Carbon::now()
-                    ]);
-                 $token = $token;
+                    //  $token = bcrypt(Str::random(64));
+
+                    $user = DB::table('password_resets')->where('email', '=', $request->email)->first();
+                    // $userObj->remember_token = $token;
+                    // $userObj->save();
+                 $token = $user->token;
                  $email = $request->email;
-                    return view('auth.passwords.reset',compact(['token','email']));
-                    
-
-
+                 return redirect()->route('reset-password-view',['token' => $token, 'email' => $email])->with('success', 'OTP verified successfully.');
+                
                 }elseif($request->type == 'S')
                 {
                     $userObj->email_verified_at = Carbon::now();
