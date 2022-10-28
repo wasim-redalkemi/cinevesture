@@ -54,7 +54,7 @@
                             <div class="col-md-6">
                                 <div class="profile_input">
                                     <label>Name</label>
-                                    <input type="text" class="outline name-only form-control @error('name') is-invalid @enderror" placeholder="{{ __('Name') }}" name="name" value="" aria-label="Username" aria-describedby="basic-addon1" autofocus>
+                                    <input type="text" class="outline name-only form-control @error('name') is-invalid @enderror" placeholder="{{ __('Name') }}" name="name" value="{{(isset($UserOrganisation->name))?$UserOrganisation->name:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -72,10 +72,10 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Organisation Type</label>
-                                    <select name="organisation_type" class="@error('organisation_type') is-invalid @enderror" id="">
+                                    <select name="organisation_type" class="@error('organisation_type') is-invalid @enderror" id="" required autofocus>
                                         <option value="">Select</option>
                                         @foreach ($organisationType as $k=>$v)
-                                            <option value="{{ $v->id }}"<?php if(isset($user->country) && $user->country->id == $v->id){echo('selected');} ?>>{{  $v->name }}</option>
+                                            <option value="{{ $v->id }}">{{  $v->name }}</option>
                                         @endforeach
                                     </select>                                    
                                     @error('organisation_type')
@@ -90,7 +90,7 @@
                             <div class="col-md-12">
                                 <div class="profile_input">
                                     <label>About</label>
-                                    <textarea class="form-control" name="about" aria-label="With textarea"></textarea>
+                                    <textarea class="form-control" name="about" aria-label="With textarea" required autofocus>{{(isset($UserOrganisation->about))?$UserOrganisation->about:'' }}</textarea>
                                 </div>
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                             <div class="col-md-6">
                                 <div class="profile_input">
                                     <label>Services</label>
-                                    <select name="service_id[]" class="outline js-select2 @error('service_id') is-invalid @enderror" id="" multiple>
+                                    <select name="service_id[]" class="outline js-select2 @error('service_id') is-invalid @enderror" id="" multiple required autofocus>
                                         @foreach ($organisationService as $k=>$v)
                                             <option value="{{ $v->id }}">{{ $v->name }}</option>
                                         @endforeach
@@ -115,10 +115,15 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Located In</label>
-                                    <select name="located_in" class="@error('located_in') is-invalid @enderror" id="">
+                                    <select name="located_in" class="@error('located_in') is-invalid @enderror" id="" required autofocus>
                                         <option value="">Select</option>
-                                        @foreach ($country as $k=>$v)
-                                            <option value="{{ $v->id }}">{{ $v->name }}</option>
+                                        @foreach ($country as $k=>$v)                                            
+                                            <option
+                                            @php
+                                            if ($UserOrganisation->location_in == $v->id) {
+                                                echo 'selected';
+                                            }
+                                            @endphp value="{{ $v->id }}">{{ $v->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('located_in')
@@ -131,10 +136,15 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Available To Work In</label>
-                                    <select name="available_to_work_in" class="@error('available_to_work_in') is-invalid @enderror" id="">
+                                    <select name="available_to_work_in" class="@error('available_to_work_in') is-invalid @enderror" id="" required autofocus>
                                         <option value="">Select</option>
-                                        <option value="virtually">Virtually</option>
-                                        <option value="physically">Physically</option>
+                                        <option @if("virtually" == $UserOrganisation->available_to_work_in)
+                                            {{'selected'}}
+                                        @endif value="virtually">Virtually</option>
+                                        <option 
+                                        @if("physically" == $UserOrganisation->available_to_work_in)
+                                            {{'selected'}}
+                                        @endif value="physically">Physically</option>
                                     </select>
                                     @error('available_to_work_in')
                                     <span class="invalid-feedback" role="alert">
@@ -146,7 +156,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label> Languages Spoken</label>
-                                    <select name="language_id[]" class="outline js-select2 @error('language_id') is-invalid @enderror" id="lang" multiple>
+                                    <select name="language_id[]" class="outline js-select2 @error('language_id') is-invalid @enderror" id="lang" multiple required autofocus>
                                         @foreach ($languages as $k=>$v)
                                             <option value="{{ $v->id }}"<?php if(isset($user->country) && $user->country->id == $v->id){echo('selected');} ?>>{{  $v->name }}</option>
                                         @endforeach
@@ -164,7 +174,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>IMDB Profile</label>
-                                    <input type="text" class="foutline orm-control @error('imdb_profile') is-invalid @enderror" placeholder="IMDB Profile" name="imdb_profile" value="" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" class="foutline orm-control @error('imdb_profile') is-invalid @enderror" placeholder="IMDB Profile" name="imdb_profile" value="{{(isset($UserOrganisation->imdb_profile))?$UserOrganisation->imdb_profile:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('imdb_profile')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -175,7 +185,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>LinkedIn Profile</label>
-                                    <input type="text" class="outline form-control @error('linkedin_profile') is-invalid @enderror" placeholder="LinkedIn Profile" name="linkedin_profile" value="" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" class="outline form-control @error('linkedin_profile') is-invalid @enderror" placeholder="LinkedIn Profile" name="linkedin_profile" value="{{(isset($UserOrganisation->linkedin_profile))?$UserOrganisation->linkedin_profile:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('linkedin_profile')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -186,7 +196,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Website</label>
-                                    <input type="text" class="outline form-control @error('website') is-invalid @enderror" placeholder="Website" aria-label="Username" name="website" value="" aria-describedby="basic-addon1">
+                                    <input type="text" class="outline form-control @error('website') is-invalid @enderror" placeholder="Website" aria-label="Username" name="website" value="{{(isset($UserOrganisation->website))?$UserOrganisation->website:'' }}" aria-describedby="basic-addon1" required autofocus>
                                     @error('website')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -199,7 +209,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Introduction Video</label>
-                                    <input type="text" class="outline form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" class="outline form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="{{(isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('intro_video_link')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -217,7 +227,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Team size</label>
-                                    <input type="number" class="form-control" name="team_size" placeholder="Team size" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="number" class="form-control" name="team_size" value="{{(isset($UserOrganisation->team_size))?$UserOrganisation->team_size:'' }}" placeholder="Team size" aria-label="Username" aria-describedby="basic-addon1">
                                     @error('team_size')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

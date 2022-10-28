@@ -87,8 +87,8 @@
 
             // is_check
         
-            $(".ischeck").on("input",function(){
-                $(this).removeClass("is-invalid");
+            $(".is-invalid-remove").on("input",function(){
+                $(this).next().remove(".invalid-feedback");
             });
             
 

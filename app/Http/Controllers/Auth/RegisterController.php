@@ -62,7 +62,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'first_name' => ['required', 'string', 'max:255'],
-            'last_name' => ['nullable', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -166,18 +166,15 @@ class RegisterController extends Controller
                     return back()->with('error', 'Invalid OTP.');
                 }
                 if($request->type == 'F'){
-                     $token = Str::random(60);
-                    DB::table('password_resets')->insert([
-                        'email' => $request->email,
-                        'token' => $token,
-                        'created_at' => Carbon::now()
-                    ]);
-                 $token = $token;
+                    //  $token = bcrypt(Str::random(64));
+
+                    $user = DB::table('password_resets')->where('email', '=', $request->email)->first();
+                    // $userObj->remember_token = $token;
+                    // $userObj->save();
+                 $token = $user->token;
                  $email = $request->email;
-                    return view('auth.passwords.reset',compact(['token','email']));
-                    
-
-
+                 return redirect()->route('reset-password-view',['token' => $token, 'email' => $email])->with('success', 'OTP verified successfully.');
+                
                 }elseif($request->type == 'S')
                 {
                     $userObj->email_verified_at = Carbon::now();
@@ -206,20 +203,20 @@ class RegisterController extends Controller
 
 
     public function resendOtp($email = null,$type = null)
-    {   
+    {  if($email == null){
+        return back()->with('error', 'Email field is required.')->withInput();
+       }
         $user =  User::query()->where('email', $email)->first();
         if ($user) {
-            if (!$user->email_verified_at) {
+            
                 $otp = OtpController::createOtp($user, $type);
                 $collect  = collect();
                 $collect->put('otp', $otp);
                 $user->notify(new VerifyOtp($collect));
                 return back()->with('success', 'OTP Re-Send successfully.');
-            } else {
-                return back()->with('error', 'Something went wrong. Please try again later.');
-            }
+          
         } else {
-            return back()->with('error', 'Something went wrong. Please try again later.');
+            return back()->with('error', 'Email does not exist. Please try again.')->withInput();
         }
     }
 }

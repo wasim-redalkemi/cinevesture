@@ -44,12 +44,8 @@ class OrganisationController extends Controller
             $organisationType = MasterOrganisationType::query()->get();
             $organisationService = MasterOrganisationService::query()->get();
             $UserOrganisation = UserOrganisation::query()->with(['organizationLanguages.languages','organizationServices.services','country'])->where('user_id',auth()->user()->id)->first();
-            if (!isset($UserOrganisation)) {
-                $UserOrganisation = '';
-                return view('user.organisation.organisation_create',compact(['languages','country','organisationType','organisationService','UserOrganisation']));
-            }
+            
             return view('user.organisation.organisation_create',compact(['languages','country','organisationType','organisationService','UserOrganisation']));
-
 
         } catch (Exception $e) {
             return back()->withError('error','Somethig went wrong.');
@@ -65,10 +61,10 @@ class OrganisationController extends Controller
     public function store(Request $request)
     {
         try {
-            UserOrganisation::query()->where('user_id',auth()->user()->id)->delete();
-            
-            $UserOrganisation =new UserOrganisation();
-
+            $UserOrganisation = UserOrganisation::query()->where('user_id',auth()->user()->id)->first();
+            if(!$UserOrganisation){
+                $UserOrganisation =new UserOrganisation();
+            }
             $UserOrganisation->user_id = auth()->user()->id;
             $UserOrganisation->name = $request->name;
             $UserOrganisation->type = $request->organisation_type;
@@ -115,12 +111,12 @@ class OrganisationController extends Controller
                 }
                 return redirect()->route('organisation-private-view')->with("success","User organisation updated successfully.");
             }else {
-                return back()->withError('Somethig went wrong ,please try again.');
+                return back()->withError('error','Somethig went wrong ,please try again.');
             }
            
 
         } catch (Exception $e) {
-            // return back()->withError('error','Somethig went wrong.');
+            return back()->withError('error','Somethig went wrong.');
         }
     }
 
