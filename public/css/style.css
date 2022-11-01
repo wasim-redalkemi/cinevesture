@@ -1040,7 +1040,7 @@ body {
     letter-spacing: 0.018em;
     color: #787885;
 }
-.profile_input input, select {
+.profile_input input, select, .modal_input {
     background: #FFFFFF;
     width: 100%;
     border: 1px solid #4D0D8A;
@@ -1192,6 +1192,21 @@ body {
 }
 .w__17 {
     width: 17%;
+}
+.bg_3308 {
+    background: #33084C !important;
+}
+.invite_btn {
+    background: #971E9B !important;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 114%;
+    letter-spacing: 0.054em;
+    color: #FAF8FB !important;
+    width: 100%;
+    border: none;
+    height: 40px;
 }
 .flow_step_text {
     font-weight: 400;

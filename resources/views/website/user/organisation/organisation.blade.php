@@ -59,7 +59,7 @@
                                 <div class="d-flex mt-3">
                                     @if (isset($UserOrganisation->organizationServices))
                                         @foreach ($UserOrganisation->organizationServices as $k => $organizationService)
-                                            <button class="curv_cmn_btn">{{ (isset($organizationService->services->name))?$organizationService->services->name:'-'; }}</button>
+                                            <button class="curv_cmn_btn skill_container">{{ (isset($organizationService->services->name))?$organizationService->services->name:'-'; }}</button>
                                         @endforeach
                                     @else
                                     <span><b>-</b></span>
@@ -68,7 +68,7 @@
                                 <div class="guide_profile_main_text mt-3">Availabe To Work In</div>
                                 <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (isset($UserOrganisation->available_to_work_in))?$UserOrganisation->available_to_work_in:'-'; }}</div>
                                 <div class="guide_profile_main_text mt-3">Languages Spoken</div>
-                                @if (isset($UserOrganisation->organizationServices))
+                                @if (isset($UserOrganisation->organizationLanguages))
                                     @foreach ($UserOrganisation->organizationLanguages as $k => $organizationLanguage)                                    
                                         <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (isset($organizationLanguage->languages->name))?$organizationLanguage->languages->name:'-'; }}</div>
                                     @endforeach
@@ -109,10 +109,10 @@
                                 <div>
                                     <iframe width=100% height="300" src="{{isset($UserOrganisation->intro_video_link)?$UserOrganisation->intro_video_link:'https://www.youtube.com/embed/bDMwlH1FTpk'}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 </div>
-                                <div class="d-flex justify-content-between mt-3">
+                                {{-- <div class="d-flex justify-content-between mt-3">
                                     <div class="organisation_cmn_text">Title</div>
                                     <div class="icon_container"><i class="fa fa-pencil deep-pink" aria-hidden="true"></i></div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
