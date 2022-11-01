@@ -40,7 +40,7 @@ class OtpController extends Controller
               
             
         } catch (Exception $e) {
-            return back()->with( 'error','Somethig went wrong.');
+            return back()->with( 'error','Something went wrong.');
         }
     }
 

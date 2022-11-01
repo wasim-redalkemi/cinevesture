@@ -29,7 +29,7 @@ class OrganisationController extends Controller
 
             return view('user.organisation.organisation', compact(['UserOrganisation']));
         } catch (Exception $e) {
-            return back()->withError('error', 'Somethig went wrong.');
+            return back()->withError('error', 'Something went wrong.');
         }
     }
 
@@ -49,7 +49,7 @@ class OrganisationController extends Controller
 
             return view('user.organisation.organisation_create', compact(['languages', 'country', 'organisationType', 'organisationService', 'UserOrganisation']));
         } catch (Exception $e) {
-            return back()->withError('error', 'Somethig went wrong.');
+            return back()->withError('error', 'Something went wrong.');
         }
     }
 
@@ -112,10 +112,10 @@ class OrganisationController extends Controller
                 }
                 return redirect()->route('organisation-private-view')->with("success", "User organisation updated successfully.");
             } else {
-                return back()->withError('error', 'Somethig went wrong ,please try again.');
+                return back()->withError('error', 'Something went wrong ,please try again.');
             }
         } catch (Exception $e) {
-            return back()->withError('error', 'Somethig went wrong.');
+            return back()->withError('error', 'Something went wrong.');
         }
     }
 
@@ -174,33 +174,33 @@ class OrganisationController extends Controller
         try {
             $validator = Validator::make($request->all(), [
 
-                'first_mail' => 'nullable|email',
-                'second_mail' => 'nullable|email',
+                'email_1' => 'nullable|email',
+                'email_2' => 'nullable|email',
             ]);
 
             if ($validator->fails()) {
                 return ['satus'=>0,'msg'=>$validator->errors()->first()];
             }
             $email = '';
-            if(!$_REQUEST['email1'] && !$_REQUEST['email2']){
+            if(!$_REQUEST['email_1'] && !$_REQUEST['email_2']){
                 return ['satus'=>0,'msg'=>"Email fields can not be empty."];
             }
-            if(!empty($_REQUEST['email1']) ){
-                $email = $_REQUEST['email1'];
+            if(!empty($_REQUEST['email_1']) ){
+                $email = $_REQUEST['email_1'];
+                $collect = collect();
+                $collect->put('url','www.google.com');
+                Notification::route('mail', $email)->notify(new TeamInvite($collect));
+                
+            }
+            if(!empty($_REQUEST['email_2']) ){
+                $email = $_REQUEST['email_2'];
                 $collect = collect();
                 $collect->put('url','www.google.com');
                 Notification::route('mail', $email)->notify(new TeamInvite($collect));
             }
-            if(!empty($_REQUEST['email2']) ){
-                $email = $_REQUEST['email2'];
-                $collect = collect();
-                $collect->put('url','www.google.com');
-                Notification::route('mail', $email)->notify(new TeamInvite($collect));
-            }
-
-            
+            return ['status'=>1,'msg'=>"Invite link has been gone by email."];           
         } catch (Exception $e) {
-            return ['satus'=>0,'msg'=>"Somethig went wrong."];
+            return ['status'=>0,'msg'=>"Something went wrong."];
         }
     }
 }
