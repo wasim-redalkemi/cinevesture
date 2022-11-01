@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\OtpController;
+use App\Http\Controllers\Helper\OtpUtilityController;
 use App\Models\User;
 use App\Notifications\VerifyOtp;
 use App\Providers\RouteServiceProvider;
@@ -43,6 +43,16 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+     /**
+     * Show the application's login form.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showLoginForm()
+    {
+        return view('website.auth.login');
+    }
+
 
      /**
      * Handle a login request to the application.
@@ -70,7 +80,7 @@ class LoginController extends Controller
             
            
             if (!$user->email_verified_at) {
-                $otp = OtpController::createOtp($user,'S'); // S for signup and verify otp.
+                $otp = OtpUtilityController::createOtp($user,'S'); // S for signup and verify otp.
                 $collect  = collect();
                 $collect->put('otp',$otp);
                 $user->notify(new VerifyOtp($collect));

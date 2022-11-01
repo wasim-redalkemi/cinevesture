@@ -3,12 +3,11 @@
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\IndustryGuideController;
-use App\Http\Controllers\OrganisationController;
-use App\Http\Controllers\OtpController;
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Website\UserController;
+use App\Http\Controllers\Website\IndustryGuideController;
+use App\Http\Controllers\Website\OrganisationController;
+use App\Http\Controllers\Website\ProjectController;
+use App\Http\Controllers\Website\SettingController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;  
@@ -24,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', function () {
-    return view('auth.login');
+    return view('website.website.auth.login');
 });
 Auth::routes(['verify' => true]);
 
@@ -114,12 +113,12 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     
     Route::get('/setting-page',[SettingController::class, 'index'])->name('setting-page');
     Route::get('/forgot-password-page', function () {
-        return view('auth.passwords/forgot');
+        return view('website.auth.passwords/forgot');
     })->name('forgot-password-page');
 });
 
 Route::get('/test', function () {
-    return view('user.organisation.organisation_create');
+    return view('website.organisation.organisation_edit');
 });
 
 

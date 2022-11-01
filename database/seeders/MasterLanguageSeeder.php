@@ -37,6 +37,22 @@ class MasterLanguageSeeder extends Seeder
             ['name' => 'Telugu'],
             ['name' => 'Urdu',],
             ['name' => 'Sindhi'],
+            ['name' => 'Chinese'],
+            ['name' => 'Spanish'],
+            ['name' => 'English'],
+            ['name' => 'Portuguese'],
+            ['name' => 'Russian'],
+            ['name' => 'Japanese'],
+            ['name' => 'Yue Chinese'],
+            ['name' => 'Vietnamese'],
+            ['name' => 'Turkish'],
+            ['name' => 'Wu Chinese'],
+            ['name' => 'Korean'],
+            ['name' => 'French'],
+            ['name' => 'German'],
+            ['name' => 'Javanese'],
+            ['name' => 'Italian'],
+            ['name' => 'French'],
         ]);
     }
 }
