@@ -89,40 +89,41 @@
                                     <div class="guide_profile_main_text mt-3">Languages Spoken</div>
                                     @if (count($user_languages)>0)
                                     @foreach ($user_languages as $k=>$v)
-                                    <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ $v['get_languages']['name'] }}</div>
-                                    @endforeach
+                                        <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ $v['get_languages']['name'] }}</div> 
+                                    @endforeach                                        
+                                @else
+                                    <span><b>-</b></span>
+                                @endif
+                            </div>
+                            <div class="col-md-6">
+                                <div class="guide_profile_main_text mt-3">
+                                    <p> Social Profile</p>
+                                </div>
+                                <div class="guide_profile_main_subtext mt-3">IMDB Profile</div>
+                                <div class="guide_profile_main_subtext deep-pink mt-1 pointer">
+                                    @if (isset($user->imdb_profile))
+                                        <a href="{{ $user->imdb_profile }}"style="color:#971e9b"  >{{ $user->imdb_profile }}</a>                                      
                                     @else
                                     <span><b>-</b></span>
                                     @endif
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="guide_profile_main_text mt-3">
-                                        <p> Social Profile</p>
-                                    </div>
-                                    <div class="guide_profile_main_subtext mt-3">IMDB Profile</div>
-                                    <div class="guide_profile_main_subtext deep-pink mt-1 pointer">
-                                        @if (isset($user->imdb_profile))
-                                        {{ $user->imdb_profile }}
-                                        @else
+                                <div class="guide_profile_main_subtext mt-3">LinkedIn Profile</div>
+                                <div class="guide_profile_main_subtext deep-pink pointer">
+                                    @if (isset($user->linkedin_profile))
+                                        <a href="{{ $user->linkedin_profile }}"style="color:#971e9b"  >{{ $user->linkedin_profile }}</a>                                         
+                                    @else
+                                        <span><b>-</b></span>
+                                    @endif
+                                </div>
+                                <div class="guide_profile_main_subtext mt-3">Website</div>
+                                <div class="guide_profile_main_subtext deep-pink mt-1 pointer">
+                                    @if (isset($user->website))     
+                                        <a href="{{ $user->website }}" style="color:#971e9b" >{{ $user->website }}</a>                                 
+                                    @else
                                         <span><b>-</b></span>
                                         @endif
                                     </div>
-                                    <div class="guide_profile_main_subtext mt-3">LinkedIn Profile</div>
-                                    <div class="guide_profile_main_subtext deep-pink pointer">
-                                        @if (isset($user->linkedin_profile))
-                                        {{ $user->linkedin_profile }}
-                                        @else
-                                        <span><b>-</b></span>
-                                        @endif
-                                    </div>
-                                    <div class="guide_profile_main_subtext mt-3">Website</div>
-                                    <div class="guide_profile_main_subtext deep-pink mt-1 pointer">
-                                        @if (isset($user->website))
-                                        {{ $user->website }}
-                                        @else
-                                        <span><b>-</b></span>
-                                        @endif
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>

@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-
 class ResetPasswordController extends Controller
 {
     /*
@@ -74,7 +73,7 @@ class ResetPasswordController extends Controller
         if($response == "passwords.token"){
             return back()->with('error', 'Something went wrong, Please try again later.');
         }else{
-            return redirect('login')->with('success', 'Password reset successfully. Please Login.');
+            return redirect('login')->with('success', 'Password reset successfully.');
         }
 
         // $status = Password::reset(
@@ -95,6 +94,46 @@ class ResetPasswordController extends Controller
         //             : back()->with('error',"Something went wrong. Please try again later.");
 
     }
+
+        /**
+     * Reset the given user's password.
+     *
+     * @param  \Illuminate\Contracts\Auth\CanResetPassword  $user
+     * @param  string  $password
+     * @return void
+     */
+    protected function resetPassword($user, $password)
+    {
+        $this->setUserPassword($user, $password);
+
+        $user->setRememberToken(Str::random(60));
+
+        $user->save();
+
+        event(new PasswordReset($user));
+
+        $this->guard()->login($user);
+
+    }
+
+
+    /**
+     * Display the password reset view for the given token.
+     *
+     * If no token is present, display the link request form.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function showResetForm(Request $request,$token)
+    {
+        //$token = $request->route()->parameter('token');
+
+        return view('auth.passwords.reset')->with(
+            ['token' => $token, 'email' => $request->email]
+        );
+    }
+
 
     // reset password otp views
     public function createResetOtp()

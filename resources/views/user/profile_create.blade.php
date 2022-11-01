@@ -94,7 +94,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input" style="max-height:300px;overflow:auto;">
                                         <label for="lang">Age</label>
-                           
+                                      
                                         <select name="age" class="outline is-invalid-remove @error('age') is-invalid @enderror" id="lang">
                                         <option value="">Select</option>
                                               
@@ -119,7 +119,7 @@
                                             <option value="woman"<?php if("woman" == $user->gender){echo('selected');} ?>>Woman</option>
                                             <option value="non_binary"<?php if("non_binary" == $user->gender){echo('selected');} ?>>Non binary</option>
                                             <option value="transgender"<?php if("transgender" == $user->gender){echo('selected');} ?>>Transgender</option>
-                                            <option value="gender_non_confirming"<?php if("gender_non_confirming" == $user->gender){echo('selected');} ?>>Gender Non Confirming</option>
+                                            <option value="gender_non_confirming"<?php if("gender_non_confirming" == $user->gender){echo('selected');} ?>>Gender-Non-Confirming</option>
                                             <option value="prefer_not_to_say"<?php if("prefer_not_to_say" == $user->gender){echo('selected');} ?>>Prefer Not To Say</option>
                                             <option value="other"<?php if("other" == $user->gender){echo('selected');} ?>>Other</option>
                                         </select>
@@ -233,11 +233,10 @@
                                 <div class="col-md-12">
                                     <div class="mt_16">
                                         <label for="lang">Skills</label>
-                                        <select name="skills[]" class="outline ischeck js-select2" id="lang" multiple>
+                                        <select name="skills[]" class="outline is-invalid-remove js-select2" id="lang" multiple>
                                         @foreach ($skills as $k=>$v)
                                             <option value="{{ $v->id }}" @if(in_array($v->id,$user->skill))selected @endif>{{  $v->name }}</option>                                        
                                         @endforeach
-
                                         </select>
                                         @error('skills')
                                             <span class="invalid-feedback" role="alert">

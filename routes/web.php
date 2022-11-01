@@ -35,7 +35,7 @@ Auth::routes(['verify' => true]);
     Route::post('verify-otp', [RegisterController::class, 'otpVerify'])->name('verify-otp');
     Route::get('otp-view', [RegisterController::class, 'index'])->name('otp-view'); 
     Route::get('resend-otp/{email?}/{type?}', [RegisterController::class, 'resendOtp'])->name('resend-otp'); 
-    Route::get('reset-password-page',[ResetPasswordController::class,'restPasswordPublicView'])->name('reset-password-view');
+    // Route::get('reset-password/{token}',[ResetPasswordController::class,'restPasswordPublicView'])->name('reset-password-view');
 
     
 

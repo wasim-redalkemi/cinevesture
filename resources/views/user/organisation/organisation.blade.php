@@ -28,7 +28,11 @@
                             
                             <div class="col-md-2">
                                 <div class="user_profile_container">
-                                    <img src="{{ asset('public/images/asset/photo-1500648767791-00dcc994a43e 1.png') }}" />
+                                    @if (empty($UserOrganisation->logo))
+                                        <img src="{{ asset('public/images/asset/100_no_img.jpg') }}" />
+                                    @else
+                                        <img src="{{ Storage::url($UserOrganisation->logo) }}"  class = "prod-img" alt="product-image" style="max-height:100px;width:100%;">
+                                    @endif  
                                 </div>
                             </div>
                             <div class="col-md-8">

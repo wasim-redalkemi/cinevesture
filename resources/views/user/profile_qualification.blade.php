@@ -107,7 +107,7 @@
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-end mt-4">
                                         <button class="save_add_btn">Add another</button>
-                                        <button class="cancel_btn mx-3">Cancel</button>
+                                        <a href="{{route('experience-create')}}"class="cancel_btn mx-3" style="text-decoration:none">Cancel</a>
                                         <input type="hidden" name="flag" value="<?=request('flag')?>">
                                         <button type="submit" class="guide_profile_btn mx-3">Save</button>
                                     </div>

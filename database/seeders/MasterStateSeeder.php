@@ -42,15 +42,16 @@ class MasterStateSeeder extends Seeder
         ('25', 'Tripura'),
         ('26', 'Uttar Pradesh'),
         ('27', 'Uttarakhand'),
-        ('28', 'West+A1:B29 Bengal'),
+        ('28', 'West Bengal'),
         ('29', 'Andaman & Nicobar Islands'),
         ('30', 'Chandigarh'),
-        ('31', 'Dadra & Nagar Haveli and Daman & Diu'),
-        ('32', 'Delhi'),
-        ('33', 'Lakshadweep'),
-        ('34', 'Jammu & Kashmir'),
-        ('35', 'Ladakh'),
-        ('36', 'Puducherry')";
+        ('31', 'Dadra & Nagar Haveli'),
+        ('32', 'Daman & Diu'),
+        ('33', 'Delhi'),
+        ('34', 'Lakshadweep'),
+        ('35', 'Jammu & Kashmir'),
+        ('36', 'Ladakh'),
+        ('37', 'Puducherry')";
         
         DB::unprepared($query);
     }
