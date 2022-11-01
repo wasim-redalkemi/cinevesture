@@ -242,7 +242,43 @@
                                     <h6>Team members</h6>
                                 </div>
                                 <!-- <div class="mx-5 icon_container"><i class="fa fa-plus icon-size deep-pink" aria-hidden="true"></i></div> -->
-                                <div class="mx-5 icon_container"> <span class="icon-size deep-pink">+</span></div>
+                                <div class="mx-5 icon_container" data-toggle="modal" data-target="#inviteMemberModal"> <span class="icon-size deep-pink">+</span></div>
+
+                <!-- Invite Members modal  -->
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inviteMemberModal">
+                </button>
+                <div class="modal fade" id="inviteMemberModal" tabindex="-1" role="dialog" aria-labelledby="inviteMemberModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-body p-0">
+                                <section class="bg_3308 p-3">
+                                    <div class="container">
+                                        <form method="POST">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="signup-text  mt-5 mt-md-5"> Invite Members</div>
+                                                    <div class="proctect_by_capta_text mt-4 text-center">
+                                                    You can invite up to two members in your enterprise plan.
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12 mt-4">
+                                                    <input type="" id="email" name="email" value="" placeholder="Email" class="modal_input">
+                                                </div>
+                                                <div class="col-md-12 mt-3">
+                                                    <input type="" id="email" name="email" value="" placeholder="Email" class="modal_input">
+                                                </div>
+                                                <div class="col-md-12 py-3">
+                                                    <button class="invite_btn">Invite</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                             </div>
                             <div class="col-md-3">
                                 <div><img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="w-100"></div>
