@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="col-md-10">
                                     <div class="guide_profile_main_text pt-3">
-                                        {{ (isset($user->job_title))?ucfirst($user->first_name).' '.ucfirst($user->last_name):'Name'; }}
+                                        {{ (isset($user->first_name))?ucfirst($user->first_name).' '.ucfirst($user->last_name):'Name'; }}
                                     </div>
                                     <div class="guide_profile_main_subtext aubergine">
                                         <i>{{empty($user->age)?'Age':$user->age;}} </i>
