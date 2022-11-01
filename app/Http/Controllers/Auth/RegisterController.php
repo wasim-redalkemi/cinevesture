@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\OtpController;
+use App\Http\Controllers\Helper\OtpUtilityController;
 use App\Models\Otp;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -58,6 +58,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
+
     protected function validator(array $data)
     {
         return Validator::make($data, [
@@ -66,6 +67,17 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+    }
+    
+
+    /**
+     * Show the application registration form.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function showRegistrationForm()
+    {
+        return view('website.auth.register');
     }
 
     /**
@@ -99,7 +111,7 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
         $otp_type = 'S'; // S for signup
-        $otp = OtpController::createOtp($user, $otp_type);
+        $otp = OtpUtilityController::createOtp($user, $otp_type);
         $collect  = collect();
         $collect->put('otp', $otp);
         $user->notify(new VerifyOtp($collect));
@@ -194,7 +206,7 @@ class RegisterController extends Controller
     {   
         $type= $request->type;
         $user = User::query()->where('email', $request->email)->first();
-        return view('auth.otp', compact('user','type'));
+        return view('website.auth.otp', compact('user','type'));
     }
 
 
@@ -205,7 +217,7 @@ class RegisterController extends Controller
         $user =  User::query()->where('email', $email)->first();
         if ($user) {
             
-                $otp = OtpController::createOtp($user, $type);
+                $otp = OtpUtilityController::createOtp($user, $type);
                 $collect  = collect();
                 $collect->put('otp', $otp);
                 $user->notify(new VerifyOtp($collect));
