@@ -75,7 +75,7 @@
                                     <select name="organisation_type" class="@error('organisation_type') is-invalid @enderror" id="" required autofocus>
                                         <option value="">Select</option>
                                         @foreach ($organisationType as $k=>$v)
-                                            <option value="{{ $v->id }}">{{  $v->name }}</option>
+                                            <option value="{{ $v->id }}" <?php if($v->id == $UserOrganisation->type){echo('selected');} ?>>{{  $v->name }}</option>
                                         @endforeach
                                     </select>                                    
                                     @error('organisation_type')
@@ -100,7 +100,9 @@
                                     <label>Services</label>
                                     <select name="service_id[]" class="outline js-select2 @error('service_id') is-invalid @enderror" id="" multiple required autofocus>
                                         @foreach ($organisationService as $k=>$v)
-                                            <option value="{{ $v->id }}">{{ $v->name }}</option>
+                                            @foreach ($UserOrganisation->organizationServices as $k => $organizationService)
+                                                <option value="{{ $v->id }}" <?php if($v->id == $organizationService->services->id){echo('selected');} ?>>{{ $v->name }}</option>
+                                            @endforeach
                                         @endforeach
                                     </select>
                                     @error('service_id')
@@ -122,15 +124,15 @@
                                             @php
                                             if(isset($UserOrganisation->location_in)){
                                                 if ($UserOrganisation->location_in == $v->id) {
-                                                echo 'selected';
-                                            }
+                                                    echo 'selected';
+                                                }
                                             }
                                             @endphp value="{{ $v->id }}">{{ $v->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('located_in')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $Located }}</strong>
+                                        <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
@@ -166,7 +168,9 @@
                                     <label> Languages Spoken</label>
                                     <select name="language_id[]" class="outline js-select2 @error('language_id') is-invalid @enderror" id="lang" multiple required autofocus>
                                         @foreach ($languages as $k=>$v)
-                                            <option value="{{ $v->id }}"<?php if(isset($user->country) && $user->country->id == $v->id){echo('selected');} ?>>{{  $v->name }}</option>
+                                            @foreach ($UserOrganisation->organizationLanguages as $k => $organizationLanguage)                                    
+                                                <option value="{{ $v->id }}"<?php if($v->id == $organizationLanguage->languages->id){echo('selected');} ?>>{{  $v->name }}</option>
+                                            @endforeach
                                         @endforeach
                                     </select>
                                     @error('language_id')
@@ -244,15 +248,50 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="row">
+                        <div class="row">
                             <div class="col-md-12 d-flex my-3 align-items-center">
                                 <div class="organisation_cmn_text deep-pink">
                                     <h6>Team members</h6>
                                 </div>
+                                <div class="mx-5 icon_container"><a href="{{ route('create-team') }}"><span class="icon-size deep-pink">+</span></a></div>
                                 <!-- <div class="mx-5 icon_container"><i class="fa fa-plus icon-size deep-pink" aria-hidden="true"></i></div> -->
-                                <div class="mx-5 icon_container"> <span class="icon-size deep-pink">+</span></div>
+
+                                
                             </div>
-                            <div class="col-md-3">
+                            {{-- <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('team-store') }}">
+                                @csrf                           --}}
+    
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="profile_input">
+                                            <label>first mail</label>
+                                            <input type="email" class="first_mail outline is-invalid-remove name-only form-control @error('first_mail') is-invalid @enderror" placeholder="{{ __('first_mail') }}" name="first_mail" value=""
+                                                aria-label="Username" aria-describedby="basic-addon1" autofocus>
+                                            @error('first_mail')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="profile_input">
+                                            <label>Second mail</label>
+                                            <input type="email" class="second_mail outline is-invalid-remove name-only form-control @error('second_mail') is-invalid @enderror" placeholder="{{ __('second_mail') }}" name="second_mail" value=""
+                                                aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                            @error('second_mail')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="invite_submit guide_profile_btn">Invite</button>
+                                    </div>
+                                </div>                                
+                            {{-- </form> --}}
+                            {{-- <div class="col-md-3">
                                 <div><img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="w-100"></div>
                                 <div class="d-flex justify-content-between mt-3">
                                     <div class="organisation_cmn_text">Title</div>
@@ -265,8 +304,8 @@
                                     <div class="organisation_cmn_text">Title</div>
                                     <div class="icon_container"><i class="fa fa-times-circle icon-size deep-pink" aria-hidden="true"></i></div>
                                 </div>
-                            </div>
-                        </div> --}}
+                            </div> --}}
+                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-end mt-4">
@@ -330,5 +369,31 @@
             
     //     }
     // });
+
+    $('.invite_submit').click(function()
+    {
+        var email1 = $('.first_mail').val();
+        var email2 = $('.second_mail').val();
+        
+        $.ajax(
+        {
+            url:"{{ route('team-store') }}",
+            type:'POST',
+            dataType:'json',
+            data:{email1:email1,email2:email2,"_token": "{{ csrf_token() }}"},
+            success:function(response)
+            {
+                console.log(response);
+                alert(response);
+            },
+            error:function(response,status,error)
+            {   
+                console.log(response);
+                console.log(status);
+                console.log(error);
+            } 
+        });
+    });
+        
 </script>
 @endpush

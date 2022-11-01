@@ -103,6 +103,12 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/store', [OrganisationController::class, 'store'])->name('organisation-store');
         // Route::get('/edit/{id}', [OrganisationController::class, 'edit'])->name('organisation-edit');
         // Route::post('/update/{id}', [OrganisationController::class, 'update'])->name('organisation-update');
+
+
+
+        Route::get('/create-team', [OrganisationController::class, 'createTeam'])->name('create-team');
+        Route::post('/team-store', [OrganisationController::class, 'teamStore'])->name('team-store');
+
 	});
 
     

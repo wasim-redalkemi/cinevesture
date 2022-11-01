@@ -9,8 +9,11 @@ use App\Models\MasterOrganisationType;
 use App\Models\UserOrganisation;
 use App\Models\UserOrganisationLanguage;
 use App\Models\UserOrganisationService;
+use App\Notifications\TeamInvite;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Validator;
 
 class OrganisationController extends Controller
 {
@@ -22,12 +25,11 @@ class OrganisationController extends Controller
     public function index()
     {
         try {
-            $UserOrganisation = UserOrganisation::query()->with(['organizationLanguages.languages','organizationServices.services','country'])->where('user_id',auth()->user()->id)->first();
-            
-            return view('user.organisation.organisation',compact(['UserOrganisation']));
+            $UserOrganisation = UserOrganisation::query()->with(['organizationLanguages.languages', 'organizationServices.services', 'country'])->where('user_id', auth()->user()->id)->first();
 
+            return view('user.organisation.organisation', compact(['UserOrganisation']));
         } catch (Exception $e) {
-            return back()->withError('error','Somethig went wrong.');
+            return back()->withError('error', 'Somethig went wrong.');
         }
     }
 
@@ -43,12 +45,11 @@ class OrganisationController extends Controller
             $country = MasterCountry::query()->get();
             $organisationType = MasterOrganisationType::query()->get();
             $organisationService = MasterOrganisationService::query()->get();
-            $UserOrganisation = UserOrganisation::query()->with(['organizationLanguages.languages','organizationServices.services','country'])->where('user_id',auth()->user()->id)->first();
-            
-            return view('user.organisation.organisation_create',compact(['languages','country','organisationType','organisationService','UserOrganisation']));
+            $UserOrganisation = UserOrganisation::query()->with(['organizationLanguages.languages', 'organizationServices.services', 'country'])->where('user_id', auth()->user()->id)->first();
 
+            return view('user.organisation.organisation_create', compact(['languages', 'country', 'organisationType', 'organisationService', 'UserOrganisation']));
         } catch (Exception $e) {
-            return back()->withError('error','Somethig went wrong.');
+            return back()->withError('error', 'Somethig went wrong.');
         }
     }
 
@@ -61,9 +62,9 @@ class OrganisationController extends Controller
     public function store(Request $request)
     {
         try {
-            $UserOrganisation = UserOrganisation::query()->where('user_id',auth()->user()->id)->first();
-            if(!$UserOrganisation){
-                $UserOrganisation =new UserOrganisation();
+            $UserOrganisation = UserOrganisation::query()->where('user_id', auth()->user()->id)->first();
+            if (!$UserOrganisation) {
+                $UserOrganisation = new UserOrganisation();
             }
             $UserOrganisation->user_id = auth()->user()->id;
             $UserOrganisation->name = $request->name;
@@ -78,21 +79,21 @@ class OrganisationController extends Controller
             $UserOrganisation->team_size = $request->team_size;
 
 
-            if($request->hasFile('logo')) {
+            if ($request->hasFile('logo')) {
 
                 $file = $request->file('logo');
                 $originalFile = $file->getClientOriginalName();
                 $fileExt = pathinfo($originalFile, PATHINFO_EXTENSION);
                 $fileName = pathinfo($originalFile, PATHINFO_FILENAME);
                 $nameStr = date('_YmdHis');
-                $newName = $fileName.$nameStr.'.'.$fileExt;
+                $newName = $fileName . $nameStr . '.' . $fileExt;
                 $locationPath  = "organisation";
-                $uploadFile = $this->uploadFile($locationPath , $file,$newName);
+                $uploadFile = $this->uploadFile($locationPath, $file, $newName);
                 $UserOrganisation->logo = $uploadFile;
             }
-            if($UserOrganisation->save()) {
+            if ($UserOrganisation->save()) {
                 if (isset($request->service_id)) {
-                    UserOrganisationService::query()->where('organisation_id',$UserOrganisation->id)->delete();
+                    UserOrganisationService::query()->where('organisation_id', $UserOrganisation->id)->delete();
                     foreach ($request->service_id as $k => $v) {
                         $UserOrganisationService = new UserOrganisationService();
                         $UserOrganisationService->organisation_id = $UserOrganisation->id;
@@ -101,7 +102,7 @@ class OrganisationController extends Controller
                     }
                 }
                 if (isset($request->language_id)) {
-                    UserOrganisationLanguage::query()->where('organisation_id',$UserOrganisation->id)->delete();
+                    UserOrganisationLanguage::query()->where('organisation_id', $UserOrganisation->id)->delete();
                     foreach ($request->language_id as $k => $v) {
                         $UserOrganisationLanguage = new UserOrganisationLanguage();
                         $UserOrganisationLanguage->organisation_id = $UserOrganisation->id;
@@ -109,14 +110,12 @@ class OrganisationController extends Controller
                         $UserOrganisationLanguage->save();
                     }
                 }
-                return redirect()->route('organisation-private-view')->with("success","User organisation updated successfully.");
-            }else {
-                return back()->withError('error','Somethig went wrong ,please try again.');
+                return redirect()->route('organisation-private-view')->with("success", "User organisation updated successfully.");
+            } else {
+                return back()->withError('error', 'Somethig went wrong ,please try again.');
             }
-           
-
         } catch (Exception $e) {
-            return back()->withError('error','Somethig went wrong.');
+            return back()->withError('error', 'Somethig went wrong.');
         }
     }
 
@@ -163,5 +162,45 @@ class OrganisationController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function createTeam()
+    {
+        return view('user.organisation.team');
+    }
+
+    public function teamStore(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+
+                'first_mail' => 'nullable|email',
+                'second_mail' => 'nullable|email',
+            ]);
+
+            if ($validator->fails()) {
+                return ['satus'=>0,'msg'=>$validator->errors()->first()];
+            }
+            $email = '';
+            if(!$_REQUEST['email1'] && !$_REQUEST['email2']){
+                return ['satus'=>0,'msg'=>"Email fields can not be empty."];
+            }
+            if(!empty($_REQUEST['email1']) ){
+                $email = $_REQUEST['email1'];
+                $collect = collect();
+                $collect->put('url','www.google.com');
+                Notification::route('mail', $email)->notify(new TeamInvite($collect));
+            }
+            if(!empty($_REQUEST['email2']) ){
+                $email = $_REQUEST['email2'];
+                $collect = collect();
+                $collect->put('url','www.google.com');
+                Notification::route('mail', $email)->notify(new TeamInvite($collect));
+            }
+
+            
+        } catch (Exception $e) {
+            return ['satus'=>0,'msg'=>"Somethig went wrong."];
+        }
     }
 }
