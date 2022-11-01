@@ -39,7 +39,7 @@
                                 <div class="col-md-12">
                                     <div class="profile_input">
                                         <label>Description</label>
-                                    <textarea class="form-control @error('description') is-invalid @enderror" name="description" aria-label="With textarea">{{ $UserPortfolioEdit[0]->description }}</textarea>
+                                    <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" text-length = "600" maxlength="600" name="description" aria-label="With textarea">{{ $UserPortfolioEdit[0]->description }}</textarea>
                                     @error('description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>

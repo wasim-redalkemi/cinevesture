@@ -34,7 +34,7 @@
                             <div class="col-md-10">
                                 <div class="profile_input">
                                     <label>Synopsis/Brief Description *</label>
-                                    <textarea class="form-control" name="synopsis" aria-label="With textarea"></textarea>
+                                    <textarea class="form-control controlTextLength" text-length = "600" maxlength="600" name="synopsis" aria-label="With textarea"></textarea>
                                 </div>
                             </div>
                         </div>
@@ -43,7 +43,7 @@
                                 <div class="profile_input">
                                     <label>Director/Creator/Founder’s Statement *</label>
                                 </div>
-                                <textarea class="form-control" name="director_statement" style="border: 1px solid #4D0D8A;" id="textAreaExample3" rows="1"></textarea>
+                                <textarea class="form-control controlTextLength" text-length = "600" maxlength="600" name="director_statement" style="border: 1px solid #4D0D8A;" id="textAreaExample3" rows="1"></textarea>
                             </div>
                         </div>
                         <div class="row">
