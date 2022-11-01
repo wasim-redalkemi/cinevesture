@@ -244,23 +244,20 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="row">
+                         <div class="row">
                             <div class="col-md-12 d-flex my-3 align-items-center">
                                 <div class="organisation_cmn_text deep-pink">
                                     <h6>Team members</h6>
                                 </div>
                                 <!-- <div class="mx-5 icon_container"><i class="fa fa-plus icon-size deep-pink" aria-hidden="true"></i></div> -->
-                                <div class="mx-5 icon_container" data-toggle="modal" data-target="#inviteMemberModal"> <span class="icon-size deep-pink">+</span></div>
+                                <div class="mx-5 icon_container pointer" data-toggle="modal" data-target="#inviteMemberModal"> <span class="icon-size deep-pink">+</span></div>
 
                 <!-- Invite Members modal  -->
-
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#inviteMemberModal">
-                </button>
                 <div class="modal fade" id="inviteMemberModal" tabindex="-1" role="dialog" aria-labelledby="inviteMemberModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
-                        <div class="modal-content">
+                        <div class="modal-content bg_3308">
                             <div class="modal-body p-0">
-                                <section class="bg_3308 p-3">
+                                <section class="p-3">
                                     <div class="container">
                                         <form method="POST">
                                             <div class="row">
@@ -302,7 +299,7 @@
                                     <div class="icon_container"><i class="fa fa-times-circle icon-size deep-pink" aria-hidden="true"></i></div>
                                 </div>
                             </div>
-                        </div> --}}
+                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-end mt-4">
