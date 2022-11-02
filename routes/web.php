@@ -3,9 +3,9 @@
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Website\OrganisationController;
 use App\Http\Controllers\Website\UserController;
 use App\Http\Controllers\Website\IndustryGuideController;
-use App\Http\Controllers\Website\OrganisationController;
 use App\Http\Controllers\Website\ProjectController;
 use App\Http\Controllers\Website\SettingController;
 use App\Models\User;
