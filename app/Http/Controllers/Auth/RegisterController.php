@@ -192,13 +192,13 @@ class RegisterController extends Controller
 
                 }
                 else{
-                    return back()->with( 'error','Somethig went wrong.');
+                    return back()->with( 'error','Something went wrong.');
                 }
               
               
             }
         } catch (Exception $e) {
-            return back()->with( 'error','Somethig went wrong.');
+            return back()->with( 'error','Something went wrong.');
         }
     }
 
