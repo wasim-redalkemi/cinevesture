@@ -18,14 +18,14 @@
                 @include('website.include.profile_sidebar')
             </div>
             <div class="col-md-9">
-                <div class="profile_text"><h1>Endorsements</h1></div>
+                <div class="profile_text mt-2"><h1>Endorsements</h1></div>
                 @foreach($endorsement as $edm)
-                <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
+                <div class="profile_wraper profile_wraper_padding mt-4">
                   <div class="row">
                     <div class="col-md-3">
                         <div class="guide_profile_main_text deep-pink">{{$edm['endorsementCreater']->name}}</div>
                         <div class="guide_profile_main_subtext Aubergine_at_night">{{$edm['endorsementCreater']->job_title}}</div>
-                        <div class="profile_upload_text Aubergine_at_night">{{date('d M Y',strtotime($edm->created_at))}}</div>
+                        <div class="profile_upload_text Aubergine_at_night fw_300">{{date('d M Y',strtotime($edm->created_at))}}</div>
                         <div class="guide_profile_main_subtext Aubergine_at_night">{{$edm['endorsementCreater']['organization']->name?$edm['endorsementCreater']['organization']->name:NULL}}</div>
                     </div>
                     <div class="col-md-7">

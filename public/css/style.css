@@ -239,7 +239,10 @@ body {
     color: #DD45B3;
 }
 
-
+.fw_300 {
+    font-weight: 300 !important;
+    margin-top: 0 !important;
+}
 .dropdown-toggle::after {
     color: #DD45B3 !important;
 }
