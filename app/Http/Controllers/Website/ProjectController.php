@@ -31,7 +31,7 @@ class ProjectController extends WebController
             return view('website.user.project.project',compact('user','UserProject'));
 
         } catch (Exception $e) {
-            return back()->withError('error','Somethig went wrong.');
+            return back()->withError('error','Something went wrong.');
         }
     }
     public function projectViewRender($nextPage = '')
@@ -68,7 +68,7 @@ class ProjectController extends WebController
                     return view('website.user.project.project_overview', compact('user','languages','country'));
             }
         } catch (Exception $e) {
-            return back()->withError('error','Somethig went wrong.');
+            return back()->withError('error','Something went wrong.');
         }
     }
 
@@ -103,7 +103,7 @@ class ProjectController extends WebController
 
             }
         } catch (Exception $e) {
-            return back()->withError('error','Somethig went wrong.');
+            return back()->withError('error','Something went wrong.');
         }
     }
         
@@ -138,7 +138,7 @@ class ProjectController extends WebController
                 }
             }
         } catch (Exception $e) {
-            return back()->withError('error','Somethig went wrong.');
+            return back()->withError('error','Something went wrong.');
         }
     }
 
@@ -160,7 +160,7 @@ class ProjectController extends WebController
                 }
             }
         } catch (Exception $e) {
-            return back()->withError('error','Somethig went wrong.');
+            return back()->withError('error','Something went wrong.');
         }
     }
 
@@ -217,7 +217,7 @@ class ProjectController extends WebController
             } 
             catch (Exception $e) 
             {
-                return back()->withError('error','Somethig went wrong.');
+                return back()->withError('error','Something went wrong.');
             }
     }
 
@@ -252,7 +252,7 @@ class ProjectController extends WebController
                 }
             }
         } catch (Exception $e) {
-            return back()->withError('error','Somethig went wrong.');
+            return back()->withError('error','Something went wrong.');
         }
     }    
 }

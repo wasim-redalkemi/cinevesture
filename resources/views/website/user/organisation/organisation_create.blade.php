@@ -7,6 +7,9 @@
 @endsection
 
 @section('content')
+<div class="hide-me animation for_authtoast">
+    @include('website.include.flash_message')
+</div>
 <section class="profile-section">
     <div class="container">
         <div class="row">
@@ -63,11 +66,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- @php
-                            echo '<pre>';
-                                print_r($organisationType);
-                                die;
-                        @endphp --}}
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="profile_input">
@@ -253,45 +251,54 @@
                                 <div class="organisation_cmn_text deep-pink">
                                     <h6>Team members</h6>
                                 </div>
-                                <div class="mx-5 icon_container"><a href="{{ route('create-team') }}"><span class="icon-size deep-pink">+</span></a></div>
                                 <!-- <div class="mx-5 icon_container"><i class="fa fa-plus icon-size deep-pink" aria-hidden="true"></i></div> -->
+                                <div class="mx-5 icon_container pointer" data-toggle="modal" data-target="#inviteMemberModal"> <span class="icon-size deep-pink">+</span></div>
 
-                                
-                            </div>
-                            {{-- <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('team-store') }}">
-                                @csrf                           --}}
-    
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        <div class="profile_input">
-                                            <label>first mail</label>
-                                            <input type="email" class="first_mail outline is-invalid-remove name-only form-control @error('first_mail') is-invalid @enderror" placeholder="{{ __('first_mail') }}" name="first_mail" value=""
-                                                aria-label="Username" aria-describedby="basic-addon1" autofocus>
-                                            @error('first_mail')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
+                                <!-- Invite Members modal  -->
+                                <div class="modal fade" id="inviteMemberModal" tabindex="-1" role="dialog" aria-labelledby="inviteMemberModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content bg_3308">
+                                            <div class="modal-body p-0">
+                                                <section class="p-3">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-md-12">                                                                
+                                                                <div class="signup-text  mt-5 mt-md-5"> Invite Members </div>    
+                                                                    
+                                                                <div class="proctect_by_capta_text mt-4 text-center">
+                                                                    You can invite up to two members in your enterprise plan.
+                                                                </div>                                                                
+                                                            </div>
+                                                            <div class="col-md-12 mt-4">
+                                                                <input type="email" id="email_1" name="email_1" value="" placeholder="First email" class="modal_input">
+                                                                @error('email_1')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="col-md-12 mt-3">
+                                                                <input type="email" id="email_2" name="email_2" value="" placeholder="Second email" class="modal_input">
+                                                                @error('email_2')
+                                                                    <span class="invalid-feedback" role="alert">
+                                                                        <strong>{{ $message }}</strong>
+                                                                    </span>
+                                                                @enderror
+                                                            </div>
+                                                            <div class="col-md-12 py-3">
+                                                                <button type="button" class="invite_btn">Invite</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div class="profile_input">
-                                            <label>Second mail</label>
-                                            <input type="email" class="second_mail outline is-invalid-remove name-only form-control @error('second_mail') is-invalid @enderror" placeholder="{{ __('second_mail') }}" name="second_mail" value=""
-                                                aria-label="Username" aria-describedby="basic-addon1" required autofocus>
-                                            @error('second_mail')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <button type="button" class="invite_submit guide_profile_btn">Invite</button>
-                                    </div>
-                                </div>                                
-                            {{-- </form> --}}
-                            {{-- <div class="col-md-3">
+                                </div>
+                            </div>                            
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
                                 <div><img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="w-100"></div>
                                 <div class="d-flex justify-content-between mt-3">
                                     <div class="organisation_cmn_text">Title</div>
@@ -304,7 +311,7 @@
                                     <div class="organisation_cmn_text">Title</div>
                                     <div class="icon_container"><i class="fa fa-times-circle icon-size deep-pink" aria-hidden="true"></i></div>
                                 </div>
-                            </div> --}}
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -328,11 +335,6 @@
 
 @push('scripts')
 <script type="text/javascript">
-
-    // $(document).ready(function(){
-    //     $("#error-toast").toast("show");
-    //     $("#success-toast").toast("show");
-    // });
 
     $(document).ready(function()
     {   
@@ -360,31 +362,22 @@
         tags: false
     });
 
-    // $("#located_in").on('change', function() {
-    //     if($("#located_in option:selected").text().trim() == "India"){
-    //         $("#state-show").show();
-    //     }else{
-    //         $("#state-show").hide();
-    //         $("option:selected", $("#state")).prop("selected", false);
-            
-    //     }
-    // });
-
-    $('.invite_submit').click(function()
+    $('.invite_btn').click(function()
     {
-        var email1 = $('.first_mail').val();
-        var email2 = $('.second_mail').val();
+        var email_1 = $('#email_1').val();
+        var email_2 = $('#email_2').val();
         
         $.ajax(
         {
             url:"{{ route('team-store') }}",
             type:'POST',
             dataType:'json',
-            data:{email1:email1,email2:email2,"_token": "{{ csrf_token() }}"},
+            data:{email_1:email_1,email_2:email_2,"_token": "{{ csrf_token() }}"},
             success:function(response)
             {
-                console.log(response);
-                alert(response);
+                toastMessage(response.status, response.msg);
+                $('.modal').hide();
+                $('.modal-backdrop').remove();
             },
             error:function(response,status,error)
             {   
