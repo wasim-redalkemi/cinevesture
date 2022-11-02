@@ -1,13 +1,13 @@
-@extends('layouts.app')
+@extends('website.layouts.app')
 
 @section('title','Cinevesture-index')
 
 @section('header')
-    @include('include.header')
+    @include('website.include.header')
 @endsection
 
 @section('nav')
-    @include('include.nav')
+    @include('website.include.nav')
 @endsection
 
 @section('content')
@@ -206,7 +206,7 @@
 @endsection
 
 @section('footer')
-  @include('include.footer')      
+  @include('website.include.footer')      
 @endsection
   
 @section('scripts')

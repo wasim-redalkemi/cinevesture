@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Helper\OtpUtilityController;
 use App\Http\Controllers\OtpController;
 use App\Models\User;
 use App\Notifications\VerifyOtp;
@@ -129,17 +130,18 @@ class ResetPasswordController extends Controller
     {
         //$token = $request->route()->parameter('token');
 
-        return view('auth.passwords.reset')->with(
+        return view('websiteauth.passwords.reset')->with(
             ['token' => $token, 'email' => $request->email]
         );
     }
+    
 
 
     // reset password otp views
     public function createResetOtp()
     {
         $user = User::find(auth()->user()->id);
-        $otp = OtpController::createOtp($user, 'R'); // F for Forgot pasword
+        $otp = OtpUtilityController::createOtp($user, 'R'); // F for Forgot pasword
         $collect  = collect();
         $collect->put('otp', $otp);
         $user->notify(new VerifyOtp($collect));
@@ -149,20 +151,20 @@ class ResetPasswordController extends Controller
 
     public function restPasswordOtpView()
     {
-        return view('userverification.reset_password');
+        return view('website.userverification.reset_password');
     }
 
     // reset password View
     public function restPasswordView()
     {
-        return view('userverification.password_change');
+        return view('website.userverification.password_change');
     }
 
     // reset password public view 
     public function restPasswordPublicView(Request $request)
     {   $token = $request->token;
         $email = $request->email;
-        return view('auth.passwords.reset',compact(['token','email']));
+        return view('website.auth.passwords.reset',compact(['token','email']));
     }
 
     public function resetPasswordCreate(Request $request)

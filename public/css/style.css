@@ -76,6 +76,14 @@ body {
 
 }
 
+.link-style{
+    color: #971e9b;
+    font-size: 14px;
+    font-style: italic;
+    outline: none;
+    text-decoration: none;
+}
+
 .add-proj-btn {
     border: 1px solid #DD45B3;
     color: #DD45B3;
