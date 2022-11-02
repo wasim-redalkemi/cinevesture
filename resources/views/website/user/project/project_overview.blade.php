@@ -10,7 +10,7 @@
 <div class="hide-me animation for_authtoast">
     @include('website.include.flash_message')
 </div>
-@include('user.project.project_pagination')
+@include('website.user.project.project_pagination')
 
 
 <!-- Overview section -->
@@ -38,8 +38,9 @@
                                 <div class="profile_input">
                                     <label>Type of Project *</label>
                                         <select name="project_type_id" id="lang">
+                                            <option value="test1">Select</option>
                                             <option value="test1">test1</option>
-                                            <option value="test1">test1</option>
+                                            <option value="test1">test2</option>
                                         </select>
                                 </div>
                             </div>
@@ -50,13 +51,15 @@
                                 <div class="profile_input">
                                     <label>Who are you listing this project as? *</label>
                                     <div class="d-flex">
-                                        <div class="checkbox_btn d-flex">
+                                        <div class="checkbox_btn d-flex align-items-center">
+                                        <!-- <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"> -->
+                                        <!-- <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"> -->
                                             <input type="radio" class="checkbox_btn" name="listing_project_as" value="Individual" aria-label="">
-                                            <div class="verified-text mx-2"> Individual</div>
+                                            <div class="radio_btn_label"> Individual</div>
                                         </div>
-                                        <div class="checkbox_btn d-flex mx-3">
+                                        <div class="checkbox_btn d-flex align-items-center mx-4">
                                             <input type="radio" class="checkbox_btn" name="listing_project_as" value="Organization" aria-label="">
-                                            <div class="verified-text mx-2"> Organization</div>
+                                            <div class="radio_btn_label"> Organization</div>
                                         </div>
                                     </div>
                                 </div>
@@ -65,7 +68,7 @@
 
                         <div class="row">
                             <div class="col-md-3">
-                                <div class="mt_16">
+                                <div>
                                     <label>Select Country *</label>
                                     <select class="js-select2" name="countries[]" multiple="multiple">
                                         @foreach ($country as $k=>$v)
@@ -132,7 +135,7 @@
 
     $(".js-select2").select2({
       closeOnSelect: false,
-      placeholder: "Placeholder",
+      placeholder: "Select",
       allowClear: true,
       tags: true
   });
@@ -143,7 +146,7 @@
 <script>
       $(".js-select2").select2({
         closeOnSelect: false,
-        placeholder: "Placeholder",
+        placeholder: "Select",
         allowClear: true,
         tags: true
     });
