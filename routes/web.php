@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
@@ -39,7 +40,16 @@ Auth::routes(['verify' => true]);
 
     Route::group(['prefix'=>'admin'],function(){
         Route::get('/index', [AdminController::class, 'index'])->name('admin.index');
+        Route::get('/user', function () {
+            return view('admin.user.user');
+        });
+    });
+    Route::group(['prefix'=>'admin'],function(){
+        Route::get('/project/list', [AdminProjectController::class, 'index'])->name('admin.project');
+        Route::get('/project/list/fav', [AdminProjectController::class, 'markFav'])->name('adminmarkfav');
+        Route::get('/project/list/recom', [AdminProjectController::class, 'markRecom'])->name('adminmarkrecom');
 
+      
     });
 
 
