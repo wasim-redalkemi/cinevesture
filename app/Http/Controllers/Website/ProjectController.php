@@ -58,7 +58,7 @@ class ProjectController extends WebController
                 case 'Gallery':
                     return view('website.user.project.project_gallery', compact('user','languages','country'));
                     break;
-                case 'Req&milestone':
+                case 'Milestone':
                     return view('website.user.project.project_milestones', compact('user','languages','country','lookingFor'));
                     break;
                 case 'Preview':
@@ -212,7 +212,7 @@ class ProjectController extends WebController
                         $projectMedia->file_link = $v['file_link'];
                         $projectMedia->save();
                     }
-                    return redirect()->route('project-create',['nextPage' => 'Req&milestone'])->with("success","Project media updated successfully.");
+                    return redirect()->route('project-create',['nextPage' => 'Milestone'])->with("success","Project media updated successfully.");
                 }
             } 
             catch (Exception $e) 

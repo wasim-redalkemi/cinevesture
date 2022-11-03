@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Website;
 
-namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\WebController;
 
 use App\Models\MasterCountry;
 use App\Models\MasterLanguage;
@@ -30,8 +32,6 @@ class OrganisationController extends WebController
             $UserOrganisation = UserOrganisation::query()->with(['organizationLanguages.languages','organizationServices.services','country'])->where('user_id',auth()->user()->id)->first();
             
             return view('website.user.organisation.organisation',compact(['UserOrganisation']));
-
-            return view('user.organisation.organisation', compact(['UserOrganisation']));
         } catch (Exception $e) {
             return back()->withError('error', 'Something went wrong.');
         }
@@ -52,8 +52,6 @@ class OrganisationController extends WebController
             $UserOrganisation = UserOrganisation::query()->with(['organizationLanguages.languages','organizationServices.services','country'])->where('user_id',auth()->user()->id)->first();
             
             return view('website.user.organisation.organisation_create',compact(['languages','country','organisationType','organisationService','UserOrganisation']));
-
-            return view('user.organisation.organisation_create', compact(['languages', 'country', 'organisationType', 'organisationService', 'UserOrganisation']));
         } catch (Exception $e) {
             return back()->withError('error', 'Something went wrong.');
         }
@@ -172,7 +170,7 @@ class OrganisationController extends WebController
 
     public function createTeam()
     {
-        return view('user.organisation.team');
+        return view('website.user.organisation.organisation');
     }
 
     public function teamStore(Request $request)

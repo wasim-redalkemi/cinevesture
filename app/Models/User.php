@@ -66,8 +66,8 @@ class User extends Authenticatable
         $collect->put('otp', $otp);
         $this->notify(new VerifyOtp($collect));
     }
-    public function organization()
-    {
+
+    public function organization(){
         return $this->hasOne(UserOrganisation::class, 'user_id', 'id');
     }
 }
