@@ -4,9 +4,10 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Website\EndorsementController;
+use App\Http\Controllers\Website\OrganisationController;
 use App\Http\Controllers\Website\UserController;
 use App\Http\Controllers\Website\IndustryGuideController;
-use App\Http\Controllers\Website\OrganisationController;
 use App\Http\Controllers\Website\ProjectController;
 use App\Http\Controllers\Website\SettingController;
 use App\Models\User;
@@ -28,6 +29,9 @@ Route::get('/', function () {
 });
 Auth::routes(['verify' => true]);
 
+
+// Admin routes 
+@include('admin.php');
 
 
 
@@ -68,7 +72,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::get('/qualification-create/{id?}', [UserController::class, 'qualificationCreate'])->name('qualification-create');
         Route::post('/qualification-store/{id?}', [UserController::class, 'qualificationStore'])->name('qualification-store');        		
         Route::get('/qualification-edit/{id}', [UserController::class, 'qualificationEdit'])->name('qualification-edit');
-        Route::post('/qualification-edit-store/{id}', [UserController::class, 'qualificationEditStore'])->name('qualification-edit-store');        		
+        Route::post('/qualification-edit-store/{id}', [UserController::class, 'qualificationEditStore'])->name('qualification-edit-store'); 
+               		
 	});
 
     Route::group(['prefix'=>'project'],function()
@@ -80,6 +85,14 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/project-gallery-store/{id}', [ProjectController::class, 'galleryStore'])->name('project-gallery-store');
         Route::post('/project-description-store/{id}', [ProjectController::class, 'descriptionStore'])->name('project-description-store');
         Route::post('/project-milestone-store/{id}', [ProjectController::class, 'milestoneStore'])->name('project-milestone-store');
+	});
+
+    Route::group(['prefix'=>'endorsement'],function()
+	{	
+        Route::get('/', [EndorsementController::class, 'index'])->name('endorsement-view');
+        Route::post('/status', [EndorsementController::class, 'changeStatus'])->name('endorsement-status-change');
+
+        
 	});
 
     Route::group(['prefix'=>'industry-guide'],function()
@@ -107,9 +120,6 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/store', [OrganisationController::class, 'store'])->name('organisation-store');
         // Route::get('/edit/{id}', [OrganisationController::class, 'edit'])->name('organisation-edit');
         // Route::post('/update/{id}', [OrganisationController::class, 'update'])->name('organisation-update');
-
-
-
         Route::get('/create-team', [OrganisationController::class, 'createTeam'])->name('create-team');
         Route::post('/team-store', [OrganisationController::class, 'teamStore'])->name('team-store');
 

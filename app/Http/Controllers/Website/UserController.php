@@ -8,6 +8,7 @@ use App\Http\Controllers\WebController;
 use App\Http\Requests\PostUserPortfolioRequest;
 use App\Http\Requests\StoreProfileUpdate;
 use App\Models\AgeRange;
+use App\Models\Endorsement;
 use App\Models\MasterCountry;
 use App\Models\MasterLanguage;
 use App\Models\MasterSkill;
@@ -130,10 +131,12 @@ class UserController extends WebController
                 ->where('user_id', $user->id)
                 ->get()
                 ->toArray();
-
-            return view('website.user.profile_private_view', compact('user', 'portfolio', 'experience', 'qualification', 'user_country', 'user_skills', 'user_languages'));
+            // Endorsement
+            $user_endorsement = Endorsement::query()->with('endorsementCreater')->where('to',$user->id)
+                                ->orderByDesc('id')->limit(5)->get();
+            return view('website.user.profile_private_view', compact(['user', 'portfolio', 'experience', 'qualification', 'user_country', 'user_skills', 'user_languages','user_endorsement']));
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', "Something went wrong");
         }
     }
 
