@@ -9,7 +9,7 @@
           <span class="mdi mdi-menu"></span>
         </button>
         <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item dropdown">
+          {{-- <li class="nav-item dropdown">
             <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
               <i class="mdi mdi-bell-outline mx-0"></i>
               <span class="count"></span>
@@ -63,8 +63,8 @@
                 </div>
               </a>
             </div>
-          </li>
-          <li class="nav-item dropdown">
+          </li> --}}
+          {{-- <li class="nav-item dropdown">
             <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
               <i class="mdi mdi-email-outline mx-0"></i>
               <span class="count"></span>
@@ -118,7 +118,7 @@
                 </div>
               </a>
             </div>
-          </li>
+          </li> --}}
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
               <img src="{{asset('/admin/images/face5.jpg')}}" alt="profile"/>
@@ -137,14 +137,14 @@
               </a>
             </div>
           </li>
-          <li class="nav-item nav-settings d-none d-lg-block">
+          {{-- <li class="nav-item nav-settings d-none d-lg-block">
             <a class="nav-link" href="#">
               <i class="mdi mdi-apps"></i>
             </a>
-          </li>
+          </li> --}}
         </ul>
-        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+        {{-- <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
           <span class="mdi mdi-menu"></span>
-        </button>
+        </button> --}}
       </div>
     </nav>

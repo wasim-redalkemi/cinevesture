@@ -1,27 +1,27 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.php">
+            <a class="nav-link" href="">
               <i class="fa fa-dashcube" style="margin-right:25px;"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="widgets.php">
+            <a class="nav-link" href="">
               <i class="fa fa-address-book" style="margin-right:25px;"></i>
-              <span class="menu-title">Widgets</span>
+              <span class="menu-title">User</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
               <i class="mdi mdi-puzzle-outline menu-icon"></i>
-              <span class="menu-title">UI Elements</span>
+              <span class="menu-title">Project Management</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/accordions.html">Accordions</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('admin.project')}}">List</a></li>
+                {{-- <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/badges.html">Badges</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/breadcrumbs.html">Breadcrumbs</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
@@ -30,11 +30,11 @@
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/pagination.html">Pagination</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/tabs.html">Tabs</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/typography.html">Typography</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/tooltips.html">Tooltips</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/tooltips.html">Tooltips</a></li> --}}
               </ul>
             </div>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-advanced" aria-expanded="false" aria-controls="ui-advanced">
               <i class="mdi mdi-bullseye-arrow menu-icon"></i>
               <span class="menu-title">Advanced UI</span>
@@ -51,8 +51,8 @@
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/loaders.html">Loaders</a></li>
               </ul>
             </div>
-          </li>
-          <li class="nav-item">
+          </li> --}}
+          {{-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
               <i class="mdi mdi-file-document-box-outline menu-icon"></i>
               <span class="menu-title">Form elements</span>
@@ -66,8 +66,8 @@
                 <li class="nav-item"><a class="nav-link" href="pages/forms/wizard.html">Wizard</a></li>
               </ul>
             </div>
-          </li>
-          <li class="nav-item">
+          </li> --}}
+          {{-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#editors" aria-expanded="false" aria-controls="editors">
               <i class="mdi mdi-pencil-box-outline menu-icon"></i>
               <span class="menu-title">Editors</span>
@@ -247,5 +247,5 @@
               <span class="menu-title">Documentation</span>
             </a>
           </li>
-        </ul>
+        </ul> --}}
       </nav>
