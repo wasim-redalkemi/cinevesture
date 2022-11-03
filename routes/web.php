@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Website\UserController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Website\IndustryGuideController;
 use App\Http\Controllers\Website\OrganisationController;
 use App\Http\Controllers\Website\ProjectController;
@@ -126,4 +127,9 @@ Route::get('/test', function () {
     return view('website.organisation.organisation_edit');
 });
 
+Route::group(['prefix'=>'admin'],function()
+{	
+    Route::get('/index', [AdminUserController::class, 'index'])->name('user-management');
+
+});
 
