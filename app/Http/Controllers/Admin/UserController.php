@@ -17,17 +17,7 @@ class UserController extends Controller
     public function index()
     {
         $users=User::query()->with(['organization.country'])->get();
-       // $users=User::all('name','email','job_title','id','created_at');
         return view('admin.user.index',compact('users'));
-        //  $UserOrganisation = UserOrganisation::query()->with(['organizationLanguages.languages','organizationServices.services','country'])->where('user_id','1')->first();
-        //  foreach($users as $user){
-           
-        //         dd($user->organization->country->name);
-            
-        //     }
-
-        
-        //dd($users);
     }
 
     /**
