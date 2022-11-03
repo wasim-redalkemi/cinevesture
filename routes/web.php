@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
@@ -40,7 +41,11 @@ Auth::routes(['verify' => true]);
     Route::get('resend-otp/{email?}/{type?}', [RegisterController::class, 'resendOtp'])->name('resend-otp'); 
     // Route::get('reset-password/{token}',[ResetPasswordController::class,'restPasswordPublicView'])->name('reset-password-view');
 
-    
+    Route::group(['prefix'=>'admin'],function(){
+        Route::get('/index', [AdminController::class, 'index'])->name('admin.index');
+
+    });
+
 
 
 Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],function(){
@@ -85,6 +90,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     Route::group(['prefix'=>'endorsement'],function()
 	{	
         Route::get('/', [EndorsementController::class, 'index'])->name('endorsement-view');
+        Route::post('/status', [EndorsementController::class, 'changeStatus'])->name('endorsement-status-change');
+
         
 	});
 

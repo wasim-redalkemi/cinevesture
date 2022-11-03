@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
 use App\Models\Endorsement;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class EndorsementController extends Controller
 {   // views 
@@ -90,5 +92,38 @@ class EndorsementController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    // change status 
+
+    public function changeStatus(Request $request)
+    {
+        
+        try {
+            $validator = Validator::make($request->all(), [
+
+                'end_id' => 'required|exists:endorsements,id',
+            ],['end_id.required'=>'Something went wrong',
+               'end_id.exists'=>'Something went wrong',]);
+
+            if ($validator->fails()) {
+                return ['satus'=>0,'msg'=>$validator->errors()->first()];
+            }
+            
+            $endorsement = Endorsement::find($request->end_id);
+            if($endorsement->status == '1'){
+                $endorsement->status = '0';
+                $msg = "Endorsement Inactive successfully.";
+            }else{
+                $endorsement->status = '1';
+                $msg = "Endorsement active successfully.";
+
+            }
+            $endorsement->save();
+            return ['status'=>1,'msg'=>$msg];           
+        } catch (Exception $e) {
+            return ['status'=>0,'msg'=>"Something went wrong."];
+        }
+        
     }
 }
