@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserFavourite;
+use App\Models\UserFavouriteProfile;
 use App\Models\UserFavouriteProject;
 use App\Models\UserProject;
 use Illuminate\Http\Request;
@@ -17,11 +18,12 @@ class FavouriteController extends Controller
      */
     public function index()
     {
-        $user_projects = UserFavouriteProject::query()->with('projects')
+        $user_projects = UserFavouriteProject::query()->with('projects.projectImage')
                          ->where('user_id',auth()->user()->id)->paginate(5);
-        dd($user_projects);
+        $user_profiles = UserFavouriteProfile::query()->with('profiles')
+                         ->where('user_id',auth()->user()->id)->paginate(5);
 
-        return view('website.user.favourite.favourite');
+        return view('website.user.favourite.favourite',compact(['user_projects','user_profiles']));
     }
 
     /**
