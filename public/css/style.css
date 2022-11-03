@@ -94,7 +94,7 @@ body {
     width: 9rem;
 }
 
-.search ::placeholder {
+.search ::placeholder, .text_fff {
     color: #FFFFFF !important;
 }
 
@@ -883,8 +883,8 @@ body {
 .mt__3 {
     margin-top: -3px;
 }
-.font_24 h1 {
-    font-size: 24px ;
+.font_24 h1, .font_24 {
+    font-size: 24px;
 }
 .font_12 {
     font-size: 12px !important;
@@ -1269,10 +1269,10 @@ body {
 }
 .tile_text {
     font-weight: 600;
-  font-size: 18px;
-  line-height: 150%;
-  letter-spacing: 0.0075em;
-  color: #33084C;
+    font-size: 18px;
+    line-height: 150%;
+    letter-spacing: 0.0075em;
+    color: #33084C;
   }
   
 .deactivate_btn {
@@ -1504,6 +1504,9 @@ button, input, optgroup, select, textarea {
 .m_0 {
     margin: 0 !important;
 }
+.br_100 {
+    border-radius: 100%;
+}
 select  option, .radio_btn_label{
     font-weight: 300;
     font-size: 14px;
@@ -1544,13 +1547,16 @@ select  option, .radio_btn_label{
     border-radius: 100%;
     color: #DD45B3;
 }
-.for_alert {
-    font-weight: 400;
+.modal_btm_text {
+    font-weight: 300;
     font-size: 14px;
-    line-height: 143%;
+    line-height: 19px;
+    text-align: center;
     letter-spacing: 0.018em;
-    color: #787885 !important;
-    text-align: end;
+    color: #FAF8FB;
+}
+.modal_check_input:checked {
+    background-color: #DD45B3 !important;
 }
 select {
     -webkit-appearance: none;
