@@ -65,7 +65,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="flow_step_text mt-3">Milestones</div>
+                        <div class="flow_step_text mt-5">Milestones</div>
                         <div class="row">
                             <div class="col-md-5">
                                 <div class="profile_input">
@@ -86,13 +86,13 @@
                                 </div>
                             </div>
                             <div class="col-md-2 d-flex align-items-end">
-                                <div class="d-flex">
+                                <div class="d-flex checkbox_btn mb-2">
                                     <input type="radio" class="checkbox_btn" name="complete" value="" aria-label="">
                                     <div class="verified-text deep-pink mx-2"> Make Complete</div>
                                 </div>
                             </div>
                         </div>
-                        <div><button class="save_add_btn mt-5">Add another Milestone</button></div>
+                        <div><button class="save_add_btn mt-4">Add another Milestone</button></div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-end mt-5 pt-5 pb-md-0">

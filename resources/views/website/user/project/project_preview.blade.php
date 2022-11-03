@@ -18,10 +18,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class=" profile_wraper profile_wraper_padding  mt-4">
+                <div class=" profile_wraper profile_wraper_padding  mt-4 mb-0">
                     <p class="flow_step_text"> Overview</p>
                @foreach ($UserProject as $k=>$v)
-                <div class="preview_headtext">Project Name</div>
+                <div class="preview_headtext mt-4">Project Name</div>
                 <div class="preview_subtext">{{$v->project_name}}</div>
                 <div class="preview_headtext">Types of projects</div>
                 <div class="preview_subtext">{{ $v->project_type_id }}</div>
@@ -46,11 +46,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="profile_wraper profile_wraper_padding  mt-4">
+                <div class="profile_wraper profile_wraper_padding mt-4 mb-0">
                 <div>
                     <p class="flow_step_text"> Details</p>
                 </div>
-                <div class="preview_headtext">Category</div>
+                <div class="preview_headtext mt-4">Category</div>
                 <div class="preview_subtext">Feature</div>
                 <div class="preview_headtext">Genre</div>
                 <div class="d-flex mt-2">
@@ -84,11 +84,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="profile_wraper profile_wraper_padding  mt-4">
+                <div class="profile_wraper profile_wraper_padding mt-4 mb-0">
                 <div>
                     <p class="flow_step_text"> Description</p>
                 </div>
-                <div class="preview_headtext">Logline</div>
+                <div class="preview_headtext mt-4">Logline</div>
                 <div class="preview_subtext">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
                 <div class="preview_headtext">Synopsis/Brief Description</div>
                 <div class="preview_subtext">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -110,7 +110,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="profile_wraper profile_wraper_padding  mt-4">
+                <div class="profile_wraper profile_wraper_padding mt-4 mb-0">
                 <div>
                     <p class="flow_step_text"> Description</p>
                 </div>
@@ -175,16 +175,16 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="profile_wraper profile_wraper_padding  mt-4">
+                <div class="profile_wraper profile_wraper_padding mt-4 mb-0">
                 <div>
                     <p class="flow_step_text"> Requirements & Milestones</p>
                 </div>
-                <div class="preview_headtext">Project Stage</div>
+                <div class="preview_headtext mt-4">Project Stage</div>
                 <div class="preview_subtext">Pre-Production</div>
                 <div class="preview_headtext">Looking For</div>
                 <div class="preview_subtext">Talent/Crew/Organisation</div>
-                <div class="preview_headtext">Crowdfunding Link</div>
-                <div class="preview_subtext">https://samplelink/sample.com</div>
+                <div class="preview_headtext mb-1">Crowdfunding Link</div>
+                <div class="proctect_by_capta_text Aubergine_at_night">https://samplelink/sample.com</div>
 
                 <div class="row mt-3">
                     <div class="col-4 col-md-3 preview_headtext">Milestone Description</div>
@@ -208,11 +208,18 @@
                 </div>
                 <div class="row">
                     <div class="com-md-12">
+                        <div class="d-flex justify-content-end mt-2">
+                        <div class="info_btn_icon pointer"><i class="fa fa-info-circle aubergine icon-size" aria-hidden="true"></i></div>
                         <div class="justify-content-end"><button class="save_add_btn float-end">Edit</button></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+        </div>
+        <div class="text-center my-5">
+            <button class="cancel_btn">Save as draft</button>
+            <button class="guide_profile_btn">Save & Publish</button>
         </div>
     </div>
 

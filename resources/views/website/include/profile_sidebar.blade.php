@@ -29,7 +29,7 @@
         </ul>
     </div>
     <hr class="sidebar_content_hr">
-    <div class="sidebar_content"><a href="">Endorsements </a></div>
+    <div class="sidebar_content"><a href="{{route('endorsement-view')}}">Endorsements </a></div>
     <hr class="sidebar_content_hr">
     <div class="sidebar_content"><a href="{{ route('favourite-view') }}">Favourites</a></div>
     <hr class="sidebar_content_hr">

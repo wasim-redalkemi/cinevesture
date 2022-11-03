@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
 
 
     @yield('css')
@@ -28,6 +29,7 @@
         <main class="">
             @yield('header')
             @yield('nav')
+            @stack('add_css')
             @yield('content')
             @yield('footer')
         </main>
@@ -41,6 +43,28 @@
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <script>
+
+$('.controlTextLength').each(function(){
+    $('.controlTextLength').after("<div class=textlength for_alert text-end>"+ $(this).val().length +" / "+$(this).attr('text-length')+"</div>");
+    $('.textlength').css({"color":"#787885", "text-align":"end"})
+ });
+
+        $('.controlTextLength').keyup(function ()
+        {
+            var max = $(this).attr('text-length');
+            var len = $(this).val().length;
+            if (len >= max) {
+                $(this).next('.textlength').text(' You have reached the limit');
+                $('.textlength').css('color', 'red', 'text-align', 'end');
+            } else {
+            var char = len;
+            $(this).next('.textlength').text(char + ' / '+max);
+            $('.textlength').css({"color":"#787885", "text-align":"end"});
+        }
+    });
+    </script>
 
     @yield('scripts')
     @stack('scripts')

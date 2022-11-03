@@ -26,15 +26,17 @@
                         </div>
                         <div class="d-flex custom_file_explorer">
                             <div class="upload_img_container">
-                                <img src="<?php if (!empty($UserOrganisation->logo)){echo Storage::url($UserOrganisation->logo); }?>" class="upload_preview">                                        
+                                <img src="<?php if (!empty($UserOrganisation->logo)) {
+                                                echo Storage::url($UserOrganisation->logo);
+                                            } ?>" class="upload_preview">
 
                                 <div for="file-input" class="d-none">
                                     <input type="file" name="logo" class="@error('logo') is-invalid @enderror file_element" accept=".jpg,.jpeg,.png">
                                     @error('logo')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror 
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                                 <div class="pointer open_file_explorer">
                                     <div class="text-center"> <i class="fa fa-plus-circle mx-2 profile_icon deep-pink pointer" aria-hidden="true"></i></div>
@@ -51,7 +53,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>                            
+                        </div>
 
                         <div class="row">
                             <div class="col-md-6">
@@ -59,9 +61,9 @@
                                     <label>Name</label>
                                     <input type="text" class="outline name-only form-control @error('name') is-invalid @enderror" placeholder="{{ __('Name') }}" name="name" value="{{(isset($UserOrganisation->name))?$UserOrganisation->name:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('name')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
@@ -73,9 +75,9 @@
                                     <select name="organisation_type" class="@error('organisation_type') is-invalid @enderror" id="" required autofocus>
                                         <option value="">Select</option>
                                         @foreach ($organisationType as $k=>$v)
-                                            <option value="{{ $v->id }}" <?php if($v->id == $UserOrganisation->type){echo('selected');} ?>>{{  $v->name }}</option>
+                                        <option value="{{ $v->id }}">{{ $v->name }}</option>
                                         @endforeach
-                                    </select>                                    
+                                    </select>
                                     @error('organisation_type')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -86,10 +88,13 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="profile_input">
+                                <div class="profile_input text_field">
                                     <label>About</label>
-                                    <textarea class="form-control" name="about" aria-label="With textarea" required autofocus>{{(isset($UserOrganisation->about))?$UserOrganisation->about:'' }}</textarea>
+                                    <textarea class="form-control controlTextLength" text-length="600" id="" name="about" maxlength="600" aria-label="With textarea" required autofocus>{{(isset($UserOrganisation->about))?$UserOrganisation->about:'' }}</textarea>
                                 </div>
+
+                                <!-- <div id="charNum" class="for_alert word_count">0 / 200</div> -->
+
                             </div>
                         </div>
                         <div class="row">
@@ -142,17 +147,18 @@
                                         <option value="">Select</option>
                                         <option @if(isset($UserOrganisation->available_to_work_in))
                                             @if ("virtually" == $UserOrganisation->available_to_work_in) {
-                                                {{'selected'}}
+                                            {{'selected'}}
                                             @endif
-                                            
-                                        @endif value="virtually">Virtually</option>
-                                        <option 
-                                        @if(isset($UserOrganisation->available_to_work_in)){
+
+                                            @endif value="virtually">Virtually
+                                        </option>
+                                        <option @if(isset($UserOrganisation->available_to_work_in)){
                                             @if ("physically" == $UserOrganisation->available_to_work_in) {
-                                                {{'selected'}}
-                                            
+                                            {{'selected'}}
+
                                             @endif
-                                        @endif value="physically">Physically</option>
+                                            @endif value="physically">Physically
+                                        </option>
                                     </select>
                                     @error('available_to_work_in')
                                     <span class="invalid-feedback" role="alert">
@@ -186,9 +192,9 @@
                                     <label>IMDB Profile</label>
                                     <input type="text" class="foutline orm-control @error('imdb_profile') is-invalid @enderror" placeholder="IMDB Profile" name="imdb_profile" value="{{(isset($UserOrganisation->imdb_profile))?$UserOrganisation->imdb_profile:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('imdb_profile')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
@@ -197,9 +203,9 @@
                                     <label>LinkedIn Profile</label>
                                     <input type="text" class="outline form-control @error('linkedin_profile') is-invalid @enderror" placeholder="LinkedIn Profile" name="linkedin_profile" value="{{(isset($UserOrganisation->linkedin_profile))?$UserOrganisation->linkedin_profile:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('linkedin_profile')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
@@ -208,9 +214,9 @@
                                     <label>Website</label>
                                     <input type="text" class="outline form-control @error('website') is-invalid @enderror" placeholder="Website" aria-label="Username" name="website" value="{{(isset($UserOrganisation->website))?$UserOrganisation->website:'' }}" aria-describedby="basic-addon1" required autofocus>
                                     @error('website')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
@@ -221,9 +227,9 @@
                                     <label>Introduction Video</label>
                                     <input type="text" class="outline form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="{{(isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('intro_video_link')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
@@ -239,9 +245,9 @@
                                     <label>Team size</label>
                                     <input type="number" class="form-control" name="team_size" value="{{(isset($UserOrganisation->team_size))?$UserOrganisation->team_size:'' }}" placeholder="Team size" aria-label="Username" aria-describedby="basic-addon1">
                                     @error('team_size')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
@@ -343,13 +349,12 @@
             $(this).parents('.custom_file_explorer').find('.file_element').click();
         });
 
-        $('.file_element').change(function()
-        {
+        $('.file_element').change(function() {
             var output = $(this).parents('.custom_file_explorer').find('.upload_preview');
             const file = this.files;
             var reader = new FileReader();
             reader.onload = function() {
-                output.attr('src',reader.result);
+                output.attr('src', reader.result);
             };
             reader.readAsDataURL(file[0]);
         });

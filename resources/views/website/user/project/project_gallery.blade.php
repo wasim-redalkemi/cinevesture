@@ -34,8 +34,8 @@
                                     <div class="profile_input">
                                         <input type="text" class="form-control" name="project_video_link_1" placeholder="Video Title">
                                     </div>
-                                    <div class="d-flex mt-5 mt-md-3">
-                                        <div> <input type="radio" class="checkbox_btn" name="" aria-label=""></div>
+                                    <div class="d-flex checkbox_btn mt-5 mt-md-3">
+                                         <input type="radio" class="checkbox_btn" name="" aria-label="">
                                         <div class="verified-text mx-2"> Make Feature Vedio</div>
                                     </div>
                                 </div>
@@ -80,7 +80,7 @@
                                 <div class="profile_input">
                                     <input type="text" class="form-control" name="" placeholder="Photo Title">
                                 </div>
-                                <div class="d-flex mt-3">
+                                <div class="d-flex checkbox_btn mt-3">
                                     <input type="radio" class="checkbox_btn" name="" aria-label="">
                                     <div class="verified-text mx-2">Make thumbnail Image</div>
                                 </div>
@@ -231,14 +231,14 @@
             e.preventDefault();
             if (x < max_fields) { //max input box allowed
                 x++; //text box increment
-                $('<div class="add_new col-md-3"><div class=""><div class="profile_upload_container h_66 mt-3 mt-md-0"><div class="text-center"><div><i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true"></i></div><div class="mt-3 movie_name_text">Upload file</div></div></div><div class="profile_input"><input type="text" class="form-control" name="" placeholder="Paste Link Here"></div><div class="d-flex mt-5 mt-md-3"><div> <input type="radio" class="checkbox_btn" name="" aria-label=""></div><div class="verified-text mx-2"> Make Feature Vedio</div></div></div> </div>').insertBefore('.add_video_btn');
+                $('<div class="add_new col-md-3"><div class=""><div class="profile_upload_container h_66 mt-3 mt-md-0"><div class="text-center"><div><i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true"></i></div><div class="mt-3 movie_name_text">Upload file</div></div></div><div class="profile_input"><input type="text" class="form-control" name="" placeholder="Paste Link Here"></div><div class="d-flex mt-5 mt-md-3"><div class="checkbox_btn"> <input type="radio" class="checkbox_btn" name="" aria-label=""></div><div class="verified-text mx-2"> Make Feature Vedio</div></div></div> </div>').insertBefore('.add_video_btn');
             }
         });
         $(add_img_button).click(function(e) { //on add input button click
             e.preventDefault();
             if (x < max_fields) { //max input box allowed
                 x++; //text box increment
-                $('<div class="add_new col-md-3"><div class=""><div class="profile_upload_container h_66 mt-3 mt-md-0">  <div class="text-center"><div><i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true"></i></div><div class="mt-3 movie_name_text">Upload file</div></div></div><div class="profile_input"><input type="text" class="form-control" name="" placeholder="Photo Title"></div><div class="d-flex mt-5 mt-md-3"><div> <input type="radio" class="checkbox_btn" name="" aria-label=""></div><div class="verified-text mx-2"> Make thumbnail image</div></div></div> </div>').insertBefore('.add_image_btn');
+                $('<div class="add_new col-md-3"><div class=""><div class="profile_upload_container h_66 mt-3 mt-md-0">  <div class="text-center"><div><i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true"></i></div><div class="mt-3 movie_name_text">Upload file</div></div></div><div class="profile_input"><input type="text" class="form-control" name="" placeholder="Photo Title"></div><div class="d-flex mt-5 mt-md-3"><div class="checkbox_btn"> <input type="radio" class="checkbox_btn" name="" aria-label=""></div><div class="verified-text mx-2"> Make thumbnail image</div></div></div> </div>').insertBefore('.add_image_btn');
             }
         });
         $(add_button).click(function(e) { //on add input button click

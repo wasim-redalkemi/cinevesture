@@ -156,7 +156,7 @@
 
       $(".js-select2").select2({
         closeOnSelect: false,
-        placeholder: "Placeholder",
+        placeholder: "select",
         allowClear: true,
         tags: true
     });
@@ -186,4 +186,14 @@ $(document).ready(function() {
 });
 });
 </script>
+{{-- @section('scripts')
+<script>
+      $(".js-select2").select2({
+        closeOnSelect: false,
+        placeholder: "Select",
+        allowClear: true,
+        tags: true
+    });
+</script>
+@endsection --}}
 @endsection

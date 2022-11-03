@@ -89,7 +89,7 @@
                     <div class="guide_profile_subsection">
                         <div class="guide_profile_main_text mt-3">Job Description</div>
                         <div class="profile_input">
-                            <textarea class="form-control" aria-label="With textarea" placeholder="Your answer here"></textarea>
+                            <textarea class="form-control controlTextLength" text-length = "200" aria-label="With textarea" placeholder="Your answer here"></textarea>
                         </div>
                     </div>
                     <div class="guide_profile_subsection">
