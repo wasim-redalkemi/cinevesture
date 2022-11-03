@@ -18,6 +18,8 @@ class CreateProjectMediasTable extends Migration
             $table->string('project_id', 20);
             $table->enum('file_type', ['image', 'video', 'pdf']);
             $table->string('file_link', 500);
+            $table->string('media_info',5000)->nullable();
+            $table->enum('is_default_marked', ['0', '1'])->default('0');
             $table->softDeletes();
             $table->timestamps();
         });
