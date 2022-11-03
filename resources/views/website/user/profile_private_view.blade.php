@@ -102,7 +102,7 @@
                                 <div class="guide_profile_main_subtext mt-3">IMDB Profile</div>
                                 <div class="guide_profile_main_subtext deep-pink mt-1 pointer">
                                     @if (isset($user->imdb_profile))
-                                        <a href="{{ $user->imdb_profile }}"style="color:#971e9b"  >{{ $user->imdb_profile }}</a>                                      
+                                        <a href="{{ $user->imdb_profile }}" class="link-style"  >{{ $user->imdb_profile }}</a>                                      
                                     @else
                                     <span><b>-</b></span>
                                     @endif
@@ -110,7 +110,7 @@
                                 <div class="guide_profile_main_subtext mt-3">LinkedIn Profile</div>
                                 <div class="guide_profile_main_subtext deep-pink pointer">
                                     @if (isset($user->linkedin_profile))
-                                        <a href="{{ $user->linkedin_profile }}"style="color:#971e9b"  >{{ $user->linkedin_profile }}</a>                                         
+                                        <a href="{{ $user->linkedin_profile }}" class="link-style" >{{ $user->linkedin_profile }}</a>                                         
                                     @else
                                         <span><b>-</b></span>
                                     @endif
@@ -118,7 +118,7 @@
                                 <div class="guide_profile_main_subtext mt-3">Website</div>
                                 <div class="guide_profile_main_subtext deep-pink mt-1 pointer">
                                     @if (isset($user->website))     
-                                        <a href="{{ $user->website }}" style="color:#971e9b" >{{ $user->website }}</a>                                 
+                                        <a href="{{ $user->website }}" class="link-style" >{{ $user->website }}</a>                                 
                                     @else
                                         <span><b>-</b></span>
                                         @endif
@@ -293,7 +293,8 @@
                             </div>
                         </div>
                     </div>
-
+                     @if(isset($user_endorsement))
+                     @foreach($user_endorsement as $edm)
                     <div class="guide_profile_subsection">
                         <div class="container">
                             <div class="row">
@@ -303,22 +304,22 @@
                             </div>
                             <div class="row mt-3">
                                 <div class="col-md-3">
-                                    <div class="guide_profile_main_text deep-pink">John doe</div>
-                                    <div class="guide_profile_main_subtext Aubergine_at_night">Chief Officer</div>
-                                    <div class="guide_profile_main_subtext Aubergine_at_night">10TH JULY 2021</div>
+                                    <div class="guide_profile_main_text deep-pink">{{$edm['endorsementCreater']->name}}</div>
+                                    <div class="guide_profile_main_subtext Aubergine_at_night">{{$edm['endorsementCreater']->job_title?$edm['endorsementCreater']->job_title:"-"}}</div>
+                                    <div class="guide_profile_main_subtext Aubergine_at_night">{{$edm->created_at}}</div>
                                 </div>
                                 <div class="col-md-9">
                                     <div class="guide_profile_main_subtext Aubergine_at_night">
                                         <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                            exercitation.
+                                            {{$edm->comment}}
                                         </p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
+                    @endif
                 </div>
             </div>
         </div>

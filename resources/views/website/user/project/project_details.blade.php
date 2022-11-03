@@ -10,7 +10,7 @@
 <div class="hide-me animation for_authtoast">
     @include('website.include.flash_message')
 </div>
-@include('user.project.project_pagination')
+@include('website.user.project.project_pagination')
 
 
 <!-- Detail section  -->
@@ -27,16 +27,16 @@
                             <div class="col-md-6">
                                 <div class="profile_input">
                                     <label>Category (Optional)</label>
-                                        <select name="category_id" id="lang">
-                                            <?php
-                                                for($i=0;$i<=5;$i++)
-                                                {
-                                                    ?>
-                                                        <option value="<?php echo $i;?>">cat <?php echo $i;?></option>
-                                                    <?php
-                                                }        
-                                            ?>
-                                        </select>
+                                    <select class="js-select2" name="countries[]" multiple="multiple">
+                                    <option value="O1" data-badge="">Option1</option>
+                                            <option value="O2" data-badge="">Option2</option>
+                                            <option value="O3" data-badge="">Option3</option>
+                                            <option value="O4" data-badge="">Option4</option>
+                                            <option value="O5" data-badge="">Option5</option>
+                                            <option value="O6" data-badge="">Option6</option>
+                                            <option value="O7" data-badge="">Option7</option>
+                                    </select>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -45,15 +45,11 @@
                             <div class="col-md-6">
                                 <div class="mt_16">
                                     <label>Genre *</label>
-                                    <select class="js-select2" name="gener[]" multiple="multiple">
-                                            <option value="O1" data-badge="">Option1</option>
-                                            <option value="O2" data-badge="">Option2</option>
-                                            <option value="O3" data-badge="">Option3</option>
-                                            <option value="O4" data-badge="">Option4</option>
-                                            <option value="O5" data-badge="">Option5</option>
-                                            <option value="O6" data-badge="">Option6</option>
-                                            <option value="O7" data-badge="">Option7</option>
-                                        </select>
+                                    <select class="js-select2" name="countries[]" multiple="multiple">
+                                       
+                                            <option value="">name</option>
+                                       
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -154,7 +150,7 @@
 
       $(".js-select2").select2({
         closeOnSelect: false,
-        placeholder: "Placeholder",
+        placeholder: "select",
         allowClear: true,
         tags: true
     });
@@ -184,4 +180,14 @@ $(document).ready(function() {
 });
 });
 </script>
+{{-- @section('scripts')
+<script>
+      $(".js-select2").select2({
+        closeOnSelect: false,
+        placeholder: "Select",
+        allowClear: true,
+        tags: true
+    });
+</script>
+@endsection --}}
 @endsection

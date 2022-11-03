@@ -8,16 +8,16 @@
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive">
-                        <table id="order-listing" class="table order-listing">
+                        <table id="order-listing" class="table">
                             <thead>
                                 <tr>
-                                    <th>Order #</th>
-                                    <th>Purchased On</th>
-                                    <th>Customer</th>
-                                    <th>Ship to</th>
-                                    <th>Base Price</th>
-                                    <th>Purchased Price</th>
+                                    <th>userID #</th>
+                                    <th>Name</th>
+                                    <th>Title</th>
+                                    <th>Organisation</th>
+                                    <th>Location</th>
                                     <th>Status</th>
+                                    <th>Created On</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
