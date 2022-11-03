@@ -31,7 +31,7 @@
     <hr class="sidebar_content_hr">
     <div class="sidebar_content"><a href="">Endorsements </a></div>
     <hr class="sidebar_content_hr">
-    <div class="sidebar_content"><a href="">Favourites</a></div>
+    <div class="sidebar_content"><a href="{{ route('favourite-view') }}">Favourites</a></div>
     <hr class="sidebar_content_hr">
     <div class="sidebar_content"><a href="">Membership & Billing</a></div>
     <hr class="sidebar_content_hr">

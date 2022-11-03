@@ -10,7 +10,7 @@
 <div class="hide-me animation for_authtoast">
     @include('website.include.flash_message')
 </div>
-@include('user.project.project_pagination')
+@include('website.user.project.project_pagination')
 
 
 <!-- Detail section  -->
@@ -27,33 +27,35 @@
                             <div class="col-md-6">
                                 <div class="profile_input">
                                     <label>Category (Optional)</label>
-                                        <select name="category_id" id="lang">
-                                            <?php
-                                                for($i=0;$i<=5;$i++)
-                                                {
-                                                    ?>
-                                                        <option value="<?php echo $i;?>">cat <?php echo $i;?></option>
-                                                    <?php
-                                                }        
-                                            ?>
-                                        </select>
+                                    <select name="category_id[]" id="located_in" class="outline js-select2 @error('category_id') is-invalid @enderror" id="" multiple>
+                                        <option value="">Select</option>
+                                        @foreach ($category as $k=>$v)
+                                            <option value="{{ $v->id }}">{{  $v->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('category_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror                                        
                                 </div>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mt_16">
                                     <label>Genre *</label>
-                                    <select class="js-select2" name="gener[]" multiple="multiple">
-                                            <option value="O1" data-badge="">Option1</option>
-                                            <option value="O2" data-badge="">Option2</option>
-                                            <option value="O3" data-badge="">Option3</option>
-                                            <option value="O4" data-badge="">Option4</option>
-                                            <option value="O5" data-badge="">Option5</option>
-                                            <option value="O6" data-badge="">Option6</option>
-                                            <option value="O7" data-badge="">Option7</option>
-                                        </select>
+                                    <select class="outline js-select2 @error('gener') is-invalid @enderror" name="gener[]" multiple="multiple">
+                                        <option value="">Select</option>
+                                        @foreach ($Genres as $k=>$v)
+                                            <option value="{{ $v->id }}">{{  $v->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('gener')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

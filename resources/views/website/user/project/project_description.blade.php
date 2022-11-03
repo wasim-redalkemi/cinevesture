@@ -10,7 +10,7 @@
 <div class="hide-me animation for_authtoast">
     @include('website.include.flash_message')
 </div>
-@include('user.project.project_pagination')
+@include('website.user.project.project_pagination')
 
 <!-- Description section -->
 <section>

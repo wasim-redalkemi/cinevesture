@@ -5,13 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserProject extends Model
+class UserFavouriteProject extends Model
 {
     use HasFactory;
 
-    public function projectImage()
+    public function projects()
     {
-        return $this->hasOne(ProjectMedia::class,'project_id','id');
-
+        return $this->hasOne(UserProject::class,'id','project_id');
     }
 }
