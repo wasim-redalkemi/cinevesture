@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
 
 
     @yield('css')
@@ -28,6 +29,7 @@
         <main class="">
             @yield('header')
             @yield('nav')
+            @stack('add_css')
             @yield('content')
             @yield('footer')
         </main>
@@ -41,6 +43,7 @@
     <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('js/script.js') }}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
     @yield('scripts')
     @stack('scripts')

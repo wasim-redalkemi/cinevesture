@@ -305,7 +305,7 @@
                             <div class="row mt-3">
                                 <div class="col-md-3">
                                     <div class="guide_profile_main_text deep-pink">{{$edm['endorsementCreater']->name}}</div>
-                                    <div class="guide_profile_main_subtext Aubergine_at_night">{{$edm['endorsementCreater']->job_title?$edm['endorsementCreater']->job_title:NUll}}</div>
+                                    <div class="guide_profile_main_subtext Aubergine_at_night">{{$edm['endorsementCreater']->job_title?$edm['endorsementCreater']->job_title:"-"}}</div>
                                     <div class="guide_profile_main_subtext Aubergine_at_night">{{$edm->created_at}}</div>
                                 </div>
                                 <div class="col-md-9">

@@ -85,6 +85,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     Route::group(['prefix'=>'endorsement'],function()
 	{	
         Route::get('/', [EndorsementController::class, 'index'])->name('endorsement-view');
+        Route::post('/status', [EndorsementController::class, 'changeStatus'])->name('endorsement-status-change');
+
         
 	});
 
