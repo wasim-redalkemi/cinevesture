@@ -4,6 +4,7 @@ use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\FavouriteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Website\EndorsementController;
 use App\Http\Controllers\Website\OrganisationController;
@@ -119,6 +120,11 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::get('/create-team', [OrganisationController::class, 'createTeam'])->name('create-team');
         Route::post('/team-store', [OrganisationController::class, 'teamStore'])->name('team-store');
 
+	});
+
+    Route::group(['prefix'=>'favourite'],function()
+	{	
+        Route::get('/view',[FavouriteController::class, 'index'])->name('favourite-view');
 	});
 
     
