@@ -121,7 +121,8 @@
           </li> --}}
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <img src="{{asset('/admin/images/face5.jpg')}}" alt="profile"/>
+              <i class='fas fa-user-alt' style='font-size:24px'></i>
+              {{-- <img src="{{asset('/admin/images/face5.jpg')}}" alt="profile"/> --}}
               
               
             </a>

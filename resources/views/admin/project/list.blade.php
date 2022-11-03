@@ -38,24 +38,25 @@
                                     <td>{{$project->user->name}}</td>
                                     @endif
                                    
-                                    <td>{{$project->user->name}}</td>
-                                    <th>
+                                    <td>anish</td>
+                                    <td>anish</td>
+                                    <td>
                                         
                                         @php
                                        $x=($project->favorited==1)? 0:1;
                                        @endphp
                                         
-                                        <input type="checkbox" class="fav_inp" path="{{route('adminmarkfav')}}?s={{$x}}&p={{$project->id}}" name="fav" id="fav" <?php if($project->favorited == 1){echo 'checked';}?>>
+                                        <input type="checkbox" class="fav_inp" path="{{route('project-list-favorite')}}?s={{$x}}&p={{$project->id}}" name="fav" id="fav" <?php if($project->favorited == 1){echo 'checked';}?>>
                                      
-                                    </th>                                    
+                                    </td>                                    
                                     <td>
                                         @php
                                         $recom=($project->Recommended_badge==1)? 0:1;
                                         @endphp
                                         
-                                         <input type="checkbox" class="recom_inp" path="{{route('adminmarkrecom')}}?s={{$recom}}&p={{$project->id}}" name="fav" id="fav" <?php if($project->Recommended_badge == 1){echo 'checked';}?>>
+                                         <input type="checkbox" class="recom_inp" path="{{route('project-list-Recommended')}}?s={{$recom}}&p={{$project->id}}" name="fav" id="fav" <?php if($project->Recommended_badge == 1){echo 'checked';}?>>
                                     </td>
-                                    <td d->
+                                    <td>
                                     
                                         <button class="btn mb-2  btn-outline-primary w-65 view-btn">View</button></div>
                                        

@@ -6,7 +6,7 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Serein Admin</title>
+  <title>local/cinevesture.com</title>
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{asset('admin/css/materialdesignicons.min.css')}}">
   <link rel="stylesheet" href="{{asset('admin/css/vendor.bundle.base.css')}}">
@@ -17,6 +17,9 @@
   <!-- inject:css -->
   <link rel="stylesheet" href="{{asset('admin/css/style.css')}} ">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/fontawesome.min.css"> --}}
+  {{-- <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script> --}}
+  
   <!-- endinject -->
   <link rel="shortcut icon" href="admin/images/favicon.png" />
 </head>

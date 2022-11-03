@@ -43,21 +43,6 @@ Auth::routes(['verify' => true]);
     Route::get('resend-otp/{email?}/{type?}', [RegisterController::class, 'resendOtp'])->name('resend-otp'); 
     // Route::get('reset-password/{token}',[ResetPasswordController::class,'restPasswordPublicView'])->name('reset-password-view');
 
-    Route::group(['prefix'=>'admin'],function(){
-        Route::get('/index', [AdminController::class, 'index'])->name('admin.index');
-        Route::get('/user', function () {
-            return view('admin.user.user');
-        });
-    });
-    Route::group(['prefix'=>'admin'],function(){
-        Route::get('/project/list', [AdminProjectController::class, 'index'])->name('admin.project');
-        Route::get('/project/list/fav', [AdminProjectController::class, 'markFav'])->name('adminmarkfav');
-        Route::get('/project/list/recom', [AdminProjectController::class, 'markRecom'])->name('adminmarkrecom');
-
-      
-    });
-
-
 
 Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],function(){
  

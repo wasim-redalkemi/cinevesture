@@ -25,7 +25,7 @@ class ProjectController extends Controller
         }
         
     }
-    public function markFav(Request $request)
+    public function markFavorite(Request $request)
     {
         try {
             $project=UserProject::where('id',$request->p)->first();
@@ -36,7 +36,7 @@ class ProjectController extends Controller
             return back($e);
         }
     }
-    public function markRecom(Request $request)
+    public function markRecommended(Request $request)
     {
         try {
             $project=UserProject::where('id',$request->p)->first();
