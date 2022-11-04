@@ -1,13 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Website;
+
 
 use App\Http\Controllers\Controller;
-use App\Models\ProjectAssociation;
-use Illuminate\Http\Request;
-use SebastianBergmann\CodeCoverage\Report\Xml\Project;
+use App\Http\Controllers\WebController;
+use App\Http\Controllers\FavouriteController;
 
-class AdminController extends Controller
+
+use App\Models\UserFavourite;
+use Illuminate\Http\Request;
+
+class UserFavouriteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +20,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        try {
-            
-            return view('admin.user.index');
-        } catch (\Throwable $e) {
-            return back($e);
-        }
-        
+        //
     }
 
     /**
@@ -49,10 +47,10 @@ class AdminController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\UserFavourite  $userFavourite
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(UserFavourite $userFavourite)
     {
         //
     }
@@ -60,10 +58,10 @@ class AdminController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\UserFavourite  $userFavourite
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(UserFavourite $userFavourite)
     {
         //
     }
@@ -72,10 +70,10 @@ class AdminController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\UserFavourite  $userFavourite
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, UserFavourite $userFavourite)
     {
         //
     }
@@ -83,10 +81,10 @@ class AdminController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\UserFavourite  $userFavourite
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(UserFavourite $userFavourite)
     {
         //
     }

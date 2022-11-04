@@ -3,26 +3,49 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ProjectAssociation;
+use App\Models\UserProject;
 use Illuminate\Http\Request;
-use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
-class AdminController extends Controller
+class ProjectController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         try {
+            $projects = UserProject::query()->with('user')
+            ->get();
             
-            return view('admin.user.index');
+                return view('admin.project.list',compact('projects'));
+        } catch (\Throwable $e) {
+        return back($e);
+        }
+        
+    }
+    public function markFavorite(Request $request)
+    {
+        try {
+            $project=UserProject::where('id',$request->p)->first();
+            $project->favorited = $request->s;
+            $project->save();
+            return back();
         } catch (\Throwable $e) {
             return back($e);
         }
-        
+    }
+    public function markRecommended(Request $request)
+    {
+        try {
+            $project=UserProject::where('id',$request->p)->first();
+            $project->Recommended_badge = $request->s;
+            $project->save();
+            return back();
+        } catch (\Throwable $e) {
+            return back($e);
+        }
     }
 
     /**
@@ -32,7 +55,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -43,7 +66,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -54,7 +77,7 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

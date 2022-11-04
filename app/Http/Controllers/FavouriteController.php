@@ -1,13 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\admin;
-
+namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
-use App\Models\ProjectAssociation;
+use App\Models\User;
+use App\Models\UserFavourite;
+use App\Models\UserFavouriteProfile;
+use App\Models\UserFavouriteProject;
+use App\Models\UserProject;
 use Illuminate\Http\Request;
-use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
-class AdminController extends Controller
+class FavouriteController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +18,12 @@ class AdminController extends Controller
      */
     public function index()
     {
-        try {
-            
-            return view('admin.user.index');
-        } catch (\Throwable $e) {
-            return back($e);
-        }
-        
+        $user_projects = UserFavouriteProject::query()->with('projects.projectImage')
+                         ->where('user_id',auth()->user()->id)->paginate(5);
+        $user_profiles = UserFavouriteProfile::query()->with('profiles')
+                         ->where('user_id',auth()->user()->id)->paginate(5);
+
+        return view('website.user.favourite.favourite',compact(['user_projects','user_profiles']));
     }
 
     /**

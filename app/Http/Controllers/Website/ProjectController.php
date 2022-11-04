@@ -7,7 +7,10 @@ use App\Http\Controllers\WebController;
 use App\Models\MasterCountry;
 use App\Models\MasterLanguage;
 use App\Models\MasterLookingFor;
+use App\Models\MasterProjectCategory;
+use App\Models\MasterProjectGenre;
 use App\Models\ProjectAssociation;
+use App\Models\ProjectCategory;
 use App\Models\ProjectCountry;
 use App\Models\ProjectGenre;
 use App\Models\ProjectLanguage;
@@ -43,6 +46,10 @@ class ProjectController extends WebController
             $lookingFor = MasterLookingFor::query()->get();
             $UserProject = UserProject::query()->get();
             $projectCountries = ProjectCountry::query()->get();
+            $category = MasterProjectCategory::query()->get();
+            $Genres = MasterProjectGenre::query()->get();
+            // dd($country);
+
            
             if (isset($_REQUEST['nextPage'])) {
                 $nextPage = $_REQUEST['nextPage'];
@@ -50,7 +57,7 @@ class ProjectController extends WebController
             
             switch ($nextPage) {
                 case 'Details':
-                    return view('website.user.project.project_details', compact('user','languages','country'));
+                    return view('website.user.project.project_details', compact('user','languages','country','category','Genres'));
                     break;
                 case 'Description':
                     return view('website.user.project.project_description', compact('user','languages','country'));
@@ -120,7 +127,15 @@ class ProjectController extends WebController
                 $details->financing_secured = $request->financing_secured;
                 if($details->update()) {
 
+                    foreach ($request->category_id as $k => $v) {
+                        ProjectGenre::query()->where('project_id', $details->id)->delete();
+                        $projectGenres = new ProjectCategory();
+                        $projectGenres->project_id = $details->id;
+                        $projectGenres->category_id = $v;
+                        $projectGenres->save();
+                    }                
                     foreach ($request->gener as $k => $v) {
+                        ProjectGenre::query()->where('project_id', $details->id)->delete();
                         $projectGenres = new ProjectGenre();
                         $projectGenres->project_id = $details->id;
                         $projectGenres->gener_id = $v;
