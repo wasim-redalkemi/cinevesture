@@ -26,7 +26,7 @@ Route::group(['prefix'=>'admin'],function()
         return view('admin.user.user');
     });
 
-    Route::get('project-list', [AdminProjectController::class, 'index'])->name('project-list');
+    Route::get('project-list', [AdminProjectController::class, 'index'])->name('admin-project-list');
     Route::get('project-list-favorite', [AdminProjectController::class, 'markFavorite'])->name('project-list-favorite');
     Route::get('project-list-Recommended', [AdminProjectController::class, 'markRecommended'])->name('project-list-Recommended');
 
