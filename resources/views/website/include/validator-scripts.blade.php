@@ -124,35 +124,9 @@
 
         });
 
-        // var app = function(){
-        //     var isLive = 0;
-        //     var baseUrl = "";
-        //     let loadMyApp = function(){
-        //         this.isLive = true;
-        //         this.baseUrl = "https://google.com";
-        //         return true;
-        //     }
-        //     let myLocalVar = function(){
-        //         console.log("in my var fu");
-        //         $("#gallery .add_video_field").click(function(e) { //on add input button click
-        //             console.log("here i am 3");
-        //             e.preventDefault();
-        //         });
-        //         return true;
-        //     };
-
-        //     return {
-        //         loadMyApp,
-        //         myLocalVar,
-        //         baseUrl
-        //     };
-        // }();
-
-        // console.log("myVar "+app.loadMyApp()+", baseUrl "+app.baseUrl);
-
         // gallary page script
-        var Gallary = function () {
-            var parentElemId = "#gallery";
+        var Videos = function () {
+            var parentElemId = "#Videos";
             var currentVideos = [];
             var lastVidId = 0;
 
@@ -328,6 +302,6 @@
         // get the current video list from backend and load into the Gallary class.
         let currentVideos = [{'id':1,'title':'Direct Links To Video Files','thumbnail_medium':'https://i.vimeocdn.com/video/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_200x150',
                 'url':'https://vimeo.com/336812686','isFeature':1}];
-        Gallary.init(currentVideos);
+        Videos.init(currentVideos);
 
 </script>
