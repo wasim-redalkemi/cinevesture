@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\Admin\ProjectListController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\HomeController;
@@ -140,6 +141,8 @@ Route::get('/test', function () {
 Route::group(['prefix'=>'admin'],function()
 {	
     Route::get('/index', [AdminUserController::class, 'index'])->name('user-management');
+    Route::get('/project-list', [ProjectListController::class, 'index'])->name('project-list-management');
+    Route::post('/create-list', [ProjectListController::class, 'create'])->name('create-list');
 
 });
 
