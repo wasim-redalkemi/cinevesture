@@ -957,7 +957,7 @@ body {
 }
 .profile_wraper_padding {
     padding: 22px 30px !important;
-    margin: 10px 0px 50px 0;
+    /* margin: 10px 0px 50px 0; */
 }
 .profile_wraper {
     background: #FFFFFF;
@@ -1577,3 +1577,7 @@ select {
     background-position-x: 100% !important;
     background-position-y: 5px !important;
   }
+.favourite_img_card {
+    width: 100%;
+    height: 215px;
+}
