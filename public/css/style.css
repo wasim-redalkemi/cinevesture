@@ -120,9 +120,9 @@ body {
 }
 
 .for_authtoast {
-    position: absolute;
-    right: 12px;
-    top: 12px;
+    position: fixed;
+    right: 18px;
+    top: 25px;
     z-index: 1;
 }
 
@@ -385,12 +385,6 @@ body {
      background: rgb(28,3,48);;
 }
 
-.for_authtoast {
-    position: absolute;
-    right: 12px;
-    top: 12px;
-    z-index: 1;
-}
 .signup-container {
     background: #33084C !important;
     /* padding: 0 35%; */
