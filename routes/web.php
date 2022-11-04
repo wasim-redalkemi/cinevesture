@@ -139,11 +139,3 @@ Route::get('/test', function () {
     return view('website.organisation.organisation_edit');
 });
 
-Route::group(['prefix'=>'admin'],function()
-{	
-    Route::get('/index', [AdminUserController::class, 'index'])->name('user-management');
-    Route::get('/project-list', [ProjectListController::class, 'index'])->name('project-list-management');
-    Route::post('/create-list', [ProjectListController::class, 'create'])->name('create-list');
-
-});
-

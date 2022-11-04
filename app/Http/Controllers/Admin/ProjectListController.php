@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ProjectList;
+use App\Models\UserProject;
 use Illuminate\Http\Request;
 
 class ProjectListController extends Controller
@@ -43,7 +44,8 @@ class ProjectListController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+    
     }
 
     /**
@@ -52,9 +54,11 @@ class ProjectListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $project_list=ProjectList::all();
+        $project_count=UserProject::select('id')->get()->count();
+        return view('admin.user.projectlist',compact('project_list','project_count'));
     }
 
     /**
@@ -63,9 +67,19 @@ class ProjectListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function search()
+    {
+        return view('admin.user.search_project');
+    }
     public function edit($id)
     {
         //
+    }
+    public function find(Request $request)
+    {
+            $project_name='%'.$request->name.'%';
+            $search_projects=UserProject::select('project_name')->where('project_name','like',$project_name)->get();
+            dd($search_projects);
     }
 
     /**

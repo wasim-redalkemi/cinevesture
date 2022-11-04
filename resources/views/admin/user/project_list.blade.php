@@ -19,15 +19,19 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Status</label>
-                                        <input type="text" class="form-control" name="status" placeholder="list status" aria-describedby="basic-addon1">
+                                        <select name="status"class="form-control" id="lang">
+                                            <option value="">Select</option>
+                                            <option value="publish">publish</option>
+                                            <option value="publish">unpublish</option>
+                                      </select>
                                     </div>
+                               </div>
                             </div>
-                            <div class="col-md-6">
-                                    <div class="justify-center">
-                                    <button type="submit" class="btn btn-outline-primary btn-sm mt-10">Create</button>
-                                    </div>
+                            <div class="row" style="margin-top:15px">
+                            <div class="col-md-12" style="padding-left: 42%;">
+                                 <button type="submit" class="btn btn-outline-primary btn-sm mt-10">Create</button>
                             </div>
-                        </div>
+                           </div>
                     </form>
                  </div>
             </div>
