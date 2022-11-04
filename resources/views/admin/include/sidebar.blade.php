@@ -7,10 +7,28 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">
-              <i class="fa fa-address-book" style="margin-right:25px;"></i>
-              <span class="menu-title">User</span>
+            <a class="nav-link" data-toggle="collapse" href="#user-mgt" aria-expanded="false" aria-controls="ui-basic">
+              <i class="mdi mdi-puzzle-outline menu-icon"></i>
+              <span class="menu-title">User Management</span>
+              <i class="menu-arrow"></i>
             </a>
+            <div class="collapse" id="user-mgt">
+              <ul class="nav flex-column sub-menu">
+                <li class="nav-item"> <a class="nav-link" href="{{route('user-management')}}">List</a></li>
+               </ul>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#proj-mgt" aria-expanded="false" aria-controls="ui-basic">
+              <i class="mdi mdi-puzzle-outline menu-icon"></i>
+              <span class="menu-title">Project List Management</span>
+              <i class="menu-arrow"></i>
+            </a>
+            <div class="collapse" id="proj-mgt">
+              <ul class="nav flex-column sub-menu">
+              <li class="nav-item" > <a class="nav-link" href="{{route('show-list')}}" >List</a></li>
+               <li class="nav-item"> <a class="nav-link" href="{{route('project-list-management')}}">Create List</a></li>               </ul>
+            </div>
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">

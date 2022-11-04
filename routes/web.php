@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\ProjectController as AdminProjectController;
+use App\Http\Controllers\Admin\ProjectListController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\FavouriteController;
@@ -136,11 +137,5 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 
 Route::get('/test', function () {
     return view('website.user.profile_public_view');
-});
-
-Route::group(['prefix'=>'admin'],function()
-{	
-    Route::get('/index', [AdminUserController::class, 'index'])->name('user-management');
-
 });
 
