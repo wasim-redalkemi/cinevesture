@@ -17,6 +17,7 @@ use App\Models\ProjectLanguage;
 use App\Models\ProjectLookingFor;
 use App\Models\ProjectMedia;
 use App\Models\ProjectMilestone;
+use App\Models\ProjectType;
 use App\Models\User;
 use App\Models\UserProject;
 use Exception;
@@ -37,7 +38,7 @@ class ProjectController extends WebController
             return back()->withError('error','Something went wrong.');
         }
     }
-    public function projectViewRender($nextPage = '')
+    public function projectViewRender($nextPage = '',$id = null)
     {
         try {
             $user = User::query()->find(auth()->user()->id);
@@ -48,6 +49,7 @@ class ProjectController extends WebController
             $projectCountries = ProjectCountry::query()->get();
             $category = MasterProjectCategory::query()->get();
             $Genres = MasterProjectGenre::query()->get();
+            $project_types = ProjectType::all();
             // dd($country);
 
            
@@ -72,7 +74,7 @@ class ProjectController extends WebController
                     return view('website.user.project.project_preview', compact('user','languages','country','lookingFor','UserProject'));
                     break;            
                 default:
-                    return view('website.user.project.project_overview', compact('user','languages','country'));
+                    return view('website.user.project.project_overview', compact(['user','languages','country','project_types']));
             }
         } catch (Exception $e) {
             return back()->withError('error','Something went wrong.');

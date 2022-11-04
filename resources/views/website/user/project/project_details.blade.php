@@ -44,7 +44,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mt_16">
-                                    <label>Genre *</label>
+                                    <label>Genre <span style = "color:red">*</span></label>
                                     <select class="outline js-select2 @error('gener') is-invalid @enderror" name="gener[]" multiple="multiple">
                                         <option value="">Select</option>
                                         @foreach ($Genres as $k=>$v)
@@ -72,7 +72,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>Total Budget (USD) *</label>
+                                    <label>Total Budget (USD) <span style = "color:red">*</span></label>
                                     <input type="text" class="form-control" name="total_budget" placeholder="Empty input">
                                 </div>
                             </div>
@@ -80,7 +80,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>Financing Secured (USD) *</label>
+                                    <label>Financing Secured (USD) <span style = "color:red">*</span></label>
                                     <input type="text" class="form-control" name="financing_secured" placeholder="Empty input">
                                 </div>
                             </div>
