@@ -121,11 +121,9 @@
           </li> --}}
           <li class="nav-item nav-profile dropdown">
             <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-              <i class='fas fa-user-alt' style='font-size:24px'></i>
+              <i class='fa fa-user' style='font-size:24px'></i>
               {{-- <img src="{{asset('/admin/images/face5.jpg')}}" alt="profile"/> --}}
-              
-              
-            </a>
+              </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               <a class="dropdown-item">
                 <i class="mdi mdi-settings text-primary"></i>
