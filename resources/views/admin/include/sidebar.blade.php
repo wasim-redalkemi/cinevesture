@@ -1,7 +1,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{{route('admin-dashboard')}}">
               <i class="fa fa-dashcube" style="margin-right:25px;"></i>
               <span class="menu-title">Dashboard</span>
             </a>
@@ -20,7 +20,7 @@
             </a>
             <div class="collapse" id="ui-basic">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{route('project-list')}}">List</a></li>
+                 <a class="nav-link" href="{{route('admin-project-list')}}"><li class="nav-item">List</li></a>
                 {{-- <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/badges.html">Badges</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/breadcrumbs.html">Breadcrumbs</a></li>

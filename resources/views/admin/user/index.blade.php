@@ -30,7 +30,9 @@
                                     <td>{{$user->id}}</td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
-                                    <td>{{$user->job_title}}ttitle</td>
+                                    <td>{{$user->job_title}}title</td>
+                                    
+                                    <td>{{$user->organization->name}}</td>
                                     <td>{{$user->organization->name}}</td>
                                     <td>{{$user->organization->country->name}}</td>
                                     <td>active</td>
