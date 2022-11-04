@@ -21,26 +21,71 @@
                         <div class="col-md-2">
                             <div class="user_profile_container">
                                 <?php
-                                    if(empty($user->profile_image))
-                                    {
-                                        ?>
-                                            <img src="{{ asset('public/images/asset/user-profile.png') }}" />
-                                        <?php
-                                    }
-                                    else 
-                                    {
-                                        ?>
-                                            <img src="{{Storage::url($user->profile_image)}}"  class = "prod-img" alt="product-image" style="height:100%;width:100%;">
-                                        <?php
-                                    }
+                                if (empty($user->profile_image)) {
+                                ?>
+                                    <img src="{{ asset('public/images/asset/user-profile.png') }}" />
+                                <?php
+                                } else {
+                                ?>
+                                    <img src="{{Storage::url($user->profile_image)}}" class="prod-img" alt="product-image" style="height:100%;width:100%;">
+                                <?php
+                                }
                                 ?>
                             </div>
                         </div>
                         <div class="col-md-8">
-                            <div class="guide_profile_main_text pt-3">{{$user->first_name.' '.$user->last_name}}</div>
-                                <div class="guide_profile_main_subtext">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                    elit.</div>
-                            <div><button class="guide_profile_btn mt-2">Contact </button></div>
+                            <div class="guide_profile_main_text pt-3">{{empty($user->first_name)?'Name':$user->first_name.' '.$user->last_name;}}</div>
+                            <div class="guide_profile_main_subtext">Lorem ipsum dolor sit amet, consectetur adipiscing
+                                elit.</div>
+                            <div><button class="guide_profile_btn mt-2" data-toggle="modal" data-target="#contactModal">Contact </button></div>
+
+                            <!-- Contact modal  -->
+                            <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="ContactModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content bg_3308">
+                                        <div class="modal-body p-0">
+                                            <div class="p-3 float-end">
+                                                <i class="fa fa-times text_fff font_24 pointer" data-dismiss="modal" aria-label="Close"></i>
+                                            </div>
+                                            <section class="p-3">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="signup-text  mb-4 mt-5"> Contact </div>
+                                                            <div class="row">
+                                                                <div class="col-md-3">
+                                                                    <div><img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="w-100 br_100"></div>
+                                                                </div>
+                                                                <div class="col-md-9">
+                                                                    <div class="tile_text text_fff">Name</div>
+                                                                    <div class="organisation_cmn_text text_fff">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mt-3"><input type="email" id="email_1" name="email_1" value="" placeholder="Subject" class="modal_input"></div>
+                                                            <div class="mt-3">
+                                                                <textarea name="" id="" cols="25" rows="6" class="w-100" placeholder="Message"></textarea>
+                                                            </div>
+
+                                                            <div class="form-check mt-3">
+                                                                <input class="form-check-input modal_check_input" type="checkbox" id="check1" name="option1" value="something" checked>
+                                                                <label class="modal_btm_text mx-1">Send a copy to me</label>
+                                                            </div>
+
+                                                            <div class="mt-4">
+                                                                <button type="button" class="invite_btn">Send Mail</button>
+                                                            </div>
+                                                            <div class="modal_btm_text mt-4 mb-5">
+                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum vel cras vitae morbi varius vitae.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
                             <i class="fa fa-heart icon-size Aubergine" aria-hidden="true"></i>
@@ -69,7 +114,7 @@
                                 <button class="curv_cmn_btn mx-2">Skills 1</button>
                             </div>
                             <div class="guide_profile_main_text mt-3">Available to Work In</div>
-                            <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ $user->available_to_work_in }}</div>
+                            <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ empty($user->available_to_work_in)?'Available_to_work_in':$user->available_to_work_in; }}</div>
                             <div class="guide_profile_main_text mt-3">Languages Spoken</div>
                             <div class="guide_profile_main_subtext Aubergine_at_night mt-2">Hindi</div>
                             <div class="guide_profile_main_subtext Aubergine_at_night mt-1">English</div>
@@ -163,8 +208,6 @@
                 </div>
             </div>
 
-
-
             <div class="guide_profile_subsection">
                 <div class="container">
                     <div class="row">
@@ -181,7 +224,7 @@
                             <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
                                 <p>{{$v->description}}</p>
                             </div>
-                            @endforeach  
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -216,7 +259,42 @@
                                 <h1>Endorsements</h1>
                             </div>
                             <div>
-                                <button class="guide_profile_btn">Endorse</button>
+                                <button class="guide_profile_btn" data-toggle="modal" data-target="#endorseModal">Endorse</button>
+                            </div>
+                            <!-- Endorse modal  -->
+                            <div class="modal fade" id="endorseModal" tabindex="-1" role="dialog" aria-labelledby="endorseModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content bg_3308">
+                                        <div class="modal-body p-0">
+                                            <div class="p-3 float-end">
+                                                <i class="fa fa-times text_fff font_24 pointer" data-dismiss="modal" aria-label="Close"></i>
+                                            </div>
+                                            <section class="p-3">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-12">
+                                                            <div class="signup-text mb-2 mt-5"> Write Endorsement </div>
+                                                            <div class="guide_profile_main_subtext text-center">
+                                                                <span class="disable-resend">Help identify relevant opportunities and content for John on Cinevesture</span>
+                                                            </div>
+
+                                                            <div class="mt-5">
+                                                                <textarea name="" id="" cols="25" rows="6" class="controlTextLength w-100" placeholder="Message" text-length="250" maxlength="250" name="about" aria-label="With textarea"></textarea>
+                                                            </div>
+
+                                                            <div class="mt-4">
+                                                                <button type="button" class="invite_btn">Submit</button>
+                                                            </div>
+                                                            <div class="modal_btm_text mt-4 mb-5">
+                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum vel cras vitae morbi varius vitae.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
