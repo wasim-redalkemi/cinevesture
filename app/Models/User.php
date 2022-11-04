@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\Helper\OtpUtilityController;
 use App\Http\Controllers\OtpController;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -60,9 +61,13 @@ class User extends Authenticatable
 
     public function sendPasswordResetNotification($token)
     {
-        $otp = OtpController::createOtp($this, 'F',$token); // F for Forgot pasword
+        $otp = OtpUtilityController::createOtp($this, 'F',$token); // F for Forgot pasword
         $collect  = collect();
         $collect->put('otp', $otp);
         $this->notify(new VerifyOtp($collect));
+    }
+
+    public function organization(){
+        return $this->hasOne(UserOrganisation::class, 'user_id', 'id');
     }
 }

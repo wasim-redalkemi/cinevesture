@@ -76,6 +76,14 @@ body {
 
 }
 
+.link-style{
+    color: #971e9b;
+    font-size: 14px;
+    font-style: italic;
+    outline: none;
+    text-decoration: none;
+}
+
 .add-proj-btn {
     border: 1px solid #DD45B3;
     color: #DD45B3;
@@ -231,7 +239,10 @@ body {
     color: #DD45B3;
 }
 
-
+.fw_300 {
+    font-weight: 300 !important;
+    margin-top: 0 !important;
+}
 .dropdown-toggle::after {
     color: #DD45B3 !important;
 }
@@ -809,6 +820,10 @@ body {
 .heart-color {
    color: #C13D4F;
 }
+.info_btn_icon {
+    position: relative;
+    right: 35%;
+}
 
 /* guide profile page  */
 .verified_cmn_btn {
@@ -1232,7 +1247,7 @@ body {
 .checkbox_btn input {
     color: #4D0D8A !important;
     background: #4D0D8A !important;
-    width: 30%;   
+    width: 20px;   
 }
 .associate_text {
     font-weight: 600;
@@ -1434,9 +1449,9 @@ button, input, optgroup, select, textarea {
     margin-right: 8px;
   }
   .select2-results__option[aria-selected=true]:before {
-    content: "\f00c";
-    color: #FFFFFF;
-    background-color: #4D0D8A;;
+    content: url("../images/asset/done_icon_15.jpg") !important;
+    height: 20px;
+    width: 20px;
     border: 0;
     display: inline-block;
     text-align: center;
@@ -1511,13 +1526,16 @@ button, input, optgroup, select, textarea {
     /* margin: 0 5%; */
     margin: 60px 30px;
 }
-select  option{
+.m_0 {
+    margin: 0 !important;
+}
+select  option, .radio_btn_label{
     font-weight: 300;
     font-size: 14px;
     line-height: 19px !important;
     letter-spacing: 0.018em !important;
     color: #4D0D8A !important;
-    margin: 18px 12px !important;
+    margin: 18px 10px !important;
 }
 .job_input input {
     background: #FFFFFF;
@@ -1548,3 +1566,20 @@ select  option{
     border-radius: 100%;
     color: #DD45B3;
 }
+.for_alert {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 143%;
+    letter-spacing: 0.018em;
+    color: #787885 !important;
+    text-align: end;
+}
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='rgb(77, 13, 138)' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>") !important;
+    background-repeat: no-repeat !important;
+    background-position-x: 100% !important;
+    background-position-y: 5px !important;
+  }

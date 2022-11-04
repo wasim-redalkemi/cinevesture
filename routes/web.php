@@ -1,14 +1,16 @@
 <?php
 
+use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\FavouriteController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\IndustryGuideController;
-use App\Http\Controllers\OrganisationController;
-use App\Http\Controllers\OtpController;
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\SettingController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Website\EndorsementController;
+use App\Http\Controllers\Website\OrganisationController;
+use App\Http\Controllers\Website\UserController;
+use App\Http\Controllers\Website\IndustryGuideController;
+use App\Http\Controllers\Website\ProjectController;
+use App\Http\Controllers\Website\SettingController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;  
@@ -24,10 +26,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/', function () {
-    return view('auth.login');
+    return view('website.website.auth.login');
 });
 Auth::routes(['verify' => true]);
 
+
+// Admin routes 
+@include('admin.php');
 
 
 
@@ -37,7 +42,11 @@ Auth::routes(['verify' => true]);
     Route::get('resend-otp/{email?}/{type?}', [RegisterController::class, 'resendOtp'])->name('resend-otp'); 
     // Route::get('reset-password/{token}',[ResetPasswordController::class,'restPasswordPublicView'])->name('reset-password-view');
 
-    
+    Route::group(['prefix'=>'admin'],function(){
+        Route::get('/index', [AdminController::class, 'index'])->name('admin.index');
+
+    });
+
 
 
 Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],function(){
@@ -64,7 +73,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::get('/qualification-create/{id?}', [UserController::class, 'qualificationCreate'])->name('qualification-create');
         Route::post('/qualification-store/{id?}', [UserController::class, 'qualificationStore'])->name('qualification-store');        		
         Route::get('/qualification-edit/{id}', [UserController::class, 'qualificationEdit'])->name('qualification-edit');
-        Route::post('/qualification-edit-store/{id}', [UserController::class, 'qualificationEditStore'])->name('qualification-edit-store');        		
+        Route::post('/qualification-edit-store/{id}', [UserController::class, 'qualificationEditStore'])->name('qualification-edit-store'); 
+               		
 	});
 
     Route::group(['prefix'=>'project'],function()
@@ -76,6 +86,14 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/project-gallery-store/{id}', [ProjectController::class, 'galleryStore'])->name('project-gallery-store');
         Route::post('/project-description-store/{id}', [ProjectController::class, 'descriptionStore'])->name('project-description-store');
         Route::post('/project-milestone-store/{id}', [ProjectController::class, 'milestoneStore'])->name('project-milestone-store');
+	});
+
+    Route::group(['prefix'=>'endorsement'],function()
+	{	
+        Route::get('/', [EndorsementController::class, 'index'])->name('endorsement-view');
+        Route::post('/status', [EndorsementController::class, 'changeStatus'])->name('endorsement-status-change');
+
+        
 	});
 
     Route::group(['prefix'=>'industry-guide'],function()
@@ -103,17 +121,25 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/store', [OrganisationController::class, 'store'])->name('organisation-store');
         // Route::get('/edit/{id}', [OrganisationController::class, 'edit'])->name('organisation-edit');
         // Route::post('/update/{id}', [OrganisationController::class, 'update'])->name('organisation-update');
+        Route::get('/create-team', [OrganisationController::class, 'createTeam'])->name('create-team');
+        Route::post('/team-store', [OrganisationController::class, 'teamStore'])->name('team-store');
+
+	});
+
+    Route::group(['prefix'=>'favourite'],function()
+	{	
+        Route::get('/view',[FavouriteController::class, 'index'])->name('favourite-view');
 	});
 
     
     Route::get('/setting-page',[SettingController::class, 'index'])->name('setting-page');
     Route::get('/forgot-password-page', function () {
-        return view('auth.passwords/forgot');
+        return view('website.auth.passwords/forgot');
     })->name('forgot-password-page');
 });
 
 Route::get('/test', function () {
-    return view('user.organisation.organisation_create');
+    return view('website.organisation.organisation_edit');
 });
 
 
