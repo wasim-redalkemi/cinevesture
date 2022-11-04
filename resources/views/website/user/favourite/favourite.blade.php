@@ -18,29 +18,27 @@
                 <div class="profile_text">
                     <h1>Favourites</h1>
                 </div>
-                <div class="preview_headtext mb-3 deep-pink">Projects</div>
+                <div class="guide_profile_main_text deep-pink mb-3 ">Projects</div>
                 <div class="row">
+                    @php
+                        $user_projects = $user_projects->toArray();
+                                                    
+                    @endphp
+                    @foreach ($user_projects['data'] as $k => $v)
                     <div class="col-md-4">
-                        @php
-                            $user_projects = $user_projects->toArray();
-                                                        
-                        @endphp
-                        @foreach ($user_projects['data'] as $k => $v)
-                            @if (!empty($v['projects']['project_image']))
-                                <div><img src="{{ Storage::url($v['projects']['project_image']['file_link']) }}"  class="" width=100% alt="image"></div>
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div class="movie_name_text">{{ !empty($v['projects']['project_name'])? $v['projects']['project_name'] : '-' }} </div>
-                                    <i class="fa fa fa-heart aubergine icon-size" aria-hidden="true"></i>
-                                </div>
-                            @else
-                                <div><img src="{{ asset('public/images/asset/100_no_img.jpg') }}"  class="" width=100% alt="image"></div>
-                                <div class="d-flex align-items-center justify-content-between">
-                                    <div class="movie_name_text">Movie Title </div>
-                                    <i class="fa fa fa-heart aubergine icon-size" aria-hidden="true"></i>
-                                </div>                            
-                            @endif                                       
-                        @endforeach
+                        @if (!empty($v['projects']['project_image']))
+                            <div class="favourite_img_card"><img src="{{ Storage::url($v['projects']['project_image']['file_link']) }}" width=100% alt="image"></div>
+                        @else
+                            {{-- <div class="favourite_img_card"><img src="{{ asset('public/images/asset/100_no_img.jpg') }}" alt="image""></div> --}}
+                            <img src="{{ asset('public/images/asset/100_no_img.jpg') }}" />
+
+                        @endif
+                        <div class="d-flex align-items-center justify-content-between">
+                            <div class="movie_name_text">{{ !empty($v['projects']['project_name'])? $v['projects']['project_name'] : '-' }} </div>
+                            <i class="fa fa fa-heart aubergine icon-size" aria-hidden="true"></i>
+                        </div>                                       
                     </div>                    
+                    @endforeach
                 </div>
 
                 <div class="py-4">
@@ -72,10 +70,10 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div class="user_profile_container">                                
-                                @if (!empty($v['projects']['project_image']))
+                                @if (!empty($v['profiles']['profile_image']))
                                     <img src="{{ Storage::url($v['profiles']['profile_image']) }}"  class="" width=100% alt="image">
                                 @else
-                                <img src="{{ asset('public/images/asset/100_no_img.jpg') }}" alt="image">
+                                <img src="{{ asset('public/images/asset/100_no_img.jpg') }}" />
                                 @endif
                             </div>
                         </div>
@@ -91,16 +89,15 @@
                                 {{ !empty($v['profiles']['job_title'])? $v['profiles']['job_title'] : '-' }}
                             </div>
                             <div class="preview_headtext lh_54 candy-pink">
-                                Location
+                                {{ !empty($v['profile_country']['country']['name'])? $v['profile_country']['country']['name'] : '-' }}
                             </div>
                             <div class="posted_job_header Aubergine_at_night">
                                 {{ !empty($v['profiles']['about'])? $v['profiles']['about'] : '-' }}
                             </div>
                             <div class="d-flex mt-3">
-                                <button class="curv_cmn_btn">Skills 1</button>
-                                <button class="curv_cmn_btn mx-4">Skills 2</button>
-                                <button class="curv_cmn_btn">Skills 3</button>
-                                <button class="curv_cmn_btn mx-4">Skills 4</button>
+                                @foreach ($v['profile_skills'] as $k1=>$v1)                           
+                                    <button class="curv_cmn_btn skill_container">{{ !empty($v1['get_skills']['name'])? $v1['get_skills']['name'] : '-' }}</button>
+                                @endforeach
                             </div>
                         </div>
                     </div>
