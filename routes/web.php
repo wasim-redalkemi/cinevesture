@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\ProjectController as AdminProjectController;
+use App\Http\Controllers\Admin\ProjectListController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\FavouriteController;
@@ -8,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Website\EndorsementController;
 use App\Http\Controllers\Website\OrganisationController;
 use App\Http\Controllers\Website\UserController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Website\IndustryGuideController;
 use App\Http\Controllers\Website\ProjectController;
 use App\Http\Controllers\Website\SettingController;
@@ -43,11 +46,6 @@ Auth::routes(['verify' => true]);
     Route::get('otp-view', [RegisterController::class, 'index'])->name('otp-view'); 
     Route::get('resend-otp/{email?}/{type?}', [RegisterController::class, 'resendOtp'])->name('resend-otp'); 
     // Route::get('reset-password/{token}',[ResetPasswordController::class,'restPasswordPublicView'])->name('reset-password-view');
-
-    Route::group(['prefix'=>'admin'],function(){
-        Route::get('/index', [AdminController::class, 'index'])->name('admin.index');
-
-    });
 
 Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],function(){
  
@@ -143,7 +141,6 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 });
 
 Route::get('/test', function () {
-    return view('website.organisation.organisation_edit');
+    return view('website.user.profile_public_view');
 });
-
 

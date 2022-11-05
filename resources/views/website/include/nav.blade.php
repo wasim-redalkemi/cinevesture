@@ -1,7 +1,7 @@
 @section('nav')
 <nav class="navbar navbar-expand-lg sub-header">
     <div class="container">
-      <div class="row">
+      <div class="row w_100">
         <div class="col-md-12">
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
             aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">

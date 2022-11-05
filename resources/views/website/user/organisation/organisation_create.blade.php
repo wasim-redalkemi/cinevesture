@@ -103,9 +103,11 @@
                                     <label>Services</label>
                                     <select name="service_id[]" class="outline js-select2 @error('service_id') is-invalid @enderror" id="" multiple required autofocus>
                                         @foreach ($organisationService as $k=>$v)
-                                            @foreach ($UserOrganisation->organizationServices as $k => $organizationService)
-                                                <option value="{{ $v->id }}" <?php if($v->id == $organizationService->services->id){echo('selected');} ?>>{{ $v->name }}</option>
-                                            @endforeach
+                                            {{-- @foreach ($UserOrganisation->organizationServices as $k => $organizationService) --}}
+                                                <option value="{{ $v->id }}" 
+                                                    <?php #if($v->id == $organizationService->services->id){echo('selected');} ?>>
+                                                    {{ $v->name }}</option>
+                                            {{-- @endforeach --}}
                                         @endforeach
                                     </select>
                                     @error('service_id')
@@ -172,10 +174,11 @@
                                     <label> Languages Spoken</label>
                                     <select name="language_id[]" class="outline js-select2 @error('language_id') is-invalid @enderror" id="lang" multiple required autofocus>
                                         @foreach ($languages as $k=>$v)
-                                            @foreach ($UserOrganisation->organizationLanguages as $k => $organizationLanguage)                                    
-                                                <option value="{{ $v->id }}"<?php if($v->id == $organizationLanguage->languages->id){echo('selected');} ?>>{{  $v->name }}</option>
-                                            @endforeach
+                                            {{-- @foreach ($UserOrganisation->organizationLanguages as $k => $organizationLanguage)                                     --}}
+                                                <option value="{{ $v->id }}"<?php #if($v->id == $organizationLanguage->languages->id){echo('selected');} ?>>{{  $v->name }}</option>
+                                            {{-- @endforeach --}}
                                         @endforeach
+
                                     </select>
                                     @error('language_id')
                                     <span class="invalid-feedback" role="alert">
