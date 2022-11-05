@@ -11,6 +11,8 @@ use App\Http\Controllers\Website\UserController;
 use App\Http\Controllers\Website\IndustryGuideController;
 use App\Http\Controllers\Website\ProjectController;
 use App\Http\Controllers\Website\SettingController;
+use App\Http\Controllers\Website\AjaxController;
+
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;  
@@ -47,11 +49,13 @@ Auth::routes(['verify' => true]);
 
     });
 
-
-
 Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],function(){
  
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+    Route::group(['prefix' => 'ajax'],function(){
+        Route::post('/get-video-details',[AjaxController::class, 'getVideoDetails'])->name('get-video-details');
+    });
 
     Route::group(['prefix'=>'user'],function()
 	{	

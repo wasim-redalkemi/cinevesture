@@ -269,5 +269,6 @@ class ProjectController extends WebController
         } catch (Exception $e) {
             return back()->withError('error','Something went wrong.');
         }
-    }    
+    }
+
 }
