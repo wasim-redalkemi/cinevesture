@@ -26,7 +26,7 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Job Title</label>
-                                        <input type="text" class="form-control @error('intro_video_link') is-invalid @enderror" placeholder="Job Title" name="job_title" value="{{ $UserExperienceData->job_title }}"
+                                        <input type="text" class="form-control @error('intro_video_link') is-invalid @enderror" placeholder="Job Title" name="job_title" value="<?php if(isset($UserExperienceData->job_title)){ echo($UserExperienceData->job_title); }?>"
                                             aria-label="Username" aria-describedby="basic-addon1">
                                         @error('intro_video_link')
                                             <span class="invalid-feedback" role="alert">
@@ -41,7 +41,7 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Company</label>
-                                        <input type="text" class="form-control @error('comapny') is-invalid @enderror" placeholder="Company" name="comapny" value="{{ $UserExperienceData->comapny }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control @error('comapny') is-invalid @enderror" placeholder="Company" name="comapny" value="<?php if(isset($UserExperienceData->comapny)){ echo($UserExperienceData->comapny); }?>" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('comapny')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -54,7 +54,7 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Location</label>
-                                        <input type="text" class="form-control @error('country_id') is-invalid @enderror" placeholder="Location" name="country_id" value="{{ $UserExperienceData->country_id }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control @error('country_id') is-invalid @enderror" placeholder="Location" name="country_id" value="<?php if(isset($UserExperienceData->country_id)){ echo($UserExperienceData->country_id); }?>" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('country_id')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -133,7 +133,7 @@
                                 <div class="col-md-12">
                                     <div class="profile_input">
                                         <label>Description</label>
-                                        <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" text-length = "600" maxlength="600" name="description" aria-label="With textarea">{{ $UserExperienceData->description }}</textarea>
+                                        <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" text-length = "600" maxlength="600" name="description" aria-label="With textarea"><?php if(isset($UserExperienceData->description)){ echo($UserExperienceData->description); }?></textarea>
                                         @error('description')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
