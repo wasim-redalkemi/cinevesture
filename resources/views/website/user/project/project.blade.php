@@ -1,6 +1,3 @@
-@extends('website.layouts.app',['class' => 'bg_white'])
-
-@section('title','Cinevesture-organisation')
 
 @extends('website.layouts.app',['class' => 'bg_white'])
 
@@ -26,9 +23,9 @@
                     <button class="guide_profile_btn h_40"><a class="btn-link text_decor_none" href="{{ route('project-create')}}">Add a Project</a></button>
                 </div>
                 <div class="row">
-                @foreach ($UserProject as $k=>$v)
+                @foreach($UserProject as $k=>$v)
                     <div class="col-md-4">
-                        <div class="img-container">
+                        <div class="img-container project-img-container">
                                 @if (empty($v->profile_image))
                                     <img src="{{ asset('public/images/asset/user-profile.png') }}" width="100%" height="100%"  />
                                 @else
