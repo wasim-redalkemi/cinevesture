@@ -18,7 +18,7 @@ class AdminController extends Controller
     {
         try {
             
-            return view('admin.user.index');
+            return view('admin.dashboard');
         } catch (\Throwable $e) {
             return back($e);
         }

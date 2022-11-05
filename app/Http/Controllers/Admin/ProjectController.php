@@ -16,12 +16,12 @@ class ProjectController extends Controller
     public function index(Request $request)
     {
         try {
-            $projects = UserProject::query()->with('user')
+            $projects = UserProject::query()->with(['user','projectCategory','genres'])
             ->get();
-            
+          
                 return view('admin.project.list',compact('projects'));
         } catch (\Throwable $e) {
-        return back($e);
+        return back()->withErrors($e->getMessage());
         }
         
     }
@@ -41,6 +41,19 @@ class ProjectController extends Controller
         try {
             $project=UserProject::where('id',$request->p)->first();
             $project->Recommended_badge = $request->s;
+            $project->save();
+            return back();
+        } catch (\Throwable $e) {
+            return back($e);
+        }
+    }
+    public function changeStatus(Request $request)
+    {
+        try {
+            
+        
+            $project=UserProject::where('id',$request->pId)->first();
+            $project->project_verified = $request->status;
             $project->save();
             return back();
         } catch (\Throwable $e) {
