@@ -32,7 +32,7 @@
               <div class="brand-logo">
                 {{-- <a class="navbar-brand brand-logo" href="index.php"> --}}
                 
-                    <img src="http://localhost/cinevesture-backend/images/asset/Logo-white.jpg" alt="logo">
+                    <img src="{{asset('images/asset')}}/Logo-white.jpg" alt="logo">
                 {{-- </a> --}}
               </div>
               <h4>Hello! let's get started</h4><br>
