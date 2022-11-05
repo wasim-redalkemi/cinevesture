@@ -13,7 +13,6 @@ class UserOrganisation extends Model
     {
         return $this->hasOne(MasterCountry::class,'id','location_in');
     }
-
     public function organizationServices()
     {
         return $this->hasMany(UserOrganisationService::class,'organisation_id');

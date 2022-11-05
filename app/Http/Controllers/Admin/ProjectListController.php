@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ProjectAssociation;
+use App\Models\ProjectList;
+use App\Models\UserProject;
 use Illuminate\Http\Request;
-use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
-class AdminController extends Controller
+class ProjectListController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +16,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        try {
-            
-            return view('admin.dashboard');
-        } catch (\Throwable $e) {
-            return back($e);
-        }
-        
+        return view('admin.user.project_list');
     }
 
     /**
@@ -30,9 +24,16 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+       
+        $project_list= new ProjectList();
+        $project_list->list_name=$request->name;
+        $project_list->list_status=$request->status;
+        $project_list->save();
+            
+
+           
     }
 
     /**
@@ -43,7 +44,8 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       
+    
     }
 
     /**
@@ -52,9 +54,11 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
-        //
+        $project_list=ProjectList::all();
+        $project_count=UserProject::select('id')->get()->count();
+        return view('admin.user.projectlist',compact('project_list','project_count'));
     }
 
     /**
@@ -63,9 +67,19 @@ class AdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function search()
+    {
+        return view('admin.user.search_project');
+    }
     public function edit($id)
     {
         //
+    }
+    public function find(Request $request)
+    {
+            $project_name='%'.$request->name.'%';
+            $search_projects=UserProject::select('project_name')->where('project_name','like',$project_name)->get();
+            dd($search_projects);
     }
 
     /**

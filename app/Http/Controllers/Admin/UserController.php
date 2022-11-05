@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ProjectAssociation;
+use App\Models\User;
+use App\Models\UserOrganisation;
 use Illuminate\Http\Request;
-use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
-class AdminController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +16,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        try {
-            
-            return view('admin.dashboard');
-        } catch (\Throwable $e) {
-            return back($e);
-        }
-        
+        $users=User::query()->with(['organization.country'])->get();
+        return view('admin.user.index',compact('users'));
     }
 
     /**
