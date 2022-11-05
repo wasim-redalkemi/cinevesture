@@ -12,4 +12,13 @@ class UserFavouriteProfile extends Model
     {
         return $this->hasOne(User::class,'id','profile_id');
     }
+    public function profileSkills()
+    {
+        return $this->hasMany(UserSkill::class,'user_id','profile_id');
+    }
+
+    public function profileCountry()
+    {
+        return $this->hasOne(user::class,'id','profile_id');
+    }
 }
