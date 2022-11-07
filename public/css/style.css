@@ -1422,7 +1422,7 @@ button, input, optgroup, select, textarea {
     border: none;
 }
 .delete_btn {
-    padding: 6px 16px;
+    padding: 9px 16px;
     font-size: 14px;
     background: #C13D4F;
     border-radius: 4px;
