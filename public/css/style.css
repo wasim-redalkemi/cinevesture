@@ -948,7 +948,7 @@ body {
 }
 .profile_wraper_padding {
     padding: 22px 30px !important;
-    margin: 10px 0px 50px 0;
+    /* margin: 10px 0px 50px 0; */
 }
 .profile_wraper {
     background: #FFFFFF;
@@ -1403,7 +1403,7 @@ button, input, optgroup, select, textarea {
 
 @media (min-width: 600px) {
 .container, .container-lg, .container-md, .container-sm, .container-xl {
-    max-width: 1365px !important;
+    /* max-width: 1365px !important; */
 }
 
 }
