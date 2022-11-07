@@ -1,11 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Models\UserOrganisation;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +16,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.user.index');
+        $users=User::query()->with(['organization.country'])->get();
+        return view('admin.user.index',compact('users'));
     }
 
     /**

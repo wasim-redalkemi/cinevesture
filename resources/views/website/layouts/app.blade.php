@@ -46,10 +46,19 @@
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
     <script>
 
-$('.controlTextLength').each(function(){
-    $('.controlTextLength').after("<div class=textlength for_alert text-end>"+ $(this).val().length +" / "+$(this).attr('text-length')+"</div>");
-    $('.textlength').css({"color":"#787885", "text-align":"end"})
- });
+        var BaseUrl = '{{config('app.url')}}';
+        var CSRFToken = '{{ csrf_token() }}';
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $('.controlTextLength').each(function(){
+            $('.controlTextLength').after("<div class=textlength for_alert text-end>"+ $(this).val().length +" / "+$(this).attr('text-length')+"</div>");
+            $('.textlength').css({"color":"#787885", "text-align":"end"})
+        });
 
         $('.controlTextLength').keyup(function ()
         {

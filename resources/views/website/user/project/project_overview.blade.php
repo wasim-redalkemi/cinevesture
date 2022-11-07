@@ -27,8 +27,8 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>Project Name *</label>
-                                    <input type="text" class="form-control" name="project_name" placeholder="Project Name" aria-label="Username" aria-describedby="basic-addon1">
+                                    <label>Project Name <span style = "color:red">*</span></label>
+                                    <input type="text" class="form-control" name="project_name" placeholder="Project Name" aria-label="Username" aria-describedby="basic-addon1" required>
                                 </div>
                             </div>
                         </div>
@@ -36,11 +36,12 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>Type of Project *</label>
-                                        <select name="project_type_id" id="lang">
-                                            <option value="test1">Select</option>
-                                            <option value="test1">test1</option>
-                                            <option value="test1">test2</option>
+                                    <label>Type of Project <span style = "color:red">*</span></label>
+                                        <select name="project_type_id" requiredid="lang">
+                                            <option value="">Select</option>
+                                            @foreach($project_types as $type)
+                                            <option value="{{$type->id}}">{{$type->name}}</option>
+                                             @endforeach
                                         </select>
                                 </div>
                             </div>
@@ -49,7 +50,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>Who are you listing this project as? *</label>
+                                    <label>Who are you listing this project as? <span style = "color:red">*</span></label>
                                     <div class="d-flex">
                                         <div class="checkbox_btn d-flex align-items-center">
                                         <!-- <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"> -->
@@ -69,8 +70,8 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div>
-                                    <label>Select Country *</label>
-                                    <select class="js-select2" name="countries[]" multiple="multiple">
+                                    <label>Select Country <span style = "color:red">*</span></label>
+                                    <select class="js-select2" name="countries[]"  required multiple="multiple">
                                         @foreach ($country as $k=>$v)
                                             <option value="{{ $v->id }}">{{  $v->name }}</option>
                                         @endforeach
@@ -82,8 +83,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mt_16">
-                                    <label>Select Language *</label>
-                                    <select class="js-select2" name="languages[]" multiple="multiple">
+                                    <label>Select Language <span style = "color:red">*</span></label>
+                                    <select class="js-select2" name="languages[]" required multiple="multiple">
                                         @foreach ($languages as $k=>$v)
                                             <option value="{{ $v->id }}">{{  $v->name }}</option>
                                         @endforeach

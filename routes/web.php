@@ -1,15 +1,21 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\ProjectController as AdminProjectController;
+use App\Http\Controllers\Admin\ProjectListController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\FavouriteController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Website\EndorsementController;
 use App\Http\Controllers\Website\OrganisationController;
 use App\Http\Controllers\Website\UserController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Website\IndustryGuideController;
 use App\Http\Controllers\Website\ProjectController;
 use App\Http\Controllers\Website\SettingController;
+use App\Http\Controllers\Website\AjaxController;
+
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;  
@@ -41,16 +47,13 @@ Auth::routes(['verify' => true]);
     Route::get('resend-otp/{email?}/{type?}', [RegisterController::class, 'resendOtp'])->name('resend-otp'); 
     // Route::get('reset-password/{token}',[ResetPasswordController::class,'restPasswordPublicView'])->name('reset-password-view');
 
-    Route::group(['prefix'=>'admin'],function(){
-        Route::get('/index', [AdminController::class, 'index'])->name('admin.index');
-
-    });
-
-
-
 Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],function(){
  
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+    Route::group(['prefix' => 'ajax'],function(){
+        Route::post('/get-video-details',[AjaxController::class, 'getVideoDetails'])->name('get-video-details');
+    });
 
     Route::group(['prefix'=>'user'],function()
 	{	
@@ -125,6 +128,11 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 
 	});
 
+    Route::group(['prefix'=>'favourite'],function()
+	{	
+        Route::get('/view',[FavouriteController::class, 'index'])->name('favourite-view');
+	});
+
     
     Route::get('/setting-page',[SettingController::class, 'index'])->name('setting-page');
     Route::get('/forgot-password-page', function () {
@@ -135,5 +143,4 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 Route::get('/test', function () {
     return view('website.Plain');
 });
-
 

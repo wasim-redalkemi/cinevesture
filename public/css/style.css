@@ -120,10 +120,10 @@ body {
 }
 
 .for_authtoast {
-    /* position: absolute;
-    right: 12px;
-    top: 12px;
-    z-index: 1; */
+    position: fixed;
+    right: 18px;
+    top: 25px;
+    z-index: 1;
 }
 
 /* home page  */
@@ -176,6 +176,18 @@ body {
     width: 100%;
     height: auto;
     background: linear-gradient(180deg, rgba(28, 3, 48, 0) 65.92%, #1C0330 100%);
+}
+
+.project-img-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    height: 172px;
+    background: linear-gradient(180deg, rgba(28, 3, 48, 0) 65.92%, #1C0330 100%);
+}
+
+.opacity-title{
+    opacity:0.5;
 }
 
 .carosel-card-cntainer {
@@ -385,12 +397,6 @@ body {
      background: rgb(28,3,48);;
 }
 
-.for_authtoast {
-    position: absolute;
-    right: 12px;
-    top: 12px;
-    z-index: 1;
-}
 .signup-container {
     background: #33084C !important;
     /* padding: 0 35%; */
@@ -564,6 +570,21 @@ body {
 .verified-text {
     font-weight: 400;
     font-size: 20px;
+    letter-spacing: 0.018em;
+    color: #4D0D8A;
+}
+
+.add_content_wraper {
+    padding: 10px 0px;
+}
+
+.add-another-item > div{
+    margin-bottom: 40px;
+}
+
+.mk-feature {
+    font-weight: 400;
+    font-size: 16px;
     letter-spacing: 0.018em;
     color: #4D0D8A;
 }
@@ -1155,6 +1176,14 @@ body {
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
     border-radius: 4px;
 }
+.title.project_card_data {
+    bottom: 0;
+    left: 0;
+    justify-content: flex-start;
+    align-items: flex-end;
+    background: none;
+}
+.project_card_data p {text-shadow: 1px 1px #3e3e3e; font-weight: 600;max-height: 40px;margin-bottom: -5px;line-height: 22px;}
 .movie_name_text {
     font-weight: 600;
     font-size: 20px;
@@ -1235,10 +1264,12 @@ body {
 }
 .h_66 {
     height: 194px !important;
+    overflow: hidden;
 }
 .h_69 {
     height: 69px;
 }
+
 .document_pdf {
     align-items: center;
     padding: 12px 24px;
@@ -1567,3 +1598,7 @@ select {
     background-position-x: 100% !important;
     background-position-y: 5px !important;
   }
+.favourite_img_card {
+    width: 100%;
+    height: 215px;
+}

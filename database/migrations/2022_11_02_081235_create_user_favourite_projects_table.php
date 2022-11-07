@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGenresTable extends Migration
+class CreateUserFavouriteProjectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,23 @@ class CreateGenresTable extends Migration
      */
     public function up()
     {
-        Schema::create('genres', function (Blueprint $table) {
+        Schema::create('user_favourite_projects', function (Blueprint $table) {
             $table->id();
-            $table->string('name',255);
+            $table->string('user_id',20);
+            $table->string('project_id',20);
 
             $table->timestamps();
             $table->softDeletes();
         });
     }
 
-    /**						
+    /**
      * Reverse the migrations.
      *
      * @return void
      */
     public function down()
     {
-        Schema::dropIfExists('genres');
+        Schema::dropIfExists('user_favourite_projects');
     }
 }

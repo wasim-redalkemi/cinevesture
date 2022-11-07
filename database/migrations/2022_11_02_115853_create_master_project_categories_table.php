@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserFavouritesTable extends Migration
+class CreateMasterProjectCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,24 +13,22 @@ class CreateUserFavouritesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_favourites', function (Blueprint $table) {
+        Schema::create('master_project_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id',20);
-            $table->enum('type',['project','profile']);
-            $table->string('type_id',20);
+            $table->string('name',100);
 
             $table->timestamps();
             $table->softDeletes();
         });
     }
 
-    /**					
+    /**
      * Reverse the migrations.
      *
      * @return void
      */
     public function down()
     {
-        Schema::dropIfExists('user_favourites');
+        Schema::dropIfExists('master_project_categories');
     }
 }

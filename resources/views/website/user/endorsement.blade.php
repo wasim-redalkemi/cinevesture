@@ -12,36 +12,64 @@
 </div>
 @push('add_css')
 <style>
-  .toggle.ios, .toggle-on.ios, .toggle-off.ios { border-radius: 20rem; }
-  .toggle.ios .toggle-handle { border-radius: 20rem; }
-  .toggle-on{
-    color: #fff;
-    background-color: #971E9B;
-    border-color: #971E9B;  
-  }
-  .btn-primary.active{
-    color: #fff;
-    background-color: #971E9B;
-    border-color: #971E9B;
-  }
-  .toggle-handle {
-    background: #971E9B;
-
-  }
-  .toggle-off{
-    color: #fff;
-    background-color: #b26cb4;
-    border-color: #f9fafb; 
-  }
-  .btn-primary:hover {
-    color: #fff;
-    background-color: #971E9B;
-    border-color: #971E9B;
+.switch {
+  position: relative;
+    display: inline-block;
+    width: 55px;
+    height: 28px;
 }
-.btn-light:hover {
-    color: #fff;
-    background-color: #b26cb4;
-    border-color: #f9fafb; 
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 25px;
+    width: 26px;
+    left: 2px;
+    bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #971E9B;;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
 </style>
 @endpush
@@ -54,7 +82,7 @@
             </div>
             <div class="col-md-9">
                 <div class="profile_text mt-2"><h1>Endorsements</h1></div>
-                @if($endorsement)
+                @if(isset($endorsement))
                 @foreach($endorsement as $edm)
                 <div class="profile_wraper profile_wraper_padding mt-4">
                   <div class="row">
@@ -62,7 +90,7 @@
                         <div class="guide_profile_main_text deep-pink">{{$edm['endorsementCreater']->name}}</div>
                         <div class="guide_profile_main_subtext Aubergine_at_night">{{$edm['endorsementCreater']->job_title}}</div>
                         <div class="profile_upload_text Aubergine_at_night fw_300">{{date('d M Y',strtotime($edm->created_at))}}</div>
-                        <div class="guide_profile_main_subtext Aubergine_at_night">{{$edm['endorsementCreater']['organization']->name?$edm['endorsementCreater']['organization']->name:NULL}}</div>
+                        <div class="guide_profile_main_subtext Aubergine_at_night">{{isset($edm['endorsementCreater']['organization']->name)?$edm['endorsementCreater']['organization']->name:NULL}}</div>
                     </div>
                     <div class="col-md-7">
                         <div class="guide_profile_main_text Aubergine_at_night">Published</div>
@@ -71,7 +99,11 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                    <input type="checkbox" class="check" <?php if($edm->status == '1'){echo'checked';}?> data-toggle="toggle" value="{{$edm->id}}" data-on="" data-off="" data-style="ios">   
+                    <!-- <input type="checkbox" class="check" <?php if($edm->status == '1'){echo'checked';}?> data-toggle="toggle" value="{{$edm->id}}" data-on="" data-off="" data-style="ios">  -->
+                    <label class="switch">
+                      <input type="checkbox" class="check" value="{{$edm->id}}" <?php if($edm->status == '1'){echo'checked';}?>>
+                      <span class="slider round"></span>
+                    </label>  
                     </div>
                   </div>
                 </div>
@@ -101,6 +133,7 @@
   $(function() {
     $('.check').change( function(event){
          checkbox = $(this).val();
+         $(".toast").hide();
          $.ajax(
         {
             url:"{{ route('endorsement-status-change') }}",
@@ -109,9 +142,9 @@
             data:{end_id:checkbox,"_token": "{{ csrf_token() }}"},
             success:function(response)
             {   
+       
                 toastMessage(response.status, response.msg);
-                $('.modal').hide();
-                $('.modal-backdrop').remove();
+              
             },
             error:function(response,status,error)
             {   
@@ -125,6 +158,10 @@
         
 
     });
+
+    $('.btn-close').on('click', function() {
+			$(".toast").hide();
+		});
 
 </script>
 @endpush

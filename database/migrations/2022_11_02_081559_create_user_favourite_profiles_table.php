@@ -2,10 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoryTable extends Migration
+class CreateUserFavouriteProfilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,18 +13,14 @@ class CreateCategoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('user_favourite_profiles', function (Blueprint $table) {
             $table->id();
-            $table->string('name',255);
-            $table->timestamps();
-        });
+            $table->string('user_id',20);
+            $table->string('profile_id',20);
 
-        DB::table('categories')->insert([
-            [ 'name' => 'Features'],
-            [ 'name' => 'Animation'],
-            ['name'=>'Biography']
-          
-        ]);
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -35,6 +30,6 @@ class CreateCategoryTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category');
+        Schema::dropIfExists('user_favourite_profiles');
     }
 }
