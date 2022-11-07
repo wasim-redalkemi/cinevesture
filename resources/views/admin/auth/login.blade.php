@@ -27,25 +27,32 @@
     <div class="container-fluid page-body-wrapper full-page-wrapper">
       <div class="content-wrapper d-flex align-items-center auth">
         <div class="row w-100">
+
+         
           <div class="col-lg-4 mx-auto">
             <div class="auth-form-light text-left p-5">
               <div class="brand-logo">
                 {{-- <a class="navbar-brand brand-logo" href="index.php"> --}}
                 
-                    <img src="http://localhost/cinevesture-backend/images/asset/Logo-white.jpg" alt="logo">
+                    <img src="{{asset('images/asset/Logo-white.jpg')}}">
                 {{-- </a> --}}
               </div>
               <h4>Hello! let's get started</h4><br>
               <h6 class="font-weight-light">Sign in to continue.</h6>
-              <form class="pt-3">
+              <form class="pt-3" method="POST" action="{{ route('admin.login') }}">
+                @csrf
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Username">
+                  <input type="email" class="form-control form-control-lg" name="email" id="exampleInputEmail1" placeholder="Username">
+
+                  @if($errors->has('email'))
+                  <div class="text-danger mt-1">{{ $errors->first('email') }}</div>
+                  @endif
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                  <input type="password" class="form-control form-control-lg" name="password" id="exampleInputPassword1" placeholder="Password">
                 </div>
                 <div class="mt-3">
-                  <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="../../index.html">SIGN IN</a>
+                  <button class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</button>
                 </div>
                 {{-- <div class="my-2 d-flex justify-content-between align-items-center">
                   <div class="form-check">
@@ -75,15 +82,15 @@
   </div>
   <!-- container-scroller -->
   <!-- plugins:js -->
-  <script src="../../../../vendors/js/vendor.bundle.base.js"></script>
-  <script src="../../../../vendors/js/vendor.bundle.addons.js"></script>
+  <script src="{{asset('admin/js/vendor.bundle.base.js')}}"></script>
+  <script src="{{asset('admin/js/vendor.bundle.addons.js')}}"></script>
   <!-- endinject -->
   <!-- inject:js -->
-  <script src="../../../../js/off-canvas.js"></script>
-  <script src="../../../../js/hoverable-collapse.js"></script>
-  <script src="../../../../js/template.js"></script>
-  <script src="../../../../js/settings.js"></script>
-  <script src="../../../../js/todolist.js"></script>
+  <script src="{{asset('admin/js/off-canvas.js')}}"></script>
+  <script src="{{asset('admin/js/hoverable-collapse.js')}}"></script>
+  <script src="{{asset('admin/js/template.js')}}"></script>
+  <script src="{{asset('admin/js/settings.js')}}"></script>
+  <script src="{{asset('admin/js/todolist.js')}}"></script>
   <!-- endinject -->
   <script src="{{ asset('admin/js/dashboard.js') }}"></script>
 </body>
