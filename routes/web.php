@@ -30,8 +30,11 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/test', function () {
+    return view('website.Plan');
+});
 Route::get('/', function () {
-    return view('website.website.auth.login');
+    return view('website.auth.login');
 });
 Auth::routes(['verify' => true]);
 
@@ -145,7 +148,5 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     })->name('forgot-password-page');
 });
 
-Route::get('/test', function () {
-    return view('website.user.profile_public_view');
-});
+
 

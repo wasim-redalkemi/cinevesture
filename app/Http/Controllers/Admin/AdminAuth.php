@@ -3,26 +3,28 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\ProjectAssociation;
 use Illuminate\Http\Request;
-use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
-class AdminController extends Controller
+class AdminAuth extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function index()
     {
         try {
-            
             return view('admin.dashboard');
         } catch (\Throwable $e) {
-            return back($e);
+            return back()->withErrors($e->getMessage());
         }
-        
+    }
+
+    public function login()
+    {
+        return view('admin.auth.login');
     }
 
     /**

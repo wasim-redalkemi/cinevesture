@@ -89,7 +89,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="guide_profile_main_subtext Aubergine_at_night">Chief Officer</div>
-                                    <div class="profile_upload_text Aubergine_at_night">10TH July 2021</div>
+                                    <div class="profile_upload_text fw_300 Aubergine_at_night">10TH July 2021</div>
                                     <div class="guide_profile_main_subtext Aubergine_at_night">Abc Private Limited</div>
                                 </div>
                             </div>
