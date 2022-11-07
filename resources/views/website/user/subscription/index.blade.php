@@ -1,46 +1,264 @@
 @extends('website.layouts.app',['class' => 'bg_white'])
 
-@section('title','Project-overview')
-
 @section('header')
 @include('website.include.header')
 @endsection
 
 @section('content')
-<div class="hide-me animation for_authtoast">
-    @include('website.include.flash_message')
-</div>
 
-
-<!-- Overview section -->
 <section>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
+    <div class="pb-5">
+        <div class="plan_wraper">
             <div class="container">
-  <div style = "text-align:center;margin-top:200px">
-    <form>
-      <a  href="{{route('subscription-create')}}">
-        <span class="before-submit">Subscribe</span>
-       </a>
-    </form>
-  </div>
-</div>
-     </div>
+                <div class="row">
+                    <div class="class-md-12">
+                        <div class="mt-4">SETUP YOUR PLAN</div>
+                        <div class="mt-4">
+
+                            <div class="currency_togle">
+                                <div class="togle_text text_fff mt-0">Doller</div>
+                                <label class="switch mx-2">
+                                    <input type="checkbox" class="check" value="">
+                                    <span class="slider round"></span>
+                                </label>
+                                <div class="togle_text text_fff mt-0">Rupee</div>
+                            </div>
+                            <div class="mb-5">
+                                <!-- <div class="time_togle">
+                        <label class="switch mx-2">
+                          <input type="checkbox" class="check" value="">
+                          <span class="slider">abc</span>
+                        </label> 
+                        </div> -->
+                                <button class="plan_btn">Monthly</button>
+                                <button class="plan_btn">Annually</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container mt__150">
+            <div class="row">
+                <div class="col-md-1">sidebar</div>
+                <div class="col-md-11">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="plan_card">
+                                <div class="plain_detail">
+                                    <div class="plain_header text-center">Free</div>
+                                    <div class="plan_subheader mt-2">Great for those who want to get themselves in front of the right people in the industry</div>
+                                </div>
+                                <div class="Plain_price">
+                                    <div class="search-head-subtext Aubergine_at_night mt-3">Free forever</div>
+                                    <div class="search-head-text Aubergine_at_night">$0.00</div>
+                                    <div class="d-flex justify-content-center">
+                                        <a  href="{{route('subscription-create')}}" style="text-decoration:none;">
+                                          <button class="cantact-page-cmn-btn mt-2">Get Started</button></div>
+                                          </a>
+                                </div>
+                                <div class="plain_industry_guide">
+                                    <div class="industry_guide_text plain_industry_guide opacity-50">
+                                        <span class="movie_name_text">Industry Guide</span>
+                                    </div>
+                                    <div class="plain_page_list p-3">
+                                        <ul>
+                                            <li>Create Profile</li>
+                                            <li>Search for industry professionals</li>
+                                            <li>View profiles</li>
+                                            <li>Save profiles</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="plain_project my-2">
+                                    <div class="project_text plain_project opacity-50">
+                                        <span class="movie_name_text">Projects</span>
+                                    </div>
+                                    <div class="plain_page_list p-3">
+                                        <ul>
+                                            <li>Create Profile</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="plain_job">
+                                    <div class="project_text plain_job opacity-50">
+                                        <span class="movie_name_text">Jobs</span>
+                                    </div>
+                                    <div class="plain_page_list p-3">
+                                        <ul>
+                                            <li>Create Profile</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="py-4 px-3">
+                                <a  href="{{route('subscription-create')}}" style="text-decoration:none;">
+                                       <button class="job_search_btn">Select Free Plan</button>
+                                          </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="plan_card">
+                                <div class="plain_detail">
+                                    <div class="plain_header text-center">Basic</div>
+                                    <div class="plan_subheader mt-2">Great for those who want to get themselves in front of the right people in the industry</div>
+                                </div>
+                                <div class="Plain_price">
+                                    <div class="search-head-subtext Aubergine_at_night mt-3">Paid Monthly</div>
+                                    <div class="search-head-text Aubergine_at_night">$9.99</div>
+                                    <div class="d-flex justify-content-center">
+                                    <a  href="{{route('subscription-create')}}" style="text-decoration:none;">
+                                          <button class="cantact-page-cmn-btn mt-2">Get Started</button>
+                                          </a>
+                                    </div>
+                                </div>
+                                <div class="plain_industry_guide p-3">
+                                    <div class="plain_page_list">
+                                        <ul>
+                                            <li>Create Profile</li>
+                                            <li>Search for industry professionals</li>
+                                            <li>View profiles</li>
+                                            <li>Save profiles</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="plain_project p-3 my-2">
+                                    <div class="plain_page_list">
+                                        <ul>
+                                            <li>Create Profile</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="plain_job p-3">
+                                    <div class="plain_page_list">
+                                        <ul>
+                                            <li>Create Profile</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="py-4 px-3">
+                                <a  href="{{route('subscription-create')}}" style="text-decoration:none;">
+                                       <button class="job_search_btn">Select Free Plan</button>
+                                          </a>                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="plan_card">
+                                <div class="plain_detail">
+                                    <div class="plain_header text-center">Pro</div>
+                                    <div class="plan_subheader mt-2">Great for those who want to get themselves in front of the right people in the industry</div>
+                                </div>
+                                <div class="Plain_price">
+                                    <div class="search-head-subtext Aubergine_at_night mt-3">Paid Monthly</div>
+                                    <div class="search-head-text Aubergine_at_night">$14.99</div>
+                                    <div class="d-flex justify-content-center">
+                                    <a  href="{{route('subscription-create')}}"  style="text-decoration:none;">
+                                          <button class="cantact-page-cmn-btn mt-2">Get Started</button>
+                                          </a>                                   
+                                     </div>
+                                </div>
+                                <div class="plain_industry_guide p-3">
+                                    <div class="plain_page_list">
+                                        <ul>
+                                            <li>Create Profile</li>
+                                            <li>Search for industry professionals</li>
+                                            <li>View profiles</li>
+                                            <li>Save profiles</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="plain_project p-3 my-2">
+                                    <div class="plain_page_list">
+                                        <ul>
+                                            <li>Create Profile</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="plain_job p-3">
+                                    <div class="plain_page_list">
+                                        <ul>
+                                            <li>Create Profile</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="py-4 px-3">
+                                <a  href="{{route('subscription-create')}}" style="text-decoration:none;">
+                                       <button class="job_search_btn">Select Free Plan</button>
+                                          </a>                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="plan_card">
+                                <div class="plain_detail">
+                                    <div class="plain_header text-center">Enterprise</div>
+                                    <div class="plan_subheader mt-2">Great for those who want to get themselves in front of the right people in the industry</div>
+                                </div>
+                                <div class="Plain_price">
+                                    <div class="search-head-subtext Aubergine_at_night mt-3">Paid Monthly</div>
+                                    <div class="search-head-text Aubergine_at_night">$39.00</div>
+                                    <div class="d-flex justify-content-center">
+                                    <a  href="{{route('subscription-create')}}"  style="text-decoration:none;">
+                                          <button class="cantact-page-cmn-btn mt-2">Get Started</button>
+                                          </a>                                    </div>
+                                </div>
+                                <div class="plain_industry_guide p-3">
+                                    <div class="plain_page_list">
+                                        <ul>
+                                            <li>Create Profile</li>
+                                            <li>Search for industry professionals</li>
+                                            <li>View profiles</li>
+                                            <li>Save profiles</li>
+                                            <li>Save profiles</li>
+                                            <li>Save profiles</li>
+                                            <li>Save profiles</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="plain_project p-3 my-2">
+                                    <div class="plain_page_list">
+                                        <ul>
+                                            <li>Create Profile</li>
+                                            <li>Create Profile</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="plain_job p-3">
+                                    <div class="plain_page_list">
+                                        <ul>
+                                            <li>Create Profile</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="py-4 px-3">
+                                <a  href="{{route('subscription-create')}}" style="text-decoration:none;">
+                                       <button class="job_search_btn">Select Free Plan</button>
+                                          </a>                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </section>
 
+
 @endsection
 
-
-
+@section('footer')
+@include('website.include.footer')
+@endsection
 @push('scripts')
-<script>
 
-    $(document).ready(function(){
-        $("#error-toast").toast("show");
-        $("#success-toast").toast("show");
+<script>
+    var addclass = 'card_highlight';
+    var forHead = 'active_plain_detail';
+    var $cols = $('.plan_card').click(function(e) {
+        $cols.removeClass(addclass);
+        $(this).addClass(addclass);
+        $('.plain_detail').removeClass(forHead);
+        $(this).find('.plain_detail').addClass(forHead);
     });
 </script>
+
 @endpush
