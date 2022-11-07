@@ -174,8 +174,20 @@ body {
     display: inline-block;
     position: relative;
     width: 100%;
+    height: auto;
+    background: linear-gradient(180deg, rgba(28, 3, 48, 0) 65.92%, #1C0330 100%);
+}
+
+.project-img-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
     height: 172px;
     background: linear-gradient(180deg, rgba(28, 3, 48, 0) 65.92%, #1C0330 100%);
+}
+
+.opacity-title{
+    opacity:0.5;
 }
 
 .carosel-card-cntainer {

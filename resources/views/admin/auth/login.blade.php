@@ -34,7 +34,6 @@
               <div class="brand-logo">
                 {{-- <a class="navbar-brand brand-logo" href="index.php"> --}}
                 
-                    <img src="{{asset('images/asset/Logo-white.jpg')}}">
                 {{-- </a> --}}
               </div>
               <h4>Hello! let's get started</h4><br>

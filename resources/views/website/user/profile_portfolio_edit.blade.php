@@ -26,7 +26,7 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Project Title</label>
-                                        <input type="text" class="form-control @error('project_title') is-invalid @enderror" placeholder="Project Title" name="project_title" value="{{ $UserPortfolioEdit[0]->project_title }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control @error('project_title') is-invalid @enderror" placeholder="Project Title" name="project_title" value="<?php if(isset($UserPortfolioEdit[0]->project_title)){ echo($UserPortfolioEdit[0]->project_title); }?>" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('project_title')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -39,7 +39,7 @@
                                 <div class="col-md-12">
                                     <div class="profile_input">
                                         <label>Description</label>
-                                    <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" text-length = "600" maxlength="600" name="description" aria-label="With textarea">{{ $UserPortfolioEdit[0]->description }}</textarea>
+                                    <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" text-length = "600" maxlength="600" name="description" aria-label="With textarea"><?php if(isset($UserPortfolioEdit[0]->description)){ echo($UserPortfolioEdit[0]->description); }?></textarea>
                                     @error('description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -114,7 +114,7 @@
                                     <div class="profile_input">
                                         <div><label>Project Files</label></div>
                                         <label class="mt-3">Video Link</label>
-                                        <input type="text" class="form-control @error('video') is-invalid @enderror" placeholder="Paste link here" name="video" value="{{ $UserPortfolioEdit[0]->video }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control @error('video') is-invalid @enderror" placeholder="Paste link here" name="video" value="<?php if(isset($UserPortfolioEdit[0]->video)){ echo($UserPortfolioEdit[0]->video); }?>" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('video')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

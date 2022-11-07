@@ -140,6 +140,18 @@
                 bindActions();
             }
 
+            let doAjax = function(url,reqData,method,callback) {
+                $.ajax({
+                    url: BaseUrl+url,
+                    type: method,
+                    data: reqData,
+                    success: function(result){
+                        alert(result);
+                        callback(reqData,result);
+                    }
+                });
+            }
+
             let bindActions = function (){
                 $(parentElemId+" .add_video_field").off("click").on("click",(e)=>{
                     let fieldElems = $(parentElemId+" input.video-link");
@@ -154,15 +166,22 @@
                     else
                         alert("Please enter a video url.");
                 });
+
                 $(parentElemId+" .video-link.add").off("blur").on("blur",(e)=>{
                     let link = e.target.value;
                     if(link){
                         console.log("link blurred - "+link);
                         if(link.indexOf("vimeo.com") > -1){
-                            vimeoData = getVimeoData(link);
+                            //vimeoData = getVimeoData(link);
                             //console.log(vimeoData);
+                            //let reqData = {'vidUrl': "https://vimeo.com/336812686"};
+                            let reqData = {'vidUrl': link};
+                            doAjax("/ajax/get-video-details",reqData,"POST",getVimeoData);
                         } else if(link.indexOf("youtube.com") > -1) {
-                            getYouTubeData(link);
+                            //getYouTubeData(link);
+                            let reqData = {'vidUrl': "https://www.youtube.com/watch?v=ZdbQ_FvNBZA&t=915s&ab_channel=ScaleupAlly"};
+                            //let reqData = {'vidUrl':link};
+                            doAjax("/ajax/get-video-details",reqData,"POST",getYouTubeData);
                         } else {
                             //show error
                             alert("Invalid video url. Only Vimeo and Youtube links are allowed.");
@@ -170,6 +189,7 @@
                         }
                     }
                 });
+
                 $(parentElemId+" input.feature_ved").off("click").on("click",(e)=>{
                     let defVid = $(parentElemId+" input.feature_ved:checked").val();
                     let vdrec = $.each(currentVideos,(i,rec)=>{
@@ -185,11 +205,11 @@
                 });
             }
 
-            let getVimeoData = function(link) {
+            let getVimeoData = function(reqData,vimeoResp) {
                 //https://vimeo.com/336812686
-                let vidId = link.split("https://vimeo.com/");
-                vidId = vidId[1].split("/")[0];
-                let vimeoResp = '[{"id":336812686,"title":"Direct Links To Video Files","description":"Hi there! Need help? Go to http:\/\/vimeo.com\/help","url":"https:\/\/vimeo.com\/336812686","upload_date":"2019-05-17 09:32:53","thumbnail_small":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_100x75","thumbnail_medium":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_200x150","thumbnail_large":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_640","user_id":90564994,"user_name":"Vimeo Support","user_url":"https:\/\/vimeo.com\/vimeosupport","user_portrait_small":"https:\/\/i.vimeocdn.com\/portrait\/27986607_30x30","user_portrait_medium":"https:\/\/i.vimeocdn.com\/portrait\/27986607_75x75","user_portrait_large":"https:\/\/i.vimeocdn.com\/portrait\/27986607_100x100","user_portrait_huge":"https:\/\/i.vimeocdn.com\/portrait\/27986607_300x300","duration":41,"width":1920,"height":1080,"tags":"","embed_privacy":"anywhere"}]';
+                // let vidId = link.split("https://vimeo.com/");
+                // vidId = vidId[1].split("/")[0];
+                //let vimeoResp = '[{"id":336812686,"title":"Direct Links To Video Files","description":"Hi there! Need help? Go to http:\/\/vimeo.com\/help","url":"https:\/\/vimeo.com\/336812686","upload_date":"2019-05-17 09:32:53","thumbnail_small":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_100x75","thumbnail_medium":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_200x150","thumbnail_large":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_640","user_id":90564994,"user_name":"Vimeo Support","user_url":"https:\/\/vimeo.com\/vimeosupport","user_portrait_small":"https:\/\/i.vimeocdn.com\/portrait\/27986607_30x30","user_portrait_medium":"https:\/\/i.vimeocdn.com\/portrait\/27986607_75x75","user_portrait_large":"https:\/\/i.vimeocdn.com\/portrait\/27986607_100x100","user_portrait_huge":"https:\/\/i.vimeocdn.com\/portrait\/27986607_300x300","duration":41,"width":1920,"height":1080,"tags":"","embed_privacy":"anywhere"}]';
                 let vimeo = JSON.parse(vimeoResp)[0];
                 let newVideo = {};
                 newVideo['id'] = lastVidId+1;
@@ -202,16 +222,14 @@
                 lastVidId = currentVideos[currentVideos.length-1]['id'];
             }
 
-            let getYouTubeData = function(link) {
+            let getYouTubeData = function(reqData,youtubeResp) {
                 //"https://www.youtube.com/watch?v=ZdbQ_FvNBZA&t=915s&ab_channel=ScaleupAlly";
-                let vidId = link.split("?");
-                vidId = vidId[1].split("&")[0].split("=")[1];
-                let youtubeResp = '{"kind":"youtube#videoListResponse","etag":"NY12d6Sa3mhyYdxx62iuVh0ta50","items":[{"kind":"youtube#video","etag":"BlL66Tqwd6vcpb_0fuUt4YHRBlA","id":"ZdbQ_FvNBZA","snippet":{"publishedAt":"2021-10-03T07:14:26Z","channelId":"UCyzKMNskJwgVy7j_lQ5aP-Q","title":"Session 5: What is Postman? and How to use it? by Suprabhat Sen","description":"Postman is one of the most important tools for any kind of Web and App Development. Learn how Postman works and helps make the job easier for any Software Developer","thumbnails":{"default":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/default.jpg","width":120,"height":90},"medium":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/mqdefault.jpg","width":320,"height":180},"high":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/hqdefault.jpg","width":480,"height":360},"standard":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/sddefault.jpg","width":640,"height":480},"maxres":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/maxresdefault.jpg","width":1280,"height":720}},"channelTitle":"ScaleupAlly","categoryId":"28","liveBroadcastContent":"none","localized":{"title":"Session 5: What is Postman? and How to use it? by Suprabhat Sen","description":"Postman is one of the most important tools for any kind of Web and App Development. Learn how Postman works and helps make the job easier for any Software Developer"}}}],"pageInfo":{"totalResults":1,"resultsPerPage":1}}';
+                // let youtubeResp = '{"kind":"youtube#videoListResponse","etag":"NY12d6Sa3mhyYdxx62iuVh0ta50","items":[{"kind":"youtube#video","etag":"BlL66Tqwd6vcpb_0fuUt4YHRBlA","id":"ZdbQ_FvNBZA","snippet":{"publishedAt":"2021-10-03T07:14:26Z","channelId":"UCyzKMNskJwgVy7j_lQ5aP-Q","title":"Session 5: What is Postman? and How to use it? by Suprabhat Sen","description":"Postman is one of the most important tools for any kind of Web and App Development. Learn how Postman works and helps make the job easier for any Software Developer","thumbnails":{"default":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/default.jpg","width":120,"height":90},"medium":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/mqdefault.jpg","width":320,"height":180},"high":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/hqdefault.jpg","width":480,"height":360},"standard":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/sddefault.jpg","width":640,"height":480},"maxres":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/maxresdefault.jpg","width":1280,"height":720}},"channelTitle":"ScaleupAlly","categoryId":"28","liveBroadcastContent":"none","localized":{"title":"Session 5: What is Postman? and How to use it? by Suprabhat Sen","description":"Postman is one of the most important tools for any kind of Web and App Development. Learn how Postman works and helps make the job easier for any Software Developer"}}}],"pageInfo":{"totalResults":1,"resultsPerPage":1}}';
                 let vimeo = JSON.parse(youtubeResp);
                 let newVideo = {};
                 newVideo['title'] = vimeo['items'][0]['snippet']['title'];
                 newVideo['thumbnail_medium'] = vimeo['items'][0]['snippet']['thumbnails']['high']['url'];
-                newVideo['url'] = link;
+                newVideo['url'] = reqData.vidUrl;
                 newVideo['isFeature'] = 0;
                 newVideo['type'] = 'videourl';
                 //ajaxcall to update server
@@ -221,6 +239,10 @@
                 currentVideoCount = currentVideos.length;
                 lastVidId = currentVideos[currentVideos.length-1]['id'];
                 loadCurrentVideos();
+            }
+
+            let youtubeCallback = function(resp){
+                console.log("here is the callback",resp);
             }
 
             let loadCurrentVideos = function() {
