@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\admin\AdminController;
-use App\Http\Controllers\admin\ProjectController as AdminProjectController;
-use App\Http\Controllers\Admin\ProjectListController;
+
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\FavouriteController;
@@ -10,7 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Website\EndorsementController;
 use App\Http\Controllers\Website\OrganisationController;
 use App\Http\Controllers\Website\UserController;
-use App\Http\Controllers\Admin\UserController as AdminUserController;
+
 use App\Http\Controllers\Website\IndustryGuideController;
 use App\Http\Controllers\Website\ProjectController;
 use App\Http\Controllers\Website\SettingController;
@@ -30,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/test', function () {
     return view('website.Plan');
 });
@@ -40,7 +39,7 @@ Auth::routes(['verify' => true]);
 
 
 // Admin routes 
-@include('admin.php');
+
 
 
 
@@ -150,3 +149,4 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 
 
 
+@include('admin.php');
