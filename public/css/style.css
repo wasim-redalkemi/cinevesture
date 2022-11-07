@@ -157,13 +157,21 @@ body {
     color: #ffff;
 }
 
-.carousel-header-text h1, .plain_header {
+.carousel-header-text h1 {
     font-style: normal;
     font-weight: 600;
     font-size: 36px;
     line-height: 124%;
     letter-spacing: -0.01em;
     color: #FAF8FB;
+}
+.plain_header {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 124%;
+    letter-spacing: -0.01em;
+    /* color: #FAF8FB; */
 }
 
 .carousel-card-container {
@@ -1586,6 +1594,13 @@ select  option, .radio_btn_label{
     letter-spacing: 0.018em;
     color: #FAF8FB;
 }
+.plan_subheader {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+    letter-spacing: 0.018em;
+}
 .modal_check_input:checked {
     background-color: #DD45B3 !important;
 }
@@ -1656,9 +1671,12 @@ select {
 .plain_detail {
     background: #FFFFFF;
     padding: 24px 18px;
+    color: #1C0330;
 }
 .active_plain_detail {
     background: #4D0D8A;
+    padding-bottom: 15px;
+    color: #FFFFFF;
 }
 .plan_btn {
     background: #FFFFFF;

@@ -46,8 +46,8 @@
                         <div class="col-md-3">
                             <div class="plan_card">
                                 <div class="plain_detail">
-                                    <div class="plain_header Aubergine_at_night text-center">Free</div>
-                                    <div class="modal_btm_text Aubergine_at_night mt-2">Great for those who want to get themselves in front of the right people in the industry</div>
+                                    <div class="plain_header text-center">Free</div>
+                                    <div class="plan_subheader mt-2">Great for those who want to get themselves in front of the right people in the industry</div>
                                 </div>
                                 <div class="Plain_price">
                                     <div class="search-head-subtext Aubergine_at_night mt-3">Free forever</div>
@@ -95,8 +95,8 @@
                         <div class="col-md-3">
                             <div class="plan_card">
                                 <div class="plain_detail">
-                                    <div class="plain_header Aubergine_at_night text-center">Basic</div>
-                                    <div class="modal_btm_text Aubergine_at_night mt-2">Great for those who want to get themselves in front of the right people in the industry</div>
+                                    <div class="plain_header text-center">Basic</div>
+                                    <div class="plan_subheader mt-2">Great for those who want to get themselves in front of the right people in the industry</div>
                                 </div>
                                 <div class="Plain_price">
                                     <div class="search-head-subtext Aubergine_at_night mt-3">Paid Monthly</div>
@@ -135,8 +135,8 @@
                         <div class="col-md-3">
                             <div class="plan_card">
                                 <div class="plain_detail">
-                                    <div class="plain_header Aubergine_at_night text-center">Pro</div>
-                                    <div class="modal_btm_text Aubergine_at_night mt-2">Great for those who want to get themselves in front of the right people in the industry</div>
+                                    <div class="plain_header text-center">Pro</div>
+                                    <div class="plan_subheader mt-2">Great for those who want to get themselves in front of the right people in the industry</div>
                                 </div>
                                 <div class="Plain_price">
                                     <div class="search-head-subtext Aubergine_at_night mt-3">Paid Monthly</div>
@@ -175,8 +175,8 @@
                         <div class="col-md-3">
                             <div class="plan_card">
                                 <div class="plain_detail">
-                                    <div class="plain_header Aubergine_at_night text-center">Enterprise</div>
-                                    <div class="modal_btm_text Aubergine_at_night mt-2">Great for those who want to get themselves in front of the right people in the industry</div>
+                                    <div class="plain_header text-center">Enterprise</div>
+                                    <div class="plan_subheader mt-2">Great for those who want to get themselves in front of the right people in the industry</div>
                                 </div>
                                 <div class="Plain_price">
                                     <div class="search-head-subtext Aubergine_at_night mt-3">Paid Monthly</div>
@@ -233,10 +233,12 @@
 
 <script>
     var addclass = 'card_highlight';
+    var forHead = 'active_plain_detail';
     var $cols = $('.plan_card').click(function(e) {
         $cols.removeClass(addclass);
         $(this).addClass(addclass);
-        $(this).addClass(active_plain_detail);
+        $('.plain_detail').removeClass(forHead);
+        $(this).find('.plain_detail').addClass(forHead);
     });
 </script>
 
