@@ -1628,13 +1628,15 @@ select {
     padding-bottom: 145px;
 }
 .plan_card {
-    background: #FAF8FB;
+    /* background: #FAF8FB; */
     /* padding: 20px; */
+    border: 1px solid transparent;
 }
 /* .plan_card :active {
     border: 2px solid;
 } */
 .card_highlight {
+    -webkit-transition: all 0.5s ease-out;
     border: 1px solid;
 }
 .plain_industry_guide {
@@ -1672,15 +1674,30 @@ select {
     background: #FFFFFF;
     padding: 24px 18px;
     color: #1C0330;
+    
 }
 .active_plain_detail {
     background: #4D0D8A;
-    padding-bottom: 15px;
+    /* padding-bottom: 2px; */
     color: #FFFFFF;
+    /* -webkit-transition: background-color 2s ease-out;
+    -moz-transition: background-color 2s ease-out;
+    -o-transition: background-color 2s ease-out; */
+    transition: background-color 0.5s ease-out;
 }
-.plan_btn {
-    background: #FFFFFF;
+.plan_btn_wraper {
+    background: #412d51;
     border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    width: 150px;
+    height: 40px;
+    /* opacity: 0.2; */
+}
+
+.plan_btn {
+    background: #412d51;
     border: none;
     font-weight: 600;
     font-size: 14px;
@@ -1688,11 +1705,26 @@ select {
     height: 38px;
     text-align: center;
     letter-spacing: 0.054em;
-    color: #1C0330;
+    color: #FAF8FB;
+    /* opacity: 1; */
 }
 
-.mt__150 {
-    margin-top: -150px;
+.plan_btn:focus {
+    border-radius: 4px;
+    opacity: 1;
+    transition: background-color 1s ease-out;
+    background: #FFFFFF;
+    color: #1C0330;
+}
+/* .plan_btn_wraper .active {
+    border-radius: 4px;
+    opacity: 1;
+    background: #FFFFFF;
+    color: #1C0330;
+} */
+
+.mt__158 {
+    margin-top: -158px;
 }
 .currency_togle {
     display: flex;
@@ -1737,9 +1769,9 @@ select {
     position: absolute;
     content: "";
     height: 18px;
-      width: 18px;
-      left: 2px;
-      bottom: 2px;
+    width: 18px;
+    left: 2px;
+    bottom: 2px;
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
@@ -1748,15 +1780,15 @@ select {
     position: absolute;
     content: "";
     height: 18px;
-      width: 18px;
-      left: 2px;
-      bottom: 2px;
+    width: 18px;
+    left: 2px;
+    bottom: 2px;
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
   }
   input:checked + .slider {
-    background-color: #971E9B;;
+    background-color: #971E9B;
   }
   
   input:focus + .slider {

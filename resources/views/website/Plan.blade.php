@@ -16,29 +16,35 @@
                         <div class="mt-4">
 
                             <div class="currency_togle">
-                                <div class="togle_text text_fff mt-0">Doller</div>
+                                <div class="togle_text text_fff mt-0">Dollar</div>
                                 <label class="switch mx-2">
                                     <input type="checkbox" class="check" value="">
                                     <span class="slider round"></span>
                                 </label>
                                 <div class="togle_text text_fff mt-0">Rupee</div>
                             </div>
-                            <div class="mb-5">
+                            <div class="my-5 d-flex justify-content-center">
                                 <!-- <div class="time_togle">
                         <label class="switch mx-2">
                           <input type="checkbox" class="check" value="">
                           <span class="slider">abc</span>
                         </label> 
                         </div> -->
-                                <button class="plan_btn">Monthly</button>
-                                <button class="plan_btn">Annually</button>
+                        <div class="plan_btn_wraper">
+                               <!-- <div> -->
+                                   <button class="plan_btn" active>Monthly</button>
+                               <!-- </div> -->
+                               <!-- <div> -->
+                                   <button class="plan_btn">Annually</button>
+                               <!-- </div>  -->
+                               </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container mt__150">
+        <div class="container mt__158">
             <div class="row">
                 <div class="col-md-1">sidebar</div>
                 <div class="col-md-11">
