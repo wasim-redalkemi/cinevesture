@@ -55,6 +55,10 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 
     Route::group(['prefix' => 'ajax'],function(){
         Route::post('/get-video-details',[AjaxController::class, 'getVideoDetails'])->name('get-video-details');
+        Route::post('/add-video',[AjaxController::class, 'addVideo'])->name('add-video');
+        Route::get('/get-media/{media_id}',[AjaxController::class, 'getMedia'])->name('get-media');
+        Route::post('/update-media/{media_id}',[AjaxController::class, 'updateMedia'])->name('update-video');
+        Route::post('/delete-media/{media_id}',[AjaxController::class, 'deleteMedia'])->name('delete-media');
     });
 
     Route::group(['prefix'=>'user'],function()
@@ -95,6 +99,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/project-gallery-store/{id}', [ProjectController::class, 'galleryStore'])->name('project-gallery-store');
         Route::post('/project-description-store/{id}', [ProjectController::class, 'descriptionStore'])->name('project-description-store');
         Route::post('/project-milestone-store/{id}', [ProjectController::class, 'milestoneStore'])->name('project-milestone-store');
+        Route::get('/get-project-media/{project_id}',[ProjectController::class, 'getMediaByProject'])->name('get-project-media');
 	});
 
     Route::group(['prefix'=>'endorsement'],function()
@@ -107,8 +112,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 
     Route::group(['prefix'=>'industry-guide'],function()
 	{	
-        Route::get('/show', [IndustryGuideController::class, 'show'])->name('guide-view');
-        Route::get('/filter', [IndustryGuideController::class, 'index'])->name('filter-profile');
+        Route::get('/show', [IndustryGuideController::class, 'index'])->name('guide-view');
+        // Route::get('/filter', [IndustryGuideController::class, 'index'])->name('filter-profile');
        
 	});
 
