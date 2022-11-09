@@ -51,6 +51,18 @@ class OrganisationController extends WebController
             $organisationService = MasterOrganisationService::query()->get();
             $UserOrganisation = UserOrganisation::query()->with(['organizationLanguages.languages','organizationServices.services','country'])->where('user_id',auth()->user()->id)->first();
             
+            $temp_services = [];
+            foreach ($UserOrganisation->organizationServices as $k => $v){
+                array_push($temp_services, $v->services->id);
+            }
+            $UserOrganisation->organizationServices = $temp_services;
+
+            $temp_languages = [];
+            foreach ($UserOrganisation->organizationLanguages as $k => $v){
+                array_push($temp_languages, $v->languages->id);
+            }
+            $UserOrganisation->organizationLanguages = $temp_languages;
+            
             return view('website.user.organisation.organisation_create',compact(['languages','country','organisationType','organisationService','UserOrganisation']));
         } catch (Exception $e) {
             return back()->withError('error', 'Something went wrong.');

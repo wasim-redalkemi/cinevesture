@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\admin\AdminController;
-use App\Http\Controllers\admin\ProjectController as AdminProjectController;
-use App\Http\Controllers\Admin\ProjectListController;
+
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\FavouriteController;
@@ -10,12 +8,12 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Website\EndorsementController;
 use App\Http\Controllers\Website\OrganisationController;
 use App\Http\Controllers\Website\UserController;
-use App\Http\Controllers\Admin\UserController as AdminUserController;
+
 use App\Http\Controllers\Website\IndustryGuideController;
 use App\Http\Controllers\Website\ProjectController;
 use App\Http\Controllers\Website\SettingController;
 use App\Http\Controllers\Website\AjaxController;
-
+use App\Http\Controllers\Website\SubscriptionController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;  
@@ -30,14 +28,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/test', function () {
+    return view('website.Plan');
+});
 Route::get('/', function () {
-    return view('website.website.auth.login');
+    return view('website.auth.login');
 });
 Auth::routes(['verify' => true]);
 
 
 // Admin routes 
-@include('admin.php');
+
 
 
 
@@ -60,7 +62,9 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     });
 
     Route::group(['prefix'=>'user'],function()
-	{	
+	{	Route::get('/subscription',[SubscriptionController::class,'subscriptionView'])->name('subscription-view');
+        Route::get('/subscription/store',[SubscriptionController::class,'storeSubscription'])->name('subscription-create');
+
 		Route::get('/profile-private-show', [UserController::class, 'profilePrivateShow'])->name('profile-private-show');
 		Route::get('/profile-public-show', [UserController::class, 'profilePublicShow'])->name('profile-public-show');
         Route::get('/profile-create', [UserController::class, 'profileCreate'])->name('profile-create');
@@ -80,6 +84,9 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/qualification-store/{id?}', [UserController::class, 'qualificationStore'])->name('qualification-store');        		
         Route::get('/qualification-edit/{id}', [UserController::class, 'qualificationEdit'])->name('qualification-edit');
         Route::post('/qualification-edit-store/{id}', [UserController::class, 'qualificationEditStore'])->name('qualification-edit-store'); 
+        
+        Route::post('/deactivate', [UserController::class, 'deactivateAccount'])->name('user-deactivate'); 
+
                		
 	});
 
@@ -145,7 +152,6 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     })->name('forgot-password-page');
 });
 
-Route::get('/test', function () {
-    return view('website.user.profile_public_view');
-});
 
+
+@include('admin.php');

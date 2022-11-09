@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use App\Models\UserProject;
 use Illuminate\Http\Request;
 
-class ProjectController extends Controller
+class ProjectController extends AdminController
 {
     /**
      * Display a listing of the resource.

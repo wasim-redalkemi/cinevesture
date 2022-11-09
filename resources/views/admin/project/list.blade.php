@@ -11,7 +11,7 @@
                         <table id="order-listing" class="table order-listing">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>Id</th>
                                     <th>Name</th>
                                     <th>Category</th>
                                     <th>Genre</th>

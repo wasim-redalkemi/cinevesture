@@ -30,7 +30,25 @@
                         <div class="guide_profile_main_text">
                             Title Of The Job
                         </div>
-                        <div class="pointer"><i class="fa fa-ellipsis-h aubergine icon-size" aria-hidden="true"></i></div>
+                        <div class="dropdown  search-page">
+                            <div class="" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-ellipsis-h aubergine icon-size" aria-hidden="true"></i>
+                            </div>
+                            <ul class="dropdown-menu w-100 profile_dropdown_menu p-2">
+                                <li>
+                                    Edit Job
+                                </li>
+                                <li>
+                                    Promote Job
+                                </li>
+                                <li>
+                                    Unpublish Job
+                                </li>
+                                <li>
+                                    Delete Job
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="posted_job_header">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -214,14 +232,14 @@
                                 <button class="curv_cmn_btn mx-4">Skills 4</button>
                             </div>
                             <div>
-                                <button class="guide_profile_btn">View Applications</button>
+                                <!-- <button class="guide_profile_btn">View Applications</button> -->
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Title of the job -->
+            <!-- Title of the job Modal-->
             <section>
                 <div class="col-md-9">
                     <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
@@ -230,7 +248,11 @@
                             <div class="profile_text">
                                 <h1>Title Of The Job</h1>
                             </div>
-                            <div class="pointer"><i class="fa fa-ellipsis-h aubergine icon-size" aria-hidden="true"></i></div>
+                            <div class="d-flex align-items-center">
+                                <!-- <i class="fa fa-ellipsis-h aubergine icon-size" aria-hidden="true"></i> -->
+                                <div class="pointer mx-3"><i class="fa fa fa-heart aubergine icon-size" aria-hidden="true"></i></div>
+                                <button class="guide_profile_btn">Apply now</button>
+                            </div>
                         </div>
                     </div>
                     <div class="profile_wraper profile_wraper_padding">
@@ -275,11 +297,23 @@
                             <button class="curv_cmn_btn">Skills 3</button>
                             <button class="curv_cmn_btn mx-4">Skills 4</button>
                         </div>
-                        <div class="mt-4 text-center">
-                            <button class="cancel_btn">back</button>
-                            <button class="guide_profile_btn mx-5">View Applicants</button>
-                        </div>
                     </div>
+                    <div class="profile_wraper profile_wraper_padding">
+                        <!-- <div class="container"> -->
+                        <div class="guide_profile_main_text mb-2">Job Posted By</div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="guide_profile_main_text deep-pink">John Doe</div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="guide_profile_main_subtext Aubergine_at_night">Chief Officer</div>
+                                <div class="profile_upload_text fw_300 Aubergine_at_night">10TH July 2021</div>
+                                <div class="guide_profile_main_subtext Aubergine_at_night">Abc Private Limited</div>
+                            </div>
+                        </div>
+                        <!-- </div> -->
+                    </div>
+
                 </div>
             </section>
 
@@ -288,8 +322,8 @@
                 <div class="col-md-9">
                     <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
 
-                        <div class="profile_text">
-                            <h1>Applicants for “Title of job”</h1>
+                        <div class="search-head-text deep-aubergine">
+                            Applicants for “Title of job”
                         </div>
                     </div>
                     <div class="profile_wraper profile_wraper_padding">
