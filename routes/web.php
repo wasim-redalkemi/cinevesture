@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\admin\AdminController;
-use App\Http\Controllers\admin\ProjectController as AdminProjectController;
-use App\Http\Controllers\Admin\ProjectListController;
+
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\FavouriteController;
@@ -10,7 +8,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Website\EndorsementController;
 use App\Http\Controllers\Website\OrganisationController;
 use App\Http\Controllers\Website\UserController;
-use App\Http\Controllers\Admin\UserController as AdminUserController;
+
 use App\Http\Controllers\Website\IndustryGuideController;
 use App\Http\Controllers\Website\ProjectController;
 use App\Http\Controllers\Website\SettingController;
@@ -30,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/test', function () {
     return view('website.Plan');
 });
@@ -40,7 +39,7 @@ Auth::routes(['verify' => true]);
 
 
 // Admin routes 
-@include('admin.php');
+
 
 
 
@@ -56,6 +55,10 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 
     Route::group(['prefix' => 'ajax'],function(){
         Route::post('/get-video-details',[AjaxController::class, 'getVideoDetails'])->name('get-video-details');
+        Route::post('/add-video',[AjaxController::class, 'addVideo'])->name('add-video');
+        Route::get('/get-media/{media_id}',[AjaxController::class, 'getMedia'])->name('get-media');
+        Route::post('/update-media/{media_id}',[AjaxController::class, 'updateMedia'])->name('update-video');
+        Route::post('/delete-media/{media_id}',[AjaxController::class, 'deleteMedia'])->name('delete-media');
     });
 
     Route::group(['prefix'=>'user'],function()
@@ -96,6 +99,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/project-gallery-store/{id}', [ProjectController::class, 'galleryStore'])->name('project-gallery-store');
         Route::post('/project-description-store/{id}', [ProjectController::class, 'descriptionStore'])->name('project-description-store');
         Route::post('/project-milestone-store/{id}', [ProjectController::class, 'milestoneStore'])->name('project-milestone-store');
+        Route::get('/get-project-media/{project_id}',[ProjectController::class, 'getMediaByProject'])->name('get-project-media');
 	});
 
     Route::group(['prefix'=>'endorsement'],function()
@@ -150,3 +154,4 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 
 
 
+@include('admin.php');
