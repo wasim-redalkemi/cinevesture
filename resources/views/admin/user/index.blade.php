@@ -30,7 +30,7 @@
                                     <td>{{$user->id}}</td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
-                                    <td>{{$user->job_title}}title</td>
+                                    <td>{{$user->job_title}}</td>
                                     
                                     <td>{{$user->organization->name}}</td>
                                     <td>{{$user->organization->name}}</td>

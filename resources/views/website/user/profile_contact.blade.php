@@ -1,4 +1,4 @@
-@extends('website.layouts.app',['class' => 'main'])
+@extends('website.layouts.app',['class' => 'bg_white'])
 
 @section('title','Cinevesture-portfolio')
 

@@ -92,22 +92,15 @@
                                     <label>About</label>
                                     <textarea class="form-control controlTextLength" text-length="600" id="" name="about" maxlength="600" aria-label="With textarea" required autofocus>{{(isset($UserOrganisation->about))?$UserOrganisation->about:'' }}</textarea>
                                 </div>
-
-                                <!-- <div id="charNum" class="for_alert word_count">0 / 200</div> -->
-
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="profile_input">
                                     <label>Services</label>
-                                    <select name="service_id[]" class="outline js-select2 @error('service_id') is-invalid @enderror" id="" multiple required autofocus>
+                                    <select name="service_id[]" class="outline js-select2 @error('service_id') is-invalid @enderror" id="" multiple autofocus>
                                         @foreach ($organisationService as $k=>$v)
-                                            {{-- @foreach ($UserOrganisation->organizationServices as $k => $organizationService) --}}
-                                                <option value="{{ $v->id }}" 
-                                                    <?php #if($v->id == $organizationService->services->id){echo('selected');} ?>>
-                                                    {{ $v->name }}</option>
-                                            {{-- @endforeach --}}
+                                            <option value="{{ $v->id }}"@if(in_array($v->id, $UserOrganisation->organizationServices))selected @endif>{{ $v->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('service_id')
@@ -172,11 +165,9 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label> Languages Spoken</label>
-                                    <select name="language_id[]" class="outline js-select2 @error('language_id') is-invalid @enderror" id="lang" multiple required autofocus>
+                                    <select name="language_id[]" class="outline js-select2 @error('language_id') is-invalid @enderror" id="lang" multiple autofocus>
                                         @foreach ($languages as $k=>$v)
-                                            {{-- @foreach ($UserOrganisation->organizationLanguages as $k => $organizationLanguage)                                     --}}
-                                                <option value="{{ $v->id }}"<?php #if($v->id == $organizationLanguage->languages->id){echo('selected');} ?>>{{  $v->name }}</option>
-                                            {{-- @endforeach --}}
+                                            <option value="{{ $v->id }}"@if(in_array($v->id, $UserOrganisation->organizationLanguages))selected @endif>{{  $v->name }}</option>
                                         @endforeach
 
                                     </select>
@@ -228,7 +219,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Introduction Video</label>
-                                    <input type="text" class="outline form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="{{(isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                    <input type="text" class="outline form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="{{(isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:'https://www.youtube.com/embed/bDMwlH1FTpk' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('intro_video_link')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

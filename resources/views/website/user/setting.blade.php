@@ -41,7 +41,11 @@
                             {{-- <button class="deactivate_btn">Logout</button> --}}
                         </div>
                         <div class="col-md-5 mt-2 mt-md-0">
-                            <button class="deactivate_btn">Deactivate account</button>
+                        
+                                <button type="button" class="deactivate_btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                Deactivate account
+                               </button>
+                    
                         </div>
                     </div>
                 </div>
@@ -50,6 +54,42 @@
     </div>
 </section>
 
+
+<!-- Modal for Confirmation for account deactivate -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+
+    <div class="modal-content">
+      
+      <div class="modal-body" style="padding: 0px;">
+    <section>
+    <div class="container"style="padding: 0px;" >
+        <div class="row">   
+            <div class="col-md-12">
+                <div class="modal_container">
+                    <div class="icon_container warning">
+                        <i class="fa fa-times icon_style" aria-hidden="true"></i>
+                    </div>
+                    <div class="head_text mt-4">Are you sure?</div>
+                    <div class="sub_text mt-4">Do you really want to deactivate your account?<br>This process cannot be undone.</div>
+                    <div class="d-flex justify-content-center mt-4">   
+                        <button type="button" class="cancel_btn mx-3" data-bs-dismiss="modal">Cancel</button>
+                        <form method="POST" action="{{ route('user-deactivate') }}">
+                                @csrf
+                           <button  class="delete_btn mx-3" type="submit">Confirm</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End for Modal  -->
 @endsection
 
 @section('footer')

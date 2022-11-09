@@ -56,7 +56,8 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>First Name</label>
-                                        <input type="text" class="outline is-invalid-remove name-only form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name" value="{{ $user->first_name }}"
+                                        {{-- <input type="text" class="outline is-invalid-remove name-only form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name" value="@if(isset($user->first_name){{ $user->first_name}} @endif" --}}
+                                        <input type="text" class="outline is-invalid-remove name-only form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name" value="<?php if(isset($user->first_name)){echo($user->first_name);} ?>"
                                             aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                         @error('first_name')
                                             <span class="invalid-feedback" role="alert">
@@ -68,7 +69,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>Last Name</label>
-                                        <input type="text" class="outline is-invalid-remove name-only form-control @error('last_name') is-invalid @enderror" placeholder="{{ __('Last Name') }}" name="last_name" value="{{ $user->last_name }}"
+                                        <input type="text" class="outline is-invalid-remove name-only form-control @error('last_name') is-invalid @enderror" placeholder="{{ __('Last Name') }}" name="last_name" value="<?php if(isset($user->last_name)){echo($user->last_name);} ?>"
                                             aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                         @error('last_name')
                                             <span class="invalid-feedback" role="alert">
@@ -80,7 +81,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>Job Title</label>
-                                        <input type="text" class="outline is-invalid-remove form-control @error('job_title') is-invalid @enderror" placeholder="Job Title" name="job_title" value="{{ $user->job_title }}"
+                                        <input type="text" class="outline is-invalid-remove form-control @error('job_title') is-invalid @enderror" placeholder="Job Title" name="job_title" value="<?php if(isset($user->job_title)){echo($user->job_title);} ?>"
                                             aria-label="Username" aria-describedby="basic-addon1"  autofocus>
                                         @error('job_title')
                                             <span class="invalid-feedback" role="alert">
@@ -220,7 +221,7 @@
                                 <div class="col-md-12">
                                     <div class="profile_input">
                                         <label>About</label>
-                                        <textarea class="outline form-control controlTextLength is-invalid-remove form-control @error('about') is-invalid @enderror" text-length = "200" maxlength="200" name="about" aria-label="With textarea">{{ $user->about }}</textarea>
+                                        <textarea class="outline form-control controlTextLength is-invalid-remove form-control @error('about') is-invalid @enderror" text-length = "200" maxlength="200" name="about" aria-label="With textarea"><?php if(isset($user->about)){echo($user->about);} ?></textarea>
                                         @error('about')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -252,7 +253,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>IMDB Profile</label>
-                                        <input type="text" class="outline is-invalid-remove form-control @error('imdb_profile') is-invalid @enderror" placeholder="IMDB Profile" name="imdb_profile" value="{{ $user->imdb_profile }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="outline is-invalid-remove form-control @error('imdb_profile') is-invalid @enderror" placeholder="IMDB Profile" name="imdb_profile" value="<?php if(isset($user->imdb_profile)){echo($user->imdb_profile);} ?>" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('imdb_profile')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -263,7 +264,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>LinkedIn Profile</label>
-                                        <input type="text" class="outline is-invalid-remove form-control @error('linkedin_profile') is-invalid @enderror" placeholder="LinkedIn Profile" name="linkedin_profile" value="{{ $user->linkedin_profile }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="outline is-invalid-remove form-control @error('linkedin_profile') is-invalid @enderror" placeholder="LinkedIn Profile" name="linkedin_profile" value="<?php if(isset($user->linkedin_profile)){echo($user->linkedin_profile);} ?>" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('linkedin_profile')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -274,7 +275,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>Website</label>
-                                        <input type="text" class="outline is-invalid-remove form-control @error('website') is-invalid @enderror" placeholder="Website" aria-label="Username" name="website" value="{{ $user->website }}" aria-describedby="basic-addon1">
+                                        <input type="text" class="outline is-invalid-remove form-control @error('website') is-invalid @enderror" placeholder="Website" aria-label="Username" name="website" value="<?php if(isset($user->website)){echo($user->website);} ?>" aria-describedby="basic-addon1">
                                         @error('website')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -287,7 +288,7 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>Introduction Video</label>
-                                        <input type="text" class="outline is-invalid-remove form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="{{ $user->intro_video_link }}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="outline is-invalid-remove form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="<?php if(isset($user->intro_video_link)){echo($user->intro_video_link);} ?>" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('intro_video_link')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
