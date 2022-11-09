@@ -18,6 +18,7 @@ class CreateProjectSearchTable extends Migration
             $table->string('project_id',20);
             $table->string('list_id',20);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

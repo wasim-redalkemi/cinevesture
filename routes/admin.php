@@ -39,6 +39,8 @@ Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
         Route::get('/list', [ProjectListController::class, 'show'])->name('show-list');
         Route::get('/search/{id}', [ProjectListController::class, 'search'])->name('search-project');
         Route::post('/find/{id}', [ProjectListController::class, 'find'])->name('find-project');
+        Route::post('/search-projects', [ProjectListController::class, 'saveSearchProjects'])->name('save-search-projects');
+       
     }); 
    
    

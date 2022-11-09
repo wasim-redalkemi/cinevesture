@@ -82,23 +82,31 @@ class ProjectListController extends AdminController
     public function find(Request $request,$id)
     {
         //dd(array_count_values($request->projectids));
-        {
-        foreach ($request->projectids as $k=>$v ) {
-            $data[] = [
-                'project_id' =>$v,
-                'list_id'  =>$request->listids[$k]
-                ];
-            }
-        }
-            ProjectSearch::insert( $data );
+       
+           
             $project_data=UserProject::query()->with('projectImage')->get();
             $search_data=$request->name;
             $search_projects=UserProject::query()->with('projectImage')
             ->where('project_name', 'like' ,"%$search_data%")
             ->get();
+           
             return view('admin.user.search_project',compact('search_projects','id','project_data'));
     }
 
+    public function saveSearchProjects(Request $request){
+        foreach($request->projectids as $project){
+        $projectid = explode(',', $project);
+          
+       
+        // foreach ($projectid as $k=>$v ) {
+            $data[] = [
+                'project_id' =>$projectid[0],
+                'list_id'  =>$projectid[1]
+                ];
+            }
+           // dd($data);
+            ProjectSearch::insert( $data );
+    }
     /**
      * Update the specified resource in storage.
      *
