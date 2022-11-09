@@ -23,7 +23,7 @@
                                 </label>
                                 <div class="togle_text text_fff mt-0">Rupee</div>
                             </div>
-                            <div class="my-5 d-flex justify-content-center">
+                            <div class="mt-4 mb-5 d-flex justify-content-center">
                                 <!-- <div class="time_togle">
                         <label class="switch mx-2">
                           <input type="checkbox" class="check" value="">
@@ -240,11 +240,14 @@
 <script>
     var addclass = 'card_highlight';
     var forHead = 'active_plain_detail';
+    var forButton = 'active_plain_button';
     var $cols = $('.plan_card').click(function(e) {
         $cols.removeClass(addclass);
         $(this).addClass(addclass);
         $('.plain_detail').removeClass(forHead);
+        $('.job_search_btn').removeClass(forButton);
         $(this).find('.plain_detail').addClass(forHead);
+        $(this).find('.job_search_btn').addClass(forButton);
     });
 </script>
 

@@ -440,6 +440,7 @@ body {
     border: none;
     color: #FAF8FB;
 }
+
 .with_google_btn {
     width: 100%;
     height: 40px;
@@ -1626,6 +1627,9 @@ select {
     line-height: 120%;
     letter-spacing: -0.025em;
     padding-bottom: 145px;
+}
+.active_plain_button {
+    background: #33084C;
 }
 .plan_card {
     /* background: #FAF8FB; */
