@@ -28,7 +28,7 @@
                                             <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
                                             <div class="project_card_data w-100 h-100">
                                                 <div>
-                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                                    <i class="fa fa-trash-o delete-media" aria-hidden="true"></i>
                                                 </div>
                                             </div>
                                             <div class="profile_input">

@@ -82,7 +82,7 @@ class ProjectController extends WebController
     }
 
 
-    public function overviewStore(Request $request)
+    public function overviewStore(Request $request, $id)
     {
         try {
             $user = User::query()->find(auth()->user()->id);       
@@ -271,6 +271,22 @@ class ProjectController extends WebController
         } catch (Exception $e) {
             return back()->withError('error','Something went wrong.');
         }
+    }
+
+    public function getMediaByProject(Request $request, $project_id = null){
+        $reqData = $request->all();
+        //\Log::info("project_id ".$project_id.", ".$reqData['type']);
+        //\DB::connection()->enableQueryLog();
+        $where = ['project_id'=>$project_id];
+        if(isset($reqData['type'])){
+            $where['file_type'] = $reqData['type'];
+        }
+        $ProjectVideos = ProjectMedia::where($where)->get();
+        foreach($ProjectVideos as $i => $rec) {
+            $ProjectVideos[$i]->media_info = json_decode($rec->media_info,true);
+        } 
+        //$queries = \DB::getQueryLog();
+        return json_encode($ProjectVideos);
     }
 
 }
