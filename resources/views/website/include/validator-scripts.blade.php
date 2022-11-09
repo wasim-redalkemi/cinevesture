@@ -145,7 +145,7 @@
                     lastVidId = currentVideos[currentVideoCount-1]['id'];
 
                 doAjax('/project/get-project-media/'+project_id+'?type=video',{},"GET",getVideosCallback);
-                doAjax('/ajax/get-media/1',{},"GET",updateVideoCallback)
+                //doAjax('/ajax/get-media/1',{},"GET",updateVideoCallback)
             }
 
             let getVideosCallback = function (req, resp) {
@@ -280,7 +280,7 @@
                         str += '<div class="title project_card_data w-100 h-100">';
                             str += '<p>'+v.media_info.title+'</p>';
                         str += '</div>';
-                        str += '<div class="project_card_data w-100 h-100">';
+                        str += '<div class="delete-icon project_card_data w-100 h-100">';
                             str += '<div>';
                                 str += '<i class="fa fa-trash-o delete-media" data-id="'+v.id+'" aria-hidden="true"></i>';
                             str += '</div>';

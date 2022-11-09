@@ -1180,17 +1180,24 @@ body {
     justify-content: end;
     font-size: 15px;
     color: #FAF8FB;
-    /* background: rgba(28, 3, 48, 0.4); */
+    background: rgba(28, 3, 48, 0.4);
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
     border-radius: 4px;
+    z-index:1;
 }
+
+.delete-icon.project_card_data {
+    z-index:2;
+    background: none;
+}
+
 .title.project_card_data {
     bottom: 0;
     left: 0;
     justify-content: flex-start;
     align-items: flex-end;
-    background: none;
 }
+
 .project_card_data p {text-shadow: 1px 1px #3e3e3e; font-weight: 600;max-height: 40px;margin-bottom: -5px;line-height: 22px;}
 .movie_name_text {
     font-weight: 600;
