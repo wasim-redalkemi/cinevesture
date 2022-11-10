@@ -18,7 +18,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="profile_wraper profile_wraper_padding mt-4">
+                <div class="profile_wraper profile_wraper_padding my-4">
                     <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('project-overview-store') }}">
                         @csrf
                         <div>

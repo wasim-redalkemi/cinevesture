@@ -733,11 +733,14 @@ body {
     /* position: relative; */
     display: inline-block;
     /* font-size: 0; */
-    background-image:url("../images/publicview-head-img.png");
+    background-image:url("../images/asset/publicview-head-img.png");
     height: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+.public-head-image-shadow {
+    background: rgba(28, 3, 48, 0.4);
 }
 .verified-text-area {
     display: flex;
@@ -1630,6 +1633,7 @@ select {
 }
 .active_plain_button {
     background: #33084C;
+    -webkit-transition: all 0.5s ease-out;
 }
 .plan_card {
     /* background: #FAF8FB; */
