@@ -27,7 +27,7 @@
                     <div class="guide_profile_subsection">
                         <div class="guide_profile_main_text">Cover Letter</div>
                         <div class="profile_input">
-                            <textarea class="form-control controlTextLength" text-length = "200" aria-label="With textarea" placeholder="Your answer here"></textarea>
+                            <textarea class="form-control controlTextLength" text-length = "1500" maxlength="1500" aria-label="With textarea" placeholder="Your answer here"></textarea>
                         </div>
                         <div class="d-flex justify-content-center mt-5 mb-4">
                             <button class="cancel_btn mx-5">Back</button>

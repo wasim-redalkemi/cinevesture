@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use App\Models\ProjectList;
+use App\Models\ProjectMedia;
+use App\Models\ProjectSearch;
 use App\Models\UserProject;
 use Illuminate\Http\Request;
 
@@ -68,21 +70,43 @@ class ProjectListController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function search()
+    public function search($id)
     {
-        return view('admin.user.search_project');
+        $project_data=UserProject::all();
+        return view('admin.user.search_project',compact('id','project_data'));
     }
     public function edit($id)
     {
         //
     }
-    public function find(Request $request)
+    public function find(Request $request,$id)
     {
-            $project_name='%'.$request->name.'%';
-            $search_projects=UserProject::select('project_name')->where('project_name','like',$project_name)->get();
-            dd($search_projects);
+        //dd(array_count_values($request->projectids));
+       
+           
+            $project_data=UserProject::query()->with('projectImage')->get();
+            $search_data=$request->name;
+            $search_projects=UserProject::query()->with('projectImage')
+            ->where('project_name', 'like' ,"%$search_data%")
+            ->get();
+           
+            return view('admin.user.search_project',compact('search_projects','id','project_data'));
     }
 
+    public function saveSearchProjects(Request $request){
+        foreach($request->projectids as $project){
+        $projectid = explode(',', $project);
+          
+       
+        // foreach ($projectid as $k=>$v ) {
+            $data[] = [
+                'project_id' =>$projectid[0],
+                'list_id'  =>$projectid[1]
+                ];
+            }
+           // dd($data);
+            ProjectSearch::insert( $data );
+    }
     /**
      * Update the specified resource in storage.
      *

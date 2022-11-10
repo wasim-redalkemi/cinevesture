@@ -17,7 +17,6 @@ class CreateUserFavouriteProjectsTable extends Migration
             $table->id();
             $table->string('user_id',20);
             $table->string('project_id',20);
-
             $table->timestamps();
             $table->softDeletes();
         });
