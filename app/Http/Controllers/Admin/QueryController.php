@@ -55,7 +55,8 @@ class QueryController extends Controller
      */
     public function show($id)
     {
-        //
+        $query=Query::find($id);
+        return view('admin.query.view',compact('query'));
     }
 
     /**
@@ -89,6 +90,17 @@ class QueryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $query=query::find($id);
+            
+        $query->Delete();
+       
+        return back();
+        } catch (\Throwable $th) {
+           return back()->withErrors($th->getMessage());
+        }
+        
+       
+
     }
 }

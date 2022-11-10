@@ -19,7 +19,8 @@ class CreateQuerysTable extends Migration
             $table->string('first_name',255)->nullable();
             $table->string('last_name',255)->nullable();
             $table->string('email',255)->nullable();
-            $table->string('message',500)->nullable();
+            $table->string('subject',500)->nullable();
+            $table->string('message',2000)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
