@@ -3,7 +3,8 @@
 use App\Http\Controllers\admin\AuthController;
 use App\Http\Controllers\admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
-use App\Http\Controllers\Admin\ProjectListController;  
+use App\Http\Controllers\Admin\ProjectListController;
+use App\Http\Controllers\Admin\QueryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AdminAuthMiddleware;
 
@@ -41,6 +42,12 @@ Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
         Route::post('/find/{id}', [ProjectListController::class, 'find'])->name('find-project');
         Route::post('/search-projects', [ProjectListController::class, 'saveSearchProjects'])->name('save-search-projects');
        
+    }); 
+    Route::group(['prefix'=>'query-management'],function()
+    {
+        Route::get('/query-list', [QueryController::class, 'index'])->name('query.list');
+        // Route::post('/create-list', [ProjectListController::class, 'create'])->name('create-list');
+        
     }); 
    
    
