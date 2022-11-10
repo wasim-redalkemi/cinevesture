@@ -28575,4 +28575,13 @@ div.tagsinput span.tag a {
   top: 74px;
   z-index: 9999;
 }
+.radius{
+  border-radius: 6px;
+  
+  padding: 10px;
+}
+.inp-height{
+  height: 50px;
+}
+
 /*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */
