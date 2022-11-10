@@ -18,12 +18,14 @@ class QuerySeeder extends Seeder
            [ 'first_name'=>'Rahul',
             'last_name'=>'kumar',
             'email'=>'rahul@gmail.com',
+            'subject'=>'feedback',
             'message'=>'OK gook'
             
         ],[
             'first_name'=>'ajay',
             'last_name'=>'kumar',
             'email'=>'ajay@gmail.com',
+            'subject'=>'feedback',
             'message'=>'OK gook'
             
         ],
@@ -31,7 +33,9 @@ class QuerySeeder extends Seeder
             'first_name'=>'vivak',
             'last_name'=>'kumar',
             'email'=>'vivak@gmail.com',
+            'subject'=>'feedback',
             'message'=>'OK gook'
+            
             
         ]
     ]);

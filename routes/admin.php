@@ -46,7 +46,8 @@ Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
     Route::group(['prefix'=>'query-management'],function()
     {
         Route::get('/query-list', [QueryController::class, 'index'])->name('query.list');
-        // Route::post('/create-list', [ProjectListController::class, 'create'])->name('create-list');
+        Route::get('query-delete/{id}', [QueryController::class, 'destroy'])->name('query-delete');
+        Route::get('query-view/{id}', [QueryController::class, 'show'])->name('query-show');
         
     }); 
    
