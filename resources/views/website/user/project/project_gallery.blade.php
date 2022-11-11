@@ -17,7 +17,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="profile_wraper profile_wraper_padding mt-4">
+                <div class="profile_wraper profile_wraper_padding my-4">
                     <p class="flow_step_text pb-0">Gallery</p>
                     <div id="Videos" class="add_content_wraper">
                         <div class="row video-sec">
