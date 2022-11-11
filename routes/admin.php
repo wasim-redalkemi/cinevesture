@@ -49,6 +49,7 @@ Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
         Route::get('/query-list', [QueryController::class, 'index'])->name('query.list');
         Route::get('query-delete/{id}', [QueryController::class, 'destroy'])->name('query-delete');
         Route::get('query-view/{id}', [QueryController::class, 'show'])->name('query-show');
+       
         
     }); 
    
@@ -60,7 +61,10 @@ Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
     Route::get('project-list', [AdminProjectController::class, 'index'])->name('admin-project-list');
     Route::get('project-list-favorite', [AdminProjectController::class, 'markFavorite'])->name('project-list-favorite');
     Route::get('project-list-Recommended', [AdminProjectController::class, 'markRecommended'])->name('project-list-recommended');
-    Route::get('project-list-status', [AdminProjectController::class, 'changeStatus'])->name('project-list-status');
+    Route::get('project-list-status', [AdminProjectController::class, 'changeStatus'])->name('project-list-status'); 
+    Route::get('category-update-view', [AdminProjectController::class, 'categoryUpdateView'])->name('category.update-view');
+    Route::post('category-update', [AdminProjectController::class, 'categoryUpdate'])->name('category.update');
+    Route::get('query-update-view', [AdminProjectController::class, 'queryUpdateView'])->name('query.update-view');
 
 });
 ?>

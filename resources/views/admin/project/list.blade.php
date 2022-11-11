@@ -34,11 +34,15 @@
                                     </td>
                                     <td>{{$project->project_name}}</td>
                                     @foreach ($project->projectCategory as $key=>$category)
-                                   <td>{{$category->name}}<i class="fa fa-edit"></i></td>
+                                   <td>{{$category->name}}
+                                     <a href="{{route('category.update-view')}}?pid={{$project->id}}&cid={{$category->id}}"><i class="fa fa-edit"></i></a>
+                                    </td>
                                    @endforeach
                                     
                                    @foreach ($project->genres as $key=>$genre)
-                                   <td>{{$genre->name}}<i class="fa fa-edit"></i></td>
+                                   <td>{{$genre->name}}
+                                     <a href="{{route('query.update-view',['id'=>$project->id])}}"><i class="fa fa-edit"></i></a>
+                                    </td>
                                    @endforeach
                                     
                                     <td>{{ date('d-M-y', strtotime($project->created_at)) }}</td>
