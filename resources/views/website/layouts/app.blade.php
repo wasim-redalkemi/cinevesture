@@ -56,7 +56,8 @@
         });
 
         $('.controlTextLength').each(function(){
-            $('.controlTextLength').after("<div class=textlength for_alert text-end>"+ $(this).val().length +" / "+$(this).attr('text-length')+"</div>");
+            $(this).after("<div class=textlength for_alert text-end>"+ $(this).val().length +" / "+$(this).attr('text-length')+"</div>");
+            // $('.controlTextLength').after("<div class=textlength for_alert text-end>"+ $(this).val().length +" / "+$(this).attr('text-length')+"</div>");
             $('.textlength').css({"color":"#787885", "text-align":"end"})
         });
 
