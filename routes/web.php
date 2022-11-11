@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 Route::get('/test', function () {
-    return view('website.user.project.project_description');
+    return view('website.plan');
 });
 Route::get('/', function () {
     return view('website.auth.login');
