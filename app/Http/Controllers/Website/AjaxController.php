@@ -7,28 +7,71 @@ use App\Http\Controllers\WebController;
 use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Helper\AppUtilityController;
+use App\Models\ProjectMedia;
 
 
 class AjaxController extends WebController {
-    
+
     public function getVideoDetails(Request $request){
-        \Log::info("here in logs");
+        //\Log::info("here in logs");
         $reqData = $request->all();
+        $toReturn = "";
         try {
             if(isset($reqData['vidUrl'])){
-                $apiKey = config('app.GOOGLE_API_KEY');
-                //echo "apiKey ".$apiKey.", ".config('app.name');
-                //https://www.googleapis.com/youtube/v3/videos?id=ZdbQ_FvNBZA&key=AIzaSyCNJqNKLKFTBoLnbrbNtP8MDlz2vBVvNnE&part=snippet
-                // $json = '{"kind":"youtube#videoListResponse","etag":"NY12d6Sa3mhyYdxx62iuVh0ta50","items":[{"kind":"youtube#video","etag":"BlL66Tqwd6vcpb_0fuUt4YHRBlA","id":"ZdbQ_FvNBZA","snippet":{"publishedAt":"2021-10-03T07:14:26Z","channelId":"UCyzKMNskJwgVy7j_lQ5aP-Q","title":"Session 5: What is Postman? and How to use it? by Suprabhat Sen","description":"Postman is one of the most important tools for any kind of Web and App Development. Learn how Postman works and helps make the job easier for any Software Developer","thumbnails":{"default":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/default.jpg","width":120,"height":90},"medium":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/mqdefault.jpg","width":320,"height":180},"high":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/hqdefault.jpg","width":480,"height":360},"standard":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/sddefault.jpg","width":640,"height":480},"maxres":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/maxresdefault.jpg","width":1280,"height":720}},"channelTitle":"ScaleupAlly","categoryId":"28","liveBroadcastContent":"none","localized":{"title":"Session 5: What is Postman? and How to use it? by Suprabhat Sen","description":"Postman is one of the most important tools for any kind of Web and App Development. Learn how Postman works and helps make the job easier for any Software Developer"}}}],"pageInfo":{"totalResults":1,"resultsPerPage":1}}';
-                // echo $json;
-                echo AppUtilityController::getVideoDetailsById($reqData['vidUrl']);
+                $toReturn = AppUtilityController::getVideoDetailsById($reqData['vidUrl']);
             } else {
-                echo json_encode(["status"=>1,"error"=>"Invalid request"]);
+                $toReturn = json_encode(["status"=>1,"error"=>"Invalid request"]);
             }
         } catch (Exception $e) {
-            echo json_encode(["status"=>1,"error"=>$e->getMessage()]);
+            $toReturn = json_encode(["status"=>1,"error"=>$e->getMessage()]);
         }
-        return;
+        return $toReturn;
+    }
+
+    public function addVideo(Request $request){
+        //\Log::info("here in logs");
+        $reqData = $request->all();
+        $ProjectMediaObj = new ProjectMedia();
+        $ProjectMediaObj->project_id = $reqData['project_id'];
+        $ProjectMediaObj->file_type = 'video';
+        $ProjectMediaObj->file_link = $reqData['url'];
+        $ProjectMediaObj->is_default_marked = $reqData['is_default_marked'];
+        $ProjectMediaObj->media_info = json_encode(["thumbnail"=>$reqData['thumbnail'],'title'=>$reqData['title']]);
+        $ProjectMediaObj->save();
+        $ProjectMediaObj->media_info = json_decode($ProjectMediaObj->media_info, true);
+        // $ProjectMediaObj = '{"project_id":"1","file_type":"video","file_link":"https:\/\/vimeo.com\/336812686","is_default_marked":"0","media_info":"{\"thumbnail\":\"https:\\\/\\\/i.vimeocdn.com\\\/video\\\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_200x150\",\"title\":\"Direct Links To Video Files\"}","updated_at":"2022-11-07T06:54:01.000000Z","created_at":"2022-11-07T06:54:01.000000Z","id":1}';
+        // $ProjectMediaObj = json_decode($ProjectMediaObj);
+        // $ProjectMediaObj->media_info = json_decode($ProjectMediaObj->media_info, true);
+        return json_encode($ProjectMediaObj);
+    }
+
+    public function getMedia(Request $request, $media_id) {
+        $where = ['id' => $media_id];
+        $ProjectMediaObj = ProjectMedia::find($media_id);
+        $ProjectMediaObj->media_info = json_decode($ProjectMediaObj->media_info, true);
+        return json_encode($ProjectMediaObj);
+    }
+
+
+    public function updateMedia(Request $request, $media_id){
+        //\Log::info("here in logs");
+        $reqData = $request->all();
+        $ProjectMediaObj = ProjectMedia::find($media_id);
+        //set all to "not featured"
+        ProjectMedia::where(['project_id'=>$ProjectMediaObj->project_id,'file_type'=>'video'])->update(['is_default_marked'=> '0']);
+        //
+        $ProjectMediaObj->is_default_marked = $reqData['is_default_marked'];
+        $ProjectMediaObj->save();
+        $ProjectMediaObj->media_info = json_decode($ProjectMediaObj->media_info, true);
+        return json_encode($ProjectMediaObj);
+    }
+
+    public function deleteMedia(Request $request, $media_id = null){
+        \Log::info("here in logs ".$media_id);
+        $reqData = $request->all();
+        $ProjectMediaObj = ProjectMedia::find($media_id)->delete();
+        //$ProjectMediaObj->media_info = json_decode($ProjectMediaObj->media_info, true);
+        return json_encode($ProjectMediaObj);
     }
 
 }

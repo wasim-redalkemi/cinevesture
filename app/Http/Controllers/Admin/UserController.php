@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserOrganisation;
+use Exception;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class UserController extends AdminController
 {
     /**
      * Display a listing of the resource.
@@ -16,8 +18,14 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users=User::query()->with(['organization.country'])->get();
-        return view('admin.user.index',compact('users'));
+        try
+        {
+            $users=User::query()->with(['organization.country'])->get();
+            return view('admin.user.list',compact('users'));
+        } catch (Exception  $e) {
+            return back()->withError('error', 'Something went wrong.');
+        }
+
     }
 
     /**

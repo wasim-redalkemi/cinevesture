@@ -24,6 +24,7 @@ use App\Models\UserSkill;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends WebController
@@ -508,10 +509,10 @@ class UserController extends WebController
             if ($experience->update()) {
                 return redirect()->route('profile-private-show')->with("success", "Experience added successfully.");
             } else {
-                return back()->withError('Something went wrong ,please try again.');
+                return back()->with('Something went wrong ,please try again.');
             }
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -586,6 +587,15 @@ class UserController extends WebController
         } catch (Exception $e) {
             return back()->withError('error', 'Something went wrong.');
         }
+    }
+
+
+    public function deactivateAccount()
+    {   $user= User::find(auth()->user()->id);
+        Auth::logout();
+        $user->delete();
+        return redirect('/login');
+
     }
 }
 

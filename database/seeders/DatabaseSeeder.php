@@ -14,7 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User::factory(10)->create();
-        $this->call([UserSeeder::class,MasterSkillSeeder::class,MasterLanguageSeeder::class,MasterCountrySeeder::class,MasterStateSeeder::class,MasterLookingForSeeder::class,MasterOrganisationTypeSeeder::class,MasterOrganisationServiceSeeder::class,UserFavouriteProfileSeeder::class,UserFavouriteProjectSeeder::class,MasterProjectCategorySeeder::class,MasterProjectGenreSeeder::class,AgeRangeSeeder::class]);
+        $this->call([UserSeeder::class,MasterSkillSeeder::class,MasterLanguageSeeder::class,MasterCountrySeeder::class,MasterStateSeeder::class,MasterProjectTypeSeeder::class,MasterLookingForSeeder::class,MasterOrganisationTypeSeeder::class,MasterOrganisationServiceSeeder::class,UserFavouriteProfileSeeder::class,UserFavouriteProjectSeeder::class,MasterProjectCategorySeeder::class,MasterProjectGenreSeeder::class,AgeRangeSeeder::class,ProjectStageSeeder::class,ProjectStageOfFundingSeeder::class]);
     }
 }

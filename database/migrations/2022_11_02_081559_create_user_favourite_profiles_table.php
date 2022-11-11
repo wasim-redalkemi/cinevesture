@@ -17,7 +17,6 @@ class CreateUserFavouriteProfilesTable extends Migration
             $table->id();
             $table->string('user_id',20);
             $table->string('profile_id',20);
-
             $table->timestamps();
             $table->softDeletes();
         });

@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use App\Models\ProjectList;
+use App\Models\ProjectMedia;
+use App\Models\ProjectSearch;
 use App\Models\UserProject;
+use Exception;
 use Illuminate\Http\Request;
 
-class ProjectListController extends Controller
+class ProjectListController extends AdminController
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +20,15 @@ class ProjectListController extends Controller
      */
     public function index()
     {
-        return view('admin.user.project_list');
+        try
+        {
+             return view('admin.projectList.create');
+        }
+        catch (Exception $e) 
+        {
+             return back()->withError('error','Something went wrong.');
+        }
+
     }
 
     /**
@@ -26,14 +38,18 @@ class ProjectListController extends Controller
      */
     public function create(Request $request)
     {
-       
-        $project_list= new ProjectList();
-        $project_list->list_name=$request->name;
-        $project_list->list_status=$request->status;
-        $project_list->save();
-            
-
-           
+        try
+        {
+            $project_list= new ProjectList();
+            $project_list->list_name=$request->name;
+            $project_list->list_status=$request->status;
+            $project_list->save();
+             return redirect('admin/project-management/project-list')->with("success", "List added  successfully.");
+        }
+        catch (Exception $e) 
+        {
+             return back()->withError('error','Something went wrong.');
+        }
     }
 
     /**
@@ -56,9 +72,16 @@ class ProjectListController extends Controller
      */
     public function show()
     {
-        $project_list=ProjectList::all();
-        $project_count=UserProject::select('id')->get()->count();
-        return view('admin.user.projectlist',compact('project_list','project_count'));
+        try
+        {
+            $project_list=ProjectList::all();
+            $project_count=UserProject::select('id')->get()->count();
+            return view('admin.projectList.list',compact('project_list','project_count'));
+        }
+        catch (Exception $e) 
+        {
+             return back()->withError('error','Something went wrong.');
+        }
     }
 
     /**
@@ -67,21 +90,97 @@ class ProjectListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function search()
+    public function search($id)
     {
-        return view('admin.user.search_project');
+        try
+        {
+            $project_data=UserProject::all();
+            return view('admin.projectList.search',compact('id','project_data'));
+        }
+        catch (Exception $e) 
+        {
+            return back()->withError('error','Something went wrong.');
+        }
+
     }
     public function edit($id)
     {
         //
     }
-    public function find(Request $request)
+    public function find(Request $request,$id)
     {
-            $project_name='%'.$request->name.'%';
-            $search_projects=UserProject::select('project_name')->where('project_name','like',$project_name)->get();
-            dd($search_projects);
+        try
+        {
+            $project_data=UserProject::query()->with('projectImage')->get();
+            $search_data=$request->name;
+            $search_projects=UserProject::query()->with('projectImage')
+            ->where('project_name', 'like' ,"%$search_data%")
+            ->get();
+             return view('/admin.projectList.search',compact('search_projects','id','project_data'));
+        }
+        catch (Exception $e) 
+        {
+            return back()->withError('error','Something went wrong.');
+        }
     }
 
+    public function saveSearchProjects(Request $request)
+    {
+       try
+       {
+            foreach($request->projectids as $project){
+            $projectid = explode(',', $project);
+                $data[] = [
+                    'project_id' =>$projectid[0],
+                    'list_id'  =>$projectid[1]
+                    ];
+                }
+            ProjectSearch::insert( $data );
+            return redirect('/admin/project-management/list')->with("success", "Project selected successfully.");
+        }
+        catch (Exception $e) 
+        {
+             return back()->with('error','Something went wrong.');
+        }
+       
+
+    }
+
+    public function changeStatus(Request $request, $id, $status)
+    {
+        try
+        {
+            if($status=='Publish')
+            {
+            $list_status="Unpublish";
+            }
+            else
+            {
+            $list_status="Publish";
+            }
+            ProjectList::where("id", $id)->update(["list_status" => $list_status]);
+            return redirect('/admin/project-management/list')->with("success", "Status changed successfully.");
+        }
+        catch (Exception $e) 
+        {
+            return back()->with('error','Something went wrong.');
+        }
+    }
+
+    public function deleteList(Request $request, $id)
+    {
+        try
+        {
+            $delet_list=ProjectList::where('id',$id)->delete();
+            $delete_search_list=ProjectSearch::where('list_id',$id)->delete();
+            return redirect('/admin/project-management/list')->with("success", "List deleted successfully.");
+        }
+        catch (Exception $e) 
+        {
+            return back()->with('error','Something went wrong.');
+        }
+       
+    }
     /**
      * Update the specified resource in storage.
      *
