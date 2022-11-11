@@ -1,30 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Query;
 use Illuminate\Http\Request;
 
-class AdminAuth extends Controller
+class QueryController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-
     public function index()
     {
         try {
-            return view('admin.dashboard');
-        } catch (\Throwable $e) {
-            return back()->withErrors($e->getMessage());
+           
+            $userQuerys = Query::query()->get();
+            
+            return view('admin.query.list',compact('userQuerys'));
+        } catch (\Throwable $th) {
+            return back($th->getMessage());
         }
-    }
-
-    public function login()
-    {
-        return view('admin.auth.login');
+        return view('admin.query.list');
     }
 
     /**
@@ -56,7 +55,8 @@ class AdminAuth extends Controller
      */
     public function show($id)
     {
-        //
+        $query=Query::find($id);
+        return view('admin.query.view',compact('query'));
     }
 
     /**
@@ -90,6 +90,17 @@ class AdminAuth extends Controller
      */
     public function destroy($id)
     {
-        //
+        try {
+            $query=query::find($id);
+            
+        $query->Delete();
+       
+        return back();
+        } catch (\Throwable $th) {
+           return back()->withErrors($th->getMessage());
+        }
+        
+       
+
     }
 }

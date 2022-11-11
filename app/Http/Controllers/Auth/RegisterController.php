@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Helper\OtpUtilityController;
+use App\Http\Controllers\Helper\SubscriptionUtilityController;
 use App\Models\Otp;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\UserSubscription;
 use Illuminate\Support\Str;   
 use App\Notifications\VerifyOtp;
 use Carbon\Carbon;
@@ -188,7 +190,12 @@ class RegisterController extends Controller
                     $userObj->email_verified_at = Carbon::now();
                     $userObj->save();
                     $this->guard()->login($userObj);
-                    return redirect('home');
+                    $is_subscribed = SubscriptionUtilityController::isSubscribed();
+                    if($is_subscribed){
+                        return redirect('home');
+                    }else{
+                        return redirect()->route('subscription-view')->with('success','Email Varified successfully.');
+                    }
 
                 }
                 else{
@@ -215,7 +222,7 @@ class RegisterController extends Controller
         return back()->with('error', 'Email field is required.')->withInput();
        }
         $user =  User::query()->where('email', $email)->first();
-        if ($user) {
+        if($user) {
             
                 $otp = OtpUtilityController::createOtp($user, $type);
                 $collect  = collect();

@@ -590,6 +590,11 @@ body {
 .add-another-item > div{
     margin-bottom: 40px;
 }
+.row.photo-sec {min-height: 330px;}
+
+#add-img-btn-div.add-another-item  > div{
+    /* margin-bottom: 0px; */
+}
 
 .mk-feature {
     font-weight: 400;
@@ -1059,6 +1064,10 @@ body {
 .profile_input {
     margin-top: 16px;
 }
+.profile_input.add-new-image {
+    display: none;
+    margin-top: 21px
+}
 .mt_16 {
     margin-top: 16px;
 }
@@ -1131,7 +1140,6 @@ body {
     align-items: center;
 }
 .profile_upload_container {
-    /* opacity: 0.5; */
     border: 1px dashed #4D0D8A;
     filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25));
     border-radius: 4px;
@@ -1139,7 +1147,6 @@ body {
     justify-content: center;
     align-items: center;
     height: 172px;
-    margin-top: 16px;
     overflow: hidden;
 }
 
@@ -1187,14 +1194,21 @@ body {
     background: rgba(28, 3, 48, 0.4);
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
     border-radius: 4px;
+    z-index:1;
 }
+
+.delete-icon.project_card_data {
+    z-index:2;
+    background: none;
+}
+
 .title.project_card_data {
     bottom: 0;
     left: 0;
     justify-content: flex-start;
     align-items: flex-end;
-    background: none;
 }
+
 .project_card_data p {text-shadow: 1px 1px #3e3e3e; font-weight: 600;max-height: 40px;margin-bottom: -5px;line-height: 22px;}
 .movie_name_text {
     font-weight: 600;
@@ -1281,7 +1295,9 @@ body {
 .h_69 {
     height: 69px;
 }
-
+.delete-media {
+    cursor: pointer;
+}
 .document_pdf {
     align-items: center;
     padding: 12px 24px;
@@ -1434,7 +1450,7 @@ button, input, optgroup, select, textarea {
     border: none;
 }
 .delete_btn {
-    padding: 6px 16px;
+    padding: 9px 16px;
     font-size: 14px;
     background: #C13D4F;
     border-radius: 4px;

@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminAuth;
-use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
+use App\Http\Controllers\admin\AuthController;
+use App\Http\Controllers\admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
-use App\Http\Controllers\Admin\ProjectListController;  
+use App\Http\Controllers\Admin\ProjectListController;
+use App\Http\Controllers\Admin\QueryController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Routing\Router;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Middleware\AdminAuthMiddleware;
+
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -18,14 +18,16 @@ use Illuminate\Support\Facades\Auth;
 | contains the "admin" middleware group. Now create something great!
 |
 */
+
 // Route::get('/admin', function () {
-//     return view('admin.dashboard');
+//     return view('admin.auth.login');
 // });
+Route::get('admin/login', [AuthController::class, 'showLoginAdmin'])->name('admin.loginview');
+Route::post('admin/login', [AuthController::class, 'login'])->name('admin.login');
 
-Route::group(['prefix'=>'admin'],function()
+Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
 {	
-    Route::get('/dashboard', [AdminAuth::class, 'index'])->name('admin.dashboard');
-
+    Route::get('/dashboard', [AuthController::class, 'index'])->name('admin.dashboard');
    
     Route::group(['prefix'=>'user-management'],function()
     {
@@ -36,17 +38,25 @@ Route::group(['prefix'=>'admin'],function()
         Route::get('/project-list', [ProjectListController::class, 'index'])->name('project-list-management');
         Route::post('/create-list', [ProjectListController::class, 'create'])->name('create-list');
         Route::get('/list', [ProjectListController::class, 'show'])->name('show-list');
-        Route::get('/search', [ProjectListController::class, 'search'])->name('search-project');
-        Route::post('/find', [ProjectListController::class, 'find'])->name('find-project');
+        Route::get('/search/{id}', [ProjectListController::class, 'search'])->name('search-project');
+        Route::post('/find/{id}', [ProjectListController::class, 'find'])->name('find-project');
+        Route::post('/search-projects', [ProjectListController::class, 'saveSearchProjects'])->name('save-search-projects');
+        Route::get('/change-status/{id}/{status}', [ProjectListController::class, 'changeStatus'])->name('change-status');
+        Route::get('/delete-list/{id}', [ProjectListController::class, 'deleteList'])->name('delete-list');
     }); 
-   
+    Route::group(['prefix'=>'query-management'],function()
+    {
+        Route::get('/query-list', [QueryController::class, 'index'])->name('query.list');
+        Route::get('query-delete/{id}', [QueryController::class, 'destroy'])->name('query-delete');
+        Route::get('query-view/{id}', [QueryController::class, 'show'])->name('query-show');
+        
+    }); 
    
     Route::get('user', function () {
         return view('admin.user.user');
     });
 
-    Route::get('login', [AdminAuth::class, 'login'])->name('admin-login');
-
+    Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
     Route::get('project-list', [AdminProjectController::class, 'index'])->name('admin-project-list');
     Route::get('project-list-favorite', [AdminProjectController::class, 'markFavorite'])->name('project-list-favorite');
     Route::get('project-list-Recommended', [AdminProjectController::class, 'markRecommended'])->name('project-list-recommended');

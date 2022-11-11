@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\admin\AdminController;
-use App\Http\Controllers\admin\ProjectController as AdminProjectController;
-use App\Http\Controllers\Admin\ProjectListController;
+
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\FavouriteController;
@@ -10,12 +8,12 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Website\EndorsementController;
 use App\Http\Controllers\Website\OrganisationController;
 use App\Http\Controllers\Website\UserController;
-use App\Http\Controllers\Admin\UserController as AdminUserController;
+
 use App\Http\Controllers\Website\IndustryGuideController;
 use App\Http\Controllers\Website\ProjectController;
 use App\Http\Controllers\Website\SettingController;
 use App\Http\Controllers\Website\AjaxController;
-
+use App\Http\Controllers\Website\SubscriptionController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;  
@@ -30,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/test', function () {
     return view('website.plan');
 });
@@ -40,7 +39,7 @@ Auth::routes(['verify' => true]);
 
 
 // Admin routes 
-@include('admin.php');
+
 
 
 
@@ -56,10 +55,17 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 
     Route::group(['prefix' => 'ajax'],function(){
         Route::post('/get-video-details',[AjaxController::class, 'getVideoDetails'])->name('get-video-details');
+        Route::post('/add-video',[AjaxController::class, 'addVideo'])->name('add-video');
+        Route::get('/get-media/{media_id}',[AjaxController::class, 'getMedia'])->name('get-media');
+        Route::post('/update-media/{media_id}',[AjaxController::class, 'updateMedia'])->name('update-video');
+        Route::post('/delete-media/{media_id}',[AjaxController::class, 'deleteMedia'])->name('delete-media');
+        Route::post('/upload-image',[AjaxController::class, 'uploadImage'])->name('upload-image');
     });
 
     Route::group(['prefix'=>'user'],function()
-	{	
+	{	Route::get('/subscription',[SubscriptionController::class,'subscriptionView'])->name('subscription-view');
+        Route::get('/subscription/store',[SubscriptionController::class,'storeSubscription'])->name('subscription-create');
+
 		Route::get('/profile-private-show', [UserController::class, 'profilePrivateShow'])->name('profile-private-show');
 		Route::get('/profile-public-show', [UserController::class, 'profilePublicShow'])->name('profile-public-show');
         Route::get('/profile-create', [UserController::class, 'profileCreate'])->name('profile-create');
@@ -79,18 +85,36 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/qualification-store/{id?}', [UserController::class, 'qualificationStore'])->name('qualification-store');        		
         Route::get('/qualification-edit/{id}', [UserController::class, 'qualificationEdit'])->name('qualification-edit');
         Route::post('/qualification-edit-store/{id}', [UserController::class, 'qualificationEditStore'])->name('qualification-edit-store'); 
+        
+        Route::post('/deactivate', [UserController::class, 'deactivateAccount'])->name('user-deactivate'); 
+
                		
 	});
 
     Route::group(['prefix'=>'project'],function()
 	{	
         Route::get('/project-list', [ProjectController::class, 'projectList'])->name('project-list');
-        Route::get('/project-create', [ProjectController::class, 'projectViewRender'])->name('project-create');
-        Route::post('/project-overview-store', [ProjectController::class, 'overviewStore'])->name('project-overview-store');
-        Route::post('/project-details-store/{id}', [ProjectController::class, 'detailsStore'])->name('project-details-store');
-        Route::post('/project-gallery-store/{id}', [ProjectController::class, 'galleryStore'])->name('project-gallery-store');
-        Route::post('/project-description-store/{id}', [ProjectController::class, 'descriptionStore'])->name('project-description-store');
-        Route::post('/project-milestone-store/{id}', [ProjectController::class, 'milestoneStore'])->name('project-milestone-store');
+
+        Route::get('/project-overview', [ProjectController::class, 'projectOverview'])->name('project-overview');
+        Route::post('/validate-project-overview', [ProjectController::class, 'validateProjectOverview'])->name('validate-project-overview');
+
+        Route::get('/project-details', [ProjectController::class, 'projectDetails'])->name('project-details');
+        Route::post('/validate-project-details', [ProjectController::class, 'validateProjectDetails'])->name('validate-project-details');
+
+        Route::get('/project-description', [ProjectController::class, 'projectDescription'])->name('project-description');
+        Route::post('/validate-project-description', [ProjectController::class, 'validateProjectDescription'])->name('validate-project-description');
+
+
+        Route::post('/project-gallery-store', [ProjectController::class, 'galleryStore'])->name('project-gallery-store');
+
+        Route::get('/project-milestone', [ProjectController::class, 'projectMilestone'])->name('project-milestone');
+        Route::post('/validate-project-milestone', [ProjectController::class, 'validateProjectMilestone'])->name('validate-project-milestone');
+
+        Route::get('/project-preview', [ProjectController::class, 'projectPreview'])->name('project-preview');
+
+
+        Route::get('/public-view/{id}', [ProjectController::class, 'publicView'])->name('public-view');
+
 	});
 
     Route::group(['prefix'=>'endorsement'],function()
@@ -103,8 +127,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 
     Route::group(['prefix'=>'industry-guide'],function()
 	{	
-        Route::get('/show', [IndustryGuideController::class, 'show'])->name('guide-view');
-        Route::get('/filter', [IndustryGuideController::class, 'index'])->name('filter-profile');
+        Route::get('/show', [IndustryGuideController::class, 'index'])->name('guide-view');
+        // Route::get('/filter', [IndustryGuideController::class, 'index'])->name('filter-profile');
        
 	});
 
@@ -145,3 +169,4 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 
 
 
+@include('admin.php');

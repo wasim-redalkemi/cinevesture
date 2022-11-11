@@ -18,6 +18,7 @@ class CreateProjectListsTable extends Migration
             $table->string('list_name',200);
             $table->string('list_status',200);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

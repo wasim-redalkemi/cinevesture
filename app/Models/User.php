@@ -12,10 +12,11 @@ use App\Notifications\InvoicePaid;
 use Laravel\Cashier\Billable;
 use App\Notifications\ResetPasswordNotification;
 use App\Notifications\VerifyOtp;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable,SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
