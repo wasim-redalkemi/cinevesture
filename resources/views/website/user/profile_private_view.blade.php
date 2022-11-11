@@ -175,7 +175,7 @@
                                         $img = Storage::url($v['get_portfolio'][0]['file_link']);
                                         }
                                         @endphp
-                                        <div class="item portfolio_item">
+                                        <div class="item portfolio_item" data-toggle="modal" data-target="#exampleModal">
                                             <img src="<?php echo $img ?>" class="portfolio_img">
                                             <div class="d-flex justify-content-between mt-2">
                                                 <div class="organisation_cmn_text">{{$v['project_title']}}</div>
@@ -190,8 +190,8 @@
                                     </div>
                                     <!-- modal  -->
                                     <div>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Portfolio Modal
-                                        </button>
+                                        {{-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Portfolio Modal --}}
+                                        {{-- </button> --}}
                                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
