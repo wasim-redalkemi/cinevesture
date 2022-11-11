@@ -145,6 +145,42 @@ class ProjectListController extends AdminController
        
 
     }
+
+    public function changeStatus(Request $request, $id, $status)
+    {
+        try
+        {
+            if($status=='Publish')
+            {
+            $list_status="Unpublish";
+            }
+            else
+            {
+            $list_status="Publish";
+            }
+            ProjectList::where("id", $id)->update(["list_status" => $list_status]);
+            return redirect('/admin/project-management/list')->with("success", "Status changed successfully.");
+        }
+        catch (Exception $e) 
+        {
+            return back()->with('error','Something went wrong.');
+        }
+    }
+
+    public function deleteList(Request $request, $id)
+    {
+        try
+        {
+            $delet_list=ProjectList::where('id',$id)->delete();
+            $delete_search_list=ProjectSearch::where('list_id',$id)->delete();
+            return redirect('/admin/project-management/list')->with("success", "List deleted successfully.");
+        }
+        catch (Exception $e) 
+        {
+            return back()->with('error','Something went wrong.');
+        }
+       
+    }
     /**
      * Update the specified resource in storage.
      *
