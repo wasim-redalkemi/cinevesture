@@ -1546,10 +1546,12 @@ button, input, optgroup, select, textarea {
 .portfolio_item {
     width: 300px;
     height: 250px;
+    padding:1%;
 }
-.portfolio_img {
+.portfolio .portfolio_img {
     max-width: 100%;
     height: auto;
+    max-height: 200px;
 }
 
 .input_wraper {
