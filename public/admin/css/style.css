@@ -28569,6 +28569,12 @@ div.tagsinput span.tag a {
     display: none;
   }
 }
+.for_authtoast {
+  position: fixed;
+  right: 32px;
+  top: 74px;
+  z-index: 9999;
+}
 .radius{
   border-radius: 6px;
   

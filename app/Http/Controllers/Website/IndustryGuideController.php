@@ -41,35 +41,37 @@ class IndustryGuideController extends WebController
         
         $validator = Validator::make($request->all(), [
             'search' => 'nullable',
-            'locations.*' => 'nullable|exists:countries,name',
-            'skills.*' => 'nullable|exists:master_skils,name',
+            'locations.*' => 'nullable|exists:countries,id',
+            'skills.*' => 'nullable|exists:master_skils,id',
             // 'talent.*' => 'nullable|exists:master_skils,name',
         ]);
     
         if ($validator->fails()) {
-            // return $this->returnResponse(false, "ERR081", $validator->errors()->first(), null, null);
+            return back()->withErrors($validator)->withInput();
         }
 
-        // $locations = MasterCountry::whereIn('id', $request->location)->pluck('name');
-        // $skills = MasterSkill::whereIn('id', $request->skills)->pluck('name');
+        $locations = MasterCountry::whereIn('id', $request->location)->pluck('name');
+        $skills = MasterSkill::whereIn('id', $request->skills)->pluck('name');
 
         $users = User::query()->where(function($query) use($request){
             if (isset($request->search)) { // search name of user
                 $query->where("name", "like", "%$request->search%");
             }
         })
-        ->wherehas(['country'=> function ($q) use($request){
+        ->Orwherehas(['country'=> function ($q) use($request){
              $q->whereIn('id',$request->locations);
             
         }])
-        ->wherehas(['skill.getSkills'=> function ($q) use($request){
+        ->Orwherehas(['skill.getSkills'=> function ($q) use($request){
             $q->whereIn('id',$request->skills);
         }])
-        ->paginate();
+        ->paginate(2);
+          
+        return view('website.guide.guide_search_result',compact(['countries','skills','users']));
 
                       
        }catch(Exception $e){
-           
+        return back()->with('error', 'Something went wrong.');
        }
     }
 

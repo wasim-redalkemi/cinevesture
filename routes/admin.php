@@ -41,7 +41,8 @@ Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
         Route::get('/search/{id}', [ProjectListController::class, 'search'])->name('search-project');
         Route::post('/find/{id}', [ProjectListController::class, 'find'])->name('find-project');
         Route::post('/search-projects', [ProjectListController::class, 'saveSearchProjects'])->name('save-search-projects');
-       
+        Route::get('/change-status/{id}/{status}', [ProjectListController::class, 'changeStatus'])->name('change-status');
+        Route::get('/delete-list/{id}', [ProjectListController::class, 'deleteList'])->name('delete-list');
     }); 
     Route::group(['prefix'=>'query-management'],function()
     {
@@ -52,14 +53,11 @@ Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
         
     }); 
    
-   
     Route::get('user', function () {
         return view('admin.user.user');
     });
 
-    
     Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
-
     Route::get('project-list', [AdminProjectController::class, 'index'])->name('admin-project-list');
     Route::get('project-list-favorite', [AdminProjectController::class, 'markFavorite'])->name('project-list-favorite');
     Route::get('project-list-Recommended', [AdminProjectController::class, 'markRecommended'])->name('project-list-recommended');

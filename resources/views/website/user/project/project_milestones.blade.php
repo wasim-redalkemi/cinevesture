@@ -18,31 +18,44 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="profile_wraper profile_wraper_padding mt-4">
-                    <form role="form" method="POST" enctype="multipart/form-data" action="{{route('project-milestone-store',['id' => $user->id ])}}">
+                <div class="profile_wraper profile_wraper_padding my-4">
+                    <form role="form" method="POST" enctype="multipart/form-data" action="{{route('validate-project-milestone')}}">
                         @csrf
 
                         <p class="flow_step_text pb-0">Requirements</p>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="profile_input">
-                                    <label>Project Stage *</label>
-                                    <select name="project_stage_id" id="lang">
-                                        <option value="Development">Development</option>
-                                        <option value="Pre-production">Pre-production</option>
+                                    <label>Project Stage <span style = "color:red">*</span></label>
+                                    <select name="project_stage_id" class="@error('project_stage_id') is-invalid @enderror" autofocus>
+                                        <option value="">Select</option>
+                                        @foreach ($projectStage as $k=>$v)                                            
+                                            <option value="{{ $v->id }}">{{ $v->name }}</option>
+                                        @endforeach
                                     </select>
+                                    @error('project_stage_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="mt_16">
-                                    <label>Looking for *</label>
-                                    <select name="loking_for[]" class="js-select2" multiple="multiple">
+                                    <label>Looking for <span style = "color:red">*</span></label>
+                                    <select name="loking_for[]" class="js-select2 @error('loking_for') is-invalid @enderror" autofocus multiple>
+                                        <option value="">Select</option>
                                         @foreach ($lookingFor as $k=>$v)
                                             <option value="{{ $v->id }}">{{  $v->name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('loking_for')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -50,10 +63,17 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>If Startup, What stage of funding are you at?</label>
-                                    <select name="stage_of_funding_id" id="lang">
-                                            <option value="Pre-seed">Pre-seed</option>
-                                            <option value="Seed">Seed</option>
-                                        </select>
+                                    <select name="stage_of_funding_id" class="@error('stage_of_funding_id') is-invalid @enderror" id="" autofocus>
+                                        <option value="">Select</option>
+                                        @foreach ($projectStageOfFunding as $k=>$v)                                            
+                                            <option value="{{ $v->id }}">{{ $v->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('stage_of_funding_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -62,6 +82,11 @@
                                 <div class="profile_input">
                                     <label>Crowdfunding Link (Optional)</label>
                                     <input type="text" class="form-control" name="crowdfund_link" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
+                                    @error('crowdfund_link')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -71,23 +96,43 @@
                                 <div class="profile_input">
                                     <label>Milestone Description</label>
                                     <input type="text" class="form-control" name="description" placeholder="Milestone Description">
+                                    @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="profile_input">
                                     <label>Milestone Budget (USD)</label>
                                     <input type="text" class="form-control" name="budget" placeholder="Milestone Budget (USD)">
+                                    @error('budget')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-2">
                                 <div class="profile_input">
                                     <label>Target Date</label>
                                     <input type="date" class="form-control" name="traget_date" placeholder="Target Date">
+                                    @error('traget_date')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-2 d-flex align-items-end">
                                 <div class="d-flex checkbox_btn mb-2">
-                                    <input type="radio" class="checkbox_btn" name="complete" value="" aria-label="">
+                                    <input type="radio" class="checkbox_btn" name="complete" value="1" aria-label="">
+                                    @error('complete')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                     <div class="verified-text deep-pink mx-2"> Make Complete</div>
                                 </div>
                             </div>
@@ -96,7 +141,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-end mt-5 pt-5 pb-md-0">
-                                    <button class="cancel_btn mx-3">Go back</button>
+                                    <input type="hidden" name="project_id" value="<?php if(isset($_REQUEST['id'])) {echo $_REQUEST['id'];}?>">
+
+                                    <button class="cancel_btn mx-3"><a href="">Go back</a></button>
                                     <button type="submit" class="guide_profile_btn">Save & Next</button>
                                 </div>
                             </div>

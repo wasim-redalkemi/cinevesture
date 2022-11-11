@@ -75,7 +75,14 @@
                                     <select name="organisation_type" class="@error('organisation_type') is-invalid @enderror" id="" required autofocus>
                                         <option value="">Select</option>
                                         @foreach ($organisationType as $k=>$v)
-                                        <option value="{{ $v->id }}">{{ $v->name }}</option>
+                                        <option
+                                        @php
+                                        if(isset($UserOrganisation->type)){
+                                            if ($UserOrganisation->type == $v->id) {
+                                                echo 'selected';
+                                            }
+                                        }
+                                        @endphp value="{{ $v->id }}">{{ $v->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('organisation_type')
@@ -100,7 +107,7 @@
                                     <label>Services</label>
                                     <select name="service_id[]" class="outline js-select2 @error('service_id') is-invalid @enderror" id="" multiple autofocus>
                                         @foreach ($organisationService as $k=>$v)
-                                            <option value="{{ $v->id }}"@if(in_array($v->id, $UserOrganisation->organizationServices))selected @endif>{{ $v->name }}</option>
+                                            <option value="{{ $v->id }}"@if(isset($UserOrganisation->organizationServices) && in_array($v->id, $UserOrganisation->organizationServices))selected @endif>{{ $v->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('service_id')
@@ -167,7 +174,7 @@
                                     <label> Languages Spoken</label>
                                     <select name="language_id[]" class="outline js-select2 @error('language_id') is-invalid @enderror" id="lang" multiple autofocus>
                                         @foreach ($languages as $k=>$v)
-                                            <option value="{{ $v->id }}"@if(in_array($v->id, $UserOrganisation->organizationLanguages))selected @endif>{{  $v->name }}</option>
+                                            <option value="{{ $v->id }}"@if(isset($UserOrganisation->organizationLanguages )&&(in_array($v->id, $UserOrganisation->organizationLanguages)))selected @endif>{{  $v->name }}</option>
                                         @endforeach
 
                                     </select>
@@ -219,7 +226,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Introduction Video</label>
-                                    <input type="text" class="outline form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="{{(isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:'https://www.youtube.com/embed/bDMwlH1FTpk' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                    <input type="text" class="outline form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="{{(isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('intro_video_link')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

@@ -20,7 +20,7 @@
             <div class="col-md-9">            
                 <div class="d-flex justify-content-between my-3">
                     <div class="profile_text"><h1>Project</h1></div>
-                    <button class="guide_profile_btn h_40"><a class="btn-link text_decor_none" href="{{ route('project-create')}}">Add a Project</a></button>
+                    <button class="guide_profile_btn h_40"><a class="btn-link text_decor_none" href="{{ route('project-overview')}}">Add a Project</a></button>
                 </div>
                 <div class="row">
                 @foreach($UserProject as $k=>$v)

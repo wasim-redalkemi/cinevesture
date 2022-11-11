@@ -21,8 +21,7 @@
                                     <th>Favorited</th>
                                     <th>Badge</th>
                                     <th>Action</th>
-                                    <!-- <th>Actions</th> -->
-                                </tr>
+                                  </tr>
                             </thead>
                             <tbody>
                                 <?php $i=0;?>
