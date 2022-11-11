@@ -63,7 +63,7 @@
                                         @endforeach
                                     @else
                                     <span><b>-</b></span>
-                                @endif
+                                    @endif
                                 </div>
                                 <div class="guide_profile_main_text mt-3">Availabe To Work In</div>
                                 <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (isset($UserOrganisation->available_to_work_in))?$UserOrganisation->available_to_work_in:'-'; }}</div>
