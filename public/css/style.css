@@ -956,7 +956,9 @@ body {
 .h_40 {
     height: 40px;
 }
-
+.mt__150 {
+    margin-top: -150px;
+}
 .profile_icon {
     font-size:25px !important; 
     color:#DD45B3;
