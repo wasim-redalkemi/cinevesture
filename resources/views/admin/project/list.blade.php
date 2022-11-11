@@ -1,5 +1,4 @@
 @extends('admin.layouts.app')
-
 @section('content')
 <div class="content-wrapper">
     <div class="card">
@@ -22,8 +21,7 @@
                                     <th>Favorited</th>
                                     <th>Badge</th>
                                     <th>Action</th>
-                                    <!-- <th>Actions</th> -->
-                                </tr>
+                                  </tr>
                             </thead>
                             <tbody>
                                 <?php $i=0;?>
@@ -36,11 +34,11 @@
                                     </td>
                                     <td>{{$project->project_name}}</td>
                                     @foreach ($project->projectCategory as $key=>$category)
-                                   <td>{{$category->name}}</td>
+                                   <td>{{$category->name}}<i class="fa fa-edit"></i></td>
                                    @endforeach
                                     
                                    @foreach ($project->genres as $key=>$genre)
-                                   <td>{{$genre->name}}</td>
+                                   <td>{{$genre->name}}<i class="fa fa-edit"></i></td>
                                    @endforeach
                                     
                                     <td>{{ date('d-M-y', strtotime($project->created_at)) }}</td>

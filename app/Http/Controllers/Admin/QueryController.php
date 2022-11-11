@@ -2,14 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\UserOrganisation;
-use Exception;
+use App\Models\Query;
 use Illuminate\Http\Request;
 
-class UserController extends AdminController
+class QueryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,14 +15,15 @@ class UserController extends AdminController
      */
     public function index()
     {
-        try
-        {
-            $users=User::query()->with(['organization.country'])->get();
-            return view('admin.user.list',compact('users'));
-        } catch (Exception  $e) {
-            return back()->withError('error', 'Something went wrong.');
+        try {
+           
+            $userQuerys = Query::query()->get();
+            
+            return view('admin.query.list',compact('userQuerys'));
+        } catch (\Throwable $th) {
+            return back($th->getMessage());
         }
-
+        return view('admin.query.list');
     }
 
     /**
@@ -57,7 +55,8 @@ class UserController extends AdminController
      */
     public function show($id)
     {
-        //
+        $query=Query::find($id);
+        return view('admin.query.view',compact('query'));
     }
 
     /**
@@ -91,6 +90,17 @@ class UserController extends AdminController
      */
     public function destroy($id)
     {
-        //
+        try {
+            $query=query::find($id);
+            
+        $query->Delete();
+       
+        return back();
+        } catch (\Throwable $th) {
+           return back()->withErrors($th->getMessage());
+        }
+        
+       
+
     }
 }

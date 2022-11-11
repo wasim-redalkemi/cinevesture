@@ -27,7 +27,7 @@
             <div class="collapse" id="proj-mgt">
               <ul class="nav flex-column sub-menu">
               <li class="nav-item" > <a class="nav-link" href="{{route('show-list')}}" >List</a></li>
-               <li class="nav-item"> <a class="nav-link" href="{{route('project-list-management')}}">Create List</a></li>               </ul>
+               <li class="nav-item"> <a class="nav-link" href="{{route('project-list-management')}}">Create</a></li>               </ul>
             </div>
           </li>
           <li class="nav-item">
@@ -53,24 +53,24 @@
               </ul>
             </div>
           </li>
-          {{-- <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#ui-advanced" aria-expanded="false" aria-controls="ui-advanced">
               <i class="mdi mdi-bullseye-arrow menu-icon"></i>
-              <span class="menu-title">Advanced UI</span>
+              <span class="menu-title">Query Management</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="ui-advanced">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/dragula.html">Dragula</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/clipboard.html">Clipboard</a></li>
+                <li class="nav-item"> <a class="nav-link" href="{{route('query.list')}}">Query</a></li>
+                {{-- <li class="nav-item"> <a class="nav-link" href="pages/ui-features/clipboard.html">Clipboard</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/context-menu.html">Context menu</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/slider.html">Sliders</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/carousel.html">Carousel</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/colcade.html">Colcade</a></li>
-                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/loaders.html">Loaders</a></li>
+                <li class="nav-item"> <a class="nav-link" href="pages/ui-features/loaders.html">Loaders</a></li> --}}
               </ul>
             </div>
-          </li> --}}
+          </li>
           {{-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
               <i class="mdi mdi-file-document-box-outline menu-icon"></i>
