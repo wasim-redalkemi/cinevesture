@@ -18,16 +18,15 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="profile_wraper profile_wraper_padding mt-4">
-                    <form role="form" method="POST" enctype="multipart/form-data" action="{{route('project-details-store',['id' => $user->id ])}}">
+                <div class="profile_wraper profile_wraper_padding my-4">
+                    <form role="form" method="POST" enctype="multipart/form-data" action="{{route('validate-project-details')}}">
                         @csrf
-
                         <p class="flow_step_text"> Details</p>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="profile_input">
                                     <label>Category (Optional)</label>
-                                    <select name="category_id[]" id="located_in" class="outline js-select2 @error('category_id') is-invalid @enderror" id="" multiple>
+                                    <select name="category_id[]" id="located_in" class="js-select2 @error('category_id') is-invalid @enderror" id="" autofocus multiple>
                                         <option value="">Select</option>
                                         @foreach ($category as $k=>$v)
                                             <option value="{{ $v->id }}">{{  $v->name }}</option>
@@ -45,16 +44,16 @@
                             <div class="col-md-6">
                                 <div class="mt_16">
                                     <label>Genre <span style = "color:red">*</span></label>
-                                    <select class="outline js-select2 @error('gener') is-invalid @enderror" name="gener[]" multiple="multiple">
+                                    <select name="gener[]" class="js-select2 @error('gener') is-invalid @enderror" autofocus multiple>
                                         <option value="">Select</option>
                                         @foreach ($Genres as $k=>$v)
                                             <option value="{{ $v->id }}">{{  $v->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('gener')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
                                     @enderror
                                 </div>
                             </div>
@@ -65,6 +64,11 @@
                                 <div class="profile_input">
                                     <label>Duration (Optional)</label>
                                     <input type="time" class="form-control" name="duration" placeholder="hr:min" aria-describedby="basic-addon1">
+                                    @error('duration')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -74,6 +78,11 @@
                                 <div class="profile_input">
                                     <label>Total Budget (USD) <span style = "color:red">*</span></label>
                                     <input type="text" class="form-control" name="total_budget" placeholder="Empty input">
+                                    @error('total_budget')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -82,6 +91,11 @@
                                 <div class="profile_input">
                                     <label>Financing Secured (USD) <span style = "color:red">*</span></label>
                                     <input type="text" class="form-control" name="financing_secured" placeholder="Empty input">
+                                    @error('financing_secured')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -90,13 +104,23 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Title</label>
-                                    <input type="text" class="form-control" name="project_associate_title" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" name="project_associate_title~1" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
+                                    @error('project_associate_title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Name</label>
-                                    <input type="text" class="form-control" name="project_associate_name" placeholder="Locations (Optional)" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" name="project_associate_name~1" placeholder="Locations (Optional)" aria-label="Username" aria-describedby="basic-addon1">
+                                    @error('project_associate_name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-3  d-flex align-items-end pb-2 mt-2 mt-md-0">
@@ -107,15 +131,57 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Title</label>
-                                    <input type="text" class="form-control" name="" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" name="project_associate_title~2" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
+                                    @error('project_associate_title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Name</label>
-                                    <input type="text" class="form-control" name="" placeholder="Locations (Optional)" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" name="project_associate_name~2" placeholder="Locations (Optional)" aria-label="Username" aria-describedby="basic-addon1">
+                                    @error('project_associate_name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
+                            <div class="col-md-3  d-flex align-items-end pb-2 mt-2 mt-md-0">
+                                <i class="fa fa-times-circle deep-pink icon-size" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="profile_input">
+                                    <label>Title</label>
+                                    <input type="text" class="form-control" name="project_associate_title~3" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
+                                    @error('project_associate_title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="profile_input">
+                                    <label>Name</label>
+                                    <input type="text" class="form-control" name="project_associate_name~3" placeholder="Locations (Optional)" aria-label="Username" aria-describedby="basic-addon1">
+                                    @error('project_associate_name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-md-3  d-flex align-items-end pb-2 mt-2 mt-md-0">
+                                <i class="fa fa-times-circle deep-pink icon-size" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-3 d-flex align-items-end mt-2 mt-md-0">
                                 <div>
                                     <button class="save_add_btn">Add another</button>
@@ -125,8 +191,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-end mt-5 pt-5 pb-md-0">
-                                    <button class="cancel_btn mx-3" type="submit">Go back</button>
-                                    <button class="guide_profile_btn" type="submit">Save & Next</button>
+                                    <input type="hidden" name="project_id" value="<?php if(isset($_REQUEST['id'])) {echo $_REQUEST['id'];}?>">
+                                    <button class="cancel_btn mx-3"><a href="{{ route('project-overview') }}?id={{$_REQUEST['id']}}">Go back</a></button>
+                                    <button type="submit" class="guide_profile_btn">Save & Next</button>
                                 </div>
                             </div>
                         </div>
@@ -149,20 +216,8 @@
 @section('scripts')
 <script>
 
-    $(document).ready(function(){
-        $("#error-toast").toast("show");
-        $("#success-toast").toast("show");
-    });
 
-      $(".js-select2").select2({
-        closeOnSelect: false,
-        placeholder: "select",
-        allowClear: true,
-        tags: true
-    });
-
-
-    $(document).ready(function() {
+$(document).ready(function() {
    
 $(document).ready(function() {
     var max_fields      = 10; //maximum input boxes allowed
@@ -197,3 +252,20 @@ $(document).ready(function() {
 </script>
 @endsection --}}
 @endsection
+
+@push('scripts')
+<script>
+
+    $(document).ready(function(){
+        $("#error-toast").toast("show");
+        $("#success-toast").toast("show");
+    });
+
+    $(".js-select2").select2({
+      closeOnSelect: false,
+      placeholder: "Select",
+      allowClear: true,
+      tags: true
+  });
+</script>
+@endpush
