@@ -589,6 +589,11 @@ body {
 .add-another-item > div{
     margin-bottom: 40px;
 }
+.row.photo-sec {min-height: 330px;}
+
+#add-img-btn-div.add-another-item  > div{
+    /* margin-bottom: 0px; */
+}
 
 .mk-feature {
     font-weight: 400;
@@ -1055,6 +1060,10 @@ body {
 .profile_input {
     margin-top: 16px;
 }
+.profile_input.add-new-image {
+    display: none;
+    margin-top: 21px
+}
 .mt_16 {
     margin-top: 16px;
 }
@@ -1127,7 +1136,6 @@ body {
     align-items: center;
 }
 .profile_upload_container {
-    /* opacity: 0.5; */
     border: 1px dashed #4D0D8A;
     filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.25));
     border-radius: 4px;
@@ -1135,7 +1143,6 @@ body {
     justify-content: center;
     align-items: center;
     height: 172px;
-    margin-top: 16px;
     overflow: hidden;
 }
 

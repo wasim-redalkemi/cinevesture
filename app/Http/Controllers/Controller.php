@@ -22,7 +22,6 @@ class Controller extends BaseController
                 $path = $file->store($targetDir); //this will upload the file in given direcory with auto unique generate name
             } else {
                 $path = $file->storeAs($targetDir, $fileName); //this is same with store, but accept a file name
-                echo "Function name".$fileName;
             }
             return $path;
         } catch (\Throwable $th) {

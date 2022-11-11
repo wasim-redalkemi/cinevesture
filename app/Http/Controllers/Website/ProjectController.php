@@ -284,8 +284,12 @@ class ProjectController extends WebController
         $ProjectVideos = ProjectMedia::where($where)->get();
         foreach($ProjectVideos as $i => $rec) {
             $ProjectVideos[$i]->media_info = json_decode($rec->media_info,true);
+            if($rec->file_type == 'image'){
+                $ProjectVideos[$i]->file_link = asset("storage/".$rec->file_link);
+            }
         } 
         //$queries = \DB::getQueryLog();
+        //\Log::info("project_id ".json_encode($queries));
         return json_encode($ProjectVideos);
     }
 
