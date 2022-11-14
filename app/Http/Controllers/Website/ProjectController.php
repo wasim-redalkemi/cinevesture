@@ -24,6 +24,7 @@ use App\Models\User;
 use App\Models\UserProject;
 use Exception;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\TryCatch;
 
 class ProjectController extends WebController
 {
@@ -340,7 +341,7 @@ class ProjectController extends WebController
             }
             else
             {
-                return redirect()->route('project-milestone',['id' => $_REQUEST['project_id']])->with("success",$descriptionResponse['success_msg']);
+                return redirect()->route('project-gallery',['id' => $_REQUEST['project_id']])->with("success",$descriptionResponse['success_msg']);
             }
 
         } catch (Exception $e) {
@@ -372,6 +373,25 @@ class ProjectController extends WebController
             $this->return_response['error_msg'] = $e->getMessage();
         }
         return $this->return_response;
+    }
+
+    public function projectGallery()
+    {
+        try {
+            if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
+            {
+                return back()->with('error','Project Id not found.');
+            }
+            $user = User::query()->find(auth()->user()->id);
+            $languages = MasterLanguage::query()->get();
+            $country = MasterCountry::query()->get();    
+            $projectgallery = [];
+            $projectgallery = UserProject::query()->where('id',$_REQUEST['id'])->get();
+
+            return view('website.user.project.project_gallery', compact('projectgallery','user','languages','country'));
+        } catch (Exception $e) {
+            return back()->with('error','Something went wrong.');
+        } 
     }
 
     public function galleryStore(Request $request,$id)
@@ -556,23 +576,29 @@ class ProjectController extends WebController
     }
 
     public function getMediaByProject(Request $request, $project_id = null){
-        $reqData = $request->all();
-        //\Log::info("project_id ".$project_id.", ".$reqData['type']);
-        //\DB::connection()->enableQueryLog();
-        $where = ['project_id'=>$project_id];
-        if(isset($reqData['type'])){
-            $where['file_type'] = $reqData['type'];
-        }
-        $ProjectVideos = ProjectMedia::where($where)->get();
-        foreach($ProjectVideos as $i => $rec) {
-            $ProjectVideos[$i]->media_info = json_decode($rec->media_info,true);
-            if($rec->file_type == 'image'){
-                $ProjectVideos[$i]->file_link = asset("storage/".$rec->file_link);
+        try {
+            $reqData = $request->all();
+            //\Log::info("project_id ".$project_id.", ".$reqData['type']);
+            //\DB::connection()->enableQueryLog();
+            $where = ['project_id'=>$project_id];
+            if(isset($reqData['type'])){
+                $where['file_type'] = $reqData['type'];
             }
-        } 
-        //$queries = \DB::getQueryLog();
-        //\Log::info("project_id ".json_encode($queries));
-        return json_encode($ProjectVideos);
+            $ProjectVideos = ProjectMedia::where($where)->get();
+            foreach($ProjectVideos as $i => $rec) {
+                $ProjectVideos[$i]->media_info = json_decode($rec->media_info,true);
+                if($rec->file_type == 'image'){
+                    $ProjectVideos[$i]->file_link = asset("storage/".$rec->file_link);
+                }
+            } 
+            //$queries = \DB::getQueryLog();
+            //\Log::info("project_id ".json_encode($queries));
+            return json_encode($ProjectVideos);
+        } catch (Exception $e) {
+            return json_encode([]);
+
+        }
+        
     }
 
 }

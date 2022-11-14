@@ -105,6 +105,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/validate-project-description', [ProjectController::class, 'validateProjectDescription'])->name('validate-project-description');
 
 
+        Route::get('/project-gallery', [ProjectController::class, 'projectGallery'])->name('project-gallery');     
         Route::post('/project-gallery-store', [ProjectController::class, 'galleryStore'])->name('project-gallery-store');
 
         Route::get('/project-milestone', [ProjectController::class, 'projectMilestone'])->name('project-milestone');
@@ -114,6 +115,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 
 
         Route::get('/public-view/{id}', [ProjectController::class, 'publicView'])->name('public-view');
+        Route::get('/get-project-media/{id}', [ProjectController::class, 'getMediaByProject'])->name('get-project-media');
 
 	});
 
