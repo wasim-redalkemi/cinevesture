@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive">
-                        <table id="order-listing" class="table order-listing">
+                        <table id="order-listing" class="table">
                             <thead>
                                 <tr>
                                    <th>Name</th>
@@ -33,7 +33,7 @@
                                         <button class="btn mb-2  btn-outline-primary w-65 view-btn" type="button" >{{$project->list_status}}</button>
                                         </a>
                                         <a onclick="return confirm('Are you sure to delete this list?')" href="{{route('delete-list',['id' => $project->id ])}}">
-                                        @if($project->list_name=="carousel")
+                                        @if($project->list_name=="c arousel")
                                         <button class="btn btn-outline-primary w-60 view-btn" type="button" disabled>Delete</button>
                                         @else
                                         <button class="btn btn-outline-primary w-60 view-btn" type="button" >Delete</button>
@@ -44,7 +44,12 @@
                                 @endforeach
                                @endif
                               </tbody>
-                        </table>
+                             </table>
+                             <div class="row">
+                               <div class="col-md-12">
+                               <div style="float:right;" >{{$project_list->links()}}</div>
+                               </div> 
+                              </div>
                     </div>
                 </div>
             </div>
