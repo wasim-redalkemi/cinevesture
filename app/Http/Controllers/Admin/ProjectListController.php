@@ -94,7 +94,7 @@ class ProjectListController extends AdminController
     {
         try
         {
-            $project_data=UserProject::all();
+            $project_data=UserProject::paginate(5);
             return view('admin.projectList.search',compact('id','project_data'));
         }
         catch (Exception $e) 
@@ -107,16 +107,20 @@ class ProjectListController extends AdminController
     {
         //
     }
-    public function find(Request $request,$id)
+    public function search_project(Request $request,$id)
     {
         try
         {
-            $project_data=UserProject::query()->with('projectImage')->get();
             $search_data=$request->name;
-            $search_projects=UserProject::query()->with('projectImage')
-            ->where('project_name', 'like' ,"%$search_data%")
-            ->get();
-             return view('/admin.projectList.search',compact('search_projects','id','project_data'));
+            $project_data=UserProject::query()
+            ->with('projectImage')
+            ->where(function($q)use($search_data){
+            if(!empty($search_data) && !is_null($search_data)){
+              $q->where('project_name', 'like' ,"%$search_data%");
+            }
+            })
+           ->paginate(5);
+            return view('/admin.projectList.search',compact('id','project_data'));
         }
         catch (Exception $e) 
         {
