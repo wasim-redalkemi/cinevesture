@@ -21,9 +21,11 @@
                                     <th>Status</th>
                                     <th>Membership</th>
                                     <th>Joining</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @if(isset($users))
                                 @foreach($users as $user)
                                  <tr>
                                     <td>{{$user->id}}</td>
@@ -41,7 +43,7 @@
                                     </td>
                                  </tr>
                                @endforeach
-                              {{-- @endif  --}}
+                              @endif 
                             </tbody>
                         </table>
                         <div class="row">

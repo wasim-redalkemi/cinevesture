@@ -45,6 +45,11 @@
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div style="float:right;" >{{$userQuerys->links()}}</div>
+                                </div> 
+                            </div>
                     </div>
                 </div>
             </div>

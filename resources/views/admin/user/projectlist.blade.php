@@ -25,7 +25,7 @@
                                     <td>
                                         
                                        <a href="{{route('search-project',['id' => $project->id ])}}"><button type="button" class="btn btn-outline-primary btn-sm mt-10">{{$project_count}}</button></a>
-</td>
+                                    </td>
                                  </tr>
                                @endforeach
                               </tbody>

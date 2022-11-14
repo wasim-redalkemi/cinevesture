@@ -11,7 +11,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive">
-                        <table id="order-listing" class="table">
+                        <table id="order-listing" class="table order-listing">
                             <thead>
                                 <tr>
                                    <th>Name</th>
@@ -33,7 +33,7 @@
                                         <button class="btn btn-inverse-primary btn-fw mb-1 btn-sm mt-10 w-65 view-btn" type="button" >{{$project->list_status}}</button>
                                         </a>
                                         <a onclick="return confirm('Are you sure to delete this list?')" href="{{route('delete-list',['id' => $project->id ])}}">
-                                        @if($project->list_name=="c arousel")
+                                        @if($project->list_name=="carousel")
                                         <button class="btn btn-inverse-primary btn-fw mb-1  btn-sm mt-10 w-60 view-btn" type="button" disabled>Delete</button>
                                         @else
                                         <button class="btn btn-inverse-primary btn-fw mb-1  btn-sm mt-10 w-60 view-btn" type="button" >Delete</button>

@@ -20,7 +20,7 @@ class UserController extends AdminController
     {
         try
         {
-            $users=User::query()->where('user_type','U')->with(['organization','country'])->get();
+            $users=User::query()->where('user_type','U')->with(['organization','country'])->paginate(1);
             
             return view('admin.user.list',compact('users'));
         } 
