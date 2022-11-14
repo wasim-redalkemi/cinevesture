@@ -43,13 +43,19 @@
                                     </td>
                                   
                                     
-                                   {{-- @foreach ($project->genres as $key=>$genre) --}}
+                                  
                                    <td>
+                                   
                                     @foreach ($project->genres as $key=>$genre)
+                                    @if (empty($genre->name))
+                                    {{'-'}}
+                                    @else
                                     {{$genre->name.','}}
-                                     @endforeach
-                                     <a href="{{route('genre.update-view')}}?p_id={{$project->id}}&g_id={{$genre->id}}"><i class="fa fa-edit"></i></a>
+                                     @endif
+                                    @endforeach
+                                    <a href="{{route('genre.update-view')}}?p_id={{$project->id}}&g_id={{$genre->id}}"><i class="fa fa-edit"></i></a>
 
+                                   
                                     </td>
                                    
                                     
