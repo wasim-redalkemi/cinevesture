@@ -21,14 +21,9 @@
                                     <th>Status</th>
                                     <th>Membership</th>
                                     <th>Joining</th>
-                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                               
-                                
-                              {{-- @if(!empty(($users)&& ($users->organizaton))) --}}
-                              
                                 @foreach($users as $user)
                                  <tr>
                                     <td>{{$user->id}}</td>
@@ -49,6 +44,11 @@
                               {{-- @endif  --}}
                             </tbody>
                         </table>
+                        <div class="row">
+                         <div class="col-md-12">
+                             <div style="float:right;" >{{$users->links()}}</div>
+                             </div> 
+                         </div>
                     </div>
                 </div>
             </div>

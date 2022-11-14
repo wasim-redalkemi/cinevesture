@@ -23,7 +23,8 @@ class UserController extends AdminController
             $users=User::query()->where('user_type','U')->with(['organization','country'])->get();
             
             return view('admin.user.list',compact('users'));
-        } catch (Exception  $e) {
+        } 
+        catch (Exception  $e) {
             return back()->withError('error', 'Something went wrong.');
         }
 
