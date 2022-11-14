@@ -74,7 +74,7 @@ class ProjectListController extends AdminController
     {
         try
         {
-            $project_list=ProjectList::all();
+            $project_list=ProjectList::paginate(5);
             $project_count=UserProject::select('id')->get()->count();
             return view('admin.projectList.list',compact('project_list','project_count'));
         }
