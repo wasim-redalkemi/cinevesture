@@ -345,6 +345,10 @@ body {
     text-decoration: none !important;
     color: white !important;
 }
+.text_user_name {
+    text-decoration: none !important;
+    color: #33084C !important;
+}
 .btn:focus  {
  box-shadow: none !important;
 }
