@@ -5,8 +5,12 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use App\Models\MasterProjectCategory;
+use App\Models\MasterProjectGenre;
 use App\Models\ProjectCategory;
+use App\Models\ProjectCountry;
+use App\Models\ProjectGenre;
 use App\Models\UserProject;
+use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
@@ -131,7 +135,7 @@ class ProjectController extends AdminController
         //
     }
 
-    public function categoryUpdateView(request $request)
+    public function categoryEdit(request $request)
     {
         
         $projectcategories = ProjectCategory::query()->where('project_id',$request->pid)->get();
@@ -142,16 +146,73 @@ class ProjectController extends AdminController
             array_push($temp_cat,$v->category_id);
         }
         $projectcategories = $temp_cat;
-        return view('admin.project.categoryedit',compact(['projectcategories','categories']));
+        $project_id = $request->pid;
+        
+        return view('admin.project.categoryedit',compact(['projectcategories','categories','project_id']));
     }
     public function categoryUpdate(request $request)
     {
-        dd($request);
-        $category=ProjectCategory::find();
+      try {
+        if ($request->cat) {
+            # code...
+        }
+        $project = ProjectCategory::query()->where('project_id',$request->p_id)->delete();
+        if (!empty(request('category'))) {
+          foreach (request('category') as $value) {
+             $project = new ProjectCategory();
+             $project->project_id=$request->p_id;
+             $project->category_id=$value;
+             $project->save();
+          }
+          return back();
+        }
+      } catch (\Throwable $e) {
+        return back()->withErrors($e->getmessage);
+      }
     }
 
-    public function queryUpdateView(request $request)
+
+    public function genreEdit(request $request)
     {
-        return view('admin.project.queryedit');
+        try {
+            $genre = ProjectGenre::query()->where('project_id',$request->p_id)->get();
+            $mastergenres=MasterProjectGenre::get();
+            
+            $temp_cat = [];
+            foreach($genre as $k =>$v)
+            {
+                array_push($temp_cat,$v->gener_id);
+            }
+            $genres = $temp_cat;
+            $project_id = $request->p_id;
+            
+            return view('admin.project.genreedit',compact(['genres','mastergenres','project_id']));
+        } catch (\Throwable $e) {
+            return back()->withErrors($e->getmessage());
+        }
+        
+    }
+
+    public function genreUpdate(request $request)
+    {
+      try {
+        
+        if (!empty($request->genres)) {
+            $project = ProjectGenre::query()->where('project_id',$request->p_id)->delete();
+            if (!empty(request('genres'))) {
+              foreach (request('genres') as $genre) {
+               
+                 $project = new ProjectGenre();
+                 $project->project_id=$request->p_id;
+                 $project->gener_id=$genre;
+                 $project->save();
+              }
+              return back();
+            };
+        }
+       
+      } catch (\Throwable $e) {
+        return back()->withErrors($e->getMessage());
+      };
     }
 }

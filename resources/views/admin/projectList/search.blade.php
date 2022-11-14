@@ -57,7 +57,7 @@
                                     <?php  $projectids=[];
                                         $listids=[];
                                         $i=0; ?>
-                                   @foreach($project_data as $project)
+                                    @foreach($project_data as $project)
                                     <?php $i++;?>
                                     <?php $image=$project->projectImage->file_link; ?>
                                         <tr class="jsgrid-alt-row">
@@ -70,9 +70,12 @@
                                           <td><img src="<?php echo asset("images/asset/$image")?>" style="height: 174px; width: 245px;border:2px solid black"></img></td>
                                           <td><input type="checkbox" class="checkbox_btn"  data="{{$id}}" value="{{$project->id.','.$id}}" name="projectids[]" aria-label=""></td>
                                         </tr>
-                                   @endforeach
+                                    @endforeach
                                        <?php  $y=$i;?>
-                                  @endif
+                                       @else
+                                      <div class="profile_text" style="text-align: center;"><h2>No Data Found</h1>
+                                      </div>
+                                 @endif
                                   @if(isset($search_projects))
                                     @foreach($search_projects as $project)
                                       <?php  $y++;?>
@@ -88,14 +91,26 @@
                                               <td><input type="checkbox" class="checkbox_btn" data-key="{{$id}}" data-project="{{$project->id}}" value="{{$project->id.','.$id}}" name="projectids[]" aria-label=""></td>
                                         </tr>
                                     @endforeach
-                                  @endif
-                                  @if(isset($project_data))
-                                           <tr>
-                                               <td colspan="6" style="text-align: center;"><button type="submit"  class="btn btn-outline-primary btn-sm mt-10">Save</button></td>
-                                          </tr>
-                                  @endif        
+                                   @endif
+                                   @if(isset($project_data))
+                                   <tr>
+                                        <td colspan="6" style="text-align: center;">
+                                          <button type="button" class="btn btn-primary btn-icon-text">
+                                          <i class="mdi mdi-file-check btn-icon-prepend"></i>
+                                           Save</button>
+                                        </td>
+                                   </tr>
+                                   @else
+                                    <div class="profile_text" style="text-align: center;"><h2>No Data Found</h1>
+                                    </div>
+                                    @endif
                               </form>
                             </tbody>
+                            <div class="row">
+                         <div class="col-md-12">
+                             <div style="float:right;" >{{$project_data->links()}}</div>
+                             </div> 
+                         </div>
                       </table>
                     </div>
                 </div>
