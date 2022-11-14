@@ -37,12 +37,11 @@ class IndustryGuideController extends WebController
      */
     public function index(Request $request)
     {
-       try{
-        
+       try{ 
         $validator = Validator::make($request->all(), [
             'search' => 'nullable',
             'locations.*' => 'nullable|exists:countries,id',
-            'skills.*' => 'nullable|exists:master_skils,id',
+            'skills.*' => 'nullable|exists:master_skills,id',
             // 'talent.*' => 'nullable|exists:master_skils,name',
         ]);
     
@@ -50,26 +49,42 @@ class IndustryGuideController extends WebController
             return back()->withErrors($validator)->withInput();
         }
 
-        $locations = MasterCountry::whereIn('id', $request->location)->pluck('name');
-        $skills = MasterSkill::whereIn('id', $request->skills)->pluck('name');
-
+        $countries = MasterCountry::all();
+        $skills = MasterSkill::all();
+        $talent_type = User::query()->where('job_title','!=',null)->where('user_type','U')->groupBy('job_title')->get();
         $users = User::query()->where(function($query) use($request){
             if (isset($request->search)) { // search name of user
                 $query->where("name", "like", "%$request->search%");
             }
+            if (isset($request->talentType)) { // search name of user
+                $query->whereIn("job_title",$request->talentType);
+            }
+            if(isset($request->verified)){
+              $query->where("is_profile_verified","1");
+ 
+            }
         })
-        ->Orwherehas(['country'=> function ($q) use($request){
-             $q->whereIn('id',$request->locations);
-            
-        }])
-        ->Orwherehas(['skill.getSkills'=> function ($q) use($request){
-            $q->whereIn('id',$request->skills);
-        }])
-        ->paginate(2);
-          
-        return view('website.guide.guide_search_result',compact(['countries','skills','users']));
-
-                      
+        ->where(function($subQuery) use($request)
+        {   
+            if (isset($request->countries)) { // search name of user
+            $subQuery->whereHas('country',function ($q) use($request){
+                    $q->whereIn('id',$request->countries);
+                    
+                });
+            } 
+            if (isset($request->skills)) { // search name of user
+                $subQuery->whereHas('skill', function ($q) use($request){
+                    $q->whereIn('skill_id',$request->skills);
+                });
+            } 
+        })
+        ->with('country','skill.getSkills')
+        ->where('id','!=',auth()->user()->id)
+        ->where('user_type','U')
+        ->orderByDesc('id')
+        ->paginate(1);
+        $users->appends(request()->input())->links();
+        return view('website.guide.guide_search_result',compact(['countries','skills','users','talent_type']));                   
        }catch(Exception $e){
         return back()->with('error', 'Something went wrong.');
        }

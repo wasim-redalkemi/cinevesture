@@ -112,7 +112,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 
     Route::group(['prefix'=>'industry-guide'],function()
 	{	
-        Route::get('/show', [IndustryGuideController::class, 'index'])->name('guide-view');
+        Route::get('/show', [IndustryGuideController::class, 'index'])->name('e');
         // Route::get('/filter', [IndustryGuideController::class, 'index'])->name('filter-profile');
        
 	});

@@ -13,115 +13,227 @@
         <div class="row mt-4">
             <div class="col-md-3 side-bar-cmn-part">
                 <div class="search-box-container">
-                <form class="" method="Get"  action="{{ route('filter-profile') }}"> 
-                    @csrf      
-                        <input type="search" name="search"class="w-100 search-box" placeholder="Search...">
+                    <form class="" method="Get" action="{{ route('guide-view') }}">
+                        @csrf
+                        <input type="search" name="search" value="{{request('search')}}" class="w-100 search-box" placeholder="Search...">
                         <button class="search-btn"></button>
-                    
+
                 </div>
-                <!-- <div cl    ass="dropdown search-page mt-3">
-                    <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Genres
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item active" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </div> -->
-                <!-- <div class="dropdown search-page">
-                    <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Categories
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item active" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </div> -->
                 <div class="dropdown search-page">
-                    <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="modal" data-bs-target="#locations-list">
                         Location
                     </button>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item active" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </div>
-                <!-- <div class="dropdown search-page">
-                    <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Workspace Type
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item active" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </div> -->
-                <div class="dropdown search-page">
-                    <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Skills
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item active" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </div>
-                <div class="form-check d-flex align-items-center mt-4">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="verified-text mx-2" for="flexCheckDefault">
-                        Verified Projects
-                    </label>
-                </div>
-                <input type ="submit" class="watch-now-btn mt-4">Apply Now</input>
-            </form>
-            </div>
-          
-
-               
-                    <div class="col-md-9">
-                        <div class="profile_wraper profile_wraper_padding">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <div class="user_profile_container">
-                                        <img src="{{ asset('public/images/asset/user-profile.png') }}" />
-                                    </div>
-
-                                </div>
-                                <div class="col-md-9">
-
-                                        <div class="guide_profile_main_text">
-                                            Name
+                    <!-- Modal for Loactions List -->
+                    <div class="modal fade" id="locations-list" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered filter_modal_wrap">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <section class="filter_option_wrap">
+                                        <div class="container no-padding">
+                                            <div class="row">
+                                                @foreach($countries as $country)
+                                                <div class="col-md-4 filter_options">
+                                                    <label class="list-group-item">
+                                                        @if(isset(request('countries')[0]) && in_array($country->id, request('countries')))
+                                                        <input class="form-check-input me-1" type="checkbox" name="countries[]" checked value="{{$country->id}}">
+                                                        {{$country->name}}
+                                                        @else
+                                                        <input class="form-check-input me-1" type="checkbox" name="countries[]" value="{{$country->id}}">
+                                                        {{$country->name}}
+                                                        @endif
+                                                    </label>
+                                                </div>
+                                                @endforeach
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 text-center">
+                                                    <button type="button" class="btn btn-sm modal-close-filter" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                  
-                                    <div class="posted_job_header">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    </div>
-                                    <div class="preview_headtext lh_54 candy-pink">
-                                        Location
-                                    </div>
-                                    <div class="posted_job_header Aubergine_at_night">
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                                    </div>
-                                    <div class="d-flex justify-content-between mt-4">
-                                        <div class="d-flex">
-                                            <button class="curv_cmn_btn">Skills 1</button>
-                                            <button class="curv_cmn_btn mx-4">Skills 2</button>
-                                            <button class="curv_cmn_btn">Skills 3</button>
-                                            <button class="curv_cmn_btn mx-4">Skills 4</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-1">
-
-                                    <div> <i class="fa fa-heart icon-size Aubergine" aria-hidden="true"></i></div>
+                                    </section>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- Modal for Confirmation for account deactivate -->
+
+                    <div class="dropdown search-page">
+                        <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="modal" data-bs-target="#talent-type" aria-expanded="false">
+                            Talent Type
+                        </button>
+                        <!-- Modal for Loactions List -->
+                        <div class="modal fade" id="talent-type" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered filter_modal_wrap">
+                                <div class="modal-content">
+                                    <div class="modal-body" style="padding: 0px;">
+                                        <section>
+                                            <div class="container" style="padding: 0px;">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="modal_container filter_wrap">
+                                                            <div class="list-group-my" style="justify-content: center;">
+                                                                <div class="row">
+                                                                @foreach($talent_type as $talent)
+                                                                    <div class="col-md-4">
+                                                                        <label class="list-group-item filter_options">
+                                                                    @if(isset(request('talentType')[0]) && in_array($talent->job_title, request('talentType')))
+                                                                            <input class="form-check-input me-1" type="checkbox" checked name="talentType[]" value="{{$talent->job_title}}">
+                                                                            {{$talent->job_title}}
+                                                                            @else
+                                                                            <input class="form-check-input me-1" type="checkbox" name="talentType[]" value="{{$talent->job_title}}">
+                                                                            {{$talent->job_title}}
+                                                                     @endif
+                                                                        </label>
+                                                                    </div>
+                                                                    @endforeach
+                                                                </div>
+                                                            </div>
+                                                            <button type="button" class="btn modal-close-filter" data-bs-dismiss="modal">Close</button>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal for Confirmation for account deactivate -->
+                    </div>
+                    <div class="dropdown search-page">
+                        <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="modal" data-bs-target="#skills" aria-expanded="false">
+                            Skills
+                        </button>
+                        <!-- Modal for Loactions List -->
+                        <div class="modal fade" id="skills" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-body" style="padding: 0px;">
+                                        <section>
+                                            <div class="container" style="padding: 0px;">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="modal_container">
+                                                            <div class="list-group">
+                                                                @foreach($skills as $skill)
+                                                                <label class="list-group-item">
+                                                                  
+                                                                    @if(isset(request('skills')[0]) && in_array($skill->id, request('skills')))
+                                                                    <input class="form-check-input me-1" type="checkbox" checked name="skills[]" value="{{$skill->id}}">
+                                                                    {{$skill->name}}
+                                                                            @else
+                                                                            <input class="form-check-input me-1" type="checkbox" name="skills[]" value="{{$skill->id}}">
+                                                                    {{$skill->name}}
+                                                                     @endif
+                                                                </label>
+                                                                @endforeach
+
+                                                            </div>
+                                                            <button type="button" class="btn modal-close-filter" data-bs-dismiss="modal">Close</button>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Modal for Confirmation for account deactivate -->
+                    </div>
+                    <div class="form-check d-flex align-items-center mt-4">
+                        <input class="form-check-input" <?php if(request('verified') == '1'){echo'checked';}?> style="border-radius: 0px;" type="checkbox" value="1" name="verified" id="flexCheckDefault">
+                        <label class="verified-text mx-2" for="flexCheckDefault">
+                            Recommended Profile
+                        </label>
+                    </div>
+                    <div class="mt-4">
+                        <input type="submit" class="filter-button watch-now-btn mt-4" Value="Apply">
+                        <a href="{{route('guide-view')}}"><input type="button" class="clear-filter watch-now-btn mt-4" Value="Clear"></a>
+                    </div>
+
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-9">
+                @if(count($users) >= 1)
+                @foreach($users as $user)
+                <div class="profile_wraper profile_wraper_padding">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="user_profile_container">
+                                <!-- <img src="{{ asset('public/images/asset/user-profile.png') }}" /> -->
+                                @if(isset($user->profile_image))
+                                <img src="{{Storage::url($user->profile)}}" />
+                                @else
+                                <img src="{{ asset('public/images/asset/user-profile.png') }}" />
+                                @endif
+                            </div>
+
+                        </div>
+                        <div class="col-md-9">
+                            <div class="d-flex align-items-center">
+                                <div class="guide_profile_main_text">
+                                    {{$user->name}}
+                                </div>
+                                @if($user->is_profile_verified == '1')<span><button class="verified_cmn_btn mx-3">
+                                        <img src="{{ asset('public/images/asset/verified_icon.svg') }}" alt="image"> VERIFIED</button></span>@endif
+
+                            </div>
+
+                            <div class="posted_job_header">
+                                @if(isset($user->job_title))
+                                {{$user->job_title}}
+                                @else
+                                -
+                                @endif
+                            </div>
+                            <div class="preview_headtext lh_54 candy-pink">
+                                @if(isset($user->country))
+                                {{$user->country->name}}
+                                @else
+                                -
+                                @endif
+                            </div>
+                            <div class="posted_job_header Aubergine_at_night">
+                                @if(isset($user->about))
+                                {{$user->about}}
+                                @else
+                                -
+                                @endif
+                            </div>
+                            <div class="d-flex justify-content-between mt-4">
+                                <div class="d-flex">
+                                    @if(isset($user->skill[0]))
+                                    @foreach($user->skill as $skill)
+                                    <button class="curv_cmn_btn">{{$skill->getSkills->name}}</button>
+                                    @endforeach
+                                    @else
+                                    -
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-1">
+
+                            <div> <i class="fa fa-heart icon-size Aubergine" aria-hidden="true"></i></div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                @else
+                <div class="not-found-text">
+                    <p>No Profile Found</p>
+                </div>
+                @endif
+                <div>
+                    {!! $users->links() !!}
+                </div>
+
+            </div>
         </div>
 </section>
 
