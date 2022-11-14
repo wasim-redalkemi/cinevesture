@@ -33,7 +33,7 @@
                         dolore magna aliqua.
                         Ut enim ad minim veniam, quis nostrud exercitation.</div>
                       <div class="duration-lang-text mt-1">1hr 5min | English | Horror</div>
-                      <button class="watch-now-btn mt-4">Watch now</button>
+                      <button class="watch-now-btn mt-4"><a href="{{ route('public-view', ['id'=>3]) }}">Watch now</a></button>
                     </div>
                   </div>
                 </div>

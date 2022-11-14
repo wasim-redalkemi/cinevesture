@@ -1,11 +1,14 @@
 <script>
-
+        var project_id = null;
         var validateUrl = function (url) {
             let urlReg = /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?$/i;
             return urlReg.test(url);
         }
 
         $(document).ready(function(){
+            
+            project_id = $("input[name=project_id]").val();
+            console.log("project_id "+project_id);
             //For albhabates
             $(".alphabets-only").on("input",function(){
                 $(this).val($(this).val().replace(/[^A-z ]/g,''));
@@ -136,20 +139,24 @@
             var parentElemId = "#Videos";
             var currentVideos = [];
             var lastVidId = 0;
+            var currentVideoCount = 0;
 
-            let init = function(id, params){
+            let init = function(id){
                 project_id = id;
-                currentVideos = params;
-                var currentVideoCount = currentVideos.length;
-                if(currentVideoCount > 0)
+                console.log("currentVideos - ",currentVideos);
+                currentVideoCount = currentVideos.length;
+                if(currentVideoCount > 0){
                     lastVidId = currentVideos[currentVideoCount-1]['id'];
+                    console.log("lastVidId = "+lastVidId);
+                }
 
-                doAjax('/project/get-project-media/'+project_id+'?type=video',{},"GET",getVideosCallback);
+                doAjax('project/get-project-media/'+project_id+'?type=video',{},"GET",getVideosCallback);
                 //doAjax('/ajax/get-media/1',{},"GET",updateVideoCallback)
             }
 
             let getVideosCallback = function (req, resp) {
                 currentVideos = JSON.parse(resp);
+                currentVideoCount = currentVideos.length;
                 loadCurrentVideos();
                 bindActions();
             }
@@ -168,6 +175,7 @@
 
             let bindActions = function (){
                 $(parentElemId+" .add_video_field").off("click").on("click",(e)=>{
+                    console.log("in ");
                     let fieldElems = $(parentElemId+" input.video-link");
                     let isEmptyField = false;
                     fieldElems.each(function(){
@@ -175,6 +183,7 @@
                         console.log("elem",inputVal);
                         isEmptyField = (inputVal == "" || !validateUrl(inputVal));
                     });
+                    console.log("isEmptyField = ",isEmptyField);
                     if(!isEmptyField)
                         addVideoElem();
                     else
@@ -188,11 +197,11 @@
                         if(link.indexOf("vimeo.com") > -1){
                             //let reqData = {'vidUrl': "https://vimeo.com/336812686"};
                             let reqData = {'vidUrl': link};
-                            doAjax("/ajax/get-video-details",reqData,"POST",getVimeoData);
+                            doAjax("ajax/get-video-details",reqData,"POST",getVimeoData);
                         } else if(link.indexOf("youtube.com") > -1) {
                             //let reqData = {'vidUrl': "https://www.youtube.com/watch?v=ZdbQ_FvNBZA&t=915s&ab_channel=ScaleupAlly"};
                             let reqData = {'vidUrl':link};
-                            doAjax("/ajax/get-video-details",reqData,"POST",getYouTubeData);
+                            doAjax("ajax/get-video-details",reqData,"POST",getYouTubeData);
                         } else {
                             //show error
                             alert("Invalid video url. Only Vimeo and Youtube links are allowed.");
@@ -212,12 +221,12 @@
                             rec.is_default_marked = 0;
                         }
                     });
-                    doAjax('/ajax/update-media/'+defVid,{'id':defVid,'is_default_marked':'1','type':'video'},"POST",updateVideoCallback);
+                    doAjax('ajax/update-media/'+defVid,{'id':defVid,'is_default_marked':'1','type':'video'},"POST",updateVideoCallback);
                 });
                 $(parentElemId+" .delete-media").off("click").on("click",(e)=>{
                     alert("Add delete confirmation here");
                     let mediaId = $(e.target).attr('data-id');
-                    doAjax("/ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteMediaCallback);
+                    doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteMediaCallback);
                 });
             }
 
@@ -243,7 +252,7 @@
                 newVideo['thumbnail'] = vimeo.thumbnail_medium;
                 newVideo['url'] = vimeo.url;
                 newVideo['is_default_marked'] = 0;
-                doAjax('/ajax/add-video',newVideo,"POST",addVideoCallback);
+                doAjax('ajax/add-video',newVideo,"POST",addVideoCallback);
             }
 
             let getYouTubeData = function(reqData,youtubeResp) {
@@ -257,11 +266,11 @@
                 newVideo['url'] = reqData.vidUrl;
                 newVideo['is_default_marked'] = 0;
                 newVideo['type'] = 'videourl';
-                doAjax('/ajax/add-video',newVideo,"POST",addVideoCallback);
+                doAjax('ajax/add-video',newVideo,"POST",addVideoCallback);
             }
 
             let addVideoCallback = function(req,resp){
-                console.log("in here addVideoCallback",resp);
+                //console.log("in here addVideoCallback",resp);
                 let newVideo = JSON.parse(resp);
                 currentVideos.push(newVideo);
                 currentVideoCount = currentVideos.length;
@@ -272,36 +281,38 @@
             let loadCurrentVideos = function() {
                 let str = '';
                 if(currentVideos.length > 0) {
-                $.each(currentVideos, (i,v) => {
-                    console.log("v = ",v);
-                    str += '<div id="vid-'+v.id+'" class="col-md-3">';
-                        str += '<div class="img-container h_66">';
-                        str += '<img src="'+v.media_info.thumbnail+'" class="width_inheritence" alt="image">';
-                        str += '<div class="title project_card_data w-100 h-100">';
-                            str += '<p>'+v.media_info.title+'</p>';
-                        str += '</div>';
-                        str += '<div class="delete-icon project_card_data w-100 h-100">';
-                            str += '<div>';
-                                str += '<i class="fa fa-trash-o delete-media" data-id="'+v.id+'" aria-hidden="true"></i>';
+                    $.each(currentVideos, (i,v) => {
+                        //console.log("v = ",v);
+                        str += '<div id="vid-'+v.id+'" class="col-md-3">';
+                            str += '<div class="img-container h_66">';
+                            str += '<img src="'+v.media_info.thumbnail+'" class="width_inheritence" alt="image">';
+                            str += '<div class="title project_card_data w-100 h-100">';
+                                str += '<p>'+v.media_info.title+'</p>';
                             str += '</div>';
+                            str += '<div class="delete-icon project_card_data w-100 h-100">';
+                                str += '<div>';
+                                    str += '<i class="fa fa-trash-o delete-media" data-id="'+v.id+'" aria-hidden="true"></i>';
+                                str += '</div>';
+                            str += '</div>';
+                            str += '</div>';
+                        str += '<div class="profile_input">';
+                        str += '<input type="text" class="form-control video-link" name="project_video_link_'+v.id+'" placeholder="Video url" value="'+v.file_link+'">';
+                        str += '</div>';
+                        str += '<div class="d-flex mt-5 mt-md-3">';
+                        str += '<div>';
+                        if(parseInt(v.is_default_marked))
+                            str += '<input type="radio" class="checkbox_btn feature_ved" name="is_feature_ved" aria-label="" checked="checked" value="'+v.id+'">';
+                        else
+                            str += '<input type="radio" class="checkbox_btn feature_ved" name="is_feature_ved" aria-label="" value="'+v.id+'">';
+                        str += '</div>';
+                        str += '<div class="mk-feature mx-2">Make feature video</div>';
                         str += '</div>';
                         str += '</div>';
-                    str += '<div class="profile_input">';
-                    str += '<input type="text" class="form-control video-link" name="project_video_link_'+v.id+'" placeholder="Video url" value="'+v.file_link+'">';
-                    str += '</div>';
-                    str += '<div class="d-flex mt-5 mt-md-3">';
-                    str += '<div>';
-                    if(parseInt(v.is_default_marked))
-                        str += '<input type="radio" class="checkbox_btn feature_ved" name="is_feature_ved" aria-label="" checked="checked" value="'+v.id+'">';
-                    else
-                        str += '<input type="radio" class="checkbox_btn feature_ved" name="is_feature_ved" aria-label="" value="'+v.id+'">';
-                    str += '</div>';
-                    str += '<div class="mk-feature mx-2">Make Feature Video</div>';
-                    str += '</div>';
-                    str += '</div>';
-                });
+                    });
+                } else {
+                    str += getAddElemHtml();
                 }
-                str += '<div class="col-md-3 add-another-item add_video_btn d-flex align-items-end">';
+                str += '<div id="add-video-btn-div" class="col-md-3 add-another-item add_video_btn d-flex align-items-end">';
                 str += '<div>';
                 str += '<button class="add_video_field save_add_btn">Add another</button>';
                 str += '</div>';
@@ -311,6 +322,16 @@
             }
 
             let addVideoElem = function() {
+                let str = getAddElemHtml();
+                if(currentVideoCount == 0){
+                    $(str).insertBefore(parentElemId+" .video-list #add-video-btn-div");
+                } else {
+                    $(str).insertAfter(parentElemId+" .video-list #vid-"+lastVidId);
+                }
+                bindActions();
+            }
+
+            let getAddElemHtml = function () {
                 let str = '<div class="col-md-3">';
                     str += '<div class="img-container h_66 mt-3 mt-md-0">';
                         str += '<img src="'+BaseUrl+'/images/asset/default-video-thumbnail.jpg" class="width_inheritence" alt="image">';
@@ -322,31 +343,269 @@
                         str += '<div>';
                         str += '<input type="radio" class="checkbox_btn" name="is_feature_ved" aria-label="" value="" disabled>';
                         str += '</div>';
-                        str += '<div class="mk-feature mx-2">Make Feature Video</div>';
+                        str += '<div class="mk-feature mx-2">Make feature video</div>';
                     str += '</div>';
                 str += '</div>';
-                $(str).insertAfter(parentElemId+" .video-list #vid-"+lastVidId);
-                bindActions();
+                return str;
             }
 
             return {
                 init
             }
         }();
+
+        project_id = $("input[name=project_id]").val();
+        console.log("project_id "+project_id);
         // get the current video list from backend and load into the Gallary class.
-        let project_id = 1;
-        let currentVideos = [{
-                "project_id":"1",
-                "file_type":"video",
-                "file_link":"https:\/\/vimeo.com\/336812686",
-                "is_default_marked":"0",
-                "media_info":{
-                    "thumbnail":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_200x150",
-                    "title":"Direct Links To Video Files"
-                },
-                "updated_at":"2022-11-07T06:54:01.000000Z","created_at":"2022-11-07T06:54:01.000000Z","id":1}
-            ];
+        Videos.init(project_id);
 
-        Videos.init(project_id,currentVideos);
+        // Photo gallary page script
+        var Photos = function () {
+            var project_id = null;
+            var parentElemId = "#Photos";
+            var currentMediaList = [];
+            var lastVidId = 0;
+            var currentMediaCount = 0;
+            var uploadedFile = null;
 
+            let init = function(id){
+                project_id = id;
+                console.log("currentMediaList - ",currentMediaList);
+                currentMediaCount = currentMediaList.length;
+                if(currentMediaCount > 0){
+                    lastVidId = currentMediaList[currentMediaCount-1]['id'];
+                    console.log("lastVidId = "+lastVidId);
+                }
+
+                doAjax('project/get-project-media/'+project_id+'?type=image',{},"GET",getMediaCallback);
+                //doAjax('/ajax/get-media/1',{},"GET",updateVideoCallback)
+            }
+
+            let progressHandling = function (event) {
+                var percent = 0;
+                var position = event.loaded || event.position;
+                var total = event.total;
+                var progress_bar_id = "#progress-wrp";
+                if (event.lengthComputable) {
+                    percent = Math.ceil(position / total * 100);
+                }
+                // update progressbars classes so it fits your code
+                $(progress_bar_id + " .progress-bar").css("width", +percent + "%");
+                $(progress_bar_id + " .status").text(percent + "%");
+                console.log("percent complete = "+percent);
+            };
+
+            let getMediaCallback = function (req, resp) {
+                //console.log("getMediaCallback",resp);
+                currentMediaList = JSON.parse(resp);
+                currentMediaCount = currentMediaList.length;
+                if(currentMediaCount > 0){
+                    lastVidId = currentMediaList[currentMediaCount-1]['id'];
+                    //console.log("lastVidId = "+lastVidId);
+                }
+                loadcurrentMediaList();
+                bindActions();
+            }
+
+            let doAjax = function(url,reqData,method,callback) {
+                $.ajax({
+                    url: BaseUrl+url,
+                    type: method,
+                    data: reqData,
+                    success: function(result){
+                        //alert(result);
+                        callback(reqData,result);
+                    }
+                });
+            }
+
+            let bindActions = function (){
+
+                $(parentElemId+" input#upload-img-inp").off("change").on("change",function uploadImageFile(e) {
+                    //console.log("e = ",this.files);
+                    const [file] = this.files
+                    uploadedFile = this.files[0];
+                    if (file) {
+                        $("#previewImg").attr("src",URL.createObjectURL(file));
+                    }
+                    $(parentElemId+" .profile_upload_text").hide();
+                    $(parentElemId+" .profile_input.add-new-image").show();
+                    $("#cancel-img-upload").show();
+                });
+
+                $(parentElemId+" input[name=image_title]").on("blur",(e)=>{
+                    //console.log("blur ",e.target.value,uploadedFile);
+                    var formData = new FormData();
+                    formData.append("file", uploadedFile, uploadedFile.name);
+                    formData.append("title", e.target.value);
+                    $.ajax({
+                        type: "POST",
+                        url: BaseUrl+"ajax/upload-image",
+                        xhr: function () {
+                            var myXhr = $.ajaxSettings.xhr();
+                            if (myXhr.upload) {
+                                myXhr.upload.addEventListener('progress', progressHandling, false);
+                            }
+                            return myXhr;
+                        },
+                        success: function (data) {
+                            // your callback here
+                            console.log("success data ",JSON.parse(data));
+                            uploadedFile = null;
+                            addMediaCallback(data);
+                        },
+                        error: function (error) {
+                            // handle error
+                        },
+                        async: true,
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        timeout: 60000
+                    });
+                });
+
+                $(parentElemId+" .add_img_field").off("click").on("click",(e)=>{
+                    console.log("in here");
+                    addMediaElem();
+                });
+
+                $(parentElemId+" input.feature_ved").off("click").on("click",(e)=>{
+                    let defVid = $(parentElemId+" input.feature_ved:checked").val();
+                    let vdrec = $.each(currentMediaList,(i,rec)=>{
+                        if(rec.id == defVid){
+                            rec.is_default_marked = 1;
+                        } else {
+                            rec.is_default_marked = 0;
+                        }
+                    });
+                    doAjax('ajax/update-media/'+defVid,{'id':defVid,'is_default_marked':'1','type':'video'},"POST",updateMediaCallback);
+                });
+
+                $(parentElemId+" .delete-media").off("click").on("click",(e)=>{
+                    //alert("Add delete confirmation here");
+                    let mediaId = $(e.target).attr('data-id');
+                    doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteMediaCallback);
+                });
+
+                $(parentElemId+" #cancel-img-upload").off("click").on("click",(e)=>{
+                    $("#previewImg").attr("src","");
+                    $(parentElemId+" .profile_upload_text").show();
+                    $(parentElemId+" .profile_input.add-new-image").hide();
+                    $("#cancel-img-upload").hide();
+                    uploadedFile = null;
+                });
+            }
+
+            let deleteMediaCallback = function (req,resp) {
+                $("#img-"+req.mediaId).remove();
+                console.log("bfore remove ",currentMediaList,req.mediaId);
+                currentMediaList = currentMediaList.filter((item)=>{
+                    console.log(item.id,item.id != req.mediaId);
+                    return item.id != req.mediaId;
+                });
+                console.log("after remove ",currentMediaList)
+                lastVidId = currentMediaList[currentMediaCount-1]['id'];
+                loadcurrentMediaList();
+            }
+
+            let updateMediaCallback = function (req,resp) {
+                console.log("Image updated successfully.");
+                //alert(resp);
+            }
+
+            let addMediaCallback = function(resp){
+                //console.log("in here addVideoCallback",resp);
+                let newVideo = JSON.parse(resp);
+                currentMediaList.push(newVideo);
+                currentMediaCount = currentMediaList.length;
+                loadcurrentMediaList();
+                lastVidId = currentMediaList[currentMediaList.length-1]['id'];
+            }
+
+            let loadcurrentMediaList = function() {
+                let str = '';
+                if(currentMediaList.length > 0) {
+                    $.each(currentMediaList, (i,v) => {
+                        //console.log("v = ",v);
+                        str += '<div id="img-'+v.id+'" class="col-md-3">';
+                            str += '<div class="img-container h_66">';
+                            str += '<img src="'+v.file_link+'" class="width_inheritence" alt="image">';
+                            str += '<div class="title project_card_data w-100 h-100">';
+                                str += '<p>'+v.media_info.title+'</p>';
+                            str += '</div>';
+                            str += '<div class="delete-icon project_card_data w-100 h-100">';
+                                str += '<div>';
+                                    str += '<i class="fa fa-trash-o delete-media" data-id="'+v.id+'" aria-hidden="true"></i>';
+                                str += '</div>';
+                            str += '</div>';
+                            str += '</div>';
+                        str += '<div class="profile_input">';
+                        str += '<input type="text" class="form-control image_title" name="project_image_title_'+v.id+'" placeholder="Add image title" value="'+v.media_info.title+'">';
+                        str += '</div>';
+                        str += '<div class="d-flex mt-5 mt-md-3">';
+                        str += '<div>';
+                        if(parseInt(v.is_default_marked))
+                            str += '<input type="radio" class="checkbox_btn feature_ved" name="is_feature_image" aria-label="" checked="checked" value="'+v.id+'">';
+                        else
+                            str += '<input type="radio" class="checkbox_btn feature_ved" name="is_feature_image" aria-label="" value="'+v.id+'">';
+                        str += '</div>';
+                        str += '<div class="mk-feature mx-2">Make feature image</div>';
+                        str += '</div>';
+                        str += '</div>';
+                    });
+                } else {
+                    str += getAddElemHtml();
+                }
+                str += '<div id="add-img-btn-div" class="col-md-3 add-another-item add_video_btn d-flex align-items-end">';
+                str += '<div>';
+                str += '<button class="add_img_field save_add_btn">Add another</button>';
+                str += '</div>';
+                str += '</div>';
+                $(parentElemId+" .photo-list").html(str);
+                bindActions();
+            }
+
+            let addMediaElem = function() {
+                let str = getAddElemHtml();
+                if(currentMediaCount == 0){
+                    $(str).insertBefore(parentElemId+" .photo-list #add-image-btn-div");
+                } else {
+                    $(str).insertAfter(parentElemId+" .photo-list #img-"+lastVidId);
+                }
+                bindActions();
+            }
+
+            let getAddElemHtml = function () {
+                let str = '<div class="col-md-3">';
+                    str += '<div class="open_file_explorer profile_upload_container h_66">';
+                        str += '<img src="" id="previewImg">';
+                        str += '<div id="cancel-img-upload" style="display:none;curson:pointer;position:absolute;background:red;width:20px;height:20px;top:0;right:0"></div>';
+                        str += '<div for="file-input input_wrap" class="d-none">';
+                            str += '<input type="file" class="imgInp" id="upload-img-inp" name="project_image_1" accept=".jpg,.jpeg,.png">';
+                        str += '</div>';
+                        str += '<label for="upload-img-inp">';
+                            str += '<div class="text-center">';
+                                str += '<div>';
+                                    str += '<i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true"></i>';
+                                str += '</div>';
+                                str += '<div class="mt-3 movie_name_text">Upload file</div>';
+                            str += '</div>';
+                        str += '</label>';
+                    str += '</div>';
+                    str += '<div class="profile_input add-new-image">';
+                        str += '<input type="text" class="form-control" name="image_title" placeholder="Photo Title">';
+                    str += '</div>';
+                    str += '<div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 4MB</div>';
+                str += '</div>';
+                return str;
+            }
+
+            return {
+                init
+            }
+        }();
+
+        Photos.init(project_id);
 </script>

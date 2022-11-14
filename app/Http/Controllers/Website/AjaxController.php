@@ -46,10 +46,21 @@ class AjaxController extends WebController {
     }
 
     public function getMedia(Request $request, $media_id) {
-        $where = ['id' => $media_id];
-        $ProjectMediaObj = ProjectMedia::find($media_id);
-        $ProjectMediaObj->media_info = json_decode($ProjectMediaObj->media_info, true);
-        return json_encode($ProjectMediaObj);
+        try {
+            $where = ['id' => $media_id];
+            $ProjectMediaObj = ProjectMedia::find($media_id);
+            if (isset($ProjectMediaObj)) {
+                $ProjectMediaObj->media_info = json_decode($ProjectMediaObj->media_info, true);
+                return json_encode($ProjectMediaObj);
+            } else {
+                // return back()->with('error','Not find media file.');
+                return json_encode([]);
+            }
+            
+        } catch (Exception $e) {
+            // return back()->with('error','Something went wrong.');
+            return json_encode([]);
+        }
     }
 
 
@@ -58,7 +69,7 @@ class AjaxController extends WebController {
         $reqData = $request->all();
         $ProjectMediaObj = ProjectMedia::find($media_id);
         //set all to "not featured"
-        ProjectMedia::where(['project_id'=>$ProjectMediaObj->project_id,'file_type'=>'video'])->update(['is_default_marked'=> '0']);
+        ProjectMedia::where(['project_id'=>$ProjectMediaObj->project_id,'file_type'=>$ProjectMediaObj->file_type])->update(['is_default_marked'=> '0']);
         //
         $ProjectMediaObj->is_default_marked = $reqData['is_default_marked'];
         $ProjectMediaObj->save();
@@ -67,11 +78,31 @@ class AjaxController extends WebController {
     }
 
     public function deleteMedia(Request $request, $media_id = null){
-        \Log::info("here in logs ".$media_id);
-        $reqData = $request->all();
-        $ProjectMediaObj = ProjectMedia::find($media_id)->delete();
-        //$ProjectMediaObj->media_info = json_decode($ProjectMediaObj->media_info, true);
-        return json_encode($ProjectMediaObj);
+        $isDeleted = ProjectMedia::find($media_id)->delete();
+        //\Log::info("here in logs ".json_encode($ProjectMediaObj));
+        return json_encode($isDeleted);
+    }
+
+    public function uploadImage(Request $request){
+        $request->validate([
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        $file = $request->file("file");
+        $locationPath  = "project/image";
+        $fileName = $file->getClientOriginalName();
+        $nameStr = date('YmdHis');
+        $newName = str_replace(" ","_",$nameStr.$fileName);
+        $this->uploadFile($locationPath , $file, $newName);
+        //\Log::info("here in logs ".$newName.",".asset($locationPath."/".$newName));
+        $projectMedia = new ProjectMedia();
+        $projectMedia->project_id = 1;
+        $projectMedia->file_type = 'image';
+        $projectMedia->file_link = $locationPath."/".$newName;
+        $projectMedia->media_info = json_encode(["title"=>$request->title]);
+        $projectMedia->save();
+        $projectMedia->file_link = asset("storage/".$projectMedia->file_link);
+        $projectMedia->media_info = json_decode($projectMedia->media_info, true);
+        return json_encode($projectMedia);
     }
 
 }

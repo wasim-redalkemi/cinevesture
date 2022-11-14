@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\UserOrganisation;
+use Exception;
 use Illuminate\Http\Request;
 
 class UserController extends AdminController
@@ -17,8 +18,15 @@ class UserController extends AdminController
      */
     public function index()
     {
-        $users=User::query()->with(['organization.country'])->get();
-        return view('admin.user.index',compact('users'));
+        try
+        {
+            $users=User::query()->with(['organization.country'])->paginate(5);
+            return view('admin.user.list',compact('users'));
+        } 
+        catch (Exception  $e) {
+            return back()->withError('error', 'Something went wrong.');
+        }
+
     }
 
     /**

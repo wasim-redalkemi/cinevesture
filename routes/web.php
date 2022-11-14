@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/test', function () {
-    return view('website.Plan');
+    return view('website.plan');
 });
 Route::get('/', function () {
     return view('website.auth.login');
@@ -59,6 +59,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::get('/get-media/{media_id}',[AjaxController::class, 'getMedia'])->name('get-media');
         Route::post('/update-media/{media_id}',[AjaxController::class, 'updateMedia'])->name('update-video');
         Route::post('/delete-media/{media_id}',[AjaxController::class, 'deleteMedia'])->name('delete-media');
+        Route::post('/upload-image',[AjaxController::class, 'uploadImage'])->name('upload-image');
     });
 
     Route::group(['prefix'=>'user'],function()
@@ -93,13 +94,29 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     Route::group(['prefix'=>'project'],function()
 	{	
         Route::get('/project-list', [ProjectController::class, 'projectList'])->name('project-list');
-        Route::get('/project-create', [ProjectController::class, 'projectViewRender'])->name('project-create');
-        Route::post('/project-overview-store', [ProjectController::class, 'overviewStore'])->name('project-overview-store');
-        Route::post('/project-details-store/{id}', [ProjectController::class, 'detailsStore'])->name('project-details-store');
-        Route::post('/project-gallery-store/{id}', [ProjectController::class, 'galleryStore'])->name('project-gallery-store');
-        Route::post('/project-description-store/{id}', [ProjectController::class, 'descriptionStore'])->name('project-description-store');
-        Route::post('/project-milestone-store/{id}', [ProjectController::class, 'milestoneStore'])->name('project-milestone-store');
-        Route::get('/get-project-media/{project_id}',[ProjectController::class, 'getMediaByProject'])->name('get-project-media');
+
+        Route::get('/project-overview', [ProjectController::class, 'projectOverview'])->name('project-overview');
+        Route::post('/validate-project-overview', [ProjectController::class, 'validateProjectOverview'])->name('validate-project-overview');
+
+        Route::get('/project-details', [ProjectController::class, 'projectDetails'])->name('project-details');
+        Route::post('/validate-project-details', [ProjectController::class, 'validateProjectDetails'])->name('validate-project-details');
+
+        Route::get('/project-description', [ProjectController::class, 'projectDescription'])->name('project-description');
+        Route::post('/validate-project-description', [ProjectController::class, 'validateProjectDescription'])->name('validate-project-description');
+
+
+        Route::get('/project-gallery', [ProjectController::class, 'projectGallery'])->name('project-gallery');     
+        Route::post('/project-gallery-store', [ProjectController::class, 'galleryStore'])->name('project-gallery-store');
+
+        Route::get('/project-milestone', [ProjectController::class, 'projectMilestone'])->name('project-milestone');
+        Route::post('/validate-project-milestone', [ProjectController::class, 'validateProjectMilestone'])->name('validate-project-milestone');
+
+        Route::get('/project-preview', [ProjectController::class, 'projectPreview'])->name('project-preview');
+
+
+        Route::get('/public-view/{id}', [ProjectController::class, 'publicView'])->name('public-view');
+        Route::get('/get-project-media/{id}', [ProjectController::class, 'getMediaByProject'])->name('get-project-media');
+
 	});
 
     Route::group(['prefix'=>'endorsement'],function()

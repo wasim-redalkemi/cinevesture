@@ -17,7 +17,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="profile_wraper profile_wraper_padding mt-4">
+                <div class="profile_wraper profile_wraper_padding my-4">
                     <p class="flow_step_text pb-0">Gallery</p>
                     <div id="Videos" class="add_content_wraper">
                         <div class="row video-sec">
@@ -63,7 +63,7 @@
                                             <div class="mk-feature mx-2">Make Feature Video</div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3 add-another-item add_video_btn d-flex align-items-end">
+                                    <div id="add-video-btn-div" class="col-md-3 add-another-item add_video_btn d-flex align-items-end">
                                         <div>
                                             <button class="add_video_field save_add_btn">Add another</button>
                                         </div>
@@ -71,10 +71,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="Photoes" class="add_content_wraper">
+                        <div id="Photos" class="add_content_wraper">
                             <div class="row photo-sec">
                                 <div class="guide_profile_main_text Aubergine_at_night mt-2">Photos</div>
-                                <div class="row col_wrap">
+                                <div class="photo-list row col_wrap">
                                     <div class="col-md-3">
                                         <div class="img-container h_66">
                                             <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
@@ -89,25 +89,30 @@
                                         </div>
                                         <div class="d-flex mt-3">
                                             <input type="radio" class="checkbox_btn" name="" aria-label="">
-                                            <div class="verified-text mx-2">Make thumbnail Image</div>
+                                            <div class="verified-text mk-feature mx-2">Make thumbnail Image</div>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
-                                        <div class="profile_upload_container h_66 mt-3 mt-md-0">
+                                        <div class="open_file_explorer profile_upload_container h_66">
                                             <img src="" id="previewImg">
                                             <div for="file-input input_wrap" class="d-none">
-                                                <input type="file" onchange="uploadImageFile(this)" class="imgInp" id="456" name="project_image_1" accept=".jpg,.jpeg,.png">
+                                                <input type="file" class="imgInp" id="upload-img-inp" name="project_image_1" accept=".jpg,.jpeg,.png">
                                             </div>
-                                            <div class="text-center">
-                                                <div>
-                                                    <i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true"></i>
+                                            <label for="upload-img-inp">
+                                                <div class="text-center">
+                                                    <div>
+                                                        <i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true"></i>
+                                                    </div>
+                                                    <div class="mt-3 movie_name_text">Upload file</div>
                                                 </div>
-                                                <div class="mt-3 movie_name_text">Upload file</div>
-                                            </div>
+                                            </label>
+                                        </div>
+                                        <div class="profile_input add-new-image">
+                                            <input type="text" class="form-control" name="image_title" placeholder="Photo Title">
                                         </div>
                                         <div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 4MB</div>
                                     </div>
-                                    <div class="col-md-2 add_image_btn d-flex align-items-end">
+                                    <div id="add-photo-btn-div" class="col-md-2 add_image_btn d-flex align-items-end">
                                         <div class="add_img_field mb-5">
                                             <button class="save_add_btn">Add another</button>
                                         </div>
@@ -130,7 +135,8 @@
                         <div class="col-md-12">
                             <div class="d-flex justify-content-end mt-5">
                                 <button class="cancel_btn mx-3">Go back</button>
-                                <button class="guide_profile_btn">Save & Next</button>
+                                <input type="hidden" name="project_id" value="<?php if(isset($_REQUEST['id'])) {echo $_REQUEST['id'];}?>">
+                                <button type="submit" class="guide_profile_btn">Save & Next</button>
                             </div>
                         </div>
                     </div>
@@ -141,15 +147,11 @@
     </div>
     <div class="col-md-5 mt-2 mt-md-0">
                         
-                        <button type="button" class="deactivate_btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                        Deactivate account
-                       </button>
+<button type="button" class="deactivate_btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="display:none">Deactivate account</button>
     <!-- Modal for Confirmation for account deactivate -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
-
     <div class="modal-content">
-      
       <div class="modal-body" style="padding: 0px;">
     <section>
     <div class="container"style="padding: 0px;" >
@@ -163,9 +165,7 @@
                     <div class="sub_text mt-4">Do you really want to deactivate your account?<br>This process cannot be undone.</div>
                     <div class="d-flex justify-content-center mt-4">   
                         <button type="button" class="cancel_btn mx-3" data-bs-dismiss="modal">Cancel</button>
-                     
                            <button  class="delete_btn mx-3" type="button">Confirm</button>
-        
                     </div>
                 </div>
             </div>
@@ -186,6 +186,7 @@
         $("#success-toast").toast("show");
 
         $('.doc_container').hide();
+
         $('.open_file_explorer').click(function(e) {
             $(this).parents('.custom_file_explorer').find('.file_element').click();
         });
