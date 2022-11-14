@@ -175,7 +175,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="profile_wraper profile_wraper_padding mt-4 mb-0">
+                <div class="profile_wraper profile_wraper_padding mt-4 mb-4">
                 <div>
                     <p class="flow_step_text"> Requirements & Milestones</p>
                 </div>
