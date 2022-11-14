@@ -27,6 +27,10 @@ use Illuminate\Http\Request;
 
 class ProjectController extends WebController
 {
+    public function __construct()
+    {
+        $this->return_response = ['error_msg'=>'','success_msg'=>''];
+    }
     public function projectList()
     {
         try {
@@ -110,8 +114,17 @@ class ProjectController extends WebController
         try {
             if(!empty($_REQUEST['project_id']))
             {
-                $this->overviewEdit();
-                return redirect()->route('project-details',['id' => $_REQUEST['project_id']])->with("success","User overview updated successfully.");
+                $overviewEditResponse = $this->overviewEdit();
+                
+                if(!empty($overviewEditResponse['error_msg']))
+                {
+                    return back()->with('error',$overviewEditResponse['error_msg']);
+                }
+                else
+                {
+                    return redirect()->route('project-details',['id' => $_REQUEST['project_id']])->with("success",$overviewEditResponse['success_msg']);
+                }
+
             }
             else 
             {
@@ -187,11 +200,14 @@ class ProjectController extends WebController
                     $projectLanguages->project_id = $overview->id;
                     $projectLanguages->language_id = $v;
                     $projectLanguages->save();
+
+                    $this->return_response['success_msg'] = 'Project overview edit successfully.';
                 }
             }
         } catch (Exception $e) {
-            return back()->with('error','Something went wrong.');
+            $this->return_response['error_msg'] = $e->getMessage();
         }
+        return $this->return_response;
     }
         
     
@@ -223,8 +239,15 @@ class ProjectController extends WebController
     public function validateProjectDetails()
     {
         try {
-            $this->detailsStore();
-            return redirect()->route('project-description',['id' => $_REQUEST['project_id']])->with("success","Project details updated successfully.");
+            $detailsResponse = $this->detailsStore();
+            if(!empty($detailsResponse['error_msg']))
+            {
+                return back()->with('error',$detailsResponse['error_msg']);
+            }
+            else
+            {
+                return redirect()->route('project-description',['id' => $_REQUEST['project_id']])->with("success",$detailsResponse['success_msg']);
+            }
             
         } catch (Exception $e) {
             return back()->with('error','Something went wrong.');
@@ -272,6 +295,8 @@ class ProjectController extends WebController
                             $projectAssociations->project_associate_title = $_REQUEST['project_associate_title~'.$fdata[1]];
                             $projectAssociations->project_associate_name = $_REQUEST['project_associate_name~'.$fdata[1]];
                             $projectAssociations->save();
+
+                            $this->return_response['success_msg'] = 'Project details updated successfully.';
                         }
                     }
                     
@@ -280,8 +305,9 @@ class ProjectController extends WebController
                 }
             }
         } catch (Exception $e) {
-            return back()->with('error','Something went wrong.');
+            $this->return_response['error_msg'] = $e->getMessage();
         }
+        return $this->return_response;
     }
 
     public function projectDescription()
@@ -307,8 +333,15 @@ class ProjectController extends WebController
     public function validateProjectDescription()
     {
         try {    
-            $this->descriptionStore();
-            return redirect()->route('project-milestone',['id' => $_REQUEST['project_id']])->with("success","Project description updated successfully.");
+            $descriptionResponse = $this->descriptionStore();
+            if(!empty($descriptionResponse['error_msg']))
+            {
+                return back()->with('error',$descriptionResponse['error_msg']);
+            }
+            else
+            {
+                return redirect()->route('project-milestone',['id' => $_REQUEST['project_id']])->with("success",$descriptionResponse['success_msg']);
+            }
 
         } catch (Exception $e) {
             return back()->with('error','Something went wrong.');
@@ -330,14 +363,15 @@ class ProjectController extends WebController
                 $description->synopsis = $request->synopsis;
                 $description->director_statement = $request->director_statement;
                 if($description->update()) {
-                    
+                    $this->return_response['success_msg'] = 'Project description updated successfully.';
                 } else {
-                    return back()->with("error","Please overview phase fill.");
+                    throw new Exception('Please overview phase fill');
                 }
             }
         } catch (Exception $e) {
-            return back()->with('error','Something went wrong.');
+            $this->return_response['error_msg'] = $e->getMessage();
         }
+        return $this->return_response;
     }
 
     public function galleryStore(Request $request,$id)
@@ -426,10 +460,15 @@ class ProjectController extends WebController
     public function validateProjectMilestone()
     {
         try {
-            $this->milestoneStore();
-            
-            return redirect()->route('project-preview',['id' => $_REQUEST['project_id']])->with("success","Project milestones updated successfully.");
-
+            $milestoneResponse = $this->milestoneStore();
+            if(!empty($milestoneResponse['error_msg']))
+            {
+                return back()->with('error',$milestoneResponse['error_msg']);
+            }
+            else
+            {
+                return redirect()->route('project-preview',['id' => $_REQUEST['project_id']])->with("success",$milestoneResponse['success_msg']);
+            }
         } catch (Exception $e) {
             return back()->with('error','Something went wrong.');
         }    
@@ -467,14 +506,15 @@ class ProjectController extends WebController
                         $projectMilestone->complete = 0;
                     }
                     $projectMilestone->save();
-
+                    $this->return_response['success_msg'] = 'Project milestones updated successfully.';
                 } else {
-                    return back()->with("error","Please overview phase fill.");
+                    throw new Exception('Please overview phase fill');
                 }
             }
         } catch (Exception $e) {
-            return back()->with('error','Something went wrong.');
+            $this->return_response['error_msg'] = $e->getMessage();
         }
+        return $this->return_response;
     }
 
     public function projectPreview()
@@ -526,8 +566,12 @@ class ProjectController extends WebController
         $ProjectVideos = ProjectMedia::where($where)->get();
         foreach($ProjectVideos as $i => $rec) {
             $ProjectVideos[$i]->media_info = json_decode($rec->media_info,true);
+            if($rec->file_type == 'image'){
+                $ProjectVideos[$i]->file_link = asset("storage/".$rec->file_link);
+            }
         } 
         //$queries = \DB::getQueryLog();
+        //\Log::info("project_id ".json_encode($queries));
         return json_encode($ProjectVideos);
     }
 

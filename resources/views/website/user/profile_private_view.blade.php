@@ -165,7 +165,7 @@
                                         <div class="contact-page-text deep-pink mb-2">Portfolio</div>
                                         <div class="mx-3 icon_container"><a href="{{ route('portfolio-create',['flag'=>'privateView']) }}"><i class="fa fa-plus deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                     </div>
-                                    <div class="portfolio owl-theme">
+                                    <div class="portfolio owl-carousel">
                                         @if (count($portfolio)>0)
                                         @foreach ($portfolio as $k=>$v)
                                         @php
@@ -175,7 +175,7 @@
                                         $img = Storage::url($v['get_portfolio'][0]['file_link']);
                                         }
                                         @endphp
-                                        <div class="item portfolio_item">
+                                        <div class="item portfolio_item" data-toggle="modal" data-target="#exampleModal">
                                             <img src="<?php echo $img ?>" class="portfolio_img">
                                             <div class="d-flex justify-content-between mt-2">
                                                 <div class="organisation_cmn_text">{{$v['project_title']}}</div>
@@ -190,8 +190,6 @@
                                     </div>
                                     <!-- modal  -->
                                     <div>
-                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Portfolio Modal
-                                        </button>
                                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -331,7 +329,7 @@
 @include('website.include.footer')
 @endsection
 
-@section('scripts')
+@push('scripts')
 
 <script type="text/javascript">
     $(document).ready(function() {
@@ -339,27 +337,27 @@
         $("#success-toast").toast("show");
     });
 
-    $(".owl-carousel").owlCarousel({
-        center: true,
-        autoPlay: 3000,
-        autoplay: true,
-        // loop: true,
-        nav: true,
-        center: true,
-        margin: 10,
-        items: 5,
-        responsive: {
-            480: {
-                items: 3
-            },
-            768: {
-                items: 4
-            },
-            1024: {
-                items: 5
-            }
-        },
-    });
+    // $(".owl-carousel").owlCarousel({
+    //     center: true,
+    //     autoPlay: 3000,
+    //     autoplay: true,
+    //     // loop: true,
+    //     nav: true,
+    //     center: true,
+    //     margin: 10,
+    //     items: 5,
+    //     responsive: {
+    //         480: {
+    //             items: 3
+    //         },
+    //         768: {
+    //             items: 4
+    //         },
+    //         1024: {
+    //             items: 5
+    //         }
+    //     },
+    // });
 
 
     $(".portfolio.owl-carousel").owlCarousel({
@@ -370,18 +368,18 @@
         nav: true,
         margin: 20,
         center: true,
-        items: 4,
+        // items: 4,
         responsive: {
-            480: {
-                items: 1
-            },
-            768: {
-                items: 2
-            },
-            1024: {
-                items: 4
-            }
+            // 480: {
+            //     items: 1
+            // },
+            // 768: {
+            //     items: 2
+            // },
+            // 1024: {
+            //     items: 4
+            // }
         },
     });
 </script>
-@endsection
+@endpush

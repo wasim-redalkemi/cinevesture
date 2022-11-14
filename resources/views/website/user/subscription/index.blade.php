@@ -16,29 +16,35 @@
                         <div class="mt-4">
 
                             <div class="currency_togle">
-                                <div class="togle_text text_fff mt-0">Doller</div>
+                                <div class="togle_text text_fff mt-0">Dollar</div>
                                 <label class="switch mx-2">
                                     <input type="checkbox" class="check" value="">
                                     <span class="slider round"></span>
                                 </label>
                                 <div class="togle_text text_fff mt-0">Rupee</div>
                             </div>
-                            <div class="mb-5">
+                            <div class="mt-4 mb-5 d-flex justify-content-center">
                                 <!-- <div class="time_togle">
                         <label class="switch mx-2">
                           <input type="checkbox" class="check" value="">
                           <span class="slider">abc</span>
                         </label> 
                         </div> -->
-                                <button class="plan_btn">Monthly</button>
-                                <button class="plan_btn">Annually</button>
+                        <div class="plan_btn_wraper">
+                               <!-- <div> -->
+                                   <button class="plan_btn" active>Monthly</button>
+                               <!-- </div> -->
+                               <!-- <div> -->
+                                   <button class="plan_btn">Annually</button>
+                               <!-- </div>  -->
+                               </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="container mt__150">
+        <div class="container mt__158">
             <div class="row">
                 <div class="col-md-1">sidebar</div>
                 <div class="col-md-11">
@@ -52,10 +58,7 @@
                                 <div class="Plain_price">
                                     <div class="search-head-subtext Aubergine_at_night mt-3">Free forever</div>
                                     <div class="search-head-text Aubergine_at_night">$0.00</div>
-                                    <div class="d-flex justify-content-center">
-                                        <a  href="{{route('subscription-create')}}" style="text-decoration:none;">
-                                          <button class="cantact-page-cmn-btn mt-2">Get Started</button></div>
-                                          </a>
+                                    <div class="d-flex justify-content-center"><a  href="{{route('subscription-create')}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
                                 </div>
                                 <div class="plain_industry_guide">
                                     <div class="industry_guide_text plain_industry_guide opacity-50">
@@ -91,9 +94,9 @@
                                     </div>
                                 </div>
                                 <div class="py-4 px-3">
-                                <a  href="{{route('subscription-create')}}" style="text-decoration:none;">
-                                       <button class="job_search_btn">Select Free Plan</button>
-                                          </a>
+                                    <a  href="{{route('subscription-create')}}" style="text-decoration:none;">
+                                    <button class="job_search_btn">Select Free Plan</button>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -106,11 +109,7 @@
                                 <div class="Plain_price">
                                     <div class="search-head-subtext Aubergine_at_night mt-3">Paid Monthly</div>
                                     <div class="search-head-text Aubergine_at_night">$9.99</div>
-                                    <div class="d-flex justify-content-center">
-                                    <a  href="{{route('subscription-create')}}" style="text-decoration:none;">
-                                          <button class="cantact-page-cmn-btn mt-2">Get Started</button>
-                                          </a>
-                                    </div>
+                                    <div class="d-flex justify-content-center"><a  href="{{route('subscription-create')}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
                                 </div>
                                 <div class="plain_industry_guide p-3">
                                     <div class="plain_page_list">
@@ -137,9 +136,10 @@
                                     </div>
                                 </div>
                                 <div class="py-4 px-3">
-                                <a  href="{{route('subscription-create')}}" style="text-decoration:none;">
-                                       <button class="job_search_btn">Select Free Plan</button>
-                                          </a>                                </div>
+                                    <a  href="{{route('subscription-create')}}" style="text-decoration:none;">
+                                    <button class="job_search_btn">Select Free Plan</button>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -151,11 +151,7 @@
                                 <div class="Plain_price">
                                     <div class="search-head-subtext Aubergine_at_night mt-3">Paid Monthly</div>
                                     <div class="search-head-text Aubergine_at_night">$14.99</div>
-                                    <div class="d-flex justify-content-center">
-                                    <a  href="{{route('subscription-create')}}"  style="text-decoration:none;">
-                                          <button class="cantact-page-cmn-btn mt-2">Get Started</button>
-                                          </a>                                   
-                                     </div>
+                                    <div class="d-flex justify-content-center"><a  href="{{route('subscription-create')}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
                                 </div>
                                 <div class="plain_industry_guide p-3">
                                     <div class="plain_page_list">
@@ -182,9 +178,10 @@
                                     </div>
                                 </div>
                                 <div class="py-4 px-3">
-                                <a  href="{{route('subscription-create')}}" style="text-decoration:none;">
-                                       <button class="job_search_btn">Select Free Plan</button>
-                                          </a>                                </div>
+                                    <a  href="{{route('subscription-create')}}" style="text-decoration:none;">
+                                    <button class="job_search_btn">Select Free Plan</button>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-3">
@@ -196,10 +193,7 @@
                                 <div class="Plain_price">
                                     <div class="search-head-subtext Aubergine_at_night mt-3">Paid Monthly</div>
                                     <div class="search-head-text Aubergine_at_night">$39.00</div>
-                                    <div class="d-flex justify-content-center">
-                                    <a  href="{{route('subscription-create')}}"  style="text-decoration:none;">
-                                          <button class="cantact-page-cmn-btn mt-2">Get Started</button>
-                                          </a>                                    </div>
+                                    <div class="d-flex justify-content-center"><a  href="{{route('subscription-create')}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
                                 </div>
                                 <div class="plain_industry_guide p-3">
                                     <div class="plain_page_list">
@@ -230,9 +224,10 @@
                                     </div>
                                 </div>
                                 <div class="py-4 px-3">
-                                <a  href="{{route('subscription-create')}}" style="text-decoration:none;">
-                                       <button class="job_search_btn">Select Free Plan</button>
-                                          </a>                                </div>
+                                    <a  href="{{route('subscription-create')}}" style="text-decoration:none;">
+                                    <button class="job_search_btn">Select Free Plan</button>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -251,13 +246,24 @@
 @push('scripts')
 
 <script>
+    // var addclass = 'card_highlight';
+    // var forHead = 'active_plain_detail';
+    // var $cols = $('.plan_card').click(function(e) {
+    //     $cols.removeClass(addclass);
+    //     $(this).addClass(addclass);
+    //     $('.plain_detail').removeClass(forHead);
+    //     $(this).find('.plain_detail').addClass(forHead);
+    // });
     var addclass = 'card_highlight';
     var forHead = 'active_plain_detail';
+    var forButton = 'active_plain_button';
     var $cols = $('.plan_card').click(function(e) {
         $cols.removeClass(addclass);
         $(this).addClass(addclass);
         $('.plain_detail').removeClass(forHead);
+        $('.job_search_btn').removeClass(forButton);
         $(this).find('.plain_detail').addClass(forHead);
+        $(this).find('.job_search_btn').addClass(forButton);
     });
 </script>
 

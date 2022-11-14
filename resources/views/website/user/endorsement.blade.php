@@ -84,7 +84,7 @@ input:checked + .slider:before {
                 <div class="profile_text mt-2"><h1>Endorsements</h1></div>
                 @if(isset($endorsement))
                 @foreach($endorsement as $edm)
-                <div class="profile_wraper profile_wraper_padding mt-4">
+                <div class="profile_wraper profile_wraper_padding my-4">
                   <div class="row">
                     <div class="col-md-3">
                         <div class="guide_profile_main_text deep-pink">{{$edm['endorsementCreater']->name}}</div>
