@@ -17,7 +17,7 @@
                                    <th>Name</th>
                                     <th>Status</th>
                                     <th>Project Count</th>
-                                    <th colspan="2">Action</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>

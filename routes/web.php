@@ -47,6 +47,11 @@ Auth::routes(['verify' => true]);
     Route::post('verify-otp', [RegisterController::class, 'otpVerify'])->name('verify-otp');
     Route::get('otp-view', [RegisterController::class, 'index'])->name('otp-view'); 
     Route::get('resend-otp/{email?}/{type?}', [RegisterController::class, 'resendOtp'])->name('resend-otp'); 
+
+    Route::group(["middleware"=>["adminWebAuth"],"prefix"=>"admin"],function(){
+        Route::get('project/public-view/{id}', [ProjectController::class, 'publicView'])->name('project-public-view');
+		Route::get('user/profile-public-show', [UserController::class, 'profilePublicShow'])->name('user-profile-public-show');
+    });
     // Route::get('reset-password/{token}',[ResetPasswordController::class,'restPasswordPublicView'])->name('reset-password-view');
 
 Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],function(){

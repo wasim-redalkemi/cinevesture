@@ -26,8 +26,8 @@
             </a>
             <div class="collapse" id="proj-mgt">
               <ul class="nav flex-column sub-menu">
-              <li class="nav-item" > <a class="nav-link" href="{{route('show-list')}}" >List</a></li>
-               <li class="nav-item"> <a class="nav-link" href="{{route('project-list-management')}}">Create</a></li>               </ul>
+              <li class="nav-item"><a class="nav-link" href="{{route('show-list')}}" >List</a></li>
+               <li class="nav-item"><a class="nav-link" href="{{route('project-list-management')}}">Create</a></li>               </ul>
             </div>
           </li>
           <li class="nav-item">
