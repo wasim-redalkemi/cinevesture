@@ -46,10 +46,21 @@ class AjaxController extends WebController {
     }
 
     public function getMedia(Request $request, $media_id) {
-        $where = ['id' => $media_id];
-        $ProjectMediaObj = ProjectMedia::find($media_id);
-        $ProjectMediaObj->media_info = json_decode($ProjectMediaObj->media_info, true);
-        return json_encode($ProjectMediaObj);
+        try {
+            $where = ['id' => $media_id];
+            $ProjectMediaObj = ProjectMedia::find($media_id);
+            if (isset($ProjectMediaObj)) {
+                $ProjectMediaObj->media_info = json_decode($ProjectMediaObj->media_info, true);
+                return json_encode($ProjectMediaObj);
+            } else {
+                // return back()->with('error','Not find media file.');
+                return json_encode([]);
+            }
+            
+        } catch (Exception $e) {
+            // return back()->with('error','Something went wrong.');
+            return json_encode([]);
+        }
     }
 
 

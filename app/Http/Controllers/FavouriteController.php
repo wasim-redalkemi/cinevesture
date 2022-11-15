@@ -8,7 +8,10 @@ use App\Models\UserFavouriteProfile;
 use App\Models\UserFavouriteProject;
 use App\Models\UserProject;
 use App\Models\UserSkill;
+use Database\Factories\UserFactory;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class FavouriteController extends Controller
 {
@@ -77,9 +80,34 @@ class FavouriteController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        try{ $validator = Validator::make($request->all(), [
+
+            'id' => 'required|exists:users,id',
+            
+        ]);
+
+        if ($validator->fails()) {
+            return ['status'=>False,'msg'=>"Something went wrong, Please try again later."];
+        }
+             $favourite = UserFavouriteProfile::query()
+                         ->where('user_id',auth()->user()->id)
+                         ->where('profile_id',$request->id)->first();
+             if($favourite){
+                $favourite->delete();
+                return ['status'=>True,'msg'=>"You have unliked a profile."];
+             }else{
+                $favourite = new UserFavouriteProfile();
+                $favourite->user_id = auth()->user()->id;
+                $favourite->profile_id = $request->id;
+                $favourite->save();
+                return ['status'=>True,'msg'=>"You have liked a profile."];
+              }
+
+        }catch(Exception $e){
+            return ['status'=>False,'msg'=>"Something went wrong, Please try again later."];
+        }
     }
 
     /**

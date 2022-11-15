@@ -24,6 +24,7 @@ use App\Models\User;
 use App\Models\UserProject;
 use Exception;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\TryCatch;
 
 class ProjectController extends WebController
 {
@@ -101,9 +102,28 @@ class ProjectController extends WebController
             {
                 return view('website.user.project.project_overview', compact(['user','languages','country','project_types']));
             }
-            $projectOverview = UserProject::query()->where('id',$_REQUEST['id'])->get();
+            // $projectOverview = UserProject::query()->where('id',$_REQUEST['id'])->get();
+            $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
+            $projectData = UserProject::query()->with(['user','projectLanguages','projectCountries','projectType'])->where('id',$_REQUEST['id'])->get();
+            $projectData = $projectData->toArray();
 
-            return view('website.user.project.project_overview', compact(['projectOverview','user','languages','country','project_types']));
+            $temp_languages = [];
+            if (!empty($projectData[0]['project_languages'])) {
+                foreach ($projectData[0]['project_languages'] as $k => $v){
+                    array_push($temp_languages, $v['id']);
+                }
+                $projectData[0]['project_languages'] = $temp_languages;
+            }
+
+            $temp_countries = [];
+            if (!empty($projectData[0]['project_countries'])) {
+                foreach ($projectData[0]['project_countries'] as $k => $v){
+                    array_push($temp_countries, $v['id']);
+                }
+                $projectData[0]['project_countries'] = $temp_countries;
+            }
+
+            return view('website.user.project.project_overview', compact(['UserProject','projectData','user','languages','country','project_types']));
         } catch (Exception $e) {
             return back()->with('error','Something went wrong.');
         }
@@ -225,8 +245,24 @@ class ProjectController extends WebController
             $Genres = MasterProjectGenre::query()->get();    
           
             $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
-            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectType','projectStageOfFunding','projectStage'])->where('id',$_REQUEST['id'])->get();
+            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectAssociation'])->where('id',$_REQUEST['id'])->get();
             $projectData = $projectData->toArray();
+
+            $temp_genres = [];
+            if (!empty($projectData[0]['genres'])) {
+                foreach ($projectData[0]['genres'] as $k => $v){
+                    array_push($temp_genres, $v['id']);
+                }
+                $projectData[0]['genres'] = $temp_genres;
+            }
+
+            $temp_categories = [];
+            if (!empty($projectData[0]['project_category'])) {
+                foreach ($projectData[0]['project_category'] as $k => $v){
+                    array_push($temp_categories, $v['id']);
+                }
+                $projectData[0]['project_category'] = $temp_categories;
+            }
             
             return view('website.user.project.project_details', compact('UserProject','projectData','user','languages','country','category','Genres'));
 
@@ -295,10 +331,9 @@ class ProjectController extends WebController
                             $projectAssociations->project_associate_title = $_REQUEST['project_associate_title~'.$fdata[1]];
                             $projectAssociations->project_associate_name = $_REQUEST['project_associate_name~'.$fdata[1]];
                             $projectAssociations->save();
-
-                            $this->return_response['success_msg'] = 'Project details updated successfully.';
                         }
                     }
+                    $this->return_response['success_msg'] = 'Project details updated successfully.';
                     
                 } else {
                     return back()->with("error","Please overview phase fill.");
@@ -317,13 +352,11 @@ class ProjectController extends WebController
             {
                 return back()->with('error','Project Id not found.');
             }
-            $user = User::query()->find(auth()->user()->id);
-            $languages = MasterLanguage::query()->get();
-            $country = MasterCountry::query()->get();    
+                
             $projectDescription = [];
             $projectDescription = UserProject::query()->where('id',$_REQUEST['id'])->get();
 
-            return view('website.user.project.project_description', compact('projectDescription','user','languages','country'));
+            return view('website.user.project.project_description', compact('projectDescription'));
         } catch (Exception $e) {
             return back()->with('error','Something went wrong.');
         } 
@@ -340,7 +373,7 @@ class ProjectController extends WebController
             }
             else
             {
-                return redirect()->route('project-milestone',['id' => $_REQUEST['project_id']])->with("success",$descriptionResponse['success_msg']);
+                return redirect()->route('project-gallery',['id' => $_REQUEST['project_id']])->with("success",$descriptionResponse['success_msg']);
             }
 
         } catch (Exception $e) {
@@ -355,7 +388,6 @@ class ProjectController extends WebController
             $request = (object) $_REQUEST;
             $id = $request->project_id;
 
-            $user = User::query()->find(auth()->user()->id);
             $description = UserProject::query()->find($id)->latest()->first();
             if (isset($description)) {
                 
@@ -372,6 +404,25 @@ class ProjectController extends WebController
             $this->return_response['error_msg'] = $e->getMessage();
         }
         return $this->return_response;
+    }
+
+    public function projectGallery()
+    {
+        try {
+            if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
+            {
+                return back()->with('error','Project Id not found.');
+            }
+           
+            $languages = MasterLanguage::query()->get();
+            $country = MasterCountry::query()->get();    
+            $projectgallery = [];
+            $projectgallery = UserProject::query()->where('id',$_REQUEST['id'])->get();
+
+            return view('website.user.project.project_gallery', compact('projectgallery','languages','country'));
+        } catch (Exception $e) {
+            return back()->with('error','Something went wrong.');
+        } 
     }
 
     public function galleryStore(Request $request,$id)
@@ -445,10 +496,20 @@ class ProjectController extends WebController
             $lookingFor = MasterLookingFor::query()->get();
             $projectStageOfFunding = ProjectStageOfFunding::query()->get();
 
-            $projectMilestone = [];
-            $projectMilestone = UserProject::query()->where('id',$_REQUEST['id'])->get();
+            $projectData = [];
+            $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
+            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage'])->where('id',$_REQUEST['id'])->get();
+            $projectData = $projectData->toArray();
+            
+            $temp_looking_for = [];
+            if (!empty($projectData[0]['project_looking_for'])) {
+                foreach ($projectData[0]['project_looking_for'] as $k => $v){
+                    array_push($temp_looking_for, $v['id']);
+                }
+                $projectData[0]['project_looking_for'] = $temp_looking_for;
+            }
 
-            return view('website.user.project.project_milestones', compact('projectMilestone','user','languages','country','projectStage','lookingFor','projectStageOfFunding'));
+            return view('website.user.project.project_milestones', compact('UserProject','projectData','user','languages','country','projectStage','lookingFor','projectStageOfFunding'));
         } 
         catch (Exception $e) 
         {
@@ -488,24 +549,33 @@ class ProjectController extends WebController
                 $requirements->stage_of_funding_id = $request->stage_of_funding_id;
                 $requirements->crowdfund_link = $request->crowdfund_link;
                 if($requirements->update()) {
-
+                    ProjectLookingFor::query()->where('project_id', $requirements->id)->delete();
                     foreach ($request->loking_for as $k => $v) {
                         $projectLookingFor = new ProjectLookingFor();
                         $projectLookingFor->project_id = $requirements->id;
                         $projectLookingFor->looking_for_id = $v;
                         $projectLookingFor->save();
                     }                   
-                    $projectMilestone = new ProjectMilestone();
-                    $projectMilestone->project_id = $requirements->id;
-                    $projectMilestone->description = $request->description;
-                    $projectMilestone->budget = $request->budget;
-                    $projectMilestone->traget_date = $request->traget_date;
-                    if (isset($request->complete)) {
-                        $projectMilestone->complete = $request->complete;
-                    } else {
-                        $projectMilestone->complete = 0;
+                    
+                    ProjectMilestone::query()->where('project_id', $requirements->id)->delete();
+                    foreach($_REQUEST as $k => $v)
+                    {
+                        $fdata = explode('~',$k);
+                        if($fdata[0] == 'project_milestone_description')
+                        {
+                            $projectMilestone = new ProjectMilestone();
+                            $projectMilestone->project_id = $requirements->id;
+                            $projectMilestone->description = $_REQUEST['project_milestone_description~'.$fdata[1]];
+                            $projectMilestone->budget = $_REQUEST['project_milestone_budget~'.$fdata[1]];
+                            $projectMilestone->traget_date = $_REQUEST['project_milestone_traget_date~'.$fdata[1]];
+                            if (isset($_REQUEST['project_milestone_complete~'.$fdata[1]])) {
+                                $projectMilestone->complete = $_REQUEST['project_milestone_complete~'.$fdata[1]];
+                            } else {
+                                $projectMilestone->complete = 0;
+                            }
+                            $projectMilestone->save();
+                        }
                     }
-                    $projectMilestone->save();
                     $this->return_response['success_msg'] = 'Project milestones updated successfully.';
                 } else {
                     throw new Exception('Please overview phase fill');
@@ -556,23 +626,29 @@ class ProjectController extends WebController
     }
 
     public function getMediaByProject(Request $request, $project_id = null){
-        $reqData = $request->all();
-        //\Log::info("project_id ".$project_id.", ".$reqData['type']);
-        //\DB::connection()->enableQueryLog();
-        $where = ['project_id'=>$project_id];
-        if(isset($reqData['type'])){
-            $where['file_type'] = $reqData['type'];
-        }
-        $ProjectVideos = ProjectMedia::where($where)->get();
-        foreach($ProjectVideos as $i => $rec) {
-            $ProjectVideos[$i]->media_info = json_decode($rec->media_info,true);
-            if($rec->file_type == 'image'){
-                $ProjectVideos[$i]->file_link = asset("storage/".$rec->file_link);
+        try {
+            $reqData = $request->all();
+            //\Log::info("project_id ".$project_id.", ".$reqData['type']);
+            //\DB::connection()->enableQueryLog();
+            $where = ['project_id'=>$project_id];
+            if(isset($reqData['type'])){
+                $where['file_type'] = $reqData['type'];
             }
-        } 
-        //$queries = \DB::getQueryLog();
-        //\Log::info("project_id ".json_encode($queries));
-        return json_encode($ProjectVideos);
+            $ProjectVideos = ProjectMedia::where($where)->get();
+            foreach($ProjectVideos as $i => $rec) {
+                $ProjectVideos[$i]->media_info = json_decode($rec->media_info,true);
+                if($rec->file_type == 'image'){
+                    $ProjectVideos[$i]->file_link = asset("storage/".$rec->file_link);
+                }
+            } 
+            //$queries = \DB::getQueryLog();
+            //\Log::info("project_id ".json_encode($queries));
+            return json_encode($ProjectVideos);
+        } catch (Exception $e) {
+            return json_encode([]);
+
+        }
+        
     }
 
 }
