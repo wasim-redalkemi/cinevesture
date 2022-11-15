@@ -129,7 +129,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 
     Route::group(['prefix'=>'industry-guide'],function()
 	{	
-        Route::get('/show', [IndustryGuideController::class, 'index'])->name('e');
+        Route::get('/show', [IndustryGuideController::class, 'index'])->name('guide-view');
         // Route::get('/filter', [IndustryGuideController::class, 'index'])->name('filter-profile');
        
 	});
@@ -160,6 +160,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     Route::group(['prefix'=>'favourite'],function()
 	{	
         Route::get('/view',[FavouriteController::class, 'index'])->name('favourite-view');
+        Route::post('/action',[FavouriteController::class, 'update'])->name('favourite-update');
+
 	});
 
     

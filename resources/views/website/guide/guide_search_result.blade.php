@@ -74,16 +74,16 @@
                                                         <div class="modal_container filter_wrap">
                                                             <div class="list-group-my" style="justify-content: center;">
                                                                 <div class="row">
-                                                                @foreach($talent_type as $talent)
+                                                                    @foreach($talent_type as $talent)
                                                                     <div class="col-md-4">
                                                                         <label class="list-group-item filter_options">
-                                                                    @if(isset(request('talentType')[0]) && in_array($talent->job_title, request('talentType')))
+                                                                            @if(isset(request('talentType')[0]) && in_array($talent->job_title, request('talentType')))
                                                                             <input class="form-check-input me-1" type="checkbox" checked name="talentType[]" value="{{$talent->job_title}}">
                                                                             {{$talent->job_title}}
                                                                             @else
                                                                             <input class="form-check-input me-1" type="checkbox" name="talentType[]" value="{{$talent->job_title}}">
                                                                             {{$talent->job_title}}
-                                                                     @endif
+                                                                            @endif
                                                                         </label>
                                                                     </div>
                                                                     @endforeach
@@ -119,14 +119,14 @@
                                                             <div class="list-group">
                                                                 @foreach($skills as $skill)
                                                                 <label class="list-group-item">
-                                                                  
+
                                                                     @if(isset(request('skills')[0]) && in_array($skill->id, request('skills')))
                                                                     <input class="form-check-input me-1" type="checkbox" checked name="skills[]" value="{{$skill->id}}">
                                                                     {{$skill->name}}
-                                                                            @else
-                                                                            <input class="form-check-input me-1" type="checkbox" name="skills[]" value="{{$skill->id}}">
+                                                                    @else
+                                                                    <input class="form-check-input me-1" type="checkbox" name="skills[]" value="{{$skill->id}}">
                                                                     {{$skill->name}}
-                                                                     @endif
+                                                                    @endif
                                                                 </label>
                                                                 @endforeach
 
@@ -145,7 +145,9 @@
                         <!-- Modal for Confirmation for account deactivate -->
                     </div>
                     <div class="form-check d-flex align-items-center mt-4">
-                        <input class="form-check-input" <?php if(request('verified') == '1'){echo'checked';}?> style="border-radius: 0px;" type="checkbox" value="1" name="verified" id="flexCheckDefault">
+                        <input class="form-check-input" <?php if (request('verified') == '1') {
+                                                            echo 'checked';
+                                                        } ?> style="border-radius: 0px;" type="checkbox" value="1" name="verified" id="flexCheckDefault">
                         <label class="verified-text mx-2" for="flexCheckDefault">
                             Recommended Profile
                         </label>
@@ -177,7 +179,7 @@
                         <div class="col-md-9">
                             <div class="d-flex align-items-center">
                                 <div class="guide_profile_main_text">
-                                    <a href ="{{route('profile-public-show',['id'=>$user->id])}}" class="btn-link text_user_name">{{$user->name}}</a>
+                                    <a href="{{route('profile-public-show',['id'=>$user->id])}}" class="btn-link text_user_name">{{$user->name}}</a>
                                 </div>
                                 @if($user->is_profile_verified == '1')<span><button class="verified_cmn_btn mx-3">
                                         <img src="{{ asset('public/images/asset/verified_icon.svg') }}" alt="image"> VERIFIED</button></span>@endif
@@ -219,7 +221,7 @@
                         </div>
                         <div class="col-md-1">
 
-                            <div> <i class="fa fa-heart icon-size Aubergine" aria-hidden="true"></i></div>
+                            <div> <i class="fa fa-heart-o icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$user->id}}" aria-hidden="true"></i></div>
                         </div>
                     </div>
                 </div>
@@ -242,3 +244,52 @@
 @section('footer')
 @include('website.include.footer')
 @endsection
+
+@push('scripts')
+<script>
+    $('.like-profile').on('click', function(e) {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var profile_id = $(this).attr('data-id');
+        var classList = $(this).attr('class').split(/\s+/);
+        var element = $(this);
+        $.ajax({
+            type: 'post',
+            data: {'id':profile_id},
+            url: "{{route('favourite-update')}}",
+            success: function(resp) {
+                if (resp.status) {
+                    for (var i = 0; i < classList.length; i++) {
+                        if (classList[i] == 'fa-heart-o') {
+                            element.removeClass('fa-heart-o');
+                            element.addClass('fa-heart')
+                            toastMessage("success", response.msg);
+                            break;
+                        }
+                        if(classList[i] == 'fa-heart')
+                        {
+                            element.removeClass('fa-heart');
+                            element.addClass('fa-heart-o');
+                            toastMessage("error", response.msg);
+
+                            break;
+                        }
+
+                    }
+                } else {
+
+                }
+            },
+            error: function(error) {
+                
+            }
+        });
+
+    });
+</script>
+
+@endpush
