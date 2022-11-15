@@ -84,6 +84,10 @@ body {
     text-decoration: none;
 }
 
+.btn-link-style{
+    text-decoration: none;
+}
+
 .add-proj-btn {
     border: 1px solid #DD45B3;
     color: #DD45B3;
@@ -1306,6 +1310,7 @@ body {
 
 /*Project flow */
 .flow_container {
+    z-index: 1;
     width: 50px;
     height: 50px;
     border-radius: 100%;
@@ -1319,12 +1324,44 @@ body {
     margin: auto;
     background: #971E9B;
 }
+
+.active_bg{
+    background: #971E9B;
+}
+
+.inactive_bg{
+    background: RGB(200, 139, 203);
+    /* background: #971E9B;
+    opacity: 1; */
+    z-index: 9999;
+    position: relative;
+}
+
 .flow_hr {
-    opacity: 0.5;
+    /* opacity: 0.5; */
+    z-index: -1;
+    position: relative;
     border: 2px solid #971E9B;
     background-color: #971E9B;
     width: 100%;
-    margin: -3% -1.5% 0 -1.5%;
+    margin: -3% -2.5% 0 -2.5%;
+}
+.no_number_arrows::-webkit-outer-spin-button,
+.no_number_arrows::-webkit-inner-spin-button 
+{
+    -webkit-appearance: none;
+}
+
+.flow_hr_bold {
+    opacity: 1;
+    z-index: -1;
+    position: relative;
+    /* opacity: 0.5; */
+    border: 2px solid #971E9B;
+    background-color: #971E9B;
+    width: 100%;
+    margin: -3% -2.5% 0 -2.5%;
+    
 }
 
 .opc_5 {
@@ -1334,6 +1371,19 @@ body {
 .ml__3 {
     margin-left: -3%;
 }
+
+/* .ml__2 {
+    margin-left: -2%;
+}
+.mr__2 {
+    margin-right: -2%;
+}
+.mr_0 {
+    margin-right: 0;
+}
+.ml_0 {
+    margin-left: 0;
+} */
 .mr__3 {
     margin-right: -3%;
 }
