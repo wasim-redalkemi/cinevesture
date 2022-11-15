@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
                 'email' => 'superuser@mailinator.com',
                 'email_verified_at' => now(),
                 'password' => Hash::make('12345678'),
-                'user_type' => 'U',
+                'user_type' => 'A',
                 'first_name' => 'admin',
                 'is_profile_complete' => '0',
 
