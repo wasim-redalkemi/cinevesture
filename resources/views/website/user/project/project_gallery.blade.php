@@ -135,7 +135,8 @@
                         <div class="col-md-12">
                             <div class="d-flex justify-content-end mt-5">
                                 <button class="cancel_btn mx-3">Go back</button>
-                                <button class="guide_profile_btn">Save & Next</button>
+                                <input type="hidden" name="project_id" value="<?php if(isset($_REQUEST['id'])) {echo $_REQUEST['id'];}?>">
+                                <button type="submit" class="guide_profile_btn">Save & Next</button>
                             </div>
                         </div>
                     </div>
