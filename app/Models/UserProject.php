@@ -48,6 +48,11 @@ class UserProject extends Model
     {
         return $this->hasMany(ProjectMilestone::class,'project_id');
     }
+
+    public function projectAssociation()
+    {
+        return $this->hasMany(ProjectAssociation::class,'project_id');
+    }
     
     public function projectType()
     {
