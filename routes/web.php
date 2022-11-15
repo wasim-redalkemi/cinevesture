@@ -160,6 +160,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     Route::group(['prefix'=>'favourite'],function()
 	{	
         Route::get('/view',[FavouriteController::class, 'index'])->name('favourite-view');
+        Route::post('/action',[FavouriteController::class, 'update'])->name('favourite-update');
+
 	});
 
     

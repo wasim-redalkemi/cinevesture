@@ -8,7 +8,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive">
-                        <table id="order-listing" class="table order-listing">
+                        <table id="order-listing" class="table">
                             <thead>
                                 <tr>
                                     <th>Id</th>
@@ -36,13 +36,20 @@
                                     <td>active</td>
                                     <td>membership</td>
                                     <td><?php echo(date("d-m-Y", strtotime($user->created_at))); ?></td>
-                                    <td><button class="btn btn-outline-primary btn-sm">View</button></td>
-                                    <td><button class="btn btn-outline-primary mt-2 btn-sm">Delete</button></td>
+                                    <td><button class="btn btn-inverse-primary btn-fw mb-1 btn-sm mt-10 w-65 view-btn">View</button></td>
+                                    <td><button class="btn btn-inverse-primary btn-fw mb-1 btn-sm mt-10 w-65 view-btn">Delete</button></td>
                                  </tr>
                                @endforeach
+                              @else
+                              <div class="profile_text" style="text-align: center;"><h2>No Data Found</h1></div>
                               @endif 
                             </tbody>
                         </table>
+                        <div class="row">
+                         <div class="col-md-12">
+                             <div style="float:right;" >{{$users->links()}}</div>
+                             </div> 
+                         </div>
                     </div>
                 </div>
             </div>
