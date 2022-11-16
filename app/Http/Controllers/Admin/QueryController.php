@@ -17,7 +17,7 @@ class QueryController extends Controller
     {
         try {
            
-            $userQuerys = Query::query()->get();
+            $userQuerys = Query::query()->paginate(2);
             
             return view('admin.query.list',compact('userQuerys'));
         } catch (\Throwable $th) {

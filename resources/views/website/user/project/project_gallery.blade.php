@@ -10,7 +10,7 @@
 <div class="hide-me animation for_authtoast">
     @include('website.include.flash_message')
 </div>
-@include('website.user.project.project_pagination')
+@include('website.user.project.project_pagination',['page_bg' => '4'])
 
 <!-- Gallery section -->
 <section id="gallery">
@@ -164,7 +164,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="d-flex justify-content-end mt-5">
-                                <button class="cancel_btn mx-3">Go back</button>
+                                <button class="cancel_btn mx-3"><a class="btn-link-style" href="{{ route('project-description') }}?id={{$_REQUEST['id']}}">Go back</a></button>
                                 <input type="hidden" name="project_id" value="<?php if(isset($_REQUEST['id'])) {echo $_REQUEST['id'];}?>">
                                 <button type="submit" class="guide_profile_btn">Save & Next</button>
                             </div>

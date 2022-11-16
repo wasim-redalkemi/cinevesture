@@ -10,7 +10,7 @@
 <div class="hide-me animation for_authtoast">
     @include('website.include.flash_message')
 </div>
-@include('website.user.project.project_pagination')
+@include('website.user.project.project_pagination',['page_bg' => '1'])
 
 
 <!-- Overview section -->
@@ -28,7 +28,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Project Name <span style = "color:red">*</span></label>
-                                    <input type="text" class="form-control" name="project_name" placeholder="Project Name" aria-label="Username" aria-describedby="basic-addon1" required>
+                                    <input type="text" class="form-control" name="project_name" placeholder="Project Name" value="@if (!empty($projectData[0]['project_name'])) {{$projectData[0]['project_name']}} @endif" aria-label="Username" aria-describedby="basic-addon1" required>
                                     @error('project_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -45,7 +45,7 @@
                                         <select name="project_type_id" requiredid="lang">
                                             <option value="">Select</option>
                                             @foreach($project_types as $type)
-                                            <option value="{{$type->id}}">{{$type->name}}</option>
+                                            <option @if(!empty($projectData[0]['project_type'])) @if ($projectData[0]['project_type']['id'] == $type->id) {{'selected'}} @endif @endif value="{{$type->id}}">{{$type->name}}</option>
                                              @endforeach
                                         </select>
                                         @error('project_type_id')
@@ -63,11 +63,20 @@
                                     <label>Who are you listing this project as? <span style = "color:red">*</span></label>
                                     <div class="d-flex">
                                         <div class="checkbox_btn d-flex align-items-center">
-                                            <input type="radio" class="checkbox_btn" name="listing_project_as" value="Individual" aria-label="">
+                                            <input type="radio" class="checkbox_btn" name="listing_project_as" value="Individual" @if(isset($projectData[0]['listing_project_as']))
+                                            @if ("individual" == $projectData[0]['listing_project_as']) 
+                                            {{'checked'}}
+                                            @endif
+
+                                            @endif aria-label="">
                                             <div class="radio_btn_label"> Individual</div>
                                         </div>
                                         <div class="checkbox_btn d-flex align-items-center mx-4">
-                                            <input type="radio" class="checkbox_btn" name="listing_project_as" value="Organization" aria-label="">
+                                            <input type="radio" class="checkbox_btn" name="listing_project_as" value="Organization" @if(isset($projectData[0]['listing_project_as']))
+                                            @if ("organization" == $projectData[0]['listing_project_as'])
+                                            {{'checked'}}
+                                            @endif
+                                            @endif aria-label="">
                                             <div class="radio_btn_label"> Organization</div>
                                         </div>
                                         @error('listing_project_as')
@@ -86,7 +95,7 @@
                                     <label>Select Country <span style = "color:red">*</span></label>
                                     <select class="js-select2 @error('countries') is-invalid @enderror" name="countries[]"  required multiple="multiple">
                                         @foreach ($country as $k=>$v)
-                                            <option value="{{ $v->id }}">{{  $v->name }}</option>
+                                            <option value="{{ $v->id }}"@if(!empty($projectData[0]['project_countries'] )&&(in_array($v->id, $projectData[0]['project_countries'])))selected @endif>{{  $v->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('countries')
@@ -104,7 +113,7 @@
                                     <label>Select Language <span style = "color:red">*</span></label>
                                     <select class="js-select2 @error('languages') is-invalid @enderror" name="languages[]" required multiple="multiple">
                                         @foreach ($languages as $k=>$v)
-                                            <option value="{{ $v->id }}">{{  $v->name }}</option>
+                                            <option value="{{ $v->id }}"@if(!empty($projectData[0]['project_languages'] )&&(in_array($v->id, $projectData[0]['project_languages'])))selected @endif>{{  $v->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('languages')
@@ -120,7 +129,7 @@
                             <div class="col-md-6">
                                 <div class="profile_input">
                                     <label>Locations (Optional)</label>
-                                    <input type="text" class="form-control" name="location" placeholder="Locations (Optional)" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control" name="location" placeholder="Locations (Optional)" value="@if (!empty($projectData[0]['location'])) {{$projectData[0]['location']}} @endif" aria-label="Username" aria-describedby="basic-addon1">
                                     @error('location')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

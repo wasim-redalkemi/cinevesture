@@ -17,7 +17,7 @@
                                    <th>Name</th>
                                     <th>Status</th>
                                     <th>Project Count</th>
-                                    <th colspan="2">Action</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -26,25 +26,33 @@
                                     <tr>
                                         <td>{{$project->list_name}}</td>
                                         <td>{{$project->list_status}}</td>
-                                        <td><a href="{{route('search-project',['id' => $project->id ])}}"><button type="button" class="btn btn-outline-primary btn-sm mt-10">{{$project_count}}</button></a></td>
+                                        <td><a href="{{route('search-project',['id' => $project->id ])}}"><button type="button" class="btn btn-primary btn-sm btn-sm mt-10">{{$project_count}}</button></a></td>
                                       
                                         <td>
                                         <a onclick="return confirm('Are you sure to change list status?')" href="{{route('change-status',['id' => $project->id , 'status' => $project->list_status])}}">
-                                        <button class="btn mb-2  btn-outline-primary w-65 view-btn" type="button" >{{$project->list_status}}</button>
+                                        <button class="btn btn-inverse-primary btn-fw mb-1 btn-sm mt-10 w-65 view-btn" type="button" >{{$project->list_status}}</button>
                                         </a>
                                         <a onclick="return confirm('Are you sure to delete this list?')" href="{{route('delete-list',['id' => $project->id ])}}">
                                         @if($project->list_name=="carousel")
-                                        <button class="btn btn-outline-primary w-60 view-btn" type="button" disabled>Delete</button>
+                                        <button class="btn btn-inverse-primary btn-fw mb-1  btn-sm mt-10 w-60 view-btn" type="button" disabled>Delete</button>
                                         @else
-                                        <button class="btn btn-outline-primary w-60 view-btn" type="button" >Delete</button>
+                                        <button class="btn btn-inverse-primary btn-fw mb-1  btn-sm mt-10 w-60 view-btn" type="button" >Delete</button>
                                         @endif
                                         </a>
                                        </td>
                                     </tr>
                                 @endforeach
-                               @endif
-                              </tbody>
-                        </table>
+                                @else
+                                <div class="profile_text" style="text-align: center;"><h2>No Data Found</h1>
+                                </div>
+                                @endif                              
+                                </tbody>
+                                </table>
+                             <div class="row">
+                               <div class="col-md-12">
+                               <div style="float:right;" >{{$project_list->links()}}</div>
+                               </div> 
+                              </div>
                     </div>
                 </div>
             </div>
