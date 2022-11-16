@@ -9,4 +9,7 @@ class ProjectList extends Model
 {
     use HasFactory;
     protected $table = 'project_lists';
+   
+
+
 }

@@ -26,9 +26,13 @@
                             </thead>
                             <tbody>
                                 @if(isset($users))
+                                <?php $i=0;?>
                                 @foreach($users as $user)
-                                 <tr>
-                                    <td>{{$user->id}}</td>
+                                <?php $i++;?> 
+                                <tr>
+                                   <td>
+                                    <?php echo $i;?>
+                                    </td>
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>@if(empty($user->job_title)){{'-'}}@else{{$user->job_title}}@endif</td>
@@ -38,8 +42,8 @@
                                     <td>membership</td>
                                     <td><?php echo(date("d-m-Y", strtotime($user->created_at))); ?></td>
                                     <td>
-                                        <button class="btn btn-outline-primary mt-2 btn-sm">Delete</button>
-                                        <a href="{{route('profile-public-show',[($user->id)])}}"><button class="btn btn-outline-primary btn-sm">View</button></a>
+                                        <button class="btn btn-danger  btn-sm">Delete</button>
+                                        <a href="{{route('profile-public-show',[($user->id)])}}"><button class="btn btn-info btn-sm">View</button></a>
                                     </td>
                                  </tr>
                                @endforeach

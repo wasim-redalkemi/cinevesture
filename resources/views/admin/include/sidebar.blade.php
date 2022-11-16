@@ -1,44 +1,49 @@
-<nav class="sidebar sidebar-offcanvas" id="sidebar">
+<nav class="sidebar  sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="{{route('admin.dashboard')}}">
+             <a class="nav-link {{ Request::is('/dashboard') ? 'active' : '' }}" data-toggle="collapse" href="{{route('admin.dashboard')}}">
               <i class="fa fa-dashcube" style="margin-right:25px;"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#user-mgt" aria-expanded="false" aria-controls="ui-basic">
+            <a class="nav-link {{ Request::is('/user-management/*') ? 'active' : '' }}" data-toggle="collapse" href="#user-mgt" aria-expanded="false" aria-controls="user-mgt">
               <i class="mdi mdi-puzzle-outline menu-icon"></i>
               <span class="menu-title">User Management</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="user-mgt">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{route('user-management')}}">List</a></li>
+                <li class="nav-item"> <a class="nav-link {{ Request::is('/user-management/list') ? 'active' : '' }}" href="{{route('user-management')}}">List</a></li>
                </ul>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#proj-mgt" aria-expanded="false" aria-controls="ui-basic">
+            <a class="nav-link {{ Request::is('/project-management/list','admin/project-management/create-list') ? 'active' : '' }}"  data-toggle="collapse" href="#proj-mgt" aria-expanded="false" aria-controls="proj-mgt">
               <i class="mdi mdi-puzzle-outline menu-icon"></i>
               <span class="menu-title">Project List Management</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="proj-mgt">
               <ul class="nav flex-column sub-menu">
-              <li class="nav-item"><a class="nav-link" href="{{route('show-list')}}" >List</a></li>
-               <li class="nav-item"><a class="nav-link" href="{{route('project-list-management')}}">Create</a></li>               </ul>
+              <li class="nav-item" >
+                <a class="nav-link {{ Request::is('/project-management/list') ? 'active' : '' }}" href="{{route('show-list')}}">List</a>
+              </li>
+               <li class="nav-item">
+                <a class="nav-link {{ Request::is('/project-management/create-list') ? 'active' : '' }}" href="{{route('project-list-management')}}">Create</a>
+              </li> 
+              </ul>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+            <a class="nav-link {{ Request::is('/project-list') ? 'active' : '' }}" data-toggle="collapse" href="#proj" aria-expanded="false" aria-controls="proj">
               <i class="mdi mdi-puzzle-outline menu-icon"></i>
               <span class="menu-title">Project Management</span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="ui-basic">
+            <div class="collapse" id="proj">
               <ul class="nav flex-column sub-menu">
-                 <a class="nav-link" href="{{route('admin-project-list')}}"><li class="nav-item">List</li></a>
+                 <a class="nav-link {{ Request::is('/project-list') ? 'active' : '' }}" href="{{route('admin-project-list')}}"><li class="nav-item">List</li></a>
                  <a class="nav-link" href=""><li class="nav-item">Create</li></a>
                 {{-- <li class="nav-item"> <a class="nav-link" href="pages/ui-features/buttons.html">Buttons</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/badges.html">Badges</a></li>
@@ -54,14 +59,14 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#ui-advanced" aria-expanded="false" aria-controls="ui-advanced">
+            <a class="nav-link {{ Request::is('admin/project-list') ? 'active' : '' }}" data-toggle="collapse" href="#query" aria-expanded="false" aria-controls="query">
               <i class="mdi mdi-bullseye-arrow menu-icon"></i>
               <span class="menu-title">Query Management</span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="ui-advanced">
+            <div class="collapse" id="query">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"> <a class="nav-link" href="{{route('query.list')}}">Query</a></li>
+                <li class="nav-item"> <a class="nav-link {{ Request::is('admin/query-management/query-list') ? 'active' : '' }}" href="{{route('query.list')}}">Query</a></li>
                 {{-- <li class="nav-item"> <a class="nav-link" href="pages/ui-features/clipboard.html">Clipboard</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/context-menu.html">Context menu</a></li>
                 <li class="nav-item"> <a class="nav-link" href="pages/ui-features/slider.html">Sliders</a></li>

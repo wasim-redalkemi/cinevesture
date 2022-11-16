@@ -13,6 +13,12 @@ use Illuminate\Http\Request;
 
 class ProjectListController extends AdminController
 {
+  
+    
+   
+      
+
+    
     /**
      * Display a listing of the resource.
      *
@@ -20,6 +26,7 @@ class ProjectListController extends AdminController
      */
     public function index()
     {
+       
         try
         {
              return view('admin.projectList.create');
@@ -70,13 +77,17 @@ class ProjectListController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function project_list_show()
     {
+       
         try
         {
-            $project_list=ProjectList::query()->paginate(5);
-            $project_count=UserProject::select('id')->get()->count();
-            return view('admin.projectList.list',compact('project_list','project_count'));
+            $project_list=ProjectList::query()->paginate($this->records_limit);
+            $projects_data=ProjectSearch::query()->with('lists')->groupby('list_id')
+            ->selectraw('count(project_id) as project_count,list_id')
+            ->paginate($this->records_limit);
+           
+            return view('admin.projectList.list',compact('project_list','projects_data'));
         }
         catch (Exception $e) 
         {
@@ -94,8 +105,14 @@ class ProjectListController extends AdminController
     {
         try
         {
-            $project_data=UserProject::paginate(5);
-            return view('admin.projectList.search',compact('id','project_data'));
+            $project_data=UserProject::paginate($this->records_limit);
+            $project_search=ProjectSearch::query()
+             ->with('projects')
+            ->select('project_id')
+            ->where('list_id', $id)
+            ->paginate($this->records_limit);
+           // dd($project_search);
+            return view('admin.projectList.search',compact('id','project_search'));
         }
         catch (Exception $e) 
         {
@@ -109,17 +126,27 @@ class ProjectListController extends AdminController
     }
     public function search_project(Request $request,$id)
     {
+       
         try
         {
             $search_data=$request->name;
-            $project_data=UserProject::query()
-            ->with('projectImage')
-            ->where(function($q)use($search_data){
-            if(!empty($search_data) && !is_null($search_data)){
-              $q->where('project_name', 'like' ,"%$search_data%");
-            }
-            })
-           ->paginate(5);
+            // $project_search=ProjectSearch::query()
+            // ->with('projects')
+            // ->select('project_id')
+            // ->groupby('list_id')
+            // ->havingraw('list_id','=',$id)
+            // ->get();
+            // dd($project_search);
+
+
+        //     $project_data=UserProject::query()
+        //     ->with('projectImage')
+        //     ->where(function($q)use($search_data){
+        //     if(!empty($search_data) && !is_null($search_data)){
+        //       $q->where('project_name', 'like' ,"%$search_data%");
+        //     }
+        //     })
+        //    ->paginate($this->records_limit);
             return view('/admin.projectList.search',compact('id','project_data'));
         }
         catch (Exception $e) 
