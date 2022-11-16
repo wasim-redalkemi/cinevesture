@@ -122,15 +122,45 @@
                     </div>
                     <div id="Documents" class="add_content_wraper">
                         <div class="guide_profile_main_text Aubergine_at_night mt-3 mb-2">Documents</div>
-
-                        <div class="row col_wrap">
-                            <div class="col-md-3 add_new_doc_btn_wrap">
-                                <div class="add_video_field mb-3">
-                                    <button class="add_new_doc_btn save_add_btn">Add another</button>
+                        <div class="doc-list row col_wrap">
+                            <div class="col-md-3">
+                                <div class="doc_container" id="">
+                                    <div class="upload_loader">
+                                        <i class="fa fa-file-text -pink icon-size" aria-hidden="true"></i>
+                                    </div>
+                                    <div>
+                                        <div class="guide_profile_main_subtext Aubergine_at_night">Lorem ipsum.doc</div>
+                                        <div class="proctect_by_capta_text Aubergine_at_night">64.32 KB</div>
+                                    </div>
+                                    <div>
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="upload_doc">
+                                    <div class="profile_upload_container h_69 w-100 mt-3 mt-md-0 -flx">
+                                        <div for="file-input" class="d-none">
+                                            <input type="file" onchange="uploadDocFile(this)" name="">
+                                        </div>
+                                        <div>
+                                            <i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="movie_name_text mx-3 mt-0">Upload file</div>
+                                    </div>
+                                    <div class="profile_upload_text">Upload PDF only</div>
+                                </div>
+                            </div>
+                            <div id="add-doc-btn-div" class="row col_wrap">
+                                <div class="col-md-3 add_new_doc_btn_wrap">
+                                    <div class="add_video_field mb-3">
+                                        <button class="add_new_doc_btn save_add_btn">Add another</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="d-flex justify-content-end mt-5">

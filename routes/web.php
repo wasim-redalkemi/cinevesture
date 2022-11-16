@@ -65,6 +65,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/update-media/{media_id}',[AjaxController::class, 'updateMedia'])->name('update-video');
         Route::post('/delete-media/{media_id}',[AjaxController::class, 'deleteMedia'])->name('delete-media');
         Route::post('/upload-image',[AjaxController::class, 'uploadImage'])->name('upload-image');
+        Route::post('/upload-doc',[AjaxController::class, 'uploadDoc'])->name('ajax/upload-doc');
     });
 
     Route::group(['prefix'=>'user'],function()

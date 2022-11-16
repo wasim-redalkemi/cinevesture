@@ -487,7 +487,7 @@ body {
 }
 .proctect_by_capta_text {
     font-weight: 300;
-    font-size: 14px;
+    font-size: 13px;
     line-height: 19px;
     letter-spacing: 0.018em;
     color: #FAF8FB;
@@ -652,18 +652,29 @@ body {
     padding: 10px 0px;
 }
 
+.add-another-item {min-height: 100px;}
+
 .add-another-item > div{
-    margin-bottom: 40px;
+    margin-bottom: 31px;
 }
+
+.cancel-img-upload {
+    display:none;curson:pointer;position:absolute;background:red;width:20px;height:20px;top:0;right:0;
+}
+.mid-col {margin-left:12px;}
 .row.photo-sec {min-height: 330px;}
 
 #add-img-btn-div.add-another-item  > div{
-    /* margin-bottom: 0px; */
+    margin-bottom: 31px;
+}
+
+.img-item {
+    padding-top: 15px;
 }
 
 .mk-feature {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 14px;
     letter-spacing: 0.018em;
     color: #4D0D8A;
 }
@@ -1024,13 +1035,19 @@ body {
 .Aubergine_at_night {
     color: #1C0330 !important;
 }
+.add_new_doc_btn {
+    margin-bottom: 20px
+}
 .guide_profile_main_subtext {
     font-weight: 400;
-    font-size: 16px;
-    line-height: 150%;
+    font-size: 13px;
+    line-height: 19px;
     letter-spacing: 0.022em;
     font-feature-settings: 'ss01' on;
     color: #33084C;
+    word-break: break-all;
+    max-height: 40px;
+    overflow: hidden;
 }
 .guide_profile_btn {
     padding: 6px 16px;

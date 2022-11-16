@@ -105,5 +105,29 @@ class AjaxController extends WebController {
         return json_encode($projectMedia);
     }
 
+    public function uploadDoc(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:doc,pdf|max:2048*5',
+        ]);
+        $file = $request->file("file");
+        $locationPath  = "project/docs";
+        $fileName = $file->getClientOriginalName();
+        $fileSize = $file->getSize();
+        $nameStr = date('YmdHis');
+        $newName = str_replace(" ","_",$nameStr.$fileName);
+        $this->uploadFile($locationPath , $file, $newName);
+        //\Log::info("here in logs ".$newName.",".asset($locationPath."/".$newName));
+        $projectMedia = new ProjectMedia();
+        $projectMedia->project_id = 1;
+        $projectMedia->file_type = "doc";
+        $projectMedia->file_link = $locationPath."/".$newName;
+        $projectMedia->media_info = json_encode(["name"=>$fileName,"size"=> $fileSize,"size_label"=> ($fileSize/1000)." KB"]);
+        $projectMedia->save();
+        $projectMedia->file_link = asset("storage/".$projectMedia->file_link);
+        $projectMedia->media_info = json_decode($projectMedia->media_info, true);
+        return json_encode($projectMedia);
+    }
+
 }
 ?>
