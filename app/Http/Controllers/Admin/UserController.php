@@ -21,8 +21,13 @@ class UserController extends AdminController
         try
         {
             $users=User::query()->where('user_type','U')->with(['organization','country'])->paginate(1);
+            $UserOrganisation = UserOrganisation::all();
+            // echo '<pre>';
+            // print_r($UserOrganisation);
+            // die;
+            // dd($UserOrganisation);
             
-            return view('admin.user.list',compact('users'));
+            return view('admin.user.list',compact('users','UserOrganisation'));
         } 
         catch (Exception  $e) {
             return back()->withError('error', 'Something went wrong.');

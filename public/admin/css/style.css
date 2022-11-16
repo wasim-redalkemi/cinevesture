@@ -28586,5 +28586,8 @@ div.tagsinput span.tag a {
 .btn_padding{
   padding: 0.2rem 1rem;
 }
-
+.table_scroller{
+  max-height: 100px;
+  overflow:auto;
+}
 /*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */

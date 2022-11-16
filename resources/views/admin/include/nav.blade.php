@@ -120,10 +120,11 @@
             </div>
           </li> --}}
           <li class="nav-item nav-profile dropdown">
-            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+            <a class="nav-link dropdown-toggle d-flex" href="#" data-toggle="dropdown" id="profileDropdown">
               <i class='fa fa-user' style='font-size:24px'></i>
               {{-- <img src="{{asset('/admin/images/face5.jpg')}}" alt="profile"/> --}}
-              </a><div class="mt-1">{{Auth::user()->name}}</div>
+              <div class="">{{Auth::user()->name}}</div>
+              </a>
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
               {{-- <a class="dropdown-item">
                 <i class="mdi mdi-settings text-primary"></i>

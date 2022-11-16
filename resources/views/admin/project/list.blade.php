@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive">
-                        <table id="order-listing" class="table order-listing">
+                        <table id="order-listing" class="table table-sm table-bordered table-hover order-listing">
                             <thead>
                                 <tr>
                                     <th>Id</th>
@@ -38,13 +38,13 @@
                                     @if (!empty($project->projectCategory))
                                         
                                     
-                                    @php $x=0.; @endphp
                                    
+                                    <ol type="1" class="table_scroller">
                                     @foreach ($project->projectCategory as $key=>$category)
-                                    @php $x++; @endphp
-                                    {{$x.'.'.$category->name.','}}
+                                    <li>{{$category->name.','}}</li>
                                      
                                      @endforeach
+                                    </ol>
                                      <a href="{{route('category.update-view')}}?pid={{$project->id}}&cid={{$category->id}}"><i class="fa fa-edit"></i></a>
                                      @endif
                                     </td>
@@ -53,11 +53,14 @@
                                     @if ($project->genres)
                                         
                                     
-                                    @php $x=0; @endphp
-                                    @foreach ($project->genres as $key=>$genre)
-                                    @php $x++; @endphp
-                                    @if (empty($genre->name)){{'-'}}@endif{{ucfirst($x.".".$genre->name).','}}
-                                    @endforeach
+                                    
+
+                                    <ol type="1" class="table_scroller">
+                                        @foreach ($project->genres as $key=>$genre)
+                                        <li>{{$genre->name.','}}</li>
+                                         
+                                         @endforeach
+                                        </ol>
                                     @if (!empty($genre->name))
                                     <a href="{{route('genre.update-view')}}?p_id={{$project->id}}&g_id={{$genre->id}}"><i class="fa fa-edit"></i></a>
                                     @else 

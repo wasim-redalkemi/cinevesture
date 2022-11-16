@@ -6,9 +6,89 @@
         <div class="card-body">
             <h4 class="card-title">User Management</h4>
             <div class="row">
+                <div class="col-md-12">
+                    <form class="">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                <label>Organization</label>
+                                
+                                <select name="" id="" class="form-control radius">
+                                    @if (!empty($UserOrganisation))
+                                    @foreach ($UserOrganisation as $k => $v)                                        
+                                    <option value="{{$v->id}}">{{$v->name}}</option>
+                                    @endforeach
+                                    @endif
+                                </select>
+                            </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                <label>Location</label>
+                                <select name="" id="" class="form-control form-control radius">
+                                    @foreach ($UserOrganisation as $key=>$location)
+                                    <option value="{{$location->id}}">{{$location->location}}</option>
+                                    @endforeach
+                                </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                <label>Date Joined From</label>
+                                <input type="date" class="form-control form-control-sm radius"placeholder="Jane Doe">
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                <label>Date Joined From</label>
+                                <input type="date" class="form-control form-control-sm radius"placeholder="Jane Doe">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                <label>Status</label>
+                                <select name="" id="" class="form-control form-control radius">
+                                    <option value="1">India</option>
+                                    <option value="1">India1</option>
+                                    <option value="1">India2</option>
+                                    <option value="1">India3</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                <label>Membership </label>
+                                <select name="" id="" class="form-control radius">
+                                    <option value="1">India</option>
+                                    <option value="1">India1</option>
+                                    <option value="1">India2</option>
+                                    <option value="1">India3</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                <label>Search</label>
+                                <div><input type="text" class="form-control form-control-sm" name="" id=""></div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 mt">
+                                <div class="form-group">
+                                <label for="">Action</label>
+                                <div><button type="submit" class="btn btn-primary btn-sm">Submit</button></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-12">
                     <div class="table-responsive">
-
                         <table id="order-listing" class="table order-listing">
                             <thead>
                                 <tr>
