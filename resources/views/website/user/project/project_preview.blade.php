@@ -27,12 +27,19 @@
                 <div class="preview_headtext">Who are you listning this project as</div>
                 <div class="preview_subtext">@if (!empty($projectData[0]['listing_project_as'])) {{ $projectData[0]['listing_project_as'] }} @endif</div>
                 <div class="preview_headtext">Language</div>
-                
-                <div class="preview_subtext">English</div>
+                @if (!empty($projectData[0]['project_languages']))
+                    @foreach ($projectData[0]['project_languages'] as $v)
+                        <div class="preview_subtext">{{$v['name']}}</div>
+                    @endforeach                    
+                @endif
                 <div class="preview_headtext">Country</div>
-                <div class="preview_subtext"></div>
+                @if (!empty($projectData[0]['project_countries']))
+                    @foreach ($projectData[0]['project_countries'] as $v)
+                        <div class="preview_subtext">{{$v['name']}}</div>
+                    @endforeach                    
+                @endif                
                 <div class="preview_headtext">Locations</div>
-                <div class="preview_subtext pb-3"></div>
+                <div class="preview_subtext pb-3">@if (!empty($projectData[0]['location'])) {{$projectData[0]['location']}} @endif</div>
                 <div class="row">
                     <div class="com-md-12">
                         <div class="justify-content-end"><button class="save_add_btn float-end">Edit</button></div>
@@ -50,25 +57,34 @@
                     <p class="flow_step_text"> Details</p>
                 </div>
                 <div class="preview_headtext mt-4">Category</div>
-                <div class="preview_subtext">Feature</div>
+                @if (!empty($projectData[0]['project_category']))
+                    @foreach ($projectData[0]['project_category'] as $v)
+                        <div class="preview_subtext">{{$v['name']}}</div>
+                    @endforeach                    
+                @endif 
                 <div class="preview_headtext">Genre</div>
                 <div class="d-flex mt-2">
-                    <button class="curv_cmn_btn">Adventure</button>
-                    <button class="curv_cmn_btn mx-3">Biography</button>
+                    @if (!empty($projectData[0]['genres']))
+                    @foreach ($projectData[0]['genres'] as $v)
+                        <button class="curv_cmn_btn mx-1">{{$v['name']}}</button>
+                    @endforeach                    
+                    @endif
                 </div>
                 <div class="preview_headtext">Duration</div>
-                <div class="preview_subtext">1 hr 39 min 38 sec</div>
+                <div class="preview_subtext">@if (!empty($projectData[0]['duration'])) {{$projectData[0]['duration']}} @endif</div>
                 <div class="preview_headtext">Total Budget (USD)</div>
-                <div class="preview_subtext">10,000,000.00</div>
+                <div class="preview_subtext">@if (!empty($projectData[0]['total_budget'])) {{$projectData[0]['total_budget']}} @endif</div>
                 <div class="preview_headtext">Financing Secured (USD)</div>
-                <div class="preview_subtext">5,000,000.00</div>
+                <div class="preview_subtext">@if (!empty($projectData[0]['financing_secured'])) {{$projectData[0]['financing_secured']}} @endif</div>
                 <div class="preview_headtext">Creator/Founder Name</div>
-                <div class="preview_subtext">Riyah P Ghuman</div>
+                <div class="preview_subtext">@if (!empty($projectData[0]['user']['name'])) {{$projectData[0]['user']['name']}} @endif</div>
                 <div class="preview_headtext">Associated with the Project</div>
                 <div class="preview_subtext">
-                    <div>Cinematographer - Name</div>
-                    <div> Editor - Name</div>
-                    <div> Actor - Name</div>
+                    @if (!empty($projectData[0]['project_association']))
+                    @foreach ($projectData[0]['project_association'] as $v)
+                        <div> {{$v['project_associate_title']}} - {{$v['project_associate_name']}}</div>
+                    @endforeach                    
+                    @endif
                 </div>
                 <div class="row">
                     <div class="com-md-12">
@@ -88,15 +104,11 @@
                     <p class="flow_step_text"> Description</p>
                 </div>
                 <div class="preview_headtext mt-4">Logline</div>
-                <div class="preview_subtext">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                <div class="preview_subtext">@if (!empty($projectData[0]['logline'])) {{$projectData[0]['logline']}} @endif</div>
                 <div class="preview_headtext">Synopsis/Brief Description</div>
-                <div class="preview_subtext">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    <br> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
+                <div class="preview_subtext">@if (!empty($projectData[0]['synopsis'])) {{$projectData[0]['synopsis']}} @endif</div>
                 <div class="preview_headtext">Creator/Founder’s Statement</div>
-                <div class="preview_subtext">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    <br> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
+                <div class="preview_subtext">@if (!empty($projectData[0]['director_statement'])) {{$projectData[0]['director_statement']}} @endif</div>
                 <div class="row">
                     <div class="com-md-12">
                         <div class="justify-content-end"><button class="save_add_btn float-end">Edit</button></div>
@@ -179,36 +191,40 @@
                     <p class="flow_step_text"> Requirements & Milestones</p>
                 </div>
                 <div class="preview_headtext mt-4">Project Stage</div>
-                <div class="preview_subtext">Pre-Production</div>
+                <div class="preview_subtext">@if (!empty($projectData[0]['project_stage']['name'])) {{$projectData[0]['project_stage']['name']}} @endif</div>
                 <div class="preview_headtext">Looking For</div>
-                <div class="preview_subtext">Talent/Crew/Organisation</div>
+                <div class="d-flex mt-2">
+                    @if (!empty($projectData[0]['project_looking_for']))
+                    @foreach ($projectData[0]['project_looking_for'] as $v)
+                        <button class="curv_cmn_btn mx-1">{{$v['name']}}</button>
+                    @endforeach                    
+                    @endif
+                </div>
+                {{-- <div class="preview_subtext">Talent/Crew/Organisation</div> --}}
                 <div class="preview_headtext mb-1">Crowdfunding Link</div>
-                <div class="proctect_by_capta_text Aubergine_at_night">https://samplelink/sample.com</div>
+                <div class="">
+                    @if (!empty($projectData[0]['crowdfund_link']))
+                        <a href="{{$projectData[0]['crowdfund_link']}}" class="crowdfund_text">{{$projectData[0]['crowdfund_link']}}</a>
+                    @endif
+                </div>
 
                 <div class="row mt-3">
                     <div class="col-4 col-md-3 preview_headtext">Milestone Description</div>
                     <div class="col-4 col-md-3 preview_headtext">Milestone Budget (USD)</div>
                     <div class="col-4 col-md-3 preview_headtext">Target Date</div>
                 </div>
+                @if (!empty($projectData[0]['project_milestone']))
+                @foreach ($projectData[0]['project_milestone'] as $v)
                 <div class="row mt-2">
-                    <div class="col-4 col-md-3 preview_subtext">Lorem ipsum dolor sit amet.</div>
-                    <div class="col-4 col-md-3 preview_subtext">2,000,000.00</div>
-                    <div class="col-4 col-md-3 preview_subtext">2,000,000.00</div>
+                    <div class="col-4 col-md-3 preview_subtext">{{ $v['description'] }}</div>
+                    <div class="col-4 col-md-3 preview_subtext">{{ $v['budget'] }}</div>
+                    <div class="col-4 col-md-3 preview_subtext">{{ $v['traget_date'] }}</div>
                 </div>
-                <div class="row mt-2">
-                    <div class="col-4 col-md-3 preview_subtext">Lorem ipsum dolor sit amet.</div>
-                    <div class="col-4 col-md-3 preview_subtext">2,000,000.00</div>
-                    <div class="col-4 col-md-3 preview_subtext">2,000,000.00</div>
-                </div>
-                <div class="row mt-2">
-                    <div class="col-4 col-md-3 preview_subtext">Lorem ipsum dolor sit amet.</div>
-                    <div class="col-4 col-md-3 preview_subtext">2,000,000.00</div>
-                    <div class="col-4 col-md-3 preview_subtext">2,000,000.00</div>
-                </div>
+                @endforeach                    
+                @endif
                 <div class="row">
                     <div class="com-md-12">
                         <div class="d-flex justify-content-end mt-2">
-                        <div class="info_btn_icon pointer"><i class="fa fa-info-circle aubergine icon-size" aria-hidden="true"></i></div>
                         <div class="justify-content-end"><button class="save_add_btn float-end">Edit</button></div>
                         </div>
                     </div>
@@ -217,8 +233,8 @@
         </div>
         </div>
         <div class="text-center my-5">
-            <button class="cancel_btn">Save as draft</button>
-            <button class="guide_profile_btn">Save & Publish</button>
+            <a href="{{ route('project-status') }}?id={{$_REQUEST['id']}}&status=draft"><button class="cancel_btn">Save as draft</button></a>
+            <a href="{{ route('project-status') }}?id={{$_REQUEST['id']}}&status=published"><button class="guide_profile_btn">Save & Publish</button></a>
         </div>
     </div>
 

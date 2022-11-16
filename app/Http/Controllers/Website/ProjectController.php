@@ -581,4 +581,22 @@ class ProjectController extends WebController
         
     }
 
+    public function changeStatus(Request $request)
+    {
+        try {
+            $project=UserProject::where('id',$request->id)->first();
+            $project->status = $request->status;
+            if($project->update())
+            {
+                return redirect()->route('project-list')->with("success", "Project status updated successfully.");
+            }
+            else
+            {
+                return back()->with("error", "Something went wrong");
+            }
+        } catch (Exception $e) {
+            return back()->with("error", $e->getMessage());
+        }
+    }
+
 }
