@@ -16,7 +16,7 @@ class CreateProjectMediasTable extends Migration
         Schema::create('project_medias', function (Blueprint $table) {
             $table->id();
             $table->string('project_id', 20);
-            $table->enum('file_type', ['image', 'video', 'pdf']);
+            $table->enum('file_type', ['image', 'video', 'doc']);
             $table->string('file_link', 500);
             $table->string('media_info',5000)->nullable();
             $table->enum('is_default_marked', ['0', '1'])->default('0');
