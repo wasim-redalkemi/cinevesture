@@ -19,7 +19,7 @@
                 <li>
                   <a class="header-nav-link" href="{{route('guide-view')}}">Industry Guide</a>
                 </li>
-                <li>
+                {{-- <li>
                   <div class="dropdown home-dropdown">
                     <a class="btn dropdown-toggle header-nav-link" href="#" role="button" data-bs-toggle="dropdown"
                       aria-expanded="false">
@@ -46,18 +46,29 @@
                       </li>
                     </ul>
                   </div>
-                </li>
+                </li> --}}
                 <li>
                   <a class="header-nav-link" href="#">Jobs</a>
                 </li>
               </ul>
             </div>
-            <i class="fa fa-user-circle mx-2"
-              style="font-size:25px; color: #DD45B3;background-color: white; border-radius: 50%;border:none"
-              aria-hidden="true"></i>
-              <a href="{{ route('profile-private-show')}}" class="text_decor_none">
-                <span>Profile</span>
-              </a>
+              <?php
+                if(!empty(auth()->user()) && auth()->user()->user_type !== 'A')
+                {
+
+                ?>
+                  <div>
+                    <i class="fa fa-user-circle"
+                  style="font-size:25px; color: #DD45B3;background-color: white; border-radius: 50%;border:none"
+                  aria-hidden="true"></i>
+                  <a href="{{ route('profile-private-show')}}" class="text_decor_none">
+                    <span style="top: -2px;position: relative;">Profile</span>
+                  </a>
+                  </div>
+                <?php
+                }
+
+              ?>
         </div>
         </nav>
       </div>
