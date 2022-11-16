@@ -108,7 +108,7 @@ class AjaxController extends WebController {
     public function uploadDoc(Request $request)
     {
         $request->validate([
-            'file' => 'required|file|mimes:doc,pdf|max:2048*5',
+            'file' => 'required|file|mimes:docx,pdf|max:2048*5',
         ]);
         $file = $request->file("file");
         $locationPath  = "project/docs";

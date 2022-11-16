@@ -20,20 +20,19 @@
             <div class="col-md-12">
                 <div class=" profile_wraper profile_wraper_padding  mt-4 mb-0">
                     <p class="flow_step_text"> Overview</p>
-               @foreach ($UserProject as $k=>$v)
                 <div class="preview_headtext mt-4">Project Name</div>
-                <div class="preview_subtext">{{$v->project_name}}</div>
+                <div class="preview_subtext">@if (!empty($projectData[0]['project_name'])) {{$projectData[0]['project_name']}} @endif</div>
                 <div class="preview_headtext">Types of projects</div>
-                <div class="preview_subtext">{{ $v->project_type_id }}</div>
+                <div class="preview_subtext">@if (!empty($projectData[0]['project_type']['name'])) {{ $projectData[0]['project_type']['name'] }} @endif</div>
                 <div class="preview_headtext">Who are you listning this project as</div>
-                <div class="preview_subtext">{{ $v->listing_project_as }}</div>
+                <div class="preview_subtext">@if (!empty($projectData[0]['listing_project_as'])) {{ $projectData[0]['listing_project_as'] }} @endif</div>
                 <div class="preview_headtext">Language</div>
+                
                 <div class="preview_subtext">English</div>
                 <div class="preview_headtext">Country</div>
-                <div class="preview_subtext">{{ $v->location }}</div>
+                <div class="preview_subtext"></div>
                 <div class="preview_headtext">Locations</div>
-                <div class="preview_subtext pb-3">{{ $v->location }}</div>
-               @endforeach
+                <div class="preview_subtext pb-3"></div>
                 <div class="row">
                     <div class="com-md-12">
                         <div class="justify-content-end"><button class="save_add_btn float-end">Edit</button></div>

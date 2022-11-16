@@ -529,15 +529,12 @@ class ProjectController extends WebController
             if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
             {
                 return back()->with('error','Project Id not found.');
-            }
-            $languages = MasterLanguage::query()->get();
-            $country = MasterCountry::query()->get();
-            $projectStage = ProjectStage::query()->get();
-            $lookingFor = MasterLookingFor::query()->get();
-            $UserProject = UserProject::query()->get();
+            }           
+            $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
+            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage'])->where('id',$_REQUEST['id'])->get();
+            $projectData = $projectData->toArray();
 
-            $projectPreview = UserProject::query()->where('id',$_REQUEST['id'])->get();
-            return view('website.user.project.project_preview', compact('projectPreview','languages','country','lookingFor','UserProject'));
+            return view('website.user.project.project_preview', compact('UserProject','projectData'));
         } catch (Exception $e) {
             return back()->with('error','Something went wrong.');
         }
