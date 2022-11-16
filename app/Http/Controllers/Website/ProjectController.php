@@ -46,50 +46,6 @@ class ProjectController extends WebController
         }
     }
 
-    public function projectViewRender($nextPage = '',$id = null)
-    {
-        try {
-            $user = User::query()->find(auth()->user()->id);
-            $languages = MasterLanguage::query()->get();
-            $country = MasterCountry::query()->get();
-            $projectStage = ProjectStage::query()->get();
-            $lookingFor = MasterLookingFor::query()->get();
-            $projectStageOfFunding = ProjectStageOfFunding::query()->get();
-            $UserProject = UserProject::query()->get();
-            $projectCountries = ProjectCountry::query()->get();
-            $category = MasterProjectCategory::query()->get();
-            $Genres = MasterProjectGenre::query()->get();
-            $project_types = ProjectType::all();
-
-           
-            if (isset($_REQUEST['nextPage'])) {
-                $nextPage = $_REQUEST['nextPage'];
-            }
-            
-            switch ($nextPage) {
-                case 'Details':
-                    return view('website.user.project.project_details', compact('user','languages','country','category','Genres'));
-                    break;
-                case 'Description':
-                    return view('website.user.project.project_description', compact('user','languages','country'));
-                    break;
-                case 'Gallery':
-                    return view('website.user.project.project_gallery', compact('user','languages','country'));
-                    break;
-                case 'Milestone':
-                    return view('website.user.project.project_milestones', compact('user','languages','country','projectStage','lookingFor','projectStageOfFunding'));
-                    break;
-                case 'Preview':
-                    return view('website.user.project.project_preview', compact('user','languages','country','lookingFor','UserProject'));
-                    break;            
-                default:
-                    return view('website.user.project.project_overview', compact(['user','languages','country','project_types']));
-            }
-        } catch (Exception $e) {
-            return back()->with('error','Something went wrong.');
-        }
-    }
-
     public function projectOverview()
     {
         try {
