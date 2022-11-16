@@ -141,7 +141,7 @@
                                 <div class="upload_doc">
                                     <div class="profile_upload_container h_69 w-100 mt-3 mt-md-0 -flx">
                                         <div for="file-input" class="d-none">
-                                            <input type="file" onchange="uploadDocFile(this)" name="">
+                                            <input type="file" onchange="uploadDocFile(this)" name="" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf">
                                         </div>
                                         <div>
                                             <i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true"></i>
@@ -164,7 +164,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="d-flex justify-content-end mt-5">
-                                <button class="cancel_btn mx-3"><a class="btn-link-style" href="{{ route('project-description') }}?id={{$_REQUEST['id']}}">Go back</a></button>
+                                <button class="cancel_btn mx-3"><a class="link-style" href="{{ route('project-description') }}?id={{$_REQUEST['id']}}">Go back</a></button>
                                 <input type="hidden" name="project_id" value="<?php if(isset($_REQUEST['id'])) {echo $_REQUEST['id'];}?>">
                                 <button type="submit" class="guide_profile_btn">Save & Next</button>
                             </div>
@@ -234,7 +234,7 @@
             reader.readAsDataURL(file[0]);
         });
 
-        var new_doc_structure = '<div class="col-md-3"> <div class="doc_container" id=""><div class="upload_loader"><i class="fa fa-file-text -pink icon-size" aria-hidden="true"></i></div><div><div class="guide_profile_main_subtext Aubergine_at_night">Lorem ipsum.doc</div><div class="proctect_by_capta_text Aubergine_at_night">64.32 KB</div></div><div><i class="fa fa-times" aria-hidden="true"></i></div></div><div class="upload_doc"> <div class="profile_upload_container h_69 w-100 mt-3 mt-md-0 -flx"><div for="file-input" class="d-none"><input type="file" onchange="uploadDocFile(this)" name=""></div><div ><i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true"></i></div><div class="movie_name_text mx-3 mt-0">Upload file</div></div><div class="profile_upload_text">Upload PDF only</div></div></div></div>';
+        var new_doc_structure = '<div class="col-md-3"> <div class="doc_container" id=""><div class="upload_loader"><i class="fa fa-file-text -pink icon-size" aria-hidden="true"></i></div><div><div class="guide_profile_main_subtext Aubergine_at_night">Lorem ipsum.doc</div><div class="proctect_by_capta_text Aubergine_at_night">64.32 KB</div></div><div><i class="fa fa-times" aria-hidden="true"></i></div></div><div class="upload_doc"> <div class="profile_upload_container h_69 w-100 mt-3 mt-md-0 -flx"><div for="file-input" class="d-none"><input type="file" onchange="uploadDocFile(this)" name="" accept=".xlsx,.xls,image/*,.doc, .docx,.ppt, .pptx,.txt,.pdf"></div><div ><i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true"></i></div><div class="movie_name_text mx-3 mt-0">Upload file</div></div><div class="profile_upload_text">Upload PDF only</div></div></div></div>';
 
         // $(document).ready(function() {
         $('.profile_upload_container').bind('click');

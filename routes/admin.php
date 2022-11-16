@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\admin\AuthController;
-use App\Http\Controllers\admin\ProjectController as AdminProjectController;
+use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\ProjectListController;
 use App\Http\Controllers\Admin\QueryController;
@@ -37,7 +37,7 @@ Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
     {
         Route::get('/project-list', [ProjectListController::class, 'index'])->name('project-list-management');
         Route::post('/create-list', [ProjectListController::class, 'create'])->name('create-list');
-        Route::get('/list', [ProjectListController::class, 'show'])->name('show-list');
+        Route::get('/list', [ProjectListController::class, 'project_list_show'])->name('show-list');
         Route::get('/search/{id}', [ProjectListController::class, 'search'])->name('search-project');
         Route::post('/find/{id}', [ProjectListController::class, 'search_project'])->name('find-project');
         Route::post('/search-projects', [ProjectListController::class, 'saveSearchProjects'])->name('save-search-projects');

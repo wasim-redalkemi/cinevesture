@@ -118,6 +118,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/validate-project-milestone', [ProjectController::class, 'validateProjectMilestone'])->name('validate-project-milestone');
 
         Route::get('/project-preview', [ProjectController::class, 'projectPreview'])->name('project-preview');
+        Route::get('/project-status', [ProjectController::class, 'changeStatus'])->name('project-status');
+
 
 
         Route::get('/public-view/{id}', [ProjectController::class, 'publicView'])->name('public-view');

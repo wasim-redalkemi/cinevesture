@@ -35,6 +35,9 @@
                                     <td>{{ucfirst($project->project_name)}}</td>
                                     
                                    <td>
+                                    @if (!empty($project->projectCategory))
+                                        
+                                    
                                     @php $x=0.; @endphp
                                    
                                     @foreach ($project->projectCategory as $key=>$category)
@@ -43,9 +46,13 @@
                                      
                                      @endforeach
                                      <a href="{{route('category.update-view')}}?pid={{$project->id}}&cid={{$category->id}}"><i class="fa fa-edit"></i></a>
+                                     @endif
                                     </td>
                                   
                                    <td>
+                                    @if ($project->genres)
+                                        
+                                    
                                     @php $x=0; @endphp
                                     @foreach ($project->genres as $key=>$genre)
                                     @php $x++; @endphp
@@ -56,7 +63,7 @@
                                     @else 
                                     {{'-'}}
                                     @endif
-                                    
+                                    @endif
                                     </td>
 
                                     <td>{{ date('d-M-y', strtotime($project->created_at)) }}</td>

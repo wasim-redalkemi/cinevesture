@@ -46,50 +46,6 @@ class ProjectController extends WebController
         }
     }
 
-    public function projectViewRender($nextPage = '',$id = null)
-    {
-        try {
-            $user = User::query()->find(auth()->user()->id);
-            $languages = MasterLanguage::query()->get();
-            $country = MasterCountry::query()->get();
-            $projectStage = ProjectStage::query()->get();
-            $lookingFor = MasterLookingFor::query()->get();
-            $projectStageOfFunding = ProjectStageOfFunding::query()->get();
-            $UserProject = UserProject::query()->get();
-            $projectCountries = ProjectCountry::query()->get();
-            $category = MasterProjectCategory::query()->get();
-            $Genres = MasterProjectGenre::query()->get();
-            $project_types = ProjectType::all();
-
-           
-            if (isset($_REQUEST['nextPage'])) {
-                $nextPage = $_REQUEST['nextPage'];
-            }
-            
-            switch ($nextPage) {
-                case 'Details':
-                    return view('website.user.project.project_details', compact('user','languages','country','category','Genres'));
-                    break;
-                case 'Description':
-                    return view('website.user.project.project_description', compact('user','languages','country'));
-                    break;
-                case 'Gallery':
-                    return view('website.user.project.project_gallery', compact('user','languages','country'));
-                    break;
-                case 'Milestone':
-                    return view('website.user.project.project_milestones', compact('user','languages','country','projectStage','lookingFor','projectStageOfFunding'));
-                    break;
-                case 'Preview':
-                    return view('website.user.project.project_preview', compact('user','languages','country','lookingFor','UserProject'));
-                    break;            
-                default:
-                    return view('website.user.project.project_overview', compact(['user','languages','country','project_types']));
-            }
-        } catch (Exception $e) {
-            return back()->with('error','Something went wrong.');
-        }
-    }
-
     public function projectOverview()
     {
         try {
@@ -573,15 +529,12 @@ class ProjectController extends WebController
             if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
             {
                 return back()->with('error','Project Id not found.');
-            }
-            $languages = MasterLanguage::query()->get();
-            $country = MasterCountry::query()->get();
-            $projectStage = ProjectStage::query()->get();
-            $lookingFor = MasterLookingFor::query()->get();
-            $UserProject = UserProject::query()->get();
+            }           
+            $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
+            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage'])->where('id',$_REQUEST['id'])->get();
+            $projectData = $projectData->toArray();
 
-            $projectPreview = UserProject::query()->where('id',$_REQUEST['id'])->get();
-            return view('website.user.project.project_preview', compact('projectPreview','languages','country','lookingFor','UserProject'));
+            return view('website.user.project.project_preview', compact('UserProject','projectData'));
         } catch (Exception $e) {
             return back()->with('error','Something went wrong.');
         }
@@ -626,6 +579,24 @@ class ProjectController extends WebController
 
         }
         
+    }
+
+    public function changeStatus(Request $request)
+    {
+        try {
+            $project=UserProject::where('id',$request->id)->first();
+            $project->status = $request->status;
+            if($project->update())
+            {
+                return redirect()->route('project-list')->with("success", "Project status updated successfully.");
+            }
+            else
+            {
+                return back()->with("error", "Something went wrong");
+            }
+        } catch (Exception $e) {
+            return back()->with("error", $e->getMessage());
+        }
     }
 
 }
