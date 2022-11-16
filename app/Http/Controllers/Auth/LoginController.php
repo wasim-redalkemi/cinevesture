@@ -77,7 +77,9 @@ class LoginController extends Controller
         }
        
             $user = User::query()->where('email',$request->email)->first();
-            
+            if($user->user_type == 'A'){
+                return back()->with('error','Invalid credentials.');
+            }
            
             if (!$user->email_verified_at) {
                 $otp = OtpUtilityController::createOtp($user,'S'); // S for signup and verify otp.

@@ -26,9 +26,9 @@ class CreateUserProjectsTable extends Migration
             $table->enum('listing_project_as',['individual','organization']);
             $table->string('location',255)->nullable();
             $table->string('category_id',20)->nullable();
-            $table->string('duration')->nullable();
-            $table->float('total_budget')->nullable();
-            $table->float('financing_secured')->nullable();
+            $table->integer('duration')->nullable();
+            $table->integer('total_budget')->nullable();
+            $table->integer('financing_secured')->nullable();
             $table->string('logline',500)->nullable();
             $table->string('synopsis',1000)->nullable();
             $table->string('director_statement',1000)->nullable();

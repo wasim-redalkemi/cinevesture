@@ -25,7 +25,7 @@ class ProjectController extends AdminController
     {
         try {
             $projects = UserProject::query()->with(['user','projectCategory','genres'])
-            ->paginate(2);
+            ->paginate(3);
           
                 return view('admin.project.list',compact('projects'));
         } catch (\Throwable $e) {

@@ -1,11 +1,14 @@
 <script>
-
+        var project_id = null;
         var validateUrl = function (url) {
             let urlReg = /^(?:(?:(?:https?|ftp):)?\/\/)(?:\S+(?::\S*)?@)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z0-9\u00a1-\uffff][a-z0-9\u00a1-\uffff_-]{0,62})?[a-z0-9\u00a1-\uffff]\.)+(?:[a-z\u00a1-\uffff]{2,}\.?))(?::\d{2,5})?(?:[/?#]\S*)?$/i;
             return urlReg.test(url);
         }
 
         $(document).ready(function(){
+            
+            project_id = $("input[name=project_id]").val();
+            console.log("project_id "+project_id);
             //For albhabates
             $(".alphabets-only").on("input",function(){
                 $(this).val($(this).val().replace(/[^A-z ]/g,''));
@@ -147,7 +150,7 @@
                     console.log("lastVidId = "+lastVidId);
                 }
 
-                doAjax('/project/get-project-media/'+project_id+'?type=video',{},"GET",getVideosCallback);
+                doAjax('project/get-project-media/'+project_id+'?type=video',{},"GET",getVideosCallback);
                 //doAjax('/ajax/get-media/1',{},"GET",updateVideoCallback)
             }
 
@@ -194,11 +197,11 @@
                         if(link.indexOf("vimeo.com") > -1){
                             //let reqData = {'vidUrl': "https://vimeo.com/336812686"};
                             let reqData = {'vidUrl': link};
-                            doAjax("/ajax/get-video-details",reqData,"POST",getVimeoData);
+                            doAjax("ajax/get-video-details",reqData,"POST",getVimeoData);
                         } else if(link.indexOf("youtube.com") > -1) {
                             //let reqData = {'vidUrl': "https://www.youtube.com/watch?v=ZdbQ_FvNBZA&t=915s&ab_channel=ScaleupAlly"};
                             let reqData = {'vidUrl':link};
-                            doAjax("/ajax/get-video-details",reqData,"POST",getYouTubeData);
+                            doAjax("ajax/get-video-details",reqData,"POST",getYouTubeData);
                         } else {
                             //show error
                             alert("Invalid video url. Only Vimeo and Youtube links are allowed.");
@@ -218,12 +221,12 @@
                             rec.is_default_marked = 0;
                         }
                     });
-                    doAjax('/ajax/update-media/'+defVid,{'id':defVid,'is_default_marked':'1','type':'video'},"POST",updateVideoCallback);
+                    doAjax('ajax/update-media/'+defVid,{'id':defVid,'is_default_marked':'1','type':'video'},"POST",updateVideoCallback);
                 });
                 $(parentElemId+" .delete-media").off("click").on("click",(e)=>{
                     alert("Add delete confirmation here");
                     let mediaId = $(e.target).attr('data-id');
-                    doAjax("/ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteMediaCallback);
+                    doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteMediaCallback);
                 });
             }
 
@@ -249,7 +252,7 @@
                 newVideo['thumbnail'] = vimeo.thumbnail_medium;
                 newVideo['url'] = vimeo.url;
                 newVideo['is_default_marked'] = 0;
-                doAjax('/ajax/add-video',newVideo,"POST",addVideoCallback);
+                doAjax('ajax/add-video',newVideo,"POST",addVideoCallback);
             }
 
             let getYouTubeData = function(reqData,youtubeResp) {
@@ -263,7 +266,7 @@
                 newVideo['url'] = reqData.vidUrl;
                 newVideo['is_default_marked'] = 0;
                 newVideo['type'] = 'videourl';
-                doAjax('/ajax/add-video',newVideo,"POST",addVideoCallback);
+                doAjax('ajax/add-video',newVideo,"POST",addVideoCallback);
             }
 
             let addVideoCallback = function(req,resp){
@@ -350,8 +353,10 @@
                 init
             }
         }();
+
+        project_id = $("input[name=project_id]").val();
+        console.log("project_id "+project_id);
         // get the current video list from backend and load into the Gallary class.
-        let project_id = 1;
         Videos.init(project_id);
 
         // Photo gallary page script
@@ -372,7 +377,7 @@
                     console.log("lastVidId = "+lastVidId);
                 }
 
-                doAjax('/project/get-project-media/'+project_id+'?type=image',{},"GET",getMediaCallback);
+                doAjax('project/get-project-media/'+project_id+'?type=image',{},"GET",getMediaCallback);
                 //doAjax('/ajax/get-media/1',{},"GET",updateVideoCallback)
             }
 
@@ -435,7 +440,7 @@
                     formData.append("title", e.target.value);
                     $.ajax({
                         type: "POST",
-                        url: BaseUrl+"/ajax/upload-image",
+                        url: BaseUrl+"ajax/upload-image",
                         xhr: function () {
                             var myXhr = $.ajaxSettings.xhr();
                             if (myXhr.upload) {
@@ -475,13 +480,13 @@
                             rec.is_default_marked = 0;
                         }
                     });
-                    doAjax('/ajax/update-media/'+defVid,{'id':defVid,'is_default_marked':'1','type':'video'},"POST",updateMediaCallback);
+                    doAjax('ajax/update-media/'+defVid,{'id':defVid,'is_default_marked':'1','type':'video'},"POST",updateMediaCallback);
                 });
 
                 $(parentElemId+" .delete-media").off("click").on("click",(e)=>{
                     //alert("Add delete confirmation here");
                     let mediaId = $(e.target).attr('data-id');
-                    doAjax("/ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteMediaCallback);
+                    doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteMediaCallback);
                 });
 
                 $(parentElemId+" #cancel-img-upload").off("click").on("click",(e)=>{
