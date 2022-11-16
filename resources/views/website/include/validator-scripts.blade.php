@@ -143,13 +143,6 @@
 
             let init = function(id){
                 project_id = id;
-                console.log("currentVideos - ",currentVideos);
-                currentVideoCount = currentVideos.length;
-                if(currentVideoCount > 0){
-                    lastVidId = currentVideos[currentVideoCount-1]['id'];
-                    console.log("lastVidId = "+lastVidId);
-                }
-
                 doAjax('project/get-project-media/'+project_id+'?type=video',{},"GET",getVideosCallback);
                 //doAjax('/ajax/get-media/1',{},"GET",updateVideoCallback)
             }
@@ -157,6 +150,10 @@
             let getVideosCallback = function (req, resp) {
                 currentVideos = JSON.parse(resp);
                 currentVideoCount = currentVideos.length;
+                if(currentVideoCount > 0){
+                    lastVidId = currentVideos[currentVideoCount-1]['id'];
+                    console.log("lastVidId = "+lastVidId);
+                }
                 loadCurrentVideos();
                 bindActions();
             }
@@ -175,19 +172,19 @@
 
             let bindActions = function (){
                 $(parentElemId+" .add_video_field").off("click").on("click",(e)=>{
-                    console.log("in ");
                     let fieldElems = $(parentElemId+" input.video-link");
                     let isEmptyField = false;
                     fieldElems.each(function(){
                         let inputVal = $(this).val();
-                        console.log("elem",inputVal);
                         isEmptyField = (inputVal == "" || !validateUrl(inputVal));
                     });
                     console.log("isEmptyField = ",isEmptyField);
-                    if(!isEmptyField)
+                    if(!isEmptyField){
                         addVideoElem();
-                    else
+                    } else if ($(".video-link.add").val() != "" ) {
+                        console.log("Error");
                         alert("Please enter a valid video url.");
+                    }
                 });
 
                 $(parentElemId+" .video-link.add").off("blur").on("blur",(e)=>{
@@ -207,8 +204,8 @@
                             alert("Invalid video url. Only Vimeo and Youtube links are allowed.");
                             console.log("Invalid video url. Only Vimeo and Youtube links are allowed.");
                         }
-                    } else {
-                        alert("Please enter a valid video url.");
+                    } else if (link != ''){
+                        createToast("Please enter a valid video your.<br>Only Vimeo and Youtube links are allowed.","E");
                     }
                 });
 
@@ -224,7 +221,7 @@
                     doAjax('ajax/update-media/'+defVid,{'id':defVid,'is_default_marked':'1','type':'video'},"POST",updateVideoCallback);
                 });
                 $(parentElemId+" .delete-media").off("click").on("click",(e)=>{
-                    alert("Add delete confirmation here");
+                    //alert("Add delete confirmation here");
                     let mediaId = $(e.target).attr('data-id');
                     doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteMediaCallback);
                 });
@@ -232,11 +229,11 @@
 
             let deleteMediaCallback = function (req,resp) {
                 $("#vid-"+req.mediaId).remove();
+                createToast("Video deleted successfully.","S");
             }
 
             let updateVideoCallback = function (req,resp) {
-                console.log("Video updated successfully.");
-                //alert(resp);
+                createToast("Video updated successfully.","S");
             }
 
             let getVimeoData = function(reqData,vimeoResp) {
@@ -271,6 +268,7 @@
 
             let addVideoCallback = function(req,resp){
                 //console.log("in here addVideoCallback",resp);
+                createToast("Video added successfully.","S");
                 let newVideo = JSON.parse(resp);
                 currentVideos.push(newVideo);
                 currentVideoCount = currentVideos.length;
@@ -298,7 +296,7 @@
                         str += '<div class="profile_input">';
                         str += '<input type="text" class="form-control video-link" name="project_video_link_'+v.id+'" placeholder="Video url" value="'+v.file_link+'">';
                         str += '</div>';
-                        str += '<div class="d-flex mt-5 mt-md-3">';
+                        str += '<div class="d-flex mt-5 mt-md-2">';
                         str += '<div>';
                         if(parseInt(v.is_default_marked))
                             str += '<input type="radio" class="checkbox_btn feature_ved" name="is_feature_ved" aria-label="" checked="checked" value="'+v.id+'">';
@@ -326,6 +324,7 @@
                 if(currentVideoCount == 0){
                     $(str).insertBefore(parentElemId+" .video-list #add-video-btn-div");
                 } else {
+                    console.log("in addVideoElem lastVidId = "+lastVidId)
                     $(str).insertAfter(parentElemId+" .video-list #vid-"+lastVidId);
                 }
                 bindActions();
@@ -339,7 +338,7 @@
                     str += '<div class="profile_input">';
                     str += '<input type="text" class="form-control video-link add" name="project_video_link_'+(lastVidId+1)+'" placeholder="Paste Link Here">';
                     str += '</div>';
-                    str += '<div class="d-flex mt-5 mt-md-3">';
+                    str += '<div class="d-flex mt-5 mt-md-2">';
                         str += '<div>';
                         str += '<input type="radio" class="checkbox_btn" name="is_feature_ved" aria-label="" value="" disabled>';
                         str += '</div>';
@@ -355,7 +354,6 @@
         }();
 
         project_id = $("input[name=project_id]").val();
-        console.log("project_id "+project_id);
         // get the current video list from backend and load into the Gallary class.
         Videos.init(project_id);
 
@@ -370,6 +368,9 @@
 
             let init = function(id){
                 project_id = id;
+                if(!id){
+                    return;
+                }
                 console.log("currentMediaList - ",currentMediaList);
                 currentMediaCount = currentMediaList.length;
                 if(currentMediaCount > 0){
@@ -379,6 +380,32 @@
 
                 doAjax('project/get-project-media/'+project_id+'?type=image',{},"GET",getMediaCallback);
                 //doAjax('/ajax/get-media/1',{},"GET",updateVideoCallback)
+            }
+
+            let doAjax = function(url,reqData,method,callback) {
+                //show loader
+                $.ajax({
+                    url: BaseUrl+url,
+                    type: method,
+                    data: reqData,
+                    success: function(result){
+                        //alert(result);
+                        //hide loader
+                        callback(reqData,result);
+                    }
+                });
+            }
+
+            let getMediaCallback = function (req, resp) {
+                //console.log("getMediaCallback",resp);
+                currentMediaList = JSON.parse(resp);
+                currentMediaCount = currentMediaList.length;
+                if(currentMediaCount > 0){
+                    lastVidId = currentMediaList[currentMediaCount-1]['id'];
+                    //console.log("lastVidId = "+lastVidId);
+                }
+                loadcurrentMediaList();
+                //bindActions();
             }
 
             let progressHandling = function (event) {
@@ -395,30 +422,6 @@
                 console.log("percent complete = "+percent);
             };
 
-            let getMediaCallback = function (req, resp) {
-                //console.log("getMediaCallback",resp);
-                currentMediaList = JSON.parse(resp);
-                currentMediaCount = currentMediaList.length;
-                if(currentMediaCount > 0){
-                    lastVidId = currentMediaList[currentMediaCount-1]['id'];
-                    //console.log("lastVidId = "+lastVidId);
-                }
-                loadcurrentMediaList();
-                bindActions();
-            }
-
-            let doAjax = function(url,reqData,method,callback) {
-                $.ajax({
-                    url: BaseUrl+url,
-                    type: method,
-                    data: reqData,
-                    success: function(result){
-                        //alert(result);
-                        callback(reqData,result);
-                    }
-                });
-            }
-
             let bindActions = function (){
 
                 $(parentElemId+" input#upload-img-inp").off("change").on("change",function uploadImageFile(e) {
@@ -430,11 +433,10 @@
                     }
                     $(parentElemId+" .profile_upload_text").hide();
                     $(parentElemId+" .profile_input.add-new-image").show();
-                    $("#cancel-img-upload").show();
+                    $(parentElemId+" .cancel-img-upload").show();
                 });
 
                 $(parentElemId+" input[name=image_title]").on("blur",(e)=>{
-                    //console.log("blur ",e.target.value,uploadedFile);
                     var formData = new FormData();
                     formData.append("file", uploadedFile, uploadedFile.name);
                     formData.append("title", e.target.value);
@@ -467,7 +469,6 @@
                 });
 
                 $(parentElemId+" .add_img_field").off("click").on("click",(e)=>{
-                    console.log("in here");
                     addMediaElem();
                 });
 
@@ -493,30 +494,30 @@
                     $("#previewImg").attr("src","");
                     $(parentElemId+" .profile_upload_text").show();
                     $(parentElemId+" .profile_input.add-new-image").hide();
-                    $("#cancel-img-upload").hide();
+                    $(parentElemId+" .cancel-img-upload").hide();
                     uploadedFile = null;
                 });
             }
 
             let deleteMediaCallback = function (req,resp) {
+                createToast("Image deleted successfully.","S");
                 $("#img-"+req.mediaId).remove();
-                console.log("bfore remove ",currentMediaList,req.mediaId);
                 currentMediaList = currentMediaList.filter((item)=>{
                     console.log(item.id,item.id != req.mediaId);
                     return item.id != req.mediaId;
                 });
-                console.log("after remove ",currentMediaList)
-                lastVidId = currentMediaList[currentMediaCount-1]['id'];
+                currentMediaCount = currentMediaList.length;
+                if(currentMediaCount > 0){
+                    lastVidId = currentMediaList[currentMediaCount-1]['id'];
+                }
                 loadcurrentMediaList();
             }
 
             let updateMediaCallback = function (req,resp) {
-                console.log("Image updated successfully.");
-                //alert(resp);
+                createToast("Image updated successfully.","S");
             }
 
             let addMediaCallback = function(resp){
-                //console.log("in here addVideoCallback",resp);
                 let newVideo = JSON.parse(resp);
                 currentMediaList.push(newVideo);
                 currentMediaCount = currentMediaList.length;
@@ -529,7 +530,7 @@
                 if(currentMediaList.length > 0) {
                     $.each(currentMediaList, (i,v) => {
                         //console.log("v = ",v);
-                        str += '<div id="img-'+v.id+'" class="col-md-3">';
+                        str += '<div id="img-'+v.id+'" class="img-item col-md-3">';
                             str += '<div class="img-container h_66">';
                             str += '<img src="'+v.file_link+'" class="width_inheritence" alt="image">';
                             str += '<div class="title project_card_data w-100 h-100">';
@@ -544,7 +545,7 @@
                         str += '<div class="profile_input">';
                         str += '<input type="text" class="form-control image_title" name="project_image_title_'+v.id+'" placeholder="Add image title" value="'+v.media_info.title+'">';
                         str += '</div>';
-                        str += '<div class="d-flex mt-5 mt-md-3">';
+                        str += '<div class="d-flex mt-5 mt-md-2">';
                         str += '<div>';
                         if(parseInt(v.is_default_marked))
                             str += '<input type="radio" class="checkbox_btn feature_ved" name="is_feature_image" aria-label="" checked="checked" value="'+v.id+'">';
@@ -578,10 +579,10 @@
             }
 
             let getAddElemHtml = function () {
-                let str = '<div class="col-md-3">';
+                let str = '<div class="col-md-3 img-item">';
                     str += '<div class="open_file_explorer profile_upload_container h_66">';
                         str += '<img src="" id="previewImg">';
-                        str += '<div id="cancel-img-upload" style="display:none;curson:pointer;position:absolute;background:red;width:20px;height:20px;top:0;right:0"></div>';
+                        str += '<div id="cancel-img-upload" class="cancel-img-upload"></div>';
                         str += '<div for="file-input input_wrap" class="d-none">';
                             str += '<input type="file" class="imgInp" id="upload-img-inp" name="project_image_1" accept=".jpg,.jpeg,.png">';
                         str += '</div>';
@@ -608,4 +609,233 @@
         }();
 
         Photos.init(project_id);
+
+        var Docs = function(){
+            var project_id = null;
+            var parentElemId = "#Documents";
+            var currentMediaList = [];
+            var lastVidId = 0;
+            var currentMediaCount = 0;
+            var uploadedFile = null;
+
+            let init = function(id){
+                project_id = id;
+                if(!id){
+                    return;
+                }
+                currentMediaCount = currentMediaList.length;
+                if(currentMediaCount > 0){
+                    lastVidId = currentMediaList[currentMediaCount-1]['id'];
+                    console.log("lastVidId = "+lastVidId);
+                }
+
+                doAjax('project/get-project-media/'+project_id+'?type=doc',{},"GET",getMediaCallback);
+                //doAjax('/ajax/get-media/1',{},"GET",updateVideoCallback)
+            }
+
+            let doAjax = function(url,reqData,method,callback) {
+                //show loader
+                $.ajax({
+                    url: BaseUrl+url,
+                    type: method,
+                    data: reqData,
+                    success: function(result){
+                        //alert(result);
+                        //hide loader
+                        callback(reqData,result);
+                    }
+                });
+            }
+
+            let bindActions = function (){
+
+                $(parentElemId+" .add_new_doc_btn").off("click").on("click",(e)=>{
+                    addMediaElem();
+                });
+
+                $(parentElemId+" input#upload-doc-inp").off("change").on("change",function uploadDocFile(e) {
+                    console.log("e = ",this.files);
+                    const [file] = this.files
+                    uploadedFile = this.files[0];
+                    uploadDoc();
+                });
+
+                $(parentElemId+" .delete-doc").off("click").on("click",(e)=>{
+                    console.log("deleting doc ",e.target);
+                    let mediaId = $(e.target).attr('data-id');
+                    console.log("mediaId = "+mediaId);
+                    doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteDocCallback);
+                });
+            }
+
+            let uploadDoc = function () {
+                var formData = new FormData();
+                formData.append("file", uploadedFile, uploadedFile.name);
+                $.ajax({
+                    type: "POST",
+                    url: BaseUrl+"ajax/upload-doc",
+                    xhr: function () {
+                        var myXhr = $.ajaxSettings.xhr();
+                        if (myXhr.upload) {
+                            myXhr.upload.addEventListener('progress', progressHandling, false);
+                        }
+                        return myXhr;
+                    },
+                    success: function (data) {
+                        // your callback here
+                        console.log("success data ",JSON.parse(data));
+                        uploadedFile = null;
+                        uploadDocCallback(null,data);
+                    },
+                    error: function (error) {
+                        // handle error
+                    },
+                    async: true,
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    timeout: 60000
+                });
+            }
+
+            let progressHandling = function (event){
+                var percent = 0;
+                var position = event.loaded || event.position;
+                var total = event.total;
+                var progress_bar_id = "#progress-wrp";
+                if (event.lengthComputable) {
+                    percent = Math.ceil(position / total * 100);
+                }
+                // update progressbars classes so it fits your code
+                $(progress_bar_id + " .progress-bar").css("width", +percent + "%");
+                $(progress_bar_id + " .status").text(percent + "%");
+                console.log("percent complete = "+percent);
+            }
+
+            let uploadDocCallback = function (req, resp) {
+                console.log("in uploadDocCallback",resp);
+                currentMediaList.push(JSON.parse(resp));
+                currentMediaCount = currentMediaList.length;
+                console.log("current Doc List - ",currentMediaList);
+                if(currentMediaCount > 0){
+                    lastVidId = currentMediaList[currentMediaCount-1]['id'];
+                }
+                loadcurrentMediaList();
+                bindActions();
+                
+            }
+
+            let getMediaCallback = function (req, resp) {
+                //console.log("getMediaCallback",resp);
+                currentMediaList = JSON.parse(resp);
+                currentMediaCount = currentMediaList.length;
+                console.log("current Doc List - ",currentMediaList);
+                if(currentMediaCount > 0){
+                    lastVidId = currentMediaList[currentMediaCount-1]['id'];
+                }
+                loadcurrentMediaList();
+                bindActions();
+            }
+
+            let loadcurrentMediaList = function(){
+                let str = '';
+                if(currentMediaList.length > 0) {
+                    $.each(currentMediaList, (i,v) => {
+                        //console.log("v = ",v);
+                        str += '<div class="col-md-3" id="doc-'+v.id+'">';
+                        str += '<div class="doc_container">';
+                        str += '<div class="upload_loader">';
+                        str += '<i class="fa fa-file-text -pink icon-size" aria-hidden="true"></i>';
+                        str += '</div>';
+                        str += '<div class="mid-col">';
+                        str += '<div class="guide_profile_main_subtext Aubergine_at_night">'+v.media_info.name+'</div>';
+                        str += '<div class="proctect_by_capta_text Aubergine_at_night">'+v.media_info.size_label+'</div>';
+                        str += '</div>';
+                        str += '<div>';
+                        str += '<i class="fa fa-times delete-doc" aria-hidden="true" data-id="'+v.id+'"></i>';
+                        str += '</div>';
+                        str += '</div>';
+                        str += '</div>';
+                    });
+                } else {
+                    str += getAddElemHtml();
+                }
+                str += '<div id="add-doc-btn-div" class="col-md-2 add_image_btn d-flex align-items-end">';
+                str += '<button class="add_new_doc_btn save_add_btn">Add another</button>';
+                str += '</div>';
+                $(parentElemId+" .doc-list").html(str);
+                bindActions();
+            }
+
+            let deleteDocCallback = function(req, resp){
+                $("#vid-"+req.mediaId).remove();
+                createToast("Video deleted successfully.","S");
+            }
+
+            let addMediaElem = function() {
+                let str = getAddElemHtml();
+                if(currentMediaCount == 0){
+                    $(str).insertBefore(parentElemId+" .doc-list #add-doc-btn-div");
+                } else {
+                    $(str).insertAfter(parentElemId+" .doc-list #doc-"+lastVidId);
+                }
+                bindActions();
+            }
+
+            let getAddElemHtml = function () {
+                let str = '<div class="col-md-3">';
+                str += '<div class="upload_doc">';
+                str += '<div class="profile_upload_container h_69 w-100 mt-3 mt-md-0 -flx">';
+                str += '<div for="file-input input_wrap" class="d-none">';
+                str += '<input type="file" name="project_doc_1" class="docInp" id="upload-doc-inp" accept=".docx,.doc,.pdf,.jpg,.jpeg">';
+                str += '</div>';
+                str += '<div style="display:flex;justify-content:center">';
+                str += '<label for="upload-doc-inp">';
+                str += '<i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true" style="float:left;margin:7px 0px"></i>';
+                str += '<div class="movie_name_text mx-3 mt-0" style="float:left">Upload file</div>';
+                str += '</label>';
+                str += '</div>';
+                str += '</div>';
+                str += '<div class="profile_upload_text">Upload .doc and .pdf only</div>';
+                str += '</div>';
+                str += '</div>';
+                str += '</div>';
+                return str;
+            }
+
+            return {
+                init
+            }
+
+        }();
+
+        Docs.init(project_id);
+
+        function createToast(message, type) {
+            let toastHtml = '';
+            //$('.for_authtoast').html(toastHtml);
+            if(type == "S") {
+                toastHtml += '<div class="toast align-items-end text-white bg-success border-0 justify-content-end" id="success-toast" class="toast" data-animation="true" data-autohide="true" data-delay="5000" role="alert" aria-live="assertive" aria-atomic="true">';
+                toastHtml += '<div class="d-flex">';
+                toastHtml += '<div class="toast-body">';
+                toastHtml += 'Success: '+message;
+                toastHtml += '</div>';
+                toastHtml += '<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>';
+                toastHtml += '</div>';
+                toastHtml += '</div>';
+            } else if (type == "E") {
+                toastHtml += '<div class="toast align-items-end text-white bg-danger border-0 animation" id="error-toast" role="alert" aria-live="assertive" aria-atomic="true">';
+                toastHtml += '<div class="d-flex">';
+                toastHtml += '<div class="toast-body">';
+                toastHtml += 'Error: '+message;
+                toastHtml += '</div>';
+                toastHtml += '<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>';
+                toastHtml += '</div>';
+                toastHtml += '</div>';
+            }
+            $('.for_authtoast').html(toastHtml);
+            $("#error-toast").toast("show");
+            $("#success-toast").toast("show");
+        }
 </script>
