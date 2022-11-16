@@ -23,7 +23,7 @@
                         <div class="row video-sec">
                             <div class="guide_profile_main_text Aubergine_at_night mt-2 mb-2">Videos</div>
                                 <div class="video-list row col_wrap">
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <div class="img-container h_66">
                                             <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
                                             <div class="project_card_data w-100 h-100">
@@ -41,8 +41,8 @@
                                                 <div class="mk-feature mx-2">Make Feature Video</div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-3">
+                                    </div> -->
+                                    <!-- <div class="col-md-3">
                                         <div class="profile_upload_container h_66 mt-3 mt-md-0">
                                             <div class="text-center">
                                                 <img src="" id="previewVid" onclick="document.getElementById('vidInp').click();">
@@ -67,7 +67,7 @@
                                         <div>
                                             <button class="add_video_field save_add_btn">Add another</button>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
                             <div class="row photo-sec">
                                 <div class="guide_profile_main_text Aubergine_at_night mt-2">Photos</div>
                                 <div class="photo-list row col_wrap">
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <div class="img-container h_66">
                                             <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
                                             <div class="project_card_data w-100 h-100">
@@ -116,14 +116,14 @@
                                         <div class="add_img_field mb-5">
                                             <button class="save_add_btn">Add another</button>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                         </div>
                     </div>
                     <div id="Documents" class="add_content_wraper">
                         <div class="guide_profile_main_text Aubergine_at_night mt-3 mb-2">Documents</div>
                         <div class="doc-list row col_wrap">
-                            <div class="col-md-3">
+                            <!-- <div class="col-md-3">
                                 <div class="doc_container" id="">
                                     <div class="upload_loader">
                                         <i class="fa fa-file-text -pink icon-size" aria-hidden="true"></i>
@@ -157,7 +157,7 @@
                                         <button class="add_new_doc_btn save_add_btn">Add another</button>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -175,40 +175,43 @@
             </div>
         </div>
     </div>
-    <div class="col-md-5 mt-2 mt-md-0">
-                        
-<button type="button" class="deactivate_btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="display:none">Deactivate account</button>
-    <!-- Modal for Confirmation for account deactivate -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-body" style="padding: 0px;">
-    <section>
-    <div class="container"style="padding: 0px;" >
-        <div class="row">   
-            <div class="col-md-12">
-                <div class="modal_container">
-                    <div class="icon_container warning">
-                        <i class="fa fa-times icon_style" aria-hidden="true"></i>
-                    </div>
-                    <div class="head_text mt-4">Are you sure?</div>
-                    <div class="sub_text mt-4">Do you really want to deactivate your account?<br>This process cannot be undone.</div>
-                    <div class="d-flex justify-content-center mt-4">   
-                        <button type="button" class="cancel_btn mx-3" data-bs-dismiss="modal">Cancel</button>
-                           <button  class="delete_btn mx-3" type="button">Confirm</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
+  </div>
+<div class="col-md-5 mt-2 mt-md-0">             
+	<button type="button" class="deactivate_btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="display:none">Deactivate account</button>
+		<!-- Modal for Confirmation for account deactivate -->
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-body" style="padding: 0px;">
+					<div class="container"style="padding: 0px;" >
+						<div class="row">   
+							<div class="col-md-12">
+								<div class="modal_container">
+									<div class="icon_container warning">
+										<i class="fa fa-times icon_style" aria-hidden="true"></i>
+									</div>
+									<div class="head_text mt-4">Are you sure?</div>
+									<div class="sub_text mt-4">Do you really want to delete the item?<br>This process cannot be undone.</div>
+									<div class="d-flex justify-content-center mt-4">   
+										<button type="button" class="cancel_btn cancel_btn_text mx-3" data-bs-dismiss="modal">Cancel</button>
+										   <button class="delete_btn confirm_btn_text mx-3" type="button" data-bs-dismiss="modal">Confirm</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
-
 </section>
 
 @endsection
 
 @section('scripts')
-<script>
+<!-- <script>
     
     $(document).ready(function() {
 
@@ -329,7 +332,7 @@
         e.stopPropagation();
     });
 
-</script>
+</script> -->
 @endsection
 
 

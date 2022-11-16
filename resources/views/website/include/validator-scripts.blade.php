@@ -223,7 +223,18 @@
                 $(parentElemId+" .delete-media").off("click").on("click",(e)=>{
                     //alert("Add delete confirmation here");
                     let mediaId = $(e.target).attr('data-id');
-                    doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteMediaCallback);
+                    setModal("","","Yes, Delete","");
+                    $(".deactivate_btn").click();
+                    // $(".modal-body button.cancel_btn").off("click").click((e)=>{
+                    //     console.log("cancel modal");
+                    // });
+                    $(".modal-body button.delete_btn").off("click").click((e)=>{
+                        console.log("delete confirm modal");
+                        // $("#staticBackdrop").hide();
+                        // $(".modal-backdrop").hide();
+                        doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteMediaCallback);
+                    });
+                    //doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteMediaCallback);
                 });
             }
 
@@ -408,20 +419,6 @@
                 //bindActions();
             }
 
-            let progressHandling = function (event) {
-                var percent = 0;
-                var position = event.loaded || event.position;
-                var total = event.total;
-                var progress_bar_id = "#progress-wrp";
-                if (event.lengthComputable) {
-                    percent = Math.ceil(position / total * 100);
-                }
-                // update progressbars classes so it fits your code
-                $(progress_bar_id + " .progress-bar").css("width", +percent + "%");
-                $(progress_bar_id + " .status").text(percent + "%");
-                console.log("percent complete = "+percent);
-            };
-
             let bindActions = function (){
 
                 $(parentElemId+" input#upload-img-inp").off("change").on("change",function uploadImageFile(e) {
@@ -429,11 +426,12 @@
                     const [file] = this.files
                     uploadedFile = this.files[0];
                     if (file) {
-                        $("#previewImg").attr("src",URL.createObjectURL(file));
+                        $("#previewImg").attr("src",URL.createObjectURL(file)).show();
+                        $(parentElemId+" .open_file_explorer label").hide();
+                        $(parentElemId+" .profile_upload_text").hide();
+                        $(parentElemId+" .profile_input.add-new-image").show();
+                        $(parentElemId+" .cancel-img-upload").show();
                     }
-                    $(parentElemId+" .profile_upload_text").hide();
-                    $(parentElemId+" .profile_input.add-new-image").show();
-                    $(parentElemId+" .cancel-img-upload").show();
                 });
 
                 $(parentElemId+" input[name=image_title]").on("blur",(e)=>{
@@ -487,16 +485,43 @@
                 $(parentElemId+" .delete-media").off("click").on("click",(e)=>{
                     //alert("Add delete confirmation here");
                     let mediaId = $(e.target).attr('data-id');
-                    doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteMediaCallback);
+                    setModal("","","Yes, Delete","");
+                    $(".deactivate_btn").click();
+                    // $(".modal-body button.cancel_btn").off("click").click((e)=>{
+                    //     console.log("cancel modal");
+                    // });
+                    $(".modal-body button.delete_btn").off("click").click((e)=>{
+                        console.log("delete confirm modal");
+                        // $("#staticBackdrop").hide();
+                        // $(".modal-backdrop").hide();
+                        doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteMediaCallback);
+                    });
+                    //doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteMediaCallback);
                 });
 
                 $(parentElemId+" #cancel-img-upload").off("click").on("click",(e)=>{
-                    $("#previewImg").attr("src","");
+                    $("#previewImg").attr("src","").hide();
+                    $(parentElemId+" .open_file_explorer label").show();
                     $(parentElemId+" .profile_upload_text").show();
                     $(parentElemId+" .profile_input.add-new-image").hide();
                     $(parentElemId+" .cancel-img-upload").hide();
                     uploadedFile = null;
                 });
+            }
+
+            let progressHandling = function (event){
+                $(parentElemId+" .progress-bar").show();
+                var percent = 0;
+                var position = event.loaded || event.position;
+                var total = event.total;
+                if (event.lengthComputable) {
+                    percent = Math.ceil(position / total * 100);
+                }
+                // update progressbars classes so it fits your code
+                $(parentElemId + " .progress-bar").show();
+                $(parentElemId + " .progress-bar .fill-progress").css("width", +percent + "%");
+                $(parentElemId + " .status").text(percent + "%");
+                console.log("percent complete = "+percent);
             }
 
             let deleteMediaCallback = function (req,resp) {
@@ -582,7 +607,8 @@
                 let str = '<div class="col-md-3 img-item">';
                     str += '<div class="open_file_explorer profile_upload_container h_66">';
                         str += '<img src="" id="previewImg">';
-                        str += '<div id="cancel-img-upload" class="cancel-img-upload"></div>';
+                        str += '<div id="cancel-img-upload" class="cancel-img-upload"><i class="fa fa-times" aria-hidden="true"></i></div>';
+                        str += '<div class="progress-bar"><div class="fill-progress"></div></div>';
                         str += '<div for="file-input input_wrap" class="d-none">';
                             str += '<input type="file" class="imgInp" id="upload-img-inp" name="project_image_1" accept=".jpg,.jpeg,.png">';
                         str += '</div>';
@@ -663,8 +689,16 @@
                 $(parentElemId+" .delete-doc").off("click").on("click",(e)=>{
                     console.log("deleting doc ",e.target);
                     let mediaId = $(e.target).attr('data-id');
-                    console.log("mediaId = "+mediaId);
-                    doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteDocCallback);
+                    setModal("","","Yes, Delete","");
+                    // $(".modal-body button.cancel_btn").off("click").click((e)=>{
+                    //     console.log("cancel modal");
+                    // });
+                    $(".modal-body button.delete_btn").off("click").click((e)=>{
+                        // $("#staticBackdrop").hide();
+                        // $(".modal-backdrop").hide();
+                        doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteDocCallback);
+                    });
+                    $(".deactivate_btn").click();
                 });
             }
 
@@ -703,14 +737,13 @@
                 var percent = 0;
                 var position = event.loaded || event.position;
                 var total = event.total;
-                var progress_bar_id = "#progress-wrp";
                 if (event.lengthComputable) {
                     percent = Math.ceil(position / total * 100);
                 }
                 // update progressbars classes so it fits your code
-                $(progress_bar_id + " .progress-bar").css("width", +percent + "%");
-                $(progress_bar_id + " .status").text(percent + "%");
-                console.log("percent complete = "+percent);
+                $(parentElemId + " .progress-bar").show();
+                $(parentElemId + " .progress-bar .fill-progress").css("width", +percent + "%");
+                $(parentElemId + " .status").text(percent + "%");
             }
 
             let uploadDocCallback = function (req, resp) {
@@ -769,8 +802,9 @@
             }
 
             let deleteDocCallback = function(req, resp){
-                $("#vid-"+req.mediaId).remove();
-                createToast("Video deleted successfully.","S");
+                //console.log("deleteDocCallback",req,resp);
+                $("#doc-"+req.mediaId).remove();
+                createToast("Document removed successfully.","S");
             }
 
             let addMediaElem = function() {
@@ -785,18 +819,19 @@
 
             let getAddElemHtml = function () {
                 let str = '<div class="col-md-3">';
-                str += '<div class="upload_doc">';
-                str += '<div class="profile_upload_container h_69 w-100 mt-3 mt-md-0 -flx">';
-                str += '<div for="file-input input_wrap" class="d-none">';
-                str += '<input type="file" name="project_doc_1" class="docInp" id="upload-doc-inp" accept=".docx,.doc,.pdf,.jpg,.jpeg">';
+                str += '<div class="upload_doc" style="position:relative">';
+                    str += '<div class="profile_upload_container h_69 w-100 mt-3 mt-md-0 -flx">';
+                        str += '<div for="file-input input_wrap" class="d-none">';
+                            str += '<input type="file" name="project_doc_1" class="docInp" id="upload-doc-inp" accept=".docx,.doc,.pdf,.jpg,.jpeg">';
+                        str += '</div>';
+                        str += '<div style="display:flex;justify-content:center">';
+                            str += '<label for="upload-doc-inp">';
+                                str += '<i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true" style="float:left;margin:7px 0px"></i>';
+                            str += '<div class="movie_name_text mx-3 mt-0" style="float:left">Upload file</div>';
+                            str += '</label>';
+                    str += '</div>';
                 str += '</div>';
-                str += '<div style="display:flex;justify-content:center">';
-                str += '<label for="upload-doc-inp">';
-                str += '<i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true" style="float:left;margin:7px 0px"></i>';
-                str += '<div class="movie_name_text mx-3 mt-0" style="float:left">Upload file</div>';
-                str += '</label>';
-                str += '</div>';
-                str += '</div>';
+                str += '<div class="progress-bar"><div class="fill-progress"></div></div>';
                 str += '<div class="profile_upload_text">Upload .doc and .pdf only</div>';
                 str += '</div>';
                 str += '</div>';
@@ -837,5 +872,24 @@
             $('.for_authtoast').html(toastHtml);
             $("#error-toast").toast("show");
             $("#success-toast").toast("show");
+        }
+
+        function setModal(head_text, sub_text, confirm_btn_text, cancel_btn_text) {
+            if(head_text != ""){
+                head_text = "Are you sure?";
+                $("#staticBackdrop .modal_container .head_text").html(head_text);
+            }
+            if(sub_text != ""){
+                sub_text = "Do you really want to delete the item?<br>This process cannot be undone.";
+                $("#staticBackdrop .modal_container .sub_text").html(sub_text);
+            }
+            if(confirm_btn_text != ""){
+                confirm_btn_text = "Yes, Delete"
+                $("#staticBackdrop .modal_container .confirm_btn_text").html(confirm_btn_text);
+            }
+            if(cancel_btn_text != ""){
+                cancel_btn_text = "Cancel";
+                $("#staticBackdrop .modal_container .cancel_btn_text").html(cancel_btn_text);
+            }
         }
 </script>
