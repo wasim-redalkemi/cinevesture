@@ -6,9 +6,6 @@
         }
 
         $(document).ready(function(){
-            
-            project_id = $("input[name=project_id]").val();
-            console.log("project_id "+project_id);
             //For albhabates
             $(".alphabets-only").on("input",function(){
                 $(this).val($(this).val().replace(/[^A-z ]/g,''));
@@ -391,10 +388,6 @@
             }
         }();
 
-        project_id = $("input[name=project_id]").val();
-        // get the current video list from backend and load into the Gallary class.
-        Videos.init(project_id);
-
         // Photo gallary page script
         var Photos = function () {
             var project_id = null;
@@ -676,8 +669,6 @@
             }
         }();
 
-        Photos.init(project_id);
-
         var Docs = function(){
             var project_id = null;
             var parentElemId = "#Documents";
@@ -893,8 +884,6 @@
             }
 
         }();
-
-        Docs.init(project_id);
 
         function createToast(message, type) {
             let toastHtml = '';
