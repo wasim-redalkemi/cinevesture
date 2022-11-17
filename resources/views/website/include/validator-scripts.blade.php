@@ -148,7 +148,8 @@
             }
 
             let getVideosCallback = function (req, resp) {
-                currentVideos = JSON.parse(resp);
+                let respArr = JSON.parse(resp);
+                currentVideos = respArr.payload;
                 currentVideoCount = currentVideos.length;
                 if(currentVideoCount > 0){
                     lastVidId = currentVideos[currentVideoCount-1]['id'];
@@ -389,7 +390,7 @@
                     console.log("lastVidId = "+lastVidId);
                 }
 
-                doAjax('project/get-project-media/'+project_id+'?type=image',{},"GET",getMediaCallback);
+                doAjax('project/get-project-media/'+project_id+'?type=image',{},"GET",getPhotosCallback);
                 //doAjax('/ajax/get-media/1',{},"GET",updateVideoCallback)
             }
 
@@ -402,21 +403,20 @@
                     success: function(result){
                         //alert(result);
                         //hide loader
+                        //JSON.parse(result);
                         callback(reqData,result);
                     }
                 });
             }
 
-            let getMediaCallback = function (req, resp) {
-                //console.log("getMediaCallback",resp);
-                currentMediaList = JSON.parse(resp);
+            let getPhotosCallback = function (req, resp) {
+                let respArr = JSON.parse(resp);
+                currentMediaList = respArr.payload;
                 currentMediaCount = currentMediaList.length;
                 if(currentMediaCount > 0){
                     lastVidId = currentMediaList[currentMediaCount-1]['id'];
-                    //console.log("lastVidId = "+lastVidId);
                 }
                 loadcurrentMediaList();
-                //bindActions();
             }
 
             let bindActions = function (){
@@ -655,7 +655,7 @@
                     console.log("lastVidId = "+lastVidId);
                 }
 
-                doAjax('project/get-project-media/'+project_id+'?type=doc',{},"GET",getMediaCallback);
+                doAjax('project/get-project-media/'+project_id+'?type=doc',{},"GET",getDocCallback);
                 //doAjax('/ajax/get-media/1',{},"GET",updateVideoCallback)
             }
 
@@ -759,11 +759,10 @@
                 
             }
 
-            let getMediaCallback = function (req, resp) {
-                //console.log("getMediaCallback",resp);
-                currentMediaList = JSON.parse(resp);
+            let getDocCallback = function (req, resp) {
+                let respArr = JSON.parse(resp);
+                currentMediaList = respArr.payload;
                 currentMediaCount = currentMediaList.length;
-                console.log("current Doc List - ",currentMediaList);
                 if(currentMediaCount > 0){
                     lastVidId = currentMediaList[currentMediaCount-1]['id'];
                 }

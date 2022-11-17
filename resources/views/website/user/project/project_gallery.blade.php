@@ -23,6 +23,7 @@
                         <div class="row video-sec">
                             <div class="guide_profile_main_text Aubergine_at_night mt-2 mb-2">Videos</div>
                                 <div class="video-list row col_wrap">
+                                    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                                     <!-- <div class="col-md-3">
                                         <div class="img-container h_66">
                                             <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
@@ -75,6 +76,7 @@
                             <div class="row photo-sec">
                                 <div class="guide_profile_main_text Aubergine_at_night mt-2">Photos</div>
                                 <div class="photo-list row col_wrap">
+                                    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                                     <!-- <div class="col-md-3">
                                         <div class="img-container h_66">
                                             <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
@@ -123,6 +125,7 @@
                     <div id="Documents" class="add_content_wraper">
                         <div class="guide_profile_main_text Aubergine_at_night mt-3 mb-2">Documents</div>
                         <div class="doc-list row col_wrap">
+                            <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                             <!-- <div class="col-md-3">
                                 <div class="doc_container" id="">
                                     <div class="upload_loader">

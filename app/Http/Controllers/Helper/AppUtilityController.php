@@ -13,7 +13,7 @@ class AppUtilityController extends Controller
         if(empty($url)){
             throw new \Exception("Video url cannot be empty");
         }
-        \Log::info("getting video details for ".$url);
+        //\Log::info("getting video details for ".$url);
         $urlInfo = parse_url($url);
         if($urlInfo['host'] == "youtube.com" || $urlInfo['host'] == "www.youtube.com" ) {
             $urlParts = $urlInfo['query'];

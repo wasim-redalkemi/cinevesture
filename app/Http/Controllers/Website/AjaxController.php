@@ -11,6 +11,8 @@ use App\Models\ProjectMedia;
 
 
 class AjaxController extends WebController {
+    CONST AJAX_CALL_SUCCESS = 0;
+    CONST AJAX_CALL_ERROR = 1;
 
     public function getVideoDetails(Request $request){
         //\Log::info("here in logs");

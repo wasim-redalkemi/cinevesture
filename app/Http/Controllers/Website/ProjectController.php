@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\WebController;
+use App\Http\Controllers\Website\AjaxController;
 use App\Models\MasterCountry;
 use App\Models\MasterLanguage;
 use App\Models\MasterLookingFor;
@@ -573,10 +574,10 @@ class ProjectController extends WebController
             } 
             //$queries = \DB::getQueryLog();
             //\Log::info("project_id ".json_encode($queries));
-            return json_encode($ProjectVideos);
+            //return json_encode($ProjectVideos);
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$ProjectVideos,"Success","ER000","");
         } catch (Exception $e) {
-            return json_encode([]);
-
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,$ProjectVideos,"","ER500",$e->getMessage());
         }
         
     }
