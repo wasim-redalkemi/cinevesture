@@ -21,9 +21,11 @@ use App\Models\ProjectStage;
 use App\Models\ProjectStageOfFunding;
 use App\Models\ProjectType;
 use App\Models\User;
+use App\Models\UserFavouriteProject;
 use App\Models\UserProject;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use PhpParser\Node\Stmt\TryCatch;
 
 class ProjectController extends WebController
@@ -562,12 +564,18 @@ class ProjectController extends WebController
 
     public function publicView($id)
     {
-        try {            
-            $UserProject = UserProject::query()->where('id',$id)->first();
-            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectType','projectStageOfFunding','projectStage'])->where('id',$id)->get();
+        try { 
+            $UserProject = UserProject::query()->where('id',$id)->first();           
+            $countries = MasterCountry::all();
+            $languages = MasterLanguage::all();
+            $geners = MasterProjectGenre::all();
+            $categories = MasterProjectCategory::all();
+            $looking_for = MasterLookingFor::all();
+            $project_stages = ProjectStage::all();
+            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectType','projectStageOfFunding','projectStage'])->where('id',$id)->first();
             $projectData = $projectData->toArray();
 
-            return view('website.user.project.project_public_view', compact('UserProject','projectData'));
+            return view('website.user.project.project_public_view', compact(['UserProject','projectData','countries','languages','geners','categories','looking_for','project_stages']));
 
         } catch (Exception $e) {
             return back()->with('error','Something went wrong.');
@@ -600,5 +608,118 @@ class ProjectController extends WebController
         }
         
     }
+
+    // Get filtered Project
+
+    public function getFilteredProject(Request $request)
+    {
+        try{ 
+            $validator = Validator::make($request->all(), [
+                'search' => 'nullable',
+                'countries.*' => 'nullable|exists:master_countries,id',
+                'languages.*' => 'nullable|exists:master_languages,id',
+                'geners.*' => 'nullable|exists:master_project_genres,id',
+                'categories.*' => 'nullable|exists:master_project_categories,id',
+                'looking_for.*' => 'nullable|exists:master_looking_fors,id',
+                'project_stages.*' => 'nullable|exists:project_stages,id',
+            ]);
+        
+            if ($validator->fails()) {
+                return back()->withErrors($validator)->withInput();
+            }
+    
+            $countries = MasterCountry::all();
+            $languages = MasterLanguage::all();
+            $geners = MasterProjectGenre::all();
+            $categories = MasterProjectCategory::all();
+            $looking_for = MasterLookingFor::all();
+            $project_stages = ProjectStage::all();
+            
+            $projects = UserProject::query()
+            ->where('save_type','published')
+            ->where(function($query) use($request){
+                if (isset($request->search)) { // search name of user
+                    $query->where("project_name", "like", "%$request->search%");
+                }
+                if(isset($request->project_verified)){ // filter project verified
+                  $query->where("project_verified","1");
+                }
+                if (isset($request->project_stages)) { // search name of user
+                    $query->where("project_stage_id",$request->project_stages);
+                }
+            })
+            ->where(function($subQuery) use($request)
+            {   
+                if (isset($request->countries)) { // search name of user
+                $subQuery->whereHas('projectCountries',function ($q) use($request){
+                        $q->whereIn('country_id',$request->countries);
+                        
+                    });
+                } 
+                if (isset($request->languages)) { // search name of user
+                    $subQuery->whereHas('projectLanguages', function ($q) use($request){
+                        $q->whereIn('language_id',$request->languages);
+                    });
+                }
+                if (isset($request->geners)) { // search name of user
+                    $subQuery->whereHas('genres', function ($q) use($request){
+                        $q->whereIn('gener_id',$request->geners);
+                    });
+                } 
+                if (isset($request->categories)) { // search name of user
+                    $subQuery->whereHas('projectCategory', function ($q) use($request){
+                        $q->whereIn('category_id',$request->categories);
+                    });
+                } 
+                if (isset($request->looking_for)) { // search name of user
+                    $subQuery->whereHas('projectLookingFor', function ($q) use($request){
+                        $q->whereIn('looking_for_id',$request->looking_for);
+                    });
+                }
+            
+            
+            })
+            ->with(['projectCountries','projectLanguages','genres','projectCategory','projectLookingFor','projectStage','projectType','user','projectImage'])
+            // ->where('user_id','!=',auth()->user()->id)
+            ->orderByDesc('id')
+            ->paginate(5);
+         
+            $projects->appends(request()->input())->links();
+            return view('website.user.project.search_result',compact(['countries','languages','geners','categories','looking_for','project_stages','projects']));                   
+           }catch(Exception $e){
+            return back()->with('error', 'Something went wrong.');
+           }
+        }
+
+           public function projectLike(Request $request)
+           {
+            try{ $validator = Validator::make($request->all(), [
+
+                'id' => 'required|exists:user_projects,id',
+                
+            ]);
+    
+            if ($validator->fails()) {
+                return ['status'=>False,'msg'=>"Something went wrong, Please try again later."];
+            }
+                 $favourite = UserFavouriteProject::query()
+                             ->where('user_id',auth()->user()->id)
+                             ->where('project_id',$request->id)->first();
+                 if($favourite){
+                    $favourite->delete();
+                    return ['status'=>True,'msg'=>"You have unliked this project."];
+                 }else{
+                    $favourite = new UserFavouriteProject();
+                    $favourite->user_id = auth()->user()->id;
+                    $favourite->project_id = $request->id;
+                    $favourite->save();
+                    return ['status'=>True,'msg'=>"You have liked this project."];
+                  }
+    
+            }catch(Exception $e){
+                return ['status'=>False,'msg'=>$e->getMessage()];
+            }
+           }
+    
 
 }

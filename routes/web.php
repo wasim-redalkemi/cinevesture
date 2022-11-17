@@ -115,7 +115,11 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 
 
         Route::get('/public-view/{id}', [ProjectController::class, 'publicView'])->name('public-view');
+        Route::post('/like', [ProjectController::class, 'projectLike'])->name('project-like');
+        
         Route::get('/get-project-media/{id}', [ProjectController::class, 'getMediaByProject'])->name('get-project-media');
+
+        Route::get('/filter', [ProjectController::class, 'getFilteredProject'])->name('get-project-filter');
 
 	});
 

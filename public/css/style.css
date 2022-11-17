@@ -341,6 +341,13 @@ body {
     margin-top: 0;
 }
 
+.nav-drop{
+    height: 60vh;
+    overflow: auto;
+    width: 200px;
+    overflow-x: hidden;
+}
+
 .text_decor_none {
     text-decoration: none !important;
     color: white !important;
