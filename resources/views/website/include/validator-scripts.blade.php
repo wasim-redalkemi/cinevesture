@@ -6,9 +6,6 @@
         }
 
         $(document).ready(function(){
-            
-            project_id = $("input[name=project_id]").val();
-            console.log("project_id "+project_id);
             //For albhabates
             $(".alphabets-only").on("input",function(){
                 $(this).val($(this).val().replace(/[^A-z ]/g,''));
@@ -148,7 +145,8 @@
             }
 
             let getVideosCallback = function (req, resp) {
-                currentVideos = JSON.parse(resp);
+                let respArr = JSON.parse(resp);
+                currentVideos = respArr.payload;
                 currentVideoCount = currentVideos.length;
                 if(currentVideoCount > 0){
                     lastVidId = currentVideos[currentVideoCount-1]['id'];
@@ -221,59 +219,96 @@
                     doAjax('ajax/update-media/'+defVid,{'id':defVid,'is_default_marked':'1','type':'video'},"POST",updateVideoCallback);
                 });
                 $(parentElemId+" .delete-media").off("click").on("click",(e)=>{
-                    //alert("Add delete confirmation here");
                     let mediaId = $(e.target).attr('data-id');
-                    doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteMediaCallback);
+                    setModal("","","Yes, Delete","");
+                    $(".deactivate_btn").click();
+                    // $(".modal-body button.cancel_btn").off("click").click((e)=>{
+                    //     console.log("cancel modal");
+                    // });
+                    $(".modal-body button.delete_btn").off("click").click((e)=>{
+                        doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteVideoCallback);
+                    });
                 });
             }
 
-            let deleteMediaCallback = function (req,resp) {
-                $("#vid-"+req.mediaId).remove();
-                createToast("Video deleted successfully.","S");
+            let deleteVideoCallback = function (req,resp) {
+                let respArr = JSON.parse(resp);
+                if(respArr.status == 1){
+                    currentVideos = currentVideos.filter((item)=>{
+                        console.log(item.id,item.id != req.mediaId);
+                        return item.id != req.mediaId;
+                    });
+                    currentVideoCount = currentVideos.length;
+                    if(currentVideoCount > 0){
+                        lastVidId = currentVideos[currentVideoCount-1]['id'];
+                    }
+                    $("#vid-"+req.mediaId).remove();
+                    createToast("Video deleted successfully.","S");
+                } else {
+                    createToast(respArr.error_msg,"E");
+                }
             }
 
             let updateVideoCallback = function (req,resp) {
-                createToast("Video updated successfully.","S");
+                let respArr = JSON.parse(resp);
+                if(respArr.status == 1){
+                    createToast("Video updated successfully.","S");
+                } else {
+                    createToast(respArr.error_msg,"E");
+                }
             }
 
             let getVimeoData = function(reqData,vimeoResp) {
                 //https://vimeo.com/336812686
-                // let vidId = link.split("https://vimeo.com/");
-                // vidId = vidId[1].split("/")[0];
                 //let vimeoResp = '[{"id":336812686,"title":"Direct Links To Video Files","description":"Hi there! Need help? Go to http:\/\/vimeo.com\/help","url":"https:\/\/vimeo.com\/336812686","upload_date":"2019-05-17 09:32:53","thumbnail_small":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_100x75","thumbnail_medium":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_200x150","thumbnail_large":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_640","user_id":90564994,"user_name":"Vimeo Support","user_url":"https:\/\/vimeo.com\/vimeosupport","user_portrait_small":"https:\/\/i.vimeocdn.com\/portrait\/27986607_30x30","user_portrait_medium":"https:\/\/i.vimeocdn.com\/portrait\/27986607_75x75","user_portrait_large":"https:\/\/i.vimeocdn.com\/portrait\/27986607_100x100","user_portrait_huge":"https:\/\/i.vimeocdn.com\/portrait\/27986607_300x300","duration":41,"width":1920,"height":1080,"tags":"","embed_privacy":"anywhere"}]';
-                let vimeo = JSON.parse(vimeoResp)[0];
-                let newVideo = {};
-                newVideo['project_id'] = project_id;
-                newVideo['id'] = lastVidId+1;
-                newVideo['title'] = vimeo.title;
-                newVideo['thumbnail'] = vimeo.thumbnail_medium;
-                newVideo['url'] = vimeo.url;
-                newVideo['is_default_marked'] = 0;
-                doAjax('ajax/add-video',newVideo,"POST",addVideoCallback);
+                let respArr = JSON.parse(vimeoResp);
+                if(respArr.status == 1){
+                    let vimeo = respArr.payload;
+                    let newVideo = {};
+                    newVideo['project_id'] = project_id;
+                    newVideo['id'] = lastVidId+1;
+                    newVideo['title'] = vimeo.title;
+                    newVideo['thumbnail'] = vimeo.thumbnail_medium;
+                    newVideo['url'] = vimeo.url;
+                    newVideo['is_default_marked'] = 0;
+                    doAjax('ajax/add-video',newVideo,"POST",addVideoCallback);
+                } else {
+                    createToast(respArr.error_msg,"E");
+                }
             }
 
             let getYouTubeData = function(reqData,youtubeResp) {
                 //"https://www.youtube.com/watch?v=ZdbQ_FvNBZA&t=915s&ab_channel=ScaleupAlly";
                 // let youtubeResp = '{"kind":"youtube#videoListResponse","etag":"NY12d6Sa3mhyYdxx62iuVh0ta50","items":[{"kind":"youtube#video","etag":"BlL66Tqwd6vcpb_0fuUt4YHRBlA","id":"ZdbQ_FvNBZA","snippet":{"publishedAt":"2021-10-03T07:14:26Z","channelId":"UCyzKMNskJwgVy7j_lQ5aP-Q","title":"Session 5: What is Postman? and How to use it? by Suprabhat Sen","description":"Postman is one of the most important tools for any kind of Web and App Development. Learn how Postman works and helps make the job easier for any Software Developer","thumbnails":{"default":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/default.jpg","width":120,"height":90},"medium":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/mqdefault.jpg","width":320,"height":180},"high":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/hqdefault.jpg","width":480,"height":360},"standard":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/sddefault.jpg","width":640,"height":480},"maxres":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/maxresdefault.jpg","width":1280,"height":720}},"channelTitle":"ScaleupAlly","categoryId":"28","liveBroadcastContent":"none","localized":{"title":"Session 5: What is Postman? and How to use it? by Suprabhat Sen","description":"Postman is one of the most important tools for any kind of Web and App Development. Learn how Postman works and helps make the job easier for any Software Developer"}}}],"pageInfo":{"totalResults":1,"resultsPerPage":1}}';
-                let vimeo = JSON.parse(youtubeResp);
-                let newVideo = {};
-                newVideo['project_id'] = project_id;
-                newVideo['title'] = vimeo['items'][0]['snippet']['title'];
-                newVideo['thumbnail'] = vimeo['items'][0]['snippet']['thumbnails']['high']['url'];
-                newVideo['url'] = reqData.vidUrl;
-                newVideo['is_default_marked'] = 0;
-                newVideo['type'] = 'videourl';
-                doAjax('ajax/add-video',newVideo,"POST",addVideoCallback);
+                let respArr = JSON.parse(youtubeResp);
+                if(respArr.status == 1){
+                    let vimeo = respArr.payload;
+                    let newVideo = {};
+                    newVideo['project_id'] = project_id;
+                    newVideo['title'] = vimeo['items'][0]['snippet']['title'];
+                    newVideo['thumbnail'] = vimeo['items'][0]['snippet']['thumbnails']['high']['url'];
+                    newVideo['url'] = reqData.vidUrl;
+                    newVideo['is_default_marked'] = 0;
+                    newVideo['type'] = 'videourl';
+                    doAjax('ajax/add-video',newVideo,"POST",addVideoCallback);
+                } else {
+                    createToast(respArr.error_msg,"E");
+                }
             }
 
             let addVideoCallback = function(req,resp){
                 //console.log("in here addVideoCallback",resp);
-                createToast("Video added successfully.","S");
-                let newVideo = JSON.parse(resp);
-                currentVideos.push(newVideo);
-                currentVideoCount = currentVideos.length;
-                loadCurrentVideos();
-                lastVidId = currentVideos[currentVideos.length-1]['id'];
+                let respArr = JSON.parse(resp);
+                if(respArr.status == 1){
+                    createToast("Video added successfully.","S");
+                    let newVideo = respArr.payload;
+                    currentVideos.push(newVideo);
+                    currentVideoCount = currentVideos.length;
+                    loadCurrentVideos();
+                    lastVidId = currentVideos[currentVideos.length-1]['id'];
+                } else {
+                    createToast(respArr.error_msg,"E");
+                }
             }
 
             let loadCurrentVideos = function() {
@@ -353,10 +388,6 @@
             }
         }();
 
-        project_id = $("input[name=project_id]").val();
-        // get the current video list from backend and load into the Gallary class.
-        Videos.init(project_id);
-
         // Photo gallary page script
         var Photos = function () {
             var project_id = null;
@@ -378,7 +409,7 @@
                     console.log("lastVidId = "+lastVidId);
                 }
 
-                doAjax('project/get-project-media/'+project_id+'?type=image',{},"GET",getMediaCallback);
+                doAjax('project/get-project-media/'+project_id+'?type=image',{},"GET",getPhotosCallback);
                 //doAjax('/ajax/get-media/1',{},"GET",updateVideoCallback)
             }
 
@@ -391,36 +422,21 @@
                     success: function(result){
                         //alert(result);
                         //hide loader
+                        //JSON.parse(result);
                         callback(reqData,result);
                     }
                 });
             }
 
-            let getMediaCallback = function (req, resp) {
-                //console.log("getMediaCallback",resp);
-                currentMediaList = JSON.parse(resp);
+            let getPhotosCallback = function (req, resp) {
+                let respArr = JSON.parse(resp);
+                currentMediaList = respArr.payload;
                 currentMediaCount = currentMediaList.length;
                 if(currentMediaCount > 0){
                     lastVidId = currentMediaList[currentMediaCount-1]['id'];
-                    //console.log("lastVidId = "+lastVidId);
                 }
                 loadcurrentMediaList();
-                //bindActions();
             }
-
-            let progressHandling = function (event) {
-                var percent = 0;
-                var position = event.loaded || event.position;
-                var total = event.total;
-                var progress_bar_id = "#progress-wrp";
-                if (event.lengthComputable) {
-                    percent = Math.ceil(position / total * 100);
-                }
-                // update progressbars classes so it fits your code
-                $(progress_bar_id + " .progress-bar").css("width", +percent + "%");
-                $(progress_bar_id + " .status").text(percent + "%");
-                console.log("percent complete = "+percent);
-            };
 
             let bindActions = function (){
 
@@ -429,11 +445,12 @@
                     const [file] = this.files
                     uploadedFile = this.files[0];
                     if (file) {
-                        $("#previewImg").attr("src",URL.createObjectURL(file));
+                        $("#previewImg").attr("src",URL.createObjectURL(file)).show();
+                        $(parentElemId+" .open_file_explorer label").hide();
+                        $(parentElemId+" .profile_upload_text").hide();
+                        $(parentElemId+" .profile_input.add-new-image").show();
+                        $(parentElemId+" .cancel-img-upload").show();
                     }
-                    $(parentElemId+" .profile_upload_text").hide();
-                    $(parentElemId+" .profile_input.add-new-image").show();
-                    $(parentElemId+" .cancel-img-upload").show();
                 });
 
                 $(parentElemId+" input[name=image_title]").on("blur",(e)=>{
@@ -454,7 +471,7 @@
                             // your callback here
                             console.log("success data ",JSON.parse(data));
                             uploadedFile = null;
-                            addMediaCallback(data);
+                            addPhotoCallback(data);
                         },
                         error: function (error) {
                             // handle error
@@ -487,11 +504,23 @@
                 $(parentElemId+" .delete-media").off("click").on("click",(e)=>{
                     //alert("Add delete confirmation here");
                     let mediaId = $(e.target).attr('data-id');
-                    doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteMediaCallback);
+                    setModal("","","Yes, Delete","");
+                    $(".deactivate_btn").click();
+                    // $(".modal-body button.cancel_btn").off("click").click((e)=>{
+                    //     console.log("cancel modal");
+                    // });
+                    $(".modal-body button.delete_btn").off("click").click((e)=>{
+                        console.log("delete confirm modal");
+                        // $("#staticBackdrop").hide();
+                        // $(".modal-backdrop").hide();
+                        doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deletePhotoCallback);
+                    });
+                    //doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deletePhotoCallback);
                 });
 
                 $(parentElemId+" #cancel-img-upload").off("click").on("click",(e)=>{
-                    $("#previewImg").attr("src","");
+                    $("#previewImg").attr("src","").hide();
+                    $(parentElemId+" .open_file_explorer label").show();
                     $(parentElemId+" .profile_upload_text").show();
                     $(parentElemId+" .profile_input.add-new-image").hide();
                     $(parentElemId+" .cancel-img-upload").hide();
@@ -499,30 +528,61 @@
                 });
             }
 
-            let deleteMediaCallback = function (req,resp) {
-                createToast("Image deleted successfully.","S");
-                $("#img-"+req.mediaId).remove();
-                currentMediaList = currentMediaList.filter((item)=>{
-                    console.log(item.id,item.id != req.mediaId);
-                    return item.id != req.mediaId;
-                });
-                currentMediaCount = currentMediaList.length;
-                if(currentMediaCount > 0){
-                    lastVidId = currentMediaList[currentMediaCount-1]['id'];
+            let progressHandling = function (event){
+                $(parentElemId+" .progress-bar").show();
+                var percent = 0;
+                var position = event.loaded || event.position;
+                var total = event.total;
+                if (event.lengthComputable) {
+                    percent = Math.ceil(position / total * 100);
                 }
-                loadcurrentMediaList();
+                // update progressbars classes so it fits your code
+                $(parentElemId + " .progress-bar").show();
+                $(parentElemId + " .progress-bar .fill-progress").css("width", +percent + "%");
+                $(parentElemId + " .status").text(percent + "%");
+                console.log("percent complete = "+percent);
+            }
+
+            let deletePhotoCallback = function (req,resp) {
+                let respArr = JSON.parse(resp);
+                if(respArr.status == 1){
+                    createToast("Image deleted successfully.","S");
+                    $("#img-"+req.mediaId).remove();
+                    currentMediaList = currentMediaList.filter((item)=>{
+                        console.log(item.id,item.id != req.mediaId);
+                        return item.id != req.mediaId;
+                    });
+                    currentMediaCount = currentMediaList.length;
+                    if(currentMediaCount > 0){
+                        lastVidId = currentMediaList[currentMediaCount-1]['id'];
+                    }
+                    loadcurrentMediaList();
+                } else {
+                    createToast(respArr.error_msg,"E");
+                }
             }
 
             let updateMediaCallback = function (req,resp) {
-                createToast("Image updated successfully.","S");
+                let respArr = JSON.parse(resp);
+                if(respArr.status == 1){
+                    createToast("Image updated successfully.","S");
+                } else {
+                    createToast(respArr.error_msg,"E");
+                }
             }
 
-            let addMediaCallback = function(resp){
-                let newVideo = JSON.parse(resp);
-                currentMediaList.push(newVideo);
-                currentMediaCount = currentMediaList.length;
-                loadcurrentMediaList();
-                lastVidId = currentMediaList[currentMediaList.length-1]['id'];
+            let addPhotoCallback = function(resp){
+                let respArr = JSON.parse(resp);
+                if(respArr.status == 1){
+                    let newImage = respArr.payload;
+                    currentMediaList.push(newImage);
+                    currentMediaCount = currentMediaList.length;
+                    loadcurrentMediaList();
+                    lastVidId = currentMediaList[currentMediaList.length-1]['id'];
+                    createToast("Image updated successfully.","S");
+                } else {
+                    createToast(respArr.error_msg,"E");
+                }
             }
 
             let loadcurrentMediaList = function() {
@@ -582,7 +642,8 @@
                 let str = '<div class="col-md-3 img-item">';
                     str += '<div class="open_file_explorer profile_upload_container h_66">';
                         str += '<img src="" id="previewImg">';
-                        str += '<div id="cancel-img-upload" class="cancel-img-upload"></div>';
+                        str += '<div id="cancel-img-upload" class="cancel-img-upload"><i class="fa fa-times" aria-hidden="true"></i></div>';
+                        str += '<div class="progress-bar"><div class="fill-progress"></div></div>';
                         str += '<div for="file-input input_wrap" class="d-none">';
                             str += '<input type="file" class="imgInp" id="upload-img-inp" name="project_image_1" accept=".jpg,.jpeg,.png">';
                         str += '</div>';
@@ -608,8 +669,6 @@
             }
         }();
 
-        Photos.init(project_id);
-
         var Docs = function(){
             var project_id = null;
             var parentElemId = "#Documents";
@@ -629,7 +688,7 @@
                     console.log("lastVidId = "+lastVidId);
                 }
 
-                doAjax('project/get-project-media/'+project_id+'?type=doc',{},"GET",getMediaCallback);
+                doAjax('project/get-project-media/'+project_id+'?type=doc',{},"GET",getDocCallback);
                 //doAjax('/ajax/get-media/1',{},"GET",updateVideoCallback)
             }
 
@@ -663,8 +722,16 @@
                 $(parentElemId+" .delete-doc").off("click").on("click",(e)=>{
                     console.log("deleting doc ",e.target);
                     let mediaId = $(e.target).attr('data-id');
-                    console.log("mediaId = "+mediaId);
-                    doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteDocCallback);
+                    setModal("","","Yes, Delete","");
+                    // $(".modal-body button.cancel_btn").off("click").click((e)=>{
+                    //     console.log("cancel modal");
+                    // });
+                    $(".modal-body button.delete_btn").off("click").click((e)=>{
+                        // $("#staticBackdrop").hide();
+                        // $(".modal-backdrop").hide();
+                        doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteDocCallback);
+                    });
+                    $(".deactivate_btn").click();
                 });
             }
 
@@ -703,34 +770,36 @@
                 var percent = 0;
                 var position = event.loaded || event.position;
                 var total = event.total;
-                var progress_bar_id = "#progress-wrp";
                 if (event.lengthComputable) {
                     percent = Math.ceil(position / total * 100);
                 }
                 // update progressbars classes so it fits your code
-                $(progress_bar_id + " .progress-bar").css("width", +percent + "%");
-                $(progress_bar_id + " .status").text(percent + "%");
-                console.log("percent complete = "+percent);
+                $(parentElemId + " .progress-bar").show();
+                $(parentElemId + " .progress-bar .fill-progress").css("width", +percent + "%");
+                $(parentElemId + " .status").text(percent + "%");
             }
 
             let uploadDocCallback = function (req, resp) {
-                console.log("in uploadDocCallback",resp);
-                currentMediaList.push(JSON.parse(resp));
-                currentMediaCount = currentMediaList.length;
-                console.log("current Doc List - ",currentMediaList);
-                if(currentMediaCount > 0){
-                    lastVidId = currentMediaList[currentMediaCount-1]['id'];
+                let respArr = JSON.parse(resp);
+                if(respArr.status == 1){
+                    console.log("in uploadDocCallback",resp);
+                    currentMediaList.push(respArr.payload);
+                    currentMediaCount = currentMediaList.length;
+                    console.log("current Doc List - ",currentMediaList);
+                    if(currentMediaCount > 0){
+                        lastVidId = currentMediaList[currentMediaCount-1]['id'];
+                    }
+                    loadcurrentMediaList();
+                    bindActions();
+                } else {
+                    createToast(respArr.error_msg,"E");
                 }
-                loadcurrentMediaList();
-                bindActions();
-                
             }
 
-            let getMediaCallback = function (req, resp) {
-                //console.log("getMediaCallback",resp);
-                currentMediaList = JSON.parse(resp);
+            let getDocCallback = function (req, resp) {
+                let respArr = JSON.parse(resp);
+                currentMediaList = respArr.payload;
                 currentMediaCount = currentMediaList.length;
-                console.log("current Doc List - ",currentMediaList);
                 if(currentMediaCount > 0){
                     lastVidId = currentMediaList[currentMediaCount-1]['id'];
                 }
@@ -769,8 +838,13 @@
             }
 
             let deleteDocCallback = function(req, resp){
-                $("#vid-"+req.mediaId).remove();
-                createToast("Video deleted successfully.","S");
+                let respArr = JSON.parse(resp);
+                if(respArr.status == 1){
+                    $("#doc-"+req.mediaId).remove();
+                    createToast("Document removed successfully.","S");
+                } else {
+                    createToast(respArr.error_msg,"E");
+                }
             }
 
             let addMediaElem = function() {
@@ -785,18 +859,19 @@
 
             let getAddElemHtml = function () {
                 let str = '<div class="col-md-3">';
-                str += '<div class="upload_doc">';
-                str += '<div class="profile_upload_container h_69 w-100 mt-3 mt-md-0 -flx">';
-                str += '<div for="file-input input_wrap" class="d-none">';
-                str += '<input type="file" name="project_doc_1" class="docInp" id="upload-doc-inp" accept=".docx,.doc,.pdf,.jpg,.jpeg">';
+                str += '<div class="upload_doc" style="position:relative">';
+                    str += '<div class="profile_upload_container h_69 w-100 mt-3 mt-md-0 -flx">';
+                        str += '<div for="file-input input_wrap" class="d-none">';
+                            str += '<input type="file" name="project_doc_1" class="docInp" id="upload-doc-inp" accept=".docx,.doc,.pdf,.jpg,.jpeg">';
+                        str += '</div>';
+                        str += '<div style="display:flex;justify-content:center">';
+                            str += '<label for="upload-doc-inp">';
+                                str += '<i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true" style="float:left;margin:7px 0px"></i>';
+                            str += '<div class="movie_name_text mx-3 mt-0" style="float:left">Upload file</div>';
+                            str += '</label>';
+                    str += '</div>';
                 str += '</div>';
-                str += '<div style="display:flex;justify-content:center">';
-                str += '<label for="upload-doc-inp">';
-                str += '<i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true" style="float:left;margin:7px 0px"></i>';
-                str += '<div class="movie_name_text mx-3 mt-0" style="float:left">Upload file</div>';
-                str += '</label>';
-                str += '</div>';
-                str += '</div>';
+                str += '<div class="progress-bar"><div class="fill-progress"></div></div>';
                 str += '<div class="profile_upload_text">Upload .doc and .pdf only</div>';
                 str += '</div>';
                 str += '</div>';
@@ -809,8 +884,6 @@
             }
 
         }();
-
-        Docs.init(project_id);
 
         function createToast(message, type) {
             let toastHtml = '';
@@ -837,5 +910,24 @@
             $('.for_authtoast').html(toastHtml);
             $("#error-toast").toast("show");
             $("#success-toast").toast("show");
+        }
+
+        function setModal(head_text, sub_text, confirm_btn_text, cancel_btn_text) {
+            if(head_text != ""){
+                head_text = "Are you sure?";
+                $("#staticBackdrop .modal_container .head_text").html(head_text);
+            }
+            if(sub_text != ""){
+                sub_text = "Do you really want to delete the item?<br>This process cannot be undone.";
+                $("#staticBackdrop .modal_container .sub_text").html(sub_text);
+            }
+            if(confirm_btn_text != ""){
+                confirm_btn_text = "Yes, Delete"
+                $("#staticBackdrop .modal_container .confirm_btn_text").html(confirm_btn_text);
+            }
+            if(cancel_btn_text != ""){
+                cancel_btn_text = "Cancel";
+                $("#staticBackdrop .modal_container .cancel_btn_text").html(cancel_btn_text);
+            }
         }
 </script>

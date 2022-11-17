@@ -28583,5 +28583,8 @@ div.tagsinput span.tag a {
 .inp-height{
   height: 50px;
 }
+.btn_padding{
+  padding: 0.2rem 1rem;
+}
 
 /*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */

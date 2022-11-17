@@ -9,6 +9,8 @@
           </button>
           <div class="collapse navbar-collapse justify-content-between" id="navbarTogglerDemo01">
             <div>
+            <form class="" id = "filter" method="GET" action="{{ route('get-project-filter') }}">
+                        @csrf
               <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
                   <div class="dropdown home-dropdown">
@@ -16,25 +18,15 @@
                       aria-expanded="false">
                       Genres
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu nav-drop" id="list-gener">
+                      @foreach($geners as $gen)
                       <li>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" name="gener[]" value="" id="flexCheckDefault">
                         <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Features
+                          {{$gen->name}}
                         </label>
                       </li>
-                      <li class="dropdown-list">
-                        <input class="form-check-input home-checkbox" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Animation
-                        </label>
-                      </li>
-                      <li class="dropdown-list">
-                        <input class="form-check-input home-checkbox" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Biography
-                        </label>
-                      </li>
+                      @endforeach
                     </ul>
                   </div>
                 </li>
@@ -44,25 +36,15 @@
                       aria-expanded="false">
                       Category
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu nav-drop" id="list-categories">
+                       @foreach($categories as $cate)
                       <li>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value=""  name="categories[]"id="flexCheckDefault">
                         <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Features
+                          {{$cate->name}}
                         </label>
                       </li>
-                      <li class="dropdown-list">
-                        <input class="form-check-input home-checkbox" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Animation
-                        </label>
-                      </li>
-                      <li class="dropdown-list">
-                        <input class="form-check-input home-checkbox" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Biography
-                        </label>
-                      </li>
+                      @endforeach
                     </ul>
                   </div>
                 </li>
@@ -72,25 +54,16 @@
                       aria-expanded="false">
                       Looking for
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu nav-drop" id="list-lookingFor">
+                    @foreach($looking_for as $look)
                       <li>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="" name="lookingFor[]" id="flexCheckDefault">
                         <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Features
+                          {{$look->name}}
                         </label>
                       </li>
-                      <li class="dropdown-list">
-                        <input class="form-check-input home-checkbox" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Animation
-                        </label>
-                      </li>
-                      <li class="dropdown-list">
-                        <input class="form-check-input home-checkbox" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Biography
-                        </label>
-                      </li>
+                      @endforeach
+                      
                     </ul>
                   </div>
                 </li>
@@ -100,25 +73,16 @@
                       aria-expanded="false">
                       Project Stage
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu nav-drop" id="list-stages">
+                    @foreach($project_stages as $pro)
                       <li>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value=""  name="stages[]"id="flexCheckDefault">
                         <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Features
+                          {{$pro->name}}
                         </label>
                       </li>
-                      <li class="dropdown-list">
-                        <input class="form-check-input home-checkbox" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Animation
-                        </label>
-                      </li>
-                      <li class="dropdown-list">
-                        <input class="form-check-input home-checkbox" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Biography
-                        </label>
-                      </li>
+                      @endforeach
+                      
                     </ul>
                   </div>
                 </li>
@@ -128,25 +92,16 @@
                       aria-expanded="false">
                       Country
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu nav-drop" id="list-countries">
+                    @foreach($countries as $con)
                       <li>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="" name="countries[]" id="flexCheckDefault">
                         <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Features
+                          {{$con->name}}
                         </label>
                       </li>
-                      <li class="dropdown-list">
-                        <input class="form-check-input home-checkbox" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Animation
-                        </label>
-                      </li>
-                      <li class="dropdown-list">
-                        <input class="form-check-input home-checkbox" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Biography
-                        </label>
-                      </li>
+                      @endforeach
+                     
                     </ul>
                   </div>
                 </li>
@@ -156,53 +111,15 @@
                       aria-expanded="false">
                       Language
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul class="dropdown-menu nav-drop" id="list-language">
+                    @foreach($languages as $lang)
                       <li>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" name="language[]" value="" id="flexCheckDefault">
                         <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Features
+                          {{$lang->name}}
                         </label>
                       </li>
-                      <li class="dropdown-list">
-                        <input class="form-check-input home-checkbox" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Animation
-                        </label>
-                      </li>
-                      <li class="dropdown-list">
-                        <input class="form-check-input home-checkbox" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Biography
-                        </label>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-                <li class="nav-item">
-                  <div class="dropdown home-dropdown">
-                    <a class="btn dropdown-toggle nav-link" href="#" role="button" data-bs-toggle="dropdown"
-                      aria-expanded="false">
-                      Looking for
-                    </a>
-                    <ul class="dropdown-menu">
-                      <li>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Features
-                        </label>
-                      </li>
-                      <li class="dropdown-list">
-                        <input class="form-check-input home-checkbox" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Animation
-                        </label>
-                      </li>
-                      <li class="dropdown-list">
-                        <input class="form-check-input home-checkbox" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Biography
-                        </label>
-                      </li>
+                      @endforeach
                     </ul>
                   </div>
                 </li>
@@ -213,12 +130,13 @@
                 <div class="search"><button type="submit" class="searchButton">
                     <i class="fa fa-search"></i>
                   </button>
-                  <input type="text" class="searchTerm" placeholder="Search">
+                  <input type="text" name="search" id="search-project"class="searchTerm" placeholder="Search">
                 </div>
               </div>
               <div>
-                <button class="header-search-btn mx-3">Search</button>
-                <button class="add-proj-btn my-2 my-sm-0 mr-0" type="submit"><a class="btn-link text_decor_none" href="{{ route('project-overview')}}">Add a Project</a></button>
+                <button type="submit" class="header-search-btn mx-3">Search</button>
+               </form>
+                <button class="add-proj-btn my-2 my-sm-0 mr-0"><a class="btn-link text_decor_none" href="{{ route('project-overview')}}">Add a Project</a></button>
               </div>
             </div>
           </div>
@@ -227,3 +145,37 @@
     </div>
   </nav>    
 @endsection
+
+@push('scripts')
+<script>
+  $('.header-search-btn').on('click',function(e){
+    var gener  = $("#list-gener input[type=checkbox]:checked").length
+    var categories = $("#list-categories input[type=checkbox]:checked").length
+    var lookingFor = $("#list-lookingFor input[type=checkbox]:checked").length
+    var stages = $("#list-stages input[type=checkbox]:checked").length
+    var countries = $("#list-countries input[type=checkbox]:checked").length
+    var language =  $("#list-language input[type=checkbox]:checked").length
+    var search = $.trim($('#search-project').val());
+
+    if(!search && gener == 0 && categories  == 0 && lookingFor  == 0 && countries  == 0 && language  == 0 && stages  == 0){
+         e.preventDefault();
+         toastMessage(0,"Please apply filter.");
+         $("#error-toast").toast("show");
+         $("#success-toast").toast("show");
+      }else{
+         $('#filter').submit();
+      }
+  
+  });
+
+  $(document).ready(function(){
+   
+   $("#error-toast").toast("show");
+   $("#success-toast").toast("show");
+   
+
+
+});
+</script>
+
+@endpush
