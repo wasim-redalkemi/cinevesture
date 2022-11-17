@@ -31,7 +31,9 @@
               @include('website.include.flash_message')
         </div>
             @yield('header')
-            @yield('nav')
+            @if(!empty(auth()->user()) && auth()->user()->user_type !== 'A') 
+                @yield('nav')
+            @endif
             @stack('add_css')
             @yield('content')
             @yield('footer')

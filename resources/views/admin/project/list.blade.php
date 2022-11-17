@@ -32,30 +32,43 @@
                                     <td>
                                     <?php echo $i;?>
                                     </td>
-                                    <td>{{$project->project_name}}</td>
+                                    <td>{{ucfirst($project->project_name)}}</td>
                                     
                                    <td>
+                                    @if (!empty($project->projectCategory))
+                                        
+                                    
+                                    @php $x=0.; @endphp
+                                   
                                     @foreach ($project->projectCategory as $key=>$category)
-                                    {{$category->name.','}}
+                                    @php $x++; @endphp
+                                    {{$x.'.'.$category->name.','}}
                                      
                                      @endforeach
                                      <a href="{{route('category.update-view')}}?pid={{$project->id}}&cid={{$category->id}}"><i class="fa fa-edit"></i></a>
+                                     @endif
                                     </td>
                                   
-                                    
-                                   {{-- @foreach ($project->genres as $key=>$genre) --}}
                                    <td>
-                                    @foreach ($project->genres as $key=>$genre)
-                                    {{$genre->name.','}}
-                                     @endforeach
-                                     <a href="{{route('genre.update-view')}}?p_id={{$project->id}}&g_id={{$genre->id}}"><i class="fa fa-edit"></i></a>
-
-                                    </td>
-                                   
+                                    @if ($project->genres)
+                                        
                                     
+                                    @php $x=0; @endphp
+                                    @foreach ($project->genres as $key=>$genre)
+                                    @php $x++; @endphp
+                                    @if (empty($genre->name)){{'-'}}@endif{{ucfirst($x.".".$genre->name).','}}
+                                    @endforeach
+                                    @if (!empty($genre->name))
+                                    <a href="{{route('genre.update-view')}}?p_id={{$project->id}}&g_id={{$genre->id}}"><i class="fa fa-edit"></i></a>
+                                    @else 
+                                    {{'-'}}
+                                    @endif
+                                    @endif
+                                    </td>
+
                                     <td>{{ date('d-M-y', strtotime($project->created_at)) }}</td>
                                     @if (isset($project->user->name))
-                                    <td>{{$project->user->name}}</td>
+                                    <td>{{ucfirst($project->user->name)}}</td>
                                     @endif
                                     <td>2</td>
                                     
@@ -67,7 +80,7 @@
                                         <a href="{{route('project-list-status')}}?status={{$x}}&pId={{$project->id}}"><button type="button" class="btn btn-primary btn btn-success">{{($project->project_verified==1) ?"Publish":"Unpublish"}}</button>
                                         </a>
                                         @else
-                                        <a href="{{route('project-list-status')}}?status={{$x}}&pId={{$project->id}}"><button type="button" class="btn btn-primary btn btn-danger">{{($project->project_verified==1) ?"Publish":"Unpublish"}}</button>
+                                        <a href="{{route('project-list-status')}}?status={{$x}}&pId={{$project->id}}"><button type="button" class="btn btn-primary btn btn-warning">{{($project->project_verified==1) ?"Publish":"Unpublish"}}</button>
                                         </a>
                                         @endif
                                         
@@ -86,14 +99,18 @@
                                          <input type="checkbox" class="recom_inp" path="{{route('project-list-recommended')}}?s={{$recom}}&p={{$project->id}}" name="fav" id="fav" <?php if($project->Recommended_badge == 1){echo 'checked';}?>>
                                     </td>
                                     <td>
-                                        <a href="{{route('public-view',[($project->id)])}}"><button class="btn mb-2  btn-outline-primary w-65 view-btn">View</button></a>
-                                        <button class="btn btn-outline-primary w-60 view-btn">Edit</button>
+                                        <a href="{{route('project-public-view',[($project->id)])}}"><button class="btn mb-2 view-btn btn btn-primary">View</button></a>
+                                        {{-- <button class="btn btn-outline-primary w-60 view-btn">Edit</button> --}}
                                     </td>
                                    
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
+                        <div class="row">
+                            <div class="col-md-12">
+                            <div style="float:right;">{{$projects->links()}}</div>
+                        </div> 
                     </div>
                 </div>
             </div>

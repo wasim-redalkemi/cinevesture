@@ -47,6 +47,11 @@ Auth::routes(['verify' => true]);
     Route::post('verify-otp', [RegisterController::class, 'otpVerify'])->name('verify-otp');
     Route::get('otp-view', [RegisterController::class, 'index'])->name('otp-view'); 
     Route::get('resend-otp/{email?}/{type?}', [RegisterController::class, 'resendOtp'])->name('resend-otp'); 
+
+    Route::group(["middleware"=>["adminWebAuth"],"prefix"=>"admin"],function(){
+        Route::get('project/public-view/{id}', [ProjectController::class, 'publicView'])->name('project-public-view');
+		Route::get('user/profile-public-show', [UserController::class, 'profilePublicShow'])->name('user-profile-public-show');
+    });
     // Route::get('reset-password/{token}',[ResetPasswordController::class,'restPasswordPublicView'])->name('reset-password-view');
 
 Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],function(){
@@ -60,6 +65,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/update-media/{media_id}',[AjaxController::class, 'updateMedia'])->name('update-video');
         Route::post('/delete-media/{media_id}',[AjaxController::class, 'deleteMedia'])->name('delete-media');
         Route::post('/upload-image',[AjaxController::class, 'uploadImage'])->name('upload-image');
+        Route::post('/upload-doc',[AjaxController::class, 'uploadDoc'])->name('ajax/upload-doc');
     });
 
     Route::group(['prefix'=>'user'],function()
@@ -112,6 +118,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/validate-project-milestone', [ProjectController::class, 'validateProjectMilestone'])->name('validate-project-milestone');
 
         Route::get('/project-preview', [ProjectController::class, 'projectPreview'])->name('project-preview');
+        Route::get('/project-status', [ProjectController::class, 'changeStatus'])->name('project-status');
+
 
 
         Route::get('/public-view/{id}', [ProjectController::class, 'publicView'])->name('public-view');

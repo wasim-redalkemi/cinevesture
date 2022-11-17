@@ -10,7 +10,7 @@
 <div class="hide-me animation for_authtoast">
     @include('website.include.flash_message')
 </div>
-@include('website.user.project.project_pagination')
+@include('website.user.project.project_pagination',['page_bg' => '2'])
 
 
 <!-- Detail section  -->
@@ -26,10 +26,10 @@
                             <div class="col-md-6">
                                 <div class="profile_input">
                                     <label>Category (Optional)</label>
-                                    <select name="category_id[]" id="located_in" class="js-select2 @error('category_id') is-invalid @enderror" id="" autofocus multiple>
+                                    <select name="category_id[]" class="js-select2 @error('category_id') is-invalid @enderror" id="" autofocus multiple>
                                         <option value="">Select</option>
                                         @foreach ($category as $k=>$v)
-                                            <option value="{{ $v->id }}">{{  $v->name }}</option>
+                                            <option value="{{ $v->id }}"@if(!empty($projectData[0]['project_category'] )&&(in_array($v->id, $projectData[0]['project_category'])))selected @endif>{{  $v->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('category_id')
@@ -47,7 +47,7 @@
                                     <select name="gener[]" class="js-select2 @error('gener') is-invalid @enderror" autofocus multiple>
                                         <option value="">Select</option>
                                         @foreach ($Genres as $k=>$v)
-                                            <option value="{{ $v->id }}">{{  $v->name }}</option>
+                                            <option value="{{ $v->id }}"@if(!empty($projectData[0]['genres'] )&&(in_array($v->id, $projectData[0]['genres'])))selected @endif>{{  $v->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('gener')
@@ -63,7 +63,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Duration (Optional)</label>
-                                    <input type="time" class="form-control" name="duration" placeholder="hr:min" aria-describedby="basic-addon1">
+                                    <input type="number" class="form-control no_number_arrows" name="duration" pattern="[0-9]" placeholder="min" value="<?php if(!empty($projectData[0]['duration'])){ echo $projectData[0]['duration']; } ?>" aria-describedby="basic-addon1">
                                     @error('duration')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -77,7 +77,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Total Budget (USD) <span style = "color:red">*</span></label>
-                                    <input type="text" class="form-control" name="total_budget" placeholder="Empty input">
+                                    <input type="number" class="form-control no_number_arrows" name="total_budget" pattern="[0-9]" placeholder="Empty input" value="<?php if(!empty($projectData[0]['total_budget'])){ echo $projectData[0]['total_budget']; } ?>">
                                     @error('total_budget')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -90,7 +90,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Financing Secured (USD) <span style = "color:red">*</span></label>
-                                    <input type="text" class="form-control" name="financing_secured" placeholder="Empty input">
+                                    <input type="number" class="form-control no_number_arrows" name="financing_secured" pattern="[0-9]" placeholder="Empty input" value="<?php if(!empty($projectData[0]['financing_secured'])){ echo $projectData[0]['financing_secured']; } ?>">
                                     @error('financing_secured')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -192,7 +192,7 @@
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-end mt-5 pt-5 pb-md-0">
                                     <input type="hidden" name="project_id" value="<?php if(isset($_REQUEST['id'])) {echo $_REQUEST['id'];}?>">
-                                    <button class="cancel_btn mx-3"><a href="{{ route('project-overview') }}?id={{$_REQUEST['id']}}">Go back</a></button>
+                                    <button class="cancel_btn mx-3"><a class="btn-link-style" href="{{ route('project-overview') }}?id={{$_REQUEST['id']}}">Go back</a></button>
                                     <button type="submit" class="guide_profile_btn">Save & Next</button>
                                 </div>
                             </div>

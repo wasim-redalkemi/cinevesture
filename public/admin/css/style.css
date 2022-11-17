@@ -24629,7 +24629,7 @@ body.avgrund-active {
 .dataTables_wrapper .dataTable thead .sorting_asc_disabled:after,
 .dataTables_wrapper .dataTable thead .sorting_desc_disabled:before,
 .dataTables_wrapper .dataTable thead .sorting_desc_disabled:after {
-  line-height: 2.5;
+  /* line-height: 2.5; */
   font-family: Material Design Icons;
   font-size: .65rem;
 }
@@ -28582,6 +28582,9 @@ div.tagsinput span.tag a {
 }
 .inp-height{
   height: 50px;
+}
+.btn_padding{
+  padding: 0.2rem 1rem;
 }
 
 /*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */
