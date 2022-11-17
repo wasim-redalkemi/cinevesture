@@ -163,7 +163,6 @@
                             </div> -->
                         </div>
                     </div>
-                </div>
                     <div class="row">
                         <div class="col-md-12">
                             <div class="d-flex justify-content-end mt-5">
@@ -173,6 +172,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                     </form>
                 </div>
             </div>

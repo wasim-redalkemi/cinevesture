@@ -222,7 +222,6 @@
                     doAjax('ajax/update-media/'+defVid,{'id':defVid,'is_default_marked':'1','type':'video'},"POST",updateVideoCallback);
                 });
                 $(parentElemId+" .delete-media").off("click").on("click",(e)=>{
-                    //alert("Add delete confirmation here");
                     let mediaId = $(e.target).attr('data-id');
                     setModal("","","Yes, Delete","");
                     $(".deactivate_btn").click();
@@ -230,62 +229,89 @@
                     //     console.log("cancel modal");
                     // });
                     $(".modal-body button.delete_btn").off("click").click((e)=>{
-                        console.log("delete confirm modal");
-                        // $("#staticBackdrop").hide();
-                        // $(".modal-backdrop").hide();
-                        doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteMediaCallback);
+                        doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteVideoCallback);
                     });
-                    //doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteMediaCallback);
                 });
             }
 
-            let deleteMediaCallback = function (req,resp) {
-                $("#vid-"+req.mediaId).remove();
-                createToast("Video deleted successfully.","S");
+            let deleteVideoCallback = function (req,resp) {
+                let respArr = JSON.parse(resp);
+                if(respArr.status == 1){
+                    currentVideos = currentVideos.filter((item)=>{
+                        console.log(item.id,item.id != req.mediaId);
+                        return item.id != req.mediaId;
+                    });
+                    currentVideoCount = currentVideos.length;
+                    if(currentVideoCount > 0){
+                        lastVidId = currentVideos[currentVideoCount-1]['id'];
+                    }
+                    $("#vid-"+req.mediaId).remove();
+                    createToast("Video deleted successfully.","S");
+                } else {
+                    createToast(respArr.error_msg,"E");
+                }
             }
 
             let updateVideoCallback = function (req,resp) {
-                createToast("Video updated successfully.","S");
+                let respArr = JSON.parse(resp);
+                if(respArr.status == 1){
+                    createToast("Video updated successfully.","S");
+                } else {
+                    createToast(respArr.error_msg,"E");
+                }
             }
 
             let getVimeoData = function(reqData,vimeoResp) {
                 //https://vimeo.com/336812686
-                // let vidId = link.split("https://vimeo.com/");
-                // vidId = vidId[1].split("/")[0];
                 //let vimeoResp = '[{"id":336812686,"title":"Direct Links To Video Files","description":"Hi there! Need help? Go to http:\/\/vimeo.com\/help","url":"https:\/\/vimeo.com\/336812686","upload_date":"2019-05-17 09:32:53","thumbnail_small":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_100x75","thumbnail_medium":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_200x150","thumbnail_large":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_640","user_id":90564994,"user_name":"Vimeo Support","user_url":"https:\/\/vimeo.com\/vimeosupport","user_portrait_small":"https:\/\/i.vimeocdn.com\/portrait\/27986607_30x30","user_portrait_medium":"https:\/\/i.vimeocdn.com\/portrait\/27986607_75x75","user_portrait_large":"https:\/\/i.vimeocdn.com\/portrait\/27986607_100x100","user_portrait_huge":"https:\/\/i.vimeocdn.com\/portrait\/27986607_300x300","duration":41,"width":1920,"height":1080,"tags":"","embed_privacy":"anywhere"}]';
-                let vimeo = JSON.parse(vimeoResp)[0];
-                let newVideo = {};
-                newVideo['project_id'] = project_id;
-                newVideo['id'] = lastVidId+1;
-                newVideo['title'] = vimeo.title;
-                newVideo['thumbnail'] = vimeo.thumbnail_medium;
-                newVideo['url'] = vimeo.url;
-                newVideo['is_default_marked'] = 0;
-                doAjax('ajax/add-video',newVideo,"POST",addVideoCallback);
+                let respArr = JSON.parse(vimeoResp);
+                if(respArr.status == 1){
+                    let vimeo = respArr.payload;
+                    let newVideo = {};
+                    newVideo['project_id'] = project_id;
+                    newVideo['id'] = lastVidId+1;
+                    newVideo['title'] = vimeo.title;
+                    newVideo['thumbnail'] = vimeo.thumbnail_medium;
+                    newVideo['url'] = vimeo.url;
+                    newVideo['is_default_marked'] = 0;
+                    doAjax('ajax/add-video',newVideo,"POST",addVideoCallback);
+                } else {
+                    createToast(respArr.error_msg,"E");
+                }
             }
 
             let getYouTubeData = function(reqData,youtubeResp) {
                 //"https://www.youtube.com/watch?v=ZdbQ_FvNBZA&t=915s&ab_channel=ScaleupAlly";
                 // let youtubeResp = '{"kind":"youtube#videoListResponse","etag":"NY12d6Sa3mhyYdxx62iuVh0ta50","items":[{"kind":"youtube#video","etag":"BlL66Tqwd6vcpb_0fuUt4YHRBlA","id":"ZdbQ_FvNBZA","snippet":{"publishedAt":"2021-10-03T07:14:26Z","channelId":"UCyzKMNskJwgVy7j_lQ5aP-Q","title":"Session 5: What is Postman? and How to use it? by Suprabhat Sen","description":"Postman is one of the most important tools for any kind of Web and App Development. Learn how Postman works and helps make the job easier for any Software Developer","thumbnails":{"default":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/default.jpg","width":120,"height":90},"medium":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/mqdefault.jpg","width":320,"height":180},"high":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/hqdefault.jpg","width":480,"height":360},"standard":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/sddefault.jpg","width":640,"height":480},"maxres":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/maxresdefault.jpg","width":1280,"height":720}},"channelTitle":"ScaleupAlly","categoryId":"28","liveBroadcastContent":"none","localized":{"title":"Session 5: What is Postman? and How to use it? by Suprabhat Sen","description":"Postman is one of the most important tools for any kind of Web and App Development. Learn how Postman works and helps make the job easier for any Software Developer"}}}],"pageInfo":{"totalResults":1,"resultsPerPage":1}}';
-                let vimeo = JSON.parse(youtubeResp);
-                let newVideo = {};
-                newVideo['project_id'] = project_id;
-                newVideo['title'] = vimeo['items'][0]['snippet']['title'];
-                newVideo['thumbnail'] = vimeo['items'][0]['snippet']['thumbnails']['high']['url'];
-                newVideo['url'] = reqData.vidUrl;
-                newVideo['is_default_marked'] = 0;
-                newVideo['type'] = 'videourl';
-                doAjax('ajax/add-video',newVideo,"POST",addVideoCallback);
+                let respArr = JSON.parse(youtubeResp);
+                if(respArr.status == 1){
+                    let vimeo = respArr.payload;
+                    let newVideo = {};
+                    newVideo['project_id'] = project_id;
+                    newVideo['title'] = vimeo['items'][0]['snippet']['title'];
+                    newVideo['thumbnail'] = vimeo['items'][0]['snippet']['thumbnails']['high']['url'];
+                    newVideo['url'] = reqData.vidUrl;
+                    newVideo['is_default_marked'] = 0;
+                    newVideo['type'] = 'videourl';
+                    doAjax('ajax/add-video',newVideo,"POST",addVideoCallback);
+                } else {
+                    createToast(respArr.error_msg,"E");
+                }
             }
 
             let addVideoCallback = function(req,resp){
                 //console.log("in here addVideoCallback",resp);
-                createToast("Video added successfully.","S");
-                let newVideo = JSON.parse(resp);
-                currentVideos.push(newVideo);
-                currentVideoCount = currentVideos.length;
-                loadCurrentVideos();
-                lastVidId = currentVideos[currentVideos.length-1]['id'];
+                let respArr = JSON.parse(resp);
+                if(respArr.status == 1){
+                    createToast("Video added successfully.","S");
+                    let newVideo = respArr.payload;
+                    currentVideos.push(newVideo);
+                    currentVideoCount = currentVideos.length;
+                    loadCurrentVideos();
+                    lastVidId = currentVideos[currentVideos.length-1]['id'];
+                } else {
+                    createToast(respArr.error_msg,"E");
+                }
             }
 
             let loadCurrentVideos = function() {
@@ -452,7 +478,7 @@
                             // your callback here
                             console.log("success data ",JSON.parse(data));
                             uploadedFile = null;
-                            addMediaCallback(data);
+                            addPhotoCallback(data);
                         },
                         error: function (error) {
                             // handle error
@@ -494,9 +520,9 @@
                         console.log("delete confirm modal");
                         // $("#staticBackdrop").hide();
                         // $(".modal-backdrop").hide();
-                        doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteMediaCallback);
+                        doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deletePhotoCallback);
                     });
-                    //doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteMediaCallback);
+                    //doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deletePhotoCallback);
                 });
 
                 $(parentElemId+" #cancel-img-upload").off("click").on("click",(e)=>{
@@ -524,30 +550,46 @@
                 console.log("percent complete = "+percent);
             }
 
-            let deleteMediaCallback = function (req,resp) {
-                createToast("Image deleted successfully.","S");
-                $("#img-"+req.mediaId).remove();
-                currentMediaList = currentMediaList.filter((item)=>{
-                    console.log(item.id,item.id != req.mediaId);
-                    return item.id != req.mediaId;
-                });
-                currentMediaCount = currentMediaList.length;
-                if(currentMediaCount > 0){
-                    lastVidId = currentMediaList[currentMediaCount-1]['id'];
+            let deletePhotoCallback = function (req,resp) {
+                let respArr = JSON.parse(resp);
+                if(respArr.status == 1){
+                    createToast("Image deleted successfully.","S");
+                    $("#img-"+req.mediaId).remove();
+                    currentMediaList = currentMediaList.filter((item)=>{
+                        console.log(item.id,item.id != req.mediaId);
+                        return item.id != req.mediaId;
+                    });
+                    currentMediaCount = currentMediaList.length;
+                    if(currentMediaCount > 0){
+                        lastVidId = currentMediaList[currentMediaCount-1]['id'];
+                    }
+                    loadcurrentMediaList();
+                } else {
+                    createToast(respArr.error_msg,"E");
                 }
-                loadcurrentMediaList();
             }
 
             let updateMediaCallback = function (req,resp) {
-                createToast("Image updated successfully.","S");
+                let respArr = JSON.parse(resp);
+                if(respArr.status == 1){
+                    createToast("Image updated successfully.","S");
+                } else {
+                    createToast(respArr.error_msg,"E");
+                }
             }
 
-            let addMediaCallback = function(resp){
-                let newVideo = JSON.parse(resp);
-                currentMediaList.push(newVideo);
-                currentMediaCount = currentMediaList.length;
-                loadcurrentMediaList();
-                lastVidId = currentMediaList[currentMediaList.length-1]['id'];
+            let addPhotoCallback = function(resp){
+                let respArr = JSON.parse(resp);
+                if(respArr.status == 1){
+                    let newImage = respArr.payload;
+                    currentMediaList.push(newImage);
+                    currentMediaCount = currentMediaList.length;
+                    loadcurrentMediaList();
+                    lastVidId = currentMediaList[currentMediaList.length-1]['id'];
+                    createToast("Image updated successfully.","S");
+                } else {
+                    createToast(respArr.error_msg,"E");
+                }
             }
 
             let loadcurrentMediaList = function() {
@@ -747,16 +789,20 @@
             }
 
             let uploadDocCallback = function (req, resp) {
-                console.log("in uploadDocCallback",resp);
-                currentMediaList.push(JSON.parse(resp));
-                currentMediaCount = currentMediaList.length;
-                console.log("current Doc List - ",currentMediaList);
-                if(currentMediaCount > 0){
-                    lastVidId = currentMediaList[currentMediaCount-1]['id'];
+                let respArr = JSON.parse(resp);
+                if(respArr.status == 1){
+                    console.log("in uploadDocCallback",resp);
+                    currentMediaList.push(respArr.payload);
+                    currentMediaCount = currentMediaList.length;
+                    console.log("current Doc List - ",currentMediaList);
+                    if(currentMediaCount > 0){
+                        lastVidId = currentMediaList[currentMediaCount-1]['id'];
+                    }
+                    loadcurrentMediaList();
+                    bindActions();
+                } else {
+                    createToast(respArr.error_msg,"E");
                 }
-                loadcurrentMediaList();
-                bindActions();
-                
             }
 
             let getDocCallback = function (req, resp) {
@@ -801,9 +847,13 @@
             }
 
             let deleteDocCallback = function(req, resp){
-                //console.log("deleteDocCallback",req,resp);
-                $("#doc-"+req.mediaId).remove();
-                createToast("Document removed successfully.","S");
+                let respArr = JSON.parse(resp);
+                if(respArr.status == 1){
+                    $("#doc-"+req.mediaId).remove();
+                    createToast("Document removed successfully.","S");
+                } else {
+                    createToast(respArr.error_msg,"E");
+                }
             }
 
             let addMediaElem = function() {
