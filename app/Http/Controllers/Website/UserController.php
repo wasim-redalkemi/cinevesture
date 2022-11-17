@@ -21,10 +21,12 @@ use App\Models\UserPortfolioImage;
 use App\Models\UserPortfolioSpecificSkills;
 use App\Models\UserQualification;
 use App\Models\UserSkill;
+use App\Notifications\ContactUser;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends WebController
@@ -596,6 +598,34 @@ class UserController extends WebController
         $user->delete();
         return redirect('/login');
 
+    }
+
+    public function contactMailStore(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'email_1' => 'required|email',
+                'message' => 'required|string',
+                'subject' => 'required|string',
+            ]);
+
+            if ($validator->fails()) {
+                return ['satus'=>0,'msg'=>$validator->errors()->first()];
+            }
+            $email = '';
+            if(!$_REQUEST['email_1'] && !$_REQUEST['message'] && !$_REQUEST['subject']){
+                return ['satus'=>0,'msg'=>"Email or message or subject fields can not be empty."];
+            }
+            if(!empty($_REQUEST['email_1']) ){
+                $email = $_REQUEST['email_1'];
+                $collect = collect();
+                $collect->put('url','https://www.youtube.com/');
+                Notification::route('mail', $email)->notify(new ContactUser($collect));                
+            }
+            return ['status'=>1,'msg'=>"Email has been sending by contact email."];           
+        } catch (Exception $e) {
+            return ['status'=>0,'msg'=>"Something went wrong."];
+        }
     }
 }
 
