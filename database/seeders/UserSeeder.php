@@ -42,7 +42,7 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Junior assistant',
-                'email' => 'Juniorassistant@mailinator.com',
+                'email' => 'juniorassistant@mailinator.com',
                 'email_verified_at' => now(),
                 'password' => Hash::make('12345678'),
                 'user_type' => 'U',

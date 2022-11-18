@@ -7,6 +7,9 @@
 @endsection
 
 @section('content')
+<div class="hide-me animation for_authtoast">
+    @include('website.include.flash_message')
+</div>
 
 <body class="bg_white">
     <section class="guide_profile_section">
@@ -61,9 +64,9 @@
                                                                     <div class="organisation_cmn_text text_fff">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
                                                                 </div>
                                                             </div>
-                                                            <div class="mt-3"><input type="email" id="email_1" name="email_1" value="" placeholder="Subject" class="modal_input"></div>
+                                                            <div class="mt-3"><input type="text" id="subject" name="subject" value="" placeholder="Subject" class="modal_input"></div>
                                                             <div class="mt-3">
-                                                                <textarea name="" id="" cols="25" rows="6" class="w-100" placeholder="Message"></textarea>
+                                                                <textarea name="message" id="message" cols="25" rows="6" class="w-100 modal_input" placeholder="Message"></textarea>
                                                             </div>
 
                                                             <div class="form-check mt-3">
@@ -72,6 +75,8 @@
                                                             </div>
 
                                                             <div class="mt-4">
+                                                                {{-- <input type="text" id="subject" name="e" value="" placeholder="Subject" class="modal_input"> --}}
+                                                                <input type="hidden" name="email_1" id="email_1" class="modal_input" value="@if (!empty($user->email)){{$user->email}}@endif">
                                                                 <button type="button" class="invite_btn">Send Mail</button>
                                                             </div>
                                                             <div class="modal_btm_text mt-4 mb-5">
@@ -375,3 +380,42 @@
         });
     </script>
     @endsection
+
+    @push('scripts')
+        <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $('.invite_btn').click(function()
+            {
+                var subject = $('#subject').val();
+                var email_1 = $('#email_1').val();
+                var message = $('#message').val();
+                console.log(subject);
+                console.log(email_1);
+                console.log(message);
+                
+                
+                $.ajax(
+                {
+                    url:"{{ route('contact-user-mail-store') }}",
+                    type:'POST',
+                    dataType:'json',
+                    data:{subject:subject,email_1:email_1,message:message,"_token": "{{ csrf_token() }}"},
+                    success:function(response)
+                    {
+                        console.log(response)
+                        toastMessage(response.status, response.msg);
+                        $('.modal').hide();
+                        $('.modal-backdrop').remove();
+                    },
+                    error:function(response,status,error)
+                    {   
+                        console.log(response);
+                        console.log(status);
+                        console.log(error);
+                    } 
+                });
+            }); 
+        });
+        </script>
+    @endpush
