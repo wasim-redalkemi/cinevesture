@@ -122,7 +122,7 @@ class AjaxController extends WebController {
             $this->uploadFile($locationPath , $file, $newName);
             //\Log::info("here in logs ".$newName.",".asset($locationPath."/".$newName));
             $projectMedia = new ProjectMedia();
-            $projectMedia->project_id = 1;
+            $projectMedia->project_id = $request->project_id;
             $projectMedia->file_type = 'image';
             $projectMedia->file_link = $locationPath."/".$newName;
             $projectMedia->media_info = json_encode(["title"=>$request->title]);
@@ -151,7 +151,7 @@ class AjaxController extends WebController {
             $this->uploadFile($locationPath , $file, $newName);
             //\Log::info("here in logs ".$newName.",".asset($locationPath."/".$newName));
             $projectMedia = new ProjectMedia();
-            $projectMedia->project_id = 1;
+            $projectMedia->project_id = $request->project_id;
             $projectMedia->file_type = "doc";
             $projectMedia->file_link = $locationPath."/".$newName;
             $projectMedia->media_info = json_encode(["name"=>$fileName,"size"=> $fileSize,"size_label"=> ($fileSize/1000)." KB"]);

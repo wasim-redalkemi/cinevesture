@@ -87,6 +87,10 @@ body {
 .btn-link-style{
     text-decoration: none;
 }
+.ancor-link-style{
+    text-decoration: none;
+    color: white;
+}
 
 .add-proj-btn {
     border: 1px solid #DD45B3;
