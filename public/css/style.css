@@ -1391,6 +1391,7 @@ body {
 
 /*Project flow */
 .flow_container {
+    z-index: 1;
     width: 50px;
     height: 50px;
     border-radius: 100%;
@@ -1418,15 +1419,28 @@ body {
 }
 
 .flow_hr {
+    z-index: -1;
     opacity: 0.5;
-    border: 2px solid #971E9B;
     border: 2px solid rgb(200,139,202);
-    background-color: #971E9B;
     background-color: rgb(200,139,202);
     width: 100%;
-    margin: -3% -1.5% 0 -1.5%;
+    margin: -3% -2.5% 0 -2.5%;
 }
 
+.flow_hr_bold {
+    opacity: 1;
+    z-index: -1;
+    position: relative;
+    /* opacity: 0.5; */
+    /* opacity: 0.5; */
+    /* border: 2px solid #971E9B; */
+    border: 2px solid rgb(200,139,202);
+    /* background-color: #971E9B; */
+    background-color: rgb(200,139,202);
+    width: 100%;
+    margin: -3% -2.5% 0 -2.5%;
+    
+}
 .opc_5 {
 /* opacity: 0.5; */
 }
