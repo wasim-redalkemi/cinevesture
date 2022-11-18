@@ -16,7 +16,7 @@ class AppUtilityController extends Controller
         //\Log::info("getting video details for ".$url);
         $urlInfo = parse_url($url);
         $status = 1;
-        if($urlInfo['host'] == "youtube.com1" || $urlInfo['host'] == "www.youtube.com1" ) {
+        if($urlInfo['host'] == "youtube.com" || $urlInfo['host'] == "www.youtube.com" ) {
             $urlParts = $urlInfo['query'];
             $urlParts = explode("&",$urlParts);
             $params = [];
@@ -33,7 +33,7 @@ class AppUtilityController extends Controller
             // sample response
             $json = '{"kind":"youtube#videoListResponse","etag":"NY12d6Sa3mhyYdxx62iuVh0ta50","items":[{"kind":"youtube#video","etag":"BlL66Tqwd6vcpb_0fuUt4YHRBlA","id":"ZdbQ_FvNBZA","snippet":{"publishedAt":"2021-10-03T07:14:26Z","channelId":"UCyzKMNskJwgVy7j_lQ5aP-Q","title":"Session 5: What is Postman? and How to use it? by Suprabhat Sen","description":"Postman is one of the most important tools for any kind of Web and App Development. Learn how Postman works and helps make the job easier for any Software Developer","thumbnails":{"default":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/default.jpg","width":120,"height":90},"medium":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/mqdefault.jpg","width":320,"height":180},"high":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/hqdefault.jpg","width":480,"height":360},"standard":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/sddefault.jpg","width":640,"height":480},"maxres":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/maxresdefault.jpg","width":1280,"height":720}},"channelTitle":"ScaleupAlly","categoryId":"28","liveBroadcastContent":"none","localized":{"title":"Session 5: What is Postman? and How to use it? by Suprabhat Sen","description":"Postman is one of the most important tools for any kind of Web and App Development. Learn how Postman works and helps make the job easier for any Software Developer"}}}],"pageInfo":{"totalResults":1,"resultsPerPage":1}}';
             $data = json_decode($json, true);
-        } else if ($urlInfo['host'] == "vimeo.com1" || $urlInfo['host'] == "www.vimeo.com1"){
+        } else if ($urlInfo['host'] == "vimeo.com" || $urlInfo['host'] == "www.vimeo.com"){
             $vidId = trim($urlInfo['path'],"/");
             //$hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$vidId.php"));
             //$hash = file_get_contents("http://vimeo.com/api/v2/video/$vidId.json");
