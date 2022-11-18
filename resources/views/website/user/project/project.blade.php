@@ -23,33 +23,36 @@
                 <div class="row">
                 @foreach($UserProject as $k=>$v)
                     <div class="col-md-4">
-                        <div>
-                            <a href="{{route('project-overview',['id'=>$v->id])}}">
+                    
                             <div class="img-container project-img-container">
                                 @if (empty($v->projectImage->file_link))
                                     <img src="{{ asset('public/images/asset/user-profile.png') }}" width="100%" height="100%"  />
                                 @else
-                                    <img src="{{ asset($v->projectImage->file_link)}}" class="width_inheritence" alt="image">
+                                    <img src="{{ asset('storage/'.$v->projectImage->file_link)}}" class="width_inheritence" alt="image">
                                 @endif
                                 <div class="project_card_data w-100 h-100">
-                                    <div><i class="fa fa-pencil mx-2" aria-hidden="true"></i></div>
+                                    <div><a href="{{route('project-overview',['id'=>$v->id])}}"><i class="fa fa-pencil mx-2" aria-hidden="true"></i></a></div>
                                 <div>
                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                 </div>
                             </div>
+                            <div>
+                            <a href="{{route('public-view',['id'=>$v->id])}}" style="outline: none; text-decoration:none">
                             <div class="movie_name_text">{{$v->project_name}}</div>
-                            @if(isset($v->status))
-                              @if($v->status == 'draft')
-                              <div class="movie_name_text">Draft</div>
-                              @else
-                              <div class="movie_name_text">Published</div>
-                              @endif
-                            @else
-                            <div class="movie_name_text">-</div>
-                            @endif
-                        </div>
-                            </a>
-                        </div>
+                                @if(isset($v->status))
+                                @if($v->status == 'draft')
+                                <div class="movie_name_text">Draft</div>
+                                @else
+                                <div class="movie_name_text">Published</div>
+                                @endif
+                                @else
+                                <div class="movie_name_text">-</div>
+                                @endif
+                            </div>
+                                </a>
+                            </div>
+                         
+                         
                        
                     </div>
                     @endforeach

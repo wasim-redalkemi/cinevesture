@@ -1318,6 +1318,8 @@ body {
 
 .width_inheritence {
     width: inherit;
+    min-height: 170px;
+    max-height: 170px;
 }
 .project_card_data {
     position: absolute;
