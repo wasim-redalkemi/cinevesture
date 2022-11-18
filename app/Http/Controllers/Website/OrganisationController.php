@@ -45,8 +45,8 @@ class OrganisationController extends WebController
     public function create()
     {
         try {
-            $languages = MasterLanguage::query()->get();
-            $country = MasterCountry::query()->get();
+            $languages = MasterLanguage::query()->orderBy('name', 'ASC')->get();
+            $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
             $organisationType = MasterOrganisationType::query()->get();
             $organisationService = MasterOrganisationService::query()->get();
             $UserOrganisation = UserOrganisation::query()->with(['organizationLanguages.languages','organizationServices.services','country'])->where('user_id',auth()->user()->id)->first();
