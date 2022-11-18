@@ -457,6 +457,7 @@
                     var formData = new FormData();
                     formData.append("file", uploadedFile, uploadedFile.name);
                     formData.append("title", e.target.value);
+                    formData.append("project_id", project_id);
                     $.ajax({
                         type: "POST",
                         url: BaseUrl+"ajax/upload-image",
