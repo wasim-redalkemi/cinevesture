@@ -87,6 +87,10 @@ body {
 .btn-link-style{
     text-decoration: none;
 }
+.ancor-link-style{
+    text-decoration: none;
+    color: white;
+}
 
 .add-proj-btn {
     border: 1px solid #DD45B3;
@@ -343,6 +347,13 @@ body {
     border: 2px solid #FFFFFF;
     border-radius: 0;
     margin-top: 0;
+}
+
+.nav-drop{
+    height: 60vh;
+    overflow: auto;
+    width: 200px;
+    overflow-x: hidden;
 }
 
 .text_decor_none {
@@ -977,6 +988,7 @@ body {
 }
 .deep-pink {
     color: #971E9B !important;
+    text-decoration: none;
 }
 .candy-pink {
     color: #DD45B3 !important;

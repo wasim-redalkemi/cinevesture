@@ -77,6 +77,9 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::get('/profile-create', [UserController::class, 'profileCreate'])->name('profile-create');
         Route::post('/profile-store', [UserController::class, 'profileStore'])->name('profile-store');
 
+        Route::post('/contact-user-mail-store', [UserController::class, 'contactMailStore'])->name('contact-user-mail-store');
+
+
         Route::get('/portfolio-create/{id?}', [UserController::class, 'portfolioCreate'])->name('portfolio-create');
         Route::post('/portfolio-store/{id?}', [UserController::class, 'portfolioStore'])->name('portfolio-store');
         Route::get('/portfolio-edit/{id}', [UserController::class, 'portfolioEdit'])->name('portfolio-edit');
@@ -123,7 +126,11 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 
 
         Route::get('/public-view/{id}', [ProjectController::class, 'publicView'])->name('public-view');
+        Route::post('/like', [ProjectController::class, 'projectLike'])->name('project-like');
+        
         Route::get('/get-project-media/{id}', [ProjectController::class, 'getMediaByProject'])->name('get-project-media');
+
+        Route::get('/filter', [ProjectController::class, 'getFilteredProject'])->name('get-project-filter');
 
 	});
 

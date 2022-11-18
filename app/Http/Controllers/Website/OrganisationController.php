@@ -92,7 +92,7 @@ class OrganisationController extends WebController
             $UserOrganisation->name = $request->name;
             $UserOrganisation->type = $request->organisation_type;
             $UserOrganisation->location_in = $request->located_in;
-            $UserOrganisation->about = $request->name;
+            $UserOrganisation->about = $request->about;
             $UserOrganisation->available_to_work_in = $request->available_to_work_in;
             $UserOrganisation->imdb_profile = $request->imdb_profile;
             $UserOrganisation->linkedin_profile = $request->linkedin_profile;
@@ -210,14 +210,14 @@ class OrganisationController extends WebController
             if(!empty($_REQUEST['email_1']) ){
                 $email = $_REQUEST['email_1'];
                 $collect = collect();
-                $collect->put('url','www.google.com');
+                $collect->put('url','https://www.google.co.in/');
                 Notification::route('mail', $email)->notify(new TeamInvite($collect));
                 
             }
             if(!empty($_REQUEST['email_2']) ){
                 $email = $_REQUEST['email_2'];
                 $collect = collect();
-                $collect->put('url','www.google.com');
+                $collect->put('url','https://www.google.co.in/');
                 Notification::route('mail', $email)->notify(new TeamInvite($collect));
             }
             return ['status'=>1,'msg'=>"Invite link has been gone by email."];           

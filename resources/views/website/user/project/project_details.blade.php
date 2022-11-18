@@ -62,7 +62,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>Duration (Optional)</label>
+                                    <label>Duration In Minute(Optional)</label>
                                     <input type="number" class="form-control no_number_arrows" name="duration" pattern="[0-9]" placeholder="min" value="<?php if(!empty($projectData[0]['duration'])){ echo $projectData[0]['duration']; } ?>" aria-describedby="basic-addon1">
                                     @error('duration')
                                     <span class="invalid-feedback" role="alert">
