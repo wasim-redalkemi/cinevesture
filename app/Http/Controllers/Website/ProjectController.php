@@ -614,7 +614,7 @@ class ProjectController extends WebController
             $project_stages = ProjectStage::all();
             
             $projects = UserProject::query()
-            ->where('save_type','published')
+            ->where('status','published')
             ->where(function($query) use($request){
                 if (isset($request->search)) { // search name of user
                     $query->where("project_name", "like", "%$request->search%");
@@ -665,7 +665,7 @@ class ProjectController extends WebController
             $projects->appends(request()->input())->links();
             return view('website.user.project.search_result',compact(['countries','languages','geners','categories','looking_for','project_stages','projects']));                   
            }catch(Exception $e){
-            return back()->with('error', 'Something went wrong.');
+            return back()->with('error',$e->getMessage());
            }
         }
 

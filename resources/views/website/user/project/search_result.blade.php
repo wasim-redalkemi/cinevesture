@@ -302,7 +302,7 @@
                         <div class="row">
                             <div class="col-md-5">
                                 @if(isset($project->projectImage))
-                                <img src="{{Storage::url($project->projectImage)}}" class=100% width=100%>
+                                <img src="{{Storage::url($project->projectImage->file_link)}}" class=100% width=100%>
                                 @else
                                 <img src="{{asset('images/asset/indy 7.png')}}" class=100% width=100%>
                                 @endif
@@ -314,16 +314,16 @@
                                     <tbody class="search-table-body">
                                         <tr>
                                             <td>Looking for</td>
-                                            <td class="d-flex">
-                                                 @if(isset($project->projectLookingFor[0]))
-                                                    @foreach($project->projectLookingFor as $look)
-                                                    <button class="curv_cmn_btn">{{$look->name}}</button>
-                                                    @endforeach
-                                                 @else
-                                                 -
-                                                
-                                                 @endif
-                                       
+                                            <td>
+                                                <div style="width: 100%">
+                                                    @if(isset($project->projectLookingFor[0]))
+                                                        @foreach($project->projectLookingFor as $look)
+                                                            <button class="curv_cmn_btn">{{$look->name}}</button>
+                                                        @endforeach
+                                                    @else
+                                                        -
+                                                    @endif
+                                                </div>                                       
                                             </td>
                                         </tr>
                                         <tr>
