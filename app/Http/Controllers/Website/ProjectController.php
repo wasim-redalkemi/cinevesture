@@ -38,11 +38,8 @@ class ProjectController extends WebController
     public function projectList()
     {
         try {
-            $user = User::query()->find(auth()->user()->id);
-        
-            $UserProject = UserProject::query()->with('projectImage')->where('user_id',$user->id)->get();
-            // dd($UserProject);
-            return view('website.user.project.project',compact('user','UserProject'));
+            $UserProject = UserProject::query()->with('projectImage')->where('user_id',auth()->user()->id)->get();
+            return view('website.user.project.project',compact('UserProject'));
 
         } catch (Exception $e) {
             return back()->with('error','Something went wrong.');

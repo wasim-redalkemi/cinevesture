@@ -11,7 +11,7 @@ class UserProject extends Model
 
     public function projectImage()
     {
-        return $this->hasOne(ProjectMedia::class,'project_id','id');
+        return $this->hasOne(ProjectMedia::class,'project_id','id')->where('file_type','image')->where('is_default_marked','1');
     }
 
     public function user()
