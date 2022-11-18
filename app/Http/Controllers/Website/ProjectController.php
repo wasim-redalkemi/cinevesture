@@ -40,8 +40,8 @@ class ProjectController extends WebController
         try {
             $user = User::query()->find(auth()->user()->id);
         
-            $UserProject = UserProject::query()->where('user_id',$user->id)->get();
-
+            $UserProject = UserProject::query()->with('projectImage')->where('user_id',$user->id)->get();
+            // dd($UserProject);
             return view('website.user.project.project',compact('user','UserProject'));
 
         } catch (Exception $e) {

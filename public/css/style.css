@@ -368,7 +368,7 @@ body {
 .footer {
     background: #33084C;
     color: #FAF8FB;
-    margin-top: 50px;
+    padding-top: 50px;
 }
 
 .footer .row {

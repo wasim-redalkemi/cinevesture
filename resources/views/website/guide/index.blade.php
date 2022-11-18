@@ -16,6 +16,9 @@
     background-size: cover;
     width: 100%;
 }
+.bg_blue {
+    background: rgb(28,3,48);
+ }
 </style>
 
 
@@ -23,7 +26,7 @@
 
 @section('content')
 
-<section class="main-body pb_8">
+<section class="main-body bg_blue pb_8">
     <div class="job_container">
         <div class="bg_linear">
         <div class="container">
@@ -36,16 +39,33 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="profile_input mt-0">
-                                    <input type="text" name="" placeholder="People">
+                                    <input type="text" name="search" placeholder="Search">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="mt-0">
-                                    <select class="js-select2" multiple="multiple">
-                                        <option value="Hindi" data-badge="">Hindi</option>
-                                        <option value="English" data-badge="">English</option>
-                                        <option value="Spanish" data-badge="">Spanish</option>
+                                    <select class="country_select2 @error('countries') is-invalid @enderror" name = "countries[]" multiple="multiple">
+
+                                    @foreach($countries as $country)
+                                              
+                                                        @if(isset(request('countries')[0]) && in_array($country->id, request('countries')))
+                                                        <option value="{{$country->id}}" data-badge="" selected>{{$country->name}}</option>
+                                                        @else
+                                                        <option value="{{$country->id}}" data-badge="">{{$country->name}}</option>
+                                                        @endif
+                                              
+                                     @endforeach
+                                    
+                                     
                                     </select>
+
+
+                                    
+                                    @error('countries')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -78,11 +98,22 @@
 
 @push('scripts')
 <script>
-    $(".js-select2").select2({
+        $(document).ready(function(){
+        $("#error-toast").toast("show");
+        $("#success-toast").toast("show");
+    });
+
+    $(".country_select2").select2({
+      closeOnSelect: false,
+      placeholder: "Location",
+      allowClear: true,
+      tags: true
+  });
+  $(".js-select2").select2({
         closeOnSelect: false,
-        placeholder: "Placeholder",
+        placeholder: "Talent Type",
         allowClear: true,
-        tags: true
+        tags: false
     });
 </script>
 @endpush
