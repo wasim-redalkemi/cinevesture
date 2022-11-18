@@ -24,7 +24,8 @@ class IndustryGuideController extends WebController
     {
         $countries = MasterCountry::all();
         $skills = MasterSkill::all();
-        return view('website.guide.guide_search_result',compact(['countries','skills']));
+        $talent_type = User::query()->where('job_title','!=',null)->where('user_type','U')->groupBy('job_title')->get();
+        return view('website.guide.index',compact(['countries','talent_type']));
 
     }
    

@@ -45,7 +45,7 @@ class AjaxController extends WebController {
             $ProjectMediaObj->file_link = $reqData['url'];
             $ProjectMediaObj->is_default_marked = $reqData['is_default_marked'];
             $ProjectMediaObj->media_info = json_encode(["thumbnail"=>$reqData['thumbnail'],'title'=>$reqData['title']]);
-            //$ProjectMediaObj->save();
+            $ProjectMediaObj->save();
             $ProjectMediaObj->media_info = json_decode($ProjectMediaObj->media_info, true);
             // $ProjectMediaObj = '{"project_id":"1","file_type":"video","file_link":"https:\/\/vimeo.com\/336812686","is_default_marked":"0","media_info":"{\"thumbnail\":\"https:\\\/\\\/i.vimeocdn.com\\\/video\\\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_200x150\",\"title\":\"Direct Links To Video Files\"}","updated_at":"2022-11-07T06:54:01.000000Z","created_at":"2022-11-07T06:54:01.000000Z","id":1}';
             // $ProjectMediaObj = json_decode($ProjectMediaObj);
@@ -122,7 +122,7 @@ class AjaxController extends WebController {
             $this->uploadFile($locationPath , $file, $newName);
             //\Log::info("here in logs ".$newName.",".asset($locationPath."/".$newName));
             $projectMedia = new ProjectMedia();
-            $projectMedia->project_id = 1;
+            $projectMedia->project_id = $request->project_id;
             $projectMedia->file_type = 'image';
             $projectMedia->file_link = $locationPath."/".$newName;
             $projectMedia->media_info = json_encode(["title"=>$request->title]);
@@ -151,7 +151,7 @@ class AjaxController extends WebController {
             $this->uploadFile($locationPath , $file, $newName);
             //\Log::info("here in logs ".$newName.",".asset($locationPath."/".$newName));
             $projectMedia = new ProjectMedia();
-            $projectMedia->project_id = 1;
+            $projectMedia->project_id = $request->project_id;
             $projectMedia->file_type = "doc";
             $projectMedia->file_link = $locationPath."/".$newName;
             $projectMedia->media_info = json_encode(["name"=>$fileName,"size"=> $fileSize,"size_label"=> ($fileSize/1000)." KB"]);

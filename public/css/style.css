@@ -372,7 +372,7 @@ body {
 .footer {
     background: #33084C;
     color: #FAF8FB;
-    margin-top: 50px;
+    padding-top: 50px;
 }
 
 .footer .row {
@@ -1318,6 +1318,8 @@ body {
 
 .width_inheritence {
     width: inherit;
+    min-height: 170px;
+    max-height: 170px;
 }
 .project_card_data {
     position: absolute;
