@@ -29,7 +29,9 @@
 
         <main class="">
             @yield('header')
-            @yield('nav')
+            @if(!empty(auth()->user()) && auth()->user()->user_type !== 'A') 
+                @yield('nav')
+            @endif
             @stack('add_css')
             @yield('content')
             @yield('footer')

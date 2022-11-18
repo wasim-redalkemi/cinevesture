@@ -32,7 +32,7 @@
                             </div>
                                 <div class="row" style="margin-top:15px">
                                     <div class="col-md-12" style="padding-left: 42%;">
-                                        <button type="submit" class="btn btn-outline-primary btn-sm mt-10">Create</button>
+                                        <button type="submit" class="btn btn-success btn-sm mt-10">Create</button>
                                     </div>
                             </div>
                      </form>

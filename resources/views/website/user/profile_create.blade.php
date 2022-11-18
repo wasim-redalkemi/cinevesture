@@ -30,6 +30,7 @@
                                             } ?>" class="upload_preview for_show croperImg" width="100%" height="100%">
                                 <div for="file-input" class="d-none">
                                     <input type="file" name="croperImg" class="@error('profile_image') is-invalid @enderror file_element image" accept=".jpg,.jpeg,.png">
+                                    <input type="hidden" id="croppedImg" name="croppedImg">
                                     @error('profile_image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -440,6 +441,7 @@
     // croper 
 
     croperImg = document.querySelector('.croperImg'),
+        finalImage = document.querySelector('.finalImage'),
 
         function validateSize(input) {
             const fileSize = input.files[0].size / 1024 / 1024; // in MiB
@@ -532,13 +534,9 @@
             reader.onloadend = function() {
                 base64data = reader.result;
                 var file = dataURLtoFile(base64data, 'profile_img.png');
-                console.log(base64data, 613);
-
-                croperImg.src = base64data
-
+                croperImg.src = base64data;
+                $("#croppedImg").val(base64data);
                 image.src = file;
-                console.log(file);
-
                 formData.append("document", file)
                 console.log(formData.append("document", file), "formData.append");
 
@@ -565,13 +563,12 @@
 
     $('.delete_image').on('click', function() {
         var image_x = document.getElementsByClassName("upload_img_container");
-        alert("Are you sure to remove the image")
-       $(".croperImg").attr("src", "");
-       $( "img" ).removeClass( "croperImg");
+        $(".croperImg").attr("src", "");
+        $("img").removeClass("croperImg");
 
-       $('.for_hide').css('display', 'block');
-       $('.for_show').css('display', 'none');
-       
+        $('.for_hide').css('display', 'block');
+        $('.for_show').css('display', 'none');
+
     })
 </script>
 

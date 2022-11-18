@@ -142,11 +142,11 @@ class UserController extends WebController
     }
 
 
-    public function profilePublicShow(Request $request)
+    public function profilePublicShow()
     {
         try {
-
-            $user = User::query()->find(auth()->user()->id);
+            $id=$_REQUEST['id'];
+            $user = User::query()->find($id);
             $portfolio = UserPortfolio::query()->where('user_id', $user->id)->get();
             $experience = UserExperience::query()->where('user_id', $user->id)->get();
             $qualification = UserQualification::query()->where('user_id', $user->id)->get();
@@ -180,7 +180,7 @@ class UserController extends WebController
             $age = AgeRange::query()->get();
             return view('website.user.profile_create', compact(['user', 'skills', 'languages', 'country', 'state', 'age']));
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -204,17 +204,31 @@ class UserController extends WebController
             $user->website = $request->website;
             $user->intro_video_link = $request->intro_video_link;
 
-            if ($request->hasFile('profile_image')) {
+            if ($request->croppedImg) {
 
-                $file = $request->file('profile_image');
-                $originalFile = $file->getClientOriginalName();
-                $fileExt = pathinfo($originalFile, PATHINFO_EXTENSION);
-                $fileName = pathinfo($originalFile, PATHINFO_FILENAME);
-                $nameStr = date('_YmdHis');
-                $newName = $fileName . $nameStr . '.' . $fileExt;
-                $locationPath  = "user";
-                $uploadFile = $this->uploadFile($locationPath, $file, $newName);
-                $user->profile_image = $uploadFile;
+                // $file = $request->file('croppedImg');
+                // $originalFile = $file->getClientOriginalName();
+                // $fileExt = pathinfo($originalFile, PATHINFO_EXTENSION);
+
+                // $fileName = pathinfo($originalFile, PATHINFO_FILENAME);
+                // $nameStr = date('_YmdHis');
+                // $newName = $fileName . $nameStr . '.' . $fileExt;
+                // $locationPath  = "user";
+                // $uploadFile = $this->uploadFile($locationPath, $file, $newName);
+                // $user->profile_image = $uploadFile;
+
+
+
+                $image = $request->croppedImg;
+                list($type, $image) = explode(';', $image);
+                list(, $image)      = explode(',', $image);
+                $path = 'user/';
+                $image = base64_decode($image);
+                $image_name= $path.date('sihdmY').'.png';
+                $uploadFile = storage_path('app/'.$image_name);
+                
+                file_put_contents($uploadFile, $image);
+                $user->profile_image = $image_name;
             }
             if ($user->save()) {
                 if (isset($request->skills)) {
