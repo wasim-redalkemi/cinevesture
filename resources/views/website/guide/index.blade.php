@@ -25,7 +25,9 @@
 @endsection
 
 @section('content')
-
+<div class="hide-me animation for_authtoast">
+    @include('website.include.flash_message')
+</div>
 <section class="main-body bg_blue pb_8">
     <div class="job_container">
         <div class="bg_linear">
@@ -34,17 +36,19 @@
                 <div class="col-md-12">
                     <div class="project-text text-center mt-4">YOUR GATEWAY FOR TALENT AND SERVICES</div>
                     <div class="duration-lang-text white text-center mt-3">It is our job to make your search for people in the film and media fraternity, a piece of cake! Here's your slice. </div>
+                    <form class="" method="Get" action="{{ route('guide-view') }}">
+                        @csrf
                     <div class="input_wraper mt-3">
                         <div class="container">
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="profile_input mt-0">
-                                    <input type="text" name="search" placeholder="Search">
+                                    <input type="text" name="search" id="search-profile" placeholder="People">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="mt-0">
-                                    <select class="country_select2 @error('countries') is-invalid @enderror" name = "countries[]" multiple="multiple">
+                                    <select class="country_select2 @error('countries') is-invalid @enderror" id="countries"name = "countries[]" multiple="multiple">
 
                                     @foreach($countries as $country)
                                               
@@ -70,17 +74,24 @@
                             </div>
                             <div class="col-md-4">
                                 <div class=" mt-0">
-                                    <select class="js-select2" multiple="multiple">
-                                        <option value="Hindi" data-badge="">Hindi</option>
-                                        <option value="English" data-badge="">English</option>
-                                        <option value="Spanish" data-badge="">Spanish</option>
+                                    <select class="js-select2"  id = "talentType"name ="talentType[]" multiple="multiple">
+                                    @foreach($talent_type as $type)
+                                              
+                                              @if(isset(request('talentType')[0]) && in_array($type->id, request('talentType')))
+                                              <option value="{{$country->id}}" data-badge="" selected>{{$type->job_title}}</option>
+                                              @else
+                                              <option value="{{$country->id}}" data-badge="">{{$type->job_title}}</option>
+                                              @endif
+                                    
+                                   @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="col-md-1">
-                                <button class="job_search_btn">Search</button>
+                                <button type = "submit"class="job_search_btn profile_search_btn">Search</button>
                             </div>
                         </div>
+                        </form>
                     </div>
                     </div>
                 </div>
@@ -115,5 +126,31 @@
         allowClear: true,
         tags: false
     });
+
+    $('.profile_search_btn').on('click',function(e){
+        var countries = $("#countries :selected").length;
+        var talent = $("#talentType :selected").length;
+        var search = $.trim($('#search-profile').val());
+
+
+    if(!search  && countries  == 0 && talent  == 0){
+         e.preventDefault();
+         toastMessage(0,"Please apply filter.");
+         $("#error-toast").toast("show");
+         $("#success-toast").toast("show");
+      }else{
+         $('#filter').submit();
+      }
+  
+  });
+
+  $(document).ready(function(){
+   
+   $("#error-toast").toast("show");
+   $("#success-toast").toast("show");
+   
+
+
+});
 </script>
 @endpush

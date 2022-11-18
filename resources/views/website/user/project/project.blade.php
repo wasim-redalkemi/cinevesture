@@ -29,7 +29,7 @@
                                 @if (empty($v->projectImage->file_link))
                                     <img src="{{ asset('public/images/asset/user-profile.png') }}" width="100%" height="100%"  />
                                 @else
-                                    <img src="{{ asset('$v->projectImage->file_link')}}" class="width_inheritence" alt="image">
+                                    <img src="{{ asset($v->projectImage->file_link)}}" class="width_inheritence" alt="image">
                                 @endif
                                 <div class="project_card_data w-100 h-100">
                                     <div><i class="fa fa-pencil mx-2" aria-hidden="true"></i></div>
