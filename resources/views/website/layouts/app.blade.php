@@ -27,6 +27,9 @@
      <div id="app">
 
         <main class="">
+        <div class="hide-me animation for_authtoast">
+              @include('website.include.flash_message')
+        </div>
             @yield('header')
             @if(!empty(auth()->user()) && auth()->user()->user_type !== 'A') 
                 @yield('nav')

@@ -145,7 +145,7 @@
                                 <div class="d-flex align-items-center">
                                     <button class="cantact-page-cmn-btn">Contact Now</button>
                                     <i class="fa fa-share-alt mx-4 icon-size" aria-hidden="true"></i>
-                                    <i class="fa fa-heart-o icon-size heart-color" aria-hidden="true"></i>
+                                    <div> <i class="fa fa-heart-o icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
                                 </div>
                                 <div class="d-flex">
                                     <span class="mx-3 white">Report Project</span>
@@ -421,6 +421,50 @@
     $(document).ready(function() {
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");
+    });
+
+    $('.like-project').on('click', function(e) {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var project_id = $(this).attr('data-id');
+        var classList = $(this).attr('class').split(/\s+/);
+        var element = $(this);
+        $.ajax({
+            type: 'post',
+            data: {'id':project_id},
+            url: "{{route('project-like')}}",
+            success: function(resp) {
+                if (resp.status) {
+                    for (var i = 0; i < classList.length; i++) {
+                        if (classList[i] == 'fa-heart-o') {
+                            element.removeClass('fa-heart-o');
+                            element.addClass('fa-heart')
+                            toastMessage("success", response.msg);
+                            break;
+                        }
+                        if(classList[i] == 'fa-heart')
+                        {
+                            element.removeClass('fa-heart');
+                            element.addClass('fa-heart-o');
+                            toastMessage("error", response.msg);
+
+                            break;
+                        }
+
+                    }
+                } else {
+
+                }
+            },
+            error: function(error) {
+                
+            }
+        });
+
     });
 </script>
 @endpush

@@ -28,4 +28,15 @@ class Controller extends BaseController
             return false;
         }
     }
+
+    public function prepareJsonResp ($status = 0,  $payload = [], $msg = "", $error = "ER000", $error_msg = "") {
+        $data = [
+            "status" => $status,
+            "payload" => $payload,
+            "message" => $msg,
+            "error" => $error,
+            "error_msg" => $error_msg
+        ];
+        return json_encode($data);
+    }
 }
