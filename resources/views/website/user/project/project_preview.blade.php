@@ -128,41 +128,47 @@
         
         <div class="preview_headtext mb-3">Video</div>
         <div class="row">
-            <div class="col-md-3">
-                <div> <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="" width=100% alt="image"></div>
-                <div class="d-flex align-items-center">
-                    <div class="movie_name_text">Movie Title </div>
-                    <button class="verified_cmn_btn mt-1 mx-3">Featured</button>
+            @if (!empty($projectData[0]['project_only_video']))
+            @foreach ($projectData[0]['project_only_video'] as $v)
+                <div class="col-md-3">
+                    <div> 
+                        <img src="{{ json_decode($v['media_info'])->thumbnail }}" class="" width=100% alt="image">
+                    </div>
+                    <div class="d-flex align-items-center">
+                        <div class="movie_name_text">{{json_decode($v['media_info'])->title}} </div>
+                        <?php
+                            if($v['is_default_marked'])
+                            {
+                                ?>
+                                    <button class="verified_cmn_btn mt-1 mx-3">Featured</button>
+                                <?php
+                            }
+                        ?>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div> <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="" width=100% alt="image"></div>
-                <div class="d-flex align-items-center">
-                    <div class="movie_name_text">Movie Title </div>
-                </div>
-            </div>
+            @endforeach                    
+            @endif
         </div>
         <div class="preview_headtext mb-3">Photos</div>
         <div class="row">
+            @if (!empty($projectData[0]['project_only_image']))
+            @foreach ($projectData[0]['project_only_image'] as $v)
             <div class="col-md-3">
-                <div> <img src="{{ asset('public/images/asset/Rectangle 57.png') }}" class="" width=100% alt="image"></div>
+                <div style="height: 200px; overflow:hidden;background-color:rgba(0,0,0,0.2)"> <img src="{{ Storage::url($v['file_link']) }}" class="" width=100% alt="image"></div>
                 <div class="d-flex align-items-center">
-                    <div class="movie_name_text">Photo Title </div>
-                    <button class="verified_cmn_btn mt-1 mx-3">Featured</button>
+                    <div class="movie_name_text">{{ json_decode($v['media_info'])->title }}</div>
+                    <?php
+                    if($v['is_default_marked'])
+                    {
+                        ?>
+                            <button class="verified_cmn_btn mt-1 mx-3">Featured</button>
+                        <?php
+                    }
+                ?>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div> <img src="{{ asset('public/images/asset/Rectangle 57.png') }}" class="" width=100% alt="image"></div>
-                <div class="d-flex align-items-center">
-                    <div class="movie_name_text">Photo Title </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div> <img src="{{ asset('public/images/asset/Rectangle 57.png') }}" width=100% alt="image"></div>
-                <div class="d-flex align-items-center">
-                    <div class="movie_name_text">Photo Title </div>
-                </div>
-            </div>
+            @endforeach                    
+            @endif
         </div>
         <div class="preview_headtext mb-3">pdf</div>
         <div class="row">

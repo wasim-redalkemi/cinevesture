@@ -13,6 +13,18 @@ class UserProject extends Model
     {
         return $this->hasOne(ProjectMedia::class,'project_id','id')->where('file_type','image')->where('is_default_marked','1');
     }
+    public function projectOnlyImage()
+    {
+        return $this->hasMany(ProjectMedia::class,'project_id')->where('file_type','image');
+    }
+    public function projectOnlyVideo()
+    {
+        return $this->hasMany(ProjectMedia::class,'project_id')->where('file_type','video');
+    }
+    public function projectOnlyDoc()
+    {
+        return $this->hasMany(ProjectMedia::class,'project_id')->where('file_type','pdf');
+    }
 
     public function user()
     {
