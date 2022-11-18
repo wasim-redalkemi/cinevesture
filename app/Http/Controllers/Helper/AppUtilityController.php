@@ -26,7 +26,7 @@ class AppUtilityController extends Controller
             }
             $vidId = $params['v'];
             $apiKey = config('app.GOOGLE_API_KEY');
-            $filepath = "https://www.googleapis.com/youtube/v3/videos?id=".$vidId."&key=".$apiKey."&part=snippet";
+            // $filepath = "https://www.googleapis.com/youtube/v3/videos?id=".$vidId."&key=".$apiKey."&part=snippet";
             //echo $filepath;
             // Eg. https://www.googleapis.com/youtube/v3/videos?id=ZdbQ_FvNBZA&key=AIzaSyCNJqNKLKFTBoLnbrbNtP8MDlz2vBVvNnE&part=snippet
             // $json = file_get_contents($filepath);
@@ -35,11 +35,11 @@ class AppUtilityController extends Controller
             $data = json_decode($json, true);
         } else if ($urlInfo['host'] == "vimeo.com" || $urlInfo['host'] == "www.vimeo.com"){
             $vidId = trim($urlInfo['path'],"/");
-            //$hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$vidId.php"));
-            //$hash = file_get_contents("http://vimeo.com/api/v2/video/$vidId.json");
-            //$json = $hash;//[0]['thumbnail_medium'];
+            // $hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$vidId.php"));
+            $hash = file_get_contents("http://vimeo.com/api/v2/video/$vidId.json");
+            $json = $hash;//[0]['thumbnail_medium'];
             // sample 
-            $json = '[{"id":336812686,"title":"Direct Links To Video Files","description":"Hi there! Need help? Go to http:\/\/vimeo.com\/help","url":"https:\/\/vimeo.com\/336812686","upload_date":"2019-05-17 09:32:53","thumbnail_small":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_100x75","thumbnail_medium":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_200x150","thumbnail_large":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_640","user_id":90564994,"user_name":"Vimeo Support","user_url":"https:\/\/vimeo.com\/vimeosupport","user_portrait_small":"https:\/\/i.vimeocdn.com\/portrait\/27986607_30x30","user_portrait_medium":"https:\/\/i.vimeocdn.com\/portrait\/27986607_75x75","user_portrait_large":"https:\/\/i.vimeocdn.com\/portrait\/27986607_100x100","user_portrait_huge":"https:\/\/i.vimeocdn.com\/portrait\/27986607_300x300","duration":41,"width":1920,"height":1080,"tags":"","embed_privacy":"anywhere"}]';
+            // $json = '[{"id":336812686,"title":"Direct Links To Video Files","description":"Hi there! Need help? Go to http:\/\/vimeo.com\/help","url":"https:\/\/vimeo.com\/336812686","upload_date":"2019-05-17 09:32:53","thumbnail_small":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_100x75","thumbnail_medium":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_200x150","thumbnail_large":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_640","user_id":90564994,"user_name":"Vimeo Support","user_url":"https:\/\/vimeo.com\/vimeosupport","user_portrait_small":"https:\/\/i.vimeocdn.com\/portrait\/27986607_30x30","user_portrait_medium":"https:\/\/i.vimeocdn.com\/portrait\/27986607_75x75","user_portrait_large":"https:\/\/i.vimeocdn.com\/portrait\/27986607_100x100","user_portrait_huge":"https:\/\/i.vimeocdn.com\/portrait\/27986607_300x300","duration":41,"width":1920,"height":1080,"tags":"","embed_privacy":"anywhere"}]';
             $data = json_decode($json, true);
             $data = $data[0];
         } else {
