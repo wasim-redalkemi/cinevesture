@@ -52,8 +52,8 @@ class ProjectController extends WebController
     public function projectOverview()
     {
         try {
-            $languages = MasterLanguage::query()->get();
-            $country = MasterCountry::query()->get();
+            $languages = MasterLanguage::query()->orderBy('name', 'ASC')->get();
+            $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
             $project_types = ProjectType::all();    
             $projectOverview = [];
             if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
@@ -188,8 +188,8 @@ class ProjectController extends WebController
             {
                 return back()->with('error','Project Id not found.');
             }
-            $languages = MasterLanguage::query()->get();
-            $country = MasterCountry::query()->get();
+            $languages = MasterLanguage::query()->orderBy('name', 'ASC')->get();
+            $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
             $category = MasterProjectCategory::query()->get();
             $Genres = MasterProjectGenre::query()->get();    
           
@@ -356,8 +356,8 @@ class ProjectController extends WebController
                 return back()->with('error','Project Id not found.');
             }
            
-            $languages = MasterLanguage::query()->get();
-            $country = MasterCountry::query()->get();    
+            $languages = MasterLanguage::query()->orderBy('name', 'ASC')->get();
+            $country = MasterCountry::query()->orderBy('name', 'ASC')->get();    
             $projectgallery = [];
             $projectgallery = UserProject::query()->where('id',$_REQUEST['id'])->get();
 
@@ -430,8 +430,8 @@ class ProjectController extends WebController
             {
                 return back()->with('error','Project Id not found.');
             }
-            $languages = MasterLanguage::query()->get();
-            $country = MasterCountry::query()->get();
+            $languages = MasterLanguage::query()->orderBy('name', 'ASC')->get();
+            $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
             $projectStage = ProjectStage::query()->get();
             $lookingFor = MasterLookingFor::query()->get();
             $projectStageOfFunding = ProjectStageOfFunding::query()->get();
