@@ -75,6 +75,7 @@
       // },
       bPaginate:false,
       paging:false,
+      searching:false,
       dom: 'Bfrtip',
         buttons: [
             // 'copy', 

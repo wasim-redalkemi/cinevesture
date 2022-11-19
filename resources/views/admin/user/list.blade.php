@@ -94,8 +94,8 @@
                                             <label for="">Action</label>
                                             <div class="d-flex">
                                                 {{-- <input type="submit" name="" id=""> --}}
-                                                <div><button type="submit" class="btn btn-success btn-sm mr-3">Filter</button></div>
-                                                <div><a href="{{route('user-management')}}"><button type="button" class="btn btn-warning btn-sm fa fa-refresh">  Refresh</button></a></div>
+                                                <div><button type="submit" class="btn btn-success btn-sm mr-3 text-white">Filter</button></div>
+                                                <div><a href="{{route('user-management')}}"><button type="button" class="btn btn-warning btn-sm fa fa-refresh text-white">  Refresh</button></a></div>
                                             </div>
                                         </div>
                                     </div>
@@ -139,8 +139,8 @@
                                     <td>@if(empty($user->job_title)){{'-'}}@else{{$user->job_title}}@endif</td>
                                     <td>@if (empty($user->organization->name)){{'-'}} @else{{$user->organization->name}}@endif</td>
                                     <td>@if (empty($user->organization->country->name)){{'-'}}@else{{$user->organization->country->name}}@endif</td>
-                                    <td> @if($user->status==1)<div class="btn btn-success"> {{'Active'}}</div>@else
-                                        <div class="btn btn-warning">{{'Inactive'}}</div>@endif
+                                    <td> @if($user->status==1)<div class="btn btn-success text-white"> {{'Active'}}</div>@else
+                                        <div class="btn btn-warning text-white">{{'Inactive'}}</div>@endif
                                     </td>
                                     <td>membership</td>
                                     <td><?php echo(date("d-m-Y", strtotime($user->created_at))); ?></td>
