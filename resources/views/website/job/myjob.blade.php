@@ -34,18 +34,18 @@
                             <div class="" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-ellipsis-h aubergine icon-size" aria-hidden="true"></i>
                             </div>
-                            <ul class="dropdown-menu w-100 profile_dropdown_menu p-2">
+                            <ul class="dropdown-menu profile_dropdown_menu p-2">
                                 <li>
-                                    Edit Job
+                                  <a href="">  Edit Job</a>
                                 </li>
                                 <li>
-                                    Promote Job
+                                  <a href="">  Promote Job</a>
                                 </li>
                                 <li>
-                                    Unpublish Job
+                                 <a href="">   Unpublish Job</a>
                                 </li>
                                 <li>
-                                    Delete Job
+                                  <a href="">  Delete Job </a>
                                 </li>
                             </ul>
                         </div>
@@ -61,14 +61,23 @@
                         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     </div>
                     <div class="d-flex justify-content-between mt-4">
-                        <div class="d-flex">
-                            <button class="curv_cmn_btn">Skills 1</button>
-                            <button class="curv_cmn_btn mx-4">Skills 2</button>
-                            <button class="curv_cmn_btn">Skills 3</button>
-                            <button class="curv_cmn_btn mx-4">Skills 4</button>
+                        <div class="d-flex flex-wrap">
+                            <button class="curv_cmn_btn skill_container">Skills 1</button>
+                            <button class="curv_cmn_btn skill_container">Skills 2</button>
+                            <button class="curv_cmn_btn skill_container">Skills 3</button>
+                            <button class="curv_cmn_btn skill_container">Skills 4</button>
+                            <button class="curv_cmn_btn skill_container">Skills 3</button>
+                            <button class="curv_cmn_btn skill_container">Skills 4</button>
+                            <button class="curv_cmn_btn skill_container">Skills 3</button>
+                            <button class="curv_cmn_btn skill_container">Skills 4</button>
+                            <button class="curv_cmn_btn skill_container">Skills 3</button>
+                            <button class="curv_cmn_btn skill_container">Skills 4</button>
+                            <button class="curv_cmn_btn skill_container">Skills 3</button>
+                            <button class="curv_cmn_btn skill_container">Skills 4</button>
+                            
                         </div>
                         <div>
-                            <button class="guide_profile_btn">View Applications</button>
+                            <button class="guide_profile_btn w_150">View Applications</button>
                         </div>
                     </div>
                 </div>
@@ -91,14 +100,14 @@
                         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                     </div>
                     <div class="d-flex justify-content-between mt-4">
-                        <div class="d-flex">
-                            <button class="curv_cmn_btn">Skills 1</button>
-                            <button class="curv_cmn_btn mx-4">Skills 2</button>
-                            <button class="curv_cmn_btn">Skills 3</button>
-                            <button class="curv_cmn_btn mx-4">Skills 4</button>
+                        <div class="d-flex flex-wrap">
+                            <button class="curv_cmn_btn skill_container">Skills 1</button>
+                            <button class="curv_cmn_btn skill_container">Skills 2</button>
+                            <button class="curv_cmn_btn skill_container">Skills 3</button>
+                            <button class="curv_cmn_btn skill_container">Skills 4</button>
                         </div>
                         <div>
-                            <button class="guide_profile_btn">View Applications</button>
+                            <button class="guide_profile_btn w_150">View Applications</button>
                         </div>
                     </div>
                 </div>
@@ -130,14 +139,14 @@
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                         </div>
                         <div class="d-flex justify-content-between mt-4">
-                            <div class="d-flex">
-                                <button class="curv_cmn_btn">Skills 1</button>
-                                <button class="curv_cmn_btn mx-4">Skills 2</button>
-                                <button class="curv_cmn_btn">Skills 3</button>
-                                <button class="curv_cmn_btn mx-4">Skills 4</button>
+                            <div class="d-flex flex-wrap">
+                                <button class="curv_cmn_btn skill_container">Skills 1</button>
+                                <button class="curv_cmn_btn skill_container">Skills 2</button>
+                                <button class="curv_cmn_btn skill_container">Skills 3</button>
+                                <button class="curv_cmn_btn skill_container">Skills 4</button>
                             </div>
                             <div>
-                                <button class="guide_profile_btn">Apply now</button>
+                                <button class="guide_profile_btn ">Apply now</button>
                             </div>
                         </div>
                     </div>
@@ -160,11 +169,12 @@
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                         </div>
                         <div class="d-flex justify-content-between mt-4">
-                            <div class="d-flex">
-                                <button class="curv_cmn_btn">Skills 1</button>
-                                <button class="curv_cmn_btn mx-4">Skills 2</button>
-                                <button class="curv_cmn_btn">Skills 3</button>
-                                <button class="curv_cmn_btn mx-4">Skills 4</button>
+                            <div class="d-flex flex-wrap">
+                                <button class="curv_cmn_btn skill_container">Skills 1</button>
+                                <button class="curv_cmn_btn skill_container">Skills 2</button>
+                                <button class="curv_cmn_btn skill_container">Skills 3</button>
+                                <button class="curv_cmn_btn skill_container">Skills 4</button>
+                                <button class="curv_cmn_btn skill_container">Skills 4</button>
                             </div>
                             <div>
                                 <button class="guide_profile_btn">Apply now</button>
@@ -199,11 +209,11 @@
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                         </div>
-                        <div class="d-flex  mt-4">
-                            <button class="curv_cmn_btn">Skills 1</button>
-                            <button class="curv_cmn_btn mx-4">Skills 2</button>
-                            <button class="curv_cmn_btn">Skills 3</button>
-                            <button class="curv_cmn_btn mx-4">Skills 4</button>
+                        <div class="d-flex flex-wrap mt-4">
+                            <button class="curv_cmn_btn skill_container">Skills 1</button>
+                            <button class="curv_cmn_btn skill_container">Skills 2</button>
+                            <button class="curv_cmn_btn skill_container">Skills 3</button>
+                            <button class="curv_cmn_btn skill_container">Skills 4</button>
                         </div>
                     </div>
 
@@ -225,11 +235,11 @@
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                         </div>
                         <div class="d-flex justify-content-between mt-4">
-                            <div class="d-flex">
-                                <button class="curv_cmn_btn">Skills 1</button>
-                                <button class="curv_cmn_btn mx-4">Skills 2</button>
-                                <button class="curv_cmn_btn">Skills 3</button>
-                                <button class="curv_cmn_btn mx-4">Skills 4</button>
+                            <div class="d-flex flex-wrap">
+                                <button class="curv_cmn_btn skill_container">Skills 1</button>
+                                <button class="curv_cmn_btn skill_container">Skills 2</button>
+                                <button class="curv_cmn_btn skill_container">Skills 3</button>
+                                <button class="curv_cmn_btn skill_container">Skills 4</button>
                             </div>
                             <div>
                                 <!-- <button class="guide_profile_btn">View Applications</button> -->
@@ -291,11 +301,11 @@
                     </div>
                     <div class="profile_wraper profile_wraper_padding">
                         <div class="guide_profile_main_text">Skills Required</div>
-                        <div class="d-flex mt-3">
-                            <button class="curv_cmn_btn">Skills 1</button>
-                            <button class="curv_cmn_btn mx-4">Skills 2</button>
-                            <button class="curv_cmn_btn">Skills 3</button>
-                            <button class="curv_cmn_btn mx-4">Skills 4</button>
+                        <div class="d-flex flex-wrap mt-3">
+                            <button class="curv_cmn_btn skill_container">Skills 1</button>
+                            <button class="curv_cmn_btn skill_container">Skills 2</button>
+                            <button class="curv_cmn_btn skill_container">Skills 3</button>
+                            <button class="curv_cmn_btn skill_container">Skills 4</button>
                         </div>
                     </div>
                     <div class="profile_wraper profile_wraper_padding">
@@ -352,11 +362,11 @@
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                                 </div>
-                                <div class="d-flex mt-3">
-                                    <button class="curv_cmn_btn">Skills 1</button>
-                                    <button class="curv_cmn_btn mx-4">Skills 2</button>
-                                    <button class="curv_cmn_btn">Skills 3</button>
-                                    <button class="curv_cmn_btn mx-4">Skills 4</button>
+                                <div class="d-flex flex-wrap mt-3">
+                                    <button class="curv_cmn_btn skill_container">Skills 1</button>
+                                    <button class="curv_cmn_btn skill_container">Skills 2</button>
+                                    <button class="curv_cmn_btn skill_container">Skills 3</button>
+                                    <button class="curv_cmn_btn skill_container">Skills 4</button>
                                 </div>
                             </div>
                         </div>
@@ -389,11 +399,11 @@
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                                     Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                                 </div>
-                                <div class="d-flex mt-3">
-                                    <button class="curv_cmn_btn">Skills 1</button>
-                                    <button class="curv_cmn_btn mx-4">Skills 2</button>
-                                    <button class="curv_cmn_btn">Skills 3</button>
-                                    <button class="curv_cmn_btn mx-4">Skills 4</button>
+                                <div class="d-flex flex-wrap mt-3">
+                                    <button class="curv_cmn_btn skill_container">Skills 1</button>
+                                    <button class="curv_cmn_btn skill_container">Skills 2</button>
+                                    <button class="curv_cmn_btn skill_container">Skills 3</button>
+                                    <button class="curv_cmn_btn skill_container">Skills 4</button>
                                 </div>
                             </div>
                         </div>
@@ -527,7 +537,7 @@
                 </div>
             </section>
         </div>
-        <div class="public_section">
+        <div class="public_section mb-4">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item">

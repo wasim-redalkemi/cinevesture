@@ -443,6 +443,7 @@ body {
     background: #33084C !important;
     padding: 0 28%;
     min-height: 100vh;
+    overflow: hidden;
 }
 
 .before_login_section {
@@ -761,17 +762,16 @@ body {
  .curv_cmn_btn {
     background: #971E9B;
     border-radius: 99px;
-    /* display: flex; */
-    /* flex-direction: row; */
-    align-items: center;
-    /* gap: 4px; */
     width: auto;
-    height: 39px;
+    height: 32px;
     max-height: auto;
     border: none;
     padding: 6px 10px;
     color: #FAF8FB;
-    white-space: nowrap;
+    line-height: 19px;
+    font-weight: 300;
+    font-size: 14px;
+    letter-spacing: 0.018em;
     margin: 2.5px 2px;
 }
 
@@ -1114,6 +1114,9 @@ body {
     color: #FFFFFF;
     font-size: 14px;
 }
+.w_150 {
+    width: 150px;
+}
 .h_40 {
     height: 40px;
 }
@@ -1280,9 +1283,12 @@ body {
     color: #4D0D8A !important;
     font-size: 20px !important;
 }
-.profile_dropdown_menu li {
-   color: #4D0D8A;
-   padding: 5px;
+.profile_dropdown_menu li a {
+   color: #4D0D8A !important;
+   padding: 7px;
+   font-size: 16px;
+   width: 100%;
+   text-decoration: none !important;
 }
 .cancel_btn {
     background: transparent;
@@ -1814,7 +1820,10 @@ button, input, optgroup, select, textarea {
 }
   .skill_container {
     float: left;
-    margin: 0px 5px 10px 0px;
+    margin: 0px 10px 10px 0px;
+  }
+  .mw_60 {
+    max-width: 600px;
   }
   .clearfix::after {
     content: "";
