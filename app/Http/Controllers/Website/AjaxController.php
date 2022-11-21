@@ -155,7 +155,7 @@ class AjaxController extends WebController {
             $projectMedia->file_type = "doc";
             $projectMedia->file_link = $locationPath."/".$newName;
             $projectMedia->media_info = json_encode(["name"=>$fileName,"size"=> $fileSize,"size_label"=> ($fileSize/1000)." KB"]);
-            //$projectMedia->save();
+            $projectMedia->save();
             $projectMedia->file_link = asset("storage/".$projectMedia->file_link);
             $projectMedia->media_info = json_decode($projectMedia->media_info, true);
             return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$projectMedia,"Success","ER000","");

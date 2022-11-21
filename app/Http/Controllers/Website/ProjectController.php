@@ -542,18 +542,16 @@ class ProjectController extends WebController
 
     public function publicView($id)
     {
-        try { 
-            $UserProject = UserProject::query()->where('id',$id)->first();           
-            $countries = MasterCountry::all();
-            $languages = MasterLanguage::all();
-            $geners = MasterProjectGenre::all();
-            $categories = MasterProjectCategory::all();
-            $looking_for = MasterLookingFor::all();
-            $project_stages = ProjectStage::all();
-            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectType','projectStageOfFunding','projectStage'])->where('id',$id)->first();
+        try {
+            if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
+            {
+                return back()->with('error','Project Id not found.');
+            } 
+            $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
+            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectOnlyImage','projectOnlyVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->get();
             $projectData = $projectData->toArray();
 
-            return view('website.user.project.project_public_view', compact(['UserProject','projectData','countries','languages','geners','categories','looking_for','project_stages']));
+            return view('website.user.project.project_public_view', compact(['UserProject','projectData']));
 
         } catch (Exception $e) {
             return back()->with('error','Something went wrong.');

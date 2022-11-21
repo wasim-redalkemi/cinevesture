@@ -739,6 +739,8 @@
             let uploadDoc = function () {
                 var formData = new FormData();
                 formData.append("file", uploadedFile, uploadedFile.name);
+                formData.append("project_id", project_id);
+                formData.append("file_type", project_id);
                 $.ajax({
                     type: "POST",
                     url: BaseUrl+"ajax/upload-doc",
