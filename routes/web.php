@@ -30,7 +30,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/test', function () {
-    return view('website.plan');
+    return view('website.job.myjob');
 });
 Route::get('/', function () {
     return view('website.auth.login');

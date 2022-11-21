@@ -3,16 +3,20 @@
 @section('title','Cinevesture-Register')
 
 @section('content')
-<section class="auth_section">
-<div class="container signup-container">
+<section class="auth_section p-0">
+
+
+<div class="row">
+    <div class="col-md-5">
+    <div class="container signup-container px-5">
     <div class="row">
         <div class="col-md-12">
-            <div class="signup-text mt-4-5"> Sign Up</div>
+            <div class="signup-text mt-5 mt-md-5"> Sign Up</div>
         </div>
         <form method="POST" enctype="multipart/form-data" action="{{ route('register') }}">
             @csrf
             <div class="row">
-                <div class="col-lg-6 col-sm-6 mt-2 mt-4-5 pt-2">
+                <div class="col-lg-6 col-sm-6 mt-2 mt-lg-5 pt-5 pt-lg-5">
                     <input type="text" class="name-only is-invalid-remove alphabets-only outline w-100 @error('first_name') is-invalid @enderror" name="first_name" placeholder="First Name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
                     @error('first_name')
                         <span class="invalid-feedback" role="alert">
@@ -20,7 +24,7 @@
                         </span>
                     @enderror     
                 </div>
-                <div class="col-lg-6 col-sm-6 mt-2 mt-4-5 pt-2">
+                <div class="col-lg-6 col-sm-6 mt-2 mt-lg-5 pt-4 pt-lg-5">
                     <input type="text" class="name-only is-invalid-remove alphabets-only outline w-100 @error('last_name') is-invalid @enderror" required name="last_name" placeholder="Last Name" value="{{ old('last_name') }}" autocomplete="last_name" autofocus>
                     @error('last_name')
                         <span class="invalid-feedback" role="alert">
@@ -47,7 +51,7 @@
                 <div class="col-12 mt-4-5">
                     <input type="password" class="password-only is-invalid-remove outline w-100" placeholder="Re Enter Password" name="password_confirmation" id = "password_confirmation" required autocomplete="new-password">
                 </div>
-                <div class="col-12 mt-2 mt-lg-5">
+                <div class="col-12 mt-2 mt-4-5">
                     <button type="submit" class="outline w-100">{{ __('Create Account') }}</button>
                 </div>
             </div>
@@ -69,6 +73,13 @@
                 By clicking “Create Account”, I agree to Cinevesture’s TOS
                 and Privacy Policy.
             </div>
+        </div>
+    </div>
+</div>
+    </div>
+    <div class="col-md-7 d-none d-lg-block">
+    <div class="">
+            <img src="{{asset('public/images/asset/gordon-cowie-OPlXmibx__I-unsplash 1.png')}}" width="100%" height="100%" alt="">
         </div>
     </div>
 </div>

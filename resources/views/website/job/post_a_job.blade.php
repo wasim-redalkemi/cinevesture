@@ -28,45 +28,23 @@
                             <div class="col-md-1"></div>
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>Title Of The Job</label>
-                                    <div class="dropdown profile_dropdown_btn">
-                                        <button class="btn dropdown-toggle d-flex align-items-center profile_dropdown_btn" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Genres
-                                        </button>
-                                        <ul class="dropdown-menu w-100 profile_dropdown_menu">
-                                            <li>
-                                                Features
-                                            </li>
-                                            <li>
-                                                Animation
-                                            </li>
-                                            <li>
-                                                Biography
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    <label>Employment type</label>
+                                    <select name="age" class="outline is-invalid-remove @error('age') is-invalid @enderror" id="lang">
+                                        <option value="">Select 1</option>
+                                       <option value="">Select 2</option>
+                                        
+
+                                    </select>
                                 </div>
                             </div>
                             <div class="col-md-1"></div>
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>Title Of The Job</label>
-                                    <div class="dropdown profile_dropdown_btn">
-                                        <button class="btn dropdown-toggle d-flex align-items-center profile_dropdown_btn" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Genres
-                                        </button>
-                                        <ul class="dropdown-menu w-100 profile_dropdown_menu">
-                                            <li>
-                                                Features
-                                            </li>
-                                            <li>
-                                                Animation
-                                            </li>
-                                            <li>
-                                                Biography
-                                            </li>
-                                        </ul>
-                                    </div>
+                                    <label>Workspace type</label>
+                                    <select name="age" class="outline is-invalid-remove @error('age') is-invalid @enderror" id="lang">
+                                        <option value="">Select 1</option>
+                                       <option value="">Select 2</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -94,10 +72,22 @@
                     </div>
                     <div class="guide_profile_subsection">
                         <div class="guide_profile_main_text mt-3">Skills Required</div>
-                        <div class="profile_input">
+                        <div class="row">
+                            <div class="col-md-6">
+                            <div class="profile_input">
                             <label>Skills (You can add upto 10 skills)</label>
-                            <input type="text" class="form-control" name="" placeholder="Skills" aria-describedby="basic-addon1">
+                            <select name="skills[]" class="outline js-select2" id="lang" multiple>
+                                     
+                                        <option value="">option 2</option>
+                                        <option value="">option 3</option>
+                                        <option value="">option 4</option>
+                                        <option value="">option 5</option>
+                                        
+                                    </select>
                         </div>
+                            </div>
+                        </div>
+                    
                         <div class="search-head-subtext mt-3">Suggested Skills</div>
                         <div class="d-flex my-2">
                             <button class="curv_cmn_btn">Lorem ipsim +</button>
@@ -119,3 +109,14 @@
 @section('footer')
 @include('website.include.footer')
 @endsection
+
+@push('scripts')
+<script>
+      $(".js-select2").select2({
+        closeOnSelect: false,
+        placeholder: "Select",
+        allowClear: true,
+        tags: false
+    });
+</script>
+@endpush
