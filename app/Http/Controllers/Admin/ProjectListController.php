@@ -51,7 +51,7 @@ class ProjectListController extends AdminController
             $project_list->list_name=$request->name;
             $project_list->list_status=$request->status;
             $project_list->save();
-             return redirect('admin/project-management/project-list')->with("success", "List added  successfully.");
+             return redirect()->route('show-list')->with("success", "List added  successfully.");
         }
         catch (Exception $e) 
         {
@@ -86,7 +86,7 @@ class ProjectListController extends AdminController
             $projects_data=ProjectSearch::query()->with('lists')->groupby('list_id')
             ->selectraw('count(project_id) as project_count,list_id')
             ->paginate($this->records_limit);
-           
+        //    dd($projects_data);
             return view('admin.projectList.list',compact('project_list','projects_data'));
         }
         catch (Exception $e) 

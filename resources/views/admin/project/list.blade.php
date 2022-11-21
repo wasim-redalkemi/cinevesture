@@ -100,6 +100,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
                 <div class="row mt-3">
                     <div class="col-md-12">
                         <div class="table-responsive">
@@ -212,7 +213,6 @@
             </div>
         </div>
     </div>
-</div>
 
 @endsection
 @push('scripts')
