@@ -71,4 +71,8 @@ class User extends Authenticatable
     public function organization(){
         return $this->hasOne(UserOrganisation::class, 'user_id', 'id');
     }
+
+    public function invites(){
+        return $this->hasOne(UserInvite::class, 'user_id', 'id');
+    }
 }

@@ -18,7 +18,7 @@
                                 </div>
                             </a>
                           </div>
-                          <div id="collapseOne" class="collapse p-3 pt-4" data-parent="#accordion">
+                          <div id="collapseOne" id="show_filter" class="collapse p-3 pt-4" data-parent="#accordion">
                             <form class="" method="get" action="{{route('user-management')}}">
                         
                                 <div class="row">
@@ -94,7 +94,7 @@
                                             <label for="">Action</label>
                                             <div class="d-flex">
                                                 {{-- <input type="submit" name="" id=""> --}}
-                                                <div><button type="submit" class="btn btn-success btn-sm mr-3 text-white">Filter</button></div>
+                                                <div><button type="submit" id="filter_btn" class="btn btn-success btn-sm mr-3 text-white">Filter</button></div>
                                                 <div><a href="{{route('user-management')}}"><button type="button" class="btn btn-warning btn-sm fa fa-refresh text-white">  Refresh</button></a></div>
                                             </div>
                                         </div>
@@ -138,7 +138,7 @@
                                     <td>{{$user->email}}</td>
                                     <td>@if(empty($user->job_title)){{'-'}}@else{{$user->job_title}}@endif</td>
                                     <td>@if (empty($user->organization->name)){{'-'}} @else{{$user->organization->name}}@endif</td>
-                                    <td>@if (empty($user->organization->country->name)){{'-'}}@else{{$user->organization->country->name}}@endif</td>
+                                    <td>@if (empty($user->country->name)){{'-'}}@else{{$user->country->name}}@endif</td>
                                     <td> @if($user->status==1)<div class="btn btn-success text-white"> {{'Active'}}</div>@else
                                         <div class="btn btn-warning text-white">{{'Inactive'}}</div>@endif
                                     </td>
@@ -167,5 +167,18 @@
             </div>
         </div>
     </div>
+  
 </div>
 @endsection
+@push('scripts')
+<script>
+    $(document).ready(function(){
+    @if (request('organization') || request('country') || request('from_date') || request('to_date') || request('status') || request('membership') || request('search'))
+        $(".collapse").addClass("show");
+    @endif
+     
+       
+        
+});
+</script>
+@endpush

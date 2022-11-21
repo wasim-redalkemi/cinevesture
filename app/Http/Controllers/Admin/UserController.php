@@ -25,11 +25,6 @@ class UserController extends AdminController
             
             $countries=MasterCountry::query()->get();
             $UserOrganisation = UserOrganisation::query()->get();
-            if ($request->organization) {
-                $organizationUser=UserInvite::query()
-                ->where($request->organization,'user_organization_id')
-                ->where('accepted'=='1');
-            }
             $users=User::query()->where('user_type','U')
             ->with(['organization','country'])
             ->where(function ($q) use ($request) {
@@ -46,24 +41,19 @@ class UserController extends AdminController
                 if (isset($request->status)) {
                     $q->where('status',$request->status);
                 }
-                // if (isset($request->organization)) {
-                //     $Organisation=UserInvite::query()->with('user');
-                
-                // }
-                // if (isset($request->organization)) { // search name of user
-                //     $q->whereHas('organizations', function ($q) use($request){
-                //         $q->where('user_id',$request->organization);
-                //     });
-                // }
+                if (isset($request->organization)) { // search name of user
+                    $q->whereHas('invites', function ($q) use($request){
+                        $q->where('user_organization_id',$request->organization);
+                    });
+                }
 
             })
+           
             ->paginate($this->records_limit);
-          
-            dd($organizationUser);
             return view('admin.user.list',compact('users','UserOrganisation','countries'));
         } 
         catch (Exception  $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->withError($e->getMessage());
         }
 
     }

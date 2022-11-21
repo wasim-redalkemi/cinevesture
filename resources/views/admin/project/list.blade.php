@@ -227,8 +227,10 @@
             window.location.href=$(this).attr('path');
         })
     })
-
+    
+    @if (request('category') || request('genre') || request('from_date') || request('to_date') || request('favorited') || request('Recommended_badge') || request('search'))
+        $(".collapse").addClass("show");
+    @endif
 </script>
-
 @endpush
 
