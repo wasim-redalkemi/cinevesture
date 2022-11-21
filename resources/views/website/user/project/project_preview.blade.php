@@ -42,7 +42,7 @@
                 <div class="preview_subtext pb-3">@if (!empty($projectData[0]['location'])) {{$projectData[0]['location']}} @endif</div>
                 <div class="row">
                     <div class="com-md-12">
-                        <div class="justify-content-end"><button class="save_add_btn float-end">Edit</button></div>
+                        <div class="justify-content-end"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-overview') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
                     </div>
                 </div>
             </div>
@@ -88,7 +88,7 @@
                 </div>
                 <div class="row">
                     <div class="com-md-12">
-                        <div class="justify-content-end"><button class="save_add_btn float-end">Edit</button></div>
+                        <div class="justify-content-end"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-details') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
                     </div>
                 </div>
             </div>
@@ -111,7 +111,7 @@
                 <div class="preview_subtext">@if (!empty($projectData[0]['director_statement'])) {{$projectData[0]['director_statement']}} @endif</div>
                 <div class="row">
                     <div class="com-md-12">
-                        <div class="justify-content-end"><button class="save_add_btn float-end">Edit</button></div>
+                        <div class="justify-content-end"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-description') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
                     </div>
                 </div>
             </div>
@@ -123,7 +123,7 @@
             <div class="col-md-12">
                 <div class="profile_wraper profile_wraper_padding mt-4 mb-0">
                     <div>
-                        <p class="flow_step_text"> Description</p>
+                        <p class="flow_step_text"> Gallary</p>
                     </div>
         
                     <div class="preview_headtext mb-3">Video</div>
@@ -190,6 +190,11 @@
                         <span><b>-</b></span>                    
                         @endif
                     </div>
+                    <div class="row">
+                        <div class="com-md-12">
+                            <div class="justify-content-end"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-gallery') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -236,7 +241,7 @@
                 <div class="row">
                     <div class="com-md-12">
                         <div class="d-flex justify-content-end mt-2">
-                        <div class="justify-content-end"><button class="save_add_btn float-end">Edit</button></div>
+                        <div class="justify-content-end"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-milestone') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
                         </div>
                     </div>
                 </div>
