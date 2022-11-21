@@ -253,10 +253,10 @@ class UserController extends WebController
                 }
                 return redirect()->route('portfolio-create')->with("success", "User details updated successfully.");
             } else {
-                return back()->withError('error', 'Something went wrong ,please try again.');
+                return back()->with('error', 'Something went wrong ,please try again.');
             }
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
