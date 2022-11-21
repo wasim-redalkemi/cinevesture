@@ -169,7 +169,7 @@
                             <div class="user_profile_container">
                                 <!-- <img src="{{ asset('public/images/asset/user-profile.png') }}" /> -->
                                 @if(isset($user->profile_image))
-                                <img src="{{Storage::url($user->profile)}}" />
+                                <img src="{{Storage::url($user->profile_image)}}" />
                                 @else
                                 <img src="{{ asset('public/images/asset/user-profile.png') }}" />
                                 @endif
@@ -208,7 +208,7 @@
                                 @endif
                             </div>
                             <div class="d-flex justify-content-between mt-4">
-                                <div class="d-flex">
+                                <div class="">
                                     @if(isset($user->skill[0]))
                                     @foreach($user->skill as $skill)
                                     <button class="curv_cmn_btn">{{$skill->getSkills->name}}</button>

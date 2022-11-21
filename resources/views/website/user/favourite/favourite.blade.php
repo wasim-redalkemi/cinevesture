@@ -94,7 +94,7 @@
                             <div class="posted_job_header Aubergine_at_night">
                                 {{ !empty($v['profiles']['about'])? $v['profiles']['about'] : '-' }}
                             </div>
-                            <div class="d-flex mt-3">
+                            <div class="mt-3">
                                 @foreach ($v['profile_skills'] as $k1=>$v1)                           
                                     <button class="curv_cmn_btn skill_container">{{ !empty($v1['get_skills']['name'])? $v1['get_skills']['name'] : '-' }}</button>
                                 @endforeach

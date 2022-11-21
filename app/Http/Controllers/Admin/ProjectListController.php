@@ -52,7 +52,7 @@ class ProjectListController extends AdminController
             $project_list->list_name=$request->name;
             $project_list->list_status=$request->status;
             $project_list->save();
-             return redirect('admin/project-management/project-list')->with("success", "List added  successfully.");
+             return redirect()->route('show-list')->with("success", "List added  successfully.");
         }
         catch (Exception $e) 
         {

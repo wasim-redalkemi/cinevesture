@@ -8,16 +8,16 @@
               aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-            <a class="navbar-logo" href="#">
+            <a class="navbar-logo" href="{{route('home')}}">
               <img src="{{ asset('images/asset/Logo-white-trans.png') }}" width="220" height="75" alt="image">
             </a>
             <div class="collapse navbar-collapse justify-content-center" id="navbarTogglerDemo01">
               <ul class="navbar-nav mt-2 mt-lg-0">
                 <li>
-                  <a class="header-nav-link active" href="#">Project</a>
+                  <a class="header-nav-link active" href="{{route('home')}}">Project</a>
                 </li>
                 <li>
-                  <a class="header-nav-link" href="{{route('guide-view')}}">Industry Guide</a>
+                  <a class="header-nav-link" href="{{route('show-guide')}}">Industry Guide</a>
                 </li>
                 {{-- <li>
                   <div class="dropdown home-dropdown">

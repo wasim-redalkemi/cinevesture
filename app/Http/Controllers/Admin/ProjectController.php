@@ -23,11 +23,39 @@ class ProjectController extends AdminController
      */
     public function index(Request $request)
     {
+       
         try {
-            $projects = UserProject::query()->with(['user','projectCategory','genres'])
-            ->paginate(3);
-          
-                return view('admin.project.list',compact('projects'));
+            $categories=MasterProjectCategory::query()->get();
+            $genres=MasterProjectGenre::query()->get();
+            $projects = UserProject::query()
+            ->with(['user','projectCategory','genres'])
+            ->where(function ($q) use ($request) {
+                    if (isset($request->category)) { // search name of user
+                    $q->whereHas('projectCategory', function ($q) use($request){
+                        $q->where('category_id',$request->category);
+                    });
+                    }
+                    if (isset($request->genre)) { // search name of user
+                        $q->whereHas('genres', function ($q) use($request){
+                            $q->where('gener_id',$request->genre);
+                        });
+                    }
+                    if(isset($request->from_date) && isset($request->to_date)){
+                        $q->whereBetween("created_at",[$request->from_date,$request->to_date]);
+                    }
+                    if (isset($request->favorited)) {
+                        $q->where("favorited",$request->favorited);
+                    }
+                    if (isset($request->Recommended_badge)) {
+                        $q->where("Recommended_badge",$request->Recommended_badge);
+                    }
+                    if (isset($request->search)) {
+                        $q->where("project_name","like","%$request->search%");
+                    }
+
+            })
+            ->paginate($this->records_limit);
+                return view('admin.project.list',compact('projects','categories','genres'));
         } catch (\Throwable $e) {
         return back()->withErrors($e->getMessage());
         }

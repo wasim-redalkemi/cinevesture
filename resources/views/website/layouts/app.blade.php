@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.css" integrity="sha256-jKV9n9bkk/CTP8zbtEtnKaKf+ehRovOYeKoyfthwbC8=" crossorigin="anonymous" />
 
 
     @yield('css')
@@ -27,6 +28,9 @@
      <div id="app">
 
         <main class="">
+        <div class="hide-me animation for_authtoast">
+              @include('website.include.flash_message')
+        </div>
             @yield('header')
             @if(!empty(auth()->user()) && auth()->user()->user_type !== 'A') 
                 @yield('nav')
@@ -46,6 +50,8 @@
     <script src="{{ asset('js/script.js') }}"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js" integrity="sha256-CgvH7sz3tHhkiVKh05kSUgG97YtzYNnWt6OXcmYzqHY=" crossorigin="anonymous"></script>
+
     <script>
 
         var BaseUrl = '{{config('app.url')}}';

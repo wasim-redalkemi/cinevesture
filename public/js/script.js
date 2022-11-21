@@ -16,3 +16,5 @@ function toastMessage(status, msg) {
     $(".for_authtoast").html(toast_msg);
     $(".toast").show();     
 }  
+
+	

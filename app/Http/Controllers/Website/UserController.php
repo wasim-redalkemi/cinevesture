@@ -21,10 +21,12 @@ use App\Models\UserPortfolioImage;
 use App\Models\UserPortfolioSpecificSkills;
 use App\Models\UserQualification;
 use App\Models\UserSkill;
+use App\Notifications\ContactUser;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends WebController
@@ -174,13 +176,13 @@ class UserController extends WebController
             $user->skill = $temp_skill;
 
             $skills = MasterSkill::query()->get();
-            $languages = MasterLanguage::query()->get();
-            $country = MasterCountry::query()->orderBy('name')->get();
+            $languages = MasterLanguage::query()->orderBy('name', 'ASC')->get();
+            $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
             $state = MasterState::query()->get();
             $age = AgeRange::query()->get();
             return view('website.user.profile_create', compact(['user', 'skills', 'languages', 'country', 'state', 'age']));
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -204,17 +206,31 @@ class UserController extends WebController
             $user->website = $request->website;
             $user->intro_video_link = $request->intro_video_link;
 
-            if ($request->hasFile('profile_image')) {
+            if ($request->croppedImg) {
 
-                $file = $request->file('profile_image');
-                $originalFile = $file->getClientOriginalName();
-                $fileExt = pathinfo($originalFile, PATHINFO_EXTENSION);
-                $fileName = pathinfo($originalFile, PATHINFO_FILENAME);
-                $nameStr = date('_YmdHis');
-                $newName = $fileName . $nameStr . '.' . $fileExt;
-                $locationPath  = "user";
-                $uploadFile = $this->uploadFile($locationPath, $file, $newName);
-                $user->profile_image = $uploadFile;
+                // $file = $request->file('croppedImg');
+                // $originalFile = $file->getClientOriginalName();
+                // $fileExt = pathinfo($originalFile, PATHINFO_EXTENSION);
+
+                // $fileName = pathinfo($originalFile, PATHINFO_FILENAME);
+                // $nameStr = date('_YmdHis');
+                // $newName = $fileName . $nameStr . '.' . $fileExt;
+                // $locationPath  = "user";
+                // $uploadFile = $this->uploadFile($locationPath, $file, $newName);
+                // $user->profile_image = $uploadFile;
+
+
+
+                $image = $request->croppedImg;
+                list($type, $image) = explode(';', $image);
+                list(, $image)      = explode(',', $image);
+                $path = 'user/';
+                $image = base64_decode($image);
+                $image_name= $path.date('sihdmY').'.png';
+                $uploadFile = storage_path('app/'.$image_name);
+                
+                file_put_contents($uploadFile, $image);
+                $user->profile_image = $image_name;
             }
             if ($user->save()) {
                 if (isset($request->skills)) {
@@ -249,7 +265,7 @@ class UserController extends WebController
     {
         try {
             $user = User::query()->find(auth()->user()->id);
-            $country = MasterCountry::query()->get();
+            $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
             $skills = MasterSkill::query()->get();
             $portfolio = $user;
             return view('website.user.profile_portfolio', compact('portfolio', 'country', 'skills'));
@@ -335,7 +351,7 @@ class UserController extends WebController
                 return back()->withError('This portfolio is not exist');
             } else {
                 $skills = MasterSkill::query()->get();
-                $country = MasterCountry::query()->get();
+                $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
                 $UserPortfolioEdit = UserPortfolio::query()->where('id', $id)->get();
                 $UserPortfolioImages = UserPortfolioImage::query()->where('portfolio_id', $id)->get();
                 $UserPortfolioSkills = UserPortfolioSpecificSkills::query()->where('portfolio_id', $id)->get();
@@ -596,6 +612,34 @@ class UserController extends WebController
         $user->delete();
         return redirect('/login');
 
+    }
+
+    public function contactMailStore(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'email_1' => 'required|email',
+                'message' => 'required|string',
+                'subject' => 'required|string',
+            ]);
+
+            if ($validator->fails()) {
+                return ['satus'=>0,'msg'=>$validator->errors()->first()];
+            }
+            $email = '';
+            if(!$_REQUEST['email_1'] && !$_REQUEST['message'] && !$_REQUEST['subject']){
+                return ['satus'=>0,'msg'=>"Email or message or subject fields can not be empty."];
+            }
+            if(!empty($_REQUEST['email_1']) ){
+                $email = $_REQUEST['email_1'];
+                $collect = collect();
+                $collect->put('url','https://www.youtube.com/');
+                Notification::route('mail', $email)->notify(new ContactUser($collect));                
+            }
+            return ['status'=>1,'msg'=>"Email has been sending by contact email."];           
+        } catch (Exception $e) {
+            return ['status'=>0,'msg'=>"Something went wrong."];
+        }
     }
 }
 
