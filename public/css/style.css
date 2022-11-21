@@ -1576,6 +1576,9 @@ button, input, optgroup, select, textarea {
     text-decoration: none;
     margin-top: 8px;
 }
+.post-job{
+    width: 170px;
+}
 .lh_54 {
     letter-spacing: 0.054em;
 }

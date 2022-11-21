@@ -48,7 +48,7 @@
                   </div>
                 </li> --}}
                 <li>
-                  <a class="header-nav-link" href="#">Jobs</a>
+                  <a class="header-nav-link" href="{{route('job-search-page')}}">Jobs</a>
                 </li>
               </ul>
             </div>

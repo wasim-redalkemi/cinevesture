@@ -13,6 +13,7 @@ use App\Http\Controllers\Website\IndustryGuideController;
 use App\Http\Controllers\Website\ProjectController;
 use App\Http\Controllers\Website\SettingController;
 use App\Http\Controllers\Website\AjaxController;
+use App\Http\Controllers\Website\JobController;
 use App\Http\Controllers\Website\SubscriptionController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -169,6 +170,15 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         // Route::post('/update/{id}', [OrganisationController::class, 'update'])->name('organisation-update');
         Route::get('/create-team', [OrganisationController::class, 'createTeam'])->name('create-team');
         Route::post('/team-store', [OrganisationController::class, 'teamStore'])->name('team-store');
+
+	});
+
+    Route::group(['prefix'=>'job'],function()
+	{	
+        Route::get('/search',[JobController::class, 'index'])->name('job-search-page');
+        Route::get('/create',[JobController::class, 'create'])->name('job-create-page');
+
+        // Route::post('/action',[FavouriteController::class, 'update'])->name('favourite-update');
 
 	});
 
