@@ -6,10 +6,11 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use App\Models\ProjectList;
 use App\Models\ProjectMedia;
-use App\Models\ProjectSearch;
+use App\Models\ProjectListProjects;
 use App\Models\UserProject;
 use Exception;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\FuncCall;
 
 class ProjectListController extends AdminController
 {
@@ -83,10 +84,9 @@ class ProjectListController extends AdminController
         try
         {
             $project_list=ProjectList::query()->paginate($this->records_limit);
-            $projects_data=ProjectSearch::query()->with('lists')->groupby('list_id')
+            $projects_data=ProjectListProjects::query()->with('lists')->groupby('list_id')
             ->selectraw('count(project_id) as project_count,list_id')
             ->paginate($this->records_limit);
-           
             return view('admin.projectList.list',compact('project_list','projects_data'));
         }
         catch (Exception $e) 
@@ -106,7 +106,7 @@ class ProjectListController extends AdminController
         try
         {
             $project_data=UserProject::paginate($this->records_limit);
-            $project_search=ProjectSearch::query()
+            $project_search=ProjectListProjects::query()
              ->with('projects')
             ->select('project_id')
             ->where('list_id', $id)
@@ -130,12 +130,12 @@ class ProjectListController extends AdminController
         try
         {
             $search_data=$request->name;
-            // $project_search=ProjectSearch::query()
-            // ->with('projects')
-            // ->select('project_id')
-            // ->groupby('list_id')
-            // ->havingraw('list_id','=',$id)
-            // ->get();
+            $project_search=ProjectListProjects::query()
+            ->with('projects')
+            ->select('project_id')
+            ->groupby('list_id')
+            ->havingraw('list_id','=',$id)
+            ->paginate($this->records_limit);
             // dd($project_search);
 
 
@@ -166,7 +166,7 @@ class ProjectListController extends AdminController
                     'list_id'  =>$projectid[1]
                     ];
                 }
-            ProjectSearch::insert( $data );
+            ProjectListProjects::insert( $data );
             return redirect('/admin/project-management/list')->with("success", "Project selected successfully.");
         }
         catch (Exception $e) 
@@ -203,7 +203,7 @@ class ProjectListController extends AdminController
         try
         {
             $delet_list=ProjectList::where('id',$id)->delete();
-            $delete_search_list=ProjectSearch::where('list_id',$id)->delete();
+            $delete_search_list=ProjectListProjects::where('list_id',$id)->delete();
             return redirect('/admin/project-management/list')->with("success", "List deleted successfully.");
         }
         catch (Exception $e) 

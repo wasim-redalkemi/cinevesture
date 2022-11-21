@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectSearchTable extends Migration
+class CreateProjectListsProjectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateProjectSearchTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_search', function (Blueprint $table) {
+        Schema::create('project_lists_projects', function (Blueprint $table) {
             $table->id();
             $table->string('project_id',20);
             $table->string('list_id',20);
@@ -29,6 +29,6 @@ class CreateProjectSearchTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_search');
+        Schema::dropIfExists('project_lists_projects');
     }
 }
