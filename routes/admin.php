@@ -33,10 +33,10 @@ Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
     {
         Route::get('/list', [AdminUserController::class, 'index'])->name('user-management');
     });  
-    Route::group(['prefix'=>'project-management'],function()
+    Route::group(['prefix'=>'project-list'],function()
     {
-        Route::get('/project-list', [ProjectListController::class, 'index'])->name('project-list-management');
-        Route::post('/create-list', [ProjectListController::class, 'create'])->name('create-list');
+        Route::get('/create', [ProjectListController::class, 'index'])->name('project-list-management');
+        Route::post('/list-show', [ProjectListController::class, 'create'])->name('create-list');
         Route::get('/list', [ProjectListController::class, 'project_list_show'])->name('show-list');
         Route::get('/search/{id}', [ProjectListController::class, 'search'])->name('search-project');
         Route::post('/find/{id}', [ProjectListController::class, 'search_project'])->name('find-project');
@@ -46,9 +46,9 @@ Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
     }); 
     Route::group(['prefix'=>'query-management'],function()
     {
-        Route::get('/query-list', [QueryController::class, 'index'])->name('query.list');
-        Route::get('query-delete/{id}', [QueryController::class, 'destroy'])->name('query-delete');
-        Route::get('query-view/{id}', [QueryController::class, 'show'])->name('query-show');
+        Route::get('/list', [QueryController::class, 'index'])->name('query.list');
+        Route::get('delete/{id}', [QueryController::class, 'destroy'])->name('query-delete');
+        Route::get('view/{id}', [QueryController::class, 'show'])->name('query-show');
        
         
     }); 
@@ -58,10 +58,10 @@ Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
     });
 
     Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
-    Route::get('project-list', [AdminProjectController::class, 'index'])->name('admin-project-list');
-    Route::get('project-list-favorite', [AdminProjectController::class, 'markFavorite'])->name('project-list-favorite');
-    Route::get('project-list-Recommended', [AdminProjectController::class, 'markRecommended'])->name('project-list-recommended');
-    Route::get('project-list-status', [AdminProjectController::class, 'changeStatus'])->name('project-list-status'); 
+    Route::get('project/list', [AdminProjectController::class, 'index'])->name('admin-project-list');
+    Route::get('project-favorite', [AdminProjectController::class, 'markFavorite'])->name('project-list-favorite');
+    Route::get('project-Recommended', [AdminProjectController::class, 'markRecommended'])->name('project-list-recommended');
+    Route::get('project-status', [AdminProjectController::class, 'changeStatus'])->name('project-list-status'); 
     Route::get('category-update-view', [AdminProjectController::class, 'categoryEdit'])->name('category.update-view');
     Route::post('category-update', [AdminProjectController::class, 'categoryUpdate'])->name('category.update');
     Route::get('genre-update-view', [AdminProjectController::class, 'genreEdit'])->name('genre.update-view');

@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('user_type',['A','U'])->default('U');
+            $table->enum('status',["0","1"])->default("1");
             $table->string('first_name',50);
             $table->string('last_name',50)->nullable();
             $table->enum('is_profile_complete',["0","1"])->default("0");

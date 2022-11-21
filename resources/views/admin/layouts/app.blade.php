@@ -70,9 +70,9 @@
         [5, 10, 20, 50, 100, "All"]
       ],
       "iDisplayLength": 10,
-      "language": {
-        search: "Search"
-      },
+      // "language": {
+      //   search: "Search"
+      // },
       bPaginate:false,
       paging:false,
       dom: 'Bfrtip',

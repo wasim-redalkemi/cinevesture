@@ -5,9 +5,94 @@
         <div class="card-body">
             <h4 class="card-title">Project Management</h4>
             <div class="row">
-                <div class="col-12">
+                <div class="col-md-12">
+                    <form class="" method="get" action="{{route('admin-project-list')}}">
+                        <fieldset class="pt-3 pb-3">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Category</label>
+                                        <select name="category"  id="" class="form-control form-control-sm radius">
+                                            @if (!empty($categories))
+                                                <option value="">Select</option>
+                                                @foreach ($categories as $key => $category)                                        
+                                                    <option value="{{$category->id}}" <?php if($category->id == request('category')){echo('selected');} ?>>{{$category->name}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                    <label>Genre</label>
+                                    <select name="genre" value="" id="" class="form-control form-control-sm radius">
+                                        <option value="">select</option>
+                                       @foreach ($genres as $key=>$genre)
+                                       <option value="{{$genre->id}}" <?php if ($genre->id == request('genre')) {echo ('selected');} ?>>{{$genre->name}}</option>
+                                       @endforeach
+                                    </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                    <label>Create From</label>
+                                    <input type="date" name="from_date" value="{{request('to_date')}}" class="form-control form-control-sm radius">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Create to</label>
+                                        <input type="date" name="to_date" value="{{request('to_date')}}" class="form-control form-control-sm radius">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                    <label>Favorited</label>
+                                    <select name="favorited" id="" class="form-control form-control-sm radius">
+                                        <option value="">Select</option>
+                                        <option value="1"<?php if (request('favorited')=="1") {echo ('selected');} ?>>Favorite</option>
+                                        <option value="0" <?php if (request('favorited')=="0") {echo ('selected');} ?>>Unfavorite</option>
+                                    </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                    <label>Recommended badge</label>
+                                    <select name="Recommended_badge" id="" class="form-control form-control-sm radius">
+                                        <option value="">Select</option>
+                                        <option value="1" <?php if (request('Recommended_badge')=="1") {echo ('selected');} ?>>Recommended</option>
+                                        <option value="0" <?php if (request('Recommended_badge')=="0") { echo('selected');} ?>>Unrecommended</option>
+                                    </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                    <label>Search</label>
+                                    <div><input type="text" value="{{request('search')}}" class="form-control form-control-sm" name="search" id="" placeholder="Search"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mt">
+                                    <div class="form-group">
+                                        <label for="">Action</label>
+                                        <div class="d-flex">
+                                            {{-- <input type="submit" name="" id=""> --}}
+                                            <div><button type="submit" class="btn btn-success btn-sm mr-3">Filter</button></div>
+                                            <div><a href="{{route('admin-project-list')}}"><button type="button" class="btn btn-warning btn-sm fa fa-refresh">  Refresh</button></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
                     <div class="table-responsive">
-                        <table id="order-listing" class="table order-listing">
+                        <table id="order-listing" class="table order-listing table-sm table-bordered table-hover">
                             <thead>
                                 <tr>
                                     <th>Id</th>
@@ -18,8 +103,8 @@
                                     <th>Created</th>
                                     <th>Views</th>
                                     <th>Status</th>
-                                    <th>Favorited</th>
-                                    <th>Badge</th>
+                                    <th>Favorite</th>
+                                    <th>Recommend</th>
                                     <th>Action</th>
                                   </tr>
                             </thead>
@@ -36,15 +121,12 @@
                                     
                                    <td>
                                     @if (!empty($project->projectCategory))
-                                        
-                                    
-                                    @php $x=0.; @endphp
-                                   
+                                    <ol type="1" class="table_scroller">
                                     @foreach ($project->projectCategory as $key=>$category)
-                                    @php $x++; @endphp
-                                    {{$x.'.'.$category->name.','}}
+                                    <li>{{$category->name.','}}</li>
                                      
                                      @endforeach
+                                    </ol>
                                      <a href="{{route('category.update-view')}}?pid={{$project->id}}&cid={{$category->id}}"><i class="fa fa-edit"></i></a>
                                      @endif
                                     </td>
@@ -53,11 +135,14 @@
                                     @if ($project->genres)
                                         
                                     
-                                    @php $x=0; @endphp
-                                    @foreach ($project->genres as $key=>$genre)
-                                    @php $x++; @endphp
-                                    @if (empty($genre->name)){{'-'}}@endif{{ucfirst($x.".".$genre->name).','}}
-                                    @endforeach
+                                    
+
+                                    <ol type="1" class="table_scroller">
+                                        @foreach ($project->genres as $key=>$genre)
+                                        <li>{{$genre->name.','}}</li>
+                                         
+                                         @endforeach
+                                        </ol>
                                     @if (!empty($genre->name))
                                     <a href="{{route('genre.update-view')}}?p_id={{$project->id}}&g_id={{$genre->id}}"><i class="fa fa-edit"></i></a>
                                     @else 
@@ -106,17 +191,17 @@
                                 </tr>
                                 @endforeach
                             </tbody>
-                        </table>
-                        <div class="row">
-                            <div class="col-md-12">
-                            <div style="float:right;">{{$projects->links()}}</div>
-                        </div> 
+                        </table>                            
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div style="float:right;">{{$projects->links()}}</div>
+                </div> 
             </div>
         </div>
     </div>
 </div>
+
 @endsection
 @push('scripts')
 <script>
