@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectSearchTable extends Migration
+class AddOrganizationCreaterToUserInvitesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,9 @@ class CreateProjectSearchTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_search', function (Blueprint $table) {
-            $table->id();
-            $table->string('project_id',20);
-            $table->string('list_id',20);
-            $table->timestamps();
-            $table->softDeletes();
+        Schema::table('user_invites', function (Blueprint $table) {
+            $table->enum('organization_creater',['1','0'])->default('0')->after('accepted');
+
         });
     }
 
@@ -29,6 +26,8 @@ class CreateProjectSearchTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_search');
+        Schema::table('user_invites', function (Blueprint $table) {
+            //
+        });
     }
 }

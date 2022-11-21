@@ -41,24 +41,19 @@ class UserController extends AdminController
                 if (isset($request->status)) {
                     $q->where('status',$request->status);
                 }
-                // if (isset($request->organization)) {
-                //     $Organisation=UserInvite::query()->with('user');
-                
-                // }
                 if (isset($request->organization)) { // search name of user
-                    $q->whereHas('organizations', function ($q) use($request){
-                       
-                        $q->where('user_id',$request->organization);
+                    $q->whereHas('invites', function ($q) use($request){
+                        $q->where('user_organization_id',$request->organization);
                     });
                 }
 
             })
+           
             ->paginate($this->records_limit);
-            
             return view('admin.user.list',compact('users','UserOrganisation','countries'));
         } 
         catch (Exception  $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->withError($e->getMessage());
         }
 
     }
