@@ -10,6 +10,7 @@ use App\Models\ProjectListProjects;
 use App\Models\UserProject;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\FuncCall;
 
 class ProjectListController extends AdminController
@@ -80,14 +81,13 @@ class ProjectListController extends AdminController
      */
     public function project_list_show()
     {
-       
         try
         {
-            $project_list=ProjectList::query()->paginate($this->records_limit);
-            $projects_data=ProjectListProjects::query()->with('lists')->groupby('list_id')
-            ->selectraw('count(project_id) as project_count,list_id')
+            $projects_data = ProjectList::query()->with('lists', function($q){
+                $q->select(DB::raw('list_id,COUNT(project_id) as pcount'))->groupby('list_id');
+            })
             ->paginate($this->records_limit);
-            return view('admin.projectList.list',compact('project_list','projects_data'));
+             return view('admin.projectList.list',compact('projects_data'));
         }
         catch (Exception $e) 
         {
@@ -101,17 +101,25 @@ class ProjectListController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function search($id)
+    public function search(Request $request,$id,$pcount)
     {
         try
         {
-            $project_data=UserProject::paginate($this->records_limit);
-            $project_search=ProjectListProjects::query()
-             ->with('projects')
-            ->select('project_id')
-            ->where('list_id', $id)
-            ->paginate($this->records_limit);
-           // dd($project_search);
+            if($request->project_count>0)
+            {
+                $project_search=ProjectListProjects::query()
+                ->with(['projects','projects.projectOnlyImage'])
+                ->select('project_id')
+                ->where('list_id', $id)
+                ->paginate($this->records_limit);
+            }
+            else
+            {
+                $project_search=UserProject::query()
+                ->with(['projectOnlyImage'])
+               ->paginate($this->records_limit);
+            }
+          
             return view('admin.projectList.search',compact('id','project_search'));
         }
         catch (Exception $e) 
@@ -127,26 +135,18 @@ class ProjectListController extends AdminController
     public function search_project(Request $request,$id)
     {
        
+    
         try
         {
             $search_data=$request->name;
-            $project_search=ProjectListProjects::query()
-            ->with('projects')
-            ->select('project_id')
-            ->groupby('list_id')
-            ->havingraw('list_id','=',$id)
-            ->paginate($this->records_limit);
-            // dd($project_search);
-
-
-        //     $project_data=UserProject::query()
-        //     ->with('projectImage')
-        //     ->where(function($q)use($search_data){
-        //     if(!empty($search_data) && !is_null($search_data)){
-        //       $q->where('project_name', 'like' ,"%$search_data%");
-        //     }
-        //     })
-        //    ->paginate($this->records_limit);
+            $project_data=UserProject::query()
+            ->with('projectImage')
+            ->where(function($q)use($search_data){
+            if(!empty($search_data) && !is_null($search_data)){
+              $q->where('project_name', 'like' ,"%$search_data%");
+            }
+            })
+           ->paginate($this->records_limit);
             return view('/admin.projectList.search',compact('id','project_data'));
         }
         catch (Exception $e) 

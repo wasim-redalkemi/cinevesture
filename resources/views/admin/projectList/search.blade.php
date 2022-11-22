@@ -59,17 +59,22 @@
                                         $i=0; ?>
                                     @foreach($project_search as $project)
                                     <?php $i++;?>
-                                    <?php $image=$project->projects->projectImage->file_link; ?>
+                                    @if(isset($project->projects))
+                                   
+                                    <?php if(isset($project->projects->projectImage->file_link))
+                                    
+                                       $image=$project->projects->projectImage->file_link;?>
                                         <tr class="jsgrid-alt-row">
                                           <td>
                                           <?php echo $i;?>
                                           </td>
-                                          <td>{{$project->projects->project_name}}</td>
-                                          <td>{{$project->projects->financing_secured}}</td>
-                                          <td>{{$project->projects->Recommended_badge}}</td>
-                                          <td><img src="<?php echo asset("images/asset/$image")?>" style="height: 174px; width: 245px;border:2px solid black"></img></td>
+                                          <td>@if(isset($project->projects->project_name)){{$project->projects->project_name}}@endif</td>
+                                          <td>@if(isset($project->projects->financing_secured)){{$project->projects->financing_secured}}@endif</td>
+                                          <td>@if(isset($project->projects->Recommended_badge)){{$project->projects->Recommended_badge}}@endif</td>
+                                          <td><img src="<?php if(isset($image)) {echo asset("images/asset/$image");}?>" style="height: 174px; width: 245px;border:2px solid black"></img></td>
                                           <td><input type="checkbox" class="checkbox_btn"  data="{{$id}}" value="{{$project->projects->id.','.$id}}" name="projectids[]" aria-label=""></td>
                                         </tr>
+                                        @endif
                                     @endforeach
                                        <?php  $y=$i;?>
                                        @else
@@ -92,7 +97,7 @@
                                         </tr>
                                     @endforeach
                                    @endif
-                                   @if(isset($project_search))
+                                   @if(isset($project->projects))
                                    <tr>
                                         <td colspan="6" style="text-align: center;">
                                           <button type="submit" class="btn btn-success btn-icon-text btn_padding">
@@ -100,18 +105,21 @@
                                            Save</button>
                                         </td>
                                    </tr>
-                                   @else
-                                    <div class="profile_text" style="text-align: center;"><h2>No Data Found</h1>
-                                    </div>
-                                    @endif
+                                
                               </form>
+                             
                             </tbody>
+                         
                             <div class="row">
                          <div class="col-md-12">
                              <div style="float:right;" >{{$project_search->links()}}</div>
+                             @else
+                                    <div class="profile_text" style="text-align: center;"><h3>No Data Found</h3>
+                                    </div>
+                                    @endif
                              </div> 
                          </div>
-                      </table>
+                        </table>
                     </div>
                 </div>
             </div>
