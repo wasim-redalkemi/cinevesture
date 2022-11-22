@@ -31,7 +31,7 @@
                                     </td>
                                         <td>{{$project->list_name}}</td>
                                         <td>{{$project->list_status}}</td>
-                                        <td><a href="{{route('search-project',['id' => $project->id ,'pcount' => (@$project->lists[0]->pcount) ? @$project->lists[0]->pcount : 0])}}"><button type="button" class="btn btn-primary btn-sm btn-sm mt-10">
+                                        <td><a href="{{route('list-projects',['id' => $project->id ,'pcount' => (@$project->lists[0]->pcount) ? @$project->lists[0]->pcount : 0])}}"><button type="button" class="btn btn-primary btn-sm btn-sm mt-10">
                                             
                                         {{(@$project->lists[0]->pcount) ? @$project->lists[0]->pcount : 0}}</button>
                                         <input type="hidden" id="project_count" name="project_count" value="{{(@$project->lists[0]->pcount) ? @$project->lists[0]->pcount : 0}}"></a>

@@ -7,29 +7,7 @@
             <h4 class="card-title">Project List Management</h4>
             <div class="row">
               <div class="col-12">
-              <!-- <form role="form" id="searchProject" method="Post" action="{{ route('find-project',['id' => $id ]) }}" >
-                            @csrf
-                            <div class="row" style="display: flex;">
-                              <div class="col-md-12">
-                                <div class="profile_input" style="width: 100%;">
-                                  <div class="row">  
-                                  <div class="col-md-6">
-                                    <label style="width: 50%;">Search Project</label>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                    <div class="col-md-5">
-                                    <input type="text" class="form-control" name="name" id="name" placeholder="Name" value="{{isset($_POST['name']) ? $_POST['name'] : '' }}">
-                                    </div>
-                                    <div class="col-md-1" style="padding-top:8px;">
-                                    <button type="submit"><i class="fa fa-search"></i></button>
-                                </div>
-</div>
-                                   
-                                </div>
-                                </div>
-                            </div> -->
-                            <form role="form" id="searchProject" method="Post" action="{{ route('find-project',['id' => $id ]) }}" >
+                            <form role="form" id="searchProject" method="get" action="{{ route('search-project',['id' => $id ]) }}" >
                             @csrf
                             <div class="row">
                               <div class="col-12">

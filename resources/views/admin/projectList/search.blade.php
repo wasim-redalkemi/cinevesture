@@ -10,7 +10,7 @@
             <h4 class="card-title">Project List Management</h4>
             <div class="row">
               <div class="col-12">
-                <form role="form" id="searchProject" method="Post" action="{{ route('find-project',['id' => $id ]) }}" >
+                <form role="form" id="searchProject" method="get" action="{{ route('list-projects',['id' => $id ]) }}" >
                   @csrf
                   <div class="row">
                       <div class="col-12">
@@ -20,7 +20,7 @@
                                 <div class="col-md-6">
                                   <div class="form-group">
                                     <div class="input-group">
-                                      <input type="text" class="form-control"  name="name" id="name"  value="{{isset($_POST['name']) ? $_POST['name'] : '' }}"placeholder="Project name" aria-label="Project name">
+                                      <input type="text" class="form-control" value="{{request('name')}}" name="name" id="name"  value="{{isset($_POST['name']) ? $_POST['name'] : '' }}"placeholder="Project name" aria-label="Project name">
                                       <div class="input-group-append">
                                         <button class="btn btn-sm btn-primary" type="Submit">Search</button>
                                       </div>
@@ -38,88 +38,52 @@
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive">
-                     <table id="order-listing" class="table order-listing">
-                            <thead>
-                                <tr style="text-align: center;">
-                                  <th>Id</th>
-                                  <th>Name</th>
-                                  <th>Finance Secured</th>
-                                  <th>Recommended Badge</th>
-                                  <th>Image</th>
-                                  <th>Select</th>
-                                 </tr>
-                            </thead>
-                            <tbody style="text-align: center;">
-                              <form id="saveProject" method="Post" action="{{route('save-search-projects')}}">
-                                @csrf
-                                <?php $y=0; ?>
-                                  @if(isset($project_search))
-                                    <?php  $projectids=[];
-                                        $listids=[];
-                                        $i=0; ?>
-                                    @foreach($project_search as $project)
-                                    <?php $i++;?>
-                                    @if(isset($project->projects))
-                                   
-                                    <?php if(isset($project->projects->projectImage->file_link))
-                                    
-                                       $image=$project->projects->projectImage->file_link;?>
-                                        <tr class="jsgrid-alt-row">
-                                          <td>
-                                          <?php echo $i;?>
-                                          </td>
-                                          <td>@if(isset($project->projects->project_name)){{$project->projects->project_name}}@endif</td>
-                                          <td>@if(isset($project->projects->financing_secured)){{$project->projects->financing_secured}}@endif</td>
-                                          <td>@if(isset($project->projects->Recommended_badge)){{$project->projects->Recommended_badge}}@endif</td>
-                                          <td><img src="<?php if(isset($image)) {echo asset("images/asset/$image");}?>" style="height: 174px; width: 245px;border:2px solid black"></img></td>
-                                          <td><input type="checkbox" class="checkbox_btn"  data="{{$id}}" value="{{$project->projects->id.','.$id}}" name="projectids[]" aria-label=""></td>
-                                        </tr>
-                                        @endif
-                                    @endforeach
-                                       <?php  $y=$i;?>
-                                       @else
-                                      <div class="profile_text" style="text-align: center;"><h2>No Data Found</h1>
-                                      </div>
-                                 @endif
-                                  @if(isset($search_projects))
-                                    @foreach($search_projects as $project)
-                                      <?php  $y++;?>
-                                      <?php $image=$project->projectImage->file_link; ?>
-                                        <tr class="jsgrid-alt-row">
-                                          <td>
-                                              <?php echo $y;?>
+                      <form id="saveProject" method="Post" action="{{route('save-search-projects')}}">
+                        @csrf
+                          <table id="order-listing" class="table order-listing">
+                            <input type="hidden" name="list_id" value="{{$id}}" id="">
+                                 <thead>
+                                     <tr style="text-align: center;">
+                                       <th>Id</th>
+                                       <th>Name</th>
+                                       <th>Image</th>
+                                       <th>Select</th>
+                                      </tr>
+                                 </thead>
+                                     <tbody style="text-align: center;">
+                                     <?php 
+                                        $i=0;
+                                        foreach ($project_data['data'] as $key=>$project)
+                                        {
+                                        $i++;
+                                        ?> 
+                                          <tr>
+                                            <td><?php echo $i;?></td>
+                                            <td><?php echo $project['project_name'];?></td>
+                                              <td>
+                                                <?php
+                                                  if(isset($project['project_only_image'][0]['file_link']))
+                                                  {
+                                                    echo $project['project_only_image'][0]['file_link'];
+                                                  }
+                                                  else{echo '-';}
+                                                  ?>
                                               </td>
-                                            <td>{{$project->projects->project_name}}</td>
-                                              <td>{{$project->projects->financing_secured}}gjg</td>
-                                              <td>{{$project->projects->Recommended_badge}}</td>
-                                              <td><img src="<?php echo asset("images/asset/$image")?>" style="height: 174px; width: 245px;border:2px solid black"></img></td>
-                                              <td><input type="checkbox" class="checkbox_btn" data-key="{{$id}}" data-project="{{$project->projects->id}}" value="{{$project->id.','.$id}}" name="projectids[]" aria-label=""></td>
-                                        </tr>
-                                    @endforeach
-                                   @endif
-                                   @if(isset($project->projects))
-                                   <tr>
-                                        <td colspan="6" style="text-align: center;">
-                                          <button type="submit" class="btn btn-success btn-icon-text btn_padding">
-                                          <i class="mdi mdi-file-check btn-icon-prepend"></i>
-                                           Save</button>
-                                        </td>
-                                   </tr>
-                                
-                              </form>
-                             
-                            </tbody>
-                         
-                            <div class="row">
-                         <div class="col-md-12">
-                             <div style="float:right;" >{{$project_search->links()}}</div>
-                             @else
-                                    <div class="profile_text" style="text-align: center;"><h3>No Data Found</h3>
-                                    </div>
-                                    @endif
-                             </div> 
-                         </div>
-                        </table>
+                                              <td>
+                                                <input type="checkbox" value="<?php echo $project['id'];?>" name="projects_id[]" id="">
+                                              </td>
+                                          </tr>
+                                          <?php
+                                          }
+                                        ?>
+                                   </tbody>
+                             </table>
+                          <div style="text-align: center;">
+                            <button type="submit" class="btn btn-success btn-icon-text btn_padding">
+                            <i class="mdi mdi-file-check btn-icon-prepend"></i>
+                            Save</button>
+                          </div>
+                      </form>
                     </div>
                 </div>
             </div>
