@@ -2,25 +2,25 @@
 
 @section('title','Cinevesture-organisation')
 @section('content')
-<section>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="modal_container">
-                    <div class="icon_container done">
-                        <i class="fa fa-check icon_style" aria-hidden="true"></i>
+        <section>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="modal_container">
+                            <div class="icon_container done">
+                                <i class="fa fa-check icon_style" aria-hidden="true"></i>
+                            </div>
+                            <div class="head_text mt-4">Congratulations!</div>
+                            <div class="successfullPublish_text sub_text mt-4">
+                                You have successfuly published a Job. Do you want to promote your job?
+                                <span data-toggle="tooltip" data-placement="bottom" title="Promote your job for a small small fee. Our team will get in touch with you when you submit a job promotion"> <i class="fa fa-info-circle" aria-hidden="true"></i></span>
+                            </div>
+                            <div><button class="submit_btn mt-4">Submit your job for promotion</button></div>
+                        </div>
                     </div>
-                    <div class="head_text mt-4">Congratulations!</div>
-                    <div class="successfullPublish_text sub_text mt-4">
-                        You have successfuly published a Job. Do you want to promote your job?
-                        <span data-toggle="tooltip" data-placement="bottom" title="Promote your job for a small small fee. Our team will get in touch with you when you submit a job promotion"> <i class="fa fa-info-circle" aria-hidden="true"></i></span>
-                    </div>
-                    <div><button class="submit_btn mt-4">Submit your job for promotion</button></div>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
+        </section>
 
 <!-- Unpublish job -->
 
