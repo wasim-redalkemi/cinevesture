@@ -56,7 +56,8 @@ class ProjectListController extends AdminController
         }
         catch (Exception $e) 
         {
-             return back()->withError('error','Something went wrong.');
+             return back()->with('error','Something went wrong.');
+           
         }
     }
 
@@ -91,7 +92,7 @@ class ProjectListController extends AdminController
         }
         catch (Exception $e) 
         {
-             return back()->withError('error','Something went wrong.');
+            return response()->json(["status"=>false,"message"=> $e->getMessage()]);
         }
     }
 
