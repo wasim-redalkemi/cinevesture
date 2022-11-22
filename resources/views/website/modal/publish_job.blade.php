@@ -11,9 +11,9 @@
                         <i class="fa fa-check icon_style" aria-hidden="true"></i>
                     </div>
                     <div class="head_text mt-4">Congratulations!</div>
-                    <div class="sub_text mt-4">
+                    <div class="successfullPublish_text sub_text mt-4">
                         You have successfuly published a Job. Do you want to promote your job?
-                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                        <span data-toggle="tooltip" data-placement="bottom" title="Promote your job for a small small fee. Our team will get in touch with you when you submit a job promotion"> <i class="fa fa-info-circle" aria-hidden="true"></i></span>
                     </div>
                     <div><button class="submit_btn mt-4">Submit your job for promotion</button></div>
                 </div>
