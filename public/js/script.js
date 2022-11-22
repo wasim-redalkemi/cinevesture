@@ -10,11 +10,14 @@ function toastMessage(status, msg) {
         <div class="toast-body">
         ${errorStatus}: ${msg}
         </div>
-        <button type="button" class=" btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        <button type="button" class="toast-close btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
     </div>`;
     $(".for_authtoast").html(toast_msg);
-    $(".toast").show();     
+    $(".toast").show();   
+    $('.toast-close').on('click',function(){
+        $(".toast").hide(); 
+    }) ; 
 }  
 
 	

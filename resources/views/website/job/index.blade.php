@@ -96,9 +96,9 @@
                                     @foreach($emplyements as $emp)
                                               
                                               @if(isset(request('emplyements')[0]) && in_array($emp->id, request('emplyements')))
-                                              <option value="{{$country->id}}" data-badge="" selected>{{$emp->name}}</option>
+                                              <option value="{{$emp->id}}" data-badge="" selected>{{$emp->name}}</option>
                                               @else
-                                              <option value="{{$country->id}}" data-badge="">{{$emp->name}}</option>
+                                              <option value="{{$emp->id}}" data-badge="">{{$emp->name}}</option>
                                               @endif
                                     
                                    @endforeach
