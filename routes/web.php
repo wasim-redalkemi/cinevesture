@@ -31,7 +31,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/test', function () {
-    return view('website.plan');
+    return view('website.job.myjob');
 });
 Route::get('/', function () {
     return view('website.auth.login');
@@ -126,7 +126,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 
 
 
-        Route::get('/public-view/{id}', [ProjectController::class, 'publicView'])->name('public-view');
+        Route::get('/public-view', [ProjectController::class, 'publicView'])->name('public-view');
         Route::post('/like', [ProjectController::class, 'projectLike'])->name('project-like');
         
         Route::get('/get-project-media/{id}', [ProjectController::class, 'getMediaByProject'])->name('get-project-media');
@@ -169,7 +169,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         // Route::get('/edit/{id}', [OrganisationController::class, 'edit'])->name('organisation-edit');
         // Route::post('/update/{id}', [OrganisationController::class, 'update'])->name('organisation-update');
         Route::get('/create-team', [OrganisationController::class, 'createTeam'])->name('create-team');
-        Route::post('/team-store', [OrganisationController::class, 'teamStore'])->name('team-store');
+        Route::post('/team-email', [OrganisationController::class, 'teamEmail'])->name('team-email');
+        Route::post('/team-email-log', [OrganisationController::class, 'teamEmailLogStore'])->name('team-email-log');
 
 	});
 

@@ -123,7 +123,9 @@
                     </div>
                     <div class="guide_profile_subsection">
                         <div class="guide_profile_main_text mt-3">Skills Required</div>
-                        <div class="profile_input">
+                        <div class="row">
+                            <div class="col-md-6">
+                            <div class="profile_input">
                             <label>Skills (You can add upto 10 skills)</label>
                             <select name="skills[]" class="outline is-invalid-remove js-select2" required id="lang" multiple>
                                         @foreach ($skills as $k=>$v)

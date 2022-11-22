@@ -6,8 +6,11 @@
 <div class="hide-me animation for_authtoast">
             @include('website.include.flash_message')
         </div>
-<section class="auth_section">
-    <div class="container signup-container">
+<section class="auth_section p-0">
+
+  <div class="row">
+    <div class="col-md-5">
+    <div class="container signup-container px-5">
         <div class="row">
             <div class="col-md-12">
                 <div class="signup-text mt-5 mt-md-5"> Log in</div>
@@ -25,7 +28,7 @@
                     @enderror
 
                 </div>
-                <div class="col-12 mt-2 mt-lg-5">
+                <div class="col-12 mt-2 mt-4-5">
                     <input type="password" class="outline w-100 @error('password') is-invalid @enderror" name="password" placeholder="Password" required autocomplete="current-password">
                         @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -34,7 +37,7 @@
                         @enderror
                 </div>
 
-                <div class="col-12 mt-2 mt-lg-5">
+                <div class="col-12 mt-2 mt-4-5">
                     <button type="submit" class="outline w-100 ">
                         {{ __('Log In') }}
                     </button>
@@ -69,6 +72,14 @@
                 </div>
             </form>
         </div>
-    </div>   
+    </div> 
+    </div>
+    <div class="col-md-7 d-none d-lg-block">
+        <div class="">
+            <img src="{{asset('public/images/asset/gordon-cowie-OPlXmibx__I-unsplash 1.png')}}" width="100%" height="100%" alt="">
+        </div>
+    </div>
+  </div>
+  
 </section>    
 @endsection

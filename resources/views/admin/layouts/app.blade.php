@@ -75,14 +75,17 @@
       // },
       bPaginate:false,
       paging:false,
+      searching:false,
       dom: 'Bfrtip',
-        buttons: [
-            // 'copy', 
-            'csv', 
-            // 'excel', 
-            // 'pdf', 
-            // 'print'
-        ]
+      buttons: [
+        'csv',
+      ],
+      initComplete: function () 
+      {
+        var btns = $('.dt-button');
+        btns.addClass('btn btn-primary btn-sm mb-2');
+        btns.removeClass('dt-button');
+      }
     });
     </script>
 </body>

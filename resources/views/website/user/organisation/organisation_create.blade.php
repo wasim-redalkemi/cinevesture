@@ -375,7 +375,7 @@
         
         $.ajax(
         {
-            url:"{{ route('team-store') }}",
+            url:"{{ route('team-email') }}",
             type:'POST',
             dataType:'json',
             data:{email_1:email_1,email_2:email_2,"_token": "{{ csrf_token() }}"},
