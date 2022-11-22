@@ -8,6 +8,7 @@ use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Helper\AppUtilityController;
 use App\Models\ProjectMedia;
+use App\Models\ProjectAssociation;
 
 
 class AjaxController extends WebController {
@@ -100,7 +101,7 @@ class AjaxController extends WebController {
             $media = ProjectMedia::find($media_id);
             if($media){
                 $isDeleted = $media->delete();
-                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,['isDeleted'=>$isDeleted],"Sucess","ER000","Recource deleted successfully.");
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,['isDeleted'=>$isDeleted],"Recource deleted successfully.","ER000","");
             } else {
                 return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER401","Could not find the resource.");
             }
@@ -159,6 +160,38 @@ class AjaxController extends WebController {
             $projectMedia->file_link = asset("storage/".$projectMedia->file_link);
             $projectMedia->media_info = json_decode($projectMedia->media_info, true);
             return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$projectMedia,"Success","ER000","");
+        } catch (Exception $e) {
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
+        }
+    }
+
+    public function addProjAssociationEntry(Request $request, $project_id){
+        $request->validate([
+            'title' => 'required|string|max:50',
+            'name' => 'nullable|string|max:50'
+        ]);
+        try {
+            $ProjectAssociation = new ProjectAssociation();
+            $ProjectAssociation->id = 1;
+            $ProjectAssociation->project_id = $project_id;
+            $ProjectAssociation->project_associate_title = $request->title;
+            $ProjectAssociation->project_associate_name = $request->name;
+            //$ProjectAssociation->save();
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$ProjectAssociation,"Success","ER000","");
+        } catch (Exception $e) {
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
+        }
+    }
+
+    public function removeProjAssociationEntry(Request $request, $associate_id = null){
+        try {
+            $media = ProjectAssociation::find($associate_id);
+            if($media){
+                $isDeleted = true;//$media->delete();
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,['isDeleted'=>$isDeleted],"Recource deleted successfully.","ER000","");
+            } else {
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER401","Could not find the resource.");
+            }
         } catch (Exception $e) {
             return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
         }

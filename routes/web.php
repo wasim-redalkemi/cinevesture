@@ -66,6 +66,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/delete-media/{media_id}',[AjaxController::class, 'deleteMedia'])->name('delete-media');
         Route::post('/upload-image',[AjaxController::class, 'uploadImage'])->name('upload-image');
         Route::post('/upload-doc',[AjaxController::class, 'uploadDoc'])->name('ajax/upload-doc');
+        Route::post('/add-proj-association/{project_id}',[AjaxController::class, 'addProjAssociationEntry'])->name('add-proj-association');
+        Route::delete('/delete-proj-association/{associate_id}',[AjaxController::class, 'removeProjAssociationEntry'])->name('delete-proj-association');
     });
 
     Route::group(['prefix'=>'user'],function()
