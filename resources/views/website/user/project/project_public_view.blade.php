@@ -143,9 +143,15 @@
                             </div>
                             <div class="d-flex my-4 align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
+                                    @if ($projectData[0]['user']['id'] != auth()->user()->id)
+                                        
                                     <button class="cantact-page-cmn-btn">Contact Now</button>
+                                    @endif
                                     <i class="fa fa-share-alt mx-4 icon-size" aria-hidden="true"></i>
+                                    @if ($projectData[0]['user']['id'] != auth()->user()->id)
+                                        
                                     <div> <i class="fa fa-heart-o icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
+                                    @endif
                                 </div>
                                 <div class="d-flex">
                                     <span class="mx-3 white">Report Project</span>
@@ -200,14 +206,26 @@
                     <h1 class="public-heading-text"> Gallery</h1>
                     <div class="public-head-subtext mt-3">Videos</div>
                     <div class="row">
-                        <div class="col-lg-3 col-sm-4 mt-sm-2 mt-3"><img src="{{ asset('public/images/asset/download (3) 7.png') }}" alt="image" width=100%></div>
-                        <div class="col-lg-3 col-sm-4 mt-sm-2 mt-3"><img src="{{ asset('public/images/asset/download (3) 7.png') }}" alt="image" width=100%></div>
-                        <div class="col-lg-3 col-sm-4 mt-sm-2 mt-3"><img src="{{ asset('public/images/asset/download (3) 7.png') }}" alt="image" width=100%></div>
+                        @if (!empty($projectData[0]['project_only_video']))
+                        @foreach ($projectData[0]['project_only_video'] as $v)
+                            <div class="col-md-3">
+                                <div>
+                                    <div class=""><img src="{{ json_decode($v['media_info'])->thumbnail }}" alt="image" width=100%></div>
+                                </div>                                
+                            </div>
+                        @endforeach                    
+                        @endif                        
                     </div>
                     <div class="public-head-subtext mt-3">Photos</div>
                     <div class="row">
-                        <div class="col-lg-3 col-sm-6 mt-sm-2 mt-3"><img src="{{ asset('public/images/asset/download (3) 7.png') }}" alt="image" width=100%></div>
-                        <div class="col-lg-3 col-sm-6 mt-sm-2 mt-3"><img src="{{ asset('public/images/asset/download (3) 7.png') }}" alt="image" width=100%></div>
+                        @if (!empty($projectData[0]['project_only_image']))
+                        @foreach ($projectData[0]['project_only_image'] as $v)
+                        <div class="col-md-3">
+                            <div style="height: 200px; overflow:hidden;background-color:rgba(0,0,0,0.2)"> <img src="{{ Storage::url($v['file_link']) }}" class="" width=100% alt="image"></div>
+                            
+                        </div>
+                        @endforeach                    
+                        @endif
                     </div>
                 </div>
             </div>
@@ -217,28 +235,23 @@
             <div class="col-md-12">
                 <div class="public-head-subtext mt-3">Documents</div>
                 <div class="row">
-                    <div class="col-lg-3 col-sm-6 mt-sm-2 mt-2">
-                        <div class="d-flex pdf-container">
-                            <div class="icon">
-                                <img src="./assets/images/pdf-icon.png">
-                            </div>
-                            <div class="public-subheading-text mx-2">
-                                <div>Lorem ipson pdf </div>
-                                <div>64.42 KB</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-sm-6 mt-sm-2 mt-2">
-                        <div class="d-flex pdf-container">
-                            <div class="icon">
-                                <img src="./assets/images/pdf-icon.png">
-                            </div>
-                            <div class="public-subheading-text mx-2">
-                                <div>Lorem ipson pdf </div>
-                                <div>64.42 KB</div>
+                    @if (!empty($projectData[0]['project_only_doc']))
+                        @foreach ($projectData[0]['project_only_doc'] as $v)
+                        <div class="col-md-3">
+                            <div class="document_pdf document_pdf_project">
+                                <div class="upload_loader">
+                                    <img src="{{ asset('public/images/asset/pdf_image.svg') }}" alt="image">
+                                </div>
+                                <div>
+                                    <div class="public_view_main_subtext">{{ json_decode($v['media_info'])->name }}</div>
+                                </div>
+                                <div class="proctect_by_capta_text">{{ json_decode($v['media_info'])->size_label }}</div>
                             </div>
                         </div>
-                    </div>
+                        @endforeach
+                    @else
+                    <span><b>-</b></span>                    
+                    @endif
                 </div>
             </div>
         </div>
