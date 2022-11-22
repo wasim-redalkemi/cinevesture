@@ -177,8 +177,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
 	{	
         Route::get('/search',[JobController::class, 'index'])->name('job-search-page');
         Route::get('/create',[JobController::class, 'create'])->name('job-create-page');
-
-        // Route::post('/action',[FavouriteController::class, 'update'])->name('favourite-update');
+        Route::post('/action',[JobController::class, 'store'])->name('job-store');
 
 	});
 
