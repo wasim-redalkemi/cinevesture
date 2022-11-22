@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([UserSeeder::class,MasterSkillSeeder::class,MasterLanguageSeeder::class,MasterCountrySeeder::class,MasterStateSeeder::class,MasterProjectTypeSeeder::class,MasterLookingForSeeder::class,MasterOrganisationTypeSeeder::class,MasterOrganisationServiceSeeder::class,UserFavouriteProfileSeeder::class,UserFavouriteProjectSeeder::class,MasterProjectCategorySeeder::class,MasterProjectGenreSeeder::class,AgeRangeSeeder::class,ProjectStageSeeder::class,ProjectStageOfFundingSeeder::class,MasterEmploymentTypeSeeder::class]);
+        $this->call([UserSeeder::class,MasterSkillSeeder::class,MasterLanguageSeeder::class,MasterCountrySeeder::class,MasterStateSeeder::class,MasterProjectTypeSeeder::class,MasterLookingForSeeder::class,MasterOrganisationTypeSeeder::class,MasterOrganisationServiceSeeder::class,UserFavouriteProfileSeeder::class,UserFavouriteProjectSeeder::class,MasterProjectCategorySeeder::class,MasterProjectGenreSeeder::class,AgeRangeSeeder::class,ProjectStageSeeder::class,ProjectStageOfFundingSeeder::class,MasterEmploymentTypeSeeder::class,MasterWorkspaceSeeder::class]);
+        $this->call([UserSeeder::class,MasterSkillSeeder::class,MasterLanguageSeeder::class,MasterCountrySeeder::class,MasterStateSeeder::class,MasterProjectTypeSeeder::class,MasterLookingForSeeder::class,MasterOrganisationTypeSeeder::class,MasterOrganisationServiceSeeder::class,UserFavouriteProfileSeeder::class,UserFavouriteProjectSeeder::class,MasterProjectCategorySeeder::class,MasterProjectGenreSeeder::class,AgeRangeSeeder::class,ProjectStageSeeder::class,ProjectStageOfFundingSeeder::class,ProjectListSeeder::class]);
     }
 }

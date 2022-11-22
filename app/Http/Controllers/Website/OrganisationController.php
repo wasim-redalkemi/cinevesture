@@ -10,6 +10,7 @@ use App\Models\MasterCountry;
 use App\Models\MasterLanguage;
 use App\Models\MasterOrganisationService;
 use App\Models\MasterOrganisationType;
+use App\Models\UserInvitie;
 use App\Models\UserOrganisation;
 use App\Models\UserOrganisationLanguage;
 use App\Models\UserOrganisationService;
@@ -191,7 +192,7 @@ class OrganisationController extends WebController
         return view('website.user.organisation.organisation');
     }
 
-    public function teamStore(Request $request)
+    public function teamEmail(Request $request)
     {
         try {
             $validator = Validator::make($request->all(), [
@@ -207,6 +208,16 @@ class OrganisationController extends WebController
             if(!$_REQUEST['email_1'] && !$_REQUEST['email_2']){
                 return ['satus'=>0,'msg'=>"Email fields can not be empty."];
             }
+            
+            $data = [
+                ['user_id'=>auth()->user()->id,'email'=>$_REQUEST['email_1'],'created_at'=>date("Y-m-d h:i:s", time()),'updated_at'=>date("Y-m-d h:i:s", time())],
+            ];
+            if($_REQUEST['email_2'])
+            {
+                $data[] = ['user_id'=>auth()->user()->id,'email'=>$_REQUEST['email_2'],'created_at'=>date("Y-m-d h:i:s", time()),'updated_at'=>date("Y-m-d h:i:s", time())];
+            }
+            $UserInvite = $this->teamEmailLogStore($data);
+            
             if(!empty($_REQUEST['email_1']) ){
                 $email = $_REQUEST['email_1'];
                 $collect = collect();
@@ -221,6 +232,17 @@ class OrganisationController extends WebController
                 Notification::route('mail', $email)->notify(new TeamInvite($collect));
             }
             return ['status'=>1,'msg'=>"Invite link has been gone by email."];           
+        } catch (Exception $e) {
+            return ['status'=>0,'msg'=>"Something went wrong."];
+        }
+    }
+
+    public function teamEmailLogStore($data)
+    {
+        try {            
+            $UserInvities = new UserInvitie();            
+            $UserInvities->insert($data); 
+            return ['status'=>1,'msg'=>"Invite link records updated successfully."];
         } catch (Exception $e) {
             return ['status'=>0,'msg'=>"Something went wrong."];
         }

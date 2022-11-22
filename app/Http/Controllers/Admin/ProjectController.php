@@ -54,7 +54,7 @@ class ProjectController extends AdminController
                     }
 
             })
-            ->paginate(3);
+            ->paginate($this->records_limit);
                 return view('admin.project.list',compact('projects','categories','genres'));
         } catch (\Throwable $e) {
         return back()->withErrors($e->getMessage());

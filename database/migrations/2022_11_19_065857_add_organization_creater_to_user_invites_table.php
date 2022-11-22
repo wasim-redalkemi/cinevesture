@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWorkplacesTable extends Migration
+class AddOrganizationCreaterToUserInvitesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,21 @@ class CreateWorkplacesTable extends Migration
      */
     public function up()
     {
-        Schema::create('workplaces', function (Blueprint $table) {
-            $table->id();
-            $table->string('name',100);
+        Schema::table('user_invites', function (Blueprint $table) {
+            $table->enum('organization_creater',['1','0'])->default('0')->after('accepted');
 
-            $table->timestamps();
-            $table->softDeletes();
         });
     }
 
-    /**						
+    /**
      * Reverse the migrations.
      *
      * @return void
      */
     public function down()
     {
-        Schema::dropIfExists('workplaces');
+        Schema::table('user_invites', function (Blueprint $table) {
+            //
+        });
     }
 }

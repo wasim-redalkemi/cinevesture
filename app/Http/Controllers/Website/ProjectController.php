@@ -540,18 +540,25 @@ class ProjectController extends WebController
         }
     }
 
-    public function publicView($id)
+    public function publicView()
     {
         try {
             if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
             {
                 return back()->with('error','Project Id not found.');
-            } 
+            }
+            $countries = MasterCountry::all();
+            $languages = MasterLanguage::all();
+            $geners = MasterProjectGenre::all();
+            $categories = MasterProjectCategory::all();
+            $looking_for = MasterLookingFor::all();
+            $project_stages = ProjectStage::all();
+             
             $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
             $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectOnlyImage','projectOnlyVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->get();
             $projectData = $projectData->toArray();
 
-            return view('website.user.project.project_public_view', compact(['UserProject','projectData']));
+            return view('website.user.project.project_public_view', compact(['UserProject','projectData','geners','categories','looking_for','project_stages','countries','languages']));
 
         } catch (Exception $e) {
             return back()->with('error','Something went wrong.');

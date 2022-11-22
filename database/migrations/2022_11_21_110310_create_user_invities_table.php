@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateProjectSearchTable extends Migration
+class CreateUserInvitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateProjectSearchTable extends Migration
      */
     public function up()
     {
-        Schema::create('project_search', function (Blueprint $table) {
+        Schema::create('user_invities', function (Blueprint $table) {
             $table->id();
-            $table->string('project_id',20);
-            $table->string('list_id',20);
+            $table->string('user_id',20);
+            $table->string('email')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
         });
@@ -29,6 +30,6 @@ class CreateProjectSearchTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('project_search');
+        Schema::dropIfExists('user_invities');
     }
 }

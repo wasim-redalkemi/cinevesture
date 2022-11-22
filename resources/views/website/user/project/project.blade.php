@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                             <div>
-                            <a href="{{route('public-view',['id'=>$v->id])}}" style="outline: none; text-decoration:none">
+                            <a href="{{route('public-view')}}?id={{$v->id}}" style="outline: none; text-decoration:none">
                             <div class="movie_name_text">{{$v->project_name}}</div>
                                 @if(isset($v->status))
                                 @if($v->status == 'draft')

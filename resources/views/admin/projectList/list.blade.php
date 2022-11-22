@@ -36,7 +36,7 @@
                                        <td>
                                         <a onclick="return confirm('Are you sure to change list status?')" href="{{route('change-status',['id' => $project->lists->id , 'status' => $project->lists->list_status])}}">
                                         @if($project->lists->list_status=='Publish'|| $project->lists->list_status=='publish')
-                                        <button  class="btn btn-success btn-fw mb-1 btn-sm mt-10 w-65 view-btn" type="button" >{{$project->lists->list_status}}</button>
+                                        <button  class="btn btn-success btn-fw mb-1 btn-sm mt-10 w-65 view-btn text-white" type="button" >{{$project->lists->list_status}}</button>
                                         @else
                                         <button class="btn btn-warning btn-fw mb-1 btn-sm mt-10 w-65 view-btn 
                                         " type="button" >{{$project->lists->list_status}}</button>
