@@ -119,7 +119,7 @@
                             <div class="col-md-3">
                                 <div class="guide_profile_main_text deep-pink mb-2">Introduction Video</div>
                                 <div>
-                                    <iframe width=100% height="300" src="{{isset($UserOrganisation->intro_video_link)?$UserOrganisation->intro_video_link:'https://www.youtube.com/embed/bDMwlH1FTpk'}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <iframe width=100% height="300" src="{{!empty($UserOrganisation->intro_video_link)?$UserOrganisation->intro_video_link:'https://www.youtube.com/embed/bDMwlH1FTpk'}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 </div>
                                 {{-- <div class="d-flex justify-content-between mt-3">
                                     <div class="organisation_cmn_text">Title</div>

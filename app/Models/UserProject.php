@@ -23,7 +23,7 @@ class UserProject extends Model
     }
     public function projectOnlyDoc()
     {
-        return $this->hasMany(ProjectMedia::class,'project_id')->where('file_type','pdf');
+        return $this->hasMany(ProjectMedia::class,'project_id')->where('file_type','doc');
     }
 
     public function user()

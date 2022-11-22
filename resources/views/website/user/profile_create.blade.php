@@ -471,7 +471,7 @@
 
         if (files && files.length > 0) {
             file = files[0];
-            console.log(file, "file 472");
+            // console.log(file, "file 472");
 
             var file = this.files[0];
             var fileType = file["type"];
@@ -528,7 +528,7 @@
 
         canvas.toBlob(function(blob) {
             url = URL.createObjectURL(blob);
-            console.log(url, "url");
+            // console.log(url, "url");
             var reader = new FileReader();
             reader.readAsDataURL(blob);
             reader.onloadend = function() {
@@ -538,7 +538,7 @@
                 $("#croppedImg").val(base64data);
                 image.src = file;
                 formData.append("document", file)
-                console.log(formData.append("document", file), "formData.append");
+                // console.log(formData.append("document", file), "formData.append");
 
                 $('.for_hide').css('display', 'none');
                 $('.for_show').css('display', 'block');

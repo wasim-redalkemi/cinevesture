@@ -42,7 +42,7 @@
                 <div class="preview_subtext pb-3">@if (!empty($projectData[0]['location'])) {{$projectData[0]['location']}} @endif</div>
                 <div class="row">
                     <div class="com-md-12">
-                        <div class="justify-content-end"><button class="save_add_btn float-end">Edit</button></div>
+                        <div class="justify-content-end"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-overview') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
                     </div>
                 </div>
             </div>
@@ -88,7 +88,7 @@
                 </div>
                 <div class="row">
                     <div class="com-md-12">
-                        <div class="justify-content-end"><button class="save_add_btn float-end">Edit</button></div>
+                        <div class="justify-content-end"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-details') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
                     </div>
                 </div>
             </div>
@@ -111,7 +111,7 @@
                 <div class="preview_subtext">@if (!empty($projectData[0]['director_statement'])) {{$projectData[0]['director_statement']}} @endif</div>
                 <div class="row">
                     <div class="com-md-12">
-                        <div class="justify-content-end"><button class="save_add_btn float-end">Edit</button></div>
+                        <div class="justify-content-end"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-description') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
                     </div>
                 </div>
             </div>
@@ -122,71 +122,81 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="profile_wraper profile_wraper_padding mt-4 mb-0">
-                <div>
-                    <p class="flow_step_text"> Description</p>
-                </div>
-        
-        <div class="preview_headtext mb-3">Video</div>
-        <div class="row">
-            @if (!empty($projectData[0]['project_only_video']))
-            @foreach ($projectData[0]['project_only_video'] as $v)
-                <div class="col-md-3">
-                    <div> 
-                        <img src="{{ json_decode($v['media_info'])->thumbnail }}" class="" width=100% alt="image">
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <div class="movie_name_text">{{json_decode($v['media_info'])->title}} </div>
-                        <?php
-                            if($v['is_default_marked'])
-                            {
-                                ?>
-                                    <button class="verified_cmn_btn mt-1 mx-3">Featured</button>
-                                <?php
-                            }
-                        ?>
-                    </div>
-                </div>
-            @endforeach                    
-            @endif
-        </div>
-        <div class="preview_headtext mb-3">Photos</div>
-        <div class="row">
-            @if (!empty($projectData[0]['project_only_image']))
-            @foreach ($projectData[0]['project_only_image'] as $v)
-            <div class="col-md-3">
-                <div style="height: 200px; overflow:hidden;background-color:rgba(0,0,0,0.2)"> <img src="{{ Storage::url($v['file_link']) }}" class="" width=100% alt="image"></div>
-                <div class="d-flex align-items-center">
-                    <div class="movie_name_text">{{ json_decode($v['media_info'])->title }}</div>
-                    <?php
-                    if($v['is_default_marked'])
-                    {
-                        ?>
-                            <button class="verified_cmn_btn mt-1 mx-3">Featured</button>
-                        <?php
-                    }
-                ?>
-                </div>
-            </div>
-            @endforeach                    
-            @endif
-        </div>
-        <div class="preview_headtext mb-3">pdf</div>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="document_pdf">
-                    <div class="upload_loader">
-                        <i class="fa fa-file-text deep-pink icon-size" aria-hidden="true"></i>
-                    </div>
                     <div>
-                        <div class="guide_profile_main_subtext Aubergine_at_night">Lorem ipsum.pdf</div>
-                        <div class="proctect_by_capta_text Aubergine_at_night">64.32 KB</div>
+                        <p class="flow_step_text"> Gallary</p>
                     </div>
-                    <div><i class="fa fa-times" aria-hidden="true"></i></div>
+        
+                    <div class="preview_headtext mb-3">Video</div>
+                    <div class="row">
+                        @if (!empty($projectData[0]['project_only_video']))
+                        @foreach ($projectData[0]['project_only_video'] as $v)
+                            <div class="col-md-3">
+                                <div> 
+                                    <img src="{{ json_decode($v['media_info'])->thumbnail }}" class="" width=100% alt="image">
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <div class="movie_name_text">{{json_decode($v['media_info'])->title}} </div>
+                                    <?php
+                                        if($v['is_default_marked'])
+                                        {
+                                            ?>
+                                                <button class="verified_cmn_btn mt-1 mx-3">Featured</button>
+                                            <?php
+                                        }
+                                    ?>
+                                </div>
+                            </div>
+                        @endforeach                    
+                        @endif
+                    </div>
+                    <div class="preview_headtext mb-3">Photos</div>
+                    <div class="row">
+                        @if (!empty($projectData[0]['project_only_image']))
+                        @foreach ($projectData[0]['project_only_image'] as $v)
+                        <div class="col-md-3">
+                            <div style="height: 200px; overflow:hidden;background-color:rgba(0,0,0,0.2)"> <img src="{{ Storage::url($v['file_link']) }}" class="" width=100% alt="image"></div>
+                            <div class="d-flex align-items-center">
+                                <div class="movie_name_text">{{ json_decode($v['media_info'])->title }}</div>
+                                <?php
+                                if($v['is_default_marked'])
+                                {
+                                    ?>
+                                        <button class="verified_cmn_btn mt-1 mx-3">Featured</button>
+                                    <?php
+                                }
+                            ?>
+                            </div>
+                        </div>
+                        @endforeach                    
+                        @endif
+                    </div>
+                    <div class="preview_headtext mb-3">pdf</div>
+                    <div class="row">
+                        @if (!empty($projectData[0]['project_only_doc']))
+                        @foreach ($projectData[0]['project_only_doc'] as $v)
+                        <div class="col-md-3">
+                            <div class="document_pdf">
+                                <div class="upload_loader">
+                                    <i class="fa fa-file-text deep-pink icon-size" aria-hidden="true"></i>
+                                </div>
+                                <div>
+                                    <div class="guide_profile_main_subtext Aubergine_at_night">{{ json_decode($v['media_info'])->name }}</div>
+                                </div>
+                                <div class="proctect_by_capta_text Aubergine_at_night">{{ json_decode($v['media_info'])->size_label }}</div>
+                            </div>
+                        </div>
+                        @endforeach
+                        @else
+                        <span><b>-</b></span>                    
+                        @endif
+                    </div>
+                    <div class="row">
+                        <div class="com-md-12">
+                            <div class="justify-content-end"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-gallery') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-        </div>
-        </div>
         </div>
     </div>
     <div class="container">
@@ -231,7 +241,7 @@
                 <div class="row">
                     <div class="com-md-12">
                         <div class="d-flex justify-content-end mt-2">
-                        <div class="justify-content-end"><button class="save_add_btn float-end">Edit</button></div>
+                        <div class="justify-content-end"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-milestone') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
                         </div>
                     </div>
                 </div>
@@ -243,11 +253,8 @@
             <a href="{{ route('project-status') }}?id={{$_REQUEST['id']}}&status=published"><button class="guide_profile_btn">Save & Publish</button></a>
         </div>
     </div>
-
-
-    </div>
-
-    </div>
+</div>
+</div>
 </section>
 
 
