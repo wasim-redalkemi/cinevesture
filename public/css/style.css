@@ -555,6 +555,14 @@ body {
     color: black;
 }
 
+.login_sidewraper {
+    overflow: hidden;
+    max-height: 100vh;
+}
+.register_sidewraper {
+    overflow: hidden;
+    max-height: 850px
+}
 
 /* search page  */
 
