@@ -181,9 +181,7 @@ class ProjectController extends AdminController
     public function categoryUpdate(request $request)
     {
       try {
-        if ($request->cat) {
-            # code...
-        }
+      
         $project = ProjectCategory::query()->where('project_id',$request->p_id)->delete();
         if (!empty(request('category'))) {
           foreach (request('category') as $value) {

@@ -1114,6 +1114,17 @@ body {
     max-height: 40px;
     overflow: hidden;
 }
+.public_view_main_subtext {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 19px;
+    letter-spacing: 0.022em;
+    font-feature-settings: 'ss01' on;
+    color: white;
+    word-break: break-all;
+    max-height: 40px;
+    overflow: hidden;
+}
 .guide_profile_btn {
     padding: 6px 16px;
     background: #4D0D8A;
@@ -1533,8 +1544,12 @@ body {
     display: flex;
     height: 69px;
     background: rgba(28, 3, 48, 0.05);
+    background: rgba(28, 3, 48, 0.05);
     border-radius: 4px;
     justify-content: space-between;
+}
+.document_pdf_project {
+    background: RGB(50, 28, 68) !important;
 }
 .preview_headtext {
     font-weight: 600;

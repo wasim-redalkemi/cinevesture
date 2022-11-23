@@ -45,7 +45,7 @@
                                         {{ (isset($user->first_name))?ucfirst($user->first_name).' '.ucfirst($user->last_name):'Name'; }}
                                     </div>
                                     <div class="guide_profile_main_subtext aubergine">
-                                        <i>{{empty($user->age)?'Age':$user->age;}} </i>
+                                        <i>{{empty($user_age->range)?'Age':$user_age->range;}} </i>
                                         | <i>{{empty($user->gender)?'Gender':$user->gender;}} </i>
                                         | <i>{{empty($user->gender_pronouns)?'Gender-pronouns':$user->gender_pronouns;}}</i>
                                     </div>
@@ -85,16 +85,16 @@
                                         @endif
                                     </div>
                                     <div class="guide_profile_main_text mt-3">Available to Work In</div>
-                                    <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (isset($user->available_to_work_in))?$user->available_to_work_in:'-'; }}</div>
+                                    <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (!empty($user->available_to_work_in))?$user->available_to_work_in:'-'; }}</div>
                                     <div class="guide_profile_main_text mt-3">Languages Spoken</div>
                                     @if (count($user_languages)>0)
                                     @foreach ($user_languages as $k=>$v)
                                         <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ $v['get_languages']['name'] }}</div> 
                                     @endforeach                                        
-                                @else
-                                    <span><b>-</b></span>
-                                @endif
-                            </div>
+                                    @else
+                                        <span><b>-</b></span>
+                                    @endif
+                                </div>
                             <div class="col-md-6">
                                 <div class="guide_profile_main_text mt-3">
                                     <p> Social Profile</p>
@@ -291,8 +291,7 @@
                             </div>
                         </div>
                     </div>
-                     @if(isset($user_endorsement))
-                     @foreach($user_endorsement as $edm)
+                    
                     <div class="guide_profile_subsection">
                         <div class="container">
                             <div class="row">
@@ -300,6 +299,8 @@
                                     Endorsements
                                 </div>
                             </div>
+                            @if(!empty($user_endorsement))
+                            @foreach($user_endorsement as $edm)
                             <div class="row mt-3">
                                 <div class="col-md-3">
                                     <div class="guide_profile_main_text deep-pink">{{$edm['endorsementCreater']->name}}</div>
@@ -314,10 +315,11 @@
                                     </div>
                                 </div>
                             </div>
+                            @endforeach
+                            @endif
                         </div>
                     </div>
-                    @endforeach
-                    @endif
+                    
                 </div>
             </div>
         </div>
