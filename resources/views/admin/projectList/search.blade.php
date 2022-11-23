@@ -20,8 +20,9 @@
                                 <div class="col-md-6">
                                   <div class="form-group">
                                     <div class="input-group">
-                                      <input type="text" class="form-control" value="{{request('name')}}" name="name" id="name"  value="{{isset($_POST['name']) ? $_POST['name'] : '' }}"placeholder="Project name" aria-label="Project name">
+                                      <input type="text" required class="form-control" value="{{request('name')}}" name="name" id="name"  value="{{isset($_POST['name']) ? $_POST['name'] : '' }}"placeholder="Project name" aria-label="Project name">
                                       <div class="input-group-append">
+                                        <input type="hidden" value="{{$_REQUEST['id']}}" name="id">
                                         <button class="btn btn-sm btn-primary" type="Submit">Search</button>
                                       </div>
                                     </div>
@@ -51,6 +52,7 @@
                                       </tr>
                                  </thead>
                                      <tbody style="text-align: center;">
+                                      <input type="hidden" name="add_edit" value="{{$is_added_only}}" id="">
                                      <?php 
                                         $i=0;
                                         foreach ($project_data['data'] as $key=>$project)
@@ -70,11 +72,16 @@
                                                   ?>
                                               </td>
                                               <td>
-                                                <input type="checkbox" value="<?php echo $project['id'];?>" name="projects_id[]" id="">
+                                          
+                                                <input type="checkbox" value="<?php echo $project['id'];?>" name="projects_id[]" id="" @if ($is_added_only)
+                                                    checked
+                                                @endif>
+                                            
                                               </td>
                                           </tr>
                                           <?php
-                                          }
+                                        }
+                                          
                                         ?>
                                    </tbody>
                              </table>
