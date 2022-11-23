@@ -100,8 +100,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
                 <div class="row mt-3">
+            </div>
                     <div class="col-md-12">
                         <div class="table-responsive">
                             <table id="order-listing" class="table order-listing table-sm table-bordered table-hover">
@@ -145,9 +145,6 @@
                                     
                                        <td>
                                         @if ($project->genres)
-
-
-
 
                                         <ol type="1" class="table_scroller">
                                             @foreach ($project->genres as $key=>$genre)

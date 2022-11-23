@@ -96,8 +96,10 @@ class QueryController extends Controller
         $query->Delete();
        
         return back();
-        } catch (\Throwable $th) {
-           return back()->withErrors($th->getMessage());
+        } catch (\Throwable $e) {
+           return back()->json(["status"=>false,"message"=> $e->getMessage()]);
+        //    return response()->json(["status"=>false,"message"=> $e->getMessage()]);
+
         }
         
        
