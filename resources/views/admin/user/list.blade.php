@@ -146,7 +146,7 @@
                                     <td><?php echo(date("d-m-Y", strtotime($user->created_at))); ?></td>
                                     <td>
                                         <div class="mb-1">
-                                           <a href="{{route('profile-public-show',[($user->id)])}}"><button class="btn btn-info btn-sm">View</button></a>
+                                           <a href="{{route('profile-public-show',['id'=>$user->id])}}"><button class="btn btn-info btn-sm">View</button></a>
                                           </div>
                                        <div>
                                         <button class="btn btn-danger  btn-sm">Delete</button>

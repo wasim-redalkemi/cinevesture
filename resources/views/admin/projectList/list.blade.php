@@ -22,6 +22,7 @@
                             </thead>
                             <tbody>
                               @if(isset($projects_data))
+                              {{$projects_data}}
                               <?php $i=0;?>  
                                 @foreach($projects_data as $project)
                                 <?php $i++;?> 

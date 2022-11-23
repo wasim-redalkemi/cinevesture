@@ -15,11 +15,6 @@ use PhpParser\Node\Expr\FuncCall;
 
 class ProjectListController extends AdminController
 {
-  
-    
-   
-      
-
     
     /**
      * Display a listing of the resource.
@@ -129,25 +124,35 @@ class ProjectListController extends AdminController
         try
         {
             $id = $request->id;
-            
             $project_list_project = ProjectListProjects::query()->where('list_id',$id)->pluck('project_id')->toArray();
             $project_list_project = array_unique(array_values($project_list_project));
-            // dd($project_list_project);
+            $is_added_only = true;
+            $is_filter_applied = false;
             $search_data=(!empty($request->name))?$request->name:'';
+            if(!isset($request->name) && count($project_list_project)==0)
+            {
+                $is_added_only = false;
+            }
+            else if(!empty($search_data))
+            {
+                $is_added_only = false;
+                $is_filter_applied = true;
+            }
             $project_data=UserProject::query()
             ->with('projectOnlyImage')
-            ->where(function($q)use($search_data,$project_list_project){
-                if(!empty($search_data) && !is_null($search_data)){
+            ->where(function($q)use($is_filter_applied,$search_data,$project_list_project){
+                if($is_filter_applied){
                     $q->where('project_name', 'like' ,"%$search_data%");
+                    $q->whereNotIn('id', $project_list_project);
                 }
-                else
+                else if(!empty($project_list_project))
                 {
                     $q->whereIn('id', $project_list_project);
                 }
             })
             ->paginate($this->records_limit);
             $project_data = $project_data->toArray();
-            return view('/admin.projectList.search',compact('id','project_data','project_list_project'));
+            return view('/admin.projectList.search',compact('id','project_data','is_added_only'));
         }
         catch (Exception $e) 
         {
@@ -162,30 +167,31 @@ class ProjectListController extends AdminController
        {
         
         if (!empty(request('projects_id'))) {
+            
             foreach (request('projects_id') as $project_id) {
+                
+                if (isset($request->add_edit)) {
+                    
+                    $project=ProjectListProjects::where('list_id',$request->list_id);
+                    $project->delete();
+                }
+                
                $project = new ProjectListProjects();
                $project->list_id=$request->list_id;
                $project->project_id=$project_id;
                $project->save();
             }
-            return back()->with('messege','Update successfull');;
-            // with("success", "Project selected successfully.");
-            
+            return back()->with('messege','Update successfull');
+          }else{
+            $project=ProjectListProjects::where('list_id',$request->list_id);
+                    $project->delete();
+                    return back()->with('messege','Update successfull');
           }
-            // foreach($request->projectids as $project){
-                
-            // $projectid = explode(',', $project);
-            //     $data[] = [
-            //         'project_id' =>$projectid[0],
-            //         'list_id'  =>$projectid[1]
-            //         ];
-            //     }
-            // ProjectListProjects::insert( $data );
-            // return redirect('/admin/project-management/list')->with("success", "Project selected successfully.");
+        
         }
         catch (Exception $e) 
         {
-             return back()->with('error','Something went wrong.');
+             return back()->with('error',$e->getmessage);
         }
        
 
