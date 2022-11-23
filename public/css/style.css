@@ -1125,6 +1125,14 @@ body {
     color: #FFFFFF;
     font-size: 14px;
 }
+.guide_gallery_btn {
+    padding: 9px 16px;
+    background: #4D0D8A;
+    border-radius: 4px;
+    border: none;
+    color: #FFFFFF;
+    font-size: 14px;
+}
 .w_150 {
     width: 150px;
 }
