@@ -10,6 +10,7 @@ use App\Models\ProjectCategory;
 use App\Models\ProjectCountry;
 use App\Models\ProjectGenre;
 use App\Models\UserProject;
+use Exception;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
 use SebastianBergmann\CodeCoverage\Report\Xml\Project;
@@ -41,7 +42,9 @@ class ProjectController extends AdminController
                         });
                     }
                     if(isset($request->from_date) && isset($request->to_date)){
-                        $q->whereBetween("created_at",[$request->from_date,$request->to_date]);
+                        $from=$request->from_date.' '.'00:00:00';
+                        $to=$request->to_date.' '.'23:59:59';
+                        $q->whereBetween("created_at",[$from,$to]);
                     }
                     if (isset($request->favorited)) {
                         $q->where("favorited",$request->favorited);
@@ -52,14 +55,18 @@ class ProjectController extends AdminController
                     if (isset($request->search)) {
                         $q->where("project_name","like","%$request->search%");
                     }
-
             })
             ->paginate($this->records_limit);
                 return view('admin.project.list',compact('projects','categories','genres'));
-        } catch (\Throwable $e) {
-        return back()->withErrors($e->getMessage());
+        } 
+        catch (Exception $e)
+        {
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
         }
-        
+        // catch (\Throwable $e) {
+        // return back()->withErrors($e->getMessage());
+        // }
     }
     public function markFavorite(Request $request)
     {
@@ -68,9 +75,15 @@ class ProjectController extends AdminController
             $project->favorited = $request->s;
             $project->save();
             return back();
-        } catch (\Throwable $e) {
-            return back($e);
+        } 
+        catch (Exception $e)
+        {
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
         }
+        // catch (\Throwable $e) {
+        //     return back($e);
+        // }
     }
     public function markRecommended(Request $request)
     {
@@ -79,9 +92,15 @@ class ProjectController extends AdminController
             $project->Recommended_badge = $request->s;
             $project->save();
             return back();
-        } catch (\Throwable $e) {
-            return back($e);
+        } 
+        catch (Exception $e)
+        {
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
         }
+        // catch (\Throwable $e) {
+        //     return back($e);
+        // }
     }
     public function changeStatus(Request $request)
     {
@@ -92,9 +111,15 @@ class ProjectController extends AdminController
             $project->project_verified = $request->status;
             $project->save();
             return back();
-        } catch (\Throwable $e) {
-            return back($e);
+        } 
+        catch (Exception $e)
+        {
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
         }
+        // catch (\Throwable $e) {
+        //     return back($e);
+        // }
     }
 
     /**
@@ -165,7 +190,9 @@ class ProjectController extends AdminController
 
     public function categoryEdit(request $request)
     {
-        
+        try {
+            
+       
         $projectcategories = ProjectCategory::query()->where('project_id',$request->pid)->get();
         $categories = MasterProjectCategory::get();
         $temp_cat = [];
@@ -177,7 +204,13 @@ class ProjectController extends AdminController
         $project_id = $request->pid;
         
         return view('admin.project.categoryedit',compact(['projectcategories','categories','project_id']));
-    }
+        }
+        catch (Exception $e)
+        {
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
+        }
+    }    
     public function categoryUpdate(request $request)
     {
       try {
@@ -192,9 +225,15 @@ class ProjectController extends AdminController
           }
           return back();
         }
-      } catch (\Throwable $e) {
-        return back()->withErrors($e->getmessage);
+      } 
+      catch (Exception $e)
+      {
+          Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+          return back();
       }
+    //   catch (\Throwable $e) {
+    //     return back()->withErrors($e->getmessage);
+    //   }
     }
 
 
@@ -213,9 +252,15 @@ class ProjectController extends AdminController
             $project_id = $request->p_id;
             
             return view('admin.project.genreedit',compact(['genres','mastergenres','project_id']));
-        } catch (\Throwable $e) {
-            return back()->withErrors($e->getmessage());
+        } 
+        catch (Exception $e)
+        {
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
         }
+        // catch (\Throwable $e) {
+        //     return back()->withErrors($e->getmessage());
+        // }
         
     }
 
@@ -237,8 +282,14 @@ class ProjectController extends AdminController
             };
         }
        
-      } catch (\Throwable $e) {
-        return back()->withErrors($e->getMessage());
+      }
+      catch (Exception $e)
+      {
+          Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+          return back();
       };
+    //   catch (\Throwable $e) {
+    //     return back()->withErrors($e->getMessage());
+    //   };
     }
 }
