@@ -281,6 +281,35 @@ class JobController extends WebController
         }
     }
 
+    public function getJobData($job_id)
+    {
+        try{
+            $JobData='';
+            $JobData = UserJob::query()
+            ->with(['jobSkills','jobWorkSpaces','jobEmployements','jobLocation'])
+            ->where('id',$job_id)
+            ->first();
+            return $JobData;
+        }catch(Exception $e){
+            return back()->withErrors($e->getmessage());
+        }
+    }
+
+    public function postedJobView(Request $request)
+    {
+        try{
+            if (!empty($request->job_id)) {
+                $Job_data = $this->getJobData($request->job_id);
+
+            } else {
+                return back()->with('Something went wrong');
+            }    
+            return view('website.job.job_post_single',compact(['Job_data']));
+        }catch(Exception $e){
+            return back()->withErrors($e->getmessage());
+        }
+    }
+
 
 
 }
