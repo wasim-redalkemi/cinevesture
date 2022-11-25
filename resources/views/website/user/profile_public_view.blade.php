@@ -77,7 +77,7 @@
                                                             <div class="mt-4">
                                                                 {{-- <input type="text" id="subject" name="e" value="" placeholder="Subject" class="modal_input"> --}}
                                                                 <input type="hidden" name="email_1" id="email_1" class="modal_input" value="@if (!empty($user->email)){{$user->email}}@endif">
-                                                                <button type="button" class="invite_btn">Send Mail</button>
+                                                                <button type="button" id="contact_btn" class="invite_btn">Send Mail</button>
                                                             </div>
                                                             <div class="modal_btm_text mt-4 mb-5">
                                                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum vel cras vitae morbi varius vitae.
@@ -93,7 +93,9 @@
 
                         </div>
                         <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
+                            @if($_REQUEST['id'] != auth()->user()->id )
                             <i class="fa fa-heart icon-size Aubergine" aria-hidden="true"></i>
+                            @endif
                             <button class="verified_cmn_btn mx-3"> <i class="fa fa-check-circle hot-pink mx-1" aria-hidden="true"></i> VERIFIED</button>
                         </div>
                     </div>
@@ -112,28 +114,59 @@
                             <div class="guide_profile_main_text mt-3">
                                 <p> Skils</p>
                             </div>
-                            <div class="d-flex mt-3">
-                                <button class="curv_cmn_btn">Skills 1</button>
-                                <button class="curv_cmn_btn mx-2">Skills 1</button>
-                                <button class="curv_cmn_btn">Skills 1</button>
-                                <button class="curv_cmn_btn mx-2">Skills 1</button>
+                            <div class="">
+                                @if (count($user_skills)>0)
+                                @foreach ($user_skills as $k=>$v)
+                                <button class="curv_cmn_btn skill_container">
+                                    {{ $v['get_skills']['name'] }}
+                                </button>
+
+                                @endforeach
+                                <div class="clearfix"></div>
+                                @else
+                                <span><b>-</b></span>
+                                @endif
                             </div>
                             <div class="guide_profile_main_text mt-3">Available to Work In</div>
-                            <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ empty($user->available_to_work_in)?'Available_to_work_in':$user->available_to_work_in; }}</div>
+                            <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (!empty($user->available_to_work_in))?$user->available_to_work_in:'-'; }}</div>
                             <div class="guide_profile_main_text mt-3">Languages Spoken</div>
-                            <div class="guide_profile_main_subtext Aubergine_at_night mt-2">Hindi</div>
-                            <div class="guide_profile_main_subtext Aubergine_at_night mt-1">English</div>
+                            @if (count($user_languages)>0)
+                                    @foreach ($user_languages as $k=>$v)
+                                        <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ $v['get_languages']['name'] }}</div> 
+                                    @endforeach                                        
+                            @else
+                                <span><b>-</b></span>
+                            @endif
                         </div>
                         <div class="col-md-6">
                             <div class="guide_profile_main_text mt-3">
                                 <p> Social Profile</p>
                             </div>
                             <div class="guide_profile_main_subtext mt-3">IMDB Profile</div>
-                            <div class="guide_profile_main_subtext deep-pink mt-1">{{ $user->imdb_profile }}</div>
+                            <div class="guide_profile_main_subtext deep-pink mt-1 pointer">
+                                @if (isset($user->imdb_profile))
+                                    <a href="{{ $user->imdb_profile }}" class="link-style"  >{{ $user->imdb_profile }}</a>                                      
+                                @else
+                                <span><b>-</b></span>
+                                @endif
+                            </div>
                             <div class="guide_profile_main_subtext mt-3">LinkedIn Profile</div>
-                            <div class="guide_profile_main_subtext deep-pink">{{ $user->linkedin_profile }}</div>
+                            <div class="guide_profile_main_subtext deep-pink pointer">
+                                @if (isset($user->linkedin_profile))
+                                    <a href="{{ $user->linkedin_profile }}" class="link-style" >{{ $user->linkedin_profile }}</a>                                         
+                                @else
+                                    <span><b>-</b></span>
+                                @endif
+                            </div>
                             <div class="guide_profile_main_subtext mt-3">Website</div>
-                            <div class="guide_profile_main_subtext deep-pink mt-1">{{ $user->website }}</div>
+                            <div class="guide_profile_main_subtext deep-pink pointer">
+                                @if (isset($user->website))
+                                    <a href="{{ $user->website }}" class="link-style" >{{ $user->website }}</a>                                         
+                                @else
+                                    <span><b>-</b></span>
+                                @endif
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -148,7 +181,11 @@
                             </div>
                             <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
                                 <p>
+                                    @if (!empty($user->about))
                                     {{ $user->about }}
+                                    @else
+                                    <span><b>-</b></span>
+                                    @endif
                                 </p>
                             </div>
                         </div>
@@ -156,7 +193,7 @@
                         <div class="col-md-5 ">
                             <div class="guide_profile_main_text mb-2">Meet Name</div>
                             <div>
-                                <iframe width=100% height="300" src="{{$user->intro_video_link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width=100% height="300" src="{{!empty($user->intro_video_link)?$user->intro_video_link:'https://www.youtube.com/embed/bDMwlH1FTpk'}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </div>
                     </div>
@@ -167,14 +204,31 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="guide_profile_main_text mb-2">Portfolio</div>
-                            <div class="portfolio owl-carousel owl-theme">
+                            <div class="guide_profile_main_text deep-pink font_18">Portfolio</div>
+                            {{-- <div class="portfolio owl-carousel owl-theme">
                                 @foreach ($portfolio as $k=>$v)
                                 <div class="item">
                                     <img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}">
-                                    <div class="guide_profile_main_subtext">{{$v->project_title}}</div>
+                                    
                                 </div>
                                 @endforeach
+                            </div> --}}
+                            <div class="portfolio owl-carousel">
+                                @if (count($portfolio)>0)
+                                @foreach ($portfolio as $k=>$v)
+                                @php
+                                $img = '';
+                                if(isset($v['get_portfolio'][0]['file_link']))
+                                {
+                                $img = Storage::url($v['get_portfolio'][0]['file_link']);
+                                }
+                                @endphp
+                                
+                                @endforeach
+                                <div class="clearfix"></div>
+                                @else
+                                <span><b>-</b></span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -185,29 +239,17 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="guide_profile_main_text mb-2">Project</div>
+                            <div class="guide_profile_main_text deep-pink font_18">Project</div>
+                            @if (!empty($UserProject))
                             <div class="project owl-carousel owl-theme">
+                                @foreach($UserProject as $k=>$v)                                
                                 <div class="item">
-                                    <img src="{{ asset('public/images/asset/download (3) 7.png') }}">
-                                    <div class="guide_profile_main_subtext">Title</div>
-                                </div>
-                                <div class="item">
-                                    <img src="{{ asset('public/images/asset/download (3) 7.png') }}">
-                                    <div class="guide_profile_main_subtext">Title</div>
-                                </div>
-                                <div class="item">
-                                    <img src="{{ asset('public/images/asset/download (3) 7.png') }}">
-                                    <div class="guide_profile_main_subtext">Title</div>
-                                </div>
-                                <div class="item">
-                                    <img src="{{ asset('public/images/asset/download (3) 7.png') }}">
-                                    <div class="guide_profile_main_subtext">Title</div>
-                                </div>
-                                <div class="item">
-                                    <img src="{{ asset('public/images/asset/download (3) 7.png') }}">
-                                    <div class="guide_profile_main_subtext">Title</div>
-                                </div>
+                                    <img src="@php echo (!empty($v->projectImage->file_link)?asset('storage/'.$v->projectImage->file_link): config("constants.PROJECT_NO_IMAGE")) @endphp" width="100%" height="100%"  />
+                                    <div class="guide_profile_main_subtext">@php echo (!empty($v->project_name)?$v->project_name: '-') @endphp</div>
+                                </div>                                
+                                @endforeach
                             </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -220,16 +262,23 @@
                             <div class="guide_profile_main_text deep-pink font_18">
                                 <h1>Experiences</h1>
                             </div>
-                            @foreach ($experience as $k=>$v)
-                            <div class="guide_profile_main_subtext mt-4">{{ $v->job_title}}</div>
-                            <div class="guide_profile_main_subtext candy-pink mt-2">
-                                {{$v->country_id}} | {{date('d-m-Y',strtotime($v->start_date))}} | {{date('d-m-Y',strtotime($v->end_date))}} <br>
-                                {{$v->company}} | {{$v->employement_type_id}}
-                            </div>
-                            <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
-                                <p>{{$v->description}}</p>
-                            </div>
-                            @endforeach
+                            @if (count($experience)>0)
+                                @foreach ($experience as $k=>$v)
+                                <div class="d-flex align-items-end">
+                                    <div class="guide_profile_main_subtext mt-1">{{ $v->job_title }}</div>
+                                </div>
+                                <div class="guide_profile_main_subtext candy-pink mt-2">
+                                    {{$v->country_id}} | {{date('d-m-Y',strtotime($v->start_date))}} | {{date('d-m-Y',strtotime($v->end_date))}} <br>
+                                    {{$v->company}} | {{$v->employement_type_id}}
+                                </div>
+                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
+                                    <p>{{$v->description}}</p>
+                                </div>
+                                @endforeach
+                                <div class="clearfix"></div>
+                            @else
+                            <span><b>-</b></span>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -242,15 +291,22 @@
                             <div class="guide_profile_main_text deep-pink font_18">
                                 <h1>Qualifications</h1>
                             </div>
-                            @foreach ($qualification as $k=>$v)
-                            <div class="guide_profile_main_subtext mt-4">{{$v->institue_name}}</div>
-                            <div class="guide_profile_main_subtext candy-pink mt-2">
-                                {{$v->degree_name}} | {{$v->feild_of_study}} | {{$v->start_year}} | {{$v->end_year}}
-                            </div>
-                            <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
-                                <p>{{$v->description}}</p>
-                            </div>
-                            @endforeach
+                            @if (count($qualification)>0)
+                                @foreach ($qualification as $k=>$v)
+                                <div class="d-flex align-items-end">
+                                    <div class="guide_profile_main_subtext mt-1">{{$v->institue_name}}</div>
+                                </div>
+                                <div class="guide_profile_main_subtext candy-pink mt-2">
+                                    {{$v->degree_name}} | {{$v->feild_of_study}} | {{$v->start_year}} | {{$v->end_year}}
+                                </div>
+                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
+                                    <p>{{$v->description}}</p>
+                                </div>
+                                @endforeach
+                                <div class="clearfix"></div>
+                            @else
+                            <span><b>-</b></span>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -263,9 +319,11 @@
                             <div class="guide_profile_main_text deep-pink font_18">
                                 <h1>Endorsements</h1>
                             </div>
+                            @if($_REQUEST['id'] != auth()->user()->id )
                             <div>
                                 <button class="guide_profile_btn" data-toggle="modal" data-target="#endorseModal">Endorse</button>
                             </div>
+                            @endif
                             <!-- Endorse modal  -->
                             <div class="modal fade" id="endorseModal" tabindex="-1" role="dialog" aria-labelledby="endorseModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -284,11 +342,12 @@
                                                             </div>
 
                                                             <div class="mt-5">
-                                                                <textarea name="" id="" cols="25" rows="6" class="controlTextLength w-100" placeholder="Message" text-length="250" maxlength="250" name="about" aria-label="With textarea"></textarea>
+                                                                <textarea name="endorse_message" id="endorse_message" cols="25" rows="6" class="controlTextLength w-100" placeholder="Message" text-length="250" maxlength="250" name="about" aria-label="With textarea"></textarea>
                                                             </div>
 
                                                             <div class="mt-4">
-                                                                <button type="button" class="invite_btn">Submit</button>
+                                                                <input type="hidden" name="endorse_email" id="endorse_email" value="@if (!empty($user->email)){{$user->email}}@endif">
+                                                                <button type="button" id="endorse_btn" class="invite_btn">Submit</button>
                                                             </div>
                                                             <div class="modal_btm_text mt-4 mb-5">
                                                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum vel cras vitae morbi varius vitae.
@@ -303,22 +362,26 @@
                             </div>
                         </div>
                     </div>
+                    @if(!empty($user_endorsement))
+                    @foreach($user_endorsement as $edm)
                     <div class="row mt-3">
                         <div class="col-md-3">
-                            <div class="guide_profile_main_text deep-pink">John doe</div>
-                            <div class="guide_profile_main_subtext Aubergine_at_night">Chief Officer</div>
-                            <div class="guide_profile_main_subtext Aubergine_at_night">10TH JULY 2021</div>
+                            <div class="guide_profile_main_text deep-pink">{{$edm['endorsementCreater']->name}}</div>
+                            <div class="guide_profile_main_subtext Aubergine_at_night">{{$edm['endorsementCreater']->job_title?$edm['endorsementCreater']->job_title:"-"}}</div>
+                            <div class="guide_profile_main_subtext Aubergine_at_night">{{$edm->created_at}}</div>
                         </div>
                         <div class="col-md-9">
                             <div class="guide_profile_main_subtext Aubergine_at_night">
                                 <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                    incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                    exercitation.
+                                    {{$edm->comment}}
                                 </p>
                             </div>
-                        </div>
+                        </div>                        
                     </div>
+                    @endforeach
+                    @else
+                        <span><b>-</b></span>
+                    @endif
                 </div>
             </div>
 
@@ -333,59 +396,13 @@
     @include('website.include.footer')
     @endsection
 
-    @section('scripts')
 
-    <script type="text/javascript">
-        $(".portfolio.owl-carousel").owlCarousel({
-            center: true,
-            autoPlay: 3000,
-            autoplay: true,
-            loop: true,
-            nav: true,
-            center: true,
-            margin: 10,
-            items: 5,
-            responsive: {
-                480: {
-                    items: 3
-                },
-                768: {
-                    items: 4
-                },
-                1024: {
-                    items: 5
-                }
-            },
-        });
-        $(".project.owl-carousel").owlCarousel({
-            center: true,
-            autoPlay: 3000,
-            autoplay: true,
-            loop: true,
-            nav: true,
-            center: true,
-            margin: 10,
-            items: 3,
-            responsive: {
-                480: {
-                    items: 1
-                },
-                768: {
-                    items: 2
-                },
-                1024: {
-                    items: 3
-                }
-            },
-        });
-    </script>
-    @endsection
 
     @push('scripts')
         <script type="text/javascript">
         $(document).ready(function()
         {
-            $('.invite_btn').click(function()
+            $('#contact_btn').click(function()
             {
                 var subject = $('#subject').val();
                 var email_1 = $('#email_1').val();
@@ -415,7 +432,86 @@
                         console.log(error);
                     } 
                 });
-            }); 
+            });
+            
+            $('#endorse_btn').click(function()
+            {
+                var endorse_email = $('#endorse_email').val();
+                var endorse_message = $('#endorse_message').val();
+                console.log(endorse_email);
+                console.log(endorse_message);
+                
+                
+                $.ajax(
+                {
+                    url:"{{ route('endorse-user-mail-store') }}",
+                    type:'POST',
+                    dataType:'json',
+                    data:{endorse_email:endorse_email,endorse_message:endorse_message,"_token": "{{ csrf_token() }}"},
+                    success:function(response)
+                    {
+                        console.log(response)
+                        console.log('endorse done')
+                        toastMessage(response.status, response.msg);
+                        $('.modal').hide();
+                        $('.modal-backdrop').remove();
+                    },
+                    error:function(response,status,error)
+                    {   
+                        console.log(response);
+                        console.log(status);
+                        console.log(error);
+                    } 
+                });
+            });
         });
+
+
+
+        $(".project.owl-carousel").owlCarousel({
+        center: true,
+        autoPlay: 1000,
+        autoplay: true,
+        // loop: true,
+        nav: true,
+        margin: 20,
+        center: false,
+        // items: 4,
+        responsive: {
+            // 480: {
+            //     items: 1
+            // },
+            // 768: {
+            //     items: 2
+            // },
+            // 1024: {
+            //     items: 4
+            // }
+        },
+        });
+        
+
+        $(".portfolio.owl-carousel").owlCarousel({
+            center: true,
+            autoPlay: 3000,
+            autoplay: true,
+            loop: false,
+            nav: true,
+            center: false,
+            margin: 10,
+            items: 5,
+            responsive: {
+                480: {
+                    items: 3
+                },
+                768: {
+                    items: 4
+                },
+                1024: {
+                    items: 5
+                }
+            },
+        });
+
         </script>
     @endpush

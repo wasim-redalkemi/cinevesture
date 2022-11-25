@@ -139,17 +139,24 @@
                                     <td>@if(empty($user->job_title)){{'-'}}@else{{$user->job_title}}@endif</td>
                                     <td>@if (empty($user->organization->name)){{'-'}} @else{{$user->organization->name}}@endif</td>
                                     <td>@if (empty($user->country->name)){{'-'}}@else{{$user->country->name}}@endif</td>
-                                    <td> @if($user->status==1)<div class="btn btn-success text-white"> {{'Active'}}</div>@else
-                                        <div class="btn btn-warning text-white">{{'Inactive'}}</div>@endif
+                                    <td> 
+                                        @php
+                                        $x=($user->status==1)? 0:1;
+                                    @endphp
+                                        @if($user->status==1)
+                                        <a href="{{route('user-status-change')}}?status={{$x}}&user_id={{$user->id}}"><button class="btn btn-success text-white"> {{'Active'}}</button></a>@else
+                                        <a href="{{route('user-status-change')}}?status={{$x}}&user_id={{$user->id}}"><button class="btn btn-warning text-white">{{'Inactive'}}</button></a>@endif
                                     </td>
                                     <td>membership</td>
                                     <td><?php echo(date("d-m-Y", strtotime($user->created_at))); ?></td>
                                     <td>
                                         <div class="mb-1">
-                                           <a href="{{route('profile-public-show',[($user->id)])}}"><button class="btn btn-info btn-sm">View</button></a>
+                                           <a href="{{route('profile-public-show',['id'=>$user->id])}}"><button class="btn btn-info btn-sm">View</button></a>
                                           </div>
                                        <div>
+                                        <a href="{{route('user-delete',['id'=>$user->id])}}">
                                         <button class="btn btn-danger  btn-sm">Delete</button>
+                                        </a>
                                         </div> 
                                     </td>
                                  </tr>

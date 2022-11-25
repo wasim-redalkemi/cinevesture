@@ -19,9 +19,11 @@ use App\Models\UserLanguage;
 use App\Models\UserPortfolio;
 use App\Models\UserPortfolioImage;
 use App\Models\UserPortfolioSpecificSkills;
+use App\Models\UserProject;
 use App\Models\UserQualification;
 use App\Models\UserSkill;
 use App\Notifications\ContactUser;
+use App\Notifications\EndorseUser;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -122,6 +124,8 @@ class UserController extends WebController
             $experience = UserExperience::query()->where('user_id', $user->id)->get();
             $qualification = UserQualification::query()->where('user_id', $user->id)->get();
             $user_country = MasterCountry::query()->where('id', $user->country_id)->first();
+            $user_age = AgeRange::query()->where('id', $user->age)->first();
+
             // $user_state = MasterState::query()->where('id',$user->state_id)->first();
             $user_skills = UserSkill::query()
                 ->with('getSkills')
@@ -137,7 +141,7 @@ class UserController extends WebController
             // Endorsement
             $user_endorsement = Endorsement::query()->with('endorsementCreater')->where('to',$user->id)
                                 ->orderByDesc('id')->limit(5)->get();
-            return view('website.user.profile_private_view', compact(['user', 'portfolio', 'experience', 'qualification', 'user_country', 'user_skills', 'user_languages','user_endorsement']));
+            return view('website.user.profile_private_view', compact(['user', 'portfolio', 'experience', 'qualification', 'user_country', 'user_age', 'user_skills', 'user_languages','user_endorsement']));
         } catch (Exception $e) {
             return back()->with('error', "Something went wrong");
         }
@@ -150,12 +154,42 @@ class UserController extends WebController
             $id=$_REQUEST['id'];
             $user = User::query()->find($id);
             $portfolio = UserPortfolio::query()->where('user_id', $user->id)->get();
+            $portfolio = UserPortfolio::query()
+                ->with('getPortfolio')
+                ->where('user_id', $user->id)
+                ->get()
+                ->toArray();
+
             $experience = UserExperience::query()->where('user_id', $user->id)->get();
             $qualification = UserQualification::query()->where('user_id', $user->id)->get();
-            return view('website.user.profile_public_view', compact('user', 'portfolio', 'experience', 'qualification'));
+            $user_country = MasterCountry::query()->where('id', $user->country_id)->first();
+            $user_age = AgeRange::query()->where('id', $user->age)->first();
+            $user_skills = $this->userSkills($user->id);
+            $UserProject = UserProject::query()->with('projectImage')->where('user_id',$user->id)->get();
+            
+            $user_languages = UserLanguage::query()
+                ->with('getLanguages')
+                ->where('user_id', $user->id)
+                ->get()
+                ->toArray();
+            // Endorsement
+            $user_endorsement = Endorsement::query()->with('endorsementCreater')->where('to',$user->id)
+                                ->orderByDesc('id')->limit(5)->get();
+                                // dd($user_endorsement);
+                               
+            return view('website.user.profile_public_view', compact(['user', 'portfolio', 'experience', 'qualification', 'user_country', 'user_age', 'user_skills', 'user_languages','user_endorsement', 'UserProject']));
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
+    }
+
+    public function userSkills($user_id)
+    {
+        return UserSkill::query()
+        ->with('getSkills')
+        ->where('user_id', $user_id)
+        ->get()
+        ->toArray();
     }
 
     public function profileCreate()
@@ -637,6 +671,33 @@ class UserController extends WebController
                 Notification::route('mail', $email)->notify(new ContactUser($collect));                
             }
             return ['status'=>1,'msg'=>"Email has been sending by contact email."];           
+        } catch (Exception $e) {
+            return ['status'=>0,'msg'=>"Something went wrong."];
+        }
+    }
+
+    public function endorseMailStore(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'endorse_email' => 'required|email',
+                'endorse_message' => 'required|string',
+            ]);
+
+            if ($validator->fails()) {
+                return ['satus'=>0,'msg'=>$validator->errors()->first()];
+            }
+            $email = '';
+            if(!$_REQUEST['endorse_email'] && !$_REQUEST['endorse_message']){
+                return ['satus'=>0,'msg'=>"Endorse email or message or subject fields can not be empty."];
+            }
+            if(!empty($_REQUEST['endorse_email']) ){
+                $email = $_REQUEST['endorse_email'];
+                $collect = collect();
+                $collect->put('url','https://www.google.com/');
+                Notification::route('mail', $email)->notify(new EndorseUser($collect));                
+            }
+            return ['status'=>1,'msg'=>"Email has been sending by endorse email."];           
         } catch (Exception $e) {
             return ['status'=>0,'msg'=>"Something went wrong."];
         }

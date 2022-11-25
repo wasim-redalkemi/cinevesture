@@ -100,8 +100,8 @@
                         </div>
                     </div>
                 </div>
-            </div>
                 <div class="row mt-3">
+            </div>
                     <div class="col-md-12">
                         <div class="table-responsive">
                             <table id="order-listing" class="table order-listing table-sm table-bordered table-hover">
@@ -145,9 +145,6 @@
                                     
                                        <td>
                                         @if ($project->genres)
-
-
-
 
                                         <ol type="1" class="table_scroller">
                                             @foreach ($project->genres as $key=>$genre)
@@ -196,7 +193,7 @@
                                              <input type="checkbox" class="recom_inp" path="{{route('project-list-recommended')}}?s={{$recom}}&p={{$project->id}}" name="fav" id="fav" <?php if($project->Recommended_badge == 1){echo 'checked';}?>>
                                         </td>
                                         <td>
-                                            <a href="{{route('project-public-view',[($project->id)])}}"><button class="btn mb-2 view-btn btn btn-primary">View</button></a>
+                                            <a href="{{route('project-public-view',['id'=>$project->id])}}"><button class="btn mb-2 view-btn btn btn-primary">View</button></a>
                                             {{-- <button class="btn btn-outline-primary w-60 view-btn">Edit</button> --}}
                                         </td>
                                     

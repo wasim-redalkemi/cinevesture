@@ -32,14 +32,16 @@ Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
     Route::group(['prefix'=>'user-management'],function()
     {
         Route::get('/list', [AdminUserController::class, 'index'])->name('user-management');
+        Route::get('/delete/{id}', [AdminUserController::class, 'destroy'])->name('user-delete');
+        Route::get('/user_status', [AdminUserController::class, 'changeStatus'])->name('user-status-change');
     });  
     Route::group(['prefix'=>'project-list'],function()
     {
         Route::get('/create', [ProjectListController::class, 'index'])->name('project-list-management');
         Route::post('/list-create', [ProjectListController::class, 'create'])->name('create-list');
         Route::get('/list', [ProjectListController::class, 'project_list_show'])->name('show-list');
-        Route::get('/search/{id}', [ProjectListController::class, 'search'])->name('search-project');
-        Route::post('/find/{id}', [ProjectListController::class, 'search_project'])->name('find-project');
+        Route::get('/list-projects', [ProjectListController::class, 'search_project'])->name('list-projects');
+        // Route::post('/find/{id}', [ProjectListController::class, 'search_project'])->name('find-project');
         Route::post('/search-projects', [ProjectListController::class, 'saveSearchProjects'])->name('save-search-projects');
         Route::get('/change-status/{id}/{status}', [ProjectListController::class, 'changeStatus'])->name('change-status');
         Route::get('/delete-list/{id}', [ProjectListController::class, 'deleteList'])->name('delete-list');
@@ -53,9 +55,9 @@ Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
         
     }); 
    
-    Route::get('user', function () {
-        return view('admin.user.user');
-    });
+    // Route::get('user', function () {
+    //     return view('admin.user.user');
+    // });
 
     Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
     Route::get('project/list', [AdminProjectController::class, 'index'])->name('admin-project-list');
