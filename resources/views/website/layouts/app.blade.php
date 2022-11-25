@@ -77,11 +77,18 @@
                 $(this).next('.textlength').text(' You have reached the limit');
                 $('.textlength').css('color', 'red', 'text-align', 'end');
             } else {
-            var char = len;
-            $(this).next('.textlength').text(char + ' / '+max);
-            $('.textlength').css({"color":"#787885", "text-align":"end"});
-        }
-    });
+                var char = len;
+                $(this).next('.textlength').text(char + ' / '+max);
+                $('.textlength').css({"color":"#787885", "text-align":"end"});
+            }
+        });
+        $(document).click(function (e) {
+            if ($(e.target).is('.modal')) {
+                $('.modal,.modal-backdrop').fadeOut(100);
+                $('body').css('overflow','scroll');
+            }
+
+        });
     </script>
 
     @yield('scripts')
