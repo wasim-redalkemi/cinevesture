@@ -274,7 +274,7 @@ class JobController extends WebController
                     $q->where('save_type', $status);
                 }
             })
-            ->paginate($this->records_limit);
+            ->paginate(5);
             return $userJob;
         }catch(Exception $e){
             return back()->withErrors($e->getmessage());
