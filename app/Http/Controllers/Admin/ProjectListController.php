@@ -9,17 +9,13 @@ use App\Models\ProjectMedia;
 use App\Models\ProjectListProjects;
 use App\Models\UserProject;
 use Exception;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\FuncCall;
 
 class ProjectListController extends AdminController
 {
-  
-    
-   
-      
-
     
     /**
      * Display a listing of the resource.
@@ -33,9 +29,15 @@ class ProjectListController extends AdminController
         {
              return view('admin.projectList.create');
         }
-        catch (Exception $e) 
+        // catch (Exception $e) 
+        // {
+        //      return back()->withError('error','Something went wrong.');
+        // }
+      
+        catch (Exception $e)
         {
-             return back()->withError('error','Something went wrong.');
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
         }
 
     }
@@ -55,10 +57,15 @@ class ProjectListController extends AdminController
             $project_list->save();
              return redirect()->route('show-list')->with("success", "List added  successfully.");
         }
-        catch (Exception $e) 
-        {
-             return back()->with('error','Something went wrong.');
+        // catch (Exception $e) 
+        // {
+        //      return back()->with('error','Something went wrong.');
            
+        // }
+        catch (Exception $e)
+        {
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
         }
     }
 
@@ -90,10 +97,15 @@ class ProjectListController extends AdminController
             ->paginate($this->records_limit);
              return view('admin.projectList.list',compact('projects_data'));
         }
-        catch (Exception $e) 
+        catch (Exception $e)
         {
-            return response()->json(["status"=>false,"message"=> $e->getMessage()]);
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
         }
+        // catch (Exception $e) 
+        // {
+        //     return response()->json(["status"=>false,"message"=> $e->getMessage()]);
+        // }
     }
 
     /**
@@ -114,10 +126,15 @@ class ProjectListController extends AdminController
 
             return view('admin.projectList.search',compact('id','project_data'));
         }
-        catch (Exception $e) 
+        catch (Exception $e)
         {
-            return back()->withError('error','Something went wrong.');
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
         }
+        // catch (Exception $e) 
+        // {
+        //     return back()->withError('error','Something went wrong.');
+        // }
 
     }
     public function edit($id)
@@ -129,31 +146,46 @@ class ProjectListController extends AdminController
         try
         {
             $id = $request->id;
-            
             $project_list_project = ProjectListProjects::query()->where('list_id',$id)->pluck('project_id')->toArray();
             $project_list_project = array_unique(array_values($project_list_project));
-            // dd($project_list_project);
+            $is_added_only = true;
+            $is_filter_applied = false;
             $search_data=(!empty($request->name))?$request->name:'';
+            if(!isset($request->name) && count($project_list_project)==0)
+            {
+                $is_added_only = false;
+            }
+            else if(!empty($search_data))
+            {
+                $is_added_only = false;
+                $is_filter_applied = true;
+            }
             $project_data=UserProject::query()
             ->with('projectOnlyImage')
-            ->where(function($q)use($search_data,$project_list_project){
-                if(!empty($search_data) && !is_null($search_data)){
+            ->where(function($q)use($is_filter_applied,$search_data,$project_list_project){
+                if($is_filter_applied){
                     $q->where('project_name', 'like' ,"%$search_data%");
+                    $q->whereNotIn('id', $project_list_project);
                 }
-                else
+                else if(!empty($project_list_project))
                 {
                     $q->whereIn('id', $project_list_project);
                 }
             })
             ->paginate($this->records_limit);
             $project_data = $project_data->toArray();
-            return view('/admin.projectList.search',compact('id','project_data','project_list_project'));
+            return view('/admin.projectList.search',compact('id','project_data','is_added_only'));
         }
-        catch (Exception $e) 
+        catch (Exception $e)
         {
-            die($e->getMessage());
-            return back()->withError('error','Something went wrong.');
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
         }
+        // catch (Exception $e) 
+        // {
+            
+        //     return back()->withError('error','Something went wrong.');
+        // }
     }
 
     public function saveSearchProjects(Request $request)
@@ -162,31 +194,38 @@ class ProjectListController extends AdminController
        {
         
         if (!empty(request('projects_id'))) {
+            
+            if (isset($request->add_edit)) {
+                    
+                $project=ProjectListProjects::where('list_id',$request->list_id);
+                $project->delete();
+            }
             foreach (request('projects_id') as $project_id) {
+                
+              
+                
                $project = new ProjectListProjects();
                $project->list_id=$request->list_id;
                $project->project_id=$project_id;
                $project->save();
             }
-            return back()->with('messege','Update successfull');;
-            // with("success", "Project selected successfully.");
-            
+            return back()->with('messege','Update successfull');
+          }else{
+            $project=ProjectListProjects::where('list_id',$request->list_id);
+                    $project->delete();
+                    return back()->with('messege','Update successfull');
           }
-            // foreach($request->projectids as $project){
-                
-            // $projectid = explode(',', $project);
-            //     $data[] = [
-            //         'project_id' =>$projectid[0],
-            //         'list_id'  =>$projectid[1]
-            //         ];
-            //     }
-            // ProjectListProjects::insert( $data );
-            // return redirect('/admin/project-management/list')->with("success", "Project selected successfully.");
+        
         }
-        catch (Exception $e) 
+        catch (Exception $e)
         {
-             return back()->with('error','Something went wrong.');
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
         }
+        // catch (Exception $e) 
+        // {
+        //      return back()->with('error',$e->getmessage);
+        // }
        
 
     }
@@ -204,26 +243,36 @@ class ProjectListController extends AdminController
             $list_status="Publish";
             }
             ProjectList::where("id", $id)->update(["list_status" => $list_status]);
-            return redirect('/admin/project-management/list')->with("success", "Status changed successfully.");
+            return redirect('/admin/project-list/list')->with("success", "Status changed successfully.");
         }
-        catch (Exception $e) 
+        catch (Exception $e)
         {
-            return back()->with('error','Something went wrong.');
+            return back()->with('error',$e->getmessage);
         }
+        // catch (Exception $e) 
+        // {
+        //     return back()->with('error','Something went wrong.');
+        // }
     }
 
     public function deleteList(Request $request, $id)
     {
         try
         {
-            $delet_list=ProjectList::where('id',$id)->delete();
-            $delete_search_list=ProjectListProjects::where('list_id',$id)->delete();
-            return redirect('/admin/project-management/list')->with("success", "List deleted successfully.");
+            $delete_list=ProjectList::where('id',$id);
+            $delete_list->delete();
+            $delete_search_list=ProjectListProjects::where('list_id',$id);
+            $delete_search_list->delete();
+            return redirect('/admin/project-list/list')->with("success", "List deleted successfully.");
         }
-        catch (Exception $e) 
+        catch (Exception $e)
         {
-            return back()->with('error','Something went wrong.');
+            return back()->with('error',$e->getmessage);
         }
+        // catch (Exception $e) 
+        // {
+        //     return back()->with('error','Something went wrong.');
+        // }
        
     }
     /**

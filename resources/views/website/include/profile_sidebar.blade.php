@@ -18,13 +18,13 @@
         </button>
         <ul class="dropdown-menu w-100 profile_dropdown_menu">
             <li>
-                Features
+                <a href="{{ route('posted-job') }}">Posted Jobs</a>
             </li>
             <li>
-                Animation
+                <a href="{{ route('saved-job') }}">Saved Jobs</a>
             </li>
             <li>
-                Biography
+                <a href="{{ route('applied-job') }}">Applied Jobs</a>
             </li>
         </ul>
     </div>

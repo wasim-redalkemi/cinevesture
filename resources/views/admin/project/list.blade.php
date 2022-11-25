@@ -193,7 +193,7 @@
                                              <input type="checkbox" class="recom_inp" path="{{route('project-list-recommended')}}?s={{$recom}}&p={{$project->id}}" name="fav" id="fav" <?php if($project->Recommended_badge == 1){echo 'checked';}?>>
                                         </td>
                                         <td>
-                                            <a href="{{route('project-public-view',[($project->id)])}}"><button class="btn mb-2 view-btn btn btn-primary">View</button></a>
+                                            <a href="{{route('project-public-view',['id'=>$project->id])}}"><button class="btn mb-2 view-btn btn btn-primary">View</button></a>
                                             {{-- <button class="btn btn-outline-primary w-60 view-btn">Edit</button> --}}
                                         </td>
                                     

@@ -77,7 +77,7 @@
                                                             <div class="mt-4">
                                                                 {{-- <input type="text" id="subject" name="e" value="" placeholder="Subject" class="modal_input"> --}}
                                                                 <input type="hidden" name="email_1" id="email_1" class="modal_input" value="@if (!empty($user->email)){{$user->email}}@endif">
-                                                                <button type="button" class="invite_btn">Send Mail</button>
+                                                                <button type="button" id="contact_btn" class="invite_btn">Send Mail</button>
                                                             </div>
                                                             <div class="modal_btm_text mt-4 mb-5">
                                                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum vel cras vitae morbi varius vitae.
@@ -240,26 +240,16 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="guide_profile_main_text deep-pink font_18">Project</div>
-                            @foreach($UserProject as $k=>$v)
-
+                            @if (!empty($UserProject))
                             <div class="project owl-carousel owl-theme">
-                                
+                                @foreach($UserProject as $k=>$v)                                
                                 <div class="item">
-                                    @if (empty($v->projectImage->file_link))
-                                        <img src="{{ asset('public/images/asset/download (3) 2.png') }}" width="100%" height="100%"  />
-                                        <div class="guide_profile_main_subtext">-</div>
-
-                                    @else
-                                        <img src="{{ asset('storage/'.$v->projectImage->file_link)}}" class="" width="100%" alt="image">
-                                        <div class="guide_profile_main_text">{{json_decode($v->projectImage->media_info)->title}}</div>
-
-                                    @endif
-                                    {{-- <img src="{{ asset('public/images/asset/download (3) 7.png') }}"> --}}
-                                    {{-- <div class="guide_profile_main_subtext">Title</div> --}}
-                                </div>
-                                
+                                    <img src="@php echo (!empty($v->projectImage->file_link)?asset('storage/'.$v->projectImage->file_link): config("constants.PROJECT_NO_IMAGE")) @endphp" width="100%" height="100%"  />
+                                    <div class="guide_profile_main_subtext">@php echo (!empty($v->project_name)?$v->project_name: '-') @endphp</div>
+                                </div>                                
+                                @endforeach
                             </div>
-                            @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -274,7 +264,6 @@
                             </div>
                             @if (count($experience)>0)
                                 @foreach ($experience as $k=>$v)
-
                                 <div class="d-flex align-items-end">
                                     <div class="guide_profile_main_subtext mt-1">{{ $v->job_title }}</div>
                                 </div>
@@ -353,11 +342,12 @@
                                                             </div>
 
                                                             <div class="mt-5">
-                                                                <textarea name="" id="" cols="25" rows="6" class="controlTextLength w-100" placeholder="Message" text-length="250" maxlength="250" name="about" aria-label="With textarea"></textarea>
+                                                                <textarea name="endorse_message" id="endorse_message" cols="25" rows="6" class="controlTextLength w-100" placeholder="Message" text-length="250" maxlength="250" name="about" aria-label="With textarea"></textarea>
                                                             </div>
 
                                                             <div class="mt-4">
-                                                                <button type="button" class="invite_btn">Submit</button>
+                                                                <input type="hidden" name="endorse_email" id="endorse_email" value="@if (!empty($user->email)){{$user->email}}@endif">
+                                                                <button type="button" id="endorse_btn" class="invite_btn">Submit</button>
                                                             </div>
                                                             <div class="modal_btm_text mt-4 mb-5">
                                                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum vel cras vitae morbi varius vitae.
@@ -412,7 +402,7 @@
         <script type="text/javascript">
         $(document).ready(function()
         {
-            $('.invite_btn').click(function()
+            $('#contact_btn').click(function()
             {
                 var subject = $('#subject').val();
                 var email_1 = $('#email_1').val();
@@ -442,7 +432,38 @@
                         console.log(error);
                     } 
                 });
-            }); 
+            });
+            
+            $('#endorse_btn').click(function()
+            {
+                var endorse_email = $('#endorse_email').val();
+                var endorse_message = $('#endorse_message').val();
+                console.log(endorse_email);
+                console.log(endorse_message);
+                
+                
+                $.ajax(
+                {
+                    url:"{{ route('endorse-user-mail-store') }}",
+                    type:'POST',
+                    dataType:'json',
+                    data:{endorse_email:endorse_email,endorse_message:endorse_message,"_token": "{{ csrf_token() }}"},
+                    success:function(response)
+                    {
+                        console.log(response)
+                        console.log('endorse done')
+                        toastMessage(response.status, response.msg);
+                        $('.modal').hide();
+                        $('.modal-backdrop').remove();
+                    },
+                    error:function(response,status,error)
+                    {   
+                        console.log(response);
+                        console.log(status);
+                        console.log(error);
+                    } 
+                });
+            });
         });
 
 

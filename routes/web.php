@@ -50,7 +50,7 @@ Auth::routes(['verify' => true]);
     Route::get('resend-otp/{email?}/{type?}', [RegisterController::class, 'resendOtp'])->name('resend-otp'); 
 
     Route::group(["middleware"=>["adminWebAuth"],"prefix"=>"admin"],function(){
-        Route::get('project/public-view/{id}', [ProjectController::class, 'publicView'])->name('project-public-view');
+        Route::get('project/public-view', [ProjectController::class, 'publicView'])->name('project-public-view');
 		Route::get('user/profile-public-show', [UserController::class, 'profilePublicShow'])->name('user-profile-public-show');
     });
     // Route::get('reset-password/{token}',[ResetPasswordController::class,'restPasswordPublicView'])->name('reset-password-view');
@@ -79,6 +79,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/profile-store', [UserController::class, 'profileStore'])->name('profile-store');
 
         Route::post('/contact-user-mail-store', [UserController::class, 'contactMailStore'])->name('contact-user-mail-store');
+        Route::post('/endorse-user-mail-store', [UserController::class, 'endorseMailStore'])->name('endorse-user-mail-store');
 
 
         Route::get('/portfolio-create/{id?}', [UserController::class, 'portfolioCreate'])->name('portfolio-create');
@@ -179,6 +180,14 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::get('/search',[JobController::class, 'index'])->name('job-search-page');
         Route::get('/create',[JobController::class, 'create'])->name('job-create-page');
         Route::post('/action',[JobController::class, 'store'])->name('job-store');
+        Route::post('/job-store-edit',[JobController::class, 'jobStoreEdit'])->name('job-store-edit');
+        Route::get('/validate-job',[JobController::class, 'validatejob'])->name('validate-job');
+
+
+        Route::get('/posted-job',[JobController::class, 'postedJob'])->name('posted-job');
+        Route::get('/saved-job',[JobController::class, 'savedJob'])->name('saved-job');
+        Route::get('/applied-job',[JobController::class, 'appliedJob'])->name('applied-job');
+
 
 	});
 

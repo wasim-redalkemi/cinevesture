@@ -23,6 +23,7 @@ use App\Models\UserProject;
 use App\Models\UserQualification;
 use App\Models\UserSkill;
 use App\Notifications\ContactUser;
+use App\Notifications\EndorseUser;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -165,6 +166,7 @@ class UserController extends WebController
             $user_age = AgeRange::query()->where('id', $user->age)->first();
             $user_skills = $this->userSkills($user->id);
             $UserProject = UserProject::query()->with('projectImage')->where('user_id',$user->id)->get();
+            
             $user_languages = UserLanguage::query()
                 ->with('getLanguages')
                 ->where('user_id', $user->id)
@@ -669,6 +671,33 @@ class UserController extends WebController
                 Notification::route('mail', $email)->notify(new ContactUser($collect));                
             }
             return ['status'=>1,'msg'=>"Email has been sending by contact email."];           
+        } catch (Exception $e) {
+            return ['status'=>0,'msg'=>"Something went wrong."];
+        }
+    }
+
+    public function endorseMailStore(Request $request)
+    {
+        try {
+            $validator = Validator::make($request->all(), [
+                'endorse_email' => 'required|email',
+                'endorse_message' => 'required|string',
+            ]);
+
+            if ($validator->fails()) {
+                return ['satus'=>0,'msg'=>$validator->errors()->first()];
+            }
+            $email = '';
+            if(!$_REQUEST['endorse_email'] && !$_REQUEST['endorse_message']){
+                return ['satus'=>0,'msg'=>"Endorse email or message or subject fields can not be empty."];
+            }
+            if(!empty($_REQUEST['endorse_email']) ){
+                $email = $_REQUEST['endorse_email'];
+                $collect = collect();
+                $collect->put('url','https://www.google.com/');
+                Notification::route('mail', $email)->notify(new EndorseUser($collect));                
+            }
+            return ['status'=>1,'msg'=>"Email has been sending by endorse email."];           
         } catch (Exception $e) {
             return ['status'=>0,'msg'=>"Something went wrong."];
         }

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Exception;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
@@ -26,9 +28,15 @@ class AuthController extends Controller
     {
         try {
             return view('admin.dashboard');
-        } catch (\Throwable $e) {
-            return back()->withErrors($e->getMessage());
         }
+        catch (Exception $e)
+        {
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
+        }
+        // catch (\Throwable $e) {
+        //     return back()->withErrors($e->getMessage());
+        // }
     }
 
      /**
@@ -51,8 +59,8 @@ public function showLoginAdmin()
  */
 public function login(Request $request)
 {
+    try {
     $this->validateLogin($request);
-    
     // If the class is using the ThrottlesLogins trait, we can automatically throttle
     // the login attempts for this application. We'll key this by the username and
     // the IP address of the client making these requests into this application.
@@ -77,6 +85,16 @@ public function login(Request $request)
     $this->incrementLoginAttempts($request);
 
     return $this->sendFailedLoginResponse($request);
+} 
+catch (Exception $e)
+{
+    Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+    return back();
+}
+// catch (\Throwable $th) {
+//     //throw $th;
+// }
+
 }
 
 /**
@@ -89,10 +107,18 @@ public function login(Request $request)
  */
 protected function validateLogin(Request $request)
 {
-    $request->validate([
-        $this->username() => 'required|email',
-        'password' => 'required|string',
-    ]);
+    try {
+        $request->validate([
+            $this->username() => 'required|email',
+            'password' => 'required|string',
+        ]);
+    }     
+    catch (Exception $e)
+    {
+        Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+        return back();
+    }
+    
 }
 
 /**
