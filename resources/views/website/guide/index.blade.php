@@ -34,11 +34,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="project-text text-center mt-4">YOUR GATEWAY FOR TALENT AND SERVICES</div>
-                    <div class="duration-lang-text white text-center mt-3">It is our job to make your search for people in the film and media fraternity, a piece of cake! Here's your slice. </div>
+                    <div class="project-text text-center mt-4 px-4 px-md-0">YOUR GATEWAY FOR TALENT AND SERVICES</div>
+                    <div class="duration-lang-text white text-center mt-3 px-4 px-md-0">It is our job to make your search for people in the film and media fraternity, a piece of cake! Here's your slice. </div>
                     <form class="" method="Get" action="{{ route('guide-view') }}">
                         @csrf
-                    <div class="input_wraper mt-3">
+                    <div class="input_wraper py-5 mt-3">
                         <div class="container">
                         <div class="row">
                             <div class="col-md-3">
@@ -47,7 +47,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="mt-0">
+                                <div class="mt-3 mt-md-0">
                                     <select class="country_select2 @error('countries') is-invalid @enderror" id="countries"name = "countries[]" multiple="multiple">
 
                                     @foreach($countries as $country)
@@ -73,7 +73,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class=" mt-0">
+                                <div class="mt-3 mt-md-0">
                                     <select class="js-select2"  id = "talentType"name ="talentType[]" multiple="multiple">
                                     @foreach($talent_type as $type)
                                               
@@ -87,7 +87,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-1 mt-3 mt-md-0">
                                 <button type = "submit"class="job_search_btn profile_search_btn">Search</button>
                             </div>
                         </div>

@@ -112,7 +112,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="guide_profile_main_text mt-3">
-                                <p> Skils</p>
+                                <p> Skills</p>
                             </div>
                             <div class="">
                                 @if (count($user_skills)>0)

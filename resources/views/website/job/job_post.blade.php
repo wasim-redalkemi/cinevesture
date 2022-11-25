@@ -51,7 +51,7 @@
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="guide_profile_main_text">Discription</div>
+                                    <div class="guide_profile_main_text">Description</div>
                                     <div class="posted_job_header">
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nullam elementum amet, neque, molestie iaculis tincidunt rhoncus eget. Viverra est suspendisse quis dui. In
                                         egestas nunc massa viverra integer semper. Dui, nibh ultricies pretium aliquet diam. Ut ac in dignissim non
