@@ -23,11 +23,11 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-between">
-                                        <div class="search-head-text Aubergine_at_night">Profile</div>
-                                        <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
-                                            <a href="{{ route('profile-create')}}">
-                                                <button class="guide_profile_btn mt-2">Edit </button>
-                                            </a>
+                                        <div class="search-head-text Aubergine_at_night mx-3 mx-md-0">Profile</div>
+                                        <div class="d-none d-md-block">
+                                                <a href="{{ route('profile-create')}}">
+                                                    <button class="guide_profile_btn mt-2">Edit </button>
+                                                </a>
                                         </div>
                                     </div>
                                 </div>
@@ -54,6 +54,11 @@
                                         |
                                         {{ (isset($user_country->name))?$user_country->name:'Country'; }}
                                     </div>
+                                    <div class="d-block d-md-none">
+                                                <a href="{{ route('profile-create')}}">
+                                                    <button class="guide_profile_btn mt-2">Edit </button>
+                                                </a>
+                                        </div>
                                 </div>
                             </div>
                         </div>
@@ -372,15 +377,15 @@
         center: true,
         // items: 4,
         responsive: {
-            // 480: {
-            //     items: 1
-            // },
-            // 768: {
-            //     items: 2
-            // },
-            // 1024: {
-            //     items: 4
-            // }
+            480: {
+                items: 1
+            },
+            768: {
+                items: 2
+            },
+            1024: {
+                items: 4
+            }
         },
     });
 </script>
