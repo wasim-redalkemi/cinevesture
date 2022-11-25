@@ -13,5 +13,13 @@ class AdminController extends Controller
         $this->records_limit=5;
     }
 
-    
+    public function getError($error = '')
+    {
+        $defaultError = $error->getMessage();
+        if(((env('APP_ENV') == 'production') && (strpos(get_class($error),'Database') > (-1))) || $error == '')
+        {
+            $defaultError = 'Something went wrong.';
+        }
+        return $defaultError;
+    }
 }
