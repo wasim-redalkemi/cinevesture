@@ -28,6 +28,18 @@
                                     </div>
                                   </div>
                                 </div>
+                                <div>
+                                  {{-- "bg-gradient-success p text-white" --}}
+                                  {{-- <button class="btn btn-sb btn-primary">
+                                    Refresh
+                                  </button> --}}
+                                  <a href="{{route('list-projects',['id' => $_REQUEST['id']])}}">
+                                  <button type="button" class="btn btn-linkedin">
+                                    <i class="mdi mdi-reload btn-icon-prepend"></i>                                                    
+                                    Refresh
+                                  </button>
+                                </a>
+                                </div>
                               </div>
                           </table>
                         </div>

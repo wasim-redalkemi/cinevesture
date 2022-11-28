@@ -25,7 +25,7 @@
                                         <select  name="status"class="form-control form-control-lg" id="listStatus">
                                         <option value="publish">Select</option>
                                         <option value="publish">Publish</option>
-                                        <option value="publish">Unpublish</option>
+                                        <option value="unpublish">Unpublish</option>
                                         </select>
                                     </div>
                               </div>

@@ -181,6 +181,17 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::get('/search',[JobController::class, 'index'])->name('job-search-page');
         Route::get('/create',[JobController::class, 'create'])->name('job-create-page');
         Route::post('/action',[JobController::class, 'store'])->name('job-store');
+        Route::post('/job-store-edit',[JobController::class, 'jobStoreEdit'])->name('job-store-edit');
+        Route::get('/validate-job',[JobController::class, 'validatejob'])->name('validate-job');
+
+
+        Route::get('/posted-job',[JobController::class, 'postedJob'])->name('posted-job');
+        Route::get('/saved-job',[JobController::class, 'savedJob'])->name('saved-job');
+        Route::get('/applied-job',[JobController::class, 'appliedJob'])->name('applied-job');
+
+        Route::get('/posted-job-single-view',[JobController::class, 'postedJobView'])->name('posted-job-single-view');
+
+
 
 	});
 

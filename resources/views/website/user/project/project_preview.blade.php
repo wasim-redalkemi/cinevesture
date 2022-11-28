@@ -63,7 +63,7 @@
                     @endforeach                    
                 @endif 
                 <div class="preview_headtext">Genre</div>
-                <div class="d-flex mt-2">
+                <div class="mt-2">
                     @if (!empty($projectData[0]['genres']))
                     @foreach ($projectData[0]['genres'] as $v)
                         <button class="curv_cmn_btn mx-1">{{$v['name']}}</button>
@@ -111,7 +111,7 @@
                 <div class="preview_subtext">@if (!empty($projectData[0]['director_statement'])) {{$projectData[0]['director_statement']}} @endif</div>
                 <div class="row">
                     <div class="com-md-12">
-                        <div class="justify-content-end"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-description') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
+                        <div class="justify-content-end mt-3 mt-md-0"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-description') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
                     </div>
                 </div>
             </div>
@@ -127,10 +127,12 @@
                     </div>
         
                     <div class="preview_headtext mb-3">Video</div>
-                    <div class="row">
-                        @if (!empty($projectData[0]['project_only_video']))
+
+
+                    <div class="video_slider owl-carousel">
+                    @if (!empty($projectData[0]['project_only_video']))
                         @foreach ($projectData[0]['project_only_video'] as $v)
-                            <div class="col-md-3">
+                            <div class="item">
                                 <div> 
                                     <img src="{{ json_decode($v['media_info'])->thumbnail }}" class="" width=100% alt="image">
                                 </div>
@@ -149,12 +151,20 @@
                         @endforeach                    
                         @endif
                     </div>
+
+
+
+               
                     <div class="preview_headtext mb-3">Photos</div>
-                    <div class="row">
+
+
+
+                    
+                    <div class="video_slider owl-carousel">
                         @if (!empty($projectData[0]['project_only_image']))
                         @foreach ($projectData[0]['project_only_image'] as $v)
-                        <div class="col-md-3">
-                            <div style="height: 200px; overflow:hidden;background-color:rgba(0,0,0,0.2)"> <img src="{{ Storage::url($v['file_link']) }}" class="" width=100% alt="image"></div>
+                        <div class="item">
+                            <div style=""> <img src="{{ Storage::url($v['file_link']) }}" class="" width="100%" height="240" alt="image"></div>
                             <div class="d-flex align-items-center">
                                 <div class="movie_name_text">{{ json_decode($v['media_info'])->title }}</div>
                                 <?php
@@ -167,14 +177,16 @@
                             ?>
                             </div>
                         </div>
-                        @endforeach                    
+                            @endforeach                    
                         @endif
                     </div>
+
+                
                     <div class="preview_headtext mb-3">pdf</div>
                     <div class="row">
                         @if (!empty($projectData[0]['project_only_doc']))
                         @foreach ($projectData[0]['project_only_doc'] as $v)
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-10 mt-3 mt-md-0">
                             <div class="document_pdf">
                                 <div class="upload_loader">
                                     <i class="fa fa-file-text deep-pink icon-size" aria-hidden="true"></i>
@@ -192,7 +204,7 @@
                     </div>
                     <div class="row">
                         <div class="com-md-12">
-                            <div class="justify-content-end"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-gallery') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
+                            <div class="justify-content-end mt-3 mt-md-0"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-gallery') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
                         </div>
                     </div>
                 </div>
@@ -209,7 +221,7 @@
                 <div class="preview_headtext mt-4">Project Stage</div>
                 <div class="preview_subtext">@if (!empty($projectData[0]['project_stage']['name'])) {{$projectData[0]['project_stage']['name']}} @endif</div>
                 <div class="preview_headtext">Looking For</div>
-                <div class="d-flex mt-2">
+                <div class=" mt-2">
                     @if (!empty($projectData[0]['project_looking_for']))
                     @foreach ($projectData[0]['project_looking_for'] as $v)
                         <button class="curv_cmn_btn mx-1">{{$v['name']}}</button>
@@ -239,9 +251,9 @@
                 @endforeach                    
                 @endif
                 <div class="row">
-                    <div class="com-md-12">
+                    <div class="col-md-12">
                         <div class="d-flex justify-content-end mt-2">
-                        <div class="justify-content-end"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-milestone') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
+                        <div class="justify-content-end mt-3 mt-md-0"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-milestone') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
                         </div>
                     </div>
                 </div>
@@ -269,6 +281,23 @@
     $(document).ready(function(){
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");
+    });
+    $(".video_slider.owl-carousel").owlCarousel({
+      center: true,
+      autoPlay: 3000,
+      autoplay: true,
+      loop: true,
+      nav: true,
+      center: true,
+      margin: 10,
+      items: 1.5,
+      responsive: {
+        480: { items: 1 },
+        768: { items: 1 },
+        1024: {
+          items: 4
+        }
+      },
     });
 </script>
 @endpush

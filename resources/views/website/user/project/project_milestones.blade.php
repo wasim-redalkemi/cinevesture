@@ -126,7 +126,7 @@
                                 </div>
                             </div>
                             <div class="col-md-2 d-flex align-items-end">
-                                <div class="d-flex checkbox_btn mb-2">
+                                <div class="d-flex checkbox_btn mb-2 mt-3 md-md-0">
                                     <input type="radio" class="checkbox_btn" name="project_milestone_complete~1" value="1" aria-label="">
                                     @error('complete')
                                     <span class="invalid-feedback" role="alert">
@@ -172,7 +172,7 @@
                                 </div>
                             </div>
                             <div class="col-md-2 d-flex align-items-end">
-                                <div class="d-flex checkbox_btn mb-2">
+                                <div class="d-flex checkbox_btn mb-2 mt-3 md-md-0">
                                     <input type="radio" class="checkbox_btn" name="project_milestone_complete~2" value="1" aria-label="">
                                     @error('complete')
                                     <span class="invalid-feedback" role="alert">
@@ -218,7 +218,7 @@
                                 </div>
                             </div>
                             <div class="col-md-2 d-flex align-items-end">
-                                <div class="d-flex checkbox_btn mb-2">
+                                <div class="d-flex checkbox_btn mb-2 mt-3 md-md-0">
                                     <input type="radio" class="checkbox_btn" name="project_milestone_complete~3" value="1" aria-label="">
                                     @error('complete')
                                     <span class="invalid-feedback" role="alert">
@@ -232,7 +232,7 @@
                         <div><button class="save_add_btn mt-4">Add another Milestone</button></div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="d-flex justify-content-end mt-5 pt-5 pb-md-0">
+                                <div class="d-flex justify-content-end mt-5 pt-0 pt-md-5 pb-md-0">
                                     <input type="hidden" name="project_id" value="<?php if(isset($_REQUEST['id'])) {echo $_REQUEST['id'];}?>">
 
                                     <button class="cancel_btn mx-3"><a class="btn-link-style" href="{{ route('project-gallery') }}?id={{$_REQUEST['id']}}">Go back</a></button>

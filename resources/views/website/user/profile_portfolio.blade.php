@@ -17,7 +17,7 @@
                     @include('website.include.profile_sidebar')
                 </div>
                 <div class="col-md-9">
-                    <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
+                    <div class="profile_wraper profile_wraper_padding my-md-0 my-4">
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Add Portfolio</div>
                           <div class="icon_container">

@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\UserInvite;
 use App\Models\UserOrganisation;
 use Exception;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 
 class UserController extends AdminController
@@ -22,7 +23,7 @@ class UserController extends AdminController
     {
         try
         {
-            
+           
             $countries=MasterCountry::query()->get();
             $UserOrganisation = UserOrganisation::query()->get();
             $users=User::query()->where('user_type','U')
@@ -33,7 +34,11 @@ class UserController extends AdminController
                     $q->where("name","like","%$request->search%");
                 }
                 if(isset($request->from_date) && isset($request->to_date)){
-                    $q->whereBetween("created_at",[$request->from_date,$request->to_date]);
+                    $from=($request->from_date).' '.('00:00:00');
+                    
+                    $to=($request->to_date).' '.'23:59:59';
+                    
+                    $q->whereBetween("created_at",[$from,$to]);
                 }
                 if (isset($request->country)) {
                     $q->where("country_id",$request->country);
@@ -42,7 +47,7 @@ class UserController extends AdminController
                     $q->where('status',$request->status);
                 }
                 if (isset($request->organization)) { // search name of user
-                    $q->whereHas('invites', function ($q) use($request){
+                        $q->whereHas('invites', function ($q) use($request){
                         $q->where('user_organization_id',$request->organization);
                     });
                 }
@@ -56,6 +61,15 @@ class UserController extends AdminController
             return back()->withError($e->getMessage());
         }
 
+    }
+
+    public function changeStatus(Request $request)
+    {
+        
+       $user=User::find($request->user_id);
+       $user->status= $request->status;
+       $user->save();
+       return back();
     }
 
     /**
@@ -121,6 +135,18 @@ class UserController extends AdminController
      */
     public function destroy($id)
     {
-        //
+        try {
+            $user=User::find($id)->delete();
+            // $user->delete();
+            // die;
+            // Session::flash('response', ['text'=>'User delete successfully','type'=>'success']);
+                return back();
+            
+        } catch (Exception $e)
+        {
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
+        }
+       
     }
 }

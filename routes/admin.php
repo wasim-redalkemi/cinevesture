@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\JobController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\ProjectListController;
@@ -32,6 +33,8 @@ Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
     Route::group(['prefix'=>'user-management'],function()
     {
         Route::get('/list', [AdminUserController::class, 'index'])->name('user-management');
+        Route::get('/delete/{id}', [AdminUserController::class, 'destroy'])->name('user-delete');
+        Route::get('/user_status', [AdminUserController::class, 'changeStatus'])->name('user-status-change');
     });  
     Route::group(['prefix'=>'project-list'],function()
     {
@@ -52,10 +55,18 @@ Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
        
         
     }); 
+    Route::group(['prefix'=>'job-managemant'],function()
+    {
+        Route::get('/index', [JobController::class, 'index'])->name('job');
+        Route::get('delete/{id}', [JobController::class, 'destroy'])->name('job-delete');
+        Route::get('status_update', [JobController::class, 'status_update'])->name('status_update');
+       
+        
+    }); 
    
-    Route::get('user', function () {
-        return view('admin.user.user');
-    });
+    // Route::get('user', function () {
+    //     return view('admin.user.user');
+    // });
 
     Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
     Route::get('project/list', [AdminProjectController::class, 'index'])->name('admin-project-list');

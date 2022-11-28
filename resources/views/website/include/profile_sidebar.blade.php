@@ -18,13 +18,13 @@
         </button>
         <ul class="dropdown-menu w-100 profile_dropdown_menu">
             <li>
-                Features
+                <a href="{{ route('posted-job') }}">Posted Jobs</a>
             </li>
             <li>
-                Animation
+                <a href="{{ route('saved-job') }}">Saved Jobs</a>
             </li>
             <li>
-                Biography
+                <a href="{{ route('applied-job') }}">Applied Jobs</a>
             </li>
         </ul>
     </div>
@@ -38,3 +38,14 @@
     <div class="sidebar_content"><a href="{{ route('setting-page')}}">Settings</a></div>
     <hr class="sidebar_content_hr">
 </div>
+
+<!-- <div class="for_mobile">
+<div class="sidebar_content mb-3 d-flex justify-content-between">
+      <div>  <i class="fa fa-user-circle mx-2 profile_icon" aria-hidden="true"></i>
+        <a href="">Profile</a>
+      </div>
+      <div>
+         
+      </div>
+    </div>
+</div> -->

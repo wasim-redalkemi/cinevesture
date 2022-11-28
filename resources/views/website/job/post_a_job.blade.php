@@ -148,6 +148,8 @@
                         </div> -->
                                 </div>
                                 <div class="d-flex justify-content-center mt-5 mb-4">
+                                    <input type="hidden" name="job_id" value="<?php if(isset($_REQUEST['job_id'])) {echo $_REQUEST['job_id'];}?>">
+
                                     <button class="cancel_btn mx-5 action" data-id="save">Save as Draft</button>
                                     <button class="guide_profile_btn action" data-id="publish" type="submit">Publish</button>
                                 </div>
@@ -240,9 +242,9 @@
         });
         e.preventDefault();
         $.ajax({
-            type: 'post',
+            type: 'get',
             data: $('#post_job').serialize(),
-            url: "{{ route('job-store') }}",
+            url: "{{ route('validate-job') }}",
             success: function(resp) {
 
                 if (resp.status == true) {
