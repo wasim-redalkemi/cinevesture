@@ -47,7 +47,7 @@ class UserController extends AdminController
                     $q->where('status',$request->status);
                 }
                 if (isset($request->organization)) { // search name of user
-                    $q->whereHas('invites', function ($q) use($request){
+                        $q->whereHas('invites', function ($q) use($request){
                         $q->where('user_organization_id',$request->organization);
                     });
                 }
