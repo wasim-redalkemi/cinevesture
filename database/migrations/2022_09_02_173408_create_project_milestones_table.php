@@ -18,7 +18,7 @@ class CreateProjectMilestonesTable extends Migration
             $table->string('project_id',20);
             $table->string('description',500);
             $table->integer('budget');
-            $table->timestamp('traget_date');
+            $table->timestamp('target_date');
             $table->enum('complete',['0','1'])->default('0')->nullable();
 
             $table->timestamps();

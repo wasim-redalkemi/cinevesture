@@ -106,7 +106,7 @@
                                         <div class="col-md-3">
                                             <div class="profile_input">
                                                 <label>Title</label>
-                                                <input type="text" value="{{$ass['project_associate_title']}}" class="form-control" name="project_associate_title[]" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
+                                                <input type="text" value="{{$ass['project_associate_title']}}" class="form-control" name="project_associate_title" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
                                                 @error('project_associate_title')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -117,7 +117,7 @@
                                         <div class="col-md-3">
                                             <div class="profile_input">
                                                 <label>Name</label>
-                                                <input type="text" value="{{$ass['project_associate_name']}}" class="form-control" name="project_associate_name[]" placeholder="Locations (Optional)" aria-label="Username" aria-describedby="basic-addon1">
+                                                <input type="text" value="{{$ass['project_associate_name']}}" class="form-control" name="project_associate_name" placeholder="Locations (Optional)" aria-label="Username" aria-describedby="basic-addon1">
                                                 @error('project_associate_name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -135,7 +135,7 @@
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>Title</label>
-                                        <input type="text" value="" class="form-control asso-title" name="project_associate_title[]" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" value="" class="form-control asso-title" name="project_associate_title" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('project_associate_title')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -146,7 +146,7 @@
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>Name</label>
-                                        <input type="text" value="" class="form-control asso-name" name="project_associate_name[]" placeholder="Locations (Optional)" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" value="" class="form-control asso-name" name="project_associate_name" placeholder="Locations (Optional)" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('project_associate_name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -154,12 +154,16 @@
                                         @enderror
                                     </div>
                                 </div>
+                                <div class="col-md-3 d-flex align-items-end mt-2">
+                                    <div class="profile_input">
+                                        <div class="save_add_btn">Save</div>
+                                    </div>
+                                </div>
                             </div>
-                            <input type="hidden" value="" class="form-control" name="project_associate_removed_ids">
                             <div class="row">
                                 <div class="col-md-3 d-flex align-items-end mt-2">
                                     <div class="profile_input">
-                                        <div class="save_add_btn">Add another</div>
+                                        <div class="add_another_btn">Add another</div>
                                     </div>
                                 </div>
                             </div>
@@ -217,7 +221,6 @@ $(document).ready(function() {
 
 @push('scripts')
 <script>
-    alert
     var projectDetails = [];
     $(document).ready(function(){
         projectDetailsObj = JSON.parse('<?php echo str_replace("'","\'",json_encode($projectData[0]));?>');
@@ -237,7 +240,6 @@ $(document).ready(function() {
     var project_id = null;
     var parentElemId = "#project_details";
     var associate_entriesId = "#associate_entries";
-    var lastNewAssoId = 0;
 
     let init = function(projectDetailsObj){
         console.log("projectDetailsObj = ",projectDetailsObj.id);
@@ -250,7 +252,7 @@ $(document).ready(function() {
             let id = $(e.target).parents()[1].id.split("-")[1];
             createToast("Please wait...","S");
             $(associate_entriesId+" #asso-"+id).remove();
-            doAjax('ajax/delete-proj-association/'+id,{},"DELETE",function(req,resp){
+            doAjax('ajax/delete-proj-milestone/'+id,{},"DELETE",function(req,resp){
                 if(resp.payload.isDeleted){
                     createToast(resp.message,"S");
                 } else {
@@ -259,32 +261,41 @@ $(document).ready(function() {
             });
         });
 
-        $(parentElemId+" .profile_input .save_add_btn").off("click").on("click",(e)=>{
+        $(parentElemId+" .profile_input .add_another_btn").off("click").on("click",(e)=>{
             e.preventDefault();
             validateAssoEntry();
         });
+
+        $(parentElemId+" .save_add_btn").off("click").on("click",(e)=>{
+            let isValid = validateAssoEntry();
+            if(isValid){
+                saveAssoEntry();
+            }
+        });
+    }
+
+    let saveAssoEntry = function(){
+        let title = $(parentElemId+" #asso-new .profile_input input.asso-title").val();
+        let name = $(parentElemId+" #asso-new .profile_input input.asso-name").val();
+        doAjax('ajax/add-proj-association/'+project_id,{title,name},"POST",addProjAssoCallback)
     }
 
     let validateAssoEntry = function () {
-        //console.log("okay ",$(parentElemId+" input[name='project_associate_title[]']"));
-        let titleElems = $('input[name="project_associate_title[]"]');
-        console.log("titleElems",titleElems.length);
+        let titleElems = $('input[name="project_associate_title"]');
         if(titleElems.length > 0) {
             var emptyFields = titleElems.filter(function () {
                 return this.value == ""; // $(this).val()
             });
             if(emptyFields.length == 0){
-                let title = $(parentElemId+" #asso-new .profile_input input.asso-title").val();
-                let name = $(parentElemId+" #asso-new .profile_input input.asso-name").val();
-                doAjax('ajax/add-proj-association/'+project_id,{title,name},"POST",addProjAssoCallback)
+                return true;
             } else {
                 createToast("Please enter a valid title.","E");
             }
         }
+        return false;
     }
 
     let addProjAssoCallback = function(req, resp) {
-        console.log("addProjAssoCallback",resp.payload);
         if(resp.status && resp.status == '1') {
             addAssoEntry(resp.payload);
         } else {
@@ -293,7 +304,6 @@ $(document).ready(function() {
     }
 
     let addAssoEntry = function(assoEntry){
-        lastNewAssoId++;
         if(!assoEntry.project_associate_name){
             assoEntry.project_associate_name = "";
         }
@@ -302,13 +312,13 @@ $(document).ready(function() {
         html +='<div class="col-md-3">';
         html +='<div class="profile_input">';
         html +='<label>Title</label>';
-        html +='<input type="text" value="'+assoEntry.project_associate_title+'" class="form-control" name="project_associate_title[]" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">';
+        html +='<input type="text" value="'+assoEntry.project_associate_title+'" class="form-control" name="project_associate_title" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">';
         html +='</div>';
         html +='</div>';
         html +='<div class="col-md-3">';
         html +='<div class="profile_input">';
         html +='<label>Name</label>';
-        html +='<input type="text" value="'+assoEntry.project_associate_name+'" class="form-control" name="project_associate_name[]" placeholder="Locations (Optional)" aria-label="Username" aria-describedby="basic-addon1">';    
+        html +='<input type="text" value="'+assoEntry.project_associate_name+'" class="form-control" name="project_associate_name" placeholder="Locations (Optional)" aria-label="Username" aria-describedby="basic-addon1">';    
         html +='</div>';
         html +='</div>';
         html +='<div class="col-md-3 d-flex align-items-end pb-2 mt-2 mt-md-0">';
@@ -327,7 +337,6 @@ $(document).ready(function() {
             type: method,
             data: reqData,
             success: function(result){
-                //alert(result);
                 let resp = JSON.parse(result);
                 callback(reqData,resp);
             },
