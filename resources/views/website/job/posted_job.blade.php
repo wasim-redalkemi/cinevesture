@@ -21,7 +21,6 @@
             @php                
             $jobs = $userJob->toArray();
             @endphp
-            @if (count($jobs)>0)
                 <div class="profile_wraper mt-md-0 mt-4 px-4 pt-4" style="">
                     <div class="profile_text">
                         <h1>Posted Jobs</h1>
@@ -32,6 +31,7 @@
                         <div class="posted_job_header"><a href="{{ route('posted-job',['id'=>auth()->user()->id,'status'=>'unpublished']) }}" class="posted_job_header_link px-3" <?php if($status =='unpublished' ){echo 'active_job_page';}?>>Unpublished Jobs</a></div>
                     </div>
                 </div>
+                @if (count($jobs['data'])>0)
                 @foreach ($jobs['data'] as $k=>$v)
 
                 <div class="profile_wraper profile_wraper_padding">
@@ -101,7 +101,7 @@
 
             @else
                 <div class="not-found-text">
-                    <p>No Profile Found</p>
+                    <p>No Data Found</p>
                 </div>
             @endif
             <div>
@@ -116,52 +116,4 @@
 
 @section('footer')
 @include('website.include.footer')
-@endsection
-
-@section('scripts')
-
-<script type="text/javascript">
-    $(".portfolio.owl-carousel").owlCarousel({
-        center: true,
-        autoPlay: 3000,
-        autoplay: true,
-        loop: true,
-        nav: true,
-        center: true,
-        margin: 10,
-        items: 5,
-        responsive: {
-            480: {
-                items: 3
-            },
-            768: {
-                items: 4
-            },
-            1024: {
-                items: 5
-            }
-        },
-    });
-    $(".project.owl-carousel").owlCarousel({
-        center: true,
-        autoPlay: 3000,
-        autoplay: true,
-        loop: true,
-        nav: true,
-        center: true,
-        margin: 10,
-        items: 3,
-        responsive: {
-            480: {
-                items: 1
-            },
-            768: {
-                items: 2
-            },
-            1024: {
-                items: 3
-            }
-        },
-    });
-</script>
 @endsection
