@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use App\Models\Query;
 use Illuminate\Http\Request;
 
-class QueryController extends Controller
+class QueryController extends AdminController
 {
     /**
      * Display a listing of the resource.

@@ -10,7 +10,7 @@ class SubscriptionUtilityController extends Controller
 {
     public static function isSubscribed()
     {
-        $subscription = UserSubscription::query()->where('user_id',auth()->user()->is)->where('status','active')->first();
+        $subscription = UserSubscription::query()->where('user_id',auth()->user()->id)->where('status','active')->first();
         if($subscription){
             return true;
         }else{

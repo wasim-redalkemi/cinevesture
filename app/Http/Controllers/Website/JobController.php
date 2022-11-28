@@ -45,12 +45,35 @@ class JobController extends WebController
         if(!isset($_REQUEST['job_id']))
         {
             return view('website.job.post_a_job',compact(['countries','skills','employments','workspaces']));
-
         }
-        $userJob = UserJob::query()->find($_REQUEST['job_id'])->first();
-        
+        $userJobData = $this->getJobData($_REQUEST['job_id']);
+        $userJobData = $userJobData->toArray();
+    
+        $temp_employements = [];
+        if (!empty($userJobData['job_employements'])) {
+            foreach ($userJobData['job_employements'] as $k => $v){
+                array_push($temp_employements, $v['id']);
+            }
+            $userJobData['job_employements'] = $temp_employements;
+        }
 
-        return view('website.job.post_a_job',compact(['countries','skills','employments','workspaces','userJob']));
+        $temp_workspaces = [];
+        if (!empty($userJobData['job_work_spaces'])) {
+            foreach ($userJobData['job_work_spaces'] as $k => $v){
+                array_push($temp_workspaces, $v['id']);
+            }
+            $userJobData['job_work_spaces'] = $temp_workspaces;
+        }
+
+        $temp_skills = [];
+        if (!empty($userJobData['job_skills'])) {
+            foreach ($userJobData['job_skills'] as $k => $v){
+                array_push($temp_skills, $v['id']);
+            }
+            $userJobData['job_skills'] = $temp_skills;
+        }           
+
+        return view('website.job.post_a_job',compact(['countries','skills','employments','workspaces','userJobData']));
     }
     
     public function validatejob()
@@ -224,15 +247,9 @@ class JobController extends WebController
     public function postedJob(Request $request)
     {
         try{
-            if (!empty($_REQUEST['id']) && $_REQUEST['status']) {
-                $userJob = $this->getUserJobData($_REQUEST['id'],$_REQUEST['status']);
-
-            } else {
-                $userJob = $this->getUserJobData(auth()->user()->id);
-            }
-    
-            return view('website.job.posted_job',compact(['userJob']));
-     
+            $status = isset($_REQUEST['status'])?$_REQUEST['status']:'published';
+            $userJob = $this->getUserJobData(auth()->user()->id,$status);
+            return view('website.job.posted_job',compact(['userJob','status']));    
 
         }catch(Exception $e){
             return ['status'=>0,'msg'=>$e->getMessage()];
@@ -335,8 +352,37 @@ class JobController extends WebController
                     $q->where('save_type', $status);
                 }
             })
-            ->paginate($this->records_limit);
+            ->paginate(5);
             return $userJob;
+        }catch(Exception $e){
+            return back()->withErrors($e->getmessage());
+        }
+    }
+
+    public function getJobData($job_id)
+    {
+        try{
+            $JobData='';
+            $JobData = UserJob::query()
+            ->with(['jobSkills','jobWorkSpaces','jobEmployements','jobLocation'])
+            ->where('id',$job_id)
+            ->first();
+            return $JobData;
+        }catch(Exception $e){
+            return back()->withErrors($e->getmessage());
+        }
+    }
+
+    public function postedJobView(Request $request)
+    {
+        try{
+            if (!empty($request->job_id)) {
+                $Job_data = $this->getJobData($request->job_id);
+
+            } else {
+                return back()->with('Something went wrong');
+            }    
+            return view('website.job.job_post_single',compact(['Job_data']));
         }catch(Exception $e){
             return back()->withErrors($e->getmessage());
         }

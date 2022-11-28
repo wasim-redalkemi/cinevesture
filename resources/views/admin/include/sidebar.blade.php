@@ -76,21 +76,21 @@
               </ul>
             </div>
           </li>
-          {{-- <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="collapse" href="#job" aria-expanded="false" aria-controls="job">
               <i class="mdi mdi-file-document-box-outline menu-icon"></i>
-              <span class="menu-title">Form elements</span>
+              <span class="menu-title">Job Management</span>
               <i class="menu-arrow"></i>
             </a>
-            <div class="collapse" id="form-elements">
+            <div class="collapse" id="job">
               <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="basic_form.php">Basic Form</a></li>                
-                <li class="nav-item"><a class="nav-link" href="advance_form.php">Advanced Form</a></li>
-                <li class="nav-item"><a class="nav-link" href="pages/forms/validation.html">Validation</a></li>
-                <li class="nav-item"><a class="nav-link" href="pages/forms/wizard.html">Wizard</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{route('job')}}">Job</a></li>                
+                {{-- <li class="nav-item"><a class="nav-link" href="advance_form.php">Advanced Form</a></li> --}}
+                {{-- <li class="nav-item"><a class="nav-link" href="pages/forms/validation.html">Validation</a></li>
+                <li class="nav-item"><a class="nav-link" href="pages/forms/wizard.html">Wizard</a></li> --}}
               </ul>
             </div>
-          </li> --}}
+          </li>
           {{-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#editors" aria-expanded="false" aria-controls="editors">
               <i class="mdi mdi-pencil-box-outline menu-icon"></i>

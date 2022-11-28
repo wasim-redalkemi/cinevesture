@@ -29,8 +29,9 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Notification;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Str;
 class UserController extends WebController
 {
     /**
@@ -242,6 +243,27 @@ class UserController extends WebController
 
             if ($request->croppedImg) {
 
+
+                $image_64 = $request->croppedImg; //your base64 encoded data
+
+                $extension = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];   // .jpg .png .pdf
+              
+                $replace = substr($image_64, 0, strpos($image_64, ',')+1); 
+              
+              // find substring fro replace here eg: data:image/png;base64,
+              
+               $image = str_replace($replace, '', $image_64); 
+              
+               $image = str_replace(' ', '+', $image); 
+              
+               $fileName = Str::random(10).'.'.$extension;
+                $locationPath  = "user/";
+                
+                $nameStr = date('_YmdHis');
+                $newName = $nameStr .  $fileName ;
+                 $path = $this->uploadFile($locationPath,base64_decode($image), $newName);
+             
+
                 // $file = $request->file('croppedImg');
                 // $originalFile = $file->getClientOriginalName();
                 // $fileExt = pathinfo($originalFile, PATHINFO_EXTENSION);
@@ -255,16 +277,8 @@ class UserController extends WebController
 
 
 
-                $image = $request->croppedImg;
-                list($type, $image) = explode(';', $image);
-                list(, $image)      = explode(',', $image);
-                $path = 'user/';
-                $image = base64_decode($image);
-                $image_name= $path.date('sihdmY').'.png';
-                $uploadFile = storage_path('app/'.$image_name);
-                
-                file_put_contents($uploadFile, $image);
-                $user->profile_image = $image_name;
+              
+                $user->profile_image = $locationPath.$newName;
             }
             if ($user->save()) {
                 if (isset($request->skills)) {

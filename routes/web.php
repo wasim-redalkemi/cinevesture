@@ -14,6 +14,7 @@ use App\Http\Controllers\Website\ProjectController;
 use App\Http\Controllers\Website\SettingController;
 use App\Http\Controllers\Website\AjaxController;
 use App\Http\Controllers\Website\JobController;
+use App\Http\Controllers\Website\PlanController;
 use App\Http\Controllers\Website\SubscriptionController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -67,10 +68,15 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/delete-media/{media_id}',[AjaxController::class, 'deleteMedia'])->name('delete-media');
         Route::post('/upload-image',[AjaxController::class, 'uploadImage'])->name('upload-image');
         Route::post('/upload-doc',[AjaxController::class, 'uploadDoc'])->name('ajax/upload-doc');
+        Route::post('/add-proj-association/{project_id}',[AjaxController::class, 'addProjAssociationEntry'])->name('add-proj-association');
+        Route::delete('/delete-proj-association/{associate_id}',[AjaxController::class, 'removeProjAssociationEntry'])->name('delete-proj-association');
+        Route::post('/add-proj-milestone/{project_id}',[AjaxController::class,'addProjMilestoneEntry'])->name('add-proj-milestone');
+        Route::post('/update-proj-milestone/{milestone_id}',[AjaxController::class,'updateProjMilestoneEntry'])->name('update-proj-milestone');
+        Route::delete('/delete-proj-milestone/{milestone_id}',[AjaxController::class,'removeProjMilestoneEntry'])->name('delete-proj-milestone');
     });
 
     Route::group(['prefix'=>'user'],function()
-	{	Route::get('/subscription',[SubscriptionController::class,'subscriptionView'])->name('subscription-view');
+	{	Route::get('/plans',[PlanController::class,'showPlans'])->name('plans-view');
         Route::get('/subscription/store',[SubscriptionController::class,'storeSubscription'])->name('subscription-create');
 
 		Route::get('/profile-private-show', [UserController::class, 'profilePrivateShow'])->name('profile-private-show');
@@ -189,6 +195,9 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::get('/posted-job',[JobController::class, 'postedJob'])->name('posted-job');
         Route::get('/saved-job',[JobController::class, 'savedJob'])->name('saved-job');
         Route::get('/applied-job',[JobController::class, 'appliedJob'])->name('applied-job');
+
+        Route::get('/posted-job-single-view',[JobController::class, 'postedJobView'])->name('posted-job-single-view');
+
 
 
 	});

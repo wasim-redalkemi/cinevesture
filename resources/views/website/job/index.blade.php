@@ -42,13 +42,13 @@
                         <div class="container">
                         <div class="row">
                             <div class="col-md-2">
-                                <div class="profile_input mt-0">
+                                <div class="profile_input mt-3 mt-md-0">
                                     <input type="text" name="search" id="search-profile" placeholder="Title">
                                 </div>
                             </div>
 
                             <div class="col-md-3">
-                                <div class=" mt-0">
+                                <div class=" mt-3 mt-md-0">
                                     <select class="js-select2"  id ="skills" name ="skills[]" multiple="multiple">
                                     @foreach($skills as $skill)
                                               
@@ -64,7 +64,7 @@
                             </div>
 
                             <div class="col-md-3">
-                                <div class="mt-0">
+                                <div class="mt-3 mt-md-0">
                                     <select class="country_select2 @error('countries') is-invalid @enderror" id="countries"name = "countries[]" multiple="multiple">
 
                                     @foreach($countries as $country)

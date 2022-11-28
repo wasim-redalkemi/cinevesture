@@ -24,7 +24,7 @@
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>Title Of The Job</label>
-                                        <input type="text" class="form-control @error('job_title') is-invalid @enderror" required name="job_title" value="{{request('job_title')}}" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control @error('job_title') is-invalid @enderror" required name="job_title" value="@if (!empty($userJobData['title'])) {{$userJobData['title']}} @endif" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
 
                                         @error('job_title')
                                         <span class="invalid-feedback" role="alert">
@@ -64,13 +64,7 @@
                                         <label>Workspace Type</label>
                                         <select class="emp-select2 @error('workspaces') is-invalid @enderror" required id="workspaces" name="workspaces[]" multiple="multiple">
                                             @foreach($workspaces as $work)
-
-                                            @if(isset(request('workspaces')[0]) && in_array($emp->id, request('workspaces')))
-                                            <option value="{{$work->id}}" data-badge="" selected>{{$work->name}}</option>
-                                            @else
-                                            <option value="{{$work->id}}" data-badge="">{{$work->name}}</option>
-                                            @endif
-
+                                                <option value="{{$work->id}}" @if(count($userJobData['job_work_spaces'])>0 && in_array($work->id, $userJobData['job_work_spaces']))selected @endif>{{$work->name}}</option>
                                             @endforeach
                                         </select>
 
@@ -86,7 +80,7 @@
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>Company Name</label>
-                                        <input type="text" class="form-control @error('company_name') is-invalid @enderror" required name="company_name" value="{{request('company_name')}}" placeholder="Company Name" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control @error('company_name') is-invalid @enderror" required name="company_name" value="@if (!empty($userJobData['company_name'])) {{$userJobData['company_name']}} @endif" placeholder="Company Name" aria-describedby="basic-addon1">
 
                                         @error('company_name')
                                         <span class="invalid-feedback" role="alert">
@@ -102,7 +96,11 @@
                                         <select name="countries" class="@error('countries') is-invalid @enderror" required id="lang">
                                             <option value="">Location</option>
                                             @foreach($countries as $country)
-                                            <option value="{{$country->id}}">{{$country->name}}</option>
+                                            <option @if(!empty($userJobData['job_location']))
+                                                @if ($userJobData['job_location']['id']==$country->id) {
+                                                {{'selected'}}
+                                                @endif    
+                                                @endif  value="{{$country->id}}">{{$country->name}}</option>
                                             @endforeach
                                         </select>
                                         @error('countries')
@@ -117,7 +115,7 @@
                         <div class="guide_profile_subsection">
                             <div class="guide_profile_main_text mt-3">Job Description</div>
                             <div class="profile_input">
-                                <textarea class="form-control controlTextLength" text-length="200" name="description" required aria-label="With textarea" placeholder="Your answer here"></textarea>
+                                <textarea class="form-control controlTextLength" text-length="200" name="description" required aria-label="With textarea" placeholder="Your answer here">@if (!empty($userJobData['description'])) {{$userJobData['description']}} @endif</textarea>
                             </div>
                         </div>
                         <div class="guide_profile_subsection">
@@ -128,11 +126,7 @@
                                         <label>Skills (You can add upto 10 skills)</label>
                                         <select name="skills[]" class="outline is-invalid-remove js-select2" required id="lang" multiple>
                                             @foreach ($skills as $k=>$v)
-                                            @if(isset(request('skills')[0]) && in_array($v->id,request('skills')))
-                                            <option value="{{ $v->id }}" selected>{{ $v->name }}</option>
-                                            @else
-                                            <option value="{{ $v->id }}">{{ $v->name }}</option>
-                                            @endif
+                                            <option value="{{ $v->id }}" @if(count($userJobData['job_skills'])>0 && in_array($v->id, $userJobData['job_skills']))selected @endif>{{ $v->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('skills')
@@ -141,11 +135,6 @@
                                         </span>
                                         @enderror
                                     </div>
-                                    <!-- <div class="search-head-subtext mt-3">Suggested Skills</div>
-                        <div class="d-flex my-2">
-                            <button class="curv_cmn_btn">Lorem ipsim +</button>
-                            <button class="curv_cmn_btn mx-3">Lorem ipsim +</button>
-                        </div> -->
                                 </div>
                                 <div class="d-flex justify-content-center mt-5 mb-4">
                                     <input type="hidden" name="job_id" value="<?php if(isset($_REQUEST['job_id'])) {echo $_REQUEST['job_id'];}?>">
