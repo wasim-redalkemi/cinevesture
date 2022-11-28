@@ -67,7 +67,7 @@
                         @if (!empty($v['company_name'])) {{$v['company_name']}} @endif 
                         - 
                         
-                        @if (count($v['job_location'])>0)
+                        @if (!empty($v['job_location'])>0)
                             {{$v['job_location']['name']}}
                         @else
                             <span><b>-</b></span>                    

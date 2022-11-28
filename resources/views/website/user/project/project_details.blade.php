@@ -101,7 +101,7 @@
                         </div>
                         <div class="associate_text mt-4">Associated with the project (Optional)</div>
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-12 col-md-3">
                                 <div class="profile_input">
                                     <label>Title</label>
                                     <input type="text" class="form-control" name="project_associate_title~1" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
@@ -112,7 +112,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-10">
                                 <div class="profile_input">
                                     <label>Name</label>
                                     <input type="text" class="form-control" name="project_associate_name~1" placeholder="Locations (Optional)" aria-label="Username" aria-describedby="basic-addon1">
@@ -123,12 +123,14 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-3  d-flex align-items-end pb-2 mt-2 mt-md-0">
-                                <i class="fa fa-times-circle deep-pink icon-size" aria-hidden="true"></i>
+                            <div class="col-md-3 col-2 d-flex align-items-end pb-2 mt-2 mt-md-0">
+                                <div class="">
+                                    <i class="fa fa-times-circle deep-pink icon-size" aria-hidden="true"></i>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-12">
                                 <div class="profile_input">
                                     <label>Title</label>
                                     <input type="text" class="form-control" name="project_associate_title~2" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
@@ -139,7 +141,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-10">
                                 <div class="profile_input">
                                     <label>Name</label>
                                     <input type="text" class="form-control" name="project_associate_name~2" placeholder="Locations (Optional)" aria-label="Username" aria-describedby="basic-addon1">
@@ -150,12 +152,12 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-3  d-flex align-items-end pb-2 mt-2 mt-md-0">
+                            <div class="col-md-3 col-2 d-flex align-items-end pb-2 mt-2 mt-md-0">
                                 <i class="fa fa-times-circle deep-pink icon-size" aria-hidden="true"></i>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-12">
                                 <div class="profile_input">
                                     <label>Title</label>
                                     <input type="text" class="form-control" name="project_associate_title~3" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
@@ -166,7 +168,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3 col-10">
                                 <div class="profile_input">
                                     <label>Name</label>
                                     <input type="text" class="form-control" name="project_associate_name~3" placeholder="Locations (Optional)" aria-label="Username" aria-describedby="basic-addon1">
@@ -177,12 +179,12 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-3  d-flex align-items-end pb-2 mt-2 mt-md-0">
+                            <div class="col-md-3 col-2 d-flex align-items-end pb-2 mt-2 mt-md-0">
                                 <i class="fa fa-times-circle deep-pink icon-size" aria-hidden="true"></i>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3 d-flex align-items-end mt-2 mt-md-0">
+                            <div class="col-md-3 d-flex align-items-end mt-3">
                                 <div>
                                     <button class="save_add_btn">Add another</button>
                                 </div>
@@ -190,7 +192,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="d-flex justify-content-end mt-5 pt-5 pb-md-0">
+                                <div class="d-flex justify-content-end mt-5 pt-0 pt-md-5  pb-md-0">
                                     <input type="hidden" name="project_id" value="<?php if(isset($_REQUEST['id'])) {echo $_REQUEST['id'];}?>">
                                     <button class="cancel_btn mx-3"><a class="btn-link-style" href="{{ route('project-overview') }}?id={{$_REQUEST['id']}}">Go back</a></button>
                                     <button type="submit" class="guide_profile_btn">Save & Next</button>
