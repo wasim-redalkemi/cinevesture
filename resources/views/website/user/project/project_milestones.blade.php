@@ -165,7 +165,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="d-flex justify-content-end mt-5 pt-5 pb-md-0">
+                                <div class="d-flex justify-content-end mt-5 pt-0 pt-md-5 pb-md-0">
                                     <input type="hidden" name="project_id" value="<?php if(isset($_REQUEST['id'])) {echo $_REQUEST['id'];}?>">
                                     <button class="cancel_btn mx-3"><a class="btn-link-style" href="{{ route('project-gallery') }}?id={{$_REQUEST['id']}}">Go back</a></button>
                                     <button type="submit" class="guide_profile_btn">Save & Next</button>

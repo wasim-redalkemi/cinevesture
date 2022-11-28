@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlanDetailsTable extends Migration
+class CreateMasterPlanModulesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,20 @@ class CreatePlanDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::create('plan_details', function (Blueprint $table) {
+        Schema::create('master_plan_modules', function (Blueprint $table) {
             $table->id();
-            $table->string('plan_id',20);
-            $table->string('plan_details',255);
-
+            $table->string('name');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
-    /**							
+    /**
      * Reverse the migrations.
      *
      * @return void
      */
     public function down()
     {
-        Schema::dropIfExists('plan_details');
+        Schema::dropIfExists('master_plan_modules');
     }
 }

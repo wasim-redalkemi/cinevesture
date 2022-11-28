@@ -25,4 +25,13 @@ class UserJob extends Model
     {
         return $this->hasOne(MasterCountry::class,'id','location_id');
     }
+    public function jobOrganisation()
+    {
+        return $this->hasManyThrough(UserOrganisation::class,User::class,'id','user_id','user_id');
+    }
+    public function user()
+    {
+        return $this->hasMany(User::class,'id','user_id');
+    }
+
 }

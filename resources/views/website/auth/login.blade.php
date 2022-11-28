@@ -18,7 +18,7 @@
             <form method="POST" enctype="multipart/form-data" action="{{ route('login') }}">
                 @csrf
 
-                <div class="col-12 mt-2 mt-lg-5 pt-5 pt-lg-5">
+                <div class="col-12 mt-4-5 pt-0 pt-lg-5">
                     <input type="text" class="is-invalid-remove email-only outline w-100 @error('email') is-invalid @enderror" name="email" placeholder="Email" required autocomplete="email" autofocus>
 
                     @error('email')
@@ -28,7 +28,7 @@
                     @enderror
 
                 </div>
-                <div class="col-12 mt-2 mt-4-5">
+                <div class="col-12 mt-4-5">
                     <input type="password" class="outline w-100 @error('password') is-invalid @enderror" name="password" placeholder="Password" required autocomplete="current-password">
                         @error('password')
                             <span class="invalid-feedback" role="alert">
@@ -37,7 +37,7 @@
                         @enderror
                 </div>
 
-                <div class="col-12 mt-2 mt-4-5">
+                <div class="col-12 mt-4-5">
                     <button type="submit" class="outline w-100 ">
                         {{ __('Log In') }}
                     </button>

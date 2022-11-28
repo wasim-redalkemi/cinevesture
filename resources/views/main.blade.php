@@ -239,7 +239,7 @@
       nav: true,
       margin: 20,
       center: true,
-      items: 4,
+      items: 1.5,
       responsive: {
         480: { items: 1 },
         768: { items: 2 },

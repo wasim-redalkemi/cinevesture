@@ -14,6 +14,7 @@ use App\Http\Controllers\Website\ProjectController;
 use App\Http\Controllers\Website\SettingController;
 use App\Http\Controllers\Website\AjaxController;
 use App\Http\Controllers\Website\JobController;
+use App\Http\Controllers\Website\PlanController;
 use App\Http\Controllers\Website\SubscriptionController;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -75,7 +76,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     });
 
     Route::group(['prefix'=>'user'],function()
-	{	Route::get('/subscription',[SubscriptionController::class,'subscriptionView'])->name('subscription-view');
+	{	Route::get('/plans',[PlanController::class,'showPlans'])->name('plans-view');
         Route::get('/subscription/store',[SubscriptionController::class,'storeSubscription'])->name('subscription-create');
 
 		Route::get('/profile-private-show', [UserController::class, 'profilePrivateShow'])->name('profile-private-show');
@@ -192,6 +193,9 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::get('/posted-job',[JobController::class, 'postedJob'])->name('posted-job');
         Route::get('/saved-job',[JobController::class, 'savedJob'])->name('saved-job');
         Route::get('/applied-job',[JobController::class, 'appliedJob'])->name('applied-job');
+
+        Route::get('/posted-job-single-view',[JobController::class, 'postedJobView'])->name('posted-job-single-view');
+
 
 
 	});

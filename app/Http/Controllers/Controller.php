@@ -18,11 +18,16 @@ class Controller extends BaseController
 
         try {
             Storage::makeDirectory($targetDir); //this function creates a full path directory according to filesystem driver
-            if ($fileName == null) {
-                $path = $file->store($targetDir); //this will upload the file in given direcory with auto unique generate name
-            } else {
-                $path = $file->storeAs($targetDir, $fileName); //this is same with store, but accept a file name
+            if (is_string($file)) {
+               $path = Storage::put($targetDir.$fileName,$file,$fileName);
+            }else{
+                if ($fileName == null) {
+                    $path = $file->store($targetDir); //this will upload the file in given direcory with auto unique generate name
+                } else {
+                    $path = $file->storeAs($targetDir, $fileName); //this is same with store, but accept a file name
+                }
             }
+           
             return $path;
         } catch (\Throwable $th) {
             return false;
