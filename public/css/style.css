@@ -1070,13 +1070,14 @@ body {
     border: 1px solid;
 }
 
-.guide_profile_main_text {
+.guide_profile_main_text, .guide_profile_main_text a {
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
     line-height: 150%;
     letter-spacing: 0.0075em;
     color: #33084C;
+    text-decoration: none;
 }
 .style_ilatian {
     font-style: italic !important;
@@ -1615,6 +1616,14 @@ button, input, optgroup, select, textarea {
 }
 .post-job{
     width: 170px;
+}
+.active_job_page {
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    line-height: 150% !important;
+    letter-spacing: 0.022em !important;
+    color: #080707 !important;
+    border-bottom: 2px solid #1C0330;
 }
 .lh_54 {
     letter-spacing: 0.054em;
