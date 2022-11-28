@@ -36,8 +36,8 @@
                 <div class="col-md-12">
                     <div class="project-text text-center mt-4">Search Latest Jobs</div>
                     <div class="duration-lang-text white text-center mt-3">It is our job to make your search for people in the film and media fraternity, a piece of cake! Here's your slice. </div>
-                    <form class="" method="Get" action="{{ route('guide-view') }}">
-                        @csrf
+                    <form method="post" action="{{ route('showJobSearchResults') }}"> 
+                        @csrf                       
                     <div class="input_wraper mt-3">
                         <div class="container">
                         <div class="row">
@@ -92,10 +92,10 @@
                            
                             <div class="col-md-3">
                                 <div class=" mt-0">
-                                    <select class="emp-select2"  id ="emplyements"name ="emplyements[]" multiple="multiple">
-                                    @foreach($emplyements as $emp)
+                                    <select class="emp-select2"  id ="employments"name ="employments[]" multiple="multiple">
+                                    @foreach($employments as $emp)
                                               
-                                              @if(isset(request('emplyements')[0]) && in_array($emp->id, request('emplyements')))
+                                              @if(isset(request('employments')[0]) && in_array($emp->id, request('employments')))
                                               <option value="{{$emp->id}}" data-badge="" selected>{{$emp->name}}</option>
                                               @else
                                               <option value="{{$emp->id}}" data-badge="">{{$emp->name}}</option>
@@ -153,7 +153,7 @@
     });
    $(".emp-select2").select2({
         closeOnSelect: false,
-        placeholder: "Employement",
+        placeholder: "Employement Type",
         allowClear: true,
         tags: false
     });

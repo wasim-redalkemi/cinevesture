@@ -178,6 +178,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     Route::group(['prefix'=>'job'],function()
 	{	
         Route::get('/search',[JobController::class, 'index'])->name('job-search-page');
+        Route::any('/search/results',[JobController::class, 'showJobSearchResults'])->name('showJobSearchResults');
+        Route::post('/search/add_to_fav',[JobController::class, 'storeJobToFavList'])->name('addJobToFavList');
         Route::get('/create',[JobController::class, 'create'])->name('job-create-page');
         Route::post('/action',[JobController::class, 'store'])->name('job-store');
         Route::post('/job-store-edit',[JobController::class, 'jobStoreEdit'])->name('job-store-edit');

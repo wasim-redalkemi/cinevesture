@@ -38,10 +38,10 @@
                                     <div class="profile_input">
                                         <label>Employment Type</label>
                                         <div class="dropdown profile_dropdown_btn">
-                                            <select class="work-select2 @error('countries') is-invalid @enderror" required id="emplyements" name="emplyements[]" multiple="multiple">
-                                                @foreach($emplyements as $emp)
+                                            <select class="work-select2 @error('countries') is-invalid @enderror" required id="employments" name="employments[]" multiple="multiple">
+                                                @foreach($employments as $emp)
 
-                                                @if(isset(request('emplyements')[0]) && in_array($emp->id, request('emplyements')))
+                                                @if(isset(request('employments')[0]) && in_array($emp->id, request('employments')))
                                                 <option value="{{$emp->id}}" data-badge="" selected>{{$emp->name}}</option>
                                                 @else
                                                 <option value="{{$emp->id}}" data-badge="">{{$emp->name}}</option>
@@ -50,7 +50,7 @@
                                                 @endforeach
                                             </select>
 
-                                            @error('emplyements')
+                                            @error('employments')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

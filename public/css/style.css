@@ -631,6 +631,31 @@ body {
     cursor: pointer;
 }
 
+.search-box-container .search-container {
+    height: 40px;
+    display: flex;
+    padding: 2px;
+    justify-content: space-between;
+    border: 2px solid #4D0D8A;
+    border-radius: 4px;
+    margin: 0;
+}
+
+.search-box-container .search-container input {
+    border: none;
+    color: #4D0D8A;
+    text-decoration: none;
+    outline: none;
+}
+
+.search-box-container .search-container .search-btn {
+    width: 40px;
+    border: none;
+    background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat center;
+    cursor: pointer;
+}
+
+
 .search-page .dropdown-toggle {
     padding: 10px 10px 10px 0 !important;
     font-weight: 400;
@@ -1826,7 +1851,7 @@ button, input, optgroup, select, textarea {
   }
   .select2-container--default .select2-search--inline .select2-search__field  {
     padding-left: 10px !important;
-    width: 100px !important;
+    width: 100% !important;
   }
   .select2-results__option {
     color: #4D0D8A !important;
