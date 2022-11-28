@@ -32,7 +32,7 @@ class ProjectController extends AdminController
             ->with(['user','projectCategory','genres'])
             ->where(function ($q) use ($request) {
                     if (isset($request->category)) { // search name of user
-                    $q->whereHas('projectCategory', function ($q) use($request){
+                        $q->whereHas('projectCategory', function ($q) use($request){
                         $q->where('category_id',$request->category);
                     });
                     }

@@ -129,7 +129,6 @@
             $('[data-toggle="tooltip"]').tooltip();
 
         });
-
         // gallary page script
         var Videos = function () {
             var project_id = null;
@@ -453,7 +452,7 @@
                     }
                 });
 
-                $(parentElemId+" input[name=image_title]").on("blur",(e)=>{
+                $(parentElemId+" input[name=image_title]").off("blur").on("blur",(e)=>{
                     var formData = new FormData();
                     formData.append("file", uploadedFile, uploadedFile.name);
                     formData.append("title", e.target.value);
@@ -918,19 +917,20 @@
         function setModal(head_text, sub_text, confirm_btn_text, cancel_btn_text) {
             if(head_text != ""){
                 head_text = "Are you sure?";
-                $("#staticBackdrop .modal_container .head_text").html(head_text);
             }
+            $("#staticBackdrop .modal_container .head_text").html(head_text);
             if(sub_text != ""){
                 sub_text = "Do you really want to delete the item?<br>This process cannot be undone.";
-                $("#staticBackdrop .modal_container .sub_text").html(sub_text);
+                
             }
+            $("#staticBackdrop .modal_container .sub_text").html(sub_text);
             if(confirm_btn_text != ""){
                 confirm_btn_text = "Yes, Delete"
-                $("#staticBackdrop .modal_container .confirm_btn_text").html(confirm_btn_text);
             }
+            $("#staticBackdrop .modal_container .confirm_btn_text").html(confirm_btn_text);
             if(cancel_btn_text != ""){
                 cancel_btn_text = "Cancel";
-                $("#staticBackdrop .modal_container .cancel_btn_text").html(cancel_btn_text);
             }
+            $("#staticBackdrop .modal_container .cancel_btn_text").html(cancel_btn_text);
         }
 </script>

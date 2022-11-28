@@ -493,25 +493,25 @@ class ProjectController extends WebController
                         $projectLookingFor->save();
                     }                   
                     
-                    ProjectMilestone::query()->where('project_id', $requirements->id)->delete();
-                    foreach($_REQUEST as $k => $v)
-                    {
-                        $fdata = explode('~',$k);
-                        if($fdata[0] == 'project_milestone_description')
-                        {
-                            $projectMilestone = new ProjectMilestone();
-                            $projectMilestone->project_id = $requirements->id;
-                            $projectMilestone->description = $_REQUEST['project_milestone_description~'.$fdata[1]];
-                            $projectMilestone->budget = $_REQUEST['project_milestone_budget~'.$fdata[1]];
-                            $projectMilestone->traget_date = $_REQUEST['project_milestone_traget_date~'.$fdata[1]];
-                            if (isset($_REQUEST['project_milestone_complete~'.$fdata[1]])) {
-                                $projectMilestone->complete = $_REQUEST['project_milestone_complete~'.$fdata[1]];
-                            } else {
-                                $projectMilestone->complete = 0;
-                            }
-                            $projectMilestone->save();
-                        }
-                    }
+                    // ProjectMilestone::query()->where('project_id', $requirements->id)->delete();
+                    // foreach($_REQUEST as $k => $v)
+                    // {
+                    //     $fdata = explode('~',$k);
+                    //     if($fdata[0] == 'project_milestone_description')
+                    //     {
+                    //         $projectMilestone = new ProjectMilestone();
+                    //         $projectMilestone->project_id = $requirements->id;
+                    //         $projectMilestone->description = $_REQUEST['project_milestone_description~'.$fdata[1]];
+                    //         $projectMilestone->budget = $_REQUEST['project_milestone_budget~'.$fdata[1]];
+                    //         $projectMilestone->traget_date = $_REQUEST['project_milestone_traget_date~'.$fdata[1]];
+                    //         if (isset($_REQUEST['project_milestone_complete~'.$fdata[1]])) {
+                    //             $projectMilestone->complete = $_REQUEST['project_milestone_complete~'.$fdata[1]];
+                    //         } else {
+                    //             $projectMilestone->complete = 0;
+                    //         }
+                    //         $projectMilestone->save();
+                    //     }
+                    // }
                     $this->return_response['success_msg'] = 'Project milestones updated successfully.';
                 } else {
                     throw new Exception('Please overview phase fill');

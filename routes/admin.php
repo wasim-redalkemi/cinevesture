@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\JobController;
 use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\ProjectListController;
@@ -51,6 +52,14 @@ Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
         Route::get('/list', [QueryController::class, 'index'])->name('query.list');
         Route::get('delete/{id}', [QueryController::class, 'destroy'])->name('query-delete');
         Route::get('view/{id}', [QueryController::class, 'show'])->name('query-show');
+       
+        
+    }); 
+    Route::group(['prefix'=>'job-managemant'],function()
+    {
+        Route::get('/index', [JobController::class, 'index'])->name('job');
+        Route::get('delete/{id}', [JobController::class, 'destroy'])->name('job-delete');
+        Route::get('status_update', [JobController::class, 'status_update'])->name('status_update');
        
         
     }); 

@@ -4,7 +4,7 @@
 <div class="content-wrapper">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Querys Management</h4>
+            <h4 class="card-title">Query Management</h4>
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive">
