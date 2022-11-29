@@ -18,8 +18,8 @@
             <form method="POST" enctype="multipart/form-data" action="{{ route('login') }}">
                 @csrf
 
-                <div class="col-12 mt-4-5 pt-0 pt-lg-5">
-                    <input type="text" class="is-invalid-remove email-only outline w-100 @error('email') is-invalid @enderror" name="email" placeholder="Email" required autocomplete="email" autofocus>
+                <div class="col-12 mt-2 mt-lg-5 pt-5 pt-lg-5">
+                    <input type="text" class="is-invalid-remove email-only outline w-100 @error('email') is-invalid @enderror" value="{{old('email')}}" name="email" placeholder="Email" required autocomplete="email" autofocus>
 
                     @error('email')
                     <span class="invalid-feedback" role="alert">
