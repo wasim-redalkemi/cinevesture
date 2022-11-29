@@ -19,26 +19,25 @@
             </div>
             <div class="col-md-9">
             @php                
-            $jobs = $userJob->toArray();                  
+            $jobs = $userJob->toArray();
             @endphp
-            @if (count($jobs)>0)
-            {{-- @foreach ($jobs['data'] as $k=>$v) --}}
-                <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
+                <div class="profile_wraper mt-md-0 mt-4 px-4 pt-4" style="">
                     <div class="profile_text">
                         <h1>Posted Jobs</h1>
                     </div>
                     <div class="d-flex">
-                        <div class="posted_job_header"><a href="{{ route('posted-job',['id'=>auth()->user()->id,'status'=>'published']) }}" class="posted_job_header_link px-3"> Published Jobs</a></div>
-                        <div class="posted_job_header"><a href="{{ route('posted-job',['id'=>auth()->user()->id,'status'=>'draft']) }}" class="posted_job_header_link px-3">Draft Job</a></div>
-                        <div class="posted_job_header"><a href="{{ route('posted-job',['id'=>auth()->user()->id,'status'=>'unpublished']) }}" class="posted_job_header_link px-3">Unpublished Jobs</a></div>
+                        <div class="posted_job_header"><a href="{{ route('posted-job',['id'=>auth()->user()->id]) }}" class="posted_job_header_link px-3 <?php if($status =='published' ){echo 'active_job_page';}?>"> Published Jobs</a></div>
+                        <div class="posted_job_header"><a href="{{ route('posted-job',['id'=>auth()->user()->id,'status'=>'draft']) }}" class="posted_job_header_link px-3 <?php if($status =='draft' ){echo 'active_job_page';}?>">Draft Job</a></div>
+                        <div class="posted_job_header"><a href="{{ route('posted-job',['id'=>auth()->user()->id,'status'=>'unpublished']) }}" class="posted_job_header_link px-3" <?php if($status =='unpublished' ){echo 'active_job_page';}?>>Unpublished Jobs</a></div>
                     </div>
                 </div>
+                @if (count($jobs['data'])>0)
                 @foreach ($jobs['data'] as $k=>$v)
 
                 <div class="profile_wraper profile_wraper_padding">
                     <div class="d-flex justify-content-between">
                         <div class="guide_profile_main_text">
-                            @if (!empty($v['title'])) {{$v['title']}} @endif
+                            <a href="{{ route('posted-job-single-view',['job_id'=>$v['id']]) }}">@if (!empty($v['title'])) {{$v['title']}} @endif</a>
                         </div>
                         <div class="dropdown  search-page">
                             <div class="" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -60,9 +59,6 @@
                             </ul>
                         </div>
                     </div>
-                    {{-- <div class="posted_job_header">
-                        @if (!empty($v['description'])) {{$v['description']}} @endif
-                    </div> --}}
                     <div class="preview_headtext lh_54 candy-pink">
                         @if (!empty($v['company_name'])) {{$v['company_name']}} @endif 
                         - 
@@ -105,7 +101,7 @@
 
             @else
                 <div class="not-found-text">
-                    <p>No Profile Found</p>
+                    <p>No Data Found</p>
                 </div>
             @endif
             <div>
@@ -120,52 +116,4 @@
 
 @section('footer')
 @include('website.include.footer')
-@endsection
-
-@section('scripts')
-
-<script type="text/javascript">
-    $(".portfolio.owl-carousel").owlCarousel({
-        center: true,
-        autoPlay: 3000,
-        autoplay: true,
-        loop: true,
-        nav: true,
-        center: true,
-        margin: 10,
-        items: 5,
-        responsive: {
-            480: {
-                items: 3
-            },
-            768: {
-                items: 4
-            },
-            1024: {
-                items: 5
-            }
-        },
-    });
-    $(".project.owl-carousel").owlCarousel({
-        center: true,
-        autoPlay: 3000,
-        autoplay: true,
-        loop: true,
-        nav: true,
-        center: true,
-        margin: 10,
-        items: 3,
-        responsive: {
-            480: {
-                items: 1
-            },
-            768: {
-                items: 2
-            },
-            1024: {
-                items: 3
-            }
-        },
-    });
-</script>
 @endsection

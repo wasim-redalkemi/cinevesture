@@ -1081,13 +1081,14 @@ body {
     border: 1px solid;
 }
 
-.guide_profile_main_text {
+.guide_profile_main_text, .guide_profile_main_text a {
     font-style: normal;
     font-weight: 600;
     font-size: 18px;
     line-height: 150%;
     letter-spacing: 0.0075em;
     color: #33084C;
+    text-decoration: none;
 }
 .style_ilatian {
     font-style: italic !important;
@@ -1334,7 +1335,7 @@ body {
     color: #4D0D8A !important;
     font-weight: 700;
 }
-.save_add_btn, .save_add_btn a  {
+.save_add_btn, .save_add_btn a, .add_another_btn  {
     padding: 6px 16px;
     background: #FAF8FB;
     border-radius: 4px;
@@ -1345,6 +1346,7 @@ body {
     font-size: 14px;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 .progress-bar {display:none;position:absolute;height:10px;width:100%;background:#971e9b33;bottom:24px;border-radius:4px;overflow: hidden;}
 .fill-progress {width:10px;height:100%;background-color: #971e9b;border-radius: 4px;}
@@ -1626,6 +1628,14 @@ button, input, optgroup, select, textarea {
 }
 .post-job{
     width: 170px;
+}
+.active_job_page {
+    font-weight: 600 !important;
+    font-size: 16px !important;
+    line-height: 150% !important;
+    letter-spacing: 0.022em !important;
+    color: #080707 !important;
+    border-bottom: 2px solid #1C0330;
 }
 .lh_54 {
     letter-spacing: 0.054em;

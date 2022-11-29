@@ -194,7 +194,7 @@ class RegisterController extends Controller
                     if($is_subscribed){
                         return redirect('home');
                     }else{
-                        return redirect()->route('subscription-view')->with('success','Email Varified successfully.');
+                        return redirect()->route('plans-view')->with('success','Email Varified successfully.');
                     }
 
                 }

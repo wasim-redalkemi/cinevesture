@@ -43,12 +43,35 @@ class JobController extends WebController
         if(!isset($_REQUEST['job_id']))
         {
             return view('website.job.post_a_job',compact(['countries','skills','emplyements','workspaces']));
-
         }
-        $userJob = UserJob::query()->find($_REQUEST['job_id'])->first();
-        
+        $userJobData = $this->getJobData($_REQUEST['job_id']);
+        $userJobData = $userJobData->toArray();
+    
+        $temp_employements = [];
+        if (!empty($userJobData['job_employements'])) {
+            foreach ($userJobData['job_employements'] as $k => $v){
+                array_push($temp_employements, $v['id']);
+            }
+            $userJobData['job_employements'] = $temp_employements;
+        }
 
-        return view('website.job.post_a_job',compact(['countries','skills','emplyements','workspaces','userJob']));
+        $temp_workspaces = [];
+        if (!empty($userJobData['job_work_spaces'])) {
+            foreach ($userJobData['job_work_spaces'] as $k => $v){
+                array_push($temp_workspaces, $v['id']);
+            }
+            $userJobData['job_work_spaces'] = $temp_workspaces;
+        }
+
+        $temp_skills = [];
+        if (!empty($userJobData['job_skills'])) {
+            foreach ($userJobData['job_skills'] as $k => $v){
+                array_push($temp_skills, $v['id']);
+            }
+            $userJobData['job_skills'] = $temp_skills;
+        }           
+
+        return view('website.job.post_a_job',compact(['countries','skills','emplyements','workspaces','userJobData']));
     }
     
     public function validatejob()
@@ -222,15 +245,9 @@ class JobController extends WebController
     public function postedJob(Request $request)
     {
         try{
-            if (!empty($_REQUEST['id']) && $_REQUEST['status']) {
-                $userJob = $this->getUserJobData($_REQUEST['id'],$_REQUEST['status']);
-
-            } else {
-                $userJob = $this->getUserJobData(auth()->user()->id);
-            }
-    
-            return view('website.job.posted_job',compact(['userJob']));
-     
+            $status = isset($_REQUEST['status'])?$_REQUEST['status']:'published';
+            $userJob = $this->getUserJobData(auth()->user()->id,$status);
+            return view('website.job.posted_job',compact(['userJob','status']));    
 
         }catch(Exception $e){
             return ['status'=>0,'msg'=>$e->getMessage()];

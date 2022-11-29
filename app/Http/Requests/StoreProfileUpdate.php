@@ -24,7 +24,7 @@ class StoreProfileUpdate extends FormRequest
     public function rules()
     {
         return [
-            'profile_image' => 'nullable',
+            'profile_image' => 'nullable|max:4096',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'job_title' => 'nullable|max:255',
@@ -45,7 +45,7 @@ class StoreProfileUpdate extends FormRequest
     public function messages()
     {
         return [
-         
+            'profile_image.max' => 'Image must be 4mb',
         ];
     }
 }

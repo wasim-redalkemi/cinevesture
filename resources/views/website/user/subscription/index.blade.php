@@ -46,34 +46,50 @@
         </div>
         <div class="container mt__158">
             <div class="row">
-                <div class="col-md-1">sidebar</div>
+                <div class="col-md-1"></div>
                 <div class="col-md-11">
                     <div class="row">
+                        {{$flag = 0}}
+                       @foreach($plans as $plan)
                         <div class="col-md-3">
                             <div class="plan_card">
                                 <div class="plain_detail">
-                                    <div class="plain_header text-center">Free</div>
+                                    <div class="plain_header text-center">{{$plan->plan_name}}</div>
                                     <div class="plan_subheader mt-2">Great for those who want to get themselves in front of the right people in the industry</div>
                                 </div>
                                 <div class="Plain_price">
                                     <div class="search-head-subtext Aubergine_at_night mt-3">Free forever</div>
-                                    <div class="search-head-text Aubergine_at_night">$0.00</div>
-                                    <div class="d-flex justify-content-center"><a  href="{{route('subscription-create')}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
+                                    <div class="search-head-text Aubergine_at_night">
+                                        @if($plan->currency == "USD")
+                                           $
+                                        @else
+                                           ₹
+                                        @endif
+                                        {{$plan->plan_amount}}</div>
+
+                                    <div class="d-flex justify-content-center"><a  href="{{route('subscription-create',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
                                 </div>
-                                <div class="plain_industry_guide">
+                                @foreach($modules as $module)
+                                <div class="plain_industry_guide my-2">
+                                    @if($flag == 0)
                                     <div class="industry_guide_text plain_industry_guide opacity-50">
-                                        <span class="movie_name_text">Industry Guide</span>
+                                        <span class="movie_name_text">{{$module->name}}</span>
                                     </div>
+                                    @endif
                                     <div class="plain_page_list p-3">
                                         <ul>
-                                            <li>Create Profile</li>
-                                            <li>Search for industry professionals</li>
-                                            <li>View profiles</li>
-                                            <li>Save profiles</li>
+                                            @foreach($plan->getRelationalData as $relation )
+
+                                            @if($relation->module_id == $module->id)
+                                            <li> {{$relation->getOperation->name}}</li>
+                                                @endif
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
-                                <div class="plain_project my-2">
+                                @endforeach
+
+                                <!-- <div class="plain_project my-2">
                                     <div class="project_text plain_project opacity-50">
                                         <span class="movie_name_text">Projects</span>
                                     </div>
@@ -92,15 +108,18 @@
                                             <li>Create Profile</li>
                                         </ul>
                                     </div>
-                                </div>
+                                </div> -->
+
                                 <div class="py-4 px-3">
-                                    <a  href="{{route('subscription-create')}}" style="text-decoration:none;">
+                                    <a  href="{{route('subscription-create',['id'=>$plan->id])}}" style="text-decoration:none;">
                                     <button class="job_search_btn">Select Free Plan</button>
                                     </a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        {{$flag = 1}}
+                        @endforeach
+                        <!-- <div class="col-md-3">
                             <div class="plan_card">
                                 <div class="plain_detail">
                                     <div class="plain_header text-center">Basic</div>
@@ -229,7 +248,7 @@
                                     </a>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
