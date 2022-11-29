@@ -1924,7 +1924,7 @@ button, input, optgroup, select, textarea {
     min-height: 143px;
     background: rgba(246, 239, 251, 0.8);
     border-radius: 4px;
-    width: 100%;
+    /* width: 100%; */
     display: flex;
     align-items: center;
     /* margin: 0 5%; */
@@ -2355,8 +2355,14 @@ select {
     .navbar_profile_text {
         color: #FFFFFF;
         margin-right: 16px;
-        margin-left: 6px;
+        /* margin-left: 16px; */
+        /* line-height: 168%; */
     }
+    .navbar_profile_position {
+        line-height: 168%;
+        margin-left: 16px;
+    }
+
     .profile_side_bar {
        min-height: auto;
        padding: 0.5rem;
@@ -2393,6 +2399,29 @@ select {
    .profile_side_bar {
     padding: 2px;
    }
+
+   .owl-stage {
+    left: -50px;
+    }
+
+    .section .sub-section {
+        height: 400px;
+    }
+    .home-upper-slider .img-container {
+        height: 390px;
+    }
+    .carosel-card-cntainer {
+        margin-left: 50px;
+    }
+    .project-sub-text {
+        width: 300px;
+    }
+  .w_maxcont {
+    width: max-content;
+  }
+
+
+
     }
 
     @media (min-width: 768px) {

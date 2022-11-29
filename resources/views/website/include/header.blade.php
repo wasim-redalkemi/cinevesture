@@ -23,7 +23,7 @@
             <a class="navbar-logo " href="{{route('home')}}">
               <img src="{{ asset('images/asset/Logo-white-trans.png') }}" width="220" height="75" alt="image">
             </a>
-            <div class="collapse navbar-collapse navbar_sm text-end text-md-center justify-content-between" id="navbarTogglerDemo01">
+            <div class="collapse navbar-collapse navbar_sm text-initial text-md-center justify-content-between" id="navbarTogglerDemo01">
               <div></div>
             <div class="justify-content-center">
               <ul class="navbar-nav mt-2 mt-lg-0">
@@ -34,13 +34,13 @@
                 @endforeach
               </ul>
             </div>
-            <div class="justify-content-end text-end d-none d-md-block">
+            <div class="justify-content-end text-md-end text-initial">
               <?php
                 if(!empty(auth()->user()) && auth()->user()->user_type !== 'A')
                 {
 
                 ?>
-                  <div>
+                  <div class="navbar_profile_position mt-2 mt-md-0">
                     <i class="fa fa-user-circle"
                   style="font-size:25px; color: #DD45B3;background-color: white; border-radius: 50%;border:none"
                   aria-hidden="true"></i>
