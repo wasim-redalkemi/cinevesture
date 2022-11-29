@@ -9,16 +9,24 @@
 @section('content')
 
 <section>
-    <div class="container">
+    <div class="container">      
         <div class="row mt-4">
+        <!-- <div class="col-md-12"> -->
+                @if (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Success!</strong> {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+            <!-- </div> -->
             <div class="col-md-3 side-bar-cmn-part">
                 <form method="post" action="{{ route('showJobSearchResults') }}">
-                    @csrf 
-                    <div class ="search-box-container">
+                    @csrf
+                    <div class="search-box-container">
                         <div class="search-container">
-                        <input type="search" class="w-100 search-box" value="{{request('search')}}" placeholder="Search...">
-                        <button class="search-btn"></button>
-                        </div>                        
+                            <input type="search" class="w-100 search-box" value="{{request('search')}}" placeholder="Search...">
+                            <button class="search-btn"></button>
+                        </div>
                     </div>
                     <div class="dropdown search-page">
                         <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="modal" data-bs-target="#categories-list">
@@ -67,16 +75,18 @@
                 <div class="profile_wraper profile_wraper_padding">
                     <div class="d-flex justify-content-between">
                         <div class="guide_profile_main_text">
-                           {{$job->title}}
+                            {{$job->title}}
                         </div>
-                        <div class="pointer"><i class="fa fa-heart-o aubergine icon-size" aria-hidden="true"></i></div>
+                        <div class="pointer fav-icon">
+                            <i data-id="{{$job->id}}" class="fa {{is_null($job->favorite) ? 'fa-heart-o' : 'fa-heart'}} aubergine icon-size" aria-hidden="true"></i>
+                        </div>
                     </div>
-                  
+
                     <div class="preview_headtext lh_54 candy-pink">
-                       {{$job->company_name}}-{{$job->jobLocation->name}}
+                        {{$job->company_name}}-{{$job->jobLocation->name}}
                     </div>
                     <div class="posted_job_header Aubergine_at_night">
-                    {{$job->description}}
+                        {{$job->description}}
                     </div>
                     <div class="d-flex justify-content-between mt-4">
                         <div class="d-flex">
@@ -85,7 +95,11 @@
                             @endforeach
                         </div>
                         <div>
-                            <button class="guide_profile_btn">Apply now</button>
+                            @if(is_null($job->applied))
+                            <a href="{{route('showApplyJob',['jobId'=>$job->id])}}" class="guide_profile_btn">Apply now</a>
+                            @else
+                            <button disabled class="guide_profile_btn">Applied</button>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -134,7 +148,42 @@
 @endsection
 
 @push('scripts')
-$(document).ready(function(){
-    
-});
+
+<script>
+    $(".fav-icon .aubergine").on('click', function() {
+
+        try {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            var jobId = $(this).attr('data-id')
+            var classList = $(this).attr('class').split(/\s+/);
+            var $elem = $(this);
+            $.ajax({
+                type: 'post',
+                data: {
+                    'job_id': jobId
+                },
+                url: "{{route('addJobToFavList')}}",
+                success: function(resp) {
+                    if (resp.status) {
+                        $elem.toggleClass("fa-heart-o fa-heart");
+                        toastMessage(1, resp.message);
+                    } else {
+                        toastMessage("error", resp.message);
+                    }
+                },
+                error: function(error) {
+                    toastMessage("error", "something went wrong, please try again.");
+                }
+            });
+        } catch (error) {
+            toastMessage("error", "something went wrong, please try again.");
+        }
+
+    });
+</script>
+
 @endpush

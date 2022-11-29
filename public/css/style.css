@@ -1920,10 +1920,10 @@ button, input, optgroup, select, textarea {
 }
 
 .input_wraper {
-    /* height: 143px; */
+    min-height: 143px;
     background: rgba(246, 239, 251, 0.8);
     border-radius: 4px;
-    /* width: 100%; */
+    width: 100%;
     display: flex;
     align-items: center;
     /* margin: 0 5%; */
@@ -1943,6 +1943,17 @@ select  option, .radio_btn_label{
     color: #4D0D8A !important;
     margin: 18px 10px !important;
 }
+
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
+    color: #fff !important;
+}
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #971e9b !important;
+    border: 1px solid #971e9b !important;
+}
+
 .job_input input {
     background: #FFFFFF;
     border: 1px solid #4D0D8A;

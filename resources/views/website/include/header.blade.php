@@ -4,7 +4,7 @@
     $routes = [
         "home"=>["id"=>"project","title"=>"Project","siblingRoutes"=>[]],
         "show-guide"=>["id"=>"industry_guide","title"=>"Industry Guide","siblingRoutes"=>[]],
-        "job-search-page"=>["id"=>"jobs","title"=>"Jobs","siblingRoutes"=>["showJobSearchResults"]],        
+        "job-search-page"=>["id"=>"jobs","title"=>"Jobs","siblingRoutes"=>["showJobSearchResults","showApplyJob"]],        
     ];
     $currentPath = Request::path();
     $routeName = \Request::route()->getName();

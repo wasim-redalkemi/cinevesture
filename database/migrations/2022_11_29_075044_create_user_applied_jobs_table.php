@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableUserFavoriteJobs extends Migration
+class CreateUserAppliedJobsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,13 @@ class CreateTableUserFavoriteJobs extends Migration
      */
     public function up()
     {
-        Schema::create('user_favorite_jobs', function (Blueprint $table) {
+        Schema::create('user_applied_jobs', function (Blueprint $table) {
             $table->id();
-            $table->integer("job_id");
             $table->integer("user_id");
+            $table->integer("job_id");
+            $table->string("resume");
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -28,6 +30,6 @@ class CreateTableUserFavoriteJobs extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_user_favorite_jobs');
+        Schema::dropIfExists('user_applied_jobs');
     }
 }

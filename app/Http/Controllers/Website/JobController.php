@@ -12,11 +12,13 @@ use App\Models\MasterEmployement;
 use App\Models\MasterProjectCategory;
 use App\Models\MasterProjectGenre;
 use App\Models\MasterSkill;
+use App\Models\UserAppliedJob;
 use App\Models\UserFavoriteJob;
 use App\Models\UserJob;
 use App\Models\Workspace;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 
 class JobController extends WebController
 {
@@ -273,6 +275,28 @@ class JobController extends WebController
         return view('website.job.applied_job');
     }
 
+    public function showApplyJob($jobId)
+    {
+        return view('website.job.apply_now');
+    }
+    public function storeApplyJob(Request $request,$jobId)
+    {       
+        $request->validate(["resume"=>"required|file|mimes:pdf,doc,docx","cover_letter"=>"required"]);        
+        if (UserAppliedJob::query()->where("user_id",auth()->id())->where("job_id",$jobId)->exists()) {
+           throw ValidationException::withMessages([
+            'field_name_1' => ['You have been already applied for this job.']            
+           ]);
+        }else{
+            $modelObj = new UserAppliedJob();
+            $modelObj->user_id = auth()->id();
+            $modelObj->job_id = $jobId;
+            $path = $this->uploadFile("appliedJobResumes",$request->file('resume'));
+            $modelObj->resume = $path;
+            $modelObj->save();            
+            return redirect()->route('showJobSearchResults')->with("success","Job application submitted successfully.");
+        }
+    }
+
 
     public function storeJobToFavList(Request $request)
     {
@@ -283,14 +307,14 @@ class JobController extends WebController
         if (UserFavoriteJob::query()->where("user_id",$userId)->where("job_id",$jobId)->exists()) {
             // remove from the fav list
             UserFavoriteJob::query()->where("user_id",$userId)->where("job_id",$jobId)->delete();
-            $message = "Job removed from favorite list";
+            $message = "Job removed from the favorite list.";
         }else{
             // add to fav list
             $modelObj = new UserFavoriteJob();
             $modelObj->user_id = $userId;
             $modelObj->job_id = $jobId;
             $modelObj->save();
-            $message = "Job added to favorite list";
+            $message = "Job added to the favorite list.";
             $favStatus = 1;
         }
         return $this->jsonResponse(true,$message,$favStatus);
@@ -307,7 +331,7 @@ class JobController extends WebController
         $workspaces = Workspace::query()->get();
         $skills = MasterSkill::query()->get();
         $jobs = UserJob::query()
-        ->with(["jobLocation:id,name","jobSkills:id,name"])
+        ->with(["jobLocation:id,name","jobSkills:id,name","favorite","applied"])
         ->where(function($q) use($requests){
             if (isset($requests["countries"]) && !empty($requests["countries"])) {
                 $q->whereIn("location_id",$requests["countries"]);
