@@ -2011,12 +2011,18 @@ select {
 .plain_industry_guide {
     background: #f1ecf5;
     height: 272px;
+    /* width: 142px; */
     /* opacity: 0.05; */
 }
 .industry_guide_text {
     position: absolute;
-    left: 65px;
+    left: 63px;
     padding: 12px;
+    width: 180px;
+    background: #f6f3f9 !important;
+    color: #1C0330;
+    text-align: end;
+    /* opacity: 0.05; */
 }
 .project_text {
     position: absolute;
