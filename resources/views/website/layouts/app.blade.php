@@ -87,6 +87,19 @@
                 $('.modal,.modal-backdrop').fadeOut(100);
                 $('body').css('overflow','scroll');
             }
+            
+            var container = $(".profile_side_bar");
+            // if the target of the click isn't the container nor a descendant of the container
+            if (!container.is(e.target) && container.has(e.target).length === 0) 
+            {
+                container.find('.sidebar_collapse').collapse('hide');
+            }
+            var container = $(".Header_main_container");
+            // if the target of the click isn't the container nor a descendant of the container
+            if (!container.is(e.target) && container.has(e.target).length === 0) 
+            {
+                container.find('.navbar_sm').collapse('hide');
+            }
 
         });
     </script>

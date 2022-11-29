@@ -5,13 +5,13 @@
         <div class="col-md-12">
           <nav class="navbar navbar-expand-lg header">
             
-            <a class="navbar-logo" href="{{route('home')}}">
+            <a class="navbar-logo " href="{{route('home')}}">
               <img src="{{ asset('images/asset/Logo-white-trans.png') }}" width="220" height="75" alt="image">
             </a>
             <div class="collapse navbar-collapse navbar_sm text-end text-md-center justify-content-between" id="navbarTogglerDemo01">
               <div></div>
             <div class="justify-content-center">
-              <ul class="navbar-nav mt-2 mt-lg-0">
+              <ul class="navbar-nav mt-2 mt-lg-0 text-start">
                 <li>
                   <a class="header-nav-link" href="{{route('home')}}">Project</a>
                 </li>
@@ -51,7 +51,7 @@
                 </li>
               </ul>
             </div>
-            <div class="justify-content-end text-end">
+            <div class="justify-content-end text-end d-none d-md-block">
               <?php
                 if(!empty(auth()->user()) && auth()->user()->user_type !== 'A')
                 {
