@@ -108,7 +108,7 @@ body {
     height: 2.5rem;
     line-height: 114%;
     border-radius: 4px;
-    width: 9rem;
+    /* width: 9rem; */
 }
 
 .search ::placeholder, .text_fff {
@@ -2302,6 +2302,7 @@ select {
         position: absolute;
         width: 100%;
         top: 96px;
+        z-index: 11;
     }
     .navbar-toggler:focus {
         box-shadow: none;
@@ -2323,8 +2324,9 @@ select {
         background: #FFFFFF;
         box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
         border-radius: 4px;
-        right: 35px;
+        right: 12px;
         padding: 20px;
+        margin-top: 18px;
         z-index: 10;
         -webkit-transition: .4s;
     }
@@ -2346,11 +2348,9 @@ select {
 .bg_white .guide_profile_section {
     padding: 3% 0%
 }
-    /* .collapse.dont-collapse-sm {
-        display: block;
-        height: auto !important;
-        visibility: visible;
-      } */
+   .profile_side_bar {
+    padding: 2px;
+   }
     }
 
     @media (min-width: 768px) {
