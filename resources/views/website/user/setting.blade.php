@@ -18,7 +18,7 @@
                 @include('website.include.profile_sidebar')
             </div>
             <div class="col-md-9">
-                <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4 h-100">
+                <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
 
                     <div class="profile_text">
                         <h1>Settings</h1>

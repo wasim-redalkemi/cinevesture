@@ -2,23 +2,27 @@
 
 namespace App\Http\Controllers\Website;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Traits\Utils;
 use App\Http\Controllers\WebController;
 use App\Models\JobEmployement;
 use App\Models\JobSkill;
 use App\Models\JobWorkSpace;
 use App\Models\MasterCountry;
 use App\Models\MasterEmployement;
+use App\Models\MasterProjectCategory;
+use App\Models\MasterProjectGenre;
 use App\Models\MasterSkill;
+use App\Models\UserAppliedJob;
+use App\Models\UserFavoriteJob;
 use App\Models\UserJob;
 use App\Models\Workspace;
-use Database\Seeders\MasterWorkspaceSeeder;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\ValidationException;
 
 class JobController extends WebController
 {
+    use Utils;
     // Views
     public function __construct()
     {
@@ -29,9 +33,9 @@ class JobController extends WebController
     {   
         $countries = MasterCountry::all();
         $skills = MasterSkill::all();
-        $emplyements = MasterEmployement::all();
+        $employments = MasterEmployement::all();
 
-        return view('website.job.index',compact('countries','skills','emplyements'));
+        return view('website.job.index',compact('countries','skills','employments'));
     }
 
     public function create()
@@ -39,10 +43,10 @@ class JobController extends WebController
         $countries = MasterCountry::all();
         $skills = MasterSkill::all();
         $workspaces = Workspace::all();
-        $emplyements = MasterEmployement::all();
+        $employments = MasterEmployement::all();
         if(!isset($_REQUEST['job_id']))
         {
-            return view('website.job.post_a_job',compact(['countries','skills','emplyements','workspaces']));
+            return view('website.job.post_a_job',compact(['countries','skills','employments','workspaces']));
         }
         $userJobData = $this->getJobData($_REQUEST['job_id']);
         $userJobData = $userJobData->toArray();
@@ -71,7 +75,7 @@ class JobController extends WebController
             $userJobData['job_skills'] = $temp_skills;
         }           
 
-        return view('website.job.post_a_job',compact(['countries','skills','emplyements','workspaces','userJobData']));
+        return view('website.job.post_a_job',compact(['countries','skills','employments','workspaces','userJobData']));
     }
     
     public function validatejob()
@@ -116,8 +120,8 @@ class JobController extends WebController
             // $validator = Validator::make($request->all(), [
             //         'save_type'=>'required',
             //         'job_title' => 'required',
-            //         'emplyements' => 'required',
-            //         'emplyements.*' => 'required',
+            //         'employments' => 'required',
+            //         'employments.*' => 'required',
             //         'workspaces'=>'required',
             //         'workspaces.*' => 'required',
             //         'company_name' => 'required',
@@ -155,9 +159,9 @@ class JobController extends WebController
                 }  
             }
 
-            // emplyements
+            // employments
             $emplyements_all = MasterEmployement::all()->pluck('id')->toArray();
-            foreach($request->emplyements as $emp){
+            foreach($request->employments as $emp){
                 if(in_array($emp,$emplyements_all)){
                     $link_emplyement = new JobEmployement();
                     $link_emplyement->job_id = $job->id;
@@ -212,9 +216,9 @@ class JobController extends WebController
                 $link_workspace->save();                 
             }
 
-            // emplyements
+            // employments
             $emplyements_all = JobEmployement::query()->where('job_id',$id)->delete();
-            foreach($request->emplyements as $emp){
+            foreach($request->employments as $emp){
                 $link_emplyement = new JobEmployement();
                 $link_emplyement->job_id = $id;
                 $link_emplyement->employment_id = $emp;
@@ -268,13 +272,94 @@ class JobController extends WebController
 
     public function appliedJob(Request $request)
     {
-        try{
-            return view('website.job.applied_job');
+        return view('website.job.applied_job');
+    }
 
-
-        }catch(Exception $e){
-            return ['status'=>0,'msg'=>$e->getMessage()];
+    public function showApplyJob($jobId)
+    {
+        return view('website.job.apply_now');
+    }
+    public function storeApplyJob(Request $request,$jobId)
+    {       
+        $request->validate(["resume"=>"required|file|mimes:pdf,doc,docx","cover_letter"=>"required"]);        
+        if (UserAppliedJob::query()->where("user_id",auth()->id())->where("job_id",$jobId)->exists()) {
+           throw ValidationException::withMessages([
+            'field_name_1' => ['You have been already applied for this job.']            
+           ]);
+        }else{
+            $modelObj = new UserAppliedJob();
+            $modelObj->user_id = auth()->id();
+            $modelObj->job_id = $jobId;
+            $path = $this->uploadFile("appliedJobResumes",$request->file('resume'));
+            $modelObj->resume = $path;
+            $modelObj->save();            
+            return redirect()->route('showJobSearchResults')->with("success","Job application submitted successfully.");
         }
+    }
+
+
+    public function storeJobToFavList(Request $request)
+    {
+       try {
+        $jobId = $request->get("job_id");
+        $userId = auth()->id();
+        $favStatus = 0;
+        if (UserFavoriteJob::query()->where("user_id",$userId)->where("job_id",$jobId)->exists()) {
+            // remove from the fav list
+            UserFavoriteJob::query()->where("user_id",$userId)->where("job_id",$jobId)->delete();
+            $message = "Job removed from the favorite list.";
+        }else{
+            // add to fav list
+            $modelObj = new UserFavoriteJob();
+            $modelObj->user_id = $userId;
+            $modelObj->job_id = $jobId;
+            $modelObj->save();
+            $message = "Job added to the favorite list.";
+            $favStatus = 1;
+        }
+        return $this->jsonResponse(true,$message,$favStatus);
+       } catch (\Throwable $th) {
+        return $this->jsonResponse(false,$th->getMessage(),[]);
+       }
+    }
+
+    public function showJobSearchResults(Request $request){   
+        $requests = $request->all();
+        $employments = MasterEmployement::query()->get();        
+        $countries = MasterCountry::query()->get();        
+        $categories = MasterProjectCategory::query()->get();
+        $workspaces = Workspace::query()->get();
+        $skills = MasterSkill::query()->get();
+        $jobs = UserJob::query()
+        ->with(["jobLocation:id,name","jobSkills:id,name","favorite","applied"])
+        ->where(function($q) use($requests){
+            if (isset($requests["countries"]) && !empty($requests["countries"])) {
+                $q->whereIn("location_id",$requests["countries"]);
+            }
+            if (isset($requests["search"]) && !empty($requests["search"])) {
+                $search = $requests["search"];
+                $q->where("title",'like',"%$search%");
+            }
+        })        
+        ->whereHas("jobEmployements",function($q)use($requests){
+            if (isset($requests["employments"]) && !empty($requests["employments"])) {                
+                $q->whereIn("employment_id",$requests["employments"]);
+            }
+        })
+        ->whereHas("jobWorkSpaces",function($q)use($requests){
+            if (isset($requests["workspaces"]) && !empty($requests["workspaces"])) {                
+                $q->whereIn("workspace_id",$requests["workspaces"]);
+            }
+            
+        })        
+        ->whereHas("jobSkills",function($q)use($requests){
+            if (isset($requests["skills"]) && !empty($requests["skills"])) {                                
+                $q->whereIn("skill_id",$requests["skills"]);
+            }
+        })        
+        ->paginate(1);
+
+        return view('website.job.search_result',compact('countries','employments','skills','categories','workspaces','jobs'));
     }
 
     public function getUserJobData($user_id,$status='')
