@@ -476,6 +476,20 @@ class UserController extends WebController
     }
 
 
+    public function protfolioDelete()
+    {
+        try {
+            $id = $_REQUEST['id'];
+            UserPortfolio::query()->where('id', $id)->delete();
+            UserPortfolioSpecificSkills::query()->where('portfolio_id', $id)->delete();
+            UserPortfolioImage::query()->where('portfolio_id', $id)->delete();
+            return redirect(route('profile-private-show'));
+        } catch (Exception $e) {
+            return back()->withError('error', 'Something went wrong.');
+        }
+    }
+    
+
     // User profile experience
 
     public function experienceCreate(Request $request)
@@ -496,6 +510,9 @@ class UserController extends WebController
 
                 'start_date' => 'required|date_format:Y-m-d',
                 'end_date' => 'required|date_format:Y-m-d|after_or_equal:start_date',
+                'job_title' => 'nullable|max:100',
+                'description' => 'nullable|max:600',
+                'comapny' => 'nullable|max:100',
             ]);
 
             if ($validator->fails()) {
@@ -555,6 +572,9 @@ class UserController extends WebController
 
                 'start_date' => 'required|date_format:Y-m-d',
                 'end_date' => 'required|date_format:Y-m-d|after_or_equal:start_date',
+                'job_title' => 'nullable|max:100',
+                'description' => 'nullable|max:600',
+                'comapny' => 'nullable|max:100',
             ]);
 
             if ($validator->fails()) {
@@ -580,6 +600,17 @@ class UserController extends WebController
         }
     }
 
+    public function experienceDelete()
+    {
+        try {
+            $id = $_REQUEST['id'];
+            UserExperience::query()->where('id', $id)->delete();
+            return redirect(route('profile-private-show'));
+        } catch (Exception $e) {
+            return back()->withError('error', 'Something went wrong.');
+        }
+    }
+
     // User profile qualification
 
     public function qualificationCreate(Request $request)
@@ -596,6 +627,23 @@ class UserController extends WebController
     public function qualificationStore(Request $request)
     {
         try {
+            $validator = Validator::make($request->all(), [
+
+                'institue_name' => 'nullable|max:100',
+                'description' => 'nullable|max:600',
+                'feild_of_study' => 'nullable|max:50',
+            ]);
+
+            if ($validator->fails()) {
+                return back()->withErrors($validator)->withInput();
+            }
+
+            if (
+                !$request->institue_name && !$request->degree_name && !$request->feild_of_study && !$request->start_year &&
+                !$request->end_year && !$request->description
+            ) {
+                return redirect()->route('profile-private-show');
+            }
             $user = User::query()->find(auth()->user()->id);
 
             $qualification = new UserQualification();
@@ -633,6 +681,17 @@ class UserController extends WebController
     public function qualificationEditStore(Request $request)
     {
         try {
+            $validator = Validator::make($request->all(), [
+
+                'institue_name' => 'nullable|max:100',
+                'description' => 'nullable|max:600',
+                'feild_of_study' => 'nullable|max:50',
+            ]);
+
+            if ($validator->fails()) {
+                return back()->withErrors($validator)->withInput();
+            }
+
             $user = User::query()->find(auth()->user()->id);
 
             $qualification = UserQualification::query()->where('id', $request->qualification_id)->first();
@@ -648,6 +707,17 @@ class UserController extends WebController
             } else {
                 return back()->withError('Something went wrong ,please try again.');
             }
+        } catch (Exception $e) {
+            return back()->withError('error', 'Something went wrong.');
+        }
+    }
+
+    public function qualificationDelete()
+    {
+        try {
+            $id = $_REQUEST['id'];
+            UserQualification::query()->where('id', $id)->delete();
+            return redirect(route('profile-private-show'));
         } catch (Exception $e) {
             return back()->withError('error', 'Something went wrong.');
         }

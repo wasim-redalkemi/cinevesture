@@ -20,9 +20,9 @@
                     <div class="profile_wraper profile_wraper_padding my-md-0 my-4">
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Add Portfolio</div>
-                          <div class="icon_container">
+                          {{-- <div class="icon_container">
                           <img src="{{ asset('public/images/asset/delete-icon.svg') }}"/>
-                          </div> 
+                          </div>  --}}
                         </div>                        
                         <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('portfolio-store') }}">
                             <input type="hidden" name="portfolio_id" value ="<?php if(isset($portfolio)){ echo($portfolio->id); }?>">
@@ -45,7 +45,7 @@
                                 <div class="col-md-12">
                                     <div class="profile_input">
                                         <label>Description</label>
-                                    <textarea class="form-control @error('description') is-invalid @enderror" name="description" aria-label="With textarea"><?php if(isset($portfolio)){ echo($portfolio->description); }?></textarea>
+                                    <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" name="description" aria-label="With textarea" text-length="600" maxlength="600"><?php if(isset($portfolio)){ echo($portfolio->description); }?></textarea>
                                     @error('description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
