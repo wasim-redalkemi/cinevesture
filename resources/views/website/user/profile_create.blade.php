@@ -60,22 +60,22 @@
                         <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content croppercrope">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title tile_text" id="modalLabel"> Image Cropper</h5>
+                                    <div class="modal-header py-1">
+                                        <h6 class="modal-title tile_text" id="modalLabel"> Image Cropper</h6>
                                         <div class="d-flex jutify-content-center">
-                                            <button type="button" class="cancel_btn mx-2" id="crop-cancel" data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="submit_btn" id="crop">Save changes</button>
+                                            <button type="button" class="mx-2 modal_button" id="crop-cancel" data-dismiss="modal"><i class="fa fa-times cross_btn" aria-hidden="true"></i></button>
+                                            <button type="button" class="modal_button" id="crop"><i class="fa fa-check done_btn" aria-hidden="true"></i></button>
 
                                         </div>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="">
+                                        <div class="container">
                                             <div class="row">
-                                                <div class="col-md-2"></div>
-                                                <div class="col-md-8">
+                                                <!-- <div class="col-md-1"></div> -->
+                                                <div class="col-md-12">
                                                     <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
                                                 </div>
-                                                <div class="col-md-2"></div>
+                                                <!-- <div class="col-md-1"></div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -494,11 +494,23 @@
     });
 
     $modal.on('shown.bs.modal', function() {
-        cropper = new Cropper(image, {
-            aspectRatio: 1,
-            viewMode: 3,
-            preview: '.preview'
-        });
+
+
+     cropper = new Cropper(image, {
+    dragMode: 'move',
+    autoCropArea: 0.65,
+    restore: false,
+    guides: false,
+    center: true,
+    highlight: false,
+    cropBoxMovable: true,
+    cropBoxResizable: false,
+    toggleDragModeOnDblclick: false,
+    data:{ //define cropbox size
+      width: 300,
+      height:  300,
+    },
+  });
     }).on('hidden.bs.modal', function() {
         cropper.destroy();
         cropper = null;
@@ -507,6 +519,7 @@
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','),
             mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]),
             bstr = atob(arr[1]),
             n = bstr.length,
             u8arr = new Uint8Array(n);
