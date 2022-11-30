@@ -191,9 +191,7 @@
         var maxImgCnt = 15;
 
         let init = function(portfolioData){
-            console.log("portfolioData = ",portfolioData);
             user_id = portfolioData.id;
-            console.log("Portfolio link ",portfolioData.intro_video_link);
             bindActions();
         }
 
