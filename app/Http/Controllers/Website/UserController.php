@@ -18,6 +18,7 @@ use App\Models\UserExperience;
 use App\Models\UserLanguage;
 use App\Models\UserPortfolio;
 use App\Models\UserPortfolioImage;
+use App\Models\UserPortfolioLocation;
 use App\Models\UserPortfolioSpecificSkills;
 use App\Models\UserProject;
 use App\Models\UserQualification;
@@ -340,16 +341,27 @@ class UserController extends WebController
             $portfolio->project_title = $request->project_title;
             $portfolio->description = $request->description;
             $portfolio->completion_date = $request->completion_date;
-            $portfolio->project_country_id = $request->project_country_id;
             $portfolio->video = $request->video;
 
             if ($portfolio->save()) {
                 if (isset($request->project_specific_skills_id)) {
                     UserPortfolioSpecificSkills::query()->where('portfolio_id', $portfolio->id)->delete();
-                    $user_portfolio_specific_skills = new UserPortfolioSpecificSkills();
-                    $user_portfolio_specific_skills->portfolio_id = $portfolio->id;
-                    $user_portfolio_specific_skills->project_specific_skills_id = $request->project_specific_skills_id;
-                    $user_portfolio_specific_skills->save();
+                    foreach ($request->project_specific_skills_id as $k => $v) {
+                        $user_portfolio_specific_skills = new UserPortfolioSpecificSkills();
+                        $user_portfolio_specific_skills->portfolio_id = $portfolio->id;
+                        $user_portfolio_specific_skills->project_specific_skills_id = $v;
+                        $user_portfolio_specific_skills->save();
+                    }                   
+                }
+
+                if (isset($request->project_country_id)) {
+                    UserPortfolioLocation::query()->where('portfolio_id', $portfolio->id)->delete();
+                    foreach ($request->project_country_id as $k => $v) {
+                        $user_portfolio_locations = new UserPortfolioLocation();
+                        $user_portfolio_locations->portfolio_id = $portfolio->id;
+                        $user_portfolio_locations->location_id = $v;
+                        $user_portfolio_locations->save();
+                    }                   
                 }
             }
 
@@ -403,6 +415,7 @@ class UserController extends WebController
                 $UserPortfolioEdit = UserPortfolio::query()->where('id', $id)->get();
                 $UserPortfolioImages = UserPortfolioImage::query()->where('portfolio_id', $id)->get();
                 $UserPortfolioSkills = UserPortfolioSpecificSkills::query()->where('portfolio_id', $id)->get();
+                $UserPortfolioLocations = UserPortfolioLocation::query()->where('portfolio_id', $id)->get();
                 $portfolio_skills_ids = [];
                 foreach ($UserPortfolioSkills as $k => $v) {
                     $portfolio_skills_ids[] = $v->id;
@@ -412,7 +425,16 @@ class UserController extends WebController
                     ->get()
                     ->toArray();
 
-                return view('website.user.profile_portfolio_edit', compact('UserPortfolioEdit', 'UserPortfolioImages', 'user_portfolio_skill', 'skills', 'country'));
+                $portfolio_locations_ids = [];
+                foreach ($UserPortfolioLocations as $k => $v) {
+                    $portfolio_locations_ids[] = $v->id;
+                }
+                $user_portfolio_location = UserPortfolioLocation::query()
+                    ->whereIn('id', $portfolio_locations_ids)
+                    ->get()
+                    ->toArray();
+
+                return view('website.user.profile_portfolio_edit', compact('UserPortfolioEdit', 'UserPortfolioImages', 'user_portfolio_skill','user_portfolio_location', 'skills', 'country'));
             }
         } catch (Exception $e) {
             return back()->withError('error', 'Something went wrong.');
@@ -428,16 +450,27 @@ class UserController extends WebController
             $portfolio->project_title = $request->project_title;
             $portfolio->description = $request->description;
             $portfolio->completion_date = $request->completion_date;
-            $portfolio->project_country_id = $request->project_country_id;
             $portfolio->video = $request->video;
 
             if ($portfolio->update()) {
                 if (isset($request->project_specific_skills_id)) {
                     UserPortfolioSpecificSkills::query()->where('portfolio_id', $request->portfolio_id)->delete();
-                    $user_portfolio_specific_skills = new UserPortfolioSpecificSkills();
-                    $user_portfolio_specific_skills->portfolio_id = $request->portfolio_id;
-                    $user_portfolio_specific_skills->project_specific_skills_id = $request->project_specific_skills_id;
-                    $user_portfolio_specific_skills->save();
+                    foreach ($request->project_specific_skills_id as $k => $v) {
+                        $user_portfolio_specific_skills = new UserPortfolioSpecificSkills();
+                        $user_portfolio_specific_skills->portfolio_id = $request->portfolio_id;
+                        $user_portfolio_specific_skills->project_specific_skills_id = $v;
+                        $user_portfolio_specific_skills->save();
+                    }
+                }
+
+                if (isset($request->project_country_id)) {
+                    UserPortfolioLocation::query()->where('portfolio_id', $portfolio->id)->delete();
+                    foreach ($request->project_country_id as $k => $v) {
+                        $user_portfolio_locations = new UserPortfolioLocation();
+                        $user_portfolio_locations->portfolio_id = $portfolio->id;
+                        $user_portfolio_locations->location_id = $v;
+                        $user_portfolio_locations->save();
+                    }                   
                 }
             }
 

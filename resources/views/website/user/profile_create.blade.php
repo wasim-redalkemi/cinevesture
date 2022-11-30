@@ -26,7 +26,8 @@
                         <div class="d-flex custom_file_explorer">
                             <div class="upload_img_container">
                                 <img src="<?php if (!empty($user->profile_image)) {
-                                                echo Storage::url($user->profile_image);
+                                                // echo Storage::url($user->profile_image);
+                                                echo asset('public/storage/'.$user->profile_image);
                                             } ?>" class="upload_preview for_show croperImg" width="100%" height="100%">
                                 <div for="file-input" class="d-none">
                                     <input type="file" name="croperImg" class="@error('profile_image') is-invalid @enderror file_element image" accept=".jpg,.jpeg,.png">
