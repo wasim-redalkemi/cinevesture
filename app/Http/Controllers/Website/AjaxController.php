@@ -183,6 +183,24 @@ class AjaxController extends WebController {
         }
     }
 
+    public function updateProjAssociationEntry(Request $request, $associate_id = null){
+        try {
+            $associate = ProjectMilestone::find($associate_id);
+            if($associate){
+                if(isset($request->project_associate_title))
+                    $associate->project_associate_title = $request->project_associate_title;
+                if(isset($request->project_milestone_budget))
+                    $associate->project_associate_name = $request->project_associate_name;
+                $associate->save();
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$associate,"Record updated successfully.","ER000","");
+            } else {
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER401","Could not find the resource.");
+            }
+        } catch (Exception $e) {
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
+        }
+    }
+
     public function removeProjAssociationEntry(Request $request, $associate_id = null){
         try {
             $media = ProjectAssociation::find($associate_id);

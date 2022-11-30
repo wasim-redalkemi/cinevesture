@@ -240,6 +240,7 @@ class UserController extends WebController
             $user->linkedin_profile = $request->linkedin_profile;
             $user->website = $request->website;
             $user->intro_video_link = $request->intro_video_link;
+            $user->intro_video_thumbnail = $request->intro_video_thumbnail;
 
             if ($request->croppedImg) {
 
@@ -355,7 +356,7 @@ class UserController extends WebController
 
             $data_to_insert = [];
             foreach ($request->toArray() as $k => $v) {
-                if (substr($k, 0, 14) == 'project_image_') {
+                if (strpos($k, 'portfolio-image') !== false)
                     $image_file_name = $k;
                     if ($request->hasFile($image_file_name)) {
                         $file = $request->file($image_file_name);
