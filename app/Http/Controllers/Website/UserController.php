@@ -241,7 +241,6 @@ class UserController extends WebController
             $user->linkedin_profile = $request->linkedin_profile;
             $user->website = $request->website;
             $user->intro_video_link = $request->intro_video_link;
-            $user->intro_video_thumbnail = $request->intro_video_thumbnail;
 
             if ($request->croppedImg) {
 
@@ -263,8 +262,7 @@ class UserController extends WebController
                 
                 $nameStr = date('_YmdHis');
                 $newName = $nameStr .  $fileName ;
-                 $path = $this->uploadFile($locationPath,base64_decode($image), $newName);
-             
+                $path = $this->uploadFile($locationPath,base64_decode($image), $newName);
 
                 // $file = $request->file('croppedImg');
                 // $originalFile = $file->getClientOriginalName();
@@ -276,11 +274,8 @@ class UserController extends WebController
                 // $locationPath  = "user";
                 // $uploadFile = $this->uploadFile($locationPath, $file, $newName);
                 // $user->profile_image = $uploadFile;
-
-
-
-              
                 $user->profile_image = $locationPath.$newName;
+
             }
             if ($user->save()) {
                 if (isset($request->skills)) {
@@ -306,7 +301,7 @@ class UserController extends WebController
                 return back()->with('error', 'Something went wrong ,please try again.');
             }
         } catch (Exception $e) {
-            return back()->with('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong. '.$e->getMessage());
         }
     }
 
