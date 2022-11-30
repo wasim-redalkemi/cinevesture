@@ -15,13 +15,17 @@
                 <form class="" method="Get" action="{{ route('guide-view') }}">
                     @csrf
                     <div class="search-box-container">
-                    <div class="search-container">
+                    <div class="search-container w-100">
                             <input type="search" name="search" value="{{request('search')}}" class="w-100 search-box" placeholder="Search...">
                             <button class="search-btn"></button>
-                            </div>     
+                            </div> 
+                            <div class="d-block d-md-none m-2" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            <img src="{{ asset('public/images/asset/dropdown-sidebar.svg') }}" />
+                            </div>    
 
                     </div>
-                    <div class="dropdown search-page">
+                    <div class="sidebar_collapse collapse dont-collapse-sm" id="collapseExample">
+                    <div class="dropdown search-page sidebar_data_mobile">
                         <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="modal" data-bs-target="#locations-list">
                             Location
                         </button>
@@ -122,18 +126,19 @@
                                 Recommended Profile
                             </label>
                         </div>
-                        <div class="mt-4">
+                        <div class="mt-4 d-flex">
                             <input type="submit" class="filter-button watch-now-btn mt-4" Value="Apply">
                             <a href="{{route('guide-view')}}"><input type="button" class="clear-filter watch-now-btn mt-4" Value="Clear"></a>
                         </div>
 
+                    </div>
                     </div>
                 </form>
             </div>
             <div class="col-md-9">
                 @if(count($users) >= 1)
                 @foreach($users as $user)
-                <div class="profile_wraper profile_wraper_padding">
+                <div class="profile_wraper profile_wraper_padding mt-2 mt-md-0">
                     <div class="row">
                         <div class="col-md-2">
                             <div class="user_profile_container">

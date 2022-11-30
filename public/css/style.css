@@ -586,13 +586,12 @@ body {
 }
 
 .side-bar-cmn-part {
-    padding: 1.5rem !important;
+    padding: 1.5rem;
     background: #FFFFFF;
     border-radius: 4px;
     height: 80vh;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
     margin-bottom: 160px;
-
 }
 
 .pagination{
@@ -614,7 +613,7 @@ body {
 
 .search-box-container {
     display: flex;
-    flex-direction: column;
+    /* flex-direction: column; */
 }
 
 .search-box-container form {
@@ -849,12 +848,23 @@ body {
     border-radius: 4px !important;
     color: #971E9B;
 }
-
+.modal_button {
+    border: none;
+    background: transparent;
+}
 
 .modal-content {
-
     background-color: #33084c;
-
+}
+.croppercrope {
+    background-color: #FFFFFF !important;
+    max-height: 80vh;
+    height: auto;
+    overflow: auto;
+}
+.cropper-crop-box {
+    /* width: 200px;
+    height: 200px; */
 }
 .list-group-item{
     text-align: left;
@@ -2005,6 +2015,14 @@ select  option, .radio_btn_label{
 .modal_check_input:checked {
     background-color: #DD45B3 !important;
 }
+.cross_btn {
+    color: red;
+    font-size: 25px;
+}
+.done_btn {
+    color: green;
+    font-size: 25px;
+}
 select {
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -2271,15 +2289,28 @@ select {
 }
   
 
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #971E9B; 
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #2a0547; 
+  }
 
-
-
-.forTesting {
-    color: red;
-    margin: 30px;
-}
-
-  @media (max-width: 600px) {
+  @media (max-width: 480px) {
     .container, .container-lg, .container-md, .container-sm, .container-xl {
         /* max-width: 1365px !important; */
     }
@@ -2300,7 +2331,11 @@ select {
     }
     .side-bar-cmn-part {
         height: auto;
-        margin-bottom: 16px;
+        /* margin-bottom: 16px; */
+        width: max-content;
+        margin: auto;
+        width: 93%;
+        padding: 1rem;
     }
     .auth_section {
         padding: 0 10%;
@@ -2392,6 +2427,10 @@ select {
     .profile-section {
         padding: 3% 0;
     }
+
+    .select2-selection__rendered {
+        position: relative !important;
+      }
     
 .bg_white .guide_profile_section {
     padding: 3% 0%
@@ -2419,8 +2458,16 @@ select {
   .w_maxcont {
     width: max-content;
   }
-
-
+  .modal-dialog-centered {
+    margin: auto;
+  }
+  .croppercrope {
+    max-height: 50vh;
+    max-width: fit-content;   
+}
+.modal-backdrop {
+    height: 90vh;
+}
 
     }
 
