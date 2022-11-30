@@ -356,7 +356,7 @@ class UserController extends WebController
 
             $data_to_insert = [];
             foreach ($request->toArray() as $k => $v) {
-                if (strpos($k, 'portfolio-image') !== false)
+                if (strpos($k, 'portfolio-image') !== false) {
                     $image_file_name = $k;
                     if ($request->hasFile($image_file_name)) {
                         $file = $request->file($image_file_name);
