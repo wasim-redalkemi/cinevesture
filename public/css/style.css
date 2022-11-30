@@ -803,14 +803,14 @@ body {
 }
  .curv_cmn_btn {
     /* background: #971E9B; */
-    background: RGB(255, 241, 251);
+    background: RGB(244, 243, 255);
     border-radius: 99px;
     width: auto;
     height: 32px;
     max-height: auto;
     border: none;
     padding: 2px 8px;
-    color: RGB(210, 0, 118);
+    color: RGB(105, 28, 230);
     line-height: 19px;
     font-weight: 600;
     font-size: 12px;

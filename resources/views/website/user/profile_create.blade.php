@@ -63,9 +63,8 @@
                                     <div class="modal-header py-1">
                                         <h6 class="modal-title tile_text" id="modalLabel"> Image Cropper</h6>
                                         <div class="d-flex jutify-content-center">
-                                            <button type="button" class="mx-2 modal_button" id="crop-cancel" data-dismiss="modal"><i class="fa fa-times cross_btn" aria-hidden="true"></i></button>
-                                            <button type="button" class="modal_button" id="crop"><i class="fa fa-check done_btn" aria-hidden="true"></i></button>
-
+                                            <button type="button" class="mx-2 btn-danger" id="crop-cancel" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                            <button type="button" class="btn-success" id="crop"><i class="fa fa-check" aria-hidden="true"></i></button>
                                         </div>
                                     </div>
                                     <div class="modal-body">
