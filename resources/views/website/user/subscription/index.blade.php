@@ -32,7 +32,7 @@
                         </div> -->
                         <div class="plan_btn_wraper">
                                <!-- <div> -->
-                                   <button class="plan_btn" active>Monthly</button>
+                                   <button class="plan_btn" >Monthly</button>
                                <!-- </div> -->
                                <!-- <div> -->
                                    <button class="plan_btn">Annually</button>
@@ -72,7 +72,7 @@
                                 @foreach($modules as $module)
                                 <div class="plain_industry_guide my-2">
                                     @if($flag == 0)
-                                    <div class="industry_guide_text plain_industry_guide opacity-50">
+                                    <div class="industry_guide_text plain_industry_guide">
                                         <span class="movie_name_text">{{$module->name}}</span>
                                     </div>
                                     @endif

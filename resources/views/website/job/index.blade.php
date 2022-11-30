@@ -91,7 +91,7 @@
                             </div>
                            
                             <div class="col-md-3">
-                                <div class=" mt-0">
+                                <div class="mt-3 mt-md-0">
                                     <select class="emp-select2"  id ="employments"name ="employments[]" multiple="multiple">
                                     @foreach($employments as $emp)
                                               
@@ -105,7 +105,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-1 mt-3 mt-md-0">
+                            <div class="col-md-1 my-3 my-md-0">
                                 <button type = "submit"class="job_search_btn profile_search_btn">Search</button>
                             </div>
                         </div>
