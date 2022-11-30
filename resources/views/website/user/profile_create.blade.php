@@ -89,9 +89,8 @@
                                 <div class="profile_input">
                                     <label>First Name</label>
                                     {{-- <input type="text" class="outline is-invalid-remove name-only form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name" value="@if(isset($user->first_name){{ $user->first_name}} @endif" --}}
-                                    <input type="text" class="outline is-invalid-remove name-only form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name" value="<?php if (isset($user->first_name)) {
-                                                                                                                                                                                                                            echo ($user->first_name);
-                                                                                                                                                                                                                        } ?>" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                    <input type="text" class="outline is-invalid-remove name-only form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name"
+                                    value="@if (!empty($user->first_name)) {{$user->first_name}} @endif" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('first_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -102,9 +101,7 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Last Name</label>
-                                    <input type="text" class="outline is-invalid-remove name-only form-control @error('last_name') is-invalid @enderror" placeholder="{{ __('Last Name') }}" name="last_name" value="<?php if (isset($user->last_name)) {
-                                                                                                                                                                                                                            echo ($user->last_name);
-                                                                                                                                                                                                                        } ?>" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                    <input type="text" class="outline is-invalid-remove name-only form-control @error('last_name') is-invalid @enderror" placeholder="{{ __('Last Name') }}" name="last_name" value="@if (!empty($user->last_name)) {{$user->last_name}} @endif" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('last_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -115,9 +112,7 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Job Title</label>
-                                    <input type="text" class="outline is-invalid-remove form-control @error('job_title') is-invalid @enderror" placeholder="Job Title" name="job_title" value="<?php if (isset($user->job_title)) {
-                                                                                                                                                                                                    echo ($user->job_title);
-                                                                                                                                                                                                } ?>" aria-label="Username" aria-describedby="basic-addon1" autofocus>
+                                    <input type="text" class="outline is-invalid-remove form-control @error('job_title') is-invalid @enderror" placeholder="Job Title" name="job_title" value="@if (!empty($user->job_title)) {{$user->job_title}} @endif" aria-label="Username" aria-describedby="basic-addon1" autofocus>
                                     @error('job_title')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -133,11 +128,8 @@
 
                                     <select name="age" class="outline is-invalid-remove @error('age') is-invalid @enderror" id="lang">
                                         <option value="">Select</option>
-
                                         @foreach($age as $a)
-                                        <option value="{{$a->id}}" <?php if ($a->id == $user->age) {
-                                                                        echo ('selected');
-                                                                    } ?>><?php echo $a->range; ?></option>
+                                        <option value="{{$a->id}}"@if ($a->id == $user->age) selected @endif>{{ $a->range }}</option>
                                         @endforeach
 
                                     </select>
@@ -324,9 +316,9 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>IMDB Profile</label>
-                                    <input type="text" class="outline is-invalid-remove form-control @error('imdb_profile') is-invalid @enderror" placeholder="IMDB Profile" name="imdb_profile" value="<?php if (isset($user->imdb_profile)) {
-                                                                                                                                                                                                            echo ($user->imdb_profile);
-                                                                                                                                                                                                        } ?>" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="url" class="outline is-invalid-remove form-control @error('imdb_profile') is-invalid @enderror" placeholder="IMDB Profile" name="imdb_profile" value="<?php if (isset($user->imdb_profile)) {
+                                        echo ($user->imdb_profile);
+                                    } ?>" aria-label="Username" aria-describedby="basic-addon1">
                                     @error('imdb_profile')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -337,7 +329,7 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>LinkedIn Profile</label>
-                                    <input type="text" class="outline is-invalid-remove form-control @error('linkedin_profile') is-invalid @enderror" placeholder="LinkedIn Profile" name="linkedin_profile" value="<?php if (isset($user->linkedin_profile)) {
+                                    <input type="url" class="outline is-invalid-remove form-control @error('linkedin_profile') is-invalid @enderror" placeholder="LinkedIn Profile" name="linkedin_profile" value="<?php if (isset($user->linkedin_profile)) {
                                                                                                                                                                                                                         echo ($user->linkedin_profile);
                                                                                                                                                                                                                     } ?>" aria-label="Username" aria-describedby="basic-addon1">
                                     @error('linkedin_profile')
@@ -350,7 +342,7 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Website</label>
-                                    <input type="text" class="outline is-invalid-remove form-control @error('website') is-invalid @enderror" placeholder="Website" aria-label="Username" name="website" value="<?php if (isset($user->website)) {
+                                    <input type="url" class="outline is-invalid-remove form-control @error('website') is-invalid @enderror" placeholder="Website" aria-label="Username" name="website" value="<?php if (isset($user->website)) {
                                                                                                                                                                                                                     echo ($user->website);
                                                                                                                                                                                                                 } ?>" aria-describedby="basic-addon1">
                                     @error('website')
@@ -365,7 +357,7 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Introduction Video</label>
-                                    <input type="text" class="outline is-invalid-remove form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="<?php if (isset($user->intro_video_link)) {
+                                    <input type="url" class="outline is-invalid-remove form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="<?php if (isset($user->intro_video_link)) {
                                                                                                                                                                                                                         echo ($user->intro_video_link);
                                                                                                                                                                                                                     } ?>" aria-label="Username" aria-describedby="basic-addon1">
                                     @error('intro_video_link')
