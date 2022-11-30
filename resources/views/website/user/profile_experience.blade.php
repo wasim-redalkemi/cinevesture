@@ -21,9 +21,6 @@
                     <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Add Experience</div>
-                            <div class="icon_container">
-                          <img src="{{ asset('public/images/asset/delete-icon.svg') }}"/>
-                          </div> 
                         </div>
                         <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('experience-store') }}">
                             @csrf
@@ -116,7 +113,7 @@
                                 <div class="col-md-12">
                                     <div class="profile_input">
                                         <label>Description</label>
-                                        <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" text-length = "200" maxlength="200" name="description" aria-label="With textarea"><?php if(isset($experience)){ echo($experience->description); }?></textarea>
+                                        <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" text-length = "600" maxlength="600" name="description" aria-label="With textarea"><?php if(isset($experience)){ echo($experience->description); }?></textarea>
                                         @error('description')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

@@ -34,4 +34,14 @@ class UserJob extends Model
         return $this->hasMany(User::class,'id','user_id');
     }
 
+    public function favorite()
+    {
+        return $this->hasOne(UserFavoriteJob::class,'job_id')->where("user_id",auth()->id());
+    }
+    
+    public function applied()
+    {
+        return $this->hasOne(UserAppliedJob::class,'job_id')->where("user_id",auth()->id());
+    }
+
 }

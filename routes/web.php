@@ -94,16 +94,19 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/portfolio-store/{id?}', [UserController::class, 'portfolioStore'])->name('portfolio-store');
         Route::get('/portfolio-edit/{id}', [UserController::class, 'portfolioEdit'])->name('portfolio-edit');
         Route::post('/portfolio-edit-store/{id}', [UserController::class, 'portfolioEditStore'])->name('portfolio-edit-store');
+        Route::get('/protfolio-delete', [UserController::class, 'protfolioDelete'])->name('protfolio-delete');
 
         Route::get('/experience-create/{id?}', [UserController::class, 'experienceCreate'])->name('experience-create');
         Route::post('/experience-store/{id?}', [UserController::class, 'experienceStore'])->name('experience-store');
         Route::get('/experience-edit/{id}', [UserController::class, 'experienceEdit'])->name('experience-edit');
         Route::post('/experience-edit-store/{id}', [UserController::class, 'experienceEditStore'])->name('experience-edit-store');
+        Route::get('/experience-delete', [UserController::class, 'experienceDelete'])->name('experience-delete');
 
         Route::get('/qualification-create/{id?}', [UserController::class, 'qualificationCreate'])->name('qualification-create');
         Route::post('/qualification-store/{id?}', [UserController::class, 'qualificationStore'])->name('qualification-store');        		
         Route::get('/qualification-edit/{id}', [UserController::class, 'qualificationEdit'])->name('qualification-edit');
-        Route::post('/qualification-edit-store/{id}', [UserController::class, 'qualificationEditStore'])->name('qualification-edit-store'); 
+        Route::post('/qualification-edit-store/{id}', [UserController::class, 'qualificationEditStore'])->name('qualification-edit-store');
+        Route::get('/qualification-delete', [UserController::class, 'qualificationDelete'])->name('qualification-delete');
         
         Route::post('/deactivate', [UserController::class, 'deactivateAccount'])->name('user-deactivate'); 
 
@@ -186,6 +189,10 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
     Route::group(['prefix'=>'job'],function()
 	{	
         Route::get('/search',[JobController::class, 'index'])->name('job-search-page');
+        Route::get('/apply/{jobId}',[JobController::class, 'showApplyJob'])->name('showApplyJob');
+        Route::post('/apply/{jobId}',[JobController::class, 'storeApplyJob'])->name('storeApplyJob');
+        Route::any('/search/results',[JobController::class, 'showJobSearchResults'])->name('showJobSearchResults');
+        Route::post('/search/add_to_fav',[JobController::class, 'storeJobToFavList'])->name('addJobToFavList');
         Route::get('/create',[JobController::class, 'create'])->name('job-create-page');
         Route::post('/action',[JobController::class, 'store'])->name('job-store');
         Route::post('/job-store-edit',[JobController::class, 'jobStoreEdit'])->name('job-store-edit');

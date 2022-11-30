@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserPortfoliosTable extends Migration
+class CreateUserAppliedJobsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,16 @@ class CreateUserPortfoliosTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_portfolios', function (Blueprint $table) {
+        Schema::create('user_applied_jobs', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id',20);
-            $table->string('project_title',100)->nullable();
-            $table->string('description',1000)->nullable();
-            $table->timestamp('completion_date')->nullable();
-            $table->string('video')->nullable();
-
+            $table->integer("user_id");
+            $table->integer("job_id");
+            $table->string("resume");
             $table->timestamps();
             $table->softDeletes();
         });
     }
-    
+
     /**
      * Reverse the migrations.
      *
@@ -33,6 +30,6 @@ class CreateUserPortfoliosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_portfolios');
+        Schema::dropIfExists('user_applied_jobs');
     }
 }

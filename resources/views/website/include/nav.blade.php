@@ -1,5 +1,5 @@
 @section('nav')
-<nav class="navbar navbar-expand-lg sub-header">
+<nav class="navbar navbar-expand-lg sub-header d-none d-md-block">
     <div class="container">
       <div class="row w_100">
         <div class="col-md-12">

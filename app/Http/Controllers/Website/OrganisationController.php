@@ -34,7 +34,7 @@ class OrganisationController extends WebController
             
             return view('website.user.organisation.organisation',compact(['UserOrganisation']));
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -72,7 +72,7 @@ class OrganisationController extends WebController
             
             return view('website.user.organisation.organisation_create',compact(['languages','country','organisationType','organisationService','UserOrganisation']));
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -135,10 +135,10 @@ class OrganisationController extends WebController
                 }
                 return redirect()->route('organisation-private-view')->with("success", "User organisation updated successfully.");
             } else {
-                return back()->withError('error', 'Something went wrong ,please try again.');
+                return back()->with('error', 'Something went wrong ,please try again.');
             }
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 

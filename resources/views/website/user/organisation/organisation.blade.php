@@ -7,7 +7,8 @@
 @endsection
 
 @section('content')
-<section class="guide_profile_section">
+<section class="guide_profile_section profile-section" >
+    <div class="container">
     <div class="row">
         <div class="col-md-3">
             @include('website.include.profile_sidebar')
@@ -169,6 +170,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </section>
 @endsection

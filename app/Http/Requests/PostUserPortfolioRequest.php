@@ -26,7 +26,6 @@ class PostUserPortfolioRequest extends FormRequest
         return [
             'project_title' => 'nullable|max:255',
             'description' => 'nullable|max:600',
-            'project_country_id' => 'nullable|integer',
             'completion_date' => 'nullable',
             'video' => 'nullable|url',
         ];

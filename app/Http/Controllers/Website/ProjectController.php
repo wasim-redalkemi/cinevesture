@@ -608,7 +608,7 @@ class ProjectController extends WebController
             ]);
         
             if ($validator->fails()) {
-                return back()->withErrors($validator)->withInput();
+                return back()->with($validator)->withInput();
             }
     
             $countries = MasterCountry::all();

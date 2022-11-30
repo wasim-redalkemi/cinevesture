@@ -34,11 +34,11 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="project-text text-center mt-4 px-4 px-md-0">Search Latest Jobs</div>
-                    <div class="duration-lang-text white text-center mt-3 px-4 px-md-0">It is our job to make your search for people in the film and media fraternity, a piece of cake! Here's your slice. </div>
-                    <form class="" method="Get" action="{{ route('guide-view') }}">
-                        @csrf
-                    <div class="input_wraper py-5 mt-3">
+                    <div class="project-text text-center mt-4">Search Latest Jobs</div>
+                    <div class="duration-lang-text white text-center mt-3">It is our job to make your search for people in the film and media fraternity, a piece of cake! Here's your slice. </div>
+                    <form method="post" action="{{ route('showJobSearchResults') }}"> 
+                        @csrf                       
+                    <div class="input_wraper mt-3">
                         <div class="container">
                         <div class="row">
                             <div class="col-md-2">
@@ -91,11 +91,11 @@
                             </div>
                            
                             <div class="col-md-3">
-                                <div class=" mt-3 mt-md-0">
-                                    <select class="emp-select2"  id ="emplyements"name ="emplyements[]" multiple="multiple">
-                                    @foreach($emplyements as $emp)
+                                <div class="mt-3 mt-md-0">
+                                    <select class="emp-select2"  id ="employments"name ="employments[]" multiple="multiple">
+                                    @foreach($employments as $emp)
                                               
-                                              @if(isset(request('emplyements')[0]) && in_array($emp->id, request('emplyements')))
+                                              @if(isset(request('employments')[0]) && in_array($emp->id, request('employments')))
                                               <option value="{{$emp->id}}" data-badge="" selected>{{$emp->name}}</option>
                                               @else
                                               <option value="{{$emp->id}}" data-badge="">{{$emp->name}}</option>
@@ -105,7 +105,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-1">
+                            <div class="col-md-1 my-3 my-md-0">
                                 <button type = "submit"class="job_search_btn profile_search_btn">Search</button>
                             </div>
                         </div>
@@ -115,7 +115,7 @@
                 </div>
             </div>
             <div class ="row">
-                        <div class="d-flex justify-content-center" >
+                        <div class="d-flex justify-content-center mb-3" >
                         <a href="{{route('job-create-page')}}"><button type = "button"class="job_search_btn  post-job" style="margin-right:30px">Post A Job</button></a>
                         <button type = "button"class="job_search_btn  post-job">My Jobs</button>
                         </div>
@@ -153,7 +153,7 @@
     });
    $(".emp-select2").select2({
         closeOnSelect: false,
-        placeholder: "Employement",
+        placeholder: "Employement Type",
         allowClear: true,
         tags: false
     });

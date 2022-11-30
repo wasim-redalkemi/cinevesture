@@ -17,7 +17,12 @@
                     <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Edit Experience</div>
-                            <div><i class="fa fa-trash-o  deep-pink icon-size" aria-hidden="true"></i></div>
+                            <div>
+                                <a href="{{route('experience-delete',['id'=>$UserExperienceData->id])}}">
+                                    <img src="{{ asset('public/images/asset/delete-icon.svg') }}"/>
+                                    {{-- <i class="fa fa-trash-o  deep-pink icon-size" aria-hidden="true"></i> --}}
+                                </a>
+                            </div>
                         </div>
                         <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('experience-edit-store',['id'=>$UserExperienceData->id]) }}">
                             @csrf

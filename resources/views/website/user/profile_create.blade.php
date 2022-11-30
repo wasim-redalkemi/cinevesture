@@ -26,7 +26,8 @@
                         <div class="d-flex custom_file_explorer">
                             <div class="upload_img_container">
                                 <img src="<?php if (!empty($user->profile_image)) {
-                                                echo Storage::url($user->profile_image);
+                                                // echo Storage::url($user->profile_image);
+                                                echo asset('public/storage/'.$user->profile_image);
                                             } ?>" class="upload_preview for_show croperImg" width="100%" height="100%">
                                 <div for="file-input" class="d-none">
                                     <input type="file" name="croperImg" class="@error('profile_image') is-invalid @enderror file_element image" accept=".jpg,.jpeg,.png">
@@ -60,22 +61,22 @@
                         <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content croppercrope">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title tile_text" id="modalLabel"> Image Cropper</h5>
+                                    <div class="modal-header py-1">
+                                        <h6 class="modal-title tile_text" id="modalLabel"> Image Cropper</h6>
                                         <div class="d-flex jutify-content-center">
-                                            <button type="button" class="cancel_btn mx-2" id="crop-cancel" data-dismiss="modal">Cancel</button>
-                                            <button type="button" class="submit_btn" id="crop">Save changes</button>
+                                            <button type="button" class="mx-2 modal_button" id="crop-cancel" data-dismiss="modal"><i class="fa fa-times cross_btn" aria-hidden="true"></i></button>
+                                            <button type="button" class="modal_button" id="crop"><i class="fa fa-check done_btn" aria-hidden="true"></i></button>
 
                                         </div>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="">
+                                        <div class="container">
                                             <div class="row">
-                                                <div class="col-md-2"></div>
-                                                <div class="col-md-8">
+                                                <!-- <div class="col-md-1"></div> -->
+                                                <div class="col-md-12">
                                                     <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
                                                 </div>
-                                                <div class="col-md-2"></div>
+                                                <!-- <div class="col-md-1"></div> -->
                                             </div>
                                         </div>
                                     </div>
@@ -89,9 +90,8 @@
                                 <div class="profile_input">
                                     <label>First Name</label>
                                     {{-- <input type="text" class="outline is-invalid-remove name-only form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name" value="@if(isset($user->first_name){{ $user->first_name}} @endif" --}}
-                                    <input type="text" class="outline is-invalid-remove name-only form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name" value="<?php if (isset($user->first_name)) {
-                                                                                                                                                                                                                            echo ($user->first_name);
-                                                                                                                                                                                                                        } ?>" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                    <input type="text" class="outline is-invalid-remove name-only form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name"
+                                    value="@if (!empty($user->first_name)) {{$user->first_name}} @endif" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('first_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -102,9 +102,7 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Last Name</label>
-                                    <input type="text" class="outline is-invalid-remove name-only form-control @error('last_name') is-invalid @enderror" placeholder="{{ __('Last Name') }}" name="last_name" value="<?php if (isset($user->last_name)) {
-                                                                                                                                                                                                                            echo ($user->last_name);
-                                                                                                                                                                                                                        } ?>" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                    <input type="text" class="outline is-invalid-remove name-only form-control @error('last_name') is-invalid @enderror" placeholder="{{ __('Last Name') }}" name="last_name" value="@if (!empty($user->last_name)) {{$user->last_name}} @endif" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('last_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -115,9 +113,7 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Job Title</label>
-                                    <input type="text" class="outline is-invalid-remove form-control @error('job_title') is-invalid @enderror" placeholder="Job Title" name="job_title" value="<?php if (isset($user->job_title)) {
-                                                                                                                                                                                                    echo ($user->job_title);
-                                                                                                                                                                                                } ?>" aria-label="Username" aria-describedby="basic-addon1" autofocus>
+                                    <input type="text" class="outline is-invalid-remove form-control @error('job_title') is-invalid @enderror" placeholder="Job Title" name="job_title" value="@if (!empty($user->job_title)) {{$user->job_title}} @endif" aria-label="Username" aria-describedby="basic-addon1" autofocus>
                                     @error('job_title')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -133,11 +129,8 @@
 
                                     <select name="age" class="outline is-invalid-remove @error('age') is-invalid @enderror" id="lang">
                                         <option value="">Select</option>
-
                                         @foreach($age as $a)
-                                        <option value="{{$a->id}}" <?php if ($a->id == $user->age) {
-                                                                        echo ('selected');
-                                                                    } ?>><?php echo $a->range; ?></option>
+                                        <option value="{{$a->id}}"@if ($a->id == $user->age) selected @endif>{{ $a->range }}</option>
                                         @endforeach
 
                                     </select>
@@ -324,9 +317,9 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>IMDB Profile</label>
-                                    <input type="text" class="outline is-invalid-remove form-control @error('imdb_profile') is-invalid @enderror" placeholder="IMDB Profile" name="imdb_profile" value="<?php if (isset($user->imdb_profile)) {
-                                                                                                                                                                                                            echo ($user->imdb_profile);
-                                                                                                                                                                                                        } ?>" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="url" class="outline is-invalid-remove form-control @error('imdb_profile') is-invalid @enderror" placeholder="IMDB Profile" name="imdb_profile" value="<?php if (isset($user->imdb_profile)) {
+                                        echo ($user->imdb_profile);
+                                    } ?>" aria-label="Username" aria-describedby="basic-addon1">
                                     @error('imdb_profile')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -493,11 +486,23 @@
     });
 
     $modal.on('shown.bs.modal', function() {
-        cropper = new Cropper(image, {
-            aspectRatio: 1,
-            viewMode: 3,
-            preview: '.preview'
-        });
+
+
+     cropper = new Cropper(image, {
+    dragMode: 'move',
+    autoCropArea: 0.65,
+    restore: false,
+    guides: false,
+    center: true,
+    highlight: false,
+    cropBoxMovable: true,
+    cropBoxResizable: false,
+    toggleDragModeOnDblclick: false,
+    data:{ //define cropbox size
+      width: 300,
+      height:  300,
+    },
+  });
     }).on('hidden.bs.modal', function() {
         cropper.destroy();
         cropper = null;
@@ -506,6 +511,7 @@
     function dataURLtoFile(dataurl, filename) {
         var arr = dataurl.split(','),
             mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]),
             bstr = atob(arr[1]),
             n = bstr.length,
             u8arr = new Uint8Array(n);

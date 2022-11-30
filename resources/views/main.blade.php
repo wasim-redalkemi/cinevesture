@@ -11,7 +11,6 @@
 @endsection
 
 @section('content')
-
   <div class="main-body">
     <section class="section">
       <div class="sub-section">
@@ -19,8 +18,8 @@
  
           <div class="item">
             <div class="home-upper-slider">
-              <div class="img-container">
-                <img src="{{ asset('public/images/asset/Screenshot 2021-05-28 at 11.48 1.png') }}" alt="image">
+              <div class="img-container w_maxcont">
+                <img src="{{ asset('public/images/asset/Screenshot 2021-05-28 at 11.48 1.png') }}"  height="100%" alt="image">
               </div>
               <div class="carosel-card-cntainer">
                 <div class="container">
@@ -28,11 +27,9 @@
                     <div class="col-md-12">
                       <div class="project-text mt-5 pt-2"> Projects </div>
                       <div class="project-sub-text mt-1">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                         labore
-                        et
-                        dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation.</div>
+                        </div>
                       <div class="duration-lang-text mt-1">1hr 5min | English | Horror</div>
                       <button class="watch-now-btn mt-4"><a href="{{ route('public-view', ['id'=>3]) }}">Watch now</a></button>
                     </div>
@@ -43,8 +40,8 @@
           </div>
           <div class="item">
             <div class="home-upper-slider">
-              <div class="img-container">
-                <img src="{{ asset('public/images/asset/Screenshot 2021-05-28 at 11.48 1.png') }}" alt="image">
+              <div class="img-container w_maxcont">
+                <img src="{{ asset('public/images/asset/Screenshot 2021-05-28 at 11.48 1.png') }}" height="100%" width="100%" alt="image">
               </div>
               <div class="carosel-card-cntainer">
                 <div class="container">
@@ -67,8 +64,8 @@
           </div>
           <div class="item">
             <div class="home-upper-slider">
-              <div class="img-container">
-                <img src="{{asset('public/images/asset/Screenshot 2021-05-28 at 11.48 1.png') }}" alt="image">
+              <div class="img-container w_maxcont">
+                <img src="{{asset('public/images/asset/Screenshot 2021-05-28 at 11.48 1.png') }}" height="100%" width="100%" alt="image">
               </div>
               <div class="carosel-card-cntainer">
                 <div class="container">
@@ -216,7 +213,7 @@
     $(".main_slider.owl-carousel").owlCarousel({
       center: true,
       autoPlay: 3000,
-      autoplay: true,
+      // autoplay: true,
       loop: true,
       nav: true,
       center: true,
@@ -239,7 +236,8 @@
       nav: true,
       margin: 20,
       center: true,
-      items: 1.5,
+      items: 1,
+      stagePadding: 50,
       responsive: {
         480: { items: 1 },
         768: { items: 2 },

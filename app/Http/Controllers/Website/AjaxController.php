@@ -172,7 +172,7 @@ class AjaxController extends WebController {
         ]);
         try {
             $ProjectAssociation = new ProjectAssociation();
-            $ProjectAssociation->id = 1;
+            //$ProjectAssociation->id = 1;
             $ProjectAssociation->project_id = $project_id;
             $ProjectAssociation->project_associate_title = $request->title;
             $ProjectAssociation->project_associate_name = $request->name;
