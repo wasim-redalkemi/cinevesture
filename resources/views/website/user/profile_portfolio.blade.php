@@ -58,7 +58,7 @@
                                 <div class="col-md-6">
                                 <div class="profile_input">
                                     <label for="lang">Project specific Skills</label>
-                                    <select name="project_specific_skills_id" class="outline @error('project_specific_skills_id') is-invalid @enderror" id="lang">
+                                    <select name="project_specific_skills_id[]" class="outline js-select2 @error('project_specific_skills_id') is-invalid @enderror" id="lang" multiple>
                                       <option value="">Select</option>
                                         @foreach ($skills as $k=>$v)
                                                 <option value="{{ $v->id }}" <?php if(isset($portfolio->getPortfolioSkill) && $portfolio->getPortfolioSkill->project_specific_skills_id == $v->id)
@@ -77,7 +77,7 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label for="lang">Project Location (Where it took place)</label>
-                                        <select name="project_country_id" class="@error('project_country_id') is-invalid @enderror" id="lang">
+                                        <select name="project_country_id[]" class="outline js-select2 @error('project_country_id') is-invalid @enderror" id="lang" multiple>
                                         <option value="">Select</option> 
                                         @foreach ($country as $k=>$v)
                                             <option value="{{ $v->id}}">{{  $v->name }}</option>
@@ -109,7 +109,7 @@
                                     <div class="profile_input">
                                         <div><label>Project Files</label></div>
                                         <label class="mt-3">Video Link</label>
-                                        <input type="text" class="outline is-invalid-remove form-control @error('video') is-invalid @enderror" placeholder="Paste link here" name="video" value="<?php if(isset($portfolio)){ echo($portfolio->video); }?>"
+                                        <input type="url" class="outline is-invalid-remove form-control @error('video') is-invalid @enderror" placeholder="Paste link here" name="video" value="<?php if(isset($portfolio)){ echo($portfolio->video); }?>"
                                         aria-label="Username" aria-describedby="basic-addon1">
                                         @error('video')
                                             <span class="invalid-feedback" role="alert">
@@ -168,6 +168,13 @@
     $(document).ready(function(){
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");
+    });
+
+    $(".js-select2").select2({
+        closeOnSelect: false,
+        placeholder: "Select",
+        allowClear: true,
+        tags: false
     });
 </script>
 @endpush
