@@ -28,7 +28,7 @@
                             <div class="upload_img_container">
                                 <img src="<?php if (!empty($UserOrganisation->logo)) {
                                                 echo Storage::url($UserOrganisation->logo);
-                                            } ?>" class="upload_preview">
+                                            } ?>" class="upload_preview for_show">
 
                                 <div for="file-input" class="d-none">
                                     <input type="file" name="logo" class="@error('logo') is-invalid @enderror file_element" accept=".jpg,.jpeg,.png">
@@ -38,17 +38,17 @@
                                     </span>
                                     @enderror
                                 </div>
-                                <div class="pointer open_file_explorer">
+                                <div class="pointer open_file_explorer for_hide">
                                     <div class="text-center"> <i class="fa fa-plus-circle mx-2 profile_icon deep-pink pointer" aria-hidden="true"></i></div>
                                     <div>Upload</div>
                                 </div>
                             </div>
                             <div class="mx-4 d-flex align-items-center">
                                 <div>
-                                    <div class="search-head-subtext Aubergine_at_night open_file_explorer">
+                                    <div class="search-head-subtext Aubergine_at_night open_file_explorer pointer">
                                         Upload Profile Picture
                                     </div>
-                                    <div class="search-head-subtext deep-pink">
+                                    <div class="pointer search-head-subtext deep-pink delete_image">
                                         Delete
                                     </div>
                                 </div>
@@ -345,6 +345,9 @@
 
     $(document).ready(function()
     {   
+        
+    $('.for_hide').css('display', 'block');
+                $('.for_show').css('display', 'none');
         $('.open_file_explorer').click(function(e) 
         {
             $(this).parents('.custom_file_explorer').find('.file_element').click();
@@ -358,6 +361,8 @@
                 output.attr('src', reader.result);
             };
             reader.readAsDataURL(file[0]);
+            $('.for_hide').css('display', 'none');
+                $('.for_show').css('display', 'block');
         });
     });
 
@@ -393,6 +398,15 @@
             } 
         });
     });
+    $('.delete_image').on('click', function() {
+        var image_x = document.getElementsByClassName("upload_img_container");
+        $(".upload_preview").attr("src", "");
+        // $("img").removeClass("croperImg");
+
+        $('.for_hide').css('display', 'block');
+        $('.for_show').css('display', 'none');
+
+    })
         
 </script>
 @endpush

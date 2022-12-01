@@ -131,7 +131,7 @@
                                         <input type="text" class="form-control" name="project_milestone_description" placeholder="Description">
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>Milestone Budget (USD)</label>
                                         <input type="number" class="form-control no_number_arrows" name="project_milestone_budget" placeholder="Budget (USD)">
@@ -144,16 +144,16 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2 d-flex align-items-end">
-                                    <div class="d-flex checkbox_btn mb-2">
+                                    <div class="d-flex checkbox_btn mb-2 mt-2 mt-md-0">
                                         <input type="checkbox" class="checkbox_btn" name="project_milestone_complete" value="0" aria-label="">
                                         <div class="verified-text deep-pink mx-2">Mark Complete</div>
                                     </div>
                                 </div>
-                                <div class="col-md-1 d-flex align-items-end mt-2">
+                                <!-- <div class="col-md-1 d-flex align-items-end mt-2">
                                     <div class="profile_input">
                                         <div class="save_add_btn">Save</div>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="row">
                                 <div class="col-md-3 d-flex align-items-end mt-2">

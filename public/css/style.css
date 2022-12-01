@@ -26,6 +26,7 @@ body {
     height: 55px;
     position: relative;
     top: 100px;
+    z-index: 200;
 }
 
 .navbar-nav .header-nav-link {
@@ -1190,6 +1191,7 @@ body {
     border: none;
     color: #FFFFFF;
     font-size: 14px;
+    text-decoration: none;
 }
 .guide_gallery_btn {
     padding: 9px 16px;
@@ -1960,7 +1962,7 @@ button, input, optgroup, select, textarea {
     justify-content: center;
     /* margin: 2%; */
 }
-.home_img_wrap img {
+.home_img_wrap img, .root_img {
     max-height: 100%;
     height: auto;
     position: relative;
@@ -1968,6 +1970,15 @@ button, input, optgroup, select, textarea {
     width: auto !important;
     text-align: center;
 }
+
+.organisation_img_warper {
+    width: 160px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .input_wraper {
     min-height: 143px;
     background: rgba(246, 239, 251, 0.8);
