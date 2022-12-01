@@ -337,7 +337,7 @@ class UserController extends WebController
             $portfolio->project_title = $request->project_title;
             $portfolio->description = $request->description;
             $portfolio->completion_date = $request->completion_date;
-            $portfolio->video = $request->video;
+            $portfolio->video = json_encode(['video_url'=>$request->video_url,'video_thumbnail'=>$request->video_thumbnail]);
 
             if ($portfolio->save()) {
                 if (isset($request->project_specific_skills_id)) {
@@ -409,6 +409,7 @@ class UserController extends WebController
                 $skills = MasterSkill::query()->get();
                 $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
                 $UserPortfolioEdit = UserPortfolio::query()->where('id', $id)->get();
+                $UserPortfolioEdit[0]->video = json_decode($UserPortfolioEdit[0]->video, true);
                 $UserPortfolioImages = UserPortfolioImage::query()->where('portfolio_id', $id)->get();
                 $UserPortfolioSkills = UserPortfolioSpecificSkills::query()->where('portfolio_id', $id)->get();
                 $UserPortfolioLocations = UserPortfolioLocation::query()->where('portfolio_id', $id)->get();
@@ -446,7 +447,7 @@ class UserController extends WebController
             $portfolio->project_title = $request->project_title;
             $portfolio->description = $request->description;
             $portfolio->completion_date = $request->completion_date;
-            $portfolio->video = $request->video;
+            $portfolio->video = json_encode(['video_url'=>$request->video_url,'video_thumbnail'=>$request->video_thumbnail]);
 
             if ($portfolio->update()) {
                 if (isset($request->project_specific_skills_id)) {
@@ -472,7 +473,7 @@ class UserController extends WebController
 
             $data_to_insert = [];
             foreach ($request->toArray() as $k => $v) {
-                if (substr($k, 0, 14) == 'project_image_') {
+                if (strpos($k, 'portfolio-image') !== false) {
                     $image_file_name = $k;
                     if ($request->hasFile($image_file_name)) {
                         $file = $request->file($image_file_name);
