@@ -56,12 +56,16 @@
                                 <div class="col-md-6">
                                 <div class="profile_input">
                                     <label for="lang">Project specific Skills</label>
-                                    <select name="project_specific_skills_id" class="@error('project_specific_skills_id') is-invalid @enderror" id="lang">
+                                    <select name="project_specific_skills_id" class="outline js-select2 @error('project_specific_skills_id') is-invalid @enderror" id="lang" multiple>
                                         @foreach ($skills as $k=>$v)
                                             <option
                                                 @php
-                                                if ($user_portfolio_skill[0]['project_specific_skills_id'] == $v->id) {
-                                                    echo 'selected';
+                                                if (count($user_portfolio_skill)) {
+                                                    foreach ($user_portfolio_skill as $key => $value) {
+                                                        if ($value['project_specific_skills_id'] == $v->id) {
+                                                            echo 'selected';
+                                                        }
+                                                    }
                                                 }
                                                 @endphp
                                                 value="{{ $v->id }}">{{  $v->name }}
@@ -80,12 +84,16 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label for="lang">Project Location (Where it took place)</label>
-                                        <select name="project_country_id" class="@error('project_country_id') is-invalid @enderror" id="lang">
+                                        <select name="project_country_id[]" class="outline js-select2 @error('project_country_id') is-invalid @enderror" id="lang" multiple>
                                         @foreach ($country as $k=>$v)
                                             <option
                                                 @php
-                                                if ($UserPortfolioEdit[0]['project_country_id'] == $v->id) {
-                                                    echo 'selected';
+                                                if (count($user_portfolio_location)) {
+                                                    foreach ($user_portfolio_location as $key => $value) {
+                                                        if ($value['location_id'] == $v->id) {
+                                                            echo 'selected';
+                                                        }
+                                                    }
                                                 }
                                                 @endphp
                                             value="{{ $v->id }}">{{  $v->name }}</option>
@@ -118,7 +126,7 @@
                                     <div class="profile_input">
                                         <div><label>Project Files</label></div>
                                         <label class="mt-3">Video Link</label>
-                                        <input type="text" class="form-control @error('video') is-invalid @enderror" placeholder="Paste link here" name="video" value="<?php if(isset($UserPortfolioEdit[0]->video)){ echo($UserPortfolioEdit[0]->video); }?>" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="url" class="form-control @error('video') is-invalid @enderror" placeholder="Paste link here" name="video" value="<?php if(isset($UserPortfolioEdit[0]->video)){ echo($UserPortfolioEdit[0]->video); }?>" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('video')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -151,9 +159,18 @@
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-end mt-4">
                                     <button class="cancel_btn mx-3">Cancel</button>
-                                    <button class="save_add_btn">Save & add another</button>
+                                    {{-- <button class="save_add_btn">Save & add another</button> --}}
+                                    <button type="button" name="saveAndAnother" value="false" class="portfolio_save_btn save_add_btn">Save & add another</button>
+                                    <input type="hidden" id="save_btn_value" name="saveButtonType" value="">
+
                                     <input type="hidden" name="portfolio_id" value="{{ $UserPortfolioEdit[0]['id']  }}">
-                                    <button type="submit" class="guide_profile_btn mx-3">Save & next</button>
+                                    {{-- <button type="submit" class="guide_profile_btn mx-3">Save & next</button> --}}
+                                    <button type="button" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save & next</button>
+
+                                    {{-- <button type="button" name="saveAndAnother" value="false" class="portfolio_save_btn save_add_btn">Save & add another</button>
+                                    <input type="hidden" id="save_btn_value" name="saveButtonType" value="">
+                                    <input type="hidden" name="flag" value="<?=request('flag')?>">
+                                    <button type="button" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save & next</button> --}}
                                     </div>
                                 </div>
                             </div>
@@ -175,6 +192,18 @@
     $(document).ready(function(){
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");
+    });
+
+    $(".js-select2").select2({
+        closeOnSelect: false,
+        placeholder: "Select",
+        allowClear: true,
+        tags: false
+    });
+
+    $(".portfolio_save_btn").on("click", function () {
+        $("#save_btn_value").attr("value", $(this).attr("name"))
+        $(this).parents('form').submit();
     });
 </script>
 @endpush

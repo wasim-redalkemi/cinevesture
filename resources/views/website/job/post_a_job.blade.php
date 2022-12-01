@@ -64,7 +64,7 @@
                                         <label>Workspace Type</label>
                                         <select class="emp-select2 @error('workspaces') is-invalid @enderror" required id="workspaces" name="workspaces[]" multiple="multiple">
                                             @foreach($workspaces as $work)
-                                                <option value="{{$work->id}}" @if(count($userJobData['job_work_spaces'])>0 && in_array($work->id, $userJobData['job_work_spaces']))selected @endif>{{$work->name}}</option>
+                                                <option value="{{$work->id}}" @if(!empty($userJobData['job_work_spaces']) && in_array($work->id, $userJobData['job_work_spaces']))selected @endif>{{$work->name}}</option>
                                             @endforeach
                                         </select>
 
@@ -126,7 +126,7 @@
                                         <label>Skills (You can add upto 10 skills)</label>
                                         <select name="skills[]" class="outline is-invalid-remove js-select2" required id="lang" multiple>
                                             @foreach ($skills as $k=>$v)
-                                            <option value="{{ $v->id }}" @if(count($userJobData['job_skills'])>0 && in_array($v->id, $userJobData['job_skills']))selected @endif>{{ $v->name }}</option>
+                                            <option value="{{ $v->id }}" @if(!empty($userJobData['job_skills']) && in_array($v->id, $userJobData['job_skills']))selected @endif>{{ $v->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('skills')
