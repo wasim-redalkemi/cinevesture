@@ -170,32 +170,35 @@
                                         <div class="contact-page-text deep-pink mb-2">Portfolio</div>
                                         <div class="mx-3 icon_container"><a href="{{ route('portfolio-create',['flag'=>'privateView']) }}"><i class="fa fa-plus deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                     </div>
+                                    @if (count($portfolio)>0)
                                     <div class="portfolio owl-carousel">
-                                        @if (count($portfolio)>0)
                                         @foreach ($portfolio as $k=>$v)
                                         @php
                                         $img = '';
-                                        if(isset($v['get_portfolio'][0]['file_link']))
-                                        {
-                                        $img = Storage::url($v['get_portfolio'][0]['file_link']);
+                                        if (isset($v['get_portfolio'][0]['file_link'])) {
+                                            $img = Storage::url($v['get_portfolio'][0]['file_link']);
+                                        } else {
+                                            $img = asset('public/images/asset/user-profile.png');
                                         }
                                         @endphp
-                                        <div class="item portfolio_item" data-toggle="modal" data-target="#exampleModal">
-                                            <img src="<?php echo $img ?>" class="portfolio_img">
+                                        <div class="item portfolio_item" onclick="portfolio_model({{$v['id']}})">
+                                            <div class="portfolio_item_image">
+                                                <img src="<?php echo $img ?>" class="portfolio_img" width="100%">
+                                            </div>
                                             <div class="d-flex justify-content-between mt-2">
                                                 <div class="organisation_cmn_text">{{$v['project_title']}}</div>
                                                 <div class="icon_container"> <a href="{{ route('portfolio-edit', ['id'=>$v['id']]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                             </div>
                                         </div>
                                         @endforeach
-                                        <div class="clearfix"></div>
-                                        @else
-                                        <span><b>-</b></span>
-                                        @endif
                                     </div>
+                                    <div class="clearfix"></div>
+                                    @else
+                                    <span><b>-</b></span>
+                                    @endif
                                     <!-- modal  -->
                                     <div>
-                                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="portfolioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-body">
@@ -204,22 +207,10 @@
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
-                                                        <div class="mt-1 contact-page-text">Title</div>
-                                                        <div class="mt-3 flow_step_text">20, October, 2022</div>
-
-                                                        <div class="d-flex mt-3">
-                                                            <button class="curv_cmn_btn">Skills 1</button>
-                                                            <button class="curv_cmn_btn mx-2">Skills 1</button>
-                                                            <button class="curv_cmn_btn">Skills 1</button>
-                                                            <button class="curv_cmn_btn mx-2">Skills 1</button>
+                                                        <div class="modal_content">
+                                                            
                                                         </div>
-                                                        <div class="mt-3 guide_profile_main_subtext"> Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                                                            Sed impedit quisquam laudantium! Quisquam expedita possimus explicabo! Delectus,
-                                                            minima quas nisi dolor doloremque unde, enim est, dolores cum deserunt temporibus ad.</div>
-                                                        <div class="guide_profile_main_subtext deep-pink">www.xyz.com</div>
-                                                        <div class="mt-3">
-                                                            <img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" width="100%" height="100%" />
-                                                        </div>
+                                                  
                                                     </div>
                                                 </div>
                                             </div>
@@ -344,34 +335,11 @@
         $("#success-toast").toast("show");
     });
 
-    // $(".owl-carousel").owlCarousel({
-    //     center: true,
-    //     autoPlay: 3000,
-    //     autoplay: true,
-    //     // loop: true,
-    //     nav: true,
-    //     center: true,
-    //     margin: 10,
-    //     items: 5,
-    //     responsive: {
-    //         480: {
-    //             items: 3
-    //         },
-    //         768: {
-    //             items: 4
-    //         },
-    //         1024: {
-    //             items: 5
-    //         }
-    //     },
-    // });
-
-
     $(".portfolio.owl-carousel").owlCarousel({
         center: true,
         autoPlay: 1000,
         autoplay: true,
-        loop: false,
+        loop: true,
         nav: true,
         margin: 20,
         center: true,
@@ -388,5 +356,32 @@
             }
         },
     });
+
+    function portfolio_model(id)
+    {
+        $("#portfolioModal .modal_content").html('');
+        $.ajax(
+        {
+            url:"{{ route('protfolio-modal') }}",
+            type:'POST',
+            dataType:'json',
+            data:{portfolioId:id,"_token": "{{ csrf_token() }}"},
+            success:function(response)
+            {
+                console.log(response)
+                $("#portfolioModal .modal_content").html(response);
+                // toastMessage(response.status, response.msg);
+                $('#portfolioModal').modal('show');
+                // $('.modal-backdrop').remove();
+            },
+            error:function(response,status,error)
+            {   
+                console.log(response);
+                console.log(status);
+                console.log(error);
+            } 
+        });
+    }
+    
 </script>
 @endpush

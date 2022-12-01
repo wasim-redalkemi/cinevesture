@@ -69,10 +69,12 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/upload-image',[AjaxController::class, 'uploadImage'])->name('upload-image');
         Route::post('/upload-doc',[AjaxController::class, 'uploadDoc'])->name('ajax/upload-doc');
         Route::post('/add-proj-association/{project_id}',[AjaxController::class, 'addProjAssociationEntry'])->name('add-proj-association');
+        Route::post('/update-proj-association/{associate_id}',[AjaxController::class,'updateProjAssociationEntry'])->name('update-proj-association');
         Route::delete('/delete-proj-association/{associate_id}',[AjaxController::class, 'removeProjAssociationEntry'])->name('delete-proj-association');
         Route::post('/add-proj-milestone/{project_id}',[AjaxController::class,'addProjMilestoneEntry'])->name('add-proj-milestone');
         Route::post('/update-proj-milestone/{milestone_id}',[AjaxController::class,'updateProjMilestoneEntry'])->name('update-proj-milestone');
         Route::delete('/delete-proj-milestone/{milestone_id}',[AjaxController::class,'removeProjMilestoneEntry'])->name('delete-proj-milestone');
+        Route::post('/add-portfolio-img/{portfolio_id}',[AjaxController::class,'removeProjMilestoneEntry'])->name('add-portfolio-img');
     });
 
     Route::group(['prefix'=>'user'],function()
@@ -93,6 +95,9 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::get('/portfolio-edit/{id}', [UserController::class, 'portfolioEdit'])->name('portfolio-edit');
         Route::post('/portfolio-edit-store/{id}', [UserController::class, 'portfolioEditStore'])->name('portfolio-edit-store');
         Route::get('/protfolio-delete', [UserController::class, 'protfolioDelete'])->name('protfolio-delete');
+
+
+        Route::post('/protfolio-modal', [UserController::class, 'getPortfolioHtml'])->name('protfolio-modal');
 
         Route::get('/experience-create/{id?}', [UserController::class, 'experienceCreate'])->name('experience-create');
         Route::post('/experience-store/{id?}', [UserController::class, 'experienceStore'])->name('experience-store');
