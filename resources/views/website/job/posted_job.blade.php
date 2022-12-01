@@ -32,76 +32,40 @@
                             <div class="posted_job_header"><a href="{{ route('posted-job',['id'=>auth()->user()->id,'status'=>'unpublished']) }}" class="posted_job_header_link px-3 <?php if($status =='unpublished' ){echo 'active_job_page';}?>">Unpublished Jobs</a></div>
                         </div>
                     </div>
-                    @if (count($jobs['data'])>0)
-                        @foreach ($jobs['data'] as $k=>$v)
-
-                            <div class="profile_wraper_padding jobElem">
-                                <div class="d-flex justify-content-between">
-                                    <div class="guide_profile_main_text">
-                                        <a href="{{ route('posted-job-single-view',['job_id'=>$v['id']]) }}">@if (!empty($v['title'])) {{$v['title']}} @endif</a>
-                                    </div>
-                                    <div class="dropdown  search-page">
-                                        <div class="" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa fa-ellipsis-h aubergine icon-size" aria-hidden="true"></i>
-                                        </div>
-                                        <ul class="dropdown-menu profile_dropdown_menu p-2">
-                                            <li>
-                                            <a href="{{ route('job-create-page',['job_id'=>$v['id']]) }}">  Edit Job</a>
-                                            </li>
-                                            <li>
-                                            <a href="">  Promote Job</a>
-                                            </li>
-                                            <li>
-                                            <a href="">   Unpublish Job</a>
-                                            </li>
-                                            <li>
-                                            <a href="">  Delete Job </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="preview_headtext lh_54 candy-pink">
-                                    @if (!empty($v['company_name'])) {{$v['company_name']}} @endif 
-                                    - 
-                                    
-                                    @if (!empty($v['job_location'])>0)
-                                        {{$v['job_location']['name']}}
-                                    @else
-                                        <span><b>-</b></span>                    
-                                    @endif
-                                    -
-                                    @if (count($v['job_employements'])>0)
-                                        @foreach ($v['job_employements'] as $k1=>$v1)
-                                        {{$v1['name']}}
-                                        @endforeach
-                                    @else
-                                        <span><b>-</b></span>                    
-                                    @endif
-                                </div>
-                                <div class="posted_job_header Aubergine_at_night">
-                                    @if (!empty($v['description'])) {{$v['description']}} @endif
-                                </div>
-                                <div class="d-flex justify-content-between mt-4">
-                                    <div class="d-flex flex-wrap">
-                                        @if (count($v['job_skills'])>0)
-                                        @foreach ($v['job_skills'] as $k1=>$v1)
-                                            <button class="curv_cmn_btn skill_container"> {{$v1['name']}}</button>                               
-                                        @endforeach
-                                        @else
-                                            <span><b>-</b></span>                    
-                                        @endif
-                                    </div>
-                                    <div>
-                                        
-                                        <button class="guide_profile_btn w_150">View Applications</button>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        @endforeach
-                    @else
-                        <div class="not-found-text">
-                            <p>No Data Found</p>
+                    <div class="preview_headtext lh_54 candy-pink">
+                        @if (!empty($v['company_name'])) {{$v['company_name']}} @endif 
+                        - 
+                        
+                        @if (!empty($v['job_location'])>0)
+                            {{$v['job_location']['name']}}
+                        @else
+                            <span><b>-</b></span>                    
+                        @endif
+                        -
+                        @if (count($v['job_employements'])>0)
+                            @foreach ($v['job_employements'] as $k1=>$v1)
+                            {{$v1['name']}}
+                            @endforeach
+                        @else
+                            <span><b>-</b></span>                    
+                        @endif
+                    </div>
+                    <div class="posted_job_header Aubergine_at_night">
+                        @if (!empty($v['description'])) {{$v['description']}} @endif
+                    </div>
+                    <div class="d-flex justify-content-between mt-4">
+                        <div class="d-flex flex-wrap">
+                            @if (count($v['job_skills'])>0)
+                            @foreach ($v['job_skills'] as $k1=>$v1)
+                                <button class="curv_cmn_btn skill_container"> {{$v1['name']}}</button>                               
+                            @endforeach
+                            @else
+                                <span><b>-</b></span>                    
+                            @endif
+                        </div>
+                        <div>
+                            
+                            <a href="{{route('showJobApplicants',['jobId'=>$v['id']])}}" class="guide_profile_btn w_150">View Applications</a>
                         </div>
                     @endif
                     <div>

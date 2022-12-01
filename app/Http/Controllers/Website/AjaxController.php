@@ -10,6 +10,7 @@ use App\Http\Controllers\Helper\AppUtilityController;
 use App\Models\ProjectMedia;
 use App\Models\ProjectAssociation;
 use App\Models\ProjectMilestone;
+use App\Models\UserPortfolioImage;
 
 class AjaxController extends WebController {
     CONST AJAX_CALL_SUCCESS = 1;
@@ -264,6 +265,43 @@ class AjaxController extends WebController {
             $media = ProjectMilestone::find($milestone_id);
             if($media){
                 $isDeleted = $media->delete();
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,['isDeleted'=>$isDeleted],"Recource deleted successfully.","ER000","");
+            } else {
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER401","Could not find the resource.");
+            }
+        } catch (Exception $e) {
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
+        }
+    }
+
+    /* not in use anywhere currently */
+    public function addPortfolioImg(Request $request, $portfolio_id = null){
+        $request->validate([
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        try {
+            $file = $request->file("file");
+            $fileName = $file->getClientOriginalName();
+            $newName = str_replace(" ","_",date('YmdHis').$fileName);
+            $locationPath  = "project/image";
+            $uploadFile = $this->uploadFile($locationPath, $file, $newName);
+            $UserPortfolioImage = new UserPortfolioImage();
+            //$ProjectAssociation->id = 1;
+            $UserPortfolioImage->portfolio_id = $portfolio_id;
+            $UserPortfolioImage->file_type = "image";
+            $UserPortfolioImage->file_link = $uploadFile;
+            $UserPortfolioImage->save();
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$UserPortfolioImage,"Success","ER000","");
+        } catch (Exception $e) {
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
+        }
+    }
+
+    public function deletePortfolioImg(Request $request, $img_id = null){
+        try {
+            $media = UserPortfolioImage::find($img_id);
+            if($media){
+                $isDeleted = true;//$media->delete();
                 return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,['isDeleted'=>$isDeleted],"Recource deleted successfully.","ER000","");
             } else {
                 return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER401","Could not find the resource.");

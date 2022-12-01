@@ -337,7 +337,7 @@
                                         <tr>
                                             <td class="public-head-subtext white">{{ $v['description'] }}</td>
                                             <td class="aubergine project-sub-text white">{{ $v['budget'] }}</td>
-                                            <td class="aubergine project-sub-text white">{{ $v['traget_date'] }}</td>
+                                            <td class="aubergine project-sub-text white">{{ $v['target_date'] }}</td>
                                         </tr>
                                     @endif
                                 @endforeach

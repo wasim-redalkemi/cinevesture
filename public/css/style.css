@@ -2080,8 +2080,19 @@ select {
     background-position-y: 5px !important;
   }
 .favourite_img_card {
-    width: 100%;
+    width: 290px;
     height: 215px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.home_img_wrap img, .root_img {
+    max-height: 100%;
+    height: auto;
+    position: relative;
+    max-width: 100%;
+    width: auto !important;
+    text-align: center;
 }
 .plan_wraper {
     background: #1C0330;
