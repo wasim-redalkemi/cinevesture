@@ -246,7 +246,7 @@
                 <div class="row mt-2">
                     <div class="col-4 col-md-3 preview_subtext">{{ $v['description'] }}</div>
                     <div class="col-4 col-md-3 preview_subtext">{{ $v['budget'] }}</div>
-                    <div class="col-4 col-md-3 preview_subtext">{{ $v['traget_date'] }}</div>
+                    <div class="col-4 col-md-3 preview_subtext">{{ $v['target_date'] }}</div>
                 </div>
                 @endforeach                    
                 @endif
