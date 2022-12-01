@@ -24,7 +24,7 @@ class PostUserPortfolioRequest extends FormRequest
     public function rules()
     {
         return [
-            'project_title' => 'nullable|max:255',
+            'project_name' => 'nullable|max:100',
             'description' => 'nullable|max:600',
             'completion_date' => 'nullable',
             'video' => 'nullable|url',

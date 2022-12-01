@@ -19,7 +19,8 @@
                             <div class="profile_cmn_head_text">Edit Portfolio</div>
                             <div>
                                 <a href="{{route('protfolio-delete',['id'=>$UserPortfolioEdit[0]['id']])}}">
-                                    <i class="fa fa-trash-o  deep-pink icon-size" aria-hidden="true"></i>
+                                    <img src="{{ asset('public/images/asset/delete-icon.svg') }}"/>
+                                    {{-- <i class="fa fa-trash-o  deep-pink icon-size" aria-hidden="true"></i> --}}
                                 </a>
                             </div>
                         </div>                        

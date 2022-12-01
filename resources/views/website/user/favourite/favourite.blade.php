@@ -30,7 +30,7 @@
                             <div class="favourite_img_card"><img src="{{ Storage::url($v['projects']['project_image']['file_link']) }}" width=100% alt="image"></div>
                         @else
                             {{-- <div class="favourite_img_card"><img src="{{ asset('public/images/asset/100_no_img.jpg') }}" alt="image""></div> --}}
-                            <img src="{{ asset('public/images/asset/100_no_img.jpg') }}" width="100%" height="197px" />
+                         <div class="favourite_img_card">   <img src="{{ asset('public/images/asset/100_no_img.jpg') }}" class="root_img" /></div>
 
                         @endif
                         <div class="d-flex align-items-center justify-content-between">
