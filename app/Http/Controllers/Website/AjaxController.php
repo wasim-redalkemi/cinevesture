@@ -172,12 +172,30 @@ class AjaxController extends WebController {
         ]);
         try {
             $ProjectAssociation = new ProjectAssociation();
-            $ProjectAssociation->id = 1;
+            //$ProjectAssociation->id = 1;
             $ProjectAssociation->project_id = $project_id;
             $ProjectAssociation->project_associate_title = $request->title;
             $ProjectAssociation->project_associate_name = $request->name;
             $ProjectAssociation->save();
             return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$ProjectAssociation,"Success","ER000","");
+        } catch (Exception $e) {
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
+        }
+    }
+
+    public function updateProjAssociationEntry(Request $request, $associate_id = null){
+        try {
+            $associate = ProjectMilestone::find($associate_id);
+            if($associate){
+                if(isset($request->project_associate_title))
+                    $associate->project_associate_title = $request->project_associate_title;
+                if(isset($request->project_milestone_budget))
+                    $associate->project_associate_name = $request->project_associate_name;
+                $associate->save();
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$associate,"Record updated successfully.","ER000","");
+            } else {
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER401","Could not find the resource.");
+            }
         } catch (Exception $e) {
             return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
         }

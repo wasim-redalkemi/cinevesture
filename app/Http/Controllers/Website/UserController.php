@@ -276,8 +276,7 @@ class UserController extends WebController
                 
                 $nameStr = date('_YmdHis');
                 $newName = $nameStr .  $fileName ;
-                 $path = $this->uploadFile($locationPath,base64_decode($image), $newName);
-             
+                $path = $this->uploadFile($locationPath,base64_decode($image), $newName);
 
                 // $file = $request->file('croppedImg');
                 // $originalFile = $file->getClientOriginalName();
@@ -289,11 +288,8 @@ class UserController extends WebController
                 // $locationPath  = "user";
                 // $uploadFile = $this->uploadFile($locationPath, $file, $newName);
                 // $user->profile_image = $uploadFile;
-
-
-
-              
                 $user->profile_image = $locationPath.$newName;
+
             }
             if ($user->save()) {
                 if (isset($request->skills)) {
@@ -319,7 +315,7 @@ class UserController extends WebController
                 return back()->with('error', 'Something went wrong ,please try again.');
             }
         } catch (Exception $e) {
-            return back()->with('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong. '.$e->getMessage());
         }
     }
 
@@ -381,7 +377,7 @@ class UserController extends WebController
 
             $data_to_insert = [];
             foreach ($request->toArray() as $k => $v) {
-                if (substr($k, 0, 14) == 'project_image_') {
+                if (strpos($k, 'portfolio-image') !== false) {
                     $image_file_name = $k;
                     if ($request->hasFile($image_file_name)) {
                         $file = $request->file($image_file_name);

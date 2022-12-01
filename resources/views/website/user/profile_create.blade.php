@@ -330,9 +330,10 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>LinkedIn Profile</label>
-                                    <input type="url" class="outline is-invalid-remove form-control @error('linkedin_profile') is-invalid @enderror" placeholder="LinkedIn Profile" name="linkedin_profile" value="<?php if (isset($user->linkedin_profile)) {
-                                                                                                                                                                                                                        echo ($user->linkedin_profile);
-                                                                                                                                                                                                                    } ?>" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" class="outline is-invalid-remove form-control @error('linkedin_profile') is-invalid @enderror" placeholder="LinkedIn Profile" name="linkedin_profile"
+                                    value="<?php if (isset($user->linkedin_profile)) {
+                                    echo ($user->linkedin_profile);
+                                    } ?>" aria-label="Username" aria-describedby="basic-addon1">
                                     @error('linkedin_profile')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -343,9 +344,8 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Website</label>
-                                    <input type="url" class="outline is-invalid-remove form-control @error('website') is-invalid @enderror" placeholder="Website" aria-label="Username" name="website" value="<?php if (isset($user->website)) {
-                                                                                                                                                                                                                    echo ($user->website);
-                                                                                                                                                                                                                } ?>" aria-describedby="basic-addon1">
+                                    <input type="text" class="outline is-invalid-remove form-control @error('website') is-invalid @enderror" placeholder="Website" aria-label="Username" name="website" 
+                                    value="<?php if (isset($user->website)) {echo ($user->website);} ?>" aria-describedby="basic-addon1">
                                     @error('website')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -358,9 +358,8 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Introduction Video</label>
-                                    <input type="url" class="outline is-invalid-remove form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="<?php if (isset($user->intro_video_link)) {
-                                                                                                                                                                                                                        echo ($user->intro_video_link);
-                                                                                                                                                                                                                    } ?>" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" class="outline is-invalid-remove form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" 
+                                    value="<?php if (isset($user->intro_video_link)) {echo ($user->intro_video_link);} ?>" aria-label="Username" aria-describedby="basic-addon1">
                                     @error('intro_video_link')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
