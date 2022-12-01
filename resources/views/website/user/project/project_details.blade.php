@@ -44,10 +44,10 @@
                             <div class="col-md-6">
                                 <div class="mt_16">
                                     <label>Genre <span style = "color:red">*</span></label>
-                                    <select name="gener[]" class="js-select2 @error('gener') is-invalid @enderror" autofocus multiple>
-                                        <option value="">Select</option>
+                                    <select name="gener[]" class="js-select2 @error('gener') is-invalid @enderror" autofocus multiple required>
+                                        <option value="" label="Select"></option>
                                         @foreach ($Genres as $k=>$v)
-                                            <option value="{{ $v->id }}"@if(!empty($projectData[0]['genres'] )&&(in_array($v->id, $projectData[0]['genres'])))selected @endif>{{  $v->name }}</option>
+                                            <option value="{{ $v->id }}"@if(!empty($projectData[0]['genres'] )&&(in_array($v->id, $projectData[0]['genres'])))selected @endif >{{  $v->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('gener')
@@ -76,7 +76,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Total Budget (USD) <span style = "color:red">*</span></label>
-                                    <input type="number" class="form-control no_number_arrows" name="total_budget" pattern="[0-9]" placeholder="Empty input" value="<?php if(!empty($projectData[0]['total_budget'])){ echo $projectData[0]['total_budget']; } ?>">
+                                    <input type="number" class="form-control no_number_arrows" name="total_budget" pattern="[0-9]" placeholder="Empty input" required value="<?php if(!empty($projectData[0]['total_budget'])){ echo $projectData[0]['total_budget']; } ?>">
                                     @error('total_budget')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -89,7 +89,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Financing Secured (USD) <span style = "color:red">*</span></label>
-                                    <input type="number" class="form-control no_number_arrows" name="financing_secured" pattern="[0-9]" placeholder="Empty input" value="<?php if(!empty($projectData[0]['financing_secured'])){ echo $projectData[0]['financing_secured']; } ?>">
+                                    <input type="number" class="form-control no_number_arrows" name="financing_secured" pattern="[0-9]" required placeholder="Empty input" value="<?php if(!empty($projectData[0]['financing_secured'])){ echo $projectData[0]['financing_secured']; } ?>">
                                     @error('financing_secured')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

@@ -15,6 +15,6 @@ class UserPortfolio extends Model
 
     public function getPortfolioSkill()
     {
-        return $this->hasOne(UserPortfolioSpecificSkills::class,'portfolio_id');
+        return $this->belongsToMany(MasterSkill::class,UserPortfolioSpecificSkills::class,'portfolio_id','project_specific_skills_id');
     }
 }
