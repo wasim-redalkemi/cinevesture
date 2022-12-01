@@ -74,7 +74,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::post('/add-proj-milestone/{project_id}',[AjaxController::class,'addProjMilestoneEntry'])->name('add-proj-milestone');
         Route::post('/update-proj-milestone/{milestone_id}',[AjaxController::class,'updateProjMilestoneEntry'])->name('update-proj-milestone');
         Route::delete('/delete-proj-milestone/{milestone_id}',[AjaxController::class,'removeProjMilestoneEntry'])->name('delete-proj-milestone');
-        Route::post('/add-portfolio-img/{portfolio_id}',[AjaxController::class,'removeProjMilestoneEntry'])->name('add-portfolio-img');
+        Route::post('/add-portfolio-img/{portfolio_id}',[AjaxController::class,'addPortfolioImg'])->name('add-portfolio-img');
+        Route::delete('/delete-portfolio-img/{img_id}',[AjaxController::class,'deletePortfolioImg'])->name('delete-portfolio-img');
     });
 
     Route::group(['prefix'=>'user'],function()

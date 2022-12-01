@@ -284,13 +284,13 @@
         }
 
         let addImgUploadElem = function(){
-            console.log("current imageCnt = "+imageCnt);
-            let newcnt = imageCnt+1;
+            imageCnt = $(parentElemId+" .portfolio-images").children('.img-item').length;
+            lastid = $(parentElemId+" .portfolio-images").children('.img-item').last().attr('id').split("-")[3];
+            let newcnt = lastid+1;
             if(maxImgCnt == imageCnt){
                 createToast("You can upload only upto "+maxImgCnt+" images.","E");
                 return;
             }
-
             let html = '';
             html += '<div id="portfolio-img-new-'+newcnt+'" class="col-md-4 img-item">';
                 html += '<div class="open_file_explorer profile_upload_container h_66">';
@@ -312,10 +312,8 @@
                 html += '</div>';
                 html += '<div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 4MB</div>';
             html += '</div>';
-            $(html).insertAfter(parentElemId+" #portfolio-img-new-"+imageCnt);
-            imageCnt++;
+            $(html).insertAfter(parentElemId+" #portfolio-img-new-"+lastid);
             bindActions();
-            console.log("new imageCnt = "+imageCnt);
         }
 
         return {

@@ -25,10 +25,10 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="profile_input">
-                                    <label>Logline *</label>
+                                    <label>Logline <span style = "color:red">*</span></label>
                                     <!-- <input type="text" class="form-control" name="logline"  placeholder="Logline" required> -->
                                 </div>
-                                <textarea class="form-control controlTextLength" text-length = "60" maxlength="60" placeholder="Logline" name="logline" aria-label="With textarea" style="border: 1px solid #4D0D8A;" rows="1">@if (!empty($projectDescription[0]->logline)){{ $projectDescription[0]->logline }}
+                                <textarea class="form-control controlTextLength" text-length = "60" maxlength="60" placeholder="Logline" name="logline" aria-label="With textarea" style="border: 1px solid #4D0D8A;" rows="1" required>@if (!empty($projectDescription[0]->logline)){{ $projectDescription[0]->logline }}
                                 @endif</textarea>
                                 @error('Logline')
                                 <span class="invalid-feedback" role="alert">
@@ -40,8 +40,8 @@
                         <div class="row">
                             <div class="col-md-10">
                                 <div class="profile_input">
-                                    <label>Synopsis/Brief Description *</label>
-                                    <textarea class="form-control controlTextLength" text-length = "600" maxlength="600" name="synopsis" aria-label="With textarea">@if (!empty($projectDescription[0]->synopsis)){{ $projectDescription[0]->synopsis }}
+                                    <label>Synopsis/Brief Description <span style = "color:red">*</span></label>
+                                    <textarea class="form-control controlTextLength" text-length = "600" maxlength="600" name="synopsis" aria-label="With textarea" required>@if (!empty($projectDescription[0]->synopsis)){{ $projectDescription[0]->synopsis }}
                                     @endif</textarea>
                                     @error('synopsis')
                                     <span class="invalid-feedback" role="alert">
@@ -54,9 +54,9 @@
                         <div class="row">
                             <div class="col-md-10">
                                 <div class="profile_input">
-                                    <label>Director/Creator/Founder’s Statement *</label>
+                                    <label>Director/Creator/Founder’s Statement <span style = "color:red">*</span></label>
                                 </div>
-                                <textarea class="form-control controlTextLength" text-length = "600" maxlength="600" name="director_statement" style="border: 1px solid #4D0D8A;" id="textAreaExample3" rows="1">@if (!empty($projectDescription[0]->director_statement)){{ $projectDescription[0]->director_statement }}
+                                <textarea class="form-control controlTextLength" text-length = "600" maxlength="600" name="director_statement" style="border: 1px solid #4D0D8A;" id="textAreaExample3" rows="1" required>@if (!empty($projectDescription[0]->director_statement)){{ $projectDescription[0]->director_statement }}
                                 @endif</textarea>
                                 @error('director_statement')
                                 <span class="invalid-feedback" role="alert">
