@@ -71,50 +71,7 @@
                 </form>
             </div>
             <div class="col-md-9">
-                @foreach($jobs as $job)
-                <div class="profile_wraper profile_wraper_padding">
-                    <div class="d-flex justify-content-between">
-                        <div class="guide_profile_main_text">
-                            {{$job->title}}
-                        </div>
-                        <div class="pointer fav-icon">
-                            <i data-id="{{$job->id}}" class="fa {{is_null($job->favorite) ? 'fa-heart-o' : 'fa-heart'}} aubergine icon-size" aria-hidden="true"></i>
-                        </div>
-                    </div>
-
-                    <div class="preview_headtext lh_54 candy-pink">
-                        {{$job->company_name}}-{{$job->jobLocation->name}}
-                    </div>
-                    <div class="posted_job_header Aubergine_at_night">
-                        {{$job->description}}
-                    </div>
-                    <div class="d-flex justify-content-between mt-4">
-                        <div class="d-flex">
-                            @foreach($job->jobSkills as $skill)
-                            <button class="curv_cmn_btn">{{$skill->name}}</button>
-                            @endforeach
-                        </div>
-                        <div>
-                            @if(is_null($job->applied))
-                            <a href="{{route('showApplyJob',['jobId'=>$job->id])}}" class="guide_profile_btn">Apply now</a>
-                            @else
-                            <button disabled class="guide_profile_btn">Applied</button>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-                @endforeach
-
-
-                @if(blank($jobs))
-
-                <div class="text-center">
-                    <h1>No jobs found, please modify your search</h1>
-                </div>
-
-                @endif
-
-                {{$jobs->links()}}
+                @include('website.components.jobtile')                   
             </div>
         </div>
 
@@ -147,43 +104,4 @@
 @include('website.include.footer')
 @endsection
 
-@push('scripts')
-
-<script>
-    $(".fav-icon .aubergine").on('click', function() {
-
-        try {
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            var jobId = $(this).attr('data-id')
-            var classList = $(this).attr('class').split(/\s+/);
-            var $elem = $(this);
-            $.ajax({
-                type: 'post',
-                data: {
-                    'job_id': jobId
-                },
-                url: "{{route('addJobToFavList')}}",
-                success: function(resp) {
-                    if (resp.status) {
-                        $elem.toggleClass("fa-heart-o fa-heart");
-                        toastMessage(1, resp.message);
-                    } else {
-                        toastMessage("error", resp.message);
-                    }
-                },
-                error: function(error) {
-                    toastMessage("error", "something went wrong, please try again.");
-                }
-            });
-        } catch (error) {
-            toastMessage("error", "something went wrong, please try again.");
-        }
-
-    });
-</script>
-
-@endpush
+@include('website.job.favscript')

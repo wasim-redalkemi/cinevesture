@@ -92,7 +92,7 @@
                         </div>
                         <div>
                             
-                            <button class="guide_profile_btn w_150">View Applications</button>
+                            <a href="{{route('showJobApplicants',['jobId'=>$v['id']])}}" class="guide_profile_btn w_150">View Applications</a>
                         </div>
                     </div>
                     
