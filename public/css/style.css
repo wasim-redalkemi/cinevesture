@@ -1331,6 +1331,7 @@ body {
     line-height: 143%;
     letter-spacing: 0.018em;
     color: #787885;
+    cursor: pointer;
 }
 .profile_input input, select, .modal_input {
     background: #FFFFFF;
@@ -1399,7 +1400,8 @@ body {
     align-items: center;
     height: 172px;
     overflow: hidden;
-    background: #f2f2f2
+    background: #f2f2f2;
+    cursor:pointer;
 }
 
 /* Organisation page */
@@ -1586,6 +1588,10 @@ body {
 }
 .h_66 {
     height: 194px !important;
+    overflow: hidden;
+}
+#portfolio-video .h_66 {
+    height: 170px !important;
     overflow: hidden;
 }
 .h_69 {
@@ -1923,9 +1929,15 @@ button, input, optgroup, select, textarea {
   }
 
 .portfolio_item {
-    width: 300px;
-    height: 250px;
-    padding:1%;
+    width: 215px;
+    height: 265px;
+    margin:1%;
+}
+.portfolio_item_image {
+    width: 215px;
+    height: 210px;
+    display: flex;
+    align-items: center;
 }
 .portfolio .portfolio_img {
     max-width: 100%;

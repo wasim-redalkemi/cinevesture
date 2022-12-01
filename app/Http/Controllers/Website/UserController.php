@@ -149,7 +149,21 @@ class UserController extends WebController
         }
     }
 
+    public function getPortfolio($id)
+    {
+        return $portfolio = UserPortfolio::query()
+        ->with(['getPortfolio','getPortfolioSkill'])
+        ->where('id', $id)
+        ->first()
+        ->toArray();
+    }
 
+    public function getPortfolioHtml(Request $request)
+    {
+        $data = $this->getPortfolio($request->portfolioId);
+        $html = view('website.user.portfolio_modal',compact('data'))->render();
+        return json_encode($html);
+    }
     public function profilePublicShow()
     {
         try {
@@ -262,8 +276,7 @@ class UserController extends WebController
                 
                 $nameStr = date('_YmdHis');
                 $newName = $nameStr .  $fileName ;
-                 $path = $this->uploadFile($locationPath,base64_decode($image), $newName);
-             
+                $path = $this->uploadFile($locationPath,base64_decode($image), $newName);
 
                 // $file = $request->file('croppedImg');
                 // $originalFile = $file->getClientOriginalName();
@@ -275,11 +288,8 @@ class UserController extends WebController
                 // $locationPath  = "user";
                 // $uploadFile = $this->uploadFile($locationPath, $file, $newName);
                 // $user->profile_image = $uploadFile;
-
-
-
-              
                 $user->profile_image = $locationPath.$newName;
+
             }
             if ($user->save()) {
                 if (isset($request->skills)) {
@@ -305,7 +315,7 @@ class UserController extends WebController
                 return back()->with('error', 'Something went wrong ,please try again.');
             }
         } catch (Exception $e) {
-            return back()->with('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong. '.$e->getMessage());
         }
     }
 
@@ -319,7 +329,7 @@ class UserController extends WebController
             $portfolio = $user;
             return view('website.user.profile_portfolio', compact('portfolio', 'country', 'skills'));
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -367,7 +377,7 @@ class UserController extends WebController
 
             $data_to_insert = [];
             foreach ($request->toArray() as $k => $v) {
-                if (substr($k, 0, 14) == 'project_image_') {
+                if (strpos($k, 'portfolio-image') !== false) {
                     $image_file_name = $k;
                     if ($request->hasFile($image_file_name)) {
                         $file = $request->file($image_file_name);
@@ -399,7 +409,7 @@ class UserController extends WebController
             }
             return redirect()->route('experience-create')->with("success", "Portfolio created successfully.");
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -408,7 +418,7 @@ class UserController extends WebController
         try {
             $UserPortfolioData = UserPortfolio::query()->where('id', $id)->first();
             if (is_null($UserPortfolioData)) {
-                return back()->withError('This portfolio is not exist');
+                return back()->with('This portfolio is not exist');
             } else {
                 $skills = MasterSkill::query()->get();
                 $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
@@ -437,7 +447,7 @@ class UserController extends WebController
                 return view('website.user.profile_portfolio_edit', compact('UserPortfolioEdit', 'UserPortfolioImages', 'user_portfolio_skill','user_portfolio_location', 'skills', 'country'));
             }
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -504,7 +514,7 @@ class UserController extends WebController
             }
             return redirect()->route('profile-private-show')->with("success", "Portfolio updated successfully.");
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -518,7 +528,7 @@ class UserController extends WebController
             UserPortfolioImage::query()->where('portfolio_id', $id)->delete();
             return redirect(route('profile-private-show'));
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
     
@@ -532,7 +542,7 @@ class UserController extends WebController
             $experience = $user;
             return view('website.user.profile_experience');
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -549,7 +559,7 @@ class UserController extends WebController
             ]);
 
             if ($validator->fails()) {
-                return back()->withErrors($validator)->withInput();
+                return back()->with($validator)->withInput();
             }
 
             if (
@@ -576,10 +586,10 @@ class UserController extends WebController
                 }
                 return redirect()->route('qualification-create')->with("success", "Experience added successfully.");
             } else {
-                return back()->withError('Something went wrong ,please try again.');
+                return back()->with('Something went wrong ,please try again.');
             }
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -589,12 +599,12 @@ class UserController extends WebController
         try {
             $UserExperienceData = UserExperience::query()->where('id', $id)->first();
             if (is_null($UserExperienceData)) {
-                return back()->withError('This experience is not exist');
+                return back()->with('This experience is not exist');
             } else {
                 return view('website.user.profile_experience_edit', compact('UserExperienceData'));
             }
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -611,7 +621,7 @@ class UserController extends WebController
             ]);
 
             if ($validator->fails()) {
-                return back()->withErrors($validator)->withInput();
+                return back()->with($validator)->withInput();
             }
             $user = User::query()->find(auth()->user()->id);
             $experience = UserExperience::query()->where('id', $request->experience_id)->first();
@@ -640,7 +650,7 @@ class UserController extends WebController
             UserExperience::query()->where('id', $id)->delete();
             return redirect(route('profile-private-show'));
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -653,7 +663,7 @@ class UserController extends WebController
             $qualification = $user;
             return view('website.user.profile_qualification', compact('qualification'));
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -668,7 +678,7 @@ class UserController extends WebController
             ]);
 
             if ($validator->fails()) {
-                return back()->withErrors($validator)->withInput();
+                return back()->with($validator)->withInput();
             }
 
             if (
@@ -694,10 +704,10 @@ class UserController extends WebController
                 }
                 return redirect()->route('profile-private-show');
             } else {
-                return back()->withError('error', 'Something went wrong ,please try again.');
+                return back()->with('error', 'Something went wrong ,please try again.');
             }
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -707,7 +717,7 @@ class UserController extends WebController
             $UserQualificationData = UserQualification::query()->where('id', $id)->first();
             return view('website.user.profile_qualification_edit', compact('UserQualificationData'));
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -722,7 +732,7 @@ class UserController extends WebController
             ]);
 
             if ($validator->fails()) {
-                return back()->withErrors($validator)->withInput();
+                return back()->with($validator)->withInput();
             }
 
             $user = User::query()->find(auth()->user()->id);
@@ -738,10 +748,10 @@ class UserController extends WebController
             if ($qualification->update()) {
                 return redirect()->route('profile-private-show')->with("success", "Qualification added successfully.");
             } else {
-                return back()->withError('Something went wrong ,please try again.');
+                return back()->with('Something went wrong ,please try again.');
             }
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -752,7 +762,7 @@ class UserController extends WebController
             UserQualification::query()->where('id', $id)->delete();
             return redirect(route('profile-private-show'));
         } catch (Exception $e) {
-            return back()->withError('error', 'Something went wrong.');
+            return back()->with('error', 'Something went wrong.');
         }
     }
 
