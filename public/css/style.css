@@ -851,6 +851,9 @@ body {
     border-radius: 4px !important;
     color: #971E9B;
 }
+.modal {
+    top: 100px !important;
+}
 .modal_button {
     border: none;
     background: transparent;
@@ -859,9 +862,14 @@ body {
 .modal-content {
     background-color: #33084c;
 }
-.croppercrope {
+.modal_image_wraper {
+    width: auto;
+    height: 300px;
+    margin: auto;
+}
+.croper_modal {
     background-color: #FFFFFF !important;
-    max-height: 80vh;
+    max-height: 70vh;
     height: auto;
     overflow: auto;
 }
@@ -1929,13 +1937,13 @@ button, input, optgroup, select, textarea {
   }
 
 .portfolio_item {
-    width: 215px;
+    width: 170px;
     height: 265px;
     margin:1%;
 }
 .portfolio_item_image {
-    width: 215px;
-    height: 210px;
+    width: 170px;
+    height: 200px;
     display: flex;
     align-items: center;
 }
@@ -1945,23 +1953,27 @@ button, input, optgroup, select, textarea {
     max-height: 200px;
 }
 .home_img_wrap {
-    width: 370px;
-    height: 240px;
-    margin: 2%;
+    width: 306.728px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin: 2%; */
 }
 .home_img_wrap img {
-    width: 100% !important;
-    display: flex !important;
-    align-items: center !important;
+    max-height: 100%;
+    height: auto;
+    position: relative;
+    max-width: 100%;
+    width: auto !important;
+    text-align: center;
 }
 .input_wraper {
     min-height: 143px;
     background: rgba(246, 239, 251, 0.8);
     border-radius: 4px;
-    /* width: 100%; */
     display: flex;
     align-items: center;
-    /* margin: 0 5%; */
     margin: 60px 30px;
 }
 .m_0 {
@@ -2321,6 +2333,7 @@ select {
   ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px grey; 
     border-radius: 10px;
+    background-color: #FFFFFF;
   }
    
   /* Handle */
@@ -2492,10 +2505,10 @@ select {
   .modal-dialog-centered {
     margin: auto;
   }
-  .croppercrope {
+  /* .croper_modal {
     max-height: 50vh;
     max-width: fit-content;   
-}
+} */
 .modal-backdrop {
     height: 90vh;
 }
