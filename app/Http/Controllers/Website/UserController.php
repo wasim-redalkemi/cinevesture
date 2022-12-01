@@ -149,7 +149,21 @@ class UserController extends WebController
         }
     }
 
+    public function getPortfolio($id)
+    {
+        return $portfolio = UserPortfolio::query()
+        ->with(['getPortfolio','getPortfolioSkill'])
+        ->where('id', $id)
+        ->first()
+        ->toArray();
+    }
 
+    public function getPortfolioHtml(Request $request)
+    {
+        $data = $this->getPortfolio($request->portfolioId);
+        $html = view('website.user.portfolio_modal',compact('data'))->render();
+        return json_encode($html);
+    }
     public function profilePublicShow()
     {
         try {

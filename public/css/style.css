@@ -1920,9 +1920,15 @@ button, input, optgroup, select, textarea {
   }
 
 .portfolio_item {
-    width: 300px;
-    height: 250px;
-    padding:1%;
+    width: 215px;
+    height: 265px;
+    margin:1%;
+}
+.portfolio_item_image {
+    width: 215px;
+    height: 210px;
+    display: flex;
+    align-items: center;
 }
 .portfolio .portfolio_img {
     max-width: 100%;
