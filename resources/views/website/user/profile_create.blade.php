@@ -60,7 +60,7 @@
                         <!-- <input type="file" name="image" class="image d-none"> -->
                         <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
-                                <div class="modal-content croppercrope">
+                                <div class="modal-content croper_modal">
                                     <div class="modal-header py-1">
                                         <h6 class="modal-title tile_text" id="modalLabel"> Image Cropper</h6>
                                         <div class="d-flex jutify-content-center">
@@ -369,7 +369,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="d-flex justify-content-md-end jsutify-content-start mt-md-0 mt-4">
+                                <div class="d-flex justify-content-end mt-md-0 mt-4">
                                     <a href="{{route('profile-private-show')}}" class="cancel_btn" style="text-decoration:none">Cancel</a>
                                     <button type="submit" class="guide_profile_btn mx-3">Save</button>
                                 </div>

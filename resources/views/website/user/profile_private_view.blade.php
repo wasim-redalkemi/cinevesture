@@ -76,7 +76,7 @@
                                     <div class="guide_profile_main_text mt-3">
                                         <p> Skills</p>
                                     </div>
-                                    <div class="">
+                                    <div>
                                         @if (count($user_skills)>0)
                                         @foreach ($user_skills as $k=>$v)
                                         <button class="curv_cmn_btn skill_container">
@@ -200,7 +200,7 @@
                                     <div>
                                         <div class="modal fade" id="portfolioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
+                                                <div class="modal-content croper_modal">
                                                     <div class="modal-body">
                                                         <div class="d-flex justify-content-end modal_btn">
                                                             <button type="button" class="close modal_cross_btn" data-dismiss="modal" aria-label="Close">
