@@ -106,10 +106,11 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-end mt-4">
-                                        <button class="save_add_btn">Add another</button>
+                                        <button type="button" name="saveAndAnother" value="false" class="portfolio_save_btn save_add_btn">Save & add another</button>
+                                        <input type="hidden" id="save_btn_value" name="saveButtonType" value="">
                                         <a href="{{route('experience-create')}}"class="cancel_btn mx-3" style="text-decoration:none">Cancel</a>
                                         <input type="hidden" name="flag" value="<?=request('flag')?>">
-                                        <button type="submit" class="guide_profile_btn mx-3">Save</button>
+                                        <button type="button" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save</button>
                                     </div>
                                 </div>
                             </div>
@@ -130,6 +131,11 @@
     $(document).ready(function(){
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");
+    });
+
+    $(".portfolio_save_btn").on("click", function () {
+        $("#save_btn_value").attr("value", $(this).attr("name"))
+        $(this).parents('form').submit();
     });
 </script>
 @endpush
