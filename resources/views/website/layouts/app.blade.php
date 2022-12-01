@@ -36,7 +36,9 @@
                 @yield('nav')
             @endif
             @stack('add_css')
+            <div class="main_content">
             @yield('content')
+            </div>
             @yield('footer')
         </main>
     </div>
