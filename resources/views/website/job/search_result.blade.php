@@ -96,16 +96,16 @@
                         {{$job->description}}
                     </div>
                     <div class="d-flex justify-content-between mt-4">
-                        <div class="d-flex">
+                        <div class="flex-wrap">
                             @foreach($job->jobSkills as $skill)
                             <button class="curv_cmn_btn">{{$skill->name}}</button>
                             @endforeach
                         </div>
-                        <div>
+                        <div class="">
                             @if(is_null($job->applied))
-                            <a href="{{route('showApplyJob',['jobId'=>$job->id])}}" class="guide_profile_btn">Apply now</a>
+                          <button class="guide_profile_btn w_150">  <a href="{{route('showApplyJob',['jobId'=>$job->id])}}" class="">Apply now</a></button>
                             @else
-                            <button disabled class="guide_profile_btn">Applied</button>
+                            <button disabled class="guide_profile_btn w_150">Applied</button>
                             @endif
                         </div>
                     </div>

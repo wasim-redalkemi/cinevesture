@@ -37,7 +37,6 @@
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>Employment Type</label>
-                                        <div class="dropdown profile_dropdown_btn">
                                             <select class="work-select2 @error('countries') is-invalid @enderror" required id="employments" name="employments[]" multiple="multiple">
                                                 @foreach($employments as $emp)
 
@@ -55,7 +54,6 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                             @enderror
-                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-1"></div>
@@ -151,7 +149,7 @@
 
 <!-- Modal for Confirmation for account deactivate -->
 <div class="modal fade" id="publish_job_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog">
 
         <div class="modal-content">
 
