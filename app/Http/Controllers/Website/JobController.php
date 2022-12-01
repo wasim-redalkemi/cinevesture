@@ -419,7 +419,7 @@ class JobController extends WebController
             ->paginate(5);
             return $userJob;
         }catch(Exception $e){
-            return back()->withErrors($e->getmessage());
+            return back()->with($e->getmessage());
         }
     }
 
@@ -433,7 +433,7 @@ class JobController extends WebController
             ->first();
             return $JobData;
         }catch(Exception $e){
-            return back()->withErrors($e->getmessage());
+            return back()->with($e->getmessage());
         }
     }
 
@@ -448,7 +448,7 @@ class JobController extends WebController
             }    
             return view('website.job.job_post_single',compact(['Job_data']));
         }catch(Exception $e){
-            return back()->withErrors($e->getmessage());
+            return back()->with($e->getmessage());
         }
     }
 

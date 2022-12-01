@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Website;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\Website\AjaxController;
+use App\Http\Requests\PostUserPortfolioRequest;
 use App\Models\MasterCountry;
 use App\Models\MasterLanguage;
 use App\Models\MasterLookingFor;
@@ -261,19 +262,19 @@ class ProjectController extends WebController
                         $projectGenres->gener_id = $v;
                         $projectGenres->save();
                     }
-                    ProjectAssociation::query()->where('project_id', $details->id)->delete();
-                    foreach($_REQUEST as $k => $v)
-                    {
-                        $fdata = explode('~',$k);
-                        if($fdata[0] == 'project_associate_title')
-                        {
-                            $projectAssociations = new ProjectAssociation();
-                            $projectAssociations->project_id = $details->id;
-                            $projectAssociations->project_associate_title = $_REQUEST['project_associate_title~'.$fdata[1]];
-                            $projectAssociations->project_associate_name = $_REQUEST['project_associate_name~'.$fdata[1]];
-                            $projectAssociations->save();
-                        }
-                    }
+                    // ProjectAssociation::query()->where('project_id', $details->id)->delete();
+                    // foreach($_REQUEST as $k => $v)
+                    // {
+                    //     $fdata = explode('~',$k);
+                    //     if($fdata[0] == 'project_associate_title')
+                    //     {
+                    //         $projectAssociations = new ProjectAssociation();
+                    //         $projectAssociations->project_id = $details->id;
+                    //         $projectAssociations->project_associate_title = $_REQUEST['project_associate_title~'.$fdata[1]];
+                    //         $projectAssociations->project_associate_name = $_REQUEST['project_associate_name~'.$fdata[1]];
+                    //         $projectAssociations->save();
+                    //     }
+                    // }
                     $this->return_response['success_msg'] = 'Project details updated successfully.';                    
                 } else {
                     return back()->with("error","Please overview phase fill.");
@@ -402,15 +403,15 @@ class ProjectController extends WebController
                         }                        
                     } 
 
-                    ProjectMedia::query()->where('project_id',$project->id)->delete();
-                    foreach($data_to_insert as $k => $v)
-                    {
-                        $projectMedia = new ProjectMedia();
-                        $projectMedia->project_id = $project->id;
-                        $projectMedia->file_type = $v['file_type'];
-                        $projectMedia->file_link = $v['file_link'];
-                        $projectMedia->save();
-                    }
+                    // ProjectMedia::query()->where('project_id',$project->id)->delete();
+                    // foreach($data_to_insert as $k => $v)
+                    // {
+                    //     $projectMedia = new ProjectMedia();
+                    //     $projectMedia->project_id = $project->id;
+                    //     $projectMedia->file_type = $v['file_type'];
+                    //     $projectMedia->file_link = $v['file_link'];
+                    //     $projectMedia->save();
+                    // }
                     return redirect()->route('project-create',['nextPage' => 'Milestone'])->with("success","Project media updated successfully.");
                 }
             } 
@@ -608,7 +609,7 @@ class ProjectController extends WebController
             ]);
         
             if ($validator->fails()) {
-                return back()->withErrors($validator)->withInput();
+                return back()->with($validator)->withInput();
             }
     
             $countries = MasterCountry::all();

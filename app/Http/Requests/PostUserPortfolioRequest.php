@@ -13,7 +13,7 @@ class PostUserPortfolioRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return auth()->check();
     }
 
     /**
@@ -24,9 +24,8 @@ class PostUserPortfolioRequest extends FormRequest
     public function rules()
     {
         return [
-            'project_title' => 'nullable|max:255',
+            'project_name' => 'nullable|max:100',
             'description' => 'nullable|max:600',
-            'project_country_id' => 'nullable|integer',
             'completion_date' => 'nullable',
             'video' => 'nullable|url',
         ];

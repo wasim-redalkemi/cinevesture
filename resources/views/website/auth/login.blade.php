@@ -76,7 +76,7 @@
     </div>
     <div class="col-md-7 d-none d-lg-block">
         <div class="login_sidewraper">
-            <img src="{{asset('public/images/asset/gordon-cowie-OPlXmibx__I-unsplash 1.png')}}" width="100%" height="100%" alt="">
+            <img src="{{asset('public/images/asset/gordon-cowie-OPlXmibx__I-unsplash-2.jpg')}}" width="100%" height="100%" alt="">
         </div>
     </div>
   </div>

@@ -17,7 +17,12 @@
                     <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Edit Experience</div>
-                            <div><i class="fa fa-trash-o  deep-pink icon-size" aria-hidden="true"></i></div>
+                            <div>
+                                <a href="{{route('experience-delete',['id'=>$UserExperienceData->id])}}">
+                                    <img src="{{ asset('public/images/asset/delete-icon.svg') }}"/>
+                                    {{-- <i class="fa fa-trash-o  deep-pink icon-size" aria-hidden="true"></i> --}}
+                                </a>
+                            </div>
                         </div>
                         <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('experience-edit-store',['id'=>$UserExperienceData->id]) }}">
                             @csrf
@@ -146,9 +151,10 @@
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-end mt-4">
                                         <button class="cancel_btn mx-3">Cancel</button>
-                                        <button class="save_add_btn">Save & add another</button>
+                                        <button type="button" name="saveAndAnother" value="false" class="portfolio_save_btn save_add_btn">Save & add another</button>
+                                        <input type="hidden" id="save_btn_value" name="saveButtonType" value="">
                                         <input type="hidden" name="experience_id" value="{{ $UserExperienceData->id }}">
-                                        <button type="submit" class="guide_profile_btn mx-3">Save & next</button>
+                                        <button type="button" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save & next</button>
                                     </div>
                                 </div>
                             </div>
@@ -191,6 +197,11 @@
     $(document).ready(function(){
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");
+    });
+
+    $(".portfolio_save_btn").on("click", function () {
+        $("#save_btn_value").attr("value", $(this).attr("name"))
+        $(this).parents('form').submit();
     });
 </script>
 @endpush

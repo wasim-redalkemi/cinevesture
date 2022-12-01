@@ -20,9 +20,9 @@
                     <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Add Qualification</div>
-                            <div class="icon_container">
+                            {{-- <div class="icon_container">
                           <img src="{{ asset('public/images/asset/delete-icon.svg') }}"/>
-                          </div> 
+                          </div>  --}}
                         </div>                       
                         <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('qualification-store') }}">
                             @csrf
@@ -31,7 +31,7 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label> Institute</label>
-                                        <input type="text" class="form-control @error('institue_name') is-invalid @enderror" placeholder="Institute" name="institue_name" value="{{ $qualification->institue_name}}" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" class="form-control @error('institue_name') is-invalid @enderror" placeholder="Institute" name="institue_name"  value="{{ $qualification->institue_name}}" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('institue_name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -94,7 +94,7 @@
                                 <div class="col-md-12">
                                     <div class="profile_input">
                                         <label>Description</label>
-                                        <textarea class="form-control @error('description') is-invalid @enderror" name="description" aria-label="With textarea">{{ $qualification->description }}</textarea>
+                                        <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" text-length = "600" maxlength="600" name="description" aria-label="With textarea">{{ $qualification->description }}</textarea>
                                         @error('description')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -106,10 +106,11 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-end mt-4">
-                                        <button class="save_add_btn">Add another</button>
+                                        <button type="button" name="saveAndAnother" value="false" class="portfolio_save_btn save_add_btn">Save & add another</button>
+                                        <input type="hidden" id="save_btn_value" name="saveButtonType" value="">
                                         <a href="{{route('experience-create')}}"class="cancel_btn mx-3" style="text-decoration:none">Cancel</a>
                                         <input type="hidden" name="flag" value="<?=request('flag')?>">
-                                        <button type="submit" class="guide_profile_btn mx-3">Save</button>
+                                        <button type="button" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save</button>
                                     </div>
                                 </div>
                             </div>
@@ -130,6 +131,11 @@
     $(document).ready(function(){
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");
+    });
+
+    $(".portfolio_save_btn").on("click", function () {
+        $("#save_btn_value").attr("value", $(this).attr("name"))
+        $(this).parents('form').submit();
     });
 </script>
 @endpush

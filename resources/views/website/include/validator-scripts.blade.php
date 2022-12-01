@@ -915,20 +915,20 @@
         }
 
         function setModal(head_text, sub_text, confirm_btn_text, cancel_btn_text) {
-            if(head_text != ""){
+            console.log(head_text, sub_text, confirm_btn_text, cancel_btn_text);
+            if(head_text == ""){
                 head_text = "Are you sure?";
             }
             $("#staticBackdrop .modal_container .head_text").html(head_text);
-            if(sub_text != ""){
+            if(sub_text == ""){
                 sub_text = "Do you really want to delete the item?<br>This process cannot be undone.";
-                
             }
             $("#staticBackdrop .modal_container .sub_text").html(sub_text);
-            if(confirm_btn_text != ""){
+            if(confirm_btn_text == ""){
                 confirm_btn_text = "Yes, Delete"
             }
             $("#staticBackdrop .modal_container .confirm_btn_text").html(confirm_btn_text);
-            if(cancel_btn_text != ""){
+            if(cancel_btn_text == ""){
                 cancel_btn_text = "Cancel";
             }
             $("#staticBackdrop .modal_container .cancel_btn_text").html(cancel_btn_text);
