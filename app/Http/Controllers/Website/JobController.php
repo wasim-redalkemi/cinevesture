@@ -316,24 +316,37 @@ class JobController extends WebController
 
     public function showApplyJob($jobId)
     {
-        return view('website.job.apply_now');
+        $jobTitle = UserJob::query()->where("id",$jobId)->value('title');
+        return view('website.job.apply_now',compact('jobTitle'));
     }
     public function storeApplyJob(Request $request,$jobId)
     {       
         $request->validate(["resume"=>"required|file|mimes:pdf,doc,docx","cover_letter"=>"required"]);        
         if (UserAppliedJob::query()->where("user_id",auth()->id())->where("job_id",$jobId)->exists()) {
-           throw ValidationException::withMessages([
-            'field_name_1' => ['You have been already applied for this job.']            
-           ]);
+        //    throw ValidationException::withMessages([
+        //     'field_name_1' => ['You have been already applied for this job.']            
+        //    ]);
+        return   $this->jsonResponse(false,"You have been already applied for this job.",[]);
         }else{
             $modelObj = new UserAppliedJob();
             $modelObj->user_id = auth()->id();
             $modelObj->job_id = $jobId;
-            $path = $this->uploadFile("appliedJobResumes",$request->file('resume'));
+            $file = $request->file('resume');
+            $fileName = $file->getClientOriginalName();
+            $fileSize = ceil($file->getSize()/1024).' KB';
+
+            if ($fileSize>1024) {
+                $fileSize = ceil($fileSize/1024).' MB';
+            }
+
+            $path = $this->uploadFile("appliedJobResumes",$file);
             $modelObj->resume = $path;
+            $modelObj->resume_original_name = $fileName;
+            $modelObj->resume_size = $fileSize;
             $modelObj->cover_letter = $request->get('cover_letter');
-            $modelObj->save();            
-            return redirect()->route('showJobSearchResults')->with("success","Job application submitted successfully.");
+            $modelObj->save(); 
+          return  $this->jsonResponse(true,"You have successfully applied for this job.",[]);
+           // return redirect()->route('showJobSearchResults')->with("success","Job application submitted successfully.");
         }
     }
 
@@ -425,12 +438,10 @@ class JobController extends WebController
 
     public function getJobData($job_id)
     {
-        try{
-            $JobData='';
+        try{            
             $JobData = UserJob::query()
             ->with(['jobSkills','jobWorkSpaces','jobEmployements','jobLocation'])
-            ->where('id',$job_id)
-            ->first();
+            ->find($job_id);
             return $JobData;
         }catch(Exception $e){
             return back()->with($e->getmessage());

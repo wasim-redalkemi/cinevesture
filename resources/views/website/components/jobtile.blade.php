@@ -1,9 +1,9 @@
 @foreach($jobs as $job)
 <div class="profile_wraper profile_wraper_padding">
     <div class="d-flex justify-content-between">
-        <div class="guide_profile_main_text">
+        <a href="{{route('posted-job-single-view',['job_id'=>$job->id])}}" class="guide_profile_main_text">
             {{$job->title}}
-        </div>
+        </a>
         <div class="pointer fav-icon">
             <i data-id="{{$job->id}}" class="fa {{is_null($job->favorite) ? 'fa-heart-o' : 'fa-heart'}} aubergine icon-size" aria-hidden="true"></i>
         </div>

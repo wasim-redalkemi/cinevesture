@@ -117,7 +117,8 @@
             <div class ="row">
                         <div class="d-flex justify-content-center mb-3" >
                         <a href="{{route('job-create-page')}}"><button type = "button"class="job_search_btn  post-job" style="margin-right:30px">Post A Job</button></a>
-                        <button type = "button"class="job_search_btn  post-job">My Jobs</button>
+                        <a href="{{ route('posted-job') }}"><button type = "button"class="job_search_btn  post-job">My Jobs</button></a>
+                {{-- <button type = "button"class="job_search_btn  post-job">My Jobs</button> --}}
                         </div>
 
                     </div>

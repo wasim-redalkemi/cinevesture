@@ -31,13 +31,13 @@ use Illuminate\Support\Facades\DB;
                                 <div class="row">
                                     <div class="col-md-2">
                                         <div class="user_profile_container">
-                                            <img src="{{ asset('public/images/asset/user-profile.png') }}" />
+                                            <img src="{{ asset('images/asset/user-profile.png') }}" />
                                         </div>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="guide_profile_main_text pt-3">{{$applicant->first_name.' '.$applicant->last_name}}</div>
                                        
-                                        <a href="{{route('profile-public-show',['id'=>$applicant->id])}}" class="deep-pink">Veiw Profile Contact</a>
+                                        <a href="{{route('profile-public-show',['id'=>$applicant->id])}}" class="deep-pink">View Profile Contact</a>
                                     </div>
                                     <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
                                         <i class="fa {{$isLiked ? 'fa-heart' : 'fa-heart-o'}} icon-size Aubergine" aria-hidden="true"></i>
@@ -58,12 +58,12 @@ use Illuminate\Support\Facades\DB;
                                 <div class="col-lg-3 col-sm-6 mt-sm-2 mt-2">
                                     <div class="d-flex doc_container">
                                         <div class="icon">
-                                            <img src="{{ asset('public/images/asset/pdf-icon.png') }}">
+                                            <img src="{{ asset('images/asset/pdf-icon.png') }}">
                                         </div>
-                                        <div class="public-subheading-text mx-2">
-                                            <div>Lorem ipson pdf </div>
-                                            <div>64.42 KB</div>
-                                        </div>
+                                        <a href="{{asset('storage/'.$coverLetter->resume)}}" download="" class="public-subheading-text mx-2">
+                                            <div class="resume-download-txt">{{$coverLetter->resume_original_name}}</div>
+                                            <div class="resume-download-txt">{{$coverLetter->resume_size}}</div>
+</a>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +87,7 @@ use Illuminate\Support\Facades\DB;
                                     <div class="col-md-5 ">
                                         <div class="guide_profile_main_text mb-2">Meet Name</div>
                                         <div>
-                                            <iframe width=100% height="300" src="https://www.youtube.com/embed/EXv5zovts9E" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                            <iframe width=100% height="300" src="{{$applicant->intro_video_link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                         </div>
                                     </div>
                                 </div>
@@ -102,7 +102,7 @@ use Illuminate\Support\Facades\DB;
                                         <div class="portfolio owl-carousel owl-theme">
                                             @foreach($portfolios as $key=>$portfolio)
                                             <div class="item">
-                                                <img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}">
+                                                <img src="{{ asset('images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}">
                                                 <div class="guide_profile_main_subtext">{{$portfolio->project_title}}</div>
                                             </div>
                                             @endforeach                                           

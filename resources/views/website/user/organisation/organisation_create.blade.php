@@ -306,14 +306,14 @@
                         </div>
                         <div class="row">
                             <div class="col-md-3">
-                                <div><img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="w-100"></div>
+                                <div><img src="{{ asset('images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="w-100"></div>
                                 <div class="d-flex justify-content-between mt-3">
                                     <div class="organisation_cmn_text">Title</div>
                                     <div class="icon_container"><i class="fa fa-times-circle icon-size deep-pink" aria-hidden="true"></i></div>
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div><img src="{{ asset('public/images/asset/67a6c213a22d2ba4c3982a55d828b5c7 1.png') }}" class="w-100"></div>
+                                <div><img src="{{ asset('images/asset/67a6c213a22d2ba4c3982a55d828b5c7 1.png') }}" class="w-100"></div>
                                 <div class="d-flex justify-content-between mt-3">
                                     <div class="organisation_cmn_text">Title</div>
                                     <div class="icon_container"><i class="fa fa-times-circle icon-size deep-pink" aria-hidden="true"></i></div>

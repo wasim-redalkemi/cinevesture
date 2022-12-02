@@ -67,5 +67,6 @@ class Kernel extends HttpKernel
         'profileVerification' => \App\Http\Middleware\ProfileVerification::class,
         'adminAuth' => \App\Http\Middleware\AdminAuthMiddleware::class,
         'adminWebAuth' => \App\Http\Middleware\AdminWebAuthMiddleware::class,
+        'plancheck'=> \App\Http\Middleware\PlanPermission::class,
     ];
 }

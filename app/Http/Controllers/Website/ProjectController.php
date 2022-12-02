@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\Website\AjaxController;
 use App\Http\Requests\PostUserPortfolioRequest;
+use App\Http\Requests\ProjectOverview;
 use App\Models\MasterCountry;
 use App\Models\MasterLanguage;
 use App\Models\MasterLookingFor;
@@ -84,9 +85,10 @@ class ProjectController extends WebController
         }
     }
 
-    public function validateProjectOverview()
+    public function validateProjectOverview(ProjectOverview $request)
     {
-        try {
+        try
+        {
             if(!empty($_REQUEST['project_id']))
             {
                 $overviewEditResponse = $this->overviewEdit();
@@ -99,7 +101,6 @@ class ProjectController extends WebController
                 {
                     return redirect()->route('project-details',['id' => $_REQUEST['project_id']])->with("success",$overviewEditResponse['success_msg']);
                 }
-
             }
             else 
             {

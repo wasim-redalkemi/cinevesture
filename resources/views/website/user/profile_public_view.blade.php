@@ -26,7 +26,7 @@
                                 <?php
                                 if (empty($user->profile_image)) {
                                 ?>
-                                    <img src="{{ asset('public/images/asset/user-profile.png') }}" />
+                                    <img src="{{ asset('images/asset/user-profile.png') }}" />
                                 <?php
                                 } else {
                                 ?>
@@ -57,7 +57,7 @@
                                                             <div class="signup-text  mb-4 mt-5"> Contact </div>
                                                             <div class="row">
                                                                 <div class="col-md-3">
-                                                                    <div><img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="w-100 br_100"></div>
+                                                                    <div><img src="{{ asset('images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="w-100 br_100"></div>
                                                                 </div>
                                                                 <div class="col-md-9">
                                                                     <div class="tile_text text_fff">Name</div>
@@ -208,7 +208,7 @@
                             {{-- <div class="portfolio owl-carousel owl-theme">
                                 @foreach ($portfolio as $k=>$v)
                                 <div class="item">
-                                    <img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}">
+                                    <img src="{{ asset('images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}">
                                     
                                 </div>
                                 @endforeach
@@ -347,6 +347,7 @@
 
                                                             <div class="mt-4">
                                                                 <input type="hidden" name="endorse_email" id="endorse_email" value="@if (!empty($user->email)){{$user->email}}@endif">
+                                                                <input type="hidden" name="endorse_to_id" id="endorse_to_id" value="@if (!empty($user->id)){{$user->id}}@endif">
                                                                 <button type="button" id="endorse_btn" class="invite_btn">Submit</button>
                                                             </div>
                                                             <div class="modal_btm_text mt-4 mb-5">
@@ -438,16 +439,14 @@
             {
                 var endorse_email = $('#endorse_email').val();
                 var endorse_message = $('#endorse_message').val();
-                console.log(endorse_email);
-                console.log(endorse_message);
-                
+                var endorse_to_id = $('#endorse_to_id').val();
                 
                 $.ajax(
                 {
                     url:"{{ route('endorse-user-mail-store') }}",
                     type:'POST',
                     dataType:'json',
-                    data:{endorse_email:endorse_email,endorse_message:endorse_message,"_token": "{{ csrf_token() }}"},
+                    data:{endorse_to_id:endorse_to_id,endorse_email:endorse_email,endorse_message:endorse_message,"_token": "{{ csrf_token() }}"},
                     success:function(response)
                     {
                         console.log(response)

@@ -13,7 +13,7 @@ class ProjectOverview extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class ProjectOverview extends FormRequest
     public function rules()
     {
         return [
-            
+            'project_name' => 'nullable|max:5',            
+            'location' => 'nullable|max:5',            
         ];
+    }
+    public function messages()
+    {
+        return [
+            'project_name.max' => 'Project name allow max 5 character.',
+        ];            
     }
 }
