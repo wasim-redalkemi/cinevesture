@@ -247,7 +247,7 @@
                             <div class="col-md-4">
                                 <div class="mt_16">
                                     <label for="lang">Languages Spoken</label>
-                                    <select name="languages[]" class="js-select2 @error('languages') is-invalid @enderror w-100" id="lang" multiple>
+                                    <select name="languages[]" class="js-select2 @error('languages') is-invalid @enderror" id="lang" multiple>
                                         @foreach ($languages as $k=>$v)
                                         <option value="{{ $v->id }}" @if(in_array($v->id,$user->language))selected @endif>{{ $v->name }}</option>
                                         @endforeach
