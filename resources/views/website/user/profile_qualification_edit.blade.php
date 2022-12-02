@@ -20,7 +20,11 @@
                     <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Edit Qualification</div>
-                            <div><i class="fa fa-trash-o  deep-pink icon-size" aria-hidden="true"></i></div>
+                            <div>
+                                <a href="{{route('qualification-delete',['id'=>$UserQualificationData->id])}}">
+                                    <img src="{{ asset('public/images/asset/delete-icon.svg') }}"/>
+                                </a>
+                            </div>
                         </div>                       
                         <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('qualification-edit-store',['id'=>$UserQualificationData->id]) }}">
                             @csrf
@@ -104,10 +108,11 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-end mt-4">
-                                        <button class="save_add_btn">Add another</button>
+                                        <button type="button" name="saveAndAnother" value="false" class="portfolio_save_btn save_add_btn">Save & add another</button>
+                                        <input type="hidden" id="save_btn_value" name="saveButtonType" value="">
                                         <button class="cancel_btn mx-3">Cancel</button>
                                         <input type="hidden" name="qualification_id" value="{{ $UserQualificationData->id }}">
-                                        <button type="submit" class="guide_profile_btn mx-3">Save</button>
+                                        <button type="button" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save</button>
                                     </div>
                                 </div>
                             </div>
@@ -128,6 +133,11 @@
     $(document).ready(function(){
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");
+    });
+
+    $(".portfolio_save_btn").on("click", function () {
+        $("#save_btn_value").attr("value", $(this).attr("name"))
+        $(this).parents('form').submit();
     });
 </script>
 @endpush

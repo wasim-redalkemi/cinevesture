@@ -9,134 +9,81 @@
 @section('content')
 
 <section>
-    <div class="container">
+    <div class="container">      
         <div class="row mt-4">
+        <!-- <div class="col-md-12"> -->
+                @if (session()->has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Success!</strong> {{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+            <!-- </div> -->
             <div class="col-md-3 side-bar-cmn-part">
-                <div class="search-box-container">
-                    <form>
-                        <input type="search" class="w-100 search-box" placeholder="Search...">
-                        <button class="search-btn"></button>
-                    </form>
-                </div>
-                <div class="dropdown search-page mt-3">
-                    <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Genres
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item active" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown search-page">
-                    <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Categories
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item active" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown search-page">
-                    <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Location
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item active" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown search-page">
-                    <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Workspace Type
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item active" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </div>
-                <div class="dropdown search-page">
-                    <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Skills
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-dark">
-                        <li><a class="dropdown-item active" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                        <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </div>
-                <div class="form-check d-flex align-items-center mt-4">
-                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                    <label class="verified-text mx-2" for="flexCheckDefault">
-                        Verified Projects
-                    </label>
-                </div>
+                <form method="post" action="{{ route('showJobSearchResults') }}">
+                    @csrf
+                    <div class="search-box-container">
+                        <div class="search-container w-100">
+                            <input type="search" class="w-100 search-box" value="{{request('search')}}" placeholder="Search...">
+                            <button class="search-btn"></button>
+                        </div>
+                        <div class="d-block d-md-none m-2" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            <img src="{{ asset('public/images/asset/dropdown-sidebar.svg') }}" />
+                            </div> 
+                    </div>
+                    <div class="sidebar_collapse collapse dont-collapse-sm" id="collapseExample">
+                    <div class="sidebar_data_mobile">
+                    <div class="dropdown search-page">
+                        <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="modal" data-bs-target="#categories-list">
+                            Categories
+                        </button>
+                        @include('website.modal.categories')
+                    </div>
+                    <div class="dropdown search-page">
+                        <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="modal" data-bs-target="#employments-list">
+                            Employments
+                        </button>
+                        @include('website.modal.employments')
+                    </div>
+                    <div class="dropdown search-page">
+                        <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="modal" data-bs-target="#locations-list">
+                            Location
+                        </button>
+                        @include('website.modal.locations')
+                    </div>
+                    <div class="dropdown search-page">
+                        <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="modal" data-bs-target="#workspaces-list">
+                            Workspace Type
+                        </button>
+                        @include('website.modal.workspaces')
+                    </div>
+                    <div class="dropdown search-page">
+                        <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="modal" data-bs-target="#skills-list">
+                            Skills
+                        </button>
+                        @include('website.modal.skills')
+                    </div>
+                    <div class="form-check d-flex align-items-center mt-4">
+                        <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                        <label class="verified-text mx-2" for="flexCheckDefault">
+                            Verified Projects
+                        </label>
+                    </div>
+                    <div class="mt-4 d-flex">
+                        <input type="submit" class="filter-button watch-now-btn mt-4" Value="Apply">
+                        <a href="{{route('showJobSearchResults')}}"><input type="button" class="clear-filter watch-now-btn mt-4" Value="Clear"></a>
+                    </div>
+                    </div>
+                    </div>
+                </form>
             </div>
             <div class="col-md-9">
-                <div class="profile_wraper profile_wraper_padding">
-                    <div class="d-flex justify-content-between">
-                        <div class="guide_profile_main_text">
-                            Title Of The Job
-                        </div>
-                        <div class="pointer"><i class="fa fa-heart-o aubergine icon-size" aria-hidden="true"></i></div>
-                    </div>
-                    <div class="posted_job_header">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </div>
-                    <div class="preview_headtext lh_54 candy-pink">
-                        Company Name - Location Company Name - Location
-                    </div>
-                    <div class="posted_job_header Aubergine_at_night">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </div>
-                    <div class="d-flex justify-content-between mt-4">
-                        <div class="d-flex">
-                            <button class="curv_cmn_btn">Skills 1</button>
-                            <button class="curv_cmn_btn mx-4">Skills 2</button>
-                            <button class="curv_cmn_btn">Skills 3</button>
-                            <button class="curv_cmn_btn mx-4">Skills 4</button>
-                        </div>
-                        <div>
-                            <button class="guide_profile_btn">Apply now</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="profile_wraper profile_wraper_padding">
-                    <div class="d-flex justify-content-between">
-                        <div class="guide_profile_main_text">
-                            Title Of The Job
-                        </div>
-                        <div class="pointer"><i class="fa fa-heart-o aubergine icon-size" aria-hidden="true"></i></div>
-                    </div>
-                    <div class="posted_job_header">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </div>
-                    <div class="preview_headtext lh_54 candy-pink">
-                        Company Name - Location Company Name - Location
-                    </div>
-                    <div class="posted_job_header Aubergine_at_night">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    </div>
-                    <div class="d-flex justify-content-between mt-4">
-                        <div class="d-flex">
-                            <button class="curv_cmn_btn">Skills 1</button>
-                            <button class="curv_cmn_btn mx-4">Skills 2</button>
-                            <button class="curv_cmn_btn">Skills 3</button>
-                            <button class="curv_cmn_btn mx-4">Skills 4</button>
-                        </div>
-                        <div>
-                            <button class="guide_profile_btn">Apply now</button>
-                        </div>
-                    </div>
-                </div>
+                @include('website.components.jobtile')                   
             </div>
         </div>
-        <div class="public_section mb-5">
+
+
+        <!-- <div class="public_section mb-5">
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item">
@@ -154,7 +101,7 @@
                     </li>
                 </ul>
             </nav>
-        </div>
+        </div> -->
     </div>
 </section>
 
@@ -163,3 +110,5 @@
 @section('footer')
 @include('website.include.footer')
 @endsection
+
+@include('website.job.favscript')

@@ -18,7 +18,7 @@ class MasterPlanSeeder extends Seeder
         // values('1', 'stripe','1','Free','USD','0','non-recurring','m','7','1','active'),
         // ('2', 'stripe','1','Free','INR','0','non-recurring','m',7,'1','active'),
         // ";
-        $query = "INSERT INTO `cinevesture`.`plans`
+        $query = "INSERT INTO `plans`
             (`id`,
              `platform`,
              `platform_plan_id`,

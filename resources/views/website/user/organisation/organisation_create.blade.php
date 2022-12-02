@@ -28,7 +28,7 @@
                             <div class="upload_img_container">
                                 <img src="<?php if (!empty($UserOrganisation->logo)) {
                                                 echo Storage::url($UserOrganisation->logo);
-                                            } ?>" class="upload_preview">
+                                            } ?>" class="upload_preview for_show">
 
                                 <div for="file-input" class="d-none">
                                     <input type="file" name="logo" class="@error('logo') is-invalid @enderror file_element" accept=".jpg,.jpeg,.png">
@@ -38,17 +38,17 @@
                                     </span>
                                     @enderror
                                 </div>
-                                <div class="pointer open_file_explorer">
+                                <div class="pointer open_file_explorer for_hide">
                                     <div class="text-center"> <i class="fa fa-plus-circle mx-2 profile_icon deep-pink pointer" aria-hidden="true"></i></div>
                                     <div>Upload</div>
                                 </div>
                             </div>
                             <div class="mx-4 d-flex align-items-center">
                                 <div>
-                                    <div class="search-head-subtext Aubergine_at_night open_file_explorer">
+                                    <div class="search-head-subtext Aubergine_at_night open_file_explorer pointer">
                                         Upload Profile Picture
                                     </div>
-                                    <div class="search-head-subtext deep-pink">
+                                    <div class="pointer search-head-subtext deep-pink delete_image">
                                         Delete
                                     </div>
                                 </div>
@@ -191,7 +191,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>IMDB Profile</label>
-                                    <input type="text" class="foutline orm-control @error('imdb_profile') is-invalid @enderror" placeholder="IMDB Profile" name="imdb_profile" value="{{(isset($UserOrganisation->imdb_profile))?$UserOrganisation->imdb_profile:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                    <input type="url" class="foutline orm-control @error('imdb_profile') is-invalid @enderror" placeholder="IMDB Profile" name="imdb_profile" value="{{(isset($UserOrganisation->imdb_profile))?$UserOrganisation->imdb_profile:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('imdb_profile')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -202,7 +202,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>LinkedIn Profile</label>
-                                    <input type="text" class="outline form-control @error('linkedin_profile') is-invalid @enderror" placeholder="LinkedIn Profile" name="linkedin_profile" value="{{(isset($UserOrganisation->linkedin_profile))?$UserOrganisation->linkedin_profile:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                    <input type="url" class="outline form-control @error('linkedin_profile') is-invalid @enderror" placeholder="LinkedIn Profile" name="linkedin_profile" value="{{(isset($UserOrganisation->linkedin_profile))?$UserOrganisation->linkedin_profile:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('linkedin_profile')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -213,7 +213,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Website</label>
-                                    <input type="text" class="outline form-control @error('website') is-invalid @enderror" placeholder="Website" aria-label="Username" name="website" value="{{(isset($UserOrganisation->website))?$UserOrganisation->website:'' }}" aria-describedby="basic-addon1" required autofocus>
+                                    <input type="url" class="outline form-control @error('website') is-invalid @enderror" placeholder="Website" aria-label="Username" name="website" value="{{(isset($UserOrganisation->website))?$UserOrganisation->website:'' }}" aria-describedby="basic-addon1" required autofocus>
                                     @error('website')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -226,7 +226,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Introduction Video</label>
-                                    <input type="text" class="outline form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="{{(isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                    <input type="url" class="outline form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="{{(isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('intro_video_link')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -234,11 +234,11 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-md-3 d-flex align-items-end">
+                            {{-- <div class="col-md-3 d-flex align-items-end">
                                 <div>
                                     <button class="save_add_btn">Add another</button>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="row">
                             <div class="col-md-3">
@@ -345,6 +345,9 @@
 
     $(document).ready(function()
     {   
+        
+    $('.for_hide').css('display', 'block');
+                $('.for_show').css('display', 'none');
         $('.open_file_explorer').click(function(e) 
         {
             $(this).parents('.custom_file_explorer').find('.file_element').click();
@@ -358,6 +361,8 @@
                 output.attr('src', reader.result);
             };
             reader.readAsDataURL(file[0]);
+            $('.for_hide').css('display', 'none');
+                $('.for_show').css('display', 'block');
         });
     });
 
@@ -393,6 +398,15 @@
             } 
         });
     });
+    $('.delete_image').on('click', function() {
+        var image_x = document.getElementsByClassName("upload_img_container");
+        $(".upload_preview").attr("src", "");
+        // $("img").removeClass("croperImg");
+
+        $('.for_hide').css('display', 'block');
+        $('.for_show').css('display', 'none');
+
+    })
         
 </script>
 @endpush

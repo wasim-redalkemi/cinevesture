@@ -14,7 +14,7 @@ class MasterPlanModuleOperationSeeder extends Seeder
      */
     public function run()
     {  
-        $query=  "INSERT INTO `cinevesture`.`master_plan_modules_operation_relations`
+        $query=  "INSERT INTO `master_plan_modules_operation_relations`
         (`id`,
          `plan_id`,
          `module_id`,

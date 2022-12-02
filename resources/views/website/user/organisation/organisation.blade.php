@@ -7,7 +7,8 @@
 @endsection
 
 @section('content')
-<section class="guide_profile_section">
+<section class="guide_profile_section profile-section" >
+    <div class="container">
     <div class="row">
         <div class="col-md-3">
             @include('website.include.profile_sidebar')
@@ -56,7 +57,7 @@
                                 <div class="guide_profile_main_text mt-3">
                                     <p> Services</p>
                                 </div>
-                                <div class="d-flex mt-3">
+                                <div class="d-flex flex-wrap mt-3">
                                     @if (isset($UserOrganisation->organizationServices))
                                         @foreach ($UserOrganisation->organizationServices as $k => $organizationService)
                                             <button class="curv_cmn_btn skill_container">{{ (isset($organizationService->services->name))?$organizationService->services->name:'-'; }}</button>
@@ -140,23 +141,23 @@
                                 </div>
                                 <div class="preview_headtext mb-3">Team members</div>
                                 <div class="row">
-                                    <div class="col-md-3">
-                                        <div><img src="{{ asset('public/images/asset/67a6c213a22d2ba4c3982a55d828b5c7 1.png') }}" class="w-100"></div>
+                                    <div class="col-md-3 col-6">
+                                        <div class="organisation_img_warper"><img src="{{ asset('public/images/asset/67a6c213a22d2ba4c3982a55d828b5c7 1.png') }}" class="root_img"></div>
                                         <div class="d-flex justify-content-between mt-3">
                                             <div class="organisation_cmn_text">Title</div>
                                             <div class="icon_container"><i class="fa fa-pencil  deep-pink" aria-hidden="true"></i></div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        <div><img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="w-100"></div>
+                                    <div class="col-md-3 col-6">
+                                        <div class="organisation_img_warper"><img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="root_img"></div>
                                         <div class="d-flex justify-content-between mt-3">
                                             <div class="organisation_cmn_text">Title</div>
                                             <div class="icon_container"><i class="fa fa-pencil deep-pink" aria-hidden="true"></i></div>
                                         </div>
                                     </div>
 
-                                    <div class="col-md-3">
-                                        <div><img src="{{ asset('public/images/asset/67a6c213a22d2ba4c3982a55d828b5c7 1.png') }}" class="w-100"></div>
+                                    <div class="col-md-3 col-6 mt-2 mt-md-0">
+                                        <div class="organisation_img_warper"><img src="{{ asset('public/images/asset/67a6c213a22d2ba4c3982a55d828b5c7 1.png') }}" class="root_img"></div>
                                         <div class="d-flex justify-content-between mt-3">
                                             <div class="organisation_cmn_text">Title</div>
                                             <div class="icon_container"><i class="fa fa-pencil deep-pink" aria-hidden="true"></i></div>
@@ -169,6 +170,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </section>
 @endsection

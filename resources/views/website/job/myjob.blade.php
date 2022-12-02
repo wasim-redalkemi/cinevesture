@@ -288,7 +288,7 @@
 
                     </div>
                     <div class="profile_wraper profile_wraper_padding">
-                        <div class="guide_profile_main_text">Discription</div>
+                        <div class="guide_profile_main_text">Description</div>
                         <div class="posted_job_header">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nullam elementum amet, neque, molestie iaculis tincidunt rhoncus eget. Viverra est suspendisse quis dui. In
                             egestas nunc massa viverra integer semper. Dui, nibh ultricies pretium aliquet diam. Ut ac in dignissim non
@@ -435,7 +435,7 @@
                                         <div class="guide_profile_main_text pt-3">Lorem ipsum</div>
                                         <div class="guide_profile_main_subtext">Lorem ipsum dolor sit amet, consectetur adipiscing
                                             elit.</div>
-                                        <div class="deep-pink">Veiw Profile Contact</div>
+                                        <div class="deep-pink">View Profile Contact</div>
                                     </div>
                                     <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
                                         <i class="fa fa-heart icon-size Aubergine" aria-hidden="true"></i>

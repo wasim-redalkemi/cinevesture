@@ -1,63 +1,46 @@
 @section('header')
+
+@php
+    $routes = [
+        "home"=>["id"=>"project","title"=>"Project","siblingRoutes"=>[]],
+        "show-guide"=>["id"=>"industry_guide","title"=>"Industry Guide","siblingRoutes"=>[]],
+        "job-search-page"=>["id"=>"jobs","title"=>"Jobs","siblingRoutes"=>["showJobSearchResults","showApplyJob"]],        
+    ];
+    $currentPath = Request::path();
+    $routeName = \Request::route()->getName();
+    $currentRoute = explode("/",$currentPath);
+    $currentPath = $currentRoute[array_key_last($currentRoute)];
+    if(is_numeric($currentPath)){
+        $currentPath = $currentRoute[array_key_last($currentRoute)-1];
+    }
+@endphp
 <header class="Header_main_container">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
           <nav class="navbar navbar-expand-lg header">
             
-            <a class="navbar-logo" href="{{route('home')}}">
+            <a class="navbar-logo " href="{{route('home')}}">
               <img src="{{ asset('images/asset/Logo-white-trans.png') }}" width="220" height="75" alt="image">
             </a>
-            <div class="collapse navbar-collapse navbar_sm text-end text-md-center justify-content-between" id="navbarTogglerDemo01">
+            <div class="collapse navbar-collapse navbar_sm text-initial text-md-center justify-content-between" id="navbarTogglerDemo01">
               <div></div>
             <div class="justify-content-center">
               <ul class="navbar-nav mt-2 mt-lg-0">
+                @foreach($routes as $key=>$route)
                 <li>
-                  <a class="header-nav-link" href="{{route('home')}}">Project</a>
+                  <a class="header-nav-link {{$key==$routeName || in_array($routeName,$route['siblingRoutes'])  ? 'active' : ''}}" href="{{route($key)}}">{{$route['title']}}</a>
                 </li>
-                <li>
-                  <a class="header-nav-link" href="{{route('show-guide')}}">Industry Guide</a>
-                </li>
-                {{-- <li>
-                  <div class="dropdown home-dropdown">
-                    <a class="btn dropdown-toggle header-nav-link" href="#" role="button" data-bs-toggle="dropdown"
-                      aria-expanded="false">
-                      Training
-                    </a>
-                    <ul class="dropdown-menu px-3">
-                      <li>
-                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Features
-                        </label>
-                      </li>
-                      <li class="dropdown-list">
-                        <input class="form-check-input home-checkbox" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Animation
-                        </label>
-                      </li>
-                      <li class="dropdown-list">
-                        <input class="form-check-input home-checkbox" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label mx-2" for="flexCheckDefault">
-                          Biography
-                        </label>
-                      </li>
-                    </ul>
-                  </div>
-                </li> --}}
-                <li>
-                  <a class="header-nav-link" href="{{route('job-search-page')}}">Jobs</a>
-                </li>
+                @endforeach
               </ul>
             </div>
-            <div class="justify-content-end text-end">
+            <div class="justify-content-end text-md-end text-initial">
               <?php
                 if(!empty(auth()->user()) && auth()->user()->user_type !== 'A')
                 {
 
                 ?>
-                  <div>
+                  <div class="navbar_profile_position mt-2 mt-md-0">
                     <i class="fa fa-user-circle"
                   style="font-size:25px; color: #DD45B3;background-color: white; border-radius: 50%;border:none"
                   aria-hidden="true"></i>

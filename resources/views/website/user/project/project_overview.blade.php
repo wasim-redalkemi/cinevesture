@@ -42,7 +42,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Type of Project <span style = "color:red">*</span></label>
-                                        <select name="project_type_id" requiredid="lang">
+                                        <select name="project_type_id" id="lang" required>
                                             <option value="">Select</option>
                                             @foreach($project_types as $type)
                                             <option @if(!empty($projectData[0]['project_type'])) @if ($projectData[0]['project_type']['id'] == $type->id) {{'selected'}} @endif @endif value="{{$type->id}}">{{$type->name}}</option>

@@ -70,6 +70,14 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
         Route::post('/delete-media/{media_id}',[AjaxController::class, 'deleteMedia'])->name('delete-media');
         Route::post('/upload-image',[AjaxController::class, 'uploadImage'])->name('upload-image');
         Route::post('/upload-doc',[AjaxController::class, 'uploadDoc'])->name('ajax/upload-doc');
+        Route::post('/add-proj-association/{project_id}',[AjaxController::class, 'addProjAssociationEntry'])->name('add-proj-association');
+        Route::post('/update-proj-association/{associate_id}',[AjaxController::class,'updateProjAssociationEntry'])->name('update-proj-association');
+        Route::delete('/delete-proj-association/{associate_id}',[AjaxController::class, 'removeProjAssociationEntry'])->name('delete-proj-association');
+        Route::post('/add-proj-milestone/{project_id}',[AjaxController::class,'addProjMilestoneEntry'])->name('add-proj-milestone');
+        Route::post('/update-proj-milestone/{milestone_id}',[AjaxController::class,'updateProjMilestoneEntry'])->name('update-proj-milestone');
+        Route::delete('/delete-proj-milestone/{milestone_id}',[AjaxController::class,'removeProjMilestoneEntry'])->name('delete-proj-milestone');
+        Route::post('/add-portfolio-img/{portfolio_id}',[AjaxController::class,'addPortfolioImg'])->name('add-portfolio-img');
+        Route::delete('/delete-portfolio-img/{img_id}',[AjaxController::class,'deletePortfolioImg'])->name('delete-portfolio-img');
     });
 
     Route::group(['prefix'=>'user'],function()
@@ -89,16 +97,22 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
         Route::post('/portfolio-store/{id?}', [UserController::class, 'portfolioStore'])->name('portfolio-store');
         Route::get('/portfolio-edit/{id}', [UserController::class, 'portfolioEdit'])->name('portfolio-edit');
         Route::post('/portfolio-edit-store/{id}', [UserController::class, 'portfolioEditStore'])->name('portfolio-edit-store');
+        Route::get('/protfolio-delete', [UserController::class, 'protfolioDelete'])->name('protfolio-delete');
+
+
+        Route::post('/protfolio-modal', [UserController::class, 'getPortfolioHtml'])->name('protfolio-modal');
 
         Route::get('/experience-create/{id?}', [UserController::class, 'experienceCreate'])->name('experience-create');
         Route::post('/experience-store/{id?}', [UserController::class, 'experienceStore'])->name('experience-store');
         Route::get('/experience-edit/{id}', [UserController::class, 'experienceEdit'])->name('experience-edit');
         Route::post('/experience-edit-store/{id}', [UserController::class, 'experienceEditStore'])->name('experience-edit-store');
+        Route::get('/experience-delete', [UserController::class, 'experienceDelete'])->name('experience-delete');
 
         Route::get('/qualification-create/{id?}', [UserController::class, 'qualificationCreate'])->name('qualification-create');
         Route::post('/qualification-store/{id?}', [UserController::class, 'qualificationStore'])->name('qualification-store');        		
         Route::get('/qualification-edit/{id}', [UserController::class, 'qualificationEdit'])->name('qualification-edit');
-        Route::post('/qualification-edit-store/{id}', [UserController::class, 'qualificationEditStore'])->name('qualification-edit-store'); 
+        Route::post('/qualification-edit-store/{id}', [UserController::class, 'qualificationEditStore'])->name('qualification-edit-store');
+        Route::get('/qualification-delete', [UserController::class, 'qualificationDelete'])->name('qualification-delete');
         
         Route::post('/deactivate', [UserController::class, 'deactivateAccount'])->name('user-deactivate'); 
 
@@ -190,12 +204,20 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
 	{	
         Route::get('/search',[JobController::class, 'index'])->middleware('plancheck')->name('job-search-page');
         Route::get('/job-create',[JobController::class, 'create'])->name('job-create-page');
+        Route::get('/search',[JobController::class, 'index'])->name('job-search-page');
+        Route::get('/apply/{jobId}',[JobController::class, 'showApplyJob'])->name('showApplyJob');
+        Route::post('/apply/{jobId}',[JobController::class, 'storeApplyJob'])->name('storeApplyJob');
+        Route::any('/search/results',[JobController::class, 'showJobSearchResults'])->name('showJobSearchResults');
+        Route::post('/search/add_to_fav',[JobController::class, 'storeJobToFavList'])->name('addJobToFavList');
         Route::post('/action',[JobController::class, 'store'])->name('job-store');
         Route::post('/job-store-edit',[JobController::class, 'jobStoreEdit'])->name('job-store-edit');
         Route::get('/validate-job',[JobController::class, 'validatejob'])->name('validate-job');
         Route::get('/posted-job',[JobController::class, 'postedJob'])->name('posted-job');
         Route::get('/saved-job',[JobController::class, 'savedJob'])->name('saved-job');
         Route::get('/applied-job',[JobController::class, 'appliedJob'])->name('applied-job');
+        Route::get('/applicants/{jobId}',[JobController::class, 'showJobApplicants'])->name('showJobApplicants');
+        Route::get('/cover-letter/{jobId}/{userId}',[JobController::class, 'showAppliedJobCoverLetter'])->name('showAppliedJobCoverLetter');
+
         Route::get('/posted-job-single-view',[JobController::class, 'postedJobView'])->name('posted-job-single-view');
 
 	});

@@ -8,7 +8,9 @@ use Exception;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Helper\AppUtilityController;
 use App\Models\ProjectMedia;
-
+use App\Models\ProjectAssociation;
+use App\Models\ProjectMilestone;
+use App\Models\UserPortfolioImage;
 
 class AjaxController extends WebController {
     CONST AJAX_CALL_SUCCESS = 1;
@@ -100,7 +102,7 @@ class AjaxController extends WebController {
             $media = ProjectMedia::find($media_id);
             if($media){
                 $isDeleted = $media->delete();
-                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,['isDeleted'=>$isDeleted],"Sucess","ER000","Recource deleted successfully.");
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,['isDeleted'=>$isDeleted],"Recource deleted successfully.","ER000","");
             } else {
                 return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER401","Could not find the resource.");
             }
@@ -159,6 +161,151 @@ class AjaxController extends WebController {
             $projectMedia->file_link = asset("storage/".$projectMedia->file_link);
             $projectMedia->media_info = json_decode($projectMedia->media_info, true);
             return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$projectMedia,"Success","ER000","");
+        } catch (Exception $e) {
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
+        }
+    }
+
+    public function addProjAssociationEntry(Request $request, $project_id){
+        $request->validate([
+            'title' => 'required|string|max:50',
+            'name' => 'nullable|string|max:50'
+        ]);
+        try {
+            $ProjectAssociation = new ProjectAssociation();
+            //$ProjectAssociation->id = 1;
+            $ProjectAssociation->project_id = $project_id;
+            $ProjectAssociation->project_associate_title = $request->title;
+            $ProjectAssociation->project_associate_name = $request->name;
+            $ProjectAssociation->save();
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$ProjectAssociation,"Success","ER000","");
+        } catch (Exception $e) {
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
+        }
+    }
+
+    public function updateProjAssociationEntry(Request $request, $associate_id = null){
+        try {
+            $associate = ProjectMilestone::find($associate_id);
+            if($associate){
+                if(isset($request->project_associate_title))
+                    $associate->project_associate_title = $request->project_associate_title;
+                if(isset($request->project_milestone_budget))
+                    $associate->project_associate_name = $request->project_associate_name;
+                $associate->save();
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$associate,"Record updated successfully.","ER000","");
+            } else {
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER401","Could not find the resource.");
+            }
+        } catch (Exception $e) {
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
+        }
+    }
+
+    public function removeProjAssociationEntry(Request $request, $associate_id = null){
+        try {
+            $media = ProjectAssociation::find($associate_id);
+            if($media){
+                $isDeleted = $media->delete();
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,['isDeleted'=>$isDeleted],"Recource deleted successfully.","ER000","");
+            } else {
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER401","Could not find the resource.");
+            }
+        } catch (Exception $e) {
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
+        }
+    }
+
+    public function addProjMilestoneEntry(Request $request, $project_id){
+        $request->validate([
+            'project_milestone_description' => 'required|string|max:50',
+            'project_milestone_budget' => 'required|string|max:50',
+            'project_milestone_target_date' => 'required|date',
+            'project_milestone_complete' => 'nullable|int|max:1'
+        ]);
+        try {
+            $ProjectAssociation = new ProjectMilestone();
+            //$ProjectAssociation->id = 1;
+            $ProjectAssociation->project_id = $project_id;
+            $ProjectAssociation->description = $request->project_milestone_description;
+            $ProjectAssociation->budget = $request->project_milestone_budget;
+            $ProjectAssociation->target_date = $request->project_milestone_target_date;
+            $ProjectAssociation->complete = $request->project_milestone_complete;
+            $ProjectAssociation->save();
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$ProjectAssociation,"Success","ER000","");
+        } catch (Exception $e) {
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
+        }
+    }
+
+    public function updateProjMilestoneEntry(Request $request, $milestone_id = null){
+        try {
+            $milestone = ProjectMilestone::find($milestone_id);
+            if($milestone){
+                if(isset($request->project_milestone_description))
+                    $milestone->description = $request->project_milestone_description;
+                if(isset($request->project_milestone_budget))
+                    $milestone->budget = $request->project_milestone_budget;
+                if(isset($request->project_milestone_target_date))
+                    $milestone->target_date = $request->project_milestone_target_date;
+                if(isset($request->project_milestone_complete))
+                    $milestone->complete = $request->project_milestone_complete;
+                $milestone->save();
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$milestone,"Record updated successfully.","ER000","");
+            } else {
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER401","Could not find the resource.");
+            }
+        } catch (Exception $e) {
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
+        }
+    }
+
+    public function removeProjMilestoneEntry(Request $request, $milestone_id = null){
+        try {
+            $media = ProjectMilestone::find($milestone_id);
+            if($media){
+                $isDeleted = $media->delete();
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,['isDeleted'=>$isDeleted],"Recource deleted successfully.","ER000","");
+            } else {
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER401","Could not find the resource.");
+            }
+        } catch (Exception $e) {
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
+        }
+    }
+
+    /* not in use anywhere currently */
+    public function addPortfolioImg(Request $request, $portfolio_id = null){
+        $request->validate([
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+        try {
+            $file = $request->file("file");
+            $fileName = $file->getClientOriginalName();
+            $newName = str_replace(" ","_",date('YmdHis').$fileName);
+            $locationPath  = "project/image";
+            $uploadFile = $this->uploadFile($locationPath, $file, $newName);
+            $UserPortfolioImage = new UserPortfolioImage();
+            //$ProjectAssociation->id = 1;
+            $UserPortfolioImage->portfolio_id = $portfolio_id;
+            $UserPortfolioImage->file_type = "image";
+            $UserPortfolioImage->file_link = $uploadFile;
+            $UserPortfolioImage->save();
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$UserPortfolioImage,"Success","ER000","");
+        } catch (Exception $e) {
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
+        }
+    }
+
+    public function deletePortfolioImg(Request $request, $img_id = null){
+        try {
+            $media = UserPortfolioImage::find($img_id);
+            if($media){
+                $isDeleted = true;//$media->delete();
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,['isDeleted'=>$isDeleted],"Recource deleted successfully.","ER000","");
+            } else {
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER401","Could not find the resource.");
+            }
         } catch (Exception $e) {
             return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
         }
