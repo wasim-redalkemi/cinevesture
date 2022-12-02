@@ -52,7 +52,7 @@ use Illuminate\Support\Facades\DB;
                             
                             @endphp
                             <div class="preview_headtext lh_54 candy-pink">
-                                {{$data[0]->company.' - '.$data[0]->location}}
+                                {{@$data[0]->company.' - '.@$data[0]->location}}
                             </div>
                             <div class="posted_job_header Aubergine_at_night">
                             {{$applicant->about}}

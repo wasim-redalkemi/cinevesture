@@ -435,7 +435,7 @@
                                         <div class="guide_profile_main_text pt-3">Lorem ipsum</div>
                                         <div class="guide_profile_main_subtext">Lorem ipsum dolor sit amet, consectetur adipiscing
                                             elit.</div>
-                                        <div class="deep-pink">Veiw Profile Contact</div>
+                                        <div class="deep-pink">View Profile Contact</div>
                                     </div>
                                     <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
                                         <i class="fa fa-heart icon-size Aubergine" aria-hidden="true"></i>

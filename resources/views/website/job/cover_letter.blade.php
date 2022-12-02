@@ -37,7 +37,7 @@ use Illuminate\Support\Facades\DB;
                                     <div class="col-md-8">
                                         <div class="guide_profile_main_text pt-3">{{$applicant->first_name.' '.$applicant->last_name}}</div>
                                        
-                                        <a href="{{route('profile-public-show',['id'=>$applicant->id])}}" class="deep-pink">Veiw Profile Contact</a>
+                                        <a href="{{route('profile-public-show',['id'=>$applicant->id])}}" class="deep-pink">View Profile Contact</a>
                                     </div>
                                     <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
                                         <i class="fa {{$isLiked ? 'fa-heart' : 'fa-heart-o'}} icon-size Aubergine" aria-hidden="true"></i>
