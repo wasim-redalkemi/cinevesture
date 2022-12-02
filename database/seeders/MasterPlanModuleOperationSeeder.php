@@ -25,7 +25,7 @@ class MasterPlanModuleOperationSeeder extends Seeder
                 ('3', '1','1','3',null),
                 ('4', '1','1','4',null),
 
-                ('5', '1','2','10',null),
+                ('5', '1','2','11',null),
 
                 ('6', '1','3','13',null),
 
@@ -34,9 +34,9 @@ class MasterPlanModuleOperationSeeder extends Seeder
                 ('9', '2','1','3',null),
                 ('10', '2','1','4',null),
 
-                ('11', '2','2','10',null),
+                ('11', '2','2','11',null),
 
-                ('12', '2','3','13',null)
+                ('12', '2','3','14',null)
                 ";
         
         DB::unprepared($query);

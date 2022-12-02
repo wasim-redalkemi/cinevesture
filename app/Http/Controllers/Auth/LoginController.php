@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Helper\OtpUtilityController;
+use App\Models\MasterPlanModule;
+use App\Models\MasterPlanOperation;
+use App\Models\Plans;
 use App\Models\User;
 use App\Notifications\VerifyOtp;
 use App\Providers\RouteServiceProvider;
@@ -76,7 +79,7 @@ class LoginController extends Controller
             return $this->sendLockoutResponse($request);
         }
        
-            $user = User::query()->where('email',$request->email)->first();
+            $user = User::query()->with('getSubcription')->where('email',$request->email)->first();
             if($user->user_type == 'A'){
                 return back()->with('error','Invalid credentials.');
             }
@@ -92,8 +95,17 @@ class LoginController extends Controller
         if ($this->attemptLogin($request)) {
             if ($request->hasSession()) {
                 $request->session()->put('auth.password_confirmed_at', time());
-            }
+                if($user->getSubcription){
+                    $plans = Plans::query()->where('id',$user->getSubcription->plan_id)->with('getRelationalData.getModule','getRelationalData.getOperation')
+                    ->first();
+                    $module = MasterPlanModule::all();
+                    $action = MasterPlanOperation::all();
 
+                    $request->session()->put('permission',$plans->getRelationalData);
+                    $request->session()->put('module',$module);
+                    $request->session()->put('action',$action);
+                }  
+            }
             return $this->sendLoginResponse($request);
         }
 

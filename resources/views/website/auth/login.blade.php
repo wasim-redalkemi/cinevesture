@@ -5,7 +5,7 @@
 @section('content')
 <div class="hide-me animation for_authtoast">
             @include('website.include.flash_message')
-        </div>
+</div>
 <section class="auth_section p-0">
 
   <div class="row">
