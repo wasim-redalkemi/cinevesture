@@ -25,7 +25,7 @@ class PlanPermission
              if(in_array('user',$check_module)){  
                 $mod = $request->session()->get('module')->sole('name','Industry Guide');
                 $getModule_id = $mod->id; 
-             }elseif(in_array('industry-guide',$check_module)){
+             }elseif(in_array('industiry-guide',$check_module)){
                 $mod = $request->session()->get('module')->sole('name','Industry Guide');
                 $getModule_id = $mod->id; 
              }elseif(in_array('project',$check_module)){
@@ -39,10 +39,15 @@ class PlanPermission
           
           if($getModule_id){
               $permissions = $request->session()->get('permission')->where('module_id',$getModule_id);
-              $key =  $check_module[count($check_module)-1];
+              if($mod->name == 'Jobs'){
+               $key =  $check_module[count($check_module)-2];
+              }else{
+               $key =  $check_module[count($check_module)-1];
+
+              }
               $selected_action = $request->session()->get('action')->where('url_key',$key)->first();
               if($selected_action){ // check current url action in list
-               if(!$permissions->sole('action_id',$selected_action->id)){ // view profile
+               if(!$permissions->where('action_id',$selected_action->id)->first()){ // view profile
                    return back()->with('error','Sorry, You Are Not Allowed to Access This Page');
                }
               }

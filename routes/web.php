@@ -84,13 +84,13 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
 	{	Route::get('/plans',[PlanController::class,'showPlans'])->name('plans-view');
         Route::get('/subscription/store',[SubscriptionController::class,'storeSubscription'])->name('subscription-create');
 
-		Route::get('/profile-private-show', [UserController::class, 'profilePrivateShow'])->middleware('plancheck')->name('profile-private-show');
-		Route::get('/profile-public-show', [UserController::class, 'profilePublicShow'])->name('profile-public-show');
-        Route::get('/profile-create', [UserController::class, 'profileCreate'])->name('profile-create');
+		Route::get('/profile-private-show', [UserController::class, 'profilePrivateShow'])->name('profile-private-show');
+		Route::get('/profile-public-show', [UserController::class, 'profilePublicShow'])->name('profile-public-show')->middleware('plancheck');
+        Route::get('/profile-create', [UserController::class, 'profileCreate'])->name('profile-create')->middleware('plancheck');
         Route::post('/profile-store', [UserController::class, 'profileStore'])->name('profile-store');
 
-        Route::post('/contact-user-mail-store', [UserController::class, 'contactMailStore'])->name('contact-user-mail-store');
-        Route::post('/endorse-user-mail-store', [UserController::class, 'endorseMailStore'])->name('endorse-user-mail-store');
+        Route::post('/contact-user-mail-store', [UserController::class, 'contactMailStore'])->name('contact-user-mail-store')->middleware('plancheck');
+        Route::post('/endorse-user-mail-store', [UserController::class, 'endorseMailStore'])->name('endorse-user-mail-store')->middleware('plancheck');
 
 
         Route::get('/portfolio-create/{id?}', [UserController::class, 'portfolioCreate'])->name('portfolio-create');
@@ -123,7 +123,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
 	{	
         Route::get('/project-list', [ProjectController::class, 'projectList'])->name('project-list');
 
-        Route::get('/project-overview', [ProjectController::class, 'projectOverview'])->name('project-overview');
+        Route::get('/project-overview', [ProjectController::class, 'projectOverview'])->name('project-overview')->middleware('plancheck');
         Route::post('/validate-project-overview', [ProjectController::class, 'validateProjectOverview'])->name('validate-project-overview');
 
         Route::get('/project-details', [ProjectController::class, 'projectDetails'])->name('project-details');
@@ -144,7 +144,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
 
 
 
-        Route::get('/project-public-view', [ProjectController::class, 'publicView'])->name('public-view');
+        Route::get('/project-public-view', [ProjectController::class, 'publicView'])->name('public-view')->middleware('plancheck');;
         Route::post('/like', [ProjectController::class, 'projectLike'])->name('project-like');
         
         Route::get('/get-project-media/{id}', [ProjectController::class, 'getMediaByProject'])->name('get-project-media');
@@ -169,11 +169,11 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
         Route::group(['prefix'=>'organisation'],function()
         {	
             Route::get('/private-view',[OrganisationController::class, 'index'])->name('organisation-private-view');
-            Route::get('/organisation-create',[OrganisationController::class, 'create'])->name('organisation-create');
+            Route::get('/organisation-create',[OrganisationController::class, 'create'])->name('organisation-create')->middleware('plancheck');
             Route::post('/organisation-store', [OrganisationController::class, 'store'])->name('organisation-store');
             // Route::get('/edit/{id}', [OrganisationController::class, 'edit'])->name('organisation-edit');
             // Route::post('/update/{id}', [OrganisationController::class, 'update'])->name('organisation-update');
-            Route::get('/create-team', [OrganisationController::class, 'createTeam'])->name('create-team');
+            Route::get('/create-team', [OrganisationController::class, 'createTeam'])->name('create-team')->middleware('plancheck');
             Route::post('/team-email', [OrganisationController::class, 'teamEmail'])->name('team-email');
             Route::post('/team-email-log', [OrganisationController::class, 'teamEmailLogStore'])->name('team-email-log');
     
@@ -182,7 +182,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
         Route::group(['prefix'=>'favourite'],function()
         {	
             Route::get('/view',[FavouriteController::class, 'index'])->name('favourite-view');
-            Route::post('/profile-save',[FavouriteController::class, 'update'])->name('favourite-update');
+            Route::post('/profile-save',[FavouriteController::class, 'update'])->name('favourite-update')->middleware('plancheck');
     
         });
 	});
@@ -203,16 +203,16 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
     Route::group(['prefix'=>'job'],function()
 	{	
         Route::get('/search',[JobController::class, 'index'])->middleware('plancheck')->name('job-search-page');
-        Route::get('/job-create',[JobController::class, 'create'])->name('job-create-page');
+        Route::get('/job-create',[JobController::class, 'create'])->name('job-create-page')->middleware('plancheck');
         Route::get('/search',[JobController::class, 'index'])->name('job-search-page');
-        Route::get('/apply/{jobId}',[JobController::class, 'showApplyJob'])->name('showApplyJob');
+        Route::get('/apply-job/{jobId}/',[JobController::class, 'showApplyJob'])->name('showApplyJob')->middleware('plancheck');
         Route::post('/apply/{jobId}',[JobController::class, 'storeApplyJob'])->name('storeApplyJob');
         Route::any('/search/results',[JobController::class, 'showJobSearchResults'])->name('showJobSearchResults');
         Route::post('/search/add_to_fav',[JobController::class, 'storeJobToFavList'])->name('addJobToFavList');
         Route::post('/action',[JobController::class, 'store'])->name('job-store');
         Route::post('/job-store-edit',[JobController::class, 'jobStoreEdit'])->name('job-store-edit');
         Route::get('/validate-job',[JobController::class, 'validatejob'])->name('validate-job');
-        Route::get('/posted-job',[JobController::class, 'postedJob'])->name('posted-job');
+        Route::get('/posted-job',[JobController::class, 'postedJob'])->name('posted-job')->middleware('plancheck');
         Route::get('/saved-job',[JobController::class, 'savedJob'])->name('saved-job');
         Route::get('/applied-job',[JobController::class, 'appliedJob'])->name('applied-job');
         Route::get('/applicants/{jobId}',[JobController::class, 'showJobApplicants'])->name('showJobApplicants');
