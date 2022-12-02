@@ -26,7 +26,7 @@
                                 <?php
                                 if (empty($user->profile_image)) {
                                 ?>
-                                    <img src="{{ asset('public/images/asset/user-profile.png') }}" />
+                                    <img src="{{ asset('images/asset/user-profile.png') }}" />
                                 <?php
                                 } else {
                                 ?>
@@ -57,7 +57,7 @@
                                                             <div class="signup-text  mb-4 mt-5"> Contact </div>
                                                             <div class="row">
                                                                 <div class="col-md-3">
-                                                                    <div><img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="w-100 br_100"></div>
+                                                                    <div><img src="{{ asset('images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="w-100 br_100"></div>
                                                                 </div>
                                                                 <div class="col-md-9">
                                                                     <div class="tile_text text_fff">Name</div>
@@ -208,7 +208,7 @@
                             {{-- <div class="portfolio owl-carousel owl-theme">
                                 @foreach ($portfolio as $k=>$v)
                                 <div class="item">
-                                    <img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}">
+                                    <img src="{{ asset('images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}">
                                     
                                 </div>
                                 @endforeach

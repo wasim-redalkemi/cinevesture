@@ -30,7 +30,7 @@
                             <div class="col-md-2">
                                 <div class="user_profile_container">
                                     @if (empty($UserOrganisation->logo))
-                                        <img src="{{ asset('public/images/asset/100_no_img.jpg') }}" />
+                                        <img src="{{ asset('images/asset/100_no_img.jpg') }}" />
                                     @else
                                         <img src="{{ Storage::url($UserOrganisation->logo) }}"  class = "prod-img" alt="product-image" style="max-height:100px;width:100%;">
                                     @endif  
@@ -142,14 +142,14 @@
                                 <div class="preview_headtext mb-3">Team members</div>
                                 <div class="row">
                                     <div class="col-md-3 col-6">
-                                        <div class="organisation_img_warper"><img src="{{ asset('public/images/asset/67a6c213a22d2ba4c3982a55d828b5c7 1.png') }}" class="root_img"></div>
+                                        <div class="organisation_img_warper"><img src="{{ asset('images/asset/67a6c213a22d2ba4c3982a55d828b5c7 1.png') }}" class="root_img"></div>
                                         <div class="d-flex justify-content-between mt-3">
                                             <div class="organisation_cmn_text">Title</div>
                                             <div class="icon_container"><i class="fa fa-pencil  deep-pink" aria-hidden="true"></i></div>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-6">
-                                        <div class="organisation_img_warper"><img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="root_img"></div>
+                                        <div class="organisation_img_warper"><img src="{{ asset('images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="root_img"></div>
                                         <div class="d-flex justify-content-between mt-3">
                                             <div class="organisation_cmn_text">Title</div>
                                             <div class="icon_container"><i class="fa fa-pencil deep-pink" aria-hidden="true"></i></div>
@@ -157,7 +157,7 @@
                                     </div>
 
                                     <div class="col-md-3 col-6 mt-2 mt-md-0">
-                                        <div class="organisation_img_warper"><img src="{{ asset('public/images/asset/67a6c213a22d2ba4c3982a55d828b5c7 1.png') }}" class="root_img"></div>
+                                        <div class="organisation_img_warper"><img src="{{ asset('images/asset/67a6c213a22d2ba4c3982a55d828b5c7 1.png') }}" class="root_img"></div>
                                         <div class="d-flex justify-content-between mt-3">
                                             <div class="organisation_cmn_text">Title</div>
                                             <div class="icon_container"><i class="fa fa-pencil deep-pink" aria-hidden="true"></i></div>

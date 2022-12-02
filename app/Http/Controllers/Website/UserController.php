@@ -167,9 +167,8 @@ class UserController extends WebController
     public function profilePublicShow()
     {
         try {
-            $id=$_REQUEST['id'];
-            $user = User::query()->find($id);
-            $portfolio = UserPortfolio::query()->where('user_id', $user->id)->get();
+            $id=request('id');
+            $user = User::query()->find($id);            
             $portfolio = UserPortfolio::query()
                 ->with('getPortfolio')
                 ->where('user_id', $user->id)
@@ -351,7 +350,7 @@ class UserController extends WebController
             $portfolio->project_title = $request->project_title;
             $portfolio->description = $request->description;
             $portfolio->completion_date = $request->completion_date;
-            $portfolio->video = $request->video;
+            $portfolio->video = json_encode(['video_url'=>$request->video_url,'video_thumbnail'=>$request->video_thumbnail]);
 
             if ($portfolio->save()) {
                 if (isset($request->project_specific_skills_id)) {
@@ -407,6 +406,9 @@ class UserController extends WebController
             if ($request->flag == 'privateView') {
                 return redirect()->route('profile-private-show')->with("success", "Portfolio added successfully.");
             }
+            if ($request->saveButtonType == 'saveAndAnother') {
+                return redirect()->route('portfolio-create')->with("success", "Please add another portfolio.");
+            }
             return redirect()->route('experience-create')->with("success", "Portfolio created successfully.");
         } catch (Exception $e) {
             return back()->with('error', 'Something went wrong.');
@@ -423,6 +425,7 @@ class UserController extends WebController
                 $skills = MasterSkill::query()->get();
                 $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
                 $UserPortfolioEdit = UserPortfolio::query()->where('id', $id)->get();
+                $UserPortfolioEdit[0]->video = json_decode($UserPortfolioEdit[0]->video, true);
                 $UserPortfolioImages = UserPortfolioImage::query()->where('portfolio_id', $id)->get();
                 $UserPortfolioSkills = UserPortfolioSpecificSkills::query()->where('portfolio_id', $id)->get();
                 $UserPortfolioLocations = UserPortfolioLocation::query()->where('portfolio_id', $id)->get();
@@ -460,7 +463,7 @@ class UserController extends WebController
             $portfolio->project_title = $request->project_title;
             $portfolio->description = $request->description;
             $portfolio->completion_date = $request->completion_date;
-            $portfolio->video = $request->video;
+            $portfolio->video = json_encode(['video_url'=>$request->video_url,'video_thumbnail'=>$request->video_thumbnail]);
 
             if ($portfolio->update()) {
                 if (isset($request->project_specific_skills_id)) {
@@ -486,7 +489,7 @@ class UserController extends WebController
 
             $data_to_insert = [];
             foreach ($request->toArray() as $k => $v) {
-                if (substr($k, 0, 14) == 'project_image_') {
+                if (strpos($k, 'portfolio-image') !== false) {
                     $image_file_name = $k;
                     if ($request->hasFile($image_file_name)) {
                         $file = $request->file($image_file_name);
@@ -511,6 +514,9 @@ class UserController extends WebController
                 $projectMedia->file_type = $v['file_type'];
                 $projectMedia->file_link = $v['file_link'];
                 $projectMedia->save();
+            }
+            if ($request->saveButtonType == 'saveAndAnother') {
+                return redirect()->route('portfolio-create')->with("success", "Please add another portfolio after edit.");
             }
             return redirect()->route('profile-private-show')->with("success", "Portfolio updated successfully.");
         } catch (Exception $e) {
@@ -584,6 +590,9 @@ class UserController extends WebController
                 if ($request->flag == 'privateView') {
                     return redirect()->route('profile-private-show')->with("success", "Experience added successfully.");
                 }
+                if ($request->saveButtonType == 'saveAndAnother') {
+                    return redirect()->route('experience-create')->with("success", "Please add another experience.");
+                }
                 return redirect()->route('qualification-create')->with("success", "Experience added successfully.");
             } else {
                 return back()->with('Something went wrong ,please try again.');
@@ -634,6 +643,9 @@ class UserController extends WebController
             $experience->employement_type_id = $request->employement_type_id;
             $experience->description = $request->description;
             if ($experience->update()) {
+                if ($request->saveButtonType == 'saveAndAnother') {
+                    return redirect()->route('experience-create')->with("success", "Please add another experience after edit.");
+                }
                 return redirect()->route('profile-private-show')->with("success", "Experience added successfully.");
             } else {
                 return back()->with('Something went wrong ,please try again.');
@@ -702,6 +714,9 @@ class UserController extends WebController
                 if ($request->flag == 'privateView') {
                     return redirect()->route('profile-private-show')->with("success", "Qualification added successfully.");
                 }
+                if ($request->saveButtonType == 'saveAndAnother') {
+                    return redirect()->route('qualification-create')->with("success", "Please add another qualification.");
+                }
                 return redirect()->route('profile-private-show');
             } else {
                 return back()->with('error', 'Something went wrong ,please try again.');
@@ -746,6 +761,9 @@ class UserController extends WebController
             $qualification->end_year = $request->end_year;
             $qualification->description = $request->description;
             if ($qualification->update()) {
+                if ($request->saveButtonType == 'saveAndAnother') {
+                    return redirect()->route('qualification-create')->with("success", "Please add another qualification after edit.");
+                }
                 return redirect()->route('profile-private-show')->with("success", "Qualification added successfully.");
             } else {
                 return back()->with('Something went wrong ,please try again.');

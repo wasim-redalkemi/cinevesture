@@ -17,7 +17,10 @@ class CreateUserAppliedJobsTable extends Migration
             $table->id();
             $table->integer("user_id");
             $table->integer("job_id");
+            $table->string("resume_original_name",255);
+            $table->string("resume_size",15);
             $table->string("resume");
+            $table->text("cover_letter");
             $table->timestamps();
             $table->softDeletes();
         });

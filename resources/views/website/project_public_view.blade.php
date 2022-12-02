@@ -63,7 +63,7 @@
                         <div class="col-lg-6 col-md-12 px-3">
                             <div class="public-head-subimage">
                                 <iframe width="100%" height="350" src="https://www.youtube.com/embed/oYWAwwy5EbQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                <!-- <img src="{{ asset('public/images/asset/download (3) 7.png') }}" width=100% alt="Image"> -->
+                                <!-- <img src="{{ asset('images/asset/download (3) 7.png') }}" width=100% alt="Image"> -->
 
                             </div>
                             <div class="d-flex my-4 align-items-center justify-content-between">
@@ -124,14 +124,14 @@
                     <h1 class="public-heading-text"> Gallery</h1>
                     <div class="public-head-subtext mt-3">Videos</div>
                     <div class="row">
-                        <div class="col-lg-3 col-sm-4 mt-sm-2 mt-3"><img src="{{ asset('public/images/asset/download (3) 7.png') }}" alt="image" width=100%></div>
-                        <div class="col-lg-3 col-sm-4 mt-sm-2 mt-3"><img src="{{ asset('public/images/asset/download (3) 7.png') }}" alt="image" width=100%></div>
-                        <div class="col-lg-3 col-sm-4 mt-sm-2 mt-3"><img src="{{ asset('public/images/asset/download (3) 7.png') }}" alt="image" width=100%></div>
+                        <div class="col-lg-3 col-sm-4 mt-sm-2 mt-3"><img src="{{ asset('images/asset/download (3) 7.png') }}" alt="image" width=100%></div>
+                        <div class="col-lg-3 col-sm-4 mt-sm-2 mt-3"><img src="{{ asset('images/asset/download (3) 7.png') }}" alt="image" width=100%></div>
+                        <div class="col-lg-3 col-sm-4 mt-sm-2 mt-3"><img src="{{ asset('images/asset/download (3) 7.png') }}" alt="image" width=100%></div>
                     </div>
                     <div class="public-head-subtext mt-3">Photos</div>
                     <div class="row">
-                        <div class="col-lg-3 col-sm-6 mt-sm-2 mt-3"><img src="{{ asset('public/images/asset/download (3) 7.png') }}" alt="image" width=100%></div>
-                        <div class="col-lg-3 col-sm-6 mt-sm-2 mt-3"><img src="{{ asset('public/images/asset/download (3) 7.png') }}" alt="image" width=100%></div>
+                        <div class="col-lg-3 col-sm-6 mt-sm-2 mt-3"><img src="{{ asset('images/asset/download (3) 7.png') }}" alt="image" width=100%></div>
+                        <div class="col-lg-3 col-sm-6 mt-sm-2 mt-3"><img src="{{ asset('images/asset/download (3) 7.png') }}" alt="image" width=100%></div>
                     </div>
                 </div>
             </div>
@@ -275,12 +275,12 @@
                     <div class="row">
                         <div class="col-4">
                             <div class="item">
-                                <img src="{{ asset('public/images/asset/download (3) 7.png') }}" width=100% height=100% alt="image">
+                                <img src="{{ asset('images/asset/download (3) 7.png') }}" width=100% height=100% alt="image">
                             </div>
                             <!-- <div class="item">
                                     <div class="rltv_image_wraper">
                                         <div class="img-container">
-                                            <img src="{{ asset('public/images/asset/download (3) 7.png') }}" width=100%
+                                            <img src="{{ asset('images/asset/download (3) 7.png') }}" width=100%
                                                 height=100% alt="image">
                                         </div>
                                         <div class="secondry-card-top-container w-100">
@@ -297,12 +297,12 @@
                         </div>
                         <div class="col-4">
                             <div class="item">
-                                <img src="{{ asset('public/images/asset/download (3) 7.png') }}" width=100% height=100% alt="image">
+                                <img src="{{ asset('images/asset/download (3) 7.png') }}" width=100% height=100% alt="image">
                             </div>
                         </div>
                         <div class="col-4">
                             <div class="item">
-                                <img src="{{ asset('public/images/asset/download (3) 7.png') }}" width=100% height=100% alt="image">
+                                <img src="{{ asset('images/asset/download (3) 7.png') }}" width=100% height=100% alt="image">
                             </div>
                         </div>
                     </div>

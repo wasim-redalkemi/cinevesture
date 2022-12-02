@@ -52,7 +52,7 @@ class User extends Authenticatable
 
     public function skill()
     {
-        return $this->hasMany(UserSkill::class, 'user_id');
+        return $this->belongsToMany(MasterSkill::class,UserSkill::class,'user_id','skill_id');
     }
 
     public function language()
@@ -74,5 +74,10 @@ class User extends Authenticatable
 
     public function invites(){
         return $this->hasOne(UserInvite::class, 'user_id', 'id');
+    }
+
+    public function appliedJobs()
+    {
+        return $this->hasMany(UserAppliedJob::class,'user_id');
     }
 }

@@ -21,7 +21,7 @@
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Add Portfolio</div>
                           {{-- <div class="icon_container">
-                          <img src="{{ asset('public/images/asset/delete-icon.svg') }}"/>
+                          <img src="{{ asset('images/asset/delete-icon.svg') }}"/>
                           </div>  --}}
                         </div>                        
                         <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('portfolio-store') }}">
@@ -153,9 +153,10 @@
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-end mt-4">
                                     <a href="{{route('profile-create')}}"class="cancel_btn mx-3" style="text-decoration:none">Cancel</a>
-                                    <button class="save_add_btn">Save & add another</button>
+                                    <button type="button" name="saveAndAnother" value="false" class="portfolio_save_btn save_add_btn">Save & add another</button>
+                                    <input type="hidden" id="save_btn_value" name="saveButtonType" value="">
                                     <input type="hidden" name="flag" value="<?=request('flag')?>">
-                                    <button type="submit" class="guide_profile_btn mx-3">Save & next</button>
+                                    <button type="button" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save & next</button>
                                     </div>
                                 </div>
                             </div>
@@ -283,13 +284,13 @@
         }
 
         let addImgUploadElem = function(){
-            console.log("current imageCnt = "+imageCnt);
-            let newcnt = imageCnt+1;
+            imageCnt = $(parentElemId+" .portfolio-images").children('.img-item').length;
+            lastid = $(parentElemId+" .portfolio-images").children('.img-item').last().attr('id').split("-")[3];
+            let newcnt = lastid+1;
             if(maxImgCnt == imageCnt){
                 createToast("You can upload only upto "+maxImgCnt+" images.","E");
                 return;
             }
-
             let html = '';
             html += '<div id="portfolio-img-new-'+newcnt+'" class="col-md-4 img-item">';
                 html += '<div class="open_file_explorer profile_upload_container h_66">';
@@ -311,10 +312,8 @@
                 html += '</div>';
                 html += '<div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 4MB</div>';
             html += '</div>';
-            $(html).insertAfter(parentElemId+" #portfolio-img-new-"+imageCnt);
-            imageCnt++;
+            $(html).insertAfter(parentElemId+" #portfolio-img-new-"+lastid);
             bindActions();
-            console.log("new imageCnt = "+imageCnt);
         }
 
         return {
@@ -330,5 +329,9 @@
         tags: false
     });
 
+    $(".portfolio_save_btn").on("click", function () {
+        $("#save_btn_value").attr("value", $(this).attr("name"))
+        $(this).parents('form').submit();
+    });
 </script>
 @endpush
