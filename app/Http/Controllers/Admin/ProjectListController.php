@@ -9,7 +9,7 @@ use App\Models\ProjectMedia;
 use App\Models\ProjectListProjects;
 use App\Models\UserProject;
 use Exception;
-use Illuminate\Contracts\Session\Session;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PhpParser\Node\Expr\FuncCall;
@@ -247,7 +247,9 @@ class ProjectListController extends AdminController
         }
         catch (Exception $e)
         {
-            return back()->with('error',$e->getmessage);
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
+            // return back()->with('error',$e->getmessage);
         }
         // catch (Exception $e) 
         // {
@@ -267,12 +269,11 @@ class ProjectListController extends AdminController
         }
         catch (Exception $e)
         {
-            return back()->with('error',$e->getmessage);
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
+            // return back()->with('error',$e->getmessage);
         }
-        // catch (Exception $e) 
-        // {
-        //     return back()->with('error','Something went wrong.');
-        // }
+       
        
     }
     /**
