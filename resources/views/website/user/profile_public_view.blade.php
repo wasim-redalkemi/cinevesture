@@ -347,6 +347,7 @@
 
                                                             <div class="mt-4">
                                                                 <input type="hidden" name="endorse_email" id="endorse_email" value="@if (!empty($user->email)){{$user->email}}@endif">
+                                                                <input type="hidden" name="endorse_to_id" id="endorse_to_id" value="@if (!empty($user->id)){{$user->id}}@endif">
                                                                 <button type="button" id="endorse_btn" class="invite_btn">Submit</button>
                                                             </div>
                                                             <div class="modal_btm_text mt-4 mb-5">
@@ -438,16 +439,14 @@
             {
                 var endorse_email = $('#endorse_email').val();
                 var endorse_message = $('#endorse_message').val();
-                console.log(endorse_email);
-                console.log(endorse_message);
-                
+                var endorse_to_id = $('#endorse_to_id').val();
                 
                 $.ajax(
                 {
                     url:"{{ route('endorse-user-mail-store') }}",
                     type:'POST',
                     dataType:'json',
-                    data:{endorse_email:endorse_email,endorse_message:endorse_message,"_token": "{{ csrf_token() }}"},
+                    data:{endorse_to_id:endorse_to_id,endorse_email:endorse_email,endorse_message:endorse_message,"_token": "{{ csrf_token() }}"},
                     success:function(response)
                     {
                         console.log(response)

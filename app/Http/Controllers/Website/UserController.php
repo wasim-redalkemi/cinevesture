@@ -833,17 +833,41 @@ class UserController extends WebController
             if ($validator->fails()) {
                 return ['satus'=>0,'msg'=>$validator->errors()->first()];
             }
-            $email = '';
+            // $email = '';
             if(!$_REQUEST['endorse_email'] && !$_REQUEST['endorse_message']){
                 return ['satus'=>0,'msg'=>"Endorse email or message or subject fields can not be empty."];
             }
-            if(!empty($_REQUEST['endorse_email']) ){
-                $email = $_REQUEST['endorse_email'];
-                $collect = collect();
-                $collect->put('url','https://www.google.com/');
-                Notification::route('mail', $email)->notify(new EndorseUser($collect));                
+            
+            $data = [
+                ['from'=>auth()->user()->id,'to'=>$_REQUEST['endorse_to_id'],'comment'=>$_REQUEST['endorse_message'] ,'created_at'=>date("Y-m-d h:i:s", time()),'updated_at'=>date("Y-m-d h:i:s", time())],
+            ];
+
+            $UserEmdorse = $this->userEmdorseLogStore($data);
+            if ($UserEmdorse['status'] ==1) {
+                return ['status'=>1,'msg'=>$UserEmdorse['msg']];           
+
             }
-            return ['status'=>1,'msg'=>"Email has been sending by endorse email."];           
+            return ['status'=>0,'msg'=>"Endorse records updated failed,please try again."];           
+
+
+            // if(!empty($_REQUEST['endorse_email']) ){
+            //     $email = $_REQUEST['endorse_email'];
+            //     $collect = collect();
+            //     $collect->put('url','https://www.google.com/');
+            //     Notification::route('mail', $email)->notify(new EndorseUser($collect));                
+            // }
+            // return ['status'=>1,'msg'=>"Email has been sending by endorse email."];           
+        } catch (Exception $e) {
+            return ['status'=>0,'msg'=>"Something went wrong."];
+        }
+    }
+
+    public function userEmdorseLogStore($data)
+    {
+        try {            
+            $UserEndorsements = new Endorsement();            
+            $UserEndorsements->insert($data); 
+            return ['status'=>1,'msg'=>"Endorse email records updated successfully."];
         } catch (Exception $e) {
             return ['status'=>0,'msg'=>"Something went wrong."];
         }
