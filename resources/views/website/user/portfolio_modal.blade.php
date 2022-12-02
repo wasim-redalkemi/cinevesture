@@ -16,6 +16,6 @@
     @if (!empty($data['get_portfolio']))
         <img src="{{ Storage::url($data['get_portfolio'][0]['file_link']) }}" width="100%" height="100%" />
     @else        
-        <img src="{{ asset('public/images/asset/user-profile.png') }}" width="100%" height="100%" />
+        <img src="{{ asset('images/asset/user-profile.png') }}" width="100%" height="100%" />
     @endif
 </div>

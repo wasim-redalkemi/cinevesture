@@ -14,11 +14,11 @@ class MasterPlanActionSeeder extends Seeder
      */
     public function run()
     {
-        $query = "insert into `master_plan_operations` (`id`, `name`,`key`) values('1', 'Create Profile','profileStore'),
+        $query = "insert into `master_plan_operations` (`id`, `name`,`url_key`) values('1', 'Create Profile','profile-create'),
         ('2', 'Search Profile','profile-show'),
         ('3', 'View profiles','profile-public-show'),
         ('4', 'Save profiles','profile-save'),
-        ('5', 'Contact People','contact'.'contact-user-mail-store'),
+        ('5', 'Contact People','contact-user-mail-store'),
         ('6', 'Ability to endorse others','endorse-user-mail-store'),
         ('7', 'Additional memberships','team-email'),
         ('8', 'Create Organisation','organisation-create'),
@@ -27,8 +27,8 @@ class MasterPlanActionSeeder extends Seeder
         ('11', 'View All Listed Projects','project-public-view'),
         ('12', 'Apply For Unlimited Jobs','applied-job'),
         ('13', 'Unlimited Job Posts','job-create'),
-        ('14', 'View Listed Jobs','posted-job),
-        ('15', 'Job Posts',''job-create'')"        ;  
+        ('14', 'View Listed Jobs','posted-job'),
+        ('15', 'Job Posts','job-create')"; 
 
         DB::unprepared($query);
     }

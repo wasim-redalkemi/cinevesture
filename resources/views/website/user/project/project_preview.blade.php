@@ -127,8 +127,6 @@
                     </div>
         
                     <div class="preview_headtext mb-3">Video</div>
-
-
                     <div class="video_slider owl-carousel">
                     @if (!empty($projectData[0]['project_only_video']))
                         @foreach ($projectData[0]['project_only_video'] as $v)
@@ -152,14 +150,8 @@
                         @endif
                     </div>
 
-
-
                
                     <div class="preview_headtext mb-3">Photos</div>
-
-
-
-                    
                     <div class="video_slider owl-carousel">
                         @if (!empty($projectData[0]['project_only_image']))
                         @foreach ($projectData[0]['project_only_image'] as $v)

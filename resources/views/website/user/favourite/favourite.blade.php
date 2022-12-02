@@ -29,8 +29,8 @@
                         @if (!empty($v['projects']['project_image']))
                             <div class="favourite_img_card"><img src="{{ Storage::url($v['projects']['project_image']['file_link']) }}" width=100% alt="image"></div>
                         @else
-                            {{-- <div class="favourite_img_card"><img src="{{ asset('public/images/asset/100_no_img.jpg') }}" alt="image""></div> --}}
-                         <div class="favourite_img_card">   <img src="{{ asset('public/images/asset/100_no_img.jpg') }}" class="root_img" /></div>
+                            {{-- <div class="favourite_img_card"><img src="{{ asset('images/asset/100_no_img.jpg') }}" alt="image""></div> --}}
+                         <div class="favourite_img_card">   <img src="{{ asset('images/asset/100_no_img.jpg') }}" class="root_img" /></div>
 
                         @endif
                         <div class="d-flex align-items-center justify-content-between">
@@ -73,7 +73,7 @@
                                 @if (!empty($v['profiles']['profile_image']))
                                     <img src="{{ Storage::url($v['profiles']['profile_image']) }}"  class="" width=100% alt="image">
                                 @else
-                                <img src="{{ asset('public/images/asset/100_no_img.jpg') }}" />
+                                <img src="{{ asset('images/asset/100_no_img.jpg') }}" />
                                 @endif
                             </div>
                         </div>

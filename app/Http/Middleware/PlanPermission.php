@@ -39,8 +39,8 @@ class PlanPermission
           
           if($getModule_id){
               $permissions = $request->session()->get('permission')->where('module_id',$getModule_id);
-              $key =  $check_module[count($check_module)];
-              $selected_action = $request->session()->get('action')->sole('url_key',$key);
+              $key =  $check_module[count($check_module)-1];
+              $selected_action = $request->session()->get('action')->where('url_key',$key)->first();
               if($selected_action){ // check current url action in list
                if(!$permissions->sole('action_id',$selected_action->id)){ // view profile
                    return back()->with('error','Sorry, You Are Not Allowed to Access This Page');

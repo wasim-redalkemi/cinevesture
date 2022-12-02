@@ -5,7 +5,7 @@
     <div class="signup-text my-lg-5 my-md-3"> Sign Up</div>
     <div class="row">
         <div class="col-12">
-            <button class="w-100"> <img src="{{asset('public/images/asset/google.png')}}" width="24" width="24" class="mx-3">Sign up
+            <button class="w-100"> <img src="{{asset('images/asset/google.png')}}" width="24" width="24" class="mx-3">Sign up
                 with google</button>
         </div>
         <div class="col-lg-6 col-sm-6 my-lg-5 my-sm-4">
