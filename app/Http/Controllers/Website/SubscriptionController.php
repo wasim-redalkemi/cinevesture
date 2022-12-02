@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Models\MasterPlanModule;
+use App\Models\MasterPlanOperation;
 use App\Models\Plans;
+use App\Models\User;
 use App\Models\UserSubscription;
 use Carbon\Carbon;
 use Exception;
@@ -31,6 +34,16 @@ class SubscriptionController extends Controller
              $subscription->subscription_end_date = Carbon::now();
              $subscription->status = "active";
              $subscription->save();
+             $user = User::query()->with('getSubcription')->where('id',auth()->user()->id)->first();
+
+             $plans = Plans::query()->where('id',$user->getSubcription->plan_id)->with('getRelationalData.getModule','getRelationalData.getOperation')
+             ->first();
+             $action = MasterPlanOperation::all();
+             $module = MasterPlanModule::all();
+             $request->session()->put('permission',$plans->getRelationalData);
+             $request->session()->put('module',$module);
+             $request->session()->put('action',$action);
+
 
              return redirect()->route('home');
 

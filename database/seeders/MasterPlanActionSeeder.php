@@ -14,21 +14,21 @@ class MasterPlanActionSeeder extends Seeder
      */
     public function run()
     {
-        $query = "insert into `master_plan_operations` (`id`, `name`) values('1', 'Create Profile'),
-        ('2', 'Search for industry professionals'),
-        ('3', 'View profiles'),
-        ('4', 'Save profiles'),
-        ('5', 'Contact People'),
-        ('6', 'Ability to endorse others'),
-        ('7', 'Unlimited active projects'),
-        ('8', 'Apply for unlimited jobs'),
-        ('9', 'Unlimited job posts'),
-        ('10', 'View all listed projects'),
-        ('11', '1 active project'),
-        ('12', '5 active projects'),
-        ('13', 'View jobs listed'),
-        ('14', '3 active job posts')";
-        
+        $query = "insert into `master_plan_operations` (`id`, `name`,`url_key`) values('1', 'Create Profile','profile-create'),
+        ('2', 'Search Profile','profile-show'),
+        ('3', 'View profiles','profile-public-show'),
+        ('4', 'Save profiles','profile-save'),
+        ('5', 'Contact People','contact-user-mail-store'),
+        ('6', 'Ability to endorse others','endorse-user-mail-store'),
+        ('7', 'Additional memberships','create-team'),
+        ('8', 'Create Organisation','organisation-create'),
+        ('9', 'Create Unlimited Projects','project-overview'),
+        ('10', 'Create Project','project-overview'),
+        ('11', 'View All Listed Projects','project-public-view'),
+        ('12', 'Apply For Unlimited Jobs','apply-job'),
+        ('13', 'Unlimited Job Posts','job-create'),
+        ('14', 'View Listed Jobs','posted-job'),
+        ('15', 'Job Posts','job-create')"; 
 
         DB::unprepared($query);
     }
