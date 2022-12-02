@@ -2561,3 +2561,8 @@ select {
       {
         border-bottom: 1px solid #ccc;
       }
+
+      .resume-download-txt{
+        font-size: 14px;
+        color: #000;
+      }

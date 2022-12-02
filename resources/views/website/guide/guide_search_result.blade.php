@@ -20,7 +20,7 @@
                             <button class="search-btn"></button>
                             </div> 
                             <div class="d-block d-md-none m-2" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            <img src="{{ asset('public/images/asset/dropdown-sidebar.svg') }}" />
+                            <img src="{{ asset('images/asset/dropdown-sidebar.svg') }}" />
                             </div>    
 
                     </div>
@@ -142,11 +142,11 @@
                     <div class="row">
                         <div class="col-md-2">
                             <div class="user_profile_container">
-                                <!-- <img src="{{ asset('public/images/asset/user-profile.png') }}" /> -->
+                                <!-- <img src="{{ asset('images/asset/user-profile.png') }}" /> -->
                                 @if(isset($user->profile_image))
                                 <img src="{{Storage::url($user->profile_image)}}" />
                                 @else
-                                <img src="{{ asset('public/images/asset/user-profile.png') }}" />
+                                <img src="{{ asset('images/asset/user-profile.png') }}" />
                                 @endif
                             </div>
 
@@ -157,7 +157,7 @@
                                     <a href="{{route('profile-public-show',['id'=>$user->id])}}" class="btn-link text_user_name">{{$user->name}}</a>
                                 </div>
                                 @if($user->is_profile_verified == '1')<span><button class="verified_cmn_btn mx-3">
-                                        <img src="{{ asset('public/images/asset/verified_icon.svg') }}" alt="image"> VERIFIED</button></span>@endif
+                                        <img src="{{ asset('images/asset/verified_icon.svg') }}" alt="image"> VERIFIED</button></span>@endif
 
                             </div>
 
