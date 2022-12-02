@@ -34,7 +34,7 @@
                                 <div class="col-md-2">
                                     <div class="user_profile_container">
                                         @if (empty($user->profile_image))
-                                        <img src="{{ asset('public/images/asset/100_no_img.jpg') }}" />
+                                        <img src="{{ asset('images/asset/100_no_img.jpg') }}" />
                                         @else
                                         <img src="{{ Storage::url($user->profile_image) }}" class="prod-img" alt="product-image" style="height:100%;width:100%;object-fit: cover;">
                                         @endif
@@ -76,7 +76,7 @@
                                     <div class="guide_profile_main_text mt-3">
                                         <p> Skills</p>
                                     </div>
-                                    <div class="">
+                                    <div>
                                         @if (count($user_skills)>0)
                                         @foreach ($user_skills as $k=>$v)
                                         <button class="curv_cmn_btn skill_container">
@@ -178,7 +178,7 @@
                                         if (isset($v['get_portfolio'][0]['file_link'])) {
                                             $img = Storage::url($v['get_portfolio'][0]['file_link']);
                                         } else {
-                                            $img = asset('public/images/asset/user-profile.png');
+                                            $img = asset('images/asset/user-profile.png');
                                         }
                                         @endphp
                                         <div class="item portfolio_item" onclick="portfolio_model({{$v['id']}})">
@@ -200,7 +200,7 @@
                                     <div>
                                         <div class="modal fade" id="portfolioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
-                                                <div class="modal-content">
+                                                <div class="modal-content croper_modal">
                                                     <div class="modal-body">
                                                         <div class="d-flex justify-content-end modal_btn">
                                                             <button type="button" class="close modal_cross_btn" data-dismiss="modal" aria-label="Close">

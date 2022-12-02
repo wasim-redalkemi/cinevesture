@@ -156,7 +156,7 @@
                         @if (!empty($projectData[0]['project_only_image']))
                         @foreach ($projectData[0]['project_only_image'] as $v)
                         <div class="item">
-                            <div style=""> <img src="{{ Storage::url($v['file_link']) }}" class="" width="100%" height="240" alt="image"></div>
+                            <div class="home_img_wrap"> <img src="{{ Storage::url($v['file_link']) }}" alt="image"></div>
                             <div class="d-flex align-items-center">
                                 <div class="movie_name_text">{{ json_decode($v['media_info'])->title }}</div>
                                 <?php

@@ -60,13 +60,12 @@
                         <!-- <input type="file" name="image" class="image d-none"> -->
                         <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
-                                <div class="modal-content croppercrope">
+                                <div class="modal-content croper_modal">
                                     <div class="modal-header py-1">
                                         <h6 class="modal-title tile_text" id="modalLabel"> Image Cropper</h6>
                                         <div class="d-flex jutify-content-center">
-                                            <button type="button" class="mx-2 modal_button" id="crop-cancel" data-dismiss="modal"><i class="fa fa-times cross_btn" aria-hidden="true"></i></button>
-                                            <button type="button" class="modal_button" id="crop"><i class="fa fa-check done_btn" aria-hidden="true"></i></button>
-
+                                            <button type="button" class="mx-2 btn-danger" id="crop-cancel" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                            <button type="button" class="btn-success" id="crop"><i class="fa fa-check" aria-hidden="true"></i></button>
                                         </div>
                                     </div>
                                     <div class="modal-body">
@@ -370,7 +369,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="d-flex justify-content-md-end jsutify-content-start mt-md-0 mt-4">
+                                <div class="d-flex justify-content-end mt-md-0 mt-4">
                                     <a href="{{route('profile-private-show')}}" class="cancel_btn" style="text-decoration:none">Cancel</a>
                                     <button type="submit" class="guide_profile_btn mx-3">Save</button>
                                 </div>

@@ -167,9 +167,8 @@ class UserController extends WebController
     public function profilePublicShow()
     {
         try {
-            $id=$_REQUEST['id'];
-            $user = User::query()->find($id);
-            $portfolio = UserPortfolio::query()->where('user_id', $user->id)->get();
+            $id=request('id');
+            $user = User::query()->find($id);            
             $portfolio = UserPortfolio::query()
                 ->with('getPortfolio')
                 ->where('user_id', $user->id)

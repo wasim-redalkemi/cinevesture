@@ -10,8 +10,9 @@ body {
     background: #1C0330;
     color: #FAF8FB;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) ;
-    /* position: fixed; */
-    /* width: 100%; */
+    position: fixed;
+    width: 100%;
+    z-index: 99999;
 }
 .header {
     background: #1C0330;
@@ -23,6 +24,9 @@ body {
 .sub-header {
     background: #33084C;
     height: 55px;
+    position: relative;
+    top: 100px;
+    z-index: 200;
 }
 
 .navbar-nav .header-nav-link {
@@ -160,7 +164,9 @@ body {
 }
 
 .main_slider .item .home-upper-slider {
-    height: 100%;
+    height: auto;
+    min-height: auto;
+    max-height: 483px;
     overflow: hidden;
     background: linear-gradient(180deg, rgba(28, 3, 48, 0) 65.92%, #1C0330 100%);
 }
@@ -231,6 +237,9 @@ body {
     width: 100%;
     height: auto;
     background: linear-gradient(180deg, rgba(28, 3, 48, 0) 65.92%, #1C0330 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .project-img-container {
@@ -454,6 +463,7 @@ body {
     padding: 0 28%;
     min-height: 100vh;
     overflow: hidden;
+    margin-top: -100px;
 }
 
 .before_login_section {
@@ -803,14 +813,14 @@ body {
 }
  .curv_cmn_btn {
     /* background: #971E9B; */
-    background: RGB(255, 241, 251);
+    background: RGB(244, 243, 255);
     border-radius: 99px;
     width: auto;
     height: 32px;
     max-height: auto;
     border: none;
     padding: 2px 8px;
-    color: RGB(210, 0, 118);
+    color: RGB(105, 28, 230);
     line-height: 19px;
     font-weight: 600;
     font-size: 12px;
@@ -848,6 +858,9 @@ body {
     border-radius: 4px !important;
     color: #971E9B;
 }
+.modal {
+    top: 100px !important;
+}
 .modal_button {
     border: none;
     background: transparent;
@@ -856,9 +869,14 @@ body {
 .modal-content {
     background-color: #33084c;
 }
-.croppercrope {
+.modal_image_wraper {
+    width: auto;
+    height: 300px;
+    margin: auto;
+}
+.croper_modal {
     background-color: #FFFFFF !important;
-    max-height: 80vh;
+    max-height: 70vh;
     height: auto;
     overflow: auto;
 }
@@ -1179,6 +1197,7 @@ body {
     border: none;
     color: #FFFFFF;
     font-size: 14px;
+    text-decoration: none;
 }
 .guide_gallery_btn {
     padding: 9px 16px;
@@ -1926,13 +1945,13 @@ button, input, optgroup, select, textarea {
   }
 
 .portfolio_item {
-    width: 215px;
+    width: 170px;
     height: 265px;
     margin:1%;
 }
 .portfolio_item_image {
-    width: 215px;
-    height: 210px;
+    width: 170px;
+    height: 200px;
     display: flex;
     align-items: center;
 }
@@ -1941,15 +1960,37 @@ button, input, optgroup, select, textarea {
     height: auto;
     max-height: 200px;
 }
+.home_img_wrap {
+    width: 306.728px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* margin: 2%; */
+}
+.home_img_wrap img, .root_img {
+    max-height: 100%;
+    height: auto;
+    position: relative;
+    max-width: 100%;
+    width: auto !important;
+    text-align: center;
+}
+
+.organisation_img_warper {
+    width: 160px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 .input_wraper {
     min-height: 143px;
     background: rgba(246, 239, 251, 0.8);
     border-radius: 4px;
-    /* width: 100%; */
     display: flex;
     align-items: center;
-    /* margin: 0 5%; */
     margin: 60px 30px;
 }
 .m_0 {
@@ -2320,6 +2361,7 @@ select {
   ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px grey; 
     border-radius: 10px;
+    background-color: #FFFFFF;
   }
    
   /* Handle */
@@ -2332,6 +2374,13 @@ select {
   ::-webkit-scrollbar-thumb:hover {
     background: #2a0547; 
   }
+
+
+.main_content {
+    position: relative;
+    padding-top: 100px;
+}
+
 
   @media (max-width: 480px) {
     .container, .container-lg, .container-md, .container-sm, .container-xl {
@@ -2470,8 +2519,13 @@ select {
         height: 400px;
     }
     .home-upper-slider .img-container {
-        height: 390px;
+        width: 100%;
+        height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
+    
     .carosel-card-cntainer {
         margin-left: 50px;
     }
@@ -2484,12 +2538,16 @@ select {
   .modal-dialog-centered {
     margin: auto;
   }
-  .croppercrope {
+  /* .croper_modal {
     max-height: 50vh;
     max-width: fit-content;   
-}
+} */
 .modal-backdrop {
-    height: 90vh;
+    height: 80vh;
+    z-index: 1;
+}
+.filter_modal_wrap .filter_option_wrap {
+    max-height: 60vh;
 }
 
     }
@@ -2505,4 +2563,21 @@ select {
       {
         /* -webkit-transition: 2s ease all;
         transition: 2s ease all; */
+      }
+
+      .jobWrap
+      {
+       background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgb(0 0 0 / 25%);
+    border-radius: 4px;
+        
+      }
+      .jobElem
+      {
+        border-bottom: 1px solid #ccc;
+      }
+
+      .resume-download-txt{
+        font-size: 14px;
+        color: #000;
       }

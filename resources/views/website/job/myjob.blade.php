@@ -288,7 +288,7 @@
 
                     </div>
                     <div class="profile_wraper profile_wraper_padding">
-                        <div class="guide_profile_main_text">Discription</div>
+                        <div class="guide_profile_main_text">Description</div>
                         <div class="posted_job_header">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut nullam elementum amet, neque, molestie iaculis tincidunt rhoncus eget. Viverra est suspendisse quis dui. In
                             egestas nunc massa viverra integer semper. Dui, nibh ultricies pretium aliquet diam. Ut ac in dignissim non
@@ -341,7 +341,7 @@
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="user_profile_container">
-                                    <img src="{{ asset('public/images/asset/user-profile.png') }}" />
+                                    <img src="{{ asset('images/asset/user-profile.png') }}" />
                                 </div>
                             </div>
                             <div class="col-md-10">
@@ -378,7 +378,7 @@
                         <div class="row">
                             <div class="col-md-2">
                                 <div class="user_profile_container">
-                                    <img src="{{ asset('public/images/asset/user-profile.png') }}" />
+                                    <img src="{{ asset('images/asset/user-profile.png') }}" />
                                 </div>
                             </div>
                             <div class="col-md-10">
@@ -428,14 +428,14 @@
                                 <div class="row">
                                     <div class="col-md-2">
                                         <div class="user_profile_container">
-                                            <img src="{{ asset('public/images/asset/user-profile.png') }}" />
+                                            <img src="{{ asset('images/asset/user-profile.png') }}" />
                                         </div>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="guide_profile_main_text pt-3">Lorem ipsum</div>
                                         <div class="guide_profile_main_subtext">Lorem ipsum dolor sit amet, consectetur adipiscing
                                             elit.</div>
-                                        <div class="deep-pink">Veiw Profile Contact</div>
+                                        <div class="deep-pink">View Profile Contact</div>
                                     </div>
                                     <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
                                         <i class="fa fa-heart icon-size Aubergine" aria-hidden="true"></i>
@@ -459,7 +459,7 @@
                                 <div class="col-lg-3 col-sm-6 mt-sm-2 mt-2">
                                     <div class="d-flex doc_container">
                                         <div class="icon">
-                                            <img src="{{ asset('public/images/asset/pdf-icon.png') }}">
+                                            <img src="{{ asset('images/asset/pdf-icon.png') }}">
                                         </div>
                                         <div class="public-subheading-text mx-2">
                                             <div>Lorem ipson pdf </div>
@@ -505,27 +505,27 @@
                                         <div class="guide_profile_main_text mb-2">Portfolio</div>
                                         <div class="portfolio owl-carousel owl-theme">
                                             <div class="item">
-                                                <img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}">
+                                                <img src="{{ asset('images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}">
                                                 <div class="guide_profile_main_subtext">Title</div>
                                             </div>
                                             <div class="item">
-                                                <img src="{{ asset('public/images/asset/67a6c213a22d2ba4c3982a55d828b5c7 1.png') }}">
+                                                <img src="{{ asset('images/asset/67a6c213a22d2ba4c3982a55d828b5c7 1.png') }}">
                                                 <div class="guide_profile_main_subtext">Title</div>
                                             </div>
                                             <div class="item">
-                                                <img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}">
+                                                <img src="{{ asset('images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}">
                                                 <div class="guide_profile_main_subtext">Title</div>
                                             </div>
                                             <div class="item">
-                                                <img src="{{ asset('public/images/asset/67a6c213a22d2ba4c3982a55d828b5c7 1.png') }}">
+                                                <img src="{{ asset('images/asset/67a6c213a22d2ba4c3982a55d828b5c7 1.png') }}">
                                                 <div class="guide_profile_main_subtext">Title</div>
                                             </div>
                                             <div class="item">
-                                                <img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}">
+                                                <img src="{{ asset('images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}">
                                                 <div class="guide_profile_main_subtext">Title</div>
                                             </div>
                                             <div class="item">
-                                                <img src="{{ asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}">
+                                                <img src="{{ asset('images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}">
                                                 <div class="guide_profile_main_subtext">Title</div>
                                             </div>
                                         </div>

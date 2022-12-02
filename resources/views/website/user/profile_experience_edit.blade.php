@@ -19,7 +19,7 @@
                             <div class="profile_cmn_head_text">Edit Experience</div>
                             <div>
                                 <a href="{{route('experience-delete',['id'=>$UserExperienceData->id])}}">
-                                    <img src="{{ asset('public/images/asset/delete-icon.svg') }}"/>
+                                    <img src="{{ asset('images/asset/delete-icon.svg') }}"/>
                                     {{-- <i class="fa fa-trash-o  deep-pink icon-size" aria-hidden="true"></i> --}}
                                 </a>
                             </div>

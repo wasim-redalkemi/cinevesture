@@ -6,7 +6,7 @@
 <div class="hide-me animation for_authtoast">
             @include('website.include.flash_message')
         </div>
-<section class="auth_section p-0">
+<section class="auth_section p-0 mt-0">
 
   <div class="row">
     <div class="col-md-5">
@@ -43,7 +43,7 @@
                     </button>
                 </div>
                 <div class="col-12 mt-2">
-                    <button class="with_google_btn"> <img src="{{asset('public/images/asset/google.png')}}" width="24" width="24" class="mx-3">Log
+                    <button class="with_google_btn"> <img src="{{asset('images/asset/google.png')}}" width="24" width="24" class="mx-3">Log
                         In
                         with google</button>
                 </div>
@@ -76,7 +76,7 @@
     </div>
     <div class="col-md-7 d-none d-lg-block">
         <div class="login_sidewraper">
-            <img src="{{asset('public/images/asset/gordon-cowie-OPlXmibx__I-unsplash-2.jpg')}}" width="100%" height="100%" alt="">
+            <img src="{{asset('images/asset/gordon-cowie-OPlXmibx__I-unsplash-2.jpg')}}" width="100%" height="100%" alt="">
         </div>
     </div>
   </div>

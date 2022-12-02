@@ -12,12 +12,16 @@ use App\Models\MasterEmployement;
 use App\Models\MasterProjectCategory;
 use App\Models\MasterProjectGenre;
 use App\Models\MasterSkill;
+use App\Models\User;
 use App\Models\UserAppliedJob;
 use App\Models\UserFavoriteJob;
+use App\Models\UserFavouriteProfile;
 use App\Models\UserJob;
+use App\Models\UserPortfolio;
 use App\Models\Workspace;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class JobController extends WebController
@@ -261,39 +265,88 @@ class JobController extends WebController
 
     public function savedJob(Request $request)
     {
-        try{
-            return view('website.job.saved_job');
+        $jobs = UserJob::query()
+        ->has("favorite")
+        ->with(["jobLocation:id,name","jobSkills:id,name","favorite","applied"])               
+        ->paginate($this->records_limit);
+        $notFoundMessage = "You haven't saved any job.";
+        return view('website.job.saved_job',compact('jobs','notFoundMessage'));
+    }
 
+    public function showJobApplicants($jobId)
+    {
+        $applicants = User::query()
+        ->with(["skill","organization.country"])
+                    ->whereHas('appliedJobs', function ($query) use($jobId){
+                        $query->where('job_id',$jobId);
+                    })
+                    ->paginate($this->records_limit);
+        
 
-        }catch(Exception $e){
-            return ['status'=>0,'msg'=>$e->getMessage()];
-        }
+        $jobTitle = UserJob::query()->where("id",$jobId)->value('title');
+        return view('website.job.applicants',compact('applicants','jobTitle','jobId'));
+    }
+
+    public function showAppliedJobCoverLetter($jobId,$userId)
+    {
+        $applicant = User::query()->find($userId);
+        $coverLetter = UserAppliedJob::query()->where("user_id",$userId)->where("job_id",$jobId)->first();
+        $portfolios = UserPortfolio::query()
+        ->with('getPortfolio')
+        ->where('user_id', $userId)
+        ->get();   
+
+        $jobTitle = UserJob::query()->where("id",$jobId)->value('title');
+
+        $isLiked = UserFavouriteProfile::query()->where("user_id",auth()->id())->where("profile_id",$userId)->exists();
+
+        return view('website.job.cover_letter',compact('jobTitle','applicant','coverLetter','portfolios','isLiked'));
     }
 
     public function appliedJob(Request $request)
     {
-        return view('website.job.applied_job');
+        $jobs = UserJob::query()
+        ->has("applied")
+        ->with(["jobLocation:id,name","jobSkills:id,name","favorite","applied"])               
+        ->paginate($this->records_limit);   
+        $showApplied = false;   
+        $notFoundMessage = "You haven't applied to any job, please add.";
+        return view('website.job.applied_job',compact('jobs','showApplied','notFoundMessage'));
     }
 
     public function showApplyJob($jobId)
     {
-        return view('website.job.apply_now');
+        $jobTitle = UserJob::query()->where("id",$jobId)->value('title');
+        return view('website.job.apply_now',compact('jobTitle'));
     }
     public function storeApplyJob(Request $request,$jobId)
     {       
         $request->validate(["resume"=>"required|file|mimes:pdf,doc,docx","cover_letter"=>"required"]);        
         if (UserAppliedJob::query()->where("user_id",auth()->id())->where("job_id",$jobId)->exists()) {
-           throw ValidationException::withMessages([
-            'field_name_1' => ['You have been already applied for this job.']            
-           ]);
+        //    throw ValidationException::withMessages([
+        //     'field_name_1' => ['You have been already applied for this job.']            
+        //    ]);
+        return   $this->jsonResponse(false,"You have been already applied for this job.",[]);
         }else{
             $modelObj = new UserAppliedJob();
             $modelObj->user_id = auth()->id();
             $modelObj->job_id = $jobId;
-            $path = $this->uploadFile("appliedJobResumes",$request->file('resume'));
+            $file = $request->file('resume');
+            $fileName = $file->getClientOriginalName();
+            $fileSize = ceil($file->getSize()/1024).' KB';
+
+            if ($fileSize>1024) {
+                $fileSize = ceil($fileSize/1024).' MB';
+            }
+
+            $path = $this->uploadFile("appliedJobResumes",$file);
             $modelObj->resume = $path;
-            $modelObj->save();            
-            return redirect()->route('showJobSearchResults')->with("success","Job application submitted successfully.");
+            $modelObj->resume_original_name = $fileName;
+            $modelObj->resume_size = $fileSize;
+            $modelObj->cover_letter = $request->get('cover_letter');
+            $modelObj->save(); 
+          return  $this->jsonResponse(true,"You have successfully applied for this job.",[]);
+           // return redirect()->route('showJobSearchResults')->with("success","Job application submitted successfully.");
         }
     }
 
@@ -357,9 +410,9 @@ class JobController extends WebController
                 $q->whereIn("skill_id",$requests["skills"]);
             }
         })        
-        ->paginate(1);
-
-        return view('website.job.search_result',compact('countries','employments','skills','categories','workspaces','jobs'));
+        ->paginate($this->records_limit);
+        $notFoundMessage = "No jobs found, please modify your search.";
+        return view('website.job.search_result',compact('countries','employments','skills','categories','workspaces','jobs','notFoundMessage'));
     }
 
     public function getUserJobData($user_id,$status='')
@@ -385,12 +438,10 @@ class JobController extends WebController
 
     public function getJobData($job_id)
     {
-        try{
-            $JobData='';
+        try{            
             $JobData = UserJob::query()
             ->with(['jobSkills','jobWorkSpaces','jobEmployements','jobLocation'])
-            ->where('id',$job_id)
-            ->first();
+            ->find($job_id);
             return $JobData;
         }catch(Exception $e){
             return back()->with($e->getmessage());

@@ -19,7 +19,7 @@
           <div class="item">
             <div class="home-upper-slider">
               <div class="img-container w_maxcont">
-                <img src="{{ asset('public/images/asset/Screenshot 2021-05-28 at 11.48 1.png') }}"  height="100%" alt="image">
+                <img src="{{ asset('public/images/asset/Screenshot 2021-05-28 at 11.48 1.png') }}" class="root_img" alt="image">
               </div>
               <div class="carosel-card-cntainer">
                 <div class="container">
@@ -41,7 +41,7 @@
           <div class="item">
             <div class="home-upper-slider">
               <div class="img-container w_maxcont">
-                <img src="{{ asset('public/images/asset/Screenshot 2021-05-28 at 11.48 1.png') }}" height="100%" width="100%" alt="image">
+                <img src="{{ asset('public/images/asset/gordon-cowie-OPlXmibx__I-unsplash-2.jpg') }}" class="root_img" alt="image">
               </div>
               <div class="carosel-card-cntainer">
                 <div class="container">
@@ -65,7 +65,7 @@
           <div class="item">
             <div class="home-upper-slider">
               <div class="img-container w_maxcont">
-                <img src="{{asset('public/images/asset/Screenshot 2021-05-28 at 11.48 1.png') }}" height="100%" width="100%" alt="image">
+                <img src="{{asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="root_img" alt="image">
               </div>
               <div class="carosel-card-cntainer">
                 <div class="container">
@@ -98,10 +98,10 @@
           </div>
         </div>
         <div class="test owl-carousel owl-theme">
-          <div class="item">
+          <div class="home_img_wrap">
             <div class="slider">
               <div class="img-container">
-                <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" width="370" height="240" alt="image">
+                <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">
               </div>
               <div class="secondry-card-top-container w-100">
                 <div>Movie Title</div>
@@ -114,20 +114,20 @@
               </div>
             </div>
           </div>
-          <div class="item">
-            <img src="{{ asset('public/images/asset/download (3) 2.png') }}" width="370" height="240" alt="image">
+          <div class="home_img_wrap">
+            <img src="{{ asset('images/asset/download (3) 2.png') }}" alt="image">
           </div>
-          <div class="item">
-            <img src="{{ asset('public/images/asset/43710-posts 2.png') }}" width="370" height="240" alt="image">
+          <div class="home_img_wrap">
+            <img src="{{ asset('images/asset/43710-posts 2.png') }}" alt="image">
           </div>
-          <div class="item">
-            <img src="{{ asset('public/images/asset/download (3) 2.png') }}" width="370" height="240" alt="image">
+          <div class="home_img_wrap">
+            <img src="{{ asset('images/asset/download (3) 2.png') }}" alt="image">
           </div>
-          <div class="item">
-            <img src="{{ asset('public/images/asset/43710-posts 2.png') }}" width="370" height="240" alt="image">
+          <div class="home_img_wrap">
+            <img src="{{ asset('images/asset/43710-posts 2.png') }}" alt="image">
           </div>
-          <div class="item">
-            <img src="{{ asset('public/images/asset/download (3) 2.png') }}" width="370" height="240" alt="image">
+          <div class="home_img_wrap">
+            <img src="{{ asset('images/asset/download (3) 2.png') }}" alt="image">
           </div>
         </div>
       </div>
@@ -141,27 +141,27 @@
           </div>
         </div>
         <div class="test owl-carousel owl-theme">
-          <div class="item">
+          <div class="home_img_wrap">
             <div class="slider">
               <div class="img-container">
-                <img src="{{asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" width="370" height="240" alt="image">
+                <img src="{{asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">
               </div>
             </div>
           </div>
-          <div class="item">
-            <img src="{{ asset('public/images/asset/download (3) 2.png') }}" width="370" height="240" alt="image">
+          <div class="home_img_wrap">
+            <img src="{{ asset('images/asset/download (3) 2.png') }}" alt="image">
           </div>
-          <div class="item">
-            <img src="{{ asset('public/images/asset/43710-posts 2.png') }}" width="370" height="240" alt="image">
+          <div class="home_img_wrap">
+            <img src="{{ asset('images/asset/43710-posts 2.png') }}" alt="image">
           </div>
-          <div class="item">
-            <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" width="370" height="240" alt="image">
+          <div class="home_img_wrap">
+            <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">
           </div>
-          <div class="item">
-            <img src="{{ asset('public/images/asset/download (3) 2.png') }}" width="370" height="240" alt="image">
+          <div class="home_img_wrap">
+            <img src="{{ asset('images/asset/download (3) 2.png') }}" alt="image">
           </div>
-          <div class="item">
-            <img src="{{ asset('public/images/asset/43710-posts 2.png') }}" width="370" height="240" alt="image">
+          <div class="home_img_wrap">
+            <img src="{{ asset('images/asset/43710-posts 2.png') }}" alt="image">
           </div>
         </div>
       </div>
@@ -175,27 +175,27 @@
           </div>
         </div>
         <div class="test owl-carousel owl-theme">
-          <div class="item">
+          <div class="home_img_wrap">
             <div class="slider">
               <div class="img-container">
-                <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" width="370" height="240" alt="image">
+                <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" width="370" height="240" alt="image">
               </div>
             </div>
           </div>
-          <div class="item">
-            <img src="{{ asset('public/images/asset/download (3) 2.png') }}" width="370" height="240" alt="image">
+          <div class="home_img_wrap">
+            <img src="{{ asset('images/asset/download (3) 2.png') }}"  alt="image">
           </div>
-          <div class="item">
-            <img src="{{ asset('public/images/asset/43710-posts 2.png') }}" width="370" height="240" alt="image">
+          <div class="home_img_wrap">
+            <img src="{{ asset('images/asset/43710-posts 2.png') }}"  alt="image">
           </div>
-          <div class="item">
-            <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" width="370" height="240" alt="image">
+          <div class="home_img_wrap">
+            <img src="{{ asset('images/asset/Rectangle 42.png') }}" alt="image">
           </div>
-          <div class="item">
-            <img src="{{ asset('public/images/asset/download (3) 2.png') }}" width="370" height="240" alt="image">
+          <div class="home_img_wrap">
+            <img src="{{ asset('images/asset/download (3) 2.png') }}"  alt="image">
           </div>
-          <div class="item">
-            <img src="{{ asset('public/images/asset/43710-posts 2.png') }}" width="370" height="240" alt="image">
+          <div class="home_img_wrap">
+            <img src="{{ asset('images/asset/gordon-cowie-OPlXmibx__I-unsplash 1.png') }}" alt="image">
           </div>
         </div>
       </div>
@@ -231,7 +231,7 @@
     $(".test.owl-carousel").owlCarousel({
       center: true,
       autoPlay: 1000,
-      autoplay: true,
+      // autoplay: true,
       loop: true,
       nav: true,
       margin: 20,

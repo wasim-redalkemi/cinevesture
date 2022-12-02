@@ -75,7 +75,7 @@
                             @endforeach
                         @else
                             <span><b>-</b></span>                    
-                        @endif
+                        @endif                    
                     </div>
                     <div class="posted_job_header Aubergine_at_night">
                         @if (!empty($v['description'])) {{$v['description']}} @endif
@@ -90,9 +90,8 @@
                                 <span><b>-</b></span>                    
                             @endif
                         </div>
-                        <div>
-                            
-                            <button class="guide_profile_btn w_150">View Applications</button>
+                        <div>                            
+                            <a href="{{route('showJobApplicants',['jobId'=>$v['id']])}}" class="guide_profile_btn w_150">View Applications</a>
                         </div>
                     </div>
                     
