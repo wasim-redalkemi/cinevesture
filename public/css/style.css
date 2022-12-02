@@ -164,7 +164,9 @@ body {
 }
 
 .main_slider .item .home-upper-slider {
-    height: 100%;
+    height: auto;
+    min-height: auto;
+    max-height: 483px;
     overflow: hidden;
     background: linear-gradient(180deg, rgba(28, 3, 48, 0) 65.92%, #1C0330 100%);
 }
@@ -235,6 +237,9 @@ body {
     width: 100%;
     height: auto;
     background: linear-gradient(180deg, rgba(28, 3, 48, 0) 65.92%, #1C0330 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .project-img-container {
@@ -458,6 +463,7 @@ body {
     padding: 0 28%;
     min-height: 100vh;
     overflow: hidden;
+    margin-top: -100px;
 }
 
 .before_login_section {
@@ -2513,8 +2519,13 @@ select {
         height: 400px;
     }
     .home-upper-slider .img-container {
-        height: 390px;
+        width: 100%;
+        height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
+    
     .carosel-card-cntainer {
         margin-left: 50px;
     }
@@ -2532,7 +2543,11 @@ select {
     max-width: fit-content;   
 } */
 .modal-backdrop {
-    height: 90vh;
+    height: 80vh;
+    z-index: 1;
+}
+.filter_modal_wrap .filter_option_wrap {
+    max-height: 60vh;
 }
 
     }

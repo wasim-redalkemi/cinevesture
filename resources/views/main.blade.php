@@ -19,7 +19,7 @@
           <div class="item">
             <div class="home-upper-slider">
               <div class="img-container w_maxcont">
-                <img src="{{ asset('public/images/asset/Screenshot 2021-05-28 at 11.48 1.png') }}"  height="100%" alt="image">
+                <img src="{{ asset('public/images/asset/Screenshot 2021-05-28 at 11.48 1.png') }}" class="root_img" alt="image">
               </div>
               <div class="carosel-card-cntainer">
                 <div class="container">
@@ -41,7 +41,7 @@
           <div class="item">
             <div class="home-upper-slider">
               <div class="img-container w_maxcont">
-                <img src="{{ asset('public/images/asset/Screenshot 2021-05-28 at 11.48 1.png') }}" height="100%" width="100%" alt="image">
+                <img src="{{ asset('public/images/asset/gordon-cowie-OPlXmibx__I-unsplash-2.jpg') }}" class="root_img" alt="image">
               </div>
               <div class="carosel-card-cntainer">
                 <div class="container">
@@ -65,7 +65,7 @@
           <div class="item">
             <div class="home-upper-slider">
               <div class="img-container w_maxcont">
-                <img src="{{asset('public/images/asset/Screenshot 2021-05-28 at 11.48 1.png') }}" height="100%" width="100%" alt="image">
+                <img src="{{asset('public/images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="root_img" alt="image">
               </div>
               <div class="carosel-card-cntainer">
                 <div class="container">
