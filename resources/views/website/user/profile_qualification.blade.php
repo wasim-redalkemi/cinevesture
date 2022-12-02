@@ -21,7 +21,7 @@
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Add Qualification</div>
                             {{-- <div class="icon_container">
-                          <img src="{{ asset('public/images/asset/delete-icon.svg') }}"/>
+                          <img src="{{ asset('images/asset/delete-icon.svg') }}"/>
                           </div>  --}}
                         </div>                       
                         <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('qualification-store') }}">

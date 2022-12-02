@@ -26,6 +26,7 @@
                                         <div class="" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                             <i class="fa fa-ellipsis-h aubergine icon-size" aria-hidden="true"></i>
                                         </div>
+                                        @if($Job_data['user_id']==auth()->id())
                                         <ul class="dropdown-menu profile_dropdown_menu p-2">
                                             <li>
                                             <a href="">  Edit Job</a>
@@ -40,6 +41,7 @@
                                             <a href="">  Delete Job </a>
                                             </li>
                                         </ul>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -113,7 +115,9 @@
                         </div>
                         <div class="d-flex justify-content-center mt-5 mb-4">
                             <button class="cancel_btn mx-5 action" data-id="save" onclick="history.back()">Back</button>
+                            @if($Job_data['user_id']==auth()->id())
                             <button class="guide_profile_btn action" data-id="publish">View Applicants</button>
+                            @endif
                         </div>
                     </div>
                     

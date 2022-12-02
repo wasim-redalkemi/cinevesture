@@ -28,7 +28,7 @@
                             <button class="search-btn"></button>
                         </div>
                         <div class="d-block d-md-none m-2" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                            <img src="{{ asset('public/images/asset/dropdown-sidebar.svg') }}" />
+                            <img src="{{ asset('images/asset/dropdown-sidebar.svg') }}" />
                             </div> 
                     </div>
                     <div class="sidebar_collapse collapse dont-collapse-sm" id="collapseExample">

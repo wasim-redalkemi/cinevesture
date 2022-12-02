@@ -26,7 +26,7 @@
                     
                             <div class="img-container project-img-container">
                                 @if (empty($v->projectImage->file_link))
-                                    <img src="{{ asset('public/images/asset/user-profile.png') }}" width="100%" height="100%"  />
+                                    <img src="{{ asset('images/asset/user-profile.png') }}" width="100%" height="100%"  />
                                 @else
                                     <img src="{{ asset('storage/'.$v->projectImage->file_link)}}" class="width_inheritence" alt="image">
                                 @endif
@@ -56,7 +56,7 @@
                        
                     </div>
                     @endforeach
-                            {{-- <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image"> --}}
+                            {{-- <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image"> --}}
                             {{-- <div class="project_card_data w-100 h-100">
                                 <div><i class="fa fa-pencil mx-2" aria-hidden="true"></i></div>
                                 <div>
@@ -71,7 +71,7 @@
 
                     {{-- <div class="col-md-4">
                         <div class="img-container">
-                            <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
+                            <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
                             <div class="project_card_data w-100 h-100">
                                 <div><i class="fa fa-pencil mx-2" aria-hidden="true"></i></div>
                                 <div>
@@ -84,7 +84,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="img-container">
-                            <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
+                            <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
                             <div class="project_card_data w-100 h-100">
                                 <div><i class="fa fa-pencil mx-2" aria-hidden="true"></i></div>
                                 <div>
@@ -97,7 +97,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="img-container">
-                            <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
+                            <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
                             <div class="project_card_data w-100 h-100">
                                 <div><i class="fa fa-pencil mx-2" aria-hidden="true"></i></div>
                                 <div>
@@ -113,7 +113,7 @@
                             @foreach ($collection as $item)
                                 
                             @endforeach
-                            <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
+                            <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
                             <div class="project_card_data w-100 h-100">
                                 <div><i class="fa fa-pencil mx-2" aria-hidden="true"></i></div>
                                 <div>
@@ -126,7 +126,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="img-container">
-                            <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
+                            <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
                             <div class="project_card_data w-100 h-100">
                                 <div><i class="fa fa-pencil mx-2" aria-hidden="true"></i></div>
                                 <div>
@@ -139,7 +139,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="img-container">
-                            <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
+                            <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
                             <div class="project_card_data w-100 h-100">
                                 <div><i class="fa fa-pencil mx-2" aria-hidden="true"></i></div>
                                 <div>
@@ -152,7 +152,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="img-container">
-                            <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
+                            <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
                             <div class="project_card_data w-100 h-100">
                                 <div><i class="fa fa-pencil mx-2" aria-hidden="true"></i></div>
                                 <div>
@@ -165,7 +165,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="img-container">
-                            <img src="{{ asset('public/images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
+                            <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" class="width_inheritence" alt="image">
                             <div class="project_card_data w-100 h-100">
                                 <div><i class="fa fa-pencil mx-2" aria-hidden="true"></i></div>
                                 <div>

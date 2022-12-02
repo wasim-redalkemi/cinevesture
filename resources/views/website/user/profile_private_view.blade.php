@@ -34,7 +34,7 @@
                                 <div class="col-md-2">
                                     <div class="user_profile_container">
                                         @if (empty($user->profile_image))
-                                        <img src="{{ asset('public/images/asset/100_no_img.jpg') }}" />
+                                        <img src="{{ asset('images/asset/100_no_img.jpg') }}" />
                                         @else
                                         <img src="{{ Storage::url($user->profile_image) }}" class="prod-img" alt="product-image" style="height:100%;width:100%;object-fit: cover;">
                                         @endif
@@ -178,7 +178,7 @@
                                         if (isset($v['get_portfolio'][0]['file_link'])) {
                                             $img = Storage::url($v['get_portfolio'][0]['file_link']);
                                         } else {
-                                            $img = asset('public/images/asset/user-profile.png');
+                                            $img = asset('images/asset/user-profile.png');
                                         }
                                         @endphp
                                         <div class="item portfolio_item" onclick="portfolio_model({{$v['id']}})">

@@ -22,7 +22,7 @@
                             <div class="profile_cmn_head_text">Edit Qualification</div>
                             <div>
                                 <a href="{{route('qualification-delete',['id'=>$UserQualificationData->id])}}">
-                                    <img src="{{ asset('public/images/asset/delete-icon.svg') }}"/>
+                                    <img src="{{ asset('images/asset/delete-icon.svg') }}"/>
                                 </a>
                             </div>
                         </div>                       
