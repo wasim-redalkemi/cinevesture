@@ -37,7 +37,7 @@
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>Employment Type</label>
-                                            <select class="work-select2 @error('countries') is-invalid @enderror" required id="employments" name="employments[]" multiple="multiple">
+                                            <select class="@error('countries') is-invalid @enderror" required id="employments" name="employments[]">
                                                 @foreach($employments as $emp)
 
                                                 @if(isset(request('employments')[0]) && in_array($emp->id, request('employments')))
@@ -60,7 +60,7 @@
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>Workspace Type</label>
-                                        <select class="emp-select2 @error('workspaces') is-invalid @enderror" required id="workspaces" name="workspaces[]" multiple="multiple">
+                                        <select class="@error('workspaces') is-invalid @enderror" required id="workspaces" name="workspaces[]">
                                             @foreach($workspaces as $work)
                                                 <option value="{{$work->id}}" @if(!empty($userJobData['job_work_spaces']) && in_array($work->id, $userJobData['job_work_spaces']))selected @endif>{{$work->name}}</option>
                                             @endforeach
@@ -113,7 +113,7 @@
                         <div class="guide_profile_subsection">
                             <div class="guide_profile_main_text mt-3">Job Description</div>
                             <div class="profile_input">
-                                <textarea class="form-control controlTextLength" text-length="200" name="description" required aria-label="With textarea" placeholder="Your answer here">@if (!empty($userJobData['description'])) {{$userJobData['description']}} @endif</textarea>
+                                <textarea class="form-control controlTextLength" text-length="1500" maxlength="1500" name="description" required aria-label="With textarea" placeholder="Your answer here">@if (!empty($userJobData['description'])) {{$userJobData['description']}} @endif</textarea>
                             </div>
                         </div>
                         <div class="guide_profile_subsection">
@@ -210,7 +210,7 @@
         placeholder: "Skills",
         allowClear: true,
         tags: false,
-
+        // maximumSelectionSize: 1
     });
     $(".action").on('click', function(e) {
 

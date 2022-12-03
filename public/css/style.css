@@ -107,12 +107,17 @@ body {
 
 .add-proj-btn {
     border: 1px solid #DD45B3;
-    color: #DD45B3;
+    color: #DD45B3 !important;
+    text-decoration: none;
     background: #33084C;
     height: 2.5rem;
     line-height: 114%;
     border-radius: 4px;
     /* width: 9rem; */
+}
+.add-proj-btn a {
+    color: #DD45B3 !important;
+    text-decoration: none;
 }
 
 .search ::placeholder, .text_fff {
@@ -1389,6 +1394,7 @@ body {
     border: none;
     color: #4D0D8A !important;
     font-weight: 700;
+    text-decoration: none;
 }
 .save_add_btn, .save_add_btn a, .add_another_btn  {
     padding: 6px 16px;
@@ -2016,6 +2022,8 @@ select  option, .radio_btn_label{
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
     background-color: #971e9b !important;
     border: 1px solid #971e9b !important;
+    color: #FFFFFF;
+    border-radius: 99px;
 }
 
 .job_input input {
@@ -2134,7 +2142,7 @@ select {
 }
 .industry_guide_text {
     position: absolute;
-    left: 63px;
+    left: 59px;
     padding: 12px;
     width: 180px;
     background: #f6f3f9 !important;
@@ -2381,7 +2389,6 @@ select {
     padding-top: 100px;
 }
 
-
   @media (max-width: 480px) {
     .container, .container-lg, .container-md, .container-sm, .container-xl {
         /* max-width: 1365px !important; */
@@ -2390,7 +2397,7 @@ select {
         margin-bottom: 50px;
     }
     .guide_profile_subsection {
-     padding: 1rem 0 !important;
+     padding: 1rem !important;
     }
     .profile_input {
        margin-top: 6px;
@@ -2401,6 +2408,7 @@ select {
     .pb_8 {
         padding-bottom: 0px;
     }
+   
     .side-bar-cmn-part {
         height: auto;
         /* margin-bottom: 16px; */
@@ -2550,7 +2558,12 @@ select {
     max-height: 60vh;
 }
 
+.home_img_wrap {
+    width: 280.728px;
     }
+}
+
+    /* media query end here */
 
     @media (min-width: 768px) {
         .collapse.dont-collapse-sm {
