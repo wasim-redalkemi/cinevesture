@@ -85,7 +85,7 @@ class ProjectController extends WebController
         }
     }
 
-    public function validateProjectOverview(ProjectOverview $request)
+    public function validateProjectOverview()
     {
         try
         {
