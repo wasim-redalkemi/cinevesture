@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use App\Models\MasterCountry;
 use App\Models\UserJob;
+use Illuminate\Support\Facades\Session;
+// use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 
-class JobController extends Controller
+class JobController extends AdminController
 {
     /**
      * Display a listing of the resource.
@@ -38,8 +41,9 @@ class JobController extends Controller
            
             return view('admin.job.index',compact('jobs','countries'));
         } catch (\Throwable $e) {
-          
-            return back()->withErrors( $e->getMessage());
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
+            // return back()->withErrors( $e->getMessage());
         }
     }
 
@@ -57,10 +61,12 @@ class JobController extends Controller
             ->first();
             $status->save_type = $request->status;
             $status->save();
+            Session::flash('response', ['text'=>'Status update successfully','type'=>'success']);
             return back();
             
-        } catch (\Throwable $th) {
-            
+        } catch (\Throwable $e) {
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
         }
     }
 
@@ -121,8 +127,9 @@ class JobController extends Controller
             $job=UserJob::find($id);
             $job->delete();
             return back();
-        } catch (\Throwable $th) {
-          
+        } catch (\Throwable $e) {
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
         }
         
     }

@@ -4,7 +4,7 @@
 <div class="content-wrapper">
     <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Query Update</h4>
+            <h4 class="card-title">Genre Update</h4>
             <hr>
             <div class="container mt-5">
                 <form action="{{route('genre.update')}}" method="post">
@@ -28,9 +28,9 @@
                         </div>
                     @endforeach
                     </div>  
-                    <span class="input-group-append">
-                        <button class="file-upload-browse btn btn-primary" type="submit">Upload</button>
-                      </span> 
+                    <div class="input-group-append d-flex justify-content-center m-4">
+                        <button class="file-upload-browse btn-sm btn btn-primary" type="submit">Upload</button>
+                    </div> 
                 </form>    
             </div>
            

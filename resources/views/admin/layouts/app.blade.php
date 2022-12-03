@@ -31,6 +31,7 @@
       @include('admin.include.right-sidebar')
       @include('admin.include.sidebar')
       <div class="main-panel">
+        @include('admin.include.response')
         @yield('content')
         @include('admin.include.footer')
       </div>

@@ -4,12 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
+use Illuminate\Validation\ValidationException;
 use App\Models\MasterCountry;
 use App\Models\User;
 use App\Models\UserInvite;
 use App\Models\UserOrganisation;
 use Exception;
-use Illuminate\Contracts\Session\Session;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class UserController extends AdminController
@@ -55,21 +56,29 @@ class UserController extends AdminController
             })
            
             ->paginate($this->records_limit);
+            // Session::flash('response', ['text'=>'','type'=>'danger']);
             return view('admin.user.list',compact('users','UserOrganisation','countries'));
         } 
         catch (Exception  $e) {
-            return back()->withError($e->getMessage());
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
         }
 
     }
 
     public function changeStatus(Request $request)
     {
-        
+       try {
        $user=User::find($request->user_id);
        $user->status= $request->status;
        $user->save();
+       Session::flash('response', ['text'=>'User status update','type'=>'success']);
        return back();
+    } catch (Exception $e) {
+       
+        Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+        return back();
+       } 
     }
 
     /**
@@ -139,7 +148,7 @@ class UserController extends AdminController
             $user=User::find($id)->delete();
             // $user->delete();
             // die;
-            // Session::flash('response', ['text'=>'User delete successfully','type'=>'success']);
+            Session::flash('response', ['text'=>'User delete successfully','type'=>'success']);
                 return back();
             
         } catch (Exception $e)

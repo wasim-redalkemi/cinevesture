@@ -27,9 +27,9 @@
                         </div>
                     @endforeach
                     </div>  
-                    <span class="input-group-append">
-                        <button class="file-upload-browse btn btn-primary" type="submit">Upload</button>
-                      </span> 
+                    <div class="input-group-append d-flex justify-content-center m-4">
+                        <button class="file-upload-browse btn-sm btn btn-primary" type="submit">Upload</button>
+                    </div> 
                 </form>    
             </div>
            
