@@ -48,7 +48,7 @@ class PlanPermission
               $selected_action = $request->session()->get('action')->where('url_key',$key)->first();
               if($selected_action){ // check current url action in list
                if(!$permissions->where('action_id',$selected_action->id)->first()){ // view profile
-                   return back()->with('error','Sorry, You Are Not Allowed to Access This Page');
+                  //  return back()->with('error','Sorry, You Are Not Allowed to Access This Page');
                }
               }
            }
@@ -59,7 +59,7 @@ class PlanPermission
            
             $is_subscribed = SubscriptionUtilityController::isSubscribed();
             if(!$is_subscribed){
-               return redirect()->route('plans-view');
+               // return redirect()->route('plans-view');
             }
         }
 
