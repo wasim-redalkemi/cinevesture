@@ -21,7 +21,7 @@
                 <div class=" profile_wraper profile_wraper_padding  mt-4 mb-0">
                     <p class="flow_step_text"> Overview</p>
                 <div class="preview_headtext mt-4">Project Name</div>
-                <div class="preview_subtext">@if (!empty($projectData[0]['project_name'])) {{$projectData[0]['project_name']}} @endif</div>
+                <div class="preview_subtext">@if (!empty($projectData[0]['project_name'])) {{ucFirst($projectData[0]['project_name'])}} @endif</div>
                 <div class="preview_headtext">Types of projects</div>
                 <div class="preview_subtext">@if (!empty($projectData[0]['project_type']['name'])) {{ $projectData[0]['project_type']['name'] }} @endif</div>
                 <div class="preview_headtext">Who are you listning this project as</div>
@@ -77,7 +77,7 @@
                 <div class="preview_headtext">Financing Secured (USD)</div>
                 <div class="preview_subtext">@if (!empty($projectData[0]['financing_secured'])) {{$projectData[0]['financing_secured']}} @endif</div>
                 <div class="preview_headtext">Creator/Founder Name</div>
-                <div class="preview_subtext">@if (!empty($projectData[0]['user']['name'])) {{$projectData[0]['user']['name']}} @endif</div>
+                <div class="preview_subtext">@if (!empty($projectData[0]['user']['name'])) {{ucFirst($projectData[0]['user']['name'])}} @endif</div>
                 <div class="preview_headtext">Associated with the Project</div>
                 <div class="preview_subtext">
                     @if (!empty($projectData[0]['project_association']))
