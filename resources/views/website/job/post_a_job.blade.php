@@ -37,16 +37,12 @@
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>Employment Type</label>
-                                            <select class="@error('countries') is-invalid @enderror" required id="employments" name="employments[]">
+                                            <select class="work-select2 @error('countries') is-invalid @enderror" required id="employments" name="employments[]" multiple="multiple">
+                                                @if (!empty($employments))                                                    
                                                 @foreach($employments as $emp)
-
-                                                @if(isset(request('employments')[0]) && in_array($emp->id, request('employments')))
-                                                <option value="{{$emp->id}}" data-badge="" selected>{{$emp->name}}</option>
-                                                @else
-                                                <option value="{{$emp->id}}" data-badge="">{{$emp->name}}</option>
-                                                @endif
-
+                                                    <option value="{{$emp->id}}" @if(!empty($userJobData['job_employements']) && in_array($emp->id, $userJobData['job_employements']))selected @endif>{{$emp->name}}</option>
                                                 @endforeach
+                                                @endif
                                             </select>
 
                                             @error('employments')
@@ -60,10 +56,12 @@
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>Workspace Type</label>
-                                        <select class="@error('workspaces') is-invalid @enderror" required id="workspaces" name="workspaces[]">
+                                        <select class="emp-select2 @error('workspaces') is-invalid @enderror" required id="workspaces" name="workspaces[]" multiple="multiple">
+                                            @if (!empty($workspaces))
                                             @foreach($workspaces as $work)
                                                 <option value="{{$work->id}}" @if(!empty($userJobData['job_work_spaces']) && in_array($work->id, $userJobData['job_work_spaces']))selected @endif>{{$work->name}}</option>
                                             @endforeach
+                                            @endif
                                         </select>
 
                                         @error('workspaces')

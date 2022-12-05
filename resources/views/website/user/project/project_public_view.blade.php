@@ -24,7 +24,7 @@
                             <div class="verified-text-area">
                                 <div class="public-head-text">
                                     @if (!empty(($UserProject->project_name)))
-                                    {{ $UserProject->project_name }}                                     
+                                    {{ ucfirst($UserProject->project_name) }}                                     
                                     @else
                                     <span><b>-</b></span>
                                     @endif
@@ -137,7 +137,7 @@
                         </div>
                         <div class="col-lg-6 col-md-12 px-3">
                             <div class="public-head-subimage">
-                                <iframe width="100%" height="350" src="https://www.youtube.com/embed/oYWAwwy5EbQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="100%" height="350" src="{{empty($projectData[0]['project_only_video'][0]['file_link'])?'https://www.youtube.com/embed/oYWAwwy5EbQ':$projectData[0]['project_only_video'][0]['file_link'];}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 <!-- <img src="{{ asset('images/asset/download (3) 7.png') }}" width=100% alt="Image"> -->
 
                             </div>
@@ -153,10 +153,10 @@
                                     <div> <i class="fa fa-heart-o icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
                                     @endif
                                 </div>
-                                <div class="d-flex">
+                                {{-- <div class="d-flex">
                                     <span class="mx-3 white">Report Project</span>
                                     <i class="fa fa-flag icon-size" aria-hidden="true"></i>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -170,7 +170,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="public-heading-text"> synopsis</h1>
+                <h1 class="public-heading-text"> Synopsis</h1>
                 <div class="public-subheading-text mt-2">
                     <p>
                         @if (!empty(($UserProject->synopsis)))
@@ -318,7 +318,7 @@
                                         <tr>
                                             <td class="public-head-subtext white">{{ $v['description'] }}</td>
                                             <td class="aubergine project-sub-text white">{{ $v['budget'] }}</td>
-                                            <td class="aubergine project-sub-text white">{{ $v['traget_date'] }}</td>
+                                            <td class="aubergine project-sub-text white">{{ $v['target_date'] }}</td>
                                         </tr>
                                     @endif
                                 @endforeach

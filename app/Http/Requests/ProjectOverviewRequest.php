@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProjectOverview extends FormRequest
+class ProjectOverviewRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class ProjectOverview extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class ProjectOverview extends FormRequest
     public function rules()
     {
         return [
-            
+            'project_name' => 'nullable|',            
+            'location' => 'nullable|',            
         ];
+    }
+    public function messages()
+    {
+        return [
+            'project_name.max' => 'Project name allow max 5 character.',
+        ];            
     }
 }

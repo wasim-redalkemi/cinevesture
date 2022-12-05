@@ -76,6 +76,10 @@ class User extends Authenticatable
         return $this->hasOne(UserInvite::class, 'user_id', 'id');
     }
 
+    public function getSubcription()
+    {
+        return $this->hasOne(UserSubscription::class, 'user_id', 'id');
+    }
     public function appliedJobs()
     {
         return $this->hasMany(UserAppliedJob::class,'user_id');

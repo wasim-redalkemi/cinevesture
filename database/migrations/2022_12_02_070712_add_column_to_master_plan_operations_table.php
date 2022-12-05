@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddOrganizationCreaterToUserInvitesTable extends Migration
+class AddColumnToMasterPlanOperationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,8 @@ class AddOrganizationCreaterToUserInvitesTable extends Migration
      */
     public function up()
     {
-        Schema::table('user_invites', function (Blueprint $table) {
-            $table->enum('organization_creater',['1','0'])->default('0')->after('accepted');
-
+        Schema::table('master_plan_operations', function (Blueprint $table) {
+            $table->string('url_key')->after('name');
         });
     }
 
@@ -26,7 +25,7 @@ class AddOrganizationCreaterToUserInvitesTable extends Migration
      */
     public function down()
     {
-        Schema::table('user_invites', function (Blueprint $table) {
+        Schema::table('master_plan_operations', function (Blueprint $table) {
             //
         });
     }
