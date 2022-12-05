@@ -200,7 +200,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"],"prefix"=>""],funct
         Route::get('/create',[JobController::class, 'create'])->name('job-create-page');
         Route::post('/action',[JobController::class, 'store'])->name('job-store');
         Route::post('/job-store-edit',[JobController::class, 'jobStoreEdit'])->name('job-store-edit');
-        Route::get('/validate-job',[JobController::class, 'validatejob'])->name('validate-job');
+        Route::post('/validate-job',[JobController::class, 'validatejob'])->name('validate-job');
 
 
         Route::get('/posted-job',[JobController::class, 'postedJob'])->name('posted-job');

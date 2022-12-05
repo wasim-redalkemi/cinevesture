@@ -2010,6 +2010,7 @@ select  option, .radio_btn_label{
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
     background-color: #971e9b !important;
     border: 1px solid #971e9b !important;
+    color: #fff !important;
 }
 
 .job_input input {
@@ -2565,4 +2566,8 @@ select {
       .resume-download-txt{
         font-size: 14px;
         color: #000;
+      }
+
+      .error{
+        color: red !important;
       }
