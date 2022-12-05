@@ -118,7 +118,6 @@
         });
         let formData = new FormData();
         let resume = $("#upload-doc-inp")[0].files[0];
-        debugger
         let cover_letter = $("#cover_letter").val();
         formData.append("resume",resume)
         formData.append("cover_letter",cover_letter);
@@ -143,6 +142,7 @@
                 }
             },
             error: function(error) {
+                $submitBtn.prop("disabled",false);
                 $submitBtn.text("Submit");
             }
         });

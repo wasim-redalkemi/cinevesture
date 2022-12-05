@@ -28,7 +28,7 @@
                                     <label>Logline <span style = "color:red">*</span></label>
                                     <!-- <input type="text" class="form-control" name="logline"  placeholder="Logline" required> -->
                                 </div>
-                                <textarea class="form-control controlTextLength" text-length = "60" maxlength="60" placeholder="Logline" name="logline" aria-label="With textarea" style="border: 1px solid #4D0D8A;" rows="1" required>@if (!empty($projectDescription[0]->logline)){{ $projectDescription[0]->logline }}
+                                <textarea class="form-control controlTextLength" text-length = "250" maxlength="250" placeholder="Logline" name="logline" aria-label="With textarea" style="border: 1px solid #4D0D8A;" rows="1" required>@if (!empty($projectDescription[0]->logline)){{ $projectDescription[0]->logline }}
                                 @endif</textarea>
                                 @error('Logline')
                                 <span class="invalid-feedback" role="alert">

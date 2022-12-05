@@ -21,7 +21,7 @@
             @php                
             $jobs = $userJob->toArray();
             @endphp
-                <div class="profile_wraper mt-md-0 mt-4 px-4 pt-4" style="">
+                <div class="profile_wraper mt-md-0 mt-4 px-4 pt-4">
                     <div class="profile_text">
                         <h1>Posted Jobs</h1>
                     </div>
@@ -75,13 +75,14 @@
                             @endforeach
                         @else
                             <span><b>-</b></span>                    
-                        @endif                    
+                        @endif    
                     </div>
                     <div class="posted_job_header Aubergine_at_night">
                         @if (!empty($v['description'])) {{$v['description']}} @endif
                     </div>
                     <div class="d-flex justify-content-between mt-4">
-                        <div class="d-flex flex-wrap">
+                        <div class="d-flex flex-wrap w-75
+                        ">
                             @if (count($v['job_skills'])>0)
                             @foreach ($v['job_skills'] as $k1=>$v1)
                                 <button class="curv_cmn_btn skill_container"> {{$v1['name']}}</button>                               
@@ -91,7 +92,7 @@
                             @endif
                         </div>
                         <div>                            
-                            <a href="{{route('showJobApplicants',['jobId'=>$v['id']])}}" class="guide_profile_btn w_150">View Applications</a>
+                          <button class="guide_profile_btn">  <a href="{{route('showJobApplicants',['jobId'=>$v['id']])}}" class="guide_profile_btn w_150">View Applications</a></button>
                         </div>
                     </div>
                     
