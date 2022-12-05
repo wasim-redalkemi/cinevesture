@@ -269,19 +269,7 @@ class ProjectController extends WebController
                         $projectGenres->gener_id = $v;
                         $projectGenres->save();
                     }
-                    // ProjectAssociation::query()->where('project_id', $details->id)->delete();
-                    // foreach($_REQUEST as $k => $v)
-                    // {
-                    //     $fdata = explode('~',$k);
-                    //     if($fdata[0] == 'project_associate_title')
-                    //     {
-                    //         $projectAssociations = new ProjectAssociation();
-                    //         $projectAssociations->project_id = $details->id;
-                    //         $projectAssociations->project_associate_title = $_REQUEST['project_associate_title~'.$fdata[1]];
-                    //         $projectAssociations->project_associate_name = $_REQUEST['project_associate_name~'.$fdata[1]];
-                    //         $projectAssociations->save();
-                    //     }
-                    // }
+                   
                     $this->return_response['success_msg'] = 'Project details updated successfully.';                    
                 } else {
                     return back()->with("error","Please overview phase fill.");

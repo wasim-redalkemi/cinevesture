@@ -24,16 +24,15 @@ class ProjectDetailRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => 'nullable', 
-            'category_id.*' => 'nullable|exists:master_project_categories,id',  
+            // 'category_id' => 'nullable', 
+            // 'category_id.*' => 'nullable|exists:master_project_categories,id',  
             'gener' => 'required' ,
             'gener.*' => 'required|exists:master_project_genres,id' ,   
-            'duration' => 'nullable', 
-            'total_budget' => 'required',
-            'financing_secured' => 'required',
-            'project_associate_title' => 'nullable',
-            'project_associate_name' => 'nullable'    
-            
+            'duration' => 'nullable|integer', 
+            'total_budget' => 'required|integer',
+            'financing_secured' => 'required|integer',
+           
         ];
     }
+    
 }
