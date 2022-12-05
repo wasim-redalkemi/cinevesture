@@ -132,7 +132,7 @@
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>Milestone Budget (USD)</label>
-                                        <input type="number" class="form-control no_number_arrows" name="project_milestone_budget" placeholder="Budget (USD)">
+                                        <input type="number" class="form-control no_number_arrows" name="   " placeholder="Budget (USD)">
                                     </div>
                                 </div>
                                 <div class="col-md-2">

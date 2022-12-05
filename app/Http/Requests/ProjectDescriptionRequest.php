@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProjectOverviewRequest extends FormRequest
+class ProjectDescriptionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,21 +24,17 @@ class ProjectOverviewRequest extends FormRequest
     public function rules()
     {
         return [
-            
-            'project_name' => 'required',  
-            'project_type_id'=> 'required' ,         
-            'listing_project_as'=> 'required' , 
-            'countries'=> 'required' , 
-            'countries.*' => 'required|exists:master_countries,id',
-            'languages'=> 'required' , 
-            'languages.*' => 'required|exists:master_languages,id',
-            'location'=> 'nullable'               
+            'logline' => 'required|max:280' ,
+            'synopsis' => 'required|max:600' ,   
+            'director_statement' => 'required|max:600', 
         ];
     }
     public function messages()
     {
         return [
-            
+            'logline.max' => 'Maximum 280 character are allowed',
+            'synopsis.max' => 'Maximum 600 character are allowed',
+            'director_statement.max' => 'Maximum 600 character are allowed',
         ];            
     }
 }
