@@ -29,7 +29,7 @@
                                     <span><b>-</b></span>
                                     @endif
                                 </div>
-                                <button class="verified-btn mx-3"> <i class="fa fa-check-circle icon-size" aria-hidden="true"></i> VERIFIED</button>
+                                <button class="verified-btn mx-3"> <img src="{{ asset('images/asset/verified-badge.svg') }}" width=100% alt="Image"> VERIFIED</button>
                             </div>
                             <div class="public-head-subtext">
                                 @if (isset($UserProject->logline))
@@ -84,7 +84,7 @@
                                     </tr>
                                     <tr>
                                         <td class="public-head-subtext white">Created By</td>
-                                        <td class="aubergine project-sub-text candy-pink">
+                                        <td class="aubergine contact-page-subtext candy-pink">
                                             @if (!empty($projectData[0]['user']['name']))
                                             {{$projectData[0]['user']['name']}}
                                             @else
@@ -94,9 +94,9 @@
                                     </tr>
                                     <tr>
                                         <td class="public-head-subtext white">Total Budget</td>
-                                        <td class="project-sub-text white">
+                                        <td class="contact-page-subtext white">
                                             @if (!empty($UserProject->total_budget))
-                                            {{ $UserProject->total_budget}}                                     
+                                            $ {{ $UserProject->total_budget}}                                     
                                             @else
                                             <span><b>-</b></span>
                                             @endif
@@ -104,9 +104,9 @@
                                     </tr>
                                     <tr>
                                         <td class="public-head-subtext white">Financing Secured</td>
-                                        <td class="project-sub-text white">
+                                        <td class="contact-page-subtext white">
                                             @if (!empty($UserProject->financing_secured))
-                                            {{ $UserProject->financing_secured}}                                     
+                                            $ {{ $UserProject->financing_secured}}                                     
                                             @else
                                             <span><b>-</b></span>
                                             @endif
@@ -114,7 +114,7 @@
                                     </tr>
                                     <tr>
                                         <td class="public-head-subtext white">Project Stage</td>
-                                        <td class="project-sub-text white">
+                                        <td class="contact-page-subtext white">
                                             @if (!empty($projectData[0]['project_stage']['name']))
                                             {{$projectData[0]['project_stage']['name']}}
                                             @else
@@ -124,7 +124,7 @@
                                     </tr>
                                     <tr>
                                         <td class="public-head-subtext white">Locations</td>
-                                        <td class="project-sub-text white">
+                                        <td class="contact-page-subtext white">
                                             @if (!empty($UserProject->location))
                                             {{ $UserProject->location}}                                     
                                             @else
@@ -265,10 +265,10 @@
                             <tbody class="search-table-body white">
                                 <tr>
                                     <td class="public-head-subtext white">Looking for</td>
-                                    <td class="project-sub-text white d-flex">
+                                    <td class="project-sub-text white">
                                         @if (!empty($projectData[0]['project_looking_for']))
                                         @foreach ($projectData[0]['project_looking_for'] as $k => $v)
-                                            <button class="looking-btn">{{ $v['name'] }}</button>
+                                            <button class="curv_cmn_btn darkbtn">{{ $v['name'] }}</button>
                                         @endforeach
                                         @else
                                         <span><b>-</b></span>
@@ -384,40 +384,37 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="public-heading-text mb-2"> Related</h1>
-                    <div class="row">
-                        <div class="col-4">
-                            <div class="item">
-                                <img src="{{ asset('images/asset/download (3) 7.png') }}" width=100% height=100% alt="image">
-                            </div>
-                            <!-- <div class="item">
-                                    <div class="rltv_image_wraper">
-                                        <div class="img-container">
-                                            <img src="{{ asset('images/asset/download (3) 7.png') }}" width=100%
-                                                height=100% alt="image">
-                                        </div>
-                                        <div class="secondry-card-top-container w-100">
-                                            <div>Movie Title</div>
-                                            <div>
-                                                <i class="fa fa-heart" style="color: white;" aria-hidden="true"></i>
-                                            </div>
-                                        </div>
-                                        <div class="secondry-card-bottom-container">
-                                            Duration / Language / Genre
-                                        </div>
-                                    </div>
-                                </div> -->
-                        </div>
-                        <div class="col-4">
-                            <div class="item">
-                                <img src="{{ asset('images/asset/download (3) 7.png') }}" width=100% height=100% alt="image">
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="item">
-                                <img src="{{ asset('images/asset/download (3) 7.png') }}" width=100% height=100% alt="image">
-                            </div>
-                        </div>
-                    </div>
+                    
+        <div class="test owl-carousel owl-theme">
+          <div class="home_img_wrap">
+            <div class="slider">
+              <div class="img-container">
+                <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">
+              </div>
+              <div class="secondry-card-top-container w-100">
+                <div>Movie Title</div>
+                <div>
+                  <i class="fa fa-heart" style="color: white;" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="home_img_wrap">
+            <img src="{{ asset('images/asset/publicview-head-img.png') }}" alt="image">
+          </div>
+          <div class="home_img_wrap">
+            <img src="{{ asset('images/asset/43710-posts 2.png') }}" alt="image">
+          </div>
+          <div class="home_img_wrap">
+            <img src="{{ asset('images/asset/download (3) 2.png') }}" alt="image">
+          </div>
+          <div class="home_img_wrap">
+            <img src="{{ asset('images/asset/43710-posts 2.png') }}" alt="image">
+          </div>
+          <div class="home_img_wrap">
+            <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">
+          </div>
+        </div>
                 </div>
             </div>
         </div>
@@ -478,6 +475,24 @@
             }
         });
 
+    });
+    $(".test.owl-carousel").owlCarousel({
+    //   center: true,
+      autoPlay: 1000,
+      autoplay: true,
+    //   loop: true,
+      nav: true,
+      margin: 10,
+    //   center: true,
+      items: 1,
+      stagePadding: 0,
+      responsive: {
+        480: { items: 1 },
+        768: { items: 2 },
+        1024: {
+          items: 3
+        }
+      },
     });
 </script>
 @endpush
