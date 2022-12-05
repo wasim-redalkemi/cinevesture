@@ -18,7 +18,7 @@
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Edit Experience</div>
                             <div>
-                                <a href="{{route('experience-delete',['id'=>$UserExperienceData->id])}}">
+                                <a class="confirmAction" href="{{route('experience-delete',['id'=>$UserExperienceData->id])}}">
                                     <img src="{{ asset('images/asset/delete-icon.svg') }}"/>
                                     {{-- <i class="fa fa-trash-o  deep-pink icon-size" aria-hidden="true"></i> --}}
                                 </a>
@@ -31,9 +31,9 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Job Title</label>
-                                        <input type="text" class="form-control @error('intro_video_link') is-invalid @enderror" placeholder="Job Title" name="job_title" value="<?php if(isset($UserExperienceData->job_title)){ echo($UserExperienceData->job_title); }?>"
+                                        <input type="text" class="form-control @error('job_title') is-invalid @enderror" placeholder="Job Title" name="job_title" value="<?php if(isset($UserExperienceData->job_title)){ echo($UserExperienceData->job_title); }?>"
                                             aria-label="Username" aria-describedby="basic-addon1">
-                                        @error('intro_video_link')
+                                        @error('job_title')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
