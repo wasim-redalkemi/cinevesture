@@ -80,16 +80,16 @@
                         <div class="col-md-10">
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex align-items-center">
-                                    <span class="guide_profile_main_text"> {{ !empty($v['profiles']['name'])? $v['profiles']['name'] : '-' }}</span>
+                                    <span class="guide_profile_main_text"> {{ !empty($v['profiles']['name'])? ucFirst($v['profiles']['name']) : '-' }}</span>
                                     <button class="verified_cmn_btn mx-3"> <i class="fa fa-check-circle hot-pink mx-1" aria-hidden="true"></i> VERIFIED</button>
                                 </div>
                                 <div class="pointer"><i class="fa fa fa-heart aubergine icon-size" aria-hidden="true"></i></div>
                             </div>
                             <div class="posted_job_header">
-                                {{ !empty($v['profiles']['job_title'])? $v['profiles']['job_title'] : '-' }}
+                                {{ !empty($v['profiles']['job_title'])? ucFirst($v['profiles']['job_title']) : '-' }}
                             </div>
                             <div class="preview_headtext lh_54 candy-pink">
-                                {{ !empty($v['profile_country']['country']['name'])? $v['profile_country']['country']['name'] : '-' }}
+                                {{ !empty($v['profile_country']['country']['name'])? ucFirst($v['profile_country']['country']['name']) : '-' }}
                             </div>
                             <div class="posted_job_header Aubergine_at_night">
                                 {{ !empty($v['profiles']['about'])? $v['profiles']['about'] : '-' }}

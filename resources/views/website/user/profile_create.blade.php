@@ -357,7 +357,7 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Introduction Video</label>
-                                    <input type="text" class="outline is-invalid-remove form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" 
+                                    <input type="url" class="outline is-invalid-remove form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" 
                                     value="<?php if (isset($user->intro_video_link)) {echo ($user->intro_video_link);} ?>" aria-label="Username" aria-describedby="basic-addon1">
                                     @error('intro_video_link')
                                     <span class="invalid-feedback" role="alert">
