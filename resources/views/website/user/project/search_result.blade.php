@@ -27,11 +27,13 @@
                     <form class="" method="Get" action="{{ route('get-project-filter') }}">
                         <div class="d-flex">
                     <div class="search-box-container w-100">
+                        <div class="search-container  w-100">
                         @csrf
                             <input type="search" value="{{request('search')}}" class="w-100 search-box" name="search" placeholder="Search...">
                             <button class="search-btn"></button>
                         </div>
-                        <div data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><img src="{{ asset('public/images/asset/dropdown-sidebar.svg') }}" class="d-block d-md-none mt-1" /></div>
+                        </div>
+                        <div data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><img src="{{ asset('public/images/asset/dropdown-sidebar.svg') }}" class="d-block d-md-none for_drop_img" /></div>
                 </div>
                 <div class="sidebar_collapse collapse dont-collapse-sm" id="collapseExample">
                    <div class=" sidebar_data_mobile">
@@ -305,13 +307,13 @@
                 @if(count($projects) >= 1)
                 @foreach($projects as $project)
                 <a href ="{{route('public-view',['id'=>$project->id])}}" style="outline:none;text-decoration:none">
-                    <div class="search-result-card">
+                    <div class="search-result-card my-4 my-md-0">
                         <div class="row">
                             <div class="col-md-5">
                                 @if(isset($project->projectImage))
-                                <img src="{{Storage::url($project->projectImage->file_link)}}" class=100% width=100%>
+                              <div class="home_img_wrap"><img src="{{Storage::url($project->projectImage->file_link)}}" class="root_img"></div> 
                                 @else
-                                <img src="{{asset('images/asset/indy 7.png')}}" class=100% width=100%>
+                              <div class="home_img_wrap w-auto"><img src="{{asset('images/asset/image 3 (1).png')}}" class="root_img"></div>
                                 @endif
                             </div>
                             <div class="col-md-7">
