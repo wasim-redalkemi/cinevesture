@@ -20,9 +20,6 @@
                     <div id="user-profile-div" class="profile_wraper profile_wraper_padding my-md-0 my-4">
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Add Portfolio</div>
-                          {{-- <div class="icon_container">
-                          <img src="{{ asset('images/asset/delete-icon.svg') }}"/>
-                          </div>  --}}
                         </div>                        
                         <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('portfolio-store') }}">
                             <input type="hidden" name="portfolio_id" value ="<?php if(isset($portfolio)){ echo($portfolio->id); }?>">
@@ -58,8 +55,7 @@
                                 <div class="col-md-6">
                                 <div class="profile_input">
                                     <label for="lang">Project specific Skills</label>
-                                    <select name="project_specific_skills_id[]" class="outline js-select2 @error('project_specific_skills_id') is-invalid @enderror" id="lang" multiple>
-                                      <option value="">Select</option>
+                                    <select name="project_specific_skills_id[]" class="outline is-invalid-remove js-select2 @error('project_specific_skills_id') is-invalid @enderror" id="lang" multiple>
                                         @foreach ($skills as $k=>$v)
                                                 <option value="{{ $v->id }}" <?php if(isset($portfolio->getPortfolioSkill) && $portfolio->getPortfolioSkill->project_specific_skills_id == $v->id)
                                                   {echo'selected';} ?>>{{  $v->name }}</option>
@@ -77,8 +73,7 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label for="lang">Project Location (Where it took place)</label>
-                                        <select name="project_country_id[]" class="outline js-select2 @error('project_country_id') is-invalid @enderror" id="lang" multiple>
-                                        <option value="">Select</option> 
+                                        <select name="project_country_id[]" class="outline is-invalid-remove js-select2 @error('project_country_id') is-invalid @enderror" id="lang" multiple>
                                         @foreach ($country as $k=>$v)
                                             <option value="{{ $v->id}}">{{  $v->name }}</option>
                                         @endforeach

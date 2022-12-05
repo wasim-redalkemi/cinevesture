@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use App\Models\Query;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\Session\Session as SessionSession;
 
 class QueryController extends AdminController
 {
@@ -21,10 +23,14 @@ class QueryController extends AdminController
             $userQuerys = Query::query()->paginate(2);
             
             return view('admin.query.list',compact('userQuerys'));
-        } catch (\Throwable $th) {
-            return back($th->getMessage());
+        } catch (\Throwable $e) {
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
+            // return back($th->getMessage());
+            // Session::flash('response', ['text'=>'Anish is a very humbl eperson','type'=>'danger']);
+
         }
-        return view('admin.query.list');
+        
     }
 
     /**
@@ -94,16 +100,15 @@ class QueryController extends AdminController
         try {
             $query=query::find($id);
             
-        $query->Delete();
-       
-        return back();
+            $query->Delete();
+            Session::flash('response', ['text'=>'Query deleted sucessfully','type'=>'danger']);
+            return back();
         } catch (\Throwable $e) {
-           return back()->json(["status"=>false,"message"=> $e->getMessage()]);
+        //    return back()->json(["status"=>false,"message"=> $e->getMessage()]);
         //    return response()->json(["status"=>false,"message"=> $e->getMessage()]);
-
+        Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+        return back();
         }
-        
-       
-
+     
     }
 }

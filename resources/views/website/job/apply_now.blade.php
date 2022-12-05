@@ -117,7 +117,7 @@
             }
         });
         let formData = new FormData();
-        let resume = $("#upload-doc-inp")[0].files[0];        
+        let resume = $("#upload-doc-inp")[0].files[0];
         let cover_letter = $("#cover_letter").val();
         formData.append("resume",resume)
         formData.append("cover_letter",cover_letter);

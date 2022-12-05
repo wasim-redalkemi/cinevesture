@@ -13,6 +13,7 @@ use App\Models\UserProject;
 use Exception;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
 class ProjectController extends AdminController
@@ -71,9 +72,16 @@ class ProjectController extends AdminController
     public function markFavorite(Request $request)
     {
         try {
+        $fav=($request->s);
+            
             $project=UserProject::where('id',$request->p)->first();
             $project->favorited = $request->s;
             $project->save();
+            if($fav==0){
+            Session::flash('response', ['text'=>'Unfavorite update sucessfully','type'=>'success']);
+            }else{
+                Session::flash('response', ['text'=>'Favorite update sucessfully','type'=>'success']);
+            }
             return back();
         } 
         catch (Exception $e)
@@ -88,9 +96,16 @@ class ProjectController extends AdminController
     public function markRecommended(Request $request)
     {
         try {
+            
+            $rec=($request->s);
             $project=UserProject::where('id',$request->p)->first();
             $project->Recommended_badge = $request->s;
             $project->save();
+            if($rec==0){
+                Session::flash('response', ['text'=>'Unrecommend update sucessfully','type'=>'success']);
+                }else{
+                    Session::flash('response', ['text'=>'Recommend update sucessfully','type'=>'success']);
+                }
             return back();
         } 
         catch (Exception $e)
@@ -110,6 +125,7 @@ class ProjectController extends AdminController
             $project=UserProject::where('id',$request->pId)->first();
             $project->project_verified = $request->status;
             $project->save();
+            Session::flash('response', ['text'=>'Status update sucessfully','type'=>'success']);
             return back();
         } 
         catch (Exception $e)
@@ -222,8 +238,10 @@ class ProjectController extends AdminController
              $project->project_id=$request->p_id;
              $project->category_id=$value;
              $project->save();
+             
           }
-          return back();
+          Session::flash('response', ['text'=>'Category update sucessfully','type'=>'success']);
+          return redirect(route('admin-project-list'));
         }
       } 
       catch (Exception $e)
@@ -278,7 +296,9 @@ class ProjectController extends AdminController
                  $project->gener_id=$genre;
                  $project->save();
               }
-              return back();
+              Session::flash('response', ['text'=>'Genre update successfully','type'=>'success']);
+              return redirect(route('admin-project-list'));
+              
             };
         }
        

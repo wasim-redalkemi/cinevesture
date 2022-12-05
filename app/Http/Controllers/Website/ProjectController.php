@@ -6,6 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\Website\AjaxController;
 use App\Http\Requests\PostUserPortfolioRequest;
+use App\Http\Requests\ProjectDescriptionRequest;
+use App\Http\Requests\ProjectDetailRequest;
+use App\Http\Requests\ProjectMilestoneRequest;
+use App\Http\Requests\ProjectOverview;
+use App\Http\Requests\ProjectOverviewRequest;
 use App\Models\MasterCountry;
 use App\Models\MasterLanguage;
 use App\Models\MasterLookingFor;
@@ -84,11 +89,12 @@ class ProjectController extends WebController
         }
     }
 
-    public function validateProjectOverview()
+    public function validateProjectOverview(ProjectOverviewRequest $request)
     {
-        try {
+        try
+        {   
             if(!empty($_REQUEST['project_id']))
-            {
+            {  
                 $overviewEditResponse = $this->overviewEdit();
                 
                 if(!empty($overviewEditResponse['error_msg']))
@@ -99,7 +105,6 @@ class ProjectController extends WebController
                 {
                     return redirect()->route('project-details',['id' => $_REQUEST['project_id']])->with("success",$overviewEditResponse['success_msg']);
                 }
-
             }
             else 
             {
@@ -114,8 +119,10 @@ class ProjectController extends WebController
     public function overviewStore()
     {
         try {
-            $request = (object) $_REQUEST;
             
+            $request = (object) $_REQUEST;
+
+
             $overview = new UserProject();
             $overview->user_id = auth()->user()->id;
             $overview->project_name = $request->project_name;
@@ -218,7 +225,7 @@ class ProjectController extends WebController
     }
     
 
-    public function validateProjectDetails()
+    public function validateProjectDetails(ProjectDetailRequest $request)
     {
         try {
             $detailsResponse = $this->detailsStore();
@@ -303,7 +310,7 @@ class ProjectController extends WebController
     }
 
     
-    public function validateProjectDescription()
+    public function validateProjectDescription(ProjectDescriptionRequest $request)
     {
         try {    
             $descriptionResponse = $this->descriptionStore();
@@ -456,7 +463,7 @@ class ProjectController extends WebController
     }
 
     
-    public function validateProjectMilestone()
+    public function validateProjectMilestone(ProjectMilestoneRequest $request)
     {
         try {
             $milestoneResponse = $this->milestoneStore();
@@ -471,6 +478,7 @@ class ProjectController extends WebController
         } catch (Exception $e) {
             return back()->with('error','Something went wrong.');
         }    
+        
     }
 
     public function milestoneStore()
@@ -494,26 +502,7 @@ class ProjectController extends WebController
                         $projectLookingFor->save();
                     }                   
                     
-                    // ProjectMilestone::query()->where('project_id', $requirements->id)->delete();
-                    // foreach($_REQUEST as $k => $v)
-                    // {
-                    //     $fdata = explode('~',$k);
-                    //     if($fdata[0] == 'project_milestone_description')
-                    //     {
-                    //         $projectMilestone = new ProjectMilestone();
-                    //         $projectMilestone->project_id = $requirements->id;
-                    //         $projectMilestone->description = $_REQUEST['project_milestone_description~'.$fdata[1]];
-                    //         $projectMilestone->budget = $_REQUEST['project_milestone_budget~'.$fdata[1]];
-                    //         $projectMilestone->traget_date = $_REQUEST['project_milestone_traget_date~'.$fdata[1]];
-                    //         if (isset($_REQUEST['project_milestone_complete~'.$fdata[1]])) {
-                    //             $projectMilestone->complete = $_REQUEST['project_milestone_complete~'.$fdata[1]];
-                    //         } else {
-                    //             $projectMilestone->complete = 0;
-                    //         }
-                    //         $projectMilestone->save();
-                    //     }
-                    // }
-                    $this->return_response['success_msg'] = 'Project milestones updated successfully.';
+               $this->return_response['success_msg'] = 'Project milestones updated successfully.';
                 } else {
                     throw new Exception('Please overview phase fill');
                 }

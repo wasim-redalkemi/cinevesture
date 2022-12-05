@@ -40,13 +40,13 @@
                                        <td>
                                         <a onclick="return confirm('Are you sure to change list status?')" href="{{route('change-status',['id' => $project->id , 'status' => $project->list_status])}}">
                                             @if($project->list_status=='Publish'|| $project->list_status=='publish')
-                                            <button  class="btn btn-success btn-fw mb-1 btn-sm mt-10 w-65 view-btn text-white col-md-5" type="button" >{{$project->list_status}}</button>
+                                            <button  class="btn btn-success btn-fw mb-1 btn-sm mt-10 w-65 view-btn btn_padding  text-white col-md-5" type="button" >{{$project->list_status}}</button>
                                             @else
-                                            <button class="btn btn-warning btn-fw mb-1 btn-sm mt-10 w-65 view-btn text-white col-md-5" type="button" >{{$project->list_status}}</button>
+                                            <button class="btn btn-warning btn-fw mb-1 btn-sm mt-10 w-65 view-btn btn_padding  text-white col-md-5" type="button" >{{$project->list_status}}</button>
                                             @endif
                                         </a>
                                         <a onclick="return confirm('Are you sure to delete this list?')" href="{{route('delete-list',['id' =>   $project->id ])}}">
-                                            <button @if($project->list_name=="carousel") disabled @endif class="btn btn-danger btn-fw mb-1  btn-sm mt-10 w-60 view-btn btn_padding col-md-4" type="button" >Delete</button>
+                                            <button @if($project->list_name=="carousel") disabled @endif class="btn btn-danger btn-fw mb-1 btn-sm mt-10 w-60 view-btn btn_padding col-md-4" type="button" >Delete</button>
                                         </a>
                                        </td>
                                     </tr>

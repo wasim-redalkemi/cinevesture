@@ -3,7 +3,7 @@
 @section('title','Cinevesture-Register')
 
 @section('content')
-<section class="auth_section p-0">
+<section class="auth_section p-0 mt-0">
 
 
 <div class="row">

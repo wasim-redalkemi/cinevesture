@@ -24,13 +24,17 @@
         <section>
             <div class="row mt-4">
                 <div class="col-md-3 side-bar-cmn-part">
-                    <div class="search-box-container">
                     <form class="" method="Get" action="{{ route('get-project-filter') }}">
+                        <div class="d-flex">
+                    <div class="search-box-container w-100">
                         @csrf
                             <input type="search" value="{{request('search')}}" class="w-100 search-box" name="search" placeholder="Search...">
                             <button class="search-btn"></button>
-                      
-                    </div>
+                        </div>
+                        <div data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><img src="{{ asset('public/images/asset/dropdown-sidebar.svg') }}" class="d-block d-md-none mt-1" /></div>
+                </div>
+                <div class="sidebar_collapse collapse dont-collapse-sm" id="collapseExample">
+                   <div class=" sidebar_data_mobile">
                     <div class="dropdown search-page mt-3">
                         <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="modal" data-bs-target="#gener-list"
                             aria-expanded="false">
@@ -287,12 +291,15 @@
                             Verified Projects
                         </label>
                     </div>
-                    <div class="mt-4">
+                    <div class="mt-4 d-flex">
                         <input type="submit" class="filter-button watch-now-btn mt-4" Value="Apply">
                         <a href="{{route('get-project-filter')}}"><input type="button" class="clear-filter watch-now-btn mt-4" Value="Clear"></a>
                     </div>
+                                                    </div>
+                </div>
                 </form>
                     <span class="search-head-text"> </span>
+                    
                 </div>
                 <div class="col-md-9">
                 @if(count($projects) >= 1)

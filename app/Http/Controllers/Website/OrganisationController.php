@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\WebController;
-
+use App\Http\Requests\OrganisationRequest;
 use App\Models\MasterCountry;
 use App\Models\MasterLanguage;
 use App\Models\MasterOrganisationService;
 use App\Models\MasterOrganisationType;
+use App\Models\UserInvite;
 use App\Models\UserInvitie;
 use App\Models\UserOrganisation;
 use App\Models\UserOrganisationLanguage;
@@ -82,7 +83,7 @@ class OrganisationController extends WebController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OrganisationRequest $request)
     {
         try {
             $UserOrganisation = UserOrganisation::query()->where('user_id', auth()->user()->id)->first();
@@ -240,7 +241,7 @@ class OrganisationController extends WebController
     public function teamEmailLogStore($data)
     {
         try {            
-            $UserInvities = new UserInvitie();            
+            $UserInvities = new UserInvite();            
             $UserInvities->insert($data); 
             return ['status'=>1,'msg'=>"Invite link records updated successfully."];
         } catch (Exception $e) {

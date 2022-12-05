@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProjectOverview extends FormRequest
+class ProjectMilestoneRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class ProjectOverview extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class ProjectOverview extends FormRequest
     public function rules()
     {
         return [
-            
+
+            'project_stage_id'=>'required',
+            'loking_for'=>'required',
+            'loking_for.*'=>'required|exists:master_looking_fors,id',
+            'stage_of_funding_id'=>'nullable',
+            'crowdfund_link' => 'nullable|url',
+           
         ];
     }
 }
