@@ -142,6 +142,7 @@
                 }
             },
             error: function(error) {
+                $submitBtn.prop("disabled",false);
                 $submitBtn.text("Submit");
             }
         });
