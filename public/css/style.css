@@ -2633,3 +2633,7 @@ select {
         font-size: 14px;
         color: #000;
       }
+
+      .error{
+        color: red !important;
+      }
