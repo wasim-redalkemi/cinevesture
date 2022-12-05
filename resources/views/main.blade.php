@@ -31,7 +31,7 @@
                         labore
                         </div>
                       <div class="duration-lang-text mt-1">1hr 5min | English | Horror</div>
-                      <button class="watch-now-btn mt-4"><a href="{{ route('public-view', ['id'=>3]) }}">Watch now</a></button>
+                      <button class="watch-now-btn mt-4"><a href="{{ route('public-view', ['id'=>3]) }}" style="color:white !important;">Watch now</a></button>
                     </div>
                   </div>
                 </div>

@@ -13,7 +13,7 @@
 
 <body class="bg_white">
     <section class="guide_profile_section">
-        <div class="mb-3"> <i class="fa fa-arrow-left" aria-hidden="true"></i> <span class="back_btn_profile"> Back</span></div>
+        {{-- <div class="mb-3"> <i class="fa fa-arrow-left" aria-hidden="true"></i> <span class="back_btn_profile"> Back</span></div> --}}
         <div class="content_wraper">
             <div class="guide_profile_subsection">
                 <div class="container">
@@ -37,7 +37,7 @@
                             </div>
                         </div>
                         <div class="col-md-8">
-                            <div class="guide_profile_main_text pt-3">{{empty($user->first_name)?'Name':$user->first_name.' '.$user->last_name;}}</div>
+                            <div class="guide_profile_main_text pt-3">{{empty($user->first_name)?'Name':ucfirst($user->first_name.' '.$user->last_name);}}</div>
                             <div class="guide_profile_main_subtext">Lorem ipsum dolor sit amet, consectetur adipiscing
                                 elit.</div>
                             <div><button class="guide_profile_btn mt-2" data-toggle="modal" data-target="#contactModal">Contact </button></div>
@@ -244,7 +244,8 @@
                             <div class="project owl-carousel owl-theme">
                                 @foreach($UserProject as $k=>$v)                                
                                 <div class="item">
-                                    <img src="@php echo (!empty($v->projectImage->file_link)?asset('storage/'.$v->projectImage->file_link): config("constants.PROJECT_NO_IMAGE")) @endphp" width="100%" height="100%"  />
+                                    {{-- <img src="@php echo (!empty($v->projectImage->file_link)?asset('storage/'.$v->projectImage->file_link): config("constants.PROJECT_NO_IMAGE")) @endphp" width="100%" height="100%"  /> --}}
+                                    <img src="@php echo (!empty($v->projectImage->file_link)?asset('storage/'.$v->projectImage->file_link): asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1 (1).png')) @endphp" width="100%" height="100%"  />
                                     <div class="guide_profile_main_subtext">@php echo (!empty($v->project_name)?$v->project_name: '-') @endphp</div>
                                 </div>                                
                                 @endforeach
@@ -320,9 +321,14 @@
                                 <h1>Endorsements</h1>
                             </div>
                             @if($_REQUEST['id'] != auth()->user()->id )
+                            @foreach ($user_endorsement->toArray() as $k=>$v)
+                            
+                            @if ($v['from'] != auth()->user()->id)
                             <div>
                                 <button class="guide_profile_btn" data-toggle="modal" data-target="#endorseModal">Endorse</button>
                             </div>
+                            @endif                                
+                            @endforeach
                             @endif
                             <!-- Endorse modal  -->
                             <div class="modal fade" id="endorseModal" tabindex="-1" role="dialog" aria-labelledby="endorseModalLabel" aria-hidden="true">

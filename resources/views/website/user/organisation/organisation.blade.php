@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <div class="preview_headtext">{{ (isset($UserOrganisation->name))?$UserOrganisation->name:'Name'; }}</div>
+                                <div class="preview_headtext">{{ (isset($UserOrganisation->name))?ucFirst($UserOrganisation->name):'Name'; }}</div>
                                 <div class="guide_profile_main_subtext">{{ (isset($UserOrganisation->organisation_type))?$UserOrganisation->organisation_type:'Organisation type'; }}</div>
                                 <div class="guide_profile_main_subtext">{{ (isset($UserOrganisation['country']['name']))?$UserOrganisation['country']['name']:'Located In'; }}</div>
                             </div>

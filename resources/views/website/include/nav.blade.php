@@ -136,7 +136,7 @@
               <div>
                 <button type="submit" class="header-search-btn mx-3">Search</button>
                </form>
-                <button class="add-proj-btn my-2 my-sm-0 mr-0"><a class="btn-link text_decor_none" href="{{ route('project-overview')}}">Add a Project</a></button>
+                <button class="add-proj-btn my-2 my-sm-0 mr-0"><a href="{{ route('project-overview')}}">Add a Project</a></button>
               </div>
             </div>
           </div>
