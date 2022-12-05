@@ -72,7 +72,8 @@ class UserController extends AdminController
        $user=User::find($request->user_id);
        $user->status= $request->status;
        $user->save();
-       Session::flash('response', ['text'=>'User status update','type'=>'success']);
+       toastr() ->success('Status update successfully!', 'Congrats');
+    //    Session::flash('response', ['text'=>'User status update','type'=>'success']);
        return back();
     } catch (Exception $e) {
        
@@ -146,9 +147,8 @@ class UserController extends AdminController
     {
         try {
             $user=User::find($id)->delete();
-            // $user->delete();
-            // die;
-            Session::flash('response', ['text'=>'User delete successfully','type'=>'success']);
+            toastr() ->success('User delete successfully!', 'Congrats');
+            // Session::flash('response', ['text'=>'User delete successfully','type'=>'success']);
                 return back();
             
         } catch (Exception $e)

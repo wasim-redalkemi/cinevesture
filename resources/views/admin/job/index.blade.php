@@ -80,8 +80,9 @@
                                         <th class="col-md-2">Organization</th>
                                         <th class="col-md-2">Location</th>
                                         <th class="col-md-2">Created by</th>
+                                        <th class="col-md-2">Promote</th>
                                         <th class="col-md-2">Status </th>
-                                        <th class="col-md-2">Action </th>
+                                        <th class="col-md-2">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -108,6 +109,11 @@
                                                 {{$value->name}}
                                             @endforeach
                                         </td>
+                                        <td>
+                                            
+                                            @php $promote=($job->Promote=="1")?"0":"1"; @endphp
+                                           <input type="checkbox" name="promote" path="{{route('promot_update')}}?p={{$promote}}&id={{$job->id}}" id='' class="promote" <?php if ($job->Promote==1) {echo 'checked';}?>>
+                                        </td>
                                         <td class="" style="width: 100px;">
                                             @php
                                                 $x=($job->save_type=='published')? 'unpublished':'published';
@@ -121,7 +127,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href=""><button class="btn mb-2 view-btn btn btn-primary">View</button></a>
+                                            <a href="{{route('posted-job-single-view',['job_id'=>$job->id])}}"><button class="btn mb-2 view-btn btn btn-primary">View</button></a>
                                             <a href="{{route('job-delete',['id'=>$job->id])}}"><button class="btn mb-2 view-btn btn btn-danger">Delete</button></a>
                                         </td>
                                     </tr>
@@ -142,19 +148,18 @@
 @push('scripts')
 <script>
     $(document).ready(function() {       
-        $('.fav_inp').change(function()
+        $('.promote').change(function()
         {
             window.location.href=$(this).attr('path');
         })
-        $('.recom_inp').change(function()
-        {
-            window.location.href=$(this).attr('path');
-        })
+        
     })
     
     @if (request('status')|| request('search') || request('country')) 
         $(".collapse").addClass("show");
     @endif
+
+  
 </script>
 @endpush
 
