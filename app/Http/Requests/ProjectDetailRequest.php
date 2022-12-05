@@ -25,9 +25,9 @@ class ProjectDetailRequest extends FormRequest
     {
         return [
             'category_id' => 'nullable', 
-            'category_id' => 'nullable|exists:master_project_categories,id',  
+            'category_id.*' => 'nullable|exists:master_project_categories,id',  
             'gener' => 'required' ,
-            'gener' => 'required|exists:master_project_genres,id' ,   
+            'gener.*' => 'required|exists:master_project_genres,id' ,   
             'duration' => 'nullable', 
             'total_budget' => 'required',
             'financing_secured' => 'required',
