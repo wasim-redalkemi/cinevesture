@@ -10,7 +10,7 @@
     </div>
 
     <div class="preview_headtext lh_54 candy-pink">
-        {{$job->company_name}}-{{$job->jobLocation->name}}
+        {{$job->company_name}}-{{@$job->jobLocation->name}}
     </div>
     <div class="posted_job_header Aubergine_at_night">
         {{$job->description}}

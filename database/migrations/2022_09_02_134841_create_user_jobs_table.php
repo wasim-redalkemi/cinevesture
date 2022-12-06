@@ -19,6 +19,7 @@ class CreateUserJobsTable extends Migration
             $table->string('title',100);
             $table->string('company_name',255);
             $table->string('description',500);
+            $table->enum('Promote',['1','0'])->default('0');
             $table->string('location_id',30);
             $table->enum('save_type',['draft','published','unpublished'])->nullable();
             $table->timestamps();

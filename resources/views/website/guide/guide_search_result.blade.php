@@ -19,7 +19,7 @@
                             <input type="search" name="search" value="{{request('search')}}" class="w-100 search-box" placeholder="Search...">
                             <button class="search-btn"></button>
                             </div> 
-                            <div class="d-block d-md-none m-2" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                            <div class="d-block d-md-none for_drop_img" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                             <img src="{{ asset('images/asset/dropdown-sidebar.svg') }}" />
                             </div>    
 
@@ -138,15 +138,15 @@
             <div class="col-md-9">
                 @if(count($users) >= 1)
                 @foreach($users as $user)
-                <div class="profile_wraper profile_wraper_padding mt-2 mt-md-0">
+                <div class="profile_wraper profile_wraper_padding my-3 my-md-0">
                     <div class="row">
                         <div class="col-md-2">
-                            <div class="user_profile_container">
+                            <div class="user_profile_container wh_66">
                                 <!-- <img src="{{ asset('images/asset/user-profile.png') }}" /> -->
                                 @if(isset($user->profile_image))
                                 <img src="{{Storage::url($user->profile_image)}}" />
                                 @else
-                                <img src="{{ asset('images/asset/user-profile.png') }}" />
+                                <img src="{{ asset('images/asset/user-profile.png') }}" width="100%" height="100%"/>
                                 @endif
                             </div>
 

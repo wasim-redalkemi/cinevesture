@@ -55,7 +55,9 @@ class ProjectListController extends AdminController
             $project_list->list_name=$request->name;
             $project_list->list_status=$request->status;
             $project_list->save();
-             return redirect()->route('show-list')->with("success", "List added  successfully.");
+            toastr() ->success('Project create successfully!', 'Congrats');
+             return redirect()->route('show-list');
+            //  ->with("success", "List added  successfully.");
         }
         // catch (Exception $e) 
         // {
@@ -118,7 +120,6 @@ class ProjectListController extends AdminController
     {
         try
         {
-            
             $project_data=UserProject::query()
             ->with('projectOnlyImage')
             ->paginate($this->records_limit);
@@ -243,7 +244,8 @@ class ProjectListController extends AdminController
             $list_status="Publish";
             }
             ProjectList::where("id", $id)->update(["list_status" => $list_status]);
-            return redirect('/admin/project-list/list')->with("success", "Status changed successfully.");
+            toastr() ->success('Status update successfully!', 'Congrats');
+            return redirect('/admin/project-list/list');
         }
         catch (Exception $e)
         {
@@ -265,7 +267,8 @@ class ProjectListController extends AdminController
             $delete_list->delete();
             $delete_search_list=ProjectListProjects::where('list_id',$id);
             $delete_search_list->delete();
-            return redirect('/admin/project-list/list')->with("success", "List deleted successfully.");
+            toastr() ->success('Project delete successfully!', 'Congrats');
+            return redirect('/admin/project-list/list');
         }
         catch (Exception $e)
         {
