@@ -23,9 +23,9 @@ class FavouriteController extends Controller
     public function index()
     {
         $user_projects = UserFavouriteProject::query()->with('projects.projectImage')
-                         ->where('user_id',auth()->user()->id)->paginate(5);
+                         ->where('user_id',auth()->user()->id)->orderBy('created_at', 'DESC')->paginate(5);
         $user_profiles = UserFavouriteProfile::query()->with('profiles','profileSkills.getSkills','profileCountry.country')
-                         ->where('user_id',auth()->user()->id)->paginate(5);              
+                         ->where('user_id',auth()->user()->id)->orderBy('created_at', 'DESC')->paginate(5);              
 
         return view('website.user.favourite.favourite',compact(['user_projects','user_profiles']));
     }

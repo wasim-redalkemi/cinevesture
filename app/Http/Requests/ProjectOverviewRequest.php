@@ -35,10 +35,5 @@ class ProjectOverviewRequest extends FormRequest
             'location'=> 'nullable'               
         ];
     }
-    public function messages()
-    {
-        return [
-            
-        ];            
-    }
+    
 }

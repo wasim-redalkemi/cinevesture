@@ -18,7 +18,7 @@
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Edit Portfolio</div>
                             <div>
-                                <a href="{{route('protfolio-delete',['id'=>$UserPortfolioEdit[0]['id']])}}">
+                                <a class="confirmAction" href="{{route('protfolio-delete',['id'=>$UserPortfolioEdit[0]['id']])}}">
                                     <img src="{{ asset('images/asset/delete-icon.svg') }}"/>
                                     {{-- <i class="fa fa-trash-o  deep-pink icon-size" aria-hidden="true"></i> --}}
                                 </a>
