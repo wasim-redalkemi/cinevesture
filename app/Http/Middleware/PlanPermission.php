@@ -71,7 +71,7 @@ class PlanPermission
             }
         }
        
-        return $next($request);
-    }
+      }
+      return $next($request);
  }
 }

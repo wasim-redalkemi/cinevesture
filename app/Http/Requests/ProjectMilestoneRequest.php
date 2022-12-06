@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostUserPortfolioRequest extends FormRequest
+class ProjectMilestoneRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class PostUserPortfolioRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check();
+        return true;
     }
 
     /**
@@ -24,16 +24,13 @@ class PostUserPortfolioRequest extends FormRequest
     public function rules()
     {
         return [
-            'project_title' => 'nullable',
-            'description' => 'nullable|max:600',
-            'completion_date' => 'nullable',
-            'video' => 'nullable|url',
+
+            'project_stage_id'=>'required',
+            'loking_for'=>'required',
+            'loking_for.*'=>'required|exists:master_looking_fors,id',
+            'stage_of_funding_id'=>'nullable',
+            'crowdfund_link' => 'nullable|url',
+           
         ];
-    }
-    public function messages()
-    {
-        return [
-            //
-        ];            
     }
 }

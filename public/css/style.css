@@ -635,8 +635,8 @@ body {
     height: 40px;
     display: flex;
     padding: 2px;
-    justify-content: space-between;
-    border: 2px solid #4D0D8A;
+    justify-content: space-between !important;
+    border: 2px solid #4D0D8A !important;
     border-radius: 4px;
     margin: 0;
 }
@@ -832,7 +832,10 @@ body {
     letter-spacing: 0.018em;
     margin: 2.5px 2px;
 }
-
+.darkbtn{
+    background: #971E9B !important;
+    color: #FAF8FB !important;
+}
 .search-table-body td {
     border-style: none;
     padding: 0.25rem 0 !important;
@@ -917,10 +920,10 @@ body {
     line-height: 150%;
 }
 .contact-page-subtext {
-    font-weight: 300;
-    font-size: 20px;
-    line-height: 158%;
-    letter-spacing: 0.004em;
+    font-weight: 300 !important;
+    font-size: 20px !important;
+    line-height: 158% !important;
+    letter-spacing: 0.004em !important;
 }
 .contact-form {
     text-align: center;
@@ -982,6 +985,14 @@ body {
     padding: 4px;
     color: #DD45B3;
     background: transparent;
+    font-weight: 700;
+    font-size: 9.58663px;
+    line-height: 120%;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.06em;
+    height: 25px;
 }
 .filter_wrap
 {
@@ -1138,7 +1149,10 @@ body {
     width: 100px;
     border: 1px solid;
 }
-
+.wh_66 {
+    width: 66px !important;
+    height: 66px !important;
+}
 .guide_profile_main_text, .guide_profile_main_text a {
     font-style: normal;
     font-weight: 600;
@@ -1249,7 +1263,7 @@ body {
 
 }
 .profile_wraper_padding {
-    padding: 22px 30px !important;
+    padding: 22px 30px;
     /* margin: 10px 0px 50px 0; */
 }
 .profile_wraper {
@@ -1493,6 +1507,14 @@ body {
     font-size: 20px;
     line-height: 158%;
     letter-spacing: 0.0075em;
+    color: #1C0330;
+    margin-top: 5px;
+}
+.published_text {
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 126%;
+    letter-spacing: 0.033em;
     color: #1C0330;
     margin-top: 5px;
 }
@@ -1912,6 +1934,9 @@ button, input, optgroup, select, textarea {
   .select2-container .select2-search--inline .select2-search__field {
     margin-top: 0 !important;
   }
+  .select2-container .select2-search--inline .select2-search__field:focus {
+    border: none !important;
+  }
   .select2-container--default .select2-search--inline .select2-search__field  {
     padding-left: 10px !important;
     width: 100% !important;
@@ -2014,7 +2039,10 @@ select  option, .radio_btn_label{
     margin: 18px 10px !important;
 }
 
-
+.for_drop_img {
+    margin-left: 8px;
+    margin-top: 10px;
+}
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove{
     color: #fff !important;
 }
@@ -2355,8 +2383,8 @@ select {
   }
   @media (prefers-reduced-motion: reduce) {
     .collapsing {
-        transition-property: height, visibility;
-        transition-duration: .35s;
+        /* transition-property: height, visibility; */
+        /* transition-duration: .35s; */
     }
 }
   
@@ -2388,6 +2416,23 @@ select {
     position: relative;
     padding-top: 100px;
 }
+.owl-carousel .owl-nav button.owl-next, .owl-carousel button.owl-dot {
+    display: none;
+}
+.owl-carousel .owl-nav button.owl-prev {
+    display: none;
+}
+
+.menu_position {
+    margin-right: -22px !important;
+    margin-top: 20px !important;
+}
+.border_top {
+    border-top: 1px solid #cccc;
+}
+.border_btm {
+    border-bottom: 1px solid #cccc;
+}
 
   @media (max-width: 480px) {
     .container, .container-lg, .container-md, .container-sm, .container-xl {
@@ -2403,7 +2448,7 @@ select {
        margin-top: 6px;
     }
     .profile_wraper_padding {
-        padding: 22px 15px !important;
+        padding: 22px 15px;
     }
     .pb_8 {
         padding-bottom: 0px;
@@ -2414,7 +2459,7 @@ select {
         /* margin-bottom: 16px; */
         width: max-content;
         margin: auto;
-        width: 93%;
+        width: 94%;
         padding: 1rem;
     }
     .auth_section {
@@ -2439,12 +2484,6 @@ select {
     .flow_hr_bold {
         border: 1px solid rgb(200,139,202);
         margin: 0;
-    }
-    .owl-carousel .owl-nav button.owl-next, .owl-carousel button.owl-dot {
-        display: none;
-    }
-    .owl-carousel .owl-nav button.owl-prev {
-        display: none;
     }
     .navbar-toggler {
         position: absolute;
@@ -2593,4 +2632,8 @@ select {
       .resume-download-txt{
         font-size: 14px;
         color: #000;
+      }
+
+      .error{
+        color: red !important;
       }

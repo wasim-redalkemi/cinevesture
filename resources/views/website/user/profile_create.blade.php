@@ -16,7 +16,7 @@
             </div>
             <div class="col-md-9">
                 <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
-                    <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('profile-store') }}">
+                    <form role="form" id="profile_create_form" method="POST" enctype="multipart/form-data" action="{{ route('profile-store') }}">
                         @csrf
 
                         <div class="profile_text">
@@ -282,7 +282,7 @@
                             <div class="col-md-12">
                                 <div class="profile_input">
                                     <label>About</label>
-                                    <textarea class="outline form-control controlTextLength is-invalid-remove form-control @error('about') is-invalid @enderror" text-length="200" maxlength="200" name="about" aria-label="With textarea"><?php if (isset($user->about)) {
+                                    <textarea class="outline form-control controlTextLength is-invalid-remove form-control @error('about') is-invalid @enderror" text-length="200" maxlength="200" name="about" aria-label="With textarea" required><?php if (isset($user->about)) {
                                                                                                                                                                                                                                                 echo ($user->about);
                                                                                                                                                                                                                                             } ?></textarea>
                                     @error('about')
