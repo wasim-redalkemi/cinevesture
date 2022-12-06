@@ -10,13 +10,13 @@
     </div>
 
     <div class="preview_headtext lh_54 candy-pink">
-        {{$job->company_name}}-{{$job->jobLocation->name}}
+        {{$job->company_name}}-{{@$job->jobLocation->name}}
     </div>
     <div class="posted_job_header Aubergine_at_night">
         {{$job->description}}
     </div>
     <div class="d-flex justify-content-between mt-4">
-        <div class="d-flex">
+        <div class="w-75">
             @foreach($job->jobSkills as $skill)
             <button class="curv_cmn_btn">{{$skill->name}}</button>
             @endforeach
@@ -24,7 +24,7 @@
         @if(!isset($showApplied) || $showApplied)
         <div>
             @if(is_null($job->applied))
-            <a href="{{route('showApplyJob',['jobId'=>$job->id])}}" class="guide_profile_btn">Apply now</a>
+          <button class="guide_profile_btn">  <a href="{{route('showApplyJob',['jobId'=>$job->id])}}" class="">Apply now</a></button>
             @else
             <button disabled class="guide_profile_btn">Applied</button>
             @endif

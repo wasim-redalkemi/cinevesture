@@ -31,7 +31,7 @@
                                     <img src="{{ asset('storage/'.$v->projectImage->file_link)}}" class="width_inheritence" alt="image">
                                 @endif
                                 <div class="project_card_data w-100 h-100">
-                                    <div><a href="{{route('project-overview',['id'=>$v->id])}}"><i class="fa fa-pencil mx-2" aria-hidden="true"></i></a></div>
+                                    <div><a href="{{route('project-overview',['id'=>$v->id])}}"><i class="fa fa-pencil mx-2 ancor-link-style" aria-hidden="true"></i></a></div>
                                 <div>
                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                 </div>
@@ -41,12 +41,12 @@
                             <div class="movie_name_text">{{$v->project_name}}</div>
                                 @if(isset($v->status))
                                 @if($v->status == 'draft')
-                                <div class="movie_name_text">Draft</div>
+                                <div class="published_text">Draft</div>
                                 @else
-                                <div class="movie_name_text">Published</div>
+                                <div class="published_text">Published</div>
                                 @endif
                                 @else
-                                <div class="movie_name_text">-</div>
+                                <div class="published_text">-</div>
                                 @endif
                             </div>
                                 </a>

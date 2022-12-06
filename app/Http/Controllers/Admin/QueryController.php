@@ -101,11 +101,12 @@ class QueryController extends AdminController
             $query=query::find($id);
             
             $query->Delete();
-            Session::flash('response', ['text'=>'Query deleted sucessfully','type'=>'danger']);
+            toastr() ->success('Project delete successfully!', 'Congrats');
+            // Session::flash('response', ['text'=>'Query deleted sucessfully','type'=>'danger']);
             return back();
         } catch (\Throwable $e) {
-        //    return back()->json(["status"=>false,"message"=> $e->getMessage()]);
-        //    return response()->json(["status"=>false,"message"=> $e->getMessage()]);
+
+        // toastr() ->success('Project delete successfully!', 'Congrats');
         Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
         return back();
         }

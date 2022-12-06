@@ -166,7 +166,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="d-flex justify-content-end mt-5">
-                                <button class="cancel_btn mx-3"><a class="link-style" href="{{ route('project-description') }}?id={{$_REQUEST['id']}}">Go back</a></button>
+                                <button class="cancel_btn mx-3"><a class="" href="{{ route('project-description') }}?id={{$_REQUEST['id']}}">Go back</a></button>
                                 <input type="hidden" name="project_id" value="<?php if(isset($_REQUEST['id'])) {echo $_REQUEST['id'];}?>">
                                 {{-- <button type="submit" class="guide_profile_btn"><a class="ancor-link-style" href="{{ route('project-milestone') }}?id={{$_REQUEST['id']}}">Save & Next</a></button> --}}
 
@@ -186,7 +186,7 @@
     <div class="col-md-5 mt-2 mt-md-0">             
         <button type="button" class="deactivate_btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="display:none">Deactivate account</button>
             <!-- Modal for Confirmation for account deactivate -->
-        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal fade" id="staticBackdrop"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-body" style="padding: 0px;">

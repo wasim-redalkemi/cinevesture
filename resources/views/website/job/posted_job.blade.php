@@ -18,10 +18,11 @@
                 @include('website.include.profile_sidebar')
             </div>
             <div class="col-md-9">
+                <div class="profile_wraper mt-md-0 mt-4">
             @php                
             $jobs = $userJob->toArray();
             @endphp
-                <div class="profile_wraper mt-md-0 mt-4 px-4 pt-4" style="">
+                <div class="profile_wraper_padding pb-0">
                     <div class="profile_text">
                         <h1>Posted Jobs</h1>
                     </div>
@@ -34,16 +35,16 @@
                 @if (count($jobs['data'])>0)
                 @foreach ($jobs['data'] as $k=>$v)
 
-                <div class="profile_wraper profile_wraper_padding">
+                <div class="profile_wraper_padding border_top">
                     <div class="d-flex justify-content-between">
                         <div class="guide_profile_main_text">
                             <a href="{{ route('posted-job-single-view',['job_id'=>$v['id']]) }}">@if (!empty($v['title'])) {{$v['title']}} @endif</a>
                         </div>
-                        <div class="dropdown  search-page">
+                        <div class="dropdown dropstart search-page">
                             <div class="" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa fa-ellipsis-h aubergine icon-size" aria-hidden="true"></i>
                             </div>
-                            <ul class="dropdown-menu profile_dropdown_menu p-2">
+                            <ul class="dropdown-menu profile_dropdown_menu p-2 menu_position">
                                 <li>
                                 <a href="{{ route('job-create-page',['job_id'=>$v['id']]) }}">  Edit Job</a>
                                 </li>
@@ -58,6 +59,7 @@
                                 </li>
                             </ul>
                         </div>
+                      
                     </div>
                     <div class="preview_headtext lh_54 candy-pink">
                         @if (!empty($v['company_name'])) {{$v['company_name']}} @endif 
@@ -75,13 +77,14 @@
                             @endforeach
                         @else
                             <span><b>-</b></span>                    
-                        @endif                    
+                        @endif    
                     </div>
                     <div class="posted_job_header Aubergine_at_night">
                         @if (!empty($v['description'])) {{$v['description']}} @endif
                     </div>
                     <div class="d-flex justify-content-between mt-4">
-                        <div class="d-flex flex-wrap">
+                        <div class="d-flex flex-wrap w-75
+                        ">
                             @if (count($v['job_skills'])>0)
                             @foreach ($v['job_skills'] as $k1=>$v1)
                                 <button class="curv_cmn_btn skill_container"> {{$v1['name']}}</button>                               
@@ -91,7 +94,7 @@
                             @endif
                         </div>
                         <div>                            
-                            <a href="{{route('showJobApplicants',['jobId'=>$v['id']])}}" class="guide_profile_btn w_150">View Applications</a>
+                          <button class="guide_profile_btn">  <a href="{{route('showJobApplicants',['jobId'=>$v['id']])}}" class="guide_profile_btn w_150">View Applications</a></button>
                         </div>
                     </div>
                     
@@ -99,12 +102,13 @@
                 @endforeach
 
             @else
-                <div class="not-found-text">
+                <div class="not-found-text border-top">
                     <p>No Data Found</p>
                 </div>
             @endif
             <div>
                 {!! $userJob->links() !!}
+            </div>
             </div>
             </div>
         </div>

@@ -21,7 +21,7 @@
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Edit Qualification</div>
                             <div>
-                                <a href="{{route('qualification-delete',['id'=>$UserQualificationData->id])}}">
+                                <a class="confirmAction" href="{{route('qualification-delete',['id'=>$UserQualificationData->id])}}">
                                     <img src="{{ asset('images/asset/delete-icon.svg') }}"/>
                                 </a>
                             </div>

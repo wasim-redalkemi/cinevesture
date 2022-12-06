@@ -21,7 +21,7 @@
                 <div class=" profile_wraper profile_wraper_padding  mt-4 mb-0">
                     <p class="flow_step_text"> Overview</p>
                 <div class="preview_headtext mt-4">Project Name</div>
-                <div class="preview_subtext">@if (!empty($projectData[0]['project_name'])) {{$projectData[0]['project_name']}} @endif</div>
+                <div class="preview_subtext">@if (!empty($projectData[0]['project_name'])) {{ucFirst($projectData[0]['project_name'])}} @endif</div>
                 <div class="preview_headtext">Types of projects</div>
                 <div class="preview_subtext">@if (!empty($projectData[0]['project_type']['name'])) {{ $projectData[0]['project_type']['name'] }} @endif</div>
                 <div class="preview_headtext">Who are you listning this project as</div>
@@ -66,7 +66,7 @@
                 <div class="mt-2">
                     @if (!empty($projectData[0]['genres']))
                     @foreach ($projectData[0]['genres'] as $v)
-                        <button class="curv_cmn_btn mx-1">{{$v['name']}}</button>
+                        <button class="curv_cmn_btn darkbtn mx-1">{{$v['name']}}</button>
                     @endforeach                    
                     @endif
                 </div>
@@ -77,7 +77,7 @@
                 <div class="preview_headtext">Financing Secured (USD)</div>
                 <div class="preview_subtext">@if (!empty($projectData[0]['financing_secured'])) {{$projectData[0]['financing_secured']}} @endif</div>
                 <div class="preview_headtext">Creator/Founder Name</div>
-                <div class="preview_subtext">@if (!empty($projectData[0]['user']['name'])) {{$projectData[0]['user']['name']}} @endif</div>
+                <div class="preview_subtext">@if (!empty($projectData[0]['user']['name'])) {{ucFirst($projectData[0]['user']['name'])}} @endif</div>
                 <div class="preview_headtext">Associated with the Project</div>
                 <div class="preview_subtext">
                     @if (!empty($projectData[0]['project_association']))
@@ -123,7 +123,7 @@
             <div class="col-md-12">
                 <div class="profile_wraper profile_wraper_padding mt-4 mb-0">
                     <div>
-                        <p class="flow_step_text"> Gallary</p>
+                        <p class="flow_step_text"> Gallery</p>
                     </div>
         
                     <div class="preview_headtext mb-3">Video</div>
@@ -275,12 +275,11 @@
         $("#success-toast").toast("show");
     });
     $(".video_slider.owl-carousel").owlCarousel({
-      center: true,
       autoPlay: 3000,
       autoplay: true,
-      loop: true,
+    //   loop: true,
       nav: true,
-      center: true,
+    //   center: true,
       margin: 10,
       items: 1.5,
       responsive: {

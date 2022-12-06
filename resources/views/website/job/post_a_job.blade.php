@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-md-12 mt-sm-0">
                 <div class="content_wraper">
-                    <form class="" id="post_job">
+                    <form class="" id="post_job" onsubmit="return false;">
                         @csrf
                         <input type="hidden" id="save_type" value="" name="save_type">
                         <div class="guide_profile_subsection">
@@ -38,15 +38,11 @@
                                     <div class="profile_input">
                                         <label>Employment Type</label>
                                             <select class="work-select2 @error('countries') is-invalid @enderror" required id="employments" name="employments[]" multiple="multiple">
+                                                @if (!empty($employments))                                                    
                                                 @foreach($employments as $emp)
-
-                                                @if(isset(request('employments')[0]) && in_array($emp->id, request('employments')))
-                                                <option value="{{$emp->id}}" data-badge="" selected>{{$emp->name}}</option>
-                                                @else
-                                                <option value="{{$emp->id}}" data-badge="">{{$emp->name}}</option>
-                                                @endif
-
+                                                    <option value="{{$emp->id}}" @if(!empty($userJobData['job_employements']) && in_array($emp->id, $userJobData['job_employements']))selected @endif>{{$emp->name}}</option>
                                                 @endforeach
+                                                @endif
                                             </select>
 
                                             @error('employments')
@@ -61,9 +57,11 @@
                                     <div class="profile_input">
                                         <label>Workspace Type</label>
                                         <select class="emp-select2 @error('workspaces') is-invalid @enderror" required id="workspaces" name="workspaces[]" multiple="multiple">
+                                            @if (!empty($workspaces))
                                             @foreach($workspaces as $work)
                                                 <option value="{{$work->id}}" @if(!empty($userJobData['job_work_spaces']) && in_array($work->id, $userJobData['job_work_spaces']))selected @endif>{{$work->name}}</option>
                                             @endforeach
+                                            @endif
                                         </select>
 
                                         @error('workspaces')
@@ -113,7 +111,7 @@
                         <div class="guide_profile_subsection">
                             <div class="guide_profile_main_text mt-3">Job Description</div>
                             <div class="profile_input">
-                                <textarea class="form-control controlTextLength" text-length="200" name="description" required aria-label="With textarea" placeholder="Your answer here">@if (!empty($userJobData['description'])) {{$userJobData['description']}} @endif</textarea>
+                                <textarea class="form-control controlTextLength" text-length="1500" maxlength="1500" name="description" required aria-label="With textarea" placeholder="Your answer here">@if (!empty($userJobData['description'])) {{$userJobData['description']}} @endif</textarea>
                             </div>
                         </div>
                         <div class="guide_profile_subsection">
@@ -137,8 +135,8 @@
                                 <div class="d-flex justify-content-center mt-5 mb-4">
                                     <input type="hidden" name="job_id" value="<?php if(isset($_REQUEST['job_id'])) {echo $_REQUEST['job_id'];}?>">
 
-                                    <button class="cancel_btn mx-5 action" data-id="save">Save as Draft</button>
-                                    <button class="guide_profile_btn action" data-id="publish" type="submit">Publish</button>
+                                    <button class="cancel_btn mx-5 action" data-id="save" type="button">Save as Draft</button>
+                                    <button class="guide_profile_btn action" data-id="publish" type="button">Publish</button>
                                 </div>
                     </form>
                 </div>
@@ -148,7 +146,7 @@
 </section>
 
 <!-- Modal for Confirmation for account deactivate -->
-<div class="modal fade" id="publish_job_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="publish_job_modal"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
 
         <div class="modal-content">
@@ -188,6 +186,23 @@
 @endsection
 
 @push('scripts')
+
+<script>
+// just for the demos, avoids form submit
+jQuery.validator.setDefaults({
+  debug: true,
+  success: "valid"
+});
+
+
+$("#post_job").validate({
+  errorPlacement: function(error, element) {  
+    error.insertAfter( element.closest('.profile_input') );   
+   }
+});
+
+</script>
+
 <script>
     $(".emp-select2").select2({
         closeOnSelect: false,
@@ -210,13 +225,23 @@
         placeholder: "Skills",
         allowClear: true,
         tags: false,
-
+        // maximumSelectionSize: 1
     });
-    $(".action").on('click', function(e) {
+    $(".action").on('click', function(e) {        
+        let isFormValid = $( "#post_job" ).valid();        
+        if (!isFormValid) {
+            return false;
+        }
+        let $btn = $(this);
+        e.preventDefault();
+        e.stopPropagation();
+
+        $btn.text("Submitting");
+        $btn.prop('disabled',true);
 
         var button = $(this).attr('data-id');
         if (button == 'save') {
-            $('#save_type').val('save')
+            $('#save_type').val('save');           
         } else {
             $('#save_type').val('publish')
 
@@ -227,12 +252,14 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        e.preventDefault();
+       try {
         $.ajax({
-            type: 'get',
+            type: 'post',
             data: $('#post_job').serialize(),
             url: "{{ route('validate-job') }}",
             success: function(resp) {
+                $btn.text("Publish");
+                $btn.prop('disabled',false);
 
                 if (resp.status == true) {
                     if (button == "save") {
@@ -240,8 +267,7 @@
                         $(".emp-select2").val(null).trigger('change');
                         $(".work-select2").val(null).trigger('change');
                         $('.js-select2').val(null).trigger('change');
-
-                        toastMessage(1, resp.msg);
+                        toastMessage(1, resp.message);
                     } else {
                         // modal
                         $('.toast').hide()
@@ -250,18 +276,32 @@
                         $(".work-select2").val(null).trigger('change');
                         $('.js-select2').val(null).trigger('change');
                         $('#publish_job_modal').modal('show');
-
                     }
-
                 } else {
-                    toastMessage(0, resp.msg);
-
+                    toastMessage(0, resp.message);
                 }
             },
-            error: function(error) {
-
+            error: function(error) {                
+                console.log(error);
+                $btn.text("Publish");
+                $btn.prop('disabled',false);
+                if (error.status==422) {
+            let errors = error.responseJSON.errors
+            // errors.Obj.forEach(element => {            
+            //     toastMessage(0, element);
+            // });          
+        }else{
+            toastMessage(0, "Server Error");
+        }
             }
         });
+       } catch (error) {           
+        $btn.text("Publish");
+        $btn.prop('disabled',false);
+        
+        console.log(error);
+       }
+        
 
     });
 </script>

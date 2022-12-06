@@ -26,8 +26,7 @@
                             <div class="col-md-6">
                                 <div class="profile_input">
                                     <label>Category (Optional)</label>
-                                    <select name="category_id[]" class="js-select2 @error('category_id') is-invalid @enderror" id="" autofocus multiple>
-                                        <option value="">Select</option>
+                                    <select name="category_id[]" class="js-select2 @error('category_id') is-invalid @enderror" autofocus multiple>
                                         @foreach ($category as $k=>$v)
                                             <option value="{{ $v->id }}"@if(!empty($projectData[0]['project_category'] )&&(in_array($v->id, $projectData[0]['project_category'])))selected @endif>{{  $v->name }}</option>
                                         @endforeach
@@ -45,7 +44,6 @@
                                 <div class="mt_16">
                                     <label>Genre <span style = "color:red">*</span></label>
                                     <select name="gener[]" class="js-select2 @error('gener') is-invalid @enderror" autofocus multiple required>
-                                        <option value="" label="Select"></option>
                                         @foreach ($Genres as $k=>$v)
                                             <option value="{{ $v->id }}"@if(!empty($projectData[0]['genres'] )&&(in_array($v->id, $projectData[0]['genres'])))selected @endif >{{  $v->name }}</option>
                                         @endforeach

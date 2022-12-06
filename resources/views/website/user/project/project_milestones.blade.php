@@ -45,7 +45,6 @@
                                 <div class="mt_16">
                                     <label>Looking for <span style = "color:red">*</span></label>
                                     <select name="loking_for[]" class="js-select2 @error('loking_for') is-invalid @enderror" autofocus multiple select required>
-                                        <option value="">Select</option>
                                         @foreach ($lookingFor as $k=>$v)
                                             <option value="{{ $v->id }}"@if(!empty($projectData[0]['project_looking_for'] )&&(in_array($v->id, $projectData[0]['project_looking_for'])))selected @endif>{{  $v->name }}</option>
                                         @endforeach
@@ -63,7 +62,6 @@
                                 <div class="profile_input">
                                     <label>If Startup, What stage of funding are you at?</label>
                                     <select name="stage_of_funding_id" class="@error('stage_of_funding_id') is-invalid @enderror" id="" autofocus>
-                                        <option value="">Select</option>
                                         @foreach ($projectStageOfFunding as $k=>$v)                                            
                                             <option @if(!empty($projectData[0]['project_stage_of_funding'])) @if ($projectData[0]['project_stage_of_funding']['id'] == $v->id) {{'selected'}} @endif @endif value="{{ $v->id }}">{{ $v->name }}</option>
                                         @endforeach
@@ -134,7 +132,7 @@
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>Milestone Budget (USD)</label>
-                                        <input type="number" class="form-control no_number_arrows" name="project_milestone_budget" placeholder="Budget (USD)">
+                                        <input type="number" class="form-control no_number_arrows" name="   " placeholder="Budget (USD)">
                                     </div>
                                 </div>
                                 <div class="col-md-2">

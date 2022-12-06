@@ -78,9 +78,11 @@ class ProjectController extends AdminController
             $project->favorited = $request->s;
             $project->save();
             if($fav==0){
-            Session::flash('response', ['text'=>'Unfavorite update sucessfully','type'=>'success']);
+                toastr() ->success('Unfavorite update successfully!', 'Congrats');
+            // Session::flash('response', ['text'=>'Unfavorite update sucessfully','type'=>'success']);
             }else{
-                Session::flash('response', ['text'=>'Favorite update sucessfully','type'=>'success']);
+                toastr() ->success('Favorite update successfully!', 'Congrats');
+                // Session::flash('response', ['text'=>'Favorite update sucessfully','type'=>'success']);
             }
             return back();
         } 
@@ -102,9 +104,11 @@ class ProjectController extends AdminController
             $project->Recommended_badge = $request->s;
             $project->save();
             if($rec==0){
-                Session::flash('response', ['text'=>'Unrecommend update sucessfully','type'=>'success']);
+                toastr() ->success('Unrecommend update successfully!', 'Congrats');
+                // Session::flash('response', ['text'=>'Unrecommend update sucessfully','type'=>'success']);
                 }else{
-                    Session::flash('response', ['text'=>'Recommend update sucessfully','type'=>'success']);
+                    toastr() ->success('Recommend update successfully!', 'Congrats');
+                    // Session::flash('response', ['text'=>'Recommend update sucessfully','type'=>'success']);
                 }
             return back();
         } 
@@ -125,7 +129,8 @@ class ProjectController extends AdminController
             $project=UserProject::where('id',$request->pId)->first();
             $project->project_verified = $request->status;
             $project->save();
-            Session::flash('response', ['text'=>'Status update sucessfully','type'=>'success']);
+            toastr() ->success('Status update successfully!', 'Congrats');
+            // Session::flash('response', ['text'=>'Status update sucessfully','type'=>'success']);
             return back();
         } 
         catch (Exception $e)
@@ -240,7 +245,8 @@ class ProjectController extends AdminController
              $project->save();
              
           }
-          Session::flash('response', ['text'=>'Category update sucessfully','type'=>'success']);
+          toastr() ->success('Category update successfully!', 'Congrats');
+        //   Session::flash('response', ['text'=>'Category update sucessfully','type'=>'success']);
           return redirect(route('admin-project-list'));
         }
       } 
@@ -296,7 +302,8 @@ class ProjectController extends AdminController
                  $project->gener_id=$genre;
                  $project->save();
               }
-              Session::flash('response', ['text'=>'Genre update successfully','type'=>'success']);
+              toastr() ->success('Genre update successfully!', 'Congrats');
+            //   Session::flash('response', ['text'=>'Genre update successfully','type'=>'success']);
               return redirect(route('admin-project-list'));
               
             };
