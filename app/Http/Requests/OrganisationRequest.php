@@ -24,7 +24,7 @@ class OrganisationRequest extends FormRequest
     public function rules()
     {
         return [
-            'logo' => 'required',
+            'logo' => 'required|mimes:jpeg,jpg,png|nullable|max:40000',
             'name' => 'required',
             'organisation_type' => 'required',
             'about' => 'required|max:600',

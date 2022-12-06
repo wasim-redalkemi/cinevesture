@@ -200,6 +200,7 @@ class OrganisationController extends WebController
 
                 'email_1' => 'nullable|email',
                 'email_2' => 'nullable|email',
+                'organization_id' => 'nullable|integer',
             ]);
 
             if ($validator->fails()) {
@@ -211,11 +212,11 @@ class OrganisationController extends WebController
             }
             
             $data = [
-                ['user_id'=>auth()->user()->id,'email'=>$_REQUEST['email_1'],'created_at'=>date("Y-m-d h:i:s", time()),'updated_at'=>date("Y-m-d h:i:s", time())],
+                ['user_id'=>auth()->user()->id,'user_organization_id'=>$_REQUEST['organization_id'],'email'=>$_REQUEST['email_1'],'created_at'=>date("Y-m-d h:i:s", time()),'updated_at'=>date("Y-m-d h:i:s", time())],
             ];
             if($_REQUEST['email_2'])
             {
-                $data[] = ['user_id'=>auth()->user()->id,'email'=>$_REQUEST['email_2'],'created_at'=>date("Y-m-d h:i:s", time()),'updated_at'=>date("Y-m-d h:i:s", time())];
+                $data[] = ['user_id'=>auth()->user()->id,'user_organization_id'=>$_REQUEST['organization_id'],'email'=>$_REQUEST['email_2'],'created_at'=>date("Y-m-d h:i:s", time()),'updated_at'=>date("Y-m-d h:i:s", time())];
             }
             $UserInvite = $this->teamEmailLogStore($data);
             

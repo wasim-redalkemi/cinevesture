@@ -293,6 +293,7 @@
                                                                 @enderror
                                                             </div>
                                                             <div class="col-md-12 py-3">
+                                                                <input type="hidden" id="organization_id" name="organization_id" value="@if (!empty($UserOrganisation->id)) {{$UserOrganisation->id}} @endif">
                                                                 <button type="button" class="invite_btn">Invite</button>
                                                             </div>
                                                         </div>
@@ -377,13 +378,14 @@
     {
         var email_1 = $('#email_1').val();
         var email_2 = $('#email_2').val();
+        var organization_id = $('#organization_id').val();
         
         $.ajax(
         {
             url:"{{ route('team-email') }}",
             type:'POST',
             dataType:'json',
-            data:{email_1:email_1,email_2:email_2,"_token": "{{ csrf_token() }}"},
+            data:{organization_id:organization_id,email_1:email_1,email_2:email_2,"_token": "{{ csrf_token() }}"},
             success:function(response)
             {
                 toastMessage(response.status, response.msg);
