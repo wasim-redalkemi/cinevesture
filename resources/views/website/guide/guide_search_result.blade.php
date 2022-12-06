@@ -37,7 +37,7 @@
                                 Talent Type
                             </button>
                             <!-- Modal for Loactions List -->
-                            <div class="modal fade" id="talent-type" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal fade" id="talent-type"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered filter_modal_wrap">
                                     <div class="modal-content">
                                         <div class="modal-body" style="padding: 0px;">
@@ -81,7 +81,7 @@
                                 Skills
                             </button>
                             <!-- Modal for Loactions List -->
-                            <div class="modal fade" id="skills" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal fade" id="skills"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-body" style="padding: 0px;">
