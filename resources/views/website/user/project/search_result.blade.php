@@ -44,7 +44,7 @@
                         </button>
 
                     <!-- Modal for Geners List -->
-                    <div class="modal fade" id="gener-list" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="gener-list"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered filter_modal_wrap">
                             <div class="modal-content">
                                 <div class="modal-body">
@@ -86,7 +86,7 @@
                         </button>
 
                     <!-- Modal for Category List -->
-                    <div class="modal fade" id="category-list" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="category-list"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered filter_modal_wrap">
                             <div class="modal-content">
                                 <div class="modal-body">
@@ -127,7 +127,7 @@
                         </button>
 
                     <!-- Modal for Category List -->
-                    <div class="modal fade" id="lookingfor-list" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="lookingfor-list"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered filter_modal_wrap">
                             <div class="modal-content">
                                 <div class="modal-body">
@@ -169,7 +169,7 @@
                         </button>
 
                     <!-- Modal for Category List -->
-                    <div class="modal fade" id="stage-list" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="stage-list"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered filter_modal_wrap">
                             <div class="modal-content">
                                 <div class="modal-body">
@@ -210,7 +210,7 @@
                         </button>
 
                     <!-- Modal for Category List -->
-                    <div class="modal fade" id="country-list" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="country-list"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered filter_modal_wrap">
                             <div class="modal-content">
                                 <div class="modal-body">
@@ -251,7 +251,7 @@
                         </button>
 
                     <!-- Modal for Category List -->
-                    <div class="modal fade" id="language-list" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal fade" id="language-list"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered filter_modal_wrap">
                             <div class="modal-content">
                                 <div class="modal-body">
