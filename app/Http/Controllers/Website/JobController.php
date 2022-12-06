@@ -83,15 +83,14 @@ class JobController extends WebController
         return view('website.job.post_a_job', compact(['countries', 'skills', 'employments', 'workspaces', 'userJobData']));
     }
 
-    public function validatejob($id = null)
-    {
-        $request = new CreateJobRequest;        
-        $request->validate($request->rules(),request()->all(),$request->messages());
+    public function validatejob(CreateJobRequest $request)
+    {        
+        $id  = request('job_id');
         try {
             if (!is_null($id)) {
-                $response = $this->jobStoreEdit(new CreateJobRequest(request()->all()));
+                $response = $this->jobStoreEdit( $request);
             } else {
-                $response = $this->store(new CreateJobRequest(request()->all()));
+                $response = $this->store( $request);
             }
             if ($response['status'] == 0) {
                 return $this->jsonResponse(false, $response['msg'], []);
