@@ -15,7 +15,7 @@ class CreateJobRequest extends FormRequest
 
     protected function failedValidation(Validator $validator)
     {        
-        throw new HttpResponseException($this->jsonResponse(false,$validator->errors()->first(),[]));
+        throw new HttpResponseException($this->jsonResponse(false,$validator->errors(),[]));
     }
 
 
