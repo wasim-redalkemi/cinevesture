@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostUserPortfolioRequest extends FormRequest
+class ProfieQualificationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class PostUserPortfolioRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check();
+        return true;
     }
 
     /**
@@ -24,16 +24,12 @@ class PostUserPortfolioRequest extends FormRequest
     public function rules()
     {
         return [
-            'project_title' => 'nullable',
-            'description' => 'nullable|max:600',
-            'completion_date' => 'nullable',
-            'video' => 'nullable|url',
+            'institue_name' => 'required|max:100',
+            'degree_name' => 'required',
+            'feild_of_study' => 'required|max:50',
+            'start_year' => 'required|max:50',
+            'end_year' => 'required|after_or_equal:start_year',
+            'description' => 'required|max:600',
         ];
-    }
-    public function messages()
-    {
-        return [
-            //
-        ];            
     }
 }

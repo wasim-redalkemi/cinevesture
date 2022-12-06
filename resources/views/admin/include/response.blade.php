@@ -1,9 +1,9 @@
 
 @if(Session::has('response'))
-    <div class="section">
+    <div class="section response_section">
         <div class="container-fluid">
             {{-- <div class="row"> --}}
-                <div class="w-auto float-right mt-1">
+                <div class="w-auto">
                     <div class="alert alert-sm alert-{{session('response')['type']}} alert-dismissible fade show " role="alert">
                         {{-- <span class="alert-icon"><i class="ni ni-like-2"></i></span> --}}
                         <span class="alert-text"><span class="text-wrap">{{session('response')['text']}}</span></span>

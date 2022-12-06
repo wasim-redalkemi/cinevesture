@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostUserPortfolioRequest extends FormRequest
+class ProjectDescriptionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class PostUserPortfolioRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check();
+        return true;
     }
 
     /**
@@ -24,16 +24,17 @@ class PostUserPortfolioRequest extends FormRequest
     public function rules()
     {
         return [
-            'project_title' => 'nullable',
-            'description' => 'nullable|max:600',
-            'completion_date' => 'nullable',
-            'video' => 'nullable|url',
+            'logline' => 'required|max:280' ,
+            'synopsis' => 'required|max:600' ,   
+            'director_statement' => 'required|max:600', 
         ];
     }
     public function messages()
     {
         return [
-            //
+            'logline.max' => 'Maximum 280 character are allowed',
+            'synopsis.max' => 'Maximum 600 character are allowed',
+            'director_statement.max' => 'Maximum 600 character are allowed',
         ];            
     }
 }

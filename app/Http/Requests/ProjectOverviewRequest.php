@@ -24,7 +24,6 @@ class ProjectOverviewRequest extends FormRequest
     public function rules()
     {
         return [
-            
             'project_name' => 'required',  
             'project_type_id'=> 'required' ,         
             'listing_project_as'=> 'required' , 
@@ -35,10 +34,5 @@ class ProjectOverviewRequest extends FormRequest
             'location'=> 'nullable'               
         ];
     }
-    public function messages()
-    {
-        return [
-            
-        ];            
-    }
+    
 }

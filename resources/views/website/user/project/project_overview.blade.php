@@ -28,11 +28,8 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Project Name <span style = "color:red">*</span></label>
-
-                                    {{-- <input type="text" name ="project_name" class="form-control @error('project_name') is-invalid @enderror" > --}}
-
-                                    
-                                    <input type="text" class="form-control @error('project_name') is-invalid @enderror" name="project_name" placeholder="Project Name" value="@if (!empty($projectData[0]['project_name'])) {{$projectData[0]['project_name']}} @endif" aria-label="Username" aria-describedby="basic-addon1" required>
+  
+                                    <input type="text" class="form-control @error('project_name') is-invalid @enderror" name="project_name" placeholder="Project Name" value="@if (!empty($projectData[0]['project_name'])) {{$projectData[0]['project_name']}} @endif" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
                                     
                                     @error('project_name')
                                     <span class="invalid-feedback" role="alert">

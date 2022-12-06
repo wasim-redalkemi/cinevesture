@@ -6,6 +6,8 @@ namespace App\Http\Controllers\Website;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\WebController;
 use App\Http\Requests\PostUserPortfolioRequest;
+use App\Http\Requests\ProfieQualificationRequest;
+use App\Http\Requests\ProfileExperienceRequest;
 use App\Http\Requests\StoreProfileUpdate;
 use App\Models\AgeRange;
 use App\Models\Endorsement;
@@ -454,7 +456,7 @@ class UserController extends WebController
         }
     }
 
-    public function portfolioEditStore(Request $request)
+    public function portfolioEditStore(PostUserPortfolioRequest $request)
     {
         try {
             $user = User::query()->find(auth()->user()->id);
@@ -552,22 +554,9 @@ class UserController extends WebController
         }
     }
 
-    public function experienceStore(Request $request)
+    public function experienceStore(ProfileExperienceRequest $request)
     {
         try {
-            $validator = Validator::make($request->all(), [
-
-                'start_date' => 'required|date_format:Y-m-d',
-                'end_date' => 'required|date_format:Y-m-d|after_or_equal:start_date',
-                'job_title' => 'nullable|max:100',
-                'description' => 'nullable|max:600',
-                'comapny' => 'nullable|max:100',
-            ]);
-
-            if ($validator->fails()) {
-                return back()->with($validator)->withInput();
-            }
-
             if (
                 !$request->job_title && !$request->comapny && !$request->country_id && !$request->start_date &&
                 !$request->end_date && !$request->employement_type_id && !$request->description
@@ -617,21 +606,9 @@ class UserController extends WebController
         }
     }
 
-    public function experienceEditStore(Request $request)
+    public function experienceEditStore(ProfileExperienceRequest $request)
     {
         try {
-            $validator = Validator::make($request->all(), [
-
-                'start_date' => 'required|date_format:Y-m-d',
-                'end_date' => 'required|date_format:Y-m-d|after_or_equal:start_date',
-                'job_title' => 'nullable|max:100',
-                'description' => 'nullable|max:600',
-                'comapny' => 'nullable|max:100',
-            ]);
-
-            if ($validator->fails()) {
-                return back()->with($validator)->withInput();
-            }
             $user = User::query()->find(auth()->user()->id);
             $experience = UserExperience::query()->where('id', $request->experience_id)->first();
             $experience->user_id = $user->id;
@@ -679,20 +656,9 @@ class UserController extends WebController
         }
     }
 
-    public function qualificationStore(Request $request)
+    public function qualificationStore(ProfieQualificationRequest $request)
     {
         try {
-            $validator = Validator::make($request->all(), [
-
-                'institue_name' => 'nullable|max:100',
-                'description' => 'nullable|max:600',
-                'feild_of_study' => 'nullable|max:50',
-            ]);
-
-            if ($validator->fails()) {
-                return back()->with($validator)->withInput();
-            }
-
             if (
                 !$request->institue_name && !$request->degree_name && !$request->feild_of_study && !$request->start_year &&
                 !$request->end_year && !$request->description
@@ -736,20 +702,9 @@ class UserController extends WebController
         }
     }
 
-    public function qualificationEditStore(Request $request)
+    public function qualificationEditStore(ProfieQualificationRequest $request)
     {
         try {
-            $validator = Validator::make($request->all(), [
-
-                'institue_name' => 'nullable|max:100',
-                'description' => 'nullable|max:600',
-                'feild_of_study' => 'nullable|max:50',
-            ]);
-
-            if ($validator->fails()) {
-                return back()->with($validator)->withInput();
-            }
-
             $user = User::query()->find(auth()->user()->id);
 
             $qualification = UserQualification::query()->where('id', $request->qualification_id)->first();
@@ -826,7 +781,7 @@ class UserController extends WebController
         try {
             $validator = Validator::make($request->all(), [
                 'endorse_email' => 'required|email',
-                'endorse_message' => 'required|string',
+                'endorse_message' => 'required|string|max:600',
             ]);
 
             if ($validator->fails()) {
