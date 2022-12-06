@@ -23,5 +23,10 @@ return array(
     | ],
     */
 
-    'options' => array(),
+    'options' => array(
+        'showEasing' => 'swing',
+        'showMethod'=>'fadeIn',
+        'showDuration'=> 100,
+        'closeButton'=> true,
+    ),
 );
