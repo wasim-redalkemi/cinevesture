@@ -147,11 +147,11 @@
                                         <div class="verified-text deep-pink mx-2">Mark Complete</div>
                                     </div>
                                 </div>
-                                <!-- <div class="col-md-1 d-flex align-items-end mt-2">
+                                <div class="col-md-1 d-flex align-items-end mt-2">
                                     <div class="profile_input">
                                         <div class="save_add_btn">Save</div>
                                     </div>
-                                </div> -->
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3 d-flex align-items-end mt-2">
@@ -248,6 +248,15 @@
             }
 
             $(parentElemId+" .save_add_btn").off("click").on("click",(e)=>{
+                e.preventDefault();
+                if(!validateAssoEntry()){
+                    createToast("Please fill all and valid milestone details","E");
+                } else {
+                    saveAssoEntry();
+                }
+            });
+
+            $(parentElemId+" .add_another_btn").off("click").on("click",(e)=>{
                 e.preventDefault();
                 if(!validateAssoEntry()){
                     createToast("Please fill all and valid milestone details","E");

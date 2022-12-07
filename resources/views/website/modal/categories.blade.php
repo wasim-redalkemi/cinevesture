@@ -1,5 +1,5 @@
   <!-- Modal for Loactions List -->
-  <div class="modal fade" id="categories-list" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal fade" id="categories-list"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered filter_modal_wrap">
                             <div class="modal-content">
                                 <div class="modal-body">
