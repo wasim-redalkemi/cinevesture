@@ -14,11 +14,11 @@
                     <div class="class-md-12">
                         <div class="mt-4">SETUP YOUR PLAN</div>
                         <div class="mt-4">
-
+                          
                             <div class="currency_togle">
                                 <div class="togle_text text_fff mt-0">Dollar</div>
                                 <label class="switch mx-2">
-                                    <input type="checkbox" class="check" value="">
+                                    <input type="checkbox" id="currency" class="check" <?php if($plans[0]->currency == 'INR'){echo'checked';} ?> name="currency">
                                     <span class="slider round"></span>
                                 </label>
                                 <div class="togle_text text_fff mt-0">Rupee</div>
@@ -32,10 +32,16 @@
                         </div> -->
                         <div class="plan_btn_wraper">
                                <!-- <div> -->
-                                   <button class="plan_btn" >Monthly</button>
+                                   <a href="{{route('plans-view',['plan_time'=>'m'])}}" ><button class="plan_btn <?php if(request('plan_time')){
+                                     if(request('plan_time')=='m'){
+                                        echo'plan_month_select';                                     }
+                                   } ?>">Monthly</button></a>
                                <!-- </div> -->
                                <!-- <div> -->
-                                   <button class="plan_btn">Annually</button>
+                                   <a href="{{route('plans-view',['plan_time'=>'y'])}}" ><button class="plan_btn 
+                                   <?php if(request('plan_time')=='y'){
+                                        echo'plan_month_select';
+                                   }?>">Annually</button></a>
                                <!-- </div>  -->
                                </div>
                             </div>
@@ -49,7 +55,7 @@
                 <div class="col-md-1"></div>
                 <div class="col-md-11">
                     <div class="row">
-                        {{$flag = 0}}
+                        <?php $flag = 0; ?>
                        @foreach($plans as $plan)
                         <div class="col-md-3">
                             <div class="plan_card">
@@ -117,7 +123,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{$flag = 1}}
+                        <?php $flag = 1; ?>
                         @endforeach
                         <!-- <div class="col-md-3">
                             <div class="plan_card">
@@ -284,6 +290,16 @@
         $(this).find('.plain_detail').addClass(forHead);
         $(this).find('.job_search_btn').addClass(forButton);
     });
+    $('#currency').change(function() { 
+          if(this.checked) { 
+            $('#check_id').val('INR');
+            window.location.href = "{{route('plans-view',   ['plan_time'=>'m','currency'=>'INR'])}}".replace('&amp;','&');
+          } else{
+            $('#check_id').val('USD');
+            window.location.href = "{{ route('plans-view',['plan_time'=>'m','currency'=>'USD']) }}".replace('&amp;','&');
+          }
+    });
+
 </script>
 
 @endpush

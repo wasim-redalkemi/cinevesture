@@ -171,7 +171,7 @@
 
 @push('scripts')
 <script>
-    $(document).ready(function(){
+   $(document).ready(function(){
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");
     });

@@ -194,6 +194,22 @@
 
 @push('scripts')
 <script>
+    
+        // just for the demos, avoids form submit
+    // jQuery.validator.setDefaults({
+    // debug: true,
+    // success: "valid"
+    // });
+    // $("#profile_experience_edit_form").on('click', function(e) {
+    //     let isFormValid = $( "#profile_experience_edit_form" ).valid();
+    //     if (!isFormValid) {
+    //         return false;
+    //     }
+    //     else{
+    //         $( "#profile_experience_edit_form" ).submit();
+    //     }
+    // });
+
     $(document).ready(function(){
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");

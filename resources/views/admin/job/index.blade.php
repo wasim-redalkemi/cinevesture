@@ -112,7 +112,7 @@
                                         <td>
                                             
                                             @php $promote=($job->Promote=="1")?"0":"1"; @endphp
-                                           <input type="checkbox" name="promote" path="{{route('promot_update')}}?p={{$promote}}&id={{$job->id}}" id='' class="promote" <?php if ($job->Promote==1) {echo 'checked';}?>>
+                                           <input type="checkbox" name="promote" path="{{route('promote_update')}}?p={{$promote}}&id={{$job->id}}" id='' class="promote" <?php if ($job->Promote==1) {echo 'checked';}?>>
                                         </td>
                                         <td class="" style="width: 100px;">
                                             @php

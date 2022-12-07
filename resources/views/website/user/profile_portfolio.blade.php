@@ -171,6 +171,7 @@
 
 @push('scripts')
 <script>
+    
 
     var portfolio = [];
     $(document).ready(function(){
