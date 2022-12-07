@@ -14,7 +14,11 @@
 
 <section class="public-head-section">
     <div class="img-container">
-        <div class="public-head-image-shadow">
+        <img src="{{ asset('images/asset/download (3) 7.png') }}" class="project_image_wraper" style="" alt="image">
+        
+    
+
+        <div class="public-head-image-shadow" style=";">
             <!-- </div> -->
             <div class="public-head-container">
                 <div class="container">

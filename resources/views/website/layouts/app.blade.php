@@ -103,10 +103,15 @@
                 container.find('.navbar_sm').collapse('hide');
             }
             var container = $(".side-bar-cmn-part");
-            // if the target of the click isn't the container nor a descendant of the container
             if (!container.is(e.target) && container.has(e.target).length === 0) 
             {
                 container.find('.sidebar_collapse').collapse('hide');
+            }
+            var container = $(".project_result_section");
+            // if the target of the click isn't the container nor a descendant of the container
+            if (!container.is(e.target) && container.has(e.target).length === 0) 
+            {
+                container.find('.collapse_hide').collapse('hide');
             }
 
         });

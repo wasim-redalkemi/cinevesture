@@ -14,9 +14,14 @@
 
 <section class="public-head-section">
    
-    <div class="img-container">
-        <div class="public-head-image-shadow">
-            <!-- </div> -->
+    <div class="main-slider-container">
+
+        <div class="project_image_wraper">
+            <img src="{{ asset('images/20220805_172049.jpg') }}" class="" alt="image">
+            <div class="public-head-image-shadow"></div>
+        </div>
+
+        <div>
             <div class="public-head-container">
                 <div class="container">
                     <div class="row">
