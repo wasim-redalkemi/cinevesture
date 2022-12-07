@@ -20,7 +20,7 @@
             <div class="public-head-container">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6 col-sm-12 text-center  text-lg-start">
+                        <div class="col-md-6 col-sm-12 text-center text-lg-start">
                             <div class="verified-text-area">
                                 <div class="public-head-text">
                                     @if (!empty(($UserProject->project_name)))

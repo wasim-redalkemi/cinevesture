@@ -24,7 +24,7 @@
                                 </a>
                             </div>
                         </div>                        
-                        <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('portfolio-edit-store',['id'=>$UserPortfolioEdit[0]['id']]) }}">
+                        <form role="form" class="validateBeforeSubmit" method="POST" enctype="multipart/form-data" action="{{ route('portfolio-edit-store',['id'=>$UserPortfolioEdit[0]['id']]) }}">
                             @csrf
                             
                             <div class="row">

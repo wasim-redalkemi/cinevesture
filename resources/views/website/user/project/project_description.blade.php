@@ -18,7 +18,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="profile_wraper profile_wraper_padding my-4">
-                    <form role="form" method="POST" enctype="multipart/form-data" action="{{route('validate-project-description')}}">
+                    <form role="form" class="validateBeforeSubmit" method="POST" enctype="multipart/form-data" action="{{route('validate-project-description')}}">
                         @csrf
 
                         <p class="flow_step_text pb-0"> Description</p>                

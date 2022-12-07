@@ -596,7 +596,6 @@ class ProjectController extends WebController
             $categories = MasterProjectCategory::all();
             $looking_for = MasterLookingFor::all();
             $project_stages = ProjectStage::all();
-            
             $projects = UserProject::query()
             ->where('status','published')
             ->where(function($query) use($request){

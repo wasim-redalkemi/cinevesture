@@ -24,7 +24,7 @@
                                 </a>
                             </div>
                         </div>
-                        <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('experience-edit-store',['id'=>$UserExperienceData->id]) }}">
+                        <form role="form" class="validateBeforeSubmit" method="POST" enctype="multipart/form-data" action="{{ route('experience-edit-store',['id'=>$UserExperienceData->id]) }}">
                             @csrf
 
                             <div class="row">
