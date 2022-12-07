@@ -217,7 +217,6 @@
       loop: true,
       nav: true,
       center: true,
-      margin: 10,
       items: 1,
       responsive: {
         480: { items: 1 },
