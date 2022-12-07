@@ -16,7 +16,7 @@
             </div>
             <div class="col-md-9">
                 <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
-                    <form role="form" id="profile_create_form" onsubmit="return false; method="POST" enctype="multipart/form-data" action="{{ route('profile-store') }}">
+                    <form role="form"  method="POST" enctype="multipart/form-data" action="{{ route('profile-store') }}">
                         @csrf
 
                         <div class="profile_text">
@@ -388,23 +388,6 @@
 @endsection
 @push('scripts')
 <script type="text/javascript">
-
-    // just for the demos, avoids form submit
-    jQuery.validator.setDefaults({
-    debug: true,
-    success: "valid"
-    });
-
-    $("#profile_create_form").on('click', function(e) {        
-        let isFormValid = $( "#profile_create_form" ).valid();        
-        if (!isFormValid) {
-            return false;
-        }
-        else{
-            $( "#profile_create_form" ).submit();
-        }
-    });
-    
     $(document).ready(function() {
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");

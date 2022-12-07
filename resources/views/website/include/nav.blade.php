@@ -9,7 +9,7 @@
           </button>
           <div class="collapse navbar-collapse justify-content-between" id="navbarTogglerDemo01">
             <div>
-            <form class="" id = "filter" method="GET" action="{{ route('get-project-filter') }}">
+            <form class="" id ="filter" method="GET" action="{{ route('get-project-filter') }}">
                         @csrf
               <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
@@ -39,7 +39,7 @@
                     <ul class="dropdown-menu nav-drop" id="list-categories">
                        @foreach($categories as $cate)
                       <li>
-                        <input class="form-check-input" type="checkbox" value=""  name="categories[]"id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value=""  name="categories[]" id="flexCheckDefault">
                         <label class="form-check-label mx-2" for="flexCheckDefault">
                           {{$cate->name}}
                         </label>
@@ -76,7 +76,7 @@
                     <ul class="dropdown-menu nav-drop" id="list-stages">
                     @foreach($project_stages as $pro)
                       <li>
-                        <input class="form-check-input" type="checkbox" value=""  name="stages[]"id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value=""  name="stages[]" id="flexCheckDefault">
                         <label class="form-check-label mx-2" for="flexCheckDefault">
                           {{$pro->name}}
                         </label>

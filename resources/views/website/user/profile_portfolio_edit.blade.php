@@ -24,7 +24,7 @@
                                 </a>
                             </div>
                         </div>                        
-                        <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('portfolio-edit-store',['id'=>$UserPortfolioEdit[0]['id']]) }}">
+                        <form role="form"  method="POST" enctype="multipart/form-data" action="{{ route('portfolio-edit-store',['id'=>$UserPortfolioEdit[0]['id']]) }}">
                             @csrf
                             
                             <div class="row">
@@ -257,6 +257,7 @@
 
 @push('scripts')
 <script>
+  
     $(document).ready(function(){
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");

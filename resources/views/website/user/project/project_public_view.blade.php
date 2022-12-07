@@ -86,7 +86,7 @@
                                         <td class="public-head-subtext white">Created By</td>
                                         <td class="aubergine contact-page-subtext candy-pink">
                                             @if (!empty($projectData[0]['user']['name']))
-                                            {{$projectData[0]['user']['name']}}
+                                            <a href="{{route('profile-public-show',['id'=>$projectData[0]['user']['id']])}}" class="text_decor_none">{{$projectData[0]['user']['name']}}</a>
                                             @else
                                             <span><b>-</b></span>
                                             @endif
@@ -145,7 +145,7 @@
                                 <div class="d-flex align-items-center">
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
                                         
-                                    <button class="cantact-page-cmn-btn">Contact Now</button>
+                                    <button class="cantact-page-cmn-btn"><a href=""  class="text_decor_none">Contact Now</a></button>
                                     @endif
                                     <i class="fa fa-share-alt mx-4 icon-size" aria-hidden="true"></i>
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
@@ -289,7 +289,7 @@
                                     <td class="public-head-subtext white">Crowdfunding link</td>
                                     <td class="project-sub-text white">
                                         @if (!empty($UserProject->crowdfund_link))
-                                        {{ $UserProject->crowdfund_link}}                                     
+                                        <a href="{{ $UserProject->crowdfund_link}}" >{{ $UserProject->crowdfund_link}}</a>                                    
                                         @else
                                         <span><b>-</b></span>
                                         @endif

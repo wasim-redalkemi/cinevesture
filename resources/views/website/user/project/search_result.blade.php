@@ -224,7 +224,7 @@
                                                         <input class="form-check-input me-1" type="checkbox" name="countries[]" checked value="{{$count->id}}">
                                                         {{$count->name}}
                                                         @else
-                                                        <input class="form-check-input me-1" type="checkbox" name="countries[]" value="{{$count->id}}">
+                                                       <input class="form-check-input me-1" type="checkbox" name="countries[]" value="{{$count->id}}">
                                                         {{$count->name}}
                                                         @endif
                                                     </label>

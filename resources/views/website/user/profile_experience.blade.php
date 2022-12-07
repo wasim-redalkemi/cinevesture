@@ -22,7 +22,7 @@
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Add Experience</div>
                         </div>
-                        <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('experience-store') }}">
+                        <form role="form"  method="POST" enctype="multipart/form-data" action="{{ route('experience-store') }}">
                             @csrf
 
                             <div class="row">
@@ -171,7 +171,7 @@
 
 @push('scripts')
 <script>
-    $(document).ready(function(){
+   $(document).ready(function(){
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");
     });

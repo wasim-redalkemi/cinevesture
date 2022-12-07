@@ -26,7 +26,7 @@
                                 </a>
                             </div>
                         </div>                       
-                        <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('qualification-edit-store',['id'=>$UserQualificationData->id]) }}">
+                        <form role="form"  method="POST" enctype="multipart/form-data" action="{{ route('qualification-edit-store',['id'=>$UserQualificationData->id]) }}">
                             @csrf
 
                             <div class="row">
@@ -130,6 +130,8 @@
 
 @push('scripts')
 <script>
+    
+ 
     $(document).ready(function(){
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");

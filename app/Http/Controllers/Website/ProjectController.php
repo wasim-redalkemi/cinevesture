@@ -32,6 +32,7 @@ use App\Models\UserFavouriteProject;
 use App\Models\UserProject;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use PhpParser\Node\Stmt\TryCatch;
 
@@ -576,6 +577,7 @@ class ProjectController extends WebController
     public function getFilteredProject(Request $request)
     {
         try{ 
+          
             $validator = Validator::make($request->all(), [
                 'search' => 'nullable',
                 'countries.*' => 'nullable|exists:master_countries,id',
@@ -645,7 +647,6 @@ class ProjectController extends WebController
             // ->where('user_id','!=',auth()->user()->id)
             ->orderByDesc('id')
             ->paginate(5);
-         
             $projects->appends(request()->input())->links();
             return view('website.user.project.search_result',compact(['countries','languages','geners','categories','looking_for','project_stages','projects']));                   
            }catch(Exception $e){
