@@ -24,15 +24,15 @@ class AjaxController extends WebController {
             if(isset($reqData['vidUrl'])){
                 $sourceResp = AppUtilityController::getVideoDetailsById($reqData['vidUrl']);
                 if($sourceResp['status'] == 1){
-                    $toReturn = $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$sourceResp['pl'],"Success","ER000","");
+                    $toReturn = $this->prepareJsonResp(SELF::AJAX_CALL_SUCCESS,$sourceResp['pl'],"Success","ER000","");
                 } else {
-                    $toReturn = $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER401","Invalid video url. Only Vimeo and Youtube links are allowed.");
+                    $toReturn = $this->prepareJsonResp(SELF::AJAX_CALL_ERROR,[],"Failure","ER401","Invalid video url. Only Vimeo and Youtube links are allowed.");
                 }
             } else {
-                $toReturn = $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER501","Invalid request. Video URL is missing.");
+                $toReturn = $this->prepareJsonResp(SELF::AJAX_CALL_ERROR,[],"Failure","ER501","Invalid request. Video URL is missing.");
             }
         } catch (Exception $e) {
-            $toReturn = $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
+            $toReturn = $this->prepareJsonResp(SELF::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
         }
         return $toReturn;
     }

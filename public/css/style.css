@@ -262,7 +262,7 @@ body {
 .carosel-card-cntainer {
     position: absolute;
     top: 0px;
-    left: 1rem;
+    /* left: 1rem; */
     height: 100%;
     width: 100%;
     background: linear-gradient(180deg, rgba(28, 3, 48, 0) 65.92%, #1C0330 100%);
@@ -2583,7 +2583,8 @@ select {
     }
     
     .carosel-card-cntainer {
-        margin-left: 50px;
+        border: 2px solid red;
+        /* margin-left: 50px; */
     }
     .project-sub-text {
         width: 300px;
@@ -2620,28 +2621,28 @@ select {
           visibility: visible;
         }
       }
-      .sidebar_collapse
-      {
-        /* -webkit-transition: 2s ease all;
-        transition: 2s ease all; */
-      }
+.sidebar_collapse
+{
+/* -webkit-transition: 2s ease all;
+transition: 2s ease all; */
+}
 
-      .jobWrap
-      {
-       background: #FFFFFF;
-    box-shadow: 0px 0px 4px rgb(0 0 0 / 25%);
-    border-radius: 4px;
-        
-      }
-      .jobElem
-      {
-        border-bottom: 1px solid #ccc;
-      }
+.jobWrap
+{
+background: #FFFFFF;
+box-shadow: 0px 0px 4px rgb(0 0 0 / 25%);
+border-radius: 4px;
 
-      .resume-download-txt{
-        font-size: 14px;
-        color: #000;
-      }
+}
+.jobElem
+{
+border-bottom: 1px solid #ccc;
+}
+
+.resume-download-txt{
+font-size: 14px;
+color: #000;
+}
 
       .validateBeforeSubmit label.error{
         color: #DD45B3;
