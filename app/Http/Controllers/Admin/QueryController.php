@@ -26,9 +26,6 @@ class QueryController extends AdminController
         } catch (\Throwable $e) {
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();
-            // return back($th->getMessage());
-            // Session::flash('response', ['text'=>'Anish is a very humbl eperson','type'=>'danger']);
-
         }
         
     }
@@ -101,12 +98,9 @@ class QueryController extends AdminController
             $query=query::find($id);
             
             $query->Delete();
-            toastr() ->success('Project delete successfully!', 'Congrats');
-            // Session::flash('response', ['text'=>'Query deleted sucessfully','type'=>'danger']);
+            Session::flash('response', ['text'=>'Query deleted sucessfully','type'=>'danger']);
             return back();
         } catch (\Throwable $e) {
-
-        // toastr() ->success('Project delete successfully!', 'Congrats');
         Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
         return back();
         }
