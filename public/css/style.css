@@ -2239,11 +2239,19 @@ select {
     /* opacity: 1; */
 }
 
-.plan_btn:focus {
+.plan_month_select{
     border-radius: 4px;
     opacity: 1;
     transition: background-color 1s ease-out;
     background: #FFFFFF;
+    color: #1C0330;
+}
+
+.plan_btn:focus {
+    border-radius: 4px;
+    opacity: 1;
+    transition: background-color 1s ease-out;
+    background: #412d51;
     color: #1C0330;
 }
 /* .plan_btn_wraper .active {
