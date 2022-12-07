@@ -301,7 +301,7 @@ class AjaxController extends WebController {
         try {
             $media = UserPortfolioImage::find($img_id);
             if($media){
-                $isDeleted = true;//$media->delete();
+                $isDeleted = $media->delete();
                 return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,['isDeleted'=>$isDeleted],"Recource deleted successfully.","ER000","");
             } else {
                 return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER401","Could not find the resource.");

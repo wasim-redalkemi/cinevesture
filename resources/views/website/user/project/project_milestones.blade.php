@@ -129,10 +129,10 @@
                                         <input type="text" class="form-control" name="project_milestone_description" placeholder="Description">
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-2">
                                     <div class="profile_input">
                                         <label>Milestone Budget (USD)</label>
-                                        <input type="number" class="form-control no_number_arrows" name="   " placeholder="Budget (USD)">
+                                        <input type="number" class="form-control no_number_arrows" name="project_milestone_budget" placeholder="Budget (USD)">
                                     </div>
                                 </div>
                                 <div class="col-md-2">
@@ -149,7 +149,7 @@
                                 </div>
                                 <div class="col-md-1 d-flex align-items-end mt-2">
                                     <div class="profile_input">
-                                        <div class="save_add_btn">Save</div>
+                                        <div class="save_add_btn">Add</div>
                                     </div>
                                 </div>
                             </div>
@@ -250,6 +250,7 @@
             $(parentElemId+" .save_add_btn").off("click").on("click",(e)=>{
                 e.preventDefault();
                 if(!validateAssoEntry()){
+                    console.log("validateAssoEntry error");
                     createToast("Please fill all and valid milestone details","E");
                 } else {
                     saveAssoEntry();
@@ -259,6 +260,7 @@
             $(parentElemId+" .add_another_btn").off("click").on("click",(e)=>{
                 e.preventDefault();
                 if(!validateAssoEntry()){
+                    console.log("add_another_btn validateAssoEntry error");
                     createToast("Please fill all and valid milestone details","E");
                 } else {
                     saveAssoEntry();
@@ -283,6 +285,7 @@
                 if(error)
                     return false;
             });
+            console.log("error = ",!error);
             return (!error);
         }
 
