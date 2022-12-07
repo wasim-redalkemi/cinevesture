@@ -65,9 +65,6 @@ class ProjectController extends AdminController
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();
         }
-        // catch (\Throwable $e) {
-        // return back()->withErrors($e->getMessage());
-        // }
     }
     public function markFavorite(Request $request)
     {
@@ -78,11 +75,9 @@ class ProjectController extends AdminController
             $project->favorited = $request->s;
             $project->save();
             if($fav==0){
-                toastr() ->success('Unfavorite update successfully!', 'Congrats');
-            // Session::flash('response', ['text'=>'Unfavorite update sucessfully','type'=>'success']);
+                Session::flash('response', ['text'=>'Unfavorite update successfully!','type'=>'success']);
             }else{
-                toastr() ->success('Favorite update successfully!', 'Congrats');
-                // Session::flash('response', ['text'=>'Favorite update sucessfully','type'=>'success']);
+                Session::flash('response', ['text'=>'Favorite update sucessfully','type'=>'success']);
             }
             return back();
         } 
@@ -91,9 +86,6 @@ class ProjectController extends AdminController
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();
         }
-        // catch (\Throwable $e) {
-        //     return back($e);
-        // }
     }
     public function markRecommended(Request $request)
     {
@@ -104,11 +96,9 @@ class ProjectController extends AdminController
             $project->Recommended_badge = $request->s;
             $project->save();
             if($rec==0){
-                toastr() ->success('Unrecommend update successfully!', 'Congrats');
-                // Session::flash('response', ['text'=>'Unrecommend update sucessfully','type'=>'success']);
+                Session::flash('response', ['text'=>'Unrecommend update sucessfully','type'=>'success']);
                 }else{
-                    toastr() ->success('Recommend update successfully!', 'Congrats');
-                    // Session::flash('response', ['text'=>'Recommend update sucessfully','type'=>'success']);
+                    Session::flash('response', ['text'=>'Recommend update sucessfully','type'=>'success']);
                 }
             return back();
         } 
@@ -117,9 +107,6 @@ class ProjectController extends AdminController
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();
         }
-        // catch (\Throwable $e) {
-        //     return back($e);
-        // }
     }
     public function changeStatus(Request $request)
     {
@@ -129,8 +116,7 @@ class ProjectController extends AdminController
             $project=UserProject::where('id',$request->pId)->first();
             $project->project_verified = $request->status;
             $project->save();
-            toastr() ->success('Status update successfully!', 'Congrats');
-            // Session::flash('response', ['text'=>'Status update sucessfully','type'=>'success']);
+            Session::flash('response', ['text'=>'Status update sucessfully','type'=>'success']);
             return back();
         } 
         catch (Exception $e)
@@ -138,9 +124,6 @@ class ProjectController extends AdminController
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();
         }
-        // catch (\Throwable $e) {
-        //     return back($e);
-        // }
     }
 
     /**
@@ -245,8 +228,7 @@ class ProjectController extends AdminController
              $project->save();
              
           }
-          toastr() ->success('Category update successfully!', 'Congrats');
-        //   Session::flash('response', ['text'=>'Category update sucessfully','type'=>'success']);
+          Session::flash('response', ['text'=>'Category update sucessfully','type'=>'success']);
           return redirect(route('admin-project-list'));
         }
       } 
@@ -255,9 +237,6 @@ class ProjectController extends AdminController
           Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
           return back();
       }
-    //   catch (\Throwable $e) {
-    //     return back()->withErrors($e->getmessage);
-    //   }
     }
 
 
@@ -282,9 +261,6 @@ class ProjectController extends AdminController
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();
         }
-        // catch (\Throwable $e) {
-        //     return back()->withErrors($e->getmessage());
-        // }
         
     }
 
@@ -302,8 +278,7 @@ class ProjectController extends AdminController
                  $project->gener_id=$genre;
                  $project->save();
               }
-              toastr() ->success('Genre update successfully!', 'Congrats');
-            //   Session::flash('response', ['text'=>'Genre update successfully','type'=>'success']);
+              Session::flash('response', ['text'=>'Genre update successfully','type'=>'success']);
               return redirect(route('admin-project-list'));
               
             };
@@ -315,8 +290,5 @@ class ProjectController extends AdminController
           Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
           return back();
       };
-    //   catch (\Throwable $e) {
-    //     return back()->withErrors($e->getMessage());
-    //   };
     }
 }

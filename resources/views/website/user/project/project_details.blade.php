@@ -250,7 +250,7 @@ $(document).ready(function() {
             let id = $(e.target).parents()[1].id.split("-")[1];
             createToast("Please wait...","S");
             $(associate_entriesId+" #asso-"+id).remove();
-            doAjax('ajax/delete-proj-milestone/'+id,{},"DELETE",function(req,resp){
+            doAjax('ajax/delete-proj-association/'+id,{},"DELETE",function(req,resp){
                 if(resp.payload.isDeleted){
                     createToast(resp.message,"S");
                 } else {

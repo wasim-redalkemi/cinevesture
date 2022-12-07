@@ -14,7 +14,21 @@ class PlanController extends Controller
     public function showPlans(Request $request)
     {   
         $plans = Plans::query()->with('getRelationalData.getModule','getRelationalData.getOperation')
-                 ->where('currency','INR')->get();
+                 ->where(function($q) use($request){
+                    if(isset($request->plan_time)){
+                     $q->where('plan_time',$request->plan_time);
+                    }else{
+                        $q->where('plan_time','m');  
+                    }
+                 })
+                 ->where(function($q) use($request){
+                    if(isset($request->currency)){
+                     $q->where('plan_time',$request->currency);
+                    }else{
+                      $q->where('currency','INR');
+                    }
+                 })
+                 ->get();
         $modules = MasterPlanModule::all();
         return view('website.user.subscription.index',compact('plans','modules'));
     }

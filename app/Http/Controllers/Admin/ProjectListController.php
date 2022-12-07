@@ -29,11 +29,6 @@ class ProjectListController extends AdminController
         {
              return view('admin.projectList.create');
         }
-        // catch (Exception $e) 
-        // {
-        //      return back()->withError('error','Something went wrong.');
-        // }
-      
         catch (Exception $e)
         {
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
@@ -54,16 +49,9 @@ class ProjectListController extends AdminController
             $project_list= new ProjectList();
             $project_list->list_name=$request->name;
             $project_list->list_status=$request->status;
-            $project_list->save();
-            toastr() ->success('Project create successfully!', 'Congrats');
+            Session::flash('response', ['text'=>'Project create successfully!','type'=>'success']);
              return redirect()->route('show-list');
-            //  ->with("success", "List added  successfully.");
         }
-        // catch (Exception $e) 
-        // {
-        //      return back()->with('error','Something went wrong.');
-           
-        // }
         catch (Exception $e)
         {
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
@@ -104,10 +92,6 @@ class ProjectListController extends AdminController
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();
         }
-        // catch (Exception $e) 
-        // {
-        //     return response()->json(["status"=>false,"message"=> $e->getMessage()]);
-        // }
     }
 
     /**
@@ -132,10 +116,6 @@ class ProjectListController extends AdminController
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();
         }
-        // catch (Exception $e) 
-        // {
-        //     return back()->withError('error','Something went wrong.');
-        // }
 
     }
     public function edit($id)
@@ -182,11 +162,6 @@ class ProjectListController extends AdminController
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();
         }
-        // catch (Exception $e) 
-        // {
-            
-        //     return back()->withError('error','Something went wrong.');
-        // }
     }
 
     public function saveSearchProjects(Request $request)
@@ -210,7 +185,8 @@ class ProjectListController extends AdminController
                $project->project_id=$project_id;
                $project->save();
             }
-            return back()->with('messege','Update successfull');
+            Session::flash('response', ['text'=>'Project Update successfull!','type'=>'success']);
+            return back();
           }else{
             $project=ProjectListProjects::where('list_id',$request->list_id);
                     $project->delete();
@@ -223,12 +199,6 @@ class ProjectListController extends AdminController
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();
         }
-        // catch (Exception $e) 
-        // {
-        //      return back()->with('error',$e->getmessage);
-        // }
-       
-
     }
 
     public function changeStatus(Request $request, $id, $status)
@@ -244,19 +214,14 @@ class ProjectListController extends AdminController
             $list_status="Publish";
             }
             ProjectList::where("id", $id)->update(["list_status" => $list_status]);
-            toastr() ->success('Status update successfully!', 'Congrats');
+            Session::flash('response', ['text'=>'Status Update successfull!','type'=>'success']);
             return redirect('/admin/project-list/list');
         }
         catch (Exception $e)
         {
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();
-            // return back()->with('error',$e->getmessage);
         }
-        // catch (Exception $e) 
-        // {
-        //     return back()->with('error','Something went wrong.');
-        // }
     }
 
     public function deleteList(Request $request, $id)
@@ -267,14 +232,13 @@ class ProjectListController extends AdminController
             $delete_list->delete();
             $delete_search_list=ProjectListProjects::where('list_id',$id);
             $delete_search_list->delete();
-            toastr() ->success('Project delete successfully!', 'Congrats');
+            Session::flash('response', ['text'=>'Project delete successfully!','type'=>'success']);
             return redirect('/admin/project-list/list');
         }
         catch (Exception $e)
         {
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();
-            // return back()->with('error',$e->getmessage);
         }
        
        
