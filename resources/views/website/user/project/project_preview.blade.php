@@ -131,9 +131,13 @@
                     @if (!empty($projectData[0]['project_only_video']))
                         @foreach ($projectData[0]['project_only_video'] as $v)
                             <div class="item">
-                                <div> 
+                                {{-- <div> 
                                     <img src="{{ json_decode($v['media_info'])->thumbnail }}" class="" width=100% alt="image">
+                                </div> --}}
+                                <div class="playVideoWrap" style='padding:20px' video-url="{{$v['file_link']}}">
+                                    <img src="{{json_decode($v['media_info'])->thumbnail}}" alt="">
                                 </div>
+                                
                                 <div class="d-flex align-items-center">
                                     <div class="movie_name_text">{{json_decode($v['media_info'])->title}} </div>
                                     <?php
