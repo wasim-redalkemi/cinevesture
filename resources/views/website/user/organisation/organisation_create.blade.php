@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-9">
                 <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
-                    <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('organisation-store') }}">
+                    <form role="form" class="validateBeforeSubmit" method="POST" enctype="multipart/form-data" action="{{ route('organisation-store') }}">
                         @csrf
 
                         <div class="profile_text">

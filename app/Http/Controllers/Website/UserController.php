@@ -237,11 +237,56 @@ class UserController extends WebController
         }
     }
 
+    private function getVideoLink($url = '')
+    {
+        $id = '';
+        $resp = ['link'=>'','video_id'=>'','platform'=>''];
+        if(strpos($url, 'youtu') !== false)
+        {
+            parse_str(parse_url( $url, PHP_URL_QUERY), $nurl);
+            if(array_key_exists('v', $nurl))
+            {
+                $id = $nurl['v'];
+            }
+            else if(array_key_exists('vi', $nurl))
+            {
+                $id = $nurl['vi'];
+            }
+            else
+            {
+                $id = explode('?',array_reverse(explode("/", $url))[0])[0];
+            }
+            $resp['link'] = 'https://www.youtube.com/embed/'.$id;
+            $resp['video_id'] = $id;
+            $resp['platform'] = $this->platform_youtube;
+        }
+        else if(strpos($url, 'vimeo') !== false)
+        {
+            $resp['link'] = $url;
+            $resp['platform'] = $this->platform_vimeo;
+        }
+        return $resp;
+    }
     public function profileStore(StoreProfileUpdate $request)
     {
         try {
-            $user = User::query()->find(auth()->user()->id);
+            $video_url = $this->getVideoLink($request->intro_video_link);
+            $videoDetailsParams = [
+                'link'=>$video_url['link'],
+                'video_id'=>$video_url['video_id'],
+                'platform'=>$video_url['platform'],
+            ];
+            $videoDetails = $this->getVideoDetailsURL($videoDetailsParams);
+            if($video_url['platform'] == $this->platform_youtube)
+            {
+                $thumbnail = $videoDetails['pl']['items'][0]['snippet']['thumbnails']['high']['url'];
+            }
+            elseif($video_url['platform'] == $this->platform_vimeo)
+            {
+                $thumbnail = $videoDetails['pl']['thumbnail_medium'];
+            }
 
+            $user = User::query()->find(auth()->user()->id);
             $user->first_name = $request->first_name;
             $user->last_name = $request->last_name;
             $user->job_title = $request->job_title;
@@ -255,7 +300,8 @@ class UserController extends WebController
             $user->imdb_profile = $request->imdb_profile;
             $user->linkedin_profile = $request->linkedin_profile;
             $user->website = $request->website;
-            $user->intro_video_link = $request->intro_video_link;
+            $user->intro_video_link = $video_url['link'];
+            $user->intro_video_thumbnail = $thumbnail;
 
             if ($request->croppedImg) {
 
