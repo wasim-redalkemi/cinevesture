@@ -56,7 +56,6 @@ class UserController extends AdminController
             })
            
             ->paginate($this->records_limit);
-            // Session::flash('response', ['text'=>'','type'=>'danger']);
             return view('admin.user.list',compact('users','UserOrganisation','countries'));
         } 
         catch (Exception  $e) {
@@ -72,7 +71,7 @@ class UserController extends AdminController
        $user=User::find($request->user_id);
        $user->status= $request->status;
        $user->save();
-       Session::flash('response', ['text'=>'User status update','type'=>'success']);
+       Session::flash('response', ['text'=>'Status update successfully!','type'=>'success']);
        return back();
     } catch (Exception $e) {
        
@@ -146,8 +145,6 @@ class UserController extends AdminController
     {
         try {
             $user=User::find($id)->delete();
-            // $user->delete();
-            // die;
             Session::flash('response', ['text'=>'User delete successfully','type'=>'success']);
                 return back();
             

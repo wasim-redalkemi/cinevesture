@@ -66,7 +66,7 @@
 
 
 <!-- Modal for Confirmation for account deactivate -->
-<div class="modal fade" id="job_apply_success_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="job_apply_success_modal"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-body" style="padding: 0px;">
@@ -142,6 +142,7 @@
                 }
             },
             error: function(error) {
+                $submitBtn.prop("disabled",false);
                 $submitBtn.text("Submit");
             }
         });

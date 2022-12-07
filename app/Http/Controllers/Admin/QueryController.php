@@ -26,9 +26,6 @@ class QueryController extends AdminController
         } catch (\Throwable $e) {
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();
-            // return back($th->getMessage());
-            // Session::flash('response', ['text'=>'Anish is a very humbl eperson','type'=>'danger']);
-
         }
         
     }
@@ -104,8 +101,6 @@ class QueryController extends AdminController
             Session::flash('response', ['text'=>'Query deleted sucessfully','type'=>'danger']);
             return back();
         } catch (\Throwable $e) {
-        //    return back()->json(["status"=>false,"message"=> $e->getMessage()]);
-        //    return response()->json(["status"=>false,"message"=> $e->getMessage()]);
         Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
         return back();
         }

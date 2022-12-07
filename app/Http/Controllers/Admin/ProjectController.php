@@ -65,9 +65,6 @@ class ProjectController extends AdminController
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();
         }
-        // catch (\Throwable $e) {
-        // return back()->withErrors($e->getMessage());
-        // }
     }
     public function markFavorite(Request $request)
     {
@@ -78,7 +75,7 @@ class ProjectController extends AdminController
             $project->favorited = $request->s;
             $project->save();
             if($fav==0){
-            Session::flash('response', ['text'=>'Unfavorite update sucessfully','type'=>'success']);
+                Session::flash('response', ['text'=>'Unfavorite update successfully!','type'=>'success']);
             }else{
                 Session::flash('response', ['text'=>'Favorite update sucessfully','type'=>'success']);
             }
@@ -89,9 +86,6 @@ class ProjectController extends AdminController
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();
         }
-        // catch (\Throwable $e) {
-        //     return back($e);
-        // }
     }
     public function markRecommended(Request $request)
     {
@@ -113,9 +107,6 @@ class ProjectController extends AdminController
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();
         }
-        // catch (\Throwable $e) {
-        //     return back($e);
-        // }
     }
     public function changeStatus(Request $request)
     {
@@ -133,9 +124,6 @@ class ProjectController extends AdminController
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();
         }
-        // catch (\Throwable $e) {
-        //     return back($e);
-        // }
     }
 
     /**
@@ -249,9 +237,6 @@ class ProjectController extends AdminController
           Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
           return back();
       }
-    //   catch (\Throwable $e) {
-    //     return back()->withErrors($e->getmessage);
-    //   }
     }
 
 
@@ -276,9 +261,6 @@ class ProjectController extends AdminController
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();
         }
-        // catch (\Throwable $e) {
-        //     return back()->withErrors($e->getmessage());
-        // }
         
     }
 
@@ -308,8 +290,5 @@ class ProjectController extends AdminController
           Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
           return back();
       };
-    //   catch (\Throwable $e) {
-    //     return back()->withErrors($e->getMessage());
-    //   };
     }
 }

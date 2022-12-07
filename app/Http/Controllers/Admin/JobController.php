@@ -61,6 +61,7 @@ class JobController extends AdminController
             ->first();
             $status->save_type = $request->status;
             $status->save();
+
             Session::flash('response', ['text'=>'Status update successfully','type'=>'success']);
             return back();
             
@@ -68,6 +69,20 @@ class JobController extends AdminController
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();
         }
+    }
+    public function promoteUpdate(request $request)
+    {
+       try {
+            
+            $promote=UserJob::where('id',$request->id)->first();    
+            $promote->promote=$request->p;
+            $promote->save();
+            Session::flash('response', ['text'=>'Promote update successfully!','type'=>'success']);
+            // toastr() ->success('Promote update successfully!', 'Congrats');
+            return redirect(route('job'));
+       } catch (\Throwable $th) {
+        //throw $th;
+       }
     }
 
     /**
@@ -126,7 +141,10 @@ class JobController extends AdminController
         try {
             $job=UserJob::find($id);
             $job->delete();
+            Session::flash('response', ['text'=>'Job delete successfully!','type'=>'success']);
             return back();
+            // toastr() ->success('Job delete successfully!', 'Congrats');
+            
         } catch (\Throwable $e) {
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();

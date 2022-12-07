@@ -40,6 +40,33 @@
             @yield('content')
             </div>
             @yield('footer')
+
+            <!-- Modal for Confirmation for account deactivate -->
+            <div class="modal fade" id="confirmActionModal" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body" style="padding: 0px;">
+                            <div class="container"style="padding: 0px;" >
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="modal_container">
+                                            <div class="icon_container warning">
+                                                <i class="fa fa-times icon_style" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="head_text mt-4">Are you sure?</div>
+                                            <div class="sub_text mt-4">Do you really want to delete the item?<br>This process cannot be undone.</div>
+                                            <div class="d-flex justify-content-center mt-4">   
+                                                <button type="button" class="cancel_btn cancel_btn_text mx-3" data-bs-dismiss="modal">Cancel</button>
+                                                <a href="" class="confirmActionModalLink"><button class="delete_btn confirm_btn_text mx-3" type="button" data-bs-dismiss="modal">Confirm</button></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </main>
     </div>
     
@@ -53,7 +80,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js" integrity="sha256-CgvH7sz3tHhkiVKh05kSUgG97YtzYNnWt6OXcmYzqHY=" crossorigin="anonymous"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
     <script>
 
         var BaseUrl = '{{config('app.url')}}';
@@ -85,11 +112,6 @@
             }
         });
         $(document).click(function (e) {
-            if ($(e.target).is('.modal')) {
-                $('.modal,.modal-backdrop').fadeOut(100);
-                $('body').css('overflow','scroll');
-            }
-            
             var container = $(".profile_side_bar");
             // if the target of the click isn't the container nor a descendant of the container
             if (!container.is(e.target) && container.has(e.target).length === 0) 
@@ -114,6 +136,12 @@
                 container.find('.collapse_hide').collapse('hide');
             }
 
+        });
+        $('.confirmAction').click(function(e)
+        {
+            e.preventDefault();
+            $('#confirmActionModal .confirmActionModalLink').attr('href',$(this).attr('href'));
+            $('#confirmActionModal').modal('show');
         });
     </script>
 

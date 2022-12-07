@@ -84,7 +84,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
 	{	Route::get('/plans',[PlanController::class,'showPlans'])->name('plans-view');
         Route::get('/subscription/store',[SubscriptionController::class,'storeSubscription'])->name('subscription-create');
 
-		Route::get('/profile-private-show', [UserController::class, 'profilePrivateShow'])->name('profile-private-show');
+		Route::get('/profile-private-show', [UserController::class, 'profilePrivateShow'])->name('profile-private-show')->middleware('plancheck');
 		Route::get('/profile-public-show', [UserController::class, 'profilePublicShow'])->name('profile-public-show')->middleware('plancheck');
         Route::get('/profile-create', [UserController::class, 'profileCreate'])->name('profile-create')->middleware('plancheck');
         Route::post('/profile-store', [UserController::class, 'profileStore'])->name('profile-store');
@@ -204,15 +204,16 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
 	{	
         Route::get('/search',[JobController::class, 'index'])->middleware('plancheck')->name('job-search-page');
         Route::get('/job-create',[JobController::class, 'create'])->name('job-create-page')->middleware('plancheck');
-        Route::get('/search',[JobController::class, 'index'])->name('job-search-page');
         Route::get('/apply-job/{jobId}/',[JobController::class, 'showApplyJob'])->name('showApplyJob')->middleware('plancheck');
         Route::post('/apply/{jobId}',[JobController::class, 'storeApplyJob'])->name('storeApplyJob');
         Route::any('/search/results',[JobController::class, 'showJobSearchResults'])->name('showJobSearchResults');
         Route::post('/search/add_to_fav',[JobController::class, 'storeJobToFavList'])->name('addJobToFavList');
         Route::post('/action',[JobController::class, 'store'])->name('job-store');
         Route::post('/job-store-edit',[JobController::class, 'jobStoreEdit'])->name('job-store-edit');
-        Route::get('/validate-job',[JobController::class, 'validatejob'])->name('validate-job');
-        Route::get('/posted-job',[JobController::class, 'postedJob'])->name('posted-job')->middleware('plancheck');
+        Route::post('/validate-job',[JobController::class, 'validatejob'])->name('validate-job');
+
+
+        Route::get('/posted-job',[JobController::class, 'postedJob'])->name('posted-job');
         Route::get('/saved-job',[JobController::class, 'savedJob'])->name('saved-job');
         Route::get('/applied-job',[JobController::class, 'appliedJob'])->name('applied-job');
         Route::get('/applicants/{jobId}',[JobController::class, 'showJobApplicants'])->name('showJobApplicants');

@@ -55,7 +55,7 @@ class PlanPermission
                   if($selected_permission->limit){
                      $status = MiddlewareUltilityController::checkActionLimit($selected_permission->id,$selected_permission->limit);
                      if($status == true){
-                        // return back()->with('error','Sorry, You Are Not Allowed to Access This Page');
+                        return back()->with('error','Sorry, You Are Not Allowed to Access This Page');
                      }
                   }
               }
@@ -67,7 +67,7 @@ class PlanPermission
            
             $is_subscribed = SubscriptionUtilityController::isSubscribed();
             if(!$is_subscribed){
-               // return redirect()->route('plans-view');
+               return redirect()->route('plans-view');
             }
         }
        

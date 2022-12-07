@@ -26,7 +26,7 @@
                             <div class="col-md-6">
                                 <div class="profile_input">
                                     <label>Category (Optional)</label>
-                                    <select name="category_id[]" class="js-select2 @error('category_id') is-invalid @enderror" id="" autofocus multiple>
+                                    <select name="category_id[]" class="js-select2 @error('category_id') is-invalid @enderror" autofocus multiple>
                                         @foreach ($category as $k=>$v)
                                             <option value="{{ $v->id }}"@if(!empty($projectData[0]['project_category'] )&&(in_array($v->id, $projectData[0]['project_category'])))selected @endif>{{  $v->name }}</option>
                                         @endforeach
@@ -250,7 +250,7 @@ $(document).ready(function() {
             let id = $(e.target).parents()[1].id.split("-")[1];
             createToast("Please wait...","S");
             $(associate_entriesId+" #asso-"+id).remove();
-            doAjax('ajax/delete-proj-milestone/'+id,{},"DELETE",function(req,resp){
+            doAjax('ajax/delete-proj-association/'+id,{},"DELETE",function(req,resp){
                 if(resp.payload.isDeleted){
                     createToast(resp.message,"S");
                 } else {

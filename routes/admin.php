@@ -60,6 +60,8 @@ Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
         Route::get('/index', [JobController::class, 'index'])->name('job');
         Route::get('delete/{id}', [JobController::class, 'destroy'])->name('job-delete');
         Route::get('status_update', [JobController::class, 'status_update'])->name('status_update');
+        Route::get('promote_update', [JobController::class, 'promoteUpdate'])->name('promote_update');
+
        
         
     }); 
