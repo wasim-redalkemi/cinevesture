@@ -2215,13 +2215,13 @@ select {
     transition: background-color 0.5s ease-out;
 }
 .plan_btn_wraper {
-    background: #412d51;
+    /* background: #412d51; */
     border-radius: 4px;
     display: flex;
     justify-content: center;
     text-align: center;
-    width: 150px;
-    height: 40px;
+    /* width: 150px; */
+    /* height: 40px; */
     /* opacity: 0.2; */
 }
 
@@ -2235,6 +2235,7 @@ select {
     text-align: center;
     letter-spacing: 0.054em;
     color: #FAF8FB;
+    /* border-radius: 4px; */
     /* opacity: 1; */
 }
 
