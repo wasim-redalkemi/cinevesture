@@ -42,31 +42,12 @@
             @yield('footer')
 
             <!-- Modal for Confirmation for account deactivate -->
-            <div class="modal fade" id="confirmActionModal" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-body" style="padding: 0px;">
-                            <div class="container"style="padding: 0px;" >
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="modal_container">
-                                            <div class="icon_container warning">
-                                                <i class="fa fa-times icon_style" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="head_text mt-4">Are you sure?</div>
-                                            <div class="sub_text mt-4">Do you really want to delete the item?<br>This process cannot be undone.</div>
-                                            <div class="d-flex justify-content-center mt-4">   
-                                                <button type="button" class="cancel_btn cancel_btn_text mx-3" data-bs-dismiss="modal">Cancel</button>
-                                                <a href="" class="confirmActionModalLink"><button class="delete_btn confirm_btn_text mx-3" type="button" data-bs-dismiss="modal">Confirm</button></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @include('website.include.delete_confirmation_modal')
+            
+
+            <!-- Modal for Confirmation for account deactivate -->
+            @include('website.include.video_modal')
+            
         </main>
     </div>
     
@@ -80,7 +61,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.6/cropper.js" integrity="sha256-CgvH7sz3tHhkiVKh05kSUgG97YtzYNnWt6OXcmYzqHY=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
     <script>
 
         var BaseUrl = '{{config('app.url')}}';
@@ -89,6 +70,14 @@
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        //front-end validation
+        $(".validateBeforeSubmit button[type='submit']").on('click', function(e) { 
+            e.preventDefault();       
+            if($(this).parents('form').valid()) {
+                $(this).parents('form').submit();
             }
         });
 
@@ -142,6 +131,12 @@
             e.preventDefault();
             $('#confirmActionModal .confirmActionModalLink').attr('href',$(this).attr('href'));
             $('#confirmActionModal').modal('show');
+        });
+        
+        $('.playVideoWrap').click(function()
+        {
+            $('#playVideoModal .playVideoModalContent iframe').attr('src',$(this).attr('video-url'));
+            $('#playVideoModal').modal('show');
         });
     </script>
 

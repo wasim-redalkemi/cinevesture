@@ -21,7 +21,7 @@
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Add Portfolio</div>
                         </div>                        
-                        <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('portfolio-store') }}">
+                        <form role="form" class="validateBeforeSubmit" method="POST" enctype="multipart/form-data" action="{{ route('portfolio-store') }}">
                             <input type="hidden" name="portfolio_id" value ="<?php if(isset($portfolio)){ echo($portfolio->id); }?>">
                             @csrf
 
@@ -171,6 +171,7 @@
 
 @push('scripts')
 <script>
+    
 
     var portfolio = [];
     $(document).ready(function(){
