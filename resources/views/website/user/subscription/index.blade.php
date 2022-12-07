@@ -18,7 +18,11 @@
                             <div class="currency_togle">
                                 <div class="togle_text text_fff mt-0">Dollar</div>
                                 <label class="switch mx-2">
-                                    <input type="checkbox" class="check" value="">
+                                    <input type="checkbox" class="check" name="currency" 
+                                    <?php if(request('currency') == 'INR'){
+                                        echo 'checked value="INR"';
+                                        } ?>
+                                    >
                                     <span class="slider round"></span>
                                 </label>
                                 <div class="togle_text text_fff mt-0">Rupee</div>
@@ -32,10 +36,10 @@
                         </div> -->
                         <div class="plan_btn_wraper">
                                <!-- <div> -->
-                                   <button class="plan_btn" >Monthly</button>
+                                   <a href="{{route('plans-view',['plan_time'=>'m'])}}" ><button class="plan_btn" >Monthly</button></a>
                                <!-- </div> -->
                                <!-- <div> -->
-                                   <button class="plan_btn">Annually</button>
+                                   <a href="{{route('plans-view',['plan_time'=>'y'])}}" ><button class="plan_btn">Annually</button></a>
                                <!-- </div>  -->
                                </div>
                             </div>
@@ -49,7 +53,7 @@
                 <div class="col-md-1"></div>
                 <div class="col-md-11">
                     <div class="row">
-                        {{$flag = 0}}
+                        <?php $flag = 0; ?>
                        @foreach($plans as $plan)
                         <div class="col-md-3">
                             <div class="plan_card">
@@ -117,7 +121,7 @@
                                 </div>
                             </div>
                         </div>
-                        {{$flag = 1}}
+                        <?php $flag = 1; ?>
                         @endforeach
                         <!-- <div class="col-md-3">
                             <div class="plan_card">
