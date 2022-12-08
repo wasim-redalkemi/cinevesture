@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class ContactUser extends Notification
+class VerifyOTPForgetPassword extends Notification
 {
     use Queueable;
 
@@ -41,11 +41,14 @@ class ContactUser extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->greeting('Hello ')
-                    ->line('Team Invite')
-                    ->action('Notification Action',$this->data['url'])
-                    ->line('Thank you for using our application!')
-                    ->salutation('Thank you for using our application!');
+        ->subject('Forget password for Cinevesture')
+        ->greeting('Hi'.' '.$this->data['first_name'].',')
+        ->line('Your forget password verification code is')
+        ->line($this->data['otp'])
+        // ->action('Notification Action', url('/'))
+        ->line('Enter the verification code on the website to complete your forget password.')
+        ->line('Best,')        
+        ->salutation('Team Cinevesture');
     }
 
     /**

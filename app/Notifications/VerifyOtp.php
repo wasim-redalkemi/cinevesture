@@ -41,10 +41,16 @@ class VerifyOtp extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->line('This is your OTP Please do not share it with anyone.')
+        ->subject('Your verification code for Cinevesture')
+        ->greeting('Hi'.' '.$this->data['first_name'].',')
+        ->line('Your email verification code is')
         ->line($this->data['otp'])
         // ->action('Notification Action', url('/'))
-        ->line('Thank you for using our application!');
+        ->line('Enter the verification code on the website to complete your registration. If you need to log in again, please click here.')
+        // ->line('If the code does not work, you can use this verification link:')
+        // ->line('Verify email')
+        ->line('Best,')        
+        ->salutation('Team Cinevesture');
     }
 
     /**
