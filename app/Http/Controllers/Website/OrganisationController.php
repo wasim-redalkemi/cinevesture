@@ -11,7 +11,6 @@ use App\Models\MasterLanguage;
 use App\Models\MasterOrganisationService;
 use App\Models\MasterOrganisationType;
 use App\Models\UserInvite;
-use App\Models\UserInvitie;
 use App\Models\UserOrganisation;
 use App\Models\UserOrganisationLanguage;
 use App\Models\UserOrganisationService;

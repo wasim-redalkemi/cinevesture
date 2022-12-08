@@ -49,7 +49,8 @@ class ProjectListController extends AdminController
             $project_list= new ProjectList();
             $project_list->list_name=$request->name;
             $project_list->list_status=$request->status;
-            Session::flash('response', ['text'=>'Project create successfully!','type'=>'success']);
+            $project_list->save();
+            // Session::flash('response', ['text'=>'Project create successfully!','type'=>'success']);
              return redirect()->route('show-list');
         }
         catch (Exception $e)
@@ -83,8 +84,11 @@ class ProjectListController extends AdminController
         {
             $projects_data = ProjectList::query()->with('lists', function($q){
                 $q->select(DB::raw('list_id,COUNT(project_id) as pcount'))->groupby('list_id');
+               
             })
+            
             ->paginate($this->records_limit);
+          
              return view('admin.projectList.list',compact('projects_data'));
         }
         catch (Exception $e)

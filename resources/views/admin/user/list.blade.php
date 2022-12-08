@@ -154,7 +154,7 @@
                                            <a href="{{route('profile-public-show',['id'=>$user->id])}}"><button class="btn btn-info btn-sm">View</button></a>
                                           </div>
                                        <div>
-                                        <a href="{{route('user-delete',['id'=>$user->id])}}">
+                                        <a class="confirmAction" href="{{route('user-delete',['id'=>$user->id])}}">
                                         <button class="btn btn-danger  btn-sm">Delete</button>
                                         </a>
                                         </div> 
