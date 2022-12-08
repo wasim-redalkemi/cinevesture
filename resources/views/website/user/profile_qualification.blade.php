@@ -24,7 +24,7 @@
                           <img src="{{ asset('images/asset/delete-icon.svg') }}"/>
                           </div>  --}}
                         </div>                       
-                        <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('qualification-store') }}">
+                        <form role="form" class="validateBeforeSubmit" method="POST" enctype="multipart/form-data" action="{{ route('qualification-store') }}">
                             @csrf
 
                             <div class="row">

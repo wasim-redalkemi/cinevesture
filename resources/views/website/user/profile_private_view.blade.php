@@ -154,8 +154,8 @@
                                 <div class="col-md-2"></div>
                                 <div class="col-md-5 ">
                                     <div class="guide_profile_main_text mb-2">Meet Name</div>
-                                    <div>
-                                        <iframe width=100% height="300" src="{{!empty($user->intro_video_link)?$user->intro_video_link:'https://www.youtube.com/embed/bDMwlH1FTpk'}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <div class="playVideoWrap" style='padding:20px' video-url="{{$user->intro_video_link}}">
+                                        <img src="{{$user->intro_video_thumbnail}}" alt="">
                                     </div>
                                 </div>
                             </div>

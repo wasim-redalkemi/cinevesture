@@ -1,5 +1,6 @@
-@foreach($jobs as $job)
-<div class="profile_wraper profile_wraper_padding">
+<div class="profile_wraper my-3 my-md-0">
+    @foreach($jobs as $job)
+<div class="border_btm profile_wraper_padding">
     <div class="d-flex justify-content-between">
         <a href="{{route('posted-job-single-view',['job_id'=>$job->id])}}" class="guide_profile_main_text">
             {{$job->title}}
@@ -32,8 +33,9 @@
         @endif
        
     </div>
+    </div>
+    @endforeach
 </div>
-@endforeach
 @if(blank($jobs))
     <div class="text-center mt-5">
         <h1>{{$notFoundMessage}}</h1>

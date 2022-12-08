@@ -32,6 +32,7 @@ use App\Models\UserFavouriteProject;
 use App\Models\UserProject;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use PhpParser\Node\Stmt\TryCatch;
 
@@ -130,18 +131,21 @@ class ProjectController extends WebController
             $overview->listing_project_as = $request->listing_project_as;
             $overview->location = $request->location;
             if($overview->save()) {
-
-                foreach ($request->countries as $k => $v) {
-                    $projectCountries = new ProjectCountry();   
-                    $projectCountries->project_id = $overview->id;
-                    $projectCountries->country_id = $v;
-                    $projectCountries->save();
+                if (!empty($request->countries)) {
+                    foreach ($request->countries as $k => $v) {
+                        $projectCountries = new ProjectCountry();   
+                        $projectCountries->project_id = $overview->id;
+                        $projectCountries->country_id = $v;
+                        $projectCountries->save();
+                    }
                 }
-                foreach ($request->languages as $k => $v) {
-                    $projectLanguages = new ProjectLanguage();
-                    $projectLanguages->project_id = $overview->id;
-                    $projectLanguages->language_id = $v;
-                    $projectLanguages->save();
+                if (!empty($request->languages)) {
+                    foreach ($request->languages as $k => $v) {
+                        $projectLanguages = new ProjectLanguage();
+                        $projectLanguages->project_id = $overview->id;
+                        $projectLanguages->language_id = $v;
+                        $projectLanguages->save();
+                    }
                 }
                 return $overview->id;
             }
@@ -162,20 +166,23 @@ class ProjectController extends WebController
             $overview->listing_project_as = $request->listing_project_as;
             $overview->location = $request->location;
             if($overview->update()) {
-                ProjectCountry::query()->where('project_id', $_REQUEST['project_id'])->delete();
-                foreach ($request->countries as $k => $v) {
-                    $projectCountries = new ProjectCountry();   
-                    $projectCountries->project_id = $overview->id;
-                    $projectCountries->country_id = $v;
-                    $projectCountries->save();
+                if (!empty($request->countries)) {
+                    ProjectCountry::query()->where('project_id', $_REQUEST['project_id'])->delete();
+                    foreach ($request->countries as $k => $v) {
+                        $projectCountries = new ProjectCountry();   
+                        $projectCountries->project_id = $overview->id;
+                        $projectCountries->country_id = $v;
+                        $projectCountries->save();
+                    }
                 }
-                ProjectLanguage::query()->where('project_id', $_REQUEST['project_id'])->delete();
-                foreach ($request->languages as $k => $v) {
-                    $projectLanguages = new ProjectLanguage();
-                    $projectLanguages->project_id = $overview->id;
-                    $projectLanguages->language_id = $v;
-                    $projectLanguages->save();
-
+                if (!empty($request->languages)) {
+                    ProjectLanguage::query()->where('project_id', $_REQUEST['project_id'])->delete();
+                    foreach ($request->languages as $k => $v) {
+                        $projectLanguages = new ProjectLanguage();
+                        $projectLanguages->project_id = $overview->id;
+                        $projectLanguages->language_id = $v;
+                        $projectLanguages->save();    
+                    }
                     $this->return_response['success_msg'] = 'Project overview edit successfully.';
                 }
             }
@@ -255,19 +262,23 @@ class ProjectController extends WebController
                 $details->total_budget = $request->total_budget;
                 $details->financing_secured = $request->financing_secured;
                 if($details->update()) {
-                    ProjectCategory::query()->where('project_id', $details->id)->delete();
-                    foreach ($request->category_id as $k => $v) {
-                        $projectGenres = new ProjectCategory();
-                        $projectGenres->project_id = $details->id;
-                        $projectGenres->category_id = $v;
-                        $projectGenres->save();
+                    if (!empty($request->category_id)) {
+                        ProjectCategory::query()->where('project_id', $details->id)->delete();
+                        foreach ($request->category_id as $k => $v) {
+                            $projectCategory = new ProjectCategory();
+                            $projectCategory->project_id = $details->id;
+                            $projectCategory->category_id = $v;
+                            $projectCategory->save();
+                        }
                     }
-                    ProjectGenre::query()->where('project_id', $details->id)->delete();
-                    foreach ($request->gener as $k => $v) {
-                        $projectGenres = new ProjectGenre();
-                        $projectGenres->project_id = $details->id;
-                        $projectGenres->gener_id = $v;
-                        $projectGenres->save();
+                    if (!empty($request->gener)) {
+                        ProjectGenre::query()->where('project_id', $details->id)->delete();
+                        foreach ($request->gener as $k => $v) {
+                            $projectGenres = new ProjectGenre();
+                            $projectGenres->project_id = $details->id;
+                            $projectGenres->gener_id = $v;
+                            $projectGenres->save();
+                        }
                     }
                    
                     $this->return_response['success_msg'] = 'Project details updated successfully.';                    
@@ -396,17 +407,7 @@ class ProjectController extends WebController
                                 'file_link' => $newName
                             ];
                         }                        
-                    } 
-
-                    // ProjectMedia::query()->where('project_id',$project->id)->delete();
-                    // foreach($data_to_insert as $k => $v)
-                    // {
-                    //     $projectMedia = new ProjectMedia();
-                    //     $projectMedia->project_id = $project->id;
-                    //     $projectMedia->file_type = $v['file_type'];
-                    //     $projectMedia->file_link = $v['file_link'];
-                    //     $projectMedia->save();
-                    // }
+                    }
                     return redirect()->route('project-create',['nextPage' => 'Milestone'])->with("success","Project media updated successfully.");
                 }
             } 
@@ -482,17 +483,18 @@ class ProjectController extends WebController
                 $requirements->stage_of_funding_id = $request->stage_of_funding_id;
                 $requirements->crowdfund_link = $request->crowdfund_link;
                 if($requirements->update()) {
-                    ProjectLookingFor::query()->where('project_id', $requirements->id)->delete();
-                    foreach ($request->loking_for as $k => $v) {
-                        $projectLookingFor = new ProjectLookingFor();
-                        $projectLookingFor->project_id = $requirements->id;
-                        $projectLookingFor->looking_for_id = $v;
-                        $projectLookingFor->save();
-                    }                   
-                    
-               $this->return_response['success_msg'] = 'Project milestones updated successfully.';
+                    if (!empty($request->loking_for)) {
+                        ProjectLookingFor::query()->where('project_id', $requirements->id)->delete();
+                        foreach ($request->loking_for as $k => $v) {
+                            $projectLookingFor = new ProjectLookingFor();
+                            $projectLookingFor->project_id = $requirements->id;
+                            $projectLookingFor->looking_for_id = $v;
+                            $projectLookingFor->save();
+                        }                   
+                    }                    
+                $this->return_response['success_msg'] = 'Project milestones updated successfully.';
                 } else {
-                    throw new Exception('Please overview phase fill');
+                    throw new Exception('Please overview fill agian.');
                 }
             }
         } catch (Exception $e) {
@@ -575,6 +577,7 @@ class ProjectController extends WebController
     public function getFilteredProject(Request $request)
     {
         try{ 
+          
             $validator = Validator::make($request->all(), [
                 'search' => 'nullable',
                 'countries.*' => 'nullable|exists:master_countries,id',
@@ -595,7 +598,6 @@ class ProjectController extends WebController
             $categories = MasterProjectCategory::all();
             $looking_for = MasterLookingFor::all();
             $project_stages = ProjectStage::all();
-            
             $projects = UserProject::query()
             ->where('status','published')
             ->where(function($query) use($request){
@@ -644,7 +646,6 @@ class ProjectController extends WebController
             // ->where('user_id','!=',auth()->user()->id)
             ->orderByDesc('id')
             ->paginate(5);
-         
             $projects->appends(request()->input())->links();
             return view('website.user.project.search_result',compact(['countries','languages','geners','categories','looking_for','project_stages','projects']));                   
            }catch(Exception $e){

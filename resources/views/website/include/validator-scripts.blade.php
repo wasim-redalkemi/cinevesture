@@ -179,27 +179,26 @@
                     if(!isEmptyField){
                         addVideoElem();
                     } else if ($(".video-link.add").val() != "" ) {
-                        console.log("Error");
-                        alert("Please enter a valid video url.");
+                        createToast("Please enter a valid video url.","E");
+                    } else {
+                        createToast("Please enter a video url.","E");
                     }
                 });
 
                 $(parentElemId+" .video-link.add").off("blur").on("blur",(e)=>{
                     let link = e.target.value;
                     if(link && validateUrl(link)){
-                        console.log("link blurred - "+link);
-                        if(link.indexOf("vimeo.com") > -1){
+                        if(isValidVimeoUrl(link)){
                             //let reqData = {'vidUrl': "https://vimeo.com/336812686"};
                             let reqData = {'vidUrl': link};
                             doAjax("ajax/get-video-details",reqData,"POST",getVimeoData);
-                        } else if(link.indexOf("youtube.com") > -1) {
+                        } else if(isValidYoutubeUrl(link)) {
                             //let reqData = {'vidUrl': "https://www.youtube.com/watch?v=ZdbQ_FvNBZA&t=915s&ab_channel=ScaleupAlly"};
                             let reqData = {'vidUrl':link};
                             doAjax("ajax/get-video-details",reqData,"POST",getYouTubeData);
                         } else {
-                            //show error
-                            alert("Invalid video url. Only Vimeo and Youtube links are allowed.");
-                            console.log("Invalid video url. Only Vimeo and Youtube links are allowed.");
+                            createToast("Invalid video url. Only Vimeo and Youtube links are allowed 1.","E");
+                            $(parentElemId+" .video-link.add").val("");
                         }
                     } else if (link != ''){
                         createToast("Please enter a valid video your.<br>Only Vimeo and Youtube links are allowed.","E");
@@ -228,6 +227,18 @@
                         doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteVideoCallback);
                     });
                 });
+            }
+
+            let isValidYoutubeUrl = function (link) {
+                let domain = (new URL(link));
+                let hostname = domain.hostname.replaceAll(".","");
+                return (hostname.indexOf("youtube") > -1) ? true : false;
+            }
+
+            let isValidVimeoUrl = function (link) {
+                let domain = (new URL(link));
+                let hostname = domain.hostname.replaceAll(".","");
+                return (hostname.indexOf("vimeo") > -1) ? true : false;
             }
 
             let deleteVideoCallback = function (req,resp) {
@@ -270,6 +281,7 @@
                     newVideo['thumbnail'] = vimeo.thumbnail_medium;
                     newVideo['url'] = vimeo.url;
                     newVideo['is_default_marked'] = 0;
+                    newVideo['src'] = 'vimeo';
                     doAjax('ajax/add-video',newVideo,"POST",addVideoCallback);
                 } else {
                     createToast(respArr.error_msg,"E");
@@ -281,13 +293,14 @@
                 // let youtubeResp = '{"kind":"youtube#videoListResponse","etag":"NY12d6Sa3mhyYdxx62iuVh0ta50","items":[{"kind":"youtube#video","etag":"BlL66Tqwd6vcpb_0fuUt4YHRBlA","id":"ZdbQ_FvNBZA","snippet":{"publishedAt":"2021-10-03T07:14:26Z","channelId":"UCyzKMNskJwgVy7j_lQ5aP-Q","title":"Session 5: What is Postman? and How to use it? by Suprabhat Sen","description":"Postman is one of the most important tools for any kind of Web and App Development. Learn how Postman works and helps make the job easier for any Software Developer","thumbnails":{"default":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/default.jpg","width":120,"height":90},"medium":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/mqdefault.jpg","width":320,"height":180},"high":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/hqdefault.jpg","width":480,"height":360},"standard":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/sddefault.jpg","width":640,"height":480},"maxres":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/maxresdefault.jpg","width":1280,"height":720}},"channelTitle":"ScaleupAlly","categoryId":"28","liveBroadcastContent":"none","localized":{"title":"Session 5: What is Postman? and How to use it? by Suprabhat Sen","description":"Postman is one of the most important tools for any kind of Web and App Development. Learn how Postman works and helps make the job easier for any Software Developer"}}}],"pageInfo":{"totalResults":1,"resultsPerPage":1}}';
                 let respArr = JSON.parse(youtubeResp);
                 if(respArr.status == 1){
-                    let vimeo = respArr.payload;
+                    let youtube = respArr.payload;
                     let newVideo = {};
                     newVideo['project_id'] = project_id;
-                    newVideo['title'] = vimeo['items'][0]['snippet']['title'];
-                    newVideo['thumbnail'] = vimeo['items'][0]['snippet']['thumbnails']['high']['url'];
-                    newVideo['url'] = reqData.vidUrl;
+                    newVideo['title'] = youtube['items'][0]['snippet']['title'];
+                    newVideo['thumbnail'] = youtube['items'][0]['snippet']['thumbnails']['high']['url'];
+                    newVideo['url'] = "https://www.youtube.com/embed/"+youtube['items'][0]['id'];
                     newVideo['is_default_marked'] = 0;
+                    newVideo['src'] = 'youtube';
                     newVideo['type'] = 'videourl';
                     doAjax('ajax/add-video',newVideo,"POST",addVideoCallback);
                 } else {
@@ -914,23 +927,24 @@
             $("#success-toast").toast("show");
         }
 
-        function setModal(head_text, sub_text, confirm_btn_text, cancel_btn_text) {
-            console.log(head_text, sub_text, confirm_btn_text, cancel_btn_text);
-            if(head_text == ""){
-                head_text = "Are you sure?";
-            }
-            $("#staticBackdrop .modal_container .head_text").html(head_text);
-            if(sub_text == ""){
-                sub_text = "Do you really want to delete the item?<br>This process cannot be undone.";
-            }
-            $("#staticBackdrop .modal_container .sub_text").html(sub_text);
-            if(confirm_btn_text == ""){
-                confirm_btn_text = "Yes, Delete"
-            }
-            $("#staticBackdrop .modal_container .confirm_btn_text").html(confirm_btn_text);
-            if(cancel_btn_text == ""){
-                cancel_btn_text = "Cancel";
-            }
-            $("#staticBackdrop .modal_container .cancel_btn_text").html(cancel_btn_text);
+    function setModal(head_text, sub_text, confirm_btn_text, cancel_btn_text) {
+        console.log(head_text, sub_text, confirm_btn_text, cancel_btn_text);
+        if(head_text == ""){
+            head_text = "Are you sure?";
         }
+        $("#staticBackdrop .modal_container .head_text").html(head_text);
+        if(sub_text == ""){
+            sub_text = "Do you really want to delete the item?<br>This process cannot be undone.";
+        }
+        $("#staticBackdrop .modal_container .sub_text").html(sub_text);
+        if(confirm_btn_text == ""){
+            confirm_btn_text = "Yes, Delete"
+        }
+        $("#staticBackdrop .modal_container .confirm_btn_text").html(confirm_btn_text);
+        if(cancel_btn_text == ""){
+            cancel_btn_text = "Cancel";
+        }
+        $("#staticBackdrop .modal_container .cancel_btn_text").html(cancel_btn_text);
+    }
+
 </script>
