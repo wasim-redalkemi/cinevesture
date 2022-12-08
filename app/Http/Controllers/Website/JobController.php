@@ -177,6 +177,21 @@ class JobController extends WebController
     public function applyPromotion(Request $request)
     {
     }
+    public function UnpublishJob(Request $request)
+    {
+        try {
+            $id = $request->job_id;            
+            $userJob = UserJob::query()->find($id);
+            $userJob->save_type = 'unpublished';
+            $userJob->save();
+            $message = ($userJob->save_type == 'unpublished' ? 'Job unpublished successfully.' : 'A draft of your job was successfully saved.');
+            return ['status' => 1, 'msg' => $message];
+         
+        } catch (Exception $e) {
+            return ['status' => 0, 'msg' => $e->getMessage()];
+        }
+
+    }
 
     public function postedJob(Request $request)
     {
