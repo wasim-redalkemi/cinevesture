@@ -37,11 +37,43 @@
                     </div>
                     <div class="sidebar_collapse collapse dont-collapse-sm" id="collapseExample">
                         <div class="sidebar_data_mobile">
-                            <div class="search-page mt-3 search_page_filters_wrap dropend">
-                                <button data-toggle="collapse" data-target="#gener-list" class="btn dropdown-toggle w-100" type="button">
-                                    Genres
-                                </button>
-                                <div class="collapse collapse_hide" id="gener-list">
+
+
+
+                        <!-- <div class="dropend search_page_filters_wrap">
+                    <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown"
+                      aria-expanded="false">
+                      Genres
+                    </button>
+                    <div class="dropdown-menu">
+                    <div class="filter_option_wrap">
+                                        <div class="container no-padding">
+                                            <div class="d-flex flex-wrap">
+                                                @foreach($geners as $gen)
+                                                <div class="mx-2">
+                                                    <label class="d-flex align-items-center search_page_filters_data">
+                                                        @if(isset(request('geners')[0]) && in_array($gen->id, request('geners')))
+                                                        <input class="form-check-input me-1 d-none" type="checkbox" name="geners[]" checked value="{{$gen->id}}">
+                                                        {{$gen->name}}
+                                                        @else
+                                                        <input class="form-check-input me-1 d-none d-none" type="checkbox" name="geners[]" value="{{$gen->id}}">
+                                                        <div> {{$gen->name}}</div>
+                                                        @endif
+                                                    </label>
+                                                </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                    </div>
+                  </div> -->
+
+
+                                <div class="search-page mt-3 search_page_filters_wrap dropend">
+                                    <a  class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Genres
+                                    </a>
+                                <div class="dropdown-menu filter_modal_wrap" id="">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
@@ -64,12 +96,13 @@
                                 </div>
                             </div>
                             <div class="dropend search-page search_page_filters_wrap">
-                                <button class="btn dropdown-toggle w-100" data-toggle="collapse" data-target="#category-list" type="button">
+                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown"
+                      aria-expanded="false">
                                     Category
                                 </button>
                                 <!-- Modal for Category List -->
 
-                                <div class="collapse collapse_hide" id="category-list">
+                                <div class="dropdown-menu filter_modal_wrap">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
@@ -94,12 +127,13 @@
                                 <!-- Modal for category end -->
                             </div>
                             <div class="dropend search-page search_page_filters_wrap">
-                                <button class="btn dropdown-toggle w-100" data-toggle="collapse" data-target="#looking-list" type="button">
+                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown"
+                      aria-expanded="false">
                                     Looking for
                                 </button>
 
                                 <!-- Modal for looking List -->
-                                <div class="collapse collapse_hide" id="looking-list">
+                                <div class="dropdown-menu filter_modal_wrap" id="">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
@@ -124,13 +158,14 @@
                             </div>
                             <div class="dropend search-page search_page_filters_wrap">
 
-                                <button class="btn dropdown-toggle w-100" data-toggle="collapse" data-target="#project-list" type="button">
+                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown"
+                      aria-expanded="false">
                                     Project Stage
                                 </button>
 
                                 <!-- Modal for project List -->
 
-                                <div class="collapse collapse_hide" id="project-list">
+                                <div class="dropdown-menu filter_modal_wrap">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
@@ -154,12 +189,13 @@
                                 <!-- Modal for project end -->
                             </div>
                             <div class="dropend search-page search_page_filters_wrap">
-                                <button class="btn dropdown-toggle w-100" data-toggle="collapse" data-target="#country-list" class="btn dropdown-toggle w-100" type="button">
+                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown"
+                      aria-expanded="false">
                                     Country
                                 </button>
 
                                 <!-- Modal for counter List -->
-                                <div class="collapse collapse_hide" id="country-list">
+                                <div class="dropdown-menu filter_modal_wrap" style="overflow: auto; background: #ffffff">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
@@ -177,20 +213,19 @@
                                                 </div>
                                                 @endforeach
                                             </div>
-
                                         </div>
-
                                     </div>
                                 </div>
                                 <!-- Modal for country end -->
                             </div>
                             <div class="dropend search-page search_page_filters_wrap">
-                                <button class="btn dropdown-toggle w-100" data-toggle="collapse" data-target="#language-list" class="btn dropdown-toggle w-100" type="button">
+                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown"
+                      aria-expanded="false">
                                     Language
                                 </button>
 
                                 <!-- Modal for language List -->
-                                <div class="collapse collapse_hide" id="language-list">
+                                <div class="dropdown-menu filter_modal_wrap">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">

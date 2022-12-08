@@ -134,7 +134,7 @@
                                 {{-- <div> 
                                     <img src="{{ json_decode($v['media_info'])->thumbnail }}" class="" width=100% alt="image">
                                 </div> --}}
-                                <div class="playVideoWrap" style='padding:20px' video-url="{{$v['file_link']}}">
+                                <div class="playVideoWrap mt-3" video-url="{{$v['file_link']}}">
                                     <img src="{{json_decode($v['media_info'])->thumbnail}}" alt="">
                                 </div>
                                 

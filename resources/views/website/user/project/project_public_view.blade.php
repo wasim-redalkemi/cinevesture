@@ -142,7 +142,7 @@
                         </div>
                         <div class="col-lg-6 col-md-12 px-3">
                             <div class="public-head-subimage">
-                                <div class="playVideoWrap" style='padding:20px' video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link']}} @endif">
+                                <div class="playVideoWrap mt-3" video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link']}} @endif">
                                     <img src="{{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}" alt="">
                                 </div>
                                 {{-- <iframe width="100%" height="350" src="{{empty($projectData[0]['project_only_video'][0]['file_link'])?'https://www.youtube.com/embed/oYWAwwy5EbQ':$projectData[0]['project_only_video'][0]['file_link'];}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> --}}
@@ -217,7 +217,7 @@
                         @if (!empty($projectData[0]['project_only_video']))
                         @foreach ($projectData[0]['project_only_video'] as $v)
                             <div class="col-md-3">
-                                <div class="playVideoWrap" style='padding:20px' video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link']}} @endif">
+                                <div class="playVideoWrap mt-3" video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link']}} @endif">
                                     <img src="{{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}" alt="">
                                 </div>                                
                             </div>
@@ -228,7 +228,7 @@
                     <div class="row">
                         @if (!empty($projectData[0]['project_only_image']))
                         @foreach ($projectData[0]['project_only_image'] as $v)
-                        <div class="col-md-3">
+                        <div class="col-md-3 mt-3">
                             <div style="height: 200px; overflow:hidden;background-color:rgba(0,0,0,0.2)"> <img src="{{ Storage::url($v['file_link']) }}" class="" width=100% alt="image"></div>
                             
                         </div>
