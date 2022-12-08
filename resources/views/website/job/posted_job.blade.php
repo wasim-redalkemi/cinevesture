@@ -46,13 +46,13 @@
                             </div>
                             <ul class="dropdown-menu profile_dropdown_menu p-2 menu_position">
                                 <li>
-                                <a href="{{ route('job-create-page',['job_id'=>$v['id']]) }}">  Edit Job</a>
+                                <a href="{{route('job-create-page',['job_id'=>$v['id']])}}">  Edit Job</a>
                                 </li>
                                 <li>
                                 <a href="">  Promote Job</a>
                                 </li>
                                 <li>
-                                <a href="">   Unpublish Job</a>
+                                <a href="{{route('unpublish-job',['job_id'=>$v['id']])}}">   Unpublish Job</a>
                                 </li>
                                 <li>
                                 <a href="">  Delete Job </a>

@@ -120,7 +120,7 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Skills (You can add upto 10 skills)</label>
-                                        <select name="skills[]" class="outline is-invalid-remove js-select2" required id="lang" multiple>
+                                        <select name="skills[]" class="select_limit outline is-invalid-remove js-select2" required id="lang" multiple data-maximum-selection-length="2">
                                             @foreach ($skills as $k=>$v)
                                             <option value="{{ $v->id }}" @if(!empty($userJobData['job_skills']) && in_array($v->id, $userJobData['job_skills']))selected @endif>{{ $v->name }}</option>
                                             @endforeach
@@ -201,6 +201,18 @@ $("#post_job").validate({
    }
 });
 
+limit =10
+var last_valid_selection = null;
+$('.select_limit').change(function(event) {
+    if ($(this).val().length > limit) {
+        $(this).val(last_valid_selection);
+    } 
+    else 
+    {
+      last_valid_selection = $(this).val();
+    }
+});
+
 </script>
 
 <script>
@@ -225,7 +237,7 @@ $("#post_job").validate({
         placeholder: "Skills",
         allowClear: true,
         tags: false,
-        // maximumSelectionSize: 1
+       // maximumSelectionSize: 1
     });
     $(".action").on('click', function(e) {        
         let isFormValid = $( "#post_job" ).valid();        
