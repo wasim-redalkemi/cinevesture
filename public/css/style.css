@@ -149,7 +149,7 @@ body {
     position: fixed;
     right: 18px;
     top: 25px;
-    z-index: 9999999999999;
+    z-index: 999999;
 }
 
 /* home page  */

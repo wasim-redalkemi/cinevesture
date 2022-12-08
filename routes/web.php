@@ -214,6 +214,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
 
         
         Route::get('/unpublish-job',[JobController::class, 'unPublishJob'])->name('unpublish-job');
+        Route::get('/delete-job',[JobController::class,'deleteJob'])->name('delete-job');
+
         Route::get('/posted-job',[JobController::class, 'postedJob'])->name('posted-job');
         Route::get('/saved-job',[JobController::class, 'savedJob'])->name('saved-job');
         Route::get('/applied-job',[JobController::class, 'appliedJob'])->name('applied-job');

@@ -120,7 +120,7 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Skills (You can add upto 10 skills)</label>
-                                        <select name="skills[]" class="select_limit outline is-invalid-remove js-select2" required id="lang" multiple data-maximum-selection-length="2">
+                                        <select name="skills[]" class="select_limit outline is-invalid-remove js-select2" required id="lang" multiple data-maximum-selection-length="10">
                                             @foreach ($skills as $k=>$v)
                                             <option value="{{ $v->id }}" @if(!empty($userJobData['job_skills']) && in_array($v->id, $userJobData['job_skills']))selected @endif>{{ $v->name }}</option>
                                             @endforeach
