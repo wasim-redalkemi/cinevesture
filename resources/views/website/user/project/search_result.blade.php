@@ -37,7 +37,7 @@
                     </div>
                     <div class="sidebar_collapse collapse dont-collapse-sm" id="collapseExample">
                         <div class="sidebar_data_mobile">
-                            <div class="search-page mt-3 search_page_filters_wrap">
+                            <div class="search-page mt-3 search_page_filters_wrap dropend">
                                 <button data-toggle="collapse" data-target="#gener-list" class="btn dropdown-toggle w-100" type="button">
                                     Genres
                                 </button>
@@ -63,13 +63,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="dropdown search-page search_page_filters_wrap">
+                            <div class="dropend search-page search_page_filters_wrap">
                                 <button class="btn dropdown-toggle w-100" data-toggle="collapse" data-target="#category-list" type="button">
                                     Category
                                 </button>
                                 <!-- Modal for Category List -->
 
-                                <div class="collapse" id="category-list">
+                                <div class="collapse collapse_hide" id="category-list">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
@@ -93,13 +93,13 @@
 
                                 <!-- Modal for category end -->
                             </div>
-                            <div class="dropdown search-page search_page_filters_wrap">
+                            <div class="dropend search-page search_page_filters_wrap">
                                 <button class="btn dropdown-toggle w-100" data-toggle="collapse" data-target="#looking-list" type="button">
                                     Looking for
                                 </button>
 
                                 <!-- Modal for looking List -->
-                                <div class="collapse" id="looking-list">
+                                <div class="collapse collapse_hide" id="looking-list">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
@@ -122,7 +122,7 @@
                                 </div>
                                 <!-- Modal for looking end -->
                             </div>
-                            <div class="dropdown search-page search_page_filters_wrap">
+                            <div class="dropend search-page search_page_filters_wrap">
 
                                 <button class="btn dropdown-toggle w-100" data-toggle="collapse" data-target="#project-list" type="button">
                                     Project Stage
@@ -130,7 +130,7 @@
 
                                 <!-- Modal for project List -->
 
-                                <div class="collapse" id="project-list">
+                                <div class="collapse collapse_hide" id="project-list">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
@@ -153,13 +153,13 @@
                                 </div>
                                 <!-- Modal for project end -->
                             </div>
-                            <div class="dropdown search-page search_page_filters_wrap">
+                            <div class="dropend search-page search_page_filters_wrap">
                                 <button class="btn dropdown-toggle w-100" data-toggle="collapse" data-target="#country-list" class="btn dropdown-toggle w-100" type="button">
                                     Country
                                 </button>
 
                                 <!-- Modal for counter List -->
-                                <div class="collapse" id="country-list">
+                                <div class="collapse collapse_hide" id="country-list">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
@@ -184,13 +184,13 @@
                                 </div>
                                 <!-- Modal for country end -->
                             </div>
-                            <div class="dropdown search-page search_page_filters_wrap">
+                            <div class="dropend search-page search_page_filters_wrap">
                                 <button class="btn dropdown-toggle w-100" data-toggle="collapse" data-target="#language-list" class="btn dropdown-toggle w-100" type="button">
                                     Language
                                 </button>
 
                                 <!-- Modal for language List -->
-                                <div class="collapse" id="language-list">
+                                <div class="collapse collapse_hide" id="language-list">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
