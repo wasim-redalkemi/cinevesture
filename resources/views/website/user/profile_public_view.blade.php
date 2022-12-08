@@ -37,9 +37,8 @@
                             </div>
                         </div>
                         <div class="col-md-8">
-                            <div class="guide_profile_main_text pt-3">{{empty($user->first_name)?'Name':ucfirst($user->first_name.' '.$user->last_name);}}</div>
-                            <div class="guide_profile_main_subtext">Lorem ipsum dolor sit amet, consectetur adipiscing
-                                elit.</div>
+                            <div class="guide_profile_main_text pt-3">{{empty($user->first_name)?'Name':ucfirst($user->first_name).' '.ucfirst($user->last_name);}}</div>
+                            <div class="guide_profile_main_subtext">{{empty($user->job_title)?'Job Title':ucfirst($user->job_title);}}</div>
                             <div><button class="guide_profile_btn mt-2" data-toggle="modal" data-target="#contactModal">Contact </button></div>
 
                             <!-- Contact modal  -->
@@ -57,11 +56,22 @@
                                                             <div class="signup-text  mb-4 mt-5"> Contact </div>
                                                             <div class="row">
                                                                 <div class="col-md-3">
-                                                                    <div><img src="{{ asset('images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="w-100 br_100"></div>
+                                                                    {{-- <div><img src="{{ asset('images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="w-100 br_100"></div> --}}
+                                                                    <?php
+                                                                    if (empty($user->profile_image)) {
+                                                                    ?>
+                                                                        <img src="{{ asset('images/asset/user-profile.png') }}" class="w-100 br_100">
+                                                                    <?php
+                                                                    } else {
+                                                                    ?>
+                                                                        <img src="{{Storage::url($user->profile_image)}}" class="w-100 br_100 " alt="product-image" style="height:100%;width:100%;">
+                                                                    <?php
+                                                                    }
+                                                                    ?>
                                                                 </div>
                                                                 <div class="col-md-9">
-                                                                    <div class="tile_text text_fff">Name</div>
-                                                                    <div class="organisation_cmn_text text_fff">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+                                                                    <div class="tile_text text_fff">{{empty($user->first_name)?'Name':ucfirst($user->first_name).' '.ucfirst($user->last_name);}}</div>
+                                                                    <div class="organisation_cmn_text text_fff">{{empty($user->job_title)?'Job Title':ucfirst($user->job_title);}}</div>
                                                                 </div>
                                                             </div>
                                                             <div class="mt-3"><input type="text" id="subject" name="subject" value="" placeholder="Subject" class="modal_input"></div>
@@ -192,8 +202,8 @@
                         <div class="col-md-2"></div>
                         <div class="col-md-5 ">
                             <div class="guide_profile_main_text mb-2">Meet Name</div>
-                            <div>
-                                <iframe width=100% height="300" src="{{!empty($user->intro_video_link)?$user->intro_video_link:'https://www.youtube.com/embed/bDMwlH1FTpk'}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <div class="playVideoWrap" style='padding:20px' video-url="{{$user->intro_video_link}}">
+                                <img src="{{$user->intro_video_thumbnail}}" alt="">
                             </div>
                         </div>
                     </div>
