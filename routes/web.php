@@ -14,6 +14,7 @@ use App\Http\Controllers\Website\ProjectController;
 use App\Http\Controllers\Website\SettingController;
 use App\Http\Controllers\Website\AjaxController;
 use App\Http\Controllers\Website\JobController;
+use App\Http\Controllers\Website\OtpController;
 use App\Http\Controllers\Website\PlanController;
 use App\Http\Controllers\Website\SubscriptionController;
 use App\Models\User;

@@ -7,6 +7,7 @@ use App\Http\Controllers\Helper\OtpUtilityController;
 use App\Http\Controllers\OtpController;
 use App\Models\User;
 use App\Notifications\VerifyOtp;
+use App\Notifications\VerifyOTPResetPassword;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Foundation\Auth\ResetsPasswords;
@@ -144,7 +145,8 @@ class ResetPasswordController extends Controller
         $otp = OtpUtilityController::createOtp($user, 'R'); // F for Forgot pasword
         $collect  = collect();
         $collect->put('otp', $otp);
-        $user->notify(new VerifyOtp($collect));
+        $collect->put('first_name', ucFirst($user->first_name));
+        $user->notify(new VerifyOTPResetPassword($collect));
         $type = 'R'; // R for reset 
         return redirect()->route('password-reset-otp')->with('success', 'OTP send successfully to your email.');
     }
