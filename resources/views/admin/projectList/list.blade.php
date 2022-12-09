@@ -29,8 +29,8 @@
                                     <td>
                                     <?php echo $i;?>
                                     </td>
-                                        <td>{{$project->list_name}}</td>
-                                        <td>{{$project->list_status}}</td>
+                                        <td>{{ucfirst($project->list_name)}}</td>
+                                        <td>{{ucfirst($project->list_status)}}</td>
                                         <td>
                                             
                                             <a href="{{route('list-projects',['id' => $project->id ,'pcount' => (@$project->lists[0]->pcount) ? @$project->lists[0]->pcount : 0])}}"><button type="button" class="btn btn-primary btn-sm btn-sm mt-10">
@@ -40,9 +40,9 @@
                                        <td>
                                         <a href="{{route('change-status',['id' => $project->id , 'status' => $project->list_status])}}">
                                             @if($project->list_status=='Publish'|| $project->list_status=='publish')
-                                            <button  class="btn btn-success btn-fw mb-1 btn-sm mt-10 w-65 view-btn btn_padding  text-white col-md-5" type="button" >{{$project->list_status}}</button>
+                                            <button  class="btn btn-success btn-fw mb-1 btn-sm mt-10 w-65 view-btn btn_padding  text-white col-md-5" type="button" >{{ucfirst($project->list_status)}}</button>
                                             @else
-                                            <button class="btn btn-warning btn-fw mb-1 btn-sm mt-10 w-65 view-btn btn_padding  text-white col-md-5" type="button" >{{$project->list_status}}</button>
+                                            <button class="btn btn-warning btn-fw mb-1 btn-sm mt-10 w-65 view-btn btn_padding  text-white col-md-5" type="button" >{{ucfirst($project->list_status)}}</button>
                                             @endif
                                         </a>
                                         <a class="confirmAction" href="{{route('delete-list',['id' =>$project->id ])}}">

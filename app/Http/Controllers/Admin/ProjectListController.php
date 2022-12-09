@@ -157,8 +157,13 @@ class ProjectListController extends AdminController
                     $q->whereIn('id', $project_list_project);
                 }
             })
+            
             ->paginate($this->records_limit);
-            $project_data = $project_data->toArray();
+
+            //     echo '<pre>';
+            // print_r($project_data->toArray());
+            // die;
+            
             return view('/admin.projectList.search',compact('id','project_data','is_added_only'));
         }
         catch (Exception $e)

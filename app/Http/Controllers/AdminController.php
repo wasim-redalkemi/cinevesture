@@ -10,7 +10,7 @@ class AdminController extends Controller
 
     public function __construct()
     {
-        $this->records_limit=5;
+        $this->records_limit=10;
     }
 
     public function getError($error = '')
