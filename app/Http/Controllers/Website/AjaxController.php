@@ -113,7 +113,7 @@ class AjaxController extends WebController {
 
     public function uploadImage(Request $request){
         $request->validate([
-            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'file' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:40000',
         ]);
         try {
             $file = $request->file("file");
@@ -218,7 +218,7 @@ class AjaxController extends WebController {
 
     public function addProjMilestoneEntry(Request $request, $project_id){
         $request->validate([
-            'project_milestone_description' => 'required|string|max:50',
+            'project_milestone_description' => 'required|string|max:100',
             'project_milestone_budget' => 'required|string|max:50',
             'project_milestone_target_date' => 'required|date',
             'project_milestone_complete' => 'nullable|int|max:1'

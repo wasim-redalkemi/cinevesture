@@ -40,12 +40,17 @@ class ContactUser extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        $mail = (new MailMessage)
                     ->greeting('Hello ')
                     ->line('Team Invite')
                     ->action('Notification Action',$this->data['url'])
                     ->line('Thank you for using our application!')
                     ->salutation('Thank you for using our application!');
+        if (!empty($this->data['cc_email']))
+        {
+            $mail->cc($this->data['cc_email']);
+        }
+        return $mail;
     }
 
     /**
