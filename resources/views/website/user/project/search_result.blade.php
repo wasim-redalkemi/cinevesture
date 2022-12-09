@@ -37,42 +37,10 @@
                     </div>
                     <div class="sidebar_collapse collapse dont-collapse-sm" id="collapseExample">
                         <div class="sidebar_data_mobile">
-
-
-
-                        <!-- <div class="dropend search_page_filters_wrap">
-                    <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown"
-                      aria-expanded="false">
-                      Genres
-                    </button>
-                    <div class="dropdown-menu">
-                    <div class="filter_option_wrap">
-                                        <div class="container no-padding">
-                                            <div class="d-flex flex-wrap">
-                                                @foreach($geners as $gen)
-                                                <div class="mx-2">
-                                                    <label class="d-flex align-items-center search_page_filters_data">
-                                                        @if(isset(request('geners')[0]) && in_array($gen->id, request('geners')))
-                                                        <input class="form-check-input me-1 d-none" type="checkbox" name="geners[]" checked value="{{$gen->id}}">
-                                                        {{$gen->name}}
-                                                        @else
-                                                        <input class="form-check-input me-1 d-none d-none" type="checkbox" name="geners[]" value="{{$gen->id}}">
-                                                        <div> {{$gen->name}}</div>
-                                                        @endif
-                                                    </label>
-                                                </div>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </div>
-                    </div>
-                  </div> -->
-
-
-                                <div class="search-page mt-3 search_page_filters_wrap dropend">
-                                    <a  class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Genres
-                                    </a>
+                            <div class="search-page mt-3 search_page_filters_wrap dropend">
+                                <a class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Genres
+                                </a>
                                 <div class="dropdown-menu filter_modal_wrap" id="">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
@@ -96,8 +64,7 @@
                                 </div>
                             </div>
                             <div class="dropend search-page search_page_filters_wrap">
-                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown"
-                      aria-expanded="false">
+                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Category
                                 </button>
                                 <!-- Modal for Category List -->
@@ -127,8 +94,7 @@
                                 <!-- Modal for category end -->
                             </div>
                             <div class="dropend search-page search_page_filters_wrap">
-                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown"
-                      aria-expanded="false">
+                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Looking for
                                 </button>
 
@@ -157,14 +123,10 @@
                                 <!-- Modal for looking end -->
                             </div>
                             <div class="dropend search-page search_page_filters_wrap">
-
-                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown"
-                      aria-expanded="false">
+                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Project Stage
                                 </button>
-
                                 <!-- Modal for project List -->
-
                                 <div class="dropdown-menu filter_modal_wrap">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
@@ -189,11 +151,9 @@
                                 <!-- Modal for project end -->
                             </div>
                             <div class="dropend search-page search_page_filters_wrap">
-                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown"
-                      aria-expanded="false">
+                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Country
                                 </button>
-
                                 <!-- Modal for counter List -->
                                 <div class="dropdown-menu filter_modal_wrap" style="overflow: auto; background: #ffffff">
                                     <div class="filter_option_wrap">
@@ -219,11 +179,9 @@
                                 <!-- Modal for country end -->
                             </div>
                             <div class="dropend search-page search_page_filters_wrap">
-                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown"
-                      aria-expanded="false">
+                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Language
                                 </button>
-
                                 <!-- Modal for language List -->
                                 <div class="dropdown-menu filter_modal_wrap">
                                     <div class="filter_option_wrap">
@@ -243,13 +201,9 @@
                                                 </div>
                                                 @endforeach
                                             </div>
-
                                         </div>
-
                                     </div>
                                 </div>
-
-                                <!-- Modal for language end -->
                             </div>
                             <div class="form-check d-flex align-items-center mt-4">
                                 <input class="form-check-input" <?php if (request('project_verified') == '1') {
@@ -352,17 +306,14 @@
 
 @push('scripts')
 <script>
-    
-    $('.form-check-input').change(function(){
-    if($(this).is(":checked")) {
-        $(this).parents('label').addClass('search_page_filters_data_active');
-    } else {
-        $(this).parents('label').removeClass('search_page_filters_data_active');
-    }
-});
+    $('.form-check-input').change(function() {
+        if ($(this).is(":checked")) {
+            $(this).parents('label').addClass('search_page_filters_data_active');
+        } else {
+            $(this).parents('label').removeClass('search_page_filters_data_active');
+        }
+    });
 
-$(".side-bar-cmn-part").collapse("hide");
-
-
+    $(".side-bar-cmn-part").collapse("hide");
 </script>
 @endpush
