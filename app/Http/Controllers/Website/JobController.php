@@ -356,7 +356,7 @@ class JobController extends WebController
 
     public function showJobSearchResults(Request $request)
     {
-        $requests = $request->query();
+        $requests = $request->all();
         $employments = MasterEmployement::query()->get();
         $countries = MasterCountry::query()->get();
         $categories = MasterProjectCategory::query()->get();

@@ -186,7 +186,7 @@
                                 <div class="">
                                     @if(isset($user->skill[0]))
                                     @foreach($user->skill as $skill)
-                                    <button class="curv_cmn_btn">{{$skill->getSkills->name}}</button>
+                                    <button class="curv_cmn_btn">{{$skill->name}}</button>
                                     @endforeach
                                     @else
                                     -

@@ -37,6 +37,7 @@ class JobController extends AdminController
                     $q->where('title',"like","%$request->search%") ;
                 }
             })
+            ->orderByDesc('id')
             ->paginate(5);
            
             return view('admin.job.index',compact('jobs','countries'));
