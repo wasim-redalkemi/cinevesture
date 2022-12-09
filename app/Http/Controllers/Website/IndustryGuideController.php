@@ -84,8 +84,8 @@ class IndustryGuideController extends WebController
         ->where('id','!=',auth()->user()->id)
         ->where('user_type','U')
         ->orderByDesc('id')
-        ->paginate(1);
-       $users->appends(request()->input())->links();
+        ->paginate(5);
+        $users->appends(request()->input())->links();
         return view('website.guide.guide_search_result',compact(['countries','skills','users','talent_type']));                   
        }catch(Exception $e){
         return back()->with('error', 'Something went wrong.');
