@@ -1,16 +1,24 @@
 @section('nav')
-<nav class="navbar navbar-expand-lg sub-header d-none d-md-block">
+<nav class="navbar navbar-expand-lg sub-header">
     <div class="container">
       <div class="row w_100">
         <div class="col-md-12">
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
-            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse justify-content-between" id="navbarTogglerDemo01">
+          <div class="navbar_wraper_sm">
+          <div class="collapse navbar-collapse justify-content-between" id="navbarTogglerDemo02">
             <div>
             <form class="" id ="filter" method="GET" action="{{ route('get-project-filter') }}">
                         @csrf
+                        <div class="d-flex d-md-none justify-content-between align-items-center">
+                <div class="header-search-form">
+                <div class="search"><button type="submit" class="searchButton">
+                    <i class="fa fa-search"></i>
+                  </button>
+                  <input type="text" name="search" id="search-project"class="searchTerm" placeholder="Search">
+                </div>
+              </div>
+              <button class="add-proj-btn my-2 my-sm-0 mr-0 "><a href="{{ route('project-overview')}}">Add a Project</a></button>
+              </div>
+              <div class="navbar_mobile">
               <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                 <li class="nav-item">
                   <div class="dropdown home-dropdown">
@@ -124,23 +132,25 @@
                   </div>
                 </li>
               </ul>
+              </div>
             </div>
-            <div class="d-flex">
-              <div class="header-search-form">
+            <div class="d-flex justify-content-center">
+              <div class="header-search-form d-none d-md-block">
                 <div class="search"><button type="submit" class="searchButton">
                     <i class="fa fa-search"></i>
                   </button>
                   <input type="text" name="search" id="search-project"class="searchTerm" placeholder="Search">
                 </div>
               </div>
-              <div>
+              <!-- <div class="d--flex"> -->
                 <button type="submit" class="header-search-btn mx-3">Search</button>
-               </form>
-                <button class="add-proj-btn my-2 my-sm-0 mr-0"><a href="{{ route('project-overview')}}">Add a Project</a></button>
-              </div>
+                <button class="add-proj-btn my-2 my-sm-0 mr-0 d-none d-md-block"><a href="{{ route('project-overview')}}">Add a Project</a></button>
+              <!-- </div> -->
+            </form>
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </nav>    

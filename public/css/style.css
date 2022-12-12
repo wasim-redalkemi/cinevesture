@@ -2202,12 +2202,13 @@ select {
 }
 .industry_guide_text {
     position: absolute;
-    left: 59px;
+    left: 46px;
     padding: 12px;
     width: 180px;
     background: #f6f3f9 !important;
     color: #1C0330;
     text-align: end;
+    z-index: -1;
     /* opacity: 0.05; */
 }
 .project_text {
@@ -2429,7 +2430,15 @@ select {
     }
 }
   
-
+.dropdown-toggle[aria-expanded="true"]:after {
+    transform: rotate(-90deg);
+    }
+.home-dropdown .dropdown-toggle[aria-expanded="true"]:after {
+    transform: rotate(180deg);
+    }
+    .dropdown-toggle:after { 
+        transition: 0.4s; 
+        }
 ::-webkit-scrollbar {
     width: 10px;
   }
@@ -2702,7 +2711,8 @@ select {
     }
     
     .carosel-card-cntainer {
-        border: 2px solid red;
+        /* border: 2px solid red;
+         */
         /* margin-left: 50px; */
     }
     .project-sub-text {
@@ -2747,11 +2757,51 @@ select {
         border-right: 0.3em solid transparent;
         border-bottom: 0;
         border-left: 0.3em solid transparent;
-        
     }
+    .sub-header {
+        
+        /* background: #33084C; */
+        /* height: 55px; */
+        /* position: relative;
+        top: 100px;
+        z-index: 200; */
+    }
+    .navbar_wraper_sm {
+        background: #33084c;
+        height: auto;
+        padding: 8px;
+    }
+    .home-dropdown .nav-link { 
+        text-align: left;
+    }
+    .navbar_mobile {
+        max-height: 60vh;
+        overflow: auto;
+    }
+    .navbar_mobile .navbar-nav .dropdown-menu { 
+        position: absolute;
+        height: auto;
+    }
+    .home-dropdown .dropdown-toggle::after {
+        float: right;
+    }
+    .home-dropdown ul { 
+        width: 100%;
+    }
+    .dropdown-toggle[aria-expanded="true"]:after {
+        transform: rotate(90deg);
+        }
 
 }
 
+
+
+        .dropend .dropdown-toggle::after {
+            border-top: 0.3em solid;
+            border-right: 0.3em solid transparent;
+            border-bottom: 0;
+            border-left: 0.3em solid transparent;
+        }
     /* media query end here */
 
     @media (min-width: 768px) {
