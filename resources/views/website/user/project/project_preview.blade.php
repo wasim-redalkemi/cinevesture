@@ -228,7 +228,7 @@
                 <div class="preview_headtext mb-1">Crowdfunding Link</div>
                 <div class="">
                     @if (!empty($projectData[0]['crowdfund_link']))
-                        <a href="{{$projectData[0]['crowdfund_link']}}" class="crowdfund_text">{{$projectData[0]['crowdfund_link']}}</a>
+                        <a href="{{$projectData[0]['crowdfund_link']}}" class="crowdfund_text" target="_blank">{{$projectData[0]['crowdfund_link']}}</a>
                     @endif
                 </div>
 
