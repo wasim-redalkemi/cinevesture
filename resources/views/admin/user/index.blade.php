@@ -28,15 +28,15 @@
                                 @foreach($users as $user)
                                  <tr>
                                     <td>{{$user->id}}</td>
-                                    <td>{{$user->name}}</td>
+                                    <td>{{ucfirst($user->name)}}</td>
                                     <td>{{$user->email}}</td>
-                                    <td>{{$user->job_title}}</td>
+                                    <td>{{ucfirst($user->job_title)}}</td>
                                     
-                                    <td>{{$user->organization->name}}</td>
-                                    <td>{{$user->organization->name}}</td>
-                                    <td>{{$user->organization->country->name}}</td>
-                                    <td>active</td>
-                                    <td>membership</td>
+                                    <td>{{ucfirst($user->organization->name)}}</td>
+                                    <td>{{ucfirst($user->organization->name)}}</td>
+                                    <td>{{ucfirst($user->organization->country->name)}}</td>
+                                    <td>Active</td>
+                                    <td>Membership</td>
                                     <td><?php echo(date("d-m-Y", strtotime($user->created_at))); ?></td>
                                     <td>
                                         <button class="btn btn-outline-primary btn-sm">View</button>

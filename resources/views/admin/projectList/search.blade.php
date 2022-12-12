@@ -10,7 +10,7 @@
             <h4 class="card-title">Project List Management</h4>
             <div class="row">
               <div class="col-12">
-                <form role="form" id="searchProject" method="get" action="{{ route('list-projects',['id' => $id ]) }}" >
+                <form role="form" id="searchProject" method="get" action="{{ route('list-projects',['id' => request('id') ]) }}" >
                   @csrf
                   <div class="row">
                       <div class="col-12">
@@ -54,7 +54,8 @@
                       <form id="saveProject" method="Post" action="{{route('save-search-projects')}}">
                         @csrf
                           <table id="order-listing" class="table order-listing">
-                            <input type="hidden" name="list_id" value="{{$id}}" id="">
+                            <input type="hidden" name="list_id" value="{{$_REQUEST['id']}}" id="">
+
                                  <thead>
                                      <tr style="text-align: center;">
                                        <th>Id</th>
@@ -63,25 +64,30 @@
                                        <th>Select</th>
                                       </tr>
                                  </thead>
+                                 
                                      <tbody style="text-align: center;">
                                       <input type="hidden" name="add_edit" value="{{$is_added_only}}" id="">
-                                     <?php 
-                                        $i=0;
-                                        foreach ($project_data['data'] as $key=>$project)
-                                        {
-                                        $i++;
-                                        ?> 
+                                 
+
+                                        @foreach ($project_data as $key=>$project)
+                                           
+                                        
+                                        
                                           <tr>
-                                            <td><?php echo $i;?></td>
-                                            <td><?php echo $project['project_name'];?></td>
+                                            <td>{{$project_data->firstItem() + $key}}</td>
+                                            
+                                            <td>{{ $project['project_name']}}</td>
                                               <td>
-                                                <?php
-                                                  if(isset($project['project_only_image'][0]['file_link']))
-                                                  {
-                                                    echo $project['project_only_image'][0]['file_link'];
-                                                  }
-                                                  else{echo '-';}
-                                                  ?>
+                                                @if (!empty($project->projectOnlyImage))
+                                                @foreach ($project->projectOnlyImage as $item)
+                                                <img src="{{Storage::url($item->file_link)}}" alt="">
+                                                  
+                                                @endforeach
+                                                    {{-- {{$project->projectOnlyImage->file_link}} --}}
+                                                @else
+                                                    <span>-</span>
+                                                @endif
+                                                 
                                               </td>
                                               <td>
                                           
@@ -91,10 +97,10 @@
                                             
                                               </td>
                                           </tr>
-                                          <?php
-                                        }
                                           
-                                        ?>
+                                        
+                                        @endforeach
+                                        
                                    </tbody>
                              </table>
                           <div style="text-align: center;">
@@ -103,6 +109,12 @@
                             Save</button>
                           </div>
                       </form>
+                      <div class="row">
+                        <div class="col-md-12">
+                        <div style="float:right;" >{{$project_data->appends(request()->except('page'))->links()}}</div>
+                        
+                        </div> 
+                       </div>
                     </div>
                 </div>
             </div>

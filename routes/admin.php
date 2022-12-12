@@ -62,13 +62,8 @@ Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
         Route::get('status_update', [JobController::class, 'status_update'])->name('status_update');
         Route::get('promote_update', [JobController::class, 'promoteUpdate'])->name('promote_update');
 
-       
-        
     }); 
    
-    // Route::get('user', function () {
-    //     return view('admin.user.user');
-    // });
 
     Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
     Route::get('project/list', [AdminProjectController::class, 'index'])->name('admin-project-list');
