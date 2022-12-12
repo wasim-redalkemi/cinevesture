@@ -76,16 +76,16 @@
                                                             </div>
                                                             <div class="mt-3"><input type="text" id="subject" name="subject" value="" placeholder="Subject" class="modal_input"></div>
                                                             <div class="mt-3">
-                                                                <textarea name="message" id="message" cols="25" rows="6" class="w-100 modal_input" placeholder="Message"></textarea>
+                                                                <textarea name="message" id="message" cols="25" rows="6" class="w-100 modal_input controlTextLength" placeholder="Message" text-length = "1200" maxlength="1200" aria-label="With textarea"></textarea>
+
                                                             </div>
 
                                                             <div class="form-check mt-3">
-                                                                <input class="form-check-input modal_check_input" type="checkbox" id="check1" name="option1" value="something" checked>
+                                                                <input class="form-check-input modal_check_input" type="checkbox" id="checkbox_cc">
                                                                 <label class="modal_btm_text mx-1">Send a copy to me</label>
                                                             </div>
 
                                                             <div class="mt-4">
-                                                                {{-- <input type="text" id="subject" name="e" value="" placeholder="Subject" class="modal_input"> --}}
                                                                 <input type="hidden" name="email_1" id="email_1" class="modal_input" value="@if (!empty($user->email)){{$user->email}}@endif">
                                                                 <button type="button" id="contact_btn" class="invite_btn">Send Mail</button>
                                                             </div>
@@ -155,7 +155,7 @@
                             <div class="guide_profile_main_subtext mt-3">IMDB Profile</div>
                             <div class="guide_profile_main_subtext deep-pink mt-1 pointer">
                                 @if (isset($user->imdb_profile))
-                                    <a href="{{ $user->imdb_profile }}" class="link-style"  >{{ $user->imdb_profile }}</a>                                      
+                                    <a href="{{ $user->imdb_profile }}" class="link-style" target="_blank" >{{ $user->imdb_profile }}</a>                                      
                                 @else
                                 <span><b>-</b></span>
                                 @endif
@@ -163,7 +163,7 @@
                             <div class="guide_profile_main_subtext mt-3">LinkedIn Profile</div>
                             <div class="guide_profile_main_subtext deep-pink pointer">
                                 @if (isset($user->linkedin_profile))
-                                    <a href="{{ $user->linkedin_profile }}" class="link-style" >{{ $user->linkedin_profile }}</a>                                         
+                                    <a href="{{ $user->linkedin_profile }}" class="link-style" target="_blank">{{ $user->linkedin_profile }}</a>                                         
                                 @else
                                     <span><b>-</b></span>
                                 @endif
@@ -171,7 +171,7 @@
                             <div class="guide_profile_main_subtext mt-3">Website</div>
                             <div class="guide_profile_main_subtext deep-pink pointer">
                                 @if (isset($user->website))
-                                    <a href="{{ $user->website }}" class="link-style" >{{ $user->website }}</a>                                         
+                                    <a href="{{ $user->website }}" class="link-style" target="_blank">{{ $user->website }}</a>                                         
                                 @else
                                     <span><b>-</b></span>
                                 @endif
@@ -330,16 +330,31 @@
                             <div class="guide_profile_main_text deep-pink font_18">
                                 <h1>Endorsements</h1>
                             </div>
-                            @if($_REQUEST['id'] != auth()->user()->id )
-                            @foreach ($user_endorsement->toArray() as $k=>$v)
-                            
-                            @if ($v['from'] != auth()->user()->id)
-                            <div>
-                                <button class="guide_profile_btn" data-toggle="modal" data-target="#endorseModal">Endorse</button>
-                            </div>
-                            @endif                                
-                            @endforeach
-                            @endif
+                            <?php
+                                $show_endorsement_btn = true;
+                                if($_REQUEST['id'] == auth()->user()->id)
+                                {
+                                    $show_endorsement_btn = false;
+                                }
+                                if($show_endorsement_btn)
+                                {
+                                    foreach($user_endorsement->toArray() as $k=>$v)
+                                    {
+                                        if($v['from'] == auth()->user()->id)
+                                        {
+                                            $show_endorsement_btn = false;
+                                        }                                
+                                    }
+                                }
+                                if($show_endorsement_btn)
+                                {
+                                    ?>
+                                        <div>
+                                            <button class="guide_profile_btn" data-toggle="modal" data-target="#endorseModal">Endorse</button>
+                                        </div>
+                                    <?php
+                                }
+                            ?>
                             <!-- Endorse modal  -->
                             <div class="modal fade" id="endorseModal" tabindex="-1" role="dialog" aria-labelledby="endorseModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -424,9 +439,7 @@
                 var subject = $('#subject').val();
                 var email_1 = $('#email_1').val();
                 var message = $('#message').val();
-                console.log(subject);
-                console.log(email_1);
-                console.log(message);
+                var checkbox_cc = ($("#checkbox_cc").prop("checked") == true ? '1' : '0');
                 
                 
                 $.ajax(
@@ -434,7 +447,7 @@
                     url:"{{ route('contact-user-mail-store') }}",
                     type:'POST',
                     dataType:'json',
-                    data:{subject:subject,email_1:email_1,message:message,"_token": "{{ csrf_token() }}"},
+                    data:{subject:subject,email_1:email_1,message:message,checkbox_cc:checkbox_cc,"_token": "{{ csrf_token() }}"},
                     success:function(response)
                     {
                         console.log(response)
