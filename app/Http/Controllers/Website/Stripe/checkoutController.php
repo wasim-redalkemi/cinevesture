@@ -1,33 +1,44 @@
 <?php
 
-namespace App\Http\Controllers\Website;
+namespace App\Http\Controllers\Stripe;
 
 use App\Http\Controllers\Controller;
+use App\Models\Location;
 use App\Models\MasterPlanModule;
 use App\Models\MasterPlanOperation;
+use App\Models\VenuePlan;
+use App\Models\Plan;
 use App\Models\Plans;
-use App\Models\User;
+use Illuminate\Http\Request;
+Use App\Models\User;
 use App\Models\UserSubscription;
 use Carbon\Carbon;
+use Stripe;
 use Exception;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Contracts\Session\Session as SessionSession;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session as FacadesSession;
+use Symfony\Component\HttpFoundation\Session\Session as HttpFoundationSessionSession;
 
-class SubscriptionController extends Controller
+class checkoutController extends Controller
 {
-    // Views 
-    
-
-
-
-    // Functionality
-
-    public function storeSubscription( Request $request)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-        try{ 
+             
+    }
+    
+   public function checkout(Request $request)
+    {   try{ 
         $plan = Plans::find($request->id);
         $id =auth()->user()->id;
 
-        if($plan->plan_name == 'Free'){
+        if($plan->name == 'Free'){
              $subscription = new UserSubscription();
              $subscription->user_id = auth()->user()->id;
              $subscription->platform_subscription_id = "1";
@@ -54,15 +65,11 @@ class SubscriptionController extends Controller
             $checkoutSesssion=$stripe->checkout->sessions->create(
                 [
                     'line_items' => [
-                        ['price_data'=>[
-                            'currency'=>strtolower($plan->currency),
-                            'product_data'=>['name'=>$plan->plan_name],
-                            'unit_amount'=>$plan->plan_amount*100,
-                        ], 'quantity' => 1,            
-                    ]],
-                    'mode' => 'payment',
-                    'success_url' => route('home'),
-                    'cancel_url' =>  route('home'),
+                        ['price' =>  $plan->plan_amount, 'quantity' => 1],            
+                    ],
+                    'mode' => 'subscription',
+                    // 'success_url' => config("app.url").'Stripe/success/'.$location_id,
+                    // 'cancel_url' =>  config("app.url").'Stripe/cancel/'.$location_id,
                      "metadata" => [
                         "user_id" =>$id,
                         "plan_id"=> $plan->id,
@@ -70,13 +77,13 @@ class SubscriptionController extends Controller
                 ]);
 
         }
-        dd($checkoutSesssion);
-        $checkoutUrl=$checkoutSesssion->url;
 
+          
+        $checkoutUrl=$checkoutSesssion->url;
         return redirect($checkoutUrl);  
     }catch(Exception $e){
-        return back()->with('error', $e->getMessage());
 
     } 
-    }
+     
+  }
 }
