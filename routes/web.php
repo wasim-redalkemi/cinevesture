@@ -14,6 +14,7 @@ use App\Http\Controllers\Website\ProjectController;
 use App\Http\Controllers\Website\SettingController;
 use App\Http\Controllers\Website\AjaxController;
 use App\Http\Controllers\Website\JobController;
+use App\Http\Controllers\Website\OtpController;
 use App\Http\Controllers\Website\PlanController;
 use App\Http\Controllers\Website\SubscriptionController;
 use App\Models\User;
@@ -212,6 +213,9 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
         Route::post('/job-store-edit',[JobController::class, 'jobStoreEdit'])->name('job-store-edit');
         Route::post('/validate-job',[JobController::class, 'validatejob'])->name('validate-job');
 
+        
+        Route::get('/unpublish-job',[JobController::class, 'unPublishJob'])->name('unpublish-job');
+        Route::get('/delete-job',[JobController::class,'deleteJob'])->name('delete-job');
 
         Route::get('/posted-job',[JobController::class, 'postedJob'])->name('posted-job');
         Route::get('/saved-job',[JobController::class, 'savedJob'])->name('saved-job');

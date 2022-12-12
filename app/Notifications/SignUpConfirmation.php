@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class VerifyOtp extends Notification
+class SignUpConfirmation extends Notification
 {
     use Queueable;
 
@@ -18,7 +18,7 @@ class VerifyOtp extends Notification
      */
     public function __construct($data)
     {
-        $this->data = $data;
+        $this->data =$data;
     }
 
     /**
@@ -41,16 +41,18 @@ class VerifyOtp extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->subject('Your verification code for Cinevesture')
+        ->subject('Welcome to Cinevesture')
         ->greeting('Hi'.' '.$this->data['first_name'].',')
-        ->line('Your email verification code is')
-        ->line($this->data['otp'])
-        // ->action('Notification Action', url('/'))
-        ->line('Enter the verification code on the website to complete your registration. If you need to log in again, please click here.')
-        // ->line('If the code does not work, you can use this verification link:')
-        // ->line('Verify email')
+        ->line('Welcome to Cinevesture! We’re excited to have you on board.')
+        ->line('We are here to help you build your network in the media industry to find interesting people and projects to work with.')
+        ->line('Cinevesture is about:')
+        ->line("<p>- <span>  </span>Meeting the right people</p>
+        <p>-   Sharing interesting projects</p>
+        <p>-   Finding the right talent</p>
+        <p>-   Learning new skills</p>")
         ->line('Best,')        
-        ->salutation('Team Cinevesture');
+        ->salutation('Team Cinevesture')
+        ->action('Login' ,route('plans-view'));
     }
 
     /**

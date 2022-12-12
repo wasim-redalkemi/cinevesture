@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class VerifyOtp extends Notification
+class VerifyOTPResetPassword extends Notification
 {
     use Queueable;
 
@@ -41,14 +41,12 @@ class VerifyOtp extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->subject('Your verification code for Cinevesture')
+        ->subject('Reset password for Cinevesture')
         ->greeting('Hi'.' '.$this->data['first_name'].',')
-        ->line('Your email verification code is')
+        ->line('Your reset password verification code is')
         ->line($this->data['otp'])
         // ->action('Notification Action', url('/'))
-        ->line('Enter the verification code on the website to complete your registration. If you need to log in again, please click here.')
-        // ->line('If the code does not work, you can use this verification link:')
-        // ->line('Verify email')
+        ->line('Enter the verification code on the website to complete your reset password.')
         ->line('Best,')        
         ->salutation('Team Cinevesture');
     }

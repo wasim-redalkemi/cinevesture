@@ -18,7 +18,8 @@
                             <div class="currency_togle">
                                 <div class="togle_text text_fff mt-0">Dollar</div>
                                 <label class="switch mx-2">
-                                    <input type="checkbox" id="currency" class="check" <?php if($plans[0]->currency == 'INR'){echo'checked';} ?> name="currency">
+                                    <input type="checkbox" id="currency" class="check" <?php if($plans[0]->currency == 'INR'){echo'checked';}elseif(request('currency')=='INR')
+                                    {echo 'checked';} ?> name="currency">
                                     <span class="slider round"></span>
                                 </label>
                                 <div class="togle_text text_fff mt-0">Rupee</div>
@@ -32,16 +33,17 @@
                         </div> -->
                         <div class="plan_btn_wraper">
                                <!-- <div> -->
-                                   <a href="{{route('plans-view',['plan_time'=>'m'])}}" ><button class="plan_btn <?php if(request('plan_time')){
+                                   <button class="plan_btn <?php if(request('plan_time')){
                                      if(request('plan_time')=='m'){
-                                        echo'plan_month_select';                                     }
-                                   } ?>">Monthly</button></a>
+                                        echo'plan_month_select';                                    
+                                     }
+                                   } ?>" data = "m">Monthly</button>
                                <!-- </div> -->
                                <!-- <div> -->
-                                   <a href="{{route('plans-view',['plan_time'=>'y'])}}" ><button class="plan_btn 
+                                   <button class="plan_btn 
                                    <?php if(request('plan_time')=='y'){
                                         echo'plan_month_select';
-                                   }?>">Annually</button></a>
+                                   }?>" data="y">Annually</button>
                                <!-- </div>  -->
                                </div>
                             </div>
@@ -291,14 +293,35 @@
         $(this).find('.job_search_btn').addClass(forButton);
     });
     $('#currency').change(function() { 
+        plan = $('.plan_month_select').attr('data');
+        currency = 'INR';
+        link = "{{route('plans-view')}}";
           if(this.checked) { 
-            $('#check_id').val('INR');
-            window.location.href = "{{route('plans-view',   ['plan_time'=>'m','currency'=>'INR'])}}".replace('&amp;','&');
+            currency = 'INR';
+            params = '?plan_time='+plan+'&currency='+currency
+            window.location.href = link+params;
           } else{
-            $('#check_id').val('USD');
-            window.location.href = "{{ route('plans-view',['plan_time'=>'m','currency'=>'USD']) }}".replace('&amp;','&');
+            currency = 'USD';
+            params = '?plan_time='+plan+'&currency='+currency
+            window.location.href = link+params;
           }
     });
+
+    $('.plan_btn').on('click',function(){
+        plan = $(this).attr('data');
+        currency = 'INR'
+        link = "{{route('plans-view')}}";
+        if($('#currency').prop('checked', true)) { 
+            currency = 'INR';
+            params = '?plan_time='+plan+'&currency='+currency
+            window.location.href = link+params;
+
+          } else{
+            currency = 'USD';
+            params = '?plan_time='+plan+'&currency='+currency
+            window.location.href = link+params;
+          }
+    })
 
 </script>
 

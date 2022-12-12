@@ -18,6 +18,15 @@ class PlanPermission
      */
     public function handle(Request $request, Closure $next)
     {    
+
+
+      if(isset(auth()->user()->id)){ // check login
+           
+         $is_subscribed = SubscriptionUtilityController::isSubscribed();
+         if(!$is_subscribed){
+            return redirect()->route('plans-view');
+         }
+     }
         if($request->session()->get('permission')){
            
            $getModule_id = null;
@@ -50,27 +59,17 @@ class PlanPermission
               if($selected_action){ // check current url action in list
                $selected_permission = $permissions->where('action_id',$selected_action->id)->first();
                if(!$selected_permission){ // view profile
-                   return back()->with('error','Sorry, You Are Not Allowed to Access This Page');
+                  //  return back()->with('error','Sorry, You Are Not Allowed to Access This Page');
                }else{
                   if($selected_permission->limit){
                      $status = MiddlewareUltilityController::checkActionLimit($selected_permission->id,$selected_permission->limit);
                      if($status == true){
-                        return back()->with('error','Sorry, You Are Not Allowed to Access This Page');
+                        // return back()->with('error','Sorry, You Are Not Allowed to Access This Page');
                      }
                   }
               }
            }
         }
-        
-        
-        if(isset(auth()->user()->id)){ // check login
-           
-            $is_subscribed = SubscriptionUtilityController::isSubscribed();
-            if(!$is_subscribed){
-               return redirect()->route('plans-view');
-            }
-        }
-       
       }
       return $next($request);
  }

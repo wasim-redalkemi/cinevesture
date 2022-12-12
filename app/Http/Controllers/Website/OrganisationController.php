@@ -222,14 +222,14 @@ class OrganisationController extends WebController
             if(!empty($_REQUEST['email_1']) ){
                 $email = $_REQUEST['email_1'];
                 $collect = collect();
-                $collect->put('url','https://www.google.co.in/');
+                $collect->put('url',route('register',convert_uuencode(json_encode(['iuid'=>auth()->user()->id]))));
                 Notification::route('mail', $email)->notify(new TeamInvite($collect));
                 
             }
             if(!empty($_REQUEST['email_2']) ){
                 $email = $_REQUEST['email_2'];
                 $collect = collect();
-                $collect->put('url','https://www.google.co.in/');
+                $collect->put('url',route('register',convert_uuencode(json_encode(['iuid'=>auth()->user()->id]))));
                 Notification::route('mail', $email)->notify(new TeamInvite($collect));
             }
             return ['status'=>1,'msg'=>"Invite link has been gone by email."];           

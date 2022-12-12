@@ -37,7 +37,8 @@ class JobController extends AdminController
                     $q->where('title',"like","%$request->search%") ;
                 }
             })
-            ->paginate($this->records_limit);
+            ->orderByDesc('id')
+            ->paginate(5);
            
             return view('admin.job.index',compact('jobs','countries'));
         } catch (\Throwable $e) {
