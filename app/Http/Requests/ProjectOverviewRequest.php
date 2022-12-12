@@ -24,14 +24,14 @@ class ProjectOverviewRequest extends FormRequest
     public function rules()
     {
         return [
-            'project_name' => 'required',  
+            'project_name' => 'required|max:100',  
             'project_type_id'=> 'required' ,         
             'listing_project_as'=> 'required' , 
             'countries'=> 'required' , 
             'countries.*' => 'required|exists:master_countries,id',
             'languages'=> 'required' , 
             'languages.*' => 'required|exists:master_languages,id',
-            'location'=> 'nullable'               
+            'location'=> 'nullable:max:100'               
         ];
     }
     

@@ -16,7 +16,7 @@
             </div>
             <div class="col-md-9">
                 <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
-                    <form role="form" id="profile_create_form" onsubmit="return false; method="POST" enctype="multipart/form-data" action="{{ route('profile-store') }}">
+                    <form role="form" class="validateBeforeSubmit" method="POST" enctype="multipart/form-data" action="{{ route('profile-store') }}">
                         @csrf
 
                         <div class="profile_text">
@@ -90,7 +90,7 @@
                                     <label>First Name</label>
                                     {{-- <input type="text" class="outline is-invalid-remove name-only form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name" value="@if(isset($user->first_name){{ $user->first_name}} @endif" --}}
                                     <input type="text" class="outline is-invalid-remove name-only form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name"
-                                    value="@if (!empty($user->first_name)) {{$user->first_name}} @endif" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                    value="@if (!empty($user->first_name)){{$user->first_name}}@endif" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('first_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -101,7 +101,7 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Last Name</label>
-                                    <input type="text" class="outline is-invalid-remove name-only form-control @error('last_name') is-invalid @enderror" placeholder="{{ __('Last Name') }}" name="last_name" value="@if (!empty($user->last_name)) {{$user->last_name}} @endif" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                    <input type="text" class="outline is-invalid-remove name-only form-control @error('last_name') is-invalid @enderror" placeholder="{{ __('Last Name') }}" name="last_name" value="@if (!empty($user->last_name)){{$user->last_name}} @endif" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('last_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -282,9 +282,7 @@
                             <div class="col-md-12">
                                 <div class="profile_input">
                                     <label>About</label>
-                                    <textarea class="outline form-control controlTextLength is-invalid-remove form-control @error('about') is-invalid @enderror" text-length="200" maxlength="200" name="about" aria-label="With textarea" required><?php if (isset($user->about)) {
-                                                                                                                                                                                                                                                echo ($user->about);
-                                                                                                                                                                                                                                            } ?></textarea>
+                                    <textarea class="outline form-control controlTextLength is-invalid-remove form-control @error('about') is-invalid @enderror" text-length="200" maxlength="200" name="about" aria-label="With textarea" required><?php if (isset($user->about)) { echo ($user->about);} ?></textarea>
                                     @error('about')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -387,24 +385,7 @@
 @include('website.include.footer')
 @endsection
 @push('scripts')
-<script type="text/javascript">
-
-    // just for the demos, avoids form submit
-    jQuery.validator.setDefaults({
-    debug: true,
-    success: "valid"
-    });
-
-    $("#profile_create_form").on('click', function(e) {        
-        let isFormValid = $( "#profile_create_form" ).valid();        
-        if (!isFormValid) {
-            return false;
-        }
-        else{
-            $( "#profile_create_form" ).submit();
-        }
-    });
-    
+<script type="text/javascript">    
     $(document).ready(function() {
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");

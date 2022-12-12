@@ -7,11 +7,12 @@
 @endsection
 
 @section('content')
+
+
+<section class="profile-section">
 <div class="hide-me animation for_authtoast">
     @include('website.include.flash_message')
 </div>
-
-<section class="profile-section">
     <div class="container">
         <div class="row">
             <div class="col-md-3">
@@ -46,16 +47,17 @@
                             </div>
                             <ul class="dropdown-menu profile_dropdown_menu p-2 menu_position">
                                 <li>
-                                <a href="{{ route('job-create-page',['job_id'=>$v['id']]) }}">  Edit Job</a>
+                                <a href="{{route('job-create-page',['job_id'=>$v['id']])}}">  Edit Job</a>
                                 </li>
                                 <li>
                                 <a href="">  Promote Job</a>
                                 </li>
                                 <li>
-                                <a href="">   Unpublish Job</a>
+                                <?php $status;  if($v['save_type']=='published'){  $status= "unpublished"; } else {$status="published";}?>
+                                <a href="{{route('unpublish-job',['job_id'=>$v['id'],'status'=>$status])}}">  <?php if($v['save_type']=='published'){  echo "Unpublish Job"; } else { echo "Publish Job";}?></a>
                                 </li>
                                 <li>
-                                <a href="">  Delete Job </a>
+                                <a href="{{route('delete-job',['job_id'=>$v['id']])}}">  Delete Job </a>
                                 </li>
                             </ul>
                         </div>

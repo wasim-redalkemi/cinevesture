@@ -37,9 +37,9 @@ class JobController extends WebController
 
     public function index()
     {
-        $countries = MasterCountry::query();
-        $skills = MasterSkill::query();
-        $employments = MasterEmployement::query();
+        $countries = MasterCountry::all();
+        $skills = MasterSkill::all();
+        $employments = MasterEmployement::all();
 
         return view('website.job.index', compact('countries', 'skills', 'employments'));
     }
@@ -53,6 +53,7 @@ class JobController extends WebController
         if (!isset($_REQUEST['job_id'])) {
             return view('website.job.post_a_job', compact(['countries', 'skills', 'employments', 'workspaces']));
         }
+      
         $userJobData = $this->getJobData($_REQUEST['job_id']);
         $userJobData = $userJobData->toArray();
 
@@ -165,6 +166,11 @@ class JobController extends WebController
         try {
             $id = $request->job_id;            
             $job = UserJob::query()->find($id);
+            if( $job->save_type=='unpublished')
+            {
+                $message = ($job->save_type == 'unpublished' ? 'Unpublished Job can not be draft.' : 'A draft of your job was successfully saved.');
+                return ['status' => 0, 'msg' => $message];
+            } 
             $job = $this->setJobData($job, $request);
             $this->storeJobMetas($request,$job->id,true);
             $message = ($job->save_type == 'publish' ? 'Job published successfully.' : 'A draft of your job was successfully saved.');
@@ -176,6 +182,42 @@ class JobController extends WebController
 
     public function applyPromotion(Request $request)
     {
+    }
+    public function UnpublishJob(Request $request)
+    {
+        try {
+            if($request->job_id && $request->status)
+            {
+            $id = $request->job_id;            
+            $userJob = UserJob::query()->find($id);
+            $userJob->save_type = $request->status;
+            $userJob->save();
+            $message = ( 'Job status is updated successfully.');
+            return redirect()->back()->with("success", $message);
+        } else {
+            return back()->with('error', 'Something went wrong ,please try again.');
+        }
+        } catch (Exception $e) {
+            return ['status' => 0, 'msg' => $e->getMessage()];
+        }
+
+    }
+
+    public function deleteJob(Request $request)
+    {
+      
+        try {
+            
+            $id = $request->job_id;
+            $userJob = UserJob::find( $id );
+            $userJob->delete();
+            $message = "Job deleted Successfully.";
+           return redirect()->back()->with("success", $message);
+         
+        } 
+        catch (Exception $e) {
+            return back()->with('error', 'Something went wrong. '.$e->getMessage());
+        }
     }
 
     public function postedJob(Request $request)
@@ -260,10 +302,19 @@ class JobController extends WebController
             $modelObj->job_id = $jobId;
             $file = $request->file('resume');
             $fileName = $file->getClientOriginalName();
-            $fileSize = ceil($file->getSize() / 1024) . ' KB';
+            $fileSize = ceil($file->getSize() / 1024);
+
+            if( $fileSize> 5000)
+            {
+                return   $this->jsonResponse(false, "uploaded file cannot be more than 5 MB.", []);
+            }
 
             if ($fileSize > 1024) {
                 $fileSize = ceil($fileSize / 1024) . ' MB';
+            }
+            else
+            {
+                $fileSize=$fileSize. ' KB';
             }
 
             $path = $this->uploadFile("appliedJobResumes", $file);
@@ -305,7 +356,7 @@ class JobController extends WebController
 
     public function showJobSearchResults(Request $request)
     {
-        $requests = $request->query();
+        $requests = $request->all();
         $employments = MasterEmployement::query()->get();
         $countries = MasterCountry::query()->get();
         $categories = MasterProjectCategory::query()->get();

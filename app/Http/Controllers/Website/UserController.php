@@ -237,25 +237,71 @@ class UserController extends WebController
         }
     }
 
+    private function getVideoLink($url = '')
+    {
+        $id = '';
+        $resp = ['link'=>'','video_id'=>'','platform'=>''];
+        if(strpos($url, 'youtu') !== false)
+        {
+            parse_str(parse_url( $url, PHP_URL_QUERY), $nurl);
+            if(array_key_exists('v', $nurl))
+            {
+                $id = $nurl['v'];
+            }
+            else if(array_key_exists('vi', $nurl))
+            {
+                $id = $nurl['vi'];
+            }
+            else
+            {
+                $id = explode('?',array_reverse(explode("/", $url))[0])[0];
+            }
+            $resp['link'] = 'https://www.youtube.com/embed/'.$id;
+            $resp['video_id'] = $id;
+            $resp['platform'] = $this->platform_youtube;
+        }
+        else if(strpos($url, 'vimeo') !== false)
+        {
+            $resp['link'] = $url;
+            $resp['platform'] = $this->platform_vimeo;
+        }
+        return $resp;
+    }
     public function profileStore(StoreProfileUpdate $request)
     {
         try {
-            $user = User::query()->find(auth()->user()->id);
+            $video_url = $this->getVideoLink($request->intro_video_link);
+            $videoDetailsParams = [
+                'link'=>$video_url['link'],
+                'video_id'=>$video_url['video_id'],
+                'platform'=>$video_url['platform'],
+            ];
+            $videoDetails = $this->getVideoDetailsURL($videoDetailsParams);
+            if($video_url['platform'] == $this->platform_youtube)
+            {
+                $thumbnail = $videoDetails['pl']['items'][0]['snippet']['thumbnails']['high']['url'];
+            }
+            elseif($video_url['platform'] == $this->platform_vimeo)
+            {
+                $thumbnail = $videoDetails['pl']['thumbnail_medium'];
+            }
 
-            $user->first_name = $request->first_name;
-            $user->last_name = $request->last_name;
-            $user->job_title = $request->job_title;
+            $user = User::query()->find(auth()->user()->id);
+            $user->first_name = ucfirst($request->first_name);
+            $user->last_name = ucfirst($request->last_name);
+            $user->job_title = ucfirst($request->job_title);
             $user->age = $request->age;
             $user->gender = $request->gender;
             $user->gender_pronouns = $request->gender_pronouns;
-            $user->about = $request->about;
+            $user->about = ucfirst($request->about);
             $user->available_to_work_in = $request->available_to_work_in;
             $user->country_id = $request->Located_in;
             $user->state_id = $request->state;
             $user->imdb_profile = $request->imdb_profile;
             $user->linkedin_profile = $request->linkedin_profile;
             $user->website = $request->website;
-            $user->intro_video_link = $request->intro_video_link;
+            $user->intro_video_link = $video_url['link'];
+            $user->intro_video_thumbnail = $thumbnail;
 
             if ($request->croppedImg) {
 
@@ -349,8 +395,8 @@ class UserController extends WebController
             $portfolio = new UserPortfolio();
 
             $portfolio->user_id = $user->id;
-            $portfolio->project_title = $request->project_title;
-            $portfolio->description = $request->description;
+            $portfolio->project_title = ucfirst($request->project_title);
+            $portfolio->description = ucfirst($request->description);
             $portfolio->completion_date = $request->completion_date;
             $portfolio->video = json_encode(['video_url'=>$request->video_url,'video_thumbnail'=>$request->video_thumbnail]);
 
@@ -462,8 +508,8 @@ class UserController extends WebController
             $user = User::query()->find(auth()->user()->id);
             $portfolio = UserPortfolio::query()->where('id', $request->portfolio_id)->first();
             $portfolio->user_id = $user->id;
-            $portfolio->project_title = $request->project_title;
-            $portfolio->description = $request->description;
+            $portfolio->project_title = ucFirst($request->project_title);
+            $portfolio->description = ucFirst($request->description);
             $portfolio->completion_date = $request->completion_date;
             $portfolio->video = json_encode(['video_url'=>$request->video_url,'video_thumbnail'=>$request->video_thumbnail]);
 
@@ -566,13 +612,13 @@ class UserController extends WebController
             $user = User::query()->find(auth()->user()->id);
             $experience = new UserExperience();
             $experience->user_id = $user->id;
-            $experience->job_title = $request->job_title;
-            $experience->comapny = $request->comapny;
+            $experience->job_title = ucFirst($request->job_title);
+            $experience->comapny = ucFirst($request->comapny);
             $experience->country_id = $request->country_id;
             $experience->start_date = $request->start_date;
             $experience->end_date = $request->end_date;
             $experience->employement_type_id = $request->employement_type_id;
-            $experience->description = $request->description;
+            $experience->description = ucFirst($request->description);
 
             if ($experience->save()) {
                 $qualification = $experience;
@@ -612,13 +658,13 @@ class UserController extends WebController
             $user = User::query()->find(auth()->user()->id);
             $experience = UserExperience::query()->where('id', $request->experience_id)->first();
             $experience->user_id = $user->id;
-            $experience->job_title = $request->job_title;
-            $experience->comapny = $request->comapny;
+            $experience->job_title = ucFirst($request->job_title);
+            $experience->comapny = ucFirst($request->comapny);
             $experience->country_id = $request->country_id;
             $experience->start_date = $request->start_date;
             $experience->end_date = $request->end_date;
             $experience->employement_type_id = $request->employement_type_id;
-            $experience->description = $request->description;
+            $experience->description = ucFirst($request->description);
             if ($experience->update()) {
                 if ($request->saveButtonType == 'saveAndAnother') {
                     return redirect()->route('experience-create')->with("success", "Please add another experience after edit.");
@@ -669,12 +715,12 @@ class UserController extends WebController
 
             $qualification = new UserQualification();
             $qualification->user_id = $user->id;
-            $qualification->institue_name = $request->institue_name;
-            $qualification->degree_name = $request->degree_name;
+            $qualification->institue_name = ucFirst($request->institue_name);
+            $qualification->degree_name = ucFirst($request->degree_name);
             $qualification->feild_of_study = $request->feild_of_study;
             $qualification->start_year = $request->start_year;
             $qualification->end_year = $request->end_year;
-            $qualification->description = $request->description;
+            $qualification->description = ucFirst($request->description);
 
             if ($qualification->save()) {
                 if ($request->flag == 'privateView') {
@@ -709,12 +755,12 @@ class UserController extends WebController
 
             $qualification = UserQualification::query()->where('id', $request->qualification_id)->first();
             $qualification->user_id = $user->id;
-            $qualification->institue_name = $request->institue_name;
-            $qualification->degree_name = $request->degree_name;
+            $qualification->institue_name = ucFirst($request->institue_name);
+            $qualification->degree_name = ucFirst($request->degree_name);
             $qualification->feild_of_study = $request->feild_of_study;
             $qualification->start_year = $request->start_year;
             $qualification->end_year = $request->end_year;
-            $qualification->description = $request->description;
+            $qualification->description = ucFirst($request->description);
             if ($qualification->update()) {
                 if ($request->saveButtonType == 'saveAndAnother') {
                     return redirect()->route('qualification-create')->with("success", "Please add another qualification after edit.");
@@ -754,7 +800,7 @@ class UserController extends WebController
             $validator = Validator::make($request->all(), [
                 'email_1' => 'required|email',
                 'message' => 'required|string',
-                'subject' => 'required|string',
+                'subject' => 'required|string|max:1200',
             ]);
 
             if ($validator->fails()) {
@@ -768,6 +814,10 @@ class UserController extends WebController
                 $email = $_REQUEST['email_1'];
                 $collect = collect();
                 $collect->put('url','https://www.youtube.com/');
+                if ($_REQUEST['checkbox_cc'] == 1) {
+                    
+                    $collect->put('cc_email',auth()->user()->email);
+                }
                 Notification::route('mail', $email)->notify(new ContactUser($collect));                
             }
             return ['status'=>1,'msg'=>"Email has been sending by contact email."];           

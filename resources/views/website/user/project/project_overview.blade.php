@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="profile_wraper profile_wraper_padding my-4">
-                    <form role="form" method="POST" enctype="multipart/form-data" action="{{ route('validate-project-overview') }}">
+                    <form role="form" class="validateBeforeSubmit" method="POST" enctype="multipart/form-data" action="{{ route('validate-project-overview') }}">
                         @csrf
                         <div>
                             <p class="flow_step_text"> Overview</p>
@@ -27,10 +27,8 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>Project Name <span style = "color:red">*</span></label>
-  
-                                    <input type="text" class="form-control @error('project_name') is-invalid @enderror" name="project_name" placeholder="Project Name" value="@if (!empty($projectData[0]['project_name'])) {{$projectData[0]['project_name']}} @endif" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
-                                    
+                                    <label>Project Name <span style = "color:red">*</span></label>  
+                                    <input type="text" class="form-control @error('project_name') is-invalid @enderror" name="project_name" placeholder="Project Name" value="@if (!empty($projectData[0]['project_name'])) {{$projectData[0]['project_name']}} @endif" aria-label="Username" aria-describedby="basic-addon1" maxlength="100" autofocus required>                                    
                                     @error('project_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -131,7 +129,7 @@
                             <div class="col-md-6">
                                 <div class="profile_input">
                                     <label>Locations (Optional)</label>
-                                    <input type="text" class="form-control @error('location') is-invalid @enderror" name="location" placeholder="Locations (Optional)" value="@if (!empty($projectData[0]['location'])) {{$projectData[0]['location']}} @endif" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control @error('location') is-invalid @enderror" name="location" placeholder="Locations (Optional)" value="@if (!empty($projectData[0]['location'])) {{$projectData[0]['location']}} @endif" aria-label="Username" aria-describedby="basic-addon1" maxlength="100">
                                     @error('location')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

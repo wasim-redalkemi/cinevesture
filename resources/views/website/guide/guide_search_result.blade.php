@@ -17,7 +17,7 @@
                     <div class="search-box-container">
                     <div class="search-container w-100">
                             <input type="search" name="search" value="{{request('search')}}" class="w-100 search-box" placeholder="Search...">
-                            <button class="search-btn"></button>
+                            <button class="search-btn"><i class="fa fa-search"></i></button>
                             </div> 
                             <div class="d-block d-md-none for_drop_img" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                             <img src="{{ asset('images/asset/dropdown-sidebar.svg') }}" />
@@ -186,7 +186,7 @@
                                 <div class="">
                                     @if(isset($user->skill[0]))
                                     @foreach($user->skill as $skill)
-                                    <button class="curv_cmn_btn">{{$skill->getSkills->name}}</button>
+                                    <button class="curv_cmn_btn">{{$skill->name}}</button>
                                     @endforeach
                                     @else
                                     -

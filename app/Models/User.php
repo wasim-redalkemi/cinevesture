@@ -12,6 +12,7 @@ use App\Notifications\InvoicePaid;
 use Laravel\Cashier\Billable;
 use App\Notifications\ResetPasswordNotification;
 use App\Notifications\VerifyOtp;
+use App\Notifications\VerifyOTPForgetPassword;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable
@@ -65,7 +66,10 @@ class User extends Authenticatable
         $otp = OtpUtilityController::createOtp($this, 'F',$token); // F for Forgot pasword
         $collect  = collect();
         $collect->put('otp', $otp);
-        $this->notify(new VerifyOtp($collect));
+        $collect->put('first_name', ucFirst($this->first_name));
+        // $this->notify(new VerifyOtp($collect));
+        $this->notify(new VerifyOTPForgetPassword($collect));
+
     }
 
     public function organization(){

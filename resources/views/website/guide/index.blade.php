@@ -74,13 +74,13 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="mt-3 mt-md-0">
-                                    <select class="js-select2"  id = "talentType"name ="talentType[]" multiple="multiple">
+                                    <select class="js-select2"  id="talentType" name ="talentType[]" multiple="multiple">
                                     @foreach($talent_type as $type)
                                               
                                               @if(isset(request('talentType')[0]) && in_array($type->id, request('talentType')))
-                                              <option value="{{$country->id}}" data-badge="" selected>{{$type->job_title}}</option>
+                                              <option value="{{$type->job_title}}" data-badge="" selected>{{$type->job_title}}</option>
                                               @else
-                                              <option value="{{$country->id}}" data-badge="">{{$type->job_title}}</option>
+                                              <option value="{{$type->job_title}}" data-badge="">{{$type->job_title}}</option>
                                               @endif
                                     
                                    @endforeach
