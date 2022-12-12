@@ -98,15 +98,15 @@
                                         </td>
                                        <td>
                                         @foreach ($job->jobOrganisation as $organisation)
-                                            {{$organisation->name}}
+                                            {{ucfirst($organisation->name)}}
                                         @endforeach
                                         </td>
                                        <td>
-                                            {{$job->jobLocation->name}}
+                                            {{ucfirst($job->jobLocation->name)}}
                                         </td>
                                         <td>
                                             @foreach ($job->user as $value)
-                                                {{$value->name}}
+                                                {{ucfirst($value->name)}}
                                             @endforeach
                                         </td>
                                         <td>

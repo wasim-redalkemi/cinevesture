@@ -165,14 +165,14 @@
         var search = $.trim($('#search-profile').val());
 
 
-    if(!search  && countries  == 0 && talent  == 0){
-         e.preventDefault();
-         toastMessage(0,"Please apply filter.");
-         $("#error-toast").toast("show");
-         $("#success-toast").toast("show");
-      }else{
-         $('#filter').submit();
-      }
+    // if(!search  && countries  == 0 && talent  == 0){
+    //      e.preventDefault();
+    //      toastMessage(0,"Please apply filter.");
+    //      $("#error-toast").toast("show");
+    //      $("#success-toast").toast("show");
+    //   }else{
+    //      $('#filter').submit();
+    //   }
   
   });
 

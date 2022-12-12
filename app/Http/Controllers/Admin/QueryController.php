@@ -98,7 +98,7 @@ class QueryController extends AdminController
             $query=query::find($id);
             
             $query->Delete();
-            Session::flash('response', ['text'=>'Query deleted sucessfully','type'=>'danger']);
+            Session::flash('response', ['text'=>'Query deleted sucessfully','type'=>'success']);
             return back();
         } catch (\Throwable $e) {
         Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);

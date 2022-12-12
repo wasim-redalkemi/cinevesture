@@ -9,6 +9,7 @@ use App\Models\Otp;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\UserSubscription;
+use App\Notifications\SignUpConfirmation;
 use Illuminate\Support\Str;   
 use App\Notifications\VerifyOtp;
 use Carbon\Carbon;
@@ -115,6 +116,7 @@ class RegisterController extends Controller
         $otp_type = 'S'; // S for signup
         $otp = OtpUtilityController::createOtp($user, $otp_type);
         $collect  = collect();
+        $collect->put('first_name', ucFirst($request->first_name));
         $collect->put('otp', $otp);
         $user->notify(new VerifyOtp($collect));
 
@@ -135,6 +137,7 @@ class RegisterController extends Controller
 
         event(new Registered($user = $this->create($request->all())));
         $collect  = collect();
+        $collect->put('first_name', $request->first_name);
         $collect->put('otp', '123456');
         $user->notify(new VerifyOtp($collect));
 
@@ -190,11 +193,16 @@ class RegisterController extends Controller
                     $userObj->email_verified_at = Carbon::now();
                     $userObj->save();
                     $this->guard()->login($userObj);
+                    $user = User::query()->where('email',$request->email)->first();
+                    $collect  = collect();
+                    $collect->put('first_name', $user->first_name);
+                    $user->notify(new SignUpConfirmation($collect));
+                    
                     $is_subscribed = SubscriptionUtilityController::isSubscribed();
                     if($is_subscribed){
                         return redirect('home');
                     }else{
-                        return redirect()->route('plans-view')->with('success','Email Varified successfully.');
+                        return redirect()->route('plans-view')->with('success','Email Verified successfully.');
                     }
 
                 }
@@ -227,6 +235,7 @@ class RegisterController extends Controller
                 $otp = OtpUtilityController::createOtp($user, $type);
                 $collect  = collect();
                 $collect->put('otp', $otp);
+                $collect->put('first_name', ucFirst($user->first_name));
                 $user->notify(new VerifyOtp($collect));
                 return back()->with('success', 'OTP Re-Send successfully.');
           

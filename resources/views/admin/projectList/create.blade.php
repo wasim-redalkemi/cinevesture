@@ -16,7 +16,7 @@
                               <div class="col-md-6">
                                 <div class="form-group">
                                         <label>Name</label>
-                                        <input type="text" class="form-control form-control-lg" name="name" placeholder="list name" aria-label="Username">
+                                        <input type="text" class="form-control form-control-lg" name="name" placeholder="List name" aria-label="Username">
                                 </div>
                               </div>
                               <div class="col-md-6">
