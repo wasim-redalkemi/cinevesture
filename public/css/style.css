@@ -2439,6 +2439,9 @@ select {
     .dropdown-toggle:after { 
         transition: 0.4s; 
         }
+   .sidebar .search-page .dropdown-toggle[aria-expanded="true"]:after {
+        transform: rotate(180deg);
+    }
 ::-webkit-scrollbar {
     width: 10px;
   }

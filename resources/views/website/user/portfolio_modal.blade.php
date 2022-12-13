@@ -36,15 +36,23 @@
 
 <div class="portfolioImage owl-carousel">
     @if (!empty($data['get_portfolio']))
-    @foreach ($data['get_portfolio'] as $k=>$v)                                 
-    <div class="item portfolio_item"> 
-            <div class="portfolio_item_image">      
-        <img src="{{ Storage::url($v['file_link']) }}" class="portfolio_img" width="100%" height="100%" />
-            </div>
-    </div> 
-    @endforeach
-    @endif             
-</div>    
+        <img src="{{ Storage::url($data['get_portfolio'][0]['file_link']) }}" width="100%" height="100%" />
+    @else        
+        <img src="{{ asset('images/asset/user-profile.png') }}" width="100%" height="100%" />
+    @endif
+</div>
+<div class="portfolioImage owl-carousel">
+                                      
+                                        <div class="item portfolio_item" onclick="">
+                                            <div class="portfolio_item_image">
+                                                <img src="" class="portfolio_img" width="100%">
+                                                imageee
+                                            </div>
+                                            <div class="d-flex justify-content-between mt-2">
+                                                <div class="icon_container"> <a href="{{ route('portfolio-edit', ['id'=>$v['id']]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
+                                            </div>
+                                        </div>
+                                    </div>
 
 
 
@@ -58,7 +66,7 @@
         nav: true,
         margin: 20,
         center: true,
-        items: 2,
+        items: 1,
     }); 
     });  
 </script> 
