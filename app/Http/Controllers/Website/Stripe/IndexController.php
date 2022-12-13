@@ -1,15 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Stripe;
 
-use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
-use App\Models\Query;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Session\Session as SessionSession;
 
-class QueryController extends AdminController
+class indexController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,16 +14,7 @@ class QueryController extends AdminController
      */
     public function index()
     {
-        try {
-           
-            $userQuerys = Query::query()->paginate(2);
-            
-            return view('admin.query.list',compact('userQuerys'));
-        } catch (\Throwable $e) {
-            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
-            return back();
-        }
-        
+        //
     }
 
     /**
@@ -59,8 +46,7 @@ class QueryController extends AdminController
      */
     public function show($id)
     {
-        $query=Query::find($id);
-        return view('admin.query.view',compact('query'));
+        //
     }
 
     /**
@@ -94,16 +80,6 @@ class QueryController extends AdminController
      */
     public function destroy($id)
     {
-        try {
-            $query=query::find($id);
-            
-            $query->Delete();
-            Session::flash('response', ['text'=>'Query deleted sucessfully','type'=>'success']);
-            return back();
-        } catch (\Throwable $e) {
-        Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
-        return back();
-        }
-     
+        //
     }
 }

@@ -15,123 +15,113 @@
                 <form class="" method="Get" action="{{ route('guide-view') }}">
                     @csrf
                     <div class="search-box-container">
-                    <div class="search-container w-100">
+                        <div class="search-container w-100">
                             <input type="search" name="search" value="{{request('search')}}" class="w-100 search-box" placeholder="Search...">
                             <button class="search-btn"><i class="fa fa-search"></i></button>
-                            </div> 
-                            <div class="d-block d-md-none for_drop_img" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        </div>
+                        <div class="d-block d-md-none for_drop_img" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                             <img src="{{ asset('images/asset/dropdown-sidebar.svg') }}" />
-                            </div>    
-
+                        </div>
                     </div>
                     <div class="sidebar_collapse collapse dont-collapse-sm" id="collapseExample">
-                    <div class="dropdown search-page sidebar_data_mobile">
-                        <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="modal" data-bs-target="#locations-list">
-                            Location
-                        </button>
-                    @include('website.modal.locations')
-                        <!-- Modal for Confirmation for account deactivate -->
-
-                        <div class="dropdown search-page">
-                            <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="modal" data-bs-target="#talent-type" aria-expanded="false">
-                                Talent Type
-                            </button>
-                            <!-- Modal for Loactions List -->
-                            <div class="modal fade" id="talent-type"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered filter_modal_wrap">
-                                    <div class="modal-content">
-                                        <div class="modal-body" style="padding: 0px;">
-                                            <section>
-                                                <div class="container" style="padding: 0px;">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="modal_container filter_wrap">
-                                                                <div class="list-group-my" style="justify-content: center;">
-                                                                    <div class="row">
-                                                                        @foreach($talent_type as $talent)
-                                                                        <div class="col-md-4">
-                                                                            <label class="list-group-item filter_options">
-                                                                                @if(isset(request('talentType')[0]) && in_array($talent->job_title, request('talentType')))
-                                                                                <input class="form-check-input me-1" type="checkbox" checked name="talentType[]" value="{{$talent->job_title}}">
-                                                                                {{$talent->job_title}}
-                                                                                @else
-                                                                                <input class="form-check-input me-1" type="checkbox" name="talentType[]" value="{{$talent->job_title}}">
-                                                                                {{$talent->job_title}}
-                                                                                @endif
-                                                                            </label>
-                                                                        </div>
-                                                                        @endforeach
-                                                                    </div>
-                                                                </div>
-                                                                <button type="button" class="btn modal-close-filter" data-bs-dismiss="modal">Close</button>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                        <div class="dropdown search-page sidebar_data_mobile">
+                        <div class="dropend search-page search_page_filters_wrap mt-2">
+                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Location
+                                </button>
+                                <div class="dropdown-menu filter_modal_wrap">
+                                    <div class="filter_option_wrap">
+                                        <div class="container no-padding">
+                                            <div class="d-flex flex-wrap">
+                                            @foreach($countries as $country)
+                                            <div class="mx-2 for_active">
+                                                    <label class="d-flex align-items-center search_page_filters_data">
+                                                        @if(isset(request('countries')[0]) && in_array($country->id, request('countries')))
+                                                        <input class="form-check-input me-1 d-none" type="checkbox" name="countries[]" checked value="{{$country->id}}">
+                                                        {{$country->name}}
+                                                        @else
+                                                        <input class="form-check-input me-1 d-none" type="checkbox" name="countries[]" value="{{$country->id}}">
+                                                        {{$country->name}}
+                                                        @endif
+                                                    </label>
                                                 </div>
-                                            </section>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
-                        </div>
-                        <div class="dropdown search-page">
-                            <button class="btn dropdown-toggle w-100" type="button" data-bs-toggle="modal" data-bs-target="#skills" aria-expanded="false">
-                                Skills
-                            </button>
-                            <!-- Modal for Loactions List -->
-                            <div class="modal fade" id="skills"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-body" style="padding: 0px;">
-                                            <section>
-                                                <div class="container" style="padding: 0px;">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="modal_container">
-                                                                <div class="list-group">
-                                                                    @foreach($skills as $skill)
-                                                                    <label class="list-group-item">
-
-                                                                        @if(isset(request('skills')[0]) && in_array($skill->id, request('skills')))
-                                                                        <input class="form-check-input me-1" type="checkbox" checked name="skills[]" value="{{$skill->id}}">
-                                                                        {{$skill->name}}
-                                                                        @else
-                                                                        <input class="form-check-input me-1" type="checkbox" name="skills[]" value="{{$skill->id}}">
-                                                                        {{$skill->name}}
-                                                                        @endif
-                                                                    </label>
-                                                                    @endforeach
-
-                                                                </div>
-                                                                <button type="button" class="btn modal-close-filter" data-bs-dismiss="modal">Close</button>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                            <!-- Modal for Confirmation for account deactivate -->
+                            <div class="dropend search-page search_page_filters_wrap">
+                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Talent Type
+                                </button>
+                                <div class="dropdown-menu filter_modal_wrap">
+                                    <div class="filter_option_wrap">
+                                        <div class="container no-padding">
+                                            <div class="d-flex flex-wrap">
+                                                @foreach($talent_type as $talent)
+                                                <div class="mx-2 for_active">
+                                                    <label class="d-flex align-items-center search_page_filters_data">
+                                                        @if(isset(request('talentType')[0]) && in_array($talent->job_title, request('talentType')))
+                                                        <input class="form-check-input me-1" type="checkbox" checked name="talentType[]" value="{{$talent->job_title}}">
+                                                        {{$talent->job_title}}
+                                                        @else
+                                                        <input class="form-check-input me-1 d-none" type="checkbox" name="talentType[]" value="{{$talent->job_title}}">
+                                                        {{$talent->job_title}}
+                                                        @endif
+                                                    </label>
                                                 </div>
-                                            </section>
+                                                @endforeach
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            
-                        </div>
-                        <div class="form-check d-flex align-items-center mt-4">
-                            <input class="form-check-input" <?php if (request('verified') == '1') {
-                                                                echo 'checked';
-                                                            } ?> style="border-radius: 0px;" type="checkbox" value="1" name="verified" id="flexCheckDefault">
-                            <label class="verified-text mx-2" for="flexCheckDefault">
-                                Recommended Profile
-                            </label>
-                        </div>
-                        <div class="mt-4 d-flex">
-                            <input type="submit" class="filter-button watch-now-btn mt-4" Value="Apply">
-                            <a href="{{route('guide-view')}}"><input type="button" class="clear-filter watch-now-btn mt-4" Value="Clear"></a>
-                        </div>
+                            <div class="dropend search-page search_page_filters_wrap">
+                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Skills
+                                </button>
+                                <!-- Modal for Category List -->
 
-                    </div>
+                                <div class="dropdown-menu filter_modal_wrap">
+                                    <div class="filter_option_wrap">
+                                        <div class="container no-padding">
+                                            <div class="d-flex flex-wrap">
+                                                @foreach($skills as $skill)
+
+                                                <div class="mx-2 for_active">
+                                                    <label class="d-flex align-items-center search_page_filters_data">
+
+                                                        @if(isset(request('skills')[0]) && in_array($skill->id, request('skills')))
+                                                        <input class="form-check-input me-1 d-none" type="checkbox" checked name="skills[]" value="{{$skill->id}}">
+                                                        {{$skill->name}}
+                                                        @else
+                                                        <input class="form-check-input me-1 d-none" type="checkbox" name="skills[]" value="{{$skill->id}}">
+                                                        {{$skill->name}}
+                                                        @endif
+                                                    </label>
+                                                </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-check d-flex align-items-center mt-4">
+                                <input class="form-check-input" <?php if (request('verified') == '1') {
+                                                                    echo 'checked';
+                                                                } ?> style="border-radius: 0px;" type="checkbox" value="1" name="verified" id="flexCheckDefault">
+                                <label class="verified-text mx-2" for="flexCheckDefault">
+                                    Recommended Profile
+                                </label>
+                            </div>
+                            <div class="mt-4 d-flex">
+                                <input type="submit" class="filter-button watch-now-btn mt-4" Value="Apply">
+                                <a href="{{route('guide-view')}}"><input type="button" class="clear-filter watch-now-btn mt-4" Value="Clear"></a>
+                            </div>
+
+                        </div>
                     </div>
                 </form>
             </div>
@@ -146,7 +136,7 @@
                                 @if(isset($user->profile_image))
                                 <img src="{{Storage::url($user->profile_image)}}" />
                                 @else
-                                <img src="{{ asset('images/asset/user-profile.png') }}" width="100%" height="100%"/>
+                                <img src="{{ asset('images/asset/user-profile.png') }}" width="100%" height="100%" />
                                 @endif
                             </div>
 
@@ -186,7 +176,7 @@
                                 <div class="">
                                     @if(isset($user->skill[0]))
                                     @foreach($user->skill as $skill)
-                                    <button class="curv_cmn_btn">{{$skill->getSkills->name}}</button>
+                                    <button class="curv_cmn_btn">{{$skill->name}}</button>
                                     @endforeach
                                     @else
                                     -
@@ -221,3 +211,17 @@
 @endsection
 
 @include('website.include.profilefavscript')
+
+@push('scripts')
+<script>
+    $('.form-check-input').change(function() {
+        if ($(this).is(":checked")) {
+            $(this).parents('label').addClass('search_page_filters_data_active');
+        } else {
+            $(this).parents('label').removeClass('search_page_filters_data_active');
+        }
+    });
+
+    $(".side-bar-cmn-part").collapse("hide");
+</script>
+@endpush

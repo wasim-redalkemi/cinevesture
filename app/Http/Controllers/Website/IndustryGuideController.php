@@ -8,6 +8,7 @@ use App\Models\MasterSkill;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class IndustryGuideController extends WebController
@@ -79,7 +80,7 @@ class IndustryGuideController extends WebController
                 });
             } 
         })
-        ->with('country','skill.getSkills')
+        ->with('skill','country')
         ->where('id','!=',auth()->user()->id)
         ->where('user_type','U')
         ->orderByDesc('id')

@@ -30,6 +30,7 @@
     <div class="container-fluid page-body-wrapper">
       @include('admin.include.right-sidebar')
       @include('admin.include.sidebar')
+      @include('admin.include.deletemodal')
       <div class="main-panel">
         @include('admin.include.response')
         @yield('content')
@@ -38,6 +39,10 @@
     </div>
             <!-- page-body-wrapper ends -->
   </div>
+
+
+ 
+
   <script src="{{ asset('admin/js/vendor.bundle.base.js') }}"></script>
   <script src="{{ asset('admin/js/vendor.bundle.addons.js') }}"></script>
   <!-- endinject -->
@@ -88,6 +93,13 @@
         btns.removeClass('dt-button');
       }
     });
+
+    $('.confirmAction').click(function(e)
+        {
+            e.preventDefault();
+            $('#confirmActionModal .confirmActionModalLink').attr('href',$(this).attr('href'));
+            $('#confirmActionModal').modal('show');
+        });
     </script>
 </body>
 <!-- Mirrored from www.bootstrapdash.com/demo/serein/template/demo/vertical-default-light/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Sep 2022 07:16:29 GMT -->

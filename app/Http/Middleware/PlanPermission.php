@@ -18,6 +18,15 @@ class PlanPermission
      */
     public function handle(Request $request, Closure $next)
     {    
+
+
+      if(isset(auth()->user()->id)){ // check login
+           
+         $is_subscribed = SubscriptionUtilityController::isSubscribed();
+         if(!$is_subscribed){
+            return redirect()->route('plans-view');
+         }
+     }
         if($request->session()->get('permission')){
            
            $getModule_id = null;
@@ -61,16 +70,6 @@ class PlanPermission
               }
            }
         }
-        
-        
-        if(isset(auth()->user()->id)){ // check login
-           
-            $is_subscribed = SubscriptionUtilityController::isSubscribed();
-            if(!$is_subscribed){
-               // return redirect()->route('plans-view');
-            }
-        }
-       
       }
       return $next($request);
  }

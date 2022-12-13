@@ -37,11 +37,11 @@
                     </div>
                     <div class="sidebar_collapse collapse dont-collapse-sm" id="collapseExample">
                         <div class="sidebar_data_mobile">
-                            <div class="search-page mt-3 search_page_filters_wrap">
-                                <button data-toggle="collapse" data-target="#gener-list" class="btn dropdown-toggle w-100" type="button">
+                            <div class="search-page mt-3 search_page_filters_wrap dropend">
+                                <a class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Genres
-                                </button>
-                                <div class="collapse collapse_hide" id="gener-list">
+                                </a>
+                                <div class="dropdown-menu filter_modal_wrap" id="">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
@@ -63,13 +63,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="dropdown search-page search_page_filters_wrap">
-                                <button class="btn dropdown-toggle w-100" data-toggle="collapse" data-target="#category-list" type="button">
+                            <div class="dropend search-page search_page_filters_wrap">
+                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Category
                                 </button>
                                 <!-- Modal for Category List -->
 
-                                <div class="collapse" id="category-list">
+                                <div class="dropdown-menu filter_modal_wrap">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
@@ -93,13 +93,13 @@
 
                                 <!-- Modal for category end -->
                             </div>
-                            <div class="dropdown search-page search_page_filters_wrap">
-                                <button class="btn dropdown-toggle w-100" data-toggle="collapse" data-target="#looking-list" type="button">
+                            <div class="dropend search-page search_page_filters_wrap">
+                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Looking for
                                 </button>
 
                                 <!-- Modal for looking List -->
-                                <div class="collapse" id="looking-list">
+                                <div class="dropdown-menu filter_modal_wrap" id="">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
@@ -122,15 +122,12 @@
                                 </div>
                                 <!-- Modal for looking end -->
                             </div>
-                            <div class="dropdown search-page search_page_filters_wrap">
-
-                                <button class="btn dropdown-toggle w-100" data-toggle="collapse" data-target="#project-list" type="button">
+                            <div class="dropend search-page search_page_filters_wrap">
+                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Project Stage
                                 </button>
-
                                 <!-- Modal for project List -->
-
-                                <div class="collapse" id="project-list">
+                                <div class="dropdown-menu filter_modal_wrap">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
@@ -153,13 +150,12 @@
                                 </div>
                                 <!-- Modal for project end -->
                             </div>
-                            <div class="dropdown search-page search_page_filters_wrap">
-                                <button class="btn dropdown-toggle w-100" data-toggle="collapse" data-target="#country-list" class="btn dropdown-toggle w-100" type="button">
+                            <div class="dropend search-page search_page_filters_wrap">
+                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Country
                                 </button>
-
                                 <!-- Modal for counter List -->
-                                <div class="collapse" id="country-list">
+                                <div class="dropdown-menu filter_modal_wrap" style="overflow: auto; background: #ffffff">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
@@ -177,20 +173,17 @@
                                                 </div>
                                                 @endforeach
                                             </div>
-
                                         </div>
-
                                     </div>
                                 </div>
                                 <!-- Modal for country end -->
                             </div>
-                            <div class="dropdown search-page search_page_filters_wrap">
-                                <button class="btn dropdown-toggle w-100" data-toggle="collapse" data-target="#language-list" class="btn dropdown-toggle w-100" type="button">
+                            <div class="dropend search-page search_page_filters_wrap">
+                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Language
                                 </button>
-
                                 <!-- Modal for language List -->
-                                <div class="collapse" id="language-list">
+                                <div class="dropdown-menu filter_modal_wrap">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
@@ -208,13 +201,9 @@
                                                 </div>
                                                 @endforeach
                                             </div>
-
                                         </div>
-
                                     </div>
                                 </div>
-
-                                <!-- Modal for language end -->
                             </div>
                             <div class="form-check d-flex align-items-center mt-4">
                                 <input class="form-check-input" <?php if (request('project_verified') == '1') {
@@ -317,17 +306,14 @@
 
 @push('scripts')
 <script>
-    
-    $('.form-check-input').change(function(){
-    if($(this).is(":checked")) {
-        $(this).parents('label').addClass('search_page_filters_data_active');
-    } else {
-        $(this).parents('label').removeClass('search_page_filters_data_active');
-    }
-});
+    $('.form-check-input').change(function() {
+        if ($(this).is(":checked")) {
+            $(this).parents('label').addClass('search_page_filters_data_active');
+        } else {
+            $(this).parents('label').removeClass('search_page_filters_data_active');
+        }
+    });
 
-$(".side-bar-cmn-part").collapse("hide");
-
-
+    $(".side-bar-cmn-part").collapse("hide");
 </script>
 @endpush

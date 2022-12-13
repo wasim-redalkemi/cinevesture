@@ -92,13 +92,13 @@
                             @if(count($projectData[0]['project_milestone']))
                                 @foreach ($projectData[0]['project_milestone'] as $in => $ass)
                                 <div id="milestome-{{$ass['id']}}" class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-4">
                                         <div class="profile_input">
                                             <label>Milestone Description</label>
                                             <input value="{{$ass['description']}}" type="text" class="form-control" name="project_milestone_description" placeholder="Description">
                                         </div>
                                     </div>
-                                    <div class="col-md-2">
+                                    <div class="col-md-3">
                                         <div class="profile_input">
                                             <label>Milestone Budget (USD)</label>
                                             <input value="{{$ass['budget']}}" type="number" class="form-control no_number_arrows" name="project_milestone_budget" placeholder="Budget (USD)">
@@ -123,13 +123,13 @@
                                 @endforeach
                             @endif
                             <div id="milestone_new" class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>Milestone Description</label>
                                         <input type="text" class="form-control" name="project_milestone_description" placeholder="Description">
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>Milestone Budget (USD)</label>
                                         <input type="number" class="form-control no_number_arrows" name="project_milestone_budget" placeholder="Budget (USD)">
@@ -304,13 +304,13 @@
             let complete = assoEntry.complete == 1 ? "checked": "";
             let html = "";
             html += '<div id="milestone-'+assoEntry.id+'" class="row">';
-            html += '<div class="col-md-5">';
+            html += '<div class="col-md-4">';
                 html += '<div class="profile_input">';
                     html += '<label>Milestone Description</label>';
                     html += '<input value="'+assoEntry.description+'" type="text" class="form-control" name="project_milestone_description" placeholder="Description">';
                 html += '</div>';
             html += '</div>';
-            html += '<div class="col-md-2">';
+            html += '<div class="col-md-3">';
                 html += '<div class="profile_input">';
                     html += '<label>Milestone Budget (USD)</label>';
                     html += '<input value="'+assoEntry.budget+'" type="number" class="form-control no_number_arrows" name="project_milestone_budget" placeholder="Budget (USD)">';

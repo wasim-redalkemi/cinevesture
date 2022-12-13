@@ -39,7 +39,7 @@
                     <ul class="dropdown-menu nav-drop" id="list-categories">
                        @foreach($categories as $cate)
                       <li>
-                        <input class="form-check-input" type="checkbox" value=""  name="categories[]" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="{{$cate->id}}"  name="categories[]" id="flexCheckDefault">
                         <label class="form-check-label mx-2" for="flexCheckDefault">
                           {{$cate->name}}
                         </label>
@@ -95,7 +95,7 @@
                     <ul class="dropdown-menu nav-drop" id="list-countries">
                     @foreach($countries as $con)
                       <li>
-                        <input class="form-check-input" type="checkbox" value="" name="countries[]" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="{{$con->id}}" name="countries[]" id="flexCheckDefault">
                         <label class="form-check-label mx-2" for="flexCheckDefault">
                           {{$con->name}}
                         </label>

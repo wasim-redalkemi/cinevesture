@@ -52,14 +52,13 @@
                     <input type="password" class="password-only is-invalid-remove outline w-100" placeholder="Re Enter Password" name="password_confirmation" id = "password_confirmation" required autocomplete="new-password">
                 </div>
                 <div class="col-12 mt-4-5">
+                    <input type="text" value="<?php ?>">
                     <button type="submit" class="outline w-100">{{ __('Create Account') }}</button>
                 </div>
             </div>
         </form>
         <div class="col-12 mt-2">
-            <button class="with_google_btn"> <img src="{{ asset('images/asset/google.png') }}" width="24" width="24" class="mx-3">Sign
-                up
-                with google</button>
+            <button class="with_google_btn"> <img src="{{ asset('images/asset/google.png') }}" width="24" width="24" class="mx-3">Sign up with google</button>
         </div>
         <div class="help-text mt-2 mt-lg-4">Need Help ?</div>
         <div class="bottom-container mb-5">

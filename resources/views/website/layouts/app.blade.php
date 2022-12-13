@@ -100,30 +100,45 @@
                 $('.textlength').css({"color":"#787885", "text-align":"end"});
             }
         });
+
+        // $('.collapse_hide').collapse('hide');
         $(document).click(function (e) {
             var container = $(".profile_side_bar");
-            // if the target of the click isn't the container nor a descendant of the container
             if (!container.is(e.target) && container.has(e.target).length === 0) 
             {
                 container.find('.sidebar_collapse').collapse('hide');
             }
             var container = $(".Header_main_container");
-            // if the target of the click isn't the container nor a descendant of the container
             if (!container.is(e.target) && container.has(e.target).length === 0) 
             {
                 container.find('.navbar_sm').collapse('hide');
             }
             var container = $(".side-bar-cmn-part");
+            
             if (!container.is(e.target) && container.has(e.target).length === 0) 
             {
                 container.find('.sidebar_collapse').collapse('hide');
             }
-            var container = $(".project_result_section");
-            // if the target of the click isn't the container nor a descendant of the container
-            if (!container.is(e.target) && container.has(e.target).length === 0) 
-            {
-                container.find('.collapse_hide').collapse('hide');
-            }
+
+            // $('.dropdown-toggle').click(function()
+            // {
+            //     $('.collapse_hide').not(this).collapse('hide');
+            //     $(this).parents('.search_page_filters_wrap').find('.collapse_hide').collapse('show');
+            // });
+
+            // var search_container = $(".search_page_filters_wrap");
+            // if (!search_container.is(e.target) && search_container.has(e.target).length === 0) 
+            // {
+            //     search_container.find('.collapse_hide').collapse('hide');
+            // }
+           
+            $(".filter_modal_wrap").click(function(e){
+                e.stopPropagation();
+            })
+            $(".nav-drop").click(function(e){
+                e.stopPropagation();
+            })
+
 
         });
         $('.confirmAction').click(function(e)

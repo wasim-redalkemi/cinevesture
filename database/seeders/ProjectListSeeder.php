@@ -18,7 +18,26 @@ class ProjectListSeeder extends Seeder
             'list_name' => 'carousel',
             'list_status' => 'publish',
             'created_at' => now(),
-            'updated_at' => now()
-        ]);
+            
+        ],
+        [
+            'list_name' => 'dron',
+            'list_status' => 'publish',
+            'created_at' => now(),
+            
+        ],
+        [
+            'list_name' => 'sound',
+            'list_status' => 'publish',
+            'created_at' => now(),
+            
+        ],
+        [
+            'list_name' => 'key',
+            'list_status' => 'publish',
+            'created_at' => now(),
+    
+        ]
+    );
     }
 }
