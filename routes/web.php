@@ -83,7 +83,10 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
 
     Route::group(['prefix'=>'user'],function()
 	{	Route::get('/plans',[PlanController::class,'showPlans'])->name('plans-view');
-        Route::get('/subscription/store',[SubscriptionController::class,'storeSubscription'])->name('subscription-create');
+        Route::get('/subscription/order-create',[SubscriptionController::class,'createOrder'])->name('subscription-order-create');
+        Route::get('/subscription/success',[SubscriptionController::class,'paymentSuccess'])->name('subscription-success');
+        Route::get('/subscription/failed',[SubscriptionController::class,'paymnetFailed'])->name('subscription-failed');
+
 
 		Route::get('/profile-private-show', [UserController::class, 'profilePrivateShow'])->name('profile-private-show')->middleware('plancheck');
 		Route::get('/profile-public-show', [UserController::class, 'profilePublicShow'])->name('profile-public-show')->middleware('plancheck');
