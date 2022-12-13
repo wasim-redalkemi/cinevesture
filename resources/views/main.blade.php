@@ -213,7 +213,7 @@
     $(".main_slider.owl-carousel").owlCarousel({
       center: true,
       autoPlay: 3000,
-      // autoplay: true,
+      autoplay: true,
       loop: true,
       nav: true,
       center: true,
@@ -230,7 +230,7 @@
     $(".test.owl-carousel").owlCarousel({
       center: true,
       autoPlay: 1000,
-      // autoplay: true,
+      autoplay: true,
       loop: true,
       nav: true,
       margin: 20,
