@@ -24,7 +24,7 @@ class PlanPermission
            
          $is_subscribed = SubscriptionUtilityController::isSubscribed();
          if(!$is_subscribed){
-            return redirect()->route('plans-view');
+            // return redirect()->route('plans-view');
          }
      }
         if($request->session()->get('permission')){
