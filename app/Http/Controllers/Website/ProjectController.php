@@ -535,7 +535,7 @@ class ProjectController extends WebController
             $project_stages = ProjectStage::all();
              
             $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
-            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectOnlyImage','projectOnlyVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->get();
+            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->get();
             $projectData = $projectData->toArray();
 
             return view('website.user.project.project_public_view', compact(['UserProject','projectData','geners','categories','looking_for','project_stages','countries','languages']));
