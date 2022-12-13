@@ -63,7 +63,7 @@
                     @endforeach                    
                 @endif 
                 <div class="preview_headtext">Genre</div>
-                <div class="mt-2">
+                <div class="mt-2 d-flex flex-wrap">
                     @if (!empty($projectData[0]['genres']))
                     @foreach ($projectData[0]['genres'] as $v)
                         <button class="curv_cmn_btn darkbtn mx-1">{{$v['name']}}</button>
@@ -178,7 +178,7 @@
                     </div>
 
                 
-                    <div class="preview_headtext mb-3">pdf</div>
+                    <div class="preview_headtext mb-3">Pdf</div>
                     <div class="row">
                         @if (!empty($projectData[0]['project_only_doc']))
                         @foreach ($projectData[0]['project_only_doc'] as $v)
