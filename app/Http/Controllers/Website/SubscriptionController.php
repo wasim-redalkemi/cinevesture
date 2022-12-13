@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MasterPlanModule;
 use App\Models\MasterPlanOperation;
 use App\Models\Plans;
+use App\Models\SubscriptionOrder;
 use App\Models\User;
 use App\Models\UserSubscription;
 use Carbon\Carbon;
@@ -70,13 +71,22 @@ class SubscriptionController extends Controller
                 ]);
 
         }
+        $order = new SubscriptionOrder();
         dd($checkoutSesssion);
+        $order->order_id = time();
+        $order->payment_intent = $checkoutSesssion->payment_intent;
+        $order->plan_id = $plan->id;
+        $order->payment_intent = $checkoutSesssion->payment_intent;
+        $order->payment_intent = $checkoutSesssion->payment_intent;
+        $order->payment_intent = $checkoutSesssion->payment_intent;
+        $order->payment_intent = $checkoutSesssion->payment_intent;
+
+
         $checkoutUrl=$checkoutSesssion->url;
 
         return redirect($checkoutUrl);  
     }catch(Exception $e){
         return back()->with('error', $e->getMessage());
-
     } 
     }
 }
