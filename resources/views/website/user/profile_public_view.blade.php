@@ -104,7 +104,9 @@
                         </div>
                         <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
                             @if($_REQUEST['id'] != auth()->user()->id )
-                            <i class="fa fa-heart icon-size Aubergine" aria-hidden="true"></i>
+                            {{-- <i class="fa fa-heart icon-size Aubergine" aria-hidden="true"></i> --}}
+                            <div> <i class="fa fa-heart-o icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$user->id}}" aria-hidden="true"></i></div>
+
                             @endif
                             <button class="verified_cmn_btn mx-3"> <i class="fa fa-check-circle hot-pink mx-1" aria-hidden="true"></i> VERIFIED</button>
                         </div>
@@ -373,7 +375,7 @@
                                                             </div>
 
                                                             <div class="mt-5">
-                                                                <textarea name="endorse_message" id="endorse_message" cols="25" rows="6" class="controlTextLength w-100" placeholder="Message" text-length="250" maxlength="250" name="about" aria-label="With textarea"></textarea>
+                                                                <textarea name="endorse_message" id="endorse_message" cols="25" rows="6" class="controlTextLength w-100" placeholder="Message" text-length="600" maxlength="600" name="about" aria-label="With textarea"></textarea>
                                                             </div>
 
                                                             <div class="mt-4">
@@ -492,6 +494,48 @@
                     } 
                 });
             });
+        });
+        $('.like-profile').on('click', function(e) {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var profile_id = $(this).attr('data-id');
+        var classList = $(this).attr('class').split(/\s+/);
+        var element = $(this);
+        $.ajax({
+            type: 'post',
+            data: {'id':profile_id},
+            url: "{{route('favourite-update')}}",
+            success: function(resp) {
+                if (resp.status) {
+                    for (var i = 0; i < classList.length; i++) {
+                        if (classList[i] == 'fa-heart-o') {
+                            element.removeClass('fa-heart-o');
+                            element.addClass('fa-heart')
+                            toastMessage("success", response.msg);
+                            break;
+                        }
+                        if(classList[i] == 'fa-heart')
+                        {
+                            element.removeClass('fa-heart');
+                            element.addClass('fa-heart-o');
+                            toastMessage("error", response.msg);
+
+                            break;
+                        }
+                    }
+                } else {
+
+                }
+            },
+            error: function(error) {
+                
+            }
+        });
+
         });
 
 
