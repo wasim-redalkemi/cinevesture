@@ -70,7 +70,6 @@ class SubscriptionController extends Controller
                 ]);
 
         }
-        dd($checkoutSesssion);
         $checkoutUrl=$checkoutSesssion->url;
 
         return redirect($checkoutUrl);  
