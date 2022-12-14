@@ -16,7 +16,6 @@
       <div class="sub-section">
         <div class="main_slider owl-carousel">
           @foreach ($project_lists_carousel->lists as $k=>$v)
-              
           <div class="item">
             <div class="home-upper-slider">
               <div class="img-container w_maxcont">
@@ -33,6 +32,7 @@
                 <div class="container">
                   <div class="row">
                     <div class="col-md-12">
+                      @if (!empty($v->projects) && isset($v->projects))
                       <div class="project-text mt-5 pt-2">
                         @if (!empty($v->projects->project_name))
                         {{$v->projects->project_name}}
@@ -56,6 +56,12 @@
                         @endif
                       </div>
                       <button class="watch-now-btn mt-4"><a href="{{ route('public-view', ['id'=>$v->projects->id]) }}" style="color:white !important;">Watch now</a></button>
+                      @else
+                        <div class="not-found-text">
+                          <p>No Data Found</p>
+                        </div>
+                      @endif
+                      
                     </div>
                   </div>
                 </div>
@@ -78,6 +84,7 @@
         <div class="test owl-carousel owl-theme">
           @foreach ($v->lists as $k1=>$v1)
           <div class="home_img_wrap">
+            @if (!empty($v1->projects) && isset($v1->projects))
             <div class="slider">
               <div class="img-container">
                 @if (!empty($v1->projects->projectImage) || isset($v1->projects->projectImage))
@@ -110,6 +117,12 @@
                 @endif
               </div>
             </div>
+            @else
+              <div class="not-found-text">
+                <p>No Data Found</p>
+              </div> 
+            @endif
+            
           </div>
           @endforeach
         </div>
