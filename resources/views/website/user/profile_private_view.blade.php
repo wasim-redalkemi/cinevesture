@@ -42,7 +42,7 @@
                                 </div>
                                 <div class="col-md-10">
                                     <div class="guide_profile_main_text pt-3">
-                                        {{ (isset($user->first_name))?ucfirst($user->first_name).' '.ucfirst($user->last_name):'Name'; }}
+                                        {{ (!empty($user->first_name))?ucfirst($user->first_name).' '.ucfirst($user->last_name):'Name'; }}
                                     </div>
                                     <div class="guide_profile_main_subtext aubergine">
                                         <i>{{empty($user_age->range)?'Age':$user_age->range;}} </i>
@@ -50,9 +50,9 @@
                                         | <i>{{empty($user->gender_pronouns)?'Gender-pronouns':$user->gender_pronouns;}}</i>
                                     </div>
                                     <div class="guide_profile_main_subtext">
-                                        {{ (isset($user->job_title))?$user->job_title:'Job Title'; }}
+                                        {{ (!empty($user->job_title))?$user->job_title:'Job Title'; }}
                                         |
-                                        {{ (isset($user_country->name))?$user_country->name:'Country'; }}
+                                        {{ (!empty($user_country->name))?$user_country->name:'Country'; }}
                                     </div>
                                     <div class="d-block d-md-none">
                                                 <a href="{{ route('profile-create')}}">
@@ -106,7 +106,7 @@
                                 </div>
                                 <div class="guide_profile_main_subtext mt-3">IMDB Profile</div>
                                 <div class="guide_profile_main_subtext deep-pink mt-1 pointer">
-                                    @if (isset($user->imdb_profile))
+                                    @if (!empty($user->imdb_profile))
                                         <a href="{{ $user->imdb_profile }}" class="link-style"  >{{ $user->imdb_profile }}</a>                                      
                                     @else
                                     <span><b>-</b></span>
@@ -114,7 +114,7 @@
                                 </div>
                                 <div class="guide_profile_main_subtext mt-3">LinkedIn Profile</div>
                                 <div class="guide_profile_main_subtext deep-pink pointer">
-                                    @if (isset($user->linkedin_profile))
+                                    @if (!empty($user->linkedin_profile))
                                         <a href="{{ $user->linkedin_profile }}" class="link-style" >{{ $user->linkedin_profile }}</a>                                         
                                     @else
                                         <span><b>-</b></span>
@@ -122,7 +122,7 @@
                                 </div>
                                 <div class="guide_profile_main_subtext mt-3">Website</div>
                                 <div class="guide_profile_main_subtext deep-pink mt-1 pointer">
-                                    @if (isset($user->website))     
+                                    @if (!empty($user->website))     
                                         <a href="{{ $user->website }}" class="link-style" >{{ $user->website }}</a>                                 
                                     @else
                                         <span><b>-</b></span>
@@ -143,7 +143,7 @@
                                     </div>
                                     <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
                                         <p>
-                                            @if (isset($user->about))
+                                            @if (!empty($user->about))
                                             {{ $user->about }}
                                             @else
                                             <span><b>-</b></span>
@@ -175,7 +175,7 @@
                                         @foreach ($portfolio as $k=>$v)
                                         @php
                                         $img = '';
-                                        if (isset($v['get_portfolio'][0]['file_link'])) {
+                                        if (!empty($v['get_portfolio'][0]['file_link'])) {
                                             $img = Storage::url($v['get_portfolio'][0]['file_link']);
                                         } else {
                                             $img = asset('images/asset/user-profile.png');
