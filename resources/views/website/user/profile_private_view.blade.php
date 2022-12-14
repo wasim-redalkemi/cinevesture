@@ -339,10 +339,10 @@
         center: true,
         autoPlay: 1000,
         autoplay: true,
-        loop: true,
+        // loop: true,
         nav: true,
         margin: 20,
-        center: true,
+        center: false,
         // items: 4,
         responsive: {
             480: {
