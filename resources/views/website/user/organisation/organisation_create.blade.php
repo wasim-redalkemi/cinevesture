@@ -305,7 +305,7 @@
                                 </div>
                             </div>                            
                         </div>
-                        <div class="row">
+                        {{-- <div class="row">
                             <div class="col-md-3">
                                 <div><img src="{{ asset('images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="w-100"></div>
                                 <div class="d-flex justify-content-between mt-3">
@@ -320,7 +320,7 @@
                                     <div class="icon_container"><i class="fa fa-times-circle icon-size deep-pink" aria-hidden="true"></i></div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-end mt-4">
