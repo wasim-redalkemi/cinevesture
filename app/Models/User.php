@@ -88,4 +88,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(UserAppliedJob::class,'user_id');
     }
+
+    public function isfavouriteProfile(){
+        return $this->hasOne(UserFavouriteProfile::class, 'profile_id', 'id')->where('user_id',auth()->user()->id);
+    }
 }
