@@ -1067,7 +1067,7 @@ body {
     color: #DD45B3;
 }
 .search-table-body tr td {
-    width: 40%;
+    /* width: 60%; */
 }
 
 .public-head-subimage {
@@ -1801,9 +1801,6 @@ button, input, optgroup, select, textarea {
 {
     width: auto;
     max-width: 80vw;
-    box-shadow:0px 0px 25px -10px #000;
-    background-color: #fff !important;
-    
 }
 .no-padding
 {
@@ -1812,7 +1809,7 @@ button, input, optgroup, select, textarea {
 .filter_modal_wrap .filter_option_wrap
 {
     height: auto;
-    max-height: 40vh;
+    max-height: 80vh;
     overflow-y: auto;
     padding-right: 4px;
     overflow-x: hidden;
@@ -2477,26 +2474,21 @@ select {
 .search_page_filters_wrap
 {
     position: relative;
-    /* left: 13%; */
-}
-.search_page_filters_wrap .dropdown-menu {
-    background-color: transparent;
-    border: none;
 }
 .search_page_filters_wrap .filter_option_wrap
 {
-    /* position: absolute; */
-    
+    position: absolute;
+    left: 110%;
     z-index: 999;
     max-height: 300px;
     overflow: auto;
     /* background-color: #fff; */
     background: #FFFFFF;
-        /* box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25); */
+        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
         border-radius: 4px;
     width: 50vw;
     max-width: 50vw;
-    top: 10px;
+    top: 8px;
     overflow-x: hidden;
     padding: 10px;
 }
@@ -2658,7 +2650,7 @@ select {
         padding: 20px;
         margin-top: 18px;
         z-index: 10;
-        /* -webkit-transition: .4s; */
+        -webkit-transition: .4s;
     }
     .inp_data {
     font-weight: 400;
@@ -2726,30 +2718,9 @@ select {
     max-height: 60vh;
 }
 
-.filter_modal_wrap
-{
-    width: fit-content;
-    left: -100% !important;
-    top: 40px !important;
-}
 .home_img_wrap {
     width: 280.728px;
     }
-
-    .search_page_filters_wrap .filter_option_wrap {
-        left: 0;
-        top: 45px;
-        max-width: 55vw;
-        width: fit-content;
-    }
-    .dropend .dropdown-toggle::after {
-        border-top: 0.3em solid;
-        border-right: 0.3em solid transparent;
-        border-bottom: 0;
-        border-left: 0.3em solid transparent;
-        
-    }
-
 }
 
     /* media query end here */
@@ -2790,18 +2761,4 @@ color: #000;
         margin: 0px;
       }
 
-   .public-head-subimage .playVideoWrap {
-    max-width: 400px;
-    max-height: 300px;
-    width: auto;
-}
-.playVideoWrap {
-    max-width: 300px;
-    max-height: 250px;
-    width: auto;
-}
-.playVideoWrap img{
-    width: auto;
-    max-width: 100%;
-    max-height: 100%;
-}
+      

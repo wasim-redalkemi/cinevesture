@@ -30,6 +30,7 @@ class PlanController extends Controller
               
                  ->get();
         $modules = MasterPlanModule::all();
+        
         return view('website.user.subscription.index',compact('plans','modules'));
     }
 
