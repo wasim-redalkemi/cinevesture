@@ -32,7 +32,7 @@
                 <div class="container">
                   <div class="row">
                     <div class="col-md-12">
-                      @if (!empty($v->projects) && isset($v->projects))
+                      @if (!empty($v->projects[0]))
                       <div class="project-text mt-5 pt-2">
                         @if (!empty($v->projects->project_name))
                         {{$v->projects->project_name}}
@@ -84,7 +84,7 @@
         <div class="test owl-carousel owl-theme">
           @foreach ($v->lists as $k1=>$v1)
           <div class="home_img_wrap">
-            @if (!empty($v1->projects) && isset($v1->projects))
+            @if (!empty($v1->projects[0]))
             <div class="slider">
               <div class="img-container">
                 @if (!empty($v1->projects->projectImage) || isset($v1->projects->projectImage))
