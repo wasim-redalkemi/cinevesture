@@ -54,6 +54,10 @@
               ?>
             </div>
               </div>
+              <button class="navbar-toggler mt-1" style="right: 30px;" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
+              aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"><i class="fa fa-filter text-light" aria-hidden="true"></i></span>
+            </button>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
               aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"><img src="{{ asset('images/asset/menu.svg') }}" alt=""></span>

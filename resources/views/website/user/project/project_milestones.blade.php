@@ -42,7 +42,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-4">
-                                <div class="mt_16">
+                                <div class="mt_16 select2forError">
                                     <label>Looking for <span style = "color:red">*</span></label>
                                     <select name="loking_for[]" class="js-select2 @error('loking_for') is-invalid @enderror" autofocus multiple select required>
                                         @foreach ($lookingFor as $k=>$v)
@@ -117,7 +117,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-1 d-flex align-items-end pb-2 mt-2 mt-md-0">
-                                        <i class="fa fa-times-circle deep-pink icon-size remove-entry" aria-hidden="true"></i>
+                                        <i class="fa fa-times-circle deep-pink icon-size remove-entry pointer" aria-hidden="true"></i>
                                     </div>
                                 </div>
                                 @endforeach
@@ -153,13 +153,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-md-3 d-flex align-items-end mt-2">
                                     <div class="profile_input">
                                         <div class="add_another_btn">Add another milestone</div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                         <div class="row">
                             <div class="col-md-12">
@@ -329,7 +329,7 @@
                 html += '</div>';
             html += '</div>';
             html += '<div class="col-md-1 d-flex align-items-end pb-2 mt-2 mt-md-0">';
-                html += '<i class="fa fa-times-circle deep-pink icon-size remove-entry" aria-hidden="true"></i>';
+                html += '<i class="fa fa-times-circle deep-pink icon-size remove-entry pointer" aria-hidden="true"></i>';
             html += '</div>';
             html += '</div>';
             $(html).insertBefore(parentElemId+" #milestone_new");

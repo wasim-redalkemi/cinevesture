@@ -25,9 +25,9 @@
                                     <div class="d-flex justify-content-between">
                                         <div class="search-head-text Aubergine_at_night mx-3 mx-md-0">Profile</div>
                                         <div class="d-none d-md-block">
-                                                <a href="{{ route('profile-create')}}">
-                                                    <button class="guide_profile_btn mt-2">Edit </button>
-                                                </a>
+                                            <a href="{{ route('profile-create')}}">
+                                                <button class="guide_profile_btn mt-2">EDIT </button>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -55,10 +55,10 @@
                                         {{ (!empty($user_country->name))?$user_country->name:'Country'; }}
                                     </div>
                                     <div class="d-block d-md-none">
-                                                <a href="{{ route('profile-create')}}">
-                                                    <button class="guide_profile_btn mt-2">Edit </button>
-                                                </a>
-                                        </div>
+                                        <a href="{{ route('profile-create')}}">
+                                            <button class="guide_profile_btn mt-2">Edit </button>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -128,7 +128,7 @@
                                         <span><b>-</b></span>
                                         @endif
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -178,7 +178,7 @@
                                         if (!empty($v['get_portfolio'][0]['file_link'])) {
                                             $img = Storage::url($v['get_portfolio'][0]['file_link']);
                                         } else {
-                                            $img = asset('images/asset/user-profile.png');
+                                        $img = asset('images/asset/user-profile.png');
                                         }
                                         @endphp
                                         <div class="item portfolio_item" onclick="portfolio_model({{$v['id']}})">
@@ -202,15 +202,16 @@
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content croper_modal">
                                                     <div class="modal-body">
-                                                        <div class="d-flex justify-content-end modal_btn">
-                                                            <button type="button" class="close modal_cross_btn" data-dismiss="modal" aria-label="Close">
-                                                                <span aria-hidden="true">&times;</span>
+                                                        <div class="float-end">
+                                                            <button type="button" class="close normal_btn" data-dismiss="modal" aria-label="Close">
+                                                                <!-- <span aria-hidden="true">x</span> -->
+                                                                <img src="{{ asset('images/asset/cros-modal-Icon.svg') }}" />
                                                             </button>
                                                         </div>
                                                         <div class="modal_content">
-                                                            
+
                                                         </div>
-                                                  
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -287,7 +288,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="guide_profile_subsection">
                         <div class="container">
                             <div class="row">
@@ -315,7 +316,6 @@
                             @endif
                         </div>
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -357,31 +357,29 @@
         },
     });
 
-    function portfolio_model(id)
-    {
+    function portfolio_model(id) {
         $("#portfolioModal .modal_content").html('');
-        $.ajax(
-        {
-            url:"{{ route('protfolio-modal') }}",
-            type:'POST',
-            dataType:'json',
-            data:{portfolioId:id,"_token": "{{ csrf_token() }}"},
-            success:function(response)
-            {
+        $.ajax({
+            url: "{{ route('protfolio-modal') }}",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                portfolioId: id,
+                "_token": "{{ csrf_token() }}"
+            },
+            success: function(response) {
                 console.log(response)
                 $("#portfolioModal .modal_content").html(response);
                 // toastMessage(response.status, response.msg);
                 $('#portfolioModal').modal('show');
                 // $('.modal-backdrop').remove();
             },
-            error:function(response,status,error)
-            {   
+            error: function(response, status, error) {
                 console.log(response);
                 console.log(status);
                 console.log(error);
-            } 
+            }
         });
     }
-    
 </script>
 @endpush

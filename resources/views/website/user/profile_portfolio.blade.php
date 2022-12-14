@@ -53,6 +53,7 @@
                             </div>                        
                             <div class="row">
                                 <div class="col-md-6">
+                                    <div  class="select2forError">
                                 <div class="profile_input">
                                     <label for="lang">Project specific Skills</label>
                                     <select name="project_specific_skills_id[]" class="outline is-invalid-remove js-select2 @error('project_specific_skills_id') is-invalid @enderror" id="lang" multiple>
@@ -67,11 +68,12 @@
                                         </span>
                                     @enderror
                                 </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="profile_input">
+                                    <div class="profile_input select2forError">
                                         <label for="lang">Project Location (Where it took place)</label>
                                         <select name="project_country_id[]" class="outline is-invalid-remove js-select2 @error('project_country_id') is-invalid @enderror" id="lang" multiple>
                                         @foreach ($country as $k=>$v)

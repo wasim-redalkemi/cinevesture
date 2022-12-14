@@ -134,7 +134,7 @@
                             <div class="user_profile_container wh_66">
                                 <!-- <img src="{{ asset('images/asset/user-profile.png') }}" /> -->
                                 @if(isset($user->profile_image))
-                                <img src="{{Storage::url($user->profile_image)}}" />
+                                <img src="{{Storage::url($user->profile_image)}}" width="100%"/>
                                 @else
                                 <img src="{{ asset('images/asset/user-profile.png') }}" width="100%" height="100%" />
                                 @endif
