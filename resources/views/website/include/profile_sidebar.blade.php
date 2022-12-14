@@ -49,7 +49,7 @@
     <hr class="sidebar_content_hr">
     <div class="sidebar_content"><a href="{{ route('favourite-view') }}">Favourites</a></div>
     <hr class="sidebar_content_hr">
-    <div class="sidebar_content"><a href="">Membership & Billing</a></div>
+    <div class="sidebar_content"><a href="{{route('subscription-billing')}}">Membership & Billing</a></div>
     <hr class="sidebar_content_hr">
     <div class="sidebar_content"><a href="{{ route('setting-page')}}">Settings</a></div>
     <hr class="sidebar_content_hr">

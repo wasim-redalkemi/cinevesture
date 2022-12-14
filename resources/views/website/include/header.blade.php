@@ -2,7 +2,7 @@
 
 @php
     $routes = [
-        "home"=>["id"=>"project","title"=>"Project","siblingRoutes"=>[]],
+        "home"=>["id"=>"project","title"=>"Projects","siblingRoutes"=>[]],
         "show-guide"=>["id"=>"industry_guide","title"=>"Industry Guide","siblingRoutes"=>[]],
         "job-search-page"=>["id"=>"jobs","title"=>"Jobs","siblingRoutes"=>["showJobSearchResults","showApplyJob"]],        
     ];

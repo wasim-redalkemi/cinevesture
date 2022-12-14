@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class SubscriptionOrder extends Model
 {
     use HasFactory;
+    protected $table ="subscription_orders";
 }

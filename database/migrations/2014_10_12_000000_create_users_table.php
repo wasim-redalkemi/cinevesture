@@ -39,6 +39,7 @@ class CreateUsersTable extends Migration
             $table->string('website',255)->nullable();
             $table->string('intro_video_link',500)->nullable();
             $table->string('intro_video_thumbnail',500)->nullable();
+            $table->string('google_id',255)->nullable();
 
             $table->rememberToken();
             $table->timestamps();
