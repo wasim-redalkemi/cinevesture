@@ -18,9 +18,9 @@
                             @php
                                 $Job_data = $Job_data->toArray();
                             @endphp
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-end">
                                 
-                                <div class="contact-page-text deep-aubergine"> <span onclick="history.back()"><i class="fa fa-arrow-left" aria-hidden="true"></i></span> @if (!empty($Job_data['title'])) {{$Job_data['title']}} @endif</div>
+                                <!-- <div class="contact-page-text deep-aubergine"> <span onclick="history.back()"><i class="fa fa-arrow-left" aria-hidden="true"></i></span> @if (!empty($Job_data['title'])) {{$Job_data['title']}} @endif</div> -->
                                 <div class="d-flex align-items-center">
                                     <div class="dropdown  search-page">
                                         <div class="" type="button" data-bs-toggle="dropdown" aria-expanded="false">

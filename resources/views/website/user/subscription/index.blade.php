@@ -120,7 +120,7 @@
 
                                 <div class="py-4 px-3">
                                     <a  href="{{route('subscription-create',['id'=>$plan->id])}}" style="text-decoration:none;">
-                                    <button class="job_search_btn">Select Free Plan</button>
+                                    <button class="job_search_btn">Select {{$plan->plan_name}} Plan</button>
                                     </a>
                                 </div>
                             </div>

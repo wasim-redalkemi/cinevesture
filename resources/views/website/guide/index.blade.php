@@ -74,6 +74,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="mt-3 mt-md-0">
+                                    <div class="select2forError">
                                     <select class="js-select2"  id="talentType" name ="talentType[]" multiple="multiple">
                                     @foreach($talent_type as $type)
                                               
@@ -85,6 +86,7 @@
                                     
                                    @endforeach
                                     </select>
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-1 mt-3 mt-md-0">

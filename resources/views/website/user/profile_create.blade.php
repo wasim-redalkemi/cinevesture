@@ -245,7 +245,8 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="mt_16">
+                                <div class="mt_16 select2forError">
+
                                     <label for="lang">Languages Spoken</label>
                                     <select name="languages[]" class="js-select2 @error('languages') is-invalid @enderror" id="lang" multiple>
                                         @foreach ($languages as $k=>$v)
@@ -293,7 +294,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="mt_16">
+                                <div class="mt_16 select2forError">
                                     <label for="lang">Skills</label>
                                     <select name="skills[]" class="outline is-invalid-remove js-select2" id="lang" multiple>
                                         @foreach ($skills as $k=>$v)

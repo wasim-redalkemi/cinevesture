@@ -40,9 +40,9 @@ body {
     text-decoration: none;
 }
 .navbar-nav .header-nav-link:active, .navbar_profile_text:active {
-    font-weight: 500 !important;
+    /* font-weight: 500 !important;
     color: #DD45B3 !important;
-    text-decoration: none;
+    text-decoration: none; */
 }
 
 
@@ -1439,6 +1439,11 @@ body {
     font-weight: 700;
     text-decoration: none;
 }
+ .modal_cancel_btn {
+    padding: 6px 16px !important;
+    border-radius: 4px !important;
+    background: #FAF8FB !important;
+}
 .save_add_btn, .save_add_btn a, .add_another_btn  {
     padding: 6px 16px;
     background: #FAF8FB;
@@ -1465,7 +1470,8 @@ body {
     align-items: center;
     height: 172px;
     overflow: hidden;
-    background: #f2f2f2;
+    /* background: #f2f2f2; */
+    background: #FFFFFF;
     cursor:pointer;
 }
 
@@ -1681,7 +1687,6 @@ body {
     padding: 12px 24px;
     display: flex;
     height: 69px;
-    background: rgba(28, 3, 48, 0.05);
     background: rgba(28, 3, 48, 0.05);
     border-radius: 4px;
     justify-content: space-between;
@@ -1942,8 +1947,12 @@ button, input, optgroup, select, textarea {
     vertical-align: middle;
     margin-right: 8px;
   }
+  .select2-container--default .select2-selection--multiple .select2-selection__clear {
+    display: none;
+  }
   .select2-results__option[aria-selected=true]:before {
     content: url("../images/asset/done_icon_15.jpg") !important;
+    /* content: "\f00c" !important; */
     height: 20px;
     width: 20px;
     border: 0;
@@ -2005,6 +2014,9 @@ button, input, optgroup, select, textarea {
     content: "";
     clear: both;
     display: table;
+  }
+  .pointer {
+    cursor: pointer !important;
   }
 
 .portfolio_item {
@@ -2108,8 +2120,8 @@ select  option, .radio_btn_label{
     overflow: hidden;
 }
 .modal_btn .modal_cross_btn {
-    width: 30px;
-    height: 30px;
+    width: 20px;
+    height: 20px;
     font-size: 20px;
     border: 1px solid #DD45B3;
     display: flex;
@@ -2125,6 +2137,10 @@ select  option, .radio_btn_label{
     text-align: center;
     letter-spacing: 0.018em;
     color: #FAF8FB;
+}
+.normal_btn {
+   background: transparent;
+   border: none;
 }
 .plan_subheader {
     font-weight: 300;
@@ -2571,6 +2587,16 @@ select {
     color: #FAF8FB !important;
     display: flex;
     align-items: center;
+}
+.select2forError {
+    position: relative;
+    margin-bottom: 10px;
+}
+.select2forError label.error {
+    position: absolute;
+    top: 100%;
+    left: 1px;
+
 }
 
 
