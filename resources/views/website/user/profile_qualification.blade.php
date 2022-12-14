@@ -70,7 +70,7 @@
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>Start Year</label>
-                                        <input type="number" class="form-control @error('start_year') is-invalid @enderror" placeholder="YYYY" name="start_year" min="<?php echo date('Y',strtotime('-100year'));?>" max="<?php echo date('Y',strtotime('+100year'));?>" step="1" value="<?php echo date('Y');?>" aria-label="Username" aria-describedby="basic-addon1"0>
+                                        <input type="number" class="form-control @error('start_year') is-invalid @enderror" placeholder="YYYY" name="start_year" min="<?php echo date('Y',strtotime('-100year'));?>" max="<?php echo date('Y',strtotime('+100year'));?>" step="1" value="<?php #echo date('Y');?>" aria-label="Username" aria-describedby="basic-addon1"0>
                                         @error('start_year')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -81,7 +81,7 @@
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>End Year</label>
-                                        <input type="number" class="form-control @error('end_year') is-invalid @enderror" placeholder="YYYY" name="end_year" min="<?php echo date('Y',strtotime('-100year'));?>" max="<?php echo date('Y',strtotime('+100year'));?>" step="1" value="<?php echo date('Y');?>" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="number" class="form-control @error('end_year') is-invalid @enderror" placeholder="YYYY" name="end_year" min="<?php echo date('Y',strtotime('-100year'));?>" max="<?php echo date('Y',strtotime('+100year'));?>" step="1" value="<?php #echo date('Y');?>" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('end_year')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

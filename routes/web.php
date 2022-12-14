@@ -4,6 +4,7 @@
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\FavouriteController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Website\EndorsementController;
 use App\Http\Controllers\Website\OrganisationController;
@@ -41,12 +42,15 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 
+
+// Google URL
+Route::prefix('google')->name('google.')->group( function(){
+    Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');
+    Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
+});
+
 // Admin routes 
-
-
-
-
-    // routes that require user to be authenticated
+   // routes that require user to be authenticated
     Route::post('verify-otp', [RegisterController::class, 'otpVerify'])->name('verify-otp');
     Route::get('otp-view', [RegisterController::class, 'index'])->name('otp-view'); 
     Route::get('resend-otp/{email?}/{type?}', [RegisterController::class, 'resendOtp'])->name('resend-otp'); 
