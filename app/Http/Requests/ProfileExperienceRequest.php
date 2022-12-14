@@ -25,7 +25,7 @@ class ProfileExperienceRequest extends FormRequest
     {
         return [
             'job_title' => 'required|max:100',
-            'comapny' => 'required|max:100',
+            'company' => 'required|max:100',
             'start_date' => 'required|date_format:Y-m-d',
             'end_date' => 'required|date_format:Y-m-d|after_or_equal:start_date',
             'employement_type_id' => 'required',
