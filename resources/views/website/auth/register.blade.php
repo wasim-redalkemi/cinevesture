@@ -52,6 +52,7 @@
                     <input type="password" class="password-only is-invalid-remove outline w-100" placeholder="Re Enter Password" name="password_confirmation" id = "password_confirmation" required autocomplete="new-password">
                 </div>
                 <div class="col-12 mt-4-5">
+                    <input type="hidden" value="<?php ?>">
                     <button type="submit" class="outline w-100">{{ __('Create Account') }}</button>
                 </div>
             </div>

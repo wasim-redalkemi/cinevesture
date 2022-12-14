@@ -37,6 +37,8 @@
                                      if(request('plan_time')=='m'){
                                         echo'plan_month_select';                                    
                                      }
+                                   }else{
+                                    echo'plan_month_select';
                                    } ?>" data = "m">Monthly</button>
                                <!-- </div> -->
                                <!-- <div> -->
@@ -75,7 +77,7 @@
                                         @endif
                                         {{$plan->plan_amount}}</div>
 
-                                    <div class="d-flex justify-content-center"><a  href="{{route('subscription-create',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
+                                    <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
                                 </div>
                                 @foreach($modules as $module)
                                 <div class="plain_industry_guide my-2">
@@ -136,7 +138,7 @@
                                 <div class="Plain_price">
                                     <div class="search-head-subtext Aubergine_at_night mt-3">Paid Monthly</div>
                                     <div class="search-head-text Aubergine_at_night">$9.99</div>
-                                    <div class="d-flex justify-content-center"><a  href="{{route('subscription-create')}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
+                                    <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create')}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
                                 </div>
                                 <div class="plain_industry_guide p-3">
                                     <div class="plain_page_list">
@@ -163,7 +165,7 @@
                                     </div>
                                 </div>
                                 <div class="py-4 px-3">
-                                    <a  href="{{route('subscription-create')}}" style="text-decoration:none;">
+                                    <a  href="{{route('subscription-order-create')}}" style="text-decoration:none;">
                                     <button class="job_search_btn">Select Free Plan</button>
                                     </a>
                                 </div>
@@ -178,7 +180,7 @@
                                 <div class="Plain_price">
                                     <div class="search-head-subtext Aubergine_at_night mt-3">Paid Monthly</div>
                                     <div class="search-head-text Aubergine_at_night">$14.99</div>
-                                    <div class="d-flex justify-content-center"><a  href="{{route('subscription-create')}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
+                                    <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create')}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
                                 </div>
                                 <div class="plain_industry_guide p-3">
                                     <div class="plain_page_list">
@@ -205,7 +207,7 @@
                                     </div>
                                 </div>
                                 <div class="py-4 px-3">
-                                    <a  href="{{route('subscription-create')}}" style="text-decoration:none;">
+                                    <a  href="{{route('subscription-order-create')}}" style="text-decoration:none;">
                                     <button class="job_search_btn">Select Free Plan</button>
                                     </a>
                                 </div>
@@ -220,7 +222,7 @@
                                 <div class="Plain_price">
                                     <div class="search-head-subtext Aubergine_at_night mt-3">Paid Monthly</div>
                                     <div class="search-head-text Aubergine_at_night">$39.00</div>
-                                    <div class="d-flex justify-content-center"><a  href="{{route('subscription-create')}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
+                                    <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create')}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
                                 </div>
                                 <div class="plain_industry_guide p-3">
                                     <div class="plain_page_list">
@@ -251,7 +253,7 @@
                                     </div>
                                 </div>
                                 <div class="py-4 px-3">
-                                    <a  href="{{route('subscription-create')}}" style="text-decoration:none;">
+                                    <a  href="{{route('subscription-order-create')}}" style="text-decoration:none;">
                                     <button class="job_search_btn">Select Free Plan</button>
                                     </a>
                                 </div>
@@ -309,9 +311,9 @@
 
     $('.plan_btn').on('click',function(){
         plan = $(this).attr('data');
-        currency = 'INR'
+        // currency = 'INR'
         link = "{{route('plans-view')}}";
-        if($('#currency').prop('checked', true)) { 
+        if($('#currency').is(':checked')) { 
             currency = 'INR';
             params = '?plan_time='+plan+'&currency='+currency
             window.location.href = link+params;

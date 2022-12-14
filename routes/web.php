@@ -4,6 +4,7 @@
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\FavouriteController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Website\EndorsementController;
 use App\Http\Controllers\Website\OrganisationController;
@@ -41,12 +42,15 @@ Route::get('/', function () {
 Auth::routes(['verify' => true]);
 
 
+
+// Google URL
+Route::prefix('google')->name('google.')->group( function(){
+    Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');
+    Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
+});
+
 // Admin routes 
-
-
-
-
-    // routes that require user to be authenticated
+   // routes that require user to be authenticated
     Route::post('verify-otp', [RegisterController::class, 'otpVerify'])->name('verify-otp');
     Route::get('otp-view', [RegisterController::class, 'index'])->name('otp-view'); 
     Route::get('resend-otp/{email?}/{type?}', [RegisterController::class, 'resendOtp'])->name('resend-otp'); 
@@ -83,7 +87,10 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
 
     Route::group(['prefix'=>'user'],function()
 	{	Route::get('/plans',[PlanController::class,'showPlans'])->name('plans-view');
-        Route::get('/subscription/store',[SubscriptionController::class,'storeSubscription'])->name('subscription-create');
+        Route::get('/subscription/order-create',[SubscriptionController::class,'createOrder'])->name('subscription-order-create');
+        Route::get('/subscription/success',[SubscriptionController::class,'paymentSuccess'])->name('subscription-success');
+        Route::get('/subscription/failed',[SubscriptionController::class,'paymnetFailed'])->name('subscription-failed');
+
 
 		Route::get('/profile-private-show', [UserController::class, 'profilePrivateShow'])->name('profile-private-show')->middleware('plancheck');
 		Route::get('/profile-public-show', [UserController::class, 'profilePublicShow'])->name('profile-public-show')->middleware('plancheck');
@@ -115,6 +122,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
         Route::post('/qualification-edit-store/{id}', [UserController::class, 'qualificationEditStore'])->name('qualification-edit-store');
         Route::get('/qualification-delete', [UserController::class, 'qualificationDelete'])->name('qualification-delete');
         
+        Route::get('/billing', [SubscriptionController::class, 'getBilling'])->name('subscription-billing');
         Route::post('/deactivate', [UserController::class, 'deactivateAccount'])->name('user-deactivate'); 
 
                		

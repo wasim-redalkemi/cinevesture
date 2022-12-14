@@ -154,7 +154,7 @@ class UserController extends WebController
     public function getPortfolio($id)
     {
         return $portfolio = UserPortfolio::query()
-        ->with(['getPortfolio','getPortfolioSkill'])
+        ->with(['getPortfolio','getPortfolioSkill','getPortfolioLocation'])
         ->where('id', $id)
         ->first()
         ->toArray();
@@ -182,7 +182,7 @@ class UserController extends WebController
             $user_country = MasterCountry::query()->where('id', $user->country_id)->first();
             $user_age = AgeRange::query()->where('id', $user->age)->first();
             $user_skills = $this->userSkills($user->id);
-            $UserProject = UserProject::query()->with('projectImage')->where('user_id',$user->id)->get();
+            $UserProject = UserProject::query()->with('projectImage')->where('user_id',$user->id)->where('status','published')->get();
             
             $user_languages = UserLanguage::query()
                 ->with('getLanguages')
@@ -277,6 +277,9 @@ class UserController extends WebController
                 'platform'=>$video_url['platform'],
             ];
             $videoDetails = $this->getVideoDetailsURL($videoDetailsParams);
+            if ($videoDetails['status'] == 0 || empty($videoDetails['pl'])) {
+                return back()->with('error', 'Only allow youtube and vemio video.');
+            }
             if($video_url['platform'] == $this->platform_youtube)
             {
                 $thumbnail = $videoDetails['pl']['items'][0]['snippet']['thumbnails']['high']['url'];
@@ -814,6 +817,8 @@ class UserController extends WebController
                 $email = $_REQUEST['email_1'];
                 $collect = collect();
                 $collect->put('url','https://www.youtube.com/');
+                $collect->put('subject',$request->subject);
+                $collect->put('msg',$request->message);
                 if ($_REQUEST['checkbox_cc'] == 1) {
                     
                     $collect->put('cc_email',auth()->user()->email);
@@ -845,6 +850,11 @@ class UserController extends WebController
             $data = [
                 ['from'=>auth()->user()->id,'to'=>$_REQUEST['endorse_to_id'],'comment'=>$_REQUEST['endorse_message'] ,'created_at'=>date("Y-m-d h:i:s", time()),'updated_at'=>date("Y-m-d h:i:s", time())],
             ];
+            $userEndorsement = Endorsement::query()->where('to',$_REQUEST['endorse_to_id'])->get();
+            $is_profile_verified_data =1;
+            if (count($userEndorsement)> 3) {
+                $userEmdorseVerifyProfile = $this->userEmdorseVerifyProfile($is_profile_verified_data,$_REQUEST['endorse_to_id']);
+            }            
 
             $UserEmdorse = $this->userEmdorseLogStore($data);
             if ($UserEmdorse['status'] ==1) {
@@ -871,7 +881,19 @@ class UserController extends WebController
         try {            
             $UserEndorsements = new Endorsement();            
             $UserEndorsements->insert($data); 
-            return ['status'=>1,'msg'=>"Endorse email records updated successfully."];
+            return ['status'=>1,'msg'=>"Endorse records updated successfully."];
+        } catch (Exception $e) {
+            return ['status'=>0,'msg'=>"Something went wrong."];
+        }
+    }
+
+    public function userEmdorseVerifyProfile($is_profile_verified_data,$user_id)
+    {
+        try {            
+            $UserIsProfileVerified = User::query()->where('id',$user_id)->first();            
+            $UserIsProfileVerified->is_profile_verified = $is_profile_verified_data;
+            $UserIsProfileVerified->save();
+            return ['status'=>1,'msg'=>"15 endorse completed so verify profile successfully."];
         } catch (Exception $e) {
             return ['status'=>0,'msg'=>"Something went wrong."];
         }

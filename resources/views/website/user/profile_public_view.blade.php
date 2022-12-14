@@ -104,7 +104,9 @@
                         </div>
                         <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
                             @if($_REQUEST['id'] != auth()->user()->id )
-                            <i class="fa fa-heart icon-size Aubergine" aria-hidden="true"></i>
+                            {{-- <i class="fa fa-heart icon-size Aubergine" aria-hidden="true"></i> --}}
+                            <div> <i class="fa fa-heart-o icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$user->id}}" aria-hidden="true"></i></div>
+
                             @endif
                             <button class="verified_cmn_btn mx-3"> <i class="fa fa-check-circle hot-pink mx-1" aria-hidden="true"></i> VERIFIED</button>
                         </div>
@@ -255,8 +257,10 @@
                                 @foreach($UserProject as $k=>$v)                                
                                 <div class="item">
                                     {{-- <img src="@php echo (!empty($v->projectImage->file_link)?asset('storage/'.$v->projectImage->file_link): config("constants.PROJECT_NO_IMAGE")) @endphp" width="100%" height="100%"  /> --}}
+                                    <a href = "{{route('public-view',['id'=>$v->id])}}">
                                     <img src="@php echo (!empty($v->projectImage->file_link)?asset('storage/'.$v->projectImage->file_link): asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1 (1).png')) @endphp" width="100%" height="100%"  />
                                     <div class="guide_profile_main_subtext">@php echo (!empty($v->project_name)?$v->project_name: '-') @endphp</div>
+                                    </a>
                                 </div>                                
                                 @endforeach
                             </div>
@@ -369,11 +373,11 @@
                                                         <div class="col-md-12">
                                                             <div class="signup-text mb-2 mt-5"> Write Endorsement </div>
                                                             <div class="guide_profile_main_subtext text-center">
-                                                                <span class="disable-resend">Help identify relevant opportunities and content for John on Cinevesture</span>
+                                                                <span class="disable-resend">Help identify relevant opportunities and content for {{$user->name}} on Cinevesture</span>
                                                             </div>
 
                                                             <div class="mt-5">
-                                                                <textarea name="endorse_message" id="endorse_message" cols="25" rows="6" class="controlTextLength w-100" placeholder="Message" text-length="250" maxlength="250" name="about" aria-label="With textarea"></textarea>
+                                                                <textarea name="endorse_message" id="endorse_message" cols="25" rows="6" class="controlTextLength w-100" placeholder="Message" text-length="600" maxlength="600" name="about" aria-label="With textarea"></textarea>
                                                             </div>
 
                                                             <div class="mt-4">
@@ -400,7 +404,7 @@
                         <div class="col-md-3">
                             <div class="guide_profile_main_text deep-pink">{{$edm['endorsementCreater']->name}}</div>
                             <div class="guide_profile_main_subtext Aubergine_at_night">{{$edm['endorsementCreater']->job_title?$edm['endorsementCreater']->job_title:"-"}}</div>
-                            <div class="guide_profile_main_subtext Aubergine_at_night">{{$edm->created_at}}</div>
+                            <div class="guide_profile_main_subtext Aubergine_at_night">{{date('d F Y',strtotime($edm->created_at))}}</div>
                         </div>
                         <div class="col-md-9">
                             <div class="guide_profile_main_subtext Aubergine_at_night">
@@ -434,13 +438,18 @@
         <script type="text/javascript">
         $(document).ready(function()
         {
-            $('#contact_btn').click(function()
+            $('#contact_btn').click(function(e)
             {
                 var subject = $('#subject').val();
                 var email_1 = $('#email_1').val();
                 var message = $('#message').val();
                 var checkbox_cc = ($("#checkbox_cc").prop("checked") == true ? '1' : '0');
-                
+                let $btn = $(this);
+                e.preventDefault();
+                e.stopPropagation();
+
+                $btn.text("Sending..");
+                $btn.prop('disabled',true);
                 
                 $.ajax(
                 {
@@ -449,14 +458,17 @@
                     dataType:'json',
                     data:{subject:subject,email_1:email_1,message:message,checkbox_cc:checkbox_cc,"_token": "{{ csrf_token() }}"},
                     success:function(response)
-                    {
-                        console.log(response)
+                    {   $('#subject').val("");
+                        $('#message').val("");
+                        $btn.text("Send Mail");
+                        $btn.prop('disabled',false);
                         toastMessage(response.status, response.msg);
                         $('.modal').hide();
                         $('.modal-backdrop').remove();
                     },
                     error:function(response,status,error)
-                    {   
+                    {     $btn.text("Send Mail");
+                          $btn.prop('disabled',false);
                         console.log(response);
                         console.log(status);
                         console.log(error);
@@ -492,6 +504,48 @@
                     } 
                 });
             });
+        });
+        $('.like-profile').on('click', function(e) {
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        var profile_id = $(this).attr('data-id');
+        var classList = $(this).attr('class').split(/\s+/);
+        var element = $(this);
+        $.ajax({
+            type: 'post',
+            data: {'id':profile_id},
+            url: "{{route('favourite-update')}}",
+            success: function(resp) {
+                if (resp.status) {
+                    for (var i = 0; i < classList.length; i++) {
+                        if (classList[i] == 'fa-heart-o') {
+                            element.removeClass('fa-heart-o');
+                            element.addClass('fa-heart')
+                            toastMessage("success", response.msg);
+                            break;
+                        }
+                        if(classList[i] == 'fa-heart')
+                        {
+                            element.removeClass('fa-heart');
+                            element.addClass('fa-heart-o');
+                            toastMessage("error", response.msg);
+
+                            break;
+                        }
+                    }
+                } else {
+
+                }
+            },
+            error: function(error) {
+                
+            }
+        });
+
         });
 
 

@@ -198,17 +198,13 @@
                                     <div class="d-flex justify-content-end mt-4">
                                     <button class="cancel_btn mx-3">Cancel</button>
                                     {{-- <button class="save_add_btn">Save & add another</button> --}}
-                                    <button type="button" name="saveAndAnother" value="false" class="portfolio_save_btn save_add_btn">Save & add another</button>
+                                    {{-- <button type="button" name="saveAndAnother" value="false" class="portfolio_save_btn save_add_btn">Save & add another</button> --}}
                                     <input type="hidden" id="save_btn_value" name="saveButtonType" value="">
 
                                     <input type="hidden" name="portfolio_id" value="{{ $UserPortfolioEdit[0]['id']  }}">
                                     {{-- <button type="submit" class="guide_profile_btn mx-3">Save & next</button> --}}
-                                    <button type="button" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save & next</button>
+                                    <button type="button" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save</button>
 
-                                    {{-- <button type="button" name="saveAndAnother" value="false" class="portfolio_save_btn save_add_btn">Save & add another</button>
-                                    <input type="hidden" id="save_btn_value" name="saveButtonType" value="">
-                                    <input type="hidden" name="flag" value="<?=request('flag')?>">
-                                    <button type="button" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save & next</button> --}}
                                     </div>
                                 </div>
                             </div>
@@ -219,35 +215,6 @@
         </div>
        
     </section>
-    <div class="col-md-5 mt-2 mt-md-0">             
-	<button type="button" class="deactivate_btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="display:none">Deactivate account</button>
-		<!-- Modal for Confirmation for account deactivate -->
-	<div class="modal fade" id="staticBackdrop"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered">
-			<div class="modal-content">
-				<div class="modal-body" style="padding: 0px;">
-					<div class="container"style="padding: 0px;" >
-						<div class="row">   
-							<div class="col-md-12">
-								<div class="modal_container">
-									<div class="icon_container warning">
-										<i class="fa fa-times icon_style" aria-hidden="true"></i>
-									</div>
-									<div class="head_text mt-4">Are you sure?</div>
-									<div class="sub_text mt-4">Do you really want to delete the item?<br>This process cannot be undone.</div>
-									<div class="d-flex justify-content-center mt-4">   
-										<button type="button" class="cancel_btn cancel_btn_text mx-3" data-bs-dismiss="modal">Cancel</button>
-										   <button class="delete_btn confirm_btn_text mx-3" type="button" data-bs-dismiss="modal">Confirm</button>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
 </section>
 @endsection
 

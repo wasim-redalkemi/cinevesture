@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserSubcriptionsTable extends Migration
+class CreateSubscriptionOrdersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,22 +13,19 @@ class CreateUserSubcriptionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_subcriptions', function (Blueprint $table) {
+        Schema::create('subscription_orders', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id',20);
-            $table->string('platform_subscription_id',50);
-            $table->string('platform_cutomer_id',50);
-            $table->string('plan_id',20);
+            $table->string('order_id')->nullable();
+            $table->string('payment_intent')->nullable();
+            $table->string('plan_id');
             $table->string('plan_time',3)->nullable();
             $table->string('plan_time_quntity')->nullable();
             $table->string('plan_name');
             $table->double('plan_amount');
             $table->string('currency',20);
-            $table->dateTime('subscription_start_date');
-            $table->dateTime('subscription_end_date');
-            $table->enum('status',['active','incative'])->nullable();
+            $table->enum('status',["pending","success","error"])->default("pending");
+            $table->string('user_id',40);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -39,6 +36,6 @@ class CreateUserSubcriptionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_subcriptions');
+        Schema::dropIfExists('subscription_orders');
     }
 }
