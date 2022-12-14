@@ -153,13 +153,13 @@
                                                                 } ?>>Woman</option>
                                         <option value="non_binary" <?php if ("non_binary" == $user->gender) {
                                                                         echo ('selected');
-                                                                    } ?>>Non binary</option>
+                                                                    } ?>>Non-Binary</option>
                                         <option value="transgender" <?php if ("transgender" == $user->gender) {
                                                                         echo ('selected');
                                                                     } ?>>Transgender</option>
                                         <option value="gender_non_confirming" <?php if ("gender_non_confirming" == $user->gender) {
                                                                                     echo ('selected');
-                                                                                } ?>>Gender-Non-Confirming</option>
+                                                                                } ?>>Gender Non-confirming</option>
                                         <option value="prefer_not_to_say" <?php if ("prefer_not_to_say" == $user->gender) {
                                                                                 echo ('selected');
                                                                             } ?>>Prefer Not To Say</option>
@@ -282,7 +282,7 @@
                             <div class="col-md-12">
                                 <div class="profile_input">
                                     <label>About</label>
-                                    <textarea class="outline form-control controlTextLength is-invalid-remove form-control @error('about') is-invalid @enderror" text-length="200" maxlength="200" name="about" aria-label="With textarea" required><?php if (isset($user->about)) { echo ($user->about);} ?></textarea>
+                                    <textarea class="outline form-control controlTextLength is-invalid-remove form-control @error('about') is-invalid @enderror" text-length="200" maxlength="200" name="about" aria-label="With textarea"><?php if (isset($user->about)) { echo ($user->about);} ?></textarea>
                                     @error('about')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
