@@ -142,9 +142,9 @@
                                     </div>
                                     <div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 4MB</div>
                                 </div>
-                                <div class="col-md-3 d-flex align-items-end">
+                                {{-- <div class="col-md-3 d-flex align-items-end">
                                     <div class="save_add_btn">Add another</div>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
