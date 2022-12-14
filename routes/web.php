@@ -118,6 +118,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
         Route::post('/qualification-edit-store/{id}', [UserController::class, 'qualificationEditStore'])->name('qualification-edit-store');
         Route::get('/qualification-delete', [UserController::class, 'qualificationDelete'])->name('qualification-delete');
         
+        Route::get('/billing', [SubscriptionController::class, 'getBilling'])->name('subscription-billing');
         Route::post('/deactivate', [UserController::class, 'deactivateAccount'])->name('user-deactivate'); 
 
                		
