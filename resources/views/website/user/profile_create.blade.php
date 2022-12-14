@@ -87,7 +87,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="profile_input">
-                                    <label>First Name</label>
+                                    <label>First Name <span style="color:red">*</span></label>
                                     {{-- <input type="text" class="outline is-invalid-remove name-only form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name" value="@if(isset($user->first_name){{ $user->first_name}} @endif" --}}
                                     <input type="text" class="outline is-invalid-remove name-only form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name"
                                     value="@if (!empty($user->first_name)){{$user->first_name}}@endif" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
@@ -100,7 +100,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="profile_input">
-                                    <label>Last Name</label>
+                                    <label>Last Name <span style="color:red">*</span></label>
                                     <input type="text" class="outline is-invalid-remove name-only form-control @error('last_name') is-invalid @enderror" placeholder="{{ __('Last Name') }}" name="last_name" value="@if (!empty($user->last_name)){{$user->last_name}} @endif" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('last_name')
                                     <span class="invalid-feedback" role="alert">
@@ -427,22 +427,27 @@
     });
 
 
+    if($('.upload_preview').attr('src') != '')
+    {
+        $('.upload_preview').show();
+        $('.for_hide').hide();
+    }
+
     // croper 
 
     croperImg = document.querySelector('.croperImg'),
-        finalImage = document.querySelector('.finalImage'),
+    finalImage = document.querySelector('.finalImage'),
 
-        function validateSize(input) {
-            const fileSize = input.files[0].size / 1024 / 1024; // in MiB
-            if (fileSize > 10) {
-                alert('The document may not be greater than 10 MB');
-                $('#documents').val(''); //for clearing with Jquery
-            }
+    function validateSize(input) {
+        const fileSize = input.files[0].size / 1024 / 1024; // in MiB
+        if (fileSize > 10) {
+            alert('The document may not be greater than 10 MB');
+            $('#documents').val(''); //for clearing with Jquery
         }
-    $('.for_show').css('display', 'none');
+    }
     let result = document.querySelector('.result'),
 
-        formData = new FormData()
+    formData = new FormData()
     var base64data = null;
     var $modal = $('#modal');
     var image = document.getElementById('image');

@@ -126,7 +126,12 @@ class SubscriptionController extends Controller
         $subscription->user_id = auth()->user()->id;
         $subscription->platform_cutomer_id = "1"; //stripe
         $subscription->plan_amount = $data->plan_amount;
-        $subscription->subscription_start_date = Carbon::now();
+        $subscription->plan_name = $data->plan_name;
+        $subscription->currency = $data->currency;
+        $subscription->plan_time = $data->plan_time;
+        $subscription->plan_time_quntity = $data->plan_time_quntity;
+        $subscription->subscription_start_date = Carbon::now(); // for free plan 
+
         if ($data->plan_amount == 0.00) {
             $subscription->subscription_end_date = Carbon::now(); // for free plan 
             $subscription->platform_subscription_id = '1'; // free plan
@@ -156,5 +161,17 @@ class SubscriptionController extends Controller
         $request->session()->put('permission', $plans->getRelationalData);
         $request->session()->put('module', $module);
         $request->session()->put('action', $action);
+    }
+
+
+    // Billing details
+    public function getBilling(Request $request)
+    {
+        try{
+                $subscription = UserSubscription::query()->where('user_id',auth()->user()->id)->first();
+                return view('website.membership_billing.membership&billing',compact('subscription'));
+        }catch(Exception $e){
+
+        }
     }
 }
