@@ -171,10 +171,10 @@
                                                 $x=($project->project_verified==1)? 0:1;
                                             @endphp
                                             @if ($project->project_verified==1)
-                                            <a href="{{route('project-list-status')}}?status={{$x}}&pId={{$project->id}}"><button type="button" class="btn btn-primary btn btn-success text-white">{{($project->project_verified==1) ?"Publish":"Unpublish"}}</button>
+                                            <a href="{{route('project-list-status')}}?status={{$x}}&pId={{$project->id}}"><button type="button" class="btn active-button-color">{{($project->project_verified==1) ?"Publish":"Unpublish"}}</button>
                                             </a>
                                             @else
-                                            <a href="{{route('project-list-status')}}?status={{$x}}&pId={{$project->id}}"><button type="button" class="btn btn-primary btn btn-warning text-white">{{($project->project_verified==1) ?"Publish":"Unpublish"}}</button>
+                                            <a href="{{route('project-list-status')}}?status={{$x}}&pId={{$project->id}}"><button type="button" class="btn inactive-button-color">{{($project->project_verified==1) ?"Publish":"Unpublish"}}</button>
                                             </a>
                                             @endif
 

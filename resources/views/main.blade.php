@@ -78,13 +78,13 @@
                 <div class="container">
                   <div class="row">
                     <div class="col-md-12">
-                      <div class="project-text mt-5 pt-2"> Projects </div>
+                      <div class="project-text mt-5 pt-2">Test Project 1 </div>
                       <div class="project-sub-text mt-1">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                         labore
                         </div>
                       <div class="duration-lang-text mt-1">1hr 5min | English | Horror</div>
-                      <button class="watch-now-btn mt-4"><a href="{{ route('public-view', ['id'=>3]) }}" style="color:white !important;">Watch now</a></button>
+                      <button class="watch-now-btn mt-4">Watch now</button>
                     </div>
                   </div>
                 </div>
@@ -100,7 +100,7 @@
                 <div class="container">
                   <div class="row">
                     <div class="col-md-12">
-                      <div class="project-text mt-5 pt-2"> Projects </div>
+                      <div class="project-text mt-5 pt-2"> Test Project 2 </div>
                       <div class="project-sub-text mt-1">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                         labore

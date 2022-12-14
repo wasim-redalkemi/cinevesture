@@ -19,24 +19,6 @@ class ProjectListSeeder extends Seeder
             'list_status' => 'publish',
             'created_at' => now(),
             
-        ],
-        [
-            'list_name' => 'dron',
-            'list_status' => 'publish',
-            'created_at' => now(),
-            
-        ],
-        [
-            'list_name' => 'sound',
-            'list_status' => 'publish',
-            'created_at' => now(),
-            
-        ],
-        [
-            'list_name' => 'key',
-            'list_status' => 'publish',
-            'created_at' => now(),
-    
         ]
     );
     }
