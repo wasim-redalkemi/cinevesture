@@ -40,6 +40,9 @@ class VerifyOtp extends Notification
      */
     public function toMail($notifiable)
     {
+        if (isset($this->data['first_name']) && empty($this->data['first_name'])) {
+            $this->data['first_name'] = 'User';
+        }
         return (new MailMessage)
         ->subject('Your verification code for Cinevesture')
         ->greeting('Hi'.' '.$this->data['first_name'].',')
