@@ -56,7 +56,7 @@
                                     <div class="plan_subheader mt-2">Great for those who want to get themselves in front of the right people in the industry</div>
                                 </div>
                                 <div class="Plain_price">
-                                    <div class="search-head-subtext Aubergine_at_night mt-3">Free forever</div>
+                                    <!-- <div class="search-head-subtext Aubergine_at_night mt-3">Free forever</div> -->
                                     <div class="search-head-text Aubergine_at_night">$0.00</div>
                                     <div class="d-flex justify-content-center"><button class="cantact-page-cmn-btn mt-2">Get Started</button></div>
                                 </div>
