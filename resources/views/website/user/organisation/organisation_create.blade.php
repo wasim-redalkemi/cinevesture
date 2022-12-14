@@ -58,7 +58,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="profile_input">
-                                    <label>Name</label>
+                                    <label>Name <span style="color:red">*</span></label>
                                     <input type="text" class="outline name-only form-control @error('name') is-invalid @enderror" placeholder="{{ __('Name') }}" name="name" value="{{(isset($UserOrganisation->name))?$UserOrganisation->name:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -71,18 +71,16 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="profile_input">
-                                    <label>Organisation Type</label>
+                                    <label>Organisation Type <span style="color:red">*</span></label>
                                     <select name="organisation_type" class="@error('organisation_type') is-invalid @enderror" id="" required autofocus>
                                         <option value="">Select</option>
                                         @foreach ($organisationType as $k=>$v)
-                                        <option
-                                        @php
-                                        if(isset($UserOrganisation->type)){
+                                        <option @php if(isset($UserOrganisation->type)){
                                             if ($UserOrganisation->type == $v->id) {
-                                                echo 'selected';
+                                            echo 'selected';
                                             }
-                                        }
-                                        @endphp value="{{ $v->id }}">{{ $v->name }}</option>
+                                            }
+                                            @endphp value="{{ $v->id }}">{{ $v->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('organisation_type')
@@ -96,7 +94,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="profile_input text_field">
-                                    <label>About</label>
+                                    <label>About <span style="color:red">*</span></label>
                                     <textarea class="form-control controlTextLength" text-length="600" id="" name="about" maxlength="600" aria-label="With textarea" required autofocus>{{(isset($UserOrganisation->about))?$UserOrganisation->about:'' }}</textarea>
                                 </div>
                             </div>
@@ -107,7 +105,7 @@
                                     <label>Services</label>
                                     <select name="service_id[]" class="outline js-select2 @error('service_id') is-invalid @enderror" id="" multiple autofocus>
                                         @foreach ($organisationService as $k=>$v)
-                                            <option value="{{ $v->id }}"@if(isset($UserOrganisation->organizationServices) && in_array($v->id, $UserOrganisation->organizationServices))selected @endif>{{ $v->name }}</option>
+                                        <option value="{{ $v->id }}" @if(isset($UserOrganisation->organizationServices) && in_array($v->id, $UserOrganisation->organizationServices))selected @endif>{{ $v->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('service_id')
@@ -121,16 +119,14 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>Located In</label>
+                                    <label>Located In <span style="color:red">*</span></label>
                                     <select name="located_in" class="@error('located_in') is-invalid @enderror" id="" required autofocus>
                                         <option value="">Select</option>
-                                        @foreach ($country as $k=>$v)                                            
-                                            <option
-                                            @php
-                                            if(isset($UserOrganisation->location_in)){
-                                                if ($UserOrganisation->location_in == $v->id) {
-                                                    echo 'selected';
-                                                }
+                                        @foreach ($country as $k=>$v)
+                                        <option @php if(isset($UserOrganisation->location_in)){
+                                            if ($UserOrganisation->location_in == $v->id) {
+                                            echo 'selected';
+                                            }
                                             }
                                             @endphp value="{{ $v->id }}">{{ $v->name }}</option>
                                         @endforeach
@@ -144,7 +140,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>Available To Work In</label>
+                                    <label>Available To Work In <span style="color:red">*</span></label>
                                     <select name="available_to_work_in" class="@error('available_to_work_in') is-invalid @enderror" id="" required autofocus>
                                         <option value="">Select</option>
                                         <option @if(isset($UserOrganisation->available_to_work_in))
@@ -174,7 +170,7 @@
                                     <label> Languages Spoken</label>
                                     <select name="language_id[]" class="outline js-select2 @error('language_id') is-invalid @enderror" id="lang" multiple autofocus>
                                         @foreach ($languages as $k=>$v)
-                                            <option value="{{ $v->id }}"@if(isset($UserOrganisation->organizationLanguages )&&(in_array($v->id, $UserOrganisation->organizationLanguages)))selected @endif>{{  $v->name }}</option>
+                                        <option value="{{ $v->id }}" @if(isset($UserOrganisation->organizationLanguages )&&(in_array($v->id, $UserOrganisation->organizationLanguages)))selected @endif>{{ $v->name }}</option>
                                         @endforeach
 
                                     </select>
@@ -190,8 +186,8 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>IMDB Profile</label>
-                                    <input type="url" class="foutline orm-control @error('imdb_profile') is-invalid @enderror" placeholder="IMDB Profile" name="imdb_profile" value="{{(isset($UserOrganisation->imdb_profile))?$UserOrganisation->imdb_profile:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                    <label>IMDB Profile <span style="color:red">*</span></label>
+                                    <input type="url" class="outline form-control @error('imdb_profile') is-invalid @enderror" placeholder="IMDB Profile" name="imdb_profile" value="{{(isset($UserOrganisation->imdb_profile))?$UserOrganisation->imdb_profile:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('imdb_profile')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -201,7 +197,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>LinkedIn Profile</label>
+                                    <label>LinkedIn Profile <span style="color:red">*</span></label>
                                     <input type="url" class="outline form-control @error('linkedin_profile') is-invalid @enderror" placeholder="LinkedIn Profile" name="linkedin_profile" value="{{(isset($UserOrganisation->linkedin_profile))?$UserOrganisation->linkedin_profile:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('linkedin_profile')
                                     <span class="invalid-feedback" role="alert">
@@ -212,7 +208,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>Website</label>
+                                    <label>Website <span style="color:red">*</span></label>
                                     <input type="url" class="outline form-control @error('website') is-invalid @enderror" placeholder="Website" aria-label="Username" name="website" value="{{(isset($UserOrganisation->website))?$UserOrganisation->website:'' }}" aria-describedby="basic-addon1" required autofocus>
                                     @error('website')
                                     <span class="invalid-feedback" role="alert">
@@ -225,7 +221,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>Introduction Video</label>
+                                    <label>Introduction Video <span style="color:red">*</span></label>
                                     <input type="url" class="outline form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="{{(isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('intro_video_link')
                                     <span class="invalid-feedback" role="alert">
@@ -269,27 +265,27 @@
                                                 <section class="p-3">
                                                     <div class="container">
                                                         <div class="row">
-                                                            <div class="col-md-12">                                                                
-                                                                <div class="signup-text  mt-5 mt-md-5"> Invite Members </div>    
-                                                                    
+                                                            <div class="col-md-12">
+                                                                <div class="signup-text  mt-5 mt-md-5"> Invite Members </div>
+
                                                                 <div class="proctect_by_capta_text mt-4 text-center">
                                                                     You can invite up to two members in your enterprise plan.
-                                                                </div>                                                                
+                                                                </div>
                                                             </div>
                                                             <div class="col-md-12 mt-4">
                                                                 <input type="email" id="email_1" name="email_1" value="" placeholder="First email" class="modal_input">
                                                                 @error('email_1')
-                                                                    <span class="invalid-feedback" role="alert">
-                                                                        <strong>{{ $message }}</strong>
-                                                                    </span>
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
                                                                 @enderror
                                                             </div>
                                                             <div class="col-md-12 mt-3">
                                                                 <input type="email" id="email_2" name="email_2" value="" placeholder="Second email" class="modal_input">
                                                                 @error('email_2')
-                                                                    <span class="invalid-feedback" role="alert">
-                                                                        <strong>{{ $message }}</strong>
-                                                                    </span>
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
                                                                 @enderror
                                                             </div>
                                                             <div class="col-md-12 py-3">
@@ -303,7 +299,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>                            
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-3">
@@ -343,14 +339,11 @@
 
 @push('scripts')
 <script type="text/javascript">
+    $(document).ready(function() {
 
-    $(document).ready(function()
-    {   
-        
-    $('.for_hide').css('display', 'block');
-                $('.for_show').css('display', 'none');
-        $('.open_file_explorer').click(function(e) 
-        {
+        $('.for_hide').css('display', 'block');
+        $('.for_show').css('display', 'none');
+        $('.open_file_explorer').click(function(e) {
             $(this).parents('.custom_file_explorer').find('.file_element').click();
         });
 
@@ -363,7 +356,7 @@
             };
             reader.readAsDataURL(file[0]);
             $('.for_hide').css('display', 'none');
-                $('.for_show').css('display', 'block');
+            $('.for_show').css('display', 'block');
         });
     });
 
@@ -374,30 +367,31 @@
         tags: false
     });
 
-    $('.invite_btn').click(function()
-    {
+    $('.invite_btn').click(function() {
         var email_1 = $('#email_1').val();
         var email_2 = $('#email_2').val();
         var organization_id = $('#organization_id').val();
-        
-        $.ajax(
-        {
-            url:"{{ route('team-email') }}",
-            type:'POST',
-            dataType:'json',
-            data:{organization_id:organization_id,email_1:email_1,email_2:email_2,"_token": "{{ csrf_token() }}"},
-            success:function(response)
-            {
+
+        $.ajax({
+            url: "{{ route('team-email') }}",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                organization_id: organization_id,
+                email_1: email_1,
+                email_2: email_2,
+                "_token": "{{ csrf_token() }}"
+            },
+            success: function(response) {
                 toastMessage(response.status, response.msg);
                 $('.modal').hide();
                 $('.modal-backdrop').remove();
             },
-            error:function(response,status,error)
-            {   
+            error: function(response, status, error) {
                 console.log(response);
                 console.log(status);
                 console.log(error);
-            } 
+            }
         });
     });
     $('.delete_image').on('click', function() {
@@ -409,6 +403,5 @@
         $('.for_show').css('display', 'none');
 
     })
-        
 </script>
 @endpush
