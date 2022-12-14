@@ -119,10 +119,10 @@
                                                 $x=($job->save_type=='published')? 'unpublished':'published';
                                             @endphp
                                             @if ($job->save_type=='published')
-                                            <a href="{{route('status_update')}}?status={{$x}}&job_Id={{$job->id}}"><button type="button" class="btn btn-primary btn btn-success text-white">{{($job->save_type=='published') ?"Active":"Inactive"}}</button>
+                                            <a href="{{route('status_update')}}?status={{$x}}&job_Id={{$job->id}}"><button type="button" class="btn active-button-color">{{($job->save_type=='published') ?"Active":"Inactive"}}</button>
                                             </a>
                                             @else
-                                            <a href="{{route('status_update')}}?status={{$x}}&job_Id={{$job->id}}"><button type="button" class="btn btn-primary btn btn-warning text-white">{{($job->save_type=='unpublished') ?"Inactive":"Active"}}</button>
+                                            <a href="{{route('status_update')}}?status={{$x}}&job_Id={{$job->id}}"><button type="button" class="btn inactive-button-color">{{($job->save_type=='unpublished') ?"Inactive":"Active"}}</button>
                                             </a>
                                             @endif
                                         </td>

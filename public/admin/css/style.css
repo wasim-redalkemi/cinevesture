@@ -28693,3 +28693,15 @@ body {
 	display: inline-block;
 	margin: 100px auto;
 }  */
+.inactive-button-color{
+  color: #EDEDED;
+  background-color: #CD1717;
+  border-color: #000000;
+
+}
+.active-button-color{
+  color: #000000;
+    background-color: #5FDBA7;
+    border-color: #000000;
+
+}

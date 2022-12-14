@@ -144,10 +144,10 @@
                                         $x=($user->status==1)? 0:1;
                                     @endphp
                                         @if($user->status==1)
-                                        <a href="{{route('user-status-change')}}?status={{$x}}&user_id={{$user->id}}"><button class="btn btn-success text-white"> {{'Active'}}</button></a>@else
-                                        <a href="{{route('user-status-change')}}?status={{$x}}&user_id={{$user->id}}"><button class="btn btn-warning text-white">{{'Inactive'}}</button></a>@endif
+                                        <a href="{{route('user-status-change')}}?status={{$x}}&user_id={{$user->id}}"><button class="btn active-button-color"> {{'Active'}}</button></a>@else
+                                        <a href="{{route('user-status-change')}}?status={{$x}}&user_id={{$user->id}}"><button class="btn inactive-button-color">{{'Inactive'}}</button></a>@endif
                                     </td>
-                                    <td>Membership</td>
+                                    <td>MembershipSDNCSBHC</td>
                                     <td><?php echo(date("d-m-Y", strtotime($user->created_at))); ?></td>
                                     <td>
                                         <div class="mb-1">
