@@ -427,7 +427,7 @@
         }
     });
 
-
+    $('.for_show').hide();
     if($('.upload_preview').attr('src') != '')
     {
         $('.upload_preview').show();

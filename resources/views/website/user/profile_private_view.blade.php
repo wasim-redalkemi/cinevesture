@@ -155,7 +155,7 @@
                                 <div class="col-md-5 ">
                                     <div class="guide_profile_main_text mb-2">Meet Name</div>
                                     <div class="playVideoWrap" video-url="{{$user->intro_video_link}}">
-                                        <img src="{{$user->intro_video_thumbnail}}" alt="">
+                                        <img src="{{$user->intro_video_thumbnail}}" width="100%" alt="">
                                     </div>
                                 </div>
                             </div>
