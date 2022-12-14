@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-md-12 mt-sm-0">
                 <div class="content_wraper">
-                    <form class="" id="post_job" onsubmit="return false;">
+                    <form class="validateBeforeSubmit" id="post_job" onsubmit="return false;">
                         @csrf
                         <input type="hidden" id="save_type" value="" name="save_type">
                         <div class="guide_profile_subsection">
@@ -23,7 +23,7 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="profile_input">
-                                        <label>Title Of The Job</label>
+                                        <label>Title Of The Job  <span style = "color:red">*</span></label>
                                         <input type="text" class="form-control @error('job_title') is-invalid @enderror" required name="job_title" value="@if (!empty($userJobData['title'])) {{$userJobData['title']}} @endif" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
 
                                         @error('job_title')
@@ -36,7 +36,7 @@
                                 <div class="col-md-1"></div>
                                 <div class="col-md-3">
                                     <div class="profile_input">
-                                        <label>Employment Type</label>
+                                        <label>Employment Type  <span style = "color:red">*</span></label>
                                             <select class="work-select2 @error('countries') is-invalid @enderror" required id="employments" name="employments[]" multiple="multiple">
                                                 @if (!empty($employments))                                                    
                                                 @foreach($employments as $emp)
@@ -55,7 +55,7 @@
                                 <div class="col-md-1"></div>
                                 <div class="col-md-3">
                                     <div class="profile_input">
-                                        <label>Workspace Type</label>
+                                        <label>Workspace Type  <span style = "color:red">*</span></label>
                                         <select class="emp-select2 @error('workspaces') is-invalid @enderror" required id="workspaces" name="workspaces[]" multiple="multiple">
                                             @if (!empty($workspaces))
                                             @foreach($workspaces as $work)
@@ -75,7 +75,7 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="profile_input">
-                                        <label>Company Name</label>
+                                        <label>Company Name  <span style = "color:red">*</span></label>
                                         <input type="text" class="form-control @error('company_name') is-invalid @enderror" required name="company_name" value="@if (!empty($userJobData['company_name'])) {{$userJobData['company_name']}} @endif" placeholder="Company Name" aria-describedby="basic-addon1">
 
                                         @error('company_name')
@@ -109,7 +109,7 @@
                             </div>
                         </div>
                         <div class="guide_profile_subsection">
-                            <div class="guide_profile_main_text mt-3">Job Description</div>
+                            <div class="guide_profile_main_text mt-3">Job Description </div>
                             <div class="profile_input">
                                 <textarea class="form-control controlTextLength" text-length="1500" maxlength="1500" name="description" required aria-label="With textarea" placeholder="Your answer here">@if (!empty($userJobData['description'])) {{$userJobData['description']}} @endif</textarea>
                             </div>
@@ -118,8 +118,9 @@
                             <div class="guide_profile_main_text mt-3">Skills Required</div>
                             <div class="row">
                                 <div class="col-md-6">
+                                    <div class="select2forError">
                                     <div class="profile_input">
-                                        <label>Skills (You can add upto 10 skills)</label>
+                                        <label>Skills (You can add upto 10 skills)  <span style = "color:red">*</span></label>
                                         <select name="skills[]" class="select_limit outline is-invalid-remove js-select2" required id="lang" multiple data-maximum-selection-length="10">
                                             @foreach ($skills as $k=>$v)
                                             <option value="{{ $v->id }}" @if(!empty($userJobData['job_skills']) && in_array($v->id, $userJobData['job_skills']))selected @endif>{{ $v->name }}</option>
@@ -130,6 +131,7 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                         @enderror
+                                    </div>
                                     </div>
                                 </div>
                                 <div class="d-flex justify-content-center mt-5 mb-4">

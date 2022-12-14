@@ -103,7 +103,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="profile_input">
+                                <div class="profile_input select2forError">
                                     <label>Services</label>
                                     <select name="service_id[]" class="outline js-select2 @error('service_id') is-invalid @enderror" id="" multiple autofocus>
                                         @foreach ($organisationService as $k=>$v)
@@ -170,7 +170,7 @@
                                 </div>
                             </div>
                             <div class="col-md-3">
-                                <div class="profile_input">
+                                <div class="profile_input select2forError">
                                     <label> Languages Spoken</label>
                                     <select name="language_id[]" class="outline js-select2 @error('language_id') is-invalid @enderror" id="lang" multiple autofocus>
                                         @foreach ($languages as $k=>$v)

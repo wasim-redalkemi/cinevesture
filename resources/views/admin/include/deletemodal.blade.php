@@ -17,7 +17,7 @@
 			<div class="modal-footer justify-content-center">
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
 				<a  href="" class="confirmActionModalLink"><button type="button" class="btn btn-danger ">Delete</button></a>
-				{{-- <button type="button" class="cancel_btn btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+				{{-- <button type="button" class="modal_cancel_btn btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                     <a href="" class="confirmActionModalLink"><button type="button" class="delete_btn btn btn-danger" type="button" data-bs-dismiss="modal">Confirm</button></a> --}}
 			</div>
 		</div>

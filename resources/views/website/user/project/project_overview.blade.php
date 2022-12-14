@@ -91,7 +91,7 @@
 
                         <div class="row">
                             <div class="col-md-3">
-                                <div>
+                                <div class="select2forError">
                                     <label>Select Country <span style = "color:red">*</span></label>
                                     <select class="js-select2 @error('countries') is-invalid @enderror" name="countries[]"  required multiple="multiple">
                                         @foreach ($country as $k=>$v)
@@ -109,7 +109,7 @@
 
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="mt_16">
+                                <div class="mt_16 select2forError">
                                     <label>Select Language <span style = "color:red">*</span></label>
                                     <select class="js-select2 @error('languages') is-invalid @enderror" name="languages[]" required multiple="multiple">
                                         @foreach ($languages as $k=>$v)

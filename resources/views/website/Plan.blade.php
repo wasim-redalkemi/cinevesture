@@ -134,7 +134,7 @@
                                     </div>
                                 </div>
                                 <div class="py-4 px-3">
-                                    <button class="job_search_btn">Select Free Plan</button>
+                                    <button class="job_search_btn">Select Basic Plan</button>
                                 </div>
                             </div>
                         </div>
@@ -174,7 +174,7 @@
                                     </div>
                                 </div>
                                 <div class="py-4 px-3">
-                                    <button class="job_search_btn">Select Free Plan</button>
+                                    <button class="job_search_btn">Select Pro Plan</button>
                                 </div>
                             </div>
                         </div>
@@ -218,7 +218,7 @@
                                     </div>
                                 </div>
                                 <div class="py-4 px-3">
-                                    <button class="job_search_btn">Select Free Plan</button>
+                                    <button class="job_search_btn">Select Enterprise Plan</button>
                                 </div>
                             </div>
                         </div>
