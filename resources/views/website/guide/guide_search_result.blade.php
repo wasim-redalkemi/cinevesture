@@ -134,7 +134,7 @@
                             <div class="user_profile_container wh_66">
                                 <!-- <img src="{{ asset('images/asset/user-profile.png') }}" /> -->
                                 @if(isset($user->profile_image))
-                                <img src="{{Storage::url($user->profile_image)}}" />
+                                <img src="{{Storage::url($user->profile_image)}}" width="100%"/>
                                 @else
                                 <img src="{{ asset('images/asset/user-profile.png') }}" width="100%" height="100%" />
                                 @endif
@@ -186,7 +186,7 @@
                         </div>
                         <div class="col-md-1">
 
-                            <div> <i class="fa fa-heart-o icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$user->id}}" aria-hidden="true"></i></div>
+                            <div> <i class="fa <?php if(isset($user->isfavouriteProfile)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$user->id}}" aria-hidden="true"></i></div>
                         </div>
                     </div>
                 </div>

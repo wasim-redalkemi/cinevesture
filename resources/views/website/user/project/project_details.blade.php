@@ -24,7 +24,7 @@
                         <p class="flow_step_text"> Details</p>
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="profile_input">
+                                <div class="profile_input select2forError">
                                     <label>Category (Optional)</label>
                                     <select name="category_id[]" class="js-select2 @error('category_id') is-invalid @enderror" autofocus multiple>
                                         @foreach ($category as $k=>$v)
@@ -41,7 +41,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="mt_16">
+                                <div class="mt_16 select2forError">
                                     <label>Genre <span style = "color:red">*</span></label>
                                     <select name="gener[]" class="js-select2 @error('gener') is-invalid @enderror" autofocus multiple required>
                                         @foreach ($Genres as $k=>$v)
@@ -158,13 +158,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-md-3 d-flex align-items-end mt-2">
                                     <div class="profile_input">
                                         <div class="add_another_btn">Add another</div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-end mt-5 pt-5 pb-md-0">
@@ -321,7 +321,7 @@ $(document).ready(function() {
         html +='</div>';
         html +='</div>';
         html +='<div class="col-md-3 d-flex align-items-end pb-2 mt-2 mt-md-0">';
-        html +='<i class="fa fa-times-circle deep-pink icon-size remove-entry" aria-hidden="true"></i>';
+        html +='<i class="fa fa-times-circle deep-pink icon-size remove-entry pointer" aria-hidden="true"></i>';
         html +='</div>';
         html +='</div>';
         $(html).insertBefore(parentElemId+" #asso-new");

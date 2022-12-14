@@ -49,6 +49,7 @@
 
                             <div class="col-md-3">
                                 <div class=" mt-3 mt-md-0">
+                                    <div  class="select2forError">
                                     <select class="js-select2"  id ="skills" name ="skills[]" multiple="multiple">
                                     @foreach($skills as $skill)
                                               
@@ -60,6 +61,7 @@
                                     
                                    @endforeach
                                     </select>
+                                    </div>
                                 </div>
                             </div>
 

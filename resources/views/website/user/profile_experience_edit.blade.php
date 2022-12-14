@@ -46,8 +46,8 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Company</label>
-                                        <input type="text" class="form-control @error('comapny') is-invalid @enderror" placeholder="Company" name="comapny" value="<?php if(isset($UserExperienceData->comapny)){ echo($UserExperienceData->comapny); }?>" aria-label="Username" aria-describedby="basic-addon1">
-                                        @error('comapny')
+                                        <input type="text" class="form-control @error('company') is-invalid @enderror" placeholder="Company" name="company" value="<?php if(isset($UserExperienceData->company)){ echo($UserExperienceData->company); }?>" aria-label="Username" aria-describedby="basic-addon1">
+                                        @error('company')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
@@ -151,10 +151,9 @@
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-end mt-4">
                                         <button class="cancel_btn mx-3">Cancel</button>
-                                        <button type="button" name="saveAndAnother" value="false" class="portfolio_save_btn save_add_btn">Save & add another</button>
                                         <input type="hidden" id="save_btn_value" name="saveButtonType" value="">
                                         <input type="hidden" name="experience_id" value="{{ $UserExperienceData->id }}">
-                                        <button type="button" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save & next</button>
+                                        <button type="button" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save</button>
                                     </div>
                                 </div>
                             </div>

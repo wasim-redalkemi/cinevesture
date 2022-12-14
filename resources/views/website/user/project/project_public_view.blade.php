@@ -17,7 +17,11 @@
     <div class="main-slider-container">
 
         <div class="project_image_wraper">
-            <img src="{{ asset('images/20220805_172049.jpg') }}" class="" alt="image">
+            @if ($projectData[0]['project_image']['file_link'])
+                <img src="{{ Storage::url($projectData[0]['project_image']['file_link']) }}" class="" alt="image">
+            @else                
+                <img src="{{ asset('images/20220805_172049.jpg') }}" class="" alt="image">
+            @endif
             <div class="public-head-image-shadow"></div>
         </div>
 
@@ -268,12 +272,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="public-heading-text">Requirements & Milestones</h1>
-                    <div class="col-6">
+                    <div class="col-8">
                         <table class="table mt-1">
                             <tbody class="search-table-body white">
                                 <tr>
                                     <td class="public-head-subtext white">Looking for</td>
-                                    <td class="project-sub-text white">
+                                    <td class="project-sub-text white d-flex flex-wrap">
                                         @if (!empty($projectData[0]['project_looking_for']))
                                         @foreach ($projectData[0]['project_looking_for'] as $k => $v)
                                             <button class="curv_cmn_btn darkbtn">{{ $v['name'] }}</button>
