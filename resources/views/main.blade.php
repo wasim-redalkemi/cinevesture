@@ -15,12 +15,12 @@
     <section class="section">
       <div class="sub-section">
         <div class="main_slider owl-carousel">
+          @if(isset($project_lists_carousel->lists[0]->projects) && !empty($project_lists_carousel->lists[0]->projects))
           @foreach ($project_lists_carousel->lists as $k=>$v)
           <div class="item">
             <div class="home-upper-slider">
               <div class="img-container w_maxcont">
                 @if (!empty($v->projects->projectImage->file_link) || isset($v->projects->projectImage->file_link))
-                    
                 <img src="{{ Storage::url($v->projects->projectImage->file_link) }}" alt="image">
                 @else
                 <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">
@@ -60,8 +60,7 @@
                         <div class="not-found-text">
                           <p>No Data Found</p>
                         </div>
-                      @endif
-                      
+                      @endif                      
                     </div>
                   </div>
                 </div>
@@ -69,10 +68,60 @@
             </div>
           </div>
           @endforeach
+          @else
+          <div class="item">
+            <div class="home-upper-slider">
+              <div class="img-container w_maxcont">
+                <img src="{{ asset('public/images/asset/Screenshot 2021-05-28 at 11.48 1.png') }}" class="root_img" alt="image">
+              </div>
+              <div class="carosel-card-cntainer">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="project-text mt-5 pt-2"> Projects </div>
+                      <div class="project-sub-text mt-1">
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        </div>
+                      <div class="duration-lang-text mt-1">1hr 5min | English | Horror</div>
+                      <button class="watch-now-btn mt-4"><a href="{{ route('public-view', ['id'=>3]) }}" style="color:white !important;">Watch now</a></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="item">
+            <div class="home-upper-slider">
+              <div class="img-container w_maxcont">
+                <img src="{{ asset('public/images/asset/gordon-cowie-OPlXmibx__I-unsplash-2.jpg') }}" class="root_img" alt="image">
+              </div>
+              <div class="carosel-card-cntainer">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="project-text mt-5 pt-2"> Projects </div>
+                      <div class="project-sub-text mt-1">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et
+                        dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation.</div>
+                      <div class="duration-lang-text mt-1">1hr 5min | English | Horror</div>
+                      <button class="watch-now-btn mt-4">Watch now</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          @endif          
         </div>
       </div>
 
+      @if (isset($project_lists_except_carousel) && !empty($project_lists_except_carousel))
       @foreach ($project_lists_except_carousel as $k=>$v)
+      @if (isset($v->lists) && !empty($v->lists))
       <div class="home_subsection">
         <div class="container">
           <div class="row">
@@ -127,7 +176,9 @@
           @endforeach
         </div>
       </div>
+      @endif      
       @endforeach
+      @endif      
     </section>
   </div>
 @endsection
@@ -142,7 +193,7 @@
     $(".main_slider.owl-carousel").owlCarousel({
       center: true,
       autoPlay: 3000,
-      // autoplay: true,
+      autoplay: true,
       loop: true,
       nav: true,
       center: true,
@@ -159,7 +210,7 @@
     $(".test.owl-carousel").owlCarousel({
       center: true,
       autoPlay: 1000,
-      // autoplay: true,
+      autoplay: true,
       loop: true,
       nav: true,
       margin: 20,

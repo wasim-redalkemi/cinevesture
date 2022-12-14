@@ -44,8 +44,8 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Company</label>
-                                        <input type="text" class="form-control @error('comapny') is-invalid @enderror" placeholder="Company" name="comapny" value="<?php if(isset($experience)){ echo($experience->comapny); }?>" aria-label="Username" aria-describedby="basic-addon1">
-                                        @error('comapny')
+                                        <input type="text" class="form-control @error('company') is-invalid @enderror" placeholder="Company" name="company" value="<?php if(isset($experience)){ echo($experience->company); }?>" aria-label="Username" aria-describedby="basic-addon1">
+                                        @error('company')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

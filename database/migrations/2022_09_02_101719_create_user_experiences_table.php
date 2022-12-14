@@ -17,7 +17,7 @@ class CreateUserExperiencesTable extends Migration
             $table->id();
             $table->string('user_id',20)->nullable();
             $table->string('job_title',100)->nullable();
-            $table->string('comapny',255)->nullable();
+            $table->string('company',255)->nullable();
             $table->string('country_id',20)->nullable();
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
