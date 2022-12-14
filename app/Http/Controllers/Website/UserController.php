@@ -182,7 +182,7 @@ class UserController extends WebController
             $user_country = MasterCountry::query()->where('id', $user->country_id)->first();
             $user_age = AgeRange::query()->where('id', $user->age)->first();
             $user_skills = $this->userSkills($user->id);
-            $UserProject = UserProject::query()->with('projectImage')->where('user_id',$user->id)->get();
+            $UserProject = UserProject::query()->with('projectImage')->where('user_id',$user->id)->where('status','published')->get();
             
             $user_languages = UserLanguage::query()
                 ->with('getLanguages')
@@ -817,6 +817,8 @@ class UserController extends WebController
                 $email = $_REQUEST['email_1'];
                 $collect = collect();
                 $collect->put('url','https://www.youtube.com/');
+                $collect->put('subject',$request->subject);
+                $collect->put('msg',$request->message);
                 if ($_REQUEST['checkbox_cc'] == 1) {
                     
                     $collect->put('cc_email',auth()->user()->email);

@@ -23,7 +23,7 @@ class IndustryGuideController extends WebController
      */
     public function show(Request $request)
     {
-        $countries = MasterCountry::all();
+        $countries = MasterCountry::query()->orderBy('name','asc')->get();
         $skills = MasterSkill::all();
         $talent_type = User::query()->where('job_title','!=',null)->where('user_type','U')->groupBy('job_title')->get();
         return view('website.guide.index',compact(['countries','talent_type']));
@@ -51,7 +51,7 @@ class IndustryGuideController extends WebController
             return back()->with($validator)->withInput();
         }
 
-        $countries = MasterCountry::all();
+        $countries = MasterCountry::query()->orderBy('name','asc')->get();
         $skills = MasterSkill::all();
         $talent_type = User::query()->where('job_title','!=',null)->where('user_type','U')->groupBy('job_title')->get();
         $users = User::query()->where(function($query) use($request){
@@ -80,7 +80,7 @@ class IndustryGuideController extends WebController
                 });
             } 
         })
-        ->with('skill','country')
+        ->with('skill','country','isfavouriteProfile')
         ->where('id','!=',auth()->user()->id)
         ->where('user_type','U')
         ->orderByDesc('id')

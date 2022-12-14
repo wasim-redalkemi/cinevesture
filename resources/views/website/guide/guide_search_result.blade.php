@@ -186,7 +186,7 @@
                         </div>
                         <div class="col-md-1">
 
-                            <div> <i class="fa fa-heart-o icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$user->id}}" aria-hidden="true"></i></div>
+                            <div> <i class="fa <?php if(isset($user->isfavouriteProfile)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$user->id}}" aria-hidden="true"></i></div>
                         </div>
                     </div>
                 </div>
