@@ -100,7 +100,13 @@
                                             @foreach($plan->getRelationalData as $relation )
 
                                             @if($relation->module_id == $module->id)
-                                            <li> {{$relation->getOperation->name}}</li>
+                                            <li> @if($relation->limit != 0)
+                                               
+                                            {{$relation->limit}} {{$relation->getOperation->name}}
+                                                 @else
+                                                 {{$relation->getOperation->name}}
+                                                 @endif
+                                            </li>
                                                 @endif
                                             @endforeach
                                         </ul>
