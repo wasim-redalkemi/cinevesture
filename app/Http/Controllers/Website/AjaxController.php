@@ -221,7 +221,7 @@ class AjaxController extends WebController {
             'project_milestone_description' => 'required|string|max:100',
             'project_milestone_budget' => 'required|string|max:50',
             'project_milestone_target_date' => 'required|date',
-            'project_milestone_complete' => 'nullable|int|max:1'
+            // 'project_milestone_complete' => 'nullable|int|max:1'
         ]);
         try {
             $ProjectAssociation = new ProjectMilestone();

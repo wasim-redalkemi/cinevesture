@@ -62,6 +62,7 @@
                                 <div class="profile_input">
                                     <label>If Startup, What stage of funding are you at?</label>
                                     <select name="stage_of_funding_id" class="@error('stage_of_funding_id') is-invalid @enderror" id="" autofocus>
+                                        <option value="">Select</option>
                                         @foreach ($projectStageOfFunding as $k=>$v)                                            
                                             <option @if(!empty($projectData[0]['project_stage_of_funding'])) @if ($projectData[0]['project_stage_of_funding']['id'] == $v->id) {{'selected'}} @endif @endif value="{{ $v->id }}">{{ $v->name }}</option>
                                         @endforeach
@@ -143,7 +144,7 @@
                                 </div>
                                 <div class="col-md-2 d-flex align-items-end">
                                     <div class="d-flex checkbox_btn mb-2 mt-2 mt-md-0">
-                                        <input type="checkbox" class="checkbox_btn" name="project_milestone_complete" value="0" aria-label="">
+                                        <input type="checkbox" class="checkbox_btn" name="project_milestone_complete" aria-label="">
                                         <div class="verified-text deep-pink mx-2">Mark Complete</div>
                                     </div>
                                 </div>
@@ -272,7 +273,12 @@
             let titleElems = $(parentElemId+' #milestone_new input');
             let data = {};
             $.each(titleElems,(i,element) => {
-                data[$(element).attr('name')] = $(element).val()
+                if ($(element).attr('type') == 'checkbox') {
+                    let isComplete = ($(element).is(':checked')) ? 1 : 0;
+                    data[$(element).attr('name')] = isComplete;
+                } else {
+                    data[$(element).attr('name')] = $(element).val();
+                }
             });
             doAjax('ajax/add-proj-milestone/'+project_id,data,"POST",addProjMilestoneCallback);
         }
@@ -301,6 +307,12 @@
             if(!assoEntry.description){
                 assoEntry.description = "";
             }
+            if(assoEntry.complete = '1'){
+                assoEntry.complete = 'checked';
+            } else {
+                assoEntry.complete = '';
+                
+            }
             let complete = assoEntry.complete == 1 ? "checked": "";
             let html = "";
             html += '<div id="milestone-'+assoEntry.id+'" class="row">';
@@ -324,7 +336,7 @@
             html += '</div>';
             html += '<div class="col-md-2 d-flex align-items-end">';
                 html += '<div class="d-flex checkbox_btn mb-2">';
-                    html += '<input type="checkbox" class="checkbox_btn" name="project_milestone_complete" value="'+assoEntry.complete+'" aria-label="" complete>';
+                    html += '<input type="checkbox" class="checkbox_btn" name="project_milestone_complete" value="'+assoEntry.complete+'" aria-label="" complete '+assoEntry.complete+'>';
                     html += '<div class="verified-text deep-pink mx-2">Mark Complete</div>';
                 html += '</div>';
             html += '</div>';
@@ -338,6 +350,7 @@
             $.each(titleElems,(i,element) => {
                 $(element).val("");
             });
+            $(parentElemId+' #milestone_new input[name="project_milestone_complete"]').prop("checked",false);
             bindActions();
         }
 

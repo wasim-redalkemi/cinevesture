@@ -61,7 +61,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Duration In Minute(Optional)</label>
-                                    <input type="number" class="form-control no_number_arrows" name="duration" pattern="[0-9]" placeholder="min" value="<?php if(!empty($projectData[0]['duration'])){ echo $projectData[0]['duration']; } ?>" aria-describedby="basic-addon1">
+                                    <input type="number" class="form-control no_number_arrows" name="duration" pattern="[0-9]" placeholder="Duration(Minute)" value="<?php if(!empty($projectData[0]['duration'])){ echo $projectData[0]['duration']; } ?>" aria-describedby="basic-addon1">
                                     @error('duration')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -74,7 +74,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Total Budget (USD) <span style = "color:red">*</span></label>
-                                    <input type="number" class="form-control no_number_arrows" name="total_budget" pattern="[0-9]" placeholder="Empty input" required value="<?php if(!empty($projectData[0]['total_budget'])){ echo $projectData[0]['total_budget']; } ?>">
+                                    <input type="number" class="form-control no_number_arrows" name="total_budget" pattern="[0-9]" placeholder="Total Budget" required value="<?php if(!empty($projectData[0]['total_budget'])){ echo $projectData[0]['total_budget']; } ?>">
                                     @error('total_budget')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -87,7 +87,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Financing Secured (USD) <span style = "color:red">*</span></label>
-                                    <input type="number" class="form-control no_number_arrows" name="financing_secured" pattern="[0-9]" required placeholder="Empty input" value="<?php if(!empty($projectData[0]['financing_secured'])){ echo $projectData[0]['financing_secured']; } ?>">
+                                    <input type="number" class="form-control no_number_arrows" name="financing_secured" pattern="[0-9]" required placeholder="Financing Secured" value="<?php if(!empty($projectData[0]['financing_secured'])){ echo $projectData[0]['financing_secured']; } ?>">
                                     @error('financing_secured')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -115,7 +115,7 @@
                                         <div class="col-md-3">
                                             <div class="profile_input">
                                                 <label>Name</label>
-                                                <input type="text" value="{{$ass['project_associate_name']}}" class="form-control" name="project_associate_name" placeholder="Locations (Optional)" aria-label="Username" aria-describedby="basic-addon1">
+                                                <input type="text" value="{{$ass['project_associate_name']}}" class="form-control" name="project_associate_name" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1">
                                                 @error('project_associate_name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
