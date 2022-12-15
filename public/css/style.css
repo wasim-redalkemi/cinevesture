@@ -157,6 +157,7 @@ body {
 .main-body {
     background: rgb(28,3,48);
     color: white;
+    min-height: 60vh;
 }
 
 .section .sub-section {
@@ -303,13 +304,14 @@ body {
     color: #FAF8FB;
 }
 
-.project-sub-text {
+.project-sub-text, .project-sub-text a {
     width: 500px;
     font-weight: 300;
     font-size: 20px;
     line-height: 158%;
     letter-spacing: 0.004em;
     color: #FAF8FB;
+    text-decoration: none;
 }
 
 .duration-lang-text {
@@ -1132,10 +1134,29 @@ body {
     border: 0.5px solid #DD45B3;
     border-radius: 4px;
 }
+.project_public_img_wrap
+{
+    height: 200px;
+}
+.image_responsive_wrap
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.8);
+}
+.image_responsive_wrap img
+{
+    height: auto;
+    width: auto;
+    max-width: 100%;
+    max-height: 100%;
+    position: relative;
+}
  .bg_white {
     background: rgb(250,248,251) !important;
 }
-.deep-pink {
+.deep-pink, .deep-pink a {
     color: #971E9B !important;
     text-decoration: none;
 }
@@ -2286,6 +2307,10 @@ select {
     /* opacity: 1; */
 }
 
+.playVideoModalContent {
+    height: 70vh;
+    width: 100%;
+}
 .plan_month_select{
     border-radius: 4px;
     opacity: 1;

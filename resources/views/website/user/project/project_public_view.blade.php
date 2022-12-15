@@ -17,11 +17,7 @@
     <div class="main-slider-container">
 
         <div class="project_image_wraper">
-            @if ($projectData[0]['project_image']['file_link'])
-                <img src="{{ Storage::url($projectData[0]['project_image']['file_link']) }}" class="" alt="image">
-            @else                
                 <img src="{{ asset('images/20220805_172049.jpg') }}" class="" alt="image">
-            @endif
             <div class="public-head-image-shadow"></div>
         </div>
 
@@ -147,7 +143,7 @@
                         <div class="col-lg-6 col-md-12 px-3">
                             <div class="public-head-subimage">
                                 <div class="playVideoWrap mt-3" video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link']}} @endif">
-                                    <img src="{{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}" alt="">
+                                    <img src="{{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}" alt="" >
                                 </div>
                                 {{-- <iframe width="100%" height="350" src="{{empty($projectData[0]['project_only_video'][0]['file_link'])?'https://www.youtube.com/embed/oYWAwwy5EbQ':$projectData[0]['project_only_video'][0]['file_link'];}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> --}}
                                 <!-- <img src="{{ asset('images/asset/download (3) 7.png') }}" width=100% alt="Image"> -->
@@ -222,7 +218,7 @@
                         @foreach ($projectData[0]['project_only_video'] as $v)
                             <div class="col-md-3">
                                 <div class="playVideoWrap mt-3" video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link']}} @endif">
-                                    <img src="{{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}" alt="">
+                                    <img src="{{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}" alt="" width="100%">
                                 </div>                                
                             </div>
                         @endforeach                    
@@ -233,8 +229,9 @@
                         @if (!empty($projectData[0]['project_only_image']))
                         @foreach ($projectData[0]['project_only_image'] as $v)
                         <div class="col-md-3 mt-3">
-                            <div style="height: 200px; overflow:hidden;background-color:rgba(0,0,0,0.2)"> <img src="{{ Storage::url($v['file_link']) }}" class="" width=100% alt="image"></div>
-                            
+                            <div class="project_public_img_wrap image_responsive_wrap"> 
+                                <img src="{{ Storage::url($v['file_link']) }}" class="" width=100% alt="image">
+                            </div>
                         </div>
                         @endforeach                    
                         @endif
