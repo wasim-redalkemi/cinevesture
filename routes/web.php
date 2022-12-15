@@ -159,6 +159,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
         Route::get('/get-project-media/{id}', [ProjectController::class, 'getMediaByProject'])->name('get-project-media');
 
         Route::get('/filter', [ProjectController::class, 'getFilteredProject'])->name('get-project-filter');
+        Route::get('/project-delete', [UserController::class, 'projectDelete'])->name('project-delete');
+
 
 	});
 

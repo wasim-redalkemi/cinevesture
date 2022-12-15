@@ -187,7 +187,7 @@
         var user_id = null;
         var parentElemId = "#user-profile-div";
         var imageCnt = 1;
-        var maxImgCnt = 15;
+        var maxImgCnt = 5;
 
         let init = function(portfolioData){
             user_id = portfolioData.id;
