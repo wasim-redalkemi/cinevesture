@@ -68,14 +68,23 @@
                                     <div class="plan_subheader mt-2">Great for those who want to get themselves in front of the right people in the industry</div>
                                 </div>
                                 <div class="Plain_price">
+                                    @if($plan->plan_name == "Free")
                                     <div class="search-head-subtext Aubergine_at_night mt-3">Free forever</div>
+                                    @else
+                                    <div class="search-head-subtext Aubergine_at_night mt-3">Paid 
+                                        @if($plan->plan_time == 'm')
+                                        Monthly
+                                        @else
+                                        Annually
+                                        @endif</div>
+                                    @endif
                                     <div class="search-head-text Aubergine_at_night">
                                         @if($plan->currency == "USD")
                                            $
                                         @else
                                            ₹
                                         @endif
-                                        {{$plan->plan_amount}}</div>
+                                        {{ number_format((float)$plan->plan_amount, 2, '.', ',')}}</div>
 
                                     <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
                                 </div>

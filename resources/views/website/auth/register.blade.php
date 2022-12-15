@@ -58,7 +58,9 @@
             </div>
         </form>
         <div class="col-12 mt-2">
-            <button class="with_google_btn"> <img src="{{ asset('images/asset/google.png') }}" width="24" width="24" class="mx-3">Sign up with google</button>
+            <a href="{{ route('google.login') }}">
+                <button class="with_google_btn" type="button"> <img src="{{ asset('images/asset/google.png') }}" width="24" width="24" class="mx-3">Sign up with google</button>
+            </a>
         </div>
         <div class="help-text mt-2 mt-lg-4">Need Help ?</div>
         <div class="bottom-container mb-5">

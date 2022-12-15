@@ -38,7 +38,7 @@ class CreateJobRequest extends FormRequest
     {
         return [
             'save_type'=>'required',
-            'job_title' => 'required|max:5',                    
+            'job_title' => 'required|max:20',                    
             'employments.*' => 'required',                    
             'workspaces.*' => 'required',
             'company_name' => 'required',
