@@ -95,7 +95,7 @@
                                         You have successfuly applied for this job.
                                     </div>
                                     <div>
-                                        <a href="{{route('showJobSearchResults')}}" class="submit_btn mt-4">Apply More</a>
+                                        <a href="{{route('showJobSearchResults')}}" class="submit_btn mt-4 text-decoration-none text-light">Apply More</a>
                                     </div>
                                 </div>
                             </div>
@@ -117,8 +117,11 @@
 
 @push('scripts')
 <script>
+    $(".document_pdf").fadeOut(100)
     $("#apply_job_form").change(function(e) {
+        $(".uploadedPdf").text("")
         let resume = $("#upload-doc-inp")[0].files[0]
+        $(".document_pdf").fadeIn(100)
         $(".uploadedPdf").text(resume.name)
     })
     $("#apply_job_form").on("submit", function(e) {

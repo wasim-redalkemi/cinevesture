@@ -2506,7 +2506,7 @@ select {
 .search_page_filters_wrap .filter_option_wrap
 {
     position: absolute;
-    left: 110%;
+    left: 10%;
     z-index: 999;
     max-height: 300px;
     overflow: auto;
@@ -2590,7 +2590,10 @@ select {
     left: 1px;
 
 }
-
+.search_page_filters_wrap .dropdown-menu { 
+   background-color: transparent !important;
+   border: none !important;       
+}
 
   @media (max-width: 480px) {
     .container, .container-lg, .container-md, .container-sm, .container-xl {
@@ -2793,6 +2796,7 @@ select {
         max-height: 60vh;
         overflow: auto;
     }
+   
     .navbar_mobile .navbar-nav .dropdown-menu { 
         position: absolute;
         height: auto;
