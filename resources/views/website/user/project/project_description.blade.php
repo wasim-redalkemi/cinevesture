@@ -41,7 +41,7 @@
                             <div class="col-md-10">
                                 <div class="profile_input">
                                     <label>Synopsis/Brief Description <span style = "color:red">*</span></label>
-                                    <textarea class="form-control controlTextLength" text-length = "600" maxlength="600" name="synopsis" aria-label="With textarea" required>@if (!empty($projectDescription[0]->synopsis)){{ $projectDescription[0]->synopsis }}
+                                    <textarea class="form-control controlTextLength" placeholder="Write synopsis here" text-length = "600" maxlength="600" name="synopsis" aria-label="With textarea" required>@if (!empty($projectDescription[0]->synopsis)){{ $projectDescription[0]->synopsis }}
                                     @endif</textarea>
                                     @error('synopsis')
                                     <span class="invalid-feedback" role="alert">
@@ -56,7 +56,7 @@
                                 <div class="profile_input">
                                     <label>Director/Creator/Founder’s Statement <span style = "color:red">*</span></label>
                                 </div>
-                                <textarea class="form-control controlTextLength" text-length = "600" maxlength="600" name="director_statement" style="border: 1px solid #4D0D8A;" id="textAreaExample3" rows="1" required>@if (!empty($projectDescription[0]->director_statement)){{ $projectDescription[0]->director_statement }}
+                                <textarea class="form-control controlTextLength" placeholder="Write statement here" text-length = "600" maxlength="600" name="director_statement" style="border: 1px solid #4D0D8A;" id="textAreaExample3" rows="1" required>@if (!empty($projectDescription[0]->director_statement)){{ $projectDescription[0]->director_statement }}
                                 @endif</textarea>
                                 @error('director_statement')
                                 <span class="invalid-feedback" role="alert">

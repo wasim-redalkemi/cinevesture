@@ -537,6 +537,9 @@ class ProjectController extends WebController
             $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
             $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->get();
             $projectData = $projectData->toArray();
+            if (empty($projectData)) {
+                return back()->with('error','Invalid request.');
+            }
 
             return view('website.user.project.project_public_view', compact(['UserProject','projectData','geners','categories','looking_for','project_stages','countries','languages']));
 
@@ -698,6 +701,17 @@ class ProjectController extends WebController
             }
         } catch (Exception $e) {
             return back()->with("error", $e->getMessage());
+        }
+    }
+
+    public function projectDelete()
+    {
+        try {
+            $id = $_REQUEST['id'];
+            UserQualification::query()->where('id', $id)->delete();
+            return redirect(route('profile-private-show'));
+        } catch (Exception $e) {
+            return back()->with('error', 'Something went wrong.');
         }
     }
 

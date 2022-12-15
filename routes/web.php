@@ -92,7 +92,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
         Route::get('/subscription/failed',[SubscriptionController::class,'paymnetFailed'])->name('subscription-failed');
 
 
-		Route::get('/profile-private-show', [UserController::class, 'profilePrivateShow'])->name('profile-private-show')->middleware('plancheck');
+		Route::get('/profile-private-show', [UserController::class, 'profilePrivateShow'])->name('profile-private-show');
 		Route::get('/profile-public-show', [UserController::class, 'profilePublicShow'])->name('profile-public-show')->middleware('plancheck');
         Route::get('/profile-create', [UserController::class, 'profileCreate'])->name('profile-create')->middleware('plancheck');
         Route::post('/profile-store', [UserController::class, 'profileStore'])->name('profile-store');
@@ -159,6 +159,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
         Route::get('/get-project-media/{id}', [ProjectController::class, 'getMediaByProject'])->name('get-project-media');
 
         Route::get('/filter', [ProjectController::class, 'getFilteredProject'])->name('get-project-filter');
+        Route::get('/project-delete', [UserController::class, 'projectDelete'])->name('project-delete');
+
 
 	});
 
