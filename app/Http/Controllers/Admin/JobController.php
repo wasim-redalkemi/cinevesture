@@ -23,7 +23,7 @@ class JobController extends AdminController
             
             $countries=MasterCountry::query()->get();
             $jobs=UserJob::query()
-            ->with('jobLocation','user','jobOrganisation')
+            ->with('jobLocation','user','jobOrganisation','jobEmployements')
             ->where(function($q) use ($request){
                 if (isset($request->country)) {
                     $q->whereHas('jobLocation', function($q) use($request){
@@ -35,6 +35,11 @@ class JobController extends AdminController
                 }
                 if (isset($request->search)) {
                     $q->where('title',"like","%$request->search%") ;
+                }
+                 if (isset($request->country)) {
+                    $q->whereHas('jobLocation', function($q) use($request){
+                        $q->where('location_id',$request->country);
+                    });
                 }
             })
             ->orderByDesc('id')

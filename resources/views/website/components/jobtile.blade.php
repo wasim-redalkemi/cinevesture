@@ -9,9 +9,12 @@
             <i data-id="{{$job->id}}" class="fa {{is_null($job->favorite) ? 'fa-heart-o' : 'fa-heart'}} aubergine icon-size" aria-hidden="true"></i>
         </div>
     </div>
+   
 
     <div class="preview_headtext lh_54 candy-pink">
-        {{$job->company_name}}-{{@$job->jobLocation->name}}
+        
+        {{$job->company_name}} - {{@$job->jobLocation->name}} - {{@$job->jobEmployements[0]->name}}
+
     </div>
     <div class="posted_job_header Aubergine_at_night">
         {{$job->description}}

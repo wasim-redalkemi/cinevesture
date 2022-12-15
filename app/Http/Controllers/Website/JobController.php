@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Traits\Utils;
 use App\Http\Controllers\WebController;
+use App\Http\Requests\ApplyNowRequest;
 use App\Http\Requests\CreateJobRequest;
 use App\Models\JobEmployement;
 use App\Models\JobSkill;
@@ -226,6 +227,7 @@ class JobController extends WebController
             $status = isset($_REQUEST['status']) ? $_REQUEST['status'] : 'published';
             $userJob = $this->getUserJobData(auth()->user()->id, $status);
             return view('website.job.posted_job', compact(['userJob', 'status']));
+          
         } catch (Exception $e) {
             return ['status' => 0, 'msg' => $e->getMessage()];
         }
@@ -288,9 +290,9 @@ class JobController extends WebController
         $jobTitle = UserJob::query()->where("id", $jobId)->value('title');
         return view('website.job.apply_now', compact('jobTitle'));
     }
-    public function storeApplyJob(Request $request, $jobId)
+    public function storeApplyJob(ApplyNowRequest $request, $jobId)
     {
-        $request->validate(["resume" => "required|file|mimes:pdf,doc,docx", "cover_letter" => "required"]);
+       // $request->validate(["resume" => "required|file|mimes:pdf,doc,docx", "cover_letter" => "required"]);
         if (UserAppliedJob::query()->where("user_id", auth()->id())->where("job_id", $jobId)->exists()) {
             //    throw ValidationException::withMessages([
             //     'field_name_1' => ['You have been already applied for this job.']            
@@ -388,7 +390,11 @@ class JobController extends WebController
                     $q->whereIn("skill_id", $requests["skills"]);
                 }
             })
-            ->paginate($this->records_limit);
+           // ->get();
+            // echo "<pre>";
+            // print_r($jobs);
+            // die;
+           ->paginate($this->records_limit);
         $notFoundMessage = "No jobs found, please modify your search.";
         return view('website.job.search_result', compact('countries', 'employments', 'skills', 'categories', 'workspaces', 'jobs', 'notFoundMessage'));
     }
