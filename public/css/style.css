@@ -1459,10 +1459,13 @@ body {
     font-size: 20px !important;
 }
 .profile_dropdown_menu li a {
-   color: #4D0D8A !important;
+   /* color: #4D0D8A !important; */
+   color: #971E9B !important;
    padding: 7px;
-   font-size: 16px;
+   font-size: 14px;
    width: 100%;
+   letter-spacing: 0.018em;
+   font-weight: 300;
    text-decoration: none !important;
 }
 .cancel_btn, .cancel_btn a  {
