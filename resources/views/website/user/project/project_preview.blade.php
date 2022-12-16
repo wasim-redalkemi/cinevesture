@@ -188,7 +188,7 @@
                                     <i class="fa fa-file-text deep-pink icon-size" aria-hidden="true"></i>
                                 </div>
                                 <div>
-                                    <div class="guide_profile_main_subtext Aubergine_at_night">{{ json_decode($v['media_info'])->name }}</div>
+                                    <div class="guide_profile_main_subtext Aubergine_at_night px-2">{{ json_decode($v['media_info'])->name }}</div>
                                 </div>
                                 <div class="proctect_by_capta_text Aubergine_at_night">{{ json_decode($v['media_info'])->size_label }}</div>
                             </div>
