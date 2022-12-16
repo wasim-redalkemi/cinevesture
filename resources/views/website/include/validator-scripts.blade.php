@@ -457,7 +457,12 @@
                     const [file] = this.files
                     uploadedFile = this.files[0];
                     if (file) {
-                        $("#previewImg").attr("src",URL.createObjectURL(file)).show();
+
+                        // alert("croper will start from here")
+
+                        
+
+                        // $("#previewImg").attr("src",URL.createObjectURL(file)).show();
                         $(parentElemId+" .open_file_explorer label").hide();
                         $(parentElemId+" .profile_upload_text").hide();
                         $(parentElemId+" .profile_input.add-new-image").show();
@@ -654,7 +659,7 @@
             let getAddElemHtml = function () {
                 let str = '<div class="col-md-3 img-item">';
                     str += '<div class="open_file_explorer profile_upload_container h_66">';
-                        str += '<img src="" id="previewImg">';
+                        str += '<img src="" id="previewImg" class="croperImg">';
                         str += '<div id="cancel-img-upload" class="cancel-img-upload"><i class="fa fa-times" aria-hidden="true"></i></div>';
                         str += '<div class="progress-bar"><div class="fill-progress"></div></div>';
                         str += '<div for="file-input input_wrap" class="d-none">';

@@ -36,11 +36,15 @@
                     </div>
                     <div class="sidebar_collapse collapse dont-collapse-sm" id="collapseExample">
                         <div class="sidebar_data_mobile">
-                            <div class="search-page mt-3 search_page_filters_wrap dropend">
-                                <a class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+
+        
+
+                            <div class="search-page  mt-3 search_page_filters_wrap dropend">
+                                <button type="button" class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Genres
-                                </a>
-                                <div class="dropdown-menu filter_modal_wrap" id="">
+                                </button>
+                                <div class="dropdown-menu filter_modal_wrap">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
@@ -229,9 +233,9 @@
                         <div class="row">
                             <div class="col-md-5">
                                 @if(isset($project->projectImage))
-                                <div class="home_img_wrap"><img src="{{Storage::url($project->projectImage->file_link)}}" class="root_img"></div>
+                                <div class="home_img_wrap mx_w_100 w-auto"><img src="{{Storage::url($project->projectImage->file_link)}}" class="root_img"></div>
                                 @else
-                                <div class="home_img_wrap w-auto"><img src="{{asset('images/asset/image 3 (1).png')}}" class="root_img"></div>
+                                <div class="home_img_wrap mx_w_100 w-auto"><img src="{{asset('images/asset/image 3 (1).png')}}" class="root_img"></div>
                                 @endif
                             </div>
                             <div class="col-md-7">
