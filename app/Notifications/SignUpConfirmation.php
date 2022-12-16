@@ -46,10 +46,10 @@ class SignUpConfirmation extends Notification
         ->line('Welcome to Cinevesture! We’re excited to have you on board.')
         ->line('We are here to help you build your network in the media industry to find interesting people and projects to work with.')
         ->line('Cinevesture is about:')
-        ->line("<p>- <span>  </span>Meeting the right people</p>
-        <p>-   Sharing interesting projects</p>
-        <p>-   Finding the right talent</p>
-        <p>-   Learning new skills</p>")
+        ->line("Meeting the right people")        
+        ->line("Sharing interesting projects")        
+        ->line("Finding the right talent")        
+        ->line("Learning new skills")        
         ->line('Best,')        
         ->salutation('Team Cinevesture')
         ->action('Login' ,route('plans-view'));

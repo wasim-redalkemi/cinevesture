@@ -11,7 +11,7 @@
 <section class="guide_profile_section my-4">
     <div class="container">
         <div class="row">
-            <div class="col-md-12" id="err-container">
+            {{-- <div class="col-md-12" id="err-container">
                 @if ($errors->any())
 
                 @foreach ($errors->all() as $error)
@@ -22,7 +22,7 @@
                 </div>
                 @endforeach
                 @endif
-            </div>
+            </div> --}}
             <div class="col-md-12 mt-sm-0">
                 <div class="content_wraper">
                     <div class="guide_profile_subsection">
