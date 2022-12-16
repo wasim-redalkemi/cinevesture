@@ -17,7 +17,6 @@
             <section>
                 {{$projects->total()}} Results found for <span class="candy-pink">"{{request('search')}}"</span>
             </section>
-
         </div>
     </div>
     @endif

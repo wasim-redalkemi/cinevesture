@@ -33,11 +33,6 @@
                     </div>
                     <div class="sidebar_collapse collapse dont-collapse-sm" id="collapseExample">
                     <div class="sidebar_data_mobile">
-
-
-                   
-
-                    
                     <div class="dropend search-page search_page_filters_wrap mt-2">
                                 <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Category
@@ -132,20 +127,18 @@
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
                                             @foreach($workspaces as $workspace)
-                                           
                                             <div class="mx-2 for_active">
-                                                    <label class="d-flex align-items-center search_page_filters_data">
-
-                                                                    @if(isset(request('workspaces')[0]) && in_array($workspace->id, request('workspaces')))
-                                                                    <input class="form-check-input me-1 d-none" type="checkbox" checked name="workspaces[]" value="{{$workspace->id}}">
-                                                                    {{$workspace->name}}
-                                                                    @else
-                                                                    <input class="form-check-input me-1 d-none" type="checkbox" name="workspaces[]" value="{{$workspace->id}}">
-                                                                    {{$workspace->name}}
-                                                                    @endif
-                                                                </label>
-                                                                </div>
-                                                                @endforeach
+                                            <label class="d-flex align-items-center search_page_filters_data">
+                                                @if(isset(request('workspaces')[0]) && in_array($workspace->id, request('workspaces')))
+                                                <input class="form-check-input me-1 d-none" type="checkbox" checked name="workspaces[]" value="{{$workspace->id}}">
+                                                {{$workspace->name}}     
+                                                @else
+                                                <input class="form-check-input me-1 d-none" type="checkbox" name="workspaces[]" value="{{$workspace->id}}">
+                                                {{$workspace->name}}
+                                                @endif
+                                            </label>
+                                            </div>
+                                            @endforeach
                                             </div>
                                         </div>
                                     </div>
