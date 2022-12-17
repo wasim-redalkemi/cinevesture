@@ -143,7 +143,7 @@ class UserController extends WebController
                 ->get()
                 ->toArray();
             // Endorsement
-            $user_endorsement = Endorsement::query()->with('endorsementCreater')->where('to',$user->id)
+            $user_endorsement = Endorsement::query()->with('endorsementCreater')->where('to',$user->id)->where('status','1')
                                 ->orderByDesc('id')->limit(5)->get();
             return view('website.user.profile_private_view', compact(['user', 'portfolio', 'experience', 'qualification', 'user_country', 'user_age', 'user_skills', 'user_languages','user_endorsement']));
         } catch (Exception $e) {
@@ -190,7 +190,7 @@ class UserController extends WebController
                 ->get()
                 ->toArray();
             // Endorsement
-            $user_endorsement = Endorsement::query()->with('endorsementCreater')->where('to',$user->id)
+            $user_endorsement = Endorsement::query()->with('endorsementCreater')->where('to',$user->id)->where('status','1')
                                 ->orderByDesc('id')->limit(5)->get();
                                 // dd($user_endorsement);
                                
