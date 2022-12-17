@@ -143,7 +143,7 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label for="lang">Gender</label>
-                                    <select name="gender" class="outline is-invalid-remove @error('gender') is-invalid @enderror" id="lang">
+                                    {{-- <select name="gender" class="outline is-invalid-remove @error('gender') is-invalid @enderror" id="lang">
                                         <option value="">Select</option>
                                         <option value="man" <?php if ("man" == $user->gender) {
                                                                 echo ('selected');
@@ -166,7 +166,13 @@
                                         <option value="other" <?php if ("other" == $user->gender) {
                                                                     echo ('selected');
                                                                 } ?>>Other</option>
-                                    </select>
+                                    </select> --}}
+                                    <select name="gender" class="outline is-invalid-remove @error('gender') is-invalid @enderror" id="lang">
+                                        <option value="">Select</option>
+                                        @foreach($gender as $k=>$v)
+                                        <option value="{{$v->id}}"@if ($v->id == $user->gender) selected @endif>{{ $v->gender }}</option>
+                                        @endforeach
+                                    </select>                                   
                                     @error('gender')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -177,7 +183,7 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label for="lang">Gender Pronouns</label>
-                                    <select name="gender_pronouns" class="outline is-invalid-remove @error('gender_pronouns') is-invalid @enderror" id="lang">
+                                    {{-- <select name="gender_pronouns" class="outline is-invalid-remove @error('gender_pronouns') is-invalid @enderror" id="lang">
                                         <option value="">Select</option>
                                         <option value="he/him/his" <?php if ("he/him/his" == $user->gender_pronouns) {
                                                                         echo ('selected');
@@ -197,6 +203,12 @@
                                         <option value="other" <?php if ("other" == $user->gender_pronouns) {
                                                                     echo ('selected');
                                                                 } ?>>Other</option>
+                                    </select> --}}
+                                    <select name="gender_pronouns" class="outline is-invalid-remove @error('gender_pronouns') is-invalid @enderror" id="lang">
+                                        <option value="">Select</option>
+                                        @foreach($genderPronouns as $k=>$v)
+                                        <option value="{{$v->id}}"@if ($v->id == $user->gender_pronouns) selected @endif>{{ $v->gender_pronouns }}</option>
+                                        @endforeach
                                     </select>
                                     @error('gender_pronouns')
                                     <span class="invalid-feedback" role="alert">

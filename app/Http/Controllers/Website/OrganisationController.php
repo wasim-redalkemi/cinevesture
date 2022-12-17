@@ -30,7 +30,7 @@ class OrganisationController extends WebController
     public function index()
     {
         try {
-            $UserOrganisation = UserOrganisation::query()->with(['organizationLanguages.languages','organizationServices.services','country'])->where('user_id',auth()->user()->id)->first();
+            $UserOrganisation = UserOrganisation::query()->with(['organizationLanguages.languages','organizationServices.services','country','organizationType'])->where('user_id',auth()->user()->id)->first();
             
             return view('website.user.organisation.organisation',compact(['UserOrganisation']));
         } catch (Exception $e) {
@@ -85,6 +85,30 @@ class OrganisationController extends WebController
     public function store(OrganisationRequest $request)
     {
         try {
+            $video_url = [];
+            if (!empty($request->intro_video_link)) 
+            {
+
+                $video_url = $this->getVideoLink($request->intro_video_link);
+                $videoDetailsParams = [
+                    'link'=>$video_url['link'],
+                    'video_id'=>$video_url['video_id'],
+                    'platform'=>$video_url['platform'],
+                ];
+                $videoDetails = $this->getVideoDetailsURL($videoDetailsParams);
+                if ($videoDetails['status'] == 0 || empty($videoDetails['pl'])) {
+                    return back()->with('error', 'Only allow youtube and vemio video.');
+                }
+                if($video_url['platform'] == $this->platform_youtube)
+                {
+                    $thumbnail = $videoDetails['pl']['items'][0]['snippet']['thumbnails']['high']['url'];
+                }
+                elseif($video_url['platform'] == $this->platform_vimeo)
+                {
+                    $thumbnail = $videoDetails['pl']['thumbnail_medium'];
+                }
+            }
+
             $UserOrganisation = UserOrganisation::query()->where('user_id', auth()->user()->id)->first();
             if (!$UserOrganisation) {
                 $UserOrganisation = new UserOrganisation();
@@ -98,8 +122,12 @@ class OrganisationController extends WebController
             $UserOrganisation->imdb_profile = $request->imdb_profile;
             $UserOrganisation->linkedin_profile = $request->linkedin_profile;
             $UserOrganisation->website = $request->website;
-            $UserOrganisation->intro_video_link = $request->intro_video_link;
+            // $UserOrganisation->intro_video_link = $request->intro_video_link;
             $UserOrganisation->team_size = $request->team_size;
+            if (!empty($request->intro_video_link)) {
+                $UserOrganisation->intro_video_link = $video_url['link'];
+                $UserOrganisation->intro_video_thumbnail = $thumbnail;
+            }
 
 
             if ($request->hasFile('logo')) {

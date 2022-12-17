@@ -21,6 +21,7 @@ use App\Models\UserFavouriteProfile;
 use App\Models\UserJob;
 use App\Models\UserPortfolio;
 use App\Models\Workspace;
+use App\Notifications\PromotionJob;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -439,6 +440,22 @@ class JobController extends WebController
                 return back()->with('Something went wrong');
             }
             return view('website.job.job_post_single', compact(['Job_data']));
+        } catch (Exception $e) {
+            return back()->with($e->getmessage());
+        }
+    }
+
+
+    public function promotionJob()
+    {
+        try {
+            $admin_email_id = config('app.ADMIN_EMAIL_ID');
+            $user = User::query()->where('email',$admin_email_id)->first();
+            $collect  = collect();
+            $collect->put('first_name', UcFirst($user->first_name));
+            $user->notify(new PromotionJob($collect));
+            return back()->with('success','Promotion mail send successfully');
+            
         } catch (Exception $e) {
             return back()->with($e->getmessage());
         }

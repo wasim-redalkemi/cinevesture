@@ -159,7 +159,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
         Route::get('/get-project-media/{id}', [ProjectController::class, 'getMediaByProject'])->name('get-project-media');
 
         Route::get('/filter', [ProjectController::class, 'getFilteredProject'])->name('get-project-filter');
-        Route::get('/project-delete', [UserController::class, 'projectDelete'])->name('project-delete');
+        Route::get('/project-delete/{id}', [ProjectController::class, 'projectDelete'])->name('project-delete');
 
 
 	});
@@ -234,6 +234,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
         Route::get('/cover-letter/{jobId}/{userId}',[JobController::class, 'showAppliedJobCoverLetter'])->name('showAppliedJobCoverLetter');
 
         Route::get('/posted-job-single-view',[JobController::class, 'postedJobView'])->name('posted-job-single-view');
+        Route::get('/promotion-job',[JobController::class, 'promotionJob'])->name('promotion-job');
 
 	});
 

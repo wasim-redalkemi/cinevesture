@@ -167,7 +167,8 @@
                                         <span data-toggle="tooltip" data-placement="bottom" title="Promote your job for a small fee. Our team will get in touch with you when you submit a job promotion"> <i class="fa fa-info-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <div>
-                                        <button class="submit_btn mt-4">Submit your job for promotion</button></div>
+                                <a href="{{route('promotion-job')}}" class="text-decoration-none"><button class="submit_btn mt-4">Submit your job for promotion</button></a>
+                                </div>
                                 </div>
                             </div>
                         </div>

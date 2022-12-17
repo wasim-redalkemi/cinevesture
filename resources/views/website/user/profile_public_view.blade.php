@@ -252,7 +252,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="guide_profile_main_text deep-pink font_18">Project</div>
-                            @if (!empty($UserProject))
+                            @if (count($UserProject))
                             <div class="project owl-carousel owl-theme">
                                 @foreach($UserProject as $k=>$v)                                
                                 <div class="item">
@@ -264,6 +264,8 @@
                                 </div>                                
                                 @endforeach
                             </div>
+                            @else
+                            <span><b>-</b></span>
                             @endif
                         </div>
                     </div>
