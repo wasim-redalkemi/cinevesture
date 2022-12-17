@@ -408,6 +408,7 @@
             var lastVidId = 0;
             var currentMediaCount = 0;
             var uploadedFile = null;
+            var croppedImg = null;
 
             let init = function(id){
                 project_id = id;
@@ -457,7 +458,12 @@
                     const [file] = this.files
                     uploadedFile = this.files[0];
                     if (file) {
-                        $("#previewImg").attr("src",URL.createObjectURL(file)).show();
+                        let ret = ImageCropper.init(uploadedFile);
+                        console.log("ret = "+ret);
+                        //let base64data = $("#previewImg").attr("src");
+                        //console.log("base64data",base64data);
+                        // alert("croper will start from here")
+                        // $("#previewImg").attr("src",URL.createObjectURL(file)).show();
                         $(parentElemId+" .open_file_explorer label").hide();
                         $(parentElemId+" .profile_upload_text").hide();
                         $(parentElemId+" .profile_input.add-new-image").show();
@@ -466,8 +472,10 @@
                 });
 
                 $(parentElemId+" input[name=image_title]").off("blur").on("blur",(e)=>{
+                    var croppedImg = ImageCropper.getCropperFile();
+                    console.log("croppedImg",croppedImg);
                     var formData = new FormData();
-                    formData.append("file", uploadedFile, uploadedFile.name);
+                    formData.append("file", croppedImg, uploadedFile.name);
                     formData.append("title", e.target.value);
                     formData.append("project_id", project_id);
                     $.ajax({
@@ -654,7 +662,7 @@
             let getAddElemHtml = function () {
                 let str = '<div class="col-md-3 img-item">';
                     str += '<div class="open_file_explorer profile_upload_container h_66">';
-                        str += '<img src="" id="previewImg">';
+                        str += '<img src="" id="previewImg" class="croperImg">';
                         str += '<div id="cancel-img-upload" class="cancel-img-upload"><i class="fa fa-times" aria-hidden="true"></i></div>';
                         str += '<div class="progress-bar"><div class="fill-progress"></div></div>';
                         str += '<div for="file-input input_wrap" class="d-none">';

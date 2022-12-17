@@ -212,6 +212,30 @@
             </div>
         </div>
     </div>
+
+    <!-- cropper  -->                            
+    <div class="modal fade" id="ImageCropperModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content croper_modal">
+                <div class="modal-header py-1">
+                    <h6 class="modal-title tile_text" id="modalLabel"> Image Cropper</h6>
+                    <div class="d-flex jutify-content-center">
+                        <button type="button" class="mx-2 btn-danger" id="crop-cancel" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        <button type="button" class="btn-success" id="crop"><i class="fa fa-check" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 @endsection
@@ -227,6 +251,7 @@
             Docs.init(project_id);
         });
     </script>
+    <script src="{{ asset('js/cropper.js') }}"></script>
 @endpush
 
 @section('footer')

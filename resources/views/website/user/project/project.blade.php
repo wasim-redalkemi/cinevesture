@@ -26,7 +26,7 @@
                     
                             <div class="img-container project-img-container">
                                 @if (empty($v->projectImage->file_link))
-                                    <img src="{{ asset('images/asset/user-profile.png') }}" width="100%" height="100%"  />
+                                    <img src="{{ asset('images/asset/user-profile.png') }}"   />
                                 @else
                                     <img src="{{ asset('storage/'.$v->projectImage->file_link)}}" class="width_inheritence" alt="image">
                                 @endif
@@ -38,6 +38,7 @@
                                         <img src="{{ asset('images/asset/delete-icon.svg') }}"/>
                                     </a>
                                 </div>
+                            </div>
                             </div>
                             <div>
                             <a href="{{route('public-view')}}?id={{$v->id}}" style="outline: none; text-decoration:none">
@@ -53,7 +54,7 @@
                                 @endif
                             </div>
                                 </a>
-                            </div>
+                            <!-- </div> -->
                          
                          
                        
