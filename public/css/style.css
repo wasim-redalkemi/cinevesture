@@ -409,6 +409,7 @@ body {
 
 .home-dropdown ul li input {
     width: 14px;
+    min-width: 14px;
     height: 14px;
     background-color: transparent;
     border: 2px solid #FFFFFF;
@@ -1443,6 +1444,9 @@ body {
     border: 1px solid #4D0D8A;
     border-radius: 4px;
     min-height: calc(7em + 0.75rem + 2px) !important;
+}
+.forRemoveBorder .dropdown-menu {
+    border: none !important;
 }
 .profile_dropdown_btn {
     background: #FFFFFF;
