@@ -408,7 +408,7 @@
             var lastVidId = 0;
             var currentMediaCount = 0;
             var uploadedFile = null;
-            var croppedImg = null;
+            var ImageCropperObj = null;
 
             let init = function(id){
                 project_id = id;
@@ -458,11 +458,9 @@
                     const [file] = this.files
                     uploadedFile = this.files[0];
                     if (file) {
-                        let ret = ImageCropper.init(uploadedFile);
-                        console.log("ret = "+ret);
-                        //let base64data = $("#previewImg").attr("src");
-                        //console.log("base64data",base64data);
-                        // alert("croper will start from here")
+                        ImageCropperObj = new ImageCropper(uploadedFile,"#previewImg");
+                        ImageCropperObj.setCropBoxSize({'width':285*2,height:194*2});
+                        let ret = ImageCropperObj.init();
                         // $("#previewImg").attr("src",URL.createObjectURL(file)).show();
                         $(parentElemId+" .open_file_explorer label").hide();
                         $(parentElemId+" .profile_upload_text").hide();
@@ -472,8 +470,11 @@
                 });
 
                 $(parentElemId+" input[name=image_title]").off("blur").on("blur",(e)=>{
-                    var croppedImg = ImageCropper.getCropperFile();
-                    console.log("croppedImg",croppedImg);
+                    if(e.target.value == ''){
+                        createToast("Please give a title to the image","E");
+                        return;
+                    }
+                    var croppedImg = ImageCropperObj.getCropperFile();
                     var formData = new FormData();
                     formData.append("file", croppedImg, uploadedFile.name);
                     formData.append("title", e.target.value);
