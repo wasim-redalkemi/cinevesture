@@ -45,4 +45,35 @@ class WebController extends Controller
         $toReturn = ['status'=>$status,'pl'=>$data];
         return $toReturn;
     }
+
+    public function getVideoLink($url = '')
+    {
+        $id = '';
+        $resp = ['link'=>'','video_id'=>'','platform'=>''];
+        if(strpos($url, 'youtu') !== false)
+        {
+            parse_str(parse_url( $url, PHP_URL_QUERY), $nurl);
+            if(array_key_exists('v', $nurl))
+            {
+                $id = $nurl['v'];
+            }
+            else if(array_key_exists('vi', $nurl))
+            {
+                $id = $nurl['vi'];
+            }
+            else
+            {
+                $id = explode('?',array_reverse(explode("/", $url))[0])[0];
+            }
+            $resp['link'] = 'https://www.youtube.com/embed/'.$id;
+            $resp['video_id'] = $id;
+            $resp['platform'] = $this->platform_youtube;
+        }
+        else if(strpos($url, 'vimeo') !== false)
+        {
+            $resp['link'] = $url;
+            $resp['platform'] = $this->platform_vimeo;
+        }
+        return $resp;
+    }
 }

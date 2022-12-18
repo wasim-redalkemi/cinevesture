@@ -27,8 +27,8 @@ class CreateUsersTable extends Migration
             $table->string('google_id',255)->nullable();
             $table->string("age")->nullable();
             $table->string("profile_image",255)->nullable();
-            $table->enum('gender',['man','woman','non_binary','transgender','gender_non_confirming','prefer_not_to_say','other'])->nullable();
-            $table->enum('gender_pronouns',['he/him/his','she/her/hers','they/them/theirs','ze/hir/hirs','prefer_not_to_say','other'])->nullable();
+            $table->string('gender')->nullable();
+            $table->string('gender_pronouns')->nullable();
             $table->enum('available_to_work_in',['virtually','physically'])->nullable();
             $table->string('about')->nullable();
             $table->string('country_id')->nullable();

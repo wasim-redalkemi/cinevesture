@@ -146,7 +146,11 @@
                     
               </div>
               <div class="secondry-card-top-container w-100">
-                <div>{{$v1->projects->project_name}}</div>
+                <div>
+                @if (isset($v1->projects->project_name) && !empty($v1->projects->project_name))
+                {{$v1->projects->project_name}}
+                @endif
+                </div>
                 <div>
                   <i class="fa fa-heart" style="color: white;" aria-hidden="true"></i>
                 </div>

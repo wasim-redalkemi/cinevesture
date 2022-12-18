@@ -50,7 +50,7 @@
                                 <a href="{{route('job-create-page',['job_id'=>$v['id']])}}">  Edit Job</a>
                                 </li>
                                 <li>
-                                <a href="">  Promote Job</a>
+                                <a href="{{route('promotion-job')}}">  Promote Job</a>
                                 </li>
                                 <li>
                                 <?php $status;  if($v['save_type']=='published'){  $status= "unpublished"; } else {$status="published";}?>

@@ -145,28 +145,10 @@
                                     <label for="lang">Gender</label>
                                     <select name="gender" class="outline is-invalid-remove @error('gender') is-invalid @enderror" id="lang">
                                         <option value="">Select</option>
-                                        <option value="man" <?php if ("man" == $user->gender) {
-                                                                echo ('selected');
-                                                            } ?>>Man</option>
-                                        <option value="woman" <?php if ("woman" == $user->gender) {
-                                                                    echo ('selected');
-                                                                } ?>>Woman</option>
-                                        <option value="non_binary" <?php if ("non_binary" == $user->gender) {
-                                                                        echo ('selected');
-                                                                    } ?>>Non-Binary</option>
-                                        <option value="transgender" <?php if ("transgender" == $user->gender) {
-                                                                        echo ('selected');
-                                                                    } ?>>Transgender</option>
-                                        <option value="gender_non_confirming" <?php if ("gender_non_confirming" == $user->gender) {
-                                                                                    echo ('selected');
-                                                                                } ?>>Gender Non-confirming</option>
-                                        <option value="prefer_not_to_say" <?php if ("prefer_not_to_say" == $user->gender) {
-                                                                                echo ('selected');
-                                                                            } ?>>Prefer Not To Say</option>
-                                        <option value="other" <?php if ("other" == $user->gender) {
-                                                                    echo ('selected');
-                                                                } ?>>Other</option>
-                                    </select>
+                                        @foreach($gender as $k=>$v)
+                                        <option value="{{$v->id}}"@if ($v->id == $user->gender) selected @endif>{{ $v->gender }}</option>
+                                        @endforeach
+                                    </select>                                   
                                     @error('gender')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -179,24 +161,9 @@
                                     <label for="lang">Gender Pronouns</label>
                                     <select name="gender_pronouns" class="outline is-invalid-remove @error('gender_pronouns') is-invalid @enderror" id="lang">
                                         <option value="">Select</option>
-                                        <option value="he/him/his" <?php if ("he/him/his" == $user->gender_pronouns) {
-                                                                        echo ('selected');
-                                                                    } ?>>He/him/His</option>
-                                        <option value="she/her/hers" <?php if ("she/her/hers" == $user->gender_pronouns) {
-                                                                            echo ('selected');
-                                                                        } ?>>She/Her/Hers</option>
-                                        <option value="they/them/theirs" <?php if ("they/them/theirs" == $user->gender_pronouns) {
-                                                                                echo ('selected');
-                                                                            } ?>>They/Them/Theirs</option>
-                                        <option value="ze/hir/hirs" <?php if ("ze/hir/hirs" == $user->gender_pronouns) {
-                                                                        echo ('selected');
-                                                                    } ?>>Ze/Hir/Hirs</option>
-                                        <option value="prefer_not_to_say" <?php if ("prefer_not_to_say" == $user->gender_pronouns) {
-                                                                                echo ('selected');
-                                                                            } ?>>Prefer Not To Say</option>
-                                        <option value="other" <?php if ("other" == $user->gender_pronouns) {
-                                                                    echo ('selected');
-                                                                } ?>>Other</option>
+                                        @foreach($genderPronouns as $k=>$v)
+                                        <option value="{{$v->id}}"@if ($v->id == $user->gender_pronouns) selected @endif>{{ $v->gender_pronouns }}</option>
+                                        @endforeach
                                     </select>
                                     @error('gender_pronouns')
                                     <span class="invalid-feedback" role="alert">
