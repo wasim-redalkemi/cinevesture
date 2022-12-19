@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class SignUpConfirmation extends Notification
+class PromotionJob extends Notification
 {
     use Queueable;
 
@@ -41,18 +41,11 @@ class SignUpConfirmation extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->subject('Welcome to Cinevesture')
-        ->greeting('Hi'.' '.$this->data['first_name'].',')
-        ->line('Welcome to Cinevesture! We’re excited to have you on board.')
-        ->line('We are here to help you build your network in the media industry to find interesting people and projects to work with.')
-        ->line('Cinevesture is about:')
-        ->line("Meeting the right people")        
-        ->line("Sharing interesting projects")        
-        ->line("Finding the right talent")        
-        ->line("Learning new skills")        
-        ->line('Best,')        
-        ->salutation('Team Cinevesture')
-        ->action('Login' ,route('plans-view'));
+                    ->subject('Promoted cinevesture job')
+                    ->greeting('Hi'.' '.$this->data['first_name'].',')
+                    ->line('Promotion mail')
+                    ->action('Notification Action', url('/'))
+                    ->line('Thank you for using our application!');
     }
 
     /**

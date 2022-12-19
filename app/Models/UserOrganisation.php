@@ -22,4 +22,9 @@ class UserOrganisation extends Model
     {
         return $this->hasMany(UserOrganisationLanguage::class,'organisation_id');
     }
+
+    public function organizationType()
+    {
+        return $this->hasOne(MasterOrganisationType::class,'id','type');
+    }
 }

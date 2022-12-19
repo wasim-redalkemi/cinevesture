@@ -46,8 +46,8 @@
                                     </div>
                                     <div class="guide_profile_main_subtext aubergine">
                                         <i>{{empty($user_age->range)?'Age':$user_age->range;}} </i>
-                                        | <i>{{empty($user->gender)?'Gender':$user->gender;}} </i>
-                                        | <i>{{empty($user->gender_pronouns)?'Gender-pronouns':$user->gender_pronouns;}}</i>
+                                        | <i>{{empty($user_gender->gender)?'Gender':$user_gender->gender;}}  </i>
+                                        | <i>{{empty($user_gender_pronouns->gender_pronouns)?'Gender Pronouns':$user_gender_pronouns->gender_pronouns;}}</i>
                                     </div>
                                     <div class="guide_profile_main_subtext">
                                         {{ (!empty($user->job_title))?$user->job_title:'Job Title'; }}

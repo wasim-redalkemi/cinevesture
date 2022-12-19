@@ -25,7 +25,8 @@ class CreateUserOrganisationsTable extends Migration
             $table->string('imdb_profile',255)->nullable();
             $table->string('linkedin_profile',255)->nullable();
             $table->string('website',255)->nullable();
-            $table->string('intro_video_link',255)->nullable();
+            $table->string('intro_video_link',500)->nullable();
+            $table->string('intro_video_thumbnail',500)->nullable();
             $table->integer('team_size')->nullable();
 
             $table->timestamps();

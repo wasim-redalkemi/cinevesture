@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Traits\Utils;
 use App\Http\Controllers\WebController;
+use App\Http\Requests\ApplyNowRequest;
 use App\Http\Requests\CreateJobRequest;
 use App\Models\JobEmployement;
 use App\Models\JobSkill;
@@ -20,6 +21,7 @@ use App\Models\UserFavouriteProfile;
 use App\Models\UserJob;
 use App\Models\UserPortfolio;
 use App\Models\Workspace;
+use App\Notifications\PromotionJob;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -226,6 +228,7 @@ class JobController extends WebController
             $status = isset($_REQUEST['status']) ? $_REQUEST['status'] : 'published';
             $userJob = $this->getUserJobData(auth()->user()->id, $status);
             return view('website.job.posted_job', compact(['userJob', 'status']));
+          
         } catch (Exception $e) {
             return ['status' => 0, 'msg' => $e->getMessage()];
         }
@@ -288,9 +291,9 @@ class JobController extends WebController
         $jobTitle = UserJob::query()->where("id", $jobId)->value('title');
         return view('website.job.apply_now', compact('jobTitle'));
     }
-    public function storeApplyJob(Request $request, $jobId)
+    public function storeApplyJob(ApplyNowRequest $request, $jobId)
     {
-        $request->validate(["resume" => "required|file|mimes:pdf,doc,docx", "cover_letter" => "required"]);
+       // $request->validate(["resume" => "required|file|mimes:pdf,doc,docx", "cover_letter" => "required"]);
         if (UserAppliedJob::query()->where("user_id", auth()->id())->where("job_id", $jobId)->exists()) {
             //    throw ValidationException::withMessages([
             //     'field_name_1' => ['You have been already applied for this job.']            
@@ -388,7 +391,11 @@ class JobController extends WebController
                     $q->whereIn("skill_id", $requests["skills"]);
                 }
             })
-            ->paginate($this->records_limit);
+           // ->get();
+            // echo "<pre>";
+            // print_r($jobs);
+            // die;
+           ->paginate($this->records_limit);
         $notFoundMessage = "No jobs found, please modify your search.";
         return view('website.job.search_result', compact('countries', 'employments', 'skills', 'categories', 'workspaces', 'jobs', 'notFoundMessage'));
     }
@@ -433,6 +440,22 @@ class JobController extends WebController
                 return back()->with('Something went wrong');
             }
             return view('website.job.job_post_single', compact(['Job_data']));
+        } catch (Exception $e) {
+            return back()->with($e->getmessage());
+        }
+    }
+
+
+    public function promotionJob()
+    {
+        try {
+            $admin_email_id = config('app.ADMIN_EMAIL_ID');
+            $user = User::query()->where('email',$admin_email_id)->first();
+            $collect  = collect();
+            $collect->put('first_name', UcFirst($user->first_name));
+            $user->notify(new PromotionJob($collect));
+            return back()->with('success','Promotion mail send successfully');
+            
         } catch (Exception $e) {
             return back()->with($e->getmessage());
         }

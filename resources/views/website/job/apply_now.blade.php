@@ -11,7 +11,7 @@
 <section class="guide_profile_section my-4">
     <div class="container">
         <div class="row">
-            <div class="col-md-12" id="err-container">
+            {{-- <div class="col-md-12" id="err-container">
                 @if ($errors->any())
 
                 @foreach ($errors->all() as $error)
@@ -22,7 +22,7 @@
                 </div>
                 @endforeach
                 @endif
-            </div>
+            </div> --}}
             <div class="col-md-12 mt-sm-0">
                 <div class="content_wraper">
                     <div class="guide_profile_subsection">
@@ -30,7 +30,7 @@
                     </div>
 
 
-                    <form id="apply_job_form" onsubmit="return false;" action="{{route('storeApplyJob',['jobId'=>request('jobId')])}}" method="post" enctype="multipart/form-data">
+                    <form class="validateBeforeSubmit" id="apply_job_form" action="{{route('storeApplyJob',['jobId'=>request('jobId')])}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="guide_profile_subsection" id="Documents">
                             <div class="guide_profile_main_text mt-3">Resume/CV<em class="text-danger mx-1">*</em></div>
@@ -40,7 +40,12 @@
                                     <div class="d-flex align-items-center mt-3">
                                         <div><i class="fa fa-paperclip aubergine icon-size" aria-hidden="true"></i></div>
                                         <div class="upload_resume_text mx-2">Upload Your Resume/CV</div>
-                                        <input type="file" accept="application/pdf,application/msword" name="resume" class="docInp d-none" id="upload-doc-inp" required>
+                                        <input type="file" accept="application/pdf,application/msword" name="resume" class="form-control @error('resume') is-invalid @enderror docInp d-none" id="upload-doc-inp" required>
+                                        @error('resume')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
 
                                     <div class="col-md-12">
@@ -60,7 +65,12 @@
                         <div class="guide_profile_subsection">
                             <div class="guide_profile_main_text">Cover Letter <em class="text-danger">*</em></div>
                             <div class="profile_input">
-                                <textarea name="cover_letter" class="form-control controlTextLength" text-length="1500" maxlength="1500" id="cover_letter" aria-label="With textarea" placeholder="Your answer here" required></textarea>
+                                <textarea name="cover_letter" class="form-control @error('cover_letter') is-invalid @enderror controlTextLength" text-length="1500" maxlength="1500" id="cover_letter" aria-label="With textarea" placeholder="Your answer here" required></textarea>
+                                @error('cover_letter')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                             </div>
                             <div class="d-flex justify-content-center mt-5 mb-4">
                                 <button type="button" class="cancel_btn mx-5"><a href="{{route('showJobSearchResults')}}">Back</a></button>

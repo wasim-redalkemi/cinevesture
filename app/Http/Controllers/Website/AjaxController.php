@@ -61,7 +61,6 @@ class AjaxController extends WebController {
 
     public function getMedia(Request $request, $media_id) {
         try {
-            $where = ['id' => $media_id];
             $ProjectMediaObj = ProjectMedia::find($media_id);
             if (isset($ProjectMediaObj)) {
                 $ProjectMediaObj->media_info = json_decode($ProjectMediaObj->media_info, true);
@@ -119,6 +118,7 @@ class AjaxController extends WebController {
             $file = $request->file("file");
             $locationPath  = "project/image";
             $fileName = $file->getClientOriginalName();
+            //\Log::info("here in logs ".$fileName);
             $nameStr = date('YmdHis');
             $newName = str_replace(" ","_",$nameStr.$fileName);
             $this->uploadFile($locationPath , $file, $newName);
@@ -221,7 +221,7 @@ class AjaxController extends WebController {
             'project_milestone_description' => 'required|string|max:100',
             'project_milestone_budget' => 'required|string|max:50',
             'project_milestone_target_date' => 'required|date',
-            'project_milestone_complete' => 'nullable|int|max:1'
+            // 'project_milestone_complete' => 'nullable|int|max:1'
         ]);
         try {
             $ProjectAssociation = new ProjectMilestone();

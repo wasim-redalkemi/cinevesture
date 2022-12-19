@@ -266,7 +266,7 @@ body {
     width: auto;
     max-width: 100%;
     height: auto;
-    max-height: 100%;
+    /* max-height: 100%; */
  }
 
 .opacity-title{
@@ -2084,11 +2084,10 @@ button, input, optgroup, select, textarea {
     margin:1%;
 }
 .portfolio_item_image {
-    max-width: 170px;
-    max-height: 200px;
+    width: 170px;
+    height: 200px;
     display: flex;
     align-items: center;
-    margin: 0 auto;
 }
 .portfolio .portfolio_img {
     max-width: 100%;
