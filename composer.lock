@@ -3343,16 +3343,16 @@
         },
         {
             "name": "stripe/stripe-php",
-            "version": "v10.1.0",
+            "version": "v10.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/stripe/stripe-php.git",
-                "reference": "9b69abcc40bce97712df01ba40c93bcae8e1f272"
+                "reference": "d660523f176cf3451f3ee041256c746047a7a121"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/9b69abcc40bce97712df01ba40c93bcae8e1f272",
-                "reference": "9b69abcc40bce97712df01ba40c93bcae8e1f272",
+                "url": "https://api.github.com/repos/stripe/stripe-php/zipball/d660523f176cf3451f3ee041256c746047a7a121",
+                "reference": "d660523f176cf3451f3ee041256c746047a7a121",
                 "shasum": ""
             },
             "require": {
@@ -3398,9 +3398,9 @@
             ],
             "support": {
                 "issues": "https://github.com/stripe/stripe-php/issues",
-                "source": "https://github.com/stripe/stripe-php/tree/v10.1.0"
+                "source": "https://github.com/stripe/stripe-php/tree/v10.2.0"
             },
-            "time": "2022-12-06T20:44:58+00:00"
+            "time": "2022-12-15T19:16:02+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -6814,16 +6814,16 @@
         },
         {
             "name": "phpunit/php-code-coverage",
-            "version": "9.2.21",
+            "version": "9.2.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-code-coverage.git",
-                "reference": "3f893e19712bb0c8bc86665d1562e9fd509c4ef0"
+                "reference": "e4bf60d2220b4baaa0572986b5d69870226b06df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/3f893e19712bb0c8bc86665d1562e9fd509c4ef0",
-                "reference": "3f893e19712bb0c8bc86665d1562e9fd509c4ef0",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-code-coverage/zipball/e4bf60d2220b4baaa0572986b5d69870226b06df",
+                "reference": "e4bf60d2220b4baaa0572986b5d69870226b06df",
                 "shasum": ""
             },
             "require": {
@@ -6879,7 +6879,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sebastianbergmann/php-code-coverage/issues",
-                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.21"
+                "source": "https://github.com/sebastianbergmann/php-code-coverage/tree/9.2.22"
             },
             "funding": [
                 {
@@ -6887,7 +6887,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-12-14T13:26:54+00:00"
+            "time": "2022-12-18T16:40:55+00:00"
         },
         {
             "name": "phpunit/php-file-iterator",
@@ -8256,5 +8256,5 @@
         "php": "^7.3"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
