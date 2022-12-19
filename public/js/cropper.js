@@ -73,7 +73,7 @@ var ImageCropper = function(fileToCrop,previewElem){
                 autoCropArea: 0.65,
                 restore: false,
                 guides: false,
-                center: true,
+                center: false,
                 highlight: false,
                 cropBoxMovable: true,
                 cropBoxResizable: false,
