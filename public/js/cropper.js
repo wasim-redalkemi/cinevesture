@@ -1,22 +1,29 @@
-var ImageCropper = function(){
-
+var ImageCropper = function(fileToCrop,previewElem){
+    var file = fileToCrop;
+    var filename = fileToCrop.name;
     var base64data = null;
     var $modal = $('#ImageCropperModal');
-    //var image = $('#ImageCropperModal #image');
     var image = $('#ImageCropperModal #image')[0];
     var CroppedImgformData = new FormData();
     var cropper;
+    var cropboxData = {
+        width: 300*2,
+        height: 300*2
+    }
+    //var previewElem = thumbnailElem;
+
     let done = function(url) {
-        console.log("in done");
         image.src = url;
         $modal.modal('show');
     };
 
-    let init = function(file){
+    let setCropBoxSize = function(size){
+        cropboxData = size;
+    }
+
+    let init = function(){
+
         bindEvents();
-        console.log("in init ");
-        var reader;
-        var url;
 
         if (file) {
             var fileType = file["type"];
@@ -27,7 +34,7 @@ var ImageCropper = function(){
                 if (URL) {
                     done(URL.createObjectURL(file));
                 } else if (FileReader) {
-                    reader = new FileReader();
+                    let reader = new FileReader();
                     reader.onload = function(e) {
                         done(reader.result);
                     };
@@ -56,11 +63,10 @@ var ImageCropper = function(){
     }
 
     let getCropperFile = function(){
-        return dataURLtoFile(base64data, 'profile_img.png');
+        return dataURLtoFile(base64data, filename);
     }
 
     let bindEvents = function(){
-
         $modal.on('shown.bs.modal', function() {
             cropper = new Cropper(image, {
                 dragMode: 'move',
@@ -72,10 +78,8 @@ var ImageCropper = function(){
                 cropBoxMovable: true,
                 cropBoxResizable: false,
                 toggleDragModeOnDblclick: false,
-                data:{ //define cropbox size
-                width: 285,
-                height:  194,
-                },
+                data:cropboxData,
+                //aspectRatio: 285/194,
             });
         }).on('hidden.bs.modal', function() {
             cropper.destroy();
@@ -84,8 +88,8 @@ var ImageCropper = function(){
 
         $("#crop").click(function() {
             canvas = cropper.getCroppedCanvas({
-                width: 285,
-                height: 194,
+                // width: 285*2,
+                // height: 194*2,
             });
         
             canvas.toBlob(function(blob) {
@@ -94,9 +98,10 @@ var ImageCropper = function(){
                 reader.readAsDataURL(blob);
                 reader.onloadend = function() {
                     base64data = reader.result;
-                    console.log("base64data = ",base64data);
-                    var file = dataURLtoFile(base64data, 'profile_img.png');
-                    $("#previewImg").attr("src",base64data).show();
+                    var file = dataURLtoFile(base64data, filename);
+                    if(previewElem)
+                        $(previewElem).attr("src",base64data).show();
+
                     CroppedImgformData.append("document", file);
                     $modal.modal('hide');
                 }
@@ -116,14 +121,9 @@ var ImageCropper = function(){
         });
     }
 
-    return {init,getCropperFile};
-}();
+    return {init,getCropperFile,setCropBoxSize};
 
-// var $modal = $('#ImageCropperModal');
-
-// var cropImageElem = $('#ImageCropperModal #image');
-
-// var croperImg = document.querySelector('.croperImg');
+}
 
 function validateSize(input) {
     const fileSize = input.files[0].size / 1024 / 1024; // in MiB
@@ -132,5 +132,3 @@ function validateSize(input) {
         $('#documents').val(''); //for clearing with Jquery
     }
 }
-
-//let result = document.querySelector('.result');

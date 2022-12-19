@@ -12,7 +12,7 @@
 </div>
 
 <body class="bg_white">
-    <section class="guide_profile_section">
+    <section class="guide_profile_section container">
         {{-- <div class="mb-3"> <i class="fa fa-arrow-left" aria-hidden="true"></i> <span class="back_btn_profile"> Back</span></div> --}}
         <div class="content_wraper">
             <div class="guide_profile_subsection">
