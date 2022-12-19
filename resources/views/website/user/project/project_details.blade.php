@@ -98,7 +98,7 @@
                         </div>
                         <div class="associate_text mt-4">Associated with the project (Optional)</div>
                         <div id="associate_entries" class="row">
-                            @if(count($projectData[0]['project_association']))
+                            @if(isset($projectData[0]['project_association']) && count($projectData[0]['project_association']))
                                 @foreach ($projectData[0]['project_association'] as $in => $ass)
                                     <div id="asso-{{$ass['id']}}" class="row">
                                         <div class="col-md-3">

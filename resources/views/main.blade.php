@@ -147,15 +147,20 @@
               </div>
               <div class="secondry-card-top-container w-100">
                 <div>
-                @if (isset($v1->projects->project_name) && !empty($v1->projects->project_name))
-                {{$v1->projects->project_name}}
-                @endif
+                <a href="{{ route('public-view', ['id'=>$v1->projects->id]) }}">
+                  @if (isset($v1->projects->project_name) && !empty($v1->projects->project_name))
+                  {{$v1->projects->project_name}}
+                  @endif
+                </a>
                 </div>
                 <div>
-                  <i class="fa fa-heart" style="color: white;" aria-hidden="true"></i>
+                  {{-- <i class="fa fa-heart" style="color: white;" aria-hidden="true"></i> --}}
+                  <i class="fa fa-heart-o icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$v1->projects->id}}" aria-hidden="true"></i>
                 </div>
               </div>
               <div class="secondry-card-bottom-container">
+                <a href="{{ route('public-view', ['id'=>$v1->projects->id]) }}">
+
                 @if (isset($v1->projects->duration) && !empty($v1->projects->duration))
                   {{$v1->projects->duration}} /
                 @endif
@@ -168,6 +173,7 @@
                 @if (isset($country_data['projects']['project_countries'][0]) && !empty($country_data['projects']['project_countries'][0]))
                   {{$country_data['projects']['project_countries'][0]['name']}}
                 @endif
+              </a>
               </div>
             </div>
             {{-- @else
@@ -194,6 +200,50 @@
 @section('scripts')
 
   <script type="text/javascript">
+    $('.like-project').on('click', function(e) {
+      
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    var project_id = $(this).attr('data-id');
+    var classList = $(this).attr('class').split(/\s+/);
+    var element = $(this);
+    $.ajax({
+        type: 'post',
+        data: {'id':project_id},
+        url: "{{route('project-like')}}",
+        success: function(resp) {
+            if (resp.status) {
+                for (var i = 0; i < classList.length; i++) {
+                    if (classList[i] == 'fa-heart-o') {
+                        element.removeClass('fa-heart-o');
+                        element.addClass('fa-heart')
+                        toastMessage("success", response.msg);
+                        break;
+                    }
+                    if(classList[i] == 'fa-heart')
+                    {
+                        element.removeClass('fa-heart');
+                        element.addClass('fa-heart-o');
+                        toastMessage("error", response.msg);
+
+                        break;
+                    }
+
+                }
+            } else {
+
+            }
+        },
+        error: function(error) {
+            
+        }
+    });
+
+    });
+
     $(".main_slider.owl-carousel").owlCarousel({
       center: true,
       autoPlay: 3000,
@@ -212,13 +262,12 @@
     });
 
     $(".test.owl-carousel").owlCarousel({
-      center: true,
       autoPlay: 1000,
       autoplay: true,
-      loop: true,
+      // loop: true,
       nav: true,
       margin: 20,
-      center: true,
+      center: false,
       items: 1,
       stagePadding: 50,
       responsive: {
