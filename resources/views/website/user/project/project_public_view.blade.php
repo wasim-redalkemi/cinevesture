@@ -269,7 +269,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="public-heading-text">Requirements & Milestones</h1>
-                    <div class="col-8">
+                    <div class="col-11">
                         <table class="table mt-1">
                             <tbody class="search-table-body white">
                                 <tr>
