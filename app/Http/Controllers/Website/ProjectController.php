@@ -21,6 +21,7 @@ use App\Models\ProjectCategory;
 use App\Models\ProjectCountry;
 use App\Models\ProjectGenre;
 use App\Models\ProjectLanguage;
+use App\Models\ProjectListProjects;
 use App\Models\ProjectLookingFor;
 use App\Models\ProjectMedia;
 use App\Models\ProjectMilestone;
@@ -32,6 +33,7 @@ use App\Models\UserFavouriteProject;
 use App\Models\UserProject;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use PhpParser\Node\Stmt\TryCatch;
@@ -42,8 +44,28 @@ class ProjectController extends WebController
     {
         $this->return_response = ['error_msg'=>'','success_msg'=>''];
     }
+
+    public function checkValidRequest()
+    {
+       try 
+       {
+            if(isset($_REQUEST['id']) && !empty($_REQUEST['id'])) 
+            {
+                $session_project_data = UserProject::query()->where('user_id',auth()->user()->id)->where('id',$_REQUEST['id'])->get()->toArray();
+                if(empty($session_project_data))
+                {
+                    throw new Exception('Malicious request.');
+                }
+            }
+        } catch (Exception $e) {
+            return back()->with('error',$e->getMessage().'Something went wrong.');
+        }
+    }
+
     public function projectList()
     {
+        $this->checkValidRequest();
+
         try {
             $UserProject = UserProject::query()->with('projectImage')->where('user_id',auth()->user()->id)->get();
             return view('website.user.project.project',compact('UserProject'));
@@ -55,6 +77,8 @@ class ProjectController extends WebController
 
     public function projectOverview()
     {
+        $this->checkValidRequest();
+
         try {
             $languages = MasterLanguage::query()->orderBy('name', 'ASC')->get();
             $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
@@ -196,6 +220,8 @@ class ProjectController extends WebController
     public function projectDetails()
     {
         try {
+            $this->checkValidRequest();
+
             if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
             {
                 return back()->with('error','Project Id not found.');
@@ -295,6 +321,8 @@ class ProjectController extends WebController
     public function projectDescription()
     {
         try {
+            $this->checkValidRequest();
+
             if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
             {
                 return back()->with('error','Project Id not found.');
@@ -355,6 +383,7 @@ class ProjectController extends WebController
     public function projectGallery()
     {
         try {
+            $this->checkValidRequest();
             if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
             {
                 return back()->with('error','Project Id not found.');
@@ -420,10 +449,12 @@ class ProjectController extends WebController
     public function projectMilestone()
     {        
         try {
+            $this->checkValidRequest();
             if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
             {
                 return back()->with('error','Project Id not found.');
             }
+           
             $languages = MasterLanguage::query()->orderBy('name', 'ASC')->get();
             $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
             $projectStage = ProjectStage::query()->get();
@@ -506,6 +537,7 @@ class ProjectController extends WebController
     public function projectPreview()
     {        
         try {
+            $this->checkValidRequest();
             if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
             {
                 return back()->with('error','Project Id not found.');
@@ -523,6 +555,7 @@ class ProjectController extends WebController
     public function publicView()
     {
         try {
+            $this->checkValidRequest();
             if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
             {
                 return back()->with('error','Project Id not found.');
@@ -689,6 +722,7 @@ class ProjectController extends WebController
     public function changeStatus(Request $request)
     {
         try {
+            $this->checkValidRequest();
             $project=UserProject::where('id',$request->id)->first();
             $project->status = $request->status;
             if($project->update())
@@ -704,12 +738,22 @@ class ProjectController extends WebController
         }
     }
 
-    public function projectDelete()
+    public function projectDelete($id)
     {
         try {
-            $id = $_REQUEST['id'];
-            UserQualification::query()->where('id', $id)->delete();
-            return redirect(route('profile-private-show'));
+            $this->checkValidRequest();
+            UserProject::query()->where('id', $id)->delete();
+            UserFavouriteProject::query()->where('project_id', $id)->delete();
+            ProjectAssociation::query()->where('project_id', $id)->delete();
+            ProjectMilestone::query()->where('project_id', $id)->delete();
+            ProjectLanguage::query()->where('project_id', $id)->delete();
+            ProjectCountry::query()->where('project_id', $id)->delete();
+            ProjectCategory::query()->where('project_id', $id)->delete();
+            ProjectGenre::query()->where('project_id', $id)->delete();
+            ProjectMedia::query()->where('project_id', $id)->delete();
+            ProjectLookingFor::query()->where('project_id', $id)->delete();
+            ProjectListProjects::query()->where('project_id', $id)->delete();
+            return back()->with("success", "Project deleted successfully");
         } catch (Exception $e) {
             return back()->with('error', 'Something went wrong.');
         }
