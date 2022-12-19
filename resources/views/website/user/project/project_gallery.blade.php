@@ -199,8 +199,8 @@
                                         </div>
                                         <div class="head_text mt-4">Are you sure?</div>
                                         <div class="sub_text mt-4">Do you really want to delete the item?<br>This process cannot be undone.</div>
-                                        <div class="d-flex justify-content-center mt-4">   
-                                            <button type="button" class="cancel_btn cancel_btn_text mx-3" data-bs-dismiss="modal">Cancel</button>
+                                        <div class="d-flex justify-content-center mt-4">
+                                            <button type="button" class="cancel_btn_modal cancel_btn_text mx-3" data-bs-dismiss="modal">Cancel</button>
                                             <button class="delete_btn confirm_btn_text mx-3" type="button" data-bs-dismiss="modal">Confirm</button>
                                         </div>
                                     </div>
@@ -224,11 +224,13 @@
                                                 <button type="button" class="btn-success" id="crop"><i class="fa fa-check" aria-hidden="true"></i></button>
                                             </div>
                                         </div>
-                                        <div class="modal-body">
+                                        <div class="modal-body overflow-auto">
                                             <div class="container">
                                                 <div class="row">
                                                     <div class="col-md-12">
-                                                        <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
+                                                        <div class="cropperWrap">
+                                                            <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

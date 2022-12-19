@@ -913,6 +913,13 @@ body {
     /* width: 200px;
     height: 200px; */
 }
+.croper_modal .cropperWrap
+{
+    height: auto;
+    /* width: auto;; */
+    max-height: calc(100%/2 - 1.5em);
+    min-height: 300px;
+}
 .list-group-item{
     text-align: left;
 }
@@ -1928,6 +1935,14 @@ button, input, optgroup, select, textarea {
     border: none;
 }
 .cancel_btn {
+    padding: 9px 16px;
+    font-size: 14px;
+    background: #FAF8FB;
+    border-radius: 4px;
+    color: #1C0330;
+    border: none;
+}
+.cancel_btn_modal {
     padding: 9px 16px;
     font-size: 14px;
     background: #FAF8FB;

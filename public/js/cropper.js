@@ -53,10 +53,11 @@
     autoCropArea: 0.65,
     restore: false,
     guides: false,
-    center: true,
+    center: false,
     highlight: false,
     cropBoxMovable: true,
     cropBoxResizable: false,
+    autoCropArea:1,
     toggleDragModeOnDblclick: false,
     data:{ //define cropbox size
       width: 285,
