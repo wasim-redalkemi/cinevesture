@@ -151,7 +151,7 @@ class UserController extends WebController
                                 ->orderByDesc('id')->limit(5)->get();
             return view('website.user.profile_private_view', compact(['user', 'portfolio', 'experience', 'qualification', 'user_country', 'user_age', 'user_skills', 'user_languages','user_endorsement','user_gender','user_gender_pronouns']));
         } catch (Exception $e) {
-            return back()->with('error', "Something went wrong");
+            return back()->with('error', $e->getMessage()."Something went wrong");
         }
     }
 
