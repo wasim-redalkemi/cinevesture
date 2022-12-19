@@ -106,17 +106,18 @@ body {
 }
 
 .add-proj-btn {
-    border: 1px solid #DD45B3;
-    color: #DD45B3 !important;
-    text-decoration: none;
-    background: #33084C;
+    width: 9rem;
     height: 2.5rem;
-    line-height: 114%;
+    background: #DD45B3;
     border-radius: 4px;
-    /* width: 9rem; */
+    margin-left: 4px;
+    border: none;
 }
 .add-proj-btn a {
-    color: #DD45B3 !important;
+    color: #EEEDE8;
+    line-height: 114%;
+    font-weight: 600;
+    font-size: 14px;
     text-decoration: none;
 }
 
