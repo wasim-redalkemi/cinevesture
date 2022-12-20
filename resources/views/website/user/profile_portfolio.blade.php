@@ -17,23 +17,22 @@
                 @include('website.include.profile_sidebar')
             </div>
             <div class="col-md-9">
-                <div id="user-profile-div" class="profile_wraper profile_wraper_padding my-md-0 my-4">
+                @if(isset($prevPortfolio) && count($prevPortfolio)>0)
+                    @include('website.user.include.previously_added_portfolio',['prevData'=>$prevPortfolio])
+                @endif
+                <div id="user-profile-div" class="profile_wraper profile_wraper_padding mt-md-0 my-4">
                     <div class="d-flex justify-content-between">
                         <div class="profile_cmn_head_text">Add Portfolio</div>
                     </div>
                     <form role="form" class="validateBeforeSubmit" method="POST" enctype="multipart/form-data" action="{{ route('portfolio-store') }}">
-                        <input type="hidden" name="portfolio_id" value="<?php if (isset($portfolio)) {
-                                                                            echo ($portfolio->id);
-                                                                        } ?>">
+                        <input type="hidden" name="portfolio_id">
                         @csrf
 
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="profile_input">
                                     <label>Project Title</label>
-                                    <input type="text" class="form-control @error('project_title') is-invalid @enderror" placeholder="Project Title" name="project_title" value="<?php if (isset($portfolio)) {
-                                                                                                                                                                                        echo ($portfolio->project_title);
-                                                                                                                                                                                    } ?>" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="text" class="form-control @error('project_title') is-invalid @enderror" placeholder="Project Title" name="project_title" aria-label="Username" aria-describedby="basic-addon1">
                                     @error('project_title')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -46,9 +45,7 @@
                             <div class="col-md-12">
                                 <div class="profile_input">
                                     <label>Description</label>
-                                    <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" name="description" aria-label="With textarea" text-length="600" maxlength="600"><?php if (isset($portfolio)) {
-                                                                                                                                                                                                                    echo ($portfolio->description);
-                                                                                                                                                                                                                } ?></textarea>
+                                    <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" name="description" aria-label="With textarea" text-length="600" maxlength="600"></textarea>
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -64,9 +61,7 @@
                                         <label for="lang">Project specific Skills</label>
                                         <select name="project_specific_skills_id[]" class="outline is-invalid-remove js-select2 @error('project_specific_skills_id') is-invalid @enderror" id="lang" multiple>
                                             @foreach ($skills as $k=>$v)
-                                            <option value="{{ $v->id }}" <?php if (isset($portfolio->getPortfolioSkill) && $portfolio->getPortfolioSkill->project_specific_skills_id == $v->id) {
-                                                                                echo 'selected';
-                                                                            } ?>>{{ $v->name }}</option>
+                                            <option value="{{ $v->id }}">{{ $v->name }}</option>
                                             @endforeach
                                         </select>
                                         @error('project_specific_skills_id')
@@ -99,9 +94,7 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Completion Date</label>
-                                    <input type="date" class="form-control @error('completion_date') is-invalid @enderror" placeholder="First Name" name="completion_date" value="<?php if (isset($portfolio)) {
-                                                                                                                                                                                        echo ($portfolio->completion_date);
-                                                                                                                                                                                    } ?>" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="date" class="form-control @error('completion_date') is-invalid @enderror" placeholder="First Name" name="completion_date" aria-label="Username" aria-describedby="basic-addon1">
                                     @error('completion_date')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -118,9 +111,7 @@
                                     <div class="img-container h_66 mt-3 mt-md-0">
                                         <img src="{{asset('images/asset/default-video-thumbnail.jpg')}}" class="width_inheritence" alt="image">
                                     </div>
-                                    <input type="text" class="outline is-invalid-remove form-control @error('video') is-invalid @enderror" placeholder="Paste link here" name="video_url" value="<?php if (isset($portfolio)) {
-                                                                                                                                                                                                        echo ($portfolio->video);
-                                                                                                                                                                                                    } ?>" aria-label="Video URL" aria-describedby="basic-addon1">
+                                    <input type="text" class="outline is-invalid-remove form-control @error('video') is-invalid @enderror" placeholder="Paste link here" name="video_url" aria-label="Video URL" aria-describedby="basic-addon1">
                                     <input type="hidden" class="" name="video_thumbnail" value="" aria-label="Video Thumbnail" aria-describedby="basic-addon1">
                                     @error('video')
                                     <span class="invalid-feedback" role="alert">
@@ -185,7 +176,7 @@
 <script>
     var portfolio = [];
     $(document).ready(function() {
-        portfolioData = JSON.parse('<?php echo str_replace("'", "\'", json_encode($portfolio)); ?>');
+        portfolioData = JSON.parse('<?php echo str_replace("'", "\'", json_encode("test")); ?>');
         Portfolio.init(portfolioData);
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");

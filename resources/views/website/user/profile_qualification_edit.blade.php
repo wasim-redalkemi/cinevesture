@@ -17,6 +17,9 @@
                     @include('website.include.profile_sidebar')
                 </div>
                 <div class="col-md-9">
+                    @if(isset($prevQualification) && count($prevQualification)>0)
+                        @include('website.user.include.previously_added_qualification',['prevData'=>$prevQualification])
+                    @endif
                     <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Edit Qualification</div>
@@ -59,8 +62,8 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Field of Study</label>
-                                        <input type="text" class="form-control @error('feild_of_study') is-invalid @enderror" placeholder="Feild of study" aria-label="Username" name="feild_of_study" value="{{ $UserQualificationData->feild_of_study}}" aria-describedby="basic-addon1">
-                                        @error('feild_of_study')
+                                        <input type="text" class="form-control @error('field_of_study') is-invalid @enderror" placeholder="Feild of study" aria-label="Username" name="field_of_study" value="{{ $UserQualificationData->field_of_study}}" aria-describedby="basic-addon1">
+                                        @error('field_of_study')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>

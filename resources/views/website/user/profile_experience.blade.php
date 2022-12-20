@@ -9,15 +9,18 @@
 @section('content')
 
     <section class="profile-section">
-    <div class="hide-me animation for_authtoast">
-                @include('website.include.flash_message')
-            </div>
+        <div class="hide-me animation for_authtoast">
+            @include('website.include.flash_message')
+        </div>
         <div class="container">
             <div class="row">
                 <div class="col-md-3">
                     @include('website.include.profile_sidebar')
                 </div>
                 <div class="col-md-9">
+                    @if(isset($prevExperience) && count($prevExperience)>0)
+                        @include('website.user.include.previously_added_experience',['prevData'=>$prevExperience])
+                    @endif
                     <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Add Experience</div>

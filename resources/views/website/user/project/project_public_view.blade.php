@@ -243,11 +243,7 @@
                 </div>
             </div>
         </div>
-{{-- @php
-echo "<pre>";
-   var_dump($projectData[0]['project_only_doc']);
-   die;
-@endphp --}}
+        
         <div class="row">
             <div class="col-md-12">
                 <div class="public-head-subtext mt-3">Documents</div>

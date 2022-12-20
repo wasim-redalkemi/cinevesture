@@ -160,9 +160,6 @@ class ProjectListController extends AdminController
             
             ->paginate($this->records_limit);
 
-            //     echo '<pre>';
-            // print_r($project_data->toArray());
-            // die;
             
             return view('/admin.projectList.search',compact('id','project_data','is_added_only'));
         }

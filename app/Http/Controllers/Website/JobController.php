@@ -391,10 +391,6 @@ class JobController extends WebController
                     $q->whereIn("skill_id", $requests["skills"]);
                 }
             })
-           // ->get();
-            // echo "<pre>";
-            // print_r($jobs);
-            // die;
            ->paginate($this->records_limit);
         $notFoundMessage = "No jobs found, please modify your search.";
         return view('website.job.search_result', compact('countries', 'employments', 'skills', 'categories', 'workspaces', 'jobs', 'notFoundMessage'));
