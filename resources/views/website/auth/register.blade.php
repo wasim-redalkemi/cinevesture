@@ -52,7 +52,7 @@
                     <input type="password" class="password-only is-invalid-remove outline w-100" placeholder="Re Enter Password" name="password_confirmation" id = "password_confirmation" required autocomplete="new-password">
                 </div>
                 <div class="col-12 mt-4-5">
-                    <input type="text" name="invited_by" value="<?php echo convert_uudecode($_REQUEST['iuid']);?>">
+                    <input type="hidden" name="invited_by" value="<?php if(isset($_REQUEST['iuid'])){echo convert_uudecode($_REQUEST['iuid']);}?>">
                     <button type="submit" class="outline w-100">{{ __('Create Account') }}</button>
                 </div>
             </div>

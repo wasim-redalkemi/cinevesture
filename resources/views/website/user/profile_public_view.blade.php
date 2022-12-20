@@ -497,6 +497,7 @@
                         toastMessage(response.status, response.msg);
                         $('.modal').hide();
                         $('.modal-backdrop').remove();
+                        location.reload();
                     },
                     error:function(response,status,error)
                     {   
