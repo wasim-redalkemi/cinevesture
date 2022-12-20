@@ -1,4 +1,4 @@
-<div class="profile_wraper my-3 my-md-0">
+<div class="profile_wraper my-3 my-md-0 mb-xl-4">
     @foreach($jobs as $job)
 <div class="border_btm profile_wraper_padding">
     <div class="d-flex justify-content-between">

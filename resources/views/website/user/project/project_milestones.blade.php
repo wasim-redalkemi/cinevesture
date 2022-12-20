@@ -90,7 +90,7 @@
                         </div>
                         <div class="flow_step_text mt-5">Milestones</div>
                         <div id="milestone_entries" class="row">
-                            @if(count($projectData[0]['project_milestone']))
+                            @if(isset($projectData[0]['project_milestone']) && count($projectData[0]['project_milestone'])>0)
                                 @foreach ($projectData[0]['project_milestone'] as $in => $ass)
                                 <div id="milestome-{{$ass['id']}}" class="row">
                                 <div class="col-md-4">

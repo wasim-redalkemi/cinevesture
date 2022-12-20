@@ -27,14 +27,14 @@
     <div class="sidebar_content"><a href="{{ route('organisation-private-view') }}">Organisation</a></div>
     <hr class="sidebar_content_hr">
     <!-- <div class="sidebar_content"><a href="">My Jobs</a></div> -->
-    <div class="dropdown search-page">
+    <div class="dropdown search-page forRemoveBorder">
         <button class="btn dropdown-toggle w-100 border-0 ml_10" type="button" data-bs-toggle="dropdown"
             aria-expanded="false">
             My Jobs
         </button>
         <ul class="dropdown-menu w-100 profile_dropdown_menu">
             <li>
-                <a href="{{ route('posted-job') }}">Posted Jobs</a>
+                <a href="{{ route('posted-job') }}" class="deep-pink">Posted Jobs</a>
             </li>
             <li>
                 <a href="{{ route('saved-job') }}">Saved Jobs</a>

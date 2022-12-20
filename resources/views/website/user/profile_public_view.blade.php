@@ -12,7 +12,7 @@
 </div>
 
 <body class="bg_white">
-    <section class="guide_profile_section">
+    <section class="guide_profile_section container">
         {{-- <div class="mb-3"> <i class="fa fa-arrow-left" aria-hidden="true"></i> <span class="back_btn_profile"> Back</span></div> --}}
         <div class="content_wraper">
             <div class="guide_profile_subsection">
@@ -252,7 +252,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="guide_profile_main_text deep-pink font_18">Project</div>
-                            @if (!empty($UserProject))
+                            @if (count($UserProject))
                             <div class="project owl-carousel owl-theme">
                                 @foreach($UserProject as $k=>$v)                                
                                 <div class="item">
@@ -264,6 +264,8 @@
                                 </div>                                
                                 @endforeach
                             </div>
+                            @else
+                            <span><b>-</b></span>
                             @endif
                         </div>
                     </div>
@@ -495,6 +497,7 @@
                         toastMessage(response.status, response.msg);
                         $('.modal').hide();
                         $('.modal-backdrop').remove();
+                        location.reload();
                     },
                     error:function(response,status,error)
                     {   

@@ -17,7 +17,7 @@
     <div class="main-slider-container">
 
         <div class="project_image_wraper">
-                <img src="{{ asset('images/20220805_172049.jpg') }}" class="" alt="image">
+                <img src="{{ asset('images/asset/publicview-head-img.png') }}" class="" alt="image">
             <div class="public-head-image-shadow"></div>
         </div>
 
@@ -142,8 +142,8 @@
                         </div>
                         <div class="col-lg-6 col-md-12 px-3">
                             <div class="public-head-subimage">
-                                <div class="playVideoWrap mt-3" video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link']}} @endif">
-                                    <img src="{{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}" alt="" >
+                                <div class="playVideoWrap mt-3" video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link'] }}@endif">
+                                    <img src="@if (isset($projectData[0]['project_only_video'][0]['media_info'])){{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}@endif" alt="" >
                                 </div>
                                 {{-- <iframe width="100%" height="350" src="{{empty($projectData[0]['project_only_video'][0]['file_link'])?'https://www.youtube.com/embed/oYWAwwy5EbQ':$projectData[0]['project_only_video'][0]['file_link'];}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> --}}
                                 <!-- <img src="{{ asset('images/asset/download (3) 7.png') }}" width=100% alt="Image"> -->
@@ -222,6 +222,8 @@
                                 </div>                                
                             </div>
                         @endforeach                    
+                        @else
+                        <span><b>-</b></span>                    
                         @endif                        
                     </div>
                     <div class="public-head-subtext mt-3">Photos</div>
@@ -234,12 +236,18 @@
                             </div>
                         </div>
                         @endforeach                    
+                        @else
+                        <span><b>-</b></span>                    
                         @endif
                     </div>
                 </div>
             </div>
         </div>
-
+{{-- @php
+echo "<pre>";
+   var_dump($projectData[0]['project_only_doc']);
+   die;
+@endphp --}}
         <div class="row">
             <div class="col-md-12">
                 <div class="public-head-subtext mt-3">Documents</div>
@@ -259,7 +267,7 @@
                         </div>
                         @endforeach
                     @else
-                    <span><b>-</b></span>                    
+                    <span><b>-</b></span>                
                     @endif
                 </div>
             </div>
@@ -269,7 +277,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="public-heading-text">Requirements & Milestones</h1>
-                    <div class="col-8">
+                    <div class="col-11">
                         <table class="table mt-1">
                             <tbody class="search-table-body white">
                                 <tr>
@@ -318,40 +326,52 @@
                                 </tr>
                                 <tr>
                                     <td class="public-head-subtext candy-pink mt-1">Completed Milstones</td>
-                                    <td></td>
-                                    <td></td>
                                 </tr>
+                                @php $isEmpty = true;@endphp
                                 @if (!empty($projectData[0]['project_milestone']))
-                                @foreach ($projectData[0]['project_milestone'] as $k => $v)
-                                    @if ($v['complete'] ==1 )
-                                        <tr>
-                                            <td class="public-head-subtext white">{{ $v['description'] }}</td>
-                                            <td class="aubergine project-sub-text white">{{ $v['budget'] }}</td>
-                                            <td class="aubergine project-sub-text white">{{ $v['target_date'] }}</td>
-                                        </tr>
-                                    @endif
-                                @endforeach
-                                @else
-                                <span><b>-</b></span>
+                                    @foreach ($projectData[0]['project_milestone'] as $k => $v)
+                                        @if ($v['complete'] == 1 )
+                                            @php $isEmpty = false;@endphp
+                                            <tr>
+                                                <td class="public-head-subtext white">{{ $v['description'] }}</td>
+                                                <td class="aubergine project-sub-text white">{{ $v['budget'] }}</td>
+                                                <td class="aubergine project-sub-text white">{{ $v['target_date'] }}</td>
+                                            </tr>
+                                        @endif
+                                    @endforeach                          
+                                @endif
+
+                                @if ($isEmpty == true)
+                                    <tr>
+                                        <td colspan="3">
+                                            <span class="text-white"><b>-</b></span>
+                                        </td>
+                                    </tr>
                                 @endif
                                
                                 <tr>
                                     <td class="candy-pink public-head-subtext mt-1">Upcoming Milstones</td>
-                                    <td></td>
-                                    <td></td>
                                 </tr>
+                                @php $isEmpty = true;@endphp
                                 @if (!empty($projectData[0]['project_milestone']))
-                                @foreach ($projectData[0]['project_milestone'] as $k => $v)
-                                    @if ($v['complete'] ==0 )
-                                        <tr>
-                                            <td class="public-head-subtext white">{{ $v['description'] }}</td>
-                                            <td class="aubergine project-sub-text white">{{ $v['budget'] }}</td>
-                                            <td class="aubergine project-sub-text white">{{ $v['target_date'] }}</td>
-                                        </tr>
-                                    @endif
-                                @endforeach
-                                @else
-                                <span><b>-</b></span>
+                                    @foreach ($projectData[0]['project_milestone'] as $k => $v)
+                                        @if ($v['complete'] ==0 )
+                                            @php $isEmpty = false;@endphp
+                                            <tr>
+                                                <td class="public-head-subtext white">{{ $v['description'] }}</td>
+                                                <td class="aubergine project-sub-text white">{{ $v['budget'] }}</td>
+                                                <td class="aubergine project-sub-text white">{{ $v['target_date'] }}</td>
+                                            </tr>
+                                        @endif
+                                    @endforeach                          
+                                @endif
+
+                                @if ($isEmpty == true)
+                                    <tr>
+                                        <td colspan="3">
+                                            <span class="text-white"><b>-</b></span>
+                                        </td>
+                                    </tr>
                                 @endif
                             </tbody>
                         </table>
@@ -374,14 +394,20 @@
                                         Name
                                     </td>
                                 </tr>
+                                @if (!empty($projectData[0]['project_association']))
+                                @foreach ($projectData[0]['project_association'] as $v)
+                                    <tr>
+                                        <td class="public-head-subtext white">{{$v['project_associate_title']}}</td>
+                                        <td class="aubergine project-sub-text white">{{$v['project_associate_name']}}</td>
+                                    </tr>
+                                @endforeach                    
+                                @else
                                 <tr>
-                                    <td class="public-head-subtext white">Lorem ipsum</td>
-                                    <td class="aubergine project-sub-text white">Marvin mckn</td>
+                                    <td colspan="2">
+                                        <span class="text-white"><b>-</b></span>
+                                    </td>
                                 </tr>
-                                <tr>
-                                    <td class="public-head-subtext white">Lorem ipsum</td>
-                                    <td class="aubergine project-sub-text white">Marvin mckn</td>
-                                </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>

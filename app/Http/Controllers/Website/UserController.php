@@ -12,6 +12,8 @@ use App\Http\Requests\StoreProfileUpdate;
 use App\Models\AgeRange;
 use App\Models\Endorsement;
 use App\Models\MasterCountry;
+use App\Models\MasterGender;
+use App\Models\MasterGenderPronouns;
 use App\Models\MasterLanguage;
 use App\Models\MasterSkill;
 use App\Models\MasterState;
@@ -129,6 +131,8 @@ class UserController extends WebController
             $qualification = UserQualification::query()->where('user_id', $user->id)->get();
             $user_country = MasterCountry::query()->where('id', $user->country_id)->first();
             $user_age = AgeRange::query()->where('id', $user->age)->first();
+            $user_gender = MasterGender::query()->where('id', $user->gender)->first();
+            $user_gender_pronouns = MasterGenderPronouns::query()->where('id', $user->gender_pronouns)->first();
 
             // $user_state = MasterState::query()->where('id',$user->state_id)->first();
             $user_skills = UserSkill::query()
@@ -145,9 +149,9 @@ class UserController extends WebController
             // Endorsement
             $user_endorsement = Endorsement::query()->with('endorsementCreater')->where('to',$user->id)->where('status','1')
                                 ->orderByDesc('id')->limit(5)->get();
-            return view('website.user.profile_private_view', compact(['user', 'portfolio', 'experience', 'qualification', 'user_country', 'user_age', 'user_skills', 'user_languages','user_endorsement']));
+            return view('website.user.profile_private_view', compact(['user', 'portfolio', 'experience', 'qualification', 'user_country', 'user_age', 'user_skills', 'user_languages','user_endorsement','user_gender','user_gender_pronouns']));
         } catch (Exception $e) {
-            return back()->with('error', "Something went wrong");
+            return back()->with('error', $e->getMessage()."Something went wrong");
         }
     }
 
@@ -231,42 +235,14 @@ class UserController extends WebController
             $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
             $state = MasterState::query()->orderBy('name', 'ASC')->get();
             $age = AgeRange::query()->get();
-            return view('website.user.profile_create', compact(['user', 'skills', 'languages', 'country', 'state', 'age']));
+            $gender = MasterGender::query()->get();
+            $genderPronouns = MasterGenderPronouns::query()->get();
+            return view('website.user.profile_create', compact(['user', 'skills', 'languages', 'country', 'state', 'age','gender','genderPronouns']));
         } catch (Exception $e) {
             return back()->with('error', 'Something went wrong.');
         }
     }
 
-    private function getVideoLink($url = '')
-    {
-        $id = '';
-        $resp = ['link'=>'','video_id'=>'','platform'=>''];
-        if(strpos($url, 'youtu') !== false)
-        {
-            parse_str(parse_url( $url, PHP_URL_QUERY), $nurl);
-            if(array_key_exists('v', $nurl))
-            {
-                $id = $nurl['v'];
-            }
-            else if(array_key_exists('vi', $nurl))
-            {
-                $id = $nurl['vi'];
-            }
-            else
-            {
-                $id = explode('?',array_reverse(explode("/", $url))[0])[0];
-            }
-            $resp['link'] = 'https://www.youtube.com/embed/'.$id;
-            $resp['video_id'] = $id;
-            $resp['platform'] = $this->platform_youtube;
-        }
-        else if(strpos($url, 'vimeo') !== false)
-        {
-            $resp['link'] = $url;
-            $resp['platform'] = $this->platform_vimeo;
-        }
-        return $resp;
-    }
     public function profileStore(StoreProfileUpdate $request)
     {
         try {

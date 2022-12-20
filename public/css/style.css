@@ -106,17 +106,18 @@ body {
 }
 
 .add-proj-btn {
-    border: 1px solid #DD45B3;
-    color: #DD45B3 !important;
-    text-decoration: none;
-    background: #33084C;
+    width: 9rem;
     height: 2.5rem;
-    line-height: 114%;
+    background: #DD45B3;
     border-radius: 4px;
-    /* width: 9rem; */
+    margin-left: 4px;
+    border: none;
 }
 .add-proj-btn a {
-    color: #DD45B3 !important;
+    color: #EEEDE8;
+    line-height: 114%;
+    font-weight: 600;
+    font-size: 14px;
     text-decoration: none;
 }
 
@@ -265,7 +266,7 @@ body {
     width: auto;
     max-width: 100%;
     height: auto;
-    max-height: 100%;
+    /* max-height: 100%; */
  }
 
 .opacity-title{
@@ -409,6 +410,7 @@ body {
 
 .home-dropdown ul li input {
     width: 14px;
+    min-width: 14px;
     height: 14px;
     background-color: transparent;
     border: 2px solid #FFFFFF;
@@ -440,6 +442,7 @@ body {
     background: #33084C;
     color: #FAF8FB;
     padding-top: 50px;
+    margin-top:105px;
 }
 
 .footer .row {
@@ -910,6 +913,13 @@ body {
 .cropper-crop-box {
     /* width: 200px;
     height: 200px; */
+}
+.croper_modal .cropperWrap
+{
+    height: auto;
+    /* width: auto;; */
+    max-height: calc(100%/2 - 1.5em);
+    min-height: 300px;
 }
 .list-group-item{
     text-align: left;
@@ -1444,6 +1454,9 @@ body {
     border-radius: 4px;
     min-height: calc(7em + 0.75rem + 2px) !important;
 }
+.forRemoveBorder .dropdown-menu {
+    border: none !important;
+}
 .profile_dropdown_btn {
     background: #FFFFFF;
     width: 100%;
@@ -1459,10 +1472,13 @@ body {
     font-size: 20px !important;
 }
 .profile_dropdown_menu li a {
-   color: #4D0D8A !important;
+   /* color: #4D0D8A !important; */
+   color: #971E9B !important;
    padding: 7px;
-   font-size: 16px;
+   font-size: 14px;
    width: 100%;
+   letter-spacing: 0.018em;
+   font-weight: 300;
    text-decoration: none !important;
 }
 .cancel_btn, .cancel_btn a  {
@@ -1927,6 +1943,14 @@ button, input, optgroup, select, textarea {
     color: #1C0330;
     border: none;
 }
+.cancel_btn_modal {
+    padding: 9px 16px;
+    font-size: 14px;
+    background: #FAF8FB;
+    border-radius: 4px;
+    color: #1C0330;
+    border: none;
+}
 .delete_btn {
     padding: 9px 16px;
     font-size: 14px;
@@ -2061,11 +2085,10 @@ button, input, optgroup, select, textarea {
     margin:1%;
 }
 .portfolio_item_image {
-    max-width: 170px;
-    max-height: 200px;
+    width: 170px;
+    height: 200px;
     display: flex;
     align-items: center;
-    margin: 0 auto;
 }
 .portfolio .portfolio_img {
     max-width: 100%;
