@@ -120,74 +120,68 @@
       </div>
 
       @if (isset($project_lists_except_carousel) && !empty($project_lists_except_carousel))
-      @foreach ($project_lists_except_carousel as $k=>$v)
-      @if (isset($v->lists) && !empty($v->lists))
-      <div class="home_subsection">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12 carousel-header-text">
-              <h1>{{$v->list_name}}</h1>
-            </div>
-          </div>
-        </div>
-        <div class="test owl-carousel owl-theme">
-          @foreach ($v->lists as $k1=>$v1)
-          <div class="home_img_wrap">
-            {{-- @if (!empty($v1->projects[0])) --}}
-            <div class="slider">
-              <div class="img-container">
-                @if (!empty($v1->projects->projectImage) || isset($v1->projects->projectImage))
-                    
-                <img src="{{ Storage::url($v1->projects->projectImage->file_link) }}" alt="image">
-                @else
-                <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">
-                    
-                @endif
-                    
-              </div>
-              <div class="secondry-card-top-container w-100">
-                <div>
-                <a href="{{ route('public-view', ['id'=>$v1->projects->id]) }}">
-                  @if (isset($v1->projects->project_name) && !empty($v1->projects->project_name))
-                  {{$v1->projects->project_name}}
-                  @endif
-                </a>
-                </div>
-                <div>
-                  {{-- <i class="fa fa-heart" style="color: white;" aria-hidden="true"></i> --}}
-                  <i class="fa fa-heart-o icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$v1->projects->id}}" aria-hidden="true"></i>
+        @foreach ($project_lists_except_carousel as $k=>$v)
+          @if (isset($v->lists) && count($v->lists)>0)
+            <div class="home_subsection">
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-12 carousel-header-text">
+                    <h1>{{$v->list_name}}</h1>
+                  </div>
                 </div>
               </div>
-              <div class="secondry-card-bottom-container">
-                <a href="{{ route('public-view', ['id'=>$v1->projects->id]) }}">
+              <div class="test owl-carousel owl-theme">
+                @foreach ($v->lists as $k1=>$v1)
+                <div class="home_img_wrap">
+                  {{-- @if (!empty($v1->projects[0])) --}}
+                  <div class="slider">
+                    <div class="img-container">
+                      @if (!empty($v1->projects->projectImage) || isset($v1->projects->projectImage))
+                          
+                      <img src="{{ Storage::url($v1->projects->projectImage->file_link) }}" alt="image">
+                      @else
+                      <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">
+                          
+                      @endif
+                          
+                    </div>
+                    <div class="secondry-card-top-container w-100">
+                      <div>
+                      <a href="{{ route('public-view', ['id'=>$v1->projects->id]) }}">
+                        @if (isset($v1->projects->project_name) && !empty($v1->projects->project_name))
+                        {{$v1->projects->project_name}}
+                        @endif
+                      </a>
+                      </div>
+                      <div>
+                        {{-- <i class="fa fa-heart" style="color: white;" aria-hidden="true"></i> --}}
+                        <i class="fa fa-heart-o icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$v1->projects->id}}" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                    <div class="secondry-card-bottom-container">
+                      <a href="{{ route('public-view', ['id'=>$v1->projects->id]) }}">
 
-                @if (isset($v1->projects->duration) && !empty($v1->projects->duration))
-                  {{$v1->projects->duration}} /
-                @endif
-                @if (isset($v1->projects->genres[0]) && !empty($v1->projects->genres[0]))
-                  {{$v1->projects->genres[0]['name']}} /
-                @endif
-                @php
-                  $country_data = $v1->toArray();
-                @endphp
-                @if (isset($country_data['projects']['project_countries'][0]) && !empty($country_data['projects']['project_countries'][0]))
-                  {{$country_data['projects']['project_countries'][0]['name']}}
-                @endif
-              </a>
+                      @if (isset($v1->projects->duration) && !empty($v1->projects->duration))
+                        {{$v1->projects->duration}} /
+                      @endif
+                      @if (isset($v1->projects->genres[0]) && !empty($v1->projects->genres[0]))
+                        {{$v1->projects->genres[0]['name']}} /
+                      @endif
+                      @php
+                        $country_data = $v1->toArray();
+                      @endphp
+                      @if (isset($country_data['projects']['project_countries'][0]) && !empty($country_data['projects']['project_countries'][0]))
+                        {{$country_data['projects']['project_countries'][0]['name']}}
+                      @endif
+                    </a>
+                    </div>
+                  </div>            
+                </div>
+                @endforeach
               </div>
             </div>
-            {{-- @else
-              <div class="not-found-text">
-                <p>No Data Found</p>
-              </div> 
-            @endif --}}
-            
-          </div>
-          @endforeach
-        </div>
-      </div>
-      @endif      
-      @endforeach
+          @endif      
+        @endforeach
       @endif      
     </section>
   </div>

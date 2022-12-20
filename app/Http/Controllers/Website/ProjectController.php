@@ -224,7 +224,7 @@ class ProjectController extends WebController
 
             if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
             {
-                return back()->with('error','Project Id not found.');
+                throw new Exception('Project Id not found');
             }
             $languages = MasterLanguage::query()->orderBy('name', 'ASC')->get();
             $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
@@ -560,6 +560,7 @@ class ProjectController extends WebController
             {
                 return back()->with('error','Project Id not found.');
             }
+            $a = $this->relativeFilteredProject();
             $countries = MasterCountry::all();
             $languages = MasterLanguage::all();
             $geners = MasterProjectGenre::all();
@@ -568,7 +569,7 @@ class ProjectController extends WebController
             $project_stages = ProjectStage::all();
              
             $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
-            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->get();
+            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->where('status','published')->get();
             $projectData = $projectData->toArray();
             if (empty($projectData)) {
                 return back()->with('error','Invalid request.');
@@ -758,5 +759,61 @@ class ProjectController extends WebController
             return back()->with('error', 'Something went wrong.');
         }
     }
+
+    public function relativeFilteredProject()
+    {
+        try{
+            $id[] = $_REQUEST['id'];
+            $validator = Validator::make($id, [
+
+                'id' => 'exists:user_projects,id',
+                
+            ]);
+    
+            if ($validator->fails()) {
+                return ['status'=>False,'msg'=>"Something went wrong, Please try again later."];
+            }
+            $project_data_by_id = UserProject::query()
+            ->where('id',$_REQUEST['id'])
+            ->with(['projectCountries','projectLanguages','genres','projectCategory','projectLookingFor','projectStage','projectType','user','projectImage'])
+            ->first()
+            ->toArray();
+            echo "<pre>";
+            print_r($project_data_by_id);
+            die;
+            // dd($project_data_by_id);
+            
+            $relatedProjects = UserProject::query()
+            ->where('status','published')
+            ->where(function($query) use($project_data_by_id){
+                if (isset($project_data_by_id['project_name'])) { // search name of user
+                    $query->where("project_name", "like", "%$request->search%");
+                }
+                if(isset($request->project_verified)){ // filter project verified
+                  $query->where("project_verified","1");
+                }
+                if (isset($request->project_stages)) { // search name of user
+                    $query->where("project_stage_id",$request->project_stages);
+                }
+            })
+            ->where(function($subQuery) use($request)
+            {   
+                
+                if (isset($request->geners)) { // search name of user
+                    $subQuery->whereHas('genres', function ($q) use($request){
+                        $q->whereIn('gener_id',$request->geners);
+                    });
+                }
+            
+            
+            })
+            ->with(['projectCountries','projectLanguages','genres','projectCategory','projectLookingFor','projectStage','projectType','user','projectImage'])
+            // ->where('user_id','!=',auth()->user()->id)
+            ->orderByDesc('id')
+            ->get();               
+           }catch(Exception $e){
+            return back()->with('error',$e->getMessage());
+           }
+        }
 
 }

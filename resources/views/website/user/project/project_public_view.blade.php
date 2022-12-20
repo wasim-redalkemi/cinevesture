@@ -222,6 +222,8 @@
                                 </div>                                
                             </div>
                         @endforeach                    
+                        @else
+                        <span><b>-</b></span>                    
                         @endif                        
                     </div>
                     <div class="public-head-subtext mt-3">Photos</div>
@@ -234,12 +236,18 @@
                             </div>
                         </div>
                         @endforeach                    
+                        @else
+                        <span><b>-</b></span>                    
                         @endif
                     </div>
                 </div>
             </div>
         </div>
-
+{{-- @php
+echo "<pre>";
+   var_dump($projectData[0]['project_only_doc']);
+   die;
+@endphp --}}
         <div class="row">
             <div class="col-md-12">
                 <div class="public-head-subtext mt-3">Documents</div>
@@ -259,7 +267,7 @@
                         </div>
                         @endforeach
                     @else
-                    <span><b>-</b></span>                    
+                    <span><b>-</b></span>                
                     @endif
                 </div>
             </div>
@@ -319,43 +327,51 @@
                                 <tr>
                                     <td class="public-head-subtext candy-pink mt-1">Completed Milstones</td>
                                 </tr>
+                                @php $isEmpty = true;@endphp
                                 @if (!empty($projectData[0]['project_milestone']))
-                                @foreach ($projectData[0]['project_milestone'] as $k => $v)
-                                    @if ($v['complete'] ==1 )
-                                        <tr>
-                                            <td class="public-head-subtext white">{{ $v['description'] }}</td>
-                                            <td class="aubergine project-sub-text white">{{ $v['budget'] }}</td>
-                                            <td class="aubergine project-sub-text white">{{ $v['target_date'] }}</td>
-                                        </tr>
-                                    @endif
-                                @endforeach
-                                @else
-                                <tr>
-                                    <td colspan="3">
-                                        <span class="text-white"><b>-</b></span>
-                                    </td>
-                                </tr>
+                                    @foreach ($projectData[0]['project_milestone'] as $k => $v)
+                                        @if ($v['complete'] == 1 )
+                                            @php $isEmpty = false;@endphp
+                                            <tr>
+                                                <td class="public-head-subtext white">{{ $v['description'] }}</td>
+                                                <td class="aubergine project-sub-text white">{{ $v['budget'] }}</td>
+                                                <td class="aubergine project-sub-text white">{{ $v['target_date'] }}</td>
+                                            </tr>
+                                        @endif
+                                    @endforeach                          
+                                @endif
+
+                                @if ($isEmpty == true)
+                                    <tr>
+                                        <td colspan="3">
+                                            <span class="text-white"><b>-</b></span>
+                                        </td>
+                                    </tr>
                                 @endif
                                
                                 <tr>
                                     <td class="candy-pink public-head-subtext mt-1">Upcoming Milstones</td>
                                 </tr>
+                                @php $isEmpty = true;@endphp
                                 @if (!empty($projectData[0]['project_milestone']))
-                                @foreach ($projectData[0]['project_milestone'] as $k => $v)
-                                    @if ($v['complete'] ==0 )
-                                        <tr>
-                                            <td class="public-head-subtext white">{{ $v['description'] }}</td>
-                                            <td class="aubergine project-sub-text white">{{ $v['budget'] }}</td>
-                                            <td class="aubergine project-sub-text white">{{ $v['target_date'] }}</td>
-                                        </tr>
-                                    @endif
-                                @endforeach
-                                @else
-                                <tr>
-                                    <td colspan="3">
-                                        <span class="text-white"><b>-</b></span>
-                                    </td>
-                                </tr>
+                                    @foreach ($projectData[0]['project_milestone'] as $k => $v)
+                                        @if ($v['complete'] ==0 )
+                                            @php $isEmpty = false;@endphp
+                                            <tr>
+                                                <td class="public-head-subtext white">{{ $v['description'] }}</td>
+                                                <td class="aubergine project-sub-text white">{{ $v['budget'] }}</td>
+                                                <td class="aubergine project-sub-text white">{{ $v['target_date'] }}</td>
+                                            </tr>
+                                        @endif
+                                    @endforeach                          
+                                @endif
+
+                                @if ($isEmpty == true)
+                                    <tr>
+                                        <td colspan="3">
+                                            <span class="text-white"><b>-</b></span>
+                                        </td>
+                                    </tr>
                                 @endif
                             </tbody>
                         </table>
