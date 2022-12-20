@@ -105,10 +105,10 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
         Route::post('/portfolio-store/{id?}', [UserController::class, 'portfolioStore'])->name('portfolio-store');
         Route::get('/portfolio-edit/{id}', [UserController::class, 'portfolioEdit'])->name('portfolio-edit');
         Route::post('/portfolio-edit-store/{id}', [UserController::class, 'portfolioEditStore'])->name('portfolio-edit-store');
-        Route::get('/protfolio-delete', [UserController::class, 'protfolioDelete'])->name('protfolio-delete');
+        Route::get('/portfolio-delete', [UserController::class, 'portfolioDelete'])->name('portfolio-delete');
 
 
-        Route::post('/protfolio-modal', [UserController::class, 'getPortfolioHtml'])->name('protfolio-modal');
+        Route::post('/portfolio-modal', [UserController::class, 'getPortfolioHtml'])->name('portfolio-modal');
 
         Route::get('/experience-create/{id?}', [UserController::class, 'experienceCreate'])->name('experience-create');
         Route::post('/experience-store/{id?}', [UserController::class, 'experienceStore'])->name('experience-store');

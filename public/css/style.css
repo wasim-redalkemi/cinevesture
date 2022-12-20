@@ -5,6 +5,11 @@ body {
     overflow-x: hidden !important;
 }
 
+a
+{
+    text-decoration: none;
+}
+
 /* header  */
 .Header_main_container {
     background: #1C0330;
@@ -2691,7 +2696,8 @@ select {
 {
     background: #f5f5f5 !important;
     transform: translateY(-5px);
-    box-shadow: 0px 0px 26px -9px #971E9B;
+    box-shadow: 0px 0px 25px -15px #971E9B;
+    cursor: pointer;
 }
 .accordion-button:not(.collapsed) {
     color: #1C0330;
