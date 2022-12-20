@@ -39,7 +39,7 @@ class HomeController extends Controller
         $looking_for = MasterLookingFor::all();
         $project_stages = ProjectStage::all();
         
-        $project_list_project = ProjectList::query()->with(['lists.projects.genres','lists.projects.projectCountries','lists.projects.projectLanguages','lists.projects.projectImage'])->get();
+        $project_list_project = ProjectList::query()->where('status','published')->with(['lists.projects.genres','lists.projects.projectCountries','lists.projects.projectLanguages','lists.projects.projectImage'])->get();
         $project_lists_carousel = $project_list_project[0];
         unset($project_list_project[0]);
         $project_lists_except_carousel = $project_list_project;
