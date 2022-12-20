@@ -126,9 +126,10 @@
                 </form>
             </div>
             <div class="col-md-9">
+                <div class="profile_wraper">
                 @if(count($users) >= 1)
                 @foreach($users as $user)
-                <div class="profile_wraper profile_wraper_padding my-3 my-md-0">
+                <div class="border_btm profile_wraper_padding my-3 my-md-0">
                     <div class="row">
                         <div class="col-md-2">
                             <div class="user_profile_container wh_66">
@@ -192,6 +193,7 @@
                 </div>
                 @endforeach
                 @else
+                </div>
                 <div class="not-found-text">
                     <p>No Profile Found</p>
                 </div>

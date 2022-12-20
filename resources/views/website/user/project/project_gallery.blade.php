@@ -199,8 +199,8 @@
                                         </div>
                                         <div class="head_text mt-4">Are you sure?</div>
                                         <div class="sub_text mt-4">Do you really want to delete the item?<br>This process cannot be undone.</div>
-                                        <div class="d-flex justify-content-center mt-4">   
-                                            <button type="button" class="cancel_btn cancel_btn_text mx-3" data-bs-dismiss="modal">Cancel</button>
+                                        <div class="d-flex justify-content-center mt-4">
+                                            <button type="button" class="cancel_btn_modal cancel_btn_text mx-3" data-bs-dismiss="modal">Cancel</button>
                                             <button class="delete_btn confirm_btn_text mx-3" type="button" data-bs-dismiss="modal">Confirm</button>
                                         </div>
                                     </div>
@@ -215,20 +215,28 @@
 
     <!-- cropper  -->                            
     <div class="modal fade" id="ImageCropperModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content croper_modal">
-                <div class="modal-header py-1">
-                    <h6 class="modal-title tile_text" id="modalLabel"> Image Cropper</h6>
-                    <div class="d-flex jutify-content-center">
-                        <button type="button" class="mx-2 btn-danger" id="crop-cancel" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
-                        <button type="button" class="btn-success" id="crop"><i class="fa fa-check" aria-hidden="true"></i></button>
-                    </div>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content croper_modal">
+                                        <div class="modal-header py-1">
+                                            <h6 class="modal-title tile_text" id="modalLabel"> Image Cropper</h6>
+                                            <div class="d-flex jutify-content-center">
+                                                <button type="button" class="mx-2 btn-danger" id="crop-cancel" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                <button type="button" class="btn-success" id="crop"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="modal-body overflow-auto">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="cropperWrap">
+                                                            <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -12,7 +12,7 @@
                                 <div class="head_text mt-4">Are you sure?</div>
                                 <div class="sub_text mt-4">Do you really want to delete the item?<br>This process cannot be undone.</div>
                                 <div class="d-flex justify-content-center mt-4">   
-                                    <button type="button" class="modal_cancel_btn cancel_btn_text mx-3" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="button" class="cancel_btn cancel_btn_text mx-3" data-bs-dismiss="modal">Cancel</button>
                                     <a href="" class="confirmActionModalLink"><button class="delete_btn confirm_btn_text mx-3" type="button" data-bs-dismiss="modal">Confirm</button></a>
                                 </div>
                             </div>

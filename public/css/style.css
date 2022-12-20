@@ -106,17 +106,18 @@ body {
 }
 
 .add-proj-btn {
-    border: 1px solid #DD45B3;
-    color: #DD45B3 !important;
-    text-decoration: none;
-    background: #33084C;
+    width: 9rem;
     height: 2.5rem;
-    line-height: 114%;
+    background: #DD45B3;
     border-radius: 4px;
-    /* width: 9rem; */
+    margin-left: 4px;
+    border: none;
 }
 .add-proj-btn a {
-    color: #DD45B3 !important;
+    color: #EEEDE8;
+    line-height: 114%;
+    font-weight: 600;
+    font-size: 14px;
     text-decoration: none;
 }
 
@@ -912,6 +913,13 @@ body {
 .cropper-crop-box {
     /* width: 200px;
     height: 200px; */
+}
+.croper_modal .cropperWrap
+{
+    height: auto;
+    /* width: auto;; */
+    max-height: calc(100%/2 - 1.5em);
+    min-height: 300px;
 }
 .list-group-item{
     text-align: left;
@@ -1928,6 +1936,14 @@ button, input, optgroup, select, textarea {
     border: none;
 }
 .cancel_btn {
+    padding: 9px 16px;
+    font-size: 14px;
+    background: #FAF8FB;
+    border-radius: 4px;
+    color: #1C0330;
+    border: none;
+}
+.cancel_btn_modal {
     padding: 9px 16px;
     font-size: 14px;
     background: #FAF8FB;
