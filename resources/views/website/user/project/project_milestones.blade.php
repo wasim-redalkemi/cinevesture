@@ -287,7 +287,8 @@
             let titleElems = $(parentElemId+' #milestone_new input');
             let error = false;
             $.each(titleElems,(i,element) => {
-                error = ($(element).val() == "");
+                if($(element).attr('type') != "checkbox")
+                    error = ($(element).val() == "");
                 if(error)
                     return false;
             });
