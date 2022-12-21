@@ -43,7 +43,7 @@
     @if (!empty($data['get_portfolio']))
     @foreach ($data['get_portfolio'] as $k=>$v)                                 
     <div class="item portfolio_modal_item"> 
-            <div class="portfolio_item_image">      
+            <div class="portfolio_item_image w-100">      
         <img src="{{ Storage::url($v['file_link']) }}" class="portfolio_img" width="100%" height="100%" />
             </div>
     </div> 

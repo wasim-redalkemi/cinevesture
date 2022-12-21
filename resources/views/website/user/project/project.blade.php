@@ -34,7 +34,7 @@
                                     <div><a href="{{route('project-overview',['id'=>$v->id])}}"><i class="fa fa-pencil mx-2 ancor-link-style" aria-hidden="true"></i></a></div>
                                 <div>
                                     {{-- <i class="fa fa-trash-o" aria-hidden="true"></i> --}}
-                                    <a class="confirmAction" href="{{route('project-delete',['id'=>$v->id])}}">
+                                    <a class="confirmAction" href="{{route('project-delete')}}?id={{$v->id}}">
                                         <img src="{{ asset('images/asset/delete-icon.svg') }}"/>
                                     </a>
                                 </div>

@@ -42,7 +42,6 @@ class CreateJobRequest extends FormRequest
             'employments.*' => 'required',                    
             'workspaces.*' => 'required',
             'company_name' => 'required',
-            'countries' => 'required',
             'description' => 'required',                     
             'skills.*' => 'required'
         ];

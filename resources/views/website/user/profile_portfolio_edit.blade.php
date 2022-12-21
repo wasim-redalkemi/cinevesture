@@ -14,11 +14,14 @@
                     @include('website.include.profile_sidebar')
                 </div>
                 <div class="col-md-9">
+                    @if(isset($prevPortfolio) && count($prevPortfolio)>0)
+                        @include('website.user.include.previously_added_portfolio',['prevData'=>$prevPortfolio])
+                    @endif
                     <div id="edit-portfolio-div" class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
                         <div class="d-flex justify-content-between">
                             <div class="profile_cmn_head_text">Edit Portfolio</div>
                             <div>
-                                <a class="confirmAction" href="{{route('protfolio-delete',['id'=>$UserPortfolioEdit[0]['id']])}}">
+                                <a class="confirmAction" href="{{route('portfolio-delete',['id'=>$UserPortfolioEdit[0]['id']])}}">
                                     <img src="{{ asset('images/asset/delete-icon.svg') }}"/>
                                     {{-- <i class="fa fa-trash-o  deep-pink icon-size" aria-hidden="true"></i> --}}
                                 </a>

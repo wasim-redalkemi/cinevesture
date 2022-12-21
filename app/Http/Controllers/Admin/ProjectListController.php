@@ -160,9 +160,6 @@ class ProjectListController extends AdminController
             
             ->paginate($this->records_limit);
 
-            //     echo '<pre>';
-            // print_r($project_data->toArray());
-            // die;
             
             return view('/admin.projectList.search',compact('id','project_data','is_added_only'));
         }
@@ -216,11 +213,11 @@ class ProjectListController extends AdminController
         {
             if($status=='Publish')
             {
-            $list_status="Unpublish";
+                $list_status="Unpublish";
             }
             else
             {
-            $list_status="Publish";
+                $list_status="Publish";
             }
             ProjectList::where("id", $id)->update(["list_status" => $list_status]);
             Session::flash('response', ['text'=>'Status Update successfull!','type'=>'success']);

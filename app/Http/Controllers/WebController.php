@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use Illuminate\Http\Request;
 
 class WebController extends Controller
@@ -13,6 +14,7 @@ class WebController extends Controller
         $this->records_limit=2;
         $this->platform_youtube='youtube';
         $this->platform_vimeo='vimeo';
+        $this->return_response = ['error_msg'=>'','success_msg'=>''];
     }
 
     public function getVideoDetailsURL($params=[])
@@ -75,5 +77,26 @@ class WebController extends Controller
             $resp['platform'] = $this->platform_vimeo;
         }
         return $resp;
+    }
+
+    public function isAdminRequest()
+    {
+        try 
+        {
+            if(auth()->user()->user_type != 'A') 
+            {                
+                throw new Exception('Unauthorized request!');
+            }
+        } 
+        catch (Exception $e) 
+        {
+            $this->return_response['error_msg'] = $e->getMessage();
+        }
+        return $this->return_response;
+    }
+    public function resetResponse()
+    {
+        $this->return_response['error_msg'] = '';
+        $this->return_response['success_msg'] = '';
     }
 }
