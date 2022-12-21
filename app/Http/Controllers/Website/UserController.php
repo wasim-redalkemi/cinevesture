@@ -360,7 +360,7 @@ class UserController extends WebController
             $prevPortfolio = UserPortfolio::query()->where('user_id',auth()->user()->id)->with(['getPortfolioSkill','getPortfolioLocation'])->get();
             $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
             $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();
-            $portfolio = $user;
+            $portfolio = User::query()->where('id',auth()->user()->id)->first();
             return view('website.user.profile_portfolio', compact('portfolio', 'country', 'skills'));
         } catch (Exception $e) {
             return back()->with('error', 'Something went wrong.');
