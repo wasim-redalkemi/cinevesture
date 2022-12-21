@@ -171,6 +171,7 @@
                                         <input type="hidden" name="project_id" value="<?php if(isset($_REQUEST['id'])) {echo $_REQUEST['id'];}?>">
                                         <button class="cancel_btn mx-3"><a class="btn-link-style" href="{{ route('project-overview') }}?id={{$_REQUEST['id']}}">Go back</a></button>
                                         <button type="submit" class="guide_profile_btn">Save & Next</button>
+                                        <button class="cancel_btn mx-3"><a class="btn-link-style" href="{{ route('project-overview') }}?id={{$_REQUEST['id']}}">Skip</a></button>
                                     </div>
                                 </div>
                             </div>

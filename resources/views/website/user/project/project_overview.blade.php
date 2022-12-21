@@ -68,7 +68,7 @@
                                             {{'checked'}}
                                             @endif
 
-                                            @endif aria-label="">
+                                            @endif aria-label="" required>
                                             <div class="radio_btn_label"> Individual</div>
                                         </div>
                                         <div class="checkbox_btn d-flex align-items-center mx-4">

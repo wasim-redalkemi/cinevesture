@@ -196,7 +196,6 @@ class UserController extends WebController
             // Endorsement
             $user_endorsement = Endorsement::query()->with('endorsementCreater')->where('to',$user->id)->where('status','1')
                                 ->orderByDesc('id')->limit(5)->get();
-                                // dd($user_endorsement);
                                
             return view('website.user.profile_public_view', compact(['user', 'portfolio', 'experience', 'qualification', 'user_country', 'user_age', 'user_skills', 'user_languages','user_endorsement', 'UserProject']));
         } catch (Exception $e) {
@@ -572,7 +571,16 @@ class UserController extends WebController
             return back()->with('error', 'Something went wrong.');
         }
     }
-    
+
+    public function portfolioSkip()
+    {
+        try {
+            return redirect()->route('experience-create');
+
+        } catch (Exception $e) {
+            return back()->with('error', 'Something went wrong.');
+        }
+    }    
 
     // User profile experience
 
@@ -676,6 +684,16 @@ class UserController extends WebController
         }
     }
 
+    public function experienceSkip()
+    {
+        try {
+            return redirect()->route('qualification-create');
+
+        } catch (Exception $e) {
+            return back()->with('error', 'Something went wrong.');
+        }
+    }    
+
     // User profile qualification
 
     public function qualificationCreate(Request $request)
@@ -766,6 +784,15 @@ class UserController extends WebController
         try {
             $id = $_REQUEST['id'];
             UserQualification::query()->where('id', $id)->delete();
+            return redirect(route('profile-private-show'));
+        } catch (Exception $e) {
+            return back()->with('error', 'Something went wrong.');
+        }
+    }
+
+    public function qualificationSkip()
+    {
+        try {
             return redirect(route('profile-private-show'));
         } catch (Exception $e) {
             return back()->with('error', 'Something went wrong.');
