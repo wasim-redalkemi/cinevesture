@@ -67,7 +67,7 @@ var ImageCropper = function(fileToCrop,previewElem){
     }
 
     let bindEvents = function(){
-        $modal.on('shown.bs.modal', function() {
+        $modal.off('shown.bs.modal').on('shown.bs.modal', function() {
             cropper = new Cropper(image, {
                 dragMode: 'move',
                 autoCropArea: 0.65,
@@ -81,17 +81,16 @@ var ImageCropper = function(fileToCrop,previewElem){
                 data:cropboxData,
                 //aspectRatio: 285/194,
             });
-        }).on('hidden.bs.modal', function() {
+        }).off('hidden.bs.modal').on('hidden.bs.modal', function() {
             cropper.destroy();
             cropper = null;
         });
 
-        $("#crop").click(function() {
+        $("#crop").off("click").on("click",function() {
             canvas = cropper.getCroppedCanvas({
-                // width: 285*2,
-                // height: 194*2,
+                width: 285,
+                height: 194,
             });
-        
             canvas.toBlob(function(blob) {
                 url = URL.createObjectURL(blob);
                 var reader = new FileReader();
@@ -108,15 +107,15 @@ var ImageCropper = function(fileToCrop,previewElem){
             });
         });
 
-        $('#close-cropper').on('click', function() {
+        $('#close-cropper').off('click').on('click', function() {
             $modal.modal('hide');
         });
         
-        $('#chechbox').on('click', function() {
+        $('#chechbox').off('click').on('click', function() {
             $modal.modal('hide');
         });
         
-        $('#crop-cancel').on('click', function() {
+        $('#crop-cancel').off('click').on('click', function() {
             $modal.modal('hide');
         });
     }
