@@ -74,7 +74,7 @@
                     <div class="head_text mt-4">Are you sure?</div>
                     <div class="sub_text mt-4">Do you really want to deactivate your account?<br>This process cannot be undone.</div>
                     <div class="d-flex justify-content-center mt-4">   
-                        <button type="button" class="cancel_btn mx-3" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="cancel_btn_modal mx-3" data-bs-dismiss="modal">Cancel</button>
                         <form method="POST" action="{{ route('user-deactivate') }}">
                                 @csrf
                            <button  class="delete_btn mx-3" type="submit">Confirm</button>

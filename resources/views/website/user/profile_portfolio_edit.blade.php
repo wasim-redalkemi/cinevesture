@@ -407,7 +407,15 @@
         closeOnSelect: false,
         placeholder: "Select",
         allowClear: true,
-        tags: false
+        language: {
+      noResults: function() {
+        return '<button class="no_results_btn">No Result Found</a>';
+      },
+    },
+    escapeMarkup: function(markup) {
+      return markup;
+    },
+        
     });
 
     $(".portfolio_save_btn").on("click", function () {

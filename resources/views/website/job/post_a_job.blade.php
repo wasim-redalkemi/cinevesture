@@ -23,7 +23,7 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="profile_input">
-                                        <label>Title Of The Job</label>
+                                        <label>Title Of The Job  <span style = "color:red">*</span></label>
                                         <input type="text" class="form-control @error('job_title') is-invalid @enderror" required name="job_title" value="@if (!empty($userJobData['title'])) {{$userJobData['title']}} @endif" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
 
                                         @error('job_title')
@@ -217,27 +217,26 @@ $('.select_limit').change(function(event) {
 </script>
 
 <script>
-    $(".emp-select2").select2({
-        closeOnSelect: false,
-        placeholder: "Please Select",
-        allowClear: true,
-        tags: false,
-
-    });
-
-
-    $(".work-select2").select2({
-        closeOnSelect: false,
-        placeholder: "Please Select",
-        allowClear: true,
-        tags: false,
-
-    });
     $(".js-select2").select2({
         closeOnSelect: false,
         placeholder: "Skills",
         allowClear: true,
-        tags: false,
+        language: {
+      noResults: function() {
+        return '<button class="no_results_btn">No Result Found</a>';
+      },
+    },
+    escapeMarkup: function(markup) {
+      return markup;
+    },
+        language: {
+      noResults: function() {
+        return '<button class="no_results_btn">No Result Found</a>';
+      },
+    },
+    escapeMarkup: function(markup) {
+      return markup;
+    },
        // maximumSelectionSize: 1
     });
     $(".action").on('click', function(e) {        

@@ -381,5 +381,9 @@
             }
         });
     }
+    
+    $(".close").click(function () {
+                $('#portfolioModal').modal('hide');
+            })
 </script>
 @endpush

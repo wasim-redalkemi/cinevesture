@@ -296,9 +296,9 @@
                                 </tr>
                                 <tr>
                                     <td class="public-head-subtext white">Crowdfunding link</td>
-                                    <td class="project-sub-text white">
+                                    <td class="crowdfund_text ">
                                         @if (!empty($UserProject->crowdfund_link))
-                                        <a href="{{ $UserProject->crowdfund_link}}" >{{ $UserProject->crowdfund_link}}</a>                                    
+                                        <a href="{{ $UserProject->crowdfund_link}}" class="white">{{ $UserProject->crowdfund_link}}</a>                                    
                                         @else
                                         <span><b>-</b></span>
                                         @endif

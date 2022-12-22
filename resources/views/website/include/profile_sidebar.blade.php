@@ -27,7 +27,7 @@
     <div class="sidebar_content"><a href="{{ route('organisation-private-view') }}">Organisation</a></div>
     <hr class="sidebar_content_hr">
     <!-- <div class="sidebar_content"><a href="">My Jobs</a></div> -->
-    <div class="dropdown search-page forRemoveBorder">
+    <div class="dropdown search-page">
         <button class="btn dropdown-toggle w-100 border-0 ml_10" type="button" data-bs-toggle="dropdown"
             aria-expanded="false">
             My Jobs

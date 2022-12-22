@@ -1,15 +1,5 @@
 <div class="mt-1 contact-page-text">@if (!empty($data['project_title'])) {{ $data['project_title']}} @endif</div>
 
-@if (count($data['get_portfolio_location'])>0)
-<div class="mt-3">
-    @foreach ($data['get_portfolio_location'] as $k=>$v)
-        <button class="curv_cmn_btn">{{$v['name']}}</button>
-    @endforeach
-</div>
-@else
-    <span><b>-</b></span>    
-@endif
-
 <div class="contact-page-subtext"><?php if (!empty($data['completion_date'])) {
      $orgDate = $data['completion_date'];  
     $newDate = date("d-m-Y", strtotime($orgDate));  
@@ -18,6 +8,16 @@
     echo '<span><b>-</b></span>';
 }
 ?></div>
+
+@if (count($data['get_portfolio_location'])>0)
+<div class="mt-1">
+    @foreach ($data['get_portfolio_location'] as $k=>$v)
+        <div class="">{{$v['name']}}</div>
+    @endforeach
+</div>
+@else
+    <span><b>-</b></span>    
+@endif
 
 @if (count($data['get_portfolio_skill'])>0)
 <div class="mt-3">
@@ -42,9 +42,9 @@
 <div class="portfolioImage owl-carousel mt-1">
     @if (!empty($data['get_portfolio']))
     @foreach ($data['get_portfolio'] as $k=>$v)                                 
-    <div class="item portfolio_modal_item"> 
-            <div class="portfolio_item_image">      
-        <img src="{{ Storage::url($v['file_link']) }}" class="portfolio_img" width="100%" height="100%" />
+    <div class="item portfolio_modal_item">
+            <div class="portfolio_item_image w-100">      
+        <img src="{{ Storage::url($v['file_link']) }}"/>
             </div>
     </div> 
     @endforeach

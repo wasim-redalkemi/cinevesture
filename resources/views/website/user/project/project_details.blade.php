@@ -154,7 +154,7 @@
                                 </div>
                                 <div class="col-md-3 d-flex align-items-end mt-2">
                                     <div class="profile_input">
-                                        <div class="save_add_btn">Save</div>
+                                        <div class="save_add_btn">Add another</div>
                                     </div>
                                 </div>
                             </div>
@@ -232,6 +232,14 @@ $(document).ready(function() {
       closeOnSelect: false,
       placeholder: "Select",
       allowClear: true,
+        language: {
+      noResults: function() {
+        return '<button class="no_results_btn">No Result Found</a>';
+      },
+    },
+    escapeMarkup: function(markup) {
+      return markup;
+    },
       tags: true
   });
 

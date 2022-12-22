@@ -144,19 +144,43 @@
       closeOnSelect: false,
       placeholder: "Location",
       allowClear: true,
+        language: {
+      noResults: function() {
+        return '<button class="no_results_btn">No Result Found</a>';
+      },
+    },
+    escapeMarkup: function(markup) {
+      return markup;
+    },
       tags: true
   });
   $(".js-select2").select2({
         closeOnSelect: false,
         placeholder: "Skills",
         allowClear: true,
-        tags: false
+        language: {
+      noResults: function() {
+        return '<button class="no_results_btn">No Result Found</a>';
+      },
+    },
+    escapeMarkup: function(markup) {
+      return markup;
+    },
+        
     });
    $(".emp-select2").select2({
         closeOnSelect: false,
         placeholder: "Employement Type",
         allowClear: true,
-        tags: false
+        language: {
+      noResults: function() {
+        return '<button class="no_results_btn">No Result Found</a>';
+      },
+    },
+    escapeMarkup: function(markup) {
+      return markup;
+    },
+        
     });
 
     $('.profile_search_btn').on('click',function(e){

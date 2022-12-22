@@ -362,10 +362,13 @@
     // $('.for_show').css('display', 'none');
     $(document).ready(function() {
         $('.open_file_explorer').click(function(e) {
+            console.log($(this).parents('.custom_file_explorer').find('.file_element'));
+            $(this).parents('.custom_file_explorer').find('.file_element').val("");
             $(this).parents('.custom_file_explorer').find('.file_element').click();
         });
 
         $('.file_element').change(function() {
+        alert("onchange")
             // var output = $(this).parents('.custom_file_explorer').find('.upload_preview');
             // const file = this.files;
             // var reader = new FileReader();
@@ -381,7 +384,15 @@
         closeOnSelect: false,
         placeholder: "Select",
         allowClear: true,
-        tags: false
+        language: {
+      noResults: function() {
+        return '<button class="no_results_btn">No Result Found</a>';
+      },
+    },
+    escapeMarkup: function(markup) {
+      return markup;
+    },
+        
     });
 
     $("#located_in").on('change', function() {
@@ -422,7 +433,8 @@
     var cropper;
 
     $("body").on("change", ".image", function(e) {
-        var files = e.target.files;
+       var  files = e.target.files;
+        alert(files)
         var done = function(url) {
             image.src = url;
             $modal.modal('show');

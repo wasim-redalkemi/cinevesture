@@ -176,6 +176,14 @@
       closeOnSelect: false,
       placeholder: "Select",
       allowClear: true,
+        language: {
+      noResults: function() {
+        return '<button class="no_results_btn">No Result Found</a>';
+      },
+    },
+    escapeMarkup: function(markup) {
+      return markup;
+    },
       tags: true
   });
 </script>
@@ -187,6 +195,14 @@
         closeOnSelect: false,
         placeholder: "Select",
         allowClear: true,
+        language: {
+      noResults: function() {
+        return '<button class="no_results_btn">No Result Found</a>';
+      },
+    },
+    escapeMarkup: function(markup) {
+      return markup;
+    },
         tags: true
     });
 </script>

@@ -46,7 +46,7 @@
                             <div class="mx-4 d-flex align-items-center">
                                 <div>
                                     <div class="search-head-subtext Aubergine_at_night open_file_explorer pointer">
-                                        Upload Profile Picture
+                                        Upload Profile Picture <span style="color:red">*</span>
                                     </div>
                                     <div class="pointer search-head-subtext deep-pink delete_image">
                                         Delete
@@ -102,7 +102,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="profile_input select2forError">
-                                    <label>Services</label>
+                                    <label>Services <span style="color:red">*</span></label>
                                     <select name="service_id[]" class="outline js-select2 @error('service_id') is-invalid @enderror" id="" multiple autofocus>
                                         @foreach ($organisationService as $k=>$v)
                                         <option value="{{ $v->id }}" @if(isset($UserOrganisation->organizationServices) && in_array($v->id, $UserOrganisation->organizationServices))selected @endif>{{ $v->name }}</option>
@@ -167,7 +167,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="profile_input select2forError">
-                                    <label> Languages Spoken</label>
+                                    <label> Languages Spoken <span style="color:red">*</span></label>
                                     <select name="language_id[]" class="outline js-select2 @error('language_id') is-invalid @enderror" id="lang" multiple autofocus>
                                         @foreach ($languages as $k=>$v)
                                         <option value="{{ $v->id }}" @if(isset($UserOrganisation->organizationLanguages )&&(in_array($v->id, $UserOrganisation->organizationLanguages)))selected @endif>{{ $v->name }}</option>
@@ -186,7 +186,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>IMDB Profile <span style="color:red">*</span></label>
+                                    <label>IMDB Profile</label>
                                     <input type="url" class="outline form-control @error('imdb_profile') is-invalid @enderror" placeholder="IMDB Profile" name="imdb_profile" value="{{(isset($UserOrganisation->imdb_profile))?$UserOrganisation->imdb_profile:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('imdb_profile')
                                     <span class="invalid-feedback" role="alert">
@@ -197,7 +197,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>LinkedIn Profile <span style="color:red">*</span></label>
+                                    <label>LinkedIn Profile</label>
                                     <input type="url" class="outline form-control @error('linkedin_profile') is-invalid @enderror" placeholder="LinkedIn Profile" name="linkedin_profile" value="{{(isset($UserOrganisation->linkedin_profile))?$UserOrganisation->linkedin_profile:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('linkedin_profile')
                                     <span class="invalid-feedback" role="alert">
@@ -208,7 +208,7 @@
                             </div>
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>Website <span style="color:red">*</span></label>
+                                    <label>Website</label>
                                     <input type="url" class="outline form-control @error('website') is-invalid @enderror" placeholder="Website" aria-label="Username" name="website" value="{{(isset($UserOrganisation->website))?$UserOrganisation->website:'' }}" aria-describedby="basic-addon1" required autofocus>
                                     @error('website')
                                     <span class="invalid-feedback" role="alert">
@@ -221,7 +221,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>Introduction Video <span style="color:red">*</span></label>
+                                    <label>Introduction Video</label>
                                     <input type="url" class="outline form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="{{(isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('intro_video_link')
                                     <span class="invalid-feedback" role="alert">
@@ -364,7 +364,15 @@
         closeOnSelect: false,
         placeholder: "Select",
         allowClear: true,
-        tags: false
+        language: {
+      noResults: function() {
+        return '<button class="no_results_btn">No Result Found</a>';
+      },
+    },
+    escapeMarkup: function(markup) {
+      return markup;
+    },
+        
     });
 
     $('.invite_btn').click(function() {
