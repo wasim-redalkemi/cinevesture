@@ -314,7 +314,7 @@
                                     <div class="guide_profile_main_subtext mt-1">{{$v->institue_name}}</div>
                                 </div>
                                 <div class="guide_profile_main_subtext candy-pink mt-2">
-                                    {{$v->degree_name}} | {{$v->feild_of_study}} | {{$v->start_year}} | {{$v->end_year}}
+                                    {{$v->degree_name}} | {{$v->field_of_study}} | {{$v->start_year}} | {{$v->end_year}}
                                 </div>
                                 <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
                                     <p>{{$v->description}}</p>

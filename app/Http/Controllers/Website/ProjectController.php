@@ -42,7 +42,7 @@ class ProjectController extends WebController
 {
     public function __construct()
     {
-        $this->return_response = ['error_msg'=>'','success_msg'=>''];
+        parent::__construct();
     }
 
     public function checkValidRequest()
@@ -51,20 +51,31 @@ class ProjectController extends WebController
        {
             if(isset($_REQUEST['id']) && !empty($_REQUEST['id'])) 
             {
-                $session_project_data = UserProject::query()->where('user_id',auth()->user()->id)->where('id',$_REQUEST['id'])->get()->toArray();
-                if(empty($session_project_data))
+                if(!empty($this->isAdminRequest()['error_msg']))
                 {
-                    throw new Exception('Malicious request.');
+                    $this->resetResponse();
+                    $projectData = UserProject::query()->where('user_id',auth()->user()->id)->where('id',$_REQUEST['id'])->get()->toArray();
+                    if(empty($projectData))
+                    {
+                        throw new Exception('Malicious request.');
+                    }
                 }
             }
-        } catch (Exception $e) {
-            return back()->with('error',$e->getMessage().'Something went wrong.');
+        } 
+        catch (Exception $e) 
+        {
+            $this->return_response['error_msg'] = $e->getMessage();
         }
+        return $this->return_response;
     }
 
     public function projectList()
     {
-        $this->checkValidRequest();
+        $validRequest = $this->checkValidRequest();
+            if(!empty($validRequest['error_msg']))
+            {
+                throw new Exception($validRequest['error_msg']);
+            }
 
         try {
             $UserProject = UserProject::query()->with('projectImage')->where('user_id',auth()->user()->id)->get();
@@ -77,7 +88,11 @@ class ProjectController extends WebController
 
     public function projectOverview()
     {
-        $this->checkValidRequest();
+        $validRequest = $this->checkValidRequest();
+            if(!empty($validRequest['error_msg']))
+            {
+                throw new Exception($validRequest['error_msg']);
+            }
 
         try {
             $languages = MasterLanguage::query()->orderBy('name', 'ASC')->get();
@@ -215,16 +230,30 @@ class ProjectController extends WebController
         }
         return $this->return_response;
     }
+
+    // public function validateProjectRoute($project_id,$status='overview')
+    // {
+    //     try
+    //     {   
+    //         $UserProject = UserProject::query()->where('id',$project_id)->first();  
+    //     } catch (Exception $e) {
+    //         return back()->with('error','Something went wrong.');
+    //     }
+    // }
         
     
     public function projectDetails()
     {
         try {
-            $this->checkValidRequest();
+            $validRequest = $this->checkValidRequest();
+            if(!empty($validRequest['error_msg']))
+            {
+                throw new Exception($validRequest['error_msg']);
+            }
 
             if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
             {
-                return back()->with('error','Project Id not found.');
+                throw new Exception('Project Id not found');
             }
             $languages = MasterLanguage::query()->orderBy('name', 'ASC')->get();
             $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
@@ -321,7 +350,11 @@ class ProjectController extends WebController
     public function projectDescription()
     {
         try {
-            $this->checkValidRequest();
+            $validRequest = $this->checkValidRequest();
+            if(!empty($validRequest['error_msg']))
+            {
+                throw new Exception($validRequest['error_msg']);
+            }
 
             if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
             {
@@ -383,7 +416,11 @@ class ProjectController extends WebController
     public function projectGallery()
     {
         try {
-            $this->checkValidRequest();
+            $validRequest = $this->checkValidRequest();
+            if(!empty($validRequest['error_msg']))
+            {
+                throw new Exception($validRequest['error_msg']);
+            }
             if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
             {
                 return back()->with('error','Project Id not found.');
@@ -449,7 +486,11 @@ class ProjectController extends WebController
     public function projectMilestone()
     {        
         try {
-            $this->checkValidRequest();
+            $validRequest = $this->checkValidRequest();
+            if(!empty($validRequest['error_msg']))
+            {
+                throw new Exception($validRequest['error_msg']);
+            }
             if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
             {
                 return back()->with('error','Project Id not found.');
@@ -537,7 +578,11 @@ class ProjectController extends WebController
     public function projectPreview()
     {        
         try {
-            $this->checkValidRequest();
+            $validRequest = $this->checkValidRequest();
+            if(!empty($validRequest['error_msg']))
+            {
+                throw new Exception($validRequest['error_msg']);
+            }
             if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
             {
                 return back()->with('error','Project Id not found.');
@@ -555,7 +600,11 @@ class ProjectController extends WebController
     public function publicView()
     {
         try {
-            $this->checkValidRequest();
+            $validRequest = $this->checkValidRequest();
+            if(!empty($validRequest['error_msg']))
+            {
+                throw new Exception($validRequest['error_msg']);
+            }
             if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
             {
                 return back()->with('error','Project Id not found.');
@@ -568,7 +617,7 @@ class ProjectController extends WebController
             $project_stages = ProjectStage::all();
              
             $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
-            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->get();
+            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->where('status','published')->get();
             $projectData = $projectData->toArray();
             if (empty($projectData)) {
                 return back()->with('error','Invalid request.');
@@ -722,7 +771,11 @@ class ProjectController extends WebController
     public function changeStatus(Request $request)
     {
         try {
-            $this->checkValidRequest();
+            $validRequest = $this->checkValidRequest();
+            if(!empty($validRequest['error_msg']))
+            {
+                throw new Exception($validRequest['error_msg']);
+            }
             $project=UserProject::where('id',$request->id)->first();
             $project->status = $request->status;
             if($project->update())
@@ -738,10 +791,23 @@ class ProjectController extends WebController
         }
     }
 
-    public function projectDelete($id)
+    public function projectDelete()
     {
-        try {
-            $this->checkValidRequest();
+        try 
+        {
+            $validRequest = $this->checkValidRequest();
+            if(!empty($validRequest['error_msg']))
+            {
+                throw new Exception($validRequest['error_msg']);
+            }
+
+            $id = $_REQUEST['id'];
+            $isDeleteValid = $this->validateProjectDeleteRequest($id);
+            if(!empty($isDeleteValid['error_msg']))
+            {
+                throw new Exception($isDeleteValid['error_msg']);
+            }
+
             UserProject::query()->where('id', $id)->delete();
             UserFavouriteProject::query()->where('project_id', $id)->delete();
             ProjectAssociation::query()->where('project_id', $id)->delete();
@@ -755,8 +821,79 @@ class ProjectController extends WebController
             ProjectListProjects::query()->where('project_id', $id)->delete();
             return back()->with("success", "Project deleted successfully");
         } catch (Exception $e) {
-            return back()->with('error', 'Something went wrong.');
+            return back()->with('error', $e->getMessage().'Something went wrong.');
         }
     }
+
+    private function validateProjectDeleteRequest($id)
+    {
+        try 
+        {
+            if(!empty($this->isAdminRequest()['error_msg']))
+            {
+                $this->resetResponse();
+                $projectData =  UserProject::query()->where('id', $id)->first();
+                if($projectData->user_id != auth()->user()->id) 
+                {
+                    throw new Exception('Unauthorized request!');
+                }
+            }
+        } 
+        catch (Exception $e) 
+        {
+            $this->return_response['error_msg'] = $e->getMessage();
+        }
+        return $this->return_response;
+    }
+
+    // public function relativeFilteredProject()
+    // {
+    //     try{
+    //         $id[] = $_REQUEST['id'];
+    //         $validator = Validator::make($id, [
+
+    //             'id' => 'exists:user_projects,id',
+                
+    //         ]);
+    
+    //         if ($validator->fails()) {
+    //             return ['status'=>False,'msg'=>"Something went wrong, Please try again later."];
+    //         }
+    //         $project_data_by_id = UserProject::query()
+    //         ->where('id',$_REQUEST['id'])
+    //         ->with(['projectCountries','projectLanguages','genres','projectCategory','projectLookingFor','projectStage','projectType','user','projectImage'])
+    //         ->first()
+    //         ->toArray();
+    //         echo "<pre>";
+    //         print_r($project_data_by_id);
+    //         die;
+    //         // dd($project_data_by_id);
+            
+    //         $relatedProjects = UserProject::query()
+    //         ->where('status','published')
+    //         ->where(function($query) use($project_data_by_id){
+    //             if (isset($project_data_by_id['project_name'])) { // search name of user
+    //                 $query->where("project_name", "like", "%$request->search%");
+    //             }
+    //         })
+    //         ->where(function($subQuery) use($project_data_by_id['genres'])
+    //         {   
+                
+    //             if (isset($project_data_by_id['genres'])) { // search name of user
+    //                 $subQuery->whereHas('genres', function ($q) use($project_data_by_id['genres']){
+    //                     $q->whereIn('gener_id',$request->geners);
+    //                 });
+    //             }
+            
+            
+    //         })
+    //         ->with(['projectCountries','projectLanguages','genres','projectCategory','projectLookingFor','projectStage','projectType','user','projectImage'])
+    //         // ->where('user_id','!=',auth()->user()->id)
+    //         ->orderByDesc('id')
+    //         ->get();               
+    //     } catch(Exception $e){
+    //     return back()->with('error',$e->getMessage());
+    //     }
+    // }
 
 }

@@ -230,7 +230,7 @@ class UserController extends WebController
             }
             $user->skill = $temp_skill;
 
-            $skills = MasterSkill::query()->get();
+            $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();
             $languages = MasterLanguage::query()->orderBy('name', 'ASC')->get();
             $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
             $state = MasterState::query()->orderBy('name', 'ASC')->get();
@@ -357,9 +357,9 @@ class UserController extends WebController
     public function portfolioCreate(Request $request)
     {
         try {
-            $user = User::query()->find(auth()->user()->id);
+            $prevPortfolio = UserPortfolio::query()->where('user_id',auth()->user()->id)->with(['getPortfolioSkill','getPortfolioLocation'])->get();
             $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
-            $skills = MasterSkill::query()->get();
+            $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();
             $portfolio = $user;
             return view('website.user.profile_portfolio', compact('portfolio', 'country', 'skills'));
         } catch (Exception $e) {
@@ -457,7 +457,7 @@ class UserController extends WebController
             if (is_null($UserPortfolioData)) {
                 return back()->with('This portfolio is not exist');
             } else {
-                $skills = MasterSkill::query()->get();
+                $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();
                 $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
                 $UserPortfolioEdit = UserPortfolio::query()->where('id', $id)->get();
                 $UserPortfolioEdit[0]->video = json_decode($UserPortfolioEdit[0]->video, true);
@@ -481,8 +481,8 @@ class UserController extends WebController
                     ->whereIn('id', $portfolio_locations_ids)
                     ->get()
                     ->toArray();
-
-                return view('website.user.profile_portfolio_edit', compact('UserPortfolioEdit', 'UserPortfolioImages', 'user_portfolio_skill','user_portfolio_location', 'skills', 'country'));
+                $prevPortfolio = UserPortfolio::query()->where('user_id',auth()->user()->id)->with(['getPortfolioSkill','getPortfolioLocation'])->get();
+                return view('website.user.profile_portfolio_edit', compact('UserPortfolioEdit', 'UserPortfolioImages', 'user_portfolio_skill','user_portfolio_location', 'skills', 'country','prevPortfolio'));
             }
         } catch (Exception $e) {
             return back()->with('error', 'Something went wrong.');
@@ -560,7 +560,7 @@ class UserController extends WebController
     }
 
 
-    public function protfolioDelete()
+    public function portfolioDelete()
     {
         try {
             $id = $_REQUEST['id'];
@@ -579,9 +579,8 @@ class UserController extends WebController
     public function experienceCreate(Request $request)
     {
         try {
-            $user = User::query()->find(auth()->user()->id);
-            $experience = $user;
-            return view('website.user.profile_experience');
+            $prevExperience = UserExperience::query()->where('user_id',auth()->user()->id)->get();
+            return view('website.user.profile_experience',compact(['prevExperience']));
         } catch (Exception $e) {
             return back()->with('error', 'Something went wrong.');
         }
@@ -628,11 +627,12 @@ class UserController extends WebController
     public function experienceEdit($id)
     {
         try {
+            $prevExperience = UserExperience::query()->where('user_id',auth()->user()->id)->get();
             $UserExperienceData = UserExperience::query()->where('id', $id)->first();
             if (is_null($UserExperienceData)) {
                 return back()->with('This experience is not exist');
             } else {
-                return view('website.user.profile_experience_edit', compact('UserExperienceData'));
+                return view('website.user.profile_experience_edit', compact(['UserExperienceData','prevExperience']));
             }
         } catch (Exception $e) {
             return back()->with('error', 'Something went wrong.');
@@ -681,9 +681,8 @@ class UserController extends WebController
     public function qualificationCreate(Request $request)
     {
         try {
-            $user = User::query()->find(auth()->user()->id);
-            $qualification = $user;
-            return view('website.user.profile_qualification', compact('qualification'));
+            $prevQualification = UserQualification::query()->where('user_id',auth()->user()->id)->get();
+            return view('website.user.profile_qualification', compact('prevQualification'));
         } catch (Exception $e) {
             return back()->with('error', 'Something went wrong.');
         }
@@ -693,7 +692,7 @@ class UserController extends WebController
     {
         try {
             if (
-                !$request->institue_name && !$request->degree_name && !$request->feild_of_study && !$request->start_year &&
+                !$request->institue_name && !$request->degree_name && !$request->field_of_study && !$request->start_year &&
                 !$request->end_year && !$request->description
             ) {
                 return redirect()->route('profile-private-show');
@@ -704,7 +703,7 @@ class UserController extends WebController
             $qualification->user_id = $user->id;
             $qualification->institue_name = ucFirst($request->institue_name);
             $qualification->degree_name = ucFirst($request->degree_name);
-            $qualification->feild_of_study = $request->feild_of_study;
+            $qualification->field_of_study = $request->field_of_study;
             $qualification->start_year = $request->start_year;
             $qualification->end_year = $request->end_year;
             $qualification->description = ucFirst($request->description);
@@ -728,8 +727,9 @@ class UserController extends WebController
     public function qualificationEdit($id)
     {
         try {
+            $prevQualification = UserQualification::query()->where('user_id',auth()->user()->id)->get();
             $UserQualificationData = UserQualification::query()->where('id', $id)->first();
-            return view('website.user.profile_qualification_edit', compact('UserQualificationData'));
+            return view('website.user.profile_qualification_edit', compact(['UserQualificationData','prevQualification']));
         } catch (Exception $e) {
             return back()->with('error', 'Something went wrong.');
         }
@@ -744,7 +744,7 @@ class UserController extends WebController
             $qualification->user_id = $user->id;
             $qualification->institue_name = ucFirst($request->institue_name);
             $qualification->degree_name = ucFirst($request->degree_name);
-            $qualification->feild_of_study = $request->feild_of_study;
+            $qualification->field_of_study = $request->field_of_study;
             $qualification->start_year = $request->start_year;
             $qualification->end_year = $request->end_year;
             $qualification->description = ucFirst($request->description);

@@ -274,7 +274,7 @@
                                         <div class="icon_container mx-3"><a href="{{ route('qualification-edit', ['id'=>$v->id]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                     </div>
                                     <div class="guide_profile_main_subtext candy-pink mt-2">
-                                        {{$v->degree_name}} | {{$v->feild_of_study}} | {{$v->start_year}} | {{$v->end_year}}
+                                        {{$v->degree_name}} | {{$v->field_of_study}} | {{$v->start_year}} | {{$v->end_year}}
                                     </div>
                                     <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
                                         <p>{{$v->description}}</p>
@@ -360,7 +360,7 @@
     function portfolio_model(id) {
         $("#portfolioModal .modal_content").html('');
         $.ajax({
-            url: "{{ route('protfolio-modal') }}",
+            url: "{{ route('portfolio-modal') }}",
             type: 'POST',
             dataType: 'json',
             data: {

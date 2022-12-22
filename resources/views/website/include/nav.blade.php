@@ -166,15 +166,8 @@
     var countries = $("#list-countries input[type=checkbox]:checked").length
     var language =  $("#list-language input[type=checkbox]:checked").length
     var search = $.trim($('#search-project').val());
-
-    if(!search && gener == 0 && categories  == 0 && lookingFor  == 0 && countries  == 0 && language  == 0 && stages  == 0){
-         e.preventDefault();
-         toastMessage(0,"Please apply filter.");
-         $("#error-toast").toast("show");
-         $("#success-toast").toast("show");
-      }else{
-         $('#filter').submit();
-      }
+    $('#filter').submit();
+      
   
   });
 

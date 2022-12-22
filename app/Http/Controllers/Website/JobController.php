@@ -49,7 +49,7 @@ class JobController extends WebController
     public function create()
     {
         $countries = MasterCountry::query()->get();
-        $skills = MasterSkill::query()->get();
+        $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();
         $workspaces = Workspace::query()->get();
         $employments = MasterEmployement::query()->get();
         if (!isset($_REQUEST['job_id'])) {
@@ -364,7 +364,7 @@ class JobController extends WebController
         $countries = MasterCountry::query()->get();
         $categories = MasterProjectCategory::query()->get();
         $workspaces = Workspace::query()->get();
-        $skills = MasterSkill::query()->get();
+        $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();
         $jobs = UserJob::query()
             ->with(["jobLocation:id,name", "jobSkills:id,name", "favorite", "applied"])
             ->where(function ($q) use ($requests) {
@@ -391,10 +391,6 @@ class JobController extends WebController
                     $q->whereIn("skill_id", $requests["skills"]);
                 }
             })
-           // ->get();
-            // echo "<pre>";
-            // print_r($jobs);
-            // die;
            ->paginate($this->records_limit);
         $notFoundMessage = "No jobs found, please modify your search.";
         return view('website.job.search_result', compact('countries', 'employments', 'skills', 'categories', 'workspaces', 'jobs', 'notFoundMessage'));
