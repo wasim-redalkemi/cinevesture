@@ -231,7 +231,7 @@ class ProjectController extends WebController
         return $this->return_response;
     }
 
-    // public function validateProjectRoute($project_id,$status='overview')
+    // public function validateProjectRoute($project_id,$user_status='overview')
     // {
     //     try
     //     {   
@@ -600,11 +600,11 @@ class ProjectController extends WebController
     public function publicView()
     {
         try {
-            $validRequest = $this->checkValidRequest();
-            if(!empty($validRequest['error_msg']))
-            {
-                throw new Exception($validRequest['error_msg']);
-            }
+            // $validRequest = $this->checkValidRequest();
+            // if(!empty($validRequest['error_msg']))
+            // {
+            //     throw new Exception($validRequest['error_msg']);
+            // }
             if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
             {
                 return back()->with('error','Project Id not found.');
@@ -616,8 +616,17 @@ class ProjectController extends WebController
             $looking_for = MasterLookingFor::all();
             $project_stages = ProjectStage::all();
              
-            $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
-            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->where('status','published')->get();
+            $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->with('isfavouriteProject')->first();
+            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->where(function($q){
+                if(auth()->user()->user_type == 'A'){
+                    $q->where('user_status','!=', 'draft');
+                }
+                else {
+                    $q->where('user_status', 'published')
+                    ->Where('admin_status', 'active');
+                }
+            })
+            ->get();
             $projectData = $projectData->toArray();
             if (empty($projectData)) {
                 return back()->with('error','Invalid request.');
@@ -684,7 +693,7 @@ class ProjectController extends WebController
             $looking_for = MasterLookingFor::all();
             $project_stages = ProjectStage::all();
             $projects = UserProject::query()
-            ->where('status','published')
+            ->where('user_status','published')
             ->where(function($query) use($request){
                 if (isset($request->search)) { // search name of user
                     $query->where("project_name", "like", "%$request->search%");
@@ -777,7 +786,7 @@ class ProjectController extends WebController
                 throw new Exception($validRequest['error_msg']);
             }
             $project=UserProject::where('id',$request->id)->first();
-            $project->status = $request->status;
+            $project->user_status = $request->user_status;
             if($project->update())
             {
                 return redirect()->route('project-list')->with("success", "Project status updated successfully.");
@@ -857,7 +866,7 @@ class ProjectController extends WebController
     //         ]);
     
     //         if ($validator->fails()) {
-    //             return ['status'=>False,'msg'=>"Something went wrong, Please try again later."];
+    //             return ['user_status'=>False,'msg'=>"Something went wrong, Please try again later."];
     //         }
     //         $project_data_by_id = UserProject::query()
     //         ->where('id',$_REQUEST['id'])
@@ -870,7 +879,7 @@ class ProjectController extends WebController
     //         // dd($project_data_by_id);
             
     //         $relatedProjects = UserProject::query()
-    //         ->where('status','published')
+    //         ->where('user_status','published')
     //         ->where(function($query) use($project_data_by_id){
     //             if (isset($project_data_by_id['project_name'])) { // search name of user
     //                 $query->where("project_name", "like", "%$request->search%");

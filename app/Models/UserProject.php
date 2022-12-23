@@ -79,4 +79,7 @@ class UserProject extends Model
     {
         return $this->hasOne(ProjectStage::class,'id','project_stage_id');
     }
+    public function isfavouriteProject(){
+        return $this->hasOne(UserFavouriteProject::class, 'project_id', 'id')->where('user_id',auth()->user()->id);
+    }
 }

@@ -174,7 +174,7 @@ class UserController extends WebController
     {
         try {
             $id=request('id');
-            $user = User::query()->find($id);            
+            $user = User::query()->where('id',$id)->with('isfavouriteProfile')->first();            
             $portfolio = UserPortfolio::query()
                 ->with('getPortfolio')
                 ->where('user_id', $user->id)
@@ -186,7 +186,16 @@ class UserController extends WebController
             $user_country = MasterCountry::query()->where('id', $user->country_id)->first();
             $user_age = AgeRange::query()->where('id', $user->age)->first();
             $user_skills = $this->userSkills($user->id);
-            $UserProject = UserProject::query()->with('projectImage')->where('user_id',$user->id)->where('status','published')->get();
+            $UserProject = UserProject::query()->with('projectImage')->where('user_id',$user->id)->where(function($q){
+                if(auth()->user()->user_type == 'A'){
+                    $q->where('user_status','!=', 'draft');
+                }
+                else {
+                    $q->where('user_status', 'published')
+                    ->Where('admin_status', 'active');
+                }
+            })
+            ->get();
             
             $user_languages = UserLanguage::query()
                 ->with('getLanguages')

@@ -158,7 +158,7 @@
                                     <i class="fa fa-share-alt mx-4 icon-size" aria-hidden="true"></i>
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
                                         
-                                    <div> <i class="fa fa-heart-o icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
+                                    <div> <i class="fa <?php if(isset($UserProject->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
                                     @endif
                                 </div>
                                 {{-- <div class="d-flex">

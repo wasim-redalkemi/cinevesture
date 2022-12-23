@@ -104,7 +104,7 @@
                         </div>
                         <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
                             @if($_REQUEST['id'] != auth()->user()->id )
-                            <div> <i class="fa fa-heart-o icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$user->id}}" aria-hidden="true"></i></div>
+                            <div> <i class="fa <?php if(isset($user->isfavouriteProfile)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$user->id}}" aria-hidden="true"></i></div>
 
                             @endif
                             <?php
