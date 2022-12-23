@@ -116,6 +116,7 @@
                                         <a href="{{route('experience-create')}}"class="cancel_btn mx-3" style="text-decoration:none">Cancel</a>
                                         <input type="hidden" name="flag" value="<?=request('flag')?>">
                                         <button type="button" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save</button>
+                                        <a href="{{route('qualification-skip')}}"class="cancel_btn mx-3" style="text-decoration:none">Skip</a>
                                     </div>
                                 </div>
                             </div>

@@ -137,6 +137,8 @@
                                         <input type="hidden" name="flag" value="<?=request('flag')?>">
                                         {{-- <button type="submit" class="guide_profile_btn mx-3">Save & next</button> --}}
                                         <button type="button" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save & next</button>
+                                        <a href="{{route('experience-skip')}}"class="cancel_btn mx-3" style="text-decoration:none">Skip</a>
+                                        
                                     </div>
                                 </div>
                             </div>

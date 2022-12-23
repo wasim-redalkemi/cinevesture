@@ -104,11 +104,24 @@
                         </div>
                         <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
                             @if($_REQUEST['id'] != auth()->user()->id )
-                            {{-- <i class="fa fa-heart icon-size Aubergine" aria-hidden="true"></i> --}}
-                            <div> <i class="fa fa-heart-o icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$user->id}}" aria-hidden="true"></i></div>
+                            <div> <i class="fa <?php if(isset($user->isfavouriteProfile)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$user->id}}" aria-hidden="true"></i></div>
 
                             @endif
-                            <button class="verified_cmn_btn mx-3"> <i class="fa fa-check-circle hot-pink mx-1" aria-hidden="true"></i> VERIFIED</button>
+                            <?php
+                            $show_verified_btn = true;
+                            if (count($user_endorsement)<15) {
+                                $show_verified_btn = false;
+                            }
+                            
+                            if($show_verified_btn)
+                            {
+                                ?>
+                                    <div>
+                                        <button class="verified_cmn_btn mx-3"> <i class="fa fa-check-circle hot-pink mx-1" aria-hidden="true"></i> VERIFIED</button>
+                                    </div>
+                                <?php
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
@@ -203,7 +216,7 @@
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-5 ">
-                            <div class="guide_profile_main_text mb-2">Meet Name</div>
+                            <div class="guide_profile_main_text mb-2">Introduction Video</div>
                             <div class="playVideoWrap" video-url="{{$user->intro_video_link}}">
                                 <img src="{{$user->intro_video_thumbnail}}" alt="" width="100%">
                             </div>
@@ -217,35 +230,56 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="guide_profile_main_text deep-pink font_18">Portfolio</div>
-                            {{-- <div class="portfolio owl-carousel owl-theme">
-                                @foreach ($portfolio as $k=>$v)
-                                <div class="item">
-                                    <img src="{{ asset('images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}">
-                                    
+                            @if (count($portfolio)>0)
+                                <div class="portfolio owl-carousel">
+                                    @foreach ($portfolio as $k=>$v)
+                                    @php
+                                    $img = '';
+                                    if (!empty($v['get_portfolio'][0]['file_link'])) {
+                                        $img = Storage::url($v['get_portfolio'][0]['file_link']);
+                                    } else {
+                                    $img = asset('images/asset/user-profile.png');
+                                    }
+                                    @endphp
+                                    <div class="item portfolio_item" onclick="portfolio_model({{$v['id']}})">
+                                        <div class="portfolio_item_image">
+                                            <img src="<?php echo $img ?>" class="portfolio_img" width="100%">
+                                        </div>
+                                        <div class="d-flex justify-content-between mt-2">
+                                            <div class="organisation_cmn_text">{{$v['project_title']}}</div>
+                                            <div class="icon_container"> <a href="{{ route('portfolio-edit', ['id'=>$v['id']]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
+                                        </div>
+                                    </div>
+                                    @endforeach
                                 </div>
-                                @endforeach
-                            </div> --}}
-                            <div class="portfolio owl-carousel">
-                                @if (count($portfolio)>0)
-                                @foreach ($portfolio as $k=>$v)
-                                @php
-                                $img = '';
-                                if(isset($v['get_portfolio'][0]['file_link']))
-                                {
-                                $img = Storage::url($v['get_portfolio'][0]['file_link']);
-                                }
-                                @endphp
-                                
-                                @endforeach
                                 <div class="clearfix"></div>
-                                @else
+                            @else
                                 <span><b>-</b></span>
-                                @endif
+                            @endif
+                            <!-- modal  -->
+                            <div>
+                                <div class="modal fade" id="portfolioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content croper_modal">
+                                            <div class="modal-body">
+                                                <div class="float-end">
+                                                    <button type="button" class="close normal_btn" data-dismiss="modal" aria-label="Close">
+                                                        <img src="{{ asset('images/asset/cros-modal-Icon.svg') }}" />
+                                                    </button>
+                                                </div>
+                                                <div class="modal_content">
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+           
 
             <div class="guide_profile_subsection">
                 <div class="container">
@@ -256,7 +290,6 @@
                             <div class="project owl-carousel owl-theme">
                                 @foreach($UserProject as $k=>$v)                                
                                 <div class="item">
-                                    {{-- <img src="@php echo (!empty($v->projectImage->file_link)?asset('storage/'.$v->projectImage->file_link): config("constants.PROJECT_NO_IMAGE")) @endphp" width="100%" height="100%"  /> --}}
                                     <a href = "{{route('public-view',['id'=>$v->id])}}">
                                     <img src="@php echo (!empty($v->projectImage->file_link)?asset('storage/'.$v->projectImage->file_link): asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1 (1).png')) @endphp" width="100%" height="100%"  />
                                     <div class="guide_profile_main_subtext">@php echo (!empty($v->project_name)?$v->project_name: '-') @endphp</div>
@@ -548,10 +581,29 @@
                 
             }
         });
-
         });
 
-
+        $(".portfolio.owl-carousel").owlCarousel({
+        center: true,
+        autoPlay: 1000,
+        autoplay: true,
+        // loop: true,
+        nav: true,
+        margin: 20,
+        center: false,
+        // items: 4,
+        responsive: {
+            480: {
+                items: 1
+            },
+            768: {
+                items: 2
+            },
+            1024: {
+                items: 4
+            }
+        },
+    });
 
         $(".project.owl-carousel").owlCarousel({
         center: true,
@@ -563,40 +615,42 @@
         center: false,
         // items: 4,
         responsive: {
-            // 480: {
-            //     items: 1
-            // },
-            // 768: {
-            //     items: 2
-            // },
-            // 1024: {
-            //     items: 4
-            // }
-        },
-        });
-        
-
-        $(".portfolio.owl-carousel").owlCarousel({
-            center: true,
-            autoPlay: 3000,
-            autoplay: true,
-            loop: false,
-            nav: true,
-            center: false,
-            margin: 10,
-            items: 5,
-            responsive: {
-                480: {
-                    items: 3
-                },
-                768: {
-                    items: 4
-                },
-                1024: {
-                    items: 5
-                }
+            480: {
+                items: 1
             },
+            768: {
+                items: 2
+            },
+            1024: {
+                items: 4
+            }
+        },
+    });
+
+    function portfolio_model(id) {
+        $("#portfolioModal .modal_content").html('');
+        $.ajax({
+            url: "{{ route('portfolio-modal') }}",
+            type: 'POST',
+            dataType: 'json',
+            data: {
+                portfolioId: id,
+                "_token": "{{ csrf_token() }}"
+            },
+            success: function(response) {
+                console.log(response)
+                $("#portfolioModal .modal_content").html(response);
+                // toastMessage(response.status, response.msg);
+                $('#portfolioModal').modal('show');
+                // $('.modal-backdrop').remove();
+            },
+            error: function(response, status, error) {
+                console.log(response);
+                console.log(status);
+                console.log(error);
+            }
         });
+    }
 
         </script>
     @endpush

@@ -89,7 +89,7 @@
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>Location</label>
-                                        <select name="countries" class="@error('countries') is-invalid @enderror" required id="lang">
+                                        <select name="countries" class="@error('countries') is-invalid @enderror" id="lang">
                                             <option value="">Location</option>
                                             @foreach($countries as $country)
                                             <option @if(!empty($userJobData['job_location']))

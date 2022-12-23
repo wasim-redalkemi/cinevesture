@@ -85,7 +85,7 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                     <div class="col-md-2"></div>
                                     <div class="col-md-5 ">
-                                        <div class="guide_profile_main_text mb-2">Meet Name</div>
+                                        <div class="guide_profile_main_text mb-2">Introduction Video</div>
                                         <div>
                                             <iframe width=100% height="300" src="{{$applicant->intro_video_link}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                         </div>

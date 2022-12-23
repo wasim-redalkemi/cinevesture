@@ -107,33 +107,34 @@
                 <div class="guide_profile_subsection">
                     <div class="container">
                         <div class="row">
-                            <div class="guide_profile_subsection">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <div class="contact-page-text deep-pink">
-                                                About
-                                            </div>
-                                            <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
-                                                <p>
-                                                    @if (!empty($UserOrganisation->about))
-                                                    {{$UserOrganisation->about }}
-                                                    @else
-                                                    <span><b>-</b></span>
-                                                    @endif
-                                                </p>
-                                            </div>
-                                        </div>
-                                        {{-- <div class="col-md-2"></div> --}}
-                                        <div class="col-md-5 ">
-                                            <div class="guide_profile_main_text mb-2">Meet Name</div>
-                                            <div class="playVideoWrap" video-url="{{ (isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:''; }}">
-                                                <img src="{{ (isset($UserOrganisation->intro_video_thumbnail))?$UserOrganisation->intro_video_thumbnail:''; }}" width="100%" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="contact-page-text deep-pink">
+                                    About
+                                </div>
+                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
+                                    <p>
+                                        @if (!empty($UserOrganisation->about))
+                                        {{$UserOrganisation->about }}
+                                        @else
+                                        <span><b>-</b></span>
+                                        @endif
+                                    </p>
                                 </div>
                             </div>
+                            {{-- <div class="col-md-2"></div> --}}
+                            <div class="col-md-6">
+                                <div class="guide_profile_main_text deep-pink mb-2">Introduction Video</div>
+                                <div class="playVideoWrap" video-url="{{ (isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:''; }}">
+                                    <img src="{{ (isset($UserOrganisation->intro_video_thumbnail))?$UserOrganisation->intro_video_thumbnail:''; }}" width="100%" alt="">
+                                </div>
+                            </div>
+                            {{-- <div class="guide_profile_subsection">
+                                <div class="container">
+                                    <div class="row">
+                                     
+                                    </div>
+                                </div>
+                            </div> --}}
                             {{-- <div class="col-md-12">
                                 <div class="guide_profile_main_text deep-pink font_18">
                                     <h1 class="">About</h1>
