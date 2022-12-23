@@ -156,7 +156,7 @@ class JobController extends WebController
             $job->user_id = auth()->user()->id;
             $job = $this->setJobData($job, $request);
             $this->storeJobMetas($request,$job->id,false);
-            $message = ($job->save_type == 'publish' ? 'Job published successfully.' : 'A draft of your job was successfully saved.');
+            $message = ($job->save_type == 'published' ? 'Job published successfully.' : 'A draft of your job was successfully saved.');
             return ['status' => 1, 'msg' => $message];
         } catch (Exception $e) {
             return ['status' => 0, 'msg' => $e->getMessage()];

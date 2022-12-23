@@ -31,7 +31,7 @@
                                             } ?>" class="upload_preview for_show">
 
                                 <div for="file-input" class="d-none">
-                                    <input type="file" name="logo" class="@error('logo') is-invalid @enderror file_element" accept=".jpg,.jpeg,.png">
+                                    <input type="file" name="logo" class="@error('logo') is-invalid @enderror file_element" accept=".jpg,.jpeg,.png" required>
                                     @error('logo')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -103,7 +103,7 @@
                             <div class="col-md-6">
                                 <div class="profile_input select2forError">
                                     <label>Services <span style="color:red">*</span></label>
-                                    <select name="service_id[]" class="outline js-select2 @error('service_id') is-invalid @enderror" id="" multiple autofocus>
+                                    <select name="service_id[]" class="outline js-select2 @error('service_id') is-invalid @enderror" id="" multiple autofocus required>
                                         @foreach ($organisationService as $k=>$v)
                                         <option value="{{ $v->id }}" @if(isset($UserOrganisation->organizationServices) && in_array($v->id, $UserOrganisation->organizationServices))selected @endif>{{ $v->name }}</option>
                                         @endforeach
@@ -168,7 +168,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input select2forError">
                                     <label> Languages Spoken <span style="color:red">*</span></label>
-                                    <select name="language_id[]" class="outline js-select2 @error('language_id') is-invalid @enderror" id="lang" multiple autofocus>
+                                    <select name="language_id[]" class="outline js-select2 @error('language_id') is-invalid @enderror" id="lang" multiple autofocus required>
                                         @foreach ($languages as $k=>$v)
                                         <option value="{{ $v->id }}" @if(isset($UserOrganisation->organizationLanguages )&&(in_array($v->id, $UserOrganisation->organizationLanguages)))selected @endif>{{ $v->name }}</option>
                                         @endforeach
@@ -222,7 +222,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Introduction Video</label>
-                                    <input type="url" class="outline form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="{{(isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                    <input type="url" class="outline form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="{{(isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:'' }}" aria-label="Username" aria-describedby="basic-addon1" autofocus>
                                     @error('intro_video_link')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
