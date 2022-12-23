@@ -208,7 +208,7 @@
     escapeMarkup: function(markup) {
       return markup;
     },
-      tags: true
+      
   });
 
     var ProjectMilestones = function () {
@@ -405,7 +405,7 @@
     escapeMarkup: function(markup) {
       return markup;
     },
-        tags: true
+        
     });
 </script>
 @endsection --}}

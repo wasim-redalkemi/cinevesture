@@ -16,12 +16,14 @@
             </div>
             
             <div class="col-md-9">
-                <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
-                    <div class="profile_text">
-                        <h1>Saved Jobs</h1>
+                <div class="profile_job_wrap">
+                    <div class="white_bg_wraper profile_wraper_padding mt-md-0 mt-4">
+                        <div class="profile_text">
+                            <h1>Saved Jobs</h1>
+                        </div>
                     </div>
+                    @include('website.components.jobtile')
                 </div>
-                @include('website.components.jobtile')
             </div>            
         </div>
         <!-- <div class="public_section mb-4">

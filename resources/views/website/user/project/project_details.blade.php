@@ -241,7 +241,7 @@ $(document).ready(function() {
     escapeMarkup: function(markup) {
       return markup;
     },
-      tags: true
+      
   });
 
   var ProjectDetails = function () {

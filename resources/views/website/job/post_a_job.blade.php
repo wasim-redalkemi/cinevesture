@@ -231,14 +231,6 @@ $('.select_limit').change(function(event) {
     escapeMarkup: function(markup) {
       return markup;
     },
-        language: {
-      noResults: function() {
-        return '<button class="no_results_btn">No Result Found</a>';
-      },
-    },
-    escapeMarkup: function(markup) {
-      return markup;
-    },
        // maximumSelectionSize: 1
     });
     $(".action").on('click', function(e) {        

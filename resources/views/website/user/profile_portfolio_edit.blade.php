@@ -47,12 +47,14 @@
                                 <div class="col-md-12">
                                     <div class="profile_input">
                                         <label>Description</label>
+                                        <div class="form_elem">
                                     <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" text-length = "600" maxlength="600" name="description" aria-label="With textarea"><?php if(isset($UserPortfolioEdit[0]->description)){ echo($UserPortfolioEdit[0]->description); }?></textarea>
                                     @error('description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                        </div>
                                     </div>
                                 </div>
                             </div>                        
