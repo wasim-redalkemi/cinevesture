@@ -108,9 +108,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="guide_profile_subsection">
+                        <div class="guide_profile_subsection pb-4">
                             <div class="guide_profile_main_text mt-3">Job Description</div>
-                            <div class="profile_input">
+                            <div class="profile_input form_elem">
                                 <textarea class="form-control controlTextLength" text-length="1500" maxlength="1500" name="description" required aria-label="With textarea" placeholder="Your answer here">@if (!empty($userJobData['description'])) {{$userJobData['description']}} @endif</textarea>
                             </div>
                         </div>
@@ -221,14 +221,6 @@ $('.select_limit').change(function(event) {
         closeOnSelect: false,
         placeholder: "Skills",
         allowClear: true,
-        language: {
-      noResults: function() {
-        return '<button class="no_results_btn">No Result Found</a>';
-      },
-    },
-    escapeMarkup: function(markup) {
-      return markup;
-    },
         language: {
       noResults: function() {
         return '<button class="no_results_btn">No Result Found</a>';

@@ -28,10 +28,11 @@
                             <div class="upload_img_container">
                                 <img src="<?php if (!empty($UserOrganisation->logo)) {
                                                 echo Storage::url($UserOrganisation->logo);
-                                            } ?>" class="upload_preview for_show">
+                                            } ?>" class="upload_preview for_show croperImg">
 
                                 <div for="file-input" class="d-none">
-                                    <input type="file" name="logo" class="@error('logo') is-invalid @enderror file_element" accept=".jpg,.jpeg,.png">
+                                    <input type="file" name="logo" class="@error('logo') is-invalid @enderror file_element image" accept=".jpg,.jpeg,.png">
+                                    <input name="croppedOrgImg" id="croppedOrgImg" type="hidden">
                                     @error('logo')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -50,6 +51,32 @@
                                     </div>
                                     <div class="pointer search-head-subtext deep-pink delete_image">
                                         Delete
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content croper_modal">
+                                    <div class="modal-header py-1">
+                                        <h6 class="modal-title tile_text" id="modalLabel"> Image Cropper</h6>
+                                        <div class="d-flex jutify-content-center">
+                                            <button type="button" class="mx-2 btn-danger" id="crop-cancel" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                            <button type="button" class="btn-success" id="crop"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="modal-body overflow-auto">
+                                        <div class="container">
+                                            <div class="row">
+                                                <!-- <div class="col-md-1"></div> -->
+                                                <div class="col-md-12">
+                                                    <div class="cropperWrap">
+                                                        <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="col-md-1"></div> -->
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +122,7 @@
                             <div class="col-md-12">
                                 <div class="profile_input text_field">
                                     <label>About <span style="color:red">*</span></label>
-                                    <textarea class="form-control controlTextLength" text-length="600" id="" name="about" maxlength="600" aria-label="With textarea" required autofocus>{{(isset($UserOrganisation->about))?$UserOrganisation->about:'' }}</textarea>
+                                 <div class="form_elem"> <textarea class="form-control controlTextLength" text-length="600" id="" name="about" maxlength="600" aria-label="With textarea" required autofocus>{{(isset($UserOrganisation->about))?$UserOrganisation->about:'' }}</textarea></div>  
                                 </div>
                             </div>
                         </div>
@@ -344,21 +371,171 @@
         $('.for_hide').css('display', 'block');
         $('.for_show').css('display', 'none');
         $('.open_file_explorer').click(function(e) {
+            // $(this).parents('.custom_file_explorer').find('.file_element').click();
+            $(this).parents('.custom_file_explorer').find('.file_element').val("");
             $(this).parents('.custom_file_explorer').find('.file_element').click();
         });
 
         $('.file_element').change(function() {
-            var output = $(this).parents('.custom_file_explorer').find('.upload_preview');
-            const file = this.files;
-            var reader = new FileReader();
-            reader.onload = function() {
-                output.attr('src', reader.result);
-            };
-            reader.readAsDataURL(file[0]);
-            $('.for_hide').css('display', 'none');
-            $('.for_show').css('display', 'block');
+            // var output = $(this).parents('.custom_file_explorer').find('.upload_preview');
+            // const file = this.files;
+            // var reader = new FileReader();
+            // reader.onload = function() {
+            //     output.attr('src', reader.result);
+            // };
+            // reader.readAsDataURL(file[0]);
+            // $('.for_hide').css('display', 'none');
+            // $('.for_show').css('display', 'block');
         });
     });
+
+    croperImg = document.querySelector('.croperImg'),
+    finalImage = document.querySelector('.finalImage'),
+
+    function validateSize(input) {
+        const fileSize = input.files[0].size / 1024 / 1024; // in MiB
+        if (fileSize > 10) {
+            alert('The document may not be greater than 10 MB');
+            $('#documents').val(''); //for clearing with Jquery
+        }
+    }
+    let result = document.querySelector('.result'),
+
+    formData = new FormData()
+    var base64data = null;
+    var $modal = $('#modal');
+    var image = document.getElementById('image');
+    var cropper;
+
+    $("body").on("change", ".image", function(e) {
+       var  files = e.target.files;
+        // alert(files)
+        var done = function(url) {
+            image.src = url;
+            $modal.modal('show');
+        };
+        var reader;
+        var file;
+        var url;
+
+        if (files && files.length > 0) {
+            file = files[0];
+            // console.log(file, "file 472");
+
+            var file = this.files[0];
+            var fileType = file["type"];
+            var validImageTypes = ["image/gif", "image/jpeg", "image/png"];
+            if ($.inArray(fileType, validImageTypes) < 0) {
+                formData.append("document", file)
+            } else {
+                if (URL) {
+                    done(URL.createObjectURL(file));
+                } else if (FileReader) {
+                    reader = new FileReader();
+                    reader.onload = function(e) {
+                        done(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            }
+
+        }
+    });
+
+    $modal.on('shown.bs.modal', function() {
+
+
+     cropper = new Cropper(image, {
+    dragMode: 'move',
+    autoCropArea: 0.65,
+    restore: false,
+    guides: false,
+    center: true,
+    highlight: false,
+    cropBoxMovable: true,
+    cropBoxResizable: false,
+    toggleDragModeOnDblclick: false,
+    data:{ //define cropbox size
+      width: 300,
+      height:  300,
+    },
+  });
+    }).on('hidden.bs.modal', function() {
+        cropper.destroy();
+        cropper = null;
+    });
+
+    function dataURLtoFile(dataurl, filename) {
+        var arr = dataurl.split(','),
+            mime = arr[0].match(/:(.*?);/)[1],
+            bstr = atob(arr[1]),
+            bstr = atob(arr[1]),
+            n = bstr.length,
+            u8arr = new Uint8Array(n);
+
+        while (n--) {
+            u8arr[n] = bstr.charCodeAt(n);
+        }
+
+        return new File([u8arr], filename, {
+            type: mime
+        });
+    }
+
+    $("#crop").click(function() {
+        canvas = cropper.getCroppedCanvas({
+            width: 160,
+            height: 160,
+        });
+
+        canvas.toBlob(function(blob) {
+            url = URL.createObjectURL(blob);
+            // console.log(url, "url");
+            var reader = new FileReader();
+            reader.readAsDataURL(blob);
+            reader.onloadend = function() {
+                base64data = reader.result;
+                var file = dataURLtoFile(base64data, 'profile_img.png');
+                croperImg.src = base64data;
+                $("#croppedOrgImg").val(base64data);
+                image.src = file;
+                formData.append("document", file)
+                // console.log(formData.append("document", file), "formData.append");
+
+                $('.for_hide').css('display', 'none');
+                $('.for_show').css('display', 'block');
+
+                $modal.modal('hide');
+            }
+        });
+    })
+
+    $('#close-cropper').on('click', function() {
+        $modal.modal('hide');
+    })
+    $('#chechbox').on('click', function() {
+        // $('date_of_exp').toggle();
+        $modal.modal('hide');
+    })
+
+
+    $('#crop-cancel').on('click', function() {
+        $modal.modal('hide');
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     $(".js-select2").select2({
         closeOnSelect: false,

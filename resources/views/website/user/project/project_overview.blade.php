@@ -184,7 +184,6 @@
     escapeMarkup: function(markup) {
       return markup;
     },
-      tags: true
   });
 </script>
 @endpush
@@ -203,7 +202,6 @@
     escapeMarkup: function(markup) {
       return markup;
     },
-        tags: true
     });
 </script>
 @endsection --}}

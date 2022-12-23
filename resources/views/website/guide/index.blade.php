@@ -128,7 +128,7 @@
     escapeMarkup: function(markup) {
       return markup;
     },
-      tags: true
+      
   });
   $(".js-select2").select2({
         closeOnSelect: false,

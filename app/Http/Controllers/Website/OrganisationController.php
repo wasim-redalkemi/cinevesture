@@ -19,6 +19,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
 
 class OrganisationController extends WebController
 {
@@ -82,7 +83,7 @@ class OrganisationController extends WebController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(OrganisationRequest $request)
+    public function store(Request $request)
     {
         try {
             $video_url = [];
@@ -130,17 +131,54 @@ class OrganisationController extends WebController
             }
 
 
-            if ($request->hasFile('logo')) {
+            // if ($request->hasFile('logo')) {
 
-                $file = $request->file('logo');
-                $originalFile = $file->getClientOriginalName();
-                $fileExt = pathinfo($originalFile, PATHINFO_EXTENSION);
-                $fileName = pathinfo($originalFile, PATHINFO_FILENAME);
+            //     $file = $request->file('logo');
+            //     $originalFile = $file->getClientOriginalName();
+            //     $fileExt = pathinfo($originalFile, PATHINFO_EXTENSION);
+            //     $fileName = pathinfo($originalFile, PATHINFO_FILENAME);
+            //     $nameStr = date('_YmdHis');
+            //     $newName = $fileName . $nameStr . '.' . $fileExt;
+            //     $locationPath  = "organisation";
+            //     $uploadFile = $this->uploadFile($locationPath, $file, $newName);
+            //     $UserOrganisation->logo = $uploadFile;
+            // }
+           
+
+            if ($request->croppedOrgImg) {
+
+
+                $image_64 = $request->croppedOrgImg; //your base64 encoded data
+
+                $extension = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];   // .jpg .png .pdf
+              
+                $replace = substr($image_64, 0, strpos($image_64, ',')+1); 
+              
+              // find substring fro replace here eg: data:image/png;base64,
+              
+               $image = str_replace($replace, '', $image_64); 
+              
+               $image = str_replace(' ', '+', $image); 
+              
+               $fileName = Str::random(10).'.'.$extension;
+                $locationPath  = "user/";
+                
                 $nameStr = date('_YmdHis');
-                $newName = $fileName . $nameStr . '.' . $fileExt;
-                $locationPath  = "organisation";
-                $uploadFile = $this->uploadFile($locationPath, $file, $newName);
-                $UserOrganisation->logo = $uploadFile;
+                $newName = $nameStr .  $fileName ;
+                $path = $this->uploadFile($locationPath,base64_decode($image), $newName);
+
+                // $file = $request->file('croppedImg');
+                // $originalFile = $file->getClientOriginalName();
+                // $fileExt = pathinfo($originalFile, PATHINFO_EXTENSION);
+
+                // $fileName = pathinfo($originalFile, PATHINFO_FILENAME);
+                // $nameStr = date('_YmdHis');
+                // $newName = $fileName . $nameStr . '.' . $fileExt;
+                // $locationPath  = "user";
+                // $uploadFile = $this->uploadFile($locationPath, $file, $newName);
+                // $user->profile_image = $uploadFile;
+                $UserOrganisation->logo = $locationPath.$newName;
+
             }
             if ($UserOrganisation->save()) {
                 if (isset($request->service_id)) {
