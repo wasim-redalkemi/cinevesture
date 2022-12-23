@@ -35,8 +35,12 @@
 
                         @endif
                         <div class="d-flex align-items-center justify-content-between">
-                            <div class="movie_name_text">{{ !empty($v['projects']['project_name'])? $v['projects']['project_name'] : '-' }} </div>
-                            <i class="fa fa fa-heart aubergine icon-size" aria-hidden="true"></i>
+                            <a href="{{route('public-view',['id'=>$v['projects']['id']])}}" style="outline: none; text-decoration:none">
+                                <div class="movie_name_text">{{ !empty($v['projects']['project_name'])? $v['projects']['project_name'] : '-' }} </div>
+                            </a>
+                            <div>
+                                <i class="fa <?php if(isset($v['projects']['id'])){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-project" style="cursor: pointer;" data-id="<?php if(isset($v['projects']['id'])){echo $v['projects']['id'];} ?>" aria-hidden="true"></i>
+                            </div>
                         </div>                                       
                     </div>                    
                     @endforeach
@@ -72,10 +76,12 @@
                         <div class="col-md-10">
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex align-items-center">
-                                    <span class="guide_profile_main_text"> {{ !empty($v['profiles']['name'])? ucFirst($v['profiles']['name']) : '-' }}</span>
+                                    <a href="{{route('profile-public-show',['id'=>$v['profiles']['id']])}}" style="outline: none; text-decoration:none">
+                                        <span class="guide_profile_main_text"> {{ !empty($v['profiles']['name'])? ucFirst($v['profiles']['name']) : '-' }}</span>
+                                    </a>
                                     <button class="verified_cmn_btn mx-3"> <i class="fa fa-check-circle hot-pink mx-1" aria-hidden="true"></i> VERIFIED</button>
                                 </div>
-                                <div class="pointer"><i class="fa fa fa-heart aubergine icon-size" aria-hidden="true"></i></div>
+                                <div> <i class="fa <?php if(isset($v['profiles']['id'])){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$v['profiles']['id']}}" aria-hidden="true"></i></div>
                             </div>
                             <div class="posted_job_header">
                                 {{ !empty($v['profiles']['job_title'])? ucFirst($v['profiles']['job_title']) : '-' }}
@@ -113,3 +119,95 @@
 @section('footer')
 @include('website.include.footer')
 @endsection
+
+@push('scripts')
+        <script type="text/javascript">
+        // $(document).ready(function()
+        // {
+            $('.like-profile').on('click', function(e) {
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                var profile_id = $(this).attr('data-id');
+                var classList = $(this).attr('class').split(/\s+/);
+                var element = $(this);
+                $.ajax({
+                    type: 'post',
+                    data: {'id':profile_id},
+                    url: "{{route('favourite-update')}}",
+                    success: function(resp) {
+                        if (resp.status) {
+                            for (var i = 0; i < classList.length; i++) {
+                                if (classList[i] == 'fa-heart-o') {
+                                    element.removeClass('fa-heart-o');
+                                    element.addClass('fa-heart')
+                                    toastMessage("success", resp.msg);
+                                    break;
+                                }
+                                if(classList[i] == 'fa-heart')
+                                {
+                                    element.removeClass('fa-heart');
+                                    element.addClass('fa-heart-o');
+                                    toastMessage("error", resp.msg);
+
+                                    break;
+                                }
+                            }
+                        } else {
+
+                        }
+                    },
+                    error: function(error) {
+                        
+                    }
+                });
+            });
+
+            $('.like-project').on('click', function(e) {
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                var project_id = $(this).attr('data-id');
+                var classList = $(this).attr('class').split(/\s+/);
+                var element = $(this);
+                $.ajax({
+                    type: 'post',
+                    data: {'id':project_id},
+                    url: "{{route('project-like')}}",
+                    success: function(resp) {
+                        if (resp.status) {
+                            for (var i = 0; i < classList.length; i++) {
+                                if (classList[i] == 'fa-heart-o') {
+                                    element.removeClass('fa-heart-o');
+                                    element.addClass('fa-heart')
+                                    toastMessage("success", resp.msg);
+                                    break;
+                                }
+                                if(classList[i] == 'fa-heart')
+                                {
+                                    element.removeClass('fa-heart');
+                                    element.addClass('fa-heart-o');
+                                    toastMessage("error", resp.msg);
+
+                                    break;
+                                }
+
+                            }
+                        } else {
+
+                        }
+                    },
+                    error: function(error) {
+                        
+                    }
+                });
+            });
+        // });
+        </script>
+    @endpush

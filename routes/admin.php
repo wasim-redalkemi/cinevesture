@@ -68,7 +68,7 @@ Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
     Route::get('logout', [AuthController::class, 'logout'])->name('admin.logout');
     Route::get('project/list', [AdminProjectController::class, 'index'])->name('admin-project-list');
     Route::get('project-favorite', [AdminProjectController::class, 'markFavorite'])->name('project-list-favorite');
-    Route::get('project-Recommended', [AdminProjectController::class, 'markRecommended'])->name('project-list-recommended');
+    Route::get('project-verified', [AdminProjectController::class, 'markVerified'])->name('project-list-verified');
     Route::get('project-status', [AdminProjectController::class, 'changeStatus'])->name('project-list-status'); 
     Route::get('category-update-view', [AdminProjectController::class, 'categoryEdit'])->name('category.update-view');
     Route::post('category-update', [AdminProjectController::class, 'categoryUpdate'])->name('category.update');

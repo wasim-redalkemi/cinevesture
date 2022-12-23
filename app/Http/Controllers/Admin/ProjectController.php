@@ -50,12 +50,13 @@ class ProjectController extends AdminController
                     if (isset($request->favorited)) {
                         $q->where("favorited",$request->favorited);
                     }
-                    if (isset($request->Recommended_badge)) {
-                        $q->where("Recommended_badge",$request->Recommended_badge);
+                    if (isset($request->project_verified)) {
+                        $q->where("project_verified",$request->project_verified);
                     }
                     if (isset($request->search)) {
                         $q->where("project_name","like","%$request->search%");
                     }
+                    $q->where("user_status","published");
             })
             ->paginate($this->records_limit);
                 return view('admin.project.list',compact('projects','categories','genres'));
@@ -68,62 +69,48 @@ class ProjectController extends AdminController
     }
     public function markFavorite(Request $request)
     {
-        try {
-        $fav=($request->s);
-            
+        try 
+        {
             $project=UserProject::where('id',$request->p)->first();
             $project->favorited = $request->s;
             $project->save();
-            if($fav==0){
-                Session::flash('response', ['text'=>'Unfavorite update successfully!','type'=>'success']);
-            }else{
-                Session::flash('response', ['text'=>'Favorite update sucessfully','type'=>'success']);
-            }
-            return back();
+            Session::flash('response', ['text'=>'Favorite update sucessfully','type'=>'success']);
         } 
         catch (Exception $e)
         {
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
-            return back();
         }
+        return back();
     }
-    public function markRecommended(Request $request)
+    public function markVerified(Request $request)
     {
-        try {
-            
-            $rec=($request->s);
+        try 
+        {
             $project=UserProject::where('id',$request->p)->first();
-            $project->Recommended_badge = $request->s;
+            $project->project_verified = $request->s;
             $project->save();
-            if($rec==0){
-                Session::flash('response', ['text'=>'Unrecommend update sucessfully','type'=>'success']);
-                }else{
-                    Session::flash('response', ['text'=>'Recommend update sucessfully','type'=>'success']);
-                }
-            return back();
+            Session::flash('response', ['text'=>'Verified update sucessfully','type'=>'success']);
         } 
         catch (Exception $e)
         {
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
-            return back();
         }
+        return back();
     }
     public function changeStatus(Request $request)
     {
-        try {
-            
-        
-            $project=UserProject::where('id',$request->pId)->first();
-            $project->project_verified = $request->status;
+        try 
+        {
+            $project=UserProject::where('id',$request->id)->first();
+            $project->admin_status = $request->status;
             $project->save();
             Session::flash('response', ['text'=>'Status update sucessfully','type'=>'success']);
-            return back();
         } 
         catch (Exception $e)
         {
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
-            return back();
         }
+        return back();
     }
 
     /**

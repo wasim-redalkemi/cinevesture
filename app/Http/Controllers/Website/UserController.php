@@ -174,7 +174,7 @@ class UserController extends WebController
     {
         try {
             $id=request('id');
-            $user = User::query()->find($id);            
+            $user = User::query()->where('id',$id)->with('isfavouriteProfile')->first();            
             $portfolio = UserPortfolio::query()
                 ->with('getPortfolio')
                 ->where('user_id', $user->id)
@@ -186,7 +186,16 @@ class UserController extends WebController
             $user_country = MasterCountry::query()->where('id', $user->country_id)->first();
             $user_age = AgeRange::query()->where('id', $user->age)->first();
             $user_skills = $this->userSkills($user->id);
-            $UserProject = UserProject::query()->with('projectImage')->where('user_id',$user->id)->where('status','published')->get();
+            $UserProject = UserProject::query()->with('projectImage')->where('user_id',$user->id)->where(function($q){
+                if(auth()->user()->user_type == 'A'){
+                    $q->where('user_status','!=', 'draft');
+                }
+                else {
+                    $q->where('user_status', 'published')
+                    ->Where('admin_status', 'active');
+                }
+            })
+            ->get();
             
             $user_languages = UserLanguage::query()
                 ->with('getLanguages')
@@ -196,7 +205,6 @@ class UserController extends WebController
             // Endorsement
             $user_endorsement = Endorsement::query()->with('endorsementCreater')->where('to',$user->id)->where('status','1')
                                 ->orderByDesc('id')->limit(5)->get();
-                                // dd($user_endorsement);
                                
             return view('website.user.profile_public_view', compact(['user', 'portfolio', 'experience', 'qualification', 'user_country', 'user_age', 'user_skills', 'user_languages','user_endorsement', 'UserProject']));
         } catch (Exception $e) {
@@ -360,7 +368,7 @@ class UserController extends WebController
             $prevPortfolio = UserPortfolio::query()->where('user_id',auth()->user()->id)->with(['getPortfolioSkill','getPortfolioLocation'])->get();
             $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
             $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();
-            $portfolio = $user;
+            $portfolio = User::query()->where('id',auth()->user()->id)->first();
             return view('website.user.profile_portfolio', compact('portfolio', 'country', 'skills'));
         } catch (Exception $e) {
             return back()->with('error', 'Something went wrong.');
@@ -572,7 +580,16 @@ class UserController extends WebController
             return back()->with('error', 'Something went wrong.');
         }
     }
-    
+
+    public function portfolioSkip()
+    {
+        try {
+            return redirect()->route('experience-create');
+
+        } catch (Exception $e) {
+            return back()->with('error', 'Something went wrong.');
+        }
+    }    
 
     // User profile experience
 
@@ -676,6 +693,16 @@ class UserController extends WebController
         }
     }
 
+    public function experienceSkip()
+    {
+        try {
+            return redirect()->route('qualification-create');
+
+        } catch (Exception $e) {
+            return back()->with('error', 'Something went wrong.');
+        }
+    }    
+
     // User profile qualification
 
     public function qualificationCreate(Request $request)
@@ -766,6 +793,15 @@ class UserController extends WebController
         try {
             $id = $_REQUEST['id'];
             UserQualification::query()->where('id', $id)->delete();
+            return redirect(route('profile-private-show'));
+        } catch (Exception $e) {
+            return back()->with('error', 'Something went wrong.');
+        }
+    }
+
+    public function qualificationSkip()
+    {
+        try {
             return redirect(route('profile-private-show'));
         } catch (Exception $e) {
             return back()->with('error', 'Something went wrong.');

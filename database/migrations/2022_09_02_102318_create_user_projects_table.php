@@ -19,8 +19,8 @@ class CreateUserProjectsTable extends Migration
             $table->enum('project_step',['0','1','2','3','4','5'])->default('0');
             $table->enum('project_verified',['0','1'])->default('0');
             $table->enum('favorited',['0','1'])->default('0');
-            $table->enum('Recommended_badge',['0','1'])->default('0');
-            $table->enum('status',['draft','published'])->default('draft');
+            $table->enum('user_status',['draft','published'])->default('draft');
+            $table->enum('admin_status',['active','inactive'])->default('active');
             $table->string('project_name',255);
             $table->string('project_type_id',20);
             $table->enum('listing_project_as',['individual','organization']);

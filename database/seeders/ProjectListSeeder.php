@@ -16,7 +16,7 @@ class ProjectListSeeder extends Seeder
     {
         DB::table('project_lists')->insert([
             'list_name' => 'carousel',
-            'list_status' => 'publish',
+            'status' => 'published',
             'created_at' => now(),
             
         ]

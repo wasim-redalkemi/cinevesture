@@ -71,10 +71,10 @@
                                         <div class="col-md-3">
                                             <div class="form-group">
                                             <label>Recommended badge</label>
-                                            <select name="Recommended_badge" id="" class="form-control form-control-sm radius">
+                                            <select name="project_verified" id="" class="form-control form-control-sm radius">
                                                 <option value="">Select</option>
-                                                <option value="1" <?php if (request('Recommended_badge')=="1") {echo ('selected');} ?>>Recommended</option>
-                                                <option value="0" <?php if (request('Recommended_badge')=="0") { echo('selected');} ?>>Unrecommended</option>
+                                                <option value="1" <?php if (request('project_verified')=="1") {echo ('selected');} ?>>Recommended</option>
+                                                <option value="0" <?php if (request('project_verified')=="0") { echo('selected');} ?>>Unrecommended</option>
                                             </select>
                                             </div>
                                         </div>
@@ -116,7 +116,7 @@
                                         <th>Views</th>
                                         <th>Status</th>
                                         <th>Favorite</th>
-                                        <th>Recommend</th>
+                                        <th>Verified</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -167,15 +167,14 @@
                                         <td>2</td>
 
                                         <td class="" style="width: 100px;">
-                                            @php
-                                                $x=($project->project_verified==1)? 0:1;
-                                            @endphp
-                                            @if ($project->project_verified==1)
-                                            <a href="{{route('project-list-status')}}?status={{$x}}&pId={{$project->id}}"><button type="button" class="btn active-button-color">{{($project->project_verified==1) ?"Publish":"Unpublish"}}</button>
-                                            </a>
+                                            @if($project->admin_status=='active')
+                                                <a class="btn btn-success btn-fw mb-1 btn-sm mt-10 w-65 view-btn btn_padding text-white" href="{{route('project-list-status',['id' => $project->id , 'status' =>'inactive'])}}">                                            
+                                                    {{ucfirst($project->admin_status)}}
+                                                </a>
                                             @else
-                                            <a href="{{route('project-list-status')}}?status={{$x}}&pId={{$project->id}}"><button type="button" class="btn inactive-button-color">{{($project->project_verified==1) ?"Publish":"Unpublish"}}</button>
-                                            </a>
+                                                <a class="btn btn-danger btn-fw mb-1 btn-sm mt-10 w-65 view-btn btn_padding text-white" href="{{route('project-list-status',['id' => $project->id , 'status' =>'active'])}}">
+                                                    {{ucfirst($project->admin_status)}}
+                                                </a>
                                             @endif
 
                                         </td>
@@ -187,10 +186,10 @@
                                         </td> 
                                         <td>
                                             @php
-                                            $recom=($project->Recommended_badge==1)? 0:1;
+                                            $verified=($project->project_verified==1)? 0:1;
                                             @endphp
 
-                                             <input type="checkbox" class="recom_inp" path="{{route('project-list-recommended')}}?s={{$recom}}&p={{$project->id}}" name="fav" id="fav" <?php if($project->Recommended_badge == 1){echo 'checked';}?>>
+                                             <input type="checkbox" class="recom_inp" path="{{route('project-list-verified')}}?s={{$verified}}&p={{$project->id}}" name="fav" id="fav" <?php if($project->project_verified == 1){echo 'checked';}?>>
                                         </td>
                                         <td>
                                             <a href="{{route('project-public-view',['id'=>$project->id])}}"><button class="btn mb-2 view-btn btn btn-primary">View</button></a>
@@ -225,7 +224,7 @@
         })
     })
     
-    @if (request('category') || request('genre') || request('from_date') || request('to_date') || request('favorited') || request('Recommended_badge') || request('search'))
+    @if (request('category') || request('genre') || request('from_date') || request('to_date') || request('favorited') || request('project_verified') || request('search'))
         $(".collapse").addClass("show");
     @endif
 </script>
