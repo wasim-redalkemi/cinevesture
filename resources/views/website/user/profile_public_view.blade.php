@@ -605,6 +605,28 @@
         },
     });
 
+        $(".project.owl-carousel").owlCarousel({
+        center: true,
+        autoPlay: 1000,
+        autoplay: true,
+        // loop: true,
+        nav: true,
+        margin: 20,
+        center: false,
+        // items: 4,
+        responsive: {
+            480: {
+                items: 1
+            },
+            768: {
+                items: 2
+            },
+            1024: {
+                items: 4
+            }
+        },
+    });
+
     function portfolio_model(id) {
         $("#portfolioModal .modal_content").html('');
         $.ajax({
