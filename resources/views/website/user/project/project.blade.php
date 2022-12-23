@@ -35,7 +35,8 @@
                                 <div>
                                     {{-- <i class="fa fa-trash-o" aria-hidden="true"></i> --}}
                                     <a class="confirmAction" href="{{route('project-delete',['id'=>$v->id])}}">
-                                        <img src="{{ asset('images/asset/delete-icon.svg') }}"/>
+                                        <!-- <img src="{{ asset('images/asset/delete-icon.svg') }}"/> -->
+                                        <i class="fa fa-trash-o white" aria-hidden="true"></i>
                                     </a>
                                 </div>
                             </div>

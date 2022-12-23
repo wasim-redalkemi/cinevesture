@@ -38,8 +38,8 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="preview_headtext">{{ (isset($UserOrganisation->name))?ucFirst($UserOrganisation->name):'Name'; }}</div>
-                                <div class="guide_profile_main_subtext">{{ (!empty($UserOrganisation->organizationType->name))?$UserOrganisation->organizationType->name:'organization_type'; }}</div>
-                                <div class="guide_profile_main_subtext">{{ (isset($UserOrganisation['country']['name']))?$UserOrganisation['country']['name']:'Located In'; }}</div>
+                                <div class="organisation_cmn_text">{{ (!empty($UserOrganisation->organizationType->name))?$UserOrganisation->organizationType->name:'Organization Type'; }}</div>
+                                <div class="organisation_cmn_text">{{ (isset($UserOrganisation['country']['name']))?$UserOrganisation['country']['name']:'Located In'; }}</div>
                             </div>
                         </div>
                     </div>
