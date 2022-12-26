@@ -1554,7 +1554,7 @@ a
 }
 .organisation_cmn_text {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 17px;
     line-height: 150%;
     letter-spacing: 0.022em;
     font-feature-settings: 'ss01' on;
@@ -1765,7 +1765,7 @@ a
 }
 .preview_headtext {
     font-weight: 600;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 100%;
     letter-spacing: 0.0025em;
     color: #971E9B;
@@ -2201,13 +2201,13 @@ select  option, .radio_btn_label{
     height: 350px;
     overflow: hidden;
 }
-.modal_btn .modal_cross_btn {
-    width: 20px;
-    height: 20px;
+.modal_cross_btn {
+    width: 25px;
+    height: 25px;
     font-size: 20px;
     border: 1px solid #DD45B3;
     display: flex;
-    align-items: end;
+    align-items: center;
     justify-content: center;
     border-radius: 100%;
     color: #DD45B3;
@@ -2437,8 +2437,20 @@ select {
     -webkit-transition: .4s;
     transition: .4s;
   }
-  
-  .currency_togle .slider:before {
+  /* .currency_togle .slider:after {
+    position: absolute;
+    content: "$";
+    height: 18px;
+    width: 18px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    border-radius: 100%;
+    -webkit-transition: .4s;
+    transition: .4s;
+    } */
+    
+    .currency_togle .slider:before, .forHideIcon {
     position: absolute;
     content: "";
     height: 18px;
@@ -2487,7 +2499,14 @@ select {
   .slider.round:before {
     border-radius: 50%;
   }
-
+.checkbox_elem {
+    position: relative;
+    padding-bottom: 8px;
+}
+ .checkbox_elem #listing_project_as-error {
+    position: absolute;
+    top: 37px;
+ }
   /* Loader */
   .lds-ring {
     display: inline-block;
@@ -2981,6 +3000,23 @@ select {
           visibility: visible;
         }
       }
+      
+      @media only screen and (min-width: 480px)  {
+    .industry_guide_text {
+        position: absolute;
+        left: 46px;
+    }
+}
+      @media only screen and (min-width: 1600px)  {
+    .industry_guide_text {
+        position: absolute;
+        left: 235px;
+    }
+    .main-body { 
+        min-height: 62vh;
+    }
+  }
+
 .sidebar_collapse
 {
 /* -webkit-transition: 2s ease all;

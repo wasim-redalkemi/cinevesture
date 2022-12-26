@@ -30,7 +30,7 @@
                             <div class="col-md-2">
                                 <div class="user_profile_container">
                                     @if (empty($UserOrganisation->logo))
-                                        <img src="{{ asset('images/asset/100_no_img.jpg') }}" />
+                                        <img src="{{ asset('images/asset/photo-1500648767791-00dcc994a43e 1.png') }}" />
                                     @else
                                         <img src="{{ Storage::url($UserOrganisation->logo) }}"  class = "prod-img" alt="product-image" style="max-height:100px;width:100%;">
                                     @endif  
@@ -38,7 +38,7 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="preview_headtext">{{ (isset($UserOrganisation->name))?ucFirst($UserOrganisation->name):'Name'; }}</div>
-                                <div class="organisation_cmn_text">{{ (!empty($UserOrganisation->organizationType->name))?$UserOrganisation->organizationType->name:'Organization Type'; }}</div>
+                                <div class="organisation_cmn_text">{{ (!empty($UserOrganisation->organizationType->name))?$UserOrganisation->organizationType->name:'Organization type'; }}</div>
                                 <div class="organisation_cmn_text">{{ (isset($UserOrganisation['country']['name']))?$UserOrganisation['country']['name']:'Located In'; }}</div>
                             </div>
                         </div>
@@ -66,16 +66,22 @@
                                     <span><b>-</b></span>
                                     @endif
                                 </div>
-                                <div class="guide_profile_main_text mt-3">Availabe To Work In</div>
-                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (isset($UserOrganisation->available_to_work_in))?$UserOrganisation->available_to_work_in:'-'; }}</div>
                                 <div class="guide_profile_main_text mt-3">Languages Spoken</div>
+                                
+                                <div class="d-flex flex-wrap mt-3">
                                 @if (isset($UserOrganisation->organizationLanguages))
                                     @foreach ($UserOrganisation->organizationLanguages as $k => $organizationLanguage)                                    
-                                        <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (isset($organizationLanguage->languages->name))?$organizationLanguage->languages->name:'-'; }}</div>
+                                        <div class="curv_cmn_btn skill_container darkbtn mt-2">{{ (isset($organizationLanguage->languages->name))?$organizationLanguage->languages->name:'-'; }}</div>
                                     @endforeach
                                 @else
                                     <span><b>-</b></span>
                                 @endif
+                                </div>
+                                <div>
+                                    
+                                <div class="guide_profile_main_text mt-3">Available To Work In</div>
+                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (isset($UserOrganisation->available_to_work_in))?$UserOrganisation->available_to_work_in:'-'; }}</div>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="guide_profile_main_text mt-3">

@@ -64,7 +64,7 @@
                         </div>
                         <div class="guide_profile_subsection">
                             <div class="guide_profile_main_text">Cover Letter <em class="text-danger">*</em></div>
-                            <div class="profile_input">
+                            <div class="profile_input form_elem">
                                 <textarea name="cover_letter" class="form-control @error('cover_letter') is-invalid @enderror controlTextLength" text-length="1500" maxlength="1500" id="cover_letter" aria-label="With textarea" placeholder="Your answer here" required></textarea>
                                 @error('cover_letter')
                                         <span class="invalid-feedback" role="alert">

@@ -214,6 +214,32 @@
                                 </div>
                             </div>
                         </form>
+                           <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content croper_modal">
+                                    <div class="modal-header py-1">
+                                        <h6 class="modal-title tile_text" id="modalLabel"> Image Cropper</h6>
+                                        <div class="d-flex jutify-content-center">
+                                            <button type="button" class="mx-2 btn-danger" id="crop-cancel" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                            <button type="button" class="btn-success" id="crop"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="modal-body overflow-auto">
+                                        <div class="container">
+                                            <div class="row">
+                                                <!-- <div class="col-md-1"></div> -->
+                                                <div class="col-md-12">
+                                                    <div class="cropperWrap">
+                                                        <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="col-md-1"></div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -301,6 +327,13 @@
             });
 
             $(parentElemId+" input.imgInp").off("change").on("change",function uploadImageFile(e) {
+
+                var done = function(url) {
+            image.src = url;
+            $modal.modal('show');
+        };
+
+
                 console.log("changed ",this);
                 let imgId = "#"+$(e.target).parents('.img-item').attr('id'); 
                 console.log("e = ",this.files,imgId);
@@ -427,6 +460,89 @@
         $("#save_btn_value").attr("value", $(this).attr("name"))
         $(this).parents('form').submit();
     });
+
+    // croper 
+
+    $modal.on('shown.bs.modal', function() {
+
+
+cropper = new Cropper(image, {
+dragMode: 'move',
+autoCropArea: 0.65,
+restore: false,
+guides: false,
+center: true,
+highlight: false,
+cropBoxMovable: true,
+cropBoxResizable: false,
+toggleDragModeOnDblclick: false,
+data:{ //define cropbox size
+ width: 300,
+ height:  300,
+},
+});
+}).on('hidden.bs.modal', function() {
+   cropper.destroy();
+   cropper = null;
+});
+
+function dataURLtoFile(dataurl, filename) {
+   var arr = dataurl.split(','),
+       mime = arr[0].match(/:(.*?);/)[1],
+       bstr = atob(arr[1]),
+       bstr = atob(arr[1]),
+       n = bstr.length,
+       u8arr = new Uint8Array(n);
+
+   while (n--) {
+       u8arr[n] = bstr.charCodeAt(n);
+   }
+
+   return new File([u8arr], filename, {
+       type: mime
+   });
+}
+
+$("#crop").click(function() {
+   canvas = cropper.getCroppedCanvas({
+       width: 160,
+       height: 160,
+   });
+
+   canvas.toBlob(function(blob) {
+       url = URL.createObjectURL(blob);
+       // console.log(url, "url");
+       var reader = new FileReader();
+       reader.readAsDataURL(blob);
+       reader.onloadend = function() {
+           base64data = reader.result;
+           var file = dataURLtoFile(base64data, 'profile_img.png');
+           croperImg.src = base64data;
+           $("#croppedImg").val(base64data);
+           image.src = file;
+           formData.append("document", file)
+           // console.log(formData.append("document", file), "formData.append");
+
+           $('.for_hide').css('display', 'none');
+           $('.for_show').css('display', 'block');
+
+           $modal.modal('hide');
+       }
+   });
+})
+
+$('#close-cropper').on('click', function() {
+   $modal.modal('hide');
+})
+$('#chechbox').on('click', function() {
+   // $('date_of_exp').toggle();
+   $modal.modal('hide');
+})
+
+
+$('#crop-cancel').on('click', function() {
+   $modal.modal('hide');
+})
 </script>
 @endpush
 
