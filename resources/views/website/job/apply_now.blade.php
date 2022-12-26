@@ -26,7 +26,7 @@
             <div class="col-md-12 mt-sm-0">
                 <div class="content_wraper">
                     <div class="guide_profile_subsection">
-                        <div class="contact-page-text deep-aubergine">Apply For {{$jobTitle}}</div>
+                        <div class="contact-page-text deep-aubergine">Apply For {{ucFirst($jobTitle)}}</div>
                     </div>
 
 

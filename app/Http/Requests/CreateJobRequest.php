@@ -38,11 +38,11 @@ class CreateJobRequest extends FormRequest
     {
         return [
             'save_type'=>'required',
-            'job_title' => 'required|max:255',                    
+            'job_title' => 'required|max:100',                    
             'employments.*' => 'required',                    
             'workspaces.*' => 'required',
             'company_name' => 'required',
-            'description' => 'required',                     
+            'description' => 'required|max:1500',                     
             'skills.*' => 'required'
         ];
     }

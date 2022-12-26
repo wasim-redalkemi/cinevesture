@@ -14,43 +14,33 @@
             <div class="col-md-12 mt-sm-0">
                 <div class="content_wraper">
                     <div class="guide_profile_subsection">
-                        <div class="container">
-                            @php
+                        <div class="">
+                            <div class="d-flex justify-content-between">
+                                @php
                                 $Job_data = $Job_data->toArray();
                             @endphp
                                 <div class="contact-page-text deep-aubergine">@if (!empty($Job_data['title'])) {{ucFirst($Job_data['title'])}} @endif</div>
-
-                            <div class="d-flex justify-content-end">
+                                                             
                                 <!-- <div class="contact-page-text deep-aubergine"> <span onclick="history.back()"><i class="fa fa-arrow-left" aria-hidden="true"></i></span> @if (!empty($Job_data['title'])) {{$Job_data['title']}} @endif</div> -->
                                 <div class="d-flex align-items-center">
-                                    <div class="dropdown  search-page">
-                                        <div class="" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa fa-ellipsis-h aubergine icon-size" aria-hidden="true"></i>
-                                        </div>
-                                        @if($Job_data['user_id']==auth()->id())
-                                        <ul class="dropdown-menu profile_dropdown_menu p-2">
-                                            <li>
-                                            <a href="">  Edit Job</a>
-                                            </li>
-                                            <li>
-                                            <a href="">  Promote Job</a>
-                                            </li>
-                                            <li>
-                                            <a href="">   Unpublish Job</a>
-                                            </li>
-                                            <li>
-                                            <a href="">  Delete Job </a>
-                                            </li>
-                                        </ul>
-                                        @endif
+                                     <div class="associate_text aubergine ml_10">Save job</div>
+                                     <div class="pointer fav-icon mx-3">
+                                        <i data-id="@if (!empty($Job_data['favorite']['job_id'])){{$Job_data['favorite']['job_id']}} @endif" class="fa {{is_null($Job_data['favorite']) ? 'fa-heart-o' : 'fa-heart'}} aubergine icon-size" aria-hidden="true"></i>
                                     </div>
+                                    @if(!isset($Job_data['applied']) || !empty($Job_data['applied']))
+                                    <div>
+                                        @if(is_null($Job_data['applied']))
+                                      <button class="guide_profile_btn">  <a href="{{route('showApplyJob',['jobId'=>$Job_data['id']])}}" class="">Apply now</a></button>
+                                        @else
+                                        <button disabled class="guide_profile_btn">Applied</button>
+                                        @endif
+                                    </div>      
+                                    @endif  
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="guide_profile_subsection">
-                        <div class="container">
-
                             <div class="row">
                                 <div class="col-sm-3">
                                     <div class="preview_headtext lh_54 candy-pink">Company Name</div>
@@ -66,7 +56,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="preview_headtext lh_54 candy-pink"> Employement type</div>
-                                    @if (isset($Job_data['job_employements']) && count($Job_data['job_employements'])>0)
+                                    @if (count($Job_data['job_employements'])>0)
                                     @foreach ($Job_data['job_employements'] as $k=>$v)
                                         <div class="profile_upload_text Aubergine_at_night mt-2">{{$v['name']}}</div>
                                     @endforeach
@@ -76,7 +66,7 @@
                                 </div>
                                 <div class="col-sm-3">
                                     <div class="preview_headtext lh_54 candy-pink">Work space type</div>
-                                    @if (isset($Job_data['job_work_spaces']) && count($Job_data['job_work_spaces'])>0)
+                                    @if (count($Job_data['job_work_spaces'])>0)
                                     @foreach ($Job_data['job_work_spaces'] as $k=>$v)
                                         <div class="profile_upload_text Aubergine_at_night mt-2">{{$v['name']}}</div>
                                     @endforeach
@@ -85,10 +75,8 @@
                                     @endif
                                 </div>
                             </div>
-                        </div>
                     </div>
                     <div class="guide_profile_subsection">
-                        <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="guide_profile_main_text">Description</div>
@@ -97,14 +85,12 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     </div>
                     <div class="guide_profile_subsection">
-                        <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="guide_profile_main_text">Skills Required</div>
-                                    @if (isset($Job_data['job_skills']) && count($Job_data['job_skills'])>0)
+                                    @if (count($Job_data['job_skills'])>0)
                                     @foreach ($Job_data['job_skills'] as $k=>$v)
                                         <button class="curv_cmn_btn ">{{$v['name']}}</button>
                                     @endforeach
@@ -112,15 +98,32 @@
                                         <span><b>-</b></span>                    
                                     @endif                                    
                                 </div>
-                            </div>
                         </div>
-                        <div class="d-flex justify-content-center mt-5 mb-4">
+                       
+                        {{-- <div class="d-flex justify-content-center mt-5 mb-4">
                             <button class="cancel_btn mx-5 action" data-id="save" onclick="history.back()">Back</button>
                             @if($Job_data['user_id']==auth()->id())
-                            {{-- <button class="guide_profile_btn action" data-id="publish">View Applicants</button> --}}
-                          <button class="guide_profile_btn">  <a href="{{route('showJobApplicants',['jobId'=>$Job_data['id']])}}" class="guide_profile_btn w_150">View Applications</a></button>
-
+                            <button class="guide_profile_btn action" data-id="publish">View Applicants</button>
                             @endif
+                        </div> --}}
+                    </div>
+                    <div class="guide_profile_subsection">
+                        <span class="tile_text aubergine">Job Posted By</span>
+                        <div class="d-flex mt-3">
+                            <div class="tile_text deep-pink">@if (!empty($Job_data['user'][0]['name'])) {{ucFirst($Job_data['user'][0]['name'])}} @endif</div>
+                            <div class="mx-3">
+                               <div class="organisation_cmn_text">Chief Officer</div>
+                               {{-- <div class="published_text">10th July 2021</div>  --}}
+                               <div class="published_text"><?php if (!empty($Job_data['created_at'])) {
+                                $orgDate = $Job_data['created_at'];  
+                               $newDate = date("d-m-Y", strtotime($orgDate));  
+                               echo $newDate; 
+                           } else {
+                               echo '<span><b>-</b></span>';
+                           }
+                           ?></div> 
+                               <div class="organisation_cmn_text mt-2">@if (!empty($Job_data['company_name'])) {{ucFirst($Job_data['company_name'])}} @endif</div> 
+                            </div>
                         </div>
                     </div>
                     
@@ -136,3 +139,6 @@
 @section('footer')
 @include('website.include.footer')
 @endsection
+
+@include('website.job.favscript')
+

@@ -239,6 +239,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
 
         Route::get('/posted-job-single-view',[JobController::class, 'postedJobView'])->name('posted-job-single-view');
         Route::get('/promotion-job',[JobController::class, 'promotionJob'])->name('promotion-job');
+        Route::get('/search-job-single-view/{job_id}',[JobController::class, 'searchJobSingleView'])->name('after_search-job-single-view');
 
 	});
 

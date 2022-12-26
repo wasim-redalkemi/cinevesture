@@ -2,7 +2,8 @@
     @foreach($jobs as $job)
 <div class="border_btm profile_wraper_padding">
     <div class="d-flex justify-content-between">
-        <a href="{{route('posted-job-single-view',['job_id'=>$job->id])}}" class="guide_profile_main_text">
+        {{-- <a href="{{route('posted-job-single-view',['job_id'=>$job->id])}}" class="guide_profile_main_text"> --}}
+        <a href="{{route('after_search-job-single-view',['job_id'=>$job->id])}}" class="guide_profile_main_text">
             {{$job->title}}
         </a>
         <div class="pointer fav-icon">

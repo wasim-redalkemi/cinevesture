@@ -758,17 +758,16 @@ a
 }
 
 .filter-button{
-
     padding: 6px 16px;
-
     width: 130px;
     height: 40px;
-
     /* Aubergine */
     color: #EEEDE8;
     background: #4D0D8A;
     border-radius: 4px;
     border-color: transparent;
+    display: flex;
+    justify-content: center;
 
 }
 
