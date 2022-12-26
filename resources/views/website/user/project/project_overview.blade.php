@@ -61,6 +61,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Who are you listing this project as? <span style = "color:red">*</span></label>
+                                    <div class="checkbox_elem">
                                     <div class="d-flex">
                                         <div class="checkbox_btn d-flex align-items-center">
                                             <input type="radio" class="checkbox_btn" name="listing_project_as" value="Individual" @if(isset($projectData[0]['listing_project_as']))
@@ -79,12 +80,13 @@
                                             @endif aria-label="">
                                             <div class="radio_btn_label"> Organization</div>
                                         </div>
-                                        @error('listing_project_as')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
                                     </div>
+                                    @error('listing_project_as')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
                                 </div>
                             </div>
                         </div>

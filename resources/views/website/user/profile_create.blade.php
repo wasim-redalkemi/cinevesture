@@ -178,24 +178,6 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="profile_input">
-                                    <label for="lang">Located in</label>
-                                    <select name="Located_in" id="located_in" class="outline is-invalid-remove @error('Located_in') is-invalid @enderror" id="lang">
-                                        <option value="">Select</option>
-                                        @foreach ($country as $k=>$v)
-                                        <option value="{{ $v->id }}" <?php if (isset($user->country) && $user->country->id == $v->id) {
-                                                                            echo ('selected');
-                                                                        } ?>>{{ $v->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('Located_in')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="profile_input">
                                     <label for="lang">Available To Work In</label>
                                     <select name="available_to_work_in" class="outline is-invalid-remove @error('available_to_work_in') is-invalid @enderror" id="lang">
                                         <option value="">Select</option>
@@ -214,24 +196,24 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="mt_16 select2forError">
-
-                                    <label for="lang">Languages Spoken</label>
-                                    <select name="languages[]" class="js-select2 @error('languages') is-invalid @enderror" id="lang" multiple>
-                                        @foreach ($languages as $k=>$v)
-                                        <option value="{{ $v->id }}" @if(in_array($v->id,$user->language))selected @endif>{{ $v->name }}</option>
+                                <div class="profile_input">
+                                    <label for="lang">Located in</label>
+                                    <select name="Located_in" id="located_in" class="outline is-invalid-remove @error('Located_in') is-invalid @enderror" id="lang">
+                                        <option value="">Select</option>
+                                        @foreach ($country as $k=>$v)
+                                        <option value="{{ $v->id }}" <?php if (isset($user->country) && $user->country->id == $v->id) {
+                                                                            echo ('selected');
+                                                                        } ?>>{{ $v->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('languages')
+                                    @error('Located_in')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
                             </div>
-                        </div>
-                        <div class="row display-none" id="state-show">
-                            <div class="col-md-4">
+                            <div class="col-md-4  display-none"  id="state-show">
                                 <div class="profile_input">
                                     <label for="lang">State</label>
                                     <select name="state" id="state" class="outline is-invalid-remove @error('state') is-invalid @enderror" id="lang">
@@ -248,6 +230,7 @@
                                 </div>
                             </div>
                         </div>
+                      
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="profile_input">
@@ -260,6 +243,24 @@
                                     </span>
                                     @enderror
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-md-12">
+                                <div class="mt_16 select2forError">
+                                    <label for="lang">Languages Spoken</label>
+                                    <select name="languages[]" class="js-select2 @error('languages') is-invalid @enderror" id="lang" multiple>
+                                        @foreach ($languages as $k=>$v)
+                                        <option value="{{ $v->id }}" @if(in_array($v->id,$user->language))selected @endif>{{ $v->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('languages')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

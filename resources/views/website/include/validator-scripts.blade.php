@@ -884,6 +884,9 @@
 
             let addMediaElem = function() {
                 let str = getAddElemHtml();
+                let currentpdfElem = $(parentElemId + " .profile_upload_container");
+                console.log(currentpdfElem.length, "currentMediaCountcurrentMediaCount");
+                if(currentpdfElem.length == 1) return;
                 if(currentMediaCount == 0){
                     $(str).insertBefore(parentElemId+" .doc-list #add-doc-btn-div");
                 } else {

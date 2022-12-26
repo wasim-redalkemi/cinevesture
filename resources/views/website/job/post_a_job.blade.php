@@ -150,9 +150,10 @@
 <!-- Modal for Confirmation for account deactivate -->
 <div class="modal fade" id="publish_job_modal"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
-
         <div class="modal-content">
-
+         <div class="d-flex justify-content-end m-2">
+             <button type="button" class="modal_cross_btn" data-bs-dismiss="modal" aria-label="Close">X</button>
+         </div>
             <div class="modal-body" style="padding: 0px;">
                 <section>
                     <div class="container">
