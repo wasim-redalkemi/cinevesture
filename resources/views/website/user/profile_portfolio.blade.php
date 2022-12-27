@@ -156,7 +156,7 @@
                                     <button type="button" name="saveAndAnother" value="false" class="portfolio_save_btn save_add_btn">Save & add another</button>
                                     <input type="hidden" id="save_btn_value" name="saveButtonType" value="">
                                     <input type="hidden" name="flag" value="<?= request('flag') ?>">
-                                    <button type="button" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save & next</button>
+                                    <button type="submit" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save & next</button>
 
                                     <a href="{{route('portfolio-skip')}}"class="cancel_btn mx-3" style="text-decoration:none">Skip</a>
                                 </div>

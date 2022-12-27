@@ -38,7 +38,7 @@
                                     <div class="profile_input">
                                         <label>Employment Type <span style = "color:red">*</span></label>
                                             <select class="form-control @error('countries') is-invalid @enderror" id="employments" name="employments[]" style="border: 1px solid #4D0D8A;"  data-maximum-selection-length="1" required>
-                                                <option value="">select</option>
+                                                <option value="">Select</option>
                                                 @if (!empty($employments))                                                    
                                                 @foreach($employments as $emp)
                                                     <option value="{{$emp->id}}" @if(!empty($userJobData['job_employements']) && in_array($emp->id, $userJobData['job_employements']))selected @endif>{{$emp->name}}</option>
@@ -58,7 +58,7 @@
                                     <div class="profile_input">
                                         <label>Workspace Type <span style = "color:red">*</span></label>
                                         <select class="form-control @error('workspaces') is-invalid @enderror" id="workspaces" style="border: 1px solid #4D0D8A;" name="workspaces[]" required>
-                                            <option value="">select</option>
+                                            <option value="">Select</option>
                                             @if (!empty($workspaces))
                                             @foreach($workspaces as $work)
                                                 <option value="{{$work->id}}" @if(!empty($userJobData['job_work_spaces']) && in_array($work->id, $userJobData['job_work_spaces']))selected @endif>{{$work->name}}</option>
