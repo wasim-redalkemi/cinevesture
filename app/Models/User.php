@@ -92,4 +92,11 @@ class User extends Authenticatable
     public function isfavouriteProfile(){
         return $this->hasOne(UserFavouriteProfile::class, 'profile_id', 'id')->where('user_id',auth()->user()->id);
     }
+
+    // public function userPlan(){
+    //     return $this->belongsToMany(UserSubscription::class, 'plan_id', 'user_id');
+    // }
+    public function membership(){
+        return $this->belongsToMany(Plans::class,UserSubscription::class,'user_id','plan_id');
+    }
 }
