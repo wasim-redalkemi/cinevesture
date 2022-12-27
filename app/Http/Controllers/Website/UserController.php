@@ -742,7 +742,7 @@ class UserController extends WebController
                 if ($request->saveButtonType == 'saveAndAnother') {
                     return redirect()->route('qualification-create')->with("success", "Please add another qualification.");
                 }
-                return redirect()->route('profile-private-show');
+                return redirect()->route('profile-private-show')->with("success", "Qualification added successfully.");
             } else {
                 return back()->with('error', 'Something went wrong ,please try again.');
             }
