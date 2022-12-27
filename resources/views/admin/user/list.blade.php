@@ -76,10 +76,10 @@
                                         <label>Membership</label>
                                         <select name="membership" id="" class="form-control radius">
                                             <option value="">Select</option>
-                                            <option value="1" <?php if (request('membership')=="1") {echo 'selected';} ?>>Normal</option>
-                                            <option value="2" <?php if (request('membership')=="2") {echo 'selected';} ?> >Private</option>
-                                            <option value="3" <?php if (request('membership')=="3") {echo 'selected';} ?> >Premium</option>
-                                            <option value="4" <?php if (request('membership')=="4") {echo 'selected';} ?> >Super Premium</option>
+                                            <option value="free" <?php if (request('membership')=="free") {echo 'selected';} ?>>Free</option>
+                                            <option value="basic" <?php if (request('membership')=="basic") {echo 'selected';} ?> >Basic</option>
+                                            <option value="pro" <?php if (request('membership')=="pro") {echo 'selected';} ?> >Pro</option>
+                                            <option value="enterprise" <?php if (request('membership')=="enterprise") {echo 'selected';} ?> >Enterprise</option>
                                         </select>
                                         </div>
                                     </div>
@@ -147,16 +147,16 @@
                                         <a href="{{route('user-status-change')}}?status={{$x}}&user_id={{$user->id}}"><button class="btn active-button-color"> {{'Active'}}</button></a>@else
                                         <a href="{{route('user-status-change')}}?status={{$x}}&user_id={{$user->id}}"><button class="btn inactive-button-color">{{'Inactive'}}</button></a>@endif
                                     </td>
-                                    <td>MembershipSDNCSBHC</td>
+                                    <td>Membership</td>
                                     <td><?php echo(date("d-m-Y", strtotime($user->created_at))); ?></td>
                                     <td>
                                         <div class="mb-1">
                                            <a href="{{route('profile-public-show',['id'=>$user->id])}}"><button class="btn btn-info btn-sm">View</button></a>
                                           </div>
                                        <div>
-                                        <a class="confirmAction" href="{{route('user-delete',['id'=>$user->id])}}">
-                                        <button class="btn btn-danger  btn-sm">Delete</button>
-                                        </a>
+                                            <a class="confirmAction" href="{{route('user-delete',['id'=>$user->id])}}">
+                                               <button class="btn btn-danger  btn-sm">Delete</button>
+                                            </a>
                                         </div> 
                                     </td>
                                  </tr>

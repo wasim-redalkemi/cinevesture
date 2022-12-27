@@ -25,7 +25,7 @@ class UserController extends AdminController
         try
         {
            
-            $countries=MasterCountry::query()->get();
+            $countries=MasterCountry::query()->orderBy('name','ASC')->get();
             $UserOrganisation = UserOrganisation::query()->get();
             $users=User::query()->where('user_type','U')
             ->with(['organization','country'])
@@ -51,6 +51,9 @@ class UserController extends AdminController
                         $q->whereHas('invites', function ($q) use($request){
                         $q->where('user_organization_id',$request->organization);
                     });
+                }
+                if (isset($request->membership)) {
+                    
                 }
 
             })
