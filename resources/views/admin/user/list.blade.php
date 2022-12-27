@@ -147,7 +147,17 @@
                                         <a href="{{route('user-status-change')}}?status={{$x}}&user_id={{$user->id}}"><button class="btn active-button-color"> {{'Active'}}</button></a>@else
                                         <a href="{{route('user-status-change')}}?status={{$x}}&user_id={{$user->id}}"><button class="btn inactive-button-color">{{'Inactive'}}</button></a>@endif
                                     </td>
-                                    <td>Membership</td>
+                                    <td>
+                                        @foreach ($user->membership as $plan)
+                                        @if (!empty($plan->plan_name))
+                                           
+                                                {{$plan->plan_name}}
+                                           
+                                        @else
+                                                {{'-'}}
+                                        @endif
+                                        @endforeach
+                                    </td>
                                     <td><?php echo(date("d-m-Y", strtotime($user->created_at))); ?></td>
                                     <td>
                                         <div class="mb-1">

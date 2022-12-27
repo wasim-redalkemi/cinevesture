@@ -28,7 +28,10 @@ class UserController extends AdminController
             $countries=MasterCountry::query()->orderBy('name','ASC')->get();
             $UserOrganisation = UserOrganisation::query()->get();
             $users=User::query()->where('user_type','U')
-            ->with(['organization','country'])
+            ->with(['organization','country','membership'])
+            
+            
+            
             ->where(function ($q) use ($request) {
             
                 if (isset($request->search)) {
@@ -52,8 +55,12 @@ class UserController extends AdminController
                         $q->where('user_organization_id',$request->organization);
                     });
                 }
-                if (isset($request->membership)) {
-                    
+                if(isset($request->membership)){
+                    $q->whereHas("membership",function($q)use($request){
+                        // if (isset($request->membership)) {
+                            $q->where("plans.plan_name",$request->membership);
+                        // }
+                    });
                 }
 
             })

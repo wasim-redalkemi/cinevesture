@@ -88,7 +88,7 @@
                                                  
                                               </td>
                                               <td>
-                                                {{ucfirst($project->status)}}
+                                                {{ucfirst($project->admin_status)}}
                                               </td>
                                               <td>
                                           
