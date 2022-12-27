@@ -154,7 +154,7 @@
                                 </div>
                                 <div class="col-md-3 d-flex align-items-end mt-2">
                                     <div class="profile_input">
-                                        <div class="save_add_btn">Save</div>
+                                        <div class="save_add_btn">Add another</div>
                                     </div>
                                 </div>
                             </div>
@@ -171,6 +171,7 @@
                                         <input type="hidden" name="project_id" value="<?php if(isset($_REQUEST['id'])) {echo $_REQUEST['id'];}?>">
                                         <button class="cancel_btn mx-3"><a class="btn-link-style" href="{{ route('project-overview') }}?id={{$_REQUEST['id']}}">Go back</a></button>
                                         <button type="submit" class="guide_profile_btn">Save & Next</button>
+                                        <button class="cancel_btn mx-3"><a class="btn-link-style" href="{{ route('project-overview') }}?id={{$_REQUEST['id']}}">Skip</a></button>
                                     </div>
                                 </div>
                             </div>
@@ -232,7 +233,15 @@ $(document).ready(function() {
       closeOnSelect: false,
       placeholder: "Select",
       allowClear: true,
-      tags: true
+        language: {
+      noResults: function() {
+        return '<button class="no_results_btn">No Result Found</a>';
+      },
+    },
+    escapeMarkup: function(markup) {
+      return markup;
+    },
+      
   });
 
   var ProjectDetails = function () {

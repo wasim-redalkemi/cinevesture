@@ -450,10 +450,14 @@
                 }
                 loadcurrentMediaList();
             }
-
+            
+            $("#upload-img-inp").click(function () {
+                alert("ca;led")
+            })
             let bindActions = function (){
-
+                console.log(455);
                 $(parentElemId+" input#upload-img-inp").off("change").on("change",function uploadImageFile(e) {
+                    console.log("457");
                     //console.log("e = ",this.files);
                     const [file] = this.files
                     uploadedFile = this.files[0];
@@ -541,6 +545,7 @@
                 });
 
                 $(parentElemId+" #cancel-img-upload").off("click").on("click",(e)=>{
+                    $(parentElemId+" input#upload-img-inp").val("")
                     $("#previewImg").attr("src","").hide();
                     $(parentElemId+" .open_file_explorer label").show();
                     $(parentElemId+" .profile_upload_text").show();
@@ -652,6 +657,8 @@
 
             let addMediaElem = function() {
                 let str = getAddElemHtml();
+                let currentElem = $(parentElemId + " .open_file_explorer.profile_upload_container");
+                if(currentElem.length == 1) return;
                 if(currentMediaCount == 0){
                     $(str).insertBefore(parentElemId+" .photo-list #add-image-btn-div");
                 } else {
@@ -779,7 +786,11 @@
                         uploadDocCallback(null,data);
                     },
                     error: function (error) {
+                        // createToast( "f");
                         // handle error
+                        // console.log(error);
+                        console.log(error.responseJSON.errors.file[0], "error.responseJSON.errors.file[0]");
+                        createToast(error.responseJSON.errors.file[0],"E");
                     },
                     async: true,
                     data: formData,
@@ -873,6 +884,9 @@
 
             let addMediaElem = function() {
                 let str = getAddElemHtml();
+                let currentpdfElem = $(parentElemId + " .profile_upload_container");
+                console.log(currentpdfElem.length, "currentMediaCountcurrentMediaCount");
+                if(currentpdfElem.length == 1) return;
                 if(currentMediaCount == 0){
                     $(str).insertBefore(parentElemId+" .doc-list #add-doc-btn-div");
                 } else {

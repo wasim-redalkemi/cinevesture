@@ -30,7 +30,7 @@
                             <div class="col-md-2">
                                 <div class="user_profile_container">
                                     @if (empty($UserOrganisation->logo))
-                                        <img src="{{ asset('images/asset/100_no_img.jpg') }}" />
+                                        <img src="{{ asset('images/asset/photo-1500648767791-00dcc994a43e 1.png') }}" />
                                     @else
                                         <img src="{{ Storage::url($UserOrganisation->logo) }}"  class = "prod-img" alt="product-image" style="max-height:100px;width:100%;">
                                     @endif  
@@ -38,8 +38,8 @@
                             </div>
                             <div class="col-md-8">
                                 <div class="preview_headtext">{{ (isset($UserOrganisation->name))?ucFirst($UserOrganisation->name):'Name'; }}</div>
-                                <div class="guide_profile_main_subtext">{{ (!empty($UserOrganisation->organizationType->name))?$UserOrganisation->organizationType->name:'organization_type'; }}</div>
-                                <div class="guide_profile_main_subtext">{{ (isset($UserOrganisation['country']['name']))?$UserOrganisation['country']['name']:'Located In'; }}</div>
+                                <div class="organisation_cmn_text">{{ (!empty($UserOrganisation->organizationType->name))?$UserOrganisation->organizationType->name:'Organization type'; }}</div>
+                                <div class="organisation_cmn_text">{{ (isset($UserOrganisation['country']['name']))?$UserOrganisation['country']['name']:'Located In'; }}</div>
                             </div>
                         </div>
                     </div>
@@ -66,16 +66,22 @@
                                     <span><b>-</b></span>
                                     @endif
                                 </div>
-                                <div class="guide_profile_main_text mt-3">Availabe To Work In</div>
-                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (isset($UserOrganisation->available_to_work_in))?$UserOrganisation->available_to_work_in:'-'; }}</div>
                                 <div class="guide_profile_main_text mt-3">Languages Spoken</div>
+                                
+                                <div class="d-flex flex-wrap mt-3">
                                 @if (isset($UserOrganisation->organizationLanguages))
                                     @foreach ($UserOrganisation->organizationLanguages as $k => $organizationLanguage)                                    
-                                        <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (isset($organizationLanguage->languages->name))?$organizationLanguage->languages->name:'-'; }}</div>
+                                        <div class="curv_cmn_btn skill_container darkbtn mt-2">{{ (isset($organizationLanguage->languages->name))?$organizationLanguage->languages->name:'-'; }}</div>
                                     @endforeach
                                 @else
                                     <span><b>-</b></span>
                                 @endif
+                                </div>
+                                <div>
+                                    
+                                <div class="guide_profile_main_text mt-3">Available To Work In</div>
+                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (isset($UserOrganisation->available_to_work_in))?$UserOrganisation->available_to_work_in:'-'; }}</div>
+                                </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="guide_profile_main_text mt-3">
@@ -107,33 +113,34 @@
                 <div class="guide_profile_subsection">
                     <div class="container">
                         <div class="row">
-                            <div class="guide_profile_subsection">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <div class="contact-page-text deep-pink">
-                                                About
-                                            </div>
-                                            <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
-                                                <p>
-                                                    @if (!empty($UserOrganisation->about))
-                                                    {{$UserOrganisation->about }}
-                                                    @else
-                                                    <span><b>-</b></span>
-                                                    @endif
-                                                </p>
-                                            </div>
-                                        </div>
-                                        {{-- <div class="col-md-2"></div> --}}
-                                        <div class="col-md-5 ">
-                                            <div class="guide_profile_main_text mb-2">Meet Name</div>
-                                            <div class="playVideoWrap" video-url="{{ (isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:''; }}">
-                                                <img src="{{ (isset($UserOrganisation->intro_video_thumbnail))?$UserOrganisation->intro_video_thumbnail:''; }}" width="100%" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div class="col-md-6">
+                                <div class="contact-page-text deep-pink">
+                                    About
+                                </div>
+                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
+                                    <p>
+                                        @if (!empty($UserOrganisation->about))
+                                        {{$UserOrganisation->about }}
+                                        @else
+                                        <span><b>-</b></span>
+                                        @endif
+                                    </p>
                                 </div>
                             </div>
+                            {{-- <div class="col-md-2"></div> --}}
+                            <div class="col-md-6">
+                                <div class="guide_profile_main_text deep-pink mb-2">Introduction Video</div>
+                                <div class="playVideoWrap" video-url="{{ (isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:''; }}">
+                                    <img src="{{ (isset($UserOrganisation->intro_video_thumbnail))?$UserOrganisation->intro_video_thumbnail:''; }}" width="100%" alt="">
+                                </div>
+                            </div>
+                            {{-- <div class="guide_profile_subsection">
+                                <div class="container">
+                                    <div class="row">
+                                     
+                                    </div>
+                                </div>
+                            </div> --}}
                             {{-- <div class="col-md-12">
                                 <div class="guide_profile_main_text deep-pink font_18">
                                     <h1 class="">About</h1>

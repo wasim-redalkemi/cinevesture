@@ -257,8 +257,8 @@
         </div>
         </div>
         <div class="text-center my-5">
-            <a href="{{ route('project-status') }}?id={{$_REQUEST['id']}}&status=draft"><button class="cancel_btn">Save as draft</button></a>
-            <a href="{{ route('project-status') }}?id={{$_REQUEST['id']}}&status=published"><button class="guide_profile_btn">Save & Publish</button></a>
+            <a href="{{ route('project-status') }}?id={{$_REQUEST['id']}}&user_status=draft"><button class="cancel_btn">Save as draft</button></a>
+            <a href="{{ route('project-status') }}?id={{$_REQUEST['id']}}&user_status=published"><button class="guide_profile_btn">Save & Publish</button></a>
         </div>
     </div>
 </div>

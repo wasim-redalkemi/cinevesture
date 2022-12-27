@@ -16,7 +16,7 @@ class CreateProjectListsTable extends Migration
         Schema::create('project_lists', function (Blueprint $table) {
             $table->id();
             $table->string('list_name',200);
-            $table->string('list_status',200);
+            $table->enum('status',['published','unpublished'])->default('published');
             $table->timestamps();
             $table->softDeletes();
         });

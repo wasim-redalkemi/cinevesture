@@ -107,6 +107,8 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
         Route::post('/portfolio-edit-store/{id}', [UserController::class, 'portfolioEditStore'])->name('portfolio-edit-store');
         Route::get('/portfolio-delete', [UserController::class, 'portfolioDelete'])->name('portfolio-delete');
 
+        Route::get('/portfolio-skip', [UserController::class, 'portfolioSkip'])->name('portfolio-skip');
+
 
         Route::post('/portfolio-modal', [UserController::class, 'getPortfolioHtml'])->name('portfolio-modal');
 
@@ -115,12 +117,14 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
         Route::get('/experience-edit/{id}', [UserController::class, 'experienceEdit'])->name('experience-edit');
         Route::post('/experience-edit-store/{id}', [UserController::class, 'experienceEditStore'])->name('experience-edit-store');
         Route::get('/experience-delete', [UserController::class, 'experienceDelete'])->name('experience-delete');
+        Route::get('/experience-skip', [UserController::class, 'experienceSkip'])->name('experience-skip');
 
         Route::get('/qualification-create/{id?}', [UserController::class, 'qualificationCreate'])->name('qualification-create');
         Route::post('/qualification-store/{id?}', [UserController::class, 'qualificationStore'])->name('qualification-store');        		
         Route::get('/qualification-edit/{id}', [UserController::class, 'qualificationEdit'])->name('qualification-edit');
         Route::post('/qualification-edit-store/{id}', [UserController::class, 'qualificationEditStore'])->name('qualification-edit-store');
         Route::get('/qualification-delete', [UserController::class, 'qualificationDelete'])->name('qualification-delete');
+        Route::get('/qualification-skip', [UserController::class, 'qualificationSkip'])->name('qualification-skip');
         
         Route::get('/billing', [SubscriptionController::class, 'getBilling'])->name('subscription-billing');
         Route::post('/deactivate', [UserController::class, 'deactivateAccount'])->name('user-deactivate'); 
@@ -235,6 +239,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
 
         Route::get('/posted-job-single-view',[JobController::class, 'postedJobView'])->name('posted-job-single-view');
         Route::get('/promotion-job',[JobController::class, 'promotionJob'])->name('promotion-job');
+        Route::get('/search-job-single-view/{job_id}',[JobController::class, 'searchJobSingleView'])->name('after_search-job-single-view');
 
 	});
 

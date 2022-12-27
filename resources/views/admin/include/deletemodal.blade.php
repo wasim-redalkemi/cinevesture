@@ -39,7 +39,7 @@
           <a href="" class="confirmActionModalLink">
            <button type="button" class="btn btn-success">Submit</button>
           </a>
-          <button type="button" class="btn btn-light" data-dismiss="modal">Cancel</button>
+          <button type="button" class="btn cancel_btn_modal" data-dismiss="modal">Cancel</button>
         </div>
       </div>
     </div>

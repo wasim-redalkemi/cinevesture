@@ -68,12 +68,14 @@
                                             <button type="button" class="btn-success" id="crop"><i class="fa fa-check" aria-hidden="true"></i></button>
                                         </div>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body overflow-auto">
                                         <div class="container">
                                             <div class="row">
                                                 <!-- <div class="col-md-1"></div> -->
                                                 <div class="col-md-12">
-                                                    <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
+                                                    <div class="cropperWrap">
+                                                        <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
+                                                    </div>
                                                 </div>
                                                 <!-- <div class="col-md-1"></div> -->
                                             </div>
@@ -176,24 +178,6 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="profile_input">
-                                    <label for="lang">Located in</label>
-                                    <select name="Located_in" id="located_in" class="outline is-invalid-remove @error('Located_in') is-invalid @enderror" id="lang">
-                                        <option value="">Select</option>
-                                        @foreach ($country as $k=>$v)
-                                        <option value="{{ $v->id }}" <?php if (isset($user->country) && $user->country->id == $v->id) {
-                                                                            echo ('selected');
-                                                                        } ?>>{{ $v->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('Located_in')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="profile_input">
                                     <label for="lang">Available To Work In</label>
                                     <select name="available_to_work_in" class="outline is-invalid-remove @error('available_to_work_in') is-invalid @enderror" id="lang">
                                         <option value="">Select</option>
@@ -212,24 +196,24 @@
                                 </div>
                             </div>
                             <div class="col-md-4">
-                                <div class="mt_16 select2forError">
-
-                                    <label for="lang">Languages Spoken</label>
-                                    <select name="languages[]" class="js-select2 @error('languages') is-invalid @enderror" id="lang" multiple>
-                                        @foreach ($languages as $k=>$v)
-                                        <option value="{{ $v->id }}" @if(in_array($v->id,$user->language))selected @endif>{{ $v->name }}</option>
+                                <div class="profile_input">
+                                    <label for="lang">Located in</label>
+                                    <select name="Located_in" id="located_in" class="outline is-invalid-remove @error('Located_in') is-invalid @enderror" id="lang">
+                                        <option value="">Select</option>
+                                        @foreach ($country as $k=>$v)
+                                        <option value="{{ $v->id }}" <?php if (isset($user->country) && $user->country->id == $v->id) {
+                                                                            echo ('selected');
+                                                                        } ?>>{{ $v->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('languages')
+                                    @error('Located_in')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
                             </div>
-                        </div>
-                        <div class="row display-none" id="state-show">
-                            <div class="col-md-4">
+                            <div class="col-md-4  display-none"  id="state-show">
                                 <div class="profile_input">
                                     <label for="lang">State</label>
                                     <select name="state" id="state" class="outline is-invalid-remove @error('state') is-invalid @enderror" id="lang">
@@ -246,12 +230,33 @@
                                 </div>
                             </div>
                         </div>
+                      
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="profile_input">
                                     <label>About</label>
+                                    <div class="form_elem">
                                     <textarea class="outline form-control controlTextLength is-invalid-remove form-control @error('about') is-invalid @enderror" text-length="200" maxlength="200" name="about" aria-label="With textarea"><?php if (isset($user->about)) { echo ($user->about);} ?></textarea>
                                     @error('about')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                        <div class="col-md-12">
+                                <div class="mt_16 select2forError">
+                                    <label for="lang">Languages Spoken</label>
+                                    <select name="languages[]" class="js-select2 @error('languages') is-invalid @enderror" id="lang" multiple>
+                                        @foreach ($languages as $k=>$v)
+                                        <option value="{{ $v->id }}" @if(in_array($v->id,$user->language))selected @endif>{{ $v->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('languages')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -362,10 +367,12 @@
     // $('.for_show').css('display', 'none');
     $(document).ready(function() {
         $('.open_file_explorer').click(function(e) {
+            $(this).parents('.custom_file_explorer').find('.file_element').val("");
             $(this).parents('.custom_file_explorer').find('.file_element').click();
         });
 
         $('.file_element').change(function() {
+        // alert("onchange")
             // var output = $(this).parents('.custom_file_explorer').find('.upload_preview');
             // const file = this.files;
             // var reader = new FileReader();
@@ -381,7 +388,15 @@
         closeOnSelect: false,
         placeholder: "Select",
         allowClear: true,
-        tags: false
+        language: {
+      noResults: function() {
+        return '<button class="no_results_btn">No Result Found</a>';
+      },
+    },
+    escapeMarkup: function(markup) {
+      return markup;
+    },
+        
     });
 
     $("#located_in").on('change', function() {
@@ -422,7 +437,8 @@
     var cropper;
 
     $("body").on("change", ".image", function(e) {
-        var files = e.target.files;
+       var  files = e.target.files;
+        // alert(files)
         var done = function(url) {
             image.src = url;
             $modal.modal('show');

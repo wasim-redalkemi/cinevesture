@@ -200,7 +200,15 @@
       closeOnSelect: false,
       placeholder: "Select",
       allowClear: true,
-      tags: true
+        language: {
+      noResults: function() {
+        return '<button class="no_results_btn">No Result Found</a>';
+      },
+    },
+    escapeMarkup: function(markup) {
+      return markup;
+    },
+      
   });
 
     var ProjectMilestones = function () {
@@ -287,7 +295,8 @@
             let titleElems = $(parentElemId+' #milestone_new input');
             let error = false;
             $.each(titleElems,(i,element) => {
-                error = ($(element).val() == "");
+                if($(element).attr('type') != "checkbox")
+                    error = ($(element).val() == "");
                 if(error)
                     return false;
             });
@@ -388,7 +397,15 @@
         closeOnSelect: false,
         placeholder: "Placeholder",
         allowClear: true,
-        tags: true
+        language: {
+      noResults: function() {
+        return '<button class="no_results_btn">No Result Found</a>';
+      },
+    },
+    escapeMarkup: function(markup) {
+      return markup;
+    },
+        
     });
 </script>
 @endsection --}}

@@ -34,8 +34,9 @@
                                     <div><a href="{{route('project-overview',['id'=>$v->id])}}"><i class="fa fa-pencil mx-2 ancor-link-style" aria-hidden="true"></i></a></div>
                                 <div>
                                     {{-- <i class="fa fa-trash-o" aria-hidden="true"></i> --}}
-                                    <a class="confirmAction" href="{{route('project-delete')}}?id={{$v->id}}">
-                                        <img src="{{ asset('images/asset/delete-icon.svg') }}"/>
+                                    <a class="confirmAction" href="{{route('project-delete',['id'=>$v->id])}}">
+                                        <!-- <img src="{{ asset('images/asset/delete-icon.svg') }}"/> -->
+                                        <i class="fa fa-trash-o white" aria-hidden="true"></i>
                                     </a>
                                 </div>
                             </div>
@@ -43,8 +44,8 @@
                             <div>
                             <a href="{{route('public-view')}}?id={{$v->id}}" style="outline: none; text-decoration:none">
                             <div class="movie_name_text">{{$v->project_name}}</div>
-                                @if(isset($v->status))
-                                @if($v->status == 'draft')
+                                @if(isset($v->user_status))
+                                @if($v->user_status == 'draft')
                                 <div class="published_text">Draft</div>
                                 @else
                                 <div class="published_text">Published</div>

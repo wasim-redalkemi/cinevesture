@@ -44,7 +44,7 @@
                                    <tr>
                                     <td>{{$project->project_name}}</td>
                                     <td>{{$project->financing_secured}}</td>
-                                    <td>{{$project->Recommended_badge}}</td>
+                                    <td>{{$project->project_verified}}</td>
                                     <td><img src="<?php echo asset("images/asset/$image")?>" style="height: 174px; width: 245px;border:2px solid black"></img></td>
                                     <td><input type="checkbox" class="checkbox_btn" name="" aria-label=""></td>
                                     <input type="hidden" value="{{$project->id}}"  name="projectids[]">
@@ -61,7 +61,7 @@
                                    <tr>
                                     <td>{{$project->project_name}}</td>
                                     <td>{{$project->financing_secured}}</td>
-                                    <td>{{$project->Recommended_badge}}</td>
+                                    <td>{{$project->project_verified}}</td>
                                     <td><img src="<?php echo asset("images/asset/$image")?>" style="height: 174px; width: 245px;border:2px solid black"></img></td>
                                     <td><input type="checkbox" class="checkbox_btn" name="" aria-label=""></td>
                                     <input type="hidden" value="{{$project->id}}"  name="projectid">

@@ -158,7 +158,7 @@
                                     <i class="fa fa-share-alt mx-4 icon-size" aria-hidden="true"></i>
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
                                         
-                                    <div> <i class="fa fa-heart-o icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
+                                    <div> <i class="fa <?php if(isset($UserProject->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
                                     @endif
                                 </div>
                                 {{-- <div class="d-flex">
@@ -300,9 +300,9 @@
                                 </tr>
                                 <tr>
                                     <td class="public-head-subtext white">Crowdfunding link</td>
-                                    <td class="project-sub-text white">
+                                    <td class="crowdfund_text ">
                                         @if (!empty($UserProject->crowdfund_link))
-                                        <a href="{{ $UserProject->crowdfund_link}}" >{{ $UserProject->crowdfund_link}}</a>                                    
+                                        <a href="{{ $UserProject->crowdfund_link}}" class="white">{{ $UserProject->crowdfund_link}}</a>                                    
                                         @else
                                         <span><b>-</b></span>
                                         @endif

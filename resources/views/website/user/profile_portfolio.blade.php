@@ -45,12 +45,14 @@
                             <div class="col-md-12">
                                 <div class="profile_input">
                                     <label>Description</label>
+                                    <div class="form_elem">
                                     <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" name="description" aria-label="With textarea" text-length="600" maxlength="600"></textarea>
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -155,6 +157,8 @@
                                     <input type="hidden" id="save_btn_value" name="saveButtonType" value="">
                                     <input type="hidden" name="flag" value="<?= request('flag') ?>">
                                     <button type="button" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save & next</button>
+
+                                    <a href="{{route('portfolio-skip')}}"class="cancel_btn mx-3" style="text-decoration:none">Skip</a>
                                 </div>
                             </div>
                         </div>
@@ -162,7 +166,6 @@
                 </div>
             </div>
         </div>
-        <!-- modal -->
 
     </div>
 </section>
@@ -186,7 +189,7 @@
         var user_id = null;
         var parentElemId = "#user-profile-div";
         var imageCnt = 1;
-        var maxImgCnt = 5;
+        var maxImgCnt = 15;
 
         let init = function(portfolioData) {
             user_id = portfolioData.id;
@@ -327,7 +330,15 @@
         closeOnSelect: false,
         placeholder: "Select",
         allowClear: true,
-        tags: false
+        language: {
+      noResults: function() {
+        return '<button class="no_results_btn">No Result Found</a>';
+      },
+    },
+    escapeMarkup: function(markup) {
+      return markup;
+    },
+        
     });
 
     $(".portfolio_save_btn").on("click", function() {

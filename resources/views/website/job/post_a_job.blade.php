@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-md-12 mt-sm-0">
                 <div class="content_wraper">
-                    <form class="" id="post_job" onsubmit="return false;">
+                    <form class="validateBeforeSubmit" onsubmit="return false;" id="post_job" >
                         @csrf
                         <input type="hidden" id="save_type" value="" name="save_type">
                         <div class="guide_profile_subsection">
@@ -23,7 +23,7 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="profile_input">
-                                        <label>Title Of The Job</label>
+                                        <label>Title Of The Job  <span style = "color:red">*</span></label>
                                         <input type="text" class="form-control @error('job_title') is-invalid @enderror" required name="job_title" value="@if (!empty($userJobData['title'])) {{$userJobData['title']}} @endif" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
 
                                         @error('job_title')
@@ -36,8 +36,9 @@
                                 <div class="col-md-1"></div>
                                 <div class="col-md-3">
                                     <div class="profile_input">
-                                        <label>Employment Type</label>
-                                            <select class="form-control @error('countries') is-invalid @enderror" required id="employments" name="employments[]" style="border: 1px solid #4D0D8A;"  data-maximum-selection-length="1">
+                                        <label>Employment Type <span style = "color:red">*</span></label>
+                                            <select class="form-control @error('countries') is-invalid @enderror" id="employments" name="employments[]" style="border: 1px solid #4D0D8A;"  data-maximum-selection-length="1" required>
+                                                <option value="">select</option>
                                                 @if (!empty($employments))                                                    
                                                 @foreach($employments as $emp)
                                                     <option value="{{$emp->id}}" @if(!empty($userJobData['job_employements']) && in_array($emp->id, $userJobData['job_employements']))selected @endif>{{$emp->name}}</option>
@@ -55,8 +56,9 @@
                                 <div class="col-md-1"></div>
                                 <div class="col-md-3">
                                     <div class="profile_input">
-                                        <label>Workspace Type</label>
-                                        <select class="form-control @error('workspaces') is-invalid @enderror" required id="workspaces"style="border: 1px solid #4D0D8A;" name="workspaces[]">
+                                        <label>Workspace Type <span style = "color:red">*</span></label>
+                                        <select class="form-control @error('workspaces') is-invalid @enderror" id="workspaces" style="border: 1px solid #4D0D8A;" name="workspaces[]" required>
+                                            <option value="">select</option>
                                             @if (!empty($workspaces))
                                             @foreach($workspaces as $work)
                                                 <option value="{{$work->id}}" @if(!empty($userJobData['job_work_spaces']) && in_array($work->id, $userJobData['job_work_spaces']))selected @endif>{{$work->name}}</option>
@@ -75,8 +77,8 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="profile_input">
-                                        <label>Company Name</label>
-                                        <input type="text" class="form-control @error('company_name') is-invalid @enderror" required name="company_name" value="@if (!empty($userJobData['company_name'])) {{$userJobData['company_name']}} @endif" placeholder="Company Name" aria-describedby="basic-addon1">
+                                        <label>Company Name <span style = "color:red">*</span></label>
+                                        <input type="text" class="form-control @error('company_name') is-invalid @enderror" name="company_name" value="@if (!empty($userJobData['company_name'])) {{$userJobData['company_name']}} @endif" placeholder="Company Name" aria-describedby="basic-addon1" required>
 
                                         @error('company_name')
                                         <span class="invalid-feedback" role="alert">
@@ -89,7 +91,7 @@
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>Location</label>
-                                        <select name="countries" class="@error('countries') is-invalid @enderror" required id="lang">
+                                        <select name="countries" class="@error('countries') is-invalid @enderror" id="lang" >
                                             <option value="">Location</option>
                                             @foreach($countries as $country)
                                             <option @if(!empty($userJobData['job_location']))
@@ -109,18 +111,18 @@
                             </div>
                         </div>
                         <div class="guide_profile_subsection">
-                            <div class="guide_profile_main_text mt-3">Job Description</div>
+                            <div class="guide_profile_main_text mt-3">Job Description <span style = "color:red">*</span></div>
                             <div class="profile_input">
                                 <textarea class="form-control controlTextLength" text-length="1500" maxlength="1500" name="description" required aria-label="With textarea" placeholder="Your answer here">@if (!empty($userJobData['description'])) {{$userJobData['description']}} @endif</textarea>
                             </div>
                         </div>
                         <div class="guide_profile_subsection">
-                            <div class="guide_profile_main_text mt-3">Skills Required</div>
+                            <div class="guide_profile_main_text mt-3">Skills Required <span style = "color:red">*</span></div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Skills (You can add upto 10 skills)</label>
-                                        <select name="skills[]" class="select_limit outline is-invalid-remove js-select2" required id="lang" multiple data-maximum-selection-length="10">
+                                        <select name="skills[]" class="select_limit outline is-invalid-remove js-select2" id="lang" multiple data-maximum-selection-length="10" required>
                                             @foreach ($skills as $k=>$v)
                                             <option value="{{ $v->id }}" @if(!empty($userJobData['job_skills']) && in_array($v->id, $userJobData['job_skills']))selected @endif>{{ $v->name }}</option>
                                             @endforeach
@@ -136,7 +138,7 @@
                                     <input type="hidden" name="job_id" value="<?php if(isset($_REQUEST['job_id'])) {echo $_REQUEST['job_id'];}?>">
 
                                     <button class="cancel_btn mx-5 action" id="save_draft" data-id="save" type="button">Save as Draft</button>
-                                    <button class="guide_profile_btn action" data-id="publish" type="button">Publish</button>
+                                    <button type="submit" class="guide_profile_btn action" data-id="publish" type="button">Publish</button>
                                 </div>
                     </form>
                 </div>
@@ -148,9 +150,10 @@
 <!-- Modal for Confirmation for account deactivate -->
 <div class="modal fade" id="publish_job_modal"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
-
         <div class="modal-content">
-
+         <div class="d-flex justify-content-end m-2">
+             <button type="button" class="modal_cross_btn" data-bs-dismiss="modal" aria-label="Close">X</button>
+         </div>
             <div class="modal-body" style="padding: 0px;">
                 <section>
                     <div class="container">
@@ -190,10 +193,10 @@
 
 <script>
 // just for the demos, avoids form submit
-jQuery.validator.setDefaults({
-  debug: true,
-  success: "valid"
-});
+// jQuery.validator.setDefaults({
+//   debug: true,
+//   success: "valid"
+// });
 
 
 $("#post_job").validate({
@@ -217,27 +220,18 @@ $('.select_limit').change(function(event) {
 </script>
 
 <script>
-    $(".emp-select2").select2({
-        closeOnSelect: false,
-        placeholder: "Please Select",
-        allowClear: true,
-        tags: false,
-
-    });
-
-
-    $(".work-select2").select2({
-        closeOnSelect: false,
-        placeholder: "Please Select",
-        allowClear: true,
-        tags: false,
-
-    });
     $(".js-select2").select2({
         closeOnSelect: false,
         placeholder: "Skills",
         allowClear: true,
-        tags: false,
+        language: {
+      noResults: function() {
+        return '<button class="no_results_btn">No Result Found</a>';
+      },
+    },
+    escapeMarkup: function(markup) {
+      return markup;
+    },
        // maximumSelectionSize: 1
     });
     $(".action").on('click', function(e) {        
@@ -281,7 +275,7 @@ $('.select_limit').change(function(event) {
                         $(".work-select2").val(null).trigger('change');
                         $('.js-select2').val(null).trigger('change');
                         toastMessage(1, resp.message);
-                        location.reload();
+                        // location.reload();
                     } else {
                         // modal
                         $('.toast').hide()

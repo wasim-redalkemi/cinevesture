@@ -116,12 +116,14 @@
                                 <div class="col-md-12">
                                     <div class="profile_input">
                                         <label>Description</label>
+                                        <div class="form_elem">
                                         <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" text-length = "600" maxlength="600" name="description" aria-label="With textarea"><?php if(isset($experience)){ echo($experience->description); }?></textarea>
                                         @error('description')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -135,6 +137,8 @@
                                         <input type="hidden" name="flag" value="<?=request('flag')?>">
                                         {{-- <button type="submit" class="guide_profile_btn mx-3">Save & next</button> --}}
                                         <button type="button" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save & next</button>
+                                        <a href="{{route('experience-skip')}}"class="cancel_btn mx-3" style="text-decoration:none">Skip</a>
+                                        
                                     </div>
                                 </div>
                             </div>

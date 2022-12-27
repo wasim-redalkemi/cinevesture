@@ -35,7 +35,7 @@
                     <div class="head_text mt-4">Are you sure?</div>
                     <div class="sub_text mt-4">Do you really want to unpublish this job?</div>
                     <div class="d-flex justify-content-center mt-4">
-                        <button class="cancel_btn mx-3">Cancel</button>
+                        <button class="cancel_btn_modal mx-3">Cancel</button>
                         <button class="delete_btn mx-3">Delete</button>
                     </div>
                 </div>

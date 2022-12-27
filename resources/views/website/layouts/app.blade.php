@@ -82,9 +82,8 @@
         });
 
         $('.controlTextLength').each(function(){
-            $(this).after("<div class=textlength for_alert text-end>"+ $(this).val().length +" / "+$(this).attr('text-length')+"</div>");
-            // $('.controlTextLength').after("<div class=textlength for_alert text-end>"+ $(this).val().length +" / "+$(this).attr('text-length')+"</div>");
-            $('.textlength').css({"color":"#787885", "text-align":"end"})
+            $(this).after("<span class=textlength for_alert text-end>"+ $(this).val().length +" / "+$(this).attr('text-length')+"</span>");
+            $('.textlength').css({"color":"#787885", "text-align":"end", "float":"end"})
         });
 
         $('.controlTextLength').keyup(function ()
@@ -92,11 +91,11 @@
             var max = $(this).attr('text-length');
             var len = $(this).val().length;
             if (len >= max) {
-                $(this).next('.textlength').text(' You have reached the limit');
-                $('.textlength').css('color', 'red', 'text-align', 'end');
+                $(this).parents('.form_elem').find('.textlength').text(' You have reached the limit').css('color', 'red', 'text-align', 'end');
+                // $(this).next('.textlength').css('color', 'red', 'text-align', 'end');
             } else {
                 var char = len;
-                $(this).next('.textlength').text(char + ' / '+max);
+                $(this).parents('.form_elem').find('.textlength').text(char + ' / '+max); 
                 $('.textlength').css({"color":"#787885", "text-align":"end"});
             }
         });

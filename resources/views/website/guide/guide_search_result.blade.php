@@ -145,7 +145,7 @@
                         <div class="col-md-9">
                             <div class="d-flex align-items-center">
                                 <div class="guide_profile_main_text">
-                                    <a href="{{route('profile-public-show',['id'=>$user->id])}}" class="btn-link text_user_name">{{$user->name}}</a>
+                                    <a href="{{route('profile-public-show',['id'=>$user->id])}}" class="btn-link text_user_name">{{empty($user->first_name)?'Name':ucfirst($user->first_name).' '.ucfirst($user->last_name);}}</a>
                                 </div>
                                 @if($user->is_profile_verified == '1')<span><button class="verified_cmn_btn mx-3">
                                         <img src="{{ asset('images/asset/verified_icon.svg') }}" alt="image"> VERIFIED</button></span>@endif
