@@ -2024,7 +2024,7 @@ button, input, optgroup, select, textarea {
     display: none;
   }
   .select2-results__option[aria-selected=true]:before {
-    content: url("../images/asset/done_icon_15.jpg") !important;
+    /* content: url("../images/asset/done_icon_15.jpg") !important; */
     /* content: "\f00c" !important; */
     height: 20px;
     width: 20px;
@@ -2032,6 +2032,7 @@ button, input, optgroup, select, textarea {
     display: inline-block;
     text-align: center;
     margin-right: 8px;
+    
   }
   .select2-container--open .select2-dropdown--below {
       border-radius: 4px;

@@ -110,9 +110,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="guide_profile_subsection">
+                        <div class="guide_profile_subsection pb-4">
                             <div class="guide_profile_main_text mt-3">Job Description <span style = "color:red">*</span></div>
-                            <div class="profile_input">
+                            <div class="profile_input form_elem">
                                 <textarea class="form-control controlTextLength" text-length="1500" maxlength="1500" name="description" required aria-label="With textarea" placeholder="Your answer here">@if (!empty($userJobData['description'])) {{$userJobData['description']}} @endif</textarea>
                             </div>
                         </div>
