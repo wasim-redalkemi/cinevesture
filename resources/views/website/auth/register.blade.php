@@ -2,6 +2,9 @@
 
 @section('title','Cinevesture-Register')
 
+@section('header')
+@include('website.auth.guest_header')
+@endsection
 @section('content')
 <section class="auth_section p-0 mt-0">
 
@@ -59,19 +62,19 @@
         </form>
         <div class="col-12 mt-2">
             <a href="{{ route('google.login') }}">
-                <button class="with_google_btn" type="button"> <img src="{{ asset('images/asset/google.png') }}" width="24" width="24" class="mx-3">Sign up with google</button>
+                <button class="with_google_btn" type="button"> <img src="{{ asset('images/asset/google.png') }}" width="24" width="24" class="mx-3">Sign Up with google</button>
             </a>
         </div>
-        <div class="help-text mt-2 mt-lg-4">Need Help ?</div>
+        <div class="help-text mt-2 mt-lg-4">Need Help?</div>
         <div class="bottom-container mb-5">
-            <div class="aleady-text">Already have an account ?<a href="{{route('login')}}" class="text_decor_none"><span class="mx-3 sign_now_text">Login here</span></a>
+            <div class="aleady-text">Already have an account?<a href="{{route('login')}}" class="text_decor_none"><span class="mx-3 sign_now_text">Login here</span></a>
             </div>
             <div class="my-3">
                 This site is protected by reCAPTCHA and with Google Privacy
                 Policy and Terms of Service apply.
             </div>
             <div>
-                By clicking “Create Account”, I agree to Cinevesture’s TOS
+                By clicking "Create Account", I agree to Cinevesture's TOS
                 and Privacy Policy.
             </div>
         </div>

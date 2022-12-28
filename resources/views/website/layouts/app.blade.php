@@ -38,7 +38,7 @@
             @endif
             @stack('add_css')
             <div class="main_content">
-            @yield('content')
+                @yield('content')
             </div>
             @yield('footer')
 
