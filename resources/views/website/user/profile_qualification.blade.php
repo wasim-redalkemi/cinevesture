@@ -113,7 +113,6 @@
                                     <div class="d-flex justify-content-end mt-4">
                                         <button type="submit" name="saveAndAnother" value="false" class="portfolio_save_btn save_add_btn">Save & add another</button>
                                         <input type="hidden" id="save_btn_value" name="saveButtonType" value="">
-                                        <a href="{{route('experience-create')}}"class="cancel_btn mx-3" style="text-decoration:none">Cancel</a>
                                         <input type="hidden" name="flag" value="<?=request('flag')?>">
                                         <button type="submit" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save</button>
                                         <a href="{{route('qualification-skip')}}"class="cancel_btn mx-3" style="text-decoration:none">Skip</a>
