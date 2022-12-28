@@ -103,7 +103,7 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Last Name <span style="color:red">*</span></label>
-                                    <input type="text" class="outline is-invalid-remove name-only form-control @error('last_name') is-invalid @enderror" placeholder="{{ __('Last Name') }}" name="last_name" value="@if (!empty($user->last_name)){{$user->last_name}} @endif" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                    <input type="text" class="outline is-invalid-remove name-only form-control @error('last_name') is-invalid @enderror" placeholder="{{ __('Last Name') }}" name="last_name" value="@if (!empty($user->last_name)){{$user->last_name}}@endif" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('last_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

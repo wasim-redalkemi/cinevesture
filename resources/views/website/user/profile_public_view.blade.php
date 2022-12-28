@@ -157,7 +157,9 @@
                             <div class="guide_profile_main_text mt-3">Languages Spoken</div>
                             @if (count($user_languages)>0)
                                     @foreach ($user_languages as $k=>$v)
-                                        <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ $v['get_languages']['name'] }}</div> 
+                                        <button class="curv_cmn_btn skill_container">
+                                            {{ $v['get_languages']['name'] }}
+                                        </button>
                                     @endforeach                                        
                             @else
                                 <span><b>-</b></span>

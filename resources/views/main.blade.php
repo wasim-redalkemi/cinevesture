@@ -147,31 +147,31 @@
                     </div>
                     <div class="secondry-card-top-container w-100">
                       <div>
-                      <a href="{{ route('public-view', ['id'=>$v1->projects->id]) }}">
+                      <a href="{{ route('public-view', ['id'=>$v1->projects->id]) }}" >
                         @if (isset($v1->projects->project_name) && !empty($v1->projects->project_name))
-                        {{$v1->projects->project_name}}
+                      <span class="white">{{$v1->projects->project_name}}</span> 
                         @endif
                       </a>
                       </div>
                       <div>
                         {{-- <i class="fa fa-heart" style="color: white;" aria-hidden="true"></i> --}}
-                        <i class="fa fa-heart-o icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$v1->projects->id}}" aria-hidden="true"></i>
+                        <i class="fa fa-heart-o icon-size like-project" style="cursor: pointer;" data-id="{{$v1->projects->id}}" aria-hidden="true"></i>
                       </div>
                     </div>
                     <div class="secondry-card-bottom-container">
                       <a href="{{ route('public-view', ['id'=>$v1->projects->id]) }}">
 
                       @if (isset($v1->projects->duration) && !empty($v1->projects->duration))
-                        {{$v1->projects->duration}} /
+                      <span class="white">  {{$v1->projects->duration}} /</span>
                       @endif
                       @if (isset($v1->projects->genres[0]) && !empty($v1->projects->genres[0]))
-                        {{$v1->projects->genres[0]['name']}} /
+                       <span class="white"> {{$v1->projects->genres[0]['name']}} /</span>
                       @endif
                       @php
                         $country_data = $v1->toArray();
                       @endphp
                       @if (isset($country_data['projects']['project_countries'][0]) && !empty($country_data['projects']['project_countries'][0]))
-                        {{$country_data['projects']['project_countries'][0]['name']}}
+                      <span class="white">  {{$country_data['projects']['project_countries'][0]['name']}}</span>
                       @endif
                     </a>
                     </div>

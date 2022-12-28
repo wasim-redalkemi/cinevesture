@@ -33,7 +33,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="profile_input">
-                                        <label>Project Title</label>
+                                        <label>Project Title <span style = "color:red">*</span></label>
                                         <input type="text" class="form-control @error('project_title') is-invalid @enderror" placeholder="Project Title" name="project_title" value="<?php if(isset($UserPortfolioEdit[0]->project_title)){ echo($UserPortfolioEdit[0]->project_title); }?>" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('project_title')
                                             <span class="invalid-feedback" role="alert">
@@ -46,7 +46,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="profile_input">
-                                        <label>Description</label>
+                                        <label>Description <span style = "color:red">*</span></label>
                                         <div class="form_elem">
                                     <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" text-length = "600" maxlength="600" name="description" aria-label="With textarea"><?php if(isset($UserPortfolioEdit[0]->description)){ echo($UserPortfolioEdit[0]->description); }?></textarea>
                                     @error('description')
@@ -61,7 +61,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                 <div class="profile_input">
-                                    <label for="lang">Project specific Skills</label>
+                                    <label for="lang">Project specific Skills <span style = "color:red">*</span></label>
                                     <select name="project_specific_skills_id" class="outline js-select2 @error('project_specific_skills_id') is-invalid @enderror" id="lang" multiple>
                                         @foreach ($skills as $k=>$v)
                                             <option
@@ -89,7 +89,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="profile_input">
-                                        <label for="lang">Project Location (Where it took place)</label>
+                                        <label for="lang">Project Location (Where it took place) <span style = "color:red">*</span></label>
                                         <select name="project_country_id[]" class="outline js-select2 @error('project_country_id') is-invalid @enderror" id="lang" multiple>
                                         @foreach ($country as $k=>$v)
                                             <option
@@ -116,7 +116,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <div class="profile_input">
-                                        <label>Completion Date</label>
+                                        <label>Completion Date <span style = "color:red">*</span></label>
                                         <input id="date" type="date" class="form-control @error('completion_date') is-invalid @enderror" name="completion_date" value="{{ date("Y-m-d",strtotime($UserPortfolioEdit[0]->completion_date)) }}"
                                         aria-label="" aria-describedby="basic-addon1">
                                         @error('completion_date')
@@ -128,7 +128,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <label class="mt-3">Video Link</label>
+                                <label class="mt-3">Video Link <span style = "color:red">*</span></label>
                                 @if($UserPortfolioEdit[0]->video)
                                 <div class="col-md-4">
                                     <div id="portfolio-video" class="profile_input">
@@ -162,7 +162,7 @@
                                 @endif                                              
                             </div>
                             <div class="row portfolio-images">
-                                <label class="mt-3">Pictures</label>
+                                <label class="mt-3">Pictures <span style = "color:red">*</span></label>
                                 @foreach($UserPortfolioImages as $pfimg)
                                 <div id="portfolio-img-{{$pfimg->id}}" class="col-md-4 img-item">
                                     <div class="open_file_explorer profile_upload_container h_66">
@@ -183,7 +183,7 @@
                                             <div class="fill-progress"></div>
                                         </div>
                                         <div for="file-input input_wrap" class="d-none">
-                                            <input type="file" class="imgInp" id="upload-img-inp-new-{{count($UserPortfolioImages)+1}}" name="portfolio-image-{{count($UserPortfolioImages)+1}}" accept=".jpg,.jpeg,.png">
+                                            <input type="file" class="imgInp" id="upload-img-inp-new-{{count($UserPortfolioImages)+1}}" name="portfolio-image-{{count($UserPortfolioImages)+1}}" accept=".jpg,.jpeg,.png"  autofocus required>
                                         </div>
                                         <label for="upload-img-inp-new-{{count($UserPortfolioImages)+1}}">
                                             <div class="text-center">

@@ -144,7 +144,7 @@
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>Name</label>
-                                        <input type="text" value="" class="form-control asso-name" name="project_associate_name" placeholder="Locations (Optional)" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" value="" class="form-control asso-name" name="project_associate_name" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('project_associate_name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
