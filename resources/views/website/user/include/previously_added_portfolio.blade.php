@@ -33,8 +33,18 @@
                                     </div>
                                   </div>
                                   <div class="mt-2">
-                                    <div class="upload_resume_text">{{$v->getPortfolioSkill[0]->name}}</div>
-                                    <div class="upload_resume_text mt-2">{{$v->getPortfolioLocation[0]->name}}</div>
+                                    <div class="upload_resume_text">
+                                      <?php 
+                                        if(isset($v->getPortfolioSkill[0]->name))
+                                        {echo $v->getPortfolioSkill[0]->name;}
+                                      ?>
+                                    </div>
+                                    <div class="upload_resume_text mt-2">
+                                      <?php 
+                                        if(isset($v->getPortfolioLocation[0]->name))
+                                        {echo $v->getPortfolioLocation[0]->name;}
+                                      ?>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
