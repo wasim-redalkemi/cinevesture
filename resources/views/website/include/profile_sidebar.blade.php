@@ -1,7 +1,11 @@
 <div class="profile_side_bar">
     <div class="sidebar_content mb-0 mb-md-3 d-flex justify-content-between"  data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
       <div class="d-flex align-items-center">  <i class="fa fa-user-circle profile_icon" aria-hidden="true"></i>
-        <a href="" class="mx-2">Profile</a>
+        @php
+        use App\Models\User;
+          $username =User::query()->find(auth()->user()->id);
+        @endphp
+        <a href="" class="mx-2">{{ucwords($username->name)}}</a>
       </div>
       <div class="d-flex align-items-center d-block d-md-none">
           <div class="inp_data mx-2">Profile</div>
@@ -22,8 +26,8 @@
     <hr class="sidebar_content_hr">
     <div class="sidebar_content"><a href="{{ route('project-list') }}">Projects</a></div>
     <hr class="sidebar_content_hr">
-    <div class="sidebar_content"><a href="{{ route('profile-create') }}">Profile</a></div>
-    <hr class="sidebar_content_hr">
+    {{-- <div class="sidebar_content"><a href="{{ route('profile-create') }}">Profile</a></div>
+    <hr class="sidebar_content_hr"> --}}
     <div class="sidebar_content"><a href="{{ route('organisation-private-view') }}">Organisation</a></div>
     <hr class="sidebar_content_hr">
     <!-- <div class="sidebar_content"><a href="">My Jobs</a></div> -->
