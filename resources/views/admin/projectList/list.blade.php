@@ -36,7 +36,7 @@
                                             <input type="hidden" id="project_count" name="project_count" value="{{(@$project->lists[0]->pcount) ? @$project->lists[0]->pcount : 0}}"></a>
                                         </td>
                                        <td>
-                                        @if($project->status=='published')
+                                         @if($project->status=='published')
                                             <a class="btn btn-success btn-fw mb-1 btn-sm mt-10 w-65 view-btn btn_padding text-white" href="{{route('change-status',['id' => $project->id , 'status' =>'unpublished'])}}">                                            
                                                 {{ucfirst($project->status)}}
                                             </a>

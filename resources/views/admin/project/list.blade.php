@@ -161,9 +161,13 @@
                                         </td>
 
                                         <td>{{ date('d-M-y', strtotime($project->created_at)) }}</td>
+                                        <td>
                                         @if (isset($project->user->name))
-                                        <td>{{ucfirst($project->user->name)}}</td>
+                                        {{ucfirst($project->user->name)}}
+                                        @else
+                                        {{'-'}}
                                         @endif
+                                        </td>
                                         <td>2</td>
 
                                         <td class="" style="width: 100px;">

@@ -1124,7 +1124,7 @@ a
     align-items: center;
     padding: 8px 24px;
     width: 100%;
-    height: 65px;
+    min-height: 65px;
     background: rgba(28, 3, 48, 0.05);
     border-radius: 4px;
     display: flex;
@@ -2032,6 +2032,7 @@ button, input, optgroup, select, textarea {
     display: inline-block;
     text-align: center;
     margin-right: 8px;
+    
   }
   .select2-container--open .select2-dropdown--below {
       border-radius: 4px;

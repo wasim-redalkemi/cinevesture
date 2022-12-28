@@ -61,6 +61,7 @@
                                        <th>Id</th>
                                        <th>Name</th>
                                        <th>Image</th>
+                                       <th>Status</th>
                                        <th>Select</th>
                                       </tr>
                                  </thead>
@@ -70,13 +71,10 @@
                                  
 
                                         @foreach ($project_data as $key=>$project)
-                                           
-                                        
-                                        
                                           <tr>
                                             <td>{{$project_data->firstItem() + $key}}</td>
                                             
-                                            <td>{{ $project['project_name']}}</td>
+                                            <td>{{ ucfirst($project['project_name'])}}</td>
                                               <td>
                                                 @if (!empty($project->projectOnlyImage))
                                                 @foreach ($project->projectOnlyImage as $item)
@@ -88,6 +86,9 @@
                                                     <span>-</span>
                                                 @endif
                                                  
+                                              </td>
+                                              <td>
+                                                {{ucfirst($project->admin_status)}}
                                               </td>
                                               <td>
                                           
@@ -103,7 +104,7 @@
                                         
                                    </tbody>
                              </table>
-                          <div style="text-align: center;">
+                          <div style="text-align: center;" class="m-4">
                             <button type="submit" class="btn btn-success btn-icon-text btn_padding">
                             <i class="mdi mdi-file-check btn-icon-prepend"></i>
                             Save</button>

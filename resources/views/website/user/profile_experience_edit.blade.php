@@ -34,12 +34,13 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Job Title <span style = "color:red">*</span></label>
-                                        <input type="text" class="form-control @error('job_title') is-invalid @enderror" placeholder="Job Title" name="job_title" value="<?php if(isset($UserExperienceData->job_title)){ echo($UserExperienceData->job_title); }?>"
+                                        <input type="text" class="form-control @error('job_title') is-invalid @enderror" placeholder="Job Title" name="job_title" value="<?php if(isset($UserExperienceData->job_title)){ echo ($UserExperienceData->job_title); }?>"
                                             aria-label="Username" aria-describedby="basic-addon1" autofocus required>
+                                        @error('job_title')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
-                                            @enderror
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -48,7 +49,7 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Company <span style = "color:red">*</span></label>
-                                        <input type="text" class="form-control @error('company') is-invalid @enderror" placeholder="Company" name="company" value="<?php if(isset($UserExperienceData->company)){ echo($UserExperienceData->company); }?>" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
+                                        <input type="text" class="form-control @error('company') is-invalid @enderror" placeholder="Company" name="company" value="<?php if(isset($UserExperienceData->company)){ echo ($UserExperienceData->company); }?>" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
                                         @error('company')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

@@ -168,6 +168,36 @@
         </div>
 
     </div>
+    <div class="modal fade" id="ImageCropperModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content croper_modal">
+                                        <div class="modal-header py-1">
+                                            <h6 class="modal-title tile_text" id="modalLabel"> Image Cropper</h6>
+                                            <div class="d-flex jutify-content-center">
+                                                <button type="button" class="mx-2 btn-danger" id="crop-cancel" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                <button type="button" class="btn-success" id="crop"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="modal-body overflow-auto">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="cropperWrap">
+                                                            <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 @endsection
 
@@ -249,8 +279,11 @@
                 console.log("e = ", this.files, imgId);
                 const [file] = this.files
                 uploadedFile = this.files[0];
+                var ImageCropperObj = new ImageCropper(uploadedFile, imgId+" #previewImg");
+                ImageCropperObj.setCropBoxSize({'width':285*2,height:194*2});
+                let ret = ImageCropperObj.init();
                 if (file) {
-                    $(imgId + " #previewImg").attr("src", URL.createObjectURL(file)).show();
+                    //$(imgId + " #previewImg").attr("src", URL.createObjectURL(file)).show();
                     $(parentElemId + " " + imgId + " .open_file_explorer label").hide();
                     $(parentElemId + " " + imgId + " .profile_upload_text").hide();
                     //$(parentElemId+" .profile_input.add-new-image").show();
@@ -346,4 +379,5 @@
         $(this).parents('form').submit();
     });
 </script>
+<script src="{{ asset('js/cropper.js') }}"></script>
 @endpush

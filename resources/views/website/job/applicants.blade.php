@@ -20,7 +20,8 @@ use Illuminate\Support\Facades\DB;
                 @include('website.include.profile_sidebar')
             </div>
             <div class="col-md-9">
-                <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
+                <div class="white_bg_wraper my-3 my-md-0">
+                <div class="border_btm profile_wraper_padding mt-md-0 mt-4">
 
                     <div class="search-head-text deep-aubergine">
                         Applicants for “{{$jobTitle}}”
@@ -28,7 +29,7 @@ use Illuminate\Support\Facades\DB;
                 </div>
 
                 @foreach($applicants as $applicant)
-                <div class="profile_wraper profile_wraper_padding">
+                <div class="border_btm profile_wraper_padding">
 
                     <div class="row">
                         <div class="col-md-2">
@@ -67,7 +68,7 @@ use Illuminate\Support\Facades\DB;
 
                 </div>
 @endforeach
-                
+            </div>
             </div>
         </div>
     </div>
