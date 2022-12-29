@@ -239,8 +239,8 @@
                                 @endif
                             </div>
                             <div class="col-md-7">
-                                <div class="search-head-text">{{$project->project_name}}</div>
-                                <div class="search-head-subtext">{{$project->synopsis}}</div>
+                                <div class="search-head-text">@if (!empty($project->project_name)){{ucFirst($project->project_name)}} @endif</div>
+                                <div class="search-head-subtext">@if (!empty($project->logline)){{ucFirst($project->logline)}} @endif</div>
                                 <table class="table mt-1">
                                     <tbody class="search-table-body">
                                         <tr>
@@ -248,39 +248,46 @@
                                             <td>
                                                 <div style="width: 100%">
                                                     @if(isset($project->projectLookingFor[0]))
-                                                    @foreach($project->projectLookingFor as $look)
-                                                    <button class="curv_cmn_btn">{{$look->name}}</button>
-                                                    @endforeach
-                                                    @else
-                                                    -
+                                                        <button class="curv_cmn_btn">{{$project->projectLookingFor[0]->name}}</button>
+                                                    @endif
+
+                                                    @if(isset($project->projectLookingFor[1]))
+                                                        <button class="curv_cmn_btn">{{$project->projectLookingFor[1]->name}}</button>
+                                                    @endif
+
+                                                    @if(isset($project->projectLookingFor) && count($project->projectLookingFor)>2)
+                                                        <button class="curv_cmn_btn"><b>+{{(count($project->projectLookingFor)-2)}}</b></button>
                                                     @endif
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Total Budget</td>
-                                            <td class="aubergine">{{$project->total_budget}}</td>
+                                            <td class="aubergine">@if (!empty($project->total_budget)){{ucFirst($project->total_budget)}} @endif</td>
                                         </tr>
                                         <tr>
                                             <td>Type</td>
-                                            <td class="aubergine">{{$project->projectType->name}}</td>
+                                            <td class="aubergine">@if (!empty($project->projectType->name)){{ucFirst($project->projectType->name)}} @endif</td>
                                         </tr>
                                         <tr>
                                             <td>Locations</td>
                                             <td class="aubergine">
                                                 @if(isset($project->projectCountries[0]))
-                                                @foreach($project->projectCountries as $country)
-                                                <button class="curv_cmn_btn">{{$country->name}}</button>
-                                                @endforeach
-                                                @else
-                                                -
+                                                <button class="curv_cmn_btn">{{$project->projectCountries[0]->name}}</button>
+                                                @endif
 
+                                                @if(isset($project->projectCountries[1]))
+                                                    <button class="curv_cmn_btn">{{$project->projectCountries[1]->name}}</button>
+                                                @endif
+
+                                                @if(isset($project->projectCountries) && count($project->projectCountries)>2)
+                                                    <button class="curv_cmn_btn"><b>+{{(count($project->projectCountries)-2)}}</b></button>
                                                 @endif
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Created by</td>
-                                            <td class="aubergine">{{$project->user->name}}</td>
+                                            <td class="aubergine">@if (!empty($project->user->name)){{ucwords($project->user->name)}} @endif</td>
                                         </tr>
                                     </tbody>
                                 </table>

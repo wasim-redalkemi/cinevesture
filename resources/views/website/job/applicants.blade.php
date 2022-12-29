@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\DB;
                 <div class="border_btm profile_wraper_padding mt-md-0 mt-4">
 
                     <div class="search-head-text deep-aubergine">
-                        Applicants for “{{$jobTitle}}”
+                        Applicants for “{{ucwords($jobTitle)}}”
                     </div>
                 </div>
 
@@ -34,7 +34,7 @@ use Illuminate\Support\Facades\DB;
                     <div class="row">
                         <div class="col-md-2">
                             <div class="user_profile_container">
-                                <img src="{{asset($applicant->profile_image) }}" />
+                                <img src="{{Storage::url($applicant->profile_image)}}" class="w-100 br_100 " alt="product-image" style="height:100%;width:100%;">
                             </div>
                         </div>
                         <div class="col-md-10">

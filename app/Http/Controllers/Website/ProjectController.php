@@ -311,7 +311,7 @@ class ProjectController extends WebController
             $request = (object) $_REQUEST;
             $id = $request->project_id;
 
-            $details = UserProject::query()->find($id)->latest()->first();
+            $details = UserProject::query()->find($id);
             if (isset($details)) {                
                 $details->duration = $request->duration;
                 $details->total_budget = $request->total_budget;
@@ -395,7 +395,7 @@ class ProjectController extends WebController
             $request = (object) $_REQUEST;
             $id = $request->project_id;
 
-            $description = UserProject::query()->find($id)->latest()->first();
+            $description = UserProject::query()->find($id);
             if (isset($description)) {
                 
                 $description->logline = $request->logline;
@@ -440,7 +440,7 @@ class ProjectController extends WebController
     public function galleryStore(Request $request,$id)
     {
         try {
-                $project = UserProject::query()->find($id)->latest()->first();
+                $project = UserProject::query()->find($id);
                 if(!empty($project)) 
                 {
                     $data_to_insert = [];
@@ -548,7 +548,7 @@ class ProjectController extends WebController
             $request = (object) $_REQUEST;
             $id = $request->project_id;
 
-            $requirements = UserProject::query()->find($id)->latest()->first();
+            $requirements = UserProject::query()->find($id);
             if (isset($requirements)) {
                 
                 $requirements->project_stage_id = $request->project_stage_id;
