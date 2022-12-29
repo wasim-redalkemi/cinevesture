@@ -28705,3 +28705,12 @@ body {
     border-color: #000000;
 
 }
+
+a{
+  text-decoration: none;
+  color:#fff;
+}
+a:hover{
+  text-decoration: none;
+  color:#fff;
+}
