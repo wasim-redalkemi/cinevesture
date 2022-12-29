@@ -89,7 +89,7 @@
                                     <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
                                 </div>
                                 @foreach($modules as $module)
-                                <div class="plain_industry_guide my-2">
+                                <div class="plain_industry_guide mb_2">
                                     @if($flag == 0)
                                     <div class="industry_guide_text plain_industry_guide">
                                         <span class="movie_name_text">{{$module->name}}</span>

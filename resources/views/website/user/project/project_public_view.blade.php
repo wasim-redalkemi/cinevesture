@@ -145,7 +145,7 @@
                         </div>
                         <div class="col-lg-6 col-md-12 px-3">
                             <div class="public-head-subimage">
-                                <div class="playVideoWrap mt-3" video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link'] }}@endif">
+                                <div class="playVideoWrap br_4 mt-3" video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link'] }}@endif">
                                     <img src="@if (isset($projectData[0]['project_only_video'][0]['media_info'])){{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}@endif" alt="" >
                                 </div>
                                 {{-- <iframe width="100%" height="350" src="{{empty($projectData[0]['project_only_video'][0]['file_link'])?'https://www.youtube.com/embed/oYWAwwy5EbQ':$projectData[0]['project_only_video'][0]['file_link'];}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> --}}
@@ -223,7 +223,7 @@
                                     <i class="fa fa-share-alt mx-4 icon-size" aria-hidden="true"></i>
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
                                         
-                                    <div> <i class="fa <?php if(isset($UserProject->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
+                                    <div> <i class="fa <?php if(isset($UserProject->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
                                     @endif
                                 </div>
                                 {{-- <div class="d-flex">
@@ -338,12 +338,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="public-heading-text">Requirements & Milestones</h1>
-                    <div class="col-11">
+                    <div class="col-8">
                         <table class="table mt-1">
                             <tbody class="search-table-body white">
                                 <tr>
                                     <td class="public-head-subtext white">Looking for</td>
-                                    <td class="project-sub-text white d-flex flex-wrap">
+                                    <td class="project-sub-text white d-flex flex-wrap w-100">
                                         @if (!empty($projectData[0]['project_looking_for']))
                                         @foreach ($projectData[0]['project_looking_for'] as $k => $v)
                                             <button class="curv_cmn_btn darkbtn">{{ $v['name'] }}</button>
@@ -355,7 +355,7 @@
                                 </tr>
                                 <tr>
                                     <td class="public-head-subtext white">Start Up Funding Stage</td>
-                                    <td class="aubergine project-sub-text white">
+                                    <td class="aubergine project-sub-text white w-100">
                                         @if (!empty($projectData[0]['project_stage_of_funding']['name']))
                                         {{$projectData[0]['project_stage_of_funding']['name']}}
                                         @else
@@ -365,7 +365,7 @@
                                 </tr>
                                 <tr>
                                     <td class="public-head-subtext white">Crowdfunding link</td>
-                                    <td class="crowdfund_text ">
+                                    <td class="crowdfund_text w-100">
                                         @if (!empty($UserProject->crowdfund_link))
                                         <a href="{{ $UserProject->crowdfund_link}}" class="white">{{ $UserProject->crowdfund_link}}</a>                                    
                                         @else
@@ -377,8 +377,8 @@
                         </table>
                     </div>
 
-                    <div>
-                        <table class="table mt-1">
+                    <div class="mt-4">
+                        <table class="table">
                             <tbody class="search-table-body white">
                                 <tr class="requirement-table-header">
                                     <th>Milestone Description</th>
@@ -395,8 +395,8 @@
                                             @php $isEmpty = false;@endphp
                                             <tr>
                                                 <td class="public-head-subtext white">{{ $v['description'] }}</td>
-                                                <td class="aubergine project-sub-text white">{{ $v['budget'] }}</td>
-                                                <td class="aubergine project-sub-text white">{{ $v['target_date'] }}</td>
+                                                <td class="aubergine project-sub-text white w-100">{{ $v['budget'] }}</td>
+                                                <td class="aubergine project-sub-text white w-100">{{ $v['target_date'] }}</td>
                                             </tr>
                                         @endif
                                     @endforeach                          
@@ -421,7 +421,7 @@
                                             <tr>
                                                 <td class="public-head-subtext white">{{ $v['description'] }}</td>
                                                 <td class="aubergine project-sub-text white">{{ $v['budget'] }}</td>
-                                                <td class="aubergine project-sub-text white">{{ $v['target_date'] }}</td>
+                                                <td class="aubergine project-sub-text white ">{{ $v['target_date'] }}</td>
                                             </tr>
                                         @endif
                                     @endforeach                          

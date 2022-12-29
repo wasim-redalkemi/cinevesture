@@ -10,14 +10,14 @@
 <div class="hide-me animation for_authtoast">
     @include('website.include.flash_message')
 </div>
-<section class="auth_section">
+<section class="auth_section main_content">
     <div class="container signup-container">
         
         <form method="POST" enctype="multipart/form-data" action="{{ route('verify-otp') }}">
             @csrf
         <div class="row">
             <div class="col-md-12">
-                <div class="signup-text  mt-5 mt-md-5"> OTP Verification</div>
+                <div class="signup-text mt-5 mt-md-5"> OTP Verification</div>
             </div>
             <div class="col-12 mt-2 mt-lg-5 pt-2 pt-lg-5">
                 <input type="hidden" id = "email" name = "email" value = "{{$user->email}}">
