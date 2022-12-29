@@ -91,7 +91,7 @@
                                     </div>
                                     <div class="guide_profile_main_text mt-3">Available to Work In</div>
                                     <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (!empty($user->available_to_work_in))?$user->available_to_work_in:'-'; }}</div>
-                                    <div class="Languages Spoken mt-3">Languages Spoken</div>
+                                    <div class="guide_profile_main_text mt-3">Languages Spoken</div>
                                     
                                 <div class="d-flex flex-wrap mt-3">
                                     @if (count($user_languages)>0)
@@ -140,7 +140,7 @@
                     <div class="guide_profile_subsection">
                         <div class="container">
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-6">
                                     <div class="contact-page-text deep-pink">
                                         About
                                     </div>
@@ -154,8 +154,8 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-md-2"></div>
-                                <div class="col-md-5 ">
+                                {{-- <div class="col-md-2"></div> --}}
+                                <div class="col-md-6">
                                     <div class="guide_profile_main_text mb-2">Introduction Video</div>
                                     <div class="playVideoWrap" video-url="{{$user->intro_video_link}}">
                                         <img src="{{$user->intro_video_thumbnail}}" width="100%" alt="">

@@ -22,7 +22,8 @@
 
 <body>
     <div id="app">
-        <main>
+        @yield('header')
+        <main class="main_content">
             @yield('content')
         </main>
     </div>

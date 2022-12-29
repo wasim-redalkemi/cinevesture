@@ -31,13 +31,12 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="profile_input">
-                                        <label>Job Title</label>
-                                        <input type="text" class="form-control @error('job_title') is-invalid @enderror" placeholder="Job Title" name="job_title" value="<?php if(isset($experience)){ echo($experience->job_title); }?>"
-                                            aria-label="Username" aria-describedby="basic-addon1">
+                                        <label>Job Title <span style = "color:red">*</span></label>  
+                                        <input type="text" class="form-control @error('job_title') is-invalid @enderror" name="job_title" placeholder="Job Title"  aria-label="Username" aria-describedby="basic-addon1" maxlength="100" autofocus required>                                    
                                         @error('job_title')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
                                     </div>
                                 </div>
@@ -46,8 +45,8 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="profile_input">
-                                        <label>Company</label>
-                                        <input type="text" class="form-control @error('company') is-invalid @enderror" placeholder="Company" name="company" value="<?php if(isset($experience)){ echo($experience->company); }?>" aria-label="Username" aria-describedby="basic-addon1">
+                                        <label>Company <span style = "color:red">*</span></label>
+                                        <input type="text" class="form-control @error('company') is-invalid @enderror" placeholder="Company" name="company" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
                                         @error('company')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -59,8 +58,8 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="profile_input">
-                                        <label>Location</label>
-                                        <input type="text" class="form-control @error('country_id') is-invalid @enderror" placeholder="Location" name="country_id" value="<?php if(isset($experience)){ echo($experience->country_id); }?>" aria-label="Username" aria-describedby="basic-addon1">
+                                        <label>Location <span style = "color:red">*</span></label>
+                                        <input type="text" class="form-control @error('country_id') is-invalid @enderror" placeholder="Location" name="country_id" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
                                         @error('country_id')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -72,8 +71,8 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="profile_input">
-                                        <label>Start Date</label>
-                                        <input type="date" class="form-control @error('start_date') is-invalid @enderror" placeholder="DD/MM/YY" name="start_date" value="<?php if(isset($experience)){ echo($experience->start_date); }?>" aria-label="Username" aria-describedby="basic-addon1">
+                                        <label>Start Date <span style = "color:red">*</span></label>
+                                        <input type="date" id="startDate" class="form-control @error('start_date') is-invalid @enderror" placeholder="DD/MM/YY" name="start_date" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
                                         @error('start_date')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -83,8 +82,8 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="profile_input">
-                                        <label>End Date</label>
-                                        <input type="date" class="form-control @error('end_date') is-invalid @enderror" placeholder="DD/MM/YY" name="end_date" value="<?php if(isset($experience)){ echo($experience->end_date); }?>" aria-label="Username" aria-describedby="basic-addon1">
+                                        <label>End Date <span style = "color:red">*</span></label>
+                                        <input type="date" id="endDate" class="form-control @error('end_date') is-invalid @enderror" placeholder="DD/MM/YY" name="end_date" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
                                         @error('end_date')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -96,8 +95,8 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="profile_input">
-                                        <label for="lang">Employment Type</label>
-                                        <select name="employement_type_id" class="@error('employement_type_id') is-invalid @enderror" id="lang">
+                                        <label for="lang">Employment Type <span style = "color:red">*</span></label>
+                                        <select name="employement_type_id" class="@error('employement_type_id') is-invalid @enderror" id="lang" autofocus required>
                                         <option value="">Select</option>
                                             <option value="Full-time">Full-time</option>
                                             <option value="Contract">Contract</option>
@@ -115,9 +114,9 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="profile_input">
-                                        <label>Description</label>
+                                        <label>Description <span style = "color:red">*</span></label>
                                         <div class="form_elem">
-                                        <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" text-length = "600" maxlength="600" name="description" aria-label="With textarea"><?php if(isset($experience)){ echo($experience->description); }?></textarea>
+                                        <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" text-length = "600" maxlength="600" name="description" aria-label="With textarea" required autofocus></textarea>
                                         @error('description')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -132,11 +131,11 @@
                                     <div class="d-flex justify-content-end mt-4">
                                     <a href="{{route('portfolio-create')}}"class="cancel_btn mx-3" style="text-decoration:none">Cancel</a>
                                         {{-- <button class="save_add_btn">Save & add another</button> --}}
-                                        <button type="button" name="saveAndAnother" value="false" class="portfolio_save_btn save_add_btn">Save & add another</button>
+                                        <button type="submit" name="saveAndAnother" value="false" class="portfolio_save_btn save_add_btn">Save & add another</button>
                                         <input type="hidden" id="save_btn_value" name="saveButtonType" value="">
                                         <input type="hidden" name="flag" value="<?=request('flag')?>">
                                         {{-- <button type="submit" class="guide_profile_btn mx-3">Save & next</button> --}}
-                                        <button type="button" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save & next</button>
+                                        <button type="submit" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save & next</button>
                                         <a href="{{route('experience-skip')}}"class="cancel_btn mx-3" style="text-decoration:none">Skip</a>
                                         
                                     </div>
@@ -186,6 +185,26 @@
     $(".portfolio_save_btn").on("click", function () {
         $("#save_btn_value").attr("value", $(this).attr("name"))
         $(this).parents('form').submit();
+    });
+
+    $( function() {
+    var todaydt = new Date();
+        $("#startDate").datepicker({
+    
+            autoclose: true,
+                dateFormat: "dd/mm/yy",
+                endDate: todaydt,
+            onSelect: function (date) {
+            //Get selected date 
+                var date2 = $('#startDate').datepicker('getDate');
+                //sets minDate to txt_date_to
+                $('#endDate').datepicker('option', 'minDate', date2);
+            }
+        });
+        $('#endDate').datepicker({
+            dateFormat: "dd/mm/yy",
+            
+        });
     });
 </script>
 @endpush

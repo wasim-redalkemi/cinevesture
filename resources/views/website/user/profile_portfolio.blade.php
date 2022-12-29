@@ -31,8 +31,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="profile_input">
-                                    <label>Project Title</label>
-                                    <input type="text" class="form-control @error('project_title') is-invalid @enderror" placeholder="Project Title" name="project_title" aria-label="Username" aria-describedby="basic-addon1">
+                                    <label>Project Title <span style = "color:red">*</span></label>
+                                    <input type="text" class="form-control @error('project_title') is-invalid @enderror" placeholder="Project Title" name="project_title" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
                                     @error('project_title')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -44,9 +44,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="profile_input">
-                                    <label>Description</label>
+                                    <label>Description <span style = "color:red">*</span></label>
                                     <div class="form_elem">
-                                    <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" name="description" aria-label="With textarea" text-length="600" maxlength="600"></textarea>
+                                    <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" name="description" aria-label="With textarea" text-length="600" maxlength="600" autofocus required></textarea>
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -60,8 +60,8 @@
                             <div class="col-md-6">
                                 <div class="select2forError">
                                     <div class="profile_input">
-                                        <label for="lang">Project specific Skills</label>
-                                        <select name="project_specific_skills_id[]" class="outline is-invalid-remove js-select2 @error('project_specific_skills_id') is-invalid @enderror" id="lang" multiple>
+                                        <label for="lang">Project specific Skills <span style = "color:red">*</span></label>
+                                        <select name="project_specific_skills_id[]" class="outline is-invalid-remove js-select2 @error('project_specific_skills_id') is-invalid @enderror" id="lang" multiple autofocus required>
                                             @foreach ($skills as $k=>$v)
                                             <option value="{{ $v->id }}">{{ $v->name }}</option>
                                             @endforeach
@@ -78,8 +78,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="profile_input select2forError">
-                                    <label for="lang">Project Location (Where it took place)</label>
-                                    <select name="project_country_id[]" class="outline is-invalid-remove js-select2 @error('project_country_id') is-invalid @enderror" id="lang" multiple>
+                                    <label for="lang">Project Location (Where it took place) <span style = "color:red">*</span></label>
+                                    <select name="project_country_id[]" class="outline is-invalid-remove js-select2 @error('project_country_id') is-invalid @enderror" id="lang" multiple autofocus required>
                                         @foreach ($country as $k=>$v)
                                         <option value="{{ $v->id}}">{{ $v->name }}</option>
                                         @endforeach
@@ -95,8 +95,8 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="profile_input">
-                                    <label>Completion Date</label>
-                                    <input type="date" class="form-control @error('completion_date') is-invalid @enderror" placeholder="First Name" name="completion_date" aria-label="Username" aria-describedby="basic-addon1">
+                                    <label>Completion Date <span style = "color:red">*</span></label>
+                                    <input type="date" class="form-control @error('completion_date') is-invalid @enderror" placeholder="First Name" name="completion_date" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
                                     @error('completion_date')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -106,14 +106,14 @@
                             </div>
                         </div>
                         <div class="row">
-                            <label class="mt-3">Video URL</label>
+                            <label class="mt-3">Video URL <span style = "color:red">*</span></label>
                             <div class="col-md-4">
                                 <div id="portfolio-video" class="profile_input">
                                     <!-- <div><label>Project Files</label></div> -->
                                     <div class="img-container h_66 mt-3 mt-md-0">
                                         <img src="{{asset('images/asset/default-video-thumbnail.jpg')}}" class="width_inheritence" alt="image">
                                     </div>
-                                    <input type="text" class="outline is-invalid-remove form-control @error('video') is-invalid @enderror" placeholder="Paste link here" name="video_url" aria-label="Video URL" aria-describedby="basic-addon1">
+                                    <input type="text" class="outline is-invalid-remove form-control @error('video') is-invalid @enderror" placeholder="Paste link here" name="video_url" aria-label="Video URL" aria-describedby="basic-addon1" autofocus required>
                                     <input type="hidden" class="" name="video_thumbnail" value="" aria-label="Video Thumbnail" aria-describedby="basic-addon1">
                                     @error('video')
                                     <span class="invalid-feedback" role="alert">
@@ -124,7 +124,7 @@
                             </div>
                         </div>
                         <div class="row portfolio-images">
-                            <label class="mt-3">Pictures</label>
+                            <label class="mt-3">Pictures <span style = "color:red">*</span></label>
                             <div id="portfolio-img-new-1" class="col-md-4 img-item">
                                 <div class="open_file_explorer profile_upload_container h_66">
                                     <img src="" id="previewImg">
@@ -134,7 +134,7 @@
                                     <div class="progress-bar">
                                         <div class="fill-progress"></div>
                                     </div>
-                                    <div for="file-input input_wrap" class="d-none"><input type="file" class="imgInp" id="upload-img-inp-1" name="portfolio-image-1" accept=".jpg,.jpeg,.png">
+                                    <div for="file-input input_wrap" class="d-none"><input type="file" class="imgInp" id="upload-img-inp-1" name="portfolio-image-1" accept=".jpg,.jpeg,.png" autofocus required>
                                     </div>
                                     <label for="upload-img-inp-1">
                                         <div class="text-center">
@@ -156,7 +156,7 @@
                                     <button type="button" name="saveAndAnother" value="false" class="portfolio_save_btn save_add_btn">Save & add another</button>
                                     <input type="hidden" id="save_btn_value" name="saveButtonType" value="">
                                     <input type="hidden" name="flag" value="<?= request('flag') ?>">
-                                    <button type="button" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save & next</button>
+                                    <button type="submit" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save & next</button>
 
                                     <a href="{{route('portfolio-skip')}}"class="cancel_btn mx-3" style="text-decoration:none">Skip</a>
                                 </div>
@@ -167,6 +167,36 @@
             </div>
         </div>
 
+    </div>
+    <div class="modal fade" id="ImageCropperModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content croper_modal">
+                                        <div class="modal-header py-1">
+                                            <h6 class="modal-title tile_text" id="modalLabel"> Image Cropper</h6>
+                                            <div class="d-flex jutify-content-center">
+                                                <button type="button" class="mx-2 btn-danger" id="crop-cancel" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                <button type="button" class="btn-success" id="crop"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="modal-body overflow-auto">
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="cropperWrap">
+                                                            <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 @endsection
@@ -249,8 +279,11 @@
                 console.log("e = ", this.files, imgId);
                 const [file] = this.files
                 uploadedFile = this.files[0];
+                var ImageCropperObj = new ImageCropper(uploadedFile, imgId+" #previewImg");
+                ImageCropperObj.setCropBoxSize({'width':285*2,height:194*2});
+                let ret = ImageCropperObj.init();
                 if (file) {
-                    $(imgId + " #previewImg").attr("src", URL.createObjectURL(file)).show();
+                    //$(imgId + " #previewImg").attr("src", URL.createObjectURL(file)).show();
                     $(parentElemId + " " + imgId + " .open_file_explorer label").hide();
                     $(parentElemId + " " + imgId + " .profile_upload_text").hide();
                     //$(parentElemId+" .profile_input.add-new-image").show();
@@ -346,4 +379,5 @@
         $(this).parents('form').submit();
     });
 </script>
+<script src="{{ asset('js/cropper.js') }}"></script>
 @endpush

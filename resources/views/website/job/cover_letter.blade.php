@@ -36,8 +36,11 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                     <div class="col-md-8">
                                         <div class="guide_profile_main_text pt-3">{{$applicant->first_name.' '.$applicant->last_name}}</div>
-                                       
-                                        <a href="{{route('profile-public-show',['id'=>$applicant->id])}}" class="deep-pink">View Profile Contact</a>
+                                       <div>
+                                        <span class="associate_text deep-pink"><a href="{{route('profile-public-show',['id'=>$applicant->id])}}" class="">View Profile</a></span>
+                                        <span class="associate_text deep-pink mx-3"><a href="" class="">Contact</a></span>
+                                       </div>
+                                        <!-- <a href="{{route('profile-public-show',['id'=>$applicant->id])}}" class=""></a> -->
                                     </div>
                                     <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
                                         <i class="fa {{$isLiked ? 'fa-heart' : 'fa-heart-o'}} icon-size Aubergine" aria-hidden="true"></i>

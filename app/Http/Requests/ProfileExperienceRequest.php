@@ -26,11 +26,18 @@ class ProfileExperienceRequest extends FormRequest
         return [
             'job_title' => 'required|max:100',
             'company' => 'required|max:100',
+            'country_id' => 'required',
             'start_date' => 'required|date_format:Y-m-d',
             'end_date' => 'required|date_format:Y-m-d|after_or_equal:start_date',
             'employement_type_id' => 'required',
             'employement_type_id.*' => 'required|exists:employements,id',
-            'description' => 'nullable|max:600',
+            'description' => 'required|max:600',
         ];
+    }
+    public function messages()
+    {
+        return [
+           'country_id.required' => 'The location field is required.'
+        ];            
     }
 }

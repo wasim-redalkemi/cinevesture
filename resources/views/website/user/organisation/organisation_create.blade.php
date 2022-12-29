@@ -86,7 +86,7 @@
                             <div class="col-md-6">
                                 <div class="profile_input">
                                     <label>Name <span style="color:red">*</span></label>
-                                    <input type="text" class="outline name-only form-control @error('name') is-invalid @enderror" placeholder="{{ __('Name') }}" name="name" value="{{(isset($UserOrganisation->name))?$UserOrganisation->name:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                    <input type="text" class="outline form-control @error('name') is-invalid @enderror" placeholder="{{ __('Name') }}" name="name" value="{{(isset($UserOrganisation->name))?$UserOrganisation->name:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -144,6 +144,24 @@
                             </div>
                         </div>
                         <div class="row">
+                        <div class="col-md-6">
+                                <div class="profile_input select2forError">
+                                    <label> Languages Spoken <span style="color:red">*</span></label>
+                                    <select name="language_id[]" class="outline js-select2 @error('language_id') is-invalid @enderror" id="lang" multiple autofocus required>
+                                        @foreach ($languages as $k=>$v)
+                                        <option value="{{ $v->id }}" @if(isset($UserOrganisation->organizationLanguages )&&(in_array($v->id, $UserOrganisation->organizationLanguages)))selected @endif>{{ $v->name }}</option>
+                                        @endforeach
+
+                                    </select>
+                                    @error('language_id')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Located In <span style="color:red">*</span></label>
@@ -186,22 +204,6 @@
                                         </option>
                                     </select>
                                     @error('available_to_work_in')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="profile_input select2forError">
-                                    <label> Languages Spoken <span style="color:red">*</span></label>
-                                    <select name="language_id[]" class="outline js-select2 @error('language_id') is-invalid @enderror" id="lang" multiple autofocus required>
-                                        @foreach ($languages as $k=>$v)
-                                        <option value="{{ $v->id }}" @if(isset($UserOrganisation->organizationLanguages )&&(in_array($v->id, $UserOrganisation->organizationLanguages)))selected @endif>{{ $v->name }}</option>
-                                        @endforeach
-
-                                    </select>
-                                    @error('language_id')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

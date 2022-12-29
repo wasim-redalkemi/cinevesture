@@ -1,6 +1,10 @@
-@extends('website.layouts.app')
+@extends('website.layouts.auth')
 
 @section('title','Cinevesture-Otp')
+
+@section('header')
+@include('website.auth.guest_header')
+@endsection
 
 @section('content')
 <div class="hide-me animation for_authtoast">

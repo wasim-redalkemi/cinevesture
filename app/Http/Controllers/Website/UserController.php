@@ -368,8 +368,7 @@ class UserController extends WebController
             $prevPortfolio = UserPortfolio::query()->where('user_id',auth()->user()->id)->with(['getPortfolioSkill','getPortfolioLocation'])->get();
             $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
             $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();
-            $portfolio = User::query()->where('id',auth()->user()->id)->first();
-            return view('website.user.profile_portfolio', compact('portfolio', 'country', 'skills'));
+            return view('website.user.profile_portfolio', compact('prevPortfolio', 'country', 'skills'));
         } catch (Exception $e) {
             return back()->with('error', 'Something went wrong.');
         }
@@ -742,7 +741,7 @@ class UserController extends WebController
                 if ($request->saveButtonType == 'saveAndAnother') {
                     return redirect()->route('qualification-create')->with("success", "Please add another qualification.");
                 }
-                return redirect()->route('profile-private-show');
+                return redirect()->route('profile-private-show')->with("success", "Qualification added successfully.");
             } else {
                 return back()->with('error', 'Something went wrong ,please try again.');
             }
