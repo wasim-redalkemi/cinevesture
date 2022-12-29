@@ -1,4 +1,8 @@
-@extends('website.layouts.app')
+@extends('website.layouts.auth')
+
+@section('header')
+@include('website.auth.guest_header')
+@endsection
 
 @section('content')
 <section class="auth_section">

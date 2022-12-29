@@ -433,6 +433,7 @@ a
 }
 .home-dropdown .profile_input label, label { 
    margin-top: -4px;
+   word-break: break-all;
 }
 .nav-drop{
     height: 60vh;
@@ -945,7 +946,7 @@ a
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 80vh;
+    height: 20vh;
     font-size: 36px;
     color: #971E9B;
 }
@@ -2773,7 +2774,23 @@ select {
     background: white;
     border: none;
 }
-
+.portfolio_modal_item .portfolio_item_image {
+    width: 270px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto 0;
+}
+.portfolio_item_image .portfolio_img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    max-height: 100%;
+}
+.mb_3 {
+    margin-bottom: 20px;
+}
   @media (max-width: 480px) {
     .container, .container-lg, .container-md, .container-sm, .container-xl {
         /* max-width: 1365px !important; */

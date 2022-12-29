@@ -225,7 +225,7 @@
                 </form>
                 <span class="search-head-text"> </span>
             </div>
-            <div class="col-md-9">
+            <div class="col-md-9 mb_3">
                 @if(count($projects) >= 1)
                 @foreach($projects as $project)
                 <a href="{{route('public-view',['id'=>$project->id])}}" style="outline:none;text-decoration:none">

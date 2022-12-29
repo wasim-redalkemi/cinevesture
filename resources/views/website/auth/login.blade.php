@@ -2,6 +2,10 @@
 
 @section('title','Cinevesture-Login')
 
+@section('header')
+@include('website.auth.guest_header')
+@endsection
+
 @section('content')
 <div class="hide-me animation for_authtoast">
             @include('website.include.flash_message')
@@ -52,18 +56,14 @@
                 <div class="help-text mt-2 mt-lg-3 text-center">
                     @if (Route::has('password.request'))
                         <a class="btn-link text_decor_none" href="{{ route('password.request') }}">
-                            {{ __('Forgot password ?') }}
+                            {{__('Forgot Password?')}}
                         </a>
                     @endif
                 </div>
                 <div class="bottom-container mb-3">
                     <div class="aleady-text">New to Cinevesture?<span class="mx-2 sign_now_text">
-                    @if (Route::has('password.request'))
-                        <a class="btn-link text_decor_none"href="{{ route('register') }}">
-                            {{ __('Sign Up') }}
-                        </a>
-                    @endif
-                    </span>now
+                    @if(Route::has('password.request'))
+                        <a class="btn-link text_decor_none"href="{{ route('register') }}">{{ __('Sign Up') }}</a>@endif</span>now
                     </div>
                     <div class="my-3 proctect_by_capta_text">
                         This site is protected by reCAPTCHA and with Google Privacy
