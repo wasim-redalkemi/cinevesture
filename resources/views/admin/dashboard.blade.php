@@ -7,39 +7,47 @@
       <div class="row">
         <div class="col-md-6 col-lg-3 grid-margin stretch-card">
           <div class="card bg-gradient-primary text-white text-center card-shadow-primary">
+            <a href="{{route('user-management')}}">
             <div class="card-body">
-              <h6 class="font-weight-normal">Total invoices</h6>
-              <h2 class="mb-0">28893</h2>
+              <h6 class="font-weight-normal">Total Users</h6>
+              <h2 class="mb-0">{{$totalUsreCount}}</h2>
             </div>
+          </a>
           </div>
         </div>
         <div class="col-md-6 col-lg-3 grid-margin stretch-card">
           <div class="card bg-gradient-danger text-white text-center card-shadow-danger">
+            <a href="{{route('admin-project-list')}}">
             <div class="card-body">
-              <h6 class="font-weight-normal">Total invoices</h6>
-              <h2 class="mb-0">28893</h2>
+              <h6 class="font-weight-normal">Total Projects</h6>
+              <h2 class="mb-0">{{$totalProjectCount}}</h2>
             </div>
+          </a>
           </div>
         </div>
         <div class="col-md-6 col-lg-3 grid-margin stretch-card">
           <div class="card bg-gradient-warning text-white text-center card-shadow-warning">
+            <a href="{{route('job')}}">
             <div class="card-body">
-              <h6 class="font-weight-normal">Total invoices</h6>
-              <h2 class="mb-0">28893</h2>
+              <h6 class="font-weight-normal">Total Jobs</h6>
+              <h2 class="mb-0">{{$totalJobCount}}</h2>
             </div>
+          </a>
           </div>
         </div>
         <div class="col-md-6 col-lg-3 grid-margin stretch-card">
           <div class="card bg-gradient-info text-white text-center card-shadow-info">
+            <a href="{{route('query.list')}}">
             <div class="card-body">
-              <h6 class="font-weight-normal">Total invoices</h6>
-              <h2 class="mb-0">28893</h2>
+              <h6 class="font-weight-normal">Total Querys</h6>
+              <h2 class="mb-0">{{$totalQueryCount}}</h2>
             </div>
+          </a>
           </div>
         </div>
       </div>
       <div class="row">
-        <div class="col-lg-4 grid-margin stretch-card">
+        <div class="col-lg-6 grid-margin stretch-card">
           <div class="card">
             <div class="card-body pb-0">
               <h4 class="card-title">Daily Sales</h4>
@@ -70,7 +78,7 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-4 grid-margin stretch-card">
+        {{-- <div class="col-lg-4 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
               <div class="d-flex justify-content-between">
@@ -113,8 +121,8 @@
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-lg-4 grid-margin stretch-card">
+        </div> --}}
+        <div class="col-lg-6 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
               <h4 class="card-title">Traffic</h4>
