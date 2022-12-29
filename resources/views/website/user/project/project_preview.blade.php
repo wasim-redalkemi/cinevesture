@@ -24,7 +24,7 @@
                 <div class="preview_subtext">@if (!empty($projectData[0]['project_name'])) {{ucFirst($projectData[0]['project_name'])}} @endif</div>
                 <div class="preview_headtext">Types of projects</div>
                 <div class="preview_subtext">@if (!empty($projectData[0]['project_type']['name'])) {{ $projectData[0]['project_type']['name'] }} @endif</div>
-                <div class="preview_headtext">Who are you listning this project as</div>
+                <div class="preview_headtext">Who are you listing this project as</div>
                 <div class="preview_subtext">@if (!empty($projectData[0]['listing_project_as'])) {{ $projectData[0]['listing_project_as'] }} @endif</div>
                 <div class="preview_headtext">Language</div>
                 @if (!empty($projectData[0]['project_languages']))
