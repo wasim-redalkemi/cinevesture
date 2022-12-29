@@ -39,8 +39,8 @@
                         @endif
                       </div>
                       <div class="project-sub-text mt-1">
-                        @if (!empty($v->projects->director_statement))
-                        {{$v->projects->director_statement}}
+                        @if (!empty($v->projects->logline))
+                        {{$v->projects->logline}}
                         @endif
                       </div>
                       <div class="duration-lang-text mt-1">

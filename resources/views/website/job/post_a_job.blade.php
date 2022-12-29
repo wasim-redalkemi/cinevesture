@@ -92,7 +92,7 @@
                                     <div class="profile_input">
                                         <label>Location</label>
                                         <select name="countries" class="@error('countries') is-invalid @enderror" id="lang" >
-                                            <option value="">Location</option>
+                                            <option value="">Select</option>
                                             @foreach($countries as $country)
                                             <option @if(!empty($userJobData['job_location']))
                                                 @if ($userJobData['job_location']['id']==$country->id) {
@@ -222,7 +222,7 @@ $('.select_limit').change(function(event) {
 <script>
     $(".js-select2").select2({
         closeOnSelect: false,
-        placeholder: "Skills",
+        placeholder: "Select",
         allowClear: true,
         language: {
       noResults: function() {
@@ -242,6 +242,8 @@ $('.select_limit').change(function(event) {
         let $btn = $(this);
         e.preventDefault();
         e.stopPropagation();
+
+        let btnCurrentText = $btn.text();
 
         $btn.text("Submitting");
         $btn.prop('disabled',true);
@@ -265,7 +267,7 @@ $('.select_limit').change(function(event) {
             data: $('#post_job').serialize(),
             url: "{{ route('validate-job') }}",
             success: function(resp) {
-                $btn.text("Publish");
+                $btn.text(btnCurrentText);
                 $btn.prop('disabled',false);
 
                 if (resp.status == true) {
@@ -291,7 +293,7 @@ $('.select_limit').change(function(event) {
             },
             error: function(error) {                
                 console.log(error);
-                $btn.text("Publish");
+                $btn.text(btnCurrentText);
                 $btn.prop('disabled',false);
                 if (error.status==422) {
             let errors = error.responseJSON.errors
@@ -305,7 +307,7 @@ $('.select_limit').change(function(event) {
         });
              
        } catch (error) {           
-        $btn.text("Publish");
+        $btn.text(btnCurrentText);
         $btn.prop('disabled',false);
         
         console.log(error);

@@ -48,7 +48,7 @@ class JobController extends WebController
 
     public function create()
     {
-        $countries = MasterCountry::query()->get();
+        $countries = MasterCountry::query()->orderBy('name', 'ASC')->get();
         $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();
         $workspaces = Workspace::query()->get();
         $employments = MasterEmployement::query()->get();
@@ -263,7 +263,7 @@ class JobController extends WebController
     {
         $applicant = User::query()->find($userId);
         $coverLetter = UserAppliedJob::query()->where("user_id", $userId)->where("job_id", $jobId)->first();
-        $portfolios = UserPortfolio::query()
+        $portfolio = UserPortfolio::query()
             ->with('getPortfolio')
             ->where('user_id', $userId)
             ->get();
@@ -272,7 +272,7 @@ class JobController extends WebController
 
         $isLiked = UserFavouriteProfile::query()->where("user_id", auth()->id())->where("profile_id", $userId)->exists();
 
-        return view('website.job.cover_letter', compact('jobTitle', 'applicant', 'coverLetter', 'portfolios', 'isLiked'));
+        return view('website.job.cover_letter', compact('jobTitle', 'applicant', 'coverLetter', 'portfolio', 'isLiked'));
     }
 
     public function appliedJob(Request $request)
