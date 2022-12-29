@@ -45,7 +45,7 @@ use Illuminate\Support\Facades\DB;
                                     {{$applicant->first_name.' '.$applicant->last_name}}
                                     </a>
                                 </div>
-                                <div class="pointer"><i class="fa fa fa-heart-o aubergine icon-size like-profile" aria-hidden="true" data-id="{{$applicant->id}}"></i></div>
+                                <div class="pointer"><i class="fa <?php if(isset($applicant->isfavouriteProfile)){echo'fa-heart';}else{echo'fa-heart-o';} ?> aubergine icon-size like-profile" aria-hidden="true" data-id="{{$applicant->id}}"></i></div>
                             </div>
                             @php 
 

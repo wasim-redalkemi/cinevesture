@@ -20,7 +20,7 @@
                             @endphp
                                 <div class="contact-page-text deep-aubergine">@if (!empty($Job_data['title'])) {{ucFirst($Job_data['title'])}} @endif</div>
 
-                            <div class="d-flex justify-content-end">
+                            {{-- <div class="d-flex justify-content-end">
                                 <!-- <div class="contact-page-text deep-aubergine"> <span onclick="history.back()"><i class="fa fa-arrow-left" aria-hidden="true"></i></span> @if (!empty($Job_data['title'])) {{$Job_data['title']}} @endif</div> -->
                                 <div class="d-flex align-items-center">
                                     <div class="dropdown  search-page">
@@ -45,7 +45,7 @@
                                         @endif
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <div class="guide_profile_subsection">

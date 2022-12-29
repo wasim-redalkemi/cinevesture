@@ -53,10 +53,9 @@ use Illuminate\Support\Facades\DB;
                                             'email' =>empty($applicant->email)?'Email':$applicant->email, 
                                         ])
                                        </div>
-                                        <!-- <a href="{{route('profile-public-show',['id'=>$applicant->id])}}" class=""></a> -->
                                     </div>
-                                    <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
-                                        <i class="fa {{$isLiked ? 'fa-heart' : 'fa-heart-o'}} icon-size Aubergine" aria-hidden="true"></i>
+                                    <div class="col-md-2 d-flex pt-3 justify-content-lg-end">                        
+                                        <div class="pointer"><i class="fa {{$isLiked ? 'fa-heart' : 'fa-heart-o'}} aubergine icon-size like-profile" aria-hidden="true" data-id="{{$applicant->id}}"></i></div>
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +94,7 @@ use Illuminate\Support\Facades\DB;
                                         </div>
                                         <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
                                             <p>
-                                               {{empty($applicant->about)?'-':$applicant->about }}
+                                               {{empty($applicant->about)?'-':ucFirst($applicant->about) }}
                                             </p>
                                         </div>
                                     </div>

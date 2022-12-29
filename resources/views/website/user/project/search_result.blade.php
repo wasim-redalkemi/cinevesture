@@ -240,7 +240,17 @@
                             </div>
                             <div class="col-md-7">
                                 <div class="search-head-text">@if (!empty($project->project_name)){{ucFirst($project->project_name)}} @endif</div>
-                                <div class="search-head-subtext">@if (!empty($project->logline)){{ucFirst($project->logline)}} @endif</div>
+                                @php
+                                    $small_logline = '';
+                                    if (!empty($project->logline) && strlen($project->logline)>100)
+                                    {
+                                        $small_logline = substr($project->logline, 0, 100).'.....';
+                                    
+                                    } else {
+                                        $small_logline  = $project->logline;
+                                    } 
+                                @endphp
+                                <div class="search-head-subtext">@if (isset($small_logline)){{ucFirst($small_logline)}} @endif</div>
                                 <table class="table mt-1">
                                     <tbody class="search-table-body">
                                         <tr>
