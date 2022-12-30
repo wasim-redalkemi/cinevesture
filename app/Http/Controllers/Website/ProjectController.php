@@ -627,12 +627,22 @@ class ProjectController extends WebController
                 }
             })
             ->get();
+            $gener=ProjectGenre::query()->where('project_id',$_REQUEST['id'])->get();
+            foreach($gener as $generIds){
+                $generid[]=$generIds->gener_id;
+            }
+            $projects=ProjectGenre::query()->whereIn('gener_id',$generid)->get();
+            foreach($projects as $projectId){
+                $projectIdArray[]=$projectId->project_id;
+            }
+            $projectIdUnique=array_unique($projectIdArray);
+            $recomProject=UserProject::query()->whereIn('id',$projectIdUnique)->where('user_id','!=',auth()->user()->id)->get();
             $projectData = $projectData->toArray();
             if (empty($projectData)) {
-                return back()->with('error','Invalid request.');
+                return back()->with('error','This Project is Unpublished/Inactive.');
             }
 
-            return view('website.user.project.project_public_view', compact(['UserProject','projectData','geners','categories','looking_for','project_stages','countries','languages']));
+            return view('website.user.project.project_public_view', compact(['UserProject','projectData','geners','categories','looking_for','project_stages','countries','languages','recomProject']));
 
         } catch (Exception $e) {
             return back()->with('error','Something went wrong.');
