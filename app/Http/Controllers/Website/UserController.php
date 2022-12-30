@@ -365,13 +365,18 @@ class UserController extends WebController
     public function portfolioCreate(Request $request)
     {
         try {
-            $prevPortfolio = UserPortfolio::query()->where('user_id',auth()->user()->id)->with(['getPortfolioSkill','getPortfolioLocation'])->get();
+            $prevPortfolio = $this->userPortfolios(auth()->user()->id);
             $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
             $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();
             return view('website.user.profile_portfolio', compact('prevPortfolio', 'country', 'skills'));
         } catch (Exception $e) {
             return back()->with('error', 'Something went wrong.');
         }
+    }
+
+    private function userPortfolios($uid)
+    {
+        return UserPortfolio::query()->where('user_id',$uid)->with(['getPortfolioSkill','getPortfolioLocation'])->get();
     }
 
     public function portfolioStore(PostUserPortfolioRequest $request)
@@ -488,7 +493,8 @@ class UserController extends WebController
                     ->whereIn('id', $portfolio_locations_ids)
                     ->get()
                     ->toArray();
-                $prevPortfolio = UserPortfolio::query()->where('user_id',auth()->user()->id)->with(['getPortfolioSkill','getPortfolioLocation'])->get();
+
+                $prevPortfolio = $this->userPortfolios(auth()->user()->id);
                 return view('website.user.profile_portfolio_edit', compact('UserPortfolioEdit', 'UserPortfolioImages', 'user_portfolio_skill','user_portfolio_location', 'skills', 'country','prevPortfolio'));
             }
         } catch (Exception $e) {
@@ -595,11 +601,16 @@ class UserController extends WebController
     public function experienceCreate(Request $request)
     {
         try {
-            $prevExperience = UserExperience::query()->where('user_id',auth()->user()->id)->get();
+            $prevExperience = $this->userExperiences(auth()->user()->id);
             return view('website.user.profile_experience',compact(['prevExperience']));
         } catch (Exception $e) {
             return back()->with('error', 'Something went wrong.');
         }
+    }
+    
+    private function userExperiences($uid)
+    {
+        return UserExperience::query()->where('user_id',$uid)->get();
     }
 
     public function experienceStore(ProfileExperienceRequest $request)
@@ -643,7 +654,7 @@ class UserController extends WebController
     public function experienceEdit($id)
     {
         try {
-            $prevExperience = UserExperience::query()->where('user_id',auth()->user()->id)->get();
+            $prevExperience = $this->userExperiences(auth()->user()->id);
             $UserExperienceData = UserExperience::query()->where('id', $id)->first();
             if (is_null($UserExperienceData)) {
                 return back()->with('This experience is not exist');
@@ -707,11 +718,16 @@ class UserController extends WebController
     public function qualificationCreate(Request $request)
     {
         try {
-            $prevQualification = UserQualification::query()->where('user_id',auth()->user()->id)->get();
+            $prevQualification = $this->userQualifications(auth()->user()->id);
             return view('website.user.profile_qualification', compact('prevQualification'));
         } catch (Exception $e) {
             return back()->with('error', 'Something went wrong.');
         }
+    }
+    
+    private function userQualifications($uid)
+    {
+        return UserQualification::query()->where('user_id',$uid)->get();
     }
 
     public function qualificationStore(ProfieQualificationRequest $request)
@@ -753,7 +769,7 @@ class UserController extends WebController
     public function qualificationEdit($id)
     {
         try {
-            $prevQualification = UserQualification::query()->where('user_id',auth()->user()->id)->get();
+            $prevQualification = $this->userQualifications(auth()->user()->id);
             $UserQualificationData = UserQualification::query()->where('id', $id)->first();
             return view('website.user.profile_qualification_edit', compact(['UserQualificationData','prevQualification']));
         } catch (Exception $e) {
