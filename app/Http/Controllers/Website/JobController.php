@@ -248,7 +248,7 @@ class JobController extends WebController
     public function showJobApplicants($jobId)
     {
         $applicants = User::query()
-            ->with(["skill", "organization.country"])
+            ->with(["skill", "organization.country", "isfavouriteProfile"])
             ->whereHas('appliedJobs', function ($query) use ($jobId) {
                 $query->where('job_id', $jobId);
             })

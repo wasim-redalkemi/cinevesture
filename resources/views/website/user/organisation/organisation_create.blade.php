@@ -349,9 +349,11 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-end mt-4">
-                                    <button class="cancel_btn mx-3">Discard</button>
+                                    <a href="{{route('organisation-private-view')}}" class="cancel_btn" style="text-decoration:none">Cancel</a>
+
                                     <button type="submit" class="guide_profile_btn mx-3">Save</button>
                                 </div>
+                                
                             </div>
                         </div>
                     </form>
