@@ -80,8 +80,14 @@ class LoginController extends Controller
         }
        
             $user = User::query()->with('getSubcription')->where('email',$request->email)->first();
-            if($user->user_type == 'A'){
+            if(isset($user->user_type) && $user->user_type == 'A'){
                 return back()->with('error','Invalid credentials.');
+            }
+            if(isset($user->status) && $user->status == 0){
+                return back()->with('error','Your account has been suspending,please connect admin');
+            }
+            if(!isset($user)){
+                return back()->with('error','Your account has been deleted');
             }
            
             if (!$user->email_verified_at) {

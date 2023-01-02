@@ -45,10 +45,14 @@
                                           @endif
                                         </div>
                                         <div class="upload_resume_text mt-2">
-                                          <?php 
-                                            if(isset($v->getPortfolioLocation[0]->name))
-                                            {echo $v->getPortfolioLocation[0]->name;}
-                                          ?>
+                                          
+                                          @if(isset($v->getPortfolioLocation[0]))
+                                            <button class="curv_cmn_btn">{{$v->getPortfolioLocation[0]->name}}</button>
+                                          @endif
+
+                                          @if(isset($v->getPortfolioLocation) && count($v->getPortfolioLocation)>1)
+                                              <button class="curv_cmn_btn"><b>+{{(count($v->getPortfolioLocation)-1)}}</b></button>
+                                          @endif
                                         </div>
                                       </div>
                                     </div>

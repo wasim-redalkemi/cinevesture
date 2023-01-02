@@ -367,6 +367,7 @@ class JobController extends WebController
         $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();
         $jobs = UserJob::query()
             ->with(["jobLocation:id,name", "jobSkills:id,name", "favorite", "applied"])
+            ->where('save_type','published')
             ->where(function ($q) use ($requests) {
                 if (isset($requests["countries"]) && !empty($requests["countries"])) {
                     $q->whereIn("location_id", $requests["countries"]);

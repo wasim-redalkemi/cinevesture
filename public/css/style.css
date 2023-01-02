@@ -1285,7 +1285,7 @@ a
     font-feature-settings: 'ss01' on;
     color: #33084C;
     word-break: break-all;
-    max-height: 40px;
+    /* max-height: 40px; */
     overflow: hidden;
 }
 .public_view_main_subtext {

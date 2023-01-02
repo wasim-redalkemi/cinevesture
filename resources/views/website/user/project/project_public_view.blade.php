@@ -24,9 +24,6 @@
         <div>
             <div class="public-head-container">
                 <div class="container">
-                    {{-- @php
-                        dd($projectData[0]['user']);
-                    @endphp --}}
                     <div class="row">
                         <div class="col-md-6 col-sm-12 text-center text-lg-start">
                             <div class="verified-text-area">

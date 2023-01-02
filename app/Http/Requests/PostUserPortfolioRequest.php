@@ -24,10 +24,14 @@ class PostUserPortfolioRequest extends FormRequest
     public function rules()
     {
         return [
-            'project_title' => 'nullable',
-            'description' => 'nullable|max:600',
-            'completion_date' => 'nullable',
-            'video' => 'nullable|url',
+            'project_title' => 'required',
+            'description' => 'required|max:600',
+            'completion_date' => 'required',
+            'video_url' => 'required|url',
+            'project_specific_skills_id'=> 'required', 
+            'project_specific_skills_id.*' => 'required|exists:master_skills,id',
+            'project_country_id'=> 'required', 
+            'project_country_id.*' => 'required|exists:master_countries,id',
         ];
     }
     public function messages()

@@ -26,7 +26,7 @@
                             <div class="col-md-6">
                                 <div class="profile_input select2forError">
                                     <label>Category (Optional)</label>
-                                    <select name="category_id[]" class="js-select2 @error('category_id') is-invalid @enderror" autofocus multiple>
+                                    <select name="category_id[]" class="js-select2 @error('category_id') is-invalid @enderror" autofocus multiple required>
                                         @foreach ($category as $k=>$v)
                                             <option value="{{ $v->id }}"@if(!empty($projectData[0]['project_category'] )&&(in_array($v->id, $projectData[0]['project_category'])))selected @endif>{{  $v->name }}</option>
                                         @endforeach

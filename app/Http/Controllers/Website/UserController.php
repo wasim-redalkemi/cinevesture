@@ -390,10 +390,10 @@ class UserController extends WebController
             }
 
 
-            $user = User::query()->find(auth()->user()->id);
+            // $user = User::query()->find(auth()->user()->id);
             $portfolio = new UserPortfolio();
 
-            $portfolio->user_id = $user->id;
+            $portfolio->user_id = auth()->user()->id;
             $portfolio->project_title = ucfirst($request->project_title);
             $portfolio->description = ucfirst($request->description);
             $portfolio->completion_date = $request->completion_date;
@@ -449,7 +449,6 @@ class UserController extends WebController
                 $projectMedia->file_link = $v['file_link'];
                 $projectMedia->save();
             }
-            $experience = $portfolio;
             if ($request->flag == 'privateView') {
                 return redirect()->route('profile-private-show')->with("success", "Portfolio added successfully.");
             }
