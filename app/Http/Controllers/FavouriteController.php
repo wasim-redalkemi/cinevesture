@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
+use App\Models\Endorsement;
 use App\Models\User;
 use App\Models\UserFavourite;
 use App\Models\UserFavouriteProfile;
@@ -25,9 +26,13 @@ class FavouriteController extends Controller
         $user_projects = UserFavouriteProject::query()->with('projects.projectImage')
                          ->where('user_id',auth()->user()->id)->orderBy('created_at', 'DESC')->paginate(5);
         $user_profiles = UserFavouriteProfile::query()->with('profiles','profileSkills.getSkills','profileCountry.country')
-                         ->where('user_id',auth()->user()->id)->orderBy('created_at', 'DESC')->paginate(5);              
+                         ->where('user_id',auth()->user()->id)->orderBy('created_at', 'DESC')->paginate(5);
 
-        return view('website.user.favourite.favourite',compact(['user_projects','user_profiles']));
+        $user_endorsement = Endorsement::query()->with('endorsementCreater')->where('to',auth()->user()->id)->where('status','1')
+                                ->orderByDesc('id')->get();
+                                // dd($user_endorsement);
+
+        return view('website.user.favourite.favourite',compact(['user_projects','user_profiles','user_endorsement']));
     }
 
     /**

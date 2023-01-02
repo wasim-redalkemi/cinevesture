@@ -82,7 +82,22 @@
                                     <a href="{{route('profile-public-show',['id'=>$v['profiles']['id']])}}" style="outline: none; text-decoration:none">
                                         <span class="guide_profile_main_text"> {{ !empty($v['profiles']['name'])? ucFirst($v['profiles']['name']) : '-' }}</span>
                                     </a>
-                                    <button class="verified_cmn_btn mx-3"> <i class="fa fa-check-circle hot-pink mx-1" aria-hidden="true"></i> VERIFIED</button>
+                                    <?php
+                                    $show_verified_btn = true;
+                                    if (isset($user_endorsement) && count($user_endorsement)<15) {
+                                        $show_verified_btn = false;
+                                    }
+                                    
+                                    if($show_verified_btn)
+                                    {
+                                        ?>
+                                            <div>
+                                                <button class="verified_cmn_btn mx-3"> <i class="fa fa-check-circle hot-pink mx-1" aria-hidden="true"></i> VERIFIED</button>
+                                            </div>
+                                        <?php
+                                    }
+                                    ?>
+                                    {{-- <button class="verified_cmn_btn mx-3"> <i class="fa fa-check-circle hot-pink mx-1" aria-hidden="true"></i> VERIFIED</button> --}}
                                 </div>
                                 <div> <i class="fa <?php if(isset($v['profiles']['id'])){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$v['profiles']['id']}}" aria-hidden="true"></i></div>
                             </div>
