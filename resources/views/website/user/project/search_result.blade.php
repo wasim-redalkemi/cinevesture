@@ -233,9 +233,9 @@
                         <div class="row">
                             <div class="col-md-5">
                                 @if(isset($project->projectImage))
-                                <div class="home_img_wrap mx_w_100 w-auto"><img src="{{Storage::url($project->projectImage->file_link)}}" class="root_img"></div>
+                                <div class="home_img_wrap mx_w_100 w-auto"><img src="{{Storage::url($project->projectImage->file_link)}}" class="Other_root_img"></div>
                                 @else
-                                <div class="home_img_wrap mx_w_100 w-auto"><img src="{{asset('images/asset/image 3 (1).png')}}" class="root_img"></div>
+                                <div class="home_img_wrap mx_w_100 w-auto"><img src="{{asset('images/asset/image 3 (1).png')}}" class="Other_root_img"></div>
                                 @endif
                             </div>
                             <div class="col-md-7">

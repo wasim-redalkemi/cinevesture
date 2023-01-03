@@ -24,7 +24,7 @@
                 @foreach($UserProject as $k=>$v)
                     <div class="col-md-4">
                     
-                            <div class="img-container project-img-container">
+                            <div class="project-img-container">
                                 @if (empty($v->projectImage->file_link))
                                     <img src="{{ asset('images/asset/user-profile.png') }}"   />
                                 @else
@@ -46,12 +46,12 @@
                             <div class="movie_name_text">{{$v->project_name}}</div>
                                 @if(isset($v->user_status))
                                 @if($v->user_status == 'draft')
-                                <div class="published_text">Draft</div>
+                                <div class="published_text mb-5">Draft</div>
                                 @else
-                                <div class="published_text">Published</div>
+                                <div class="published_text mb-5">Published</div>
                                 @endif
                                 @else
-                                <div class="published_text">-</div>
+                                <div class="published_text mb-5">-</div>
                                 @endif
                             </div>
                                 </a>

@@ -42,7 +42,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mt_16 select2forError">
-                                    <label>Genre <span style = "color:red">*</span></label>
+                                    <label>Genre <span class = "steric_sign_design">*</span></label>
                                     <select name="gener[]" class="js-select2 @error('gener') is-invalid @enderror" autofocus multiple required>
                                         @foreach ($Genres as $k=>$v)
                                             <option value="{{ $v->id }}"@if(!empty($projectData[0]['genres'] )&&(in_array($v->id, $projectData[0]['genres'])))selected @endif >{{  $v->name }}</option>
@@ -73,7 +73,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>Total Budget (USD) <span style = "color:red">*</span></label>
+                                    <label>Total Budget (USD) <span class = "steric_sign_design">*</span></label>
                                     <input type="number" class="form-control no_number_arrows" name="total_budget" pattern="[0-9]" placeholder="Total Budget" required value="<?php if(!empty($projectData[0]['total_budget'])){ echo $projectData[0]['total_budget']; } ?>">
                                     @error('total_budget')
                                     <span class="invalid-feedback" role="alert">
@@ -86,7 +86,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>Financing Secured (USD) <span style = "color:red">*</span></label>
+                                    <label>Financing Secured (USD) <span class = "steric_sign_design">*</span></label>
                                     <input type="number" class="form-control no_number_arrows" name="financing_secured" pattern="[0-9]" required placeholder="Financing Secured" value="<?php if(!empty($projectData[0]['financing_secured'])){ echo $projectData[0]['financing_secured']; } ?>">
                                     @error('financing_secured')
                                     <span class="invalid-feedback" role="alert">

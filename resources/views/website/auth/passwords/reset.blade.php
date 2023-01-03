@@ -16,7 +16,7 @@
                 <div class="signup-text mt-5 mt-md-5">Reset Password</div>
             </div>
             <div class="col-md-12">
-                <form method="POST" enctype="multipart/form-data" action="{{ route('password.update') }}" class="mt-5 pt-lg-5">
+                <form method="POST" enctype="multipart/form-data" action="{{ route('password.update') }}" class="mt-2 mt-lg-5 pt-2">
                     @csrf
                     <input type="hidden" name="token" value="{{ $token }}">
                     <input type="hidden" name="email" value="{{ $email }}">

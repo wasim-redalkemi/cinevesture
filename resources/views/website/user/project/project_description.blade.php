@@ -25,7 +25,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="profile_input">
-                                    <label>Logline <span style = "color:red">*</span></label>
+                                    <label>Logline <span class = "steric_sign_design">*</span></label>
                                     <!-- <input type="text" class="form-control" name="logline"  placeholder="Logline" required> -->
                                 </div>
                                 <div class="form_elem">
@@ -41,7 +41,7 @@
                         <div class="row">
                             <div class="col-md-10">
                                 <div class="profile_input">
-                                    <label>Synopsis/Brief Description <span style = "color:red">*</span></label>
+                                    <label>Synopsis/Brief Description <span class = "steric_sign_design">*</span></label>
                                     <div class="form_elem">
                                         <textarea class="form-control controlTextLength" placeholder="Write synopsis here" text-length = "600" maxlength="600" name="synopsis" aria-label="With textarea" required>@if (!empty($projectDescription[0]->synopsis)){{ $projectDescription[0]->synopsis }}@endif</textarea>
                                         @error('synopsis')
@@ -56,7 +56,7 @@
                         <div class="row">
                             <div class="col-md-10">
                                 <div class="profile_input">
-                                    <label>Director/Creator/Founder’s Statement <span style = "color:red">*</span></label>
+                                    <label>Director/Creator/Founder’s Statement <span class = "steric_sign_design">*</span></label>
                                 </div>
                                 <div class="form_elem">
                                     <textarea class="form-control controlTextLength" placeholder="Write statement here" text-length = "600" maxlength="600" name="director_statement" style="border: 1px solid #4D0D8A;" id="textAreaExample3" rows="1" required>@if (!empty($projectDescription[0]->director_statement)){{ $projectDescription[0]->director_statement }}@endif</textarea>

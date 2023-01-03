@@ -19,7 +19,7 @@
             <div class="col-md-12">
                 <div class="signup-text mt-5 mt-md-5"> OTP Verification</div>
             </div>
-            <div class="col-12 mt-2 mt-lg-5 pt-2 pt-lg-5">
+            <div class="col-12 mt-2 mt-lg-5 pt-2">
                 <input type="hidden" id = "email" name = "email" value = "{{$user->email}}">
                 <input type="hidden" id = "type" name = "type" value = "{{$type}}">
                 <input type="password" class="outline w-100 {{ $errors->has('otp') ? ' is-invalid' : '' }}" name="otp" placeholder="Please Enter OTP" required>
@@ -30,7 +30,7 @@
                 </span>
                 @endif              
             </div>
-            <div class="resend-div mt-4 mb-4 text-center">
+            <div class="resend-div mt-2 mb-3 text-center">
                         <div id="before-timer" class="font-14">
                         <span class="disable-resend">Resend OTP in </span></span>
                             <span class="otp-timer" style=" color: #FAF8FB">00:<span id="time">30</span>

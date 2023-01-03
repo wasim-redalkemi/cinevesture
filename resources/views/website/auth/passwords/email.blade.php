@@ -15,7 +15,7 @@
                 <div class="signup-text mt-5 mt-md-5"> Forgot Password</div>
             </div>
             <div class="col-md-12">
-                <form method="POST" enctype="multipart/form-data" action="{{ route('password.email') }}" class="mt-2 mt-lg-5 pt-2 pt-lg-5">
+                <form method="POST" enctype="multipart/form-data" action="{{ route('password.email') }}" class="mt-2 mt-lg-5 pt-2">
                     @csrf
                     <div class="row">
                         <div class="col-md-12 mb-3">

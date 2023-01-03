@@ -31,7 +31,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="profile_input">
-                                    <label>Project Title <span style = "color:red">*</span></label>
+                                    <label>Project Title <span class = "steric_sign_design">*</span></label>
                                     <input type="text" class="form-control @error('project_title') is-invalid @enderror" placeholder="Project Title" name="project_title" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
                                     @error('project_title')
                                     <span class="invalid-feedback" role="alert">
@@ -44,7 +44,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="profile_input">
-                                    <label>Description <span style = "color:red">*</span></label>
+                                    <label>Description <span class = "steric_sign_design">*</span></label>
                                     <div class="form_elem">
                                     <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" name="description" aria-label="With textarea" text-length="600" maxlength="600" autofocus required></textarea>
                                     @error('description')
@@ -60,7 +60,7 @@
                             <div class="col-md-6">
                                 <div class="select2forError">
                                     <div class="profile_input">
-                                        <label for="lang">Project specific Skills <span style = "color:red">*</span></label>
+                                        <label for="lang">Project specific Skills <span class = "steric_sign_design">*</span></label>
                                         <select name="project_specific_skills_id[]" class="outline is-invalid-remove js-select2 @error('project_specific_skills_id') is-invalid @enderror" id="lang" multiple autofocus required>
                                             @foreach ($skills as $k=>$v)
                                             <option value="{{ $v->id }}">{{ $v->name }}</option>
@@ -78,7 +78,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="profile_input select2forError">
-                                    <label for="lang">Project Location (Where it took place) <span style = "color:red">*</span></label>
+                                    <label for="lang">Project Location (Where it took place) <span class = "steric_sign_design">*</span></label>
                                     <select name="project_country_id[]" class="outline is-invalid-remove js-select2 @error('project_country_id') is-invalid @enderror" id="lang" multiple autofocus required>
                                         @foreach ($country as $k=>$v)
                                         <option value="{{ $v->id}}">{{ $v->name }}</option>
@@ -95,7 +95,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="profile_input">
-                                    <label>Completion Date <span style = "color:red">*</span></label>
+                                    <label>Completion Date <span class = "steric_sign_design">*</span></label>
                                     <input type="date" class="form-control @error('completion_date') is-invalid @enderror" placeholder="First Name" name="completion_date" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
                                     @error('completion_date')
                                     <span class="invalid-feedback" role="alert">
@@ -106,7 +106,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <label class="mt-3">Video URL <span style = "color:red">*</span></label>
+                            <label class="mt-3">Video URL <span class = "steric_sign_design">*</span></label>
                             <div class="col-md-4">
                                 <div id="portfolio-video" class="profile_input">
                                     <!-- <div><label>Project Files</label></div> -->
@@ -124,7 +124,7 @@
                             </div>
                         </div>
                         <div class="row portfolio-images">
-                            <label class="mt-3">Pictures <span style = "color:red">*</span></label>
+                            <label class="mt-3">Pictures <span class = "steric_sign_design">*</span></label>
                             <div id="portfolio-img-new-1" class="col-md-4 img-item">
                                 <div class="open_file_explorer profile_upload_container h_66">
                                     <img src="" id="previewImg">

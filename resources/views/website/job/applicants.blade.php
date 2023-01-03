@@ -31,13 +31,13 @@ use Illuminate\Support\Facades\DB;
                 @foreach($applicants as $applicant)
                 <div class="border_btm profile_wraper_padding">
 
-                    <div class="row">
-                        <div class="col-md-2">
+                    <div class="d-flex">
+                        <div class="">
                             <div class="user_profile_container">
                                 <img src="{{asset($applicant->profile_image) }}" />
                             </div>
                         </div>
-                        <div class="col-md-10">
+                        <div class="">
 
                             <div class="d-flex justify-content-between">
                                 <div class="guide_profile_main_text">

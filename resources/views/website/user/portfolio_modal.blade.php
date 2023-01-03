@@ -42,7 +42,7 @@
 <div class="portfolioImage owl-carousel mt-1">
     @if (!empty($data['get_portfolio']))
     @foreach ($data['get_portfolio'] as $k=>$v)                                 
-    <div class="item portfolio_modal_item"> 
+    <div class="item portfolio_modal_item">
             <div class="portfolio_item_image">     
         <img src="{{ Storage::url($v['file_link']) }}" class="portfolio_img" />
             </div>

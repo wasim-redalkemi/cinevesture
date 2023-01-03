@@ -23,7 +23,7 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="profile_input">
-                                        <label>Title Of The Job  <span style = "color:red">*</span></label>
+                                        <label>Title Of The Job  <span class = "steric_sign_design">*</span></label>
                                         <input type="text" class="form-control @error('job_title') is-invalid @enderror" required name="job_title" value="@if (!empty($userJobData['title'])) {{$userJobData['title']}} @endif" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
 
                                         @error('job_title')
@@ -36,7 +36,7 @@
                                 <div class="col-md-1"></div>
                                 <div class="col-md-3">
                                     <div class="profile_input">
-                                        <label>Employment Type <span style = "color:red">*</span></label>
+                                        <label>Employment Type <span class = "steric_sign_design">*</span></label>
                                             <select class="form-control @error('countries') is-invalid @enderror" id="employments" name="employments[]" style="border: 1px solid #4D0D8A;"  data-maximum-selection-length="1" required>
                                                 <option value="">Select</option>
                                                 @if (!empty($employments))                                                    
@@ -56,7 +56,7 @@
                                 <div class="col-md-1"></div>
                                 <div class="col-md-3">
                                     <div class="profile_input">
-                                        <label>Workspace Type <span style = "color:red">*</span></label>
+                                        <label>Workspace Type <span class = "steric_sign_design">*</span></label>
                                         <select class="form-control @error('workspaces') is-invalid @enderror" id="workspaces" style="border: 1px solid #4D0D8A;" name="workspaces[]" required>
                                             <option value="">Select</option>
                                             @if (!empty($workspaces))
@@ -77,7 +77,7 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="profile_input">
-                                        <label>Company Name <span style = "color:red">*</span></label>
+                                        <label>Company Name <span class = "steric_sign_design">*</span></label>
                                         <input type="text" class="form-control @error('company_name') is-invalid @enderror" name="company_name" value="@if (!empty($userJobData['company_name'])) {{$userJobData['company_name']}} @endif" placeholder="Company Name" aria-describedby="basic-addon1" required>
 
                                         @error('company_name')
@@ -111,13 +111,13 @@
                             </div>
                         </div>
                         <div class="guide_profile_subsection pb-4">
-                            <div class="guide_profile_main_text mt-3">Job Description <span style = "color:red">*</span></div>
+                            <div class="guide_profile_main_text mt-3">Job Description <span class = "steric_sign_design">*</span></div>
                             <div class="profile_input form_elem">
                                 <textarea class="form-control controlTextLength" text-length="1500" maxlength="1500" name="description" required aria-label="With textarea" placeholder="Your answer here">@if (!empty($userJobData['description'])) {{$userJobData['description']}} @endif</textarea>
                             </div>
                         </div>
                         <div class="guide_profile_subsection">
-                            <div class="guide_profile_main_text mt-3">Skills Required <span style = "color:red">*</span></div>
+                            <div class="guide_profile_main_text mt-3">Skills Required <span class = "steric_sign_design">*</span></div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="profile_input">

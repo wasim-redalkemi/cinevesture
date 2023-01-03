@@ -26,8 +26,9 @@
                                 </div>
                                 <div><button class="guide_profile_btn"><a class="btn-link text_decor_none" href="{{ route('organisation-create')}}">EDIT</a></button></div>
                             </div>
-                            
-                            <div class="col-md-2">
+                        </div>
+                        <div class="d-flex">
+                            <div class="">
                                 <div class="user_profile_container">
                                     @if (empty($UserOrganisation->logo))
                                         <img src="{{ asset('images/asset/photo-1500648767791-00dcc994a43e 1.png') }}" />
@@ -36,7 +37,7 @@
                                     @endif  
                                 </div>
                             </div>
-                            <div class="col-md-8">
+                            <div class="mx-4">
                                 <div class="preview_headtext">{{ (isset($UserOrganisation->name))?ucFirst($UserOrganisation->name):'Name'; }}</div>
                                 <div class="organisation_cmn_text">{{ (!empty($UserOrganisation->organizationType->name))?$UserOrganisation->organizationType->name:'Organization type'; }}</div>
                                 <div class="organisation_cmn_text">{{ (isset($UserOrganisation['country']['name']))?$UserOrganisation['country']['name']:'Located In'; }}</div>

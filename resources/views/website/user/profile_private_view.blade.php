@@ -31,7 +31,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-2">
+                        </div>
+                        <div class="d-flex">
                                     <div class="user_profile_container">
                                         @if (empty($user->profile_image))
                                         <img src="{{ asset('images/asset/100_no_img.jpg') }}" />
@@ -39,8 +40,7 @@
                                         <img src="{{ Storage::url($user->profile_image) }}" class="prod-img" alt="product-image" style="height:100%;width:100%;object-fit: cover;">
                                         @endif
                                     </div>
-                                </div>
-                                <div class="col-md-10">
+                                <div class="mx-4">
                                     <div class="guide_profile_main_text pt-3">
                                         {{ (!empty($user->first_name))?ucfirst($user->first_name).' '.ucfirst($user->last_name):'Name'; }}
                                     </div>

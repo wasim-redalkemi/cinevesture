@@ -25,7 +25,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="profile_input">
-                                    <label>Project Stage <span style = "color:red">*</span></label>
+                                    <label>Project Stage <span class = "steric_sign_design">*</span></label>
                                     <select name="project_stage_id" class="@error('project_stage_id') is-invalid @enderror" autofocus required>
                                         <option value="">Select</option>
                                         @foreach ($projectStage as $k=>$v)                                            
@@ -43,7 +43,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="mt_16 select2forError">
-                                    <label>Looking for <span style = "color:red">*</span></label>
+                                    <label>Looking for <span class = "steric_sign_design">*</span></label>
                                     <select name="loking_for[]" class="js-select2 @error('loking_for') is-invalid @enderror" autofocus multiple select required>
                                         @foreach ($lookingFor as $k=>$v)
                                             <option value="{{ $v->id }}"@if(!empty($projectData[0]['project_looking_for'] )&&(in_array($v->id, $projectData[0]['project_looking_for'])))selected @endif>{{  $v->name }}</option>

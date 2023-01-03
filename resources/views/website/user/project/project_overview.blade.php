@@ -27,7 +27,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>Project Name <span style = "color:red">*</span></label>  
+                                    <label>Project Name <span class = "steric_sign_design">*</span></label>  
                                     <input type="text" class="form-control @error('project_name') is-invalid @enderror" name="project_name" placeholder="Project Name" value="@if (!empty($projectData[0]['project_name'])){{$projectData[0]['project_name']}} @endif" aria-label="Username" aria-describedby="basic-addon1" maxlength="100" autofocus required>                                    
                                     @error('project_name')
                                     <span class="invalid-feedback" role="alert">
@@ -41,7 +41,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>Type of Project <span style = "color:red">*</span></label>
+                                    <label>Type of Project <span class = "steric_sign_design">*</span></label>
                                         <select name="project_type_id" id="lang" required>
                                             <option value="">Select</option>
                                             @foreach($project_types as $type)
@@ -60,7 +60,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="profile_input">
-                                    <label>Who are you listing this project as? <span style = "color:red">*</span></label>
+                                    <label>Who are you listing this project as? <span class = "steric_sign_design">*</span></label>
                                     <div class="checkbox_elem">
                                     <div class="d-flex">
                                         <div class="checkbox_btn d-flex align-items-center">
@@ -98,7 +98,7 @@
                         <div class="row">
                             <div class="col-md-3">
                                 <div class="select2forError">
-                                    <label>Select Country <span style = "color:red">*</span></label>
+                                    <label>Select Country <span class = "steric_sign_design">*</span></label>
                                     <select class="js-select2 @error('countries') is-invalid @enderror" name="countries[]"  required multiple="multiple">
                                         @foreach ($country as $k=>$v)
                                             <option value="{{ $v->id }}"@if(!empty($projectData[0]['project_countries'] )&&(in_array($v->id, $projectData[0]['project_countries'])))selected @endif>{{  $v->name }}</option>
@@ -116,7 +116,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mt_16 select2forError">
-                                    <label>Select Language <span style = "color:red">*</span></label>
+                                    <label>Select Language <span class = "steric_sign_design">*</span></label>
                                     <select class="js-select2 @error('languages') is-invalid @enderror" name="languages[]" required multiple="multiple">
                                         @foreach ($languages as $k=>$v)
                                             <option value="{{ $v->id }}"@if(!empty($projectData[0]['project_languages'] )&&(in_array($v->id, $projectData[0]['project_languages'])))selected @endif>{{  $v->name }}</option>
@@ -141,7 +141,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
-                                    <label>Please specify where you intend to create and complete the project </label>
+                                    <label class="mt-1">Please specify where you intend to create and complete the project </label>
                                 </div>
                             </div>
                         </div>

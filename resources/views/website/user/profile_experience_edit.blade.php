@@ -33,7 +33,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="profile_input">
-                                        <label>Job Title <span style = "color:red">*</span></label>
+                                        <label>Job Title <span class = "steric_sign_design">*</span></label>
                                         <input type="text" class="form-control @error('job_title') is-invalid @enderror" placeholder="Job Title" name="job_title" value="<?php if(isset($UserExperienceData->job_title)){ echo ($UserExperienceData->job_title); }?>"
                                             aria-label="Username" aria-describedby="basic-addon1" autofocus required>
                                         @error('job_title')
@@ -48,7 +48,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="profile_input">
-                                        <label>Company <span style = "color:red">*</span></label>
+                                        <label>Company <span class = "steric_sign_design">*</span></label>
                                         <input type="text" class="form-control @error('company') is-invalid @enderror" placeholder="Company" name="company" value="<?php if(isset($UserExperienceData->company)){ echo ($UserExperienceData->company); }?>" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
                                         @error('company')
                                             <span class="invalid-feedback" role="alert">
@@ -61,7 +61,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="profile_input">
-                                        <label>Location <span style = "color:red">*</span></label>
+                                        <label>Location <span class = "steric_sign_design">*</span></label>
                                         <input type="text" class="form-control @error('country_id') is-invalid @enderror" placeholder="Location" name="country_id" value="<?php if(isset($UserExperienceData->country_id)){ echo($UserExperienceData->country_id); }?>" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
                                         @error('country_id')
                                             <span class="invalid-feedback" role="alert">
@@ -74,7 +74,7 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="profile_input">
-                                        <label>Start Date <span style = "color:red">*</span></label>
+                                        <label>Start Date <span class = "steric_sign_design">*</span></label>
                                         <input type="date" class="form-control @error('start_date') is-invalid @enderror" placeholder="DD/MM/YY" name="start_date" value="{{ date("Y-m-d",strtotime($UserExperienceData->start_date)) }}" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
                                         @error('start_date')
                                             <span class="invalid-feedback" role="alert">
@@ -85,7 +85,7 @@
                                 </div>
                                 <div class="col-md-3">
                                     <div class="profile_input">
-                                        <label>End Date <span style = "color:red">*</span></label>
+                                        <label>End Date <span class = "steric_sign_design">*</span></label>
                                         <input type="date" class="form-control @error('end_date') is-invalid @enderror" placeholder="DD/MM/YY" name="end_date" value="{{ date("Y-m-d",strtotime($UserExperienceData->end_date)) }}" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
                                         @error('end_date')
                                             <span class="invalid-feedback" role="alert">
@@ -98,7 +98,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="profile_input">
-                                        <label for="lang">Employment Type <span style = "color:red">*</span></label>
+                                        <label for="lang">Employment Type <span class = "steric_sign_design">*</span></label>
                                         <select name="employement_type_id" class="@error('employement_type_id') is-invalid @enderror" id="lang" autofocus required>
                                             <option 
                                             @php
@@ -140,7 +140,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="profile_input">
-                                        <label>Description <span style = "color:red">*</span></label>
+                                        <label>Description <span class = "steric_sign_design">*</span></label>
                                         <div class="form_elem">
                                         <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" text-length = "600" maxlength="600" name="description" aria-label="With textarea" autofocus required><?php if(isset($UserExperienceData->description)){ echo($UserExperienceData->description); }?></textarea>
                                         @error('description')
