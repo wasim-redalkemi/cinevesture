@@ -114,10 +114,10 @@
                                         <th>Date</th>
                                         <th>Created</th>
                                         <th>Views</th>
-                                        <th>Status</th>
-                                        <th>Favorite</th>
-                                        <th>Verified</th>
-                                        <th>Action</th>
+                                        <th >Status</th>
+                                        <th class="">Favorite</th>
+                                        <th class="">Verified</th>
+                                        <th class="notForPrint">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -137,7 +137,7 @@
                                         @if (!empty($project->projectCategory))
                                         <ol type="1" class="table_scroller">
                                         @foreach ($project->projectCategory as $key=>$category)
-                                        <li>{{$category->name.','}}</li>
+                                        <li>{{$category->name.'.'}}</li>
                                         
                                          @endforeach
                                         </ol >
@@ -150,7 +150,7 @@
 
                                         <ol type="1" class="table_scroller">
                                             @foreach ($project->genres as $key=>$genre)
-                                            <li>{{$genre->name.','}}</li>
+                                            <li>{{$genre->name.'.'}}</li>
 
                                              @endforeach
                                             </ol>

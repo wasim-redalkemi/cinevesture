@@ -122,7 +122,7 @@
                                     <th>Status</th>
                                     <th>Membership</th>
                                     <th>Joining</th>
-                                    <th class="noExport">Action</th>
+                                    <th class="notForPrint">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
