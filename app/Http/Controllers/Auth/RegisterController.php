@@ -110,6 +110,16 @@ class RegisterController extends Controller
      */
     public function register(Request $request)
     {
+        
+        if(isset($request->email))
+        {
+            $deleted_user = DB::select("SELECT * FROM `users`  WHERE email='$request->email'");
+            // dd($deleted_user[0]->deleted_at);
+            if (isset($deleted_user[0]->deleted_at)) {
+                return back()->with('error', 'This account is permanent deleted,please try another email.');
+            }
+            
+        }
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
