@@ -234,7 +234,7 @@ class UserController extends WebController
 
             $temp_skill = [];
             foreach ($user->skill as $k => $v) {
-                array_push($temp_skill, $v->skill_id);
+                array_push($temp_skill, $v->id);
             }
             $user->skill = $temp_skill;
 
