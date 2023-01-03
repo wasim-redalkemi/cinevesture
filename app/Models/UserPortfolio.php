@@ -20,6 +20,6 @@ class UserPortfolio extends Model
 
     public function getPortfolioLocation()
     {
-        return $this->belongsToMany(MasterCountry::class,UserPortfolioLocation::class,'portfolio_id','id');
+        return $this->belongsToMany(MasterCountry::class,UserPortfolioLocation::class,'portfolio_id','location_id');
     }
 }

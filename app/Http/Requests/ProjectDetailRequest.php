@@ -24,8 +24,8 @@ class ProjectDetailRequest extends FormRequest
     public function rules()
     {
         return [
-            'category_id' => 'nullable', 
-            'category_id.*' => 'nullable|exists:master_project_categories,id',  
+            'category_id' => 'required', 
+            'category_id.*' => 'required|exists:master_project_categories,id',  
             'gener' => 'required' ,
             'gener.*' => 'required|exists:master_project_genres,id' ,   
             'duration' => 'nullable|integer', 
