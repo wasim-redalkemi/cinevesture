@@ -7,6 +7,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>Cinevesture</title>
+  <title> @yield('title',config('app.name', 'Cinevesture'))</title>
+  <link rel="icon" type="image/x-icon" href="{{ asset('images/asset/Logo-fav-icon-color.png') }}">
   <!-- plugins:css -->
   <link rel="stylesheet" href="{{asset('admin/css/materialdesignicons.min.css')}}">
   <link rel="stylesheet" href="{{asset('admin/css/vendor.bundle.base.css')}}">
@@ -75,17 +77,23 @@
         [5, 10, 20, 50, 100, -1],
         [5, 10, 20, 50, 100, "All"]
       ],
+      "bPaginate": false,
+      
       "iDisplayLength": 10,
       // "language": {
       //   search: "Search"
       // },
       bPaginate:false,
+      bInfo : false,
       paging:false,
       searching:false,
       dom: 'Bfrtip',
       buttons: [
         'csv',
+        
       ],
+      
+     
       initComplete: function () 
       {
         var btns = $('.dt-button');

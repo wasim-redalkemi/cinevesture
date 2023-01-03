@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
-                       <table class="table order-listing1212">
+                       <table class="table order-listing table-sm table-bordered table-hover">
                             <thead>
                                 <tr>
                                    <th class="col-md-2">Id</th>
@@ -21,7 +21,9 @@
                             </thead>
                             <tbody>
                               @if(isset($projects_data))
-                              <?php $i=0;?>  
+                              @php
+                              $i=($projects_data->perPage()*($projects_data->currentPage()-1))
+                                @endphp    
                                 @foreach($projects_data as $project)
                                 <?php $i++;?> 
                                     <tr>
@@ -37,11 +39,11 @@
                                         </td>
                                        <td>
                                          @if($project->status=='published')
-                                            <a class="btn btn-success btn-fw mb-1 btn-sm mt-10 w-65 view-btn btn_padding text-white" href="{{route('change-status',['id' => $project->id , 'status' =>'unpublished'])}}">                                            
+                                            <a class="btn btn-success btn-fw mb-1 btn-sm mt-10 w-112 view-btn btn_padding text-white" href="{{route('change-status',['id' => $project->id , 'status' =>'unpublished'])}}">                                            
                                                 {{ucfirst($project->status)}}
                                             </a>
                                         @else
-                                            <a class="btn btn-danger btn-fw mb-1 btn-sm mt-10 w-65 view-btn btn_padding text-white" href="{{route('change-status',['id' => $project->id , 'status' =>'published'])}}">
+                                            <a class="btn btn-warning btn-fw mb-1 btn-sm mt-10 w-112 view-btn btn_padding text-white" href="{{route('change-status',['id' => $project->id , 'status' =>'published'])}}">
                                                 {{ucfirst($project->status)}}
                                             </a>
                                         @endif
@@ -59,7 +61,8 @@
                                 </tbody>
                                 </table>
                               <div class="row">
-                               <div class="col-md-12">
+                               <div class="col-md-12 d-flex justify-content-between mt-3">
+                                <div>{{'Showing '.$projects_data->firstItem() .' to' .' '. $projects_data->lastItem().' of'.' '.$projects_data->total()}}</div>
                                <div style="float:right;" >{{$projects_data->links()}}</div>
                                </div> 
                               </div>

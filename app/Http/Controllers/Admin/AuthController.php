@@ -31,7 +31,7 @@ class AuthController extends Controller
     public function index()
     {
         try {
-            $totalUsre=User::query()->get();
+            $totalUsre=User::query()->where('user_type','U')->get();
             $totalUsreCount=(count($totalUsre));
             $totalProject=UserProject::query()->where('user_status','!=','draft')->get();
             $totalProjectCount=count($totalProject);
