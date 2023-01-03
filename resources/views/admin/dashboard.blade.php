@@ -46,7 +46,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
+       {{-- <div class="row">
         <div class="col-lg-6 grid-margin stretch-card">
           <div class="card">
             <div class="card-body pb-0">
@@ -78,7 +78,7 @@
             </div>
           </div>
         </div>
-        {{-- <div class="col-lg-4 grid-margin stretch-card">
+        <div class="col-lg-4 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
               <div class="d-flex justify-content-between">
@@ -121,7 +121,7 @@
               </div>
             </div>
           </div>
-        </div> --}}
+        </div> 
         <div class="col-lg-6 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
@@ -137,13 +137,13 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>  --}}
       <div class="row grid-margin">
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">Order status</h4>
-              <div class="d-flex table-responsive">
+              <h4 class="card-title">User detail</h4>
+              {{-- <div class="d-flex table-responsive">
                 <div class="btn-group mr-2">
                   <button class="btn btn-sm btn-primary"><i class="mdi mdi-plus-circle-outline"></i> Add</button>
                 </div>
@@ -161,50 +161,50 @@
                   <button type="button" class="btn btn-light"><i class="mdi mdi-cloud"></i></button>
                   <button type="button" class="btn btn-light"><i class="mdi mdi-dots-vertical"></i></button>
                 </div>
-              </div>
+              </div> --}}
               <div class="table-responsive mt-2">
                 <table class="table mt-3 border-top">
                   <thead>
                     <tr>
-                      <th>Invoice</th>
-                      <th>Customer</th>
-                      <th>Ship</th>
-                      <th>Best Price</th>
-                      <th>Purchsed Price</th>
+                      <th>Id</th>
+                      <th>User</th>
+                      <th>Country</th>
+                      <th>Mobile</th>
+                      <th>Pincode</th>
                       <th>Status</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>50014</td>
+                      <td>1</td>
                       <td>David Grey</td>
                       <td>Italy</td>
                       <td>$6300</td>
-                      <td>$2100</td>
+                      <td>212100</td>
                       <td><div class="badge badge-success badge-fw">Progress</div></td>
                     </tr>
                     <tr>
-                      <td>50015</td>
+                      <td>2</td>
                       <td>Stella Johnson</td>
                       <td>Brazil</td>
-                      <td>$4500</td>
-                      <td>$4300</td>
+                      <td>9855454500</td>
+                      <td>789300</td>
                       <td><div class="badge badge-warning badge-fw">Open</div></td>
                     </tr>
                     <tr>
-                      <td>50016</td>
+                      <td>3</td>
                       <td>Marina Michel</td>
                       <td>Japan</td>
-                      <td>$4300</td>
-                      <td>$6440</td>
+                      <td>8256654300</td>
+                      <td>546440</td>
                       <td><div class="badge badge-danger badge-fw">On hold</div></td>
                     </tr>
                     <tr>
-                      <td>50017</td>
+                      <td>4</td>
                       <td>John Doe</td>
                       <td>India</td>
-                      <td>$6400</td>
-                      <td>$2200</td>
+                      <td>7900565461</td>
+                      <td>220022</td>
                       <td><div class="badge badge-success badge-fw">Progress</div></td>
                     </tr>
                   </tbody>
@@ -227,7 +227,7 @@
           </div>
         </div>
       </div>
-      <div class="row">
+      {{-- <div class="row">
         <div class="col-12 grid-margin">
           <div class="card">
             <div class="card-body">
@@ -240,8 +240,8 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="row">
+      </div> --}}
+      {{-- <div class="row">
         <div class="col-md-4 grid-margin grid-margin-md-0">
           <div class="card">
             <div class="card-body">
@@ -284,7 +284,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> --}}
     </div>
     @endsection
     <!-- content-wrapper ends -->

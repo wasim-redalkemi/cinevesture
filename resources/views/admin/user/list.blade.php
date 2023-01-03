@@ -122,12 +122,17 @@
                                     <th>Status</th>
                                     <th>Membership</th>
                                     <th>Joining</th>
-                                    <th>Action</th>
+                                    <th class="noExport">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @if(isset($users))
-                                <?php $i=0;?>
+                               
+                                @php
+                                    $i=($users->perPage()*($users->currentPage()-1))
+                                @endphp
+                                
+                            
                                 @foreach($users as $user)
                                 <?php $i++;?> 
                                 <tr>
@@ -144,7 +149,7 @@
                                         $x=($user->status==1)? 0:1;
                                     @endphp
                                         @if($user->status==1)
-                                        <a href="{{route('user-status-change')}}?status={{$x}}&user_id={{$user->id}}"><button class="btn active-button-color"> {{'Active'}}</button></a>@else
+                                        <a href="{{route('user-status-change')}}?status={{$x}}&user_id={{$user->id}}"><button class="btn active-button-color w-82"> {{'Active'}}</button></a>@else
                                         <a href="{{route('user-status-change')}}?status={{$x}}&user_id={{$user->id}}"><button class="btn inactive-button-color">{{'Inactive'}}</button></a>@endif
                                     </td>
                                     <td>
@@ -159,10 +164,10 @@
                                         @endforeach
                                     </td>
                                     <td><?php echo(date("d-m-Y", strtotime($user->created_at))); ?></td>
-                                    <td>
-                                        <div class="mb-1">
-                                           <a href="{{route('profile-public-show',['id'=>$user->id])}}"><button class="btn btn-info btn-sm">View</button></a>
-                                          </div>
+                                    <td class="noExport">
+                                        <div class="mb-1" >
+                                           <a href="{{route('profile-public-show',['id'=>$user->id])}}"><button class="btn btn-info btn-sm w-74">View</button></a>
+                                        </div>
                                        <div>
                                             <a class="confirmAction" href="{{route('user-delete',['id'=>$user->id])}}">
                                                <button class="btn btn-danger  btn-sm">Delete</button>
@@ -174,8 +179,9 @@
                               @endif 
                             </tbody>
                         </table>
-                        <div class="row">
-                         <div class="col-md-12">
+                        <div class="row mt-3">
+                         <div class="col-md-12 d-flex justify-content-between mt-3">
+                            <div>{{'Showing '.$users->firstItem().' to' .' '. $users->lastItem().' of'.' '.$users->total()}}</div>
                              <div style="float:right;" >{{$users->links()}}</div>
                              </div> 
                          </div>
