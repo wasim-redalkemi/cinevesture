@@ -239,7 +239,14 @@
                                 @endif
                             </div>
                             <div class="col-md-7">
-                                <div class="search-head-text">@if (!empty($project->project_name)){{ucFirst($project->project_name)}} @endif</div>
+                                <div class="d-flex align-items-center">
+                                    <div class="search-head-text">@if (!empty($project->project_name)){{ucFirst($project->project_name)}} @endif</div>
+                                    @if ($project->project_verified==1)                                        
+                                    <button class="verified-btn mx-3"> <img src="{{ asset('images/asset/verified-badge.svg') }}" width=100% alt="Image"> VERIFIED</button>
+                                    @endif
+                                </div>
+                            
+                            
                                 @php
                                     $small_logline = '';
                                     if (!empty($project->logline) && strlen($project->logline)>100)
