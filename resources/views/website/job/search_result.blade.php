@@ -176,9 +176,9 @@
                             </div>
 
                             <div class="form-check d-flex align-items-center mt-4">
-                                <input class="form-check-input" type="checkbox" id="flexCheckDefault">
+                                <input class="form-check-input" type="checkbox" name="promoted_jobs" value="1"  id="flexCheckDefault">
                                 <label class="verified-text mx-2" for="flexCheckDefault">
-                                    Verified Projects
+                                    Promoted Jobs
                                 </label>
                             </div>
                             <div class="mt-4 d-flex">

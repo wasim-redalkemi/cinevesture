@@ -3,14 +3,22 @@
 <div class="border_btm profile_wraper_padding">
     <div class="d-flex justify-content-between">
         {{-- <a href="{{route('posted-job-single-view',['job_id'=>$job->id])}}" class="guide_profile_main_text"> --}}
-        <a href="{{route('after_search-job-single-view',['job_id'=>$job->id])}}" class="guide_profile_main_text">
+       
+        <div class="d-flex align-items-center">
+            <a href="{{route('after_search-job-single-view',['job_id'=>$job->id])}}" class="guide_profile_main_text">
             {{ucFirst($job->title)}}
         </a>
+        @if ($job->Promote)            
+        <span class="mx-4">
+            <button class="verified_cmn_btn"> <i class="fa fa-check-circle hot-pink mx-1" aria-hidden="true"></i> PROMOTED</button>
+        </span>
+        @endif
+        </div>
+      
         <div class="pointer fav-icon">
             <i data-id="{{$job->id}}" class="fa {{is_null($job->favorite) ? 'fa-heart-o' : 'fa-heart'}} aubergine icon-size" aria-hidden="true"></i>
         </div>
     </div>
-   
 
     <div class="preview_headtext lh_54 candy-pink">
         

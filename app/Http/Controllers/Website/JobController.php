@@ -357,7 +357,7 @@ class JobController extends WebController
         }
     }
 
-    public function showJobSearchResults(Request $request)
+    public function  showJobSearchResults(Request $request)
     {
         $requests = $request->all();
         $employments = MasterEmployement::query()->get();
@@ -376,6 +376,9 @@ class JobController extends WebController
                     $search = $requests["search"];
                     $q->where("title", 'like', "%$search%");
                 }
+                if (isset($requests["promoted_jobs"]) && !empty($requests["promoted_jobs"])) {
+                    $q->where("Promote", $requests["promoted_jobs"]);
+                }
             })
             ->whereHas("jobEmployements", function ($q) use ($requests) {
                 if (isset($requests["employments"]) && !empty($requests["employments"])) {
@@ -391,8 +394,8 @@ class JobController extends WebController
                 if (isset($requests["skills"]) && !empty($requests["skills"])) {
                     $q->whereIn("skill_id", $requests["skills"]);
                 }
-            })
-           ->paginate($this->records_limit);
+            })       
+           ->paginate(config('constants.JOB_PAGINATION_LIMIT'));
         $notFoundMessage = "No jobs found, please modify your search.";
         return view('website.job.search_result', compact('countries', 'employments', 'skills', 'categories', 'workspaces', 'jobs', 'notFoundMessage'));
     }
