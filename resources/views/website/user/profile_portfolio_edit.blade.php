@@ -61,8 +61,8 @@
                             <div class="row">
                                 <div class="col-md-6">
                                 <div class="profile_input">
-                                    <label for="lang">Project specific Skills <span style = "color:red">*</span></label>
-                                    <select name="project_specific_skills_id" class="outline js-select2 @error('project_specific_skills_id') is-invalid @enderror" id="lang" multiple>
+                                    <label for="lang">Portfolio specific Skills <span style = "color:red">*</span></label>
+                                    <select name="project_specific_skills_id[]" class="outline js-select2 @error('project_specific_skills_id') is-invalid @enderror" id="lang" multiple>
                                         @foreach ($skills as $k=>$v)
                                             <option
                                                 @php
@@ -89,7 +89,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="profile_input">
-                                        <label for="lang">Project Location (Where it took place) <span style = "color:red">*</span></label>
+                                        <label for="lang">Portfolio Location (Where it took place) <span style = "color:red">*</span></label>
                                         <select name="project_country_id[]" class="outline js-select2 @error('project_country_id') is-invalid @enderror" id="lang" multiple>
                                         @foreach ($country as $k=>$v)
                                             <option
@@ -302,6 +302,12 @@
             });
         }
 
+        let isValidYoutubeUrl = function (link) {
+            let domain = (new URL(link));
+            let hostname = domain.hostname.replaceAll(".","");
+            return (hostname.indexOf("youtube") > -1) ? true : false;
+        }
+
         let bindActions = function (){
             $(parentElemId + " #portfolio-video input[name='video_url']").off('blur').on('blur',(e)=>{
                 let link = e.target.value;
@@ -312,7 +318,7 @@
                         //let reqData = {'vidUrl': "https://vimeo.com/336812686"};
                         let reqData = {'vidUrl': link};
                         doAjax("ajax/get-video-details",reqData,"POST",getVideoDataCallback);
-                    } else if(link.indexOf("youtube.com") > -1) {
+                    } else if(isValidYoutubeUrl(link)) {
                         //let reqData = {'vidUrl': "https://www.youtube.com/watch?v=ZdbQ_FvNBZA&t=915s&ab_channel=ScaleupAlly"};
                         let reqData = {'vidUrl':link};
                         doAjax("ajax/get-video-details",reqData,"POST",getVideoDataCallback);

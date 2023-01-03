@@ -20,7 +20,7 @@ class CreateUserOrganisationsTable extends Migration
             $table->string('name',255)->nullable();
             $table->string('type',20)->nullable();
             $table->string('location_in',50)->nullable();
-            $table->string('about',500)->nullable();
+            $table->string('about',600)->nullable();
             $table->enum('available_to_work_in',['virtually','physically'])->nullable();
             $table->string('imdb_profile',255)->nullable();
             $table->string('linkedin_profile',255)->nullable();

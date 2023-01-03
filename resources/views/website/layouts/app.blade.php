@@ -122,6 +122,10 @@
             {
                 container.find('.sidebar_collapse').collapse('hide');
             }
+            $('.modal .normal_btn').click(function()
+            {
+                $(this).parents('.modal').modal('hide');
+            });
 
             // $('.dropdown-toggle').click(function()
             // {

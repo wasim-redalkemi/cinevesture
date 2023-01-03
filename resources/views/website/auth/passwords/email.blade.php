@@ -1,7 +1,11 @@
-@extends('website.layouts.app')
+@extends('website.layouts.auth')
+
+@section('header')
+@include('website.auth.guest_header')
+@endsection
 
 @section('content')
-<section class="auth_section">
+<section class="auth_section main_content">
 <div class="hide-me animation for_authtoast">
            @include('website.include.flash_message')
        </div>
@@ -11,7 +15,7 @@
                 <div class="signup-text mt-5 mt-md-5"> Forgot Password</div>
             </div>
             <div class="col-md-12">
-                <form method="POST" enctype="multipart/form-data" action="{{ route('password.email') }}" class="mt-lg-5 pt-lg-5">
+                <form method="POST" enctype="multipart/form-data" action="{{ route('password.email') }}" class="mt-2 mt-lg-5 pt-2 pt-lg-5">
                     @csrf
                     <div class="row">
                         <div class="col-md-12 mb-3">

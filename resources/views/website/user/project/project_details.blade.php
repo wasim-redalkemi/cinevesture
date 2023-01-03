@@ -26,7 +26,7 @@
                             <div class="col-md-6">
                                 <div class="profile_input select2forError">
                                     <label>Category (Optional)</label>
-                                    <select name="category_id[]" class="js-select2 @error('category_id') is-invalid @enderror" autofocus multiple>
+                                    <select name="category_id[]" class="js-select2 @error('category_id') is-invalid @enderror" autofocus multiple required>
                                         @foreach ($category as $k=>$v)
                                             <option value="{{ $v->id }}"@if(!empty($projectData[0]['project_category'] )&&(in_array($v->id, $projectData[0]['project_category'])))selected @endif>{{  $v->name }}</option>
                                         @endforeach
@@ -154,7 +154,7 @@
                                 </div>
                                 <div class="col-md-3 d-flex align-items-end mt-2">
                                     <div class="profile_input">
-                                        <div class="save_add_btn">Add another</div>
+                                        <div class="save_add_btn">Save</div>
                                     </div>
                                 </div>
                             </div>
@@ -171,7 +171,7 @@
                                         <input type="hidden" name="project_id" value="<?php if(isset($_REQUEST['id'])) {echo $_REQUEST['id'];}?>">
                                         <button class="cancel_btn mx-3"><a class="btn-link-style" href="{{ route('project-overview') }}?id={{$_REQUEST['id']}}">Go back</a></button>
                                         <button type="submit" class="guide_profile_btn">Save & Next</button>
-                                        <button class="cancel_btn mx-3"><a class="btn-link-style" href="{{ route('project-overview') }}?id={{$_REQUEST['id']}}">Skip</a></button>
+                                        {{-- <button class="cancel_btn mx-3"><a class="btn-link-style" href="{{ route('project-overview') }}?id={{$_REQUEST['id']}}">Skip</a></button> --}}
                                     </div>
                                 </div>
                             </div>

@@ -12,7 +12,7 @@
 
 @section('content')
   <div class="main-body">
-    <section class="section">
+    <section class="section mb-5">
       <div class="sub-section">
         <div class="main_slider owl-carousel">
           @if(isset($project_lists_carousel->lists[0]->projects) && !empty($project_lists_carousel->lists[0]->projects))
@@ -39,8 +39,8 @@
                         @endif
                       </div>
                       <div class="project-sub-text mt-1">
-                        @if (!empty($v->projects->director_statement))
-                        {{$v->projects->director_statement}}
+                        @if (!empty($v->projects->logline))
+                        {{$v->projects->logline}}
                         @endif
                       </div>
                       <div class="duration-lang-text mt-1">
@@ -55,7 +55,7 @@
                         {{$v->projects->genres[0]['name']}}
                         @endif
                       </div>
-                      <button class="watch-now-btn mt-4"><a href="{{ route('public-view', ['id'=>$v->projects->id]) }}" style="color:white !important;">Watch now</a></button>
+                      <button class="watch-now-btn mt-4"><a href="{{ route('public-view', ['id'=>$v->projects->id]) }}" style="color:white !important;">Watch Now</a></button>
                       {{-- @else
                         <div class="not-found-text">
                           <p>No Data Found</p>
@@ -134,7 +134,7 @@
                 @foreach ($v->lists as $k1=>$v1)
                 <div class="home_img_wrap">
                   {{-- @if (!empty($v1->projects[0])) --}}
-                  <div class="slider">
+                  <div class="home_slider">
                     <div class="img-container">
                       @if (!empty($v1->projects->projectImage) || isset($v1->projects->projectImage))
                           

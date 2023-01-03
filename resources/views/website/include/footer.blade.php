@@ -7,18 +7,18 @@
         </div>
         <div class="col-lg-9 col-md-8">
           <div class="row">
-            <div class="col-lg-2 text-center">
+            <div class="col-lg-2 text-start">
               <div> <a href="#"> About Us</a></div>
               <div> <a href="#"> Contact Us</a></div>
             </div>
             <div class="col-lg-2">
-              <div class="text-center"> <a href="#"> Help</a></div>
+              <div class="text-start"> <a href="#"> Help</a></div>
             </div>
-            <div class="col-lg-2 text-center mt-3 mt-md-0">
+            <div class="col-lg-2 text-start mt-3 mt-md-0">
               <div> <a href="#">Press</a></div>
               <div> <a href="#"> Resources</a></div>
             </div>
-            <div class="col-lg-3 text-center mt-3 mt-md-0">
+            <div class="col-lg-3 text-start mt-3 mt-md-0">
               <div> <a href="#"> Terms and Condition</a></div>
               <div> <a href="#"> Privacy Policy</a></div>
             </div>

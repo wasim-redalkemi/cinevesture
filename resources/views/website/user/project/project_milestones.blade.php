@@ -79,7 +79,7 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Crowdfunding Link (Optional)</label>
-                                    <input type="url" class="form-control" name="crowdfund_link" placeholder="Title" value="@if (!empty($projectData[0]['crowdfund_link'])) {{$projectData[0]['project_name']}} @endif" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="url" class="form-control" name="crowdfund_link" placeholder="Title" value="@if (!empty($projectData[0]['crowdfund_link'])) {{$projectData[0]['crowdfund_link']}} @endif" aria-label="Username" aria-describedby="basic-addon1">
                                     @error('crowdfund_link')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -150,7 +150,7 @@
                                 </div>
                                 <div class="col-md-1 d-flex align-items-end mt-2">
                                     <div class="profile_input">
-                                        <div class="save_add_btn">Add</div>
+                                        <div class="save_add_btn">Save</div>
                                     </div>
                                 </div>
                             </div>
