@@ -45,6 +45,7 @@
 
  
 
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
   <script src="{{ asset('admin/js/vendor.bundle.base.js') }}"></script>
   <script src="{{ asset('admin/js/vendor.bundle.addons.js') }}"></script>
   <!-- endinject -->
@@ -56,6 +57,7 @@
   <script src="{{ asset('admin/js/template.js') }}"></script>
   <script src="{{ asset('admin/js/settings.js') }}"></script>
   <script src="{{ asset('admin/js/todolist.js') }}"></script>
+  
   <!-- endinject -->
   <!-- Custom js for this page-->
   <script src="{{ asset('admin/js/dashboard.js') }}"></script>
@@ -69,46 +71,23 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
+
+  <script src="{{ asset('admin/js/export.js') }}"></script>
+
   <!-- End custom js for this page-->
   @stack('scripts')
   <script>
-    $('.order-listing').DataTable({
-      "aLengthMenu": [
-        [5, 10, 20, 50, 100, -1],
-        [5, 10, 20, 50, 100, "All"]
-      ],
-      "bPaginate": false,
-      
-      "iDisplayLength": 10,
-      // "language": {
-      //   search: "Search"
-      // },
-      bPaginate:false,
-      bInfo : false,
-      paging:false,
-      searching:false,
-      dom: 'Bfrtip',
-      buttons: [
-        'csv',
-        
-      ],
-      
-     
-      initComplete: function () 
+      $(document).ready(function()
       {
-        var btns = $('.dt-button');
-        btns.addClass('btn btn-primary btn-sm mb-2');
-        btns.removeClass('dt-button');
-      }
-    });
-
-    $('.confirmAction').click(function(e)
+        $('.confirmAction').click(function(e)
         {
             e.preventDefault();
             $('#confirmActionModal .confirmActionModalLink').attr('href',$(this).attr('href'));
+              jQuery.noConflict(); 
             $('#confirmActionModal').modal('show');
         });
+        $(".sidebar .nav-item").not('.active').find('.collapse.show').removeClass('show');
+      })
     </script>
 </body>
-<!-- Mirrored from www.bootstrapdash.com/demo/serein/template/demo/vertical-default-light/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 12 Sep 2022 07:16:29 GMT -->
 </html>

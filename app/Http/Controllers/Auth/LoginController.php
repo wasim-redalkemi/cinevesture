@@ -84,10 +84,10 @@ class LoginController extends Controller
                 return back()->with('error','Invalid credentials.');
             }
             if(isset($user->status) && $user->status == 0){
-                return back()->with('error','Your account has been suspending,please connect admin');
+                return back()->with('error','Your account has been suspended,please contact support.');
             }
             if(!isset($user)){
-                return back()->with('error','Your account has been deleted');
+                return back()->with('error','Your account does not exist.');
             }
            
             if (!$user->email_verified_at) {

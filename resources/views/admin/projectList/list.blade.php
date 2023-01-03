@@ -16,7 +16,7 @@
                                    <th class="col-md-2">Id</th>
                                    <th class="col-md-2">Name</th>
                                     <th class="col-md-2">Project Count</th>
-                                    <th class="col-md-2">Action</th>
+                                    <th class="col-md-2 notForPrint">Action</th>
                                 </tr>
                             </thead>
                             <tbody>

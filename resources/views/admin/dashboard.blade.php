@@ -39,7 +39,7 @@
           <div class="card bg-gradient-info text-white text-center card-shadow-info">
             <a href="{{route('query.list')}}">
             <div class="card-body">
-              <h6 class="font-weight-normal">Total Querys</h6>
+              <h6 class="font-weight-normal">Total Queries</h6>
               <h2 class="mb-0">{{$totalQueryCount}}</h2>
             </div>
           </a>

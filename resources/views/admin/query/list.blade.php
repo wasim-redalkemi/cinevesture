@@ -17,7 +17,7 @@
                                     <th class="col-md-1">Subject</th>
                                     <th class="col-md-1">Date</th>
                                     <th class="col-md-1">Time</th>
-                                    <th class="col-md-2 noExport">Action</th>
+                                    <th class="col-md-2 notForPrint">Action</th>
                                 </tr>
                             </thead>
                             <tbody>

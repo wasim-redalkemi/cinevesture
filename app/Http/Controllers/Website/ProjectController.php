@@ -749,7 +749,7 @@ class ProjectController extends WebController
             ->with(['projectCountries','projectLanguages','genres','projectCategory','projectLookingFor','projectStage','projectType','user','projectImage'])
             // ->where('user_id','!=',auth()->user()->id)
             ->orderByDesc('id')
-            ->paginate(5);
+            ->paginate(config('constants.JOB_PAGINATION_LIMIT'));
             $projects->appends(request()->input())->links();
             return view('website.user.project.search_result',compact(['countries','languages','geners','categories','looking_for','project_stages','projects']));                   
            }catch(Exception $e){
