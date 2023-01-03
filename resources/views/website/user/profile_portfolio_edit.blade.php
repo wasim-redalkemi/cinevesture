@@ -302,6 +302,12 @@
             });
         }
 
+        let isValidYoutubeUrl = function (link) {
+            let domain = (new URL(link));
+            let hostname = domain.hostname.replaceAll(".","");
+            return (hostname.indexOf("youtube") > -1) ? true : false;
+        }
+
         let bindActions = function (){
             $(parentElemId + " #portfolio-video input[name='video_url']").off('blur').on('blur',(e)=>{
                 let link = e.target.value;
@@ -312,7 +318,7 @@
                         //let reqData = {'vidUrl': "https://vimeo.com/336812686"};
                         let reqData = {'vidUrl': link};
                         doAjax("ajax/get-video-details",reqData,"POST",getVideoDataCallback);
-                    } else if(link.indexOf("youtube.com") > -1) {
+                    } else if(isValidYoutubeUrl(link)) {
                         //let reqData = {'vidUrl': "https://www.youtube.com/watch?v=ZdbQ_FvNBZA&t=915s&ab_channel=ScaleupAlly"};
                         let reqData = {'vidUrl':link};
                         doAjax("ajax/get-video-details",reqData,"POST",getVideoDataCallback);

@@ -24,9 +24,6 @@
         <div>
             <div class="public-head-container">
                 <div class="container">
-                    {{-- @php
-                        dd($projectData[0]['user']);
-                    @endphp --}}
                     <div class="row">
                         <div class="col-md-6 col-sm-12 text-center text-lg-start">
                             <div class="verified-text-area">
@@ -37,7 +34,10 @@
                                     <span><b>-</b></span>
                                     @endif
                                 </div>
+                                {{-- <button class="verified-btn mx-3"> <img src="{{ asset('images/asset/verified-badge.svg') }}" width=100% alt="Image"> VERIFIED</button> --}}
+                                @if ($UserProject->project_verified==1)
                                 <button class="verified-btn mx-3"> <img src="{{ asset('images/asset/verified-badge.svg') }}" width=100% alt="Image"> VERIFIED</button>
+                                @endif
                             </div>
                             <div class="public-head-subtext">
                                 @if (isset($UserProject->logline))
@@ -156,69 +156,6 @@
                                 <div class="d-flex align-items-center">
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
                                         <button class="cantact-page-cmn-btn mt-2" data-toggle="modal" data-target="#contactModal">Contact Now </button>
-                                    {{-- <button class="cantact-page-cmn-btn"><a href=""  class="text_decor_none">Contact Now</a></button> --}}
-
-
-
-                                        <!-- Contact modal  -->
-                                        <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="ContactModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <div class="modal-content bg_3308">
-                                                    <div class="modal-body p-0">
-                                                        <div class="p-3 float-end">
-                                                            <i class="fa fa-times text_fff font_24 pointer" data-dismiss="modal" aria-label="Close"></i>
-                                                        </div>
-                                                        <section class="p-3">
-                                                            <div class="container">
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <div class="signup-text  mb-4 mt-5"> Contact </div>
-                                                                        <div class="row">
-                                                                            <div class="col-md-3">
-                                                                                {{-- <div><img src="{{ asset('images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="w-100 br_100"></div> --}}
-                                                                                <?php
-                                                                                if (empty($projectData[0]['user']['profile_image'])) {
-                                                                                ?>
-                                                                                    <img src="{{ asset('images/asset/user-profile.png') }}" class="w-100 br_100">
-                                                                                <?php
-                                                                                } else {
-                                                                                ?>
-                                                                                    <img src="{{Storage::url($projectData[0]['user']['profile_image'])}}" class="w-100 br_100 " alt="product-image" style="height:100%;width:100%;">
-                                                                                <?php
-                                                                                }
-                                                                                ?>
-                                                                            </div>
-                                                                            <div class="col-md-9">
-                                                                                <div class="tile_text text_fff">{{empty($projectData[0]['user']['first_name'])?'Name':ucfirst($projectData[0]['user']['first_name']).' '.ucfirst($projectData[0]['user']['last_name']);}}</div>
-                                                                                <div class="organisation_cmn_text text_fff">{{empty($projectData[0]['user']['job_title'])?'Job Title':ucfirst($projectData[0]['user']['job_title']);}}</div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="mt-3"><input type="text" id="subject" name="subject" value="" placeholder="Subject" class="modal_input"></div>
-                                                                        <div class="mt-3">
-                                                                            <textarea name="message" id="message" cols="25" rows="6" class="w-100 modal_input controlTextLength" placeholder="Message" text-length = "1200" maxlength="1200" aria-label="With textarea"></textarea>
-
-                                                                        </div>
-
-                                                                        <div class="form-check mt-3">
-                                                                            <input class="form-check-input modal_check_input" type="checkbox" id="checkbox_cc">
-                                                                            <label class="modal_btm_text mx-1">Send a copy to me</label>
-                                                                        </div>
-
-                                                                        <div class="mt-4">
-                                                                            <input type="hidden" name="email_1" id="email_1" class="modal_input" value="@if (!empty($projectData[0]['user']['email'])){{$projectData[0]['user']['email']}}@endif">
-                                                                            <button type="button" id="contact_btn" class="invite_btn">Send Mail</button>
-                                                                        </div>
-                                                                        <div class="modal_btm_text mt-4 mb-5">
-                                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum vel cras vitae morbi varius vitae.
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </section>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
                                     @endif
                                     <i class="fa fa-share-alt mx-4 icon-size" aria-hidden="true"></i>
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
@@ -232,6 +169,7 @@
                                 </div> --}}
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
@@ -476,6 +414,42 @@
             </div>
         </div>
 
+        <div class="guide_profile_subsection">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="guide_profile_main_text deep-pink font_18">Related Project</div>
+                        {{-- @php
+                       foreach ($recomProject as $key => $value) {
+                        # code...
+                            echo '<pre>';
+                            print_r($value->project_name);
+                        }
+                        die;
+                        @endphp --}}
+                        @if (count($recomProject)>0)
+                        
+                        <div class="project owl-carousel owl-theme">
+                            @foreach($recomProject as $k=>$v)                                
+                            <div class="item">
+                                <div style="color: azure">{{!empty($v->project_name)?$v->project_name: '-' }}</div>
+                                {{-- <a href = "{{route('public-view',['id'=>$v->id])}}"> --}}
+                                {{-- <img src="@php echo (!empty($v->projectImage->file_link)?asset('storage/'.$v->projectImage->file_link): asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1 (1).png')) @endphp" width="100%" height="100%"  /> --}}
+                                {{-- <div class="guide_profile_main_subtext">@php echo (!empty($v->project_name)?$v->project_name
+                                
+                                : '-') @endphp</div> --}}
+                                {{-- </a> --}}
+                            </div>                                
+                            @endforeach
+                        </div>
+                        @else
+                        <span><b>-</b></span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="public_subsection">
             <div class="row">
                 <div class="col-md-12">
@@ -514,6 +488,13 @@
                 </div>
             </div>
         </div>
+        <!-- Contact modal  -->
+        @include('website.modal.contact', [                                         
+            'image' => (!empty($projectData[0]['user']['profile_image'])?$projectData[0]['user']['profile_image']:asset('images/asset/user-profile.png')),
+            'name' => empty($projectData[0]['user']['first_name'])?'Name':ucfirst($projectData[0]['user']['first_name']).' '.ucfirst($projectData[0]['user']['last_name']),
+            'title' =>empty($projectData[0]['user']['job_title'])?'Job Title':ucfirst($projectData[0]['user']['job_title']), 
+            'email' =>empty($projectData[0]['user']['email'])?'Email':$projectData[0]['user']['email'], 
+        ])
     </div>
 </section>
 @endsection
@@ -529,43 +510,6 @@
         $("#success-toast").toast("show");
     });
 
-    $('#contact_btn').click(function(e)
-            {
-                var subject = $('#subject').val();
-                var email_1 = $('#email_1').val();
-                var message = $('#message').val();
-                var checkbox_cc = ($("#checkbox_cc").prop("checked") == true ? '1' : '0');
-                let $btn = $(this);
-                e.preventDefault();
-                e.stopPropagation();
-
-                $btn.text("Sending..");
-                $btn.prop('disabled',true);
-                
-                $.ajax(
-                {
-                    url:"{{ route('contact-user-mail-store') }}",
-                    type:'POST',
-                    dataType:'json',
-                    data:{subject:subject,email_1:email_1,message:message,checkbox_cc:checkbox_cc,"_token": "{{ csrf_token() }}"},
-                    success:function(response)
-                    {   $('#subject').val("");
-                        $('#message').val("");
-                        $btn.text("Send Mail");
-                        $btn.prop('disabled',false);
-                        toastMessage(response.status, response.msg);
-                        $('.modal').hide();
-                        $('.modal-backdrop').remove();
-                    },
-                    error:function(response,status,error)
-                    {     $btn.text("Send Mail");
-                          $btn.prop('disabled',false);
-                        console.log(response);
-                        console.log(status);
-                        console.log(error);
-                    } 
-                });
-            });
 
     $('.like-project').on('click', function(e) {
 

@@ -72,24 +72,23 @@
                                         </span>
                                         @enderror
                                     </div>
-                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="profile_input select2forError">
-                                    <label for="lang">Project Location (Where it took place) <span class = "steric_sign_design">*</span></label>
-                                    <select name="project_country_id[]" class="outline is-invalid-remove js-select2 @error('project_country_id') is-invalid @enderror" id="lang" multiple autofocus required>
-                                        @foreach ($country as $k=>$v)
-                                        <option value="{{ $v->id}}">{{ $v->name }}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('project_country_id')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
+                                    <div class="profile_input select2forError">
+                                        <label for="lang">Portfolio Location (Where it took place) <span style = "color:red">*</span></label>
+                                        <select name="project_country_id[]" class="js-select2 @error('project_country_id') is-invalid @enderror" id="lang" multiple autofocus required>
+                                            @foreach ($country as $k=>$v)
+                                            <option value="{{ $v->id}}">{{ $v->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('project_country_id')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
                             </div>
                         </div>
                         <div class="row">
@@ -113,9 +112,9 @@
                                     <div class="img-container h_66 mt-3 mt-md-0">
                                         <img src="{{asset('images/asset/default-video-thumbnail.jpg')}}" class="width_inheritence" alt="image">
                                     </div>
-                                    <input type="text" class="outline is-invalid-remove form-control @error('video') is-invalid @enderror" placeholder="Paste link here" name="video_url" aria-label="Video URL" aria-describedby="basic-addon1" autofocus required>
+                                    <input type="text" class="outline is-invalid-remove form-control @error('video_url') is-invalid @enderror" placeholder="Paste link here" name="video_url" aria-label="Video URL" aria-describedby="basic-addon1" autofocus required>
                                     <input type="hidden" class="" name="video_thumbnail" value="" aria-label="Video Thumbnail" aria-describedby="basic-addon1">
-                                    @error('video')
+                                    @error('video_url')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -245,13 +244,20 @@
             });
         }
 
+        let isValidYoutubeUrl = function (link) {
+            let domain = (new URL(link));
+            let hostname = domain.hostname.replaceAll(".","");
+            return (hostname.indexOf("youtube") > -1) ? true : false;
+        }
+
         let bindActions = function() {
             $(parentElemId + " #portfolio-video input[name='video_url']").off('blur').on('blur', (e) => {
                 let link = e.target.value;
                 console.log("link = " + link);
                 if (link && validateUrl(link)) {
                     console.log("link blurred - " + link);
-                    if (link.indexOf("vimeo.com") > -1) {
+                    // if (link.indexOf("vimeo.com") > -1) {
+                    if (isValidYoutubeUrl(link)) {
                         //let reqData = {'vidUrl': "https://vimeo.com/336812686"};
                         let reqData = {
                             'vidUrl': link

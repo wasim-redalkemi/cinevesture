@@ -121,7 +121,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $i=0;?>
+                                    @php
+                                    $i=($projects->perPage()*($projects->currentPage()-1))
+                                @endphp
                                     @foreach($projects as $key=>$project)
                                     <?php $i++;?>
 
@@ -138,8 +140,8 @@
                                         <li>{{$category->name.','}}</li>
                                         
                                          @endforeach
-                                        </ol>
-                                         <a href="{{route('category.update-view')}}?pid={{$project->id}}&cid={{$category->id}}"><i class="fa fa-edit"></i></a>
+                                        </ol >
+                                         <a href="{{route('category.update-view')}}?pid={{$project->id}}&cid={{$category->id}}"><i class="fa fa-edit text-black"></i></a>
                                          @endif
                                         </td>
                                     
@@ -153,7 +155,7 @@
                                              @endforeach
                                             </ol>
                                         @if (!empty($genre->name))
-                                        <a href="{{route('genre.update-view')}}?p_id={{$project->id}}&g_id={{$genre->id}}"><i class="fa fa-edit"></i></a>
+                                        <a href="{{route('genre.update-view')}}?p_id={{$project->id}}&g_id={{$genre->id}}"><i class="fa fa-edit text-black"></i></a>
                                         @else 
                                         {{'-'}}
                                         @endif
@@ -172,11 +174,11 @@
 
                                         <td class="" style="width: 100px;">
                                             @if($project->admin_status=='active')
-                                                <a class="btn btn-success btn-fw mb-1 btn-sm mt-10 w-65 view-btn btn_padding text-white" href="{{route('project-list-status',['id' => $project->id , 'status' =>'inactive'])}}">                                            
+                                                <a class="btn btn-success btn-fw mb-1 btn-sm mt-10 w-65 view-btn btn_padding text-white w-82" href="{{route('project-list-status',['id' => $project->id , 'status' =>'inactive'])}}">                                            
                                                     {{ucfirst($project->admin_status)}}
                                                 </a>
                                             @else
-                                                <a class="btn btn-danger btn-fw mb-1 btn-sm mt-10 w-65 view-btn btn_padding text-white" href="{{route('project-list-status',['id' => $project->id , 'status' =>'active'])}}">
+                                                <a class="btn btn-danger btn-fw mb-1 btn-sm mt-10 w-65 view-btn btn_padding text-white w-82" href="{{route('project-list-status',['id' => $project->id , 'status' =>'active'])}}">
                                                     {{ucfirst($project->admin_status)}}
                                                 </a>
                                             @endif
@@ -206,7 +208,8 @@
                             </table>                            
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12 d-flex justify-content-between mt-3">
+                        <div>{{'Showing '.$projects->firstItem().' to' .' '. $projects->lastItem().' of'.' '.$projects->total()}}</div>
                         <div style="float:right;">{{$projects->links()}}</div>
                     </div> 
                 </div>
@@ -220,6 +223,7 @@
     $(document).ready(function() {       
         $('.fav_inp').change(function()
         {
+            
             window.location.href=$(this).attr('path');
         })
         $('.recom_inp').change(function()

@@ -18,14 +18,14 @@
                             <div class="d-flex justify-content-between">
                                 @php
                                 $Job_data = $Job_data->toArray();
-                            @endphp
+                                @endphp
                                 <div class="contact-page-text deep-aubergine">@if (!empty($Job_data['title'])) {{ucFirst($Job_data['title'])}} @endif</div>
                                                              
                                 <!-- <div class="contact-page-text deep-aubergine"> <span onclick="history.back()"><i class="fa fa-arrow-left" aria-hidden="true"></i></span> @if (!empty($Job_data['title'])) {{$Job_data['title']}} @endif</div> -->
                                 <div class="d-flex align-items-center">
-                                     <div class="associate_text aubergine ml_10">Save job</div>
+                                     <div class="associate_text aubergine ml_10">@if (!empty($Job_data['favorite']['job_id'])){{'Job saved'}}@else{{'Save job'}} @endif</div>
                                      <div class="pointer fav-icon mx-3">
-                                        <i data-id="@if (!empty($Job_data['favorite']['job_id'])){{$Job_data['favorite']['job_id']}} @endif" class="fa {{is_null($Job_data['favorite']) ? 'fa-heart-o' : 'fa-heart'}} aubergine icon-size" aria-hidden="true"></i>
+                                        <i data-id="@if (!empty($Job_data['id'])){{$Job_data['id']}} @endif" class="fa {{is_null($Job_data['favorite']) ? 'fa-heart-o' : 'fa-heart'}} aubergine icon-size" aria-hidden="true"></i>
                                     </div>
                                     @if(!isset($Job_data['applied']) || !empty($Job_data['applied']))
                                     <div>
@@ -112,7 +112,7 @@
                         <div class="d-flex mt-3">
                             <div class="tile_text deep-pink">@if (!empty($Job_data['user'][0]['name'])) {{ucFirst($Job_data['user'][0]['name'])}} @endif</div>
                             <div class="mx-3">
-                               <div class="organisation_cmn_text">Chief Officer</div>
+                               <div class="organisation_cmn_text">@if (!empty($Job_data['user'][0]['job_title'])) {{ucFirst($Job_data['user'][0]['job_title'])}} @endif</div>
                                {{-- <div class="published_text">10th July 2021</div>  --}}
                                <div class="published_text"><?php if (!empty($Job_data['created_at'])) {
                                 $orgDate = $Job_data['created_at'];  

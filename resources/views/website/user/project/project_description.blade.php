@@ -29,7 +29,7 @@
                                     <!-- <input type="text" class="form-control" name="logline"  placeholder="Logline" required> -->
                                 </div>
                                 <div class="form_elem">
-                                    <textarea class="form-control controlTextLength" text-length = "250" maxlength="250" placeholder="Logline" name="logline" aria-label="With textarea" style="border: 1px solid #4D0D8A;" rows="1" required>@if (!empty($projectDescription[0]->logline)){{ $projectDescription[0]->logline }}@endif</textarea>
+                                    <textarea class="form-control controlTextLength" text-length = "250" maxlength="250" placeholder="Write Logline" name="logline" aria-label="With textarea" style="border: 1px solid #4D0D8A;" rows="1" required>@if (!empty($projectDescription[0]->logline)){{ $projectDescription[0]->logline }}@endif</textarea>
                                     @error('Logline')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -43,7 +43,7 @@
                                 <div class="profile_input">
                                     <label>Synopsis/Brief Description <span class = "steric_sign_design">*</span></label>
                                     <div class="form_elem">
-                                        <textarea class="form-control controlTextLength" placeholder="Write synopsis here" text-length = "600" maxlength="600" name="synopsis" aria-label="With textarea" required>@if (!empty($projectDescription[0]->synopsis)){{ $projectDescription[0]->synopsis }}@endif</textarea>
+                                        <textarea class="form-control controlTextLength" placeholder="Write Synopsis" text-length = "600" maxlength="600" name="synopsis" aria-label="With textarea" required>@if (!empty($projectDescription[0]->synopsis)){{ $projectDescription[0]->synopsis }}@endif</textarea>
                                         @error('synopsis')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -59,7 +59,7 @@
                                     <label>Director/Creator/Founder’s Statement <span class = "steric_sign_design">*</span></label>
                                 </div>
                                 <div class="form_elem">
-                                    <textarea class="form-control controlTextLength" placeholder="Write statement here" text-length = "600" maxlength="600" name="director_statement" style="border: 1px solid #4D0D8A;" id="textAreaExample3" rows="1" required>@if (!empty($projectDescription[0]->director_statement)){{ $projectDescription[0]->director_statement }}@endif</textarea>
+                                    <textarea class="form-control controlTextLength" placeholder="Write Statement" text-length = "600" maxlength="600" name="director_statement" style="border: 1px solid #4D0D8A;" id="textAreaExample3" rows="1" required>@if (!empty($projectDescription[0]->director_statement)){{ $projectDescription[0]->director_statement }}@endif</textarea>
                                     @error('director_statement')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

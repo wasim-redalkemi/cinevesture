@@ -59,7 +59,6 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="profile_input">
-                                        <label>Field of Study <span class = "steric_sign_design">*</span></label>
                                         <input type="text" class="form-control @error('field_of_study') is-invalid @enderror" placeholder="Field of Study" aria-label="Username" name="field_of_study" aria-describedby="basic-addon1" autofocus required>
                                         @error('field_of_study')
                                             <span class="invalid-feedback" role="alert">
