@@ -92,7 +92,7 @@
                         <div id="milestone_entries" class="row">
                             @if(isset($projectData[0]['project_milestone']) && count($projectData[0]['project_milestone'])>0)
                                 @foreach ($projectData[0]['project_milestone'] as $in => $ass)
-                                <div id="milestome-{{$ass['id']}}" class="row">
+                                <div id="milestone-{{$ass['id']}}" class="row">
                                 <div class="col-md-4">
                                         <div class="profile_input">
                                             <label>Milestone Description</label>
@@ -226,7 +226,7 @@
             $(milestone_entriesId+" .remove-entry").off("click").on("click",(e)=>{
                 let id = $(e.target).parents()[1].id.split("-")[1];
                 createToast("Please wait...","S");
-                $(milestone_entriesId+" #milestome-"+id).remove();
+                $(milestone_entriesId+" #milestone-"+id).remove();
                 doAjax('ajax/delete-proj-milestone/'+id,{},"DELETE",function(req,resp){
                     if(resp.payload.isDeleted){
                         createToast(resp.message,"S");
@@ -316,13 +316,7 @@
             if(!assoEntry.description){
                 assoEntry.description = "";
             }
-            if(assoEntry.complete = '1'){
-                assoEntry.complete = 'checked';
-            } else {
-                assoEntry.complete = '';
-                
-            }
-            let complete = assoEntry.complete == 1 ? "checked": "";
+            let isComplete = (assoEntry.complete == 1) ? "checked": "";
             let html = "";
             html += '<div id="milestone-'+assoEntry.id+'" class="row">';
             html += '<div class="col-md-4">';
@@ -345,7 +339,7 @@
             html += '</div>';
             html += '<div class="col-md-2 d-flex align-items-end">';
                 html += '<div class="d-flex checkbox_btn mb-2">';
-                    html += '<input type="checkbox" class="checkbox_btn" name="project_milestone_complete" value="'+assoEntry.complete+'" aria-label="" complete '+assoEntry.complete+'>';
+                    html += '<input type="checkbox" class="checkbox_btn" name="project_milestone_complete" aria-label="" '+isComplete+'>';
                     html += '<div class="verified-text deep-pink mx-2">Mark Complete</div>';
                 html += '</div>';
             html += '</div>';

@@ -40,7 +40,7 @@
                                     <div class="d-flex align-items-center mt-3">
                                         <div><i class="fa fa-paperclip aubergine icon-size" aria-hidden="true"></i></div>
                                         <div class="upload_resume_text mx-2">Upload Your Resume/CV</div>
-                                        <input type="file" accept="application/pdf,application/msword" name="resume" class="form-control @error('resume') is-invalid @enderror docInp d-none" id="upload-doc-inp" required>
+                                        <input type="file" accept="application/pdf,application/msword" name="resume" class="form-control @error('resume') is-invalid @enderror docInp d-none" id="upload-doc-inp" autofocus required>
                                         @error('resume')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
