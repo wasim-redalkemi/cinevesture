@@ -19,7 +19,8 @@
             </div>
             @endif
             <!-- </div> -->
-            <div class="col-md-3 side-bar-cmn-part">
+            <div class="col-md-3">
+                <div class="side-bar-cmn-part">
                 <form method="post" action="{{ route('showJobSearchResults') }}">
                     @csrf
                     <div class="search-box-container">
@@ -188,6 +189,7 @@
                         </div>
                     </div>
                 </form>
+                </div>
             </div>
             <div class="col-md-9">
                 @include('website.components.jobtile')

@@ -21,6 +21,10 @@ var ImageCropper = function(fileToCrop,previewElem){
         cropboxData = size;
     }
 
+    let getCropBoxSize = function(){
+        return cropboxData;
+    }
+
     let init = function(){
 
         bindEvents();
@@ -120,7 +124,7 @@ var ImageCropper = function(fileToCrop,previewElem){
         });
     }
 
-    return {init,getCropperFile,setCropBoxSize};
+    return {init,getCropperFile,setCropBoxSize,getCropBoxSize};
 
 }
 

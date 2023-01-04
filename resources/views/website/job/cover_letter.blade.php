@@ -27,14 +27,14 @@ use Illuminate\Support\Facades\DB;
                             </div>
                         </div>
                         <div class="guide_profile_subsection">
-                            <div class="container">
                                 <div class="row">
-                                    <div class="col-md-2">
+                                    <div class="col-md-12">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex">
                                         <div class="user_profile_container">
                                             <img src="{{ asset('images/asset/user-profile.png') }}" />
                                         </div>
-                                    </div>
-                                    <div class="col-md-8">
+                                        <div class="mx-4">
                                         <div class="guide_profile_main_text pt-3">{{$applicant->first_name.' '.$applicant->last_name}}</div>
                                        <div>
                                         <span class="associate_text deep-pink"><a href="{{route('profile-public-show',['id'=>$applicant->id])}}" class="">View Profile</a></span>
@@ -42,8 +42,10 @@ use Illuminate\Support\Facades\DB;
                                        </div>
                                         <!-- <a href="{{route('profile-public-show',['id'=>$applicant->id])}}" class=""></a> -->
                                     </div>
-                                    <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
+                                            </div>
+                                    <div class="pt-3">
                                         <i class="fa {{$isLiked ? 'fa-heart' : 'fa-heart-o'}} icon-size Aubergine" aria-hidden="true"></i>
+                                    </div>
                                     </div>
                                 </div>
                             </div>

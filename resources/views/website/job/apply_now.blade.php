@@ -53,7 +53,7 @@
                                             <div class="upload_loader">
                                                 <img src="{{ asset('images/asset/pdf_image.svg') }}" alt="image">
                                             </div>
-                                            <div>
+                                            <div class="mx-2">
                                                 <div class="uploadedPdf mx-2"></div>
                                             </div>
                                         </div>

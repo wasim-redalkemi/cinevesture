@@ -21,7 +21,9 @@
                         @include('website.include.flash_message')
                     </div>
                     <div class="row">
-                        <div class="col-md-2">
+                        <div class="col-md-12">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex">
                             <div class="user_profile_container">
                                 <?php
                                 if (empty($user->profile_image)) {
@@ -35,8 +37,7 @@
                                 }
                                 ?>
                             </div>
-                        </div>
-                        <div class="col-md-8">
+                        <div class="mx-4">
                             <div class="guide_profile_main_text pt-3">{{empty($user->first_name)?'Name':ucfirst($user->first_name).' '.ucfirst($user->last_name);}}</div>
                             <div class="guide_profile_main_subtext">{{empty($user->job_title)?'Job Title':ucfirst($user->job_title);}}</div>
                             <div><button class="guide_profile_btn mt-2" data-toggle="modal" data-target="#contactModal">Contact </button></div>
@@ -102,7 +103,8 @@
                             </div>
 
                         </div>
-                        <div class="col-md-2 d-flex pt-3 justify-content-lg-end">
+                        </div>
+                        <div class="d-flex pt-3 justify-content-lg-end">
                             @if($_REQUEST['id'] != auth()->user()->id )
                             <div> <i class="fa <?php if(isset($user->isfavouriteProfile)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$user->id}}" aria-hidden="true"></i></div>
 
@@ -124,6 +126,8 @@
                             ?>
                         </div>
                     </div>
+                    </div>
+                </div>
                 </div>
             </div>
 

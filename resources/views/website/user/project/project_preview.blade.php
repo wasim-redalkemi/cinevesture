@@ -187,10 +187,10 @@
                                 <div class="upload_loader">
                                     <i class="fa fa-file-text deep-pink icon-size" aria-hidden="true"></i>
                                 </div>
-                                <div>
+                                <div class="mx-3">
                                     <div class="guide_profile_main_subtext Aubergine_at_night px-2">{{ json_decode($v['media_info'])->name }}</div>
+                                    <div class="proctect_by_capta_text Aubergine_at_night">{{ json_decode($v['media_info'])->size_label }}</div>
                                 </div>
-                                <div class="proctect_by_capta_text Aubergine_at_night">{{ json_decode($v['media_info'])->size_label }}</div>
                             </div>
                         </div>
                         @endforeach
@@ -217,7 +217,7 @@
                 <div class="preview_headtext mt-4">Project Stage</div>
                 <div class="preview_subtext">@if (!empty($projectData[0]['project_stage']['name'])) {{$projectData[0]['project_stage']['name']}} @endif</div>
                 <div class="preview_headtext">Looking For</div>
-                <div class=" mt-2">
+                <div class="mt-2">
                     @if (!empty($projectData[0]['project_looking_for']))
                     @foreach ($projectData[0]['project_looking_for'] as $v)
                         <button class="curv_cmn_btn mx-1">{{$v['name']}}</button>

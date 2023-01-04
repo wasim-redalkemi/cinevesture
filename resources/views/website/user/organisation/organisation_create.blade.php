@@ -122,7 +122,7 @@
                             <div class="col-md-12">
                                 <div class="profile_input text_field">
                                     <label>About <span style="color:red">*</span></label>
-                                 <div class="form_elem"> <textarea class="form-control controlTextLength" text-length="600" id="" name="about" maxlength="600" aria-label="With textarea" required autofocus>{{(isset($UserOrganisation->about))?$UserOrganisation->about:'' }}</textarea></div>  
+                                    <div class="form_elem"> <textarea class="form-control controlTextLength" text-length="600" id="" name="about" maxlength="600" aria-label="With textarea" required autofocus>{{(isset($UserOrganisation->about))?$UserOrganisation->about:'' }}</textarea></div>
                                 </div>
                             </div>
                         </div>
@@ -144,7 +144,7 @@
                             </div>
                         </div>
                         <div class="row">
-                        <div class="col-md-6">
+                            <div class="col-md-6">
                                 <div class="profile_input select2forError">
                                     <label> Languages Spoken <span style="color:red">*</span></label>
                                     <select name="language_id[]" class="outline js-select2 @error('language_id') is-invalid @enderror" id="lang" multiple autofocus required>
@@ -332,32 +332,33 @@
                         </div>
                         {{-- <div class="row">
                             <div class="col-md-3">
-                                <div><img src="{{ asset('images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="w-100"></div>
-                                <div class="d-flex justify-content-between mt-3">
-                                    <div class="organisation_cmn_text">Title</div>
-                                    <div class="icon_container"><i class="fa fa-times-circle icon-size deep-pink" aria-hidden="true"></i></div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div><img src="{{ asset('images/asset/67a6c213a22d2ba4c3982a55d828b5c7 1.png') }}" class="w-100"></div>
-                                <div class="d-flex justify-content-between mt-3">
-                                    <div class="organisation_cmn_text">Title</div>
-                                    <div class="icon_container"><i class="fa fa-times-circle icon-size deep-pink" aria-hidden="true"></i></div>
-                                </div>
-                            </div>
-                        </div> --}}
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="d-flex justify-content-end mt-4">
-                                    <button class="cancel_btn mx-3">Discard</button>
-                                    <button type="submit" class="guide_profile_btn mx-3">Save</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                                <div><img src="{{ asset('images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="w-100">
+                </div>
+                <div class="d-flex justify-content-between mt-3">
+                    <div class="organisation_cmn_text">Title</div>
+                    <div class="icon_container"><i class="fa fa-times-circle icon-size deep-pink" aria-hidden="true"></i></div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div><img src="{{ asset('images/asset/67a6c213a22d2ba4c3982a55d828b5c7 1.png') }}" class="w-100"></div>
+                <div class="d-flex justify-content-between mt-3">
+                    <div class="organisation_cmn_text">Title</div>
+                    <div class="icon_container"><i class="fa fa-times-circle icon-size deep-pink" aria-hidden="true"></i></div>
+                </div>
+            </div>
+        </div> --}}
+        <div class="row">
+            <div class="col-md-12">
+                <div class="d-flex justify-content-end mt-4">
+                    <button class="cancel_btn mx-3">Discard</button>
+                    <button type="submit" class="guide_profile_btn mx-3">Save</button>
                 </div>
             </div>
         </div>
+        </form>
+    </div>
+    </div>
+    </div>
     </div>
 </section>
 @endsection
@@ -370,8 +371,13 @@
 <script type="text/javascript">
     $(document).ready(function() {
 
-        $('.for_hide').css('display', 'block');
-        $('.for_show').css('display', 'none');
+        // $('.for_hide').css('display', 'block');
+        // $('.for_show').css('display', 'none');
+        $('.for_show').hide();
+        if ($('.upload_preview').attr('src') != '') {
+            $('.upload_preview').show();
+            $('.for_hide').hide();
+        }
         $('.open_file_explorer').click(function(e) {
             // $(this).parents('.custom_file_explorer').find('.file_element').click();
             $(this).parents('.custom_file_explorer').find('.file_element').val("");
@@ -392,25 +398,25 @@
     });
 
     croperImg = document.querySelector('.croperImg'),
-    finalImage = document.querySelector('.finalImage'),
+        finalImage = document.querySelector('.finalImage'),
 
-    function validateSize(input) {
-        const fileSize = input.files[0].size / 1024 / 1024; // in MiB
-        if (fileSize > 10) {
-            alert('The document may not be greater than 10 MB');
-            $('#documents').val(''); //for clearing with Jquery
+        function validateSize(input) {
+            const fileSize = input.files[0].size / 1024 / 1024; // in MiB
+            if (fileSize > 10) {
+                alert('The document may not be greater than 10 MB');
+                $('#documents').val(''); //for clearing with Jquery
+            }
         }
-    }
     let result = document.querySelector('.result'),
 
-    formData = new FormData()
+        formData = new FormData()
     var base64data = null;
     var $modal = $('#modal');
     var image = document.getElementById('image');
     var cropper;
 
     $("body").on("change", ".image", function(e) {
-       var  files = e.target.files;
+        var files = e.target.files;
         // alert(files)
         var done = function(url) {
             image.src = url;
@@ -447,21 +453,21 @@
     $modal.on('shown.bs.modal', function() {
 
 
-     cropper = new Cropper(image, {
-    dragMode: 'move',
-    autoCropArea: 0.65,
-    restore: false,
-    guides: false,
-    center: true,
-    highlight: false,
-    cropBoxMovable: true,
-    cropBoxResizable: false,
-    toggleDragModeOnDblclick: false,
-    data:{ //define cropbox size
-      width: 300,
-      height:  300,
-    },
-  });
+        cropper = new Cropper(image, {
+            dragMode: 'move',
+            autoCropArea: 0.65,
+            restore: false,
+            guides: false,
+            center: true,
+            highlight: false,
+            cropBoxMovable: true,
+            cropBoxResizable: false,
+            toggleDragModeOnDblclick: false,
+            data: { //define cropbox size
+                width: 300,
+                height: 300,
+            },
+        });
     }).on('hidden.bs.modal', function() {
         cropper.destroy();
         cropper = null;
@@ -544,14 +550,14 @@
         placeholder: "Select",
         allowClear: true,
         language: {
-      noResults: function() {
-        return '<button class="no_results_btn">No Result Found</a>';
-      },
-    },
-    escapeMarkup: function(markup) {
-      return markup;
-    },
-        
+            noResults: function() {
+                return '<button class="no_results_btn">No Result Found</a>';
+            },
+        },
+        escapeMarkup: function(markup) {
+            return markup;
+        },
+
     });
 
     $('.invite_btn').click(function() {

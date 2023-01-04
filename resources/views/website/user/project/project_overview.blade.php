@@ -18,7 +18,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="profile_wraper profile_wraper_padding my-4">
+                <div class="profile_wraper profile_wraper_padding mt-4 mb_100">
                     <form role="form" class="validateBeforeSubmit" method="POST" enctype="multipart/form-data" action="{{ route('validate-project-overview') }}">
                         @csrf
                         <div>
@@ -96,7 +96,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-6">
                                 <div class="select2forError">
                                     <label>Select Country <span class = "steric_sign_design">*</span></label>
                                     <select class="js-select2 @error('countries') is-invalid @enderror" name="countries[]"  required multiple="multiple">

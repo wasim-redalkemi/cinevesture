@@ -17,8 +17,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="profile_wraper profile_wraper_padding my-4">
-                    <p class="flow_step_text pb-0">Gallery</p>
+                <div class="profile_wraper profile_wraper_padding mt-4 mb_100">
+                    <p class="plain_header pb-0">Gallery</p>
                     <div id="Videos" class="add_content_wraper">
                         <div class="row video-sec">
                             <div class="guide_profile_main_text Aubergine_at_night mt-2 mb-2">Videos</div>
@@ -260,6 +260,11 @@
         });
     </script>
     <script src="{{ asset('js/cropper.js') }}"></script>
+    <script>
+        var t = new ImageCropper(null,null);
+        // ImageCropper.cropboxData.width = 1200;
+        console.log(t.getCropBoxSize(), "266");
+    </script>
 @endpush
 
 @section('footer')

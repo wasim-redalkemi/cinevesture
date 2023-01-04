@@ -22,7 +22,8 @@
     @endif
     <section class="project_result_section">
         <div class="row mt-4">
-            <div class="col-md-3 side-bar-cmn-part">
+            <div class="col-md-3">
+                <div class="side-bar-cmn-part">
                 <form class="" method="Get" action="{{ route('get-project-filter') }}">
                     <div class="d-flex">
                         <div class="search-box-container w-100">
@@ -158,7 +159,7 @@
                                     Country
                                 </button>
                                 <!-- Modal for counter List -->
-                                <div class="dropdown-menu filter_modal_wrap" style="overflow: auto; background: #ffffff">
+                                <div class="dropdown-menu filter_modal_wrap">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
@@ -216,7 +217,7 @@
                                     Verified Projects
                                 </label>
                             </div>
-                            <div class="mt-4 d-flex">
+                            <div class="mt-4 d-flex justify-content-between">
                                 <input type="submit" class="filter-button watch-now-btn mt-4" Value="Apply">
                                 <a href="{{route('get-project-filter')}}"><input type="button" class="clear-filter watch-now-btn mt-4" Value="Clear"></a>
                             </div>
@@ -224,6 +225,7 @@
                     </div>
                 </form>
                 <span class="search-head-text"> </span>
+                </div>
             </div>
             <div class="col-md-9 mb_3">
                 @if(count($projects) >= 1)
@@ -233,15 +235,15 @@
                         <div class="row">
                             <div class="col-md-5">
                                 @if(isset($project->projectImage))
-                                <div class="home_img_wrap mx_w_100 w-auto"><img src="{{Storage::url($project->projectImage->file_link)}}" class="Other_root_img"></div>
+                                <div class="home_img_wrap mx_w_100 w-auto"><img src="{{Storage::url($project->projectImage->file_link)}}" style="z-index: 0;" class="Other_root_img"></div>
                                 @else
-                                <div class="home_img_wrap mx_w_100 w-auto"><img src="{{asset('images/asset/image 3 (1).png')}}" class="Other_root_img"></div>
+                                <div class="home_img_wrap mx_w_100 w-auto"><img src="{{asset('images/asset/image 3 (1).png')}}" style="z-index: 0;" class="Other_root_img"></div>
                                 @endif
                             </div>
                             <div class="col-md-7">
                                 <div class="search-head-text">{{$project->project_name}}</div>
                                 <div class="search-head-subtext">{{$project->synopsis}}</div>
-                                <table class="table mt-1">
+                                <table class="table mt-1 require_table_width">
                                     <tbody class="search-table-body">
                                         <tr>
                                             <td>Looking for</td>
@@ -249,7 +251,7 @@
                                                 <div style="width: 100%">
                                                     @if(isset($project->projectLookingFor[0]))
                                                     @foreach($project->projectLookingFor as $look)
-                                                    <button class="curv_cmn_btn">{{$look->name}}</button>
+                                                    <button class="curv_cmn_btn darkbtn">{{$look->name}}</button>
                                                     @endforeach
                                                     @else
                                                     -
@@ -270,7 +272,7 @@
                                             <td class="aubergine">
                                                 @if(isset($project->projectCountries[0]))
                                                 @foreach($project->projectCountries as $country)
-                                                <button class="curv_cmn_btn">{{$country->name}}</button>
+                                                <button class="curv_cmn_btn darkbtn">{{$country->name}}</button>
                                                 @endforeach
                                                 @else
                                                 -

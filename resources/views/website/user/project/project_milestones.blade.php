@@ -18,7 +18,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div  id="project_milestones" class="profile_wraper profile_wraper_padding my-4">
+                <div  id="project_milestones" class="profile_wraper profile_wraper_padding mt-4 mb_100">
                     <form role="form" class="validateBeforeSubmit" method="POST" enctype="multipart/form-data" action="{{route('validate-project-milestone')}}">
                         @csrf
                         <p class="flow_step_text pb-0">Requirements</p>

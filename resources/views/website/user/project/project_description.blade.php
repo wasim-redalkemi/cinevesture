@@ -17,7 +17,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="profile_wraper profile_wraper_padding my-4">
+                <div class="profile_wraper profile_wraper_padding mt-4 mb_100">
                     <form role="form" class="validateBeforeSubmit" method="POST" enctype="multipart/form-data" action="{{route('validate-project-description')}}">
                         @csrf
 
@@ -72,7 +72,7 @@
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-end mt-5 pt-0 pt-md-5">
                                     <input type="hidden" name="project_id" value="<?php if(isset($_REQUEST['id'])) {echo $_REQUEST['id'];}?>">
-                                    <button class="cancel_btn mx-3"><a class="btn-link-style" href="{{ route('project-details') }}?id={{$_REQUEST['id']}}">Go back</a></button>
+                                    <button class="cancel_btn mx-3"><a class="btn-link-style" href="{{ route('project-details') }}?id={{$_REQUEST['id']}}">Go Back</a></button>
                                     <button type="submit" class="guide_profile_btn">Save & Next</button>
                                 </div>
                             </div>
