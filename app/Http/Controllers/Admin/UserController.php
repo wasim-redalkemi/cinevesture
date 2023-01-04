@@ -82,7 +82,7 @@ class UserController extends AdminController
        $user->status= $request->status;
        $user->save();
        Session::flash('response', ['text'=>'Status update successfully!','type'=>'success']);
-       return back();
+       return redirect()->route('user-management');
     } catch (Exception $e) {
        
         Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);

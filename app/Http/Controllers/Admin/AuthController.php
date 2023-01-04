@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Query;
+use App\Models\User;
+use App\Models\UserJob;
+use App\Models\UserProject;
 use Exception;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -27,7 +31,17 @@ class AuthController extends Controller
     public function index()
     {
         try {
-            return view('admin.dashboard');
+            $totalUsre=User::query()->where('user_type','U')->get();
+            $totalUsreCount=(count($totalUsre));
+            $totalProject=UserProject::query()->where('user_status','!=','draft')->get();
+            $totalProjectCount=count($totalProject);
+            $totalJob=UserJob::all();
+            $totalJobCount=count($totalJob);
+            $totalQuery=Query::all();
+            $totalQueryCount=count($totalQuery);
+           
+            
+            return view('admin.dashboard',compact('totalUsreCount','totalProjectCount','totalJobCount','totalQueryCount'));
         }
         catch (Exception $e)
         {

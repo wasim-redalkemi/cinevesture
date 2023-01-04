@@ -1,18 +1,22 @@
 @extends('website.layouts.app')
 
+@section('header')
+@include('website.auth.guest_header')
+@endsection
+
 @section('content')
 
 <div class="hide-me animation for_authtoast">
     @include('website.include.flash_message')
 </div>
-<section class="auth_section">
+<section class="auth_section main_content">
     <div class="container signup-container">
         <div class="row">
             <div class="col-md-12">
                 <div class="signup-text mt-5 mt-md-5">Reset Password</div>
             </div>
             <div class="col-md-12">
-                <form method="POST" enctype="multipart/form-data" action="{{ route('password.update') }}" class="mt-4-5 pt-lg-5">
+                <form method="POST" enctype="multipart/form-data" action="{{ route('password.update') }}" class="mt-5 pt-lg-5">
                     @csrf
                     <input type="hidden" name="token" value="{{ $token }}">
                     <input type="hidden" name="email" value="{{ $email }}">

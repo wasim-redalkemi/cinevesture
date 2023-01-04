@@ -8,27 +8,28 @@
             <div class="row">
                 <div class="col-12">
                     <div class="table-responsive">
-                        <table id="order-listing" class="table order-listing">
+                        <table id="order-listing" class="table order-listing table-sm table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Subject</th>
-                                    <th>Date</th>
-                                    <th>Time</th>
-                                    <th>
-                                        Action
-                                    </th>
-                                    
+                                    <th class="col-md-1">Id</th>
+                                    <th class="col-md-1">Name</th>
+                                    <th class="col-md-1">Email</th>
+                                    <th class="col-md-1">Subject</th>
+                                    <th class="col-md-1">Date</th>
+                                    <th class="col-md-1">Time</th>
+                                    <th class="col-md-2 notForPrint">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @php $i=0;@endphp
+                                @php
+                                    $i=($userQuerys->perPage()*($userQuerys->currentPage()-1))
+                                  @endphp 
+                                
                                 @foreach ($userQuerys as $key => $userQuery)
-                                        
+                                @php
+                                    $i++;
+                                @endphp
                                 <tr class="jsgrid-alt-row">
-                                    @php $i++;@endphp
                                    
                                     <td>{{$i}}</td>
                                     <td>{{ucfirst($userQuery->first_name)}} {{$userQuery->last_name}}</td>
@@ -46,7 +47,9 @@
                             </tbody>
                         </table>
                         <div class="row">
-                            <div class="col-md-12">
+                           
+                            <div class="col-md-12 d-flex justify-content-between mt-3">
+                                 <div>{{'Showing '.$userQuerys->firstItem().' to' .' '. $userQuerys->lastItem().' of'.' '.$userQuerys->total()}}</div>
                                 <div style="float:right;" >{{$userQuerys->links()}}</div>
                                 </div> 
                             </div>

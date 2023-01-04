@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<section class="auth_section">
+<section class="auth_section main_content">
     <div class="container signup-container">
         <div class="row">
 

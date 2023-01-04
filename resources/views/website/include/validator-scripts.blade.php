@@ -876,7 +876,13 @@
                 let respArr = JSON.parse(resp);
                 if(respArr.status == 1){
                     $("#doc-"+req.mediaId).remove();
+                    if(currentMediaList.length > 0) {
+                        currentMediaList = currentMediaList.filter(function(item) {
+                            return item.id != req.mediaId;
+                        });
+                    }
                     createToast("Document removed successfully.","S");
+                    addMediaElem();
                 } else {
                     createToast(respArr.error_msg,"E");
                 }
@@ -885,9 +891,10 @@
             let addMediaElem = function() {
                 let str = getAddElemHtml();
                 let currentpdfElem = $(parentElemId + " .profile_upload_container");
-                console.log(currentpdfElem.length, "currentMediaCountcurrentMediaCount");
-                if(currentpdfElem.length == 1) return;
-                if(currentMediaCount == 0){
+                if(currentpdfElem.length == 1) 
+                    return;
+
+                if(currentpdfElem.length == 0){
                     $(str).insertBefore(parentElemId+" .doc-list #add-doc-btn-div");
                 } else {
                     $(str).insertAfter(parentElemId+" .doc-list #doc-"+lastVidId);

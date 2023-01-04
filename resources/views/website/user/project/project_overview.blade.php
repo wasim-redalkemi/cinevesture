@@ -64,21 +64,25 @@
                                     <div class="checkbox_elem">
                                     <div class="d-flex">
                                         <div class="checkbox_btn d-flex align-items-center">
-                                            <input type="radio" class="checkbox_btn" name="listing_project_as" value="Individual" @if(isset($projectData[0]['listing_project_as']))
+                                            <label for="ind">
+                                            <input type="radio" id="ind" class="checkbox_btn" name="listing_project_as" value="Individual" @if(isset($projectData[0]['listing_project_as']))
                                             @if ("individual" == $projectData[0]['listing_project_as']) 
                                             {{'checked'}}
                                             @endif
 
                                             @endif aria-label="" required>
-                                            <div class="radio_btn_label"> Individual</div>
+                                            <span class="radio_btn_label"> Individual</span>
+                                            </label>
                                         </div>
-                                        <div class="checkbox_btn d-flex align-items-center mx-4">
-                                            <input type="radio" class="checkbox_btn" name="listing_project_as" value="Organization" @if(isset($projectData[0]['listing_project_as']))
+                                        <div class="checkbox_btn d-flex align-items-center  mx-4">
+                                        <label for="Org">
+                                            <input type="radio" id="Org" class="checkbox_btn" name="listing_project_as" value="Organization" @if(isset($projectData[0]['listing_project_as']))
                                             @if ("organization" == $projectData[0]['listing_project_as'])
                                             {{'checked'}}
                                             @endif
                                             @endif aria-label="">
-                                            <div class="radio_btn_label"> Organization</div>
+                                            <span class="radio_btn_label"> Organization</span>
+                                        </label>
                                         </div>
                                     </div>
                                     @error('listing_project_as')

@@ -81,7 +81,7 @@
     </div>
 </div>
     </div>
-    <div class="col-md-7 d-none d-lg-block">
+    <div class="col-md-7 d-none d-md-block d-lg-block">
     <div class="register_sidewraper">
             <img src="{{asset('images/asset/gordon-cowie-OPlXmibx__I-unsplash-2.jpg')}}" width="100%" height="100%" alt="">
         </div>

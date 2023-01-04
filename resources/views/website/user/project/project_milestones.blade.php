@@ -150,7 +150,7 @@
                                 </div>
                                 <div class="col-md-1 d-flex align-items-end mt-2">
                                     <div class="profile_input">
-                                        <div class="save_add_btn">Add</div>
+                                        <div class="save_add_btn">Save</div>
                                     </div>
                                 </div>
                             </div>
