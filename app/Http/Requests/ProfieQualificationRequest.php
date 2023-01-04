@@ -27,9 +27,16 @@ class ProfieQualificationRequest extends FormRequest
             'institue_name' => 'required|max:100',
             'degree_name' => 'required',
             'field_of_study' => 'required|max:50',
-            'start_year' => 'required|integer',
-            'end_year' => 'required|after_or_equal:start_year',
+            'start_year' => 'required|date_format:Y|before_or_equal:end_year',
+            'end_year' => 'required|date_format:Y|after_or_equal:start_year',
             'description' => 'required|max:600',
         ];
+    }
+    public function messages()
+    {
+        return [
+           'start_year.before_or_equal' => 'The start year must be before or equal to end year.',
+           'end_year.after_or_equal' => 'The end year must be after or equal to start year.',
+        ];            
     }
 }

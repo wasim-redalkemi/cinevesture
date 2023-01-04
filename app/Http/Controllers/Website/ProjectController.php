@@ -311,7 +311,7 @@ class ProjectController extends WebController
             $request = (object) $_REQUEST;
             $id = $request->project_id;
 
-            $details = UserProject::query()->find($id)->latest()->first();
+            $details = UserProject::query()->find($id);
             if (isset($details)) {                
                 $details->duration = $request->duration;
                 $details->total_budget = $request->total_budget;
@@ -395,7 +395,7 @@ class ProjectController extends WebController
             $request = (object) $_REQUEST;
             $id = $request->project_id;
 
-            $description = UserProject::query()->find($id)->latest()->first();
+            $description = UserProject::query()->find($id);
             if (isset($description)) {
                 
                 $description->logline = $request->logline;
@@ -440,7 +440,7 @@ class ProjectController extends WebController
     public function galleryStore(Request $request,$id)
     {
         try {
-                $project = UserProject::query()->find($id)->latest()->first();
+                $project = UserProject::query()->find($id);
                 if(!empty($project)) 
                 {
                     $data_to_insert = [];
@@ -548,7 +548,7 @@ class ProjectController extends WebController
             $request = (object) $_REQUEST;
             $id = $request->project_id;
 
-            $requirements = UserProject::query()->find($id)->latest()->first();
+            $requirements = UserProject::query()->find($id);
             if (isset($requirements)) {
                 
                 $requirements->project_stage_id = $request->project_stage_id;
@@ -627,12 +627,22 @@ class ProjectController extends WebController
                 }
             })
             ->get();
+            $gener=ProjectGenre::query()->where('project_id',$_REQUEST['id'])->get();
+            foreach($gener as $generIds){
+                $generid[]=$generIds->gener_id;
+            }
+            $projects=ProjectGenre::query()->whereIn('gener_id',$generid)->get();
+            foreach($projects as $projectId){
+                $projectIdArray[]=$projectId->project_id;
+            }
+            $projectIdUnique=array_unique($projectIdArray);
+            $recomProject=UserProject::query()->whereIn('id',$projectIdUnique)->where('user_id','!=',auth()->user()->id)->get();
             $projectData = $projectData->toArray();
             if (empty($projectData)) {
-                return back()->with('error','Invalid request.');
+                return back()->with('error','This Project is Unpublished/Inactive.');
             }
 
-            return view('website.user.project.project_public_view', compact(['UserProject','projectData','geners','categories','looking_for','project_stages','countries','languages']));
+            return view('website.user.project.project_public_view', compact(['UserProject','projectData','geners','categories','looking_for','project_stages','countries','languages','recomProject']));
 
         } catch (Exception $e) {
             return back()->with('error','Something went wrong.');
@@ -739,7 +749,7 @@ class ProjectController extends WebController
             ->with(['projectCountries','projectLanguages','genres','projectCategory','projectLookingFor','projectStage','projectType','user','projectImage'])
             // ->where('user_id','!=',auth()->user()->id)
             ->orderByDesc('id')
-            ->paginate(5);
+            ->paginate(config('constants.JOB_PAGINATION_LIMIT'));
             $projects->appends(request()->input())->links();
             return view('website.user.project.search_result',compact(['countries','languages','geners','categories','looking_for','project_stages','projects']));                   
            }catch(Exception $e){

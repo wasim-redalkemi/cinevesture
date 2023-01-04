@@ -22,9 +22,6 @@
         <div>
             <div class="public-head-container">
                 <div class="container">
-                    {{-- @php
-                        dd($projectData[0]['user']);
-                    @endphp --}}
                     <div class="row">
                         <div class="col-md-6 col-sm-12 text-center text-lg-start">
                             <div class="verified-text-area">
@@ -35,7 +32,10 @@
                                     <span><b>-</b></span>
                                     @endif
                                 </div>
+                                {{-- <button class="verified-btn mx-3"> <img src="{{ asset('images/asset/verified-badge.svg') }}" width=100% alt="Image"> VERIFIED</button> --}}
+                                @if ($UserProject->project_verified==1)
                                 <button class="verified-btn mx-3"> <img src="{{ asset('images/asset/verified-badge.svg') }}" width=100% alt="Image"> VERIFIED</button>
+                                @endif
                             </div>
                             <div class="public-head-subtext">
                                 @if (isset($UserProject->logline))
@@ -327,6 +327,7 @@
                                 <div class="public_view_main_subtext">{{ json_decode($v['media_info'])->name }}</div>
                                 <div class="proctect_by_capta_text">{{ json_decode($v['media_info'])->size_label }}</div>
                             </div>
+                            </div>
                         </div>
                     </div>
                     @endforeach
@@ -481,6 +482,42 @@
             </div>
         </div>
 
+        <div class="guide_profile_subsection">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="guide_profile_main_text deep-pink font_18">Related Project</div>
+                        {{-- @php
+                       foreach ($recomProject as $key => $value) {
+                        # code...
+                            echo '<pre>';
+                            print_r($value->project_name);
+                        }
+                        die;
+                        @endphp --}}
+                        @if (count($recomProject)>0)
+                        
+                        <div class="project owl-carousel owl-theme">
+                            @foreach($recomProject as $k=>$v)                                
+                            <div class="item">
+                                <div style="color: azure">{{!empty($v->project_name)?$v->project_name: '-' }}</div>
+                                {{-- <a href = "{{route('public-view',['id'=>$v->id])}}"> --}}
+                                {{-- <img src="@php echo (!empty($v->projectImage->file_link)?asset('storage/'.$v->projectImage->file_link): asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1 (1).png')) @endphp" width="100%" height="100%"  /> --}}
+                                {{-- <div class="guide_profile_main_subtext">@php echo (!empty($v->project_name)?$v->project_name
+                                
+                                : '-') @endphp</div> --}}
+                                {{-- </a> --}}
+                            </div>                                
+                            @endforeach
+                        </div>
+                        @else
+                        <span><b>-</b></span>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="public_subsection">
             <div class="row">
                 <div class="col-md-12">
@@ -519,6 +556,13 @@
                 </div>
             </div>
         </div>
+        <!-- Contact modal  -->
+        @include('website.modal.contact', [                                         
+            'image' => (!empty($projectData[0]['user']['profile_image'])?$projectData[0]['user']['profile_image']:asset('images/asset/user-profile.png')),
+            'name' => empty($projectData[0]['user']['first_name'])?'Name':ucfirst($projectData[0]['user']['first_name']).' '.ucfirst($projectData[0]['user']['last_name']),
+            'title' =>empty($projectData[0]['user']['job_title'])?'Job Title':ucfirst($projectData[0]['user']['job_title']), 
+            'email' =>empty($projectData[0]['user']['email'])?'Email':$projectData[0]['user']['email'], 
+        ])
     </div>
 </section>
 @endsection

@@ -43,64 +43,13 @@
                             <div><button class="guide_profile_btn mt-2" data-toggle="modal" data-target="#contactModal">Contact </button></div>
 
                             <!-- Contact modal  -->
-                            <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="ContactModalLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content bg_3308">
-                                        <div class="modal-body p-0">
-                                            <div class="p-3 float-end">
-                                                <i class="fa fa-times text_fff font_24 pointer" data-dismiss="modal" aria-label="Close"></i>
-                                            </div>
-                                            <section class="p-3">
-                                                <div class="container">
-                                                    <div class="row">
-                                                        <div class="col-md-12">
-                                                            <div class="signup-text  mb-4 mt-5"> Contact </div>
-                                                            <div class="row">
-                                                                <div class="col-md-3">
-                                                                    {{-- <div><img src="{{ asset('images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="w-100 br_100"></div> --}}
-                                                                    <?php
-                                                                    if (empty($user->profile_image)) {
-                                                                    ?>
-                                                                        <img src="{{ asset('images/asset/user-profile.png') }}" class="w-100 br_100">
-                                                                    <?php
-                                                                    } else {
-                                                                    ?>
-                                                                        <img src="{{Storage::url($user->profile_image)}}" class="w-100 br_100 " alt="product-image" style="height:100%;width:100%;">
-                                                                    <?php
-                                                                    }
-                                                                    ?>
-                                                                </div>
-                                                                <div class="col-md-9">
-                                                                    <div class="tile_text text_fff">{{empty($user->first_name)?'Name':ucfirst($user->first_name).' '.ucfirst($user->last_name);}}</div>
-                                                                    <div class="organisation_cmn_text text_fff">{{empty($user->job_title)?'Job Title':ucfirst($user->job_title);}}</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="mt-3"><input type="text" id="subject" name="subject" value="" placeholder="Subject" class="modal_input"></div>
-                                                            <div class="mt-3">
-                                                                <textarea name="message" id="message" cols="25" rows="6" class="w-100 modal_input controlTextLength" placeholder="Message" text-length = "1200" maxlength="1200" aria-label="With textarea"></textarea>
-
-                                                            </div>
-
-                                                            <div class="form-check mt-3">
-                                                                <input class="form-check-input modal_check_input" type="checkbox" id="checkbox_cc">
-                                                                <label class="modal_btm_text mx-1">Send a copy to me</label>
-                                                            </div>
-
-                                                            <div class="mt-4">
-                                                                <input type="hidden" name="email_1" id="email_1" class="modal_input" value="@if (!empty($user->email)){{$user->email}}@endif">
-                                                                <button type="button" id="contact_btn" class="invite_btn">Send Mail</button>
-                                                            </div>
-                                                            <div class="modal_btm_text mt-4 mb-5">
-                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum vel cras vitae morbi varius vitae.
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </section>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @include('website.modal.contact', [                                         
+                                'image' => (!empty($user->profile_image)?$user->profile_image:asset('images/asset/user-profile.png')),
+                                'name' => empty($user->first_name)?'Name':ucfirst($user->first_name).' '.ucfirst($user->last_name),
+                                'title' =>empty($user->job_title)?'Job Title':ucfirst($user->job_title), 
+                                'email' =>empty($user->email)?'Email':$user->email, 
+                            ])
+                            
 
                         </div>
                         </div>
@@ -479,44 +428,6 @@
         <script type="text/javascript">
         $(document).ready(function()
         {
-            $('#contact_btn').click(function(e)
-            {
-                var subject = $('#subject').val();
-                var email_1 = $('#email_1').val();
-                var message = $('#message').val();
-                var checkbox_cc = ($("#checkbox_cc").prop("checked") == true ? '1' : '0');
-                let $btn = $(this);
-                e.preventDefault();
-                e.stopPropagation();
-
-                $btn.text("Sending..");
-                $btn.prop('disabled',true);
-                
-                $.ajax(
-                {
-                    url:"{{ route('contact-user-mail-store') }}",
-                    type:'POST',
-                    dataType:'json',
-                    data:{subject:subject,email_1:email_1,message:message,checkbox_cc:checkbox_cc,"_token": "{{ csrf_token() }}"},
-                    success:function(response)
-                    {   $('#subject').val("");
-                        $('#message').val("");
-                        $btn.text("Send Mail");
-                        $btn.prop('disabled',false);
-                        toastMessage(response.status, response.msg);
-                        $('.modal').hide();
-                        $('.modal-backdrop').remove();
-                    },
-                    error:function(response,status,error)
-                    {     $btn.text("Send Mail");
-                          $btn.prop('disabled',false);
-                        console.log(response);
-                        console.log(status);
-                        console.log(error);
-                    } 
-                });
-            });
-            
             $('#endorse_btn').click(function()
             {
                 var endorse_email = $('#endorse_email').val();
@@ -590,26 +501,26 @@
         });
 
         $(".portfolio.owl-carousel").owlCarousel({
-        center: true,
-        autoPlay: 1000,
-        autoplay: true,
-        // loop: true,
-        nav: true,
-        margin: 20,
-        center: false,
-        // items: 4,
-        responsive: {
-            480: {
-                items: 1
+            center: true,
+            autoPlay: 1000,
+            autoplay: true,
+            // loop: true,
+            nav: true,
+            margin: 20,
+            center: false,
+            // items: 4,
+            responsive: {
+                480: {
+                    items: 1
+                },
+                768: {
+                    items: 2
+                },
+                1024: {
+                    items: 4
+                }
             },
-            768: {
-                items: 2
-            },
-            1024: {
-                items: 4
-            }
-        },
-    });
+        });
 
         $(".project.owl-carousel").owlCarousel({
         center: true,

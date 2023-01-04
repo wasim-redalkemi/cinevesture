@@ -241,8 +241,25 @@
                                 @endif
                             </div>
                             <div class="col-md-7">
-                                <div class="search-head-text">{{$project->project_name}}</div>
-                                <div class="search-head-subtext">{{$project->synopsis}}</div>
+                                <div class="d-flex align-items-center">
+                                    <div class="search-head-text">@if (!empty($project->project_name)){{ucFirst($project->project_name)}} @endif</div>
+                                    @if ($project->project_verified==1)                                        
+                                    <button class="verified-btn mx-3"> <img src="{{ asset('images/asset/verified-badge.svg') }}" width=100% alt="Image"> VERIFIED</button>
+                                    @endif
+                                </div>
+                            
+                            
+                                @php
+                                    $small_logline = '';
+                                    if (!empty($project->logline) && strlen($project->logline)>100)
+                                    {
+                                        $small_logline = substr($project->logline, 0, 100).'.....';
+                                    
+                                    } else {
+                                        $small_logline  = $project->logline;
+                                    } 
+                                @endphp
+                                <div class="search-head-subtext">@if (isset($small_logline)){{ucFirst($small_logline)}} @endif</div>
                                 <table class="table mt-1 require_table_width">
                                     <tbody class="search-table-body">
                                         <tr>
@@ -250,39 +267,46 @@
                                             <td>
                                                 <div style="width: 100%">
                                                     @if(isset($project->projectLookingFor[0]))
-                                                    @foreach($project->projectLookingFor as $look)
-                                                    <button class="curv_cmn_btn darkbtn">{{$look->name}}</button>
-                                                    @endforeach
-                                                    @else
-                                                    -
+                                                        <button class="curv_cmn_btn">{{$project->projectLookingFor[0]->name}}</button>
+                                                    @endif
+
+                                                    @if(isset($project->projectLookingFor[1]))
+                                                        <button class="curv_cmn_btn">{{$project->projectLookingFor[1]->name}}</button>
+                                                    @endif
+
+                                                    @if(isset($project->projectLookingFor) && count($project->projectLookingFor)>2)
+                                                        <button class="curv_cmn_btn"><b>+{{(count($project->projectLookingFor)-2)}}</b></button>
                                                     @endif
                                                 </div>
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Total Budget</td>
-                                            <td class="aubergine">{{$project->total_budget}}</td>
+                                            <td class="aubergine">@if (!empty($project->total_budget)){{ucFirst($project->total_budget)}} @endif</td>
                                         </tr>
                                         <tr>
                                             <td>Type</td>
-                                            <td class="aubergine">{{$project->projectType->name}}</td>
+                                            <td class="aubergine">@if (!empty($project->projectType->name)){{ucFirst($project->projectType->name)}} @endif</td>
                                         </tr>
                                         <tr>
                                             <td>Locations</td>
                                             <td class="aubergine">
                                                 @if(isset($project->projectCountries[0]))
-                                                @foreach($project->projectCountries as $country)
-                                                <button class="curv_cmn_btn darkbtn">{{$country->name}}</button>
-                                                @endforeach
-                                                @else
-                                                -
+                                                <button class="curv_cmn_btn">{{$project->projectCountries[0]->name}}</button>
+                                                @endif
 
+                                                @if(isset($project->projectCountries[1]))
+                                                    <button class="curv_cmn_btn">{{$project->projectCountries[1]->name}}</button>
+                                                @endif
+
+                                                @if(isset($project->projectCountries) && count($project->projectCountries)>2)
+                                                    <button class="curv_cmn_btn"><b>+{{(count($project->projectCountries)-2)}}</b></button>
                                                 @endif
                                             </td>
                                         </tr>
                                         <tr>
                                             <td>Created by</td>
-                                            <td class="aubergine">{{$project->user->name}}</td>
+                                            <td class="aubergine">@if (!empty($project->user->name)){{ucwords($project->user->name)}} @endif</td>
                                         </tr>
                                     </tbody>
                                 </table>

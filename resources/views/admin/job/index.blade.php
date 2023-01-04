@@ -86,7 +86,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php $i=0;?>
+                                    @php
+                                    $i=($jobs->perPage()*($jobs->currentPage()-1))
+                                @endphp
                                     @foreach($jobs as $key=>$job)
                                     <?php $i++;?>
                                     <tr class="jsgrid-alt-row">
@@ -127,8 +129,8 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{route('posted-job-single-view',['job_id'=>$job->id])}}"><button class="btn mb-2 view-btn btn btn-primary">View</button></a>
-                                            <a href="{{route('job-delete',['id'=>$job->id])}}"><button class="btn mb-2 view-btn btn btn-danger">Delete</button></a>
+                                            <a href="{{route('posted-job-single-view',['job_id'=>$job->id])}}"><button class="btn mb-2 view-btn btn btn-primary w-74">View</button></a>
+                                            <a class="confirmAction" href="{{route('job-delete',['id'=>$job->id])}}"><button class="btn mb-2 view-btn btn btn-danger">Delete</button></a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -136,7 +138,8 @@
                             </table>                            
                         </div>
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12 d-flex justify-content-between mt-3">
+                        <div>{{'Showing '.($jobs->firstItem()).' to' .' '. ($jobs->lastItem()).' of'.' '.$jobs->total()}}</div>
                         <div style="float:right;">{{$jobs->links()}}</div>
                     </div> 
                 </div>
