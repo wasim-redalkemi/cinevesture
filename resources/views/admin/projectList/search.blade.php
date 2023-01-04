@@ -92,15 +92,15 @@
                                           {{ucfirst($project->admin_status)}}
                                         </td>
                                         <td>
-                                           @if ($project->admin_status=='inactive')
+                                           {{-- @if ($project->admin_status=='inactive')
                                            <input type="checkbox" value="<?php echo $project['id'];?>" name="projects_id[]" id="" @if ($is_added_only)
-                                           checked
+                                           uchecked
                                            @endif disabled>
-                                           @else
+                                           @else --}}
                                            <input type="checkbox" value="<?php echo $project['id'];?>" name="projects_id[]" id="" @if ($is_added_only)
                                            checked
                                            @endif>
-                                           @endif
+                                           {{-- @endif --}}
                                           
                                       
                                         </td>
