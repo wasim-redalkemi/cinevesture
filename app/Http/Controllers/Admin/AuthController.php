@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use App\Models\Query;
 use App\Models\User;
@@ -15,8 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Validation\ValidationException;
 
-class AuthController extends Controller
-
+class AuthController extends AdminController
 {
 
     use AuthenticatesUsers;
