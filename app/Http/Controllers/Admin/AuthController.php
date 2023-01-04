@@ -21,7 +21,7 @@ class AuthController extends Controller
 
     use AuthenticatesUsers;
 
-    protected $redirectTo = 'admin/dashboard';
+    protected $redirectTo = 'admin/dashboard/index';
     /**
      * Display a listing of the resource.
      *

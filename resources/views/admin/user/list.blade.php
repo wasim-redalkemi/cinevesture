@@ -20,7 +20,7 @@
                           </div>
                           <div id="collapseOne" id="show_filter" class="collapse p-3 pt-4" data-parent="#accordion">
                             <form class="" method="get" action="{{route('user-management')}}">
-                        
+                                @csrf
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
