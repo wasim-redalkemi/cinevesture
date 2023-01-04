@@ -83,7 +83,7 @@ var ImageCropper = function(fileToCrop,previewElem){
                 cropBoxResizable: false,
                 toggleDragModeOnDblclick: false,
                 data:cropboxData,
-                //aspectRatio: 285/194,
+                aspectRatio: 2.5/1,
             });
         }).off('hidden.bs.modal').on('hidden.bs.modal', function() {
             cropper.destroy();
@@ -92,8 +92,8 @@ var ImageCropper = function(fileToCrop,previewElem){
 
         $("#crop").off("click").on("click",function() {
             canvas = cropper.getCroppedCanvas({
-                width: 285,
-                height: 194,
+                width: 1750,
+                height: 700,
             });
             canvas.toBlob(function(blob) {
                 url = URL.createObjectURL(blob);
