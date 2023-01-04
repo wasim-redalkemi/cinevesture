@@ -16,7 +16,12 @@
 
     <div class="main-slider-container">
         <div class="project_image_wraper">
-            <img src="{{ asset('images/asset/publicview-head-img.png') }}" class="" alt="image">
+            
+            @if (isset($projectData[0]['project_image']['file_link']))
+                <img src="{{ Storage::url($projectData[0]['project_image']['file_link']) }}" class="" alt="image">
+            @else
+                <img src="{{ asset('images/asset/publicview-head-img.png') }}" class="" alt="image">
+            @endif
             <div class="public-head-image-shadow"></div>
         </div>
         <div>
@@ -486,7 +491,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="guide_profile_main_text deep-pink font_18">Related Project</div>
+                        {{-- <div class="guide_profile_main_text deep-pink font_18">Related Project</div> --}}
                         {{-- @php
                        foreach ($recomProject as $key => $value) {
                         # code...
