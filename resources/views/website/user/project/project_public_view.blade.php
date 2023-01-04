@@ -317,6 +317,7 @@
             </div>
         </div>
 
+    <div class="public_subsection">
         <div class="row">
             <div class="col-md-12">
                 <div class="public-head-subtext mt-3">Documents</div>
