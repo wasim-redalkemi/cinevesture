@@ -179,7 +179,7 @@
                       <td>1</td>
                       <td>David Grey</td>
                       <td>Italy</td>
-                      <td>$6300</td>
+                      <td>9885456300</td>
                       <td>212100</td>
                       <td><div class="badge badge-success badge-fw">Progress</div></td>
                     </tr>

@@ -39,7 +39,7 @@
                                         </td>
                                        <td>
                                          @if($project->status=='published')
-                                            <a class="btn btn-success btn-fw mb-1 btn-sm mt-10 w-112 view-btn btn_padding text-white" href="{{route('change-status',['id' => $project->id , 'status' =>'unpublished'])}}">                                            
+                                            <a class="btn btn-success btn-fw mb-1 btn-sm mt-10  @if($project->list_name=='carousel') disabled @endif w-112 view-btn btn_padding text-white" href="{{route('change-status',['id' => $project->id , 'status' =>'unpublished'])}}">                                            
                                                 {{ucfirst($project->status)}}
                                             </a>
                                         @else
