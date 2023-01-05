@@ -104,11 +104,11 @@
                     <p class="flow_step_text"> Description</p>
                 </div>
                 <div class="preview_headtext mt-4">Logline</div>
-                <div class="preview_subtext">@if (!empty($projectData[0]['logline'])) {{$projectData[0]['logline']}} @endif</div>
+                <div class="preview_subtext pr_5">@if (!empty($projectData[0]['logline'])) {{$projectData[0]['logline']}} @endif</div>
                 <div class="preview_headtext">Synopsis/Brief Description</div>
-                <div class="preview_subtext">@if (!empty($projectData[0]['synopsis'])) {{$projectData[0]['synopsis']}} @endif</div>
+                <div class="preview_subtext pr_5">@if (!empty($projectData[0]['synopsis'])) {{$projectData[0]['synopsis']}} @endif</div>
                 <div class="preview_headtext">Creator/Founder’s Statement</div>
-                <div class="preview_subtext">@if (!empty($projectData[0]['director_statement'])) {{$projectData[0]['director_statement']}} @endif</div>
+                <div class="preview_subtext pr_5">@if (!empty($projectData[0]['director_statement'])) {{$projectData[0]['director_statement']}} @endif</div>
                 <div class="row">
                     <div class="com-md-12">
                         <div class="justify-content-end mt-3 mt-md-0"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-description') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
@@ -144,7 +144,7 @@
                                         if($v['is_default_marked'])
                                         {
                                             ?>
-                                                <button class="verified_cmn_btn mt-1 mx-3">Featured</button>
+                                                <button class="verified_cmn_btn mt-1 mx-3">FEATURED</button>
                                             <?php
                                         }
                                     ?>
@@ -167,7 +167,7 @@
                                 if($v['is_default_marked'])
                                 {
                                     ?>
-                                        <button class="verified_cmn_btn mt-1 mx-3">Featured</button>
+                                        <button class="verified_cmn_btn mt-1 mx-3">FEATURED</button>
                                     <?php
                                 }
                             ?>
@@ -248,7 +248,12 @@
                 @endif
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="d-flex justify-content-end mt-2">
+                        <div class="d-flex justify-content-between mt-2">
+                            <div></div>
+                            <div class="tooltips">
+                            <span data-toggle="tooltip" class="child_tooltip" data-placement="bottom" title="Verified projects are reviewed by cinevesture team and you'll get a verified badge.This increases the chances of your project performing better"> <i class="fa fa-info-circle" aria-hidden="true"></i></span>
+                            </div>
+                            
                         <div class="justify-content-end mt-3 mt-md-0"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-milestone') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
                         </div>
                     </div>
