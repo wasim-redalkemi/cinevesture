@@ -34,7 +34,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="project-text text-center mt-4 px-4 px-md-0">YOUR GATEWAY FOR TALENT AND SERVICES</div>
+                    <div class="project-text text-center mt-4 px-4 px-md-0">YOUR GATEWAY FOR TALENT & SERVICES</div>
                     <div class="duration-lang-text white text-center mt-3 px-4 px-md-0">It is our job to make your search for people in the film and media fraternity, a piece of cake! Here's your slice. </div>
                     <form class="" method="Get" action="{{ route('guide-view') }}">
                         @csrf
