@@ -105,14 +105,14 @@
                             </div>
                         </div>
                         <div class="row">
-                            <label class="mt-3">Video URL <span class = "steric_sign_design">*</span></label>
                             <div class="col-md-4">
                                 <div id="portfolio-video" class="profile_input">
+                                    <label class="mt-3">Video URL <span class = "steric_sign_design">*</span></label>
                                     <!-- <div><label>Project Files</label></div> -->
                                     <div class="img-container h_66 mt-3 mt-md-0">
                                         <img src="{{asset('images/asset/default-video-thumbnail.jpg')}}" class="width_inheritence" alt="image">
                                     </div>
-                                    <input type="text" class="outline is-invalid-remove form-control @error('video_url') is-invalid @enderror" placeholder="Paste link here" name="video_url" aria-label="Video URL" aria-describedby="basic-addon1" autofocus required>
+                                    <input type="text" class="outline is-invalid-remove form-control @error('video_url') is-invalid @enderror mt-3" placeholder="Paste link here" name="video_url" aria-label="Video URL" aria-describedby="basic-addon1" autofocus required>
                                     <input type="hidden" class="" name="video_thumbnail" value="" aria-label="Video Thumbnail" aria-describedby="basic-addon1">
                                     @error('video_url')
                                     <span class="invalid-feedback" role="alert">
@@ -123,8 +123,8 @@
                             </div>
                         </div>
                         <div class="row portfolio-images">
-                            <label class="mt-3">Pictures <span class = "steric_sign_design">*</span></label>
-                            <div id="portfolio-img-new-1" class="col-md-4 img-item">
+                            <label class="mt-4">Pictures <span class = "steric_sign_design">*</span></label>
+                            <div id="portfolio-img-new-1" class="col-md-4 img-item pt-1">
                                 <div class="open_file_explorer profile_upload_container h_66">
                                     <img src="" id="previewImg">
                                     <div class="cancel-img-upload">
