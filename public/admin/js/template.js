@@ -35,7 +35,7 @@
       }
     }
 
-    var current = location.pathname.split("/").slice(-2)[0].replace(/^\/|\/$/g, '')+'/'+location.pathname.split("/").slice(-1)[0].replace(/^\/|\/$/g, '');
+    var current = location.pathname.split("/").slice(-2)[0].replace(/^\/|\/$/g, '')+'/'+location.pathname.split("/").slice(-0)[0].replace(/^\/|\/$/g, '');
     console.log(current)
     // current += '/'+location.pathname.split("/").slice(-1)[0].replace(/^\/|\/$/g, '');
     $('.nav li a', sidebar).each(function() {

@@ -35,7 +35,7 @@
               <div class="brand-logo">
                 <a class="navbar-brand brand-logo" href="">
                 {{-- <img src="{{ asset('/admin/images/logo-white.jpg') }}" alt="logo" srcset=""> --}}
-                <img src="{{asset('/admin/images/logo-white.jpg')}}" alt="logo" srcset="">
+                <img src="{{asset('/admin/images/Logo-white.jpg')}}" alt="logo" srcset="">
                 </a>
               </div>
               

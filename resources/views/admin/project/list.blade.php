@@ -19,6 +19,7 @@
                             </div>
                             <div id="collapseOne" class="collapse p-3 pt-4" data-parent="#accordion">
                                 <form class="" method="get" action="{{route('admin-project-list')}}">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="form-group">
@@ -114,9 +115,9 @@
                                         <th>Date</th>
                                         <th>Created</th>
                                         <th>Views</th>
-                                        <th >Status</th>
-                                        <th class="">Favorite</th>
-                                        <th class="">Verified</th>
+                                        <th class="notForPrint">Status</th>
+                                        <th class="notForPrint">Favourite</th>
+                                        <th class="notForPrint">Verified</th>
                                         <th class="notForPrint">Action</th>
                                     </tr>
                                 </thead>

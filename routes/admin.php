@@ -28,7 +28,7 @@ Route::post('admin/login', [AuthController::class, 'login'])->name('admin.login'
 
 Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
 {	
-    Route::get('/dashboard', [AuthController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard/index', [AuthController::class, 'index'])->name('admin.dashboard');
    
     Route::group(['prefix'=>'user-management'],function()
     {

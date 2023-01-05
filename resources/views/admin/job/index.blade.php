@@ -19,6 +19,7 @@
                             </div>
                             <div id="collapseOne" class="collapse p-3 pt-4" data-parent="#accordion">
                                 <form class="" method="get" action="{{route('job')}}">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
@@ -80,9 +81,9 @@
                                         <th class="col-md-2">Organization</th>
                                         <th class="col-md-2">Location</th>
                                         <th class="col-md-2">Created by</th>
-                                        <th class="col-md-2">Promote</th>
-                                        <th class="col-md-2">Status </th>
-                                        <th class="col-md-2">Action</th>
+                                        <th class="col-md-2 notForPrint">Promote</th>
+                                        <th class="col-md-2 notForPrint">Status </th>
+                                        <th class="col-md-2 notForPrint">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -121,7 +122,7 @@
                                                 $x=($job->save_type=='published')? 'unpublished':'published';
                                             @endphp
                                             @if ($job->save_type=='published')
-                                            <a href="{{route('status_update')}}?status={{$x}}&job_Id={{$job->id}}"><button type="button" class="btn active-button-color">{{($job->save_type=='published') ?"Active":"Inactive"}}</button>
+                                            <a href="{{route('status_update')}}?status={{$x}}&job_Id={{$job->id}}"><button type="button" class="btn active-button-color w-80">{{($job->save_type=='published') ?"Active":"Inactive"}}</button>
                                             </a>
                                             @else
                                             <a href="{{route('status_update')}}?status={{$x}}&job_Id={{$job->id}}"><button type="button" class="btn inactive-button-color">{{($job->save_type=='unpublished') ?"Inactive":"Active"}}</button>

@@ -627,6 +627,10 @@ class ProjectController extends WebController
                 }
             })
             ->get();
+            if (empty($projectData)) {
+                return back()->with('error','This Project is Unpublished/Inactive.');
+            }
+            
             $gener=ProjectGenre::query()->where('project_id',$_REQUEST['id'])->get();
             foreach($gener as $generIds){
                 $generid[]=$generIds->gener_id;

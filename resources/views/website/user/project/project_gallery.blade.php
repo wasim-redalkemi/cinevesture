@@ -252,7 +252,6 @@
     <script>
         $(document).ready(function(){
             project_id = $("input[name=project_id]").val();
-            console.log("project_id "+project_id);
             // get the current video list from backend and load into the Gallary class.
             Videos.init(project_id);
             Photos.init(project_id);

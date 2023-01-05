@@ -83,7 +83,6 @@
         {
             e.preventDefault();
             $('#confirmActionModal .confirmActionModalLink').attr('href',$(this).attr('href'));
-              jQuery.noConflict(); 
             $('#confirmActionModal').modal('show');
         });
         $(".sidebar .nav-item").not('.active').find('.collapse.show').removeClass('show');
