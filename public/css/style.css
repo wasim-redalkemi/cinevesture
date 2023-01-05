@@ -2050,6 +2050,16 @@ select,
     overflow: hidden;
 }
 
+/* #gallery .video-list .h_66 {
+    height: 194px !important;
+    overflow: hidden;
+} */
+
+#gallery .video-list .width_inheritence {
+    min-height: 194px;
+    max-height: 194px;
+}
+
 #portfolio-video .h_66 {
     height: 170px !important;
     overflow: hidden;
