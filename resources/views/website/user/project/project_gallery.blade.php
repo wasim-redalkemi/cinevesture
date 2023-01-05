@@ -259,11 +259,6 @@
         });
     </script>
     <script src="{{ asset('js/cropper.js') }}"></script>
-    <script>
-        var t = new ImageCropper(null,null);
-        // ImageCropper.cropboxData.width = 1200;
-        console.log(t.getCropBoxSize(), "266");
-    </script>
 @endpush
 
 @section('footer')
