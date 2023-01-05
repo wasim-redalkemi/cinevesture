@@ -1002,6 +1002,12 @@ label {
 .modal {
     top: 100px !important;
 }
+.form_elem label {
+    display: contents !important;
+}
+#about-error {
+    display: contents !important;
+}
 
 .modal_button {
     border: none;

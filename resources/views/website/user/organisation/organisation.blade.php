@@ -118,7 +118,7 @@
                                 <div class="contact-page-text deep-pink">
                                     About
                                 </div>
-                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
+                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2 pr_35">
                                     <p>
                                         @if (!empty($UserOrganisation->about))
                                         {{$UserOrganisation->about }}
