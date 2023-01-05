@@ -192,6 +192,7 @@
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");
         ProjectData = JSON.parse('<?php echo str_replace("'","\'",json_encode($projectData[0]));?>');
+        
         console.log("ProjectMilestoneItems = ",ProjectData);
         ProjectMilestones.init(ProjectData);
     });
