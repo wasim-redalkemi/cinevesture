@@ -2602,7 +2602,8 @@ select option,
 }
 
 .bg_linear {
-    background: rgba(28, 3, 48, 0.43);
+    /* background: rgba(28, 3, 48, 0.43); */
+    background: linear-gradient(180deg, rgba(28, 3, 48, 0.43) 65.92%, #1C0330 100%);
     /* background: linear-gradient( #1C0330 30.66%, rgba(28, 3, 48, 0)); */
 }
 

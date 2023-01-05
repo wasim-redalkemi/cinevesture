@@ -130,8 +130,9 @@
                 @if(count($users) >= 1)
                 @foreach($users as $user)
                 <div class="border_btm profile_wraper_padding my-3 my-md-0">
-                    <div class="row">
-                        <div class="col-md-2">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-flex">
+                        <div class="">
                             <div class="user_profile_container wh_66">
                                 <!-- <img src="{{ asset('images/asset/user-profile.png') }}" /> -->
                                 @if(isset($user->profile_image))
@@ -142,7 +143,7 @@
                             </div>
 
                         </div>
-                        <div class="col-md-9">
+                        <div class="mx-3">
                             <div class="d-flex align-items-center">
                                 <div class="guide_profile_main_text">
                                     <a href="{{route('profile-public-show',['id'=>$user->id])}}" class="btn-link text_user_name">{{empty($user->first_name)?'Name':ucfirst($user->first_name).' '.ucfirst($user->last_name);}}</a>
@@ -185,8 +186,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-1">
-
+                        </div>
+                        <div class="">
                             <div> <i class="fa <?php if(isset($user->isfavouriteProfile)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$user->id}}" aria-hidden="true"></i></div>
                         </div>
                     </div>
