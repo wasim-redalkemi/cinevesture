@@ -24,7 +24,7 @@
                         $user_projects_data = $user_projects->toArray();
                                                     
                     @endphp
-                    @if (count($user_projects_data['data'])>0)
+                    @if (isset($user_projects_data['data']) && count($user_projects_data['data'])>0)
                     @foreach ($user_projects_data['data'] as $k => $v)
                     <div class="col-md-4">
                         @if (!empty($v['projects']['project_image']))
@@ -63,7 +63,7 @@
                 @php
                     $user_profiles_data = $user_profiles->toArray();
                 @endphp
-                @if (count($user_profiles_data['data'])>0)
+                @if (isset($user_profiles_data['data']) && count($user_profiles_data['data'])>0)
                 @foreach ($user_profiles_data['data'] as $k => $v)               
                 <div class="profile_wraper profile_wraper_padding mt-1">
                     <div class="row">
