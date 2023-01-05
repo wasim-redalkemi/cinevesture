@@ -149,7 +149,6 @@
                 currentVideoCount = currentVideos.length;
                 if(currentVideoCount > 0){
                     lastVidId = currentVideos[currentVideoCount-1]['id'];
-                    console.log("lastVidId = "+lastVidId);
                 }
                 loadCurrentVideos();
                 bindActions();
@@ -245,7 +244,6 @@
                 let respArr = JSON.parse(resp);
                 if(respArr.status == 1){
                     currentVideos = currentVideos.filter((item)=>{
-                        console.log(item.id,item.id != req.mediaId);
                         return item.id != req.mediaId;
                     });
                     currentVideoCount = currentVideos.length;
@@ -309,7 +307,6 @@
             }
 
             let addVideoCallback = function(req,resp){
-                //console.log("in here addVideoCallback",resp);
                 let respArr = JSON.parse(resp);
                 if(respArr.status == 1){
                     createToast("Video added successfully.","S");
@@ -327,7 +324,6 @@
                 let str = '';
                 if(currentVideos.length > 0) {
                     $.each(currentVideos, (i,v) => {
-                        //console.log("v = ",v);
                         str += '<div id="vid-'+v.id+'" class="col-md-3">';
                             str += '<div class="img-container h_66">';
                             str += '<img src="'+v.media_info.thumbnail+'" class="width_inheritence" alt="image">';
@@ -371,7 +367,6 @@
                 if(currentVideoCount == 0){
                     $(str).insertBefore(parentElemId+" .video-list #add-video-btn-div");
                 } else {
-                    console.log("in addVideoElem lastVidId = "+lastVidId)
                     $(str).insertAfter(parentElemId+" .video-list #vid-"+lastVidId);
                 }
                 bindActions();
@@ -415,11 +410,9 @@
                 if(!id){
                     return;
                 }
-                console.log("currentMediaList - ",currentMediaList);
                 currentMediaCount = currentMediaList.length;
                 if(currentMediaCount > 0){
                     lastVidId = currentMediaList[currentMediaCount-1]['id'];
-                    console.log("lastVidId = "+lastVidId);
                 }
 
                 doAjax('project/get-project-media/'+project_id+'?type=image',{},"GET",getPhotosCallback);
@@ -450,15 +443,9 @@
                 }
                 loadcurrentMediaList();
             }
-            
-            $("#upload-img-inp").click(function () {
-                alert("ca;led")
-            })
+
             let bindActions = function (){
-                console.log(455);
                 $(parentElemId+" input#upload-img-inp").off("change").on("change",function uploadImageFile(e) {
-                    console.log("457");
-                    //console.log("e = ",this.files);
                     const [file] = this.files
                     uploadedFile = this.files[0];
                     if (file) {
@@ -495,7 +482,6 @@
                         },
                         success: function (data) {
                             // your callback here
-                            console.log("success data ",JSON.parse(data));
                             uploadedFile = null;
                             addPhotoCallback(data);
                         },
@@ -532,16 +518,10 @@
                     let mediaId = $(e.target).attr('data-id');
                     setModal("","","Yes, Delete","");
                     $(".deactivate_btn").click();
-                    // $(".modal-body button.cancel_btn").off("click").click((e)=>{
-                    //     console.log("cancel modal");
-                    // });
                     $(".modal-body button.delete_btn").off("click").click((e)=>{
                         console.log("delete confirm modal");
-                        // $("#staticBackdrop").hide();
-                        // $(".modal-backdrop").hide();
                         doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deletePhotoCallback);
                     });
-                    //doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deletePhotoCallback);
                 });
 
                 $(parentElemId+" #cancel-img-upload").off("click").on("click",(e)=>{
@@ -567,7 +547,6 @@
                 $(parentElemId + " .progress-bar").show();
                 $(parentElemId + " .progress-bar .fill-progress").css("width", +percent + "%");
                 $(parentElemId + " .status").text(percent + "%");
-                console.log("percent complete = "+percent);
             }
 
             let deletePhotoCallback = function (req,resp) {
@@ -576,7 +555,6 @@
                     createToast("Image deleted successfully.","S");
                     $("#img-"+req.mediaId).remove();
                     currentMediaList = currentMediaList.filter((item)=>{
-                        console.log(item.id,item.id != req.mediaId);
                         return item.id != req.mediaId;
                     });
                     currentMediaCount = currentMediaList.length;
@@ -616,7 +594,6 @@
                 let str = '';
                 if(currentMediaList.length > 0) {
                     $.each(currentMediaList, (i,v) => {
-                        //console.log("v = ",v);
                         str += '<div id="img-'+v.id+'" class="img-item col-md-3">';
                             str += '<div class="img-container h_66">';
                             str += '<img src="'+v.file_link+'" class="width_inheritence" alt="image">';
@@ -714,7 +691,6 @@
                 currentMediaCount = currentMediaList.length;
                 if(currentMediaCount > 0){
                     lastVidId = currentMediaList[currentMediaCount-1]['id'];
-                    console.log("lastVidId = "+lastVidId);
                 }
 
                 doAjax('project/get-project-media/'+project_id+'?type=doc',{},"GET",getDocCallback);
@@ -742,7 +718,6 @@
                 });
 
                 $(parentElemId+" input#upload-doc-inp").off("change").on("change",function uploadDocFile(e) {
-                    console.log("e = ",this.files);
                     const [file] = this.files
                     uploadedFile = this.files[0];
                     uploadDoc();
@@ -752,12 +727,7 @@
                     console.log("deleting doc ",e.target);
                     let mediaId = $(e.target).attr('data-id');
                     setModal("","","Yes, Delete","");
-                    // $(".modal-body button.cancel_btn").off("click").click((e)=>{
-                    //     console.log("cancel modal");
-                    // });
                     $(".modal-body button.delete_btn").off("click").click((e)=>{
-                        // $("#staticBackdrop").hide();
-                        // $(".modal-backdrop").hide();
                         doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteDocCallback);
                     });
                     $(".deactivate_btn").click();
@@ -781,15 +751,10 @@
                     },
                     success: function (data) {
                         // your callback here
-                        console.log("success data ",JSON.parse(data));
                         uploadedFile = null;
                         uploadDocCallback(null,data);
                     },
                     error: function (error) {
-                        // createToast( "f");
-                        // handle error
-                        // console.log(error);
-                        console.log(error.responseJSON.errors.file[0], "error.responseJSON.errors.file[0]");
                         createToast(error.responseJSON.errors.file[0],"E");
                     },
                     async: true,
@@ -817,10 +782,8 @@
             let uploadDocCallback = function (req, resp) {
                 let respArr = JSON.parse(resp);
                 if(respArr.status == 1){
-                    console.log("in uploadDocCallback",resp);
                     currentMediaList.push(respArr.payload);
                     currentMediaCount = currentMediaList.length;
-                    console.log("current Doc List - ",currentMediaList);
                     if(currentMediaCount > 0){
                         lastVidId = currentMediaList[currentMediaCount-1]['id'];
                     }
@@ -846,7 +809,6 @@
                 let str = '';
                 if(currentMediaList.length > 0) {
                     $.each(currentMediaList, (i,v) => {
-                        //console.log("v = ",v);
                         str += '<div class="col-md-3" id="doc-'+v.id+'">';
                         str += '<div class="doc_container">';
                         str += '<div class="upload_loader">';
