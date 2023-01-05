@@ -400,6 +400,90 @@
             }
         }();
 
+        // Banner photo page script 
+        
+        var BannerPhoto = function() {
+            alert("calling")
+            var project_id = null;
+            var parentElemId = "#BannerPhoto";
+            var uploadedFile = null;
+            var ImageCropperObj = null;
+
+            let init = function(id){
+                alert("calling")
+                project_id = id;
+                if(!id){
+                    return;
+                }
+                console.log("currentMediaList - ",currentMediaList);
+                currentMediaCount = currentMediaList.length;
+                if(currentMediaCount > 0){
+                    lastVidId = currentMediaList[currentMediaCount-1]['id'];
+                    console.log("lastVidId = "+lastVidId);
+                }
+
+                doAjax('project/get-project-media/'+project_id+'?type=image',{},"GET",getBannerPhotosCallback);
+                //doAjax('/ajax/get-media/1',{},"GET",updateVideoCallback)
+            }
+
+            let getBannerPhotosCallback = function (req, resp) {
+                let respArr = JSON.parse(resp);
+                currentMediaList = respArr.payload;
+                currentMediaCount = currentMediaList.length;
+                if(currentMediaCount > 0){
+                    lastVidId = currentMediaList[currentMediaCount-1]['id'];
+                }
+                loadcurrentBannerMediaList();
+            }
+
+
+
+
+            let loadcurrentBannerMediaList = function() {
+                let str = '';
+                if(currentMediaList.length > 0) {
+                    $.each(currentMediaList, (i,v) => {
+                        //console.log("v = ",v);
+                        str += '<div id="img-'+v.id+'" class="img-item col-md-3">';
+                            str += '<div class="img-container h_66">';
+                            str += '<img src="'+v.file_link+'" class="width_inheritence" alt="image">';
+                            str += '<div class="title project_card_data w-100 h-100">';
+                                str += '<p>'+v.media_info.title+'</p>';
+                            str += '</div>';
+                            str += '<div class="delete-icon project_card_data w-100 h-100">';
+                                str += '<div>';
+                                    str += '<i class="fa fa-trash-o delete-media" data-id="'+v.id+'" aria-hidden="true"></i>';
+                                str += '</div>';
+                            str += '</div>';
+                            str += '</div>';
+                        str += '<div class="profile_input">';
+                        str += '<input type="text" class="form-control image_title" name="project_image_title_'+v.id+'" placeholder="Add image title" value="'+v.media_info.title+'">';
+                        str += '</div>';
+                        str += '<div class="d-flex mt-5 mt-md-2">';
+                        str += '<div>';
+                        if(parseInt(v.is_default_marked))
+                            str += '<input type="radio" class="checkbox_btn feature_ved" name="is_feature_image" aria-label="" checked="checked" value="'+v.id+'">';
+                        else
+                            str += '<input type="radio" class="checkbox_btn feature_ved" name="is_feature_image" aria-label="" value="'+v.id+'">';
+                        str += '</div>';
+                        str += '<div class="mk-feature mx-2">Make feature image</div>';
+                        str += '</div>';
+                        str += '</div>';
+                    });
+                } else {
+                    str += getAddElemHtml();
+                }
+                str += '<div id="add-img-btn-div" class="col-md-3 add-another-item add_video_btn d-flex align-items-end">';
+                str += '<div>';
+                str += '<button class="add_img_field save_add_btn">Add another</button>';
+                str += '</div>';
+                str += '</div>';
+                $(parentElemId+" .photo-list").html(str);
+                bindActions();
+            }
+
+        }
+
         // Photo gallary page script
         var Photos = function () {
             var project_id = null;
