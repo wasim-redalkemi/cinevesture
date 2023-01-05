@@ -35,6 +35,7 @@ class CreateUserProjectsTable extends Migration
             $table->string('project_stage_id',20)->nullable();
             $table->string('stage_of_funding_id',20)->nullable();
             $table->string('crowdfund_link',255)->nullable();
+            $table->string('banner_image',255)->nullable();
 
             $table->timestamps();
             $table->softDeletes();
