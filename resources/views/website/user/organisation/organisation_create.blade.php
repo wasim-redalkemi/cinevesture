@@ -24,11 +24,11 @@
                         <div class="profile_text">
                             <h1>Organisation</h1>
                         </div>
-                        <div class="d-flex custom_file_explorer">
+                        <div class="d-flex custom_file_explorer mt-3">
                             <div class="upload_img_container">
                                 <img src="<?php if (!empty($UserOrganisation->logo)) {
                                                 echo Storage::url($UserOrganisation->logo);
-                                            } ?>" class="upload_preview for_show croperImg">
+                                            } ?>" class="upload_preview for_show croperImg" width="100">
 
                                 <div for="file-input" class="d-none">
                                     <input type="file" name="logo" class="@error('logo') is-invalid @enderror file_element image" accept=".jpg,.jpeg,.png">
@@ -530,20 +530,6 @@
     $('#crop-cancel').on('click', function() {
         $modal.modal('hide');
     })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     $(".js-select2").select2({
         closeOnSelect: false,

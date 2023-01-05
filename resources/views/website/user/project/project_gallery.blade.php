@@ -72,6 +72,38 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="BannerPhoto" class="add_content_wraper">
+                            <div class="row photo-sec">
+                                <div class="guide_profile_main_text Aubergine_at_night mt-2">Banner Photo</div>
+                                <!-- <div class="photo-list row col_wrap">
+                                    <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+                                </div> -->
+                                <div class="col-md-3 mt-2">
+                                        <div class="open_file_explorer profile_upload_container h_66">
+                                            <img src="" id="BannerImg">
+                                            <div for="file-input input_wrap" class="d-none">
+                                                <input type="file" class="imgInp" id="upload-banner-inp" name="project_image_1" accept=".jpg,.jpeg,.png">
+                                            </div>
+                                            <label for="upload-banner-inp">
+                                                <div class="text-center">
+                                                    <div>
+                                                        <i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true"></i>
+                                                    </div>
+                                                    <div class="mt-3 movie_name_text">Upload file</div>
+                                                </div>
+                                            </label>
+                                        </div>
+                                        <div class="profile_input add-new-image">
+                                            <input type="text" class="form-control" name="image_title" placeholder="Photo Title">
+                                        </div>
+                                        <div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 4MB</div>
+                                    </div>
+                            </div>
+                        </div>
+
+
+
+
                         <div id="Photos" class="add_content_wraper">
                             <div class="row photo-sec">
                                 <div class="guide_profile_main_text Aubergine_at_night mt-2">Photos</div>
@@ -254,15 +286,125 @@
             project_id = $("input[name=project_id]").val();
             // get the current video list from backend and load into the Gallary class.
             Videos.init(project_id);
+            BannerImage.init(project_id);
             Photos.init(project_id);
             Docs.init(project_id);
         });
     </script>
     <script src="{{ asset('js/cropper.js') }}"></script>
     <script>
-        var t = new ImageCropper(null,null);
-        // ImageCropper.cropboxData.width = 1200;
-        console.log(t.getCropBoxSize(), "266");
+        // var t = new ImageCropper(null,null);
+        // // ImageCropper.cropboxData.width = 1200;
+        // console.log(t.getCropBoxSize(), "266");
+
+        // Banner Phot page script 
+        var BannerImage = function () {
+            var project_id = null;
+            var parentElemId = "#BannerPhoto";
+            var currentMediaList = [];
+            var uploadedFile = null;
+            var ImageCropperObj = null;
+
+            let init = function(id){
+                project_id = id;
+                if(!id){
+                    return;
+                }
+                bindActions();
+            }
+
+            let bindActions = function (){
+                console.log("527");
+                $(parentElemId+"input#upload-banner-inp").off("change").on("change",function uploadImageFile(e) {
+                    console.log("529");
+                    //console.log("e = ",this.files);
+                    const [file] = this.files
+                    uploadedFile = this.files[0];
+                    if (file) {
+                        ImageCropperObj = new ImageCropper(uploadedFile,"#BannerImg");
+                        ImageCropperObj.setCropBoxSize({'width':285*2,height:194*2});
+                        let ret = ImageCropperObj.init();
+                        // $("#previewImg").attr("src",URL.createObjectURL(file)).show();
+                        $(parentElemId+" .open_file_explorer label").hide();
+                        $(parentElemId+" .profile_upload_text").hide();
+                        $(parentElemId+" .profile_input.add-new-image").show();
+                        $(parentElemId+" .cancel-img-upload").show();
+                        //uploadImage();
+                    }
+                });
+
+               let uploadImage = function(){
+                    var croppedImg = ImageCropperObj.getCropperFile();
+                    var formData = new FormData();
+                    formData.append("file", croppedImg, uploadedFile.name);
+                    formData.append("project_id", project_id);
+                    $.ajax({
+                        type: "POST",
+                        url: BaseUrl+"ajax/upload-image",
+                        xhr: function () {
+                            var myXhr = $.ajaxSettings.xhr();
+                            if (myXhr.upload) {
+                                myXhr.upload.addEventListener('progress', progressHandling, false);
+                            }
+                            return myXhr;
+                        },
+                        success: function (data) {
+                            // your callback here
+                            console.log("success data ",JSON.parse(data));
+                            uploadedFile = null;
+                            addPhotoCallback(data);
+                        },
+                        error: function (error) {
+                            // handle error
+                        },
+                        async: true,
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        timeout: 60000
+                    });
+                };
+
+                $(parentElemId+" .add_img_field").off("click").on("click",(e)=>{
+                    addMediaElem();
+                });
+
+                $(parentElemId+" .delete-media").off("click").on("click",(e)=>{
+                    //alert("Add delete confirmation here");
+                    let mediaId = $(e.target).attr('data-id');
+                    setModal("","","Yes, Delete","");
+                    $(".deactivate_btn").click();
+                    // $(".modal-body button.cancel_btn").off("click").click((e)=>{
+                    //     console.log("cancel modal");
+                    // });
+                    $(".modal-body button.delete_btn").off("click").click((e)=>{
+                        console.log("delete confirm modal");
+                        // $("#staticBackdrop").hide();
+                        // $(".modal-backdrop").hide();
+                        doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deletePhotoCallback);
+                    });
+                    //doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deletePhotoCallback);
+                });
+
+                $(parentElemId+" #cancel-img-upload").off("click").on("click",(e)=>{
+                    $(parentElemId+" input#upload-img-inp").val("")
+                    $("#previewImg").attr("src","").hide();
+                    $(parentElemId+" .open_file_explorer label").show();
+                    $(parentElemId+" .profile_upload_text").show();
+                    $(parentElemId+" .profile_input.add-new-image").hide();
+                    $(parentElemId+" .cancel-img-upload").hide();
+                    uploadedFile = null;
+                });
+            }
+
+            return {
+                init
+            }
+
+        }();
+
+
     </script>
 @endpush
 
