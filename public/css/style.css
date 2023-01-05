@@ -1002,6 +1002,12 @@ label {
 .modal {
     top: 100px !important;
 }
+.form_elem label {
+    display: contents !important;
+}
+#about-error {
+    display: contents !important;
+}
 
 .modal_button {
     border: none;
@@ -1033,7 +1039,7 @@ label {
 .croper_modal .cropperWrap {
     height: auto;
     /* width: auto;; */
-    max-height: calc(100%/2 - 1.5em);
+    max-height: calc(100%/3 - 1.5em);
     min-height: 300px;
 }
 
@@ -1658,7 +1664,7 @@ label {
 }
 
 .profile_input {
-    margin-top: 26px;
+    margin-top: 18px;
 }
 .steric_sign_design {
   color: red;
@@ -2042,6 +2048,16 @@ select,
 .h_66 {
     height: 194px !important;
     overflow: hidden;
+}
+
+/* #gallery .video-list .h_66 {
+    height: 194px !important;
+    overflow: hidden;
+} */
+
+#gallery .video-list .width_inheritence {
+    min-height: 194px;
+    max-height: 194px;
 }
 
 #portfolio-video .h_66 {
