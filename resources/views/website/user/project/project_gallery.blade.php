@@ -80,7 +80,7 @@
                                 </div> -->
                                     <div class="col-md-3 mt-2 current-banner-div" style="display:none">
                                     <div class="img-container h_66">
-                                        <img src="{{$projectgallery[0]->banner_image}}" class="width_inheritence" alt="image">
+                                        <img src="{{$projectgallery[0]->banner_image}}" class="" alt="image">
                                         <div class="title project_card_data w-100 h-100">
                                             <p>Banner</p>
                                         </div>
