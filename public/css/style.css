@@ -2084,6 +2084,11 @@ select,
     max-height: 194px;
 }
 
+#BannerPhoto .img-container img {
+    height: 100%;
+    margin-left: -50%;
+}
+
 #portfolio-video .h_66 {
     height: 170px !important;
     overflow: hidden;

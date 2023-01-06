@@ -50,7 +50,7 @@
                                 @endif
                             </div>
                             <div class="hours-category my-md-4">
-                                {{ !empty(($UserProject->duration))?date('H:i', mktime(0,$UserProject->duration)):'Duration'}}
+                                {{ !empty(($UserProject->duration))?date('H:i', mktime(0,$UserProject->duration)).' min':'Duration'}}
                                 | @if (!empty($projectData[0]['project_languages']))
                                 @foreach ($projectData[0]['project_languages'] as $k => $v)
                                 {{$v['name']}}
@@ -97,7 +97,7 @@
                                         <td class="public-head-subtext white">Created By</td>
                                         <td class="aubergine contact-page-subtext candy-pink">
                                             @if (!empty($projectData[0]['user']['name']))
-                                            <a href="{{route('profile-public-show',['id'=>$projectData[0]['user']['id']])}}" class="text_decor_none">{{$projectData[0]['user']['name']}}</a>
+                                            <a href="{{route('profile-public-show',['id'=>$projectData[0]['user']['id']])}}" class="text_decor_none">{{ ucwords($projectData[0]['user']['name'])}}</a>
                                             @else
                                             <span><b>-</b></span>
                                             @endif
@@ -232,7 +232,7 @@
                         </div>
                         @endforeach
                         @else
-                        <span><b>-</b></span>
+                        <span class="text-light"><b>-</b></span>
                         @endif
                     </div>
                     <div class="public-head-subtext mt-3">Photos</div>
@@ -246,7 +246,7 @@
                         </div>
                         @endforeach
                         @else
-                        <span><b>-</b></span>
+                        <span class="text-light"><b>-</b></span>
                         @endif
                     </div>
                 </div>
@@ -273,7 +273,7 @@
                         </div>
                         @endforeach
                     @else
-                    <span><b>-</b></span>
+                    <span class="text-light"><b>-</b></span>
                     @endif
                 </div>
             </div>
@@ -405,8 +405,8 @@
                                 @if (!empty($projectData[0]['project_association']))
                                 @foreach ($projectData[0]['project_association'] as $v)
                                 <tr>
-                                    <td class="public-head-subtext white">{{$v['project_associate_title']}}</td>
-                                    <td class="aubergine project-sub-text white">{{$v['project_associate_name']}}</td>
+                                    <td class="public-head-subtext white">{{ucwords($v['project_associate_title'])}}</td>
+                                    <td class="aubergine project-sub-text white">{{ucwords($v['project_associate_name'])}}</td>
                                 </tr>
                                 @endforeach
                                 @else
