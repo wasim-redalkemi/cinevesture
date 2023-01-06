@@ -50,7 +50,7 @@
                                 @endif
                             </div>
                             <div class="hours-category my-md-4">
-                                {{ !empty(($UserProject->duration))?$UserProject->duration:'Duration'}}
+                                {{ !empty(($UserProject->duration))?date('H:i', mktime(0,$UserProject->duration)):'Duration'}}
                                 | @if (!empty($projectData[0]['project_languages']))
                                 @foreach ($projectData[0]['project_languages'] as $k => $v)
                                 {{$v['name']}}
@@ -314,7 +314,7 @@
                                         @if (!empty($UserProject->crowdfund_link))
                                         <a href="{{ $UserProject->crowdfund_link}}" class="white">{{ $UserProject->crowdfund_link}}</a>
                                         @else
-                                        <span><b>-</b></span>
+                                        <span class="text-light"><b>-</b></span>
                                         @endif
                                     </td>
                                 </tr>

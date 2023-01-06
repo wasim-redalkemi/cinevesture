@@ -425,12 +425,14 @@ class ProjectController extends WebController
             {
                 return back()->with('error','Project Id not found.');
             }
-           
+            $projectId = $_REQUEST['id'];
             $languages = MasterLanguage::query()->orderBy('name', 'ASC')->get();
             $country = MasterCountry::query()->orderBy('name', 'ASC')->get();    
             $projectgallery = [];
-            $projectgallery = UserProject::query()->where('id',$_REQUEST['id'])->get();
-
+            $projectgallery = UserProject::query()->where('id',$projectId)->get();
+            if(!empty($projectgallery[0]->banner_image)){
+                $projectgallery[0]->banner_image = asset("storage/".$projectgallery[0]->banner_image);
+            }
             return view('website.user.project.project_gallery', compact('projectgallery','languages','country'));
         } catch (Exception $e) {
             return back()->with('error','Something went wrong.');

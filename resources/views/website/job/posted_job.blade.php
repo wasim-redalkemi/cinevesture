@@ -60,7 +60,7 @@
                                 <a href="{{route('unpublish-job',['job_id'=>$v['id'],'status'=>$status])}}">  <?php if($v['save_type']=='published'){  echo "Unpublish Job"; } else { echo "Publish Job";}?></a>
                                 </li>
                                 <li>
-                                <a href="{{route('delete-job',['job_id'=>$v['id']])}}">  Delete Job </a>
+                                    <a class="confirmAction" href="{{route('delete-job',['job_id'=>$v['id']])}}"> Delete Job </a>
                                 </li>
                             </ul>
                         </div>

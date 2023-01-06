@@ -1,4 +1,4 @@
-@extends('website.layouts.auth')
+@extends('website.layouts.app')
 
 @section('title','Cinevesture-Otp')
 

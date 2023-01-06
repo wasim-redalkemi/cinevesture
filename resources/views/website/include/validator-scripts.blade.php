@@ -449,7 +449,7 @@
                     const [file] = this.files
                     uploadedFile = this.files[0];
                     if (file) {
-                        ImageCropperObj = new ImageCropper(uploadedFile,"#previewImg");
+                        ImageCropperObj = new ImageCropper(uploadedFile,parentElemId+" #previewImg");
                         ImageCropperObj.setCropBoxSize({'width':285*2,height:194*2});
                         let ret = ImageCropperObj.init();
                         // $("#previewImg").attr("src",URL.createObjectURL(file)).show();
@@ -526,7 +526,7 @@
 
                 $(parentElemId+" #cancel-img-upload").off("click").on("click",(e)=>{
                     $(parentElemId+" input#upload-img-inp").val("")
-                    $("#previewImg").attr("src","").hide();
+                    $(parentElemId+" #previewImg").attr("src","").hide();
                     $(parentElemId+" .open_file_explorer label").show();
                     $(parentElemId+" .profile_upload_text").show();
                     $(parentElemId+" .profile_input.add-new-image").hide();
