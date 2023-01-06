@@ -90,7 +90,7 @@
                                         @endif
                                     </div>
                                     <div class="guide_profile_main_text mt-3">Available to Work In</div>
-                                    <div class="inp_data Aubergine_at_night mt-2">{{ (!empty($user->available_to_work_in))?$user->available_to_work_in:'-'; }}</div>
+                                    <div class="inp_data Aubergine_at_night mt-2">{{ (!empty($user->available_to_work_in))?ucFirst($user->available_to_work_in):'-'; }}</div>
                                     <div class="guide_profile_main_text mt-3">Languages Spoken</div>
                                     
                                 <div class="d-flex flex-wrap mt-3">

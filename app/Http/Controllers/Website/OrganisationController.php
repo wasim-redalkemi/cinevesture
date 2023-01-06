@@ -128,6 +128,9 @@ class OrganisationController extends WebController
             if (!empty($request->intro_video_link)) {
                 $UserOrganisation->intro_video_link = $video_url['link'];
                 $UserOrganisation->intro_video_thumbnail = $thumbnail;
+            } else {
+                $UserOrganisation->intro_video_link = $request->intro_video_link;
+                $UserOrganisation->intro_video_thumbnail = null;
             }
 
 
