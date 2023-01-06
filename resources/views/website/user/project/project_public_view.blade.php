@@ -107,7 +107,7 @@
                                         <td class="public-head-subtext white">Total Budget</td>
                                         <td class="contact-page-subtext white">
                                             @if (!empty($UserProject->total_budget))
-                                            $ {{ $UserProject->total_budget}}
+                                            ${{ $UserProject->total_budget}}
                                             @else
                                             <span><b>-</b></span>
                                             @endif
@@ -117,7 +117,7 @@
                                         <td class="public-head-subtext white">Financing Secured</td>
                                         <td class="contact-page-subtext white">
                                             @if (!empty($UserProject->financing_secured))
-                                            $ {{ $UserProject->financing_secured}}
+                                            ${{ $UserProject->financing_secured}}
                                             @else
                                             <span><b>-</b></span>
                                             @endif
@@ -163,7 +163,8 @@
                                     {{-- <button class="cantact-page-cmn-btn"><a href=""  class="text_decor_none">Contact Now</a></button> --}}
 
                                     @endif
-                                    <i class="fa fa-share-alt mx-4 icon-size" aria-hidden="true"></i>
+                                    <!-- <i class="fa fa-share-alt mx-4 icon-size" aria-hidden="true"></i> -->
+                                    <img src="{{ asset('images/asset/share_image.svg') }}" class="mx-3" alt="image">
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
                                         
                                     <div> <i class="fa <?php if(isset($UserProject->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
