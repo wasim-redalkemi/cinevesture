@@ -23,8 +23,8 @@
     <section class="project_result_section">
         <div class="row mt-4">
             <div class="col-md-3">
-                <div class="side-bar-cmn-part">
-                <form class="" method="Get" action="{{ route('get-project-filter') }}">
+                <div class="side-bar-cmn-part h-auto">
+                <form class="pb-5" method="Get" action="{{ route('get-project-filter') }}">
                     <div class="d-flex">
                         <div class="search-box-container w-100">
                             <div class="search-container  w-100">
@@ -209,7 +209,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-check d-flex align-items-center mt-4">
+                            <div class="form-check mt-4">
                                 <input class="form-check-input" <?php if (request('project_verified') == '1') {
                                                                     echo 'checked';
                                                                 } ?> style="border-radius: 0px;" type="checkbox" value="1" name="project_verified" id="flexCheckDefault">

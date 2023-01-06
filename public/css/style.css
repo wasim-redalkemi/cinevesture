@@ -479,7 +479,7 @@ a {
 .home-dropdown .profile_input label,
 label {
     margin-top: -4px;
-    word-break: break-all;
+    word-break: break-word;
 }
 
 .nav-drop {
@@ -3621,6 +3621,7 @@ input:checked+.slider:before {
     .pr_10 {
         padding-right: 0% !important;
     }
+  
 }
 
 /* Media query ends here  */
@@ -3661,6 +3662,9 @@ input:checked+.slider:before {
 
     .main-body {
         min-height: 62vh;
+    }
+    .guest_header .container {
+         max-width: 1570px;
     }
 }
 
