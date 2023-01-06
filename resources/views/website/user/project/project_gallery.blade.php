@@ -78,32 +78,45 @@
                                 <!-- <div class="photo-list row col_wrap">
                                     <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                                 </div> -->
-                                <div class="col-md-3 mt-2">
-                                        <div class="open_file_explorer profile_upload_container h_66">
-                                            <img src="" id="BannerImg">
-                                            <div for="file-input input_wrap" class="d-none">
-                                                <input type="file" class="imgInp" id="upload-banner-inp" name="project_image_1" accept=".jpg,.jpeg,.png">
+                                    <div class="col-md-3 mt-2 current-banner-div" style="display:none">
+                                    <div class="img-container h_66">
+                                        <img src="{{$projectgallery[0]->banner_image}}" class="width_inheritence" alt="image">
+                                        <div class="title project_card_data w-100 h-100">
+                                            <p>Banner</p>
+                                        </div>
+                                        <div class="delete-icon project_card_data w-100 h-100">
+                                            <div>
+                                                <i class="fa fa-trash-o delete-media" data-id="'+v.id+'" aria-hidden="true"></i>
                                             </div>
-                                            <label for="upload-banner-inp">
-                                                <div class="text-center">
-                                                    <div>
-                                                        <i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true"></i>
-                                                    </div>
-                                                    <div class="mt-3 movie_name_text">Upload file</div>
-                                                </div>
-                                            </label>
                                         </div>
-                                        <div class="profile_input add-new-image">
-                                            <input type="text" class="form-control" name="image_title" placeholder="Photo Title">
-                                        </div>
-                                        <div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 4MB</div>
                                     </div>
+                                </div>
+                                <div class="col-md-3 mt-2 new-banner-div">
+                                    <div class="open_file_explorer profile_upload_container h_66">
+                                        <img src="" id="previewImg">
+                                        <div id="cancel-img-upload" class="cancel-img-upload">
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                        </div>
+                                        <div class="progress-bar"><div class="fill-progress"></div></div>
+                                        <div for="file-input input_wrap" class="d-none">
+                                            <input type="file" class="imgInp" id="upload-banner-inp" name="project_image_1" accept=".jpg,.jpeg,.png">
+                                        </div>
+                                        <label for="upload-banner-inp">
+                                            <div class="text-center">
+                                                <div>
+                                                    <i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true"></i>
+                                                </div>
+                                                <div class="mt-3 movie_name_text">Upload file</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 4MB</div>
+                                </div>
+                                <div class="col-md-2 mt-2 d-flex align-items-end">
+                                    <div class="save_add_btn" style="display:none">Done</div>
+                                </div>
                             </div>
                         </div>
-
-
-
-
                         <div id="Photos" class="add_content_wraper">
                             <div class="row photo-sec">
                                 <div class="guide_profile_main_text Aubergine_at_night mt-2">Photos</div>
@@ -293,19 +306,19 @@
     </script>
     <script src="{{ asset('js/cropper.js') }}"></script>
     <script>
-        // var t = new ImageCropper(null,null);
-        // // ImageCropper.cropboxData.width = 1200;
-        // console.log(t.getCropBoxSize(), "266");
-
         // Banner Phot page script 
         var BannerImage = function () {
             var project_id = null;
             var parentElemId = "#BannerPhoto";
-            var currentMediaList = [];
+            var currentBanner = '{{$projectgallery[0]->banner_image}}';
             var uploadedFile = null;
             var ImageCropperObj = null;
 
             let init = function(id){
+                if(currentBanner){
+                    $(parentElemId+" .new-banner-div").hide();
+                    $(parentElemId+" .current-banner-div").show();
+                }
                 project_id = id;
                 if(!id){
                     return;
@@ -314,88 +327,113 @@
             }
 
             let bindActions = function (){
-                console.log("527");
-                $(parentElemId+"input#upload-banner-inp").off("change").on("change",function uploadImageFile(e) {
-                    console.log("529");
-                    //console.log("e = ",this.files);
-                    const [file] = this.files
+                $(parentElemId+" input#upload-banner-inp").off("change").on("change",function uploadImageFile(e) {
                     uploadedFile = this.files[0];
-                    if (file) {
-                        ImageCropperObj = new ImageCropper(uploadedFile,"#BannerImg");
-                        ImageCropperObj.setCropBoxSize({'width':285*2,height:194*2});
+                    if (uploadedFile) {
+                        ImageCropperObj = new ImageCropper(uploadedFile,parentElemId+" #previewImg");
+                        ImageCropperObj.setCropBoxSize({'width':6*300,height:2*300});
                         let ret = ImageCropperObj.init();
+                        ImageCropperObj.setAspectRatio(3/1);
+                        // ImageCropperObj.setAfterCrop(AfterCropCallback);
                         // $("#previewImg").attr("src",URL.createObjectURL(file)).show();
                         $(parentElemId+" .open_file_explorer label").hide();
                         $(parentElemId+" .profile_upload_text").hide();
                         $(parentElemId+" .profile_input.add-new-image").show();
                         $(parentElemId+" .cancel-img-upload").show();
-                        //uploadImage();
+                        $(parentElemId+" .save_add_btn").show();
                     }
                 });
 
-               let uploadImage = function(){
-                    var croppedImg = ImageCropperObj.getCropperFile();
-                    var formData = new FormData();
-                    formData.append("file", croppedImg, uploadedFile.name);
-                    formData.append("project_id", project_id);
-                    $.ajax({
-                        type: "POST",
-                        url: BaseUrl+"ajax/upload-image",
-                        xhr: function () {
-                            var myXhr = $.ajaxSettings.xhr();
-                            if (myXhr.upload) {
-                                myXhr.upload.addEventListener('progress', progressHandling, false);
-                            }
-                            return myXhr;
-                        },
-                        success: function (data) {
-                            // your callback here
-                            console.log("success data ",JSON.parse(data));
-                            uploadedFile = null;
-                            addPhotoCallback(data);
-                        },
-                        error: function (error) {
-                            // handle error
-                        },
-                        async: true,
-                        data: formData,
-                        cache: false,
-                        contentType: false,
-                        processData: false,
-                        timeout: 60000
-                    });
-                };
-
-                $(parentElemId+" .add_img_field").off("click").on("click",(e)=>{
-                    addMediaElem();
+                $(parentElemId+ " .save_add_btn").off("click").on("click",function(){
+                    uploadImage();
                 });
 
                 $(parentElemId+" .delete-media").off("click").on("click",(e)=>{
                     //alert("Add delete confirmation here");
-                    let mediaId = $(e.target).attr('data-id');
-                    setModal("","","Yes, Delete","");
-                    $(".deactivate_btn").click();
-                    // $(".modal-body button.cancel_btn").off("click").click((e)=>{
-                    //     console.log("cancel modal");
-                    // });
-                    $(".modal-body button.delete_btn").off("click").click((e)=>{
-                        console.log("delete confirm modal");
-                        // $("#staticBackdrop").hide();
-                        // $(".modal-backdrop").hide();
-                        doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deletePhotoCallback);
-                    });
-                    //doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deletePhotoCallback);
+                    $(parentElemId+" .new-banner-div").show();
+                    //$(parentElemId+" .current-banner-div .img-container img").attr('src',resp.payload.url)
+                    $(parentElemId+" .current-banner-div").hide();
+                    $(parentElemId+" .save_add_btn").hide();
                 });
 
                 $(parentElemId+" #cancel-img-upload").off("click").on("click",(e)=>{
-                    $(parentElemId+" input#upload-img-inp").val("")
-                    $("#previewImg").attr("src","").hide();
+                    $(parentElemId+" input#upload-banner-inp").val("")
+                    $(parentElemId+" #previewImg").attr("src","").hide();
                     $(parentElemId+" .open_file_explorer label").show();
                     $(parentElemId+" .profile_upload_text").show();
                     $(parentElemId+" .profile_input.add-new-image").hide();
                     $(parentElemId+" .cancel-img-upload").hide();
+                    $(parentElemId+" .save_add_btn").hide();
                     uploadedFile = null;
                 });
+            }
+
+            let progressHandling = function (event){
+                var percent = 0;
+                var position = event.loaded || event.position;
+                var total = event.total;
+                if (event.lengthComputable) {
+                    percent = Math.ceil(position / total * 100);
+                }
+                // update progressbars classes so it fits your code
+                $(parentElemId + " .progress-bar").show();
+                $(parentElemId + " .progress-bar .fill-progress").css("width", +percent + "%");
+                $(parentElemId + " .status").text(percent + "%");
+            }
+
+            let AfterCropCallback = function(){
+                console.log("after cropper callback called");
+                //uploadImage();
+            }
+
+            let uploadImage = function(){
+                console.log("uploading file");
+                var croppedImg = ImageCropperObj.getCropperFile();
+                console.log("croppedImg = "+BaseUrl+"ajax/upload-image",croppedImg);
+                var formData = new FormData();
+                formData.append("file", croppedImg, uploadedFile.name);
+                formData.append("project_id", project_id);
+                formData.append("isBanner", 1);
+                $.ajax({
+                    type: "POST",
+                    url: BaseUrl+"ajax/upload-image",
+                    xhr: function () {
+                        var myXhr = $.ajaxSettings.xhr();
+                        if (myXhr.upload) {
+                            myXhr.upload.addEventListener('progress', progressHandling, false);
+                        }
+                        return myXhr;
+                    },
+                    success: function (data) {
+                        let resp = JSON.parse(data);
+                        console.log("success data ",resp);
+                        uploadedFile = null;
+                        addPhotoCallback(resp);
+                    },
+                    error: function (error) {
+                        // handle error
+                        console.log("AJAX error ",error);
+                        createToast("Something went wrong","E");
+                    },
+                    async: true,
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    timeout: 60000
+                });
+            };
+
+            let addPhotoCallback = function(resp){
+                if(resp.status == 1){
+                    createToast("Banner added","S");
+                    $(parentElemId+" .new-banner-div").hide();
+                    $(parentElemId+" .current-banner-div .img-container img").attr('src',resp.payload.url)
+                    $(parentElemId+" .current-banner-div").show();
+                    $(parentElemId+" .save_add_btn").hide();
+                } else {
+                    createToast("Something went wrong","E");
+                }
             }
 
             return {

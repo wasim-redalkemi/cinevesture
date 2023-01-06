@@ -48,8 +48,14 @@
                     </div>                    
                     @endforeach
                     @else
-                    <div class="not-found-text">
-                        <p>No Data Found</p>
+                    <div class="profile_wraper profile_wraper_padding mt-1">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="not-found-text">
+                                    <p>No Data Found</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     @endif
                     <div>
@@ -123,10 +129,16 @@
                 </div>            
                 @endforeach
                 @else
-                    <div class="not-found-text">
-                        <p>No Data Found</p>
+                    <div class="profile_wraper profile_wraper_padding mt-1">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="not-found-text">
+                                    <p>No Data Found</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    @endif
+                @endif
                 <div>
                     {!! $user_profiles->links() !!}
                 </div>

@@ -71,7 +71,7 @@
                     @endif
                 </div>
                 <div class="preview_headtext">Duration</div>
-                <div class="preview_subtext">@if (!empty($projectData[0]['duration'])) {{$projectData[0]['duration']}} @endif</div>
+                <div class="preview_subtext">@if (!empty($projectData[0]['duration'])) {{date('H:i', mktime(0,$projectData[0]['duration']))}} @endif</div>
                 <div class="preview_headtext">Total Budget (USD)</div>
                 <div class="preview_subtext">@if (!empty($projectData[0]['total_budget'])) {{$projectData[0]['total_budget']}} @endif</div>
                 <div class="preview_headtext">Financing Secured (USD)</div>
