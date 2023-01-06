@@ -34,7 +34,7 @@
                     </div>
                     <div class="sidebar_collapse collapse dont-collapse-sm" id="collapseExample">
                         <div class="sidebar_data_mobile">
-                            <div class="dropend search-page search_page_filters_wrap mt-2">
+                            <div class="dropend search-page search_page_filters_wrap mt-3">
                                 <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Category
                                 </button>
@@ -176,7 +176,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-check d-flex align-items-center mt-4">
+                            <div class="form-check mt-4">
                                 <input class="form-check-input" type="checkbox" name="promoted_jobs" value="1"  id="flexCheckDefault">
                                 <label class="verified-text mx-2" for="flexCheckDefault">
                                     Promoted Jobs

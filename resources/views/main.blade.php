@@ -44,7 +44,7 @@
                       </div>
                       <div class="duration-lang-text mt-1">
                         @if (!empty($v->duration))
-                        {{$v->duration}} |
+                        {{date('H:i', mktime(0,$v->duration))}} |
                         @endif
                         
                         @foreach ($v->projectLanguages as $k1=>$v1)

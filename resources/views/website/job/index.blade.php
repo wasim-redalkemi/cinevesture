@@ -120,7 +120,6 @@
                         <a href="{{ route('posted-job') }}"><button type = "button"class="job_search_btn  post-job">My Jobs</button></a>
                 {{-- <button type = "button"class="job_search_btn  post-job">My Jobs</button> --}}
                         </div>
-
                     </div>
         </div>
     </div>

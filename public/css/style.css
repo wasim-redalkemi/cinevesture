@@ -927,6 +927,9 @@ label {
 .aubergine {
     color: #4D0D8A !important;
 }
+.deep_aubergine {
+    color: #33084C !important;
+}
 
 .pointer {
     cursor: pointer;
@@ -940,6 +943,13 @@ label {
     color: #DD45B3 !important;
 }
 
+.simple_cross_btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 25px;
+    font-weight: 600;
+}
 /* .curv_cmn_btn {
     background: RGB(244, 243, 255);
     border-radius: 99px;
@@ -992,7 +1002,11 @@ label {
     font-weight: 600;
     color: #212B36;
 }
-
+.page-item:last-child .page-link, .page-item:first-child .page-link { 
+    font-size: 24px;
+    line-height: 0;
+    padding-top: 13px;
+}
 .page-link :active {
     border: 2px solid #971E9B !important;
     border-radius: 4px !important;
@@ -1333,6 +1347,13 @@ label {
     max-height: 100%;
     position: relative;
 }
+.dot {
+    height: 6px;
+    width: 6px;
+    background-color: #4D0D8A;;
+    border-radius: 50%;
+    display: inline-block;
+  }
 
 .bg_white {
     background: rgb(250, 248, 251) !important;
@@ -1511,7 +1532,10 @@ label {
     padding-right: 5% !important;
 }
 .pr_35 {
-    padding-right: 25% !important;
+    padding-right: 25%;
+}
+.pr_10 {
+    padding-right: 10%;
 }
 /* tooltip design  */
 .tooltips {
@@ -2162,6 +2186,8 @@ textarea {
 
 .post-job {
     width: 170px;
+    letter-spacing: 0.084em;
+    font-feature-settings: 'ss01' on;
 }
 
 .active_job_page {
@@ -2196,6 +2222,14 @@ textarea {
     border-radius: 360px;
     background: #971E9B;
     border: none;
+}
+
+.endorse_person_name {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 158%;
+    letter-spacing: 0.0075em;
+    color: #1C0330;
 }
 
 .bg_dee-pink {
@@ -3586,7 +3620,15 @@ input:checked+.slider:before {
         transform: rotate(90deg);
     }
 
+    .pr_35 {
+        padding-right: 0% !important;
+    }
+    .pr_10 {
+        padding-right: 0% !important;
+    }
 }
+
+/* Media query ends here  */
 
 .br_4 {
     border-radius: 4px !important;
