@@ -108,7 +108,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="form-check d-flex align-items-center mt-4">
+                            <div class="form-check mt-4">
                                 <input class="form-check-input" <?php if (request('verified') == '1') {
                                                                     echo 'checked';
                                                                 } ?> style="border-radius: 0px;" type="checkbox" value="1" name="verified" id="flexCheckDefault">

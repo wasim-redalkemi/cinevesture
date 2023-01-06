@@ -23,14 +23,14 @@
                                     </div>
                                 </div>
                                 <div class="mt-3"><input type="text" id="subject" name="subject" value="" placeholder="Subject" class="modal_input"></div>
-                                <div class="mt-3">
-                                    <textarea name="message" id="message" cols="25" rows="6" class="w-100 modal_input controlTextLength" placeholder="Message" text-length = "1200" maxlength="1200" aria-label="With textarea"></textarea>
+                                <div class="form_elem mt-3">
+                                    <textarea name="message" id="message" cols="25" rows="6" class="w-100 controlTextLength" placeholder="Message" text-length = "1200" maxlength="1200" aria-label="With textarea"></textarea>
 
                                 </div>
 
-                                <div class="form-check mt-3">
+                                <div class="form-check mt-3 d-flex">
                                     <input class="form-check-input modal_check_input" type="checkbox" id="checkbox_cc">
-                                    <label class="modal_btm_text mx-1">Send a copy to me</label>
+                                    <label class="modal_btm_text mx-2 mt-1">Send a copy to me</label>
                                 </div>
 
                                 <div class="mt-4">

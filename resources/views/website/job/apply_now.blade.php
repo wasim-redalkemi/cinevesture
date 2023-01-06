@@ -34,7 +34,7 @@
                         @csrf
                         <div class="guide_profile_subsection" id="Documents">
                             <div class="guide_profile_main_text mt-3">Resume/CV<em class="text-danger mx-1">*</em></div>
-                            <div class="guide_profile_main_subtext mt-3">Please Attach Your Resume</div>
+                            <div class="preview_subtext deep_aubergine mt-3">Please Attach Your Resume</div>
                             <div id="Documents" class="add_content_wraper">
                                 <label for="upload-doc-inp" class="d-block">
                                     <div class="d-flex align-items-center mt-3">
@@ -48,7 +48,7 @@
                                         @enderror
                                     </div>
 
-                                    <div class="col-md-4">
+                                    <div class="col-md-3">
                                         <div class="document_pdf mt-2">
                                             <div class="upload_loader">
                                                 <img src="{{ asset('images/asset/pdf_image.svg') }}" alt="image">
@@ -92,7 +92,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
          <div class="d-flex justify-content-end m-2">
-             <button type="button" class="modal_cross_btn" data-bs-dismiss="modal" aria-label="Close">X</button>
+             <button type="button" class="simple_cross_btn" data-bs-dismiss="modal" aria-label="Close">X</button>
          </div>
             <div class="modal-body" style="padding: 0px;">
                 <section>
@@ -107,7 +107,7 @@
                                     <div class="successfullPublish_text sub_text mt-4">
                                         You have successfuly applied for this job.
                                     </div>
-                                    <div>
+                                    <div class="pb-4">
                                         <a href="{{route('showJobSearchResults')}}" class="submit_btn mt-4 text-decoration-none text-light">Apply More</a>
                                     </div>
                                 </div>
