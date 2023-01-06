@@ -76,7 +76,7 @@
                                     <div class="guide_profile_main_text mt-3">
                                         <p> Skills</p>
                                     </div>
-                                    <div>
+                                    <div class="pr_10">
                                         @if (count($user_skills)>0)
                                         @foreach ($user_skills as $k=>$v)
                                         <button class="curv_cmn_btn skill_container">
