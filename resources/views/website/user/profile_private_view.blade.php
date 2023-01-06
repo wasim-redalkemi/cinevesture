@@ -339,13 +339,12 @@
     });
 
     $(".portfolio.owl-carousel").owlCarousel({
-        center: true,
+        center: false,
         autoPlay: 1000,
         autoplay: true,
-        loop: true,
+        loop: false,
         nav: true,
         margin: 20,
-        center: false,
         // items: 4,
         responsive: {
             480: {

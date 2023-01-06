@@ -36,7 +36,7 @@
                             <div class="guide_profile_main_text mt-3">Resume/CV<em class="text-danger mx-1">*</em></div>
                             <div class="guide_profile_main_subtext mt-3">Please Attach Your Resume</div>
                             <div id="Documents" class="add_content_wraper">
-                                <label for="upload-doc-inp">
+                                <label for="upload-doc-inp" class="d-block">
                                     <div class="d-flex align-items-center mt-3">
                                         <div><i class="fa fa-paperclip aubergine icon-size" aria-hidden="true"></i></div>
                                         <div class="upload_resume_text mx-2">Upload Your Resume/CV</div>
@@ -48,7 +48,7 @@
                                         @enderror
                                     </div>
 
-                                    <div class="col-md-12">
+                                    <div class="col-md-4">
                                         <div class="document_pdf mt-2">
                                             <div class="upload_loader">
                                                 <img src="{{ asset('images/asset/pdf_image.svg') }}" alt="image">
