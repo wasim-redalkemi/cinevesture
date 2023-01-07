@@ -85,7 +85,7 @@
                                 <tbody class="search-table-body white">
                                     <tr>
                                         <td class="public-head-subtext white">Type</td>
-                                        <td class="project-sub-text white">
+                                        <td class="contact-page-subtext white">
                                             @if (!empty($projectData[0]['project_type']['name']))
                                             {{$projectData[0]['project_type']['name']}}
                                             @else
@@ -150,7 +150,7 @@
                         <div class="col-lg-4 col-md-12 px-3">
                             <div class="public-head-subimage">
                                 <div class="playVideoWrap br_4 mt-3" video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link'] }}@endif">
-                                    <img src="@if (isset($projectData[0]['project_only_video'][0]['media_info'])){{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}@endif" alt="">
+                                    <img src="@if (isset($projectData[0]['project_only_video'][0]['media_info'])){{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}@endif" alt="" class="br_4">
                                 </div>
                                 {{-- <iframe width="" height="" src="{{empty($projectData[0]['project_only_video'][0]['file_link'])?'https://www.youtube.com/embed/oYWAwwy5EbQ':$projectData[0]['project_only_video'][0]['file_link'];}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> --}}
                                 <!-- <img src="{{ asset('images/asset/download (3) 7.png') }}" width=100% alt="Image"> -->
@@ -260,7 +260,7 @@
                 <div class="row">
                     @if (!empty($projectData[0]['project_only_doc']))
                     @foreach ($projectData[0]['project_only_doc'] as $v)
-                    <div class="col-md-3">
+                    <div class="col-md-3 col-8 mt-3">
                         <div class="document_pdf document_pdf_project">
                             <div class="upload_loader">
                                 <img src="{{ asset('images/asset/pdf_image.svg') }}" alt="image">
@@ -322,7 +322,7 @@
                         </table>
                     </div>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-11">
                             <div class="mt-4">
                                 <table class="table">
                                     <tbody class="search-table-body white">

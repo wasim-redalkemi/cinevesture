@@ -138,13 +138,13 @@
                                     <img src="{{json_decode($v['media_info'])->thumbnail}}" alt="">
                                 </div>
                                 
-                                <div class="d-flex align-items-center">
-                                    <div class="movie_name_text">{{json_decode($v['media_info'])->title}} </div>
+                                <div class="d-flex align-items-initial mt-2">
+                                    <div class="movie_name_text mt-0">{{json_decode($v['media_info'])->title}} </div>
                                     <?php
                                         if($v['is_default_marked'])
                                         {
                                             ?>
-                                                <button class="verified_cmn_btn mt-1 mx-3">FEATURED</button>
+                                                <button class="verified_cmn_btn mt-2 mx-3">FEATURED</button>
                                             <?php
                                         }
                                     ?>
@@ -161,13 +161,13 @@
                         @foreach ($projectData[0]['project_only_image'] as $v)
                         <div class="item">
                             <div class="home_img_wrap"> <img src="{{ Storage::url($v['file_link']) }}" alt="image"></div>
-                            <div class="d-flex align-items-center">
-                                <div class="movie_name_text">{{ json_decode($v['media_info'])->title }}</div>
+                            <div class="d-flex align-items-initial mt-2">
+                                <div class="movie_name_text mt-0">{{ json_decode($v['media_info'])->title }}</div>
                                 <?php
                                 if($v['is_default_marked'])
                                 {
                                     ?>
-                                        <button class="verified_cmn_btn mt-1 mx-3">FEATURED</button>
+                                        <button class="verified_cmn_btn mt-2 mx-3">FEATURED</button>
                                     <?php
                                 }
                             ?>

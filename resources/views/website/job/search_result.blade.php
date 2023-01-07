@@ -21,7 +21,7 @@
             <!-- </div> -->
             <div class="col-md-3">
                 <div class="side-bar-cmn-part">
-                <form method="post" action="{{ route('showJobSearchResults') }}">
+                <form method="post" class="mb-5" action="{{ route('showJobSearchResults') }}">
                     @csrf
                     <div class="search-box-container">
                         <div class="search-container w-100">

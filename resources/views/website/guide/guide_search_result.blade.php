@@ -12,7 +12,7 @@
     <div class="container">
         <div class="row mt-4">
             <div class="col-md-3 side-bar-cmn-part">
-                <form class="" method="Get" action="{{ route('guide-view') }}">
+                <form class="pb-5" method="Get" action="{{ route('guide-view') }}">
                     @csrf
                     <div class="search-box-container">
                         <div class="search-container w-100">

@@ -54,9 +54,9 @@
                 <div class="col-12 mt-4-5">
                     <input type="password" class="password-only is-invalid-remove outline w-100" placeholder="Re Enter Password" name="password_confirmation" id = "password_confirmation" required autocomplete="new-password">
                 </div>
-                <div class="col-12 mt-4-5">
+                <div class="col-12 mt-4  mt-md-5">
                     <input type="hidden" name="invited_by" value="<?php if(isset($_REQUEST['iuid'])){echo convert_uudecode($_REQUEST['iuid']);}?>">
-                    <button type="submit" class="outline w-100">{{ __('Create Account') }}</button>
+                    <button type="submit" class="outline w-100 mt-2 mt-md-0">{{ __('Create Account') }}</button>
                 </div>
             </div>
         </form>
