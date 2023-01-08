@@ -51,6 +51,7 @@
                                         <a class="confirmAction btn btn-danger btn-fw mb-1 @if($project->list_name=='carousel') d-none @endif  btn-sm mt-10 w-60 view-btn btn_padding" href="{{route('delete-list',['id' =>$project->id ])}}">
                                             Delete
                                         </a>
+                                        <a class="btn text-white btn-warning @if($project->list_name=='carousel') d-none @endif" href="{{route('projectlistedit',['id'=>$project->id])}}">Edit</a>
                                        </td>
                                     </tr>
                                 @endforeach

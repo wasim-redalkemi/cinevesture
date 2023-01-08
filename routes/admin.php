@@ -42,7 +42,8 @@ Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
         Route::post('/list-create', [ProjectListController::class, 'create'])->name('create-list');
         Route::get('/list', [ProjectListController::class, 'project_list_show'])->name('show-list');
         Route::get('/list-projects', [ProjectListController::class, 'search_project'])->name('list-projects');
-        // Route::post('/find/{id}', [ProjectListController::class, 'search_project'])->name('find-project');
+        Route::get('/edit/{id}', [ProjectListController::class, 'project_list_edit'])->name('projectlistedit');
+        Route::post('/edit', [ProjectListController::class, 'project_list_update'])->name('update_project_list');
         Route::post('/search-projects', [ProjectListController::class, 'saveSearchProjects'])->name('save-search-projects');
         Route::get('/change-status/{id}/{status}', [ProjectListController::class, 'changeStatus'])->name('change-status');
         Route::get('/delete-list/{id}', [ProjectListController::class, 'deleteList'])->name('delete-list');
