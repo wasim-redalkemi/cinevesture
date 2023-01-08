@@ -50,7 +50,7 @@
                                 @endif
                             </div>
                             <div class="hours-category my-md-4">
-                                {{ !empty(($UserProject->duration))?$UserProject->duration:'Duration'}}
+                                {{ !empty(($UserProject->duration))?date('H:i', mktime(0,$UserProject->duration)).' min':'Duration'}}
                                 | @if (!empty($projectData[0]['project_languages']))
                                 @foreach ($projectData[0]['project_languages'] as $k => $v)
                                 {{$v['name']}}
@@ -97,7 +97,7 @@
                                         <td class="public-head-subtext white">Created By</td>
                                         <td class="aubergine contact-page-subtext candy-pink">
                                             @if (!empty($projectData[0]['user']['name']))
-                                            <a href="{{route('profile-public-show',['id'=>$projectData[0]['user']['id']])}}" class="text_decor_none">{{$projectData[0]['user']['name']}}</a>
+                                            <a href="{{route('profile-public-show',['id'=>$projectData[0]['user']['id']])}}" class="text_decor_none">{{ ucwords($projectData[0]['user']['name'])}}</a>
                                             @else
                                             <span><b>-</b></span>
                                             @endif
@@ -107,7 +107,7 @@
                                         <td class="public-head-subtext white">Total Budget</td>
                                         <td class="contact-page-subtext white">
                                             @if (!empty($UserProject->total_budget))
-                                            $ {{ $UserProject->total_budget}}
+                                            ${{ $UserProject->total_budget}}
                                             @else
                                             <span><b>-</b></span>
                                             @endif
@@ -117,7 +117,7 @@
                                         <td class="public-head-subtext white">Financing Secured</td>
                                         <td class="contact-page-subtext white">
                                             @if (!empty($UserProject->financing_secured))
-                                            $ {{ $UserProject->financing_secured}}
+                                            ${{ $UserProject->financing_secured}}
                                             @else
                                             <span><b>-</b></span>
                                             @endif
@@ -146,7 +146,8 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-lg-6 col-md-12 px-3">
+                        <div class="col-md-2 col-md-0"></div>
+                        <div class="col-lg-4 col-md-12 px-3">
                             <div class="public-head-subimage">
                                 <div class="playVideoWrap br_4 mt-3" video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link'] }}@endif">
                                     <img src="@if (isset($projectData[0]['project_only_video'][0]['media_info'])){{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}@endif" alt="">
@@ -158,94 +159,29 @@
                             <div class="d-flex my-4 align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
-                                    <button class="cantact-page-cmn-btn mt-2" data-toggle="modal" data-target="#contactModal">Contact Now </button>
+                                        <button class="cantact-page-cmn-btn mt-2" data-toggle="modal" data-target="#contactModal">Contact Now </button>
                                     {{-- <button class="cantact-page-cmn-btn"><a href=""  class="text_decor_none">Contact Now</a></button> --}}
 
-
-
-                                    <!-- Contact modal  -->
-                                    <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="ContactModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog" role="document">
-                                            <div class="modal-content bg_3308">
-                                                <div class="modal-body p-0">
-                                                    <div class="p-3 float-end">
-                                                        <i class="fa fa-times text_fff font_24 pointer" data-dismiss="modal" aria-label="Close"></i>
-                                                    </div>
-                                                    <section class="p-3">
-                                                        <div class="container">
-                                                            <div class="row">
-                                                                <div class="col-md-12">
-                                                                    <div class="signup-text  mb-4 mt-5"> Contact </div>
-                                                                    <div class="row">
-                                                                        <div class="col-md-3">
-                                                                            {{-- <div><img src="{{ asset('images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" class="w-100 br_100">
-                                                                        </div> --}}
-                                                                        <?php
-                                                                        if (empty($projectData[0]['user']['profile_image'])) {
-                                                                        ?>
-                                                                            <img src="{{ asset('images/asset/user-profile.png') }}" class="w-100 br_100">
-                                                                        <?php
-                                                                        } else {
-                                                                        ?>
-                                                                            <img src="{{Storage::url($projectData[0]['user']['profile_image'])}}" class="w-100 br_100 " alt="product-image" style="height:100%;width:100%;">
-                                                                        <?php
-                                                                        }
-                                                                        ?>
-                                                                    </div>
-                                                                    <div class="col-md-9">
-                                                                        <div class="tile_text text_fff">{{empty($projectData[0]['user']['first_name'])?'Name':ucfirst($projectData[0]['user']['first_name']).' '.ucfirst($projectData[0]['user']['last_name']);}}</div>
-                                                                        <div class="organisation_cmn_text text_fff">{{empty($projectData[0]['user']['job_title'])?'Job Title':ucfirst($projectData[0]['user']['job_title']);}}</div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="mt-3"><input type="text" id="subject" name="subject" value="" placeholder="Subject" class="modal_input"></div>
-                                                                <div class="mt-3">
-                                                                    <textarea name="message" id="message" cols="25" rows="6" class="w-100 modal_input controlTextLength" placeholder="Message" text-length="1200" maxlength="1200" aria-label="With textarea"></textarea>
-
-                                                                </div>
-
-                                                                <div class="form-check mt-3">
-                                                                    <input class="form-check-input modal_check_input" type="checkbox" id="checkbox_cc">
-                                                                    <label class="modal_btm_text mx-1">Send a copy to me</label>
-                                                                </div>
-
-                                                                <div class="mt-4">
-                                                                    <input type="hidden" name="email_1" id="email_1" class="modal_input" value="@if (!empty($projectData[0]['user']['email'])){{$projectData[0]['user']['email']}}@endif">
-                                                                    <button type="button" id="contact_btn" class="invite_btn">Send Mail</button>
-                                                                </div>
-                                                                <div class="modal_btm_text mt-4 mb-5">
-                                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum vel cras vitae morbi varius vitae.
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                </div>
-            </section>
+                                    @endif
+                                    <!-- <i class="fa fa-share-alt mx-4 icon-size" aria-hidden="true"></i> -->
+                                    <img src="{{ asset('images/asset/share_image.svg') }}" class="mx-3" alt="image">
+                                    @if ($projectData[0]['user']['id'] != auth()->user()->id)
+                                        
+                                    <div> <i class="fa <?php if(isset($UserProject->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
+                                    @endif
+                                </div>
+                                {{-- <div class="d-flex">
+                                    <span class="mx-3 white">Report Project</span>
+                                    <i class="fa fa-flag icon-size" aria-hidden="true"></i>
+                                </div> --}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            </div>
-            </div>
-            </div>
-            @endif
-            <i class="fa fa-share-alt mx-4 icon-size" aria-hidden="true"></i>
-            @if ($projectData[0]['user']['id'] != auth()->user()->id)
-
-            <div> <i class="fa <?php if (isset($UserProject->isfavouriteProject)) {
-                                    echo 'fa-heart';
-                                } else {
-                                    echo 'fa-heart-o';
-                                } ?> icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
-            @endif
-            </div>
-            {{-- <div class="d-flex">
-                                                <span class="mx-3 white">Report Project</span>
-                                                <i class="fa fa-flag icon-size" aria-hidden="true"></i>
-                                            </div> --}}
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
-            </section>
+        </div>
+    </div>
+</section>
 
 <section class="public_section">
     <div class="container">
@@ -296,7 +232,7 @@
                         </div>
                         @endforeach
                         @else
-                        <span><b>-</b></span>
+                        <span class="text-light"><b>-</b></span>
                         @endif
                     </div>
                     <div class="public-head-subtext mt-3">Photos</div>
@@ -310,7 +246,7 @@
                         </div>
                         @endforeach
                         @else
-                        <span><b>-</b></span>
+                        <span class="text-light"><b>-</b></span>
                         @endif
                     </div>
                 </div>
@@ -335,10 +271,9 @@
                             </div>
                             </div>
                         </div>
-                    </div>
-                    @endforeach
+                        @endforeach
                     @else
-                    <span><b>-</b></span>
+                    <span class="text-light"><b>-</b></span>
                     @endif
                 </div>
             </div>
@@ -379,7 +314,7 @@
                                         @if (!empty($UserProject->crowdfund_link))
                                         <a href="{{ $UserProject->crowdfund_link}}" class="white">{{ $UserProject->crowdfund_link}}</a>
                                         @else
-                                        <span><b>-</b></span>
+                                        <span class="text-light"><b>-</b></span>
                                         @endif
                                     </td>
                                 </tr>
@@ -387,7 +322,7 @@
                         </table>
                     </div>
                     <div class="row">
-                        <div class="col-md-11">
+                        <div class="col-md-12">
                             <div class="mt-4">
                                 <table class="table">
                                     <tbody class="search-table-body white">
@@ -470,8 +405,8 @@
                                 @if (!empty($projectData[0]['project_association']))
                                 @foreach ($projectData[0]['project_association'] as $v)
                                 <tr>
-                                    <td class="public-head-subtext white">{{$v['project_associate_title']}}</td>
-                                    <td class="aubergine project-sub-text white">{{$v['project_associate_name']}}</td>
+                                    <td class="public-head-subtext white">{{ucwords($v['project_associate_title'])}}</td>
+                                    <td class="aubergine project-sub-text white">{{ucwords($v['project_associate_name'])}}</td>
                                 </tr>
                                 @endforeach
                                 @else
@@ -489,7 +424,7 @@
         </div>
 
         <div class="guide_profile_subsection">
-            <div class="container">
+            <div class="">
                 <div class="row">
                     <div class="col-md-12">
                         {{-- <div class="guide_profile_main_text deep-pink font_18">Related Project</div> --}}
@@ -584,47 +519,43 @@
         $("#success-toast").toast("show");
     });
 
-    $('#contact_btn').click(function(e) {
-        var subject = $('#subject').val();
-        var email_1 = $('#email_1').val();
-        var message = $('#message').val();
-        var checkbox_cc = ($("#checkbox_cc").prop("checked") == true ? '1' : '0');
-        let $btn = $(this);
-        e.preventDefault();
-        e.stopPropagation();
+    $('#contact_btn').click(function(e)
+            {
+                var subject = $('#subject').val();
+                var email_1 = $('#email_1').val();
+                var message = $('#message').val();
+                var checkbox_cc = ($("#checkbox_cc").prop("checked") == true ? '1' : '0');
+                let $btn = $(this);
+                e.preventDefault();
+                e.stopPropagation();
 
-        $btn.text("Sending..");
-        $btn.prop('disabled', true);
-
-        $.ajax({
-            url: "{{ route('contact-user-mail-store') }}",
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                subject: subject,
-                email_1: email_1,
-                message: message,
-                checkbox_cc: checkbox_cc,
-                "_token": "{{ csrf_token() }}"
-            },
-            success: function(response) {
-                $('#subject').val("");
-                $('#message').val("");
-                $btn.text("Send Mail");
-                $btn.prop('disabled', false);
-                toastMessage(response.status, response.msg);
-                $('.modal').hide();
-                $('.modal-backdrop').remove();
-            },
-            error: function(response, status, error) {
-                $btn.text("Send Mail");
-                $btn.prop('disabled', false);
-                console.log(response);
-                console.log(status);
-                console.log(error);
-            }
-        });
-    });
+                $btn.text("Sending..");
+                $btn.prop('disabled',true);
+                
+                $.ajax(
+                {
+                    url:"{{ route('contact-user-mail-store') }}",
+                    type:'POST',
+                    dataType:'json',
+                    data:{subject:subject,email_1:email_1,message:message,checkbox_cc:checkbox_cc,"_token": "{{ csrf_token() }}"},
+                    success:function(response)
+                    {   $('#subject').val("");
+                        $('#message').val("");
+                        $btn.text("Send Mail");
+                        $btn.prop('disabled',false);
+                        toastMessage(response.status, response.msg);
+                        $('.modal').hide();
+                        $('.modal-backdrop').remove();
+                    },
+                    error:function(response,status,error)
+                    {     $btn.text("Send Mail");
+                          $btn.prop('disabled',false);
+                        console.log(response);
+                        console.log(status);
+                        console.log(error);
+                    } 
+                });
+            });
 
     $('.like-project').on('click', function(e) {
 

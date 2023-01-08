@@ -296,6 +296,9 @@ class UserController extends WebController
             if (!empty($request->intro_video_link)) {
                 $user->intro_video_link = $video_url['link'];
                 $user->intro_video_thumbnail = $thumbnail;
+            } else {
+                $user->intro_video_link = $request->intro_video_link;
+                $user->intro_video_thumbnail = null;
             }
 
             if ($request->croppedImg) {
@@ -607,9 +610,9 @@ class UserController extends WebController
         }
     }
     
-    private function userExperiences($uid)
+    private function userExperiences($uid,$except_id='')
     {
-        return UserExperience::query()->where('user_id',$uid)->get();
+        return UserExperience::query()->where('user_id',$uid)->where('id','!=',$except_id)->get();
     }
 
     public function experienceStore(ProfileExperienceRequest $request)
@@ -653,7 +656,7 @@ class UserController extends WebController
     public function experienceEdit($id)
     {
         try {
-            $prevExperience = $this->userExperiences(auth()->user()->id);
+            $prevExperience = $this->userExperiences(auth()->user()->id,$id);
             $UserExperienceData = UserExperience::query()->where('id', $id)->first();
             if (is_null($UserExperienceData)) {
                 return back()->with('This experience is not exist');
@@ -724,9 +727,9 @@ class UserController extends WebController
         }
     }
     
-    private function userQualifications($uid)
+    private function userQualifications($uid,$except_id ='')
     {
-        return UserQualification::query()->where('user_id',$uid)->get();
+        return UserQualification::query()->where('user_id',$uid)->where('id','!=',$except_id)->get();
     }
 
     public function qualificationStore(ProfieQualificationRequest $request)
@@ -768,7 +771,7 @@ class UserController extends WebController
     public function qualificationEdit($id)
     {
         try {
-            $prevQualification = $this->userQualifications(auth()->user()->id);
+            $prevQualification = $this->userQualifications(auth()->user()->id,$id);
             $UserQualificationData = UserQualification::query()->where('id', $id)->first();
             return view('website.user.profile_qualification_edit', compact(['UserQualificationData','prevQualification']));
         } catch (Exception $e) {

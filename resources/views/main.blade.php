@@ -44,7 +44,7 @@
                       </div>
                       <div class="duration-lang-text mt-1">
                         @if (!empty($v->duration))
-                        {{$v->duration}} |
+                        {{date('H:i', mktime(0,$v->duration)).' min'}} |
                         @endif
                         
                         @foreach ($v->projectLanguages as $k1=>$v1)
@@ -82,7 +82,7 @@
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                         labore
                         </div>
-                      <div class="duration-lang-text mt-1">1hr 5min | English | Horror</div>
+                      <div class="duration-lang-text mt-1">01:05 min | English | Horror</div>
                       <button class="watch-now-btn mt-4">Watch now</button>
                     </div>
                   </div>
@@ -106,7 +106,7 @@
                         et
                         dolore magna aliqua.
                         Ut enim ad minim veniam, quis nostrud exercitation.</div>
-                      <div class="duration-lang-text mt-1">1hr 5min | English | Horror</div>
+                      <div class="duration-lang-text mt-1">16:25 min | English | Horror</div>
                       <button class="watch-now-btn mt-4">Watch now</button>
                     </div>
                   </div>
@@ -159,17 +159,20 @@
                         <a href="{{ route('public-view', ['id'=>$v1->id]) }}">
   
                         @if (isset($v1->duration) && !empty($v1->duration))
-                        <span class="white">{{$v1->duration}} /</span>
+                        <span class="white">{{date('H:i', mktime(0,$v1->duration)).' min'}} /</span>
+                        @endif
+                        @if (isset($v1->projectLanguages[0]) && !empty($v1->projectLanguages[0]))
+                         <span class="white"> {{$v1->projectLanguages[0]['name']}} /</span>
                         @endif
                         @if (isset($v1->genres[0]) && !empty($v1->genres[0]))
                          <span class="white"> {{$v1->genres[0]['name']}} /</span>
                         @endif
-                        @php
+                        {{-- @php
                           $country_data = $v1->toArray();
                         @endphp
                         @if (isset($country_data['project_countries'][0]) && !empty($country_data['project_countries'][0]))
                         <span class="white"> {{$country_data['project_countries'][0]['name']}}</span>
-                        @endif
+                        @endif --}}
                         </a>
                       </div>
                     </div>

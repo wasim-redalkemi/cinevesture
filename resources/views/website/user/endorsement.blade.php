@@ -50,7 +50,7 @@
 }
 
 input:checked + .slider {
-  background-color: #971E9B;;
+  background-color: #971E9B;
 }
 
 input:focus + .slider {
@@ -88,9 +88,9 @@ input:checked + .slider:before {
                   <div class="row">
                     <div class="col-md-3">
                         <div class="guide_profile_main_text deep-pink">{{$edm['endorsementCreater']->name}}</div>
-                        <div class="guide_profile_main_subtext Aubergine_at_night">{{$edm['endorsementCreater']->job_title}}</div>
+                        <div class="preview_subtext mt-0">{{$edm['endorsementCreater']->job_title}} </div>
                         <div class="profile_upload_text Aubergine_at_night fw_300">{{date('d M Y',strtotime($edm->created_at))}}</div>
-                        <div class="guide_profile_main_subtext Aubergine_at_night">{{isset($edm['endorsementCreater']['organization']->name)?$edm['endorsementCreater']['organization']->name:NULL}}</div>
+                        <div class="preview_subtext mt-0">{{isset($edm['endorsementCreater']['organization']->name)?$edm['endorsementCreater']['organization']->name:NULL}}</div>
                     </div>
                     <div class="col-md-7">
                         <div class="guide_profile_main_text Aubergine_at_night">Published</div>
@@ -99,11 +99,13 @@ input:checked + .slider:before {
                         </div>
                     </div>
                     <div class="col-md-2">
+                      <div class="d-flex justify-content-end">
                     <!-- <input type="checkbox" class="check" <?php if($edm->status == '1'){echo'checked';}?> data-toggle="toggle" value="{{$edm->id}}" data-on="" data-off="" data-style="ios">  -->
                     <label class="switch">
                       <input type="checkbox" class="check" value="{{$edm->id}}" <?php if($edm->status == '1'){echo'checked';}?>>
                       <span class="slider round"></span>
                     </label>  
+                    </div>
                     </div>
                   </div>
                 </div>

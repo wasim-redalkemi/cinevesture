@@ -2,7 +2,7 @@
 
 <div class="contact-page-subtext"><?php if (!empty($data['completion_date'])) {
      $orgDate = $data['completion_date'];  
-    $newDate = date("d-m-Y", strtotime($orgDate));  
+    $newDate = date("d ,M Y", strtotime($orgDate));  
     echo $newDate; 
 } else {
     echo '<span><b>-</b></span>';

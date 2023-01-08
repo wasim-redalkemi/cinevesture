@@ -479,7 +479,7 @@ a {
 .home-dropdown .profile_input label,
 label {
     margin-top: -4px;
-    word-break: break-all;
+    word-break: break-word;
 }
 
 .nav-drop {
@@ -927,6 +927,9 @@ label {
 .aubergine {
     color: #4D0D8A !important;
 }
+.deep_aubergine {
+    color: #33084C !important;
+}
 
 .pointer {
     cursor: pointer;
@@ -940,6 +943,13 @@ label {
     color: #DD45B3 !important;
 }
 
+.simple_cross_btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 25px;
+    font-weight: 600;
+}
 /* .curv_cmn_btn {
     background: RGB(244, 243, 255);
     border-radius: 99px;
@@ -992,7 +1002,11 @@ label {
     font-weight: 600;
     color: #212B36;
 }
-
+.page-item:last-child .page-link, .page-item:first-child .page-link { 
+    font-size: 24px;
+    line-height: 0;
+    padding-top: 13px;
+}
 .page-link :active {
     border: 2px solid #971E9B !important;
     border-radius: 4px !important;
@@ -1001,6 +1015,12 @@ label {
 
 .modal {
     top: 100px !important;
+}
+.form_elem label {
+    display: contents !important;
+}
+#about-error {
+    display: contents !important;
 }
 
 .modal_button {
@@ -1033,7 +1053,7 @@ label {
 .croper_modal .cropperWrap {
     height: auto;
     /* width: auto;; */
-    max-height: calc(100%/2 - 1.5em);
+    max-height: calc(100%/3 - 1.5em);
     min-height: 300px;
 }
 
@@ -1327,6 +1347,13 @@ label {
     max-height: 100%;
     position: relative;
 }
+.dot {
+    height: 6px;
+    width: 6px;
+    background-color: #4D0D8A;;
+    border-radius: 50%;
+    display: inline-block;
+  }
 
 .bg_white {
     background: rgb(250, 248, 251) !important;
@@ -1343,7 +1370,7 @@ label {
 }
 
 .deep-aubergine {
-    color: #33084C;
+    color: #33084C !important;
 }
 
 .Deep-aubergine {
@@ -1501,6 +1528,47 @@ label {
 .ml_10 {
     margin-left: 10px !important;
 }
+.pr_5 {
+    padding-right: 5% !important;
+}
+.pr_35 {
+    padding-right: 25%;
+}
+.pr_10 {
+    padding-right: 10%;
+}
+/* tooltip design  */
+.tooltips {
+    padding-left: 40%;
+}
+.tooltips .child_tooltip {
+    color: #4D0D8A;
+    font-size: 20px;
+}
+
+.tooltip-inner {
+    background: #1C0330;
+    color: #FFFFFF;
+    border-radius: 8px;
+    width: 400px !important;
+    box-shadow: 0px 0px 4px black;
+    opacity: 1 !important;
+}
+.tooltip.bs-tooltip-right .tooltip-arrow::before {
+    border-right-color: #1C0330 !important;
+}
+.tooltip.bs-tooltip-left .tooltip-arrow::before {
+    border-left-color: #1C0330 !important;
+}
+.tooltip.bs-tooltip-bottom .tooltip-arrow::before {
+    border-bottom-color: #1C0330 !important;
+}
+.tooltip.bs-tooltip-top .tooltip-arrow::before {
+    border-top-color: #1C0330 !important;
+}
+
+
+
 
 /* profile pages  */
 
@@ -1620,7 +1688,7 @@ label {
 }
 
 .profile_input {
-    margin-top: 26px;
+    margin-top: 18px;
 }
 .steric_sign_design {
   color: red;
@@ -1676,9 +1744,9 @@ select,
     height: 40px;
     /* color: #BDBDBD; */
 }
-.select2-selection__placeholder {
+/* .select2-selection__placeholder {
     color: #FF0000 !important;
-}
+} */
 
 .profile_input textarea {
     background: #FFFFFF;
@@ -2006,6 +2074,21 @@ select,
     overflow: hidden;
 }
 
+/* #gallery .video-list .h_66 {
+    height: 194px !important;
+    overflow: hidden;
+} */
+
+#gallery .video-list .width_inheritence {
+    min-height: 194px;
+    max-height: 194px;
+}
+
+#BannerPhoto .img-container img {
+    height: 100%;
+    margin-left: -50%;
+}
+
 #portfolio-video .h_66 {
     height: 170px !important;
     overflow: hidden;
@@ -2103,6 +2186,8 @@ textarea {
 
 .post-job {
     width: 170px;
+    letter-spacing: 0.084em;
+    font-feature-settings: 'ss01' on;
 }
 
 .active_job_page {
@@ -2137,6 +2222,14 @@ textarea {
     border-radius: 360px;
     background: #971E9B;
     border: none;
+}
+
+.endorse_person_name {
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 158%;
+    letter-spacing: 0.0075em;
+    color: #1C0330;
 }
 
 .bg_dee-pink {
@@ -2299,6 +2392,9 @@ textarea {
 .sidebar_contant a:hover {
     text-decoration: none !important;
 }
+#s2id_leadadd_mode_of_enq .select2-default {
+    color: #f00 !important;
+  }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice {
     /* background: #33084c; */
@@ -2393,10 +2489,12 @@ select:focus {
 .select2-results__option {
     color: #4D0D8A !important;
     font-weight: 300 !important;
+    padding-left: 10px
 }
 
 .select2-container--default .select2-results>.select2-results__options {
-    width: 100% !important
+    width: 100% !important;
+    padding-top: 5px;
 }
 
 .select2-container--default .select2-search--inline .select2-search__field {
@@ -2543,7 +2641,8 @@ select option,
 }
 
 .bg_linear {
-    background: rgba(28, 3, 48, 0.43);
+    /* background: rgba(28, 3, 48, 0.43); */
+    background: linear-gradient(180deg, rgba(28, 3, 48, 0.43) 65.92%, #1C0330 100%);
     /* background: linear-gradient( #1C0330 30.66%, rgba(28, 3, 48, 0)); */
 }
 
@@ -3147,7 +3246,7 @@ input:checked+.slider:before {
 }
 
 .playVideoWrap {
-    max-width: 370px;
+    max-width: 440px;
 }
 .playVideoWrap img {
     max-width: 100%;
@@ -3158,6 +3257,12 @@ input:checked+.slider:before {
     border-radius: 4px !important;
 }
 
+.previous_data_card_wrap
+{
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+}
 .previous_data_wraper {
     background: #FFFFFF;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
@@ -3171,6 +3276,14 @@ input:checked+.slider:before {
     color: #1C0330;
 }
 
+.previous_data_card_wrap_elem
+{
+
+    width: 260px;
+    min-width: 260px;
+    max-width: 260px;
+    margin: 0px 12px 12px 0px;
+}
 .previous_data_wraper .previous_data_card {
     background: #FFFFFF !important;
     /* box-shadow: 0px 0px 4px rgb(0 0 0 / 25%); */
@@ -3507,7 +3620,16 @@ input:checked+.slider:before {
         transform: rotate(90deg);
     }
 
+    .pr_35 {
+        padding-right: 0% !important;
+    }
+    .pr_10 {
+        padding-right: 0% !important;
+    }
+  
 }
+
+/* Media query ends here  */
 
 .br_4 {
     border-radius: 4px !important;
@@ -3545,6 +3667,9 @@ input:checked+.slider:before {
 
     .main-body {
         min-height: 62vh;
+    }
+    .guest_header .container {
+         max-width: 1570px;
     }
 }
 

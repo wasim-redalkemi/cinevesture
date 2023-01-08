@@ -152,7 +152,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
          <div class="d-flex justify-content-end m-2">
-             <button type="button" class="modal_cross_btn" data-bs-dismiss="modal" aria-label="Close">X</button>
+             <button type="button" class="simple_cross_btn" data-bs-dismiss="modal" aria-label="Close">X</button>
          </div>
             <div class="modal-body" style="padding: 0px;">
                 <section>
@@ -169,8 +169,8 @@
                                         You have successfuly published a Job. Do you want to promote your job?
                                         <span data-toggle="tooltip" data-placement="bottom" title="Promote your job for a small fee. Our team will get in touch with you when you submit a job promotion"> <i class="fa fa-info-circle" aria-hidden="true"></i></span>
                                     </div>
-                                    <div>
-                                <a href="{{route('promotion-job')}}" class="text-decoration-none"><button class="submit_btn mt-4">Submit your job for promotion</button></a>
+                                    <div class="mb-5">
+                                <a href="{{route('promotion-job')}}" class="text-decoration-none"><button class="submit_btn text-light mt-4">Submit your job for promotion</button></a>
                                 </div>
                                 </div>
                             </div>

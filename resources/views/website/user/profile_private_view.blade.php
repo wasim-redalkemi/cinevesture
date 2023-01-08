@@ -76,7 +76,7 @@
                                     <div class="guide_profile_main_text mt-3">
                                         <p> Skills</p>
                                     </div>
-                                    <div>
+                                    <div class="pr_10">
                                         @if (count($user_skills)>0)
                                         @foreach ($user_skills as $k=>$v)
                                         <button class="curv_cmn_btn skill_container">
@@ -90,7 +90,7 @@
                                         @endif
                                     </div>
                                     <div class="guide_profile_main_text mt-3">Available to Work In</div>
-                                    <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (!empty($user->available_to_work_in))?$user->available_to_work_in:'-'; }}</div>
+                                    <div class="inp_data Aubergine_at_night mt-2">{{ (!empty($user->available_to_work_in))?ucFirst($user->available_to_work_in):'-'; }}</div>
                                     <div class="guide_profile_main_text mt-3">Languages Spoken</div>
                                     
                                 <div class="d-flex flex-wrap mt-3">
@@ -144,7 +144,7 @@
                                     <div class="contact-page-text deep-pink">
                                         About
                                     </div>
-                                    <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
+                                    <div class="inp_data Aubergine_at_night mt-2 pr_35">
                                         <p>
                                             @if (!empty($user->about))
                                             {{ $user->about }}
@@ -240,14 +240,14 @@
                                     @foreach ($experience as $k=>$v)
 
                                     <div class="d-flex align-items-end">
-                                        <div class="guide_profile_main_subtext mt-1">{{ $v->job_title }}</div>
+                                        <div class="guide_profile_main_text mt-1">{{ $v->job_title }}</div>
                                         <div class="icon_container mx-3"><a href="{{ route('experience-edit', ['id'=>$v->id]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                     </div>
                                     <div class="guide_profile_main_subtext candy-pink mt-2">
                                         {{$v->country_id}} | {{date('d-m-Y',strtotime($v->start_date))}} | {{date('d-m-Y',strtotime($v->end_date))}} <br>
                                         {{$v->company}} | {{$v->employement_type_id}}
                                     </div>
-                                    <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
+                                    <div class="inp_data Aubergine_at_night mt-2">
                                         <p>{{$v->description}}</p>
                                     </div>
                                     @endforeach
@@ -273,13 +273,13 @@
                                     @if (count($qualification)>0)
                                     @foreach ($qualification as $k=>$v)
                                     <div class="d-flex align-items-end">
-                                        <div class="guide_profile_main_subtext mt-1">{{$v->institue_name}}</div>
+                                        <div class="back_btn_profile deep-aubergine mt-1">{{$v->institue_name}}</div>
                                         <div class="icon_container mx-3"><a href="{{ route('qualification-edit', ['id'=>$v->id]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                     </div>
                                     <div class="guide_profile_main_subtext candy-pink mt-2">
                                         {{$v->degree_name}} | {{$v->field_of_study}} | {{$v->start_year}} | {{$v->end_year}}
                                     </div>
-                                    <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
+                                    <div class="inp_data Aubergine_at_night mt-2">
                                         <p>{{$v->description}}</p>
                                     </div>
                                     @endforeach
@@ -339,13 +339,12 @@
     });
 
     $(".portfolio.owl-carousel").owlCarousel({
-        center: true,
+        center: false,
         autoPlay: 1000,
         autoplay: true,
-        loop: true,
+        loop: false,
         nav: true,
         margin: 20,
-        center: false,
         // items: 4,
         responsive: {
             480: {

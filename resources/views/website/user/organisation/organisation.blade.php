@@ -27,7 +27,7 @@
                                 <div><button class="guide_profile_btn"><a class="btn-link text_decor_none" href="{{ route('organisation-create')}}">EDIT</a></button></div>
                             </div>
                         </div>
-                        <div class="d-flex">
+                        <div class="d-flex mt-2">
                             <div class="">
                                 <div class="user_profile_container">
                                     @if (empty($UserOrganisation->logo))
@@ -49,8 +49,8 @@
                 <div class="guide_profile_subsection">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-12 guide_profile_main_text deep-pink font_24">
-                                <h1>Overview</h1>
+                            <div class="col-md-12">
+                                <span class="search-head-text deep-pink">Overview</span>
                             </div>
                         </div>
                         <div class="row">
@@ -69,7 +69,7 @@
                                 </div>
                                 <div class="guide_profile_main_text mt-3">Languages Spoken</div>
                                 
-                                <div class="d-flex flex-wrap mt-3">
+                                <div class="d-flex flex-wrap mt-2">
                                 @if (isset($UserOrganisation->organizationLanguages))
                                     @foreach ($UserOrganisation->organizationLanguages as $k => $organizationLanguage)                                    
                                         <div class="curv_cmn_btn skill_container darkbtn mt-2">{{ (isset($organizationLanguage->languages->name))?$organizationLanguage->languages->name:'-'; }}</div>
@@ -81,7 +81,7 @@
                                 <div>
                                     
                                 <div class="guide_profile_main_text mt-3">Available To Work In</div>
-                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (isset($UserOrganisation->available_to_work_in))?$UserOrganisation->available_to_work_in:'-'; }}</div>
+                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (isset($UserOrganisation->available_to_work_in))?ucFirst($UserOrganisation->available_to_work_in):'-'; }}</div>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -115,13 +115,13 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="contact-page-text deep-pink">
+                                <div class="guide_profile_main_text deep-pink">
                                     About
                                 </div>
-                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
+                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2 pr_35">
                                     <p>
                                         @if (!empty($UserOrganisation->about))
-                                        {{$UserOrganisation->about }}
+                                        {{ucFirst($UserOrganisation->about) }}
                                         @else
                                         <span><b>-</b></span>
                                         @endif

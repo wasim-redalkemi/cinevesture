@@ -24,10 +24,10 @@
             $jobs = $userJob->toArray();
             @endphp
                 <div class="profile_wraper_padding pb-0">
-                    <div class="profile_text">
-                        <h1>Posted Jobs</h1>
+                    <div class="contact-page-text deep-aubergine">
+                        Posted Jobs
                     </div>
-                    <div class="d-flex">
+                    <div class="d-flex mt-2">
                         <div class="posted_job_header"><a href="{{ route('posted-job',['id'=>auth()->user()->id]) }}" class="posted_job_header_link px-3 <?php if($status =='published' ){echo 'active_job_page';}?>"> Published Jobs</a></div>
                         <div class="posted_job_header"><a href="{{ route('posted-job',['id'=>auth()->user()->id,'status'=>'draft']) }}" class="posted_job_header_link px-3 <?php if($status =='draft' ){echo 'active_job_page';}?>">Draft Job</a></div>
                         <div class="posted_job_header"><a href="{{ route('posted-job',['id'=>auth()->user()->id,'status'=>'unpublished']) }}" class="posted_job_header_link px-3 <?php if($status =='unpublished' ){echo 'active_job_page';}?>">Unpublished Jobs</a></div>
@@ -43,7 +43,10 @@
                         </div>
                         <div class="dropdown dropstart search-page">
                             <div class="" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa fa-ellipsis-h aubergine icon-size" aria-hidden="true"></i>
+                                <!-- <i class="fa fa-ellipsis-h aubergine icon-size" aria-hidden="true"></i> -->
+                                <span class="dot"></span>
+                                <span class="dot"></span>
+                                <span class="dot"></span>
                             </div>
                             <ul class="dropdown-menu profile_dropdown_menu p-2 menu_position">
                                 <li>
@@ -57,7 +60,7 @@
                                 <a href="{{route('unpublish-job',['job_id'=>$v['id'],'status'=>$status])}}">  <?php if($v['save_type']=='published'){  echo "Unpublish Job"; } else { echo "Publish Job";}?></a>
                                 </li>
                                 <li>
-                                <a href="{{route('delete-job',['job_id'=>$v['id']])}}">  Delete Job </a>
+                                    <a class="confirmAction" href="{{route('delete-job',['job_id'=>$v['id']])}}"> Delete Job </a>
                                 </li>
                             </ul>
                         </div>
@@ -96,7 +99,7 @@
                             @endif
                         </div>
                         <div>                            
-                          <button class="guide_profile_btn">  <a href="{{route('showJobApplicants',['jobId'=>$v['id']])}}" class="guide_profile_btn w_150">View Applications</a></button>
+                          <button class="guide_profile_btn">  <a href="{{route('showJobApplicants',['jobId'=>$v['id']])}}" class="guide_profile_btn w_150">View Applicants</a></button>
                         </div>
                     </div>
                     

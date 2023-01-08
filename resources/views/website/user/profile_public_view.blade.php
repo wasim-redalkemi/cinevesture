@@ -39,7 +39,7 @@
                             </div>
                         <div class="mx-4">
                             <div class="guide_profile_main_text pt-3">{{empty($user->first_name)?'Name':ucfirst($user->first_name).' '.ucfirst($user->last_name);}}</div>
-                            <div class="guide_profile_main_subtext">{{empty($user->job_title)?'Job Title':ucfirst($user->job_title);}}</div>
+                            <div class="preview_subtext deep_aubergine mt-0">{{empty($user->job_title)?'Job Title':ucfirst($user->job_title);}}</div>
                             <div><button class="guide_profile_btn mt-2" data-toggle="modal" data-target="#contactModal">Contact </button></div>
 
                             <!-- Contact modal  -->
@@ -83,8 +83,8 @@
             <div class="guide_profile_subsection">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-12 guide_profile_main_text deep-pink font_24">
-                            <h1>Overview</h1>
+                        <div class="col-md-12">
+                            <span class="contact-page-text deep-pink">Overview</span>
                         </div>
                     </div>
                     <div class="row">
@@ -92,7 +92,7 @@
                             <div class="guide_profile_main_text mt-3">
                                 <p> Skills</p>
                             </div>
-                            <div class="">
+                            <div class="pr_10">
                                 @if (count($user_skills)>0)
                                 @foreach ($user_skills as $k=>$v)
                                 <button class="curv_cmn_btn skill_container">
@@ -106,7 +106,7 @@
                                 @endif
                             </div>
                             <div class="guide_profile_main_text mt-3">Available to Work In</div>
-                            <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (!empty($user->available_to_work_in))?$user->available_to_work_in:'-'; }}</div>
+                            <div class="inp_data Aubergine_at_night mt-2">{{ (!empty($user->available_to_work_in))?$user->available_to_work_in:'-'; }}</div>
                             <div class="guide_profile_main_text mt-3">Languages Spoken</div>
                             @if (count($user_languages)>0)
                                     @foreach ($user_languages as $k=>$v)
@@ -157,9 +157,9 @@
                     <div class="row">
                         <div class="col-md-5">
                             <div class="guide_profile_main_text deep-pink font_18">
-                                <h1 class="">About</h1>
+                                About
                             </div>
-                            <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
+                            <div class="inp_data Aubergine_at_night mt-2 pr_35">
                                 <p>
                                     @if (!empty($user->about))
                                     {{ $user->about }}
@@ -242,12 +242,12 @@
                         <div class="col-md-12">
                             <div class="guide_profile_main_text deep-pink font_18">Project</div>
                             @if (count($UserProject))
-                            <div class="project owl-carousel owl-theme">
+                            <div class="project owl-carousel owl-theme mt-3">
                                 @foreach($UserProject as $k=>$v)                                
                                 <div class="item">
                                     <a href = "{{route('public-view',['id'=>$v->id])}}">
                                     <img src="@php echo (!empty($v->projectImage->file_link)?asset('storage/'.$v->projectImage->file_link): asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1 (1).png')) @endphp" width="100%" height="100%"  />
-                                    <div class="guide_profile_main_subtext">@php echo (!empty($v->project_name)?$v->project_name: '-') @endphp</div>
+                                    <div class="guide_profile_main_subtext mt-2">@php echo (!empty($v->project_name)?$v->project_name: '-') @endphp</div>
                                     </a>
                                 </div>                                
                                 @endforeach
@@ -264,19 +264,19 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="guide_profile_main_text deep-pink font_18">
-                                <h1>Experiences</h1>
+                            <div class="guide_profile_main_text deep-pink">
+                                Experiences
                             </div>
                             @if (count($experience)>0)
                                 @foreach ($experience as $k=>$v)
                                 <div class="d-flex align-items-end">
                                     <div class="guide_profile_main_subtext mt-1">{{ $v->job_title }}</div>
                                 </div>
-                                <div class="guide_profile_main_subtext candy-pink mt-2">
+                                <div class="preview_subtext candy-pink mt-1">
                                     {{$v->country_id}} | {{date('d-m-Y',strtotime($v->start_date))}} | {{date('d-m-Y',strtotime($v->end_date))}} <br>
                                     {{$v->company}} | {{$v->employement_type_id}}
                                 </div>
-                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
+                                <div class="preview_subtext Aubergine_at_night mt-1">
                                     <p>{{$v->description}}</p>
                                 </div>
                                 @endforeach
@@ -293,8 +293,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="guide_profile_main_text deep-pink font_18">
-                                <h1>Qualifications</h1>
+                            <div class="guide_profile_main_text deep-pink">
+                                Qualifications
                             </div>
                             @if (count($qualification)>0)
                                 @foreach ($qualification as $k=>$v)
@@ -322,7 +322,7 @@
                     <div class="row">
                         <div class="col-md-12 d-flex justify-content-between">
                             <div class="guide_profile_main_text deep-pink font_18">
-                                <h1>Endorsements</h1>
+                                Endorsements
                             </div>
                             <?php
                                 $show_endorsement_btn = true;
@@ -366,11 +366,11 @@
                                                                 <span class="disable-resend">Help identify relevant opportunities and content for {{$user->name}} on Cinevesture</span>
                                                             </div>
 
-                                                            <div class="mt-5">
+                                                            <div class="form_elem mt-5">
                                                                 <textarea name="endorse_message" id="endorse_message" cols="25" rows="6" class="controlTextLength w-100" placeholder="Message" text-length="600" maxlength="600" name="about" aria-label="With textarea"></textarea>
                                                             </div>
 
-                                                            <div class="mt-4">
+                                                            <div class="mt-5">
                                                                 <input type="hidden" name="endorse_email" id="endorse_email" value="@if (!empty($user->email)){{$user->email}}@endif">
                                                                 <input type="hidden" name="endorse_to_id" id="endorse_to_id" value="@if (!empty($user->id)){{$user->id}}@endif">
                                                                 <button type="button" id="endorse_btn" class="invite_btn">Submit</button>
@@ -392,8 +392,8 @@
                     @foreach($user_endorsement as $edm)
                     <div class="row mt-3">
                         <div class="col-md-3">
-                            <div class="guide_profile_main_text deep-pink">{{$edm['endorsementCreater']->name}}</div>
-                            <div class="guide_profile_main_subtext Aubergine_at_night">{{$edm['endorsementCreater']->job_title?$edm['endorsementCreater']->job_title:"-"}}</div>
+                            <div class="endorse_person_name">{{$edm['endorsementCreater']->name}}</div>
+                            <div class="inp_data Aubergine_at_night">{{$edm['endorsementCreater']->job_title?$edm['endorsementCreater']->job_title:"-"}}</div>
                             <div class="guide_profile_main_subtext Aubergine_at_night">{{date('d F Y',strtotime($edm->created_at))}}</div>
                         </div>
                         <div class="col-md-9">
@@ -523,10 +523,9 @@
         });
 
         $(".project.owl-carousel").owlCarousel({
-        center: true,
         autoPlay: 1000,
         autoplay: true,
-        // loop: true,
+        loop: false,
         nav: true,
         margin: 20,
         center: false,

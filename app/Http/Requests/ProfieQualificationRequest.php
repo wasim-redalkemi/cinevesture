@@ -27,8 +27,8 @@ class ProfieQualificationRequest extends FormRequest
             'institue_name' => 'required|max:100',
             'degree_name' => 'required',
             'field_of_study' => 'required|max:50',
-            'start_year' => 'required|date_format:Y|before_or_equal:end_year',
-            'end_year' => 'required|date_format:Y|after_or_equal:start_year',
+            'start_year' => 'required|date_format:Y|before:end_year',
+            'end_year' => 'required|date_format:Y|after:start_year',
             'description' => 'required|max:600',
         ];
     }

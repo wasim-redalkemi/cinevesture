@@ -6,16 +6,27 @@ var ImageCropper = function(fileToCrop,previewElem){
     var image = $('#ImageCropperModal #image')[0];
     var CroppedImgformData = new FormData();
     var cropper;
+    var aspectRatio = 1/1;
     var cropboxData = {
         width: 300*2,
         height: 300*2
     }
+
+    var afterCrop = null;
     //var previewElem = thumbnailElem;
+
+    let setAfterCrop = function(callbackFun){
+        afterCrop = callbackFun;
+    }
 
     let done = function(url) {
         image.src = url;
         $modal.modal('show');
     };
+
+    let setAspectRatio = function(ratio){
+        aspectRatio = ratio
+    }
 
     let setCropBoxSize = function(size){
         cropboxData = size;
@@ -83,7 +94,7 @@ var ImageCropper = function(fileToCrop,previewElem){
                 cropBoxResizable: false,
                 toggleDragModeOnDblclick: false,
                 data:cropboxData,
-                aspectRatio: 2.5/1,
+                aspectRatio: aspectRatio,
             });
         }).off('hidden.bs.modal').on('hidden.bs.modal', function() {
             cropper.destroy();
@@ -92,8 +103,8 @@ var ImageCropper = function(fileToCrop,previewElem){
 
         $("#crop").off("click").on("click",function() {
             canvas = cropper.getCroppedCanvas({
-                width: 1750,
-                height: 700,
+                width: 1800,
+                height: 600,
             });
             canvas.toBlob(function(blob) {
                 url = URL.createObjectURL(blob);
@@ -109,6 +120,8 @@ var ImageCropper = function(fileToCrop,previewElem){
                     $modal.modal('hide');
                 }
             });
+            if(afterCrop)
+                afterCrop();
         });
 
         $('#close-cropper').off('click').on('click', function() {
@@ -124,7 +137,7 @@ var ImageCropper = function(fileToCrop,previewElem){
         });
     }
 
-    return {init,getCropperFile,setCropBoxSize,getCropBoxSize};
+    return {init,getCropperFile,setCropBoxSize,getCropBoxSize,setAfterCrop,setAspectRatio};
 
 }
 

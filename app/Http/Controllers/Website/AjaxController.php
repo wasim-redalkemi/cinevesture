@@ -11,6 +11,7 @@ use App\Models\ProjectMedia;
 use App\Models\ProjectAssociation;
 use App\Models\ProjectMilestone;
 use App\Models\UserPortfolioImage;
+use App\Models\UserProject;
 
 class AjaxController extends WebController {
     CONST AJAX_CALL_SUCCESS = 1;
@@ -123,16 +124,26 @@ class AjaxController extends WebController {
             $newName = str_replace(" ","_",$nameStr.$fileName);
             $this->uploadFile($locationPath , $file, $newName);
             //\Log::info("here in logs ".$newName.",".asset($locationPath."/".$newName));
-            $projectMedia = new ProjectMedia();
-            $projectMedia->project_id = $request->project_id;
-            $projectMedia->file_type = 'image';
-            $projectMedia->file_link = $locationPath."/".$newName;
-            $projectMedia->media_info = json_encode(["title"=>$request->title]);
-            $projectMedia->save();
-            $projectMedia->file_link = asset("storage/".$projectMedia->file_link);
-            $projectMedia->media_info = json_decode($projectMedia->media_info, true);
-            //return json_encode($projectMedia);
-            return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$projectMedia,"Success","ER000","");
+            if($request->isBanner) {
+                $project = UserProject::query()->find($request->project_id);
+                if(!empty($project->banner_image)){
+                    unlink(storage_path()."\app\public\/".$project->banner_image);
+                }
+                $project->banner_image = $locationPath."/".$newName;
+                $project->save();
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,["url"=>asset("storage/".$project->banner_image)],"Success","ER000","");
+            } else {
+                $projectMedia = new ProjectMedia();
+                $projectMedia->project_id = $request->project_id;
+                $projectMedia->file_type = 'image';
+                $projectMedia->file_link = $locationPath."/".$newName;
+                $projectMedia->media_info = json_encode(["title"=>$request->title]);
+                $projectMedia->save();
+                $projectMedia->file_link = asset("storage/".$projectMedia->file_link);
+                $projectMedia->media_info = json_decode($projectMedia->media_info, true);
+                //return json_encode($projectMedia);
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$projectMedia,"Success","ER000","");
+            }
         } catch (Exception $e) {
             return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
         }
