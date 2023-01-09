@@ -21,7 +21,7 @@
           <nav class="navbar navbar-expand-lg header">
             
             <a class="navbar-logo " href="{{route('home')}}">
-              <img src="{{ asset('images/asset/Logo-white-trans.png') }}" width="220" height="75" alt="image">
+              <img src="{{ asset('images/asset/Logo-white-trans.png') }}" width="100%" alt="image">
             </a>
             <div class="collapse navbar-collapse navbar_sm text-initial text-md-center justify-content-between" id="navbarTogglerDemo01">
               <div></div>

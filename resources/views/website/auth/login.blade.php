@@ -41,8 +41,8 @@
                         @enderror
                 </div>
 
-                <div class="col-12 mt-4-5">
-                    <button type="submit" class="outline w-100 ">
+                <div class="col-12 mt-4 mt-md-5">
+                    <button type="submit" class="outline w-100 mt-2 mt-md-0">
                         {{ __('Log In') }}
                     </button>
                 </div>
@@ -63,7 +63,7 @@
                 <div class="bottom-container mb-3">
                     <div class="aleady-text">New to Cinevesture?<span class="mx-2 sign_now_text">
                     @if(Route::has('password.request'))
-                        <a class="btn-link text_decor_none"href="{{ route('register') }}">{{ __('Sign Up') }}</a>@endif</span>now
+                        <a class="text_decor_none"href="{{ route('register') }}">{{ __('Sign Up') }}</a>@endif</span>now
                     </div>
                     <div class="my-3 proctect_by_capta_text">
                         This site is protected by reCAPTCHA and with Google Privacy
