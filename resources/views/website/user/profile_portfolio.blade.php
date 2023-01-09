@@ -286,7 +286,8 @@
                 const [file] = this.files
                 uploadedFile = this.files[0];
                 var ImageCropperObj = new ImageCropper(uploadedFile, imgId+" #previewImg");
-                ImageCropperObj.setCropBoxSize({'width':285*2,height:194*2});
+                ImageCropperObj.setCropBoxSize({'width':300*2,height:200*2});
+                ImageCropperObj.setAspectRatio(3/2);
                 let ret = ImageCropperObj.init();
                 if (file) {
                     //$(imgId + " #previewImg").attr("src", URL.createObjectURL(file)).show();

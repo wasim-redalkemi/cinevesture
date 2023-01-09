@@ -26,7 +26,7 @@
                     
                             <div class="project-img-container">
                                 @if (empty($v->projectImage->file_link))
-                                    <img src="{{ asset('images/asset/user-profile.png') }}"   />
+                                    <img src="{{ asset('images/asset/download (3) 1.png') }}" style="height: 172px; width: 100%"  />
                                 @else
                                     <img src="{{ asset('storage/'.$v->projectImage->file_link)}}" class="width_inheritence" alt="image">
                                 @endif

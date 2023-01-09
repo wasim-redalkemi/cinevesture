@@ -214,7 +214,7 @@
                                 </div>
                             </div>
                         </form>
-                           <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                           <div class="modal fade" id="ImageCropperModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content croper_modal">
                                     <div class="modal-header py-1">
@@ -345,8 +345,13 @@
                 console.log("e = ",this.files,imgId);
                 const [file] = this.files
                 uploadedFile = this.files[0];
+                console.log(348)
+                var ImageCropperObj = new ImageCropper(uploadedFile, imgId+" #previewImg");
+                ImageCropperObj.setCropBoxSize({'width':300*2,height:200*2});
+                ImageCropperObj.setAspectRatio(3/2);
+                let ret = ImageCropperObj.init();
                 if (file) {
-                    $(imgId+" #previewImg").attr("src",URL.createObjectURL(file)).show();
+                    // $(imgId+" #previewImg").attr("src",URL.createObjectURL(file)).show();
                     $(parentElemId+" "+imgId+" .open_file_explorer label").hide();
                     $(parentElemId+" "+imgId+" .profile_upload_text").hide();
                     //$(parentElemId+" .profile_input.add-new-image").show();
@@ -471,22 +476,21 @@
 
     $modal.on('shown.bs.modal', function() {
 
-
-cropper = new Cropper(image, {
-dragMode: 'move',
-autoCropArea: 0.65,
-restore: false,
-guides: false,
-center: true,
-highlight: false,
-cropBoxMovable: true,
-cropBoxResizable: false,
-toggleDragModeOnDblclick: false,
-data:{ //define cropbox size
- width: 300,
- height:  300,
-},
-});
+        cropper = new Cropper(image, {
+        dragMode: 'move',
+        autoCropArea: 0.65,
+        restore: false,
+        guides: false,
+        center: true,
+        highlight: false,
+        cropBoxMovable: true,
+        cropBoxResizable: false,
+        toggleDragModeOnDblclick: false,
+        data:{ //define cropbox size
+        width: 300,
+        height:  300,
+        },
+        });
 }).on('hidden.bs.modal', function() {
    cropper.destroy();
    cropper = null;
@@ -550,4 +554,6 @@ $('#crop-cancel').on('click', function() {
    $modal.modal('hide');
 })
 </script>
+
+<script src="{{ asset('js/cropper.js') }}"></script>
 @endpush

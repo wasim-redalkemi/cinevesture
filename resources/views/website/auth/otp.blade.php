@@ -10,10 +10,10 @@
 <div class="hide-me animation for_authtoast">
     @include('website.include.flash_message')
 </div>
-<section class="auth_section main_content">
-    <div class="container signup-container">
+<section class="auth_section main_content ">
+    <div class="container signup-container ">
         
-        <form method="POST" enctype="multipart/form-data" action="{{ route('verify-otp') }}">
+        <form method="POST" class="mt_sm_100" enctype="multipart/form-data" action="{{ route('verify-otp') }}">
             @csrf
         <div class="row">
             <div class="col-md-12">
