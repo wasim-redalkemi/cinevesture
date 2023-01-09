@@ -116,8 +116,8 @@
                                {{-- <div class="published_text">10th July 2021</div>  --}}
                                <div class="published_text"><?php if (!empty($Job_data['created_at'])) {
                                 $orgDate = $Job_data['created_at'];  
-                               $newDate = date("d-m-Y", strtotime($orgDate));  
-                               echo $newDate; 
+                               $newDate = date("jS F Y", strtotime($orgDate));  
+                               echo strtoupper($newDate);
                            } else {
                                echo '<span><b>-</b></span>';
                            }

@@ -228,6 +228,7 @@
                 </div>
             </div>
             <div class="col-md-9 mb_3">
+                <div class="white mb_3">{{count($projects)}} Results Founds</div>
                 @if(count($projects) >= 1)
                 @foreach($projects as $project)
                 <a href="{{route('public-view',['id'=>$project->id])}}" style="outline:none;text-decoration:none">
@@ -282,7 +283,7 @@
                                         </tr>
                                         <tr>
                                             <td>Total Budget</td>
-                                            <td class="aubergine">@if (!empty($project->total_budget)){{ucFirst($project->total_budget)}} @endif</td>
+                                            <td class="aubergine">@if (!empty($project->total_budget)){{'$'.number_format((float)$project->total_budget, 2, '.', ',')}} @endif</td>
                                         </tr>
                                         <tr>
                                             <td>Type</td>
