@@ -93,7 +93,11 @@ input:checked + .slider:before {
                         <div class="preview_subtext mt-0">{{isset($edm['endorsementCreater']['organization']->name)?$edm['endorsementCreater']['organization']->name:NULL}}</div>
                     </div>
                     <div class="col-md-7">
-                        <div class="guide_profile_main_text Aubergine_at_night">Published</div>
+                        <div class="guide_profile_main_text Aubergine_at_night">@if ($edm->status == 1)
+                          Published
+                        @else
+                          Unpublished
+                        @endif </div>
                         <div class="guide_profile_main_subtext Aubergine_at_night">
                         {{$edm->comment}}
                         </div>
@@ -146,6 +150,7 @@ input:checked + .slider:before {
             {   
        
                 toastMessage(response.status, response.msg);
+                location.reload();
               
             },
             error:function(response,status,error)
