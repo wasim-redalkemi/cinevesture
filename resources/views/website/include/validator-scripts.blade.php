@@ -657,7 +657,7 @@
                         str += '<label for="upload-img-inp">';
                             str += '<div class="text-center">';
                                 str += '<div>';
-                                    str += '<i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true"></i>';
+                                    str += '<i class="fa fa-plus-circle deep-pink plus-icon-size" aria-hidden="true"></i>';
                                 str += '</div>';
                                 str += '<div class="mt-3 movie_name_text">Upload file</div>';
                             str += '</div>';
@@ -874,7 +874,7 @@
                         str += '</div>';
                         str += '<div style="display:flex;justify-content:center">';
                             str += '<label for="upload-doc-inp">';
-                                str += '<i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true" style="float:left;margin:7px 0px"></i>';
+                                str += '<i class="fa fa-plus-circle deep-pink plus-icon-size" aria-hidden="true" style="float:left;margin:7px 0px"></i>';
                             str += '<div class="movie_name_text mx-3 mt-0" style="float:left">Upload file</div>';
                             str += '</label>';
                     str += '</div>';

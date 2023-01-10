@@ -18,7 +18,8 @@
                 <div class="profile_text">
                     <h1>Favourites</h1>
                 </div>
-                <div class="guide_profile_main_text deep-pink mb-3 ">Projects</div>
+                <div class="guide_profile_main_text deep-pink mb-1">Projects</div>
+                <div class="">
                 <div class="row">
                     @php
                         $user_projects_data = $user_projects->toArray();
@@ -45,7 +46,8 @@
                                 <i class="fa <?php if(isset($v['projects']['id'])){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-project" style="cursor: pointer;" data-id="<?php if(isset($v['projects']['id'])){echo $v['projects']['id'];} ?>" aria-hidden="true"></i>
                             </div>
                         </div>                                       
-                    </div>                    
+                    </div>   
+                </div>                 
                     @endforeach
                     @else
                     <div class="profile_wraper mt-1">
@@ -65,7 +67,7 @@
 
                 
 
-                <div class="guide_profile_main_text deep-pink mt-5">Profiles</div>
+                <div class="guide_profile_main_text deep-pink mt-5 mb-1">Profiles</div>
                 @php
                     $user_profiles_data = $user_profiles->toArray();
                 @endphp
@@ -138,6 +140,7 @@
                             </div>
                         </div>
                     </div>
+                </div>
                 @endif
                 <div>
                     {!! $user_profiles->links() !!}
