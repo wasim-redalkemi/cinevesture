@@ -114,14 +114,14 @@
                             <div class="mx-4 px-3">
                                <div class="organisation_cmn_text">@if (!empty($Job_data['user'][0]['job_title'])) {{ucFirst($Job_data['user'][0]['job_title'])}} @endif</div>
                                {{-- <div class="published_text">10th July 2021</div>  --}}
-                               <div class="published_text"><?php if (!empty($Job_data['created_at'])) {
-                                $orgDate = $Job_data['created_at'];  
-                               $newDate = date("jS F Y", strtotime($orgDate));  
-                               echo strtoupper($newDate);
-                           } else {
-                               echo '<span><b>-</b></span>';
-                           }
-                           ?></div> 
+                               <div class="published_text">
+                                @if (!empty($Job_data['created_at']))
+                                {{strtoupper(date('jS F Y',strtotime($Job_data['created_at'])))}}
+                                @else
+                                    <span><b>-</b></span>
+                                @endif
+                                
+                                </div> 
                                <div class="organisation_cmn_text mt-2">@if (!empty($Job_data['company_name'])) {{ucFirst($Job_data['company_name'])}} @endif</div> 
                             </div>
                         </div>

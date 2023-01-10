@@ -89,7 +89,7 @@ input:checked + .slider:before {
                     <div class="col-md-3">
                         <div class="guide_profile_main_text deep-pink">{{$edm['endorsementCreater']->name}}</div>
                         <div class="preview_subtext mt-0">{{$edm['endorsementCreater']->job_title}} </div>
-                        <div class="profile_upload_text Aubergine_at_night fw_300">{{date('d M Y',strtotime($edm->created_at))}}</div>
+                        <div class="profile_upload_text Aubergine_at_night fw_300">{{strtoupper(date('jS F Y',strtotime($edm->created_at)))}}</div>
                         <div class="preview_subtext mt-0">{{isset($edm['endorsementCreater']['organization']->name)?$edm['endorsementCreater']['organization']->name:NULL}}</div>
                     </div>
                     <div class="col-md-7">

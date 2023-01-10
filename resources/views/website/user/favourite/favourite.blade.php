@@ -48,7 +48,7 @@
                     </div>                    
                     @endforeach
                     @else
-                    <div class="profile_wraper profile_wraper_padding mt-1">
+                    <div class="profile_wraper mt-1">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="not-found-text">
@@ -129,7 +129,7 @@
                 </div>            
                 @endforeach
                 @else
-                    <div class="profile_wraper profile_wraper_padding mt-1">
+                    <div class="profile_wraper mt-1">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="not-found-text">
