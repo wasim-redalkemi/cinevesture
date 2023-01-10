@@ -19,8 +19,8 @@
                     <h1>Favourites</h1>
                 </div>
                 <div class="guide_profile_main_text deep-pink mb-1">Projects</div>
-                <div class="">
                 <div class="row">
+                <div>
                     @php
                         $user_projects_data = $user_projects->toArray();
                                                     
