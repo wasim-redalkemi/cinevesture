@@ -5,17 +5,17 @@
     @include('admin.include.flash_message')
 </div>
 <div class="content-wrapper">
-    <div class="card col-md-6">
+    <div class="card col-md-12">
         <div class="card-body">
-            <h4 class="card-title">Project List Management</h4>
+            <h1 class="card-title">Project List Management</h1>
             <div class="row">
-                <div class="col-12">
+                <div class="col-md-12">
                    <form role="form" method="Post" action="{{ route('update_project_list')}}">
                             @csrf
                             <div class="row">
                               <div class="col-md-6">
                                 <div class="form-group">
-                                        <label class="mb-3">Name(Update project list name)</label>
+                                        <label class="mb-3">Name</label>
                                         <input type="hidden" name="id" id="id" value="{{$projectList->id}}">
                                         <input type="text" class="form-control form-control-lg" name="name" placeholder="List name" aria-label="Username" value="{{ucFirst($projectList->list_name)}}">
                                 </div>
