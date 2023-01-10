@@ -241,7 +241,8 @@
             window.location.href=$(this).attr('path');
         })
     })
-    @if (request('category') || request('genre') || request('from_date') || request('to_date') || request('favorited') || request('project_verified') || request('search'))
+    
+    @if(request('category') || request('genre') || request('from_date') || request('to_date') || request('favorited') || (request('favorited') == '0') || request('project_verified') ||(request('project_verified')=='0')|| request('search'))
         $(".collapse").addClass("show");
     @endif
 
