@@ -112,7 +112,7 @@
                                         <td class="contact-page-subtext white">
                                             @if (!empty($UserProject->total_budget))
                                             {{-- $ {{ $UserProject->total_budget}} --}}
-                                            ${{ number_format($UserProject->total_budget, 2, '.', ',') }}
+                                            ${{ number_format($UserProject->total_budget, 0,'.',',') }}
 
                                             @else
                                             <span><b>-</b></span>
@@ -123,7 +123,7 @@
                                         <td class="public-head-subtext white">Financing Secured</td>
                                         <td class="contact-page-subtext white">
                                             @if (!empty($UserProject->financing_secured))
-                                            ${{ number_format($UserProject->financing_secured, 2, '.', ',')}}
+                                            ${{ number_format($UserProject->financing_secured, 0,'.',',')}}
                                             @else
                                             <span><b>-</b></span>
                                             @endif
@@ -143,7 +143,7 @@
                                         <td class="public-head-subtext white">Locations</td>
                                         <td class="contact-page-subtext white">
                                             @if (!empty($UserProject->location))
-                                            {{ $UserProject->location}}
+                                            {{ ucFirst($UserProject->location)}}
                                             @else
                                             <span><b>-</b></span>
                                             @endif
@@ -197,7 +197,7 @@
                 <div class="public-subheading-text mt-2">
                     <p>
                         @if (!empty(($UserProject->synopsis)))
-                        {{ $UserProject->synopsis}}
+                        {{ ucFirst($UserProject->synopsis)}}
                         @else
                         <span><b>-</b></span>
                         @endif
@@ -213,7 +213,7 @@
                     <div class="public-subheading-text mt-2">
                         <p>
                             @if (!empty(($UserProject->director_statement)))
-                            {{ $UserProject->director_statement}}
+                            {{ ucFirst($UserProject->director_statement)}}
                             @else
                             <span><b>-</b></span>
                             @endif
@@ -346,7 +346,7 @@
                                         @if ($v['complete'] == 1 )
                                         @php $isEmpty = false;@endphp
                                         <tr>
-                                            <td class="public-head-subtext white">{{ $v['description'] }}</td>
+                                            <td class="public-head-subtext white">{{ ucFirst($v['description']) }}</td>
                                             <td class="aubergine project-sub-text white">{{ $v['budget'] }}</td>
                                             <td class="aubergine project-sub-text white">{{ $v['target_date'] }}</td>
                                         </tr>
@@ -371,7 +371,7 @@
                                         @if ($v['complete'] ==0 )
                                         @php $isEmpty = false;@endphp
                                         <tr>
-                                            <td class="public-head-subtext white">{{ $v['description'] }}</td>
+                                            <td class="public-head-subtext white">{{ ucFirst($v['description']) }}</td>
                                             <td class="aubergine project-sub-text white">{{ $v['budget'] }}</td>
                                             <td class="aubergine project-sub-text white ">{{ $v['target_date'] }}</td>
                                         </tr>

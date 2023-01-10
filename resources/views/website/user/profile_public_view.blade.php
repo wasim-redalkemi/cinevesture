@@ -397,8 +397,8 @@
                     <div class="row mt-3">
                         <div class="col-md-3">
                             <div class="endorse_person_name">{{$edm['endorsementCreater']->name}}</div>
-                            <div class="preview_subtext mt-0">{{$edm['endorsementCreater']->job_title?$edm['endorsementCreater']->job_title:"-"}}</div>
-                            <div class="date_text">{{date('d F Y',strtotime($edm->created_at))}}</div>
+                            <div class="inp_data Aubergine_at_night">{{$edm['endorsementCreater']->job_title?$edm['endorsementCreater']->job_title:"-"}}</div>
+                            <div class="guide_profile_main_subtext Aubergine_at_night">{{strtoupper(date('jS F Y',strtotime($edm->created_at)))}}</div>
                         </div>
                         <div class="col-md-9">
                             <div class="preview_subtext">

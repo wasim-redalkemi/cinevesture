@@ -18,34 +18,7 @@
                             @php
                                 $Job_data = $Job_data->toArray();
                             @endphp
-                                <div class="contact-page-text deep-aubergine">@if (!empty($Job_data['title'])) {{ucFirst($Job_data['title'])}} @endif</div>
-
-                            {{-- <div class="d-flex justify-content-end">
-                                <!-- <div class="contact-page-text deep-aubergine"> <span onclick="history.back()"><i class="fa fa-arrow-left" aria-hidden="true"></i></span> @if (!empty($Job_data['title'])) {{$Job_data['title']}} @endif</div> -->
-                                <div class="d-flex align-items-center">
-                                    <div class="dropdown  search-page">
-                                        <div class="" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            <i class="fa fa-ellipsis-h aubergine icon-size" aria-hidden="true"></i>
-                                        </div>
-                                        @if($Job_data['user_id']==auth()->id())
-                                        <ul class="dropdown-menu profile_dropdown_menu p-2">
-                                            <li>
-                                            <a href="">  Edit Job</a>
-                                            </li>
-                                            <li>
-                                            <a href="">  Promote Job</a>
-                                            </li>
-                                            <li>
-                                            <a href="">   Unpublish Job</a>
-                                            </li>
-                                            <li>
-                                            <a href="">  Delete Job </a>
-                                            </li>
-                                        </ul>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div> --}}
+                            <div class="contact-page-text deep-aubergine">@if (!empty($Job_data['title'])) {{ucFirst($Job_data['title'])}} @endif</div>
                         </div>
                     </div>
                     <div class="guide_profile_subsection">
@@ -118,7 +91,12 @@
                             <button class="cancel_btn mx-5 action" data-id="save" onclick="history.back()">Back</button>
                             @if($Job_data['user_id']==auth()->id())
                             {{-- <button class="guide_profile_btn action" data-id="publish">View Applicants</button> --}}
-                          <button class="guide_profile_btn">  <a href="{{route('showJobApplicants',['jobId'=>$Job_data['id']])}}" class="guide_profile_btn w_150">View Applications</a></button>
+                            @if ($Job_data['save_type'] == 'published')                                
+                                <button class="guide_profile_btn">  <a href="{{route('showJobApplicants',['jobId'=>$Job_data['id']])}}" class="guide_profile_btn w_150">View Applications</a></button>
+                            @else
+                                <button class="guide_profile_btn">  <a class="jobpublishedAction" href="{{ route('unpublish-job',['job_id'=>$Job_data['id'],'status'=>'published'])}}">Publish</a></button>                                
+                            @endif
+
 
                             @endif
                         </div>

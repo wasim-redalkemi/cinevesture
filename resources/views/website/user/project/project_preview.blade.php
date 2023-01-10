@@ -43,7 +43,7 @@
                     <span><b>-</b></span>
                 @endif                
                 <div class="preview_headtext">Locations</div>
-                <div class="preview_subtext pb-3">@if (!empty($projectData[0]['location'])) {{$projectData[0]['location']}} @else <span><b>-</b></span> @endif</div>
+                <div class="preview_subtext pb-3">@if (!empty($projectData[0]['location'])) {{ucFirst($projectData[0]['location'])}} @else <span><b>-</b></span> @endif</div>
                 <div class="row">
                     <div class="com-md-12">
                         <div class="justify-content-end"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-overview') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
@@ -81,16 +81,16 @@
                 <div class="preview_headtext">Duration</div>
                 <div class="preview_subtext">@if (!empty($projectData[0]['duration'])) <?php echo sprintf(intdiv($projectData[0]['duration'], 60).' hr') .' '. ( sprintf($projectData[0]['duration'] % 60).' min');?>@else <span><b>-</b></span> @endif</div>
                 <div class="preview_headtext">Total Budget (USD)</div>
-                <div class="preview_subtext">@if (!empty($projectData[0]['total_budget'])) {{'$'.number_format((float)$projectData[0]['total_budget'], 2, '.', ',')}} @else <span><b>-</b></span> @endif</div>
+                <div class="preview_subtext">@if (!empty($projectData[0]['total_budget'])) {{'$'.number_format($projectData[0]['total_budget'], 0,'.',',')}} @else <span><b>-</b></span> @endif</div>
                 <div class="preview_headtext">Financing Secured (USD)</div>
-                <div class="preview_subtext">@if (!empty($projectData[0]['financing_secured'])) {{'$'.number_format((float)$projectData[0]['financing_secured'], 2, '.', ',')}} @else <span><b>-</b></span> @endif</div>
+                <div class="preview_subtext">@if (!empty($projectData[0]['financing_secured'])) {{'$'.number_format($projectData[0]['financing_secured'], 0,'.',',')}} @else <span><b>-</b></span> @endif</div>
                 <div class="preview_headtext">Creator/Founder Name</div>
                 <div class="preview_subtext">@if (!empty($projectData[0]['user']['name'])) {{ucFirst($projectData[0]['user']['name'])}} @else <span><b>-</b></span> @endif</div>
                 <div class="preview_headtext">Associated with the Project</div>
                 <div class="preview_subtext">
                     @if (!empty($projectData[0]['project_association']))
                     @foreach ($projectData[0]['project_association'] as $v)
-                        <div> {{$v['project_associate_title']}} - {{$v['project_associate_name']}}</div>
+                        <div> {{ucFirst($v['project_associate_title'])}} - {{ucFirst($v['project_associate_name'])}}</div>
                     @endforeach                    
                     @else
                         <span><b>-</b></span>
@@ -114,11 +114,11 @@
                     <p class="flow_step_text"> Description</p>
                 </div>
                 <div class="preview_headtext mt-4">Logline</div>
-                <div class="preview_subtext pr_5">@if (!empty($projectData[0]['logline'])) {{$projectData[0]['logline']}} @else <span><b>-</b></span> @endif</div>
+                <div class="preview_subtext pr_5">@if (!empty($projectData[0]['logline'])) {{ucFirst($projectData[0]['logline'])}} @else <span><b>-</b></span> @endif</div>
                 <div class="preview_headtext">Synopsis/Brief Description</div>
-                <div class="preview_subtext pr_5">@if (!empty($projectData[0]['synopsis'])) {{$projectData[0]['synopsis']}} @else <span><b>-</b></span> @endif</div>
+                <div class="preview_subtext pr_5">@if (!empty($projectData[0]['synopsis'])) {{ucFirst($projectData[0]['synopsis'])}} @else <span><b>-</b></span> @endif</div>
                 <div class="preview_headtext">Creator/Founder’s Statement</div>
-                <div class="preview_subtext pr_5">@if (!empty($projectData[0]['director_statement'])) {{$projectData[0]['director_statement']}} @else <span><b>-</b></span> @endif</div>
+                <div class="preview_subtext pr_5">@if (!empty($projectData[0]['director_statement'])) {{ucFirst($projectData[0]['director_statement'])}} @else <span><b>-</b></span> @endif</div>
                 <div class="row">
                     <div class="com-md-12">
                         <div class="justify-content-end mt-3 mt-md-0"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-description') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
@@ -257,13 +257,23 @@
                 @if (!empty($projectData[0]['project_milestone']))
                 @foreach ($projectData[0]['project_milestone'] as $v)
                 <div class="row mt-2">
-                    <div class="col-4 col-md-3 preview_subtext">@if (!empty($v['description'])) {{$v['description']}}@else <span><b>-</b></span> @endif</div>
+                    <div class="col-4 col-md-3 preview_subtext">@if (!empty($v['description'])) {{ucFirst($v['description'])}}@else <span><b>-</b></span> @endif</div>
                     <div class="col-4 col-md-3 preview_subtext">@if (!empty($v['budget'])) {{$v['budget']}}@else <span><b>-</b></span> @endif</div>
                     <div class="col-4 col-md-3 preview_subtext">@if (!empty($v['target_date'])) {{$v['target_date']}}@else <span><b>-</b></span> @endif</div>
                 </div>
                 @endforeach                    
                 @else
-                <span><b>-</b></span>                    
+                <div class="row">
+                    <div class="col-md-3 text-left">
+                        <span><b>-</b></span>
+                    </div>
+                    <div class="col-md-3 text-left">
+                        <span><b>-</b></span>
+                    </div>
+                    <div class="col-md-3 text-left">
+                        <span><b>-</b></span>
+                    </div>
+                </div>                    
                 @endif
                 <div class="row">
                     <div class="col-md-12">

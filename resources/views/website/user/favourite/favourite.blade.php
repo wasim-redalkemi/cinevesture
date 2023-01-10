@@ -50,7 +50,6 @@
                 </div>                 
                     @endforeach
                     @else
-                    
                     <div class="profile_wraper mt-1">
                         <div class="row">
                             <div class="col-md-12">
@@ -132,7 +131,6 @@
                 </div>            
                 @endforeach
                 @else
-                <div>
                     <div class="profile_wraper mt-1">
                         <div class="row">
                             <div class="col-md-12">

@@ -283,7 +283,7 @@
                                         </tr>
                                         <tr>
                                             <td>Total Budget</td>
-                                            <td class="aubergine">@if (!empty($project->total_budget)){{'$'.number_format((float)$project->total_budget, 2, '.', ',')}} @endif</td>
+                                            <td class="aubergine">@if (!empty($project->total_budget)){{'$'.number_format($project->total_budget, 0,'.',',')}} @endif</td>
                                         </tr>
                                         <tr>
                                             <td>Type</td>

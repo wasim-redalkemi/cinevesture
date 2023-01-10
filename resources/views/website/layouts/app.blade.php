@@ -44,6 +44,9 @@
 
             <!-- Modal for Confirmation for account deactivate -->
             @include('website.include.delete_confirmation_modal')
+            @include('website.include.job_unpublished_modal')
+            @include('website.include.job_published_modal')
+
             
 
             <!-- Modal for Confirmation for account deactivate -->
@@ -153,6 +156,20 @@
             e.preventDefault();
             $('#confirmActionModal .confirmActionModalLink').attr('href',$(this).attr('href'));
             $('#confirmActionModal').modal('show');
+        });
+
+        $('.jobUnpublishedAction').click(function(e)
+        {
+            e.preventDefault();
+            $('#jobUnpublishedActionModal .jobUnpublishedActionModalLink').attr('href',$(this).attr('href'));
+            $('#jobUnpublishedActionModal').modal('show');
+        });
+
+        $('.jobpublishedAction').click(function(e)
+        {
+            e.preventDefault();
+            $('#jobpublishedActionModal .jobpublishedActionModalLink').attr('href',$(this).attr('href'));
+            $('#jobpublishedActionModal').modal('show');
         });
         
         $('.playVideoWrap').click(function()

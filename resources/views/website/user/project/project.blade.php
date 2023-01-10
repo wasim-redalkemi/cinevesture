@@ -43,7 +43,7 @@
                             </div>
                             <div>
                             <a href="{{route('public-view')}}?id={{$v->id}}" style="outline: none; text-decoration:none">
-                            <div class="movie_name_text">{{$v->project_name}}</div>
+                            <div class="movie_name_text">{{ucFirst($v->project_name)}}</div>
                                 @if(isset($v->user_status))
                                 @if($v->user_status == 'draft')
                                 <div class="published_text mb-5">Draft</div>

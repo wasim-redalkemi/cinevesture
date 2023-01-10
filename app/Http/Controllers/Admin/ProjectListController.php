@@ -189,13 +189,16 @@ class ProjectListController extends AdminController
                         $q->where("project_name","like","%$request->search%");
                     }
                     $q->whereNotIn('id', $project_list_project);
+                    
+
                 }
                 else if(!empty($project_list_project))
                 {
                     $q->whereIn('id', $project_list_project);
                 }
             })
-            
+            ->orderBy('created_at', 'desc')
+            ->where("user_status","published")
             ->paginate($this->records_limit);
             //     ->where(function ($q) use ($request) {
 

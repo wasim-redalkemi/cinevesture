@@ -39,7 +39,7 @@
                 <div class="profile_wraper_padding border_top">
                     <div class="d-flex justify-content-between">
                         <div class="guide_profile_main_text">
-                            <a href="{{ route('posted-job-single-view',['job_id'=>$v['id']]) }}">@if (!empty($v['title'])) {{$v['title']}} @endif</a>
+                            <a href="{{ route('posted-job-single-view',['job_id'=>$v['id']]) }}">@if (!empty($v['title'])) {{ucFirst($v['title'])}} @endif</a>
                         </div>
                         <div class="dropdown dropstart search-page">
                             <div class="" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -57,7 +57,7 @@
                                 </li>
                                 <li>
                                 <?php $status;  if($v['save_type']=='published'){  $status= "unpublished"; } else {$status="published";}?>
-                                <a href="{{route('unpublish-job',['job_id'=>$v['id'],'status'=>$status])}}">  <?php if($v['save_type']=='published'){  echo "Unpublish Job"; } else { echo "Publish Job";}?></a>
+                                <a class="<?php if($status =='unpublished' ){echo 'jobUnpublishedAction';} else {echo 'jobpublishedAction';}?>" href="{{route('unpublish-job',['job_id'=>$v['id'],'status'=>$status])}}">  <?php if($v['save_type']=='published'){  echo "Unpublish Job"; } else { echo "Publish Job";}?></a>
                                 </li>
                                 <li>
                                     <a class="confirmAction" href="{{route('delete-job',['job_id'=>$v['id']])}}"> Delete Job </a>
@@ -67,7 +67,7 @@
                       
                     </div>
                     <div class="preview_headtext lh_54 candy-pink">
-                        @if (!empty($v['company_name'])) {{$v['company_name']}} @endif 
+                        @if (!empty($v['company_name'])) {{ucFirst($v['company_name'])}} @endif 
                         - 
                         
                         @if (!empty($v['job_location'])>0)
@@ -85,7 +85,7 @@
                         @endif    
                     </div>
                     <div class="posted_job_header Aubergine_at_night">
-                        @if (!empty($v['description'])) {{$v['description']}} @endif
+                        @if (!empty($v['description'])) {{ucFirst($v['description'])}} @endif
                     </div>
                     <div class="d-flex justify-content-between mt-4">
                         <div class="d-flex flex-wrap w-75
