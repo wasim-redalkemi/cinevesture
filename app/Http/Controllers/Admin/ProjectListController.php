@@ -197,6 +197,7 @@ class ProjectListController extends AdminController
                     $q->whereIn('id', $project_list_project);
                 }
             })
+            ->orderBy('created_at', 'desc')
             ->where("user_status","published")
             ->paginate($this->records_limit);
             //     ->where(function ($q) use ($request) {
