@@ -31,8 +31,10 @@ class AuthController extends AdminController
     public function index()
     {
         try {
-            $totalUsre=User::query()->where('user_type','U')->get();
-            $totalUsreCount=(count($totalUsre));
+            $users=User::query()->where('user_type','U')->where('status','1')->orderBy('created_at', 'desc')->limit('5')->get();
+            // dd(count($users));
+            $totalUsers=User::query()->where('user_type','U')->get();
+            $totalUsreCount=(count($totalUsers));
             $totalProject=UserProject::query()->where('user_status','!=','draft')->get();
             $totalProjectCount=count($totalProject);
             $totalJob=UserJob::all();
@@ -41,7 +43,7 @@ class AuthController extends AdminController
             $totalQueryCount=count($totalQuery);
            
             
-            return view('admin.dashboard',compact('totalUsreCount','totalProjectCount','totalJobCount','totalQueryCount'));
+            return view('admin.dashboard',compact('totalUsreCount','totalProjectCount','totalJobCount','totalQueryCount','users'));
         }
         catch (Exception $e)
         {

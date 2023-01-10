@@ -71,7 +71,7 @@
               </div>
             </div>
             <div class="card-body d-flex align-items-end p-0">
-              <div class="mt-auto w-100">
+              <div class="mt-auto ">
                 <div id="sales-legend" class="chartjs-legend mt-2 mb-4"></div>
                 <canvas id="chart-sales"></canvas>
               </div>
@@ -142,7 +142,18 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">User detail</h4>
+              <div class="d-flex justify-content-between">
+              <div>
+                <h4 class="card-title">Users detail</h4>
+              </div>
+              <div class="d-block">
+                <a href="{{route('user-management')}}">
+                <button class="btn btn-sm btn-success text-white">
+                  View All Users
+                </button>
+              </a>
+              </div>
+            </div>
               {{-- <div class="d-flex table-responsive">
                 <div class="btn-group mr-2">
                   <button class="btn btn-sm btn-primary"><i class="mdi mdi-plus-circle-outline"></i> Add</button>
@@ -166,51 +177,63 @@
                 <table class="table mt-3 border-top">
                   <thead>
                     <tr>
-                      <th>Id</th>
-                      <th>User</th>
-                      <th>Country</th>
-                      <th>Mobile</th>
-                      <th>Pincode</th>
-                      <th>Status</th>
+                      <th>S.No</th>
+                      <th>Name</th>
+                      <th>Email</th>
+                      <th>Title</th>
+                      <th>Organisation</th>
+                      <th>Location</th>
+                      
+                      <th>Membership</th>
+                      <th>Joining</th>
                     </tr>
                   </thead>
                   <tbody>
+                    @if(isset($users))
+                      @php
+                          $i=0;
+                      @endphp
+                    @foreach($users as $user)
+                    @php
+                        $i++;
+                    @endphp
                     <tr>
-                      <td>1</td>
-                      <td>David Grey</td>
-                      <td>Italy</td>
-                      <td>9885456300</td>
-                      <td>212100</td>
-                      <td><div class="badge badge-success badge-fw">Progress</div></td>
-                    </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Stella Johnson</td>
-                      <td>Brazil</td>
-                      <td>9855454500</td>
-                      <td>789300</td>
-                      <td><div class="badge badge-warning badge-fw">Open</div></td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Marina Michel</td>
-                      <td>Japan</td>
-                      <td>8256654300</td>
-                      <td>546440</td>
-                      <td><div class="badge badge-danger badge-fw">On hold</div></td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>John Doe</td>
-                      <td>India</td>
-                      <td>7900565461</td>
-                      <td>220022</td>
-                      <td><div class="badge badge-success badge-fw">Progress</div></td>
-                    </tr>
-                  </tbody>
+                       <td>
+                       {{$i}}
+                        </td>
+                        <td>{{ucfirst($user->name)}}</td>
+                        <td>{{$user->email}}</td>
+                        <td>@if(empty($user->job_title)){{'-'}}@else{{ucfirst($user->job_title)}}@endif</td>
+                        <td>@if (empty($user->organization->name)){{'-'}} @else{{ucfirst($user->organization->name)}}@endif</td>
+                        <td>@if (empty($user->country->name)){{'-'}}@else{{ucfirst($user->country->name)}}@endif</td>
+                        {{-- <td> 
+                            @php
+                            $x=($user->status==1)? 0:1;
+                        @endphp
+                            @if($user->status==1)
+                            <a href="{{route('user-status-change')}}?status={{$x}}&user_id={{$user->id}}"><button class="btn active-button-color w-82"> {{'Active'}}</button></a>@else
+                            <a href="{{route('user-status-change')}}?status={{$x}}&user_id={{$user->id}}"><button class="btn inactive-button-color">{{'Inactive'}}</button></a>@endif
+                        </td> --}}
+                        <td>
+                            @foreach ($user->membership as $plan)
+                            @if (!empty($plan->plan_name))
+                               
+                                    {{$plan->plan_name}}
+                               
+                            @else
+                                    {{'-'}}
+                            @endif
+                            @endforeach
+                        </td>
+                        <td><?php echo(date("d-m-Y", strtotime($user->created_at))); ?></td>
+                        
+                     </tr>
+                   @endforeach
+                  @endif 
+                </tbody>
                 </table>
               </div>
-              <div class="d-flex align-items-center justify-content-between flex-column flex-sm-row mt-4">
+              {{-- <div class="d-flex align-items-center justify-content-between flex-column flex-sm-row mt-4">
                 <p class="mb-3 mb-sm-0">Showing 1 to 20 of 20 entries</p>
                 <nav>
                   <ul class="pagination pagination-primary mb-0">
@@ -222,7 +245,7 @@
                     <li class="page-item"><a class="page-link"><i class="mdi mdi-chevron-right"></i></a></li>
                   </ul>
                 </nav>
-              </div>
+              </div> --}}
             </div>
           </div>
         </div>
