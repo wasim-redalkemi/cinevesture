@@ -50,7 +50,11 @@
                                 @endif
                             </div>
                             <div class="hours-category my-md-4">
-                                {{ !empty(($UserProject->duration))?date('H:i', mktime(0,$UserProject->duration)).' min':'Duration'}}
+                                @if (!empty(($UserProject->duration)))
+                                <?php echo sprintf(intdiv($UserProject->duration, 60).' hr') .' '. ( sprintf($UserProject->duration % 60).' min');?>
+                                @else
+                                {{'Duration'}}                                    
+                                @endif                                
                                 | @if (!empty($projectData[0]['project_languages']))
                                 @foreach ($projectData[0]['project_languages'] as $k => $v)
                                 {{$v['name']}}
@@ -107,7 +111,9 @@
                                         <td class="public-head-subtext white">Total Budget</td>
                                         <td class="contact-page-subtext white">
                                             @if (!empty($UserProject->total_budget))
-                                            ${{ $UserProject->total_budget}}
+                                            {{-- $ {{ $UserProject->total_budget}} --}}
+                                            ${{ number_format($UserProject->total_budget, 2, '.', ',') }}
+
                                             @else
                                             <span><b>-</b></span>
                                             @endif
@@ -117,7 +123,7 @@
                                         <td class="public-head-subtext white">Financing Secured</td>
                                         <td class="contact-page-subtext white">
                                             @if (!empty($UserProject->financing_secured))
-                                            ${{ $UserProject->financing_secured}}
+                                            ${{ number_format($UserProject->financing_secured, 2, '.', ',')}}
                                             @else
                                             <span><b>-</b></span>
                                             @endif

@@ -126,6 +126,7 @@
                 </form>
             </div>
             <div class="col-md-9">
+                <div class="mb_3">{{count($users)}} Results Founds</div>
                 <div class="profile_wraper">
                 @if(count($users) >= 1)
                 @foreach($users as $user)
