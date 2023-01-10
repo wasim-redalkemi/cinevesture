@@ -136,15 +136,23 @@ class ProjectListController extends AdminController
             $project_list_project = array_unique(array_values($project_list_project));
             $is_added_only = true;
             $is_filter_applied = false;
-          
-            $search_data=(!empty($request->category) || !empty($request->genre) || !empty($request->from_date) || !empty($request->to_date) || !empty($request->favorited) || !empty($request->project_verified) || !empty($request->search))?count([$request->category,$request->genre]):'';
-            if((!isset($request->name) || !isset($request->category) || !isset($request->genre) || !isset($request->from_date) || !isset($request->to_date) || !isset($request->favorited) || !isset($request->project_verified) || !isset($request->search)) && count($project_list_project)==0)
+            if($request->favorited=='0'){
+                $a='2';
+            }
+            if($request->project_verified=='0'){
+                $b='3';
+            }
+            $search_data=(!empty($request->category) || !empty($request->genre) || !empty($request->from_date) || !empty($request->to_date) || !empty($request->favorited) || !empty($request->project_verified) || !empty($request->search)|| !empty($a) || !empty($b))?count([$request->category,$request->genre]):'';
+            if((!isset($request->name) || !isset($request->category) || !isset($request->genre) || !isset($request->from_date) || !isset($request->to_date) || !isset($request->favorited) || !isset($request->project_verified) || !isset($request->search) ) && count($project_list_project)==0)
             {
                 $is_added_only = false;
             }
             else if(!empty($search_data))
             {
                 $is_added_only = false;
+                $is_filter_applied = true;
+            }
+            if(!empty($search_data)){
                 $is_filter_applied = true;
             }
             $categories=MasterProjectCategory::query()->get();
@@ -159,7 +167,7 @@ class ProjectListController extends AdminController
                     if (isset($request->category)) { // search name of user
                         $q->whereHas('projectCategory', function ($q) use($request){
                         $q->where('category_id',$request->category);
-                    });
+                     });
                     }
                     if (isset($request->genre)) { // search name of user
                         $q->whereHas('genres', function ($q) use($request){
