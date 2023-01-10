@@ -64,7 +64,7 @@ class UserController extends AdminController
                 }
 
             })
-           
+            ->orderBy('created_at', 'desc')
             ->paginate($this->records_limit);
             return view('admin.user.list',compact('users','UserOrganisation','countries'));
         } 
