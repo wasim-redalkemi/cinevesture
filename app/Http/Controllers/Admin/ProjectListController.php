@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
+use App\Models\MasterProjectCategory;
+use App\Models\MasterProjectGenre;
 use App\Models\ProjectList;
 use App\Models\ProjectMedia;
 use App\Models\ProjectListProjects;
@@ -130,11 +132,18 @@ class ProjectListController extends AdminController
         {
             $id = $request->id;
             $project_list_project = ProjectListProjects::query()->where('list_id',$id)->pluck('project_id')->toArray();
+            
             $project_list_project = array_unique(array_values($project_list_project));
             $is_added_only = true;
             $is_filter_applied = false;
-            $search_data=(!empty($request->name))?$request->name:'';
-            if(!isset($request->name) && count($project_list_project)==0)
+            if($request->favorited=='0'){
+                $a='2';
+            }
+            if($request->project_verified=='0'){
+                $b='3';
+            }
+            $search_data=(!empty($request->category) || !empty($request->genre) || !empty($request->from_date) || !empty($request->to_date) || !empty($request->favorited) || !empty($request->project_verified) || !empty($request->search)|| !empty($a) || !empty($b))?count([$request->category,$request->genre]):'';
+            if((!isset($request->name) || !isset($request->category) || !isset($request->genre) || !isset($request->from_date) || !isset($request->to_date) || !isset($request->favorited) || !isset($request->project_verified) || !isset($request->search) ) && count($project_list_project)==0)
             {
                 $is_added_only = false;
             }
@@ -143,11 +152,42 @@ class ProjectListController extends AdminController
                 $is_added_only = false;
                 $is_filter_applied = true;
             }
+            if(!empty($search_data)){
+                $is_filter_applied = true;
+            }
+            $categories=MasterProjectCategory::query()->get();
+            $genres=MasterProjectGenre::query()->get();
             $project_data=UserProject::query()
             ->with('projectOnlyImage')
-            ->where(function($q)use($is_filter_applied,$search_data,$project_list_project){
+        
+            ->where(function($q)use($is_filter_applied,$search_data,$project_list_project,$request){
                 if($is_filter_applied){
-                    $q->where('project_name', 'like' ,"%$search_data%");
+                    // $q->where('project_name', 'like' ,"%$search_data%");
+                    
+                    if (isset($request->category)) { // search name of user
+                        $q->whereHas('projectCategory', function ($q) use($request){
+                        $q->where('category_id',$request->category);
+                     });
+                    }
+                    if (isset($request->genre)) { // search name of user
+                        $q->whereHas('genres', function ($q) use($request){
+                            $q->where('gener_id',$request->genre);
+                        });
+                    }
+                    if(isset($request->from_date) && isset($request->to_date)){
+                        $from=$request->from_date.' '.'00:00:00';
+                        $to=$request->to_date.' '.'23:59:59';
+                        $q->whereBetween("created_at",[$from,$to]);
+                    }
+                    if (isset($request->favorited)) {
+                        $q->where("favorited",$request->favorited);
+                    }
+                    if (isset($request->project_verified)) {
+                        $q->where("project_verified",$request->project_verified);
+                    }
+                    if (isset($request->search)) {
+                        $q->where("project_name","like","%$request->search%");
+                    }
                     $q->whereNotIn('id', $project_list_project);
                 }
                 else if(!empty($project_list_project))
@@ -157,9 +197,36 @@ class ProjectListController extends AdminController
             })
             
             ->paginate($this->records_limit);
+            //     ->where(function ($q) use ($request) {
 
+        //         if (isset($request->category)) { // search name of user
+        //             $q->whereHas('projectCategory', function ($q) use($request){
+        //             $q->where('category_id',$request->category);
+        //         });
+        //         }
+        //         if (isset($request->genre)) { // search name of user
+        //             $q->whereHas('genres', function ($q) use($request){
+        //                 $q->where('gener_id',$request->genre);
+        //             });
+        //         }
+        //         if(isset($request->from_date) && isset($request->to_date)){
+        //             $from=$request->from_date.' '.'00:00:00';
+        //             $to=$request->to_date.' '.'23:59:59';
+        //             $q->whereBetween("created_at",[$from,$to]);
+        //         }
+        //         if (isset($request->favorited)) {
+        //             $q->where("favorited",$request->favorited);
+        //         }
+        //         if (isset($request->project_verified)) {
+        //             $q->where("project_verified",$request->project_verified);
+        //         }
+        //         if (isset($request->search)) {
+        //             $q->where("project_name","like","%$request->search%");
+        //         }
+                
+        // })
             
-            return view('/admin.projectList.search',compact('id','project_data','is_added_only'));
+            return view('/admin.projectList.search',compact('id','project_data','is_added_only','categories','genres'));
         }
         catch (Exception $e)
         {
@@ -238,6 +305,30 @@ class ProjectListController extends AdminController
         }
        
        
+    }
+    public function project_list_edit(request $request,$id)
+    {
+        try {
+            
+            $projectList=ProjectList::query()->where('id',$id)->first();
+            return view('/admin.projectList.edit',compact('projectList'));
+        } catch (\Throwable $e) {
+           return back()->with($e->getMessage());        }
+    }
+    public function project_list_update(request $request)
+    {
+        try {
+            $projectList=ProjectList::query()->where('id',$request->id)->first();
+            $projectList->list_name=$request->name;
+            $projectList->save();
+            
+            Session::flash('response', ['text'=>'Project list name update successfully!','type'=>'success']);
+            return redirect()->route('show-list');
+            // toastr() ->success('Promote update successfully!', 'Congrats');
+            
+        } catch (\Throwable $e) {
+            $e->getMessage();
+        }
     }
     /**
      * Update the specified resource in storage.

@@ -8,7 +8,7 @@
   <div class="card">
     <div class="card-body">
       <h4 class="card-title">Project List Management</h4>
-        <div class="row">
+        {{-- <div class="row">
           <div class="col-md-12">
             <form role="form" id="searchProject" method="get" action="{{ route('list-projects',['id' => request('id') ]) }}" >
               @csrf
@@ -29,10 +29,6 @@
                             </div>
                           </div>
                           <div>
-                            {{-- "bg-gradient-success p text-white" --}}
-                            {{-- <button class="btn btn-sb btn-primary">
-                              Refresh
-                            </button> --}}
                             <a href="{{route('list-projects',['id' => $_REQUEST['id']])}}">
                               <button type="button" class="btn btn-linkedin">
                                 <i class="mdi mdi-reload btn-icon-prepend"></i>                                                    
@@ -47,9 +43,103 @@
               </div>
             </form>
           </div>
-        </div>
+        </div> --}}
           <div class="row">
             <div class="col-md-12">
+              <div id="accordion">
+                <div class="my_card mb-4">
+                    <div class="card-header">
+                        <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                            <div class="text-center d-block">
+                                <button class="btn btn-sm btn-success text-white">
+                                    Apply Filter
+                                </button>
+                            </div>
+                        </a>
+                    </div>
+                    <div id="collapseOne" class="collapse p-3 pt-4" data-parent="#accordion">
+                        <form class="" method="get" action="{{ route('list-projects',['id' => request('id') ]) }}">
+                            @csrf
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Category</label>
+                                        <select name="category"  id="" class="form-control form-control-sm radius">
+                                            @if (!empty($categories))
+                                                <option value="">Select</option>
+                                                @foreach ($categories as $key => $category)                                        
+                                                    <option value="{{$category->id}}" <?php if($category->id == request('category')){echo('selected');} ?>>{{$category->name}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                    <label>Genre</label>
+                                    <select name="genre" value="" id="" class="form-control form-control-sm radius">
+                                        <option value="">select</option>
+                                       @foreach ($genres as $key=>$genre)
+                                       <option value="{{$genre->id}}" <?php if ($genre->id == request('genre')) {echo ('selected');} ?>>{{$genre->name}}</option>
+                                       @endforeach
+                                    </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                    <label>Create From</label>
+                                    <input type="date" name="from_date" value="{{request('to_date')}}" class="form-control form-control-sm radius">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Create to</label>
+                                        <input type="date" name="to_date" value="{{request('to_date')}}" class="form-control form-control-sm radius">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                    <label>Favorited</label>
+                                    <select name="favorited" id="" class="form-control form-control-sm radius">
+                                        <option value="">Select</option>
+                                        <option value="1"<?php if (request('favorited')=="1") {echo ('selected');} ?>>Favorite</option>
+                                        <option value="0" <?php if (request('favorited')=="0") {echo ('selected');} ?>>Unfavorite</option>
+                                    </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                    <label>Recommended badge</label>
+                                    <select name="project_verified" id="" class="form-control form-control-sm radius">
+                                        <option value="">Select</option>
+                                        <option value="1" <?php if (request('project_verified')=="1") {echo ('selected');} ?>>Recommended</option>
+                                        <option value="0" <?php if (request('project_verified')=="0") { echo('selected');} ?>>Unrecommended</option>
+                                    </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                    <label>Search</label>
+                                    <div><input type="text" value="{{request('search')}}" class="form-control form-control-sm" name="search" id="" placeholder="Search"></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 mt">
+                                    <div class="form-group">
+                                        <label for="">Action</label>
+                                        <div class="d-flex">
+                                          <input type="hidden" value="{{$_REQUEST['id']}}" name="id">
+                                            <div><button type="submit" class="btn btn-success btn-sm mr-3 text-white">Filter</button></div>
+                                            <div><a href="{{route('list-projects',['id' => $_REQUEST['id']])}}"><button type="button" class="btn btn-warning btn-sm fa fa-refresh text-white">  Refresh</button></a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
               <div class="table-responsive">
                 <form id="saveProject" method="Post" action="{{route('save-search-projects')}}">
                   @csrf
@@ -151,6 +241,10 @@
             window.location.href=$(this).attr('path');
         })
     })
+    
+    @if(request('category') || request('genre') || request('from_date') || request('to_date') || request('favorited') || (request('favorited') == '0') || request('project_verified') ||(request('project_verified')=='0')|| request('search'))
+        $(".collapse").addClass("show");
+    @endif
 
 </script>
 

@@ -84,7 +84,11 @@
                                         @else
                                            ₹
                                         @endif
-                                        {{ number_format((float)$plan->plan_amount, 2, '.', ',')}}</div>
+                                        {{ number_format((float)$plan->plan_amount, 2, '.', ',')}}
+                                    </div>
+                                    @if($plan->plan_time == "y")                                           
+                                        <div class="search-head-subtext Aubergine_at_night mt-3">(@if($plan->currency == "USD")$@else₹@endif{{ number_format((float)$plan->plan_amount/12, 2, '.', ',')}}/month)</div>
+                                    @endif
 
                                     <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
                                 </div>

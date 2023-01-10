@@ -44,7 +44,8 @@
                       </div>
                       <div class="duration-lang-text mt-1">
                         @if (!empty($v->duration))
-                        {{date('H:i', mktime(0,$v->duration)).' min'}} |
+                        {{-- {{date('H:i', mktime(0,$v->duration)).' min'}} | --}}
+                        <?php echo sprintf(intdiv($v->duration, 60).' hr') .' '. ( sprintf($v->duration % 60).' min');?> |
                         @endif
                         
                         @foreach ($v->projectLanguages as $k1=>$v1)
@@ -82,7 +83,7 @@
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                         labore
                         </div>
-                      <div class="duration-lang-text mt-1">01:05 min | English | Horror</div>
+                      <div class="duration-lang-text mt-1">2 hr 5 min | English | Horror</div>
                       <button class="watch-now-btn mt-4">Watch now</button>
                     </div>
                   </div>
@@ -106,7 +107,7 @@
                         et
                         dolore magna aliqua.
                         Ut enim ad minim veniam, quis nostrud exercitation.</div>
-                      <div class="duration-lang-text mt-1">16:25 min | English | Horror</div>
+                      <div class="duration-lang-text mt-1">1 hr 10 min | English | Horror</div>
                       <button class="watch-now-btn mt-4">Watch now</button>
                     </div>
                   </div>
@@ -159,7 +160,7 @@
                         <a href="{{ route('public-view', ['id'=>$v1->id]) }}">
   
                         @if (isset($v1->duration) && !empty($v1->duration))
-                        <span class="white">{{date('H:i', mktime(0,$v1->duration)).' min'}} /</span>
+                        <span class="white"><?php echo sprintf(intdiv($v1->duration, 60).' hr') .' '. ( sprintf($v1->duration % 60).' min');?> /</span>
                         @endif
                         @if (isset($v1->projectLanguages[0]) && !empty($v1->projectLanguages[0]))
                          <span class="white"> {{$v1->projectLanguages[0]['name']}} /</span>
