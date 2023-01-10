@@ -241,12 +241,14 @@
 
     $(".main_slider.owl-carousel").owlCarousel({
       center: true,
-      autoPlay: 3000,
+      // autoPlay: 500,
+      autoplayTimeout: 3000,
       autoplay: true,
       loop: true,
       nav: true,
       center: true,
       items: 1,
+      autoplayHoverPause: true,
       responsive: {
         480: { items: 1 },
         768: { items: 1 },

@@ -11,7 +11,8 @@
 <section>
     <div class="container">
         <div class="row mt-4">
-            <div class="col-md-3 side-bar-cmn-part">
+            <div class="col-md-3">
+                <div class="side-bar-cmn-part">
                 <form class="pb-5" method="Get" action="{{ route('guide-view') }}">
                     @csrf
                     <div class="search-box-container">
@@ -124,9 +125,10 @@
                         </div>
                     </div>
                 </form>
+                </div>
             </div>
             <div class="col-md-9">
-                <div class="profile_wraper">
+                <div class="profile_wraper mb-5">
                 @if(count($users) >= 1)
                 @foreach($users as $user)
                 <div class="border_btm profile_wraper_padding my-3 my-md-0">

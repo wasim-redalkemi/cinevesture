@@ -7,7 +7,7 @@
 @section('content')
 
 <section>
-    <div class="pb-5">
+    <div class="pb-5 bg_ffff">
         <div class="plan_wraper">
             <div class="container">
                 <div class="row">
@@ -89,22 +89,27 @@
                                     <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
                                 </div>
                                 @foreach($modules as $module)
-                                <div class="plain_industry_guide mb_2">
+                                <div class="plain_industry_guide mb_2" style="position: relative;" id="myDivHeight">
                                     @if($flag == 0)
                                     <div class="industry_guide_text plain_industry_guide">
                                         <span class="movie_name_text">{{$module->name}}</span>
                                     </div>
                                     @endif
-                                    <div class="plain_page_list p-3">
+                                    <div class="plan_page_list p-3">
                                         <ul>
                                             @foreach($plan->getRelationalData as $relation )
 
                                             @if($relation->module_id == $module->id)
                                             <li> @if($relation->limit != 0)
-                                               
-                                            {{$relation->limit}} {{$relation->getOperation->name}}
-                                                 @else
-                                                 {{$relation->getOperation->name}}
+                                               <span class="list"></span>
+                                               <span class="mx-2">
+                                                   {{$relation->limit}} {{$relation->getOperation->name}}
+                                               </span>
+                                               @else
+                                               <span class="list"></span>
+                                               <span class="mx-2">
+                                                   {{$relation->getOperation->name}}
+                                               </span>
                                                  @endif
                                             </li>
                                                 @endif
@@ -118,7 +123,7 @@
                                     <div class="project_text plain_project opacity-50">
                                         <span class="movie_name_text">Projects</span>
                                     </div>
-                                    <div class="plain_page_list p-3">
+                                    <div class="plan_page_list p-3">
                                         <ul>
                                             <li>Create Profile</li>
                                         </ul>
@@ -128,7 +133,7 @@
                                     <div class="project_text plain_job opacity-50">
                                         <span class="movie_name_text">Jobs</span>
                                     </div>
-                                    <div class="plain_page_list p-3">
+                                    <div class="plan_page_list p-3">
                                         <ul>
                                             <li>Create Profile</li>
                                         </ul>
@@ -156,7 +161,7 @@
                                     <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create')}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
                                 </div>
                                 <div class="plain_industry_guide p-3">
-                                    <div class="plain_page_list">
+                                    <div class="plan_page_list">
                                         <ul>
                                             <li>Create Profile</li>
                                             <li>Search for industry professionals</li>
@@ -166,14 +171,14 @@
                                     </div>
                                 </div>
                                 <div class="plain_project p-3 my-2">
-                                    <div class="plain_page_list">
+                                    <div class="plan_page_list">
                                         <ul>
                                             <li>Create Profile</li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="plain_job p-3">
-                                    <div class="plain_page_list">
+                                    <div class="plan_page_list">
                                         <ul>
                                             <li>Create Profile</li>
                                         </ul>
@@ -198,7 +203,7 @@
                                     <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create')}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
                                 </div>
                                 <div class="plain_industry_guide p-3">
-                                    <div class="plain_page_list">
+                                    <div class="plan_page_list">
                                         <ul>
                                             <li>Create Profile</li>
                                             <li>Search for industry professionals</li>
@@ -208,14 +213,14 @@
                                     </div>
                                 </div>
                                 <div class="plain_project p-3 my-2">
-                                    <div class="plain_page_list">
+                                    <div class="plan_page_list">
                                         <ul>
                                             <li>Create Profile</li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="plain_job p-3">
-                                    <div class="plain_page_list">
+                                    <div class="plan_page_list">
                                         <ul>
                                             <li>Create Profile</li>
                                         </ul>
@@ -240,7 +245,7 @@
                                     <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create')}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
                                 </div>
                                 <div class="plain_industry_guide p-3">
-                                    <div class="plain_page_list">
+                                    <div class="plan_page_list">
                                         <ul>
                                             <li>Create Profile</li>
                                             <li>Search for industry professionals</li>
@@ -253,7 +258,7 @@
                                     </div>
                                 </div>
                                 <div class="plain_project p-3 my-2">
-                                    <div class="plain_page_list">
+                                    <div class="plan_page_list">
                                         <ul>
                                             <li>Create Profile</li>
                                             <li>Create Profile</li>
@@ -261,7 +266,7 @@
                                     </div>
                                 </div>
                                 <div class="plain_job p-3">
-                                    <div class="plain_page_list">
+                                    <div class="plan_page_list">
                                         <ul>
                                             <li>Create Profile</li>
                                         </ul>
@@ -339,6 +344,14 @@
             window.location.href = link+params;
           }
     })
+
+   
+ 
+    var overlays = document.querySelectorAll('.plain_industry_guide');
+for (var i=0; i < overlays.length; i++) {
+  console.log(overlays[i].offsetHeight)
+}
+
 
 </script>
 

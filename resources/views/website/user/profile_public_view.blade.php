@@ -88,9 +88,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-6">
-                            <div class="guide_profile_main_text mt-3">
-                                <p> Skills</p>
+                        <div class="col-md-5">
+                            <div class="guide_profile_main_text mt-3 mb-2">
+                                Skills
                             </div>
                             <div class="pr_10">
                                 @if (count($user_skills)>0)
@@ -105,9 +105,11 @@
                                 <span><b>-</b></span>
                                 @endif
                             </div>
-                            <div class="guide_profile_main_text mt-3">Available to Work In</div>
-                            <div class="inp_data Aubergine_at_night mt-2">{{ (!empty($user->available_to_work_in))?$user->available_to_work_in:'-'; }}</div>
-                            <div class="guide_profile_main_text mt-3">Languages Spoken</div>
+                            <div class="guide_profile_main_text mt-3 mb-2">Available to Work In</div>
+                            <div class="inp_data Aubergine_at_night">{{ (!empty($user->available_to_work_in))?$user->available_to_work_in:'-'; }}</div>
+                            <div class="guide_profile_main_text mt-3 mb-2">Languages Spoken</div>
+                            
+                            <div class="pr_10">
                             @if (count($user_languages)>0)
                                     @foreach ($user_languages as $k=>$v)
                                         <button class="curv_cmn_btn skill_container">
@@ -117,8 +119,10 @@
                             @else
                                 <span><b>-</b></span>
                             @endif
+                            </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-2"></div>
+                        <div class="col-md-5">
                             <div class="guide_profile_main_text mt-3">
                                 <p> Social Profile</p>
                             </div>
@@ -393,11 +397,11 @@
                     <div class="row mt-3">
                         <div class="col-md-3">
                             <div class="endorse_person_name">{{$edm['endorsementCreater']->name}}</div>
-                            <div class="inp_data Aubergine_at_night">{{$edm['endorsementCreater']->job_title?$edm['endorsementCreater']->job_title:"-"}}</div>
-                            <div class="guide_profile_main_subtext Aubergine_at_night">{{date('d F Y',strtotime($edm->created_at))}}</div>
+                            <div class="preview_subtext mt-0">{{$edm['endorsementCreater']->job_title?$edm['endorsementCreater']->job_title:"-"}}</div>
+                            <div class="date_text">{{date('d F Y',strtotime($edm->created_at))}}</div>
                         </div>
                         <div class="col-md-9">
-                            <div class="guide_profile_main_subtext Aubergine_at_night">
+                            <div class="preview_subtext">
                                 <p>
                                     {{$edm->comment}}
                                 </p>

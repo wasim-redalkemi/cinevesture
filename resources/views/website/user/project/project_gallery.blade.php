@@ -104,7 +104,7 @@
                                         <label for="upload-banner-inp">
                                             <div class="text-center">
                                                 <div>
-                                                    <i class="fa fa-plus-circle deep-pink icon-size" aria-hidden="true"></i>
+                                                    <i class="fa fa-plus-circle deep-pink plus-icon-size" aria-hidden="true"></i>
                                                 </div>
                                                 <div class="mt-3 movie_name_text">Upload file</div>
                                             </div>
