@@ -19,8 +19,8 @@
                     <h1>Favourites</h1>
                 </div>
                 <div class="guide_profile_main_text deep-pink mb-1">Projects</div>
-                <div class="">
                 <div class="row">
+                <div>
                     @php
                         $user_projects_data = $user_projects->toArray();
                                                     
@@ -51,7 +51,7 @@
                     @endforeach
                     @else
                     
-                    <div class="profile_wraper profile_wraper_padding mt-1">
+                    <div class="profile_wraper mt-1">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="not-found-text">
@@ -132,8 +132,8 @@
                 </div>            
                 @endforeach
                 @else
-                <div class="">
-                    <div class="profile_wraper profile_wraper_padding mt-1">
+                <div>
+                    <div class="profile_wraper mt-1">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="not-found-text">
