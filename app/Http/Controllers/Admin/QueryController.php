@@ -20,7 +20,7 @@ class QueryController extends AdminController
     {
         try {
            
-            $userQuerys = Query::query()->paginate($this->records_limit);
+            $userQuerys = Query::query()->orderBy('created_at', 'desc')->paginate($this->records_limit);
             
             return view('admin.query.list',compact('userQuerys'));
         } catch (\Throwable $e) {
