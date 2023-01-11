@@ -98,7 +98,7 @@
                                 @foreach($modules as $module)
                                 <div class="plain_industry_guide mb_2" style="position: relative;" id="myDivHeight">
                                     @if($flag == 0)
-                                    <div class="industry_guide_text">
+                                    <div class="industry_guide_text plan_module_elem" plan_elem = "{{strtolower(str_replace(' ','_',$module->name))}}">
                                         <span class="movie_name_text">{{$module->name}}</span>
                                     </div>
                                     @endif

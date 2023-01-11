@@ -169,7 +169,7 @@
     });
    $(".emp-select2").select2({
         closeOnSelect: false,
-        placeholder: "Employement Type",
+        placeholder: "Employment Type",
         allowClear: true,
         language: {
       noResults: function() {

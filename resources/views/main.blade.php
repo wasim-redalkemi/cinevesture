@@ -20,8 +20,8 @@
           <div class="item">
             <div class="home-upper-slider">
               <div class="img-container w_maxcont">
-                @if (!empty($v->projectImage->file_link) || isset($v->projectImage->file_link))
-                <img src="{{ Storage::url($v->projectImage->file_link) }}" alt="image">
+                @if (!empty($v->banner_image) || isset($v->banner_image))
+                <img src="{{ Storage::url($v->banner_image) }}" alt="image">
                 @else
                 <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">
                     
@@ -126,13 +126,13 @@
               <div class="container">
                 <div class="row">
                   <div class="col-md-12 carousel-header-text">
-                    <h1>{{$v->list_name}}</h1>
+                    <h1 class="slider_elem_title">{{$v->list_name}}</h1>
                   </div>
                 </div>
               </div>
               <div class="test owl-carousel owl-theme">
                 @foreach ($v->lists as $k1=>$v1)
-                <div class="home_img_wrap">
+                <div class="home_img_wrap owl_item_at_{{$k1}}">
                   <div class="home_slider">
                     <div class="main_img_elem_wrap">
                       <div class="img-container">
@@ -261,23 +261,40 @@
 
     $(".test.owl-carousel").owlCarousel({
       autoPlay: 1000,
-      autoplay: true,
+      // autoplay: true,
       // loop: true,
       nav: true,
       margin: 20,
       center: false,
       items: 1,
+      autoplayHoverPause: true,
       stagePadding: 50,
       responsive: {
         480: { items: 1 },
         768: { items: 2 },
-        1024: {
+        1080: {
+          items: 2.75
+        },
+        1225: {
+          items: 3.5
+        },
+        1400: {
           items: 4
         },
-        1550: {
-          items: 5
+        1925: {
+          items: 5.5
         }
       },
     });
+
+    var slider_elem_title = $('.slider_elem_title').offset();
+    var slider_elem_child = $('.owl_item_at_0').offset();
+    var leftLen = slider_elem_title.left;
+    var childLeftLen = slider_elem_child.left;  
+    console.log(leftLen);
+    console.log(childLeftLen);
+    var newLeftLen = ((leftLen-childLeftLen)+15);
+    
+    $('.test.owl-carousel .owl-item').css({"position": "relative","left":newLeftLen+"px"});
   </script>
 @endsection

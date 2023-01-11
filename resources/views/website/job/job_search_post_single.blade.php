@@ -55,7 +55,7 @@
                                     @endif
                                 </div>
                                 <div class="col-sm-3">
-                                    <div class="preview_headtext lh_54 candy-pink"> Employement type</div>
+                                    <div class="preview_headtext lh_54 candy-pink"> Employment Type</div>
                                     @if (count($Job_data['job_employements'])>0)
                                     @foreach ($Job_data['job_employements'] as $k=>$v)
                                         <div class="profile_upload_text Aubergine_at_night mt-2">{{$v['name']}}</div>
