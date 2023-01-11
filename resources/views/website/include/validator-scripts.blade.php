@@ -451,7 +451,7 @@
                     if (file) {
                         ImageCropperObj = new ImageCropper(uploadedFile,parentElemId+" #previewImg");
                         ImageCropperObj.setCropBoxSize({'width':300*2,height:200*2});
-                        ImageCropperObj.setAspectRatio(3/2);
+                        ImageCropperObj.setAspectRatio(7/4);
                         let ret = ImageCropperObj.init();
                         // $("#previewImg").attr("src",URL.createObjectURL(file)).show();
                         $(parentElemId+" .open_file_explorer label").hide();

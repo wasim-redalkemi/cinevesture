@@ -17,8 +17,8 @@
     <div class="main-slider-container">
         <div class="project_image_wraper">
             
-            @if (isset($projectData[0]['project_image']['file_link']))
-                <img src="{{ Storage::url($projectData[0]['project_image']['file_link']) }}" class="" alt="image">
+            @if (isset($projectData[0]['banner_image']))
+                <img src="{{ Storage::url($projectData[0]['banner_image']) }}" class="" alt="image">
             @else
                 <img src="{{ asset('images/asset/publicview-head-img.png') }}" class="" alt="image">
             @endif
@@ -170,7 +170,9 @@
 
                                     @endif
                                     <!-- <i class="fa fa-share-alt mx-4 icon-size" aria-hidden="true"></i> -->
-                                    <img src="{{ asset('images/asset/share_image.svg') }}" class="mx-3" alt="image">
+                                    <div class="for_copy_url">
+                                        <img title="Please copy the link" share_link="{{ route('public-view', ['id'=>$UserProject->id]) }}" src="{{ asset('images/asset/share_image.svg') }}" class="mx-3 pointer share_link" alt="image" title="">
+                                    </div>
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
                                         
                                     <div> <i class="fa <?php if(isset($UserProject->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
@@ -242,10 +244,10 @@
                         @endif
                     </div>
                     <div class="public-head-subtext mt-3">Photos</div>
-                    <div class="row">
+                    <div class="d-flex">
                         @if (!empty($projectData[0]['project_only_image']))
                         @foreach ($projectData[0]['project_only_image'] as $v)
-                        <div class="col-md-3 mt-3">
+                        <div class="mt-3 mr_3">
                             <div class="project_public_img_wrap image_responsive_wrap">
                                 <img src="{{ Storage::url($v['file_link']) }}" class="" width=100% alt="image">
                             </div>
@@ -399,12 +401,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="public-heading-text"> Associated With The Project</h1>
-                    <div class="col-6">
+                    <div class="col-7">
                         <table class="table mt-2 table_width">
                             <tbody class="search-table-body white">
                                 <tr>
                                     <td class="public-head-subtext candy-pink">Title</td>
-                                    <td class="project-sub-text candy-pink">
+                                    <td class="public-head-subtext candy-pink">
                                         Name
                                     </td>
                                 </tr>
@@ -470,7 +472,7 @@
                 <div class="col-md-12">
                     <h1 class="public-heading-text mb-2"> Related</h1>
 
-                    <div class="test owl-carousel owl-theme">
+                    <div class="related owl-carousel owl-theme">
                         <div class="home_img_wrap">
                             <div class="slider">
                                 <div class="img-container">
@@ -484,9 +486,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="home_img_wrap">
+                        <!-- <div class="home_img_wrap">
                             <img src="{{ asset('images/asset/publicview-head-img.png') }}" alt="image">
-                        </div>
+                        </div> -->
                         <div class="home_img_wrap">
                             <img src="{{ asset('images/asset/43710-posts 2.png') }}" alt="image">
                         </div>
@@ -607,27 +609,33 @@
         });
 
     });
-    $(".test.owl-carousel").owlCarousel({
+
+    $(".related.owl-carousel").owlCarousel({
         //   center: true,
         autoPlay: 1000,
-        autoplay: true,
+        // autoplay: true,
         //   loop: true,
-        nav: true,
-        margin: 10,
-        //   center: true,
-        items: 1,
-        stagePadding: 0,
-        responsive: {
-            480: {
-                items: 1
-            },
-            768: {
-                items: 2
-            },
-            1024: {
-                items: 4
-            }
+        margin: 20,
+      center: false,
+      items: 1,
+      autoplayHoverPause: true,
+      stagePadding: 0,
+      responsive: {
+        480: { items: 1 },
+        768: { items: 2 },
+        1080: {
+          items: 3
         },
+        1225: {
+          items: 3
+        },
+        1400: {
+          items: 4
+        },
+        1925: {
+          items: 5.5
+        }
+      },
     });
 </script>
 @endpush
