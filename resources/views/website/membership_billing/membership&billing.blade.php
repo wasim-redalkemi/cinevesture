@@ -1,6 +1,6 @@
 @extends('website.layouts.app',['class' => 'bg_white'])
 
-@section('title','Cinevesture-organisation')
+{{-- @section('title','Cinevesture-organisation') --}}
 
 @section('header')
 @include('website.include.header')
@@ -21,22 +21,26 @@
                         <h1>Membership and billing</h1>
                     </div>
                     <div class="guide_profile_main_text mt-4 deep-pink">Your Plan</div>
-                    <div class="guide_profile_main_subtext Aubergine_at_night">{{$subscription->plan_name}}</div>
+                    <div class="guide_profile_main_subtext Aubergine_at_night">@if (!empty($subscription->plan_name)) {{$subscription->plan_name}} @else <span><b>-</b></span> @endif</div>
                     <div class="guide_profile_main_text mt-4 deep-pink">Payment</div>
-                    <div class="guide_profile_main_subtext Aubergine_at_night">Your Cinevesture Pro ends on <b>{{date('d F Y',strtotime($subscription->subscription_end_date))}}.</b></div>
+                    <div class="guide_profile_main_subtext Aubergine_at_night">Your Cinevesture Pro ends on <b>@if (!empty($subscription->subscription_end_date)) {{strtoupper(date('jS F Y',strtotime($subscription->subscription_end_date)))}} @else <span><b>-</b></span> @endif.</b></div>
                     <div class="guide_profile_main_text mt-4 deep-pink">Billing Deatils</div>
                     <table>
                         <tr class="guide_profile_main_subtext Aubergine_at_night">
                             <td class="w-50">Plan Amount</td>
-                            <td class="w-50"> @if($subscription->currency == "USD")
-                                           $
-                                        @else
-                                           ₹
-                                        @endif {{$subscription->plan_amount}}</td>
+                            <td class="w-50">
+                                {{-- @if($subscription->currency == "USD")
+                                    $
+                                @else
+                                    ₹
+                                @endif --}}
+                                @if (!empty($subscription->plan_amount)) {{number_format($subscription->plan_amount, 0,'.',',')}} @else <span><b>-</b></span> @endif
+                                {{-- {{number_format($subscription->plan_amount, 0,'.',',')}} --}}
+                            </td>
                         </tr>
                         <tr class="guide_profile_main_subtext Aubergine_at_night">
                             <td class="w-50">Date</td>
-                            <td class="w-50">{{date('d F Y',strtotime($subscription->subscription_start_date))}}</td>
+                            <td class="w-50"> @if (!empty($subscription->subscription_start_date)) {{strtoupper(date('jS F Y',strtotime($subscription->subscription_start_date)))}} @else <span><b>-</b></span> @endif</td>
                         </tr>
                     </table>
                  
