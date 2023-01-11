@@ -61,7 +61,7 @@
                                 <div class="select2forError">
                                     <div class="profile_input">
                                         <label for="lang">Project specific Skills <span class = "steric_sign_design">*</span></label>
-                                        <select name="project_specific_skills_id[]" class="outline is-invalid-remove js-select2 @error('project_specific_skills_id') is-invalid @enderror" id="lang" multiple autofocus required>
+                                        <select name="project_specific_skills_id[]" class="outline is-invalid-remove js-select2 @error('project_specific_skills_id') is-invalid @enderror" multiple autofocus required>
                                             @foreach ($skills as $k=>$v)
                                             <option value="{{ $v->id }}">{{ $v->name }}</option>
                                             @endforeach
@@ -78,7 +78,7 @@
                             <div class="col-md-6">
                                     <div class="profile_input select2forError">
                                         <label for="lang">Portfolio Location (Where it took place) <span style = "color:red">*</span></label>
-                                        <select name="project_country_id[]" class="js-select2 @error('project_country_id') is-invalid @enderror" id="lang" multiple autofocus required>
+                                        <select name="project_country_id[]" class="js-select2 @error('project_country_id') is-invalid @enderror"  multiple autofocus required>
                                             @foreach ($country as $k=>$v)
                                             <option value="{{ $v->id}}">{{ $v->name }}</option>
                                             @endforeach

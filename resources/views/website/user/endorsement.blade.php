@@ -82,7 +82,7 @@ input:checked + .slider:before {
             </div>
             <div class="col-md-9">
                 <div class="profile_text mt-2"><h1>Endorsements</h1></div>
-                @if(isset($endorsement))
+                @if(isset($endorsement) && count($endorsement))
                 @foreach($endorsement as $edm)
                 <div class="profile_wraper profile_wraper_padding my-4">
                   <div class="row">
@@ -115,7 +115,7 @@ input:checked + .slider:before {
                 </div>
                 @endforeach
                  @else
-                 <div class="profile_text" style="text-align: center;"><h1>No Data Found</h1></div>
+                 {!! config('constants.NO_DATA_FAVOURITE') !!}
 
                 @endif
                 {!! $endorsement->links() !!}

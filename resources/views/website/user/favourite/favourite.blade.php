@@ -50,15 +50,8 @@
                 </div>                 
                     @endforeach
                     @else
-                    <div class="profile_wraper mt-1">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="not-found-text">
-                                    <p>No Data Found</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    {!! config('constants.NO_DATA_FAVOURITE') !!}
+
                     @endif
                     <div>
                         {!! $user_projects->links() !!}
@@ -131,15 +124,8 @@
                 </div>            
                 @endforeach
                 @else
-                    <div class="profile_wraper mt-1">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="not-found-text">
-                                    <p>No Data Found</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                {!! config('constants.NO_DATA_FAVOURITE') !!}
+
                 </div>
                 @endif
                 <div>

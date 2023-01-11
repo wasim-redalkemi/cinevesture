@@ -317,9 +317,7 @@
                 </a>
                 @endforeach
                 @else
-                <div class="not-found-text">
-                    <p>No Project Found</p>
-                </div>
+                {!! config('constants.NO_DATA_SEARCH') !!}
                 @endif
                 <div>
                     {!! $projects ->links() !!}

@@ -25,6 +25,8 @@ class CreatePlansTable extends Migration
             $table->integer('free_trail_days')->nullable();
             $table->integer('plan_time_quntity');
             $table->enum('status',['active','inactive']);
+            $table->string('description',500);
+
             // $table->string('project_category',100);
             $table->timestamps();
             $table->softDeletes();

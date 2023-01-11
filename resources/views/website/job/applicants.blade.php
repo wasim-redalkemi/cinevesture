@@ -26,27 +26,23 @@ use Illuminate\Support\Facades\DB;
                             Applicants for “{{$jobTitle}}”
                         </div>
                     </div>
+                    @if (isset($applicants) && count($applicants)>1)                   
+                        
                     @foreach($applicants as $applicant)
                     <div class="border_btm profile_wraper_padding">
-
                         <div class="d-flex justify-content-between">
                             <div class="d-flex">
                                 <div class="user_profile_container">
                                     <img src="{{asset($applicant->profile_image) }}" />
                                 </div>
-                                <!-- </div>
-                        <div class=""> -->
                                 <div class="mx-4">
                                     <div class="guide_profile_main_text">
                                         <a href="{{route('showAppliedJobCoverLetter',['jobId'=>$jobId,'userId'=>$applicant->id])}}">
                                             {{$applicant->first_name.' '.$applicant->last_name}}
                                         </a>
                                     </div>
-
                                     @php
-
-                                    $data = DB::select("SELECT mc.name AS location, uo.name AS company FROM `user_organisations` uo INNER JOIN master_countries mc ON mc.id=uo.location_in WHERE user_id=$applicant->id");
-
+                                        $data = DB::select("SELECT mc.name AS location, uo.name AS company FROM `user_organisations` uo INNER JOIN master_countries mc ON mc.id=uo.location_in WHERE user_id=$applicant->id");
                                     @endphp
                                     <div class="preview_headtext lh_54 candy-pink">
                                         {{@$data[0]->company.' - '.@$data[0]->location}}
@@ -65,6 +61,9 @@ use Illuminate\Support\Facades\DB;
                         </div>
                     </div>
                     @endforeach
+                    @else
+                        {!! config('constants.NO_DATA_FAVOURITE_NO_CARD') !!}                        
+                    @endif
                 </div>
             </div>
         </div>

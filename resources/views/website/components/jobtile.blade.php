@@ -50,8 +50,9 @@
     @endforeach
 </div>
 @if(blank($jobs))
-    <div class="text-center mt-5">
+    {{-- <div class="text-center mt-5">
         <h1>{{$notFoundMessage}}</h1>
-    </div>
+    </div> --}}
+   {!! config('constants.NO_DATA_SEARCH') !!}
     @endif
 {{$jobs->links()}}

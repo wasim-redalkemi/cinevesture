@@ -65,7 +65,7 @@
                             <div class="plan_card">
                                 <div class="plain_detail">
                                     <div class="plain_header text-center">{{$plan->plan_name}}</div>
-                                    <div class="plan_subheader mt-2">Great for those who want to get themselves in front of the right people in the industry</div>
+                                    <div class="plan_subheader mt-2">{{$plan->description}}</div>
                                 </div>
                                 <div class="Plain_price">
                                     @if($plan->plan_name == "Free")
@@ -78,16 +78,10 @@
                                         Annually
                                         @endif</div>
                                     @endif
-                                    <div class="search-head-text Aubergine_at_night">
-                                        @if($plan->currency == "USD")
-                                           $
-                                        @else
-                                           ₹
-                                        @endif
-                                        {{ number_format((float)$plan->plan_amount, 2, '.', ',')}}
+                                    <div class="search-head-text Aubergine_at_night">@if($plan->currency == "USD")$@else₹@endif{{ number_format((float)$plan->plan_amount, 2, '.', ',')}}
                                     </div>
                                     @if($plan->plan_time == "y")                                           
-                                        <div class="search-head-subtext Aubergine_at_night mt-3">(@if($plan->currency == "USD")$@else₹@endif{{ number_format($plan->plan_amount/12, 0,'.',',')}}/month)</div>
+                                        <div class="search-head-subtext Aubergine_at_night mt-3">(@if($plan->currency == "USD")$@else₹@endif{{ number_format($plan->plan_amount/12, 2,'.',',')}}/month)</div>
                                     @endif
 
                                     <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
