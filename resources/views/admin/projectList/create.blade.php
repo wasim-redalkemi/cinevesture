@@ -16,14 +16,14 @@
                               <div class="col-md-6">
                                 <div class="form-group">
                                         <label>Name</label>
-                                        <input type="text" class="form-control form-control-lg" name="name" placeholder="List name" aria-label="Username">
+                                        <input type="text" class="form-control form-control-lg" name="name" placeholder="List name" aria-label="Username" required>
                                 </div>
                               </div>
                               <div class="col-md-6">
                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Status</label>
-                                        <select  name="status"class="form-control form-control-lg" id="listStatus">
-                                        <option value="publish">Select</option>
+                                        <label for="exampleFormControlSelect1">Status</label required>
+                                        <select  name="status"class="form-control form-control-lg" id="listStatus" required>
+                                        <option value="">Select</option required>
                                         <option value="published">Publish</option>
                                         <option value="unpublished">Unpublish</option>
                                         </select>
