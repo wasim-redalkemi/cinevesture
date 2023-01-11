@@ -86,14 +86,17 @@
 
                                     <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
                                 </div>
+                                @php 
+                                   $lc = 0;
+                                @endphp
                                 @foreach($modules as $module)
                                 <div class="plain_industry_guide mb_2" style="position: relative;" id="myDivHeight">
                                     @if($flag == 0)
-                                    <div class="industry_guide_text plain_industry_guide">
+                                    <div class="industry_guide_text">
                                         <span class="movie_name_text">{{$module->name}}</span>
                                     </div>
                                     @endif
-                                    <div class="plan_page_list p-3">
+                                    <div class="plan_page_list p-3 plan_module_elem" plan_elem = "{{strtolower(str_replace(' ','_',$module->name))}}">
                                         <ul>
                                             @foreach($plan->getRelationalData as $relation )
 
@@ -345,10 +348,27 @@
 
    
  
-    var overlays = document.querySelectorAll('.plain_industry_guide');
-for (var i=0; i < overlays.length; i++) {
-  console.log(overlays[i].offsetHeight)
-}
+    var elem_arr = {};
+    $('.plan_module_elem').each(function(k,v)
+    {
+        let elem_height = $(v).outerHeight();
+        if($.inArray($(v).attr('plan_elem'),elem_arr)==-1)
+        {
+            elem_arr[$(v).attr('plan_elem')] = elem_height;
+        }
+        else
+        {
+            if(elem_arr[$(v).attr('plan_elem')]<elem_height)
+            {
+                elem_arr[$(v).attr('plan_elem')] = elem_height;
+            }
+        }
+        
+    });
+    $.each(elem_arr,function(k,v)
+    {
+        $("[plan_elem="+k+"]").css('height',v+'px');
+    })
 
 
 </script>
