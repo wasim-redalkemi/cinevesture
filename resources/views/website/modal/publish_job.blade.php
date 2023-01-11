@@ -1,6 +1,6 @@
 @extends('website.layouts.app',['class' => 'bg_white'])
 
-@section('title','Cinevesture-organisation')
+{{-- @section('title','Cinevesture-organisation') --}}
 @section('content')
         <section>
             <div class="container">

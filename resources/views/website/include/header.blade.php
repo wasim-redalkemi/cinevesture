@@ -3,7 +3,7 @@
 @php
     $routes = [
         "home"=>["id"=>"project","title"=>"Projects","siblingRoutes"=>[]],
-        "show-guide"=>["id"=>"industry_guide","title"=>"Industry Guide","siblingRoutes"=>[]],
+        "show-guide"=>["id"=>"industry_guide","title"=>"Industry Guide","siblingRoutes"=>["guide-view"]],
         "job-search-page"=>["id"=>"jobs","title"=>"Jobs","siblingRoutes"=>["showJobSearchResults","showApplyJob"]],        
     ];
     $currentPath = Request::path();

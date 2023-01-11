@@ -1,6 +1,6 @@
 @extends('website.layouts.app',['class' => 'bg_white'])
 
-@section('title','Project-details')
+{{-- @section('title','Project-details') --}}
 
 @section('header')
 @include('website.include.header')
@@ -25,8 +25,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="profile_input select2forError">
-                                    <label>Category (Optional)</label>
-                                    <select name="category_id[]" id="leadadd_mode_of_enq" name="leadadd_mode_of_enq" class=" @error('category_id') is-invalid @enderror" autofocus required>
+                                    <label>Category</label>
+                                    <select name="category_id[]" id="leadadd_mode_of_enq" name="leadadd_mode_of_enq" class=" @error('category_id') is-invalid @enderror" autofocus>
                                         <option value="">Select</option>
                                         @foreach ($category as $k=>$v)
                                             <option value="{{ $v->id }}"@if(!empty($projectData[0]['project_category'] )&&(in_array($v->id, $projectData[0]['project_category'])))selected @endif>{{  $v->name }}</option>

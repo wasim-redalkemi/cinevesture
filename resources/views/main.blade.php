@@ -1,6 +1,6 @@
 @extends('website.layouts.app')
 
-@section('title','Cinevesture-index')
+{{-- @section('title','Cinevesture-index') --}}
 
 @section('header')
     @include('website.include.header')

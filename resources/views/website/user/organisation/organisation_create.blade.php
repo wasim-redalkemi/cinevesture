@@ -1,6 +1,6 @@
 @extends('website.layouts.app',['class' => 'bg_white'])
 
-@section('title','Cinevesture-organisation-create')
+{{-- @section('title','Cinevesture-organisation-create') --}}
 
 @section('header')
 @include('website.include.header')

@@ -32,12 +32,12 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {   $countries = MasterCountry::all();
-        $languages = MasterLanguage::all();
-        $geners = MasterProjectGenre::all();
-        $categories = MasterProjectCategory::all();
-        $looking_for = MasterLookingFor::all();
-        $project_stages = ProjectStage::all();
+    {   $countries = MasterCountry::query()->orderBy('name', 'ASC')->get();
+        $languages = MasterLanguage::query()->orderBy('name', 'ASC')->get();
+        $geners = MasterProjectGenre::query()->orderBy('name', 'ASC')->get();
+        $categories = MasterProjectCategory::query()->orderBy('name', 'ASC')->get();
+        $looking_for = MasterLookingFor::query()->orderBy('name', 'ASC')->get();
+        $project_stages = ProjectStage::query()->orderBy('name', 'ASC')->get();
         
         $project_list_project = ProjectList::query()->where('status','published')->with(['lists'=>function($q){
             $q->where('admin_status','active')

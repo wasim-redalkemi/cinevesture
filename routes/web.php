@@ -36,9 +36,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/test', function () {
     return view('website.job.myjob');
 });
-Route::get('/', function () {
-    return view('website.auth.login');
-});
 Auth::routes(['verify' => true]);
 
 
@@ -64,7 +61,9 @@ Route::prefix('google')->name('google.')->group( function(){
 Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
     
     // check plans permission
-  
+    Route::get('/', function () {
+        return redirect('home');
+    });  
     Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('plancheck');
 
     Route::group(['prefix' => 'ajax'],function(){

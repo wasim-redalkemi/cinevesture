@@ -1,6 +1,6 @@
 @extends('website.layouts.auth')
 
-@section('title','Cinevesture-Register')
+{{-- @section('title','Cinevesture-Register') --}}
 
 @section('header')
 @include('website.auth.guest_header')

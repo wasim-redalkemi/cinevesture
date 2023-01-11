@@ -1,6 +1,6 @@
 @extends('website.layouts.app',['class' => 'bg_white'])
 
-@section('title','Cinevesture-organisation')
+{{-- @section('title','Cinevesture-organisation') --}}
 
 @section('header')
 @include('website.include.header')
@@ -197,9 +197,7 @@
                 @endforeach
                 @else
                 </div>
-                <div class="not-found-text">
-                    <p>No Profile Found</p>
-                </div>
+                {!! config('constants.NO_DATA_SEARCH') !!}
                 @endif
                 <div>
                     {!! $users->links() !!}

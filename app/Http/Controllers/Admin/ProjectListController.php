@@ -14,6 +14,7 @@ use Exception;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 use PhpParser\Node\Expr\FuncCall;
 
 class ProjectListController extends AdminController
@@ -48,12 +49,22 @@ class ProjectListController extends AdminController
     {
         try
         {
+            $validator = Validator::make($request->all(),[
+                'name' => 'required',
+                'status' => 'required',
+                  
+            ]);
+            if ($validator->fails()) {
+                Session::flash('response', ['text'=>'Project list name update successfully!','type'=>'danger']);
+               return back();
+            }else{
             $project_list= new ProjectList();
             $project_list->list_name=$request->name;
             $project_list->status=$request->status;
             $project_list->save();
             // Session::flash('response', ['text'=>'Project create successfully!','type'=>'success']);
              return redirect()->route('show-list');
+            }
         }
         catch (Exception $e)
         {
@@ -321,13 +332,25 @@ class ProjectListController extends AdminController
     public function project_list_update(request $request)
     {
         try {
+            $validator = Validator::make($request->all(),[
+                'name' => 'required',
+                'status' => 'required',
+                  
+            ]);
+            if ($validator->fails()) {
+                Session::flash('response', ['text'=>'Project list name update successfully!','type'=>'danger']);
+                
+               return back();
+            }
             $projectList=ProjectList::query()->where('id',$request->id)->first();
             $projectList->list_name=$request->name;
+            $projectList->status=$request->status;
             $projectList->save();
             
             Session::flash('response', ['text'=>'Project list name update successfully!','type'=>'success']);
             return redirect()->route('show-list');
             // toastr() ->success('Promote update successfully!', 'Congrats');
+            
             
         } catch (\Throwable $e) {
             $e->getMessage();

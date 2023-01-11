@@ -1,6 +1,6 @@
 @extends('website.layouts.app',['class' => 'bg_white'])
 
-@section('title','Cinevesture-organisation')
+{{-- @section('title','Cinevesture-organisation') --}}
 
 @section('header')
 @include('website.include.header')
@@ -82,15 +82,15 @@ input:checked + .slider:before {
             </div>
             <div class="col-md-9">
                 <div class="profile_text mt-2"><h1>Endorsements</h1></div>
-                @if(isset($endorsement))
+                @if(isset($endorsement) && count($endorsement))
                 @foreach($endorsement as $edm)
                 <div class="profile_wraper profile_wraper_padding my-4">
                   <div class="row">
                     <div class="col-md-3">
-                        <div class="guide_profile_main_text deep-pink">{{$edm['endorsementCreater']->name}}</div>
-                        <div class="preview_subtext mt-0">{{$edm['endorsementCreater']->job_title}} </div>
-                        <div class="profile_upload_text Aubergine_at_night fw_300">{{strtoupper(date('jS F Y',strtotime($edm->created_at)))}}</div>
-                        <div class="preview_subtext mt-0">{{isset($edm['endorsementCreater']['organization']->name)?$edm['endorsementCreater']['organization']->name:NULL}}</div>
+                        <div class="guide_profile_main_text deep-pink">{{!empty($edm['endorsementCreater']->name)?$edm['endorsementCreater']->name:'-'}}</div>
+                        <div class="preview_subtext mt-0">{{!empty($edm['endorsementCreater']->job_title)?$edm['endorsementCreater']->job_title:'-'}} </div>
+                        <div class="profile_upload_text Aubergine_at_night fw_300">{{!empty($edm->created_at)?strtoupper(date('jS F Y',strtotime($edm->created_at))):'-'}}</div>
+                        <div class="preview_subtext mt-0">{{!empty($edm['endorsementCreater']['organization']->name)?$edm['endorsementCreater']['organization']->name:'-'}}</div>
                     </div>
                     <div class="col-md-7">
                         <div class="guide_profile_main_text Aubergine_at_night">@if ($edm->status == 1)
@@ -115,7 +115,7 @@ input:checked + .slider:before {
                 </div>
                 @endforeach
                  @else
-                 <div class="profile_text" style="text-align: center;"><h1>No Data Found</h1></div>
+                 {!! config('constants.NO_DATA_FAVOURITE') !!}
 
                 @endif
                 {!! $endorsement->links() !!}
