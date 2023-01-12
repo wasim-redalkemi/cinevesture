@@ -35,31 +35,36 @@
                         <div class="guide_profile_subsection" id="Documents">
                             <div class="guide_profile_main_text mt-3">Resume/CV<em class="text-danger mx-1">*</em></div>
                             <div class="preview_subtext deep_aubergine mt-3">Please Attach Your Resume</div>
-                            <div id="Documents" class="add_content_wraper">
-                                <label for="upload-doc-inp" class="d-block">
-                                    <div class="d-flex align-items-center mt-3">
-                                        <div><i class="fa fa-paperclip aubergine icon-size" aria-hidden="true"></i></div>
-                                        <div class="upload_resume_text mx-2">Upload Your Resume/CV</div>
-                                        <input type="file" accept="application/pdf,application/msword" name="resume" class="form-control @error('resume') is-invalid @enderror docInp d-none" id="upload-doc-inp" autofocus required>
-                                        @error('resume')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="col-md-3">
-                                        <div class="document_pdf mt-2">
-                                            <div class="upload_loader">
-                                                <img src="{{ asset('images/asset/pdf_image.svg') }}" alt="image">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div id="Documents" class="add_content_wraper">
+                                        <label for="upload-doc-inp" class="d-block">
+                                            <div class="d-flex align-items-center mt-3">
+                                                <div><i class="fa fa-paperclip aubergine icon-size" aria-hidden="true"></i></div>
+                                                <div class="upload_resume_text mx-2">Upload Your Resume/CV</div>
+                                                <input type="file" accept="application/pdf,application/msword" name="resume" class="form-control @error('resume') is-invalid @enderror docInp d-none" id="upload-doc-inp" autofocus required>
+                                                @error('resume')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                                @enderror
                                             </div>
-                                            <div class="mx-2">
-                                                <div class="uploadedPdf mx-2"></div>
+        
+                                        </label>
+                                            <div class="">
+                                                <div class="document_pdf mt-2 justify-content-between">
+                                                    <div class="upload_loader">
+                                                        <img src="{{ asset('images/asset/pdf_image.svg') }}" alt="image">
+                                                    </div>
+                                                    <div class="mx-2">
+                                                        <div class="uploadedPdf mx-2 forWordBreak"></div>
+                                                    </div>
+                                                    <div class="delete_file"><i class="fa fa-times" aria-hidden="true"></i></div>
+                                                </div>
                                             </div>
-                                        </div>
+        
                                     </div>
-
-                                </label>
+                                </div>
                             </div>
                         </div>
                         <div class="guide_profile_subsection">
@@ -131,11 +136,21 @@
 @push('scripts')
 <script>
     $(".document_pdf").fadeOut(100)
+     
+    // console.log($('.apply_job_form').attr('src'));
+    // if ( $('.apply_job_form').attr('src') != '') {
+    //     $(".document_pdf").fadeIn(100)
+    // }
     $("#apply_job_form").change(function(e) {
+        console.log($(".uploadedPdf").text(""));
         $(".uploadedPdf").text("")
         let resume = $("#upload-doc-inp")[0].files[0]
         $(".document_pdf").fadeIn(100)
         $(".uploadedPdf").text(resume.name)
+    })
+    $(".delete_file").click(function () {
+        $(".uploadedPdf").text("")
+         $(".document_pdf").fadeOut(100)
     })
     $("#apply_job_form").on("submit", function(e) {
         e.preventDefault();
