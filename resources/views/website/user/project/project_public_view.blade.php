@@ -32,7 +32,7 @@
                             <div class="verified-text-area">
                                 <div class="public-head-text">
                                     @if (!empty(($UserProject->project_name)))
-                                    {{ ucfirst($UserProject->project_name) }}
+                                    <span style="text-shadow: 2px 2px #971E9B">    {{ ucfirst($UserProject->project_name) }}</span>
                                     @else
                                     <span><b>-</b></span>
                                     @endif
@@ -44,7 +44,7 @@
                             </div>
                             <div class="public-head-subtext">
                                 @if (isset($UserProject->logline))
-                                {{ $UserProject->logline}}
+                                <span style="text-shadow: 2px 2px #971E9B">    {{ $UserProject->logline}}</span>
                                 @else
                                 <span><b>-</b></span>
                                 @endif
@@ -152,11 +152,11 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-md-2 col-md-0"></div>
-                        <div class="col-lg-4 col-md-12 px-3">
+                        <div class="col-md-1 col-md-0"></div>
+                        <div class="col-lg-5 col-md-12 px-3">
                             <div class="public-head-subimage">
-                                <div class="playVideoWrap br_4 mt-3" video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link'] }}@endif">
-                                    <img src="@if (isset($projectData[0]['project_only_video'][0]['media_info'])){{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}@endif" alt="" class="br_4">
+                                <div class="playVideoWrapForheader br_4 mt-3" video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link'] }}@endif">
+                                    <img src="@if (isset($projectData[0]['project_only_video'][0]['media_info'])){{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}@endif" alt="" class="br_4 w-100">
                                 </div>
                                 {{-- <iframe width="" height="" src="{{empty($projectData[0]['project_only_video'][0]['file_link'])?'https://www.youtube.com/embed/oYWAwwy5EbQ':$projectData[0]['project_only_video'][0]['file_link'];}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> --}}
                                 <!-- <img src="{{ asset('images/asset/download (3) 7.png') }}" width=100% alt="Image"> -->
@@ -170,9 +170,9 @@
 
                                     @endif
                                     <!-- <i class="fa fa-share-alt mx-4 icon-size" aria-hidden="true"></i> -->
-                                    <div class="for_copy_url">
+                                    <!-- <div class="for_copy_url">
                                         <img title="Please copy the link" share_link="{{ route('public-view', ['id'=>$UserProject->id]) }}" src="{{ asset('images/asset/share_image.svg') }}" class="mx-3 pointer share_link" alt="image" title="">
-                                    </div>
+                                    </div> -->
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
                                         
                                     <div> <i class="fa <?php if(isset($UserProject->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
@@ -244,7 +244,7 @@
                         @endif
                     </div>
                     <div class="public-head-subtext mt-3">Photos</div>
-                    <div class="d-flex">
+                    <div class="d-flex flex-wrap">
                         @if (!empty($projectData[0]['project_only_image']))
                         @foreach ($projectData[0]['project_only_image'] as $v)
                         <div class="mt-3 mr_3">
@@ -637,5 +637,30 @@
         }
       },
     });
+</script>
+<script>
+
+//     $(".for_copy_url").click( function (e) {
+        
+//         let dataForCopy = $('.share_link').attr('src')
+
+//         const copyContent = async () => {
+//     try {
+//       await navigator.clipboard.writeText(dataForCopy);
+//       console.log('Content copied to clipboard');
+//     } catch (err) {
+//       console.error('Failed to copy: ', err);
+//     }
+//   }
+  
+//   copyContent()
+//     } )
+
+    document.addEventListener('copy', function(e){
+    e.clipboardData.setData('text/plain', $('.share_link').attr('src'));
+        e.preventDefault();
+    });
+    document.execCommand('copy');
+    console.log($('.share_link').attr('src'));
 </script>
 @endpush

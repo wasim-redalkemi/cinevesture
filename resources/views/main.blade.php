@@ -34,12 +34,12 @@
                     <div class="col-md-12">
                       <div class="project-text mt-5 pt-2">
                         @if (!empty($v->project_name))
-                        {{$v->project_name}}
+                      <span style="text-shadow: 2px 2px #971E9B">  {{$v->project_name}}</span>
                         @endif
                       </div>
                       <div class="project-sub-text mt-1">
                         @if (!empty($v->logline))
-                        {{$v->logline}}
+                        <span style="text-shadow: 2px 2px #971E9B">  {{$v->logline}}</span>
                         @endif
                       </div>
                       <div class="duration-lang-text mt-1">
@@ -260,9 +260,9 @@
     });
 
     $(".test.owl-carousel").owlCarousel({
-      autoPlay: 1000,
-      // autoplay: true,
-      // loop: true,
+      autoplayTimeout: 3000,
+      autoplay: true,
+      loop: true,
       nav: true,
       margin: 20,
       center: false,

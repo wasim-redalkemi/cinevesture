@@ -50,18 +50,19 @@
                                                 @enderror
                                             </div>
         
+                                        </label>
                                             <div class="">
-                                                <div class="document_pdf mt-2">
+                                                <div class="document_pdf mt-2 justify-content-between">
                                                     <div class="upload_loader">
                                                         <img src="{{ asset('images/asset/pdf_image.svg') }}" alt="image">
                                                     </div>
                                                     <div class="mx-2">
-                                                        <div class="uploadedPdf mx-2"></div>
+                                                        <div class="uploadedPdf mx-2 forWordBreak"></div>
                                                     </div>
+                                                    <div class="delete_file"><i class="fa fa-times" aria-hidden="true"></i></div>
                                                 </div>
                                             </div>
         
-                                        </label>
                                     </div>
                                 </div>
                             </div>
@@ -136,16 +137,20 @@
 <script>
     $(".document_pdf").fadeOut(100)
      
-    console.log($('.apply_job_form').attr('src'));
-    if ( $('.apply_job_form').attr('src') != '') {
-        $(".document_pdf").fadeIn(100)
-    }
+    // console.log($('.apply_job_form').attr('src'));
+    // if ( $('.apply_job_form').attr('src') != '') {
+    //     $(".document_pdf").fadeIn(100)
+    // }
     $("#apply_job_form").change(function(e) {
         console.log($(".uploadedPdf").text(""));
         $(".uploadedPdf").text("")
         let resume = $("#upload-doc-inp")[0].files[0]
-        // $(".document_pdf").fadeIn(100)
+        $(".document_pdf").fadeIn(100)
         $(".uploadedPdf").text(resume.name)
+    })
+    $(".delete_file").click(function () {
+        $(".uploadedPdf").text("")
+         $(".document_pdf").fadeOut(100)
     })
     $("#apply_job_form").on("submit", function(e) {
         e.preventDefault();

@@ -171,7 +171,7 @@
                     <div class="video_slider owl-carousel">
                         @if (!empty($projectData[0]['project_only_image']))
                         @foreach ($projectData[0]['project_only_image'] as $v)
-                        <div class="item">
+                        <div class="item preview_image_wrape" style="overflow: hidden;">
                             <div class="home_img_wrap"> <img src="{{ Storage::url($v['file_link']) }}" alt="image"></div>
                             <div class="d-flex align-items-initial mt-2">
                                 <div class="movie_name_text mt-0">{{ json_decode($v['media_info'])->title }}</div>
