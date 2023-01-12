@@ -491,9 +491,9 @@
         <div class="public_subsection">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="public-heading-text mb-2"> {{$recomProject}}Related</h1>
+                    <h1 class="public-heading-text mb-2"> Related</h1>
                     
-                    <div class="test owl-carousel owl-theme">
+                    <div class="related owl-carousel owl-theme">
                         @foreach ($recomProject as $value)
                         <div class="home_img_wrap">
                            
