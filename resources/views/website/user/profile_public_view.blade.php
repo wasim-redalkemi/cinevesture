@@ -44,7 +44,7 @@
 
                             <!-- Contact modal  -->
                             @include('website.modal.contact', [                                         
-                                'image' => (!empty($user->profile_image)?$user->profile_image:asset('images/asset/user-profile.png')),
+                                'image' => (!empty($user->profile_image)?$user->profile_image:''),
                                 'name' => empty($user->first_name)?'Name':ucfirst($user->first_name).' '.ucfirst($user->last_name),
                                 'title' =>empty($user->job_title)?'Job Title':ucfirst($user->job_title), 
                                 'email' =>empty($user->email)?'Email':$user->email, 
