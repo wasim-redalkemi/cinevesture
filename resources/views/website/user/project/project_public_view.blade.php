@@ -17,7 +17,10 @@
     <div class="main-slider-container">
         <div class="project_image_wraper">
             
-            @if (isset($projectData[0]['banner_image']))
+            
+            @if (isset($projectData[0]['project_image']['file_link']))
+                {{-- <img src="{{ Storage::url($projectData[0]['project_image']['file_link']) }}" class="" alt="image">  FOR FEATURED IMAGE --}}
+                {{-- FOR FEATURED IMAGE  --}}
                 <img src="{{ Storage::url($projectData[0]['banner_image']) }}" class="" alt="image">
             @else
                 <img src="{{ asset('images/asset/publicview-head-img.png') }}" class="" alt="image">
@@ -170,9 +173,14 @@
 
                                     @endif
                                     <!-- <i class="fa fa-share-alt mx-4 icon-size" aria-hidden="true"></i> -->
-                                    <!-- <div class="for_copy_url">
-                                        <img title="Please copy the link" share_link="{{ route('public-view', ['id'=>$UserProject->id]) }}" src="{{ asset('images/asset/share_image.svg') }}" class="mx-3 pointer share_link" alt="image" title="">
-                                    </div> -->
+                                    {{-- <img src="{{ asset('images/asset/share_image.svg') }}" class="mx-3" alt="image"> --}}
+
+                                      
+                                          <div class="clipboard pointer"><img src="{{ asset('images/asset/share_image.svg') }}" class="mx-3" alt="image"></div>
+                                          <p class="mb-0"></p>
+                                       
+
+
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
                                         
                                     <div> <i class="fa <?php if(isset($UserProject->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
@@ -243,13 +251,30 @@
                         <span class="text-light"><b>-</b></span>
                         @endif
                     </div>
+                    <div class="public-head-subtext mt-3">Banner Photo</div>
+                    <div class="row">
+                        @if (!empty($projectData[0]['banner_image']))
+                        <div class="col-md-3 mt-3">
+                            <div class="project_public_img_wrap image_responsive_wrap">
+                                <a href="{{ Storage::url($projectData[0]['banner_image']) }}" target="_blank" rel="noopener noreferrer">
+                                    <img src="{{ Storage::url($projectData[0]['banner_image']) }}" class="" width=100% alt="image">
+                                </a>
+                            </div>
+                        </div>
+                        @else
+                        <span class="text-light"><b>-</b></span>
+                        @endif
+                    </div>
+
                     <div class="public-head-subtext mt-3">Photos</div>
                     <div class="d-flex flex-wrap">
                         @if (!empty($projectData[0]['project_only_image']))
                         @foreach ($projectData[0]['project_only_image'] as $v)
                         <div class="mt-3 mr_3">
                             <div class="project_public_img_wrap image_responsive_wrap">
-                                <img src="{{ Storage::url($v['file_link']) }}" class="" width=100% alt="image">
+                                <a href="{{ Storage::url($v['file_link']) }}" target="_blank" rel="noopener noreferrer">
+                                    <img src="{{ Storage::url($v['file_link']) }}" class="" width=100% alt="image">
+                                </a>
                             </div>
                         </div>
                         @endforeach
@@ -269,17 +294,19 @@
                     @if (!empty($projectData[0]['project_only_doc']))
                     @foreach ($projectData[0]['project_only_doc'] as $v)
                     <div class="col-md-3 col-8 mt-3">
-                        <div class="document_pdf document_pdf_project">
-                            <div class="upload_loader">
-                                <img src="{{ asset('images/asset/pdf_image.svg') }}" alt="image">
+                        <a href="{{Storage::url($v['file_link'])}}" download>
+                            <div class="document_pdf document_pdf_project">
+                                <div class="upload_loader">
+                                    <img src="{{ asset('images/asset/pdf_image.svg') }}" alt="image">
+                                </div>
+                                <div class="mx-3">
+                                    <div class="public_view_main_subtext">{{ json_decode($v['media_info'])->name }}</div>
+                                    <div class="proctect_by_capta_text">{{ json_decode($v['media_info'])->size_label }}</div>
+                                </div>
                             </div>
-                            <div class="mx-3">
-                                <div class="public_view_main_subtext">{{ json_decode($v['media_info'])->name }}</div>
-                                <div class="proctect_by_capta_text">{{ json_decode($v['media_info'])->size_label }}</div>
-                            </div>
-                            </div>
-                        </div>
-                        @endforeach
+                        </a>
+                    </div>
+                    @endforeach
                     @else
                     <span class="text-light"><b>-</b></span>
                     @endif
@@ -349,8 +376,8 @@
                                         @php $isEmpty = false;@endphp
                                         <tr>
                                             <td class="public-head-subtext white">{{ ucFirst($v['description']) }}</td>
-                                            <td class="aubergine project-sub-text white">{{ $v['budget'] }}</td>
-                                            <td class="aubergine project-sub-text white">{{ $v['target_date'] }}</td>
+                                            <td class="aubergine project-sub-text white">{{ '$'.number_format($v['budget'], 0,'.',',') }}</td>
+                                            <td class="aubergine project-sub-text white">{{ strtoupper(date('jS F Y',strtotime($v['target_date']))) }}</td>
                                         </tr>
                                         @endif
                                         @endforeach
@@ -374,8 +401,8 @@
                                         @php $isEmpty = false;@endphp
                                         <tr>
                                             <td class="public-head-subtext white">{{ ucFirst($v['description']) }}</td>
-                                            <td class="aubergine project-sub-text white">{{ $v['budget'] }}</td>
-                                            <td class="aubergine project-sub-text white ">{{ $v['target_date'] }}</td>
+                                            <td class="aubergine project-sub-text white">{{ '$'.number_format($v['budget'], 0,'.',',') }}</td>
+                                            <td class="aubergine project-sub-text white ">{{ strtoupper(date('jS F Y',strtotime($v['target_date']))) }}</td>
                                         </tr>
                                         @endif
                                         @endforeach
@@ -525,6 +552,17 @@
     $(document).ready(function() {
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");
+
+        var $temp = $("<input>");
+        var $url = $(location).attr('href');
+
+        $('.clipboard').on('click', function() {
+        $("body").append($temp);
+        $temp.val($url).select();
+        document.execCommand("copy");
+        $temp.remove();
+        $("p").text("URL copied!");
+        })
     });
 
     $('#contact_btn').click(function(e)
