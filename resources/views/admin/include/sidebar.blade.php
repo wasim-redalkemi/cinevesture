@@ -7,8 +7,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#user-mgt" aria-expanded="false" aria-controls="user-mgt">
-              <i class="mdi mdi-puzzle-outline menu-icon"></i>
+            <a class="nav-link" data-toggle="collapse" href="#user-mgt" aria-expanded="fales" aria-controls="user-mgt">
+              <i class="fa fa-users menu-icon "></i>
               <span class="menu-title">User Management</span>
               <i class="menu-arrow"></i>
             </a>
@@ -19,9 +19,9 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link"  data-toggle="collapse" href="#proj-mgt" aria-expanded="true" aria-controls="proj-mgt">
-              <i class="mdi mdi-puzzle-outline menu-icon"></i>
-              <span class="menu-title">Project List Management</span>
+            <a class="nav-link"  data-toggle="collapse" href="#proj-mgt" aria-expanded="false" aria-controls="proj-mgt">
+              <i class="fa fa-list-alt menu-icon"></i>
+              <span class="menu-title ">Project List Management</span>
               <i class="menu-arrow"></i>
             </a>
             <div class="collapse" id="proj-mgt">
@@ -37,7 +37,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#proj" aria-expanded="false" aria-controls="proj">
-              <i class="mdi mdi-puzzle-outline menu-icon"></i>
+              <i class="fa fa-file-text menu-icon"></i>
               <span class="menu-title">Project Management</span>
               <i class="menu-arrow"></i>
             </a>
@@ -60,7 +60,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#query" aria-expanded="false" aria-controls="query">
-              <i class="mdi mdi-bullseye-arrow menu-icon"></i>
+              <i class="mdi mdi-file-document-box-outline menu-icon"></i>
               <span class="menu-title">Query Management</span>
               <i class="menu-arrow"></i>
             </a>
@@ -78,7 +78,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#job" aria-expanded="false" aria-controls="job">
-              <i class="mdi mdi-file-document-box-outline menu-icon"></i>
+              <i class=" mdi mdi-bullseye-arrow menu-icon"></i>
               <span class="menu-title">Job Management</span>
               <i class="menu-arrow"></i>
             </a>
