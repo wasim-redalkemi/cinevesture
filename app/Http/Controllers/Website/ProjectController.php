@@ -643,8 +643,9 @@ class ProjectController extends WebController
             }
             $projectIdUnique=array_unique($projectIdArray);
             $recomProject=UserProject::query()->whereIn('id',$projectIdUnique)
-                          ->where('user_id','!=',auth()->user()->id)
-                          ->get();
+                          ->where('id','!=',$_REQUEST['id'])
+                          ->orderBy('id','desc')
+                          ->paginate(10);
             $projectData = $projectData->toArray();
             if (empty($projectData)) {
                 return back()->with('error','This Project is Unpublished/Inactive.');
