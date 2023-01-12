@@ -478,7 +478,7 @@
                             <div class="item">
                                 <div style="color: azure">{{!empty($v->project_name)?$v->project_name: '-' }}</div>
                                 {{-- <a href = "{{route('public-view',['id'=>$v->id])}}"> --}}
-                                {{-- <img src="@php echo (!empty($v->projectImage->file_link)?asset('storage/'.$v->projectImage->file_link): asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1 (1).png')) @endphp" width="100%" height="100%"  /> --}}
+                                <img src="@php echo (!empty($v->projectImage->file_link)?asset('storage/'.$v->projectImage->file_link): asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1 (1).png')) @endphp" width="100%" height="100%"  />
                                 {{-- <div class="guide_profile_main_subtext">@php echo (!empty($v->project_name)?$v->project_name
                                 
                                 : '-') @endphp</div> --}}
@@ -493,42 +493,47 @@
                 </div>
             </div>
         </div>
+       
+{{-- @php
+    dd($recomProject);
 
+@endphp --}}
         <div class="public_subsection">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="public-heading-text mb-2"> Related</h1>
-
+                    <h1 class="public-heading-text mb-2"> {{$recomProject}}Related</h1>
+                    
                     <div class="test owl-carousel owl-theme">
+                        @foreach ($recomProject as $value)
                         <div class="home_img_wrap">
+                           
                             <div class="slider">
-                                <div class="img-container">
-                                    <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">
+                               
+                                {{-- {{$value->projectOnlyImage[0]->file_link}} --}}
+                                <div class="img-container"> 
+                                    @if (!empty($value->projectOnlyImage[0]->file_link))
+                                    <img src="{{ Storage::url($value->projectOnlyImage[0]->file_link) }}" alt="image"> 
+                                    @else
+                                    <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">    
+                                    @endif                                 
+                                  
+                                 
+                                 
                                 </div>
+                                
                                 <div class="secondry-card-top-container w-100">
-                                    <div>Movie Title</div>
+                                    <div>{{$value->project_name}}</div>
                                     <div>
                                         <i class="fa fa-heart" style="color: white;" aria-hidden="true"></i>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="home_img_wrap">
-                            <img src="{{ asset('images/asset/publicview-head-img.png') }}" alt="image">
-                        </div>
-                        <div class="home_img_wrap">
-                            <img src="{{ asset('images/asset/43710-posts 2.png') }}" alt="image">
-                        </div>
-                        <div class="home_img_wrap">
-                            <img src="{{ asset('images/asset/download (3) 2.png') }}" alt="image">
-                        </div>
-                        <div class="home_img_wrap">
-                            <img src="{{ asset('images/asset/43710-posts 2.png') }}" alt="image">
-                        </div>
-                        <div class="home_img_wrap">
-                            <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">
-                        </div>
+                               
+                            </div>                            
+                            
+                        </div> 
+                        @endforeach  
                     </div>
+                    
                 </div>
             </div>
         </div>
