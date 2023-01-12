@@ -35,7 +35,7 @@
                             <div class="verified-text-area">
                                 <div class="public-head-text">
                                     @if (!empty(($UserProject->project_name)))
-                                    <span style="text-shadow: 2px 2px #971E9B">    {{ ucfirst($UserProject->project_name) }}</span>
+                                    <span class="blackTextShadow">    {{ ucfirst($UserProject->project_name) }}</span>
                                     @else
                                     <span><b>-</b></span>
                                     @endif
@@ -47,12 +47,12 @@
                             </div>
                             <div class="public-head-subtext">
                                 @if (isset($UserProject->logline))
-                                <span style="text-shadow: 2px 2px #971E9B">    {{ $UserProject->logline}}</span>
+                                <span class="blackTextShadow">    {{ $UserProject->logline}}</span>
                                 @else
                                 <span><b>-</b></span>
                                 @endif
                             </div>
-                            <div class="hours-category my-md-4">
+                            <div class="hours-category my-md-4 blackTextShadow">
                                 @if (!empty(($UserProject->duration)))
                                 <?php echo sprintf(intdiv($UserProject->duration, 60).' hr') .' '. ( sprintf($UserProject->duration % 60).' min');?>
                                 @else
@@ -91,8 +91,8 @@
                             <table class="table mt-1 table_width">
                                 <tbody class="search-table-body white">
                                     <tr>
-                                        <td class="public-head-subtext white">Type</td>
-                                        <td class="contact-page-subtext white">
+                                        <td class="public-head-subtext white blackTextShadow">Type</td>
+                                        <td class="contact-page-subtext white blackTextShadow">
                                             @if (!empty($projectData[0]['project_type']['name']))
                                             {{$projectData[0]['project_type']['name']}}
                                             @else
@@ -101,8 +101,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="public-head-subtext white">Created By</td>
-                                        <td class="aubergine contact-page-subtext candy-pink">
+                                        <td class="public-head-subtext white blackTextShadow">Created By</td>
+                                        <td class="aubergine contact-page-subtext candy-pink blackTextShadow">
                                             @if (!empty($projectData[0]['user']['name']))
                                             <a href="{{route('profile-public-show',['id'=>$projectData[0]['user']['id']])}}" class="text_decor_none">{{ ucwords($projectData[0]['user']['name'])}}</a>
                                             @else
@@ -111,8 +111,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="public-head-subtext white">Total Budget</td>
-                                        <td class="contact-page-subtext white">
+                                        <td class="public-head-subtext white blackTextShadow">Total Budget</td>
+                                        <td class="contact-page-subtext white blackTextShadow">
                                             @if (!empty($UserProject->total_budget))
                                             {{-- $ {{ $UserProject->total_budget}} --}}
                                             ${{ number_format($UserProject->total_budget, 0,'.',',') }}
@@ -123,8 +123,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="public-head-subtext white">Financing Secured</td>
-                                        <td class="contact-page-subtext white">
+                                        <td class="public-head-subtext white blackTextShadow">Financing Secured</td>
+                                        <td class="contact-page-subtext white blackTextShadow">
                                             @if (!empty($UserProject->financing_secured))
                                             ${{ number_format($UserProject->financing_secured, 0,'.',',')}}
                                             @else
@@ -133,8 +133,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="public-head-subtext white">Project Stage</td>
-                                        <td class="contact-page-subtext white">
+                                        <td class="public-head-subtext white blackTextShadow">Project Stage</td>
+                                        <td class="contact-page-subtext white blackTextShadow">
                                             @if (!empty($projectData[0]['project_stage']['name']))
                                             {{$projectData[0]['project_stage']['name']}}
                                             @else
@@ -143,8 +143,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="public-head-subtext white">Locations</td>
-                                        <td class="contact-page-subtext white">
+                                        <td class="public-head-subtext white blackTextShadow">Locations</td>
+                                        <td class="contact-page-subtext white blackTextShadow">
                                             @if (!empty($UserProject->location))
                                             {{ ucFirst($UserProject->location)}}
                                             @else

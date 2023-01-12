@@ -34,15 +34,16 @@
                     <div class="col-md-12">
                       <div class="project-text mt-5 pt-2">
                         @if (!empty($v->project_name))
-                      <span style="text-shadow: 2px 2px #971E9B">  {{$v->project_name}}</span>
+                      <span class="blackTextShadow">  {{$v->project_name}}</span>
                         @endif
                       </div>
                       <div class="project-sub-text mt-1">
                         @if (!empty($v->logline))
-                        <span style="text-shadow: 2px 2px #971E9B">  {{$v->logline}}</span>
+                        <span class="blackTextShadow">  {{$v->logline}}</span>
                         @endif
                       </div>
                       <div class="duration-lang-text mt-1">
+                        <span class="blackTextShadow">
                         @if (!empty($v->duration))
                         {{-- {{date('H:i', mktime(0,$v->duration)).' min'}} | --}}
                         <?php echo sprintf(intdiv($v->duration, 60).' hr') .' '. ( sprintf($v->duration % 60).' min');?> |
@@ -54,11 +55,12 @@
                         @if (isset($v->genres[0]) && !empty($v->genres[0]))
                         {{$v->genres[0]['name']}}
                         @endif
+                        </span>
                       </div>
                       <button class="watch-now-btn mt-4"><a href="{{ route('public-view', ['id'=>$v->id]) }}" style="color:white !important;">Watch Now</a></button>
                       {{-- @else
                         <div class="not-found-text">
-                          <p>No Data Found</p>
+                          <p class="blackTextShadow">No Data Found</p>
                         </div>
                       @endif                       --}}
                     </div>

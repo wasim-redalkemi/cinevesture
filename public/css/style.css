@@ -1350,6 +1350,9 @@ label {
 .project_public_img_wrap {
     height: 200px;
     width: 350px;
+    max-width: 350px;
+    max-height: 200px;
+    overflow: hidden;
 }
 
 .image_responsive_wrap {
@@ -1950,7 +1953,9 @@ select,
     margin-bottom: -5px;
     line-height: 22px;
 }
-
+.blackTextShadow {
+    text-shadow: 2px 2px black;
+}
 .movie_name_text {
     font-weight: 600;
     font-size: 22px;
