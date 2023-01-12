@@ -642,7 +642,9 @@ class ProjectController extends WebController
                 $projectIdArray[]=$projectId->project_id;
             }
             $projectIdUnique=array_unique($projectIdArray);
-            $recomProject=UserProject::query()->whereIn('id',$projectIdUnique)->where('user_id','!=',auth()->user()->id)->get();
+            $recomProject=UserProject::query()->whereIn('id',$projectIdUnique)
+                          ->where('user_id','!=',auth()->user()->id)
+                          ->get();
             $projectData = $projectData->toArray();
             if (empty($projectData)) {
                 return back()->with('error','This Project is Unpublished/Inactive.');
@@ -871,54 +873,5 @@ class ProjectController extends WebController
         return $this->return_response;
     }
 
-    // public function relativeFilteredProject()
-    // {
-    //     try{
-    //         $id[] = $_REQUEST['id'];
-    //         $validator = Validator::make($id, [
-
-    //             'id' => 'exists:user_projects,id',
-                
-    //         ]);
-    
-    //         if ($validator->fails()) {
-    //             return ['user_status'=>False,'msg'=>"Something went wrong, Please try again later."];
-    //         }
-    //         $project_data_by_id = UserProject::query()
-    //         ->where('id',$_REQUEST['id'])
-    //         ->with(['projectCountries','projectLanguages','genres','projectCategory','projectLookingFor','projectStage','projectType','user','projectImage'])
-    //         ->first()
-    //         ->toArray();
-    //         echo "<pre>";
-    //         print_r($project_data_by_id);
-    //         die;
-    //         // dd($project_data_by_id);
-            
-    //         $relatedProjects = UserProject::query()
-    //         ->where('user_status','published')
-    //         ->where(function($query) use($project_data_by_id){
-    //             if (isset($project_data_by_id['project_name'])) { // search name of user
-    //                 $query->where("project_name", "like", "%$request->search%");
-    //             }
-    //         })
-    //         ->where(function($subQuery) use($project_data_by_id['genres'])
-    //         {   
-                
-    //             if (isset($project_data_by_id['genres'])) { // search name of user
-    //                 $subQuery->whereHas('genres', function ($q) use($project_data_by_id['genres']){
-    //                     $q->whereIn('gener_id',$request->geners);
-    //                 });
-    //             }
-            
-            
-    //         })
-    //         ->with(['projectCountries','projectLanguages','genres','projectCategory','projectLookingFor','projectStage','projectType','user','projectImage'])
-    //         // ->where('user_id','!=',auth()->user()->id)
-    //         ->orderByDesc('id')
-    //         ->get();               
-    //     } catch(Exception $e){
-    //     return back()->with('error',$e->getMessage());
-    //     }
-    // }
 
 }
