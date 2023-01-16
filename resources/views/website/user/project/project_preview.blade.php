@@ -171,7 +171,7 @@
                     <div class="video_slider owl-carousel">
                         @if (!empty($projectData[0]['project_only_image']))
                         @foreach ($projectData[0]['project_only_image'] as $v)
-                        <div class="item">
+                        <div class="item preview_image_wrape" style="overflow: hidden;">
                             <div class="home_img_wrap"> <img src="{{ Storage::url($v['file_link']) }}" alt="image"></div>
                             <div class="d-flex align-items-initial mt-2">
                                 <div class="movie_name_text mt-0">{{ json_decode($v['media_info'])->title }}</div>
@@ -258,8 +258,8 @@
                 @foreach ($projectData[0]['project_milestone'] as $v)
                 <div class="row mt-2">
                     <div class="col-4 col-md-3 preview_subtext">@if (!empty($v['description'])) {{ucFirst($v['description'])}}@else <span><b>-</b></span> @endif</div>
-                    <div class="col-4 col-md-3 preview_subtext">@if (!empty($v['budget'])) {{$v['budget']}}@else <span><b>-</b></span> @endif</div>
-                    <div class="col-4 col-md-3 preview_subtext">@if (!empty($v['target_date'])) {{$v['target_date']}}@else <span><b>-</b></span> @endif</div>
+                    <div class="col-4 col-md-3 preview_subtext">@if (!empty($v['budget'])) {{'$'.number_format($v['budget'], 0,'.',',')}}@else <span><b>-</b></span> @endif</div>
+                    <div class="col-4 col-md-3 preview_subtext">@if (!empty($v['target_date'])) {{strtoupper(date('jS F Y',strtotime($v['target_date'])))}}@else <span><b>-</b></span> @endif</div>
                 </div>
                 @endforeach                    
                 @else

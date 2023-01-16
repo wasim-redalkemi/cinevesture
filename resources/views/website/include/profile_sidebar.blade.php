@@ -1,7 +1,7 @@
 <div class="profile_side_bar">
     <div class="sidebar_content mb-0 mb-md-3 d-flex justify-content-between"  data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
       <div class="d-flex align-items-center">  <i class="fa fa-user-circle profile_icon" aria-hidden="true"></i>
-        <a href="" class="mx-2">{{ucwords(auth()->user()->name)}}</a>
+        <a href="{{ route('profile-private-show')}}" class="mx-2">{{ucwords(auth()->user()->name)}}</a>
       </div>
       <div class="d-flex align-items-center d-block d-md-none">
           <div class="inp_data mx-2">Profile</div>
