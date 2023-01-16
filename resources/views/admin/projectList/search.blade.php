@@ -144,9 +144,16 @@
                 <form id="saveProject" method="Post" action="{{route('save-search-projects')}}">
                   @csrf
                     <table id="" class="table order-listing table-sm table-bordered table-hover">
-                      <input type="hidden" name="list_id" value="{{$_REQUEST['id']}}" id="">
                            <thead>
+                                <tr>
+                              
+                                <td class="text-center" colspan="5">
+                                  <h4 class="p-1 m-0">List name : <b>{{$list_name}}</b></h4>
+                                </td>
+                                
+                              </tr>
                                <tr>
+                                
                                  <th>Id</th>
                                  <th>Name</th>
                                  <th>Image</th>
@@ -156,7 +163,6 @@
                            </thead>
                            
                               <tbody>
-                                <input type="hidden" name="add_edit" value="{{$is_added_only}}" id="">
                                   @php
                                       $lc = $project_data->firstItem();
                                   @endphp
@@ -204,6 +210,8 @@
                               </tbody>
                     </table>
                     <div style="text-align: center;" class="m-4">
+                      <input type="hidden" name="list_id" value="{{$_REQUEST['id']}}" id="">
+                      <input type="hidden" name="add_edit" value="{{$is_added_only}}" id="">
                       <button type="submit" class="btn btn-success btn-icon-text btn_padding">
                       <i class="mdi mdi-file-check btn-icon-prepend"></i>
                       Save</button>
