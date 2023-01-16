@@ -15,10 +15,9 @@
 <section class="public-head-section">
 
     <div class="main-slider-container">
-        <div class="project_image_wraper">
-            
-            @if (isset($projectData[0]['project_image']['file_link']))
-                <img src="{{ Storage::url($projectData[0]['project_image']['file_link']) }}" class="" alt="image">
+        <div class="project_image_wraper">            
+            @if (isset($projectData[0]['banner_image']))
+                <img src="{{ Storage::url($projectData[0]['banner_image']) }}" class="" alt="image">
             @else
                 <img src="{{ asset('images/asset/publicview-head-img.png') }}" class="" alt="image">
             @endif
@@ -32,7 +31,7 @@
                             <div class="verified-text-area">
                                 <div class="public-head-text">
                                     @if (!empty(($UserProject->project_name)))
-                                    {{ ucfirst($UserProject->project_name) }}
+                                    <span style="text-shadow: 2px 2px #971E9B">    {{ ucfirst($UserProject->project_name) }}</span>
                                     @else
                                     <span><b>-</b></span>
                                     @endif
@@ -44,7 +43,7 @@
                             </div>
                             <div class="public-head-subtext">
                                 @if (isset($UserProject->logline))
-                                {{ $UserProject->logline}}
+                                <span style="text-shadow: 2px 2px #971E9B">    {{ $UserProject->logline}}</span>
                                 @else
                                 <span><b>-</b></span>
                                 @endif
@@ -152,11 +151,11 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="col-md-2 col-md-0"></div>
-                        <div class="col-lg-4 col-md-12 px-3">
+                        <div class="col-md-1 col-md-0"></div>
+                        <div class="col-lg-5 col-md-12 px-3">
                             <div class="public-head-subimage">
-                                <div class="playVideoWrap br_4 mt-3" video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link'] }}@endif">
-                                    <img src="@if (isset($projectData[0]['project_only_video'][0]['media_info'])){{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}@endif" alt="" class="br_4">
+                                <div class="playVideoWrapForheader br_4 mt-3" video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link'] }}@endif">
+                                    <img src="@if (isset($projectData[0]['project_only_video'][0]['media_info'])){{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}@endif" alt="" class="br_4 w-100">
                                 </div>
                                 {{-- <iframe width="" height="" src="{{empty($projectData[0]['project_only_video'][0]['file_link'])?'https://www.youtube.com/embed/oYWAwwy5EbQ':$projectData[0]['project_only_video'][0]['file_link'];}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> --}}
                                 <!-- <img src="{{ asset('images/asset/download (3) 7.png') }}" width=100% alt="Image"> -->
@@ -170,7 +169,8 @@
 
                                     @endif
                                     <!-- <i class="fa fa-share-alt mx-4 icon-size" aria-hidden="true"></i> -->
-                                    <img src="{{ asset('images/asset/share_image.svg') }}" class="mx-3" alt="image">
+                                          <div class="clipboard pointer"><img src="{{ asset('images/asset/share_image.svg') }}" class="mx-3" alt="image"></div>
+                                          <p class="mb-0"></p>
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
                                         
                                     <div> <i class="fa <?php if(isset($UserProject->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
@@ -241,13 +241,30 @@
                         <span class="text-light"><b>-</b></span>
                         @endif
                     </div>
-                    <div class="public-head-subtext mt-3">Photos</div>
+                    <div class="public-head-subtext mt-3">Banner Photo</div>
                     <div class="row">
-                        @if (!empty($projectData[0]['project_only_image']))
-                        @foreach ($projectData[0]['project_only_image'] as $v)
+                        @if (!empty($projectData[0]['banner_image']))
                         <div class="col-md-3 mt-3">
                             <div class="project_public_img_wrap image_responsive_wrap">
-                                <img src="{{ Storage::url($v['file_link']) }}" class="" width=100% alt="image">
+                                <a href="{{ Storage::url($projectData[0]['banner_image']) }}" target="_blank" rel="noopener noreferrer">
+                                    <img src="{{ Storage::url($projectData[0]['banner_image']) }}" class="" width=100% alt="image">
+                                </a>
+                            </div>
+                        </div>
+                        @else
+                        <span class="text-light"><b>-</b></span>
+                        @endif
+                    </div>
+
+                    <div class="public-head-subtext mt-3">Photos</div>
+                    <div class="d-flex flex-wrap">
+                        @if (!empty($projectData[0]['project_only_image']))
+                        @foreach ($projectData[0]['project_only_image'] as $v)
+                        <div class="mt-3 mr_3">
+                            <div class="project_public_img_wrap image_responsive_wrap">
+                                <a href="{{ Storage::url($v['file_link']) }}" target="_blank" rel="noopener noreferrer">
+                                    <img src="{{ Storage::url($v['file_link']) }}" class="" width=100% alt="image">
+                                </a>
                             </div>
                         </div>
                         @endforeach
@@ -267,17 +284,19 @@
                     @if (!empty($projectData[0]['project_only_doc']))
                     @foreach ($projectData[0]['project_only_doc'] as $v)
                     <div class="col-md-3 col-8 mt-3">
-                        <div class="document_pdf document_pdf_project">
-                            <div class="upload_loader">
-                                <img src="{{ asset('images/asset/pdf_image.svg') }}" alt="image">
+                        <a href="{{Storage::url($v['file_link'])}}" download>
+                            <div class="document_pdf document_pdf_project">
+                                <div class="upload_loader">
+                                    <img src="{{ asset('images/asset/pdf_image.svg') }}" alt="image">
+                                </div>
+                                <div class="mx-3">
+                                    <div class="public_view_main_subtext">{{ json_decode($v['media_info'])->name }}</div>
+                                    <div class="proctect_by_capta_text">{{ json_decode($v['media_info'])->size_label }}</div>
+                                </div>
                             </div>
-                            <div class="mx-3">
-                                <div class="public_view_main_subtext">{{ json_decode($v['media_info'])->name }}</div>
-                                <div class="proctect_by_capta_text">{{ json_decode($v['media_info'])->size_label }}</div>
-                            </div>
-                            </div>
-                        </div>
-                        @endforeach
+                        </a>
+                    </div>
+                    @endforeach
                     @else
                     <span class="text-light"><b>-</b></span>
                     @endif
@@ -347,8 +366,8 @@
                                         @php $isEmpty = false;@endphp
                                         <tr>
                                             <td class="public-head-subtext white">{{ ucFirst($v['description']) }}</td>
-                                            <td class="aubergine project-sub-text white">{{ $v['budget'] }}</td>
-                                            <td class="aubergine project-sub-text white">{{ $v['target_date'] }}</td>
+                                            <td class="aubergine project-sub-text white">{{ '$'.number_format($v['budget'], 0,'.',',') }}</td>
+                                            <td class="aubergine project-sub-text white">{{ strtoupper(date('jS F Y',strtotime($v['target_date']))) }}</td>
                                         </tr>
                                         @endif
                                         @endforeach
@@ -372,8 +391,8 @@
                                         @php $isEmpty = false;@endphp
                                         <tr>
                                             <td class="public-head-subtext white">{{ ucFirst($v['description']) }}</td>
-                                            <td class="aubergine project-sub-text white">{{ $v['budget'] }}</td>
-                                            <td class="aubergine project-sub-text white ">{{ $v['target_date'] }}</td>
+                                            <td class="aubergine project-sub-text white">{{ '$'.number_format($v['budget'], 0,'.',',') }}</td>
+                                            <td class="aubergine project-sub-text white ">{{ strtoupper(date('jS F Y',strtotime($v['target_date']))) }}</td>
                                         </tr>
                                         @endif
                                         @endforeach
@@ -399,12 +418,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="public-heading-text"> Associated With The Project</h1>
-                    <div class="col-6">
+                    <div class="col-7">
                         <table class="table mt-2 table_width">
                             <tbody class="search-table-body white">
                                 <tr>
                                     <td class="public-head-subtext candy-pink">Title</td>
-                                    <td class="project-sub-text candy-pink">
+                                    <td class="public-head-subtext candy-pink">
                                         Name
                                     </td>
                                 </tr>
@@ -449,7 +468,7 @@
                             <div class="item">
                                 <div style="color: azure">{{!empty($v->project_name)?$v->project_name: '-' }}</div>
                                 {{-- <a href = "{{route('public-view',['id'=>$v->id])}}"> --}}
-                                {{-- <img src="@php echo (!empty($v->projectImage->file_link)?asset('storage/'.$v->projectImage->file_link): asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1 (1).png')) @endphp" width="100%" height="100%"  /> --}}
+                                <img src="@php echo (!empty($v->projectImage->file_link)?asset('storage/'.$v->projectImage->file_link): asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1 (1).png')) @endphp" width="100%" height="100%"  />
                                 {{-- <div class="guide_profile_main_subtext">@php echo (!empty($v->project_name)?$v->project_name
                                 
                                 : '-') @endphp</div> --}}
@@ -464,42 +483,47 @@
                 </div>
             </div>
         </div>
+       
+{{-- @php
+    dd($recomProject);
 
+@endphp --}}
         <div class="public_subsection">
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="public-heading-text mb-2"> Related</h1>
-
-                    <div class="test owl-carousel owl-theme">
+                    
+                    <div class="related owl-carousel owl-theme">
+                        @foreach ($recomProject as $value)
                         <div class="home_img_wrap">
+                           
                             <div class="slider">
-                                <div class="img-container">
-                                    <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">
+                               
+                                {{-- {{$value->projectOnlyImage[0]->file_link}} --}}
+                                <div class="img-container"> 
+                                    @if (!empty($value->projectOnlyImage[0]->file_link))
+                                    <img src="{{ Storage::url($value->projectOnlyImage[0]->file_link) }}" alt="image"> 
+                                    @else
+                                    <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">    
+                                    @endif                                 
+                                  
+                                 
+                                 
                                 </div>
+                                
                                 <div class="secondry-card-top-container w-100">
-                                    <div>Movie Title</div>
+                                    <div>{{$value->project_name}}</div>
                                     <div>
                                         <i class="fa fa-heart" style="color: white;" aria-hidden="true"></i>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="home_img_wrap">
-                            <img src="{{ asset('images/asset/publicview-head-img.png') }}" alt="image">
-                        </div>
-                        <div class="home_img_wrap">
-                            <img src="{{ asset('images/asset/43710-posts 2.png') }}" alt="image">
-                        </div>
-                        <div class="home_img_wrap">
-                            <img src="{{ asset('images/asset/download (3) 2.png') }}" alt="image">
-                        </div>
-                        <div class="home_img_wrap">
-                            <img src="{{ asset('images/asset/43710-posts 2.png') }}" alt="image">
-                        </div>
-                        <div class="home_img_wrap">
-                            <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">
-                        </div>
+                               
+                            </div>                            
+                            
+                        </div> 
+                        @endforeach  
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -523,6 +547,17 @@
     $(document).ready(function() {
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");
+
+        var $temp = $("<input>");
+        var $url = $(location).attr('href');
+
+        $('.clipboard').on('click', function() {
+        $("body").append($temp);
+        $temp.val($url).select();
+        document.execCommand("copy");
+        $temp.remove();
+        $("p").text("URL copied!");
+        })
     });
 
     $('#contact_btn').click(function(e)
@@ -607,27 +642,58 @@
         });
 
     });
-    $(".test.owl-carousel").owlCarousel({
+
+    $(".related.owl-carousel").owlCarousel({
         //   center: true,
         autoPlay: 1000,
-        autoplay: true,
+        // autoplay: true,
         //   loop: true,
-        nav: true,
-        margin: 10,
-        //   center: true,
-        items: 1,
-        stagePadding: 0,
-        responsive: {
-            480: {
-                items: 1
-            },
-            768: {
-                items: 2
-            },
-            1024: {
-                items: 4
-            }
+        margin: 20,
+      center: false,
+      items: 1,
+      autoplayHoverPause: true,
+      stagePadding: 0,
+      responsive: {
+        480: { items: 1 },
+        768: { items: 2 },
+        1080: {
+          items: 3
         },
+        1225: {
+          items: 3
+        },
+        1400: {
+          items: 4
+        },
+        1925: {
+          items: 5.5
+        }
+      },
     });
+</script>
+<script>
+
+//     $(".for_copy_url").click( function (e) {
+        
+//         let dataForCopy = $('.share_link').attr('src')
+
+//         const copyContent = async () => {
+//     try {
+//       await navigator.clipboard.writeText(dataForCopy);
+//       console.log('Content copied to clipboard');
+//     } catch (err) {
+//       console.error('Failed to copy: ', err);
+//     }
+//   }
+  
+//   copyContent()
+//     } )
+
+    document.addEventListener('copy', function(e){
+    e.clipboardData.setData('text/plain', $('.share_link').attr('src'));
+        e.preventDefault();
+    });
+    document.execCommand('copy');
+    console.log($('.share_link').attr('src'));
 </script>
 @endpush

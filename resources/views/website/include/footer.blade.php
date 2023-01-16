@@ -16,7 +16,7 @@
               <div class="mt-1"> <a href="#"> Resources</a></div>
             </div>
             <div class="col-lg-3 text-md-start text-center mt-3 mt-md-0">
-              <div> <a href="#"> Terms and Condition</a></div>
+              <div> <a href="#"> Terms and Conditions</a></div>
               <div class="mt-1"> <a href="#"> Privacy Policy</a></div>
             </div>
             <div class="col-lg-2">
