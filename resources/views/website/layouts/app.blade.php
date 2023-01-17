@@ -49,8 +49,8 @@
 
             
 
-            <!-- Modal for Confirmation for account deactivate -->
             @include('website.include.video_modal')
+            @include('website.include.image_in_full_view_modal')
             
         </main>
     </div>
@@ -125,6 +125,13 @@
             {
                 container.find('.sidebar_collapse').collapse('hide');
             }
+            
+            var container = $(".image_in_full_view_modal .imgSubWrap");
+            if ($(e.target).parents('.image_in_full_view_modal').length && container.has(e.target).length === 0) 
+            {
+                container.parents('.image_in_full_view_modal').fadeOut(500);
+            } 
+
             $('.modal .normal_btn').click(function()
             {
                 $(this).parents('.modal').modal('hide');
@@ -176,6 +183,11 @@
         {
             $('#playVideoModal .playVideoModalContent iframe').attr('src',$(this).attr('video-url'));
             $('#playVideoModal').modal('show');
+        });
+        $('.image_in_full_view').click(function()
+        {
+            $('#ImageInFullViewModal .ImageInFullViewModalContent img').attr('src',$(this).find('img').attr('src'));
+            $('#ImageInFullViewModal').fadeIn(500);
         });
     </script>
 
