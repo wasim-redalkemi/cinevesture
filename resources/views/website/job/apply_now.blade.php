@@ -59,7 +59,7 @@
                                                     <div class="mx-2">
                                                         <div class="uploadedPdf mx-2 forWordBreak"></div>
                                                     </div>
-                                                    <div class="delete_file"><i class="fa fa-times" aria-hidden="true"></i></div>
+                                                    <div class="delete_file"><i class="fa fa-times pointer" aria-hidden="true"></i></div>
                                                 </div>
                                             </div>
         
@@ -143,6 +143,7 @@
     // }
     $("#apply_job_form").change(function(e) {
         console.log($(".uploadedPdf").text(""));
+        // $("#upload-doc-inp").val("");
         $(".uploadedPdf").text("")
         let resume = $("#upload-doc-inp")[0].files[0]
         $(".document_pdf").fadeIn(100)

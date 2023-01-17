@@ -31,7 +31,7 @@
                             <div class="verified-text-area">
                                 <div class="public-head-text">
                                     @if (!empty(($UserProject->project_name)))
-                                    <span style="text-shadow: 2px 2px #971E9B">    {{ ucfirst($UserProject->project_name) }}</span>
+                                    <span class="blackTextShadow">    {{ ucfirst($UserProject->project_name) }}</span>
                                     @else
                                     <span><b>-</b></span>
                                     @endif
@@ -41,14 +41,14 @@
                                 <button class="verified-btn mx-3"> <img src="{{ asset('images/asset/verified-badge.svg') }}" width=100% alt="Image"> VERIFIED</button>
                                 @endif
                             </div>
-                            <div class="public-head-subtext">
+                            <div class="public-head-subtext text-start">
                                 @if (isset($UserProject->logline))
-                                <span style="text-shadow: 2px 2px #971E9B">    {{ $UserProject->logline}}</span>
+                                <span class="blackTextShadow">    {{ $UserProject->logline}}</span>
                                 @else
                                 <span><b>-</b></span>
                                 @endif
                             </div>
-                            <div class="hours-category my-md-4">
+                            <div class="hours-category my-md-4 blackTextShadow text-start">
                                 @if (!empty(($UserProject->duration)))
                                 <?php echo sprintf(intdiv($UserProject->duration, 60).' hr') .' '. ( sprintf($UserProject->duration % 60).' min');?>
                                 @else
@@ -87,8 +87,8 @@
                             <table class="table mt-1 table_width">
                                 <tbody class="search-table-body white">
                                     <tr>
-                                        <td class="public-head-subtext white">Type</td>
-                                        <td class="contact-page-subtext white">
+                                        <td class="public-head-subtext white blackTextShadow text-start">Type</td>
+                                        <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
                                             @if (!empty($projectData[0]['project_type']['name']))
                                             {{$projectData[0]['project_type']['name']}}
                                             @else
@@ -97,8 +97,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="public-head-subtext white">Created By</td>
-                                        <td class="aubergine contact-page-subtext candy-pink">
+                                        <td class="public-head-subtext white blackTextShadow text-start">Created By</td>
+                                        <td class="aubergine contact-page-subtext candy-pink blackTextShadow text-end text-md-start">
                                             @if (!empty($projectData[0]['user']['name']))
                                             <a href="{{route('profile-public-show',['id'=>$projectData[0]['user']['id']])}}" class="text_decor_none">{{ ucwords($projectData[0]['user']['name'])}}</a>
                                             @else
@@ -107,8 +107,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="public-head-subtext white">Total Budget</td>
-                                        <td class="contact-page-subtext white">
+                                        <td class="public-head-subtext white blackTextShadow text-start">Total Budget</td>
+                                        <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
                                             @if (!empty($UserProject->total_budget))
                                             {{-- $ {{ $UserProject->total_budget}} --}}
                                             ${{ number_format($UserProject->total_budget, 0,'.',',') }}
@@ -119,8 +119,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="public-head-subtext white">Financing Secured</td>
-                                        <td class="contact-page-subtext white">
+                                        <td class="public-head-subtext white blackTextShadow text-start">Financing Secured</td>
+                                        <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
                                             @if (!empty($UserProject->financing_secured))
                                             ${{ number_format($UserProject->financing_secured, 0,'.',',')}}
                                             @else
@@ -129,8 +129,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="public-head-subtext white">Project Stage</td>
-                                        <td class="contact-page-subtext white">
+                                        <td class="public-head-subtext white blackTextShadow text-start">Project Stage</td>
+                                        <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
                                             @if (!empty($projectData[0]['project_stage']['name']))
                                             {{$projectData[0]['project_stage']['name']}}
                                             @else
@@ -139,8 +139,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="public-head-subtext white">Locations</td>
-                                        <td class="contact-page-subtext white">
+                                        <td class="public-head-subtext white blackTextShadow text-start">Locations</td>
+                                        <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
                                             @if (!empty($UserProject->location))
                                             {{ ucFirst($UserProject->location)}}
                                             @else
@@ -194,7 +194,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h1 class="public-heading-text"> Synopsis</h1>
-                <div class="public-subheading-text mt-2">
+                <div class="public-subheading-text mt-3 mt-md-2">
                     <p>
                         @if (!empty(($UserProject->synopsis)))
                         {{ ucFirst($UserProject->synopsis)}}
@@ -210,7 +210,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="public-heading-text"> Director Statement</h1>
-                    <div class="public-subheading-text mt-2">
+                    <div class="public-subheading-text mt-3 mt-md-2">
                         <p>
                             @if (!empty(($UserProject->director_statement)))
                             {{ ucFirst($UserProject->director_statement)}}
@@ -228,10 +228,10 @@
                 <div class="col-md-12">
                     <h1 class="public-heading-text"> Gallery</h1>
                     <div class="public-head-subtext mt-3">Videos</div>
-                    <div class="row">
+                    <div class="d-flex flex-wrap">
                         @if (!empty($projectData[0]['project_only_video']))
                         @foreach ($projectData[0]['project_only_video'] as $v)
-                        <div class="col-md-3">
+                        <div class="mt-2 mr_3">
                             <div class="playVideoWrap mt-3" video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link']}} @endif">
                                 <img src="{{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}" alt="" width="100%">
                             </div>
@@ -348,9 +348,9 @@
                                 <table class="table">
                                     <tbody class="search-table-body white">
                                         <tr class="requirement-table-header">
-                                            <th>Milestone Description</th>
-                                            <th>Milestone Budget (USD)</th>
-                                            <th>Target Date</th>
+                                            <th style="width: 39%;">Milestone Description</th>
+                                            <th style="width: 39%;">Milestone Budget (USD)</th>
+                                            <th style="width: 39%;">Target Date</th>
                                         </tr>
                                         <tr>
                                             <td class="public-head-subtext candy-pink mt-1">Completed Milstones</td>
@@ -412,9 +412,9 @@
 
         <div class="public_subsection">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-7">
                     <h1 class="public-heading-text"> Associated With The Project</h1>
-                    <div class="col-7">
+                    <div class="">
                         <table class="table mt-2 table_width">
                             <tbody class="search-table-body white">
                                 <tr>

@@ -24,7 +24,7 @@
         <div class="row mt-4">
             <div class="col-md-3">
                 <div class="side-bar-cmn-part h-auto">
-                <form class="pb-5" method="Get" action="{{ route('get-project-filter') }}">
+                <form class="pb-0 pb-md-5" method="Get" action="{{ route('get-project-filter') }}">
                     <div class="d-flex">
                         <div class="search-box-container w-100">
                             <div class="search-container  w-100">
@@ -261,7 +261,7 @@
                                     } 
                                 @endphp
                                 <div class="search-head-subtext">@if (isset($small_logline)){{ucFirst($small_logline)}} @endif</div>
-                                <table class="table mt-1 require_table_width">
+                                <table class="table mt-1 lookingfor_table_width">
                                     <tbody class="search-table-body">
                                         <tr>
                                             <td>Looking for</td>
