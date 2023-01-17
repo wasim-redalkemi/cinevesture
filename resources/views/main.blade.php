@@ -46,7 +46,7 @@
                         <span class="blackTextShadow">
                         @if (!empty($v->duration))
                         {{-- {{date('H:i', mktime(0,$v->duration)).' min'}} | --}}
-                        <?php echo sprintf(intdiv($v->duration, 60).' hr') .' '. ( sprintf($v->duration % 60).' min');?> |
+                        <?php echo sprintf(intdiv($v->duration, 60).'hr') .' '. ( sprintf($v->duration % 60).'min');?> |
                         @endif
                         
                         @foreach ($v->projectLanguages as $k1=>$v1)
@@ -85,7 +85,7 @@
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                         labore
                         </div>
-                      <div class="duration-lang-text mt-1">2 hr 5 min | English | Horror</div>
+                      <div class="duration-lang-text mt-1">2hr 5min | English | Horror</div>
                       <button class="watch-now-btn mt-4">Watch now</button>
                     </div>
                   </div>
@@ -109,7 +109,7 @@
                         et
                         dolore magna aliqua.
                         Ut enim ad minim veniam, quis nostrud exercitation.</div>
-                      <div class="duration-lang-text mt-1">1 hr 10 min | English | Horror</div>
+                      <div class="duration-lang-text mt-1">1hr 10min | English | Horror</div>
                       <button class="watch-now-btn mt-4">Watch now</button>
                     </div>
                   </div>
