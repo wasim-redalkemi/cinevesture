@@ -86,7 +86,7 @@
                                         </a>
                                         <?php
                                         $show_verified_btn = true;
-                                        if (isset($user_endorsement) && count($user_endorsement)<15) {
+                                        if (isset($user_endorsement) && count($user_endorsement)<15) {000
                                             $show_verified_btn = false;
                                         }
                                         

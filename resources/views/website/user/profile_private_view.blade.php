@@ -8,10 +8,10 @@
 
 @section('content')
 <section class="guide_profile_section">
+    <div class="hide-me animation for_authtoast">
+        @include('website.include.flash_message')
+    </div>
     <div class="container">
-        <div class="hide-me animation for_authtoast">
-            @include('website.include.flash_message')
-        </div>
         <div class="row">
             <div class="col-md-3">
                 @include('website.include.profile_sidebar')
@@ -19,7 +19,7 @@
             <div class="col-md-9 mt-3 mt-sm-0">
                 <div class="content_wraper">
                     <div class="guide_profile_subsection">
-                        <div class="container">
+                        <div class="container px-0">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-between">
@@ -65,7 +65,7 @@
                     </div>
 
                     <div class="guide_profile_subsection">
-                        <div class="container">
+                        <div class="container px-0">
                             <div class="row">
                                 <div class="col-md-12 contact-page-text deep-pink">
                                     Overview
@@ -138,7 +138,7 @@
                     </div>
 
                     <div class="guide_profile_subsection">
-                        <div class="container">
+                        <div class="container px-0">
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="contact-page-text deep-pink">
@@ -166,7 +166,7 @@
                     </div>
 
                     <div class="guide_profile_subsection">
-                        <div class="container">
+                        <div class="container px-0">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="d-flex">
@@ -227,8 +227,8 @@
                     </div>
 
                     <div class="guide_profile_subsection">
-                        <div class="container">
-                            <div class="row">
+                        <div class="container px-0">
+                            <div class="row"> 
                                 <div class="col-md-12">
                                     <div class="d-flex">
                                         <div class="contact-page-text deep-pink font_18">
@@ -261,7 +261,7 @@
                     </div>
 
                     <div class="guide_profile_subsection">
-                        <div class="container">
+                        <div class="container px-0">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="d-flex">
@@ -293,7 +293,7 @@
                     </div>
 
                     <div class="guide_profile_subsection">
-                        <div class="container">
+                        <div class="container px-0">
                             <div class="row">
                                 <div class="contact-page-text deep-pink font_18">
                                     Endorsements
@@ -345,7 +345,8 @@
         loop: false,
         nav: true,
         margin: 20,
-        // items: 4,
+        items: 1,
+        autoplayHoverPause: true,
         responsive: {
             480: {
                 items: 1
@@ -354,7 +355,7 @@
                 items: 2
             },
             1024: {
-                items: 4
+                items: 3
             }
         },
     });
