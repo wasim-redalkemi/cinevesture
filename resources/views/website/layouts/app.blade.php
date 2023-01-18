@@ -51,6 +51,7 @@
 
             @include('website.include.video_modal')
             @include('website.include.image_in_full_view_modal')
+            @include('website.include.docs_preview_modal')
             
         </main>
     </div>
@@ -184,6 +185,13 @@
             $('#playVideoModal .playVideoModalContent iframe').attr('src',$(this).attr('video-url'));
             $('#playVideoModal').modal('show');
         });
+
+        $('.docsPreview').click(function()
+        {
+            $('#docsPreviewModal .docsPreviewModalContent iframe').attr('src',$(this).attr('docs-url'));
+            $('#docsPreviewModal').modal('show');
+        });
+
         $('.image_in_full_view').click(function()
         {
             $('#ImageInFullViewModal .ImageInFullViewModalContent img').attr('src',$(this).find('img').attr('src'));

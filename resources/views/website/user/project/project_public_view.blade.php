@@ -280,17 +280,15 @@
                     @if (!empty($projectData[0]['project_only_doc']))
                     @foreach ($projectData[0]['project_only_doc'] as $v)
                     <div class="col-md-3 col-8 mt-3">
-                        <a href="{{Storage::url($v['file_link'])}}" download>
-                            <div class="document_pdf document_pdf_project">
-                                <div class="upload_loader">
-                                    <img src="{{ asset('images/asset/pdf_image.svg') }}" alt="image">
-                                </div>
-                                <div class="mx-3">
-                                    <div class="public_view_main_subtext">{{ json_decode($v['media_info'])->name }}</div>
-                                    <div class="proctect_by_capta_text">{{ json_decode($v['media_info'])->size_label }}</div>
-                                </div>
+                        <div class="document_pdf document_pdf_project docsPreview" docs-url="{{Storage::url($v['file_link'])}}">
+                            <div class="upload_loader">
+                                <img src="{{ asset('images/asset/pdf_image.svg') }}" alt="image">
                             </div>
-                        </a>
+                            <div class="mx-3">
+                                <div class="public_view_main_subtext">{{ json_decode($v['media_info'])->name }}</div>
+                                <div class="proctect_by_capta_text">{{ json_decode($v['media_info'])->size_label }}</div>
+                            </div>
+                        </div>
                     </div>
                     @endforeach
                     @else

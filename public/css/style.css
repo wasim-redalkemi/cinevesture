@@ -3930,7 +3930,8 @@ transition: 2s ease all; */
 }
 .my_modal
 {
-    transform: translate(0,-50px);
+    transform: translate(0,-80px);
+    z-index: 99999999;
 }
 .image_in_full_view_modal
 {
@@ -3975,4 +3976,9 @@ transition: 2s ease all; */
 }
 .image_in_full_view_modal .imgWrap::-webkit-scrollbar { 
     display: none;
+}
+#docsPreviewModal .docsPreviewModalContent
+{
+    height: 90vh;
+    width: 100%;
 }
