@@ -31,7 +31,7 @@
                           <span class="slider">abc</span>
                         </label> 
                         </div> -->
-                        <div class="plan_btn_wraper">
+                        <div class="plan_btn_wraper d-none">
                                <!-- <div> -->
                                    <button class="plan_btn <?php if(request('plan_time')){
                                      if(request('plan_time')=='m'){

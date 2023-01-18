@@ -271,18 +271,18 @@
                                         <div class="mx-3 icon_container"><a href="{{ route('qualification-create',['flag'=>'privateView']) }}"><i class="fa fa-plus deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                     </div>
                                     @if (count($qualification)>0)
-                                    @foreach ($qualification as $k=>$v)
-                                    <div class="d-flex align-items-end">
-                                        <div class="back_btn_profile deep-aubergine mt-1">{{$v->institue_name}}</div>
-                                        <div class="icon_container mx-3"><a href="{{ route('qualification-edit', ['id'=>$v->id]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
-                                    </div>
-                                    <div class="guide_profile_main_subtext candy-pink mt-2">
-                                        {{$v->degree_name}} | {{$v->field_of_study}} | {{$v->start_year}} | {{$v->end_year}}
-                                    </div>
-                                    <div class="inp_data Aubergine_at_night mt-2">
-                                        <p>{{$v->description}}</p>
-                                    </div>
-                                    @endforeach
+                                        @foreach ($qualification as $k=>$v)
+                                        <div class="d-flex align-items-end">
+                                            <div class="back_btn_profile deep-aubergine mt-1">{{$v->institue_name}}</div>
+                                            <div class="icon_container mx-3"><a href="{{ route('qualification-edit', ['id'=>$v->id]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
+                                        </div>
+                                        <div class="guide_profile_main_subtext candy-pink mt-2">
+                                            {{$v->degree_name}} | {{$v->field_of_study}} | {{$v->start_year}} | {{$v->end_year}}
+                                        </div>
+                                        <div class="inp_data Aubergine_at_night mt-2">
+                                            <p>{{$v->description}}</p>
+                                        </div>
+                                        @endforeach
                                     <div class="clearfix"></div>
                                     @else
                                     <span><b>-</b></span>
@@ -299,23 +299,27 @@
                                     Endorsements
                                 </div>
                             </div>
-                            @if(!empty($user_endorsement))
-                            @foreach($user_endorsement as $edm)
-                            <div class="row mt-3">
-                                <div class="col-md-3">
-                                    <div class="guide_profile_main_text deep-pink">{{$edm['endorsementCreater']->name}}</div>
-                                    <div class="guide_profile_main_subtext Aubergine_at_night">{{$edm['endorsementCreater']->job_title?$edm['endorsementCreater']->job_title:"-"}}</div>
-                                    <div class="guide_profile_main_subtext Aubergine_at_night">{{strtoupper(date('jS F Y',strtotime($edm->created_at)))}}</div>
-                                </div>
-                                <div class="col-md-9">
-                                    <div class="guide_profile_main_subtext Aubergine_at_night">
-                                        <p>
-                                            {{$edm->comment}}
-                                        </p>
+                            @if(count($user_endorsement)>0)
+                                @foreach($user_endorsement as $edm)
+                                <div class="row mt-3">
+                                    <div class="col-md-3">
+                                        <div class="guide_profile_main_text deep-pink">{{$edm['endorsementCreater']->name}}</div>
+                                        <div class="guide_profile_main_subtext Aubergine_at_night">{{$edm['endorsementCreater']->job_title?$edm['endorsementCreater']->job_title:"-"}}</div>
+                                        <div class="guide_profile_main_subtext Aubergine_at_night">{{strtoupper(date('jS F Y',strtotime($edm->created_at)))}}</div>
+                                    </div>
+                                    <div class="col-md-9">
+                                        <div class="guide_profile_main_subtext Aubergine_at_night">
+                                            <p>
+                                                {{$edm->comment}}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            @endforeach
+                                @endforeach
+                            @else
+                                <div class="row">
+                                    <span><b>-</b></span>
+                                </div>
                             @endif
                         </div>
                     </div>

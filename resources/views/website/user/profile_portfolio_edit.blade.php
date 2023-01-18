@@ -62,7 +62,7 @@
                                 <div class="col-md-6">
                                 <div class="profile_input">
                                     <label for="lang">Project specific Skills <span class = "steric_sign_design">*</span></label>
-                                    <select name="project_specific_skills_id" class="outline js-select2 @error('project_specific_skills_id') is-invalid @enderror" id="lang" multiple>
+                                    <select name="project_specific_skills_id[]" class="outline js-select2 @error('project_specific_skills_id') is-invalid @enderror" id="lang" multiple>
                                         @foreach ($skills as $k=>$v)
                                             <option
                                                 @php
@@ -194,6 +194,12 @@
                                     </div>
                                     <div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 4MB</div>
                                 </div>
+                                <input type="hidden" value="" class="portfolio_images_count @error('portfolio_images_count') is-invalid @enderror" name="portfolio_images_count"/>
+                                @error('portfolio_images_count')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                                 {{-- <div class="col-md-3 d-flex align-items-end">
                                     <div class="save_add_btn">Add another</div>
                                 </div> --}}
@@ -399,6 +405,9 @@
         }
         
 
+        let imageCnt = $(parentElemId+" .portfolio-images").children('.img-item').length;
+        $('.portfolio_images_count').val(imageCnt);
+
         let getVideoDataCallback = function(req,resp){
             if(resp.status == 1){
                 if(resp.payload.src == 'vimeo'){
@@ -416,6 +425,7 @@
 
         let addImgUploadElem = function(){
             let imageCnt = $(parentElemId+" .portfolio-images").children('.img-item').length;
+            $('.portfolio_images_count').val(imageCnt);
             let lastid = $(parentElemId+" .portfolio-images").children('.img-item').last().attr('id').split("-")[3];
             let newcnt = lastid+1;
             if(maxImgCnt == imageCnt){

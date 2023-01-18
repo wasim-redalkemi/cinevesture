@@ -30,10 +30,35 @@
     <div class="sub-footer">
       <div class="info">
         <ul class="info-ul">
-          <li><i class="fa fa-linkedin-square" style="font-size:25px;" aria-hidden="true"></i></li>
-          <li><i class="fa fa-instagram" style="font-size:25px;" aria-hidden="true"></i></li>
-          <li><i class="fa fa-twitter-square" style="font-size:25px;" aria-hidden="true"></i></li>
-          <li><i class="fa fa-youtube-play" style="font-size:25px;" aria-hidden="true"></i></li>
+          
+          <li>
+            <a href="{{config('constants.SOCIAL_MEDIA_LINK_FACEBOOK')}}" target="_blank">
+              <i class="fa fa-facebook" style="font-size:25px;" aria-hidden="true"></i>
+            </a>
+          </li>
+          <li>
+            <a href="{{config('constants.SOCIAL_MEDIA_LINK_LINKEDIN')}}" target="_blank">
+              <i class="fa fa-linkedin-square" style="font-size:25px;" aria-hidden="true"></i>
+            </a>
+          </li>
+          
+          <li>
+            <a href="{{config('constants.SOCIAL_MEDIA_LINK_INSTAGRAM')}}" target="_blank">
+              <i class="fa fa-instagram" style="font-size:25px;" aria-hidden="true"></i>
+            </a>
+          </li>
+          
+          <li>
+            <a href="{{config('constants.SOCIAL_MEDIA_LINK_TWITTER')}}" target="_blank">
+              <i class="fa fa-twitter" style="font-size:25px;" aria-hidden="true"></i>
+            </a>
+          </li>
+          
+          <li>
+            <a href="{{config('constants.SOCIAL_MEDIA_LINK_YOUTUBE')}}" target="_blank">
+              <i class="fa fa-youtube" style="font-size:25px;" aria-hidden="true"></i>
+            </a>
+          </li>
         </ul>
       </div>
     </div>

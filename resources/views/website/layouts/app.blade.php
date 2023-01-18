@@ -188,8 +188,16 @@
 
         $('.docsPreview').click(function()
         {
-            $('#docsPreviewModal .docsPreviewModalContent iframe').attr('src',$(this).attr('docs-url'));
-            $('#docsPreviewModal').modal('show');
+            var doc_url = $(this).attr('docs-url');
+            if($(window).width()>480)
+            {
+                $('#docsPreviewModal .docsPreviewModalContent iframe').attr('src',doc_url);
+                $('#docsPreviewModal').modal('show');
+            }
+            else
+            {
+                window.location.href=doc_url;
+            }
         });
 
         $('.image_in_full_view').click(function()

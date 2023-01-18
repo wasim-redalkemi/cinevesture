@@ -60,7 +60,7 @@
                             @endif
                             <?php
                             $show_verified_btn = true;
-                            if (count($user_endorsement)<15) {
+                            if (count($user_endorsement)<config('constants.PROFILE_VERIFIED_ON_ENDORSE_COUNT')) {
                                 $show_verified_btn = false;
                             }
                             

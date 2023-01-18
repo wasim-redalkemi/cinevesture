@@ -34,6 +34,8 @@ class GoogleController extends Controller
                 $saveUser = User::updateOrCreate([
                     'google_id' => $user->getId(),
                 ],[
+                    'first_name' => $user['given_name'],
+                    'last_name' => $user['family_name'],
                     'name' => $user->getName(),
                     'email' => $user->getEmail(),
                     'email_verified_at' => date('Y-m-d H:i:s'),
@@ -60,7 +62,7 @@ class GoogleController extends Controller
             
             return redirect()->route('home');
         } catch (\Throwable $th) {
-            throw $th;
+            return redirect()->route('home')->with('error', 'Something went wrong!');
         }
     }
 }
