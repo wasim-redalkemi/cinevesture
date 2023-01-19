@@ -28,5 +28,13 @@ class ApplyNowRequest extends FormRequest
             'cover_letter' => 'required',
            
         ];
+       
+    }
+    public function messages()
+    {
+        return [
+            'resume.required'=>'This filed is required'
+            
+        ];            
     }
 }

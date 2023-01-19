@@ -177,7 +177,7 @@
                             </div>
 
                             <div class="form-check mt-4">
-                                <input class="form-check-input" type="checkbox" name="promoted_jobs" value="1"  id="flexCheckDefault">
+                                <input class="form-check-input " type="checkbox" name="promoted_jobs" value="1"  id="flexCheckDefault" @if($promoteCheck)checked @endif>
                                 <label class="verified-text mx-2" for="flexCheckDefault">
                                     Promoted Jobs
                                 </label>

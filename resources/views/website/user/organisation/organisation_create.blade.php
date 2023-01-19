@@ -384,16 +384,8 @@
             $(this).parents('.custom_file_explorer').find('.file_element').click();
         });
 
-        $('.file_element').change(function() {
-            // var output = $(this).parents('.custom_file_explorer').find('.upload_preview');
-            // const file = this.files;
-            // var reader = new FileReader();
-            // reader.onload = function() {
-            //     output.attr('src', reader.result);
-            // };
-            // reader.readAsDataURL(file[0]);
-            // $('.for_hide').css('display', 'none');
-            // $('.for_show').css('display', 'block');
+        $('#lang').change(function() {
+            $(".uploadedPdf").text(resume.name)
         });
     });
 
@@ -582,5 +574,6 @@
         $('.for_show').css('display', 'none');
 
     })
+
 </script>
 @endpush
