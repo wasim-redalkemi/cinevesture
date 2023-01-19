@@ -171,7 +171,7 @@
                     <div class="video_slider owl-carousel">
                         @if (!empty($projectData[0]['project_only_image']))
                         @foreach ($projectData[0]['project_only_image'] as $v)
-                        <div class="item preview_image_wrape" style="overflow: hidden;">
+                        <div class="item preview_image_wrape image_in_full_view" style="overflow: hidden;">
                             <div class="home_img_wrap"> <img src="{{ Storage::url($v['file_link']) }}" alt="image"></div>
                             <div class="d-flex align-items-initial mt-2">
                                 <div class="movie_name_text mt-0">{{ json_decode($v['media_info'])->title }}</div>
@@ -197,7 +197,7 @@
                         @if (!empty($projectData[0]['project_only_doc']))
                         @foreach ($projectData[0]['project_only_doc'] as $v)
                         <div class="col-md-3 col-10 mt-3 mt-md-0">
-                            <div class="document_pdf">
+                            <div class="document_pdf docsPreview" docs-url="{{Storage::url($v['file_link'])}}">
                                 <div class="upload_loader">
                                     <i class="fa fa-file-text deep-pink icon-size" aria-hidden="true"></i>
                                 </div>

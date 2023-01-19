@@ -2623,6 +2623,7 @@ select:focus {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: rgba(0,0,0,.03);
     /* margin: 2%; */
 }
 .preview_image_wrape .home_img_wrap {
