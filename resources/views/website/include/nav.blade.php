@@ -146,7 +146,11 @@
               </div>
               <!-- <div class="d--flex"> -->
                 <button type="submit" class="header-search-btn ml_10 mr_5">Search</button>
-                <button class="add-proj-btn my-2 my-sm-0 mr-0 d-none d-md-block"><a href="{{ route('project-overview')}}">Add a Project</a></button>
+                <a href="{{ route('project-overview')}}">
+                  <button type="button" class="add-proj-btn my-2 my-sm-0 mr-0 d-none d-md-block text-white">
+                      Add a Project
+                  </button>
+                </a>
               <!-- </div> -->
             </form>
             </div>
