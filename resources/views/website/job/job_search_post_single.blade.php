@@ -30,7 +30,7 @@
                                     @if(!isset($Job_data['applied']) || !empty($Job_data['applied']))
                                     <div>
                                         @if(is_null($Job_data['applied']))
-                                      <button class="guide_profile_btn">  <a href="{{route('showApplyJob',['jobId'=>$Job_data['id']])}}" class="">Apply now</a></button>
+                                         <button class="guide_profile_btn"><a href="{{route('showApplyJob',['jobId'=>$Job_data['id']])}}" class=""> Apply now</a></button>
                                         @else
                                         <button disabled class="guide_profile_btn">Applied</button>
                                         @endif

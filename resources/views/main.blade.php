@@ -50,14 +50,14 @@
                         @endif
                         
                         @foreach ($v->projectLanguages as $k1=>$v1)
-                        {{$v1->name}} |
+                        {{$v1->name}} ,
                         @endforeach 
                         @if (isset($v->genres[0]) && !empty($v->genres[0]))
                         {{$v->genres[0]['name']}}
                         @endif
                         </span>
                       </div>
-                      <button class="watch-now-btn mt-4"><a href="{{ route('public-view', ['id'=>$v->id]) }}" style="color:white !important;">Watch Now</a></button>
+                      <button class="watch-now-btn mt-4"><a href="{{ route('public-view', ['id'=>$v->id]) }}" style="color:white !important;">View Project</a></button>
                       {{-- @else
                         <div class="not-found-text">
                           <p class="blackTextShadow">No Data Found</p>
@@ -86,7 +86,7 @@
                         labore
                         </div>
                       <div class="duration-lang-text mt-1">2hr 5min | English | Horror</div>
-                      <button class="watch-now-btn mt-4">Watch now</button>
+                      <button class="watch-now-btn mt-4">View Project</button>
                     </div>
                   </div>
                 </div>
@@ -110,7 +110,7 @@
                         dolore magna aliqua.
                         Ut enim ad minim veniam, quis nostrud exercitation.</div>
                       <div class="duration-lang-text mt-1">1hr 10min | English | Horror</div>
-                      <button class="watch-now-btn mt-4">Watch now</button>
+                      <button class="watch-now-btn mt-4">View Project</button>
                     </div>
                   </div>
                 </div>

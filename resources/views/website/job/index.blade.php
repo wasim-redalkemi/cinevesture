@@ -105,8 +105,10 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-1 my-3 my-md-0">
-                                <button type = "submit"class="job_search_btn profile_search_btn">Search</button>
+                            <div class="col-md-1">
+                              <div class="d-flex justify-content-center my-3 my-md-0">
+                                <button type = "submit"class="job_search_btn profile_search_btn w_sm_25">Search</button>
+                              </div>
                             </div>
                         </div>
                         </form>
@@ -114,7 +116,7 @@
                     </div>
                 </div>
             </div>
-            <div class ="row">
+            <div class ="row pb_100">
                         <div class="d-flex justify-content-center mb-3" >
                         <a href="{{route('job-create-page')}}"><button type = "button"class="job_search_btn  post-job" style="margin-right:30px">Post A Job</button></a>
                         <a href="{{ route('posted-job') }}"><button type = "button"class="job_search_btn  post-job">My Jobs</button></a>

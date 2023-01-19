@@ -88,8 +88,7 @@
                         @if (!empty($v['description'])) {{ucFirst($v['description'])}} @endif
                     </div>
                     <div class="d-flex justify-content-between mt-4">
-                        <div class="d-flex flex-wrap w-75
-                        ">
+                        <div class="d-flex flex-wrap w_75">
                             @if (count($v['job_skills'])>0)
                             @foreach ($v['job_skills'] as $k1=>$v1)
                                 <button class="curv_cmn_btn skill_container"> {{$v1['name']}}</button>                               
