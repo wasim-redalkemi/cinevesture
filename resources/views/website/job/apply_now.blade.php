@@ -38,11 +38,11 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     <div id="Documents" class="add_content_wraper">
-                                        <label for="upload-doc-inp" class="d-block">
+                                        <label for="upload-doc-inp" class="d-block" id="resume_job">
                                             <div class="d-flex align-items-center mt-3">
                                                 <div><i class="fa fa-paperclip aubergine icon-size" aria-hidden="true"></i></div>
                                                 <div class="upload_resume_text mx-2">Upload Your Resume/CV</div>
-                                                <input type="file" accept="application/pdf,application/msword" name="resume" class="form-control @error('resume') is-invalid @enderror docInp d-none" id="upload-doc-inp" autofocus required>
+                                                <input type="file" accept="application/pdf,application/msword" name="resume" class="form-control @error('resume') is-invalid @enderror docInp d-none" id="upload-doc-inp" autofocus >
                                                 @error('resume')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -141,21 +141,32 @@
     // if ( $('.apply_job_form').attr('src') != '') {
     //     $(".document_pdf").fadeIn(100)
     // }
-    $("#apply_job_form").change(function(e) {
+    $("#upload-doc-inp").change(function(e) {
         console.log($(".uploadedPdf").text(""));
         // $("#upload-doc-inp").val("");
         $(".uploadedPdf").text("")
         let resume = $("#upload-doc-inp")[0].files[0]
         $(".document_pdf").fadeIn(100)
         $(".uploadedPdf").text(resume.name)
+        $('.e-err').hide()
     })
     $(".delete_file").click(function () {
         $(".uploadedPdf").text("")
+        $("#upload-doc-inp").val("")
          $(".document_pdf").fadeOut(100)
     })
     $("#apply_job_form").on("submit", function(e) {
         e.preventDefault();
         e.stopPropagation();
+        
+        if(!$("#upload-doc-inp").val()){
+            $("#resume_job").parent().find('span').remove();
+            if ($("#resume_job").parent().find('span').length == 0) {
+                $(`<span class="e-err" style="color: #DD45B3; font-weight:600 ;margin:0px;">Please select resume</span>`).insertAfter($("#resume_job"));    
+             }  
+            return false;
+        }
+      
         let $submitBtn = $(".guide_profile_btn");
         $submitBtn.prop("disabled", true);
         $submitBtn.text("Submitting...");
