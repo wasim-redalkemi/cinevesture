@@ -33,7 +33,7 @@
                         <div class="preview_subtext mt-2">{{$password}}</div> <a class="profile_upload_text aubergine mx-3" href = "{{route('create-reset-otp')}}">Change Password</a>
                     </div>
                     <div class="row mt_35">
-                        <div class="col-md-2">
+                        <div class="col-4 col-md-2">
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 
@@ -41,7 +41,7 @@
                             </form>
                             {{-- <button class="deactivate_btn">Logout</button> --}}
                         </div>
-                        <div class="col-md-5 mt-2 mt-md-0">
+                        <div class="col-8 col-md-5">
                         
                                 <button type="button" class="deactivate_btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                 Deactivate account

@@ -29,6 +29,7 @@
                 {{-- <img src="{{ asset('public/images/asset/Screenshot 2021-05-28 at 11.48 1.png') }}" class="root_img" alt="image"> --}}
               </div>
               <div class="carosel-card-cntainer">
+                <div class="carosel-card-cntainer-two">
                 <div class="container">
                   <div class="row">
                     <div class="col-md-12">
@@ -65,6 +66,7 @@
                       @endif                       --}}
                     </div>
                   </div>
+                </div>
                 </div>
               </div>
             </div>
@@ -263,7 +265,7 @@
 
     $(".test.owl-carousel").owlCarousel({
       autoplayTimeout: 3000,
-      // autoplay: true,
+      autoplay: true,
       loop: true,
       nav: true,
       margin: 20,

@@ -119,7 +119,7 @@
                                         <div class="pr_10">
                                             @if (count($user_languages)>0)
                                             @foreach ($user_languages as $k=>$v)
-                                            <button class="curv_cmn_btn skill_container">
+                                            <button class="curv_cmn_btn darkbtn skill_container">
                                                 {{ $v['get_languages']['name'] }}
                                             </button>
                                             @endforeach
@@ -133,26 +133,26 @@
                                         <div class="guide_profile_main_text mt-3">
                                             <p> Social Profile</p>
                                         </div>
-                                        <div class="guide_profile_main_subtext mt-3">IMDB Profile</div>
-                                        <div class="guide_profile_main_subtext deep-pink mt-1 pointer">
+                                        <div class="inp_data deep_aubergine mt-3">IMDB Profile</div>
+                                        <div class="deep-pink mt-1 pointer">
                                             @if (isset($user->imdb_profile))
-                                            <a href="{{ $user->imdb_profile }}" class="link-style" target="_blank">{{ $user->imdb_profile }}</a>
+                                            <a href="{{ $user->imdb_profile }}" class="fs_italian inp_data" target="_blank">{{ $user->imdb_profile }}</a>
                                             @else
                                             <span><b>-</b></span>
                                             @endif
                                         </div>
-                                        <div class="guide_profile_main_subtext mt-3">LinkedIn Profile</div>
-                                        <div class="guide_profile_main_subtext deep-pink pointer">
+                                        <div class="inp_data deep_aubergine mt-3">LinkedIn Profile</div>
+                                        <div class="inp_data deep-pink pointer">
                                             @if (isset($user->linkedin_profile))
-                                            <a href="{{ $user->linkedin_profile }}" class="link-style" target="_blank">{{ $user->linkedin_profile }}</a>
+                                            <a href="{{ $user->linkedin_profile }}" class="fs_italian inp_data" target="_blank">{{ $user->linkedin_profile }}</a>
                                             @else
                                             <span><b>-</b></span>
                                             @endif
                                         </div>
-                                        <div class="guide_profile_main_subtext mt-3">Website</div>
-                                        <div class="guide_profile_main_subtext deep-pink pointer">
+                                        <div class="inp_data deep_aubergine mt-3">Website</div>
+                                        <div class="deep-pink pointer">
                                             @if (isset($user->website))
-                                            <a href="{{ $user->website }}" class="link-style" target="_blank">{{ $user->website }}</a>
+                                            <a href="{{ $user->website }}" class="fs_italian inp_data" target="_blank">{{ $user->website }}</a>
                                             @else
                                             <span><b>-</b></span>
                                             @endif
@@ -520,7 +520,7 @@
             nav: true,
             margin: 20,
             center: false,
-            // items: 4,
+            items: 1,
             responsive: {
                 480: {
                     items: 1

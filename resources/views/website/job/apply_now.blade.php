@@ -33,13 +33,13 @@
                     <form class="validateBeforeSubmit" id="apply_job_form" action="{{route('storeApplyJob',['jobId'=>request('jobId')])}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="guide_profile_subsection" id="Documents">
-                            <div class="guide_profile_main_text mt-3">Resume/CV<em class="text-danger mx-1">*</em></div>
-                            <div class="preview_subtext deep_aubergine mt-3">Please Attach Your Resume</div>
+                            <div class="guide_profile_main_text mt-2 mt-md-3">Resume/CV<em class="text-danger mx-1">*</em></div>
+                            <div class="preview_subtext deep_aubergine mt-2 mt-md-3">Please Attach Your Resume</div>
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-10 col-md-3">
                                     <div id="Documents" class="add_content_wraper">
                                         <label for="upload-doc-inp" class="d-block">
-                                            <div class="d-flex align-items-center mt-3">
+                                            <div class="d-flex align-items-center mt-2 mt-md-3">
                                                 <div><i class="fa fa-paperclip aubergine icon-size" aria-hidden="true"></i></div>
                                                 <div class="upload_resume_text mx-2">Upload Your Resume/CV</div>
                                                 <input type="file" accept="application/pdf,application/msword" name="resume" class="form-control @error('resume') is-invalid @enderror docInp d-none" id="upload-doc-inp" autofocus required>
