@@ -20,10 +20,8 @@
                 </div>
                 <div class="guide_profile_main_text deep-pink mb-1">Projects</div>
                 <div class="row">
-                <div>
                     @php
                         $user_projects_data = $user_projects->toArray();
-                                                    
                     @endphp
                     @if (isset($user_projects_data['data']) && count($user_projects_data['data'])>0)
                     @foreach ($user_projects_data['data'] as $k => $v)
@@ -47,89 +45,91 @@
                             </div>
                         </div>                                       
                     </div>   
-                </div>                 
                     @endforeach
-                    @else
-                    {!! config('constants.NO_DATA_FAVOURITE') !!}
-
-                    @endif
-                    <div>
+                    <div class="col col-md-12">
                         {!! $user_projects->links() !!}
                     </div>
+                    @else
+                    <div class="col col-md-12">
+                        {!! config('constants.NO_DATA_FAVOURITE') !!}
+                    </div>
+                    @endif
                 </div>
 
                 
 
                 <div class="guide_profile_main_text deep-pink mt-5 mb-1">Profiles</div>
-                @php
-                    $user_profiles_data = $user_profiles->toArray();
-                @endphp
-                @if (isset($user_profiles_data['data']) && count($user_profiles_data['data'])>0)
-                @foreach ($user_profiles_data['data'] as $k => $v)               
-                <div class="profile_wraper profile_wraper_padding mt-1">
-                    <div class="d-flex justify-content-between">
-                        <div class="d-flex">
-                            <div class="">
-                                <div class="user_profile_container">                                
-                                    @if (!empty($v['profiles']['profile_image']))
-                                        <img src="{{ Storage::url($v['profiles']['profile_image']) }}"  class="" width=100% alt="image">
-                                    @else
-                                    <img src="{{ asset('images/asset/100_no_img.jpg') }}" />
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="mx-4 px-1">
-                                <div class="d-flex justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <a href="{{route('profile-public-show',['id'=>$v['profiles']['id']])}}" style="outline: none; text-decoration:none">
-                                            <span class="guide_profile_main_text"> {{ !empty($v['profiles']['name'])? ucFirst($v['profiles']['name']) : '-' }}</span>
-                                        </a>
-                                        <?php
-                                        $show_verified_btn = true;
-                                        if (isset($user_endorsement) && count($user_endorsement)<15) {
-                                            $show_verified_btn = false;
-                                        }
-                                        
-                                        if($show_verified_btn)
-                                        {
-                                            ?>
-                                                <div>
-                                                    <button class="verified_cmn_btn mx-3"> <i class="fa fa-check-circle hot-pink mx-1" aria-hidden="true"></i> VERIFIED</button>
-                                                </div>
-                                            <?php
-                                        }
-                                        ?>
-                                        {{-- <button class="verified_cmn_btn mx-3"> <i class="fa fa-check-circle hot-pink mx-1" aria-hidden="true"></i> VERIFIED</button> --}}
+                <div class="row">
+                    @php
+                        $user_profiles_data = $user_profiles->toArray();
+                    @endphp
+                    @if (isset($user_profiles_data['data']) && count($user_profiles_data['data'])>0)
+                        @foreach ($user_profiles_data['data'] as $k => $v)               
+                        <div class="profile_wraper profile_wraper_padding mt-1">
+                            <div class="d-flex justify-content-between">
+                                <div class="d-flex">
+                                    <div class="">
+                                        <div class="user_profile_container">                                
+                                            @if (!empty($v['profiles']['profile_image']))
+                                                <img src="{{ Storage::url($v['profiles']['profile_image']) }}"  class="" width=100% alt="image">
+                                            @else
+                                            <img src="{{ asset('images/asset/100_no_img.jpg') }}" />
+                                            @endif
+                                        </div>
+                                    </div>
+                                    <div class="mx-4 px-1">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="d-flex align-items-center">
+                                                <a href="{{route('profile-public-show',['id'=>$v['profiles']['id']])}}" style="outline: none; text-decoration:none">
+                                                    <span class="guide_profile_main_text"> {{ !empty($v['profiles']['name'])? ucFirst($v['profiles']['name']) : '-' }}</span>
+                                                </a>
+                                                <?php
+                                                $show_verified_btn = true;
+                                                if (isset($user_endorsement) && count($user_endorsement)<config('constants.PROFILE_VERIFIED_ON_ENDORSE_COUNT')) {
+                                                    $show_verified_btn = false;
+                                                }
+                                                
+                                                if($show_verified_btn)
+                                                {
+                                                    ?>
+                                                        <div>
+                                                            <button class="verified_cmn_btn mx-3"> <i class="fa fa-check-circle hot-pink mx-1" aria-hidden="true"></i> VERIFIED</button>
+                                                        </div>
+                                                    <?php
+                                                }
+                                                ?>
+                                                {{-- <button class="verified_cmn_btn mx-3"> <i class="fa fa-check-circle hot-pink mx-1" aria-hidden="true"></i> VERIFIED</button> --}}
+                                            </div>
+                                        </div>
+                                        <div class="posted_job_header">
+                                            {{ !empty($v['profiles']['job_title'])? ucFirst($v['profiles']['job_title']) : '-' }}
+                                        </div>
+                                        <div class="preview_headtext lh_54 candy-pink">
+                                            {{ !empty($v['profile_country']['country']['name'])? ucFirst($v['profile_country']['country']['name']) : '-' }}
+                                        </div>
+                                        <div class="posted_job_header Aubergine_at_night">
+                                            {{ !empty($v['profiles']['about'])? $v['profiles']['about'] : '-' }}
+                                        </div>
+                                        <div class="mt-3">
+                                            @foreach ($v['profile_skills'] as $k1=>$v1)                           
+                                                <button class="curv_cmn_btn skill_container">{{ !empty($v1['get_skills']['name'])? $v1['get_skills']['name'] : '-' }}</button>
+                                            @endforeach
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="posted_job_header">
-                                    {{ !empty($v['profiles']['job_title'])? ucFirst($v['profiles']['job_title']) : '-' }}
-                                </div>
-                                <div class="preview_headtext lh_54 candy-pink">
-                                    {{ !empty($v['profile_country']['country']['name'])? ucFirst($v['profile_country']['country']['name']) : '-' }}
-                                </div>
-                                <div class="posted_job_header Aubergine_at_night">
-                                    {{ !empty($v['profiles']['about'])? $v['profiles']['about'] : '-' }}
-                                </div>
-                                <div class="mt-3">
-                                    @foreach ($v['profile_skills'] as $k1=>$v1)                           
-                                        <button class="curv_cmn_btn skill_container">{{ !empty($v1['get_skills']['name'])? $v1['get_skills']['name'] : '-' }}</button>
-                                    @endforeach
-                                </div>
+                                
+                                <div> <i class="fa <?php if(isset($v['profiles']['id'])){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$v['profiles']['id']}}" aria-hidden="true"></i></div>
                             </div>
+                        </div>            
+                        @endforeach
+                        <div class="col col-md-12">
+                            {!! $user_profiles->links() !!}
                         </div>
-                        
-                        <div> <i class="fa <?php if(isset($v['profiles']['id'])){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$v['profiles']['id']}}" aria-hidden="true"></i></div>
-                    </div>
-                </div>            
-                @endforeach
-                @else
-                {!! config('constants.NO_DATA_FAVOURITE') !!}
-
-                </div>
-                @endif
-                <div>
-                    {!! $user_profiles->links() !!}
+                        @else
+                        <div class="col col-md-12">
+                            {!! config('constants.NO_DATA_FAVOURITE') !!}
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
