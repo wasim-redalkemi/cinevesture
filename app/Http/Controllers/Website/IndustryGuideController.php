@@ -52,7 +52,7 @@ class IndustryGuideController extends WebController
         }
 
         $countries = MasterCountry::query()->orderBy('name','asc')->get();
-        $skills = MasterSkill::all();
+        $skills = MasterSkill::query()->orderBy('name','asc')->get();
         $talent_type = User::query()->where('job_title','!=',null)->where('user_type','U')->groupBy('job_title')->get();
         $users = User::query()->where(function($query) use($request){
             if (isset($request->search)) { // search name of user
