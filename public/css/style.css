@@ -1095,9 +1095,15 @@ label {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 20vh;
-    font-size: 36px;
+    /* font-size: 30px; */
+    padding: 2vh 0px;
     color: #971E9B;
+    background-color: rgba(0,0,0,0.03);
+    border-radius: 4px;
+}
+
+.not-found-text h4{
+    margin-bottom: 0px;
 }
 
 /* contact us page  */
@@ -2621,6 +2627,7 @@ select:focus {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: rgba(0,0,0,.03);
     /* margin: 2%; */
 }
 .preview_image_wrape .home_img_wrap {
