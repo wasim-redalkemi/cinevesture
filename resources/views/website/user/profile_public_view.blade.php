@@ -275,13 +275,13 @@
                             <div class="container px-0">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="guide_profile_main_text deep-pink">
+                                        <div class="guide_profile_main_text candy-pink">
                                             Experiences
                                         </div>
                                         @if (count($experience)>0)
                                         @foreach ($experience as $k=>$v)
                                         <div class="d-flex align-items-end">
-                                            <div class="guide_profile_main_subtext mt-1">{{ $v->job_title }}</div>
+                                            <div class="duration-lang-text Aubergine_at_night mt-1">{{ $v->job_title }}</div>
                                         </div>
                                         <div class="preview_subtext candy-pink mt-1">
                                             {{$v->country_id}} | {{date('d-m-Y',strtotime($v->start_date))}} | {{date('d-m-Y',strtotime($v->end_date))}} <br>
@@ -304,18 +304,18 @@
                             <div class="container px-0">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="guide_profile_main_text deep-pink">
+                                        <div class="guide_profile_main_text candy-pink">
                                             Qualifications
                                         </div>
                                         @if (count($qualification)>0)
                                         @foreach ($qualification as $k=>$v)
                                         <div class="d-flex align-items-end">
-                                            <div class="guide_profile_main_subtext mt-1">{{$v->institue_name}}</div>
+                                            <div class="duration-lang-text Aubergine_at_night mt-1">{{$v->institue_name}}</div>
                                         </div>
-                                        <div class="guide_profile_main_subtext candy-pink mt-2">
+                                        <div class="preview_subtext candy-pink mt-2">
                                             {{$v->degree_name}} | {{$v->field_of_study}} | {{$v->start_year}} | {{$v->end_year}}
                                         </div>
-                                        <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
+                                        <div class="inp_data Aubergine_at_night mt-2">
                                             <p>{{$v->description}}</p>
                                         </div>
                                         @endforeach
@@ -403,9 +403,9 @@
                                         <div class="guide_profile_main_subtext Aubergine_at_night">{{strtoupper(date('jS F Y',strtotime($edm->created_at)))}}</div>
                                     </div>
                                     <div class="col-md-9">
-                                        <div class="preview_subtext">
+                                        <div class="inp_data">
                                             <p>
-                                                {{$edm->comment}}
+                                                {{$edm->comment}} 
                                             </p>
                                         </div>
                                     </div>
@@ -529,7 +529,7 @@
                     items: 2
                 },
                 1024: {
-                    items: 4
+                    items: 3.75
                 }
             },
         });

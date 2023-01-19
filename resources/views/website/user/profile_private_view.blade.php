@@ -309,7 +309,7 @@
                                         <div class="guide_profile_main_subtext Aubergine_at_night">{{strtoupper(date('jS F Y',strtotime($edm->created_at)))}}</div>
                                     </div>
                                     <div class="col-md-9">
-                                        <div class="guide_profile_main_subtext Aubergine_at_night">
+                                        <div class="inp_data Aubergine_at_night">
                                             <p>
                                                 {{$edm->comment}}
                                             </p>
