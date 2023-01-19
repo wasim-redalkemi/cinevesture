@@ -62,7 +62,7 @@
                                     </a>
                                     @endif
                                 </div>
-                                <div class="bottom-container mb-3 mt-3 mt-md-0">
+                                <div class="bottom-container mt-3 mt-md-0">
                                     <div class="aleady-text">New to Cinevesture?<span class="mx-2 sign_now_text">
                                             @if(Route::has('password.request'))
                                             <a class="text_decor_none" href="{{ route('register') }}">{{ __('Sign Up') }}</a>@endif</span>now

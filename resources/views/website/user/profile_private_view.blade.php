@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <div class="guide_profile_main_text mt-3">
                                         <p> Skills</p>
                                     </div>
@@ -103,30 +103,31 @@
                                     @endif
                                 </div>
                                 </div>
-                            <div class="col-md-6">
+                                <div class="col-md-2"></div>
+                            <div class="col-md-5">
                                 <div class="guide_profile_main_text mt-3">
                                     <p> Social Profile</p>
                                 </div>
-                                <div class="guide_profile_main_subtext mt-3">IMDB Profile</div>
-                                <div class="guide_profile_main_subtext deep-pink mt-1 pointer">
+                                <div class="inp_data deep_aubergine mt-3">IMDB Profile</div>
+                                <div class="deep-pink mt-1 pointer">
                                     @if (!empty($user->imdb_profile))
-                                        <a href="{{ $user->imdb_profile }}" class="link-style"  >{{ $user->imdb_profile }}</a>                                      
+                                        <a href="{{ $user->imdb_profile }}" class="fs_italian inp_data"  >{{ $user->imdb_profile }}</a>                                      
                                     @else
                                     <span><b>-</b></span>
                                     @endif
                                 </div>
-                                <div class="guide_profile_main_subtext mt-3">LinkedIn Profile</div>
-                                <div class="guide_profile_main_subtext deep-pink pointer">
+                                <div class="inp_data deep_aubergine mt-3">LinkedIn Profile</div>
+                                <div class="deep-pink pointer">
                                     @if (!empty($user->linkedin_profile))
-                                        <a href="{{ $user->linkedin_profile }}" class="link-style" >{{ $user->linkedin_profile }}</a>                                         
+                                        <a href="{{ $user->linkedin_profile }}" class="fs_italian inp_data" >{{ $user->linkedin_profile }}</a>                                         
                                     @else
                                         <span><b>-</b></span>
                                     @endif
                                 </div>
-                                <div class="guide_profile_main_subtext mt-3">Website</div>
-                                <div class="guide_profile_main_subtext deep-pink mt-1 pointer">
+                                <div class="inp_data deep_aubergine mt-3">Website</div>
+                                <div class="deep-pink mt-1 pointer">
                                     @if (!empty($user->website))     
-                                        <a href="{{ $user->website }}" class="link-style" >{{ $user->website }}</a>                                 
+                                        <a href="{{ $user->website }}" class="fs_italian inp_data" >{{ $user->website }}</a>                                 
                                     @else
                                         <span><b>-</b></span>
                                         @endif
@@ -140,7 +141,7 @@
                     <div class="guide_profile_subsection">
                         <div class="container px-0">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <div class="contact-page-text deep-pink">
                                         About
                                     </div>
@@ -154,11 +155,11 @@
                                         </p>
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-2"></div> --}}
-                                <div class="col-md-6">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-5">
                                     <div class="guide_profile_main_text mb-2">Introduction Video</div>
-                                    <div class="playVideoWrap" video-url="{{$user->intro_video_link}}">
-                                        <img src="{{$user->intro_video_thumbnail}}" width="100%" alt="">
+                                    <div class="VideoWrapforProfile" video-url="{{$user->intro_video_link}}">
+                                        <img src="{{$user->intro_video_thumbnail}}" width="100%" height="100%" alt="">
                                     </div>
                                 </div>
                             </div>
