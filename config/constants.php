@@ -30,6 +30,12 @@ return [
     'NO_DATA_FAVOURITE_NO_CARD' => '<div class="not-found-text">
                             <p>No Project Found</p>
                         </div>',
+    'SOCIAL_MEDIA_LINK_LINKEDIN' => 'https://www.linkedin.com/in/cinevesture',
+    'SOCIAL_MEDIA_LINK_INSTAGRAM' => 'https://instagram.com/cinevesture?igshid=YWJhMjlhZTc=',
+    'SOCIAL_MEDIA_LINK_FACEBOOK' => 'https://www.facebook.com/cinevesture',
+    'SOCIAL_MEDIA_LINK_TWITTER' => 'https://twitter.com/cinevesture',
+    'SOCIAL_MEDIA_LINK_YOUTUBE' => 'https://youtube.com/@cinevesture5809',
+    'PROFILE_VERIFIED_ON_ENDORSE_COUNT' => '15',
 ];
 
 ?>

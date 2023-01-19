@@ -308,7 +308,7 @@ class MasterSkillSeeder extends Seeder
         ('291', 'Production Secretary'),
         ('292', 'Production Supervisor'),
         ('293', 'Projectionist'),
-        ('294', 'Projectionist'),
+        -- ('294', 'Projectionist'),
         ('295', 'Prop Assistants'),
         ('296', 'Prop Maker'),
         ('297', 'Property Master'),

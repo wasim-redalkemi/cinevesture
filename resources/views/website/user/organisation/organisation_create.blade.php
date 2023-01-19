@@ -31,13 +31,7 @@
                                             } ?>" class="upload_preview for_show croperImg" width="100">
 
                                 <div for="file-input" class="d-none">
-                                    <input type="file" name="logo" class="@error('logo') is-invalid @enderror file_element image" accept=".jpg,.jpeg,.png">
                                     <input name="croppedOrgImg" id="croppedOrgImg" type="hidden">
-                                    @error('logo')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
                                 </div>
                                 <div class="pointer open_file_explorer for_hide">
                                     <div class="text-center"> <i class="fa fa-plus-circle mx-2 profile_icon deep-pink pointer" aria-hidden="true"></i></div>
@@ -52,6 +46,12 @@
                                     <div class="pointer search-head-subtext deep-pink delete_image">
                                         Delete
                                     </div>
+                                    <input type="file" name="logo" class="d-none @error('logo') is-invalid @enderror file_element image" accept=".jpg,.jpeg,.png">
+                                    @error('logo')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>

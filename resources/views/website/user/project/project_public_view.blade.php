@@ -154,7 +154,7 @@
                         <div class="col-md-1 col-md-0"></div>
                         <div class="col-lg-5 col-md-12 px-3">
                             <div class="public-head-subimage">
-                                <div class="playVideoWrapForheader br_4 mt-3" video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link'] }}@endif">
+                                <div class="playVideoWrapForheader playVideoWrap br_4 mt-3" video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link'] }}@endif">
                                     <img src="@if (isset($projectData[0]['project_only_video'][0]['media_info'])){{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}@endif" alt="" class="br_4 w-100">
                                 </div>
                                 {{-- <iframe width="" height="" src="{{empty($projectData[0]['project_only_video'][0]['file_link'])?'https://www.youtube.com/embed/oYWAwwy5EbQ':$projectData[0]['project_only_video'][0]['file_link'];}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> --}}
@@ -245,10 +245,8 @@
                     <div class="row">
                         @if (!empty($projectData[0]['banner_image']))
                         <div class="col-md-3 mt-3">
-                            <div class="project_public_img_wrap image_responsive_wrap">
-                                <a href="{{ Storage::url($projectData[0]['banner_image']) }}" target="_blank" rel="noopener noreferrer">
+                            <div class="project_public_img_wrap image_responsive_wrap image_in_full_view">
                                     <img src="{{ Storage::url($projectData[0]['banner_image']) }}" class="" width=100% alt="image">
-                                </a>
                             </div>
                         </div>
                         @else
@@ -261,10 +259,8 @@
                         @if (!empty($projectData[0]['project_only_image']))
                         @foreach ($projectData[0]['project_only_image'] as $v)
                         <div class="mt-3 mr_3">
-                            <div class="project_public_img_wrap image_responsive_wrap">
-                                <a href="{{ Storage::url($v['file_link']) }}" target="_blank" rel="noopener noreferrer">
+                            <div class="project_public_img_wrap image_responsive_wrap image_in_full_view">
                                     <img src="{{ Storage::url($v['file_link']) }}" class="" width=100% alt="image">
-                                </a>
                             </div>
                         </div>
                         @endforeach
@@ -284,17 +280,15 @@
                     @if (!empty($projectData[0]['project_only_doc']))
                     @foreach ($projectData[0]['project_only_doc'] as $v)
                     <div class="col-md-3 col-8 mt-3">
-                        <a href="{{Storage::url($v['file_link'])}}" download>
-                            <div class="document_pdf document_pdf_project">
-                                <div class="upload_loader">
-                                    <img src="{{ asset('images/asset/pdf_image.svg') }}" alt="image">
-                                </div>
-                                <div class="mx-3">
-                                    <div class="public_view_main_subtext">{{ json_decode($v['media_info'])->name }}</div>
-                                    <div class="proctect_by_capta_text">{{ json_decode($v['media_info'])->size_label }}</div>
-                                </div>
+                        <div class="document_pdf document_pdf_project docsPreview" docs-url="{{Storage::url($v['file_link'])}}">
+                            <div class="upload_loader">
+                                <img src="{{ asset('images/asset/pdf_image.svg') }}" alt="image">
                             </div>
-                        </a>
+                            <div class="mx-3">
+                                <div class="public_view_main_subtext">{{ json_decode($v['media_info'])->name }}</div>
+                                <div class="proctect_by_capta_text">{{ json_decode($v['media_info'])->size_label }}</div>
+                            </div>
+                        </div>
                     </div>
                     @endforeach
                     @else

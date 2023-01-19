@@ -15,11 +15,12 @@ class PlanController extends Controller
     {                    
         $plans = Plans::query()->with('getRelationalData.getModule','getRelationalData.getOperation')
                  ->where(function($q) use($request){
-                    if(isset($request->plan_time)){
-                     $q->where('plan_time',$request->plan_time);
-                    }else{
-                        $q->where('plan_time','m');  
-                    }
+                    // if(isset($request->plan_time)){
+                    //  $q->where('plan_time',$request->plan_time);
+                    // }else{
+                    //     $q->where('plan_time','m');  
+                    // }
+                    $q->where('plan_time','y');  
 
                     if(isset($request->currency)){
                         $q->where('currency',$request->currency);

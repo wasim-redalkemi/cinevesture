@@ -3359,8 +3359,8 @@ input:checked+.slider:before {
 }
 
 .playVideoWrapForheader {
-    max-width: 600px;
-    min-width: 500px;
+    max-width: 600px !important;
+    min-width: 500px !important;
     /* height: 200px; */
 }
 .playVideoWrap {
@@ -3992,4 +3992,58 @@ transition: 2s ease all; */
 {
     position: relative;
     left:20px;
+}
+.my_modal
+{
+    transform: translate(0,-80px);
+    z-index: 99999999;
+}
+.image_in_full_view_modal
+{
+    z-index: 99999999;
+    display: none;
+    position: fixed;
+    width: 99vw;
+    height: 100vh;
+    top: 0px;
+    padding: 10px;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.9);
+}
+.image_in_full_view_modal .ImageInFullViewModalContent
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.ImageInFullViewModalContent .imgWrap
+{
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ImageInFullViewModalContent .imgWrap .imgSubWrap
+{
+    max-width: 100%;
+    max-height: 100%;
+}
+.ImageInFullViewModalContent .close_btn
+{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.image_in_full_view_modal .imgWrap::-webkit-scrollbar { 
+    display: none;
+}
+#docsPreviewModal .docsPreviewModalContent
+{
+    height: 90vh;
+    width: 100%;
 }

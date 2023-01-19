@@ -52,7 +52,7 @@ class MasterLanguageSeeder extends Seeder
             ['name' => 'German'],
             ['name' => 'Javanese'],
             ['name' => 'Italian'],
-            ['name' => 'French'],
+            // ['name' => 'French'],
         ]);
     }
 }

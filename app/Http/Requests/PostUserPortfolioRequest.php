@@ -32,11 +32,14 @@ class PostUserPortfolioRequest extends FormRequest
             'project_specific_skills_id.*' => 'required|exists:master_skills,id',
             'project_country_id'=> 'required', 
             'project_country_id.*' => 'required|exists:master_countries,id',
+            'portfolio_images_count' => 'required|min:1'
+
         ];
     }
     public function messages()
     {
         return [
+           'portfolio_images_count.required' => 'Portfolio image is required.'
             //
         ];            
     }
