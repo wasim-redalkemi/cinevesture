@@ -6,20 +6,22 @@
                 <div class="p-3 float-end">
                     <i class="fa fa-times text_fff font_24 pointer" data-dismiss="modal" aria-label="Close"></i>
                 </div>
-                <section class="p-3">
+                <section class="p-0 p-md-3">
                     <div class="container">
-                        <div class="row">
+                        <div class="">
                             <div class="col-md-12">
-                                <div class="signup-text  mb-4 mt-5"> Contact </div>
-                                <div class="row">
-                                    <div class="col-md-3">
-                                        @if (!empty($image))                                            
-                                            <img src="{{Storage::url($image)}}" class="w-100 br_100 " alt="product-image" style="height:100%;width:100%;">
-                                        @else
-                                            <img src="{{ asset('images/asset/user-profile.png') }}" class="w-100 br_100 " alt="product-image" />
-                                        @endif
+                                <div class="signup-text mb-4 mt-2 mt-md-5"> Contact </div>
+                                <div class="d-flex">
+                                    <div class="">
+                                        <div class="contact_modal_profile">
+                                            @if (!empty($image))                                            
+                                                <img src="{{Storage::url($image)}}" class="w-100 br_100 " alt="product-image" style="height:100%;width:100%;">
+                                            @else
+                                                <img src="{{ asset('images/asset/user-profile.png') }}" class="w-100 br_100 " alt="product-image" />
+                                            @endif
+                                        </div>
                                     </div>
-                                    <div class="col-md-9">
+                                    <div class="contact_modal_side_contant">
                                         <div class="tile_text text_fff">{{$name}}</div>
                                         <div class="organisation_cmn_text text_fff">{{$title}}</div>
                                     </div>
@@ -35,13 +37,13 @@
                                     <label class="modal_btm_text mx-2 mt-1">Send a copy to me</label>
                                 </div>
 
-                                <div class="mt-4">
+                                <div class="my-4">
                                     <input type="hidden" name="email_1" id="email_1" class="modal_input" value="{{$email}}">
                                     <button type="button" id="contact_btn" class="invite_btn">Send Mail</button>
                                 </div>
-                                <div class="modal_btm_text mt-4 mb-5">
+                                <!-- <div class="modal_btm_text mt-4 mb-5">
                                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum vel cras vitae morbi varius vitae.
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </div>

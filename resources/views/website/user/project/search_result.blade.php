@@ -228,11 +228,11 @@
                 </div>
             </div>
             <div class="col-md-9 mb_3">
-                <div class="white mb_3">{{count($projects)}} Results Founds</div>
+                <div class="white mb-2 mt-2 mt-md-0">{{count($projects)}} Results Founds</div>
                 @if(count($projects) >= 1)
                 @foreach($projects as $project)
                 <a href="{{route('public-view',['id'=>$project->id])}}" style="outline:none;text-decoration:none">
-                    <div class="search-result-card my-4 my-md-0">
+                    <div class="search-result-card my-2 my-md-0">
                         <div class="row">
                             <div class="col-md-5">
                                 @if(isset($project->projectImage))
@@ -264,7 +264,7 @@
                                 <table class="table mt-1 lookingfor_table_width">
                                     <tbody class="search-table-body">
                                         <tr>
-                                            <td>Looking for</td>
+                                            <td>Looking For</td>
                                             <td>
                                                 <div style="width: 100%">
                                                     @if(isset($project->projectLookingFor[0]))
@@ -306,7 +306,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Created by</td>
+                                            <td>Created By</td>
                                             <td class="aubergine">@if (!empty($project->user->name)){{ucwords($project->user->name)}} @endif</td>
                                         </tr>
                                     </tbody>

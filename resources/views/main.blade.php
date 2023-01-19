@@ -50,7 +50,7 @@
                         @endif
                         
                         @foreach ($v->projectLanguages as $k1=>$v1)
-                        {{$v1->name}} |
+                        {{$v1->name}} ,
                         @endforeach 
                         @if (isset($v->genres[0]) && !empty($v->genres[0]))
                         {{$v->genres[0]['name']}}

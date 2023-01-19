@@ -803,6 +803,9 @@ label {
     outline: none;
 }
 
+.search-box-container .search-container input::placeholder {
+    color: #4D0D8A;
+}
 .search-box-container .search-container .search-btn {
     width: 40px;
     border: none;
@@ -3482,6 +3485,28 @@ input:checked+.slider:before {
     margin-top: 0px;
 }
 
+.w_sm_25 {
+    width: 100%;
+}
+
+.collapse:not(.show) {
+    display: block;
+}
+
+.contact_modal_profile {
+    width: 75px;
+    height: 75px;
+}
+.contact_modal_side_contant {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 16px;
+}
+.w_75 {
+    width: 75%;
+}
 
 @media (max-width: 480px) {
 
@@ -3493,10 +3518,12 @@ input:checked+.slider:before {
         /* max-width: 1365px !important; */
     }
 
+    .collapse:not(.show) {
+        display: none;
+    }
     .content_wraper {
         margin-bottom: 50px;
     }
-
     .guide_profile_subsection {
         padding: 1rem !important;
     }
@@ -3519,7 +3546,7 @@ input:checked+.slider:before {
         width: max-content;
         margin: auto;
         width: 100%;
-        padding: 1rem;
+        padding: 0.65rem;
     }
     .mt_sm_100 {
         margin-top: 100px;
@@ -3668,7 +3695,7 @@ input:checked+.slider:before {
     }
 
     .project-sub-text {
-        width: 300px;
+        width: 250px;
     }
 
     .w_maxcont {
@@ -3757,6 +3784,7 @@ input:checked+.slider:before {
     .pr_10 {
         padding-right: 0% !important;
     }
+
     .signup-container {
         background: #33084C !important;
         max-width: 340px;
@@ -3788,7 +3816,7 @@ input:checked+.slider:before {
     }
     .guide_profile_btn
         {
-        padding: 6px 3px;
+        padding: 8px 15px;
     }
     .industry_sub_text {
     font-weight: 400;
@@ -3804,7 +3832,10 @@ input:checked+.slider:before {
         font-feature-settings: 'ss01' on;
     }
     .input_wraper {
-    margin: 60px 10px;
+    margin: 30px 10px;
+    }
+    .pb_100 {
+        padding-bottom: 100px;
     }
     .portfolio_item { 
         width: 270px;
@@ -3839,9 +3870,43 @@ input:checked+.slider:before {
     font-weight: 400;
     font-size: 16px;
     }
+    
+.w_sm_25 {
+    width: 25%;
+}
+ .footer {
+    padding-top: 20px;
+}
+ .footer .row {
+    padding: 0;
+}
+.info-ul {
+    margin-bottom: 0rem;
+    padding: 0rem;
+ }
+ .pagination {
+    float: left !important;
+    margin-left: 25%;
+    margin-top: 15px;
+    margin-bottom: 30px;
+}
+.w_75 {
+    width: 100%;
+}
+.forWordBreak {
+    white-space: nowrap; 
+    width: 300px; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+
+
+
+
 }
 
 /* Media query ends here  */
+
 
 .br_4 {
     border-radius: 4px !important;

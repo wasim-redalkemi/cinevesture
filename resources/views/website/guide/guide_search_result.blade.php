@@ -13,7 +13,7 @@
         <div class="row mt-4">
             <div class="col-md-3">
                 <div class="side-bar-cmn-part">
-                <form class="pb-5" method="Get" action="{{ route('guide-view') }}">
+                <form class="pb-0 pb-md-5" method="Get" action="{{ route('guide-view') }}">
                     @csrf
                     <div class="search-box-container">
                         <div class="search-container w-100">
@@ -133,7 +133,7 @@
                 @foreach($users as $user)
                 <div class="border_btm profile_wraper_padding my-3 my-md-0">
                     <div class="d-flex justify-content-between">
-                        <div class="d-flex">
+                        <div class="d-block d-md-flex">
                         <div class="">
                             <div class="user_profile_container wh_66">
                                 <!-- <img src="{{ asset('images/asset/user-profile.png') }}" /> -->
@@ -145,7 +145,7 @@
                             </div>
 
                         </div>
-                        <div class="mx-3">
+                        <div class="mx-2 mx-md-3 mt-2 mt-md-0">
                             <div class="d-flex align-items-center">
                                 <div class="guide_profile_main_text">
                                     <a href="{{route('profile-public-show',['id'=>$user->id])}}" class="btn-link text_user_name">{{empty($user->first_name)?'Name':ucfirst($user->first_name).' '.ucfirst($user->last_name);}}</a>
