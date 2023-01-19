@@ -1,4 +1,4 @@
-<div class="mb_3 mt-2 mt-md-0">{{count($jobs)}} Results Founds</div>
+{{-- <div class="mb_3 mt-2 mt-md-0">{{count($jobs)}} Results Founds</div> --}}
 <div class="white_bg_wraper my-3 my-md-0 mb-xl-4">
     @foreach($jobs as $job)
 <div class="border_btm profile_wraper_padding">
@@ -16,9 +16,11 @@
         @endif
         </div>
       
+        @if($job->user_id!=auth()->user()->id)
         <div class="pointer fav-icon">
             <i data-id="{{$job->id}}" class="fa {{is_null($job->favorite) ? 'fa-heart-o' : 'fa-heart'}} aubergine icon-size" aria-hidden="true"></i>
         </div>
+        @endif
     </div>
 
     <div class="preview_headtext lh_54 candy-pink">
@@ -35,16 +37,17 @@
             <button class="curv_cmn_btn">{{$skill->name}}</button>
             @endforeach
         </div>
-        @if(!isset($showApplied) || $showApplied)
-        <div class="mt-2 mt-md-0">
-            @if(is_null($job->applied))
-          <button class="guide_profile_btn">  <a href="{{route('showApplyJob',['jobId'=>$job->id])}}" class="">Apply now</a></button>
-            @else
-            <button disabled class="guide_profile_btn">Applied</button>
+        @if($job->user_id!=auth()->user()->id)
+            @if(!isset($showApplied) || $showApplied)
+                <div class="mt-2 mt-md-0">
+                    @if(is_null($job->applied))
+                <button class="guide_profile_btn">  <a href="{{route('showApplyJob',['jobId'=>$job->id])}}" class="">Apply now</a></button>
+                    @else
+                    <button disabled class="guide_profile_btn">Applied</button>
+                    @endif
+                </div>      
             @endif
-        </div>      
         @endif
-       
     </div>
     </div>
     @endforeach

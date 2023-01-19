@@ -1109,6 +1109,10 @@ label {
     border-radius: 4px;
 }
 
+.not-found-text h4{
+    margin-bottom: 0px;
+}
+
 /* contact us page  */
 
 .contact-text {

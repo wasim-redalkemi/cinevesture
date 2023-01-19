@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
 use App\Models\Endorsement;
+use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -120,6 +121,20 @@ class EndorsementController extends Controller
 
             }
             $endorsement->save();
+
+            $currentActiveCount = Endorsement::query()->where('to',$endorsement->to)->where('status','1')->get();
+            $updateUserVerified = User::find($endorsement->to);
+            if(count($currentActiveCount)>=config('constants.PROFILE_VERIFIED_ON_ENDORSE_COUNT'))
+            {
+                $updateUserVerified->is_profile_verified = 1;
+            }
+            else
+            {
+                $updateUserVerified->is_profile_verified = 0;
+            }
+            $updateUserVerified->update();
+
+
             return ['status'=>1,'msg'=>$msg];           
         } catch (Exception $e) {
             return ['status'=>0,'msg'=>"Something went wrong."];
