@@ -3503,9 +3503,9 @@ input:checked+.slider:before {
     width: 100%;
 }
 
-.collapse:not(.show) {
+/* .collapse:not(.show) {
     display: block;
-}
+} */
 
 .contact_modal_profile {
     width: 75px;
@@ -3539,9 +3539,9 @@ input:checked+.slider:before {
         /* max-width: 1365px !important; */
     }
 
-    .collapse:not(.show) {
+    /* .collapse:not(.show) {
         display: none;
-    }
+    } */
     .content_wraper {
         margin-bottom: 50px;
     }

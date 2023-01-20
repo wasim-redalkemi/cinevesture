@@ -248,7 +248,7 @@
       center: true,
       // autoPlay: 500,
       autoplayTimeout: 3000,
-      autoplay: true,
+      // autoplay: true,
       loop: true,
       nav: true,
       center: true,
@@ -284,6 +284,9 @@
         },
         1400: {
           items: 4
+        },
+        1900: {
+          items: 5
         },
         1925: {
           items: 5.5
