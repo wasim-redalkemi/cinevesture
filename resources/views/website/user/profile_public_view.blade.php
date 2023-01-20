@@ -103,7 +103,7 @@
                                             @if (count($user_skills)>0)
                                             @foreach ($user_skills as $k=>$v)
                                             <button class="curv_cmn_btn skill_container">
-                                                {{ $v['get_skills']['name'] }}
+                                                {{ $v['get_skills']['name']}}
                                             </button>
 
                                             @endforeach
@@ -113,7 +113,7 @@
                                             @endif
                                         </div>
                                         <div class="guide_profile_main_text mt-3 mb-2">Available to Work In</div>
-                                        <div class="inp_data Aubergine_at_night">{{ (!empty($user->available_to_work_in))?$user->available_to_work_in:'-'; }}</div>
+                                        <div class="inp_data Aubergine_at_night">{{ (!empty($user->available_to_work_in))?ucfirst($user->available_to_work_in):'-'; }}</div>
                                         <div class="guide_profile_main_text mt-3 mb-2">Languages Spoken</div>
 
                                         <div class="pr_10">
@@ -213,7 +213,7 @@
                                                 </div>
                                                 <div class="d-flex justify-content-between mt-2">
                                                     <div class="organisation_cmn_text">{{$v['project_title']}}</div>
-                                                    <div class="icon_container"> <a href="{{ route('portfolio-edit', ['id'=>$v['id']]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
+                                                    {{-- <div class="icon_container"> <a href="{{ route('portfolio-edit', ['id'=>$v['id']]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div> --}}
                                                 </div>
                                             </div>
                                             @endforeach
