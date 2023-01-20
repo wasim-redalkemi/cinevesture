@@ -248,7 +248,7 @@
       center: true,
       // autoPlay: 500,
       autoplayTimeout: 3000,
-      // autoplay: true,
+      autoplay: true,
       loop: true,
       nav: true,
       center: true,

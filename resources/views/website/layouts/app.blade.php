@@ -205,6 +205,12 @@
             $('#ImageInFullViewModal .ImageInFullViewModalContent img').attr('src',$(this).find('img').attr('src'));
             $('#ImageInFullViewModal').fadeIn(500);
         });
+        $('.static_content_elem').click(function()
+        {
+            var elem = $(this).attr('modal_name');
+            $('#'+elem).modal('show');
+        });
+  </script>
     </script>
 
     @yield('scripts')

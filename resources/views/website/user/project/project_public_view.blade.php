@@ -494,7 +494,7 @@
                             <div class="slider">
                                
                                 {{-- {{$value->projectOnlyImage[0]->file_link}} --}}
-                                <div class="img-container"> 
+                                <div class="img-container gradient"> 
                                     @if (!empty($value->projectOnlyImage[0]->file_link))
                                     <img src="{{ Storage::url($value->projectOnlyImage[0]->file_link) }}" alt="image"> 
                                     @else

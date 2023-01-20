@@ -170,7 +170,7 @@
                                         <div class="guide_profile_main_text deep-pink font_18">
                                             About
                                         </div>
-                                        <div class="inp_data Aubergine_at_night mt-2 pr_35">
+                                        <div class="inp_data Aubergine_at_night mt-2">
                                             <p>
                                                 @if (!empty($user->about))
                                                 {{ $user->about }}
@@ -275,7 +275,7 @@
                             <div class="container px-0">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="guide_profile_main_text candy-pink">
+                                        <div class="guide_profile_main_text deep-pink">
                                             Experiences
                                         </div>
                                         @if (count($experience)>0)
@@ -304,7 +304,7 @@
                             <div class="container px-0">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="guide_profile_main_text candy-pink">
+                                        <div class="guide_profile_main_text deep-pink">
                                             Qualifications
                                         </div>
                                         @if (count($qualification)>0)
@@ -376,14 +376,14 @@
                                                                             <textarea name="endorse_message" id="endorse_message" cols="25" rows="6" class="controlTextLength w-100" placeholder="Message" text-length="600" maxlength="600" name="about" aria-label="With textarea"></textarea>
                                                                         </div>
 
-                                                                        <div class="mt-5">
+                                                                        <div class="my-5">
                                                                             <input type="hidden" name="endorse_email" id="endorse_email" value="@if (!empty($user->email)){{$user->email}}@endif">
                                                                             <input type="hidden" name="endorse_to_id" id="endorse_to_id" value="@if (!empty($user->id)){{$user->id}}@endif">
                                                                             <button type="button" id="endorse_btn" class="invite_btn">Submit</button>
                                                                         </div>
-                                                                        <div class="modal_btm_text mt-4 mb-5">
+                                                                        <!-- <div class="modal_btm_text mt-4 mb-5">
                                                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum vel cras vitae morbi varius vitae.
-                                                                        </div>
+                                                                        </div> -->
                                                                     </div>
                                                                 </div>
                                                             </div>

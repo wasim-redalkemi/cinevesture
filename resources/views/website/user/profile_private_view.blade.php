@@ -145,7 +145,7 @@
                                     <div class="contact-page-text deep-pink">
                                         About
                                     </div>
-                                    <div class="inp_data Aubergine_at_night mt-2 pr_35">
+                                    <div class="inp_data Aubergine_at_night mt-2">
                                         <p>
                                             @if (!empty($user->about))
                                             {{ $user->about }}

@@ -3251,6 +3251,9 @@ input:checked+.slider:before {
 .owl-carousel .owl-nav button.owl-prev {
     display: none;
 }
+/* .test.owl-carousel .owl-nav   .owl-carousel .owl-nav button.owl-prev {
+    display: block !important;
+} */
 
 .menu_position {
     margin-right: -22px !important;
@@ -3527,7 +3530,9 @@ input:checked+.slider:before {
     overflow: hidden;
     text-overflow: ellipsis; 
 }
-
+.gradient {
+    background: rgba(28, 3, 48, 0.4) !important;
+}
 
 @media (max-width: 480px) {
 
