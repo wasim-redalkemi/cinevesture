@@ -113,7 +113,7 @@
                                     <div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 4MB</div>
                                 </div>
                                 <div class="col-md-2 mt-2 d-flex align-items-end">
-                                    <div class="save_add_btn" style="display:none">Done</div>
+                                    <div class="save_add_btn" style="display:none">Save</div>
                                 </div>
                             </div>
                         </div>

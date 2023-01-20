@@ -206,8 +206,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="d-flex align-items-center">
-                                    <div class="preview_headtext">Team size</div>
-                                    <div class="associate_text mt-3 mx-3">{{isset($UserOrganisation->team_size)?$UserOrganisation->team_size:'-'}}</div>
+                                    <div class="preview_headtext mb-3">Team size</div>
+                                    <div class="associate_text my-3 mx-3">{{isset($UserOrganisation->team_size)?$UserOrganisation->team_size:'-'}}</div>
                                 </div>
                                 {{-- <div class="preview_headtext mb-3">Team members</div>
                                 <div class="row">

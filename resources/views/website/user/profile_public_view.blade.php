@@ -119,7 +119,7 @@
                                         <div class="pr_10">
                                             @if (count($user_languages)>0)
                                             @foreach ($user_languages as $k=>$v)
-                                            <button class="curv_cmn_btn skill_container">
+                                            <button class="curv_cmn_btn darkbtn skill_container">
                                                 {{ $v['get_languages']['name'] }}
                                             </button>
                                             @endforeach
@@ -133,26 +133,26 @@
                                         <div class="guide_profile_main_text mt-3">
                                             <p> Social Profile</p>
                                         </div>
-                                        <div class="guide_profile_main_subtext mt-3">IMDB Profile</div>
-                                        <div class="guide_profile_main_subtext deep-pink mt-1 pointer">
+                                        <div class="inp_data deep_aubergine mt-3">IMDB Profile</div>
+                                        <div class="deep-pink mt-1 pointer">
                                             @if (isset($user->imdb_profile))
-                                            <a href="{{ $user->imdb_profile }}" class="link-style" target="_blank">{{ $user->imdb_profile }}</a>
+                                            <a href="{{ $user->imdb_profile }}" class="fs_italian inp_data" target="_blank">{{ $user->imdb_profile }}</a>
                                             @else
                                             <span><b>-</b></span>
                                             @endif
                                         </div>
-                                        <div class="guide_profile_main_subtext mt-3">LinkedIn Profile</div>
-                                        <div class="guide_profile_main_subtext deep-pink pointer">
+                                        <div class="inp_data deep_aubergine mt-3">LinkedIn Profile</div>
+                                        <div class="inp_data deep-pink pointer">
                                             @if (isset($user->linkedin_profile))
-                                            <a href="{{ $user->linkedin_profile }}" class="link-style" target="_blank">{{ $user->linkedin_profile }}</a>
+                                            <a href="{{ $user->linkedin_profile }}" class="fs_italian inp_data" target="_blank">{{ $user->linkedin_profile }}</a>
                                             @else
                                             <span><b>-</b></span>
                                             @endif
                                         </div>
-                                        <div class="guide_profile_main_subtext mt-3">Website</div>
-                                        <div class="guide_profile_main_subtext deep-pink pointer">
+                                        <div class="inp_data deep_aubergine mt-3">Website</div>
+                                        <div class="deep-pink pointer">
                                             @if (isset($user->website))
-                                            <a href="{{ $user->website }}" class="link-style" target="_blank">{{ $user->website }}</a>
+                                            <a href="{{ $user->website }}" class="fs_italian inp_data" target="_blank">{{ $user->website }}</a>
                                             @else
                                             <span><b>-</b></span>
                                             @endif
@@ -170,7 +170,7 @@
                                         <div class="guide_profile_main_text deep-pink font_18">
                                             About
                                         </div>
-                                        <div class="inp_data Aubergine_at_night mt-2 pr_35">
+                                        <div class="inp_data Aubergine_at_night mt-2">
                                             <p>
                                                 @if (!empty($user->about))
                                                 {{ $user->about }}
@@ -281,7 +281,7 @@
                                         @if (count($experience)>0)
                                         @foreach ($experience as $k=>$v)
                                         <div class="d-flex align-items-end">
-                                            <div class="guide_profile_main_subtext mt-1">{{ $v->job_title }}</div>
+                                            <div class="duration-lang-text Aubergine_at_night mt-1">{{ $v->job_title }}</div>
                                         </div>
                                         <div class="preview_subtext candy-pink mt-1">
                                             {{$v->country_id}} | {{date('d-m-Y',strtotime($v->start_date))}} | {{date('d-m-Y',strtotime($v->end_date))}} <br>
@@ -310,12 +310,12 @@
                                         @if (count($qualification)>0)
                                         @foreach ($qualification as $k=>$v)
                                         <div class="d-flex align-items-end">
-                                            <div class="guide_profile_main_subtext mt-1">{{$v->institue_name}}</div>
+                                            <div class="duration-lang-text Aubergine_at_night mt-1">{{$v->institue_name}}</div>
                                         </div>
-                                        <div class="guide_profile_main_subtext candy-pink mt-2">
+                                        <div class="preview_subtext candy-pink mt-2">
                                             {{$v->degree_name}} | {{$v->field_of_study}} | {{$v->start_year}} | {{$v->end_year}}
                                         </div>
-                                        <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
+                                        <div class="inp_data Aubergine_at_night mt-2">
                                             <p>{{$v->description}}</p>
                                         </div>
                                         @endforeach
@@ -376,14 +376,14 @@
                                                                             <textarea name="endorse_message" id="endorse_message" cols="25" rows="6" class="controlTextLength w-100" placeholder="Message" text-length="600" maxlength="600" name="about" aria-label="With textarea"></textarea>
                                                                         </div>
 
-                                                                        <div class="mt-5">
+                                                                        <div class="my-5">
                                                                             <input type="hidden" name="endorse_email" id="endorse_email" value="@if (!empty($user->email)){{$user->email}}@endif">
                                                                             <input type="hidden" name="endorse_to_id" id="endorse_to_id" value="@if (!empty($user->id)){{$user->id}}@endif">
                                                                             <button type="button" id="endorse_btn" class="invite_btn">Submit</button>
                                                                         </div>
-                                                                        <div class="modal_btm_text mt-4 mb-5">
+                                                                        <!-- <div class="modal_btm_text mt-4 mb-5">
                                                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Bibendum vel cras vitae morbi varius vitae.
-                                                                        </div>
+                                                                        </div> -->
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -403,9 +403,9 @@
                                         <div class="guide_profile_main_subtext Aubergine_at_night">{{strtoupper(date('jS F Y',strtotime($edm->created_at)))}}</div>
                                     </div>
                                     <div class="col-md-9">
-                                        <div class="preview_subtext">
+                                        <div class="inp_data">
                                             <p>
-                                                {{$edm->comment}}
+                                                {{$edm->comment}} 
                                             </p>
                                         </div>
                                     </div>
@@ -520,7 +520,7 @@
             nav: true,
             margin: 20,
             center: false,
-            // items: 4,
+            items: 1,
             responsive: {
                 480: {
                     items: 1
@@ -529,7 +529,7 @@
                     items: 2
                 },
                 1024: {
-                    items: 4
+                    items: 3 
                 }
             },
         });

@@ -33,10 +33,10 @@
                     <form class="validateBeforeSubmit" id="apply_job_form" action="{{route('storeApplyJob',['jobId'=>request('jobId')])}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="guide_profile_subsection" id="Documents">
-                            <div class="guide_profile_main_text mt-3">Resume/CV<em class="text-danger mx-1">*</em></div>
-                            <div class="preview_subtext deep_aubergine mt-3">Please Attach Your Resume</div>
+                            <div class="guide_profile_main_text mt-2 mt-md-3">Resume/CV<em class="text-danger mx-1">*</em></div>
+                            <div class="preview_subtext deep_aubergine mt-2 mt-md-3">Please Attach Your Resume</div>
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-10 col-md-3">
                                     <div id="Documents" class="add_content_wraper">
                                         <label for="upload-doc-inp" class="d-block" id="resume_job">
                                             <div class="d-flex align-items-center mt-3">

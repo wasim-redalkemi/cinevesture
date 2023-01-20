@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <div class="guide_profile_main_text mt-3">
                                         <p> Skills</p>
                                     </div>
@@ -103,30 +103,31 @@
                                     @endif
                                 </div>
                                 </div>
-                            <div class="col-md-6">
+                                <div class="col-md-2"></div>
+                            <div class="col-md-5">
                                 <div class="guide_profile_main_text mt-3">
                                     <p> Social Profile</p>
                                 </div>
-                                <div class="guide_profile_main_subtext mt-3">IMDB Profile</div>
-                                <div class="guide_profile_main_subtext deep-pink mt-1 pointer">
+                                <div class="inp_data deep_aubergine mt-3">IMDB Profile</div>
+                                <div class="deep-pink mt-1 pointer">
                                     @if (!empty($user->imdb_profile))
-                                        <a href="{{ $user->imdb_profile }}" class="link-style"  >{{ $user->imdb_profile }}</a>                                      
+                                        <a href="{{ $user->imdb_profile }}" class="fs_italian inp_data"  >{{ $user->imdb_profile }}</a>                                      
                                     @else
                                     <span><b>-</b></span>
                                     @endif
                                 </div>
-                                <div class="guide_profile_main_subtext mt-3">LinkedIn Profile</div>
-                                <div class="guide_profile_main_subtext deep-pink pointer">
+                                <div class="inp_data deep_aubergine mt-3">LinkedIn Profile</div>
+                                <div class="deep-pink pointer">
                                     @if (!empty($user->linkedin_profile))
-                                        <a href="{{ $user->linkedin_profile }}" class="link-style" >{{ $user->linkedin_profile }}</a>                                         
+                                        <a href="{{ $user->linkedin_profile }}" class="fs_italian inp_data" >{{ $user->linkedin_profile }}</a>                                         
                                     @else
                                         <span><b>-</b></span>
                                     @endif
                                 </div>
-                                <div class="guide_profile_main_subtext mt-3">Website</div>
-                                <div class="guide_profile_main_subtext deep-pink mt-1 pointer">
+                                <div class="inp_data deep_aubergine mt-3">Website</div>
+                                <div class="deep-pink mt-1 pointer">
                                     @if (!empty($user->website))     
-                                        <a href="{{ $user->website }}" class="link-style" >{{ $user->website }}</a>                                 
+                                        <a href="{{ $user->website }}" class="fs_italian inp_data" >{{ $user->website }}</a>                                 
                                     @else
                                         <span><b>-</b></span>
                                         @endif
@@ -140,11 +141,11 @@
                     <div class="guide_profile_subsection">
                         <div class="container px-0">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <div class="contact-page-text deep-pink">
                                         About
                                     </div>
-                                    <div class="inp_data Aubergine_at_night mt-2 pr_35">
+                                    <div class="inp_data Aubergine_at_night mt-2">
                                         <p>
                                             @if (!empty($user->about))
                                             {{ $user->about }}
@@ -154,12 +155,16 @@
                                         </p>
                                     </div>
                                 </div>
-                                {{-- <div class="col-md-2"></div> --}}
-                                <div class="col-md-6">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-5">
                                     <div class="guide_profile_main_text mb-2">Introduction Video</div>
-                                    <div class="playVideoWrap" video-url="{{$user->intro_video_link}}">
-                                        <img src="{{$user->intro_video_thumbnail}}" width="100%" alt="">
+                                    @if($user->intro_video_link)
+                                    <div class="VideoWrapforProfile" video-url="{{$user->intro_video_link}}">
+                                        <img src="{{$user->intro_video_thumbnail}}" width="100%" height="100%" alt="">
                                     </div>
+                                    @else
+                                        <span><b>-</b></span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -243,7 +248,7 @@
                                         <div class="guide_profile_main_text mt-1">{{ $v->job_title }}</div>
                                         <div class="icon_container mx-3"><a href="{{ route('experience-edit', ['id'=>$v->id]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                     </div>
-                                    <div class="guide_profile_main_subtext candy-pink mt-2">
+                                    <div class="preview_subtext candy-pink mt-2">
                                         {{$v->country_id}} | {{date('d-m-Y',strtotime($v->start_date))}} | {{date('d-m-Y',strtotime($v->end_date))}} <br>
                                         {{$v->company}} | {{$v->employement_type_id}}
                                     </div>
@@ -276,7 +281,7 @@
                                             <div class="back_btn_profile deep-aubergine mt-1">{{$v->institue_name}}</div>
                                             <div class="icon_container mx-3"><a href="{{ route('qualification-edit', ['id'=>$v->id]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                         </div>
-                                        <div class="guide_profile_main_subtext candy-pink mt-2">
+                                        <div class="preview_subtext candy-pink mt-2">
                                             {{$v->degree_name}} | {{$v->field_of_study}} | {{$v->start_year}} | {{$v->end_year}}
                                         </div>
                                         <div class="inp_data Aubergine_at_night mt-2">
@@ -308,7 +313,7 @@
                                         <div class="guide_profile_main_subtext Aubergine_at_night">{{strtoupper(date('jS F Y',strtotime($edm->created_at)))}}</div>
                                     </div>
                                     <div class="col-md-9">
-                                        <div class="guide_profile_main_subtext Aubergine_at_night">
+                                        <div class="inp_data Aubergine_at_night">
                                             <p>
                                                 {{$edm->comment}}
                                             </p>

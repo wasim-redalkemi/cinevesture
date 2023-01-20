@@ -386,7 +386,12 @@
       return markup;
     },
         
-    });
+    })
+                .on('select2:selecting', e => $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop()))
+                .on('select2:select', e => $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop')))
+                .on('select2:unselecting', e => $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop()))
+                .on('select2:unselect', e => $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop')));
+
 
     $(".portfolio_save_btn").on("click", function() {
         $("#save_btn_value").attr("value", $(this).attr("name"))
