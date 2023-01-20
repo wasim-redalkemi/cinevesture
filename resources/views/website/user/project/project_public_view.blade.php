@@ -50,38 +50,50 @@
                             </div>
                             <div class="hours-category my-md-4 blackTextShadow text-start">
                                 @if (!empty(($UserProject->duration)))
-                                <?php echo sprintf(intdiv($UserProject->duration, 60).' hr') .' '. ( sprintf($UserProject->duration % 60).' min');?>
+                                <?php echo ((intdiv($UserProject->duration, 60)>0)?sprintf(intdiv($UserProject->duration, 60).' hr'):'') .' '. ((($UserProject->duration % 60)>0)?( sprintf($UserProject->duration % 60).' min'):'');?>
                                 @else
                                 {{'Duration'}}                                    
-                                @endif                                
-                                | @if (!empty($projectData[0]['project_languages']))
-                                @foreach ($projectData[0]['project_languages'] as $k => $v)
-                                {{$v['name']}}
-                                @endforeach
+                                @endif 
+
+                                @if (!empty($projectData[0]['project_languages']))
+                                    |@php $temp_all_data = [] @endphp
+                                    @foreach ($projectData[0]['project_languages'] as $k => $v)
+                                        @php $temp_all_data[] = $v['name'] @endphp
+                                    @endforeach
+                                    {{implode(', ',$temp_all_data)}}
                                 @else
-                                <span><b>'Empty Project Language'</b></span>
+                                    <span><b>'Empty Project Language'</b></span>
                                 @endif
-                                | @if (!empty($projectData[0]['project_countries']))
-                                @foreach ($projectData[0]['project_countries'] as $k => $v)
-                                {{$v['name']}}
-                                @endforeach
+
+                                @if (!empty($projectData[0]['project_countries']))
+                                    |@php $temp_all_data = [] @endphp
+                                    @foreach ($projectData[0]['project_countries'] as $k => $v)
+                                        @php $temp_all_data[] = $v['name'] @endphp
+                                    @endforeach
+                                    {{implode(', ',$temp_all_data)}}
                                 @else
-                                <span><b>'Empty Project country'</b></span>
+                                    <span><b>'Empty Project country'</b></span>
                                 @endif
+
                                 <br>
                                 @if (!empty($projectData[0]['genres']))
-                                @foreach ($projectData[0]['genres'] as $k => $v)
-                                {{$v['name']}}
-                                @endforeach
+                                    @php $temp_all_data = [] @endphp
+                                    @foreach ($projectData[0]['genres'] as $k => $v)
+                                        @php $temp_all_data[] = $v['name'] @endphp
+                                    @endforeach
+                                    {{implode(', ',$temp_all_data)}}
                                 @else
-                                <span><b>'Empty genres'</b></span>
+                                    <span><b>'Empty genres'</b></span>
                                 @endif
-                                | @if (!empty($projectData[0]['project_category']))
-                                @foreach ($projectData[0]['project_category'] as $k => $v)
-                                {{$v['name']}}
-                                @endforeach
+
+                                @if (!empty($projectData[0]['project_category']))
+                                    |@php $temp_all_data = [] @endphp
+                                    @foreach ($projectData[0]['project_category'] as $k => $v)
+                                        @php $temp_all_data[] = $v['name'] @endphp
+                                    @endforeach
+                                    {{implode(', ',$temp_all_data)}}
                                 @else
-                                <span><b>'Empty Project Category'</b></span>
+                                    <span><b>'Empty Project Category'</b></span>
                                 @endif
                             </div>
                             <table class="table mt-1 table_width">
@@ -478,44 +490,44 @@
             </div>
         </div>
        
-{{-- @php
-    dd($recomProject);
-
-@endphp --}}
         <div class="public_subsection">
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="public-heading-text mb-2"> Related</h1>
                     
                     <div class="related owl-carousel owl-theme">
-                        @foreach ($recomProject as $value)
-                        <div class="home_img_wrap">
-                           
-                            <div class="slider">
-                               
-                                {{-- {{$value->projectOnlyImage[0]->file_link}} --}}
-                                <div class="img-container gradient"> 
-                                    @if (!empty($value->projectOnlyImage[0]->file_link))
-                                    <img src="{{ Storage::url($value->projectOnlyImage[0]->file_link) }}" alt="image"> 
-                                    @else
-                                    <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">    
-                                    @endif                                 
-                                  
-                                 
-                                 
-                                </div>
-                                
-                                <div class="secondry-card-top-container w-100">
-                                    <div>{{$value->project_name}}</div>
-                                    <div>
-                                        <i class="fa fa-heart" style="color: white;" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                               
-                            </div>                            
+                        @if(count($recomProject)>0)
+                            @foreach ($recomProject as $value)
+                            <div class="home_img_wrap">
                             
-                        </div> 
-                        @endforeach  
+                                <div class="slider">
+                                
+                                    {{-- {{$value->projectOnlyImage[0]->file_link}} --}}
+                                    <div class="img-container gradient"> 
+                                        @if (!empty($value->projectOnlyImage[0]->file_link))
+                                        <img src="{{ Storage::url($value->projectOnlyImage[0]->file_link) }}" alt="image"> 
+                                        @else
+                                        <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">    
+                                        @endif                                 
+                                    
+                                    
+                                    
+                                    </div>
+                                    
+                                    <div class="secondry-card-top-container w-100">
+                                        <div>{{$value->project_name}}</div>
+                                        <div>
+                                            <i class="fa fa-heart" style="color: white;" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                
+                                </div>                            
+                                
+                            </div> 
+                            @endforeach 
+                        @else
+                            <span class="text-white"><b>-</b></span>
+                        @endif 
                     </div>
                     
                 </div>
