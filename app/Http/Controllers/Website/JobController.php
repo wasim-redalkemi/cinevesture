@@ -363,6 +363,11 @@ class JobController extends WebController
         if($request->promoted_jobs=='1'){
             $promoteCheck=true;
         }
+        // dd($request);
+        if(!empty($request)){
+            $prevDataReturn=['categories'=>$request->categories,'employments'=>$request->employments,'countries'=>$request->countries,'workspaces'=>$request->workspaces,"skills"=>$request->skills];
+        }
+        
         $requests = $request->all();
         $employments = MasterEmployement::query()->orderBy('name', 'ASC')->get();
         $countries = MasterCountry::query()->orderBy('name', 'ASC')->get();
@@ -401,7 +406,8 @@ class JobController extends WebController
             })       
            ->paginate(config('constants.JOB_PAGINATION_LIMIT'));
         $notFoundMessage = "No jobs found, please modify your search.";
-        return view('website.job.search_result', compact('countries', 'employments', 'skills', 'categories', 'workspaces', 'jobs', 'notFoundMessage','promoteCheck'));
+        
+        return view('website.job.search_result', compact('countries', 'employments', 'skills', 'categories', 'workspaces', 'jobs', 'notFoundMessage','promoteCheck','prevDataReturn'));
     }
 
     public function getUserJobData($user_id, $status = '')
