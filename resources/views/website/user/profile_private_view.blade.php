@@ -158,9 +158,13 @@
                                 <div class="col-md-2"></div>
                                 <div class="col-md-5">
                                     <div class="guide_profile_main_text mb-2">Introduction Video</div>
+                                    @if($user->intro_video_link)
                                     <div class="VideoWrapforProfile" video-url="{{$user->intro_video_link}}">
                                         <img src="{{$user->intro_video_thumbnail}}" width="100%" height="100%" alt="">
                                     </div>
+                                    @else
+                                        <span><b>-</b></span>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -244,7 +248,7 @@
                                         <div class="guide_profile_main_text mt-1">{{ $v->job_title }}</div>
                                         <div class="icon_container mx-3"><a href="{{ route('experience-edit', ['id'=>$v->id]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                     </div>
-                                    <div class="guide_profile_main_subtext candy-pink mt-2">
+                                    <div class="preview_subtext candy-pink mt-2">
                                         {{$v->country_id}} | {{date('d-m-Y',strtotime($v->start_date))}} | {{date('d-m-Y',strtotime($v->end_date))}} <br>
                                         {{$v->company}} | {{$v->employement_type_id}}
                                     </div>
@@ -277,7 +281,7 @@
                                             <div class="back_btn_profile deep-aubergine mt-1">{{$v->institue_name}}</div>
                                             <div class="icon_container mx-3"><a href="{{ route('qualification-edit', ['id'=>$v->id]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                         </div>
-                                        <div class="guide_profile_main_subtext candy-pink mt-2">
+                                        <div class="preview_subtext candy-pink mt-2">
                                             {{$v->degree_name}} | {{$v->field_of_study}} | {{$v->start_year}} | {{$v->end_year}}
                                         </div>
                                         <div class="inp_data Aubergine_at_night mt-2">
