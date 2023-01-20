@@ -47,15 +47,23 @@
                         <span class="blackTextShadow">
                         @if (!empty($v->duration))
                         {{-- {{date('H:i', mktime(0,$v->duration)).' min'}} | --}}
-                        <?php echo sprintf(intdiv($v->duration, 60).'hr') .' '. ( sprintf($v->duration % 60).'min');?> |
+                        <?php echo ((intdiv($v->duration, 60)>0)?sprintf(intdiv($v->duration, 60).' hr'):'') .' '. ((($v->duration % 60)>0)?( sprintf($v->duration % 60).' min'):'');?>
                         @endif
                         
-                        @foreach ($v->projectLanguages as $k1=>$v1)
+                        {{-- @foreach ($v->projectLanguages as $k1=>$v1)
                         {{$v1->name}} ,
-                        @endforeach 
+                        @endforeach  --}}
+
+                        @if (isset($v->projectLanguages) && !empty($v->projectLanguages))
+                        |
+                        {{$v->projectLanguages[0]['name']}}
+                        @endif
+
                         @if (isset($v->genres[0]) && !empty($v->genres[0]))
+                        |
                         {{$v->genres[0]['name']}}
                         @endif
+
                         </span>
                       </div>
                       <button class="watch-now-btn mt-4"><a href="{{ route('public-view', ['id'=>$v->id]) }}" style="color:white !important;">View Project</a></button>
