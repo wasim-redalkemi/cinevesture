@@ -236,7 +236,7 @@
                 </div>
             </div>
             <div class="col-md-9 mb_3">
-                <div class="white mb-2 mt-2 mt-md-0">{{count($projects)}} Results Founds</div>
+                <div class="white mb-2 mt-2 mt-md-0">{{($projects->total())}} Results Founds</div>
                 @if(count($projects) >= 1)
                 @foreach($projects as $project)
                 <a href="{{route('public-view',['id'=>$project->id])}}" style="outline:none;text-decoration:none">
