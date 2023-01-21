@@ -25,7 +25,7 @@
                     @csrf
                     <div class="search-box-container">
                         <div class="search-container w-100">
-                            <input type="search" class="w-100 search-box" value="{{request('search')}}" placeholder="Search...">
+                            <input type="search" class="w-100 search-box" name="search" value="{{request('search')}}" placeholder="Search...">
                             <button class="search-btn"><i class="fa fa-search"></i></button>
                         </div>
                         <div class="d-block d-md-none m-2" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
