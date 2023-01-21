@@ -131,6 +131,7 @@
                 </div>
             </div>
             <div class="col-md-9">
+                <div class="mb_2 mt-2 mt-md-0">{{($users->total())}} Results Founds</div>
                 <div class="profile_wraper mb-5">
                 @if(count($users) >= 1)
                 @foreach($users as $user)
