@@ -41,7 +41,7 @@ class JobController extends WebController
     {
         $countries = MasterCountry::query()->orderBy('name','ASC')->get();
         $skills = MasterSkill::query()->orderBy('name','ASC')->get();
-        $employments = MasterEmployement::all();
+        $employments = MasterEmployement::query()->orderBy('name','ASC')->get();
 
         return view('website.job.index', compact('countries', 'skills', 'employments'));
     }
