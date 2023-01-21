@@ -355,6 +355,14 @@ a {
     font-size: 18px;
     color: #FAF8FB !important;
 }
+.like_btn_wrapper {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    /* padding: 20px; */
+    display: flex;
+    z-index: 100;
+}
 
 .secondry-card-bottom-container {
     position: absolute;
@@ -3251,9 +3259,60 @@ input:checked+.slider:before {
 .owl-carousel .owl-nav button.owl-prev {
     display: none;
 }
-/* .test.owl-carousel .owl-nav   .owl-carousel .owl-nav button.owl-prev {
-    display: block !important;
-} */
+
+
+
+.test.owl-carousel .owl-nav button.owl-prev {
+    display: flex !important;
+    position: absolute !important;
+    top: -50px !important;
+    left: 230px !important;
+    justify-content: center;
+    align-items: center;
+   
+    /* border: 2px solid white; */
+    /* height: 20px; */
+    /* width: 20px; */
+}
+
+
+.test.owl-carousel .owl-nav button
+{
+    /* border: 2px solid; */
+    height: 40px;
+    width: 40px;
+    /* background-color: red; */
+    font-size: 30px;
+    padding:0px 0px 5px 0px !important;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,0.4);
+
+}
+
+.test.owl-carousel .owl-nav button span
+{
+    font-size: 30px !important;
+}
+.test.owl-carousel .owl-nav button.owl-prev { 
+    
+}
+.test.owl-carousel .owl-nav button.owl-next { 
+    
+}
+
+.test.owl-carousel .owl-nav button.owl-next {
+    display: flex !important;
+    position: absolute !important;
+    top: -50px !important;
+    right: 1200px !important;
+    /* right: calc(v) !important; */
+    justify-content: center;
+    align-items: center;
+    /* border: 2px solid; */
+    /* width: 30px; */
+    /* height: 30px; */
+    /* border: 2px solid white; */
+}
 
 .menu_position {
     margin-right: -22px !important;
@@ -4025,6 +4084,7 @@ transition: 2s ease all; */
     width:100%;
     z-index: 9;
     background-color: rgba(28, 3, 48, 0.4);
+    z-index: 10;
 
 }
 

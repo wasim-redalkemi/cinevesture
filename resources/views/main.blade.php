@@ -134,7 +134,7 @@
       @if (isset($project_lists_except_carousel) && !empty($project_lists_except_carousel))
         @foreach ($project_lists_except_carousel as $k=>$v)
           @if (isset($v->lists) && count($v->lists)>0)
-            <div class="home_subsection">
+            <div class="home_subsection" style="position: relative;">
               <div class="container">
                 <div class="row">
                   <div class="col-md-12 carousel-header-text">
@@ -155,21 +155,20 @@
                         @endif                            
                       </div>
                     </div>
+                    
+                    <a href="{{ route('public-view', ['id'=>$v1->id]) }}">
                     <div class="main_slider_elem_wrap">
                       <div class="secondry-card-top-container w-100">
                         <div>
-                        <a href="{{ route('public-view', ['id'=>$v1->id]) }}" >
+                        <!-- <a href="{{ route('public-view', ['id'=>$v1->id]) }}" > -->
                           @if (isset($v1->project_name) && !empty($v1->project_name))
                         <span class="white">{{$v1->project_name}}</span> 
                           @endif
-                        </a>
+                        <!-- </a> -->
                         </div>
-                        <div>
-                          <i class="fa fa-heart-o icon-size like-project" style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
-                        </div>
+                       
                       </div>
                       <div class="secondry-card-bottom-container">
-                        <a href="{{ route('public-view', ['id'=>$v1->id]) }}">
   
                         @if (isset($v1->duration) && !empty($v1->duration))
                         <span class="white"><?php echo sprintf(intdiv($v1->duration, 60).' hr') .' '. ( sprintf($v1->duration % 60).' min');?> /</span>
@@ -186,9 +185,17 @@
                         @if (isset($country_data['project_countries'][0]) && !empty($country_data['project_countries'][0]))
                         <span class="white"> {{$country_data['project_countries'][0]['name']}}</span>
                         @endif --}}
-                        </a>
                       </div>
+                      
                     </div>
+                  </a>
+                  <div class="like_btn_wrapper">
+                    <div>
+                      <i class="fa fa-heart-o icon-size like-project" style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
+                    </div>
+                  </div>
+
+
                   </div>            
                 </div>
                 @endforeach

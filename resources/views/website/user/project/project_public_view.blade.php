@@ -501,6 +501,7 @@
                             <div class="home_img_wrap">
                             
                                 <div class="slider">
+                                    <a href="#">
                                 
                                     {{-- {{$value->projectOnlyImage[0]->file_link}} --}}
                                     <div class="img-container gradient"> 
@@ -510,8 +511,7 @@
                                         <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">    
                                         @endif                                 
                                     
-                                    
-                                    
+                                        
                                     </div>
                                     
                                     <div class="secondry-card-top-container w-100">
@@ -520,6 +520,7 @@
                                             <i class="fa fa-heart" style="color: white;" aria-hidden="true"></i>
                                         </div>
                                     </div>
+                                </a>
                                 
                                 </div>                            
                                 
