@@ -619,7 +619,7 @@ class ProjectController extends WebController
             $project_stages = ProjectStage::all();
              
             $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->with('isfavouriteProject')->first();
-            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->where(function($q){
+            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectMarkVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->where(function($q){
                 if(auth()->user()->user_type == 'A'){
                     $q->where('user_status','!=', 'draft');
                 }

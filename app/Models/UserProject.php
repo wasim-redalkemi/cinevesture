@@ -21,6 +21,10 @@ class UserProject extends Model
     {
         return $this->hasMany(ProjectMedia::class,'project_id')->where('file_type','video');
     }
+    public function projectMarkVideo()
+    {
+        return $this->hasMany(ProjectMedia::class,'project_id')->where('file_type','video')->where('is_default_marked','1');
+    }
     public function projectOnlyDoc()
     {
         return $this->hasMany(ProjectMedia::class,'project_id')->where('file_type','doc');

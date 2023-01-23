@@ -211,7 +211,7 @@
             $('#'+elem).modal('show');
         });
   </script>
-    </script>
+    
 
     @yield('scripts')
     @stack('scripts')
