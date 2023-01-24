@@ -81,7 +81,7 @@
                                 <div>
                                     
                                 <div class="guide_profile_main_text mt-3">Available To Work In</div>
-                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (isset($UserOrganisation->available_to_work_in))?ucFirst($UserOrganisation->available_to_work_in):'-'; }}</div>
+                                <div class="search-head-subtext Aubergine_at_night mt-2">{{ (isset($UserOrganisation->available_to_work_in))?ucFirst($UserOrganisation->available_to_work_in):'-'; }}</div>
                                 </div>
                             </div>
                             <div class="col-md-6">

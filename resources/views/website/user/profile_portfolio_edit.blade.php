@@ -32,7 +32,7 @@
                             
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="profile_input">
+                                    <div class="profile_input mb-1">
                                         <label>Project Title <span class = "steric_sign_design">*</span></label>
                                         <input type="text" class="form-control @error('project_title') is-invalid @enderror" placeholder="Project Title" name="project_title" value="<?php if(isset($UserPortfolioEdit[0]->project_title)){ echo($UserPortfolioEdit[0]->project_title); }?>" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('project_title')
