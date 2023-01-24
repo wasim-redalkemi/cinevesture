@@ -29,7 +29,7 @@
                         @if (!empty($v['projects']['project_image']))
                             <a href="{{route('public-view',['id'=>$v['projects']['id']])}}" style="outline: none; text-decoration:none">
                                 {{-- <div class="movie_name_text">{{ !empty($v['projects']['project_name'])? $v['projects']['project_name'] : '-' }} </div> --}}
-                                <div class="favourite_img_card"><img src="{{ Storage::url($v['projects']['project_image']['file_link']) }}" width=100% alt="image"></div>
+                                <div class="favourite_img_card"><img src="{{ Storage::url($v['projects']['project_image']['file_link']) }}" width=100% height="100%" alt="image"></div>
                             </a>
                         @else
                             {{-- <div class="favourite_img_card"><img src="{{ asset('images/asset/100_no_img.jpg') }}" alt="image""></div> --}}

@@ -3595,6 +3595,12 @@ input:checked+.slider:before {
 .gradient {
     background: rgba(28, 3, 48, 0.4) !important;
 }
+.mt_46 {
+    margin-top: 46px;
+}
+.mt_40 {
+    margin-top: 40px;
+}
 
 @media (max-width: 480px) {
 
@@ -3615,7 +3621,13 @@ input:checked+.slider:before {
     .guide_profile_subsection {
         padding: 1rem !important;
     }
-
+    .mt_46 {
+        margin-top: 6px;
+    }
+    
+.mt_40 {
+    margin-top: 0px;
+}
     .profile_input {
         margin-top: 6px;
     }
