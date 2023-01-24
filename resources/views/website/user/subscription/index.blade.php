@@ -101,7 +101,7 @@
                                             @foreach($plan->getRelationalData as $relation )
 
                                             @if($relation->module_id == $module->id)
-                                            <li> @if($relation->limit != 0)
+                                            <li class="d-flex align-items-baseline"> @if($relation->limit != 0)
                                                <span class="list"></span>
                                                <span class="mx-2">
                                                    {{$relation->limit}} {{$relation->getOperation->name}}

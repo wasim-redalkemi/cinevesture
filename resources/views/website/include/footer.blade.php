@@ -7,11 +7,11 @@
         </div>
         <div class="col-lg-9 col-md-8">
           <div class="row">
-            <div class="col-lg-2 text-md-start text-center">
+            <div class="col-lg-3 text-md-start text-center">
               <div> <a href="#"> About Us</a></div>
               <div class="mt-1"> <a href="#"> Contact Us</a></div>
             </div>
-            <div class="col-lg-2 text-md-start text-center mt-3 mt-md-0">
+            <div class="col-lg-3 text-md-start text-center mt-3 mt-md-0">
               <div> <a href="#">Press</a></div>
               <div class="mt-1"> <a href="#"> Resources</a></div>
             </div>
@@ -19,10 +19,10 @@
               <div  class="static_content_elem " modal_name="term_and_condition_modal"> <a class="pointer"> Terms and Conditions</a></div>
               <div class="static_content_elem mt-1" modal_name="privacy_policy_modal"> <a class="pointer"> Privacy Policy</a></div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-3">
               <div class="text-md-start text-center"> <a href="#"> Help</a></div>
             </div>
-            <div class="col-lg-3"></div>
+            <!-- <div class="col-lg-3"></div> -->
           </div>
         </div>
       </div>

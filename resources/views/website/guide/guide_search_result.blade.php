@@ -72,7 +72,7 @@
                                                 @endphp
                                                 <div class="mx-2 for_active">
                                                     <label class="d-flex align-items-center search_page_filters_data @if($is_elem_ex) search_page_filters_data_active @endif">
-                                                        <input class="form-check-input me-1" type="checkbox" @if($is_elem_ex) checked @endif name="talentType[]" value="{{$talent->job_title}}">
+                                                        <input class="form-check-input me-1 d-none" type="checkbox" @if($is_elem_ex) checked @endif name="talentType[]" value="{{$talent->job_title}}">
                                                         {{$talent->job_title}}
                                                        
                                                     </label>
