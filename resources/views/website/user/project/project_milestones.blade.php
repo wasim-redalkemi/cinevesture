@@ -222,8 +222,10 @@
         var project_id = null;
         var parentElemId = "#project_milestones";
         var milestone_entriesId = "#milestone_entries";
+        var projectDetailsObj = null;
 
-        let init = function(projectDetailsObj){
+        let init = function(projectDetails){
+            projectDetailsObj = projectDetails;
             project_id = projectDetailsObj.id;
             bindActions();
         }
@@ -255,6 +257,11 @@
             let updateMilestone = function(msid,data){
                 doAjax('ajax/update-proj-milestone/'+msid,data,"POST",function(req,resp){
                     if(resp.payload){
+                        let newMilestones = projectDetailsObj.project_milestone.filter((rec)=>{
+                            return rec.id != resp.payload.id
+                        });
+                        newMilestones.push(resp.payload);
+                        projectDetailsObj.project_milestone = newMilestones;
                         createToast(resp.message,"S");
                     }else{
                         createToast(resp.error_msg,"E");
@@ -266,11 +273,25 @@
                 let msid = $(e.target).parent().closest('.row').attr('id');
                 let msidsplit = msid.split('-');
                 let toUpdate = {};
+                let isUpdated = false;
                 $(parentElemId+" #"+msid+" input.editable").each((i,n)=>{
                     //console.log("i = "+i,"n = "+$(n).val(),$(n).attr('name'));
-                    toUpdate[$(n).attr('name')] = $(n).val();
+                    let currentMl = projectDetailsObj.project_milestone.find((rec)=>{
+                        return msidsplit[1] == rec.id;
+                    });
+                    let input_key = $(n).attr('name').replace("project_milestone_","");
+                    let inputVal = $(n).val();
+                    if(input_key == "target_date"){
+                        inputVal = inputVal.replace("00:00:00 ","")+" 00:00:00";
+                    }
+                    if(currentMl[input_key] != inputVal){
+                        isUpdated = true;
+                        toUpdate[$(n).attr('name')] = inputVal;
+                    }
                 });
-                updateMilestone(msidsplit[1],toUpdate);
+                //console.log(isUpdated,toUpdate);
+                if(isUpdated)
+                    updateMilestone(msidsplit[1],toUpdate);
             });
 
             $(parentElemId+" .save_add_btn").off("click").on("click",(e)=>{
