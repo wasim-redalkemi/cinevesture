@@ -291,6 +291,10 @@ class ProjectController extends WebController
     {
         try {
             $detailsResponse = $this->detailsStore();
+            if($request->total_budget<$request->financing_secured){    
+                return back()->with('error','Financing Secured should small then total budget.');
+            }
+
             if(!empty($detailsResponse['error_msg']))
             {
                 return back()->with('error',$detailsResponse['error_msg']);
