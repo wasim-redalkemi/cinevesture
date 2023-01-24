@@ -114,7 +114,8 @@
                         <div class="d-flex mt-3">
                             <div class="tile_text deep-pink">@if (!empty($Job_data['user'][0]['name'])) {{ucFirst($Job_data['user'][0]['name'])}} @endif</div>
                             <div class="mx-4 px-3">
-                               <div class="organisation_cmn_text">@if (!empty($Job_data['user'][0]['job_title'])) {{ucFirst($Job_data['user'][0]['job_title'])}} @endif</div>
+                            
+                               <div class="organisation_cmn_text">@if (!empty($Job_data['title'])) {{ucFirst($Job_data['title'])}} @endif</div>
                                {{-- <div class="published_text">10th July 2021</div>  --}}
                                <div class="published_text">
                                 @if (!empty($Job_data['created_at']))

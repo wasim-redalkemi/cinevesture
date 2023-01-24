@@ -96,7 +96,7 @@ class SubscriptionController extends Controller
                 $this->createSubscription($order, $request);
             }
 
-            return redirect()->route('home')->with('success', 'Subsription completed Successfully');
+            return redirect()->route('profile-create')->with('success', 'Subsription completed Successfully');
         } catch (\Exception $e) {
             return back()->with('error', 'Something went wrong, Please try again later.');
         }

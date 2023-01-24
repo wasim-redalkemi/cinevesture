@@ -452,12 +452,18 @@
                         ImageCropperObj = new ImageCropper(uploadedFile,parentElemId+" #previewImg");
                         ImageCropperObj.setCropBoxSize({'width':300*2,height:200*2});
                         ImageCropperObj.setAspectRatio(7/4);
+                        ImageCropperObj.setAfterCrop(function(){
+                            if(ImageCropperObj.getBase64()){
+                                $(parentElemId+" .open_file_explorer label").hide();
+                                $(parentElemId+" .profile_upload_text").hide();
+                                $(parentElemId+" .profile_input.add-new-image").show();
+                                $(parentElemId+" .cancel-img-upload").show();
+                            } else {
+                                console.log("cropper cancelled");
+                            }
+                        });
                         let ret = ImageCropperObj.init();
                         // $("#previewImg").attr("src",URL.createObjectURL(file)).show();
-                        $(parentElemId+" .open_file_explorer label").hide();
-                        $(parentElemId+" .profile_upload_text").hide();
-                        $(parentElemId+" .profile_input.add-new-image").show();
-                        $(parentElemId+" .cancel-img-upload").show();
                     }
                 });
 
@@ -757,6 +763,7 @@
                     },
                     error: function (error) {
                         createToast(error.responseJSON.errors.file[0],"E");
+                        loadcurrentMediaList();
                     },
                     async: true,
                     data: formData,

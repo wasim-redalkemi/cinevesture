@@ -92,24 +92,24 @@
                         <div id="milestone_entries" class="row">
                             @if(isset($projectData[0]['project_milestone']) && count($projectData[0]['project_milestone'])>0)
                                 @foreach ($projectData[0]['project_milestone'] as $in => $ass)
-                                <div id="milestone-{{$ass['id']}}" class="row">
+                                <div id="milestone-{{$ass['id']}}" class="row existing-milestones">
                                 <div class="col-md-4">
                                         <div class="profile_input">
                                             <label>Milestone Description</label>
-                                            <input value="{{$ass['description']}}" type="text" class="form-control" name="project_milestone_description" placeholder="Description">
+                                            <input value="{{$ass['description']}}" type="text" class="editable form-control" name="project_milestone_description" placeholder="Description">
                                         </div>
                                     </div>
                                     <div class="col-md-3">
                                         <div class="profile_input">
                                             <label>Milestone Budget (USD)</label>
-                                            <input value="{{$ass['budget']}}" type="number" class="form-control no_number_arrows" name="project_milestone_budget" placeholder="Budget (USD)">
+                                            <input value="{{$ass['budget']}}" type="number" class="editable form-control no_number_arrows" name="project_milestone_budget" placeholder="Budget (USD)">
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div class="profile_input">
                                             <label>Target Date</label>
                                             {{-- min="{{Date('Y-m-d')}}" --}}
-                                            <input value="{{Date('Y-m-d',strtotime($ass['target_date']))}}"  max="2030-12-31" type="date" class="form-control" name="project_milestone_target_date" placeholder="Target Date">
+                                            <input value="{{Date('Y-m-d',strtotime($ass['target_date']))}}"  max="2030-12-31" type="date" class="editable form-control" name="project_milestone_target_date" placeholder="Target Date">
                                         </div>
                                     </div>
                                     <div class="col-md-2 d-flex align-items-end">
@@ -224,7 +224,6 @@
         var milestone_entriesId = "#milestone_entries";
 
         let init = function(projectDetailsObj){
-            console.log("projectDetailsObj = ",projectDetailsObj.id);
             project_id = projectDetailsObj.id;
             bindActions();
         }
@@ -262,6 +261,17 @@
                     }
                 });
             }
+
+            $(parentElemId+ " .existing-milestones input.editable").off("blur").on("blur",(e)=>{
+                let msid = $(e.target).parent().closest('.row').attr('id');
+                let msidsplit = msid.split('-');
+                let toUpdate = {};
+                $(parentElemId+" #"+msid+" input.editable").each((i,n)=>{
+                    //console.log("i = "+i,"n = "+$(n).val(),$(n).attr('name'));
+                    toUpdate[$(n).attr('name')] = $(n).val();
+                });
+                updateMilestone(msidsplit[1],toUpdate);
+            });
 
             $(parentElemId+" .save_add_btn").off("click").on("click",(e)=>{
                 e.preventDefault();
