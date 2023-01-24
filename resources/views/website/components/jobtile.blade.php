@@ -1,4 +1,5 @@
-<div class="mb_3">{{count($jobs)}} Results Founds</div>
+<div class="mb_2 mt-2 mt-md-0">{{($jobs->total())}} Results Founds</div>
+
 <div class="white_bg_wraper my-3 my-md-0 mb-xl-4">
     @foreach($jobs as $job)
 <div class="border_btm profile_wraper_padding">
@@ -16,35 +17,38 @@
         @endif
         </div>
       
+        @if($job->user_id!=auth()->user()->id)
         <div class="pointer fav-icon">
             <i data-id="{{$job->id}}" class="fa {{is_null($job->favorite) ? 'fa-heart-o' : 'fa-heart'}} aubergine icon-size" aria-hidden="true"></i>
         </div>
+        @endif
     </div>
 
     <div class="preview_headtext lh_54 candy-pink">
         
-        {{ucFirst($job->company_name)}} - {{@$job->jobLocation->name}} - {{@$job->jobEmployements[0]->name}}
+        {{ucFirst($job->company_name)}} - {{@$job->jobLocation->name}} - <span style="color: #971E9B"> {{@$job->jobEmployements[0]->name}}</span>
 
     </div>
     <div class="posted_job_header Aubergine_at_night" style="word-break: break-all;">
-        {{ucFirst($job->description)}}
+       <span class=""> {{ucFirst($job->description)}}</span>
     </div>
-    <div class="d-flex justify-content-between mt-4">
-        <div class="w-75">
+    <div class="d-block d-md-flex justify-content-between mt-2 mt-md-4">
+        <div class="w_75">
             @foreach($job->jobSkills as $skill)
             <button class="curv_cmn_btn">{{$skill->name}}</button>
             @endforeach
         </div>
-        @if(!isset($showApplied) || $showApplied)
-        <div>
-            @if(is_null($job->applied))
-          <button class="guide_profile_btn">  <a href="{{route('showApplyJob',['jobId'=>$job->id])}}" class="">Apply now</a></button>
-            @else
-            <button disabled class="guide_profile_btn">Applied</button>
+        @if($job->user_id!=auth()->user()->id)
+            @if(!isset($showApplied) || $showApplied)
+                <div class="mt-2 mt-md-0">
+                    @if(is_null($job->applied))
+                <button class="guide_profile_btn">  <a href="{{route('showApplyJob',['jobId'=>$job->id])}}" class="">Apply now</a></button>
+                    @else
+                    <button disabled class="guide_profile_btn">Applied</button>
+                    @endif
+                </div>      
             @endif
-        </div>      
         @endif
-       
     </div>
     </div>
     @endforeach

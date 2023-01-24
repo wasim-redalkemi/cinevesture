@@ -397,7 +397,12 @@
       return markup;
     },
         
-    });
+    })
+                .on('select2:selecting', e => $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop()))
+                .on('select2:select', e => $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop')))
+                .on('select2:unselecting', e => $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop()))
+                .on('select2:unselect', e => $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop')));
+
 
     $("#located_in").on('change', function() {
         if ($("#located_in option:selected").text().trim() == "India") {
@@ -475,15 +480,11 @@
 
 
      cropper = new Cropper(image, {
-    dragMode: 'move',
-    autoCropArea: 0.65,
-    restore: false,
-    guides: false,
-    center: true,
-    highlight: false,
-    cropBoxMovable: true,
-    cropBoxResizable: false,
-    toggleDragModeOnDblclick: false,
+        dragMode: 'move',
+        cropBoxMovable: true,
+        cropBoxResizable: true,
+        toggleDragModeOnDblclick: false,
+        viewMode:1
     data:{ //define cropbox size
       width: 300,
       height:  300,

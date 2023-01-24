@@ -282,6 +282,7 @@ class UserController extends WebController
             $user = User::query()->find(auth()->user()->id);
             $user->first_name = ucfirst($request->first_name);
             $user->last_name = ucfirst($request->last_name);
+            $user->name = $request->first_name.' '.$request->last_name;
             $user->job_title = ucfirst($request->job_title);
             $user->age = $request->age;
             $user->gender = $request->gender;
@@ -685,7 +686,7 @@ class UserController extends WebController
                 if ($request->saveButtonType == 'saveAndAnother') {
                     return redirect()->route('experience-create')->with("success", "Please add another experience after edit.");
                 }
-                return redirect()->route('profile-private-show')->with("success", "Experience added successfully.");
+                return redirect()->route('profile-private-show')->with("success", "Experience updated successfully.");
             } else {
                 return back()->with('Something went wrong ,please try again.');
             }
@@ -796,7 +797,7 @@ class UserController extends WebController
                 if ($request->saveButtonType == 'saveAndAnother') {
                     return redirect()->route('qualification-create')->with("success", "Please add another qualification after edit.");
                 }
-                return redirect()->route('profile-private-show')->with("success", "Qualification added successfully.");
+                return redirect()->route('profile-private-show')->with("success", "Qualification updated successfully.");
             } else {
                 return back()->with('Something went wrong ,please try again.');
             }
@@ -887,15 +888,19 @@ class UserController extends WebController
             $data = [
                 ['from'=>auth()->user()->id,'to'=>$_REQUEST['endorse_to_id'],'comment'=>$_REQUEST['endorse_message'] ,'created_at'=>date("Y-m-d h:i:s", time()),'updated_at'=>date("Y-m-d h:i:s", time())],
             ];
-            $userEndorsement = Endorsement::query()->where('to',$_REQUEST['endorse_to_id'])->get();
-            $is_profile_verified_data =1;
-            if (count($userEndorsement)> 3) {
-                $userEmdorseVerifyProfile = $this->userEmdorseVerifyProfile($is_profile_verified_data,$_REQUEST['endorse_to_id']);
+            $userEndorsement = Endorsement::query()->where('to',$_REQUEST['endorse_to_id'])->where('status','1')->get();
+            if (count($userEndorsement)>=config('constants.PROFILE_VERIFIED_ON_ENDORSE_COUNT')) {
+                $is_profile_verified_data =1;
             }            
+            else
+            {
+                $is_profile_verified_data =0;
+            }
+            $userEndorseVerifyProfile = $this->userEndorseVerifyProfile($is_profile_verified_data,$_REQUEST['endorse_to_id']);
 
-            $UserEmdorse = $this->userEmdorseLogStore($data);
-            if ($UserEmdorse['status'] ==1) {
-                return ['status'=>1,'msg'=>$UserEmdorse['msg']];           
+            $UserEndorse = $this->userEndorseLogStore($data);
+            if ($UserEndorse['status'] ==1) {
+                return ['status'=>1,'msg'=>$UserEndorse['msg']];           
 
             }
             return ['status'=>0,'msg'=>"Endorse records updated failed,please try again."];           
@@ -913,7 +918,7 @@ class UserController extends WebController
         }
     }
 
-    public function userEmdorseLogStore($data)
+    public function userEndorseLogStore($data)
     {
         try {            
             $UserEndorsements = new Endorsement();            
@@ -924,13 +929,13 @@ class UserController extends WebController
         }
     }
 
-    public function userEmdorseVerifyProfile($is_profile_verified_data,$user_id)
+    public function userEndorseVerifyProfile($is_profile_verified_data,$user_id)
     {
         try {            
             $UserIsProfileVerified = User::query()->where('id',$user_id)->first();            
             $UserIsProfileVerified->is_profile_verified = $is_profile_verified_data;
             $UserIsProfileVerified->save();
-            return ['status'=>1,'msg'=>"15 endorse completed so verify profile successfully."];
+            return ['status'=>1,'msg'=>config('constants.PROFILE_VERIFIED_ON_ENDORSE_COUNT')." endorse completed so verify profile successfully."];
         } catch (Exception $e) {
             return ['status'=>0,'msg'=>"Something went wrong."];
         }

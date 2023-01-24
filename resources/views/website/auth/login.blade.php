@@ -21,10 +21,10 @@
                         <div class="signup-container">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="signup-text mt-5 mt-md-5"> Log in</div>
+                                    <div class="signup-text mt-4 pt-2 pt-md-0 mt-md-5"> Log in</div>
                                 </div>
 
-                                <div class="col-12 mt-4-5 pt-0 pt-lg-5">
+                                <div class="col-12 mt-4-5 pt-2 pt-lg-5">
                                     <input type="text" class="is-invalid-remove email-only outline w-100 @error('email') is-invalid @enderror" value="{{old('email')}}" name="email" placeholder="Email" required autocomplete="email" autofocus>
 
                                     @error('email')
@@ -43,7 +43,7 @@
                                     @enderror
                                 </div>
 
-                                <div class="col-12 mt-4 mt-md-5">
+                                <div class="col-12 mt-4 pt-2 pt-md-0 mt-md-5">
                                     <button type="submit" class="outline w-100 mt-2 mt-md-0">
                                         {{ __('Log In') }}
                                     </button>
@@ -62,7 +62,7 @@
                                     </a>
                                     @endif
                                 </div>
-                                <div class="bottom-container mb-3">
+                                <div class="bottom-container mt-3 mt-md-0">
                                     <div class="aleady-text">New to Cinevesture?<span class="mx-2 sign_now_text">
                                             @if(Route::has('password.request'))
                                             <a class="text_decor_none" href="{{ route('register') }}">{{ __('Sign Up') }}</a>@endif</span>now

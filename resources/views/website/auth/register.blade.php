@@ -17,9 +17,9 @@
                         <div class="signup-container">
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="signup-text mt-5 mt-md-5"> Sign Up</div>
+                                <div class="signup-text mt-4 pt-2 pt-md-0 mt-md-5"> Sign Up</div>
                             </div>
-                            <div class="col-lg-6 col-sm-6 mt-4-5 pt-0 pt-lg-5">
+                            <div class="col-lg-6 col-sm-6 mt-4-5 pt-2 pt-lg-5">
                                 <input type="text" class="name-only is-invalid-remove alphabets-only outline w-100 @error('first_name') is-invalid @enderror" name="first_name" placeholder="First Name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
                                 @error('first_name')
                                     <span class="invalid-feedback" role="alert">
@@ -54,7 +54,7 @@
                             <div class="col-12 mt-4-5">
                                 <input type="password" class="password-only is-invalid-remove outline w-100" placeholder="Re Enter Password" name="password_confirmation" id = "password_confirmation" required autocomplete="new-password">
                             </div>
-                            <div class="col-12 mt-4  mt-md-5">
+                            <div class="col-12 mt-4 pt-2 pt-md-0 mt-md-5">
                                 <input type="hidden" name="invited_by" value="<?php if(isset($_REQUEST['iuid'])){echo convert_uudecode($_REQUEST['iuid']);}?>">
                                 <button type="submit" class="outline w-100 mt-2 mt-md-0">{{ __('Create Account') }}</button>
                             </div>
@@ -65,8 +65,8 @@
                             </div>
                             <div class="col col-md-12">
                                 <div class="help-text mt-2 mt-lg-4">Need Help?</div>
-                                <div class="bottom-container mb-5">
-                                    <div class="aleady-text">Already have an account?<a href="{{route('login')}}" class="text_decor_none"><span class="mx-3 sign_now_text">Login here</span></a>
+                                <div class="bottom-container mb-5 mt-4 mt-md-0">
+                                    <div class="aleady-text">Already have an account?<a href="{{route('login')}}" class="text_decor_none"><span class="ml_10 sign_now_text">Login here</span></a>
                                     </div>
                                     <div class="my-3">
                                         This site is protected by reCAPTCHA and with Google Privacy

@@ -33,13 +33,13 @@
             My Jobs
         </button>
         <ul class="dropdown-menu w-100 profile_dropdown_menu">
-            <li>
+            <li class="py-1">
                 <a href="{{ route('posted-job') }}" class="deep-pink">Posted Jobs</a>
             </li>
-            <li>
+            <li class="py-1">
                 <a href="{{ route('saved-job') }}">Saved Jobs</a>
             </li>
-            <li>
+            <li class="py-1">
                 <a href="{{ route('applied-job') }}">Applied Jobs</a>
             </li>
         </ul>

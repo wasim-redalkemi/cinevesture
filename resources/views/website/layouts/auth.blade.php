@@ -34,12 +34,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function() {
-
             $("#error-toast").toast("show");
             $("#success-toast").toast("show");
-
-
-
+            $('form').submit(function()
+            {
+                var submit_elem = $(this).find(':submit');
+                submit_elem.text('Please wait...').attr('type','button');
+            });
         });
     </script>
 </body>

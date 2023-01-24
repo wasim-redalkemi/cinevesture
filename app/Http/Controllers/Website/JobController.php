@@ -41,7 +41,7 @@ class JobController extends WebController
     {
         $countries = MasterCountry::query()->orderBy('name','ASC')->get();
         $skills = MasterSkill::query()->orderBy('name','ASC')->get();
-        $employments = MasterEmployement::all();
+        $employments = MasterEmployement::query()->orderBy('name','ASC')->get();
 
         return view('website.job.index', compact('countries', 'skills', 'employments'));
     }
@@ -359,11 +359,19 @@ class JobController extends WebController
 
     public function  showJobSearchResults(Request $request)
     {
+        $promoteCheck=false;
+        if($request->promoted_jobs=='1'){
+            $promoteCheck=true;
+        }
+        if(!empty($request)){
+            $prevDataReturn=['categories'=>$request->categories,'employments'=>$request->employments,'countries'=>$request->countries,'workspaces'=>$request->workspaces,"skills"=>$request->skills];
+        }
+        
         $requests = $request->all();
-        $employments = MasterEmployement::query()->get();
-        $countries = MasterCountry::query()->get();
-        $categories = MasterProjectCategory::query()->get();
-        $workspaces = Workspace::query()->get();
+        $employments = MasterEmployement::query()->orderBy('name', 'ASC')->get();
+        $countries = MasterCountry::query()->orderBy('name', 'ASC')->get();
+        $categories = MasterProjectCategory::query()->orderBy('name', 'ASC')->get();
+        $workspaces = Workspace::query()->orderBy('name', 'ASC')->get();
         $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();
         $jobs = UserJob::query()
             ->with(["jobLocation:id,name", "jobSkills:id,name", "favorite", "applied"])
@@ -396,8 +404,10 @@ class JobController extends WebController
                 }
             })       
            ->paginate(config('constants.JOB_PAGINATION_LIMIT'));
+        
         $notFoundMessage = "No jobs found, please modify your search.";
-        return view('website.job.search_result', compact('countries', 'employments', 'skills', 'categories', 'workspaces', 'jobs', 'notFoundMessage'));
+        
+        return view('website.job.search_result', compact('countries', 'employments', 'skills', 'categories', 'workspaces', 'jobs', 'notFoundMessage','promoteCheck','prevDataReturn'));
     }
 
     public function getUserJobData($user_id, $status = '')

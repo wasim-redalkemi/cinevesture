@@ -31,13 +31,7 @@
                                             } ?>" class="upload_preview for_show croperImg" width="100">
 
                                 <div for="file-input" class="d-none">
-                                    <input type="file" name="logo" class="@error('logo') is-invalid @enderror file_element image" accept=".jpg,.jpeg,.png">
                                     <input name="croppedOrgImg" id="croppedOrgImg" type="hidden">
-                                    @error('logo')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
                                 </div>
                                 <div class="pointer open_file_explorer for_hide">
                                     <div class="text-center"> <i class="fa fa-plus-circle mx-2 profile_icon deep-pink pointer" aria-hidden="true"></i></div>
@@ -52,6 +46,12 @@
                                     <div class="pointer search-head-subtext deep-pink delete_image">
                                         Delete
                                     </div>
+                                    <input type="file" name="logo" class="d-none @error('logo') is-invalid @enderror file_element image" accept=".jpg,.jpeg,.png">
+                                    @error('logo')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -384,16 +384,8 @@
             $(this).parents('.custom_file_explorer').find('.file_element').click();
         });
 
-        $('.file_element').change(function() {
-            // var output = $(this).parents('.custom_file_explorer').find('.upload_preview');
-            // const file = this.files;
-            // var reader = new FileReader();
-            // reader.onload = function() {
-            //     output.attr('src', reader.result);
-            // };
-            // reader.readAsDataURL(file[0]);
-            // $('.for_hide').css('display', 'none');
-            // $('.for_show').css('display', 'block');
+        $('#lang').change(function() {
+            $(".uploadedPdf").text(resume.name)
         });
     });
 
@@ -454,15 +446,10 @@
 
 
         cropper = new Cropper(image, {
-            dragMode: 'move',
-            autoCropArea: 0.65,
-            restore: false,
-            guides: false,
-            center: true,
-            highlight: false,
             cropBoxMovable: true,
-            cropBoxResizable: false,
+            cropBoxResizable: true,
             toggleDragModeOnDblclick: false,
+            viewMode:1
             data: { //define cropbox size
                 width: 300,
                 height: 300,
@@ -582,5 +569,6 @@
         $('.for_show').css('display', 'none');
 
     })
+
 </script>
 @endpush

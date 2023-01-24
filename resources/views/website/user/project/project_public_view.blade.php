@@ -13,7 +13,9 @@
 @section('content')
 
 <section class="public-head-section">
-
+    <div class="hide-me animation for_authtoast">
+        @include('website.include.flash_message')
+    </div>
     <div class="main-slider-container">
         <div class="project_image_wraper">            
             @if (isset($projectData[0]['banner_image']))
@@ -31,7 +33,7 @@
                             <div class="verified-text-area">
                                 <div class="public-head-text">
                                     @if (!empty(($UserProject->project_name)))
-                                    <span style="text-shadow: 2px 2px #971E9B">    {{ ucfirst($UserProject->project_name) }}</span>
+                                    <span class="blackTextShadow">    {{ ucfirst($UserProject->project_name) }}</span>
                                     @else
                                     <span><b>-</b></span>
                                     @endif
@@ -41,54 +43,66 @@
                                 <button class="verified-btn mx-3"> <img src="{{ asset('images/asset/verified-badge.svg') }}" width=100% alt="Image"> VERIFIED</button>
                                 @endif
                             </div>
-                            <div class="public-head-subtext">
+                            <div class="public-head-subtext text-start">
                                 @if (isset($UserProject->logline))
-                                <span style="text-shadow: 2px 2px #971E9B">    {{ $UserProject->logline}}</span>
+                                <span class="blackTextShadow">    {{ $UserProject->logline}}</span>
                                 @else
                                 <span><b>-</b></span>
                                 @endif
                             </div>
-                            <div class="hours-category my-md-4">
+                            <div class="hours-category my-md-4 blackTextShadow text-start">
                                 @if (!empty(($UserProject->duration)))
-                                <?php echo sprintf(intdiv($UserProject->duration, 60).' hr') .' '. ( sprintf($UserProject->duration % 60).' min');?>
+                                <?php echo ((intdiv($UserProject->duration, 60)>0)?sprintf(intdiv($UserProject->duration, 60).' hr'):'') .' '. ((($UserProject->duration % 60)>0)?( sprintf($UserProject->duration % 60).' min'):'');?>
                                 @else
                                 {{'Duration'}}                                    
-                                @endif                                
-                                | @if (!empty($projectData[0]['project_languages']))
-                                @foreach ($projectData[0]['project_languages'] as $k => $v)
-                                {{$v['name']}}
-                                @endforeach
+                                @endif 
+
+                                @if (!empty($projectData[0]['project_languages']))
+                                    |@php $temp_all_data = [] @endphp
+                                    @foreach ($projectData[0]['project_languages'] as $k => $v)
+                                        @php $temp_all_data[] = $v['name'] @endphp
+                                    @endforeach
+                                    {{implode(', ',$temp_all_data)}}
                                 @else
-                                <span><b>'Empty Project Language'</b></span>
+                                    <span><b>'Empty Project Language'</b></span>
                                 @endif
-                                | @if (!empty($projectData[0]['project_countries']))
-                                @foreach ($projectData[0]['project_countries'] as $k => $v)
-                                {{$v['name']}}
-                                @endforeach
+
+                                @if (!empty($projectData[0]['project_countries']))
+                                    |@php $temp_all_data = [] @endphp
+                                    @foreach ($projectData[0]['project_countries'] as $k => $v)
+                                        @php $temp_all_data[] = $v['name'] @endphp
+                                    @endforeach
+                                    {{implode(', ',$temp_all_data)}}
                                 @else
-                                <span><b>'Empty Project country'</b></span>
+                                    <span><b>'Empty Project country'</b></span>
                                 @endif
+
                                 <br>
                                 @if (!empty($projectData[0]['genres']))
-                                @foreach ($projectData[0]['genres'] as $k => $v)
-                                {{$v['name']}}
-                                @endforeach
+                                    @php $temp_all_data = [] @endphp
+                                    @foreach ($projectData[0]['genres'] as $k => $v)
+                                        @php $temp_all_data[] = $v['name'] @endphp
+                                    @endforeach
+                                    {{implode(', ',$temp_all_data)}}
                                 @else
-                                <span><b>'Empty genres'</b></span>
+                                    <span><b>'Empty genres'</b></span>
                                 @endif
-                                | @if (!empty($projectData[0]['project_category']))
-                                @foreach ($projectData[0]['project_category'] as $k => $v)
-                                {{$v['name']}}
-                                @endforeach
+
+                                @if (!empty($projectData[0]['project_category']))
+                                    |@php $temp_all_data = [] @endphp
+                                    @foreach ($projectData[0]['project_category'] as $k => $v)
+                                        @php $temp_all_data[] = $v['name'] @endphp
+                                    @endforeach
+                                    {{implode(', ',$temp_all_data)}}
                                 @else
-                                <span><b>'Empty Project Category'</b></span>
+                                    <span><b>'Empty Project Category'</b></span>
                                 @endif
                             </div>
                             <table class="table mt-1 table_width">
                                 <tbody class="search-table-body white">
                                     <tr>
-                                        <td class="public-head-subtext white">Type</td>
-                                        <td class="contact-page-subtext white">
+                                        <td class="public-head-subtext white blackTextShadow text-start">Type</td>
+                                        <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
                                             @if (!empty($projectData[0]['project_type']['name']))
                                             {{$projectData[0]['project_type']['name']}}
                                             @else
@@ -97,8 +111,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="public-head-subtext white">Created By</td>
-                                        <td class="aubergine contact-page-subtext candy-pink">
+                                        <td class="public-head-subtext white blackTextShadow text-start">Created By</td>
+                                        <td class="aubergine contact-page-subtext candy-pink blackTextShadow text-end text-md-start">
                                             @if (!empty($projectData[0]['user']['name']))
                                             <a href="{{route('profile-public-show',['id'=>$projectData[0]['user']['id']])}}" class="text_decor_none">{{ ucwords($projectData[0]['user']['name'])}}</a>
                                             @else
@@ -107,8 +121,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="public-head-subtext white">Total Budget</td>
-                                        <td class="contact-page-subtext white">
+                                        <td class="public-head-subtext white blackTextShadow text-start">Total Budget</td>
+                                        <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
                                             @if (!empty($UserProject->total_budget))
                                             {{-- $ {{ $UserProject->total_budget}} --}}
                                             ${{ number_format($UserProject->total_budget, 0,'.',',') }}
@@ -119,8 +133,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="public-head-subtext white">Financing Secured</td>
-                                        <td class="contact-page-subtext white">
+                                        <td class="public-head-subtext white blackTextShadow text-start">Financing Secured</td>
+                                        <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
                                             @if (!empty($UserProject->financing_secured))
                                             ${{ number_format($UserProject->financing_secured, 0,'.',',')}}
                                             @else
@@ -129,8 +143,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="public-head-subtext white">Project Stage</td>
-                                        <td class="contact-page-subtext white">
+                                        <td class="public-head-subtext white blackTextShadow text-start">Project Stage</td>
+                                        <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
                                             @if (!empty($projectData[0]['project_stage']['name']))
                                             {{$projectData[0]['project_stage']['name']}}
                                             @else
@@ -139,8 +153,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="public-head-subtext white">Locations</td>
-                                        <td class="contact-page-subtext white">
+                                        <td class="public-head-subtext white blackTextShadow text-start">Locations</td>
+                                        <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
                                             @if (!empty($UserProject->location))
                                             {{ ucFirst($UserProject->location)}}
                                             @else
@@ -154,8 +168,9 @@
                         <div class="col-md-1 col-md-0"></div>
                         <div class="col-lg-5 col-md-12 px-3">
                             <div class="public-head-subimage">
-                                <div class="playVideoWrapForheader br_4 mt-3" video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link'] }}@endif">
-                                    <img src="@if (isset($projectData[0]['project_only_video'][0]['media_info'])){{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}@endif" alt="" class="br_4 w-100">
+                    
+                                <div class="playVideoWrapForheader playVideoWrap br_4 mt-3" video-url="@if(!empty($projectData[0]['project_mark_video'][0]['file_link'])){{ $projectData[0]['project_mark_video'][0]['file_link'] }}@endif">
+                                    <img src="@if (isset($projectData[0]['project_mark_video'][0]['media_info'])){{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}@endif" alt="" class="br_4 w-100">
                                 </div>
                                 {{-- <iframe width="" height="" src="{{empty($projectData[0]['project_only_video'][0]['file_link'])?'https://www.youtube.com/embed/oYWAwwy5EbQ':$projectData[0]['project_only_video'][0]['file_link'];}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> --}}
                                 <!-- <img src="{{ asset('images/asset/download (3) 7.png') }}" width=100% alt="Image"> -->
@@ -170,7 +185,7 @@
                                     @endif
                                     <!-- <i class="fa fa-share-alt mx-4 icon-size" aria-hidden="true"></i> -->
                                           <div class="clipboard pointer"><img src="{{ asset('images/asset/share_image.svg') }}" class="mx-3" alt="image"></div>
-                                          <p class="mb-0"></p>
+                                         <div class="forCopy" style="margin-right: 10px"><p class="mb-0"></p></div> 
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
                                         
                                     <div> <i class="fa <?php if(isset($UserProject->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
@@ -194,7 +209,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h1 class="public-heading-text"> Synopsis</h1>
-                <div class="public-subheading-text mt-2">
+                <div class="public-subheading-text mt-3 mt-md-2">
                     <p>
                         @if (!empty(($UserProject->synopsis)))
                         {{ ucFirst($UserProject->synopsis)}}
@@ -210,7 +225,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="public-heading-text"> Director Statement</h1>
-                    <div class="public-subheading-text mt-2">
+                    <div class="public-subheading-text mt-3 mt-md-2">
                         <p>
                             @if (!empty(($UserProject->director_statement)))
                             {{ ucFirst($UserProject->director_statement)}}
@@ -228,10 +243,10 @@
                 <div class="col-md-12">
                     <h1 class="public-heading-text"> Gallery</h1>
                     <div class="public-head-subtext mt-3">Videos</div>
-                    <div class="row">
+                    <div class="d-flex flex-wrap">
                         @if (!empty($projectData[0]['project_only_video']))
                         @foreach ($projectData[0]['project_only_video'] as $v)
-                        <div class="col-md-3">
+                        <div class="mt-2 mr_3">
                             <div class="playVideoWrap mt-3" video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link']}} @endif">
                                 <img src="{{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}" alt="" width="100%">
                             </div>
@@ -245,10 +260,8 @@
                     <div class="row">
                         @if (!empty($projectData[0]['banner_image']))
                         <div class="col-md-3 mt-3">
-                            <div class="project_public_img_wrap image_responsive_wrap">
-                                <a href="{{ Storage::url($projectData[0]['banner_image']) }}" target="_blank" rel="noopener noreferrer">
+                            <div class="project_public_img_wrap image_responsive_wrap image_in_full_view">
                                     <img src="{{ Storage::url($projectData[0]['banner_image']) }}" class="" width=100% alt="image">
-                                </a>
                             </div>
                         </div>
                         @else
@@ -261,10 +274,8 @@
                         @if (!empty($projectData[0]['project_only_image']))
                         @foreach ($projectData[0]['project_only_image'] as $v)
                         <div class="mt-3 mr_3">
-                            <div class="project_public_img_wrap image_responsive_wrap">
-                                <a href="{{ Storage::url($v['file_link']) }}" target="_blank" rel="noopener noreferrer">
+                            <div class="project_public_img_wrap image_responsive_wrap image_in_full_view">
                                     <img src="{{ Storage::url($v['file_link']) }}" class="" width=100% alt="image">
-                                </a>
                             </div>
                         </div>
                         @endforeach
@@ -284,17 +295,15 @@
                     @if (!empty($projectData[0]['project_only_doc']))
                     @foreach ($projectData[0]['project_only_doc'] as $v)
                     <div class="col-md-3 col-8 mt-3">
-                        <a href="{{Storage::url($v['file_link'])}}" download>
-                            <div class="document_pdf document_pdf_project">
-                                <div class="upload_loader">
-                                    <img src="{{ asset('images/asset/pdf_image.svg') }}" alt="image">
-                                </div>
-                                <div class="mx-3">
-                                    <div class="public_view_main_subtext">{{ json_decode($v['media_info'])->name }}</div>
-                                    <div class="proctect_by_capta_text">{{ json_decode($v['media_info'])->size_label }}</div>
-                                </div>
+                        <div class="document_pdf document_pdf_project docsPreview" docs-url="{{Storage::url($v['file_link'])}}">
+                            <div class="upload_loader">
+                                <img src="{{ asset('images/asset/pdf_image.svg') }}" alt="image">
                             </div>
-                        </a>
+                            <div class="mx-3">
+                                <div class="public_view_main_subtext">{{ json_decode($v['media_info'])->name }}</div>
+                                <div class="proctect_by_capta_text">{{ json_decode($v['media_info'])->size_label }}</div>
+                            </div>
+                        </div>
                     </div>
                     @endforeach
                     @else
@@ -352,9 +361,9 @@
                                 <table class="table">
                                     <tbody class="search-table-body white">
                                         <tr class="requirement-table-header">
-                                            <th>Milestone Description</th>
-                                            <th>Milestone Budget (USD)</th>
-                                            <th>Target Date</th>
+                                            <th style="width: 39%;">Milestone Description</th>
+                                            <th style="width: 39%;">Milestone Budget (USD)</th>
+                                            <th style="width: 39%;">Target Date</th>
                                         </tr>
                                         <tr>
                                             <td class="public-head-subtext candy-pink mt-1">Completed Milstones</td>
@@ -416,9 +425,9 @@
 
         <div class="public_subsection">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-7">
                     <h1 class="public-heading-text"> Associated With The Project</h1>
-                    <div class="col-7">
+                    <div class="">
                         <table class="table mt-2 table_width">
                             <tbody class="search-table-body white">
                                 <tr>
@@ -468,7 +477,7 @@
                             <div class="item">
                                 <div style="color: azure">{{!empty($v->project_name)?$v->project_name: '-' }}</div>
                                 {{-- <a href = "{{route('public-view',['id'=>$v->id])}}"> --}}
-                                {{-- <img src="@php echo (!empty($v->projectImage->file_link)?asset('storage/'.$v->projectImage->file_link): asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1 (1).png')) @endphp" width="100%" height="100%"  /> --}}
+                                <img src="@php echo (!empty($v->projectImage->file_link)?asset('storage/'.$v->projectImage->file_link): asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1 (1).png')) @endphp" width="100%" height="100%"  />
                                 {{-- <div class="guide_profile_main_subtext">@php echo (!empty($v->project_name)?$v->project_name
                                 
                                 : '-') @endphp</div> --}}
@@ -483,42 +492,48 @@
                 </div>
             </div>
         </div>
-
+       
         <div class="public_subsection">
             <div class="row">
                 <div class="col-md-12">
                     <h1 class="public-heading-text mb-2"> Related</h1>
-
+                    
                     <div class="related owl-carousel owl-theme">
-                        <div class="home_img_wrap">
-                            <div class="slider">
-                                <div class="img-container">
-                                    <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">
-                                </div>
-                                <div class="secondry-card-top-container w-100">
-                                    <div>Movie Title</div>
-                                    <div>
-                                        <i class="fa fa-heart" style="color: white;" aria-hidden="true"></i>
+                        @if(count($recomProject)>0)
+                            @foreach ($recomProject as $value)
+                            <div class="home_img_wrap">
+                            
+                                <div class="slider">
+                                    <a href="{{route('public-view',['id'=>$value->id])}}">
+                                
+                                    {{-- {{$value->projectOnlyImage[0]->file_link}} --}}
+                                    <div class="img-container gradient"> 
+                                        @if (!empty($value->projectOnlyImage[0]->file_link))
+                                        <img src="{{ Storage::url($value->projectOnlyImage[0]->file_link) }}" alt="image"> 
+                                        @else
+                                        <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">    
+                                        @endif                                 
+                                    
+                                        
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- <div class="home_img_wrap">
-                            <img src="{{ asset('images/asset/publicview-head-img.png') }}" alt="image">
-                        </div> -->
-                        <div class="home_img_wrap">
-                            <img src="{{ asset('images/asset/43710-posts 2.png') }}" alt="image">
-                        </div>
-                        <div class="home_img_wrap">
-                            <img src="{{ asset('images/asset/download (3) 2.png') }}" alt="image">
-                        </div>
-                        <div class="home_img_wrap">
-                            <img src="{{ asset('images/asset/43710-posts 2.png') }}" alt="image">
-                        </div>
-                        <div class="home_img_wrap">
-                            <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">
-                        </div>
+                                    
+                                    <div class="secondry-card-top-container w-100">
+                                        <div>{{$value->project_name}}</div>
+                                        <div>
+                                            <i class="fa fa-heart" style="color: white;" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </a>
+                                
+                                </div>                            
+                                
+                            </div> 
+                            @endforeach 
+                        @else
+                            <span class="text-white"><b>-</b></span>
+                        @endif 
                     </div>
+                    
                 </div>
             </div>
         </div>
@@ -547,13 +562,24 @@
         var $url = $(location).attr('href');
 
         $('.clipboard').on('click', function() {
-        $("body").append($temp);
-        $temp.val($url).select();
-        document.execCommand("copy");
-        $temp.remove();
-        $("p").text("URL copied!");
+        // $("body").append($temp);
+        // toastMessage("success",'copy successfully');
+        // toastr.success('Success'."copy");
+        toastr.success('Click Button');
+
+        toastMessage("success", 'URL copied')
+        // $temp.val($url).select();
+        // document.execCommand("copy");
+        // $temp.remove();
+        // $("p").text("URL copied!");
+       
+        $(".forCopy").text("URL copied!");
         })
+        $('#forCopy').click(function() {
+           toastr.success('Click Button');
+        });
     });
+   
 
     $('#contact_btn').click(function(e)
             {

@@ -16,7 +16,9 @@
                   <input type="text" name="search" id="search-project"class="searchTerm" placeholder="Search">
                 </div>
               </div>
-              <button class="add-proj-btn my-2 my-sm-0 mr-0 "><a href="{{ route('project-overview')}}">Add a Project</a></button>
+              <a class="add-proj-btn my-2 my-sm-0 mr-0 " href="{{ route('project-overview')}}">
+                Add a Project
+              </a>
               </div>
               <div class="navbar_mobile">
               <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
@@ -29,7 +31,7 @@
                     <ul class="dropdown-menu nav-drop" id="list-gener">
                       @foreach($geners as $gen)
                       <li>
-                        <input class="form-check-input" type="checkbox" name="gener[]" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" name="geners[]" value="{{$gen->id}}" id="flexCheckDefault">
                         <label class="form-check-label mx-2" for="flexCheckDefault">
                           {{$gen->name}}
                         </label>
@@ -65,7 +67,7 @@
                     <ul class="dropdown-menu nav-drop" id="list-lookingFor">
                     @foreach($looking_for as $look)
                       <li>
-                        <input class="form-check-input" type="checkbox" value="" name="lookingFor[]" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="{{$look->id}}" name="looking_for[]" id="flexCheckDefault">
                         <label class="form-check-label mx-2" for="flexCheckDefault">
                           {{$look->name}}
                         </label>
@@ -84,8 +86,8 @@
                     <ul class="dropdown-menu nav-drop" id="list-stages">
                     @foreach($project_stages as $pro)
                       <li>
-                        <input class="form-check-input" type="checkbox" value=""  name="stages[]" id="flexCheckDefault">
                         <label class="form-check-label mx-2" for="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" value="{{$pro->id}}"  name="project_stages[]" id="flexCheckDefault">
                           {{$pro->name}}
                         </label>
                       </li>
@@ -122,7 +124,7 @@
                     <ul class="dropdown-menu nav-drop" id="list-language">
                     @foreach($languages as $lang)
                       <li>
-                        <input class="form-check-input" type="checkbox" name="language[]" value="" id="flexCheckDefault">
+                        <input class="form-check-input" type="checkbox" name="languages[]" value="{{$lang->id}}" id="flexCheckDefault">
                         <label class="form-check-label mx-2" for="flexCheckDefault">
                           {{$lang->name}}
                         </label>
@@ -139,12 +141,16 @@
                 <div class="search"><button type="submit" class="searchButton">
                     <i class="fa fa-search"></i>
                   </button>
-                  <input type="text" name="search" id="search-project"class="searchTerm" placeholder="Search">
+                  <input type="text" name="search" id="search-project" class="searchTerm" placeholder="Search">
                 </div>
               </div>
               <!-- <div class="d--flex"> -->
                 <button type="submit" class="header-search-btn ml_10 mr_5">Search</button>
-                <button class="add-proj-btn my-2 my-sm-0 mr-0 d-none d-md-block"><a href="{{ route('project-overview')}}">Add a Project</a></button>
+                <a href="{{ route('project-overview')}}">
+                  <button type="button" class="add-proj-btn my-2 my-sm-0 mr-0 d-none d-md-block text-white">
+                      Add a Project
+                  </button>
+                </a>
               <!-- </div> -->
             </form>
             </div>

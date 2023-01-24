@@ -81,7 +81,7 @@
                                 <div>
                                     
                                 <div class="guide_profile_main_text mt-3">Available To Work In</div>
-                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">{{ (isset($UserOrganisation->available_to_work_in))?ucFirst($UserOrganisation->available_to_work_in):'-'; }}</div>
+                                <div class="search-head-subtext Aubergine_at_night mt-2">{{ (isset($UserOrganisation->available_to_work_in))?ucFirst($UserOrganisation->available_to_work_in):'-'; }}</div>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -91,19 +91,26 @@
                                 <div class="guide_profile_main_subtext mt-3">IMDB Profile</div>
                                 <div class="guide_profile_main_subtext deep-pink mt-1">
                                 @if (!empty($UserOrganisation->imdb_profile))
-                                    <a href="{{$UserOrganisation->imdb_profile}}" class=" deep-pink">{{(!empty($UserOrganisation->imdb_profile))?$UserOrganisation->imdb_profile:'-';}}</a>
+                                    <a href="{{$UserOrganisation->imdb_profile}}" class=" deep-pink">{{empty($UserOrganisation->imdb_profile) ? '-' : $UserOrganisation->imdb_profile  }}</a>
+                               
+                                @else 
+                                    {{'_'}}
                                 @endif
                                 </div>
                                 <div class="guide_profile_main_subtext mt-3">LinkedIn Profile</div>
                                 <div class="guide_profile_main_subtext deep-pink">
                                 @if (!empty($UserOrganisation->linkedin_profile))
-                                    <a href="{{$UserOrganisation->linkedin_profile}}" class=" deep-pink">{{(!empty($UserOrganisation->linkedin_profile))?$UserOrganisation->imdb_profile:'-';}}</a>
+                                    <a href="{{$UserOrganisation->linkedin_profile}}" class=" deep-pink">{{(!empty($UserOrganisation->linkedin_profile))?$UserOrganisation->linkedin_profile:'-'}}</a>
+                                    @else 
+                                    {{'_'}}
                                 @endif
                                 </div>
                                 <div class="guide_profile_main_subtext mt-3">Website</div>
                                 <div class="guide_profile_main_subtext deep-pink mt-1">
-                                @if (!empty($UserOrganisation->linkedin_profile))
+                                @if (!empty($UserOrganisation->website))
                                     <a href="{{$UserOrganisation->website}}" class=" deep-pink">{{(!empty($UserOrganisation->website))?$UserOrganisation->website:'-';}}</a>
+                                    @else 
+                                    {{'_'}}
                                 @endif
                                 </div>
                             </div>
@@ -199,8 +206,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="d-flex align-items-center">
-                                    <div class="preview_headtext">Team size</div>
-                                    <div class="associate_text mt-3 mx-3">{{isset($UserOrganisation->team_size)?$UserOrganisation->team_size:'-'}}</div>
+                                    <div class="preview_headtext mb-3">Team size</div>
+                                    <div class="associate_text my-3 mx-3">{{isset($UserOrganisation->team_size)?$UserOrganisation->team_size:'-'}}</div>
                                 </div>
                                 {{-- <div class="preview_headtext mb-3">Team members</div>
                                 <div class="row">

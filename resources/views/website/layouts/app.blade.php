@@ -49,8 +49,9 @@
 
             
 
-            <!-- Modal for Confirmation for account deactivate -->
             @include('website.include.video_modal')
+            @include('website.include.image_in_full_view_modal')
+            @include('website.include.docs_preview_modal')
             
         </main>
     </div>
@@ -125,6 +126,13 @@
             {
                 container.find('.sidebar_collapse').collapse('hide');
             }
+            
+            var container = $(".image_in_full_view_modal .imgSubWrap");
+            if ($(e.target).parents('.image_in_full_view_modal').length && container.has(e.target).length === 0) 
+            {
+                container.parents('.image_in_full_view_modal').fadeOut(500);
+            } 
+
             $('.modal .normal_btn').click(function()
             {
                 $(this).parents('.modal').modal('hide');
@@ -177,7 +185,33 @@
             $('#playVideoModal .playVideoModalContent iframe').attr('src',$(this).attr('video-url'));
             $('#playVideoModal').modal('show');
         });
-    </script>
+
+        $('.docsPreview').click(function()
+        {
+            var doc_url = $(this).attr('docs-url');
+            if($(window).width()>480)
+            {
+                $('#docsPreviewModal .docsPreviewModalContent iframe').attr('src',doc_url);
+                $('#docsPreviewModal').modal('show');
+            }
+            else
+            {
+                window.location.href=doc_url;
+            }
+        });
+
+        $('.image_in_full_view').click(function()
+        {
+            $('#ImageInFullViewModal .ImageInFullViewModalContent img').attr('src',$(this).find('img').attr('src'));
+            $('#ImageInFullViewModal').fadeIn(500);
+        });
+        $('.static_content_elem').click(function()
+        {
+            var elem = $(this).attr('modal_name');
+            $('#'+elem).modal('show');
+        });
+  </script>
+    
 
     @yield('scripts')
     @stack('scripts')

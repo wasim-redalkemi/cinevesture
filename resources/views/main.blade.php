@@ -29,40 +29,52 @@
                 {{-- <img src="{{ asset('public/images/asset/Screenshot 2021-05-28 at 11.48 1.png') }}" class="root_img" alt="image"> --}}
               </div>
               <div class="carosel-card-cntainer">
+                <div class="carosel-card-cntainer-two">
                 <div class="container">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="project-text mt-5 pt-2">
                         @if (!empty($v->project_name))
-                      <span style="text-shadow: 2px 2px #971E9B">  {{$v->project_name}}</span>
+                      <span class="blackTextShadow">  {{$v->project_name}}</span>
                         @endif
                       </div>
                       <div class="project-sub-text mt-1">
                         @if (!empty($v->logline))
-                        <span style="text-shadow: 2px 2px #971E9B">  {{$v->logline}}</span>
+                        <span class="blackTextShadow">  {{$v->logline}}</span>
                         @endif
                       </div>
                       <div class="duration-lang-text mt-1">
+                        <span class="blackTextShadow">
                         @if (!empty($v->duration))
                         {{-- {{date('H:i', mktime(0,$v->duration)).' min'}} | --}}
-                        <?php echo sprintf(intdiv($v->duration, 60).'hr') .' '. ( sprintf($v->duration % 60).'min');?> |
+                        <?php echo ((intdiv($v->duration, 60)>0)?sprintf(intdiv($v->duration, 60).' hr'):'') .' '. ((($v->duration % 60)>0)?( sprintf($v->duration % 60).' min'):'');?>
                         @endif
                         
-                        @foreach ($v->projectLanguages as $k1=>$v1)
-                        {{$v1->name}} |
-                        @endforeach 
+                        {{-- @foreach ($v->projectLanguages as $k1=>$v1)
+                        {{$v1->name}} ,
+                        @endforeach  --}}
+
+                        @if (isset($v->projectLanguages) && !empty($v->projectLanguages))
+                        |
+                        {{$v->projectLanguages[0]['name']}}
+                        @endif
+
                         @if (isset($v->genres[0]) && !empty($v->genres[0]))
+                        |
                         {{$v->genres[0]['name']}}
                         @endif
+
+                        </span>
                       </div>
-                      <button class="watch-now-btn mt-4"><a href="{{ route('public-view', ['id'=>$v->id]) }}" style="color:white !important;">Watch Now</a></button>
+                      <button class="watch-now-btn mt-4"><a href="{{ route('public-view', ['id'=>$v->id]) }}" style="color:white !important;">View Project</a></button>
                       {{-- @else
                         <div class="not-found-text">
-                          <p>No Data Found</p>
+                          <p class="blackTextShadow">No Data Found</p>
                         </div>
                       @endif                       --}}
                     </div>
                   </div>
+                </div>
                 </div>
               </div>
             </div>
@@ -84,7 +96,7 @@
                         labore
                         </div>
                       <div class="duration-lang-text mt-1">2hr 5min | English | Horror</div>
-                      <button class="watch-now-btn mt-4">Watch now</button>
+                      <button class="watch-now-btn mt-4">View Project</button>
                     </div>
                   </div>
                 </div>
@@ -108,7 +120,7 @@
                         dolore magna aliqua.
                         Ut enim ad minim veniam, quis nostrud exercitation.</div>
                       <div class="duration-lang-text mt-1">1hr 10min | English | Horror</div>
-                      <button class="watch-now-btn mt-4">Watch now</button>
+                      <button class="watch-now-btn mt-4">View Project</button>
                     </div>
                   </div>
                 </div>
@@ -122,7 +134,7 @@
       @if (isset($project_lists_except_carousel) && !empty($project_lists_except_carousel))
         @foreach ($project_lists_except_carousel as $k=>$v)
           @if (isset($v->lists) && count($v->lists)>0)
-            <div class="home_subsection">
+            <div class="home_subsection" style="position: relative;">
               <div class="container">
                 <div class="row">
                   <div class="col-md-12 carousel-header-text">
@@ -143,21 +155,20 @@
                         @endif                            
                       </div>
                     </div>
+                    
+                    <a href="{{ route('public-view', ['id'=>$v1->id]) }}">
                     <div class="main_slider_elem_wrap">
                       <div class="secondry-card-top-container w-100">
                         <div>
-                        <a href="{{ route('public-view', ['id'=>$v1->id]) }}" >
+                        <!-- <a href="{{ route('public-view', ['id'=>$v1->id]) }}" > -->
                           @if (isset($v1->project_name) && !empty($v1->project_name))
                         <span class="white">{{$v1->project_name}}</span> 
                           @endif
-                        </a>
+                        <!-- </a> -->
                         </div>
-                        <div>
-                          <i class="fa fa-heart-o icon-size like-project" style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
-                        </div>
+                       
                       </div>
                       <div class="secondry-card-bottom-container">
-                        <a href="{{ route('public-view', ['id'=>$v1->id]) }}">
   
                         @if (isset($v1->duration) && !empty($v1->duration))
                         <span class="white"><?php echo sprintf(intdiv($v1->duration, 60).' hr') .' '. ( sprintf($v1->duration % 60).' min');?> /</span>
@@ -174,9 +185,17 @@
                         @if (isset($country_data['project_countries'][0]) && !empty($country_data['project_countries'][0]))
                         <span class="white"> {{$country_data['project_countries'][0]['name']}}</span>
                         @endif --}}
-                        </a>
                       </div>
+                      
                     </div>
+                  </a>
+                  <div class="like_btn_wrapper">
+                    <div>
+                      <i class="fa fa-heart-o icon-size like-project" style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
+                    </div>
+                  </div>
+
+
                   </div>            
                 </div>
                 @endforeach
@@ -280,6 +299,9 @@
         },
         1400: {
           items: 4
+        },
+        1900: {
+          items: 5
         },
         1925: {
           items: 5.5

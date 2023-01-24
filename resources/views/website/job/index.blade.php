@@ -35,7 +35,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="project-text text-center mt-4">Search Latest Jobs</div>
-                    <div class="duration-lang-text white text-center mt-3">It is our job to make your search for people in the film and media fraternity, a piece of cake! Here's your slice. </div>
+                    <div class="industry_sub_text mt-3">It is our job to make your search for people in the film and media fraternity, a piece of cake! Here's your slice. </div>
                     <form method="post" action="{{ route('showJobSearchResults') }}"> 
                         @csrf                       
                     <div class="input_wraper mt-3">
@@ -105,8 +105,10 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-1 my-3 my-md-0">
-                                <button type = "submit"class="job_search_btn profile_search_btn">Search</button>
+                            <div class="col-md-1">
+                              <div class="d-flex justify-content-center my-3 my-md-0">
+                                <button type = "submit"class="job_search_btn profile_search_btn w_sm_25">Search</button>
+                              </div>
                             </div>
                         </div>
                         </form>
@@ -114,7 +116,7 @@
                     </div>
                 </div>
             </div>
-            <div class ="row">
+            <div class ="row pb_100">
                         <div class="d-flex justify-content-center mb-3" >
                         <a href="{{route('job-create-page')}}"><button type = "button"class="job_search_btn  post-job" style="margin-right:30px">Post A Job</button></a>
                         <a href="{{ route('posted-job') }}"><button type = "button"class="job_search_btn  post-job">My Jobs</button></a>
@@ -152,7 +154,12 @@
       return markup;
     },
       
-  });
+  })
+                .on('select2:selecting', e => $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop()))
+                .on('select2:select', e => $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop')))
+                .on('select2:unselecting', e => $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop()))
+                .on('select2:unselect', e => $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop')));
+                
   $(".js-select2").select2({
         closeOnSelect: false,
         placeholder: "Skills",
@@ -166,7 +173,12 @@
       return markup;
     },
         
-    });
+    })
+                .on('select2:selecting', e => $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop()))
+                .on('select2:select', e => $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop')))
+                .on('select2:unselecting', e => $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop()))
+                .on('select2:unselect', e => $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop')));
+
    $(".emp-select2").select2({
         closeOnSelect: false,
         placeholder: "Employment Type",
@@ -180,7 +192,12 @@
       return markup;
     },
         
-    });
+    })
+                .on('select2:selecting', e => $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop()))
+                .on('select2:select', e => $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop')))
+                .on('select2:unselecting', e => $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop()))
+                .on('select2:unselect', e => $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop')));
+
 
     $('.profile_search_btn').on('click',function(e){
         var countries = $("#countries :selected").length;

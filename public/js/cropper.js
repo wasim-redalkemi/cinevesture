@@ -89,16 +89,12 @@ var ImageCropper = function(fileToCrop,previewElem){
         $modal.off('shown.bs.modal').on('shown.bs.modal', function() {
             cropper = new Cropper(image, {
                 dragMode: 'move',
-                autoCropArea: 0.65,
-                restore: false,
-                guides: false,
-                center: false,
-                highlight: false,
                 cropBoxMovable: true,
-                cropBoxResizable: false,
+                cropBoxResizable: true,
                 toggleDragModeOnDblclick: false,
                 data:cropboxData,
                 aspectRatio: aspectRatio,
+                viewMode:1
             });
         }).off('hidden.bs.modal').on('hidden.bs.modal', function() {
             cropper.destroy();
