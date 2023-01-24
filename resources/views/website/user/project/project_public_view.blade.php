@@ -13,7 +13,9 @@
 @section('content')
 
 <section class="public-head-section">
-
+    <div class="hide-me animation for_authtoast">
+        @include('website.include.flash_message')
+    </div>
     <div class="main-slider-container">
         <div class="project_image_wraper">            
             @if (isset($projectData[0]['banner_image']))
@@ -166,8 +168,9 @@
                         <div class="col-md-1 col-md-0"></div>
                         <div class="col-lg-5 col-md-12 px-3">
                             <div class="public-head-subimage">
-                                <div class="playVideoWrapForheader playVideoWrap br_4 mt-3" video-url="@if(!empty($projectData[0]['project_only_video'][0]['file_link'])){{ $projectData[0]['project_only_video'][0]['file_link'] }}@endif">
-                                    <img src="@if (isset($projectData[0]['project_only_video'][0]['media_info'])){{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}@endif" alt="" class="br_4 w-100">
+                    
+                                <div class="playVideoWrapForheader playVideoWrap br_4 mt-3" video-url="@if(!empty($projectData[0]['project_mark_video'][0]['file_link'])){{ $projectData[0]['project_mark_video'][0]['file_link'] }}@endif">
+                                    <img src="@if (isset($projectData[0]['project_mark_video'][0]['media_info'])){{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}@endif" alt="" class="br_4 w-100">
                                 </div>
                                 {{-- <iframe width="" height="" src="{{empty($projectData[0]['project_only_video'][0]['file_link'])?'https://www.youtube.com/embed/oYWAwwy5EbQ':$projectData[0]['project_only_video'][0]['file_link'];}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> --}}
                                 <!-- <img src="{{ asset('images/asset/download (3) 7.png') }}" width=100% alt="Image"> -->
@@ -182,7 +185,7 @@
                                     @endif
                                     <!-- <i class="fa fa-share-alt mx-4 icon-size" aria-hidden="true"></i> -->
                                           <div class="clipboard pointer"><img src="{{ asset('images/asset/share_image.svg') }}" class="mx-3" alt="image"></div>
-                                          <p class="mb-0"></p>
+                                         <div class="forCopy" style="margin-right: 10px"><p class="mb-0"></p></div> 
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
                                         
                                     <div> <i class="fa <?php if(isset($UserProject->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
@@ -501,7 +504,7 @@
                             <div class="home_img_wrap">
                             
                                 <div class="slider">
-                                    <a href="#">
+                                    <a href="{{route('public-view',['id'=>$value->id])}}">
                                 
                                     {{-- {{$value->projectOnlyImage[0]->file_link}} --}}
                                     <div class="img-container gradient"> 
@@ -559,13 +562,24 @@
         var $url = $(location).attr('href');
 
         $('.clipboard').on('click', function() {
-        $("body").append($temp);
-        $temp.val($url).select();
-        document.execCommand("copy");
-        $temp.remove();
-        $("p").text("URL copied!");
+        // $("body").append($temp);
+        // toastMessage("success",'copy successfully');
+        // toastr.success('Success'."copy");
+        toastr.success('Click Button');
+
+        toastMessage("success", 'URL copied')
+        // $temp.val($url).select();
+        // document.execCommand("copy");
+        // $temp.remove();
+        // $("p").text("URL copied!");
+       
+        $(".forCopy").text("URL copied!");
         })
+        $('#forCopy').click(function() {
+           toastr.success('Click Button');
+        });
     });
+   
 
     $('#contact_btn').click(function(e)
             {

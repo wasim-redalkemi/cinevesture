@@ -446,15 +446,10 @@
 
 
         cropper = new Cropper(image, {
-            dragMode: 'move',
-            autoCropArea: 0.65,
-            restore: false,
-            guides: false,
-            center: true,
-            highlight: false,
             cropBoxMovable: true,
-            cropBoxResizable: false,
+            cropBoxResizable: true,
             toggleDragModeOnDblclick: false,
+            viewMode:1
             data: { //define cropbox size
                 width: 300,
                 height: 300,

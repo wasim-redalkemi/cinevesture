@@ -619,7 +619,7 @@ class ProjectController extends WebController
             $project_stages = ProjectStage::all();
              
             $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->with('isfavouriteProject')->first();
-            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->where(function($q){
+            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectMarkVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->where(function($q){
                 if(auth()->user()->user_type == 'A'){
                     $q->where('user_status','!=', 'draft');
                 }
@@ -706,13 +706,16 @@ class ProjectController extends WebController
             if ($validator->fails()) {
                 return back()->with($validator)->withInput();
             }
-    
-            $countries = MasterCountry::all();
-            $languages = MasterLanguage::all();
-            $geners = MasterProjectGenre::all();
-            $categories = MasterProjectCategory::all();
-            $looking_for = MasterLookingFor::all();
-            $project_stages = ProjectStage::all();
+            if(!empty($request)){
+                $prevDataReturn=['geners'=>$request->geners,'categories'=>$request->categories,'looking_for'=>$request->looking_for,
+                'project_stages'=>$request->project_stages,'countries'=>$request->countries,'languages'=>$request->languages];
+            }
+            $countries = MasterCountry::query()->orderBy('name', 'ASC')->get();
+            $languages = MasterLanguage::query()->orderBy('name', 'ASC')->get();
+            $geners = MasterProjectGenre::query()->orderBy('name', 'ASC')->get();
+            $categories = MasterProjectCategory::query()->orderBy('name', 'ASC')->get();
+            $looking_for = MasterLookingFor::query()->orderBy('name', 'ASC')->get();
+            $project_stages = ProjectStage::query()->orderBy('name', 'ASC')->get();
             $projects = UserProject::query()
             ->where('user_status','published')
             ->where(function($query) use($request){
@@ -762,7 +765,7 @@ class ProjectController extends WebController
             ->orderByDesc('id')
             ->paginate(config('constants.JOB_PAGINATION_LIMIT'));
             $projects->appends(request()->input())->links();
-            return view('website.user.project.search_result',compact(['countries','languages','geners','categories','looking_for','project_stages','projects']));                   
+            return view('website.user.project.search_result',compact(['countries','languages','geners','categories','looking_for','project_stages','projects','prevDataReturn']));                   
            }catch(Exception $e){
             return back()->with('error',$e->getMessage());
            }

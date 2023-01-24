@@ -25,7 +25,7 @@
                     @csrf
                     <div class="search-box-container">
                         <div class="search-container w-100">
-                            <input type="search" class="w-100 search-box" value="{{request('search')}}" placeholder="Search...">
+                            <input type="search" class="w-100 search-box" name="search" value="{{request('search')}}" placeholder="Search...">
                             <button class="search-btn"><i class="fa fa-search"></i></button>
                         </div>
                         <div class="d-block d-md-none m-2" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
@@ -38,20 +38,22 @@
                                 <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Category
                                 </button>
+                                
                                 <div class="dropdown-menu filter_modal_wrap">
                                     <div class="filter_option_wrap">
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
                                                 @foreach($categories as $cat)
+                                                @php
+                                                    $is_elem_ex = false;
+                                                    if(in_array('categories',array_keys($prevDataReturn)) && !empty($prevDataReturn['categories']) && in_array($cat->id,$prevDataReturn['categories'])){
+                                                        $is_elem_ex = true;
+                                                    }
+                                                @endphp
                                                 <div class="mx-2 for_active">
-                                                    <label class="d-flex align-items-center search_page_filters_data">
-                                                        @if(isset(request('categories')[0]) && in_array($cat->id, request('categories')))
-                                                        <input class="form-check-input me-1 d-none" type="checkbox" name="categories[]" checked value="{{$cat->id}}">
+                                                    <label class="d-flex align-items-center search_page_filters_data @if($is_elem_ex) search_page_filters_data_active @endif">
+                                                        <input class="form-check-input me-1 d-none" type="checkbox" name="categories[]" @if($is_elem_ex) checked @endif value="{{$cat->id}}">
                                                         {{$cat->name}}
-                                                        @else
-                                                        <input class="form-check-input me-1 d-none" type="checkbox" name="categories[]" value="{{$cat->id}}">
-                                                        {{$cat->name}}
-                                                        @endif
                                                     </label>
                                                 </div>
                                                 @endforeach
@@ -69,17 +71,16 @@
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
                                                 @foreach($employments as $employment)
-
+                                                @php
+                                                    $is_elem_ex = false;
+                                                    if(in_array('employments',array_keys($prevDataReturn)) && !empty($prevDataReturn['employments']) && in_array($employment->id,$prevDataReturn['employments'])){
+                                                        $is_elem_ex = true;
+                                                    }
+                                                @endphp
                                                 <div class="mx-2 for_active">
-                                                    <label class="d-flex align-items-center search_page_filters_data">
-
-                                                        @if(isset(request('employments')[0]) && in_array($employment->id, request('employments')))
-                                                        <input class="form-check-input me-1 d-none" type="checkbox" checked name="employments[]" value="{{$employment->id}}">
+                                                    <label class="d-flex align-items-center search_page_filters_data  @if($is_elem_ex) search_page_filters_data_active @endif">
+                                                        <input class="form-check-input me-1 d-none" type="checkbox" @if($is_elem_ex) checked @endif name="employments[]" value="{{$employment->id}}">
                                                         {{$employment->name}}
-                                                        @else
-                                                        <input class="form-check-input me-1 d-none" type="checkbox" name="employments[]" value="{{$employment->id}}">
-                                                        {{$employment->name}}
-                                                        @endif
                                                     </label>
                                                 </div>
                                                 @endforeach
@@ -98,15 +99,19 @@
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
                                                 @foreach($countries as $country)
+                                                @php
+                                                    $is_elem_ex = false;
+                                                    if (in_array('countries',array_keys($prevDataReturn)) && !empty($prevDataReturn['countries']) && in_array($country->id,$prevDataReturn['countries'])) {
+                                                        $is_elem_ex = true;
+                                                    }
+                                                @endphp
                                                 <div class="mx-2 for_active">
-                                                    <label class="d-flex align-items-center search_page_filters_data">
-                                                        @if(isset(request('countries')[0]) && in_array($country->id, request('countries')))
-                                                        <input class="form-check-input me-1 d-none" type="checkbox" name="countries[]" checked value="{{$country->id}}">
+                                                    <label class="d-flex align-items-center search_page_filters_data 
+                                                    @if($is_elem_ex)search_page_filters_data_active @endif">
+                                                        <input class="form-check-input me-1 d-none" type="checkbox"
+                                                         name="countries[]" @if ($is_elem_ex) checked @endif
+                                                          value="{{$country->id}}">
                                                         {{$country->name}}
-                                                        @else
-                                                        <input class="form-check-input me-1 d-none" type="checkbox" name="countries[]" value="{{$country->id}}">
-                                                        {{$country->name}}
-                                                        @endif
                                                     </label>
                                                 </div>
                                                 @endforeach
@@ -125,17 +130,16 @@
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
                                                 @foreach($workspaces as $workspace)
-
+                                                @php
+                                                    $is_elem_ex = false;
+                                                    if (in_array('workspaces',array_keys($prevDataReturn)) && !empty($prevDataReturn['workspaces']) && in_array($workspace->id,$prevDataReturn['workspaces'])) {
+                                                        $is_elem_ex = true;
+                                                    }
+                                                @endphp
                                                 <div class="mx-2 for_active">
-                                                    <label class="d-flex align-items-center search_page_filters_data">
-
-                                                        @if(isset(request('workspaces')[0]) && in_array($workspace->id, request('workspaces')))
-                                                        <input class="form-check-input me-1 d-none" type="checkbox" checked name="workspaces[]" value="{{$workspace->id}}">
+                                                    <label class="d-flex align-items-center search_page_filters_data @if($is_elem_ex)search_page_filters_data_active @endif">
+                                                        <input class="form-check-input me-1 d-none" type="checkbox" @if ($is_elem_ex) checked @endif name="workspaces[]" value="{{$workspace->id}}">
                                                         {{$workspace->name}}
-                                                        @else
-                                                        <input class="form-check-input me-1 d-none" type="checkbox" name="workspaces[]" value="{{$workspace->id}}">
-                                                        {{$workspace->name}}
-                                                        @endif
                                                     </label>
                                                 </div>
                                                 @endforeach
@@ -156,17 +160,16 @@
                                         <div class="container no-padding">
                                             <div class="d-flex flex-wrap">
                                                 @foreach($skills as $skill)
-
+                                                @php
+                                                    $is_elem_ex = false;
+                                                    if (in_array('skills',array_keys($prevDataReturn)) && !empty($prevDataReturn['skills']) && in_array($skill->id,$prevDataReturn['skills'])) {
+                                                        $is_elem_ex = true;
+                                                    }
+                                                @endphp
                                                 <div class="mx-2 for_active">
-                                                    <label class="d-flex align-items-center search_page_filters_data">
-
-                                                        @if(isset(request('skills')[0]) && in_array($skill->id, request('skills')))
-                                                        <input class="form-check-input me-1 d-none" type="checkbox" checked name="skills[]" value="{{$skill->id}}">
+                                                    <label class="d-flex align-items-center search_page_filters_data @if($is_elem_ex)search_page_filters_data_active @endif">
+                                                        <input class="form-check-input me-1 d-none" type="checkbox" @if ($is_elem_ex) checked @endif name="skills[]" value="{{$skill->id}}">
                                                         {{$skill->name}}
-                                                        @else
-                                                        <input class="form-check-input me-1 d-none" type="checkbox" name="skills[]" value="{{$skill->id}}">
-                                                        {{$skill->name}}
-                                                        @endif
                                                     </label>
                                                 </div>
                                                 @endforeach
