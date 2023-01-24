@@ -1036,6 +1036,7 @@ label {
 .pagination .page-item {
     margin-left: 14px;
     background: white;
+    border-radius: 4px;
 }
 
 .pagination .page-link {
@@ -3267,6 +3268,7 @@ input:checked+.slider:before {
     position: absolute !important;
     top: -50px !important;
     left: 230px !important;
+    /* left: 1320px !important; */
     justify-content: center;
     align-items: center;
    
@@ -3305,6 +3307,7 @@ input:checked+.slider:before {
     position: absolute !important;
     top: -50px !important;
     right: 1200px !important;
+    /* right: 70px !important; */
     /* right: calc(v) !important; */
     justify-content: center;
     align-items: center;
