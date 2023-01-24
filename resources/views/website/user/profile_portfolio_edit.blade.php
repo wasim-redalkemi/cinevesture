@@ -32,7 +32,7 @@
                             
                             <div class="row">
                                 <div class="col-md-6">
-                                    <div class="profile_input">
+                                    <div class="profile_input mb-1">
                                         <label>Project Title <span class = "steric_sign_design">*</span></label>
                                         <input type="text" class="form-control @error('project_title') is-invalid @enderror" placeholder="Project Title" name="project_title" value="<?php if(isset($UserPortfolioEdit[0]->project_title)){ echo($UserPortfolioEdit[0]->project_title); }?>" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('project_title')
@@ -492,15 +492,10 @@
     $modal.on('shown.bs.modal', function() {
 
         cropper = new Cropper(image, {
-        dragMode: 'move',
-        autoCropArea: 0.65,
-        restore: false,
-        guides: false,
-        center: true,
-        highlight: false,
         cropBoxMovable: true,
-        cropBoxResizable: false,
+        cropBoxResizable: true,
         toggleDragModeOnDblclick: false,
+        viewMode:1
         data:{ //define cropbox size
         width: 300,
         height:  300,

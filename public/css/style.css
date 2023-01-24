@@ -1036,6 +1036,7 @@ label {
 .pagination .page-item {
     margin-left: 14px;
     background: white;
+    border-radius: 4px;
 }
 
 .pagination .page-link {
@@ -1090,16 +1091,13 @@ label {
     overflow: auto;
 }
 
-.cropper-crop-box {
-    /* width: 200px;
-    height: 200px; */
-}
-
-.croper_modal .cropperWrap {
+.cropperWrap img {
+    max-height: 60vh;
+    min-height: 200px;
     height: auto;
-    /* width: auto;; */
-    max-height: calc(100%/3 - 1.5em);
-    min-height: 300px;
+    max-width: 500px;
+    min-width: 250px;
+    width: auto;
 }
 
 .list-group-item {
@@ -3267,6 +3265,7 @@ input:checked+.slider:before {
     position: absolute !important;
     top: -50px !important;
     left: 230px !important;
+    /* left: 1320px !important; */
     justify-content: center;
     align-items: center;
    
@@ -3305,6 +3304,7 @@ input:checked+.slider:before {
     position: absolute !important;
     top: -50px !important;
     right: 1200px !important;
+    /* right: 70px !important; */
     /* right: calc(v) !important; */
     justify-content: center;
     align-items: center;
