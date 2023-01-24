@@ -129,7 +129,7 @@
                                     <label for="lang">Age</label>
 
                                     <select name="age" class="outline is-invalid-remove @error('age') is-invalid @enderror" id="lang">
-                                        <option value="">Select</option>
+                                        <option value="" >Select</option>
                                         @foreach($age as $a)
                                         <option value="{{$a->id}}"@if ($a->id == $user->age) selected @endif>{{ $a->range }}</option>
                                         @endforeach
@@ -484,7 +484,7 @@
         cropBoxMovable: true,
         cropBoxResizable: true,
         toggleDragModeOnDblclick: false,
-        viewMode:1
+        viewMode:1,
     data:{ //define cropbox size
       width: 300,
       height:  300,

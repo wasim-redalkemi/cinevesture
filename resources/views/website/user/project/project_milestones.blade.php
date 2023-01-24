@@ -143,14 +143,14 @@
                                         <input type="date"  min="{{Date('Y-m-d')}}" max="2030-12-31" class="form-control" name="project_milestone_target_date" placeholder="Target Date">
                                     </div>
                                 </div>
-                                <div class="col-md-2 d-flex align-items-end">
-                                    <div class="d-flex checkbox_btn mb-2 mt-2 mt-md-0">
+                                <div class="col-md-2">
+                                    <div class="d-flex checkbox_btn mt_46 mb-2">
                                         <input type="checkbox" class="checkbox_btn" name="project_milestone_complete" aria-label="">
                                         <div class="verified-text deep-pink mx-2">Mark Complete</div>
                                     </div>
                                 </div>
-                                <div class="col-md-1 d-flex align-items-end mt-2">
-                                    <div class="profile_input">
+                                <div class="col-md-1 mt_40">
+                                    <div class="">
                                         <div class="save_add_btn">Save</div>
                                     </div>
                                 </div>
