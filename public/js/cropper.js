@@ -36,6 +36,10 @@ var ImageCropper = function(fileToCrop,previewElem){
         return cropboxData;
     }
 
+    let getBase64 = function(){
+        return base64data;
+    }
+
     let init = function(){
 
         bindEvents();
@@ -95,6 +99,8 @@ var ImageCropper = function(fileToCrop,previewElem){
         }).off('hidden.bs.modal').on('hidden.bs.modal', function() {
             cropper.destroy();
             cropper = null;
+            if(afterCrop)
+                afterCrop();
         });
 
         $("#crop").off("click").on("click",function() {
@@ -116,8 +122,6 @@ var ImageCropper = function(fileToCrop,previewElem){
                     $modal.modal('hide');
                 }
             });
-            if(afterCrop)
-                afterCrop();
         });
 
         $('#close-cropper').off('click').on('click', function() {
@@ -133,7 +137,7 @@ var ImageCropper = function(fileToCrop,previewElem){
         });
     }
 
-    return {init,getCropperFile,setCropBoxSize,getCropBoxSize,setAfterCrop,setAspectRatio};
+    return {init,getCropperFile,setCropBoxSize,getCropBoxSize,setAfterCrop,setAspectRatio,getBase64};
 
 }
 

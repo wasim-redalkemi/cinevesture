@@ -102,7 +102,7 @@ class AjaxController extends WebController {
             $media = ProjectMedia::find($media_id);
             if($media){
                 $isDeleted = $media->delete();
-                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,['isDeleted'=>$isDeleted],"Recource deleted successfully.","ER000","");
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,['isDeleted'=>$isDeleted],"Media deleted successfully.","ER000","");
             } else {
                 return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER401","Could not find the resource.");
             }
@@ -218,7 +218,7 @@ class AjaxController extends WebController {
             $media = ProjectAssociation::find($associate_id);
             if($media){
                 $isDeleted = $media->delete();
-                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,['isDeleted'=>$isDeleted],"Recource deleted successfully.","ER000","");
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,['isDeleted'=>$isDeleted],"Project association deleted successfully.","ER000","");
             } else {
                 return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER401","Could not find the resource.");
             }
@@ -262,7 +262,7 @@ class AjaxController extends WebController {
                 if(isset($request->project_milestone_complete))
                     $milestone->complete = $request->project_milestone_complete;
                 $milestone->save();
-                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$milestone,"Record updated successfully.","ER000","");
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$milestone,"Project milestone updated successfully.","ER000","");
             } else {
                 return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER401","Could not find the resource.");
             }
@@ -276,7 +276,7 @@ class AjaxController extends WebController {
             $media = ProjectMilestone::find($milestone_id);
             if($media){
                 $isDeleted = $media->delete();
-                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,['isDeleted'=>$isDeleted],"Recource deleted successfully.","ER000","");
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,['isDeleted'=>$isDeleted],"Project milestone removed successfully.","ER000","");
             } else {
                 return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER401","Could not find the resource.");
             }
@@ -313,7 +313,7 @@ class AjaxController extends WebController {
             $media = UserPortfolioImage::find($img_id);
             if($media){
                 $isDeleted = $media->delete();
-                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,['isDeleted'=>$isDeleted],"Recource deleted successfully.","ER000","");
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,['isDeleted'=>$isDeleted],"Portfolio image deleted successfully.","ER000","");
             } else {
                 return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER401","Could not find the resource.");
             }
