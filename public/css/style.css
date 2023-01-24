@@ -4147,3 +4147,6 @@ transition: 2s ease all; */
     height: 90vh;
     width: 100%;
 }
+.tooltip-inner {
+    max-width: 100% !important;
+}

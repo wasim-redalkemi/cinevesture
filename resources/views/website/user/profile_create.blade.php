@@ -484,7 +484,7 @@
         cropBoxMovable: true,
         cropBoxResizable: true,
         toggleDragModeOnDblclick: false,
-        viewMode:1
+        viewMode:1,
     data:{ //define cropbox size
       width: 300,
       height:  300,
