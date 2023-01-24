@@ -1753,7 +1753,6 @@ label {
     cursor: pointer;
     display: flex;
     align-items: center;
-    margin-bottom: 4px;
 }
 
 .profile_input input,

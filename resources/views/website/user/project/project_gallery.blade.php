@@ -332,15 +332,22 @@
                     if (uploadedFile) {
                         ImageCropperObj = new ImageCropper(uploadedFile,parentElemId+" #previewImg");
                         ImageCropperObj.setCropBoxSize({'width':6*300,height:2*300});
-                        let ret = ImageCropperObj.init();
                         ImageCropperObj.setAspectRatio(3/1);
+                        ImageCropperObj.setAfterCrop(function(){
+                            console.log("after crop called");
+                            if(ImageCropperObj.getBase64()){
+                                $(parentElemId+" .open_file_explorer label").hide();
+                                $(parentElemId+" .profile_upload_text").hide();
+                                $(parentElemId+" .profile_input.add-new-image").show();
+                                $(parentElemId+" .cancel-img-upload").show();
+                                $(parentElemId+" .save_add_btn").show();
+                            } else {
+                                console.log("cropper cancelled");
+                            }
+                        });
+                        let ret = ImageCropperObj.init();
                         // ImageCropperObj.setAfterCrop(AfterCropCallback);
                         // $("#previewImg").attr("src",URL.createObjectURL(file)).show();
-                        $(parentElemId+" .open_file_explorer label").hide();
-                        $(parentElemId+" .profile_upload_text").hide();
-                        $(parentElemId+" .profile_input.add-new-image").show();
-                        $(parentElemId+" .cancel-img-upload").show();
-                        $(parentElemId+" .save_add_btn").show();
                     }
                 });
 
