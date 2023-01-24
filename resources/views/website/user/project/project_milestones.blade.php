@@ -124,7 +124,7 @@
                                 </div>
                                 @endforeach
                             @endif
-                            <div id="milestone_new" class="row">
+                            <div id="milestone_new" class="row d-flex align-items-end">
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>Milestone Description</label>
@@ -149,7 +149,7 @@
                                         <div class="verified-text deep-pink mx-2">Mark Complete</div>
                                     </div>
                                 </div>
-                                <div class="col-md-1 mt_40">
+                                <div class="col-md-1">
                                     <div class="">
                                         <div class="save_add_btn">Save</div>
                                     </div>

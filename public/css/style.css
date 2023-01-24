@@ -1875,6 +1875,7 @@ select,
     display: flex;
     align-items: center;
     cursor: pointer;
+    justify-content: center;
 }
 
 .progress-bar {

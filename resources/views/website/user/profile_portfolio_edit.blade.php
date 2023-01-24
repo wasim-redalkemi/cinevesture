@@ -387,7 +387,6 @@
                 setModal("","","Yes, Delete","");
                 $(".deactivate_btn").click();
                 $(".modal-body button.delete_btn").off("click").click((e)=>{
-                    console.log("delete confirm modal");
                     doAjax("ajax/delete-portfolio-img/"+imgId,{"imgId":imgId},"DELETE",(req,resp)=>{
                         if(resp.status == 1){
                             createToast("Image deleted successfully.","S");

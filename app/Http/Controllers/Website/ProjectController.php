@@ -222,7 +222,7 @@ class ProjectController extends WebController
                         $projectLanguages->language_id = $v;
                         $projectLanguages->save();    
                     }
-                    $this->return_response['success_msg'] = 'Project overview edit successfully.';
+                    $this->return_response['success_msg'] = 'Project overview updated successfully.';
                 }
             }
         } catch (Exception $e) {
