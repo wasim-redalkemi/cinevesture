@@ -184,6 +184,7 @@
                                         </div>
                                         <div for="file-input input_wrap" class="d-none">
                                             <input type="file" class="imgInp" id="upload-img-inp-new-{{count($UserPortfolioImages)+1}}" name="portfolio-image-{{count($UserPortfolioImages)+1}}" accept=".jpg,.jpeg,.png"  autofocus required>
+                                            <input type="hidden" class="imgInp" id="cropped-upload-img-inp-new-{{count($UserPortfolioImages)+1}}" name="cropped-portfolio-image-{{count($UserPortfolioImages)+1}}">
                                         </div>
                                         <label for="upload-img-inp-new-{{count($UserPortfolioImages)+1}}">
                                             <div class="text-center">
@@ -339,16 +340,14 @@
             });
 
             $(parentElemId+" input.imgInp").off("change").on("change",function uploadImageFile(e) {
-
                 var done = function(url) {
-            image.src = url;
-            $modal.modal('show');
-        };
-
-
+                    image.src = url;
+                    $modal.modal('show');
+                };
                 console.log("changed ",this);
                 let imgId = "#"+$(e.target).parents('.img-item').attr('id'); 
-                console.log("e = ",this.files,imgId);
+                let croppedImgContainerId = imgId.replace("#portfolio-img","#cropped-upload-img-inp");
+                console.log("e = ",this.files,imgId,croppedImgContainerId );
                 const [file] = this.files
                 uploadedFile = this.files[0];
                 var ImageCropperObj = new ImageCropper(uploadedFile, imgId+" #previewImg");
@@ -360,6 +359,7 @@
                         $(parentElemId + " " + imgId + " .profile_upload_text").hide();
                         $(parentElemId + " " + imgId + " .cancel-img-upload").show();
                         addImgUploadElem();
+                        $(parentElemId+" "+croppedImgContainerId).val(ImageCropperObj.getBase64());
                     } else {
                         console.log("cropper cancelled");
                     }
@@ -371,23 +371,15 @@
                 let imgId = "#"+$(e.target).parents('.img-item').attr('id');
                 console.log("cancelling ",imgId,parentElemId+" "+imgId+" .open_file_explorer label");
                 $(imgId).remove();
-                // //console.log("ok",$(parentElemId+" .portfolio-images").html());
-                // $(parentElemId+" "+imgId+" #previewImg").attr("src","").hide();
-                // $(parentElemId+" "+imgId+" .open_file_explorer label").show();
-                // $(parentElemId+" "+imgId+" .profile_upload_text").show();
-                // $(parentElemId+" "+imgId+" .cancel-img-upload").hide();
-                // uploadedFile = null;
-                //addImgUploadElem();
             });
 
-            $(parentElemId+" .cancel-img-upload.delete").off("click").on("click",function cancelImgUpload(e) {
+            $(parentElemId+" .cancel-img-upload.delete").off("click").on("click",function deleteImgUpload(e) {
                 let imgId = "#"+$(e.target).parents('.img-item').attr('id');
                 imgId = imgId.split("-")[2];
                 //console.log("deleting ",imgId);
                 setModal("","","Yes, Delete","");
                 $(".deactivate_btn").click();
                 $(".modal-body button.delete_btn").off("click").click((e)=>{
-                    console.log("delete confirm modal");
                     doAjax("ajax/delete-portfolio-img/"+imgId,{"imgId":imgId},"DELETE",(req,resp)=>{
                         if(resp.status == 1){
                             createToast("Image deleted successfully.","S");
@@ -428,7 +420,7 @@
             let imageCnt = $(parentElemId+" .portfolio-images").children('.img-item').length;
             $('.portfolio_images_count').val(imageCnt);
             let lastid = $(parentElemId+" .portfolio-images").children('.img-item').last().attr('id').split("-")[3];
-            let newcnt = lastid+1;
+            let newcnt = lastid*1+1;
             if(maxImgCnt == imageCnt){
                 createToast("You can upload only upto "+maxImgCnt+" images.","E");
                 return;
@@ -443,7 +435,9 @@
                     html += '<div class="progress-bar">';
                         html += '<div class="fill-progress"></div>';
                     html += '</div>';
-                    html += '<div for="file-input input_wrap" class="d-none"><input type="file" class="imgInp" id="upload-img-inp-'+newcnt+'" name="portfolio-image-'+newcnt+'" accept=".jpg,.jpeg,.png">';
+                    html += '<div for="file-input input_wrap" class="d-none">';
+                        html += '<input type="file" class="imgInp" id="upload-img-inp-'+newcnt+'" name="portfolio-image-'+newcnt+'" accept=".jpg,.jpeg,.png">';
+                        html += '<input type="hidden" class="imgInp" id="cropped-upload-img-inp-new-'+newcnt+'" name="cropped-portfolio-image-'+newcnt+'">';
                 html += '</div>';
                 html += '<label for="upload-img-inp-'+newcnt+'">';
                     html += '<div class="text-center">';
@@ -468,14 +462,13 @@
         placeholder: "Select",
         allowClear: true,
         language: {
-      noResults: function() {
-        return '<button class="no_results_btn">No Result Found</a>';
-      },
+        noResults: function() {
+            return '<button class="no_results_btn">No Result Found</a>';
+        },
     },
     escapeMarkup: function(markup) {
-      return markup;
-    },
-        
+        return markup;
+    },  
     })
                 .on('select2:selecting', e => $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop()))
                 .on('select2:select', e => $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop')))
@@ -488,82 +481,6 @@
         $(this).parents('form').submit();
     });
 
-    // croper 
-
-    $modal.on('shown.bs.modal', function() {
-
-        cropper = new Cropper(image, {
-        cropBoxMovable: true,
-        cropBoxResizable: true,
-        toggleDragModeOnDblclick: false,
-        viewMode:1,
-        data:{ //define cropbox size
-        width: 300,
-        height:  300,
-        },
-        });
-}).on('hidden.bs.modal', function() {
-   cropper.destroy();
-   cropper = null;
-});
-
-function dataURLtoFile(dataurl, filename) {
-   var arr = dataurl.split(','),
-       mime = arr[0].match(/:(.*?);/)[1],
-       bstr = atob(arr[1]),
-       bstr = atob(arr[1]),
-       n = bstr.length,
-       u8arr = new Uint8Array(n);
-
-   while (n--) {
-       u8arr[n] = bstr.charCodeAt(n);
-   }
-
-   return new File([u8arr], filename, {
-       type: mime
-   });
-}
-
-$("#crop").click(function() {
-   canvas = cropper.getCroppedCanvas({
-       width: 160,
-       height: 160,
-   });
-
-   canvas.toBlob(function(blob) {
-       url = URL.createObjectURL(blob);
-       // console.log(url, "url");
-       var reader = new FileReader();
-       reader.readAsDataURL(blob);
-       reader.onloadend = function() {
-           base64data = reader.result;
-           var file = dataURLtoFile(base64data, 'profile_img.png');
-           croperImg.src = base64data;
-           $("#croppedImg").val(base64data);
-           image.src = file;
-           formData.append("document", file)
-           // console.log(formData.append("document", file), "formData.append");
-
-           $('.for_hide').css('display', 'none');
-           $('.for_show').css('display', 'block');
-
-           $modal.modal('hide');
-       }
-   });
-})
-
-$('#close-cropper').on('click', function() {
-   $modal.modal('hide');
-})
-$('#chechbox').on('click', function() {
-   // $('date_of_exp').toggle();
-   $modal.modal('hide');
-})
-
-
-$('#crop-cancel').on('click', function() {
-   $modal.modal('hide');
-})
 </script>
 
 <script src="{{ asset('js/cropper.js') }}"></script>

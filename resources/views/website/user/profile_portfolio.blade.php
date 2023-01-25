@@ -133,7 +133,9 @@
                                     <div class="progress-bar">
                                         <div class="fill-progress"></div>
                                     </div>
-                                    <div for="file-input input_wrap" class="d-none"><input type="file" class="imgInp" id="upload-img-inp-1" name="portfolio-image-1" accept=".jpg,.jpeg,.png" autofocus required>
+                                    <div for="file-input input_wrap" class="d-none">
+                                        <input type="file" class="imgInp" id="upload-img-inp-1" name="portfolio-image-1" accept=".jpg,.jpeg,.png" autofocus required>
+                                        <input type="hidden" class="imgInp" id="cropped-upload-img-inp-new-1" name="cropped-portfolio-image-1">
                                     </div>
                                     <label for="upload-img-inp-1">
                                         <div class="text-center">
@@ -288,6 +290,8 @@
             $(parentElemId + " input.imgInp").off("change").on("change", function uploadImageFile(e) {
                 console.log("changed ", this);
                 let imgId = "#" + $(e.target).parents('.img-item').attr('id');
+                let croppedImgContainerId = imgId.replace("#portfolio-img","#cropped-upload-img-inp");
+                console.log("e = ",this.files,imgId,croppedImgContainerId );
                 console.log("e = ", this.files, imgId);
                 const [file] = this.files
                 uploadedFile = this.files[0];
@@ -300,6 +304,8 @@
                         $(parentElemId + " " + imgId + " .profile_upload_text").hide();
                         $(parentElemId + " " + imgId + " .cancel-img-upload").show();
                         addImgUploadElem();
+                        $(parentElemId+" "+croppedImgContainerId).val(ImageCropperObj.getBase64());
+                        $("#croppedImg").val(ImageCropperObj.getBase64());
                     } else {
                         console.log("cropper cancelled");
                     }
@@ -347,7 +353,7 @@
             imageCnt = $(parentElemId + " .portfolio-images").children('.img-item').length;
             $('.portfolio_images_count').val(imageCnt);
             lastid = $(parentElemId + " .portfolio-images").children('.img-item').last().attr('id').split("-")[3];
-            let newcnt = lastid + 1;
+            let newcnt = lastid*1 + 1;
             if (maxImgCnt == imageCnt) {
                 createToast("You can upload only upto " + maxImgCnt + " images.", "E");
                 return;
@@ -362,7 +368,9 @@
             html += '<div class="progress-bar">';
             html += '<div class="fill-progress"></div>';
             html += '</div>';
-            html += '<div for="file-input input_wrap" class="d-none"><input type="file" class="imgInp" id="upload-img-inp-' + newcnt + '" name="portfolio-image-' + newcnt + '" accept=".jpg,.jpeg,.png">';
+            html += '<div for="file-input input_wrap" class="d-none">';
+                html += '<input type="file" class="imgInp" id="upload-img-inp-' + newcnt + '" name="portfolio-image-' + newcnt + '" accept=".jpg,.jpeg,.png">';
+                html += '<input type="hidden" class="imgInp" id="cropped-upload-img-inp-new-'+newcnt+'" name="cropped-portfolio-image-'+newcnt+'">';
             html += '</div>';
             html += '<label for="upload-img-inp-' + newcnt + '">';
             html += '<div class="text-center">';
