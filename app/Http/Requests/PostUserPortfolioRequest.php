@@ -24,7 +24,7 @@ class PostUserPortfolioRequest extends FormRequest
     public function rules()
     {
         return [
-            'project_title' => 'required',
+            'portfolio_title' => 'required',
             'description' => 'required|max:600',
             'completion_date' => 'required',
             'video_url' => 'required|url',
@@ -39,8 +39,7 @@ class PostUserPortfolioRequest extends FormRequest
     public function messages()
     {
         return [
-           'portfolio_images_count.required' => 'Portfolio image is required.'
-            //
+           'portfolio_images_count.required' => 'Portfolio image is required.'            
         ];            
     }
 }

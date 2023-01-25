@@ -31,9 +31,9 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="profile_input mb-1">
-                                    <label>Project Title <span class = "steric_sign_design">*</span></label>
-                                    <input type="text" class="form-control @error('project_title') is-invalid @enderror" placeholder="Project Title" name="project_title" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
-                                    @error('project_title')
+                                    <label>Portfolio Title <span class = "steric_sign_design">*</span></label>
+                                    <input type="text" class="form-control @error('portfolio_title') is-invalid @enderror" placeholder="Portfolio Title" name="portfolio_title" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
+                                    @error('portfolio_title')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
