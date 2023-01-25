@@ -180,7 +180,7 @@ class AjaxController extends WebController {
     public function addProjAssociationEntry(Request $request, $project_id){
         $request->validate([
             'title' => 'required|string|max:50',
-            'name' => 'nullable|string|max:50'
+            'name' => 'required|string|max:50'
         ]);
         try {
             $ProjectAssociation = new ProjectAssociation();
