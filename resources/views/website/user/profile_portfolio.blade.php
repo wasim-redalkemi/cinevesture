@@ -31,8 +31,8 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="profile_input mb-1">
-                                    <label>Project Title <span class = "steric_sign_design">*</span></label>
-                                    <input type="text" class="form-control @error('project_title') is-invalid @enderror" placeholder="Project Title" name="project_title" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
+                                    <label>Portfolio Title <span class = "steric_sign_design">*</span></label>
+                                    <input type="text" class="form-control @error('project_title') is-invalid @enderror" placeholder="Portfolio Title" name="project_title" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
                                     @error('project_title')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -60,7 +60,7 @@
                             <div class="col-md-6">
                                 <div class="select2forError">
                                     <div class="profile_input">
-                                        <label for="lang">Project specific Skills <span class = "steric_sign_design">*</span></label>
+                                        <label for="lang">Portfolio specific Skills <span class = "steric_sign_design">*</span></label>
                                         <select name="project_specific_skills_id[]" class="outline is-invalid-remove js-select2 @error('project_specific_skills_id') is-invalid @enderror" multiple autofocus required>
                                             @foreach ($skills as $k=>$v)
                                             <option value="{{ $v->id }}">{{ $v->name }}</option>
