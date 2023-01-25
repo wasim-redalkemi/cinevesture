@@ -351,19 +351,20 @@
                 console.log("e = ",this.files,imgId);
                 const [file] = this.files
                 uploadedFile = this.files[0];
-                console.log(348)
                 var ImageCropperObj = new ImageCropper(uploadedFile, imgId+" #previewImg");
                 ImageCropperObj.setCropBoxSize({'width':300*2,height:200*2});
                 ImageCropperObj.setAspectRatio(3/2);
+                ImageCropperObj.setAfterCrop(function(){
+                    if(ImageCropperObj.getBase64()){
+                        $(parentElemId + " " + imgId + " .open_file_explorer label").hide();
+                        $(parentElemId + " " + imgId + " .profile_upload_text").hide();
+                        $(parentElemId + " " + imgId + " .cancel-img-upload").show();
+                        addImgUploadElem();
+                    } else {
+                        console.log("cropper cancelled");
+                    }
+                });
                 let ret = ImageCropperObj.init();
-                if (file) {
-                    // $(imgId+" #previewImg").attr("src",URL.createObjectURL(file)).show();
-                    $(parentElemId+" "+imgId+" .open_file_explorer label").hide();
-                    $(parentElemId+" "+imgId+" .profile_upload_text").hide();
-                    //$(parentElemId+" .profile_input.add-new-image").show();
-                    $(parentElemId+" "+imgId+" .cancel-img-upload").show();
-                    addImgUploadElem();
-                }
             });
 
             $(parentElemId+" .cancel-img-upload.cancel").off("click").on("click",function cancelImgUpload(e) {
