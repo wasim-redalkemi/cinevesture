@@ -61,7 +61,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                 <div class="profile_input">
-                                    <label for="lang">Project specific Skills <span class = "steric_sign_design">*</span></label>
+                                    <label for="lang">Portfolio specific Skills <span class = "steric_sign_design">*</span></label>
                                     <select name="project_specific_skills_id[]" class="outline js-select2 @error('project_specific_skills_id') is-invalid @enderror" id="lang" multiple>
                                         @foreach ($skills as $k=>$v)
                                             <option
@@ -89,7 +89,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="profile_input">
-                                        <label for="lang">Project Location (Where it took place) <span class = "steric_sign_design">*</span></label>
+                                        <label for="lang">Portfolio Location (Where it took place) <span class = "steric_sign_design">*</span></label>
                                         <select name="project_country_id[]" class="outline js-select2 @error('project_country_id') is-invalid @enderror" id="lang" multiple>
                                         @foreach ($country as $k=>$v)
                                             <option

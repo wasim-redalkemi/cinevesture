@@ -114,11 +114,11 @@
                     <p class="flow_step_text"> Description</p>
                 </div>
                 <div class="preview_headtext mt-4">Logline</div>
-                <div class="preview_subtext pr_5">@if (!empty($projectData[0]['logline'])) {{ucFirst($projectData[0]['logline'])}} @else <span><b>-</b></span> @endif</div>
+                <div class="preview_subtext pr_10">@if (!empty($projectData[0]['logline'])) {{ucFirst($projectData[0]['logline'])}} @else <span><b>-</b></span> @endif</div>
                 <div class="preview_headtext">Synopsis/Brief Description</div>
-                <div class="preview_subtext pr_5">@if (!empty($projectData[0]['synopsis'])) {{ucFirst($projectData[0]['synopsis'])}} @else <span><b>-</b></span> @endif</div>
+                <div class="preview_subtext pr_10">@if (!empty($projectData[0]['synopsis'])) {{ucFirst($projectData[0]['synopsis'])}} @else <span><b>-</b></span> @endif</div>
                 <div class="preview_headtext">Creator/Founder’s Statement</div>
-                <div class="preview_subtext pr_5">@if (!empty($projectData[0]['director_statement'])) {{ucFirst($projectData[0]['director_statement'])}} @else <span><b>-</b></span> @endif</div>
+                <div class="preview_subtext pr_10">@if (!empty($projectData[0]['director_statement'])) {{ucFirst($projectData[0]['director_statement'])}} @else <span><b>-</b></span> @endif</div>
                 <div class="row">
                     <div class="com-md-12">
                         <div class="justify-content-end mt-3 mt-md-0"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-description') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
@@ -145,7 +145,7 @@
                                     <img src="{{ json_decode($v['media_info'])->thumbnail }}" class="" width=100% alt="image">
                                 </div> --}}
                                 <div class="playVideoWrap mt-3" video-url="{{$v['file_link']}}">
-                                    <img src="{{json_decode($v['media_info'])->thumbnail}}" alt="">
+                                    <img src="{{json_decode($v['media_info'])->thumbnail}}" alt="" class="br_4">
                                 </div>
                                 
                                 <div class="d-flex align-items-initial mt-2">

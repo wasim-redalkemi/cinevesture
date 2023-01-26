@@ -225,9 +225,9 @@
                                     Verified Projects
                                 </label>
                             </div>
-                            <div class="mt-4 d-flex justify-content-between">
+                            <div class="mt-4 d-flex justify-content-between align-items-center">
                                 <input type="submit" class="filter-button watch-now-btn mt-4" Value="Apply">
-                                <a href="{{route('get-project-filter')}}"><input type="button" class="clear-filter watch-now-btn mt-4" Value="Clear"></a>
+                                <a href="{{route('get-project-filter')}}"><input type="button" class="clear-filter-btn mt-4" Value="Clear"></a>
                             </div>
                         </div>
                     </div>
