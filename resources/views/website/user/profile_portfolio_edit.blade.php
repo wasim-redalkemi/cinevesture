@@ -207,7 +207,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="d-flex justify-content-end mt-4">
+                                    <div class="d-flex flex-wrap justify-content-start justify-content-md-end mt-4">
                                     <button class="cancel_btn mx-3">Cancel</button>
                                     {{-- <button class="save_add_btn">Save & add another</button> --}}
                                     {{-- <button type="button" name="saveAndAnother" value="false" class="portfolio_save_btn save_add_btn">Save & add another</button> --}}

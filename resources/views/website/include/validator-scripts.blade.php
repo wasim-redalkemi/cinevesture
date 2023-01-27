@@ -339,7 +339,7 @@
                         str += '<div class="profile_input">';
                         str += '<input type="text" class="form-control video-link" name="project_video_link_'+v.id+'" placeholder="Video url" value="'+v.file_link+'">';
                         str += '</div>';
-                        str += '<div class="d-flex mt-5 mt-md-2">';
+                        str += '<div class="d-flex mt-2">';
                         str += '<div>';
                         if(parseInt(v.is_default_marked))
                             str += '<input type="radio" class="checkbox_btn feature_ved" name="is_feature_ved" aria-label="" checked="checked" value="'+v.id+'">';
@@ -380,7 +380,7 @@
                     str += '<div class="profile_input">';
                     str += '<input type="text" class="form-control video-link add" name="project_video_link_'+(lastVidId+1)+'" placeholder="Paste Link Here">';
                     str += '</div>';
-                    str += '<div class="d-flex mt-5 mt-md-2">';
+                    str += '<div class="d-flex mt-2">';
                         str += '<div>';
                         str += '<input type="radio" class="checkbox_btn" name="is_feature_ved" aria-label="" value="" disabled>';
                         str += '</div>';
@@ -616,7 +616,7 @@
                         str += '<div class="profile_input">';
                         str += '<input type="text" class="form-control image_title" name="project_image_title_'+v.id+'" placeholder="Add image title" value="'+v.media_info.title+'">';
                         str += '</div>';
-                        str += '<div class="d-flex mt-5 mt-md-2">';
+                        str += '<div class="d-flex mt-3 mt-md-2">';
                         str += '<div>';
                         if(parseInt(v.is_default_marked))
                             str += '<input type="radio" class="checkbox_btn feature_ved" name="is_feature_image" aria-label="" checked="checked" value="'+v.id+'">';
@@ -873,7 +873,7 @@
             }
 
             let getAddElemHtml = function () {
-                let str = '<div class="col-md-3">';
+                let str = '<div class="col-md-3 mb-3 mb-md-0">';
                 str += '<div class="upload_doc" style="position:relative">';
                     str += '<div class="profile_upload_container h_69 w-100 mt-3 mt-md-0 -flx">';
                         str += '<div for="file-input input_wrap" class="d-none">';

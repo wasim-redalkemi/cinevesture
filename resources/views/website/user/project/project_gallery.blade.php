@@ -210,7 +210,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="d-flex justify-content-end mt-5">
+                            <div class="d-flex justify-content-end mt-2 mt-md-5">
                                 <button class="cancel_btn mx-3"><a class="" href="{{ route('project-description') }}?id={{$_REQUEST['id']}}">Go back</a></button>
                                 <input type="hidden" name="project_id" value="<?php if(isset($_REQUEST['id'])) {echo $_REQUEST['id'];}?>">
                                 {{-- <button type="submit" class="guide_profile_btn"><a class="ancor-link-style" href="{{ route('project-milestone') }}?id={{$_REQUEST['id']}}">Save & Next</a></button> --}}

@@ -74,6 +74,7 @@
                                     </div>
                             </div>
                         </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                     <div class="profile_input select2forError">
@@ -125,7 +126,7 @@
                         <div class="row portfolio-images">
                             <label class="mt-4">Pictures <span class = "steric_sign_design">*</span></label>
                             <div id="portfolio-img-new-1" class="col-md-4 img-item pt-0">
-                                <div class="open_file_explorer profile_upload_container h_66">
+                                <div class="open_file_explorer profile_upload_container h_66 mb-3 mb-md-0">
                                     <img src="" id="previewImg">
                                     <div class="cancel-img-upload">
                                         <i class="fa fa-times" aria-hidden="true"></i>
@@ -158,14 +159,14 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="d-flex justify-content-end mt-4">
+                                <div class="d-flex justify-content-start justify-content-md-end flex-wrap mt-4">
                                     <a href="{{route('profile-create')}}" class="cancel_btn mx-3" style="text-decoration:none">Cancel</a>
                                     <button type="button" name="saveAndAnother" value="false" class="portfolio_save_btn save_add_btn">Save & add another</button>
                                     <input type="hidden" id="save_btn_value" name="saveButtonType" value="">
                                     <input type="hidden" name="flag" value="<?= request('flag') ?>">
-                                    <button type="submit" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save & next</button>
+                                    <button type="submit" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3 mt-2 mt-md-0">Save & next</button>
 
-                                    <a href="{{route('portfolio-skip')}}"class="cancel_btn mx-3" style="text-decoration:none">Skip</a>
+                                    <a href="{{route('portfolio-skip')}}"class="cancel_btn mx-3 mt-2 mt-md-0" style="text-decoration:none">Skip</a>
                                 </div>
                             </div>
                         </div>
