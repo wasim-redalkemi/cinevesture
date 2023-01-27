@@ -398,7 +398,7 @@ class UserController extends WebController
             $portfolio = new UserPortfolio();
 
             $portfolio->user_id = auth()->user()->id;
-            $portfolio->project_title = ucfirst($request->project_title);
+            $portfolio->portfolio_title = ucfirst($request->portfolio_title);
             $portfolio->description = ucfirst($request->description);
             $portfolio->completion_date = $request->completion_date;
             $portfolio->video = json_encode(['video_url'=>$request->video_url,'video_thumbnail'=>$request->video_thumbnail]);
@@ -427,21 +427,27 @@ class UserController extends WebController
 
             $data_to_insert = [];
             foreach ($request->toArray() as $k => $v) {
-                if (strpos($k, 'portfolio-image') !== false) {
+                if (strpos($k, 'cropped-portfolio-image') !== false) {
                     $image_file_name = $k;
-                    if ($request->hasFile($image_file_name)) {
-                        $file = $request->file($image_file_name);
-                        $originalFile = $file->getClientOriginalName();
-                        $fileExt = pathinfo($originalFile, PATHINFO_EXTENSION);
-                        $fileName = pathinfo($originalFile, PATHINFO_FILENAME);
-                        $nameStr = date('_YmdHis');
-                        $newName = $fileName . $nameStr . '.' . $fileExt;
-                        $locationPath  = "project/image";
-                        $uploadFile = $this->uploadFile($locationPath, $file, $newName);
-                        $data_to_insert[] = [
-                            'file_type' => 'image',
-                            'file_link' => $uploadFile
-                        ];
+                    if (isset($image_file_name)) {
+                        if (isset($request->$image_file_name)) {
+                            $image_64 = $request->$image_file_name; //your base64 encoded data
+                            $extension = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];   // .jpg .png .pdf              
+                            $replace = substr($image_64, 0, strpos($image_64, ',')+1);             
+                            // find substring fro replace here eg: data:image/png;base64,              
+                            $image = str_replace($replace, '', $image_64);              
+                            $image = str_replace(' ', '+', $image);              
+                            $fileName = Str::random(10).'.'.$extension;
+                            $locationPath  = "user/portfolio/image";
+                            
+                            $nameStr = date('_YmdHis');
+                            $newName = $nameStr .  $fileName ;
+                            $uploadFile = $this->uploadFile($locationPath,base64_decode($image), $newName);
+                            $data_to_insert[] = [
+                                'file_type' => 'image',
+                                'file_link' => $locationPath.$newName
+                            ];
+                        }
                     }
                 }
             }
@@ -511,7 +517,7 @@ class UserController extends WebController
             $user = User::query()->find(auth()->user()->id);
             $portfolio = UserPortfolio::query()->where('id', $request->portfolio_id)->first();
             $portfolio->user_id = $user->id;
-            $portfolio->project_title = ucFirst($request->project_title);
+            $portfolio->portfolio_title = ucFirst($request->portfolio_title);
             $portfolio->description = ucFirst($request->description);
             $portfolio->completion_date = $request->completion_date;
             $portfolio->video = json_encode(['video_url'=>$request->video_url,'video_thumbnail'=>$request->video_thumbnail]);
@@ -540,21 +546,41 @@ class UserController extends WebController
 
             $data_to_insert = [];
             foreach ($request->toArray() as $k => $v) {
-                if (strpos($k, 'portfolio-image') !== false) {
+                if (strpos($k, 'cropped-portfolio-image') !== false) {
                     $image_file_name = $k;
-                    if ($request->hasFile($image_file_name)) {
-                        $file = $request->file($image_file_name);
-                        $originalFile = $file->getClientOriginalName();
-                        $fileExt = pathinfo($originalFile, PATHINFO_EXTENSION);
-                        $fileName = pathinfo($originalFile, PATHINFO_FILENAME);
-                        $nameStr = date('_YmdHis');
-                        $newName = $fileName . $nameStr . '.' . $fileExt;
-                        $locationPath  = "project/image";
-                        $uploadFile = $this->uploadFile($locationPath, $file, $newName);
-                        $data_to_insert[] = [
-                            'file_type' => 'image',
-                            'file_link' => $uploadFile
-                        ];
+                    // if ($request->hasFile($image_file_name)) {
+                    //     $file = $request->file($image_file_name);
+                    //     $originalFile = $file->getClientOriginalName();
+                    //     $fileExt = pathinfo($originalFile, PATHINFO_EXTENSION);
+                    //     $fileName = pathinfo($originalFile, PATHINFO_FILENAME);
+                    //     $nameStr = date('_YmdHis');
+                    //     $newName = $fileName . $nameStr . '.' . $fileExt;
+                    //     $locationPath  = "project/image";
+                    //     $uploadFile = $this->uploadFile($locationPath, $file, $newName);
+                    //     $data_to_insert[] = [
+                    //         'file_type' => 'image',
+                    //         'file_link' => $uploadFile
+                    //     ];
+                    // }
+                    if (isset($image_file_name)) {
+                        if (isset($request->$image_file_name)) {
+                            $image_64 = $request->$image_file_name; //your base64 encoded data
+                            $extension = explode('/', explode(':', substr($image_64, 0, strpos($image_64, ';')))[1])[1];   // .jpg .png .pdf              
+                            $replace = substr($image_64, 0, strpos($image_64, ',')+1);             
+                            // find substring fro replace here eg: data:image/png;base64,              
+                            $image = str_replace($replace, '', $image_64);              
+                            $image = str_replace(' ', '+', $image);              
+                            $fileName = Str::random(10).'.'.$extension;
+                            $locationPath  = "user/portfolio/image";
+                            
+                            $nameStr = date('_YmdHis');
+                            $newName = $nameStr .  $fileName ;
+                            $uploadFile = $this->uploadFile($locationPath,base64_decode($image), $newName);
+                            $data_to_insert[] = [
+                                'file_type' => 'image',
+                                'file_link' => $locationPath.$newName
+                            ];
+                        }
                     }
                 }
             }
