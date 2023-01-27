@@ -533,10 +533,17 @@
 
     });
 
-    $('.invite_btn').click(function() {
+    $('.invite_btn').click(function(e) {
         var email_1 = $('#email_1').val();
         var email_2 = $('#email_2').val();
         var organization_id = $('#organization_id').val();
+
+        let $btn = $(this);
+        e.preventDefault();
+        e.stopPropagation();
+
+        $btn.text("Sending..");
+        $btn.prop('disabled',true);
 
         $.ajax({
             url: "{{ route('team-email') }}",
@@ -549,11 +556,17 @@
                 "_token": "{{ csrf_token() }}"
             },
             success: function(response) {
+                $('#email_1').val("");
+                $('#email_2').val("");
+                $btn.text("Send Mail");
+                $btn.prop('disabled',false);
                 toastMessage(response.status, response.msg);
                 $('.modal').hide();
                 $('.modal-backdrop').remove();
             },
             error: function(response, status, error) {
+                $btn.text("Send Mail");
+                    $btn.prop('disabled',false);
                 console.log(response);
                 console.log(status);
                 console.log(error);
