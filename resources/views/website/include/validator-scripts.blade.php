@@ -249,6 +249,8 @@
                     currentVideoCount = currentVideos.length;
                     if(currentVideoCount > 0){
                         lastVidId = currentVideos[currentVideoCount-1]['id'];
+                    } else {
+                        addVideoElem();
                     }
                     $("#vid-"+req.mediaId).remove();
                     createToast("Video deleted successfully.","S");
