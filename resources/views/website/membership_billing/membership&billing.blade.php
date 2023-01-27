@@ -29,13 +29,13 @@
                         <tr class="guide_profile_main_subtext Aubergine_at_night">
                             <td class="w-50">Plan Amount</td>
                             <td class="w-50">
-                                {{-- @if($subscription->currency == "USD")
-                                    $
+                                @if($subscription->currency == "USD")
+                                     @if (!empty($subscription->plan_amount)) {{'$'.' '.number_format($subscription->plan_amount, 0,'.',',')}} @else <span><b>-</b></span> @endif
                                 @else
-                                    ₹
-                                @endif --}}
-                                @if (!empty($subscription->plan_amount)) {{number_format($subscription->plan_amount, 0,'.',',')}} @else <span><b>-</b></span> @endif
-                                {{-- {{number_format($subscription->plan_amount, 0,'.',',')}} --}}
+                                     @if (!empty($subscription->plan_amount)) {{'₹'.' '.number_format($subscription->plan_amount, 0,'.',',')}} @else <span><b>-</b></span> @endif
+                                
+                                @endif
+                               {{-- {{number_format($subscription->plan_amount, 0,'.',',')}} --}}
                             </td>
                         </tr>
                         <tr class="guide_profile_main_subtext Aubergine_at_night">
