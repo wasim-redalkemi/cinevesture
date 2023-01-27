@@ -140,7 +140,6 @@
             let init = function(id){
                 project_id = id;
                 doAjax('project/get-project-media/'+project_id+'?type=video',{},"GET",getVideosCallback);
-                //doAjax('/ajax/get-media/1',{},"GET",updateVideoCallback)
             }
 
             let getVideosCallback = function (req, resp) {
@@ -206,18 +205,26 @@
 
                 $(parentElemId+" input.feature_ved").off("click").on("click",(e)=>{
                     let defVid = $(parentElemId+" input.feature_ved:checked").val();
+                    $(parentElemId+" .video-list .delete-icon").show();
                     let vdrec = $.each(currentVideos,(i,rec)=>{
                         if(rec.id == defVid){
                             rec.is_default_marked = 1;
+                            $(parentElemId+" #vid-"+defVid+" .delete-icon").hide();
                         } else {
                             rec.is_default_marked = 0;
                         }
                     });
                     doAjax('ajax/update-media/'+defVid,{'id':defVid,'is_default_marked':'1','type':'video'},"POST",updateVideoCallback);
                 });
+
                 $(parentElemId+" .delete-media").off("click").on("click",(e)=>{
                     let mediaId = $(e.target).attr('data-id');
-                    setModal("","","Yes, Delete","");
+                    let featuredOne = isAnyDefaultVideo();
+                    if(mediaId == featuredOne){
+                        setModal("","This video is a featured video. Do you really want to delete the video?","Yes, Delete","");
+                    } else {
+                        setModal("","Do you really want to delete the video?","Yes, Delete","");
+                    }
                     $(".deactivate_btn").click();
                     // $(".modal-body button.cancel_btn").off("click").click((e)=>{
                     //     console.log("cancel modal");
@@ -240,6 +247,13 @@
                 return (hostname.indexOf("vimeo") > -1) ? true : false;
             }
 
+            let isAnyDefaultVideo = function(){
+                let featured = currentVideos.find((v)=>{
+                    return (v.is_default_marked == 1);
+                });
+                return (featured) ? featured.id : 0;
+            }
+
             let deleteVideoCallback = function (req,resp) {
                 let respArr = JSON.parse(resp);
                 if(respArr.status == 1){
@@ -249,6 +263,8 @@
                     currentVideoCount = currentVideos.length;
                     if(currentVideoCount > 0){
                         lastVidId = currentVideos[currentVideoCount-1]['id'];
+                        let is_default_marked = (isAnyDefaultVideo()) ? "0" : "1";
+                        console.log("setting is_default_marked = ",is_default_marked);
                     } else {
                         addVideoElem();
                     }
@@ -272,6 +288,8 @@
                 //https://vimeo.com/336812686
                 //let vimeoResp = '[{"id":336812686,"title":"Direct Links To Video Files","description":"Hi there! Need help? Go to http:\/\/vimeo.com\/help","url":"https:\/\/vimeo.com\/336812686","upload_date":"2019-05-17 09:32:53","thumbnail_small":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_100x75","thumbnail_medium":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_200x150","thumbnail_large":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_640","user_id":90564994,"user_name":"Vimeo Support","user_url":"https:\/\/vimeo.com\/vimeosupport","user_portrait_small":"https:\/\/i.vimeocdn.com\/portrait\/27986607_30x30","user_portrait_medium":"https:\/\/i.vimeocdn.com\/portrait\/27986607_75x75","user_portrait_large":"https:\/\/i.vimeocdn.com\/portrait\/27986607_100x100","user_portrait_huge":"https:\/\/i.vimeocdn.com\/portrait\/27986607_300x300","duration":41,"width":1920,"height":1080,"tags":"","embed_privacy":"anywhere"}]';
                 let respArr = JSON.parse(vimeoResp);
+                let is_default_marked = (isAnyDefaultVideo()) ? "0" : "1";
+                console.log("setting is_default_marked = ",is_default_marked);
                 if(respArr.status == 1){
                     let vimeo = respArr.payload;
                     let newVideo = {};
@@ -280,7 +298,7 @@
                     newVideo['title'] = vimeo.title;
                     newVideo['thumbnail'] = vimeo.thumbnail_medium;
                     newVideo['url'] = vimeo.url;
-                    newVideo['is_default_marked'] = 0;
+                    newVideo['is_default_marked'] = is_default_marked;
                     newVideo['src'] = 'vimeo';
                     doAjax('ajax/add-video',newVideo,"POST",addVideoCallback);
                 } else {
@@ -292,6 +310,8 @@
                 //"https://www.youtube.com/watch?v=ZdbQ_FvNBZA&t=915s&ab_channel=ScaleupAlly";
                 // let youtubeResp = '{"kind":"youtube#videoListResponse","etag":"NY12d6Sa3mhyYdxx62iuVh0ta50","items":[{"kind":"youtube#video","etag":"BlL66Tqwd6vcpb_0fuUt4YHRBlA","id":"ZdbQ_FvNBZA","snippet":{"publishedAt":"2021-10-03T07:14:26Z","channelId":"UCyzKMNskJwgVy7j_lQ5aP-Q","title":"Session 5: What is Postman? and How to use it? by Suprabhat Sen","description":"Postman is one of the most important tools for any kind of Web and App Development. Learn how Postman works and helps make the job easier for any Software Developer","thumbnails":{"default":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/default.jpg","width":120,"height":90},"medium":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/mqdefault.jpg","width":320,"height":180},"high":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/hqdefault.jpg","width":480,"height":360},"standard":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/sddefault.jpg","width":640,"height":480},"maxres":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/maxresdefault.jpg","width":1280,"height":720}},"channelTitle":"ScaleupAlly","categoryId":"28","liveBroadcastContent":"none","localized":{"title":"Session 5: What is Postman? and How to use it? by Suprabhat Sen","description":"Postman is one of the most important tools for any kind of Web and App Development. Learn how Postman works and helps make the job easier for any Software Developer"}}}],"pageInfo":{"totalResults":1,"resultsPerPage":1}}';
                 let respArr = JSON.parse(youtubeResp);
+                let is_default_marked = (isAnyDefaultVideo()) ? "0" : "1";
+                console.log("setting is_default_marked = ",is_default_marked);
                 if(respArr.status == 1){
                     let youtube = respArr.payload;
                     let newVideo = {};
@@ -299,7 +319,7 @@
                     newVideo['title'] = youtube['items'][0]['snippet']['title'];
                     newVideo['thumbnail'] = youtube['items'][0]['snippet']['thumbnails']['high']['url'];
                     newVideo['url'] = "https://www.youtube.com/embed/"+youtube['items'][0]['id'];
-                    newVideo['is_default_marked'] = 0;
+                    newVideo['is_default_marked'] = is_default_marked;
                     newVideo['src'] = 'youtube';
                     newVideo['type'] = 'videourl';
                     doAjax('ajax/add-video',newVideo,"POST",addVideoCallback);
@@ -326,13 +346,14 @@
                 let str = '';
                 if(currentVideos.length > 0) {
                     $.each(currentVideos, (i,v) => {
+                        let dnone =  (parseInt(v.is_default_marked) == 1 ) ? "display:none" : "";
                         str += '<div id="vid-'+v.id+'" class="col-md-3">';
                             str += '<div class="img-container h_66">';
                             str += '<img src="'+v.media_info.thumbnail+'" class="width_inheritence" alt="image">';
                             str += '<div class="title project_card_data w-100 h-100">';
                                 str += '<p>'+v.media_info.title+'</p>';
                             str += '</div>';
-                            str += '<div class="delete-icon project_card_data w-100 h-100">';
+                            str += '<div class="delete-icon project_card_data w-100 h-100" style='+dnone+'>';
                                 str += '<div>';
                                     str += '<i class="fa fa-trash-o delete-media" data-id="'+v.id+'" aria-hidden="true"></i>';
                                 str += '</div>';
