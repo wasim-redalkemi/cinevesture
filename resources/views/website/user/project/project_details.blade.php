@@ -62,7 +62,9 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Duration In Minute(Optional)</label>
-                                    <input type="number" class="form-control no_number_arrows @error('duration') is-invalid @enderror" name="duration" min="1" pattern="[0-9]" placeholder="Duration(Minute)" max="{{config('constants.MAX_PROJECT_DURATION_IN_MIN')}}" value="<?php if(!empty($projectData[0]['duration'])){ echo $projectData[0]['duration']; } ?>" aria-describedby="basic-addon1">
+                                    <input type="number" class="form-control no_number_arrows @error('duration') is-invalid @enderror" name="duration" min="1" pattern="[0-9]" placeholder="Duration(Minute)" max="{{config('constants.MAX_PROJECT_DURATION_IN_MIN')}}" value="<?php if(!empty($projectData[0]['duration'])){ echo $projectData[0]['duration']; } else{
+                                        echo old('duration');
+                                    }?>" aria-describedby="basic-addon1">
                                     @error('duration')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -72,10 +74,17 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-3 mt-2 mt-md-0">
                                 <div class="profile_input">
                                     <label>Total Budget (USD) <span class = "steric_sign_design">*</span></label>
-                                    <input type="number" class="form-control no_number_arrows @error('total_budget') is-invalid @enderror" name="total_budget" min="1" max="config('constants.TOTAL_BUDGET')" pattern="[0-9]" placeholder="Total Budget" required value="<?php if(!empty($projectData[0]['total_budget'])){ echo $projectData[0]['total_budget']; } ?>">
+                                    <input type="number" class="form-control no_number_arrows @error('total_budget') is-invalid @enderror" name="total_budget" min="1" max="config('constants.TOTAL_BUDGET')" pattern="[0-9]" placeholder="Total Budget" required 
+                                    value="<?php
+                                     if(!empty($projectData[0]['total_budget']))
+                                    { echo $projectData[0]['total_budget']; }
+                                    else{
+                                        echo old('total_budget');
+                                    }
+                                     ?>">
                                     @error('total_budget')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -85,10 +94,12 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-3 mt-2 mt-md-0">
                                 <div class="profile_input">
                                     <label>Financing Secured (USD) <span class = "steric_sign_design">*</span></label>
-                                    <input type="number" class="form-control no_number_arrows @error('financing_secured') is-invalid @enderror" name="financing_secured"  min="1" max="{{config('constants.MAX_TOTAL_BUDGET')}}"  pattern="[0-9]" required placeholder="Financing Secured" value="<?php if(!empty($projectData[0]['financing_secured'])){ echo $projectData[0]['financing_secured']; } ?>">
+                                    <input type="number" class="form-control no_number_arrows @error('financing_secured') is-invalid @enderror" name="financing_secured"  min="1" max="{{config('constants.MAX_TOTAL_BUDGET')}}"  pattern="[0-9]" required placeholder="Financing Secured" value="<?php if(!empty($projectData[0]['financing_secured'])){ echo $projectData[0]['financing_secured']; } else{
+                                        echo old('financing_secured');
+                                    } ?>">
                                     @error('financing_secured')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -98,11 +109,11 @@
                             </div>
                         </div>
                         <div class="associate_text mt-4">Associated with the project (Optional)</div>
-                        <div id="associate_entries" class="row">
+                        <div id="associate_entries" class="">
                             @if(isset($projectData[0]['project_association']) && count($projectData[0]['project_association']))
                                 @foreach ($projectData[0]['project_association'] as $in => $ass)
                                     <div id="asso-{{$ass['id']}}" class="row">
-                                        <div class="col-md-3">
+                                        <div class="col-md-3 mt-2 mt-md-0">
                                             <div class="profile_input">
                                                 <label>Title</label>
                                                 <input type="text" value="{{$ass['project_associate_title']}}" class="form-control" name="project_associate_title" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
@@ -113,7 +124,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-3">
+                                        <div class="col-10 col-md-3 mt-2 mt-md-0">
                                             <div class="profile_input">
                                                 <label>Name</label>
                                                 <input type="text" value="{{$ass['project_associate_name']}}" class="form-control" name="project_associate_name" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1">
@@ -124,14 +135,14 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                        <div class="col-md-3 d-flex align-items-end pb-2 mt-2 mt-md-0">
+                                        <div class="col-2 col-md-3 d-flex align-items-end pb-2 mt-2 mt-md-0">
                                             <i class="fa fa-times-circle deep-pink icon-size remove-entry" aria-hidden="true"></i>
                                         </div>
                                     </div>
                                 @endforeach
                             @endif
                             <div id="asso-new" class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-3 mt-2 mt-md-0">
                                     <div class="profile_input">
                                         <label>Title</label>
                                         <input type="text" value="" class="form-control asso-title" name="project_associate_title" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
@@ -142,7 +153,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 mt-2 mt-md-0">
                                     <div class="profile_input">
                                         <label>Name</label>
                                         <input type="text" value="" class="form-control asso-name" name="project_associate_name" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1">
@@ -153,7 +164,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-3 d-flex align-items-end mt-2">
+                                <div class="col-md-3 d-flex align-items-end justify-content-end justify-content-md-start mt-2">
                                     <div class="profile_input">
                                         <div class="save_add_btn">Save</div>
                                     </div>
@@ -168,7 +179,7 @@
                             </div> -->
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="d-flex justify-content-end mt-5 pt-5 pb-md-0">
+                                    <div class="d-flex justify-content-end mt-0 mt-md-5 pt-5 pb-md-0">
                                         <input type="hidden" name="project_id" value="<?php if(isset($_REQUEST['id'])) {echo $_REQUEST['id'];}?>">
                                         <button class="cancel_btn mx-3"><a class="btn-link-style" href="{{ route('project-overview') }}?id={{$_REQUEST['id']}}">Go back</a></button>
                                         <button type="submit" class="guide_profile_btn">Save & Next</button>

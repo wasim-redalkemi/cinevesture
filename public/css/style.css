@@ -1706,6 +1706,13 @@ select option[value=""]{
     letter-spacing: -0.01em;
     color: #1C0330;
 }
+.profile_text_res {
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 124%;
+    letter-spacing: -0.01em;
+    color: #1C0330;
+}
 
 .profile_cmn_head_text {
     font-weight: 700;
@@ -3625,11 +3632,35 @@ input:checked+.slider:before {
         margin-top: 6px;
     }
     
+ 
+
 .mt_40 {
     margin-top: 0px;
 }
     .profile_input {
         margin-top: 6px;
+    }
+    .profile_text_res {
+        font-size: 24px;
+        line-height: 150%;
+        letter-spacing: -0.01em;
+        color: #33084C;
+    }
+    .add-another-item {
+        min-height: 60px;
+    }
+    .profile_cmn_head_text {
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 150%;
+        color: #1C0330;
+    }
+    .add-another-item>div {
+        margin-bottom: 0px;
+    }
+
+    #add-img-btn-div.add-another-item>div {
+        margin-bottom: 0px;
     }
 
     .profile_wraper_padding {
@@ -3740,8 +3771,8 @@ input:checked+.slider:before {
         box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
         border-radius: 4px;
         right: 12px;
-        padding: 20px;
-        margin-top: 18px;
+        padding: 5px  20px;
+        margin-top: 10px;
         z-index: 10;
         -webkit-transition: .4s;
     }

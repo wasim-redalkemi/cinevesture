@@ -62,7 +62,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="dropend search-page search_page_filters_wrap mt-2">
+                            <div class="dropend search-page search_page_filters_wrap">
                                 <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Employments
                                 </button>
@@ -90,7 +90,7 @@
                                 </div>
                             </div>
 
-                            <div class="dropend search-page search_page_filters_wrap mt-2">
+                            <div class="dropend search-page search_page_filters_wrap">
                                 <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Location
                                 </button>
@@ -121,7 +121,7 @@
                                 </div>
                             </div>
 
-                            <div class="dropend search-page search_page_filters_wrap mt-2">
+                            <div class="dropend search-page search_page_filters_wrap">
                                 <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Workspace Type
                                 </button>
@@ -179,7 +179,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-check mt-4">
+                            <div class="form-check  mt-3 mt-md-4">
                                 <input class="form-check-input " type="checkbox" name="promoted_jobs" value="1"  id="flexCheckDefault" @if($promoteCheck)checked @endif>
                                 <label class="verified-text mx-2" for="flexCheckDefault">
                                     Promoted Jobs

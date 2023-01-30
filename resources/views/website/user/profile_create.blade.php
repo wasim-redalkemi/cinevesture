@@ -15,7 +15,7 @@
                 @include('website.include.profile_sidebar')
             </div>
             <div class="col-md-9">
-                <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
+                <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4 mb-5 mb-md-0">
                     <form role="form" class="validateBeforeSubmit" method="POST" enctype="multipart/form-data" action="{{ route('profile-store') }}">
                         @csrf
 
