@@ -2532,7 +2532,7 @@ select:focus {
 }
 
 .select2-results__option[aria-selected=true]:before {
-    content: url("../images/asset/done_icon_15.jpg") !important;
+    content: url("../images/asset/done_icon_16.png") !important;
     /* content: "\f00c" !important; */
     height: 20px;
     width: 20px;
@@ -4052,7 +4052,7 @@ input:checked+.slider:before {
     display: flex !important;
     position: absolute !important;
     top: -55px !important;
-    left: 195px;
+    left: 195px !important;
     justify-content: center;
     align-items: center;
 }
@@ -4060,7 +4060,7 @@ input:checked+.slider:before {
     display: flex !important;
     position: absolute !important;
     top: -55px !important;
-    right: 1200px !important;
+    right: 40px !important;
     justify-content: center;
     align-items: center;
 }
@@ -4121,6 +4121,14 @@ input:checked+.slider:before {
         justify-content: center;
         align-items: center;
     }
+    .test.owl-carousel .owl-nav button.owl-next {
+        display: flex !important;
+        position: absolute !important;
+        top: -55px !important;
+        right: 1200px !important;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 
@@ -4131,6 +4139,14 @@ input:checked+.slider:before {
         top: -55px !important;
         /* left: 230px !important; */
         left: 1670px !important;
+        justify-content: center;
+        align-items: center;
+    }
+    .test.owl-carousel .owl-nav button.owl-next {
+        display: flex !important;
+        position: absolute !important;
+        top: -55px !important;
+        right: 75px !important;
         justify-content: center;
         align-items: center;
     }
