@@ -14,8 +14,12 @@ class ProjectMedia extends Model
 
     public function getThumbnailLabelAttribute(){
         if($this->file_type == 'video'){
-            $mi = json_decode($this->media_info);
-            return $mi->thumbnail;
+            if(is_array($this->media_info)){
+                return $this->media_info["thumbnail"];
+            } else {
+                $mi = json_decode($this->media_info);
+                return $mi->thumbnail;
+            }
         }
         return "";
     }
