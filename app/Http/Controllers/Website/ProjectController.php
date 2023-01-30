@@ -649,6 +649,9 @@ class ProjectController extends WebController
             $recomProject=UserProject::query()->whereIn('id',$projectIdUnique)
             ->with('projectOnlyImage')
                           ->where('id','!=',$_REQUEST['id'])
+                          ->where('user_status','published')
+                          ->where('admin_status','active')
+                          
                           ->orderBy('id','desc')
                           ->paginate(10);
                           
