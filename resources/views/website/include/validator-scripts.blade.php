@@ -205,11 +205,11 @@
 
                 $(parentElemId+" input.feature_ved").off("click").on("click",(e)=>{
                     let defVid = $(parentElemId+" input.feature_ved:checked").val();
-                    $(parentElemId+" .video-list .delete-icon").show();
+                    //$(parentElemId+" .video-list .delete-icon").show();
                     let vdrec = $.each(currentVideos,(i,rec)=>{
                         if(rec.id == defVid){
                             rec.is_default_marked = 1;
-                            $(parentElemId+" #vid-"+defVid+" .delete-icon").hide();
+                            //$(parentElemId+" #vid-"+defVid+" .delete-icon").hide();
                         } else {
                             rec.is_default_marked = 0;
                         }
@@ -221,14 +221,13 @@
                     let mediaId = $(e.target).attr('data-id');
                     let featuredOne = isAnyDefaultVideo();
                     if(mediaId == featuredOne){
-                        setModal("","This video is a featured video. Do you really want to delete the video?","Yes, Delete","");
+                        createToast("You cannot delete a featured video. Please mark another video as featured and try again.","E");
+                        return;
+                        //setModal("","This video is a featured video. Do you really want to delete the video?","Yes, Delete","");
                     } else {
                         setModal("","Do you really want to delete the video?","Yes, Delete","");
                     }
                     $(".deactivate_btn").click();
-                    // $(".modal-body button.cancel_btn").off("click").click((e)=>{
-                    //     console.log("cancel modal");
-                    // });
                     $(".modal-body button.delete_btn").off("click").click((e)=>{
                         doAjax("ajax/delete-media/"+mediaId,{"mediaId":mediaId},"POST",deleteVideoCallback);
                     });
@@ -264,7 +263,6 @@
                     if(currentVideoCount > 0){
                         lastVidId = currentVideos[currentVideoCount-1]['id'];
                         let is_default_marked = (isAnyDefaultVideo()) ? "0" : "1";
-                        console.log("setting is_default_marked = ",is_default_marked);
                     } else {
                         addVideoElem();
                     }
@@ -346,7 +344,7 @@
                 let str = '';
                 if(currentVideos.length > 0) {
                     $.each(currentVideos, (i,v) => {
-                        let dnone =  (parseInt(v.is_default_marked) == 1 ) ? "display:none" : "";
+                        let dnone =  "";//(parseInt(v.is_default_marked) == 1 ) ? "display:none" : "";
                         str += '<div id="vid-'+v.id+'" class="col-md-3">';
                             str += '<div class="img-container h_66">';
                             str += '<img src="'+v.media_info.thumbnail+'" class="width_inheritence" alt="image">';
