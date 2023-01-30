@@ -62,7 +62,9 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Duration In Minute(Optional)</label>
-                                    <input type="number" class="form-control no_number_arrows @error('duration') is-invalid @enderror" name="duration" min="1" pattern="[0-9]" placeholder="Duration(Minute)" max="{{config('constants.MAX_PROJECT_DURATION_IN_MIN')}}" value="<?php if(!empty($projectData[0]['duration'])){ echo $projectData[0]['duration']; } ?>" aria-describedby="basic-addon1">
+                                    <input type="number" class="form-control no_number_arrows @error('duration') is-invalid @enderror" name="duration" min="1" pattern="[0-9]" placeholder="Duration(Minute)" max="{{config('constants.MAX_PROJECT_DURATION_IN_MIN')}}" value="<?php if(!empty($projectData[0]['duration'])){ echo $projectData[0]['duration']; } else{
+                                        echo old('duration');
+                                    }?>" aria-describedby="basic-addon1">
                                     @error('duration')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -75,7 +77,14 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Total Budget (USD) <span class = "steric_sign_design">*</span></label>
-                                    <input type="number" class="form-control no_number_arrows @error('total_budget') is-invalid @enderror" name="total_budget" min="1" max="config('constants.TOTAL_BUDGET')" pattern="[0-9]" placeholder="Total Budget" required value="<?php if(!empty($projectData[0]['total_budget'])){ echo $projectData[0]['total_budget']; } ?>">
+                                    <input type="number" class="form-control no_number_arrows @error('total_budget') is-invalid @enderror" name="total_budget" min="1" max="config('constants.TOTAL_BUDGET')" pattern="[0-9]" placeholder="Total Budget" required 
+                                    value="<?php
+                                     if(!empty($projectData[0]['total_budget']))
+                                    { echo $projectData[0]['total_budget']; }
+                                    else{
+                                        echo old('total_budget');
+                                    }
+                                     ?>">
                                     @error('total_budget')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -88,7 +97,9 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Financing Secured (USD) <span class = "steric_sign_design">*</span></label>
-                                    <input type="number" class="form-control no_number_arrows @error('financing_secured') is-invalid @enderror" name="financing_secured"  min="1" max="{{config('constants.MAX_TOTAL_BUDGET')}}"  pattern="[0-9]" required placeholder="Financing Secured" value="<?php if(!empty($projectData[0]['financing_secured'])){ echo $projectData[0]['financing_secured']; } ?>">
+                                    <input type="number" class="form-control no_number_arrows @error('financing_secured') is-invalid @enderror" name="financing_secured"  min="1" max="{{config('constants.MAX_TOTAL_BUDGET')}}"  pattern="[0-9]" required placeholder="Financing Secured" value="<?php if(!empty($projectData[0]['financing_secured'])){ echo $projectData[0]['financing_secured']; } else{
+                                        echo old('financing_secured');
+                                    } ?>">
                                     @error('financing_secured')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

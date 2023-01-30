@@ -471,7 +471,7 @@ class UserController extends WebController
         }
     }
 
-    public function portfolioEdit($id)
+    public function portfolioEdit( $id)
     {
         try {
             $UserPortfolioData = UserPortfolio::query()->where('id', $id)->first();
