@@ -41,11 +41,13 @@ class PromotionJob extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject('Promoted cinevesture job')
+                    ->subject('Your request to promote your job post is received.
+                    ')
                     ->greeting('Hi'.' '.$this->data['first_name'].',')
-                    ->line('Promotion mail')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line('We have received a request to promote your job post: '.$this->data['job_title'])
+                    ->line('We will review your request and contact you with further information.')
+                    ->line('Best,')        
+                    ->salutation('Team Cinevesture');
     }
 
     /**
