@@ -4,7 +4,7 @@
         <a href="{{ route('profile-private-show')}}" class="mx-2">{{ucwords(auth()->user()->name)}}</a>
       </div>
       <div class="d-flex align-items-center d-block d-md-none">
-          <div class="inp_data mx-2">Profile</div>
+          <div class="mx-2">Profile</div>
           <i class="fa fa-angle-down" aria-hidden="true"></i>
       </div>
     </div>

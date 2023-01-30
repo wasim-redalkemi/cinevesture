@@ -17,7 +17,7 @@
             </div>
             <div class="col-md-9">            
                 <div class="d-flex justify-content-between my-3">
-                    <div class="profile_text"><h1>Projects</h1></div>
+                    <div class="profile_text_res">Projects</div>
                     <button class="guide_profile_btn h_40"><a class="btn-link text_decor_none" href="{{ route('project-overview')}}">Add a Project</a></button>
                 </div>
                 <div class="row">
