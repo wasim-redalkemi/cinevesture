@@ -39,7 +39,11 @@ class PostUserPortfolioRequest extends FormRequest
     public function messages()
     {
         return [
-           'portfolio_images_count.required' => 'Portfolio image is required.'            
+            'portfolio_images_count.required' => 'This field is required.',
+            'portfolio_title,description.required' => 'This field is required.',
+            'completion_datevideo_url.required' => 'This field is required.',
+            'project_specific_skills_id.required' => 'This field is required.',
+            'project_country_id.required' => 'This field is required.'            
         ];            
     }
 }
