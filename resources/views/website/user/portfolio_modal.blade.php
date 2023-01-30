@@ -1,4 +1,4 @@
-<div class="mt-1 contact-page-text">@if (!empty($data['project_title'])) {{ $data['project_title']}} @endif</div>
+<div class="mt-1 contact-page-text">@if (!empty($data['portfolio_title'])) {{ $data['portfolio_title']}} @endif</div>
 
 <div class="contact-page-subtext"><?php if (!empty($data['completion_date'])) {
      $orgDate = $data['completion_date'];  

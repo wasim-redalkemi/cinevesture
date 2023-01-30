@@ -40,7 +40,8 @@ class PostUserPortfolioRequest extends FormRequest
     {
         return [
             'portfolio_images_count.required' => 'This field is required.',
-            'portfolio_title,description.required' => 'This field is required.',
+            'portfolio_title.required' => 'This field is required.',
+            'description.required' => 'This field is required.',
             'completion_datevideo_url.required' => 'This field is required.',
             'project_specific_skills_id.required' => 'This field is required.',
             'project_country_id.required' => 'This field is required.'            

@@ -108,7 +108,6 @@
                                     <div class="col-md-2">
                                         <div class="profile_input">
                                             <label>Target Date</label>
-                                            {{-- min="{{Date('Y-m-d')}}" --}}
                                             <input value="{{Date('Y-m-d',strtotime($ass['target_date']))}}"  max="2030-12-31" type="date" class="editable form-control" name="project_milestone_target_date" placeholder="Target Date">
                                         </div>
                                     </div>
@@ -140,7 +139,7 @@
                                 <div class="col-md-2">
                                     <div class="profile_input">
                                         <label>Target Date</label>
-                                        <input type="date"  min="{{Date('Y-m-d')}}" max="2030-12-31" class="form-control" name="project_milestone_target_date" placeholder="Target Date">
+                                        <input type="date" max="2030-12-31" class="form-control" name="project_milestone_target_date" placeholder="Target Date">
                                     </div>
                                 </div>
                                 <div class="col-md-2">

@@ -40,7 +40,7 @@ class ProjectDetailRequest extends FormRequest
         return [
            'duration.integer' => 'Duration should be less then 60000 min.',
            'total_budget.integer' => 'Total Budget should be less then $1000000000.',
-           'financing_secured.integer' => 'Financing Secured Budget should be less then $1000000000.',
+        //    'financing_secured.integer' => 'Financing Secured Budget should be less then $1000000000.',
            'financing_secured.lt:total_budget' => 'Financing Secured Budget should be less then Total Budget.',
             //
         ];            

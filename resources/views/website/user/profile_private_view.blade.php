@@ -194,7 +194,7 @@
                                                 <img src="<?php echo $img ?>" class="portfolio_img" width="100%">
                                             </div>
                                             <div class="d-flex justify-content-between mt-2">
-                                                <div class="organisation_cmn_text">{{$v['project_title']}}</div>
+                                                <div class="organisation_cmn_text">{{$v['portfolio_title']}}</div>
                                                 <div class="icon_container"> <a href="{{ route('portfolio-edit', ['id'=>$v['id']]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                             </div>
                                         </div>

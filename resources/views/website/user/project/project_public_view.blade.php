@@ -11,7 +11,6 @@
 @endsection
 
 @section('content')
-
 <section class="public-head-section">
     <div class="hide-me animation for_authtoast">
         @include('website.include.flash_message')
@@ -168,12 +167,11 @@
                         <div class="col-md-1 col-md-0"></div>
                         <div class="col-lg-5 col-md-12 px-3">
                             <div class="public-head-subimage">
-                    
                                 <div class="playVideoWrapForheader playVideoWrap br_4 mt-3" video-url="@if(!empty($projectData[0]['project_mark_video'][0]['file_link'])){{ $projectData[0]['project_mark_video'][0]['file_link'] }}@endif">
-                                    <img src="@if (isset($projectData[0]['project_mark_video'][0]['media_info'])){{json_decode($projectData[0]['project_only_video'][0]['media_info'])->thumbnail}}@endif" alt="" class="br_4 w-100">
+                                    @if (isset($projectData[0]['project_mark_video'][0]['thumbnail_label']))
+                                        <img src="{{$projectData[0]['project_mark_video'][0]['thumbnail_label']}}" alt="{{$projectData[0]['project_mark_video'][0]['thumbnail_label']}}" class="br_4 w-100">
+                                    @endif
                                 </div>
-                                {{-- <iframe width="" height="" src="{{empty($projectData[0]['project_only_video'][0]['file_link'])?'https://www.youtube.com/embed/oYWAwwy5EbQ':$projectData[0]['project_only_video'][0]['file_link'];}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> --}}
-                                <!-- <img src="{{ asset('images/asset/download (3) 7.png') }}" width=100% alt="Image"> -->
 
                             </div>
                             <div class="d-flex my-4 align-items-center justify-content-between">
