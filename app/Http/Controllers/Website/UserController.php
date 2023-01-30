@@ -664,7 +664,7 @@ class UserController extends WebController
 
             if ($experience->save()) {
                 $qualification = $experience;
-                if ($request->flag == 'privateView') {
+                if ($request->flag == 'saveAndAnother') {
                     return redirect()->route('profile-private-show')->with("success", "Experience added successfully.");
                 }
                 if ($request->saveButtonType == 'saveAndAnother') {
@@ -769,7 +769,6 @@ class UserController extends WebController
                 return redirect()->route('profile-private-show');
             }
             $user = User::query()->find(auth()->user()->id);
-
             $qualification = new UserQualification();
             $qualification->user_id = $user->id;
             $qualification->institue_name = ucFirst($request->institue_name);

@@ -134,8 +134,13 @@
                                         <div class="fill-progress"></div>
                                     </div>
                                     <div for="file-input input_wrap" class="d-none">
-                                        <input type="file" class="imgInp" id="upload-img-inp-1" name="portfolio-image-1" accept=".jpg,.jpeg,.png" autofocus required>
+                                        <input type="file" class="imgInp @error('video_url') is-invalid @enderror" id="upload-img-inp-1" name="portfolio-image-1" accept=".jpg,.jpeg,.png" autofocus required>
                                         <input type="hidden" class="imgInp" id="cropped-upload-img-inp-new-1" name="cropped-portfolio-image-1">
+                                        @error('video_url')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
                                     <label for="upload-img-inp-1">
                                         <div class="text-center">
@@ -288,6 +293,7 @@
             });
 
             $(parentElemId + " input.imgInp").off("change").on("change", function uploadImageFile(e) {
+                $(".imgInp").attr('required',true);
                 console.log("changed ", this);
                 let imgId = "#" + $(e.target).parents('.img-item').attr('id');
                 let croppedImgContainerId = imgId.replace("#portfolio-img","#cropped-upload-img-inp");

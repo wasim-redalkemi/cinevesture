@@ -83,7 +83,7 @@ class OrganisationController extends WebController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(OrganisationRequest $request)
     {
         try {
             $video_url = [];
