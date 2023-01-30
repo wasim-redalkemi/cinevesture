@@ -40,6 +40,14 @@ class OrganisationRequest extends FormRequest
     public function messages()
     {
         return [
+            "logo.required" => "This field is required",
+            "name.required" => "This field is required",
+            "organisation_type.required" => "This field is required",
+            "service_id.required" => "This field is required",
+            "language_id.required" => "This field is required",
+            "located_in.required" => "This field is required",
+            "available_to_work_in.required" => "This field is required",
+            
         ];            
     }
 }

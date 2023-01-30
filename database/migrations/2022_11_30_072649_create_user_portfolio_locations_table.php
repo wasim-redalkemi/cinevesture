@@ -17,8 +17,6 @@ class CreateUserPortfolioLocationsTable extends Migration
             $table->id();
             $table->string('portfolio_id',20);
             $table->string('location_id',20);
-            
-
             $table->timestamps();
             $table->softDeletes();
         });

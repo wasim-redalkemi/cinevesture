@@ -219,7 +219,10 @@
                                     <select name="state" id="state" class="outline is-invalid-remove @error('state') is-invalid @enderror" id="lang">
                                         <option value="">Select</option>
                                         @foreach ($state as $k=>$v)
-                                        <option value="{{ $v->id }}">{{ $v->name }}</option>
+                                        {{$v}}
+                                        <option value="{{ $v->id }}" <?php if (isset($user->country) && $user->country->id == $v->id) {
+                                            echo ('selected');
+                                        } ?>>{{ $v->name }}</option>
                                         @endforeach
                                     </select>
                                     @error('state')
@@ -398,10 +401,10 @@
     },
         
     })
-                .on('select2:selecting', e => $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop()))
-                .on('select2:select', e => $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop')))
-                .on('select2:unselecting', e => $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop()))
-                .on('select2:unselect', e => $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop')));
+    .on('select2:selecting', e => $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop()))
+    .on('select2:select', e => $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop')))
+    .on('select2:unselecting', e => $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop()))
+    .on('select2:unselect', e => $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop')));
 
 
     $("#located_in").on('change', function() {
@@ -413,6 +416,12 @@
 
         }
     });
+    
+    if($("#located_in").val()=='6') 
+        {
+            $("#state-show").show();
+       
+    };
 
     $('.for_show').hide();
     if($('.upload_preview').attr('src') != '')

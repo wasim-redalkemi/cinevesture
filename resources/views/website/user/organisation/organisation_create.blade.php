@@ -31,7 +31,12 @@
                                             } ?>" class="upload_preview for_show croperImg" width="100">
 
                                 <div for="file-input" class="d-none">
-                                    <input name="croppedOrgImg" id="croppedOrgImg" type="hidden">
+                                    <input name="croppedOrgImg " class=" @error('croppedOrgImg') is-invalid @enderror" id="croppedOrgImg" type="hidden" required>
+                                    @error('croppedOrgImg')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
                                 </div>
                                 <div class="pointer open_file_explorer for_hide">
                                     <div class="text-center"> <i class="fa fa-plus-circle mx-2 profile_icon deep-pink pointer" aria-hidden="true"></i></div>
@@ -46,7 +51,7 @@
                                     <div class="pointer search-head-subtext deep-pink delete_image">
                                         Delete
                                     </div>
-                                    <input type="file" name="logo" class="d-none @error('logo') is-invalid @enderror file_element image" accept=".jpg,.jpeg,.png">
+                                    <input type="file" name="logo" class="d-none @error('logo') is-invalid @enderror file_element image" accept=".jpg,.jpeg,.png" required>
                                     @error('logo')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -135,7 +140,7 @@
                                         <option value="{{ $v->id }}" @if(isset($UserOrganisation->organizationServices) && in_array($v->id, $UserOrganisation->organizationServices))selected @endif>{{ $v->name }}</option>
                                         @endforeach
                                     </select>
-                                    @error('service_id')
+                                    @error('service_id[]')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -533,10 +538,17 @@
 
     });
 
-    $('.invite_btn').click(function() {
+    $('.invite_btn').click(function(e) {
         var email_1 = $('#email_1').val();
         var email_2 = $('#email_2').val();
         var organization_id = $('#organization_id').val();
+
+        let $btn = $(this);
+        e.preventDefault();
+        e.stopPropagation();
+
+        $btn.text("Sending..");
+        $btn.prop('disabled',true);
 
         $.ajax({
             url: "{{ route('team-email') }}",
@@ -549,11 +561,17 @@
                 "_token": "{{ csrf_token() }}"
             },
             success: function(response) {
+                $('#email_1').val("");
+                $('#email_2').val("");
+                $btn.text("Send Mail");
+                $btn.prop('disabled',false);
                 toastMessage(response.status, response.msg);
                 $('.modal').hide();
                 $('.modal-backdrop').remove();
             },
             error: function(response, status, error) {
+                $btn.text("Send Mail");
+                    $btn.prop('disabled',false);
                 console.log(response);
                 console.log(status);
                 console.log(error);
