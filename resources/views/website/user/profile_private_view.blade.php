@@ -351,7 +351,7 @@
         center: false,
         autoPlay: 1000,
         autoplay: true,
-        loop: false,
+        loop: true,
         nav: true,
         margin: 20,
         items: 1,

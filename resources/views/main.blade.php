@@ -273,8 +273,8 @@
       autoplay: true,
       loop: true,
       nav: true,
-      center: true,
       items: 1,
+      margin: 10,
       autoplayHoverPause: true,
       responsive: {
         480: { items: 1 },
