@@ -157,7 +157,7 @@
                     </div>
                     
                     
-                    {{-- <a href="{{ route('public-view', ['id'=>$v1->id]) }}"> --}}
+                     <a href="{{ route('public-view', ['id'=>$v1->id]) }}">
                     <div class="main_slider_elem_wrap">
                       <div class="secondry-card-top-container w-100">
                         <div>
@@ -167,9 +167,9 @@
                           @endif
                         <!-- </a> -->
                         </div>
-                        <div>
+                        <!-- <div>
                             <i class="fa fa-heart-o icon-size like-project" style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
-                        </div>
+                        </div> -->
                        
                       </div>
                       <div class="secondry-card-bottom-container">
@@ -192,12 +192,11 @@
                       </div>
                       
                     </div>
-                    {{-- </a> --}}
+                    </a>
                   <div class="like_btn_wrapper">
                     <div>
-                      {{-- <i class="fa fa-heart-o icon-size like-project" style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i> --}}
-                      {{-- <i class="fa <?php if(isset($v1->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size heart-color" style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i> --}}
-
+                      <!-- <i class="fa fa-heart-o icon-size like-project" style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i> -->
+                    <i class="fa <?php if(isset($v1->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size  like-project" style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
                     </div>
                   </div>
 
@@ -243,14 +242,14 @@
                     if (classList[i] == 'fa-heart-o') {
                         element.removeClass('fa-heart-o');
                         element.addClass('fa-heart')
-                        toastMessage("success", status.msg);
+                        // toastMessage("success", resp.msg);
                         break;
                     }
                     if(classList[i] == 'fa-heart')
                     {
                         element.removeClass('fa-heart');
                         element.addClass('fa-heart-o');
-                        toastMessage("error", status.msg);
+                        // toastMessage("success", resp.msg);
 
                         break;
                     }
@@ -288,7 +287,7 @@
 
     $(".test.owl-carousel").owlCarousel({
       autoplayTimeout: 3000,
-      // autoplay: true,
+      autoplay: true,
       loop: true,
       nav: true,
       margin: 20,
