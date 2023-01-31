@@ -482,6 +482,7 @@ class JobController extends WebController
             $user = User::query()->where('email',$admin_email_id)->first();
             $collect  = collect();
             $collect->put('first_name', UcFirst($user->first_name));
+            $collect->put('job_title', UcFirst($user->job_title));
             $user->notify(new PromotionJob($collect));
             return back()->with('success','Promotion mail send successfully');
             

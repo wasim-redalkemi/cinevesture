@@ -44,7 +44,7 @@ class SignUpConfirmation extends Notification
         ->subject('Welcome to Cinevesture')
         ->greeting('Hi'.' '.$this->data['first_name'].',')
         ->line('Welcome to Cinevesture! We’re excited to have you on board.')
-        ->line('We are here to help you build your network in the media industry to find interesting people and projects to work with.')
+        ->line('We’re here to bridge the gap in the film and media industry by helping you build your network and find interesting people and projects to work with.')
         ->line('Cinevesture is about:')
         ->line("Meeting the right people")        
         ->line("Sharing interesting projects")        
