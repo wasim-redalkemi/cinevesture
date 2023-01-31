@@ -24,7 +24,7 @@
                                   <div class="previous_data_card_wrap_elem">
                                     <div class="card previous_data_card">
                                       <div class="d-flex justify-content-between">
-                                        <div class="crop_input_label">{{$v->project_title}}</div>
+                                        <div class="crop_input_label">{{$v->portfolio_title}}</div>
                                         <div>
                                           <a href="{{ route('portfolio-edit', ['id'=>$v->id]) }}" >
                                             <i class="fa fa-pencil mx-2 Aubergine" aria-hidden="true"></i>

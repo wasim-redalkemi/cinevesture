@@ -16,7 +16,7 @@ class CreateUserPortfoliosTable extends Migration
         Schema::create('user_portfolios', function (Blueprint $table) {
             $table->id();
             $table->string('user_id',20);
-            $table->string('project_title',100)->nullable();
+            $table->string('portfolio_title',100)->nullable();
             $table->string('description',1000)->nullable();
             $table->timestamp('completion_date')->nullable();
             $table->string('video')->nullable();
