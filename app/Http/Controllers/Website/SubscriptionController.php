@@ -9,9 +9,11 @@ use App\Models\Plans;
 use App\Models\SubscriptionOrder;
 use App\Models\User;
 use App\Models\UserSubscription;
+use App\Notifications\MembershipConfarmation;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Notification;
 
 class SubscriptionController extends Controller
 {
@@ -93,10 +95,18 @@ class SubscriptionController extends Controller
             );
 
             if ($checkout_status->payment_status == 'paid') {
-                $this->createSubscription($order, $request);
+                $subscription = $this->createSubscription($order, $request);
+                
+                $collect  = collect();
+                $collect->put('first_name', ucwords(auth()->user()->first_name));
+                $collect->put('currency', $subscription->currency);
+                $collect->put('plan_amount', $subscription->plan_amount);
+                $collect->put('plan_name', $subscription->plan_name);
+                Notification::route('mail', auth()->user()->email)->notify(new MembershipConfarmation($collect));
             }
+        
 
-            return redirect()->route('profile-create')->with('success', 'Subsription completed Successfully');
+            return redirect()->route('profile-create')->with('success', 'Subcription completed Successfully');
         } catch (\Exception $e) {
             return back()->with('error', 'Something went wrong, Please try again later.');
         }
@@ -161,6 +171,7 @@ class SubscriptionController extends Controller
         $request->session()->put('permission', $plans->getRelationalData);
         $request->session()->put('module', $module);
         $request->session()->put('action', $action);
+        return $subscription;
     }
 
 
