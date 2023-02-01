@@ -647,13 +647,14 @@ class ProjectController extends WebController
             }
             $projectIdUnique=array_unique($projectIdArray);
             $recomProject=UserProject::query()->whereIn('id',$projectIdUnique)
-            ->with('projectOnlyImage')
+            ->with(['projectOnlyImage','isfavouriteProject'])
                           ->where('id','!=',$_REQUEST['id'])
                           ->where('user_status','published')
                           ->where('admin_status','active')
                           
                           ->orderBy('id','desc')
                           ->paginate(10);
+                        //   dd($recomProject);
                           
             $projectData = $projectData->toArray();
             if (empty($projectData)) {

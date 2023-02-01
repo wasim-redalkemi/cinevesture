@@ -54,7 +54,7 @@
 
 <section class="auth_section p-0 mt-0">
     <div class="main_page_wraper">
-        <form method="POST" class="mt_sm_100" enctype="multipart/form-data" action="{{ route('verify-otp') }}">
+        <form method="POST" class="" enctype="multipart/form-data" action="{{ route('verify-otp') }}">
             @csrf
             <div class="container">
                 <div class="row">

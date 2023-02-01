@@ -2569,6 +2569,7 @@ select:focus {
 .select2-container--default .select2-search--inline .select2-search__field {
     padding-left: 10px !important;
     width: 100% !important;
+    /* width: 3em !important; */
 }
 
 .select2-results__option {
@@ -3283,7 +3284,29 @@ input:checked+.slider:before {
     display: none;
 }
 
-
+.portfolio.owl-carousel .owl-nav {
+    display: block !important;
+}
+.portfolio.owl-carousel .owl-nav button.owl-prev {
+    display: flex !important;
+    position: absolute !important;
+    top: -43px !important;
+    left: 750px !important;
+    justify-content: center;
+    align-items: center;
+}
+.portfolio.owl-carousel .owl-nav button.owl-prev span , .portfolio.owl-carousel .owl-nav button.owl-next span {
+    font-size: 30px !important;
+    color: #2a0547;
+}
+.portfolio.owl-carousel .owl-nav button.owl-next {
+    display: flex !important;
+    position: absolute !important;
+    top: -43px !important;
+    right: 60px !important;
+    justify-content: center;
+    align-items: center;
+}
 
 .test.owl-carousel .owl-nav button.owl-prev {
     display: flex !important;
@@ -3296,11 +3319,11 @@ input:checked+.slider:before {
 }
 
 
-.test.owl-carousel .owl-nav button
+.test.owl-carousel .owl-nav button , .portfolio.owl-carousel .owl-nav button
 {
     /* border: 2px solid; */
-    height: 40px;
-    width: 40px;
+    height: 37px;
+    width: 37px;
     /* background-color: red; */
     font-size: 30px;
     padding:0px 0px 5px 0px !important;
@@ -4078,6 +4101,14 @@ input:checked+.slider:before {
     align-items: center;
 }
 
+.portfolio.owl-carousel .owl-nav button.owl-next {
+    top: -43px !important;
+    right: 25px !important;
+}
+.portfolio.owl-carousel .owl-nav button.owl-prev {
+    top: -43px !important;
+    left: 180px !important;
+}
 
 }
 
@@ -4142,6 +4173,14 @@ input:checked+.slider:before {
         justify-content: center;
         align-items: center;
     }
+    .portfolio.owl-carousel .owl-nav button.owl-next {
+        top: -43px !important;
+        right: 50px !important;
+    }
+    .portfolio.owl-carousel .owl-nav button.owl-prev {
+        top: -43px !important;
+        left: 735px !important;
+    }
   
 }
 
@@ -4163,6 +4202,14 @@ input:checked+.slider:before {
         right: 75px !important;
         justify-content: center;
         align-items: center;
+    }
+    .portfolio.owl-carousel .owl-nav button.owl-next {
+        top: -43px !important;
+        right: 50px !important;
+    }
+    .portfolio.owl-carousel .owl-nav button.owl-prev {
+        top: -43px !important;
+        left: 735px !important;
     }
 }
 

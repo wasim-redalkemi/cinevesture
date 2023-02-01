@@ -97,7 +97,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
          <div class="d-flex justify-content-end m-2">
-             <button type="button" class="simple_cross_btn" data-bs-dismiss="modal" aria-label="Close">X</button>
+             <button type="button" class="simple_cross_btn" data-bs-dismiss="modal" aria-label="Close">  <img src="{{ asset('images/asset/cross_Icon.svg') }}" /> </button>
          </div>
             <div class="modal-body" style="padding: 0px;">
                 <section>
@@ -113,7 +113,7 @@
                                         You have successfuly applied for this job.
                                     </div>
                                     <div class="pb-4">
-                                        <a href="{{route('showJobSearchResults')}}" class="submit_btn mt-4 text-decoration-none text-light">Apply More</a>
+                                        <a href="{{route('showJobSearchResults')}}" class="submit_btn mt-4 text-decoration-none text-light" style="width: 40%;">Apply More</a>
                                     </div>
                                 </div>
                             </div>
