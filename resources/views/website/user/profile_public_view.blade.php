@@ -119,9 +119,12 @@
                                         <div class="pr_10">
                                             @if (count($user_languages)>0)
                                             @foreach ($user_languages as $k=>$v)
-                                            <button class="curv_cmn_btn darkbtn skill_container">
-                                                {{ $v['get_languages']['name'] }}
-                                            </button>
+                                            @if (!empty($v['get_languages']['name']))
+                                                
+                                                <button class="curv_cmn_btn darkbtn skill_container">
+                                                    {{ $v['get_languages']['name'] }}
+                                                </button>
+                                            @endif
                                             @endforeach
                                             @else
                                             <span><b>-</b></span>
@@ -396,12 +399,13 @@
                                 </div>
                                 @if(!empty($user_endorsement))
                                 @foreach($user_endorsement as $edm)
+                                @if (!empty($edm->endorsementCreater)&& !empty($edm->endorsementJob))
                                 <div class="row mt-3">
                                     <div class="col-md-3">
-                                        <div class="endorse_person_name">{{$edm['endorsementCreater']->name}}</div>
-                                        <div class="inp_data Aubergine_at_night">{{$edm['endorsementCreater']->job_title?$edm['endorsementCreater']->job_title:"-"}}</div>
+                                        <div class="endorse_person_name">{{!empty($edm->endorsementCreater->name)?$edm->endorsementCreater->name:'-'}}</div>
+                                        <div class="inp_data Aubergine_at_night">{{$edm->endorsementJob->title?$edm->endorsementJob->title:"-"}}</div>
                                         <div class="guide_profile_main_subtext Aubergine_at_night">{{strtoupper(date('jS F Y',strtotime($edm->created_at)))}}</div>
-                                        <div class="inp_data Aubergine_at_night">{{$edm['endorsementCreater']->job_title?$edm['endorsementCreater']->company_name:"-"}}</div>
+                                        <div class="inp_data Aubergine_at_night">{{$edm->endorsementJob->company_name?$edm->endorsementJob->company_name:"-"}}</div>
                                     </div>
                                     <div class="col-md-9">
                                         <div class="inp_data">
@@ -411,6 +415,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                @endif
                                 @endforeach
                                 @else
                                 <span><b>-</b></span>

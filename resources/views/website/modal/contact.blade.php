@@ -26,7 +26,9 @@
                                         <div class="organisation_cmn_text text_fff">{{$title}}</div>
                                     </div>
                                 </div>
-                                <div class="mt-3"><input type="text" id="subject" name="subject" value="" placeholder="Subject" class="modal_input"></div>
+                                <div class=" form_elem mt-3">
+                                    <div><input type="text" id="subject" class="myText col-md-12 controlTextLength" name="subject" maxlength="30" value=""  text-length = "30" placeholder="Subject" class="modal_input" ></div>
+                                </div>
                                 <div class="form_elem mt-3">
                                     <textarea name="message" id="message" cols="25" rows="6" class="w-100 controlTextLength" placeholder="Message" text-length = "1200" maxlength="1200" aria-label="With textarea"></textarea>
 
@@ -55,9 +57,22 @@
 
 @push('scripts')
 <script>
+    $('.myText').keyup(validateMaxLength);
+
+        function validateMaxLength()
+        {
+                var text = $(this).val().length;
+                
+                if (text>=30) {
+                    $(this).parents('.form_elem').find('.textlength').text(' You have reached the limit').css('color', 'red', 'text-align', 'end');
+                }
+             
+        }
+   
     $('#contact_btn').click(function(e)
     {
         var subject = $('#subject').val();
+        
         var email_1 = $('#email_1').val();
         var message = $('#message').val();
         var checkbox_cc = ($("#checkbox_cc").prop("checked") == true ? '1' : '0');

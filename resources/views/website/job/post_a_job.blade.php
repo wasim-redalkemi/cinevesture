@@ -170,7 +170,7 @@
                                         <span data-toggle="tooltip" data-placement="bottom" title="Promote your job for a small fee. Our team will get in touch with you when you submit a job promotion"> <i class="fa fa-info-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <div class="mb-5">
-                                <a href="{{route('promotion-job')}}" class="text-decoration-none"><button class="submit_btn text-light mt-4">Submit your job for promotion</button></a>
+                                <a href="#" class="text-decoration-none"><button class="submit_btn text-light mt-4">Submit your job for promotion</button></a>
                                 </div>
                                 </div>
                             </div>
@@ -318,6 +318,45 @@ $('.select_limit').change(function(event) {
        }
        
 
+    });
+    $(document).ready(function() {
+
+        $('.submit_btn').click(function(e) {
+                          
+                    
+            let $btn = $(this);
+            e.preventDefault();
+            e.stopPropagation();
+
+            $btn.text("Submitting..");
+            $btn.prop('disabled',true);
+            
+            $.ajax(
+            {
+                url:"{{route('promotion-job')}}",
+                type:'GET',
+                dataType:'json',
+                data:'',
+                success:function(response)
+                {  
+                    console.log(response);
+                    $btn.text("Send Mail");
+                    $btn.prop('disabled',false);
+                    if (response.status == 1) {                                
+                        toastMessage(response.status, response.msg);
+                    }
+                    $('.modal').hide();
+                    $('.modal-backdrop').remove();
+                },
+                error:function(response,status,error)
+                {     $btn.text("Send Mail");
+                    $btn.prop('disabled',false);
+                    console.log(response);
+                    console.log(status);
+                    console.log(error);
+                } 
+            });
+        });
     });
    
 </script>

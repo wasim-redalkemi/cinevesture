@@ -483,10 +483,12 @@ class JobController extends WebController
             $collect  = collect();
             $collect->put('first_name', UcFirst($user->first_name));
             $user->notify(new PromotionJob($collect));
-            return back()->with('success','Promotion mail send successfully');
+            return ['status'=>1,'msg'=>"Email has been dispatched."];
             
         } catch (Exception $e) {
-            return back()->with($e->getmessage());
+            // return back()->with($e->getmessage());
+            return ['status'=>0,'msg'=>$e->getMessage()];
+            
         }
     }
 }

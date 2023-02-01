@@ -172,7 +172,6 @@
                                         <img src="{{$projectData[0]['project_mark_video'][0]['thumbnail_label']}}" alt="{{$projectData[0]['project_mark_video'][0]['thumbnail_label']}}" class="br_4 w-100">
                                     @endif
                                 </div>
-
                             </div>
                             <div class="d-flex my-4 align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
@@ -182,17 +181,15 @@
 
                                     @endif
                                     <!-- <i class="fa fa-share-alt mx-4 icon-size" aria-hidden="true"></i> -->
-                                          <div class="clipboard pointer"><img src="{{ asset('images/asset/share_image.svg') }}" class="mx-3" alt="image"></div>
-                                         <div class="forCopy" style="margin-right: 10px"><p class="mb-0"></p></div> 
+                                    {{-- <input type="hidden" name="" class="share_link" id="" value=""> --}}
+                                    <button onclick="copyToClipboard('#urlcopy')" style="background-color: rgb(28 3 48)" class="clipboard pointer border-0"><img src="{{ asset('images/asset/share_image.svg') }}" class="mx-3" alt="image"></button>
+                                    <p id="urlcopy" class="d-none">http://local.cinevesture.com/project/project-public-view?id={{$UserProject->id}}</p>
+
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
-                                        
                                     <div> <i class="fa <?php if(isset($UserProject->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
                                     @endif
                                 </div>
-                                {{-- <div class="d-flex">
-                                    <span class="mx-3 white">Report Project</span>
-                                    <i class="fa fa-flag icon-size" aria-hidden="true"></i>
-                                </div> --}}
+                               
                             </div>
                         </div>
                     </div>
@@ -560,10 +557,13 @@
         var $url = $(location).attr('href');
 
         $('.clipboard').on('click', function() {
+                                         
+                        toastMessage(response.status, response.msg);
+                   
         // $("body").append($temp);
         // toastMessage("success",'copy successfully');
         // toastr.success('Success'."copy");
-        toastr.success('Click Button');
+        toastr.success('Click Button','done');
 
         toastMessage("success", 'URL copied')
         // $temp.val($url).select();
@@ -571,10 +571,10 @@
         // $temp.remove();
         // $("p").text("URL copied!");
        
-        $(".forCopy").text("URL copied!");
-        })
-        $('#forCopy').click(function() {
-           toastr.success('Click Button');
+        // $(".forCopy").text("URL copied!");
+        // })
+        // $('#forCopy').click(function() {
+        //    toastr.success('Click Button');
         });
     });
     $("#contact_modal").on("click", function() {
@@ -711,12 +711,14 @@
   
 //   copyContent()
 //     } )
-
-    document.addEventListener('copy', function(e){
-    e.clipboardData.setData('text/plain', $('.share_link').attr('src'));
-        e.preventDefault();
-    });
-    document.execCommand('copy');
-    console.log($('.share_link').attr('src'));
+function copyToClipboard(element) {
+ 
+  var $temp = $("<input>");
+  $("body").append($temp);
+  $temp.val($(element).text()).select();
+  document.execCommand("copy");
+  $temp.remove();
+  toastMessage("1", 'URL copied')
+}
 </script>
 @endpush
