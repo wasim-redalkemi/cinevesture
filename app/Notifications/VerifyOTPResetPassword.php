@@ -46,7 +46,8 @@ class VerifyOTPResetPassword extends Notification
         ->line('Your reset password verification code is')
         ->line($this->data['otp'])
         // ->action('Notification Action', url('/'))
-        ->line('Enter the verification code on the website to complete your reset password.')
+        ->line('Enter the  verification code on the website to complete password change.')
+        ->line("'If you ignore this message, your password will not be changed. If you didn't request a password reset, let us know.")
         ->line('Best,')        
         ->salutation('Team Cinevesture');
     }

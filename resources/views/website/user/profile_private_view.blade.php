@@ -196,6 +196,7 @@
                                         $img = asset('images/asset/user-profile.png');
                                         }
                                         @endphp
+                                        
                                         <div class="item portfolio_item" onclick="portfolio_model({{$v['id']}})">
                                             <div class="portfolio_item_image">
                                                 <img src="<?php echo $img ?>" class="portfolio_img" width="100%">
@@ -354,12 +355,19 @@
         $("#success-toast").toast("show");
     });
 
+
+
+    // var lenght = $(".portfolio.owl-carousel").width()
+    // var lenght2 = $(".owl-carousel.owl-stage").width()
+    // var slider_elem_child = $('.owl-stage-outer').offset();
+    // console.log(lenght,lenght2, "lenght", slider_elem_child);
+
     $(".portfolio.owl-carousel").owlCarousel({
         center: false,
         autoPlay: 1000,
         autoplay: true,
         loop: false,
-        nav: true,
+        // nav: true,
         margin: 20,
         items: 1,
         autoplayHoverPause: true,

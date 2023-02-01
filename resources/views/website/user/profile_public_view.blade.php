@@ -198,7 +198,7 @@
                             <div class="container px-0">
                                 <div class="row">
                                     <div class="col-md-12">
-                                        <div class="guide_profile_main_text deep-pink font_18">Portfolio</div>
+                                        <div class="guide_profile_main_text deep-pink font_18 mb-2">Portfolio</div>
                                         @if (count($portfolio)>0)
                                         <div class="portfolio owl-carousel">
                                             @foreach ($portfolio as $k=>$v)
@@ -256,7 +256,7 @@
                                     <div class="col-md-12">
                                         <div class="guide_profile_main_text deep-pink font_18">Project</div>
                                         @if (count($UserProject))
-                                        <div class="project owl-carousel owl-theme mt-3">
+                                        <div class="project owl-carousel owl-theme mt-2">
                                             @foreach($UserProject as $k=>$v)
                                             <div class="item">
                                                 <a href="{{route('public-view',['id'=>$v->id])}}">
@@ -535,7 +535,13 @@
                     items: 2
                 },
                 1024: {
-                    items: 3 
+                    items: 3
+                },
+                1225: {
+                    items: 3
+                },
+                1400: {
+                    items: 3.75
                 }
             },
         });

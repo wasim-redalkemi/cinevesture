@@ -499,7 +499,7 @@
                             <div class="home_img_wrap">
                             
                                 <div class="slider">
-                                    <a href="{{route('public-view',['id'=>$value->id])}}">
+                                <a href="{{route('public-view',['id'=>$value->id])}}">
                                 
                                     {{-- {{$value->projectOnlyImage[0]->file_link}} --}}
                                     <div class="img-container gradient"> 
@@ -507,19 +507,15 @@
                                         <img src="{{ Storage::url($value->projectOnlyImage[0]->file_link) }}" alt="image"> 
                                         @else
                                         <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">    
-                                        @endif                                 
-                                    
-                                        
+                                        @endif
                                     </div>
-                                    
                                     <div class="secondry-card-top-container w-100">
                                         <div>{{$value->project_name}}</div>
-                                        <div>
-                                            <i class="fa fa-heart" style="color: white;" aria-hidden="true"></i>
-                                        </div>
                                     </div>
-                                </a>
-                                
+                                </a> 
+                                    <div class="like_btn_wrapper">
+                                        <div> <i class="fa <?php if(isset($value->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size text-white like-project" style="cursor: pointer;" data-id="{{$value->id}}" aria-hidden="true"></i></div>
+                                    </div>  
                                 </div>                            
                                 
                             </div> 
