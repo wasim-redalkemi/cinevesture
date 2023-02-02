@@ -131,7 +131,7 @@
                 </div>
             </div>
             <div class="col-md-9">
-                <div class="mb_2 mt-2 mt-md-0">{{($users->total())}} Results Founds</div>
+                <div class="mb_2 mt-2 mt-md-0">{{($users->total())}} Results Found</div>
                 <div class="profile_wraper mb-5">
                 @if(count($users) >= 1)
                 @foreach($users as $user)
@@ -155,7 +155,9 @@
                                     <a href="{{route('profile-public-show',['id'=>$user->id])}}" class="btn-link text_user_name">{{empty($user->first_name)?'Name':ucfirst($user->first_name).' '.ucfirst($user->last_name);}}</a>
                                 </div>
                                 @if($user->is_profile_verified == '1')<span><button class="verified_cmn_btn mx-3">
-                                        <img src="{{ asset('images/asset/verified_icon.svg') }}" alt="image"> VERIFIED</button></span>@endif
+                                    <img src="{{ asset('images/asset/verified-badge.svg') }}" width="13px"  alt="image"><span class="mx-1"> VERIFIED</span></button></span>
+                                @endif
+                                
 
                             </div>
 
