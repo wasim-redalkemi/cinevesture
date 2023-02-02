@@ -24,6 +24,7 @@
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-between">
                                         <div class="search-head-text Aubergine_at_night mx-3 mx-md-0">Profile</div>
+                                        
                                         <div class="d-none d-md-block">
                                             <a href="{{ route('profile-create')}}">
                                                 <button class="guide_profile_btn mt-2">EDIT </button>
@@ -53,6 +54,12 @@
                                         {{ (!empty($user->job_title))?$user->job_title:'Job Title'; }}
                                         |
                                         {{ (!empty($user_country->name))?$user_country->name:'Country'; }}
+                                        @if ($user_country->name == 'India')
+                                        @if (!empty ($user_state))
+                                        |
+                                            {{$user_state->name}}
+                                        @endif
+                                        @endif
                                     </div>
                                     <div class="d-block d-md-none">
                                         <a href="{{ route('profile-create')}}">

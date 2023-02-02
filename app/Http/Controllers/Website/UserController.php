@@ -130,6 +130,7 @@ class UserController extends WebController
             $experience = UserExperience::query()->where('user_id', $user->id)->get();
             $qualification = UserQualification::query()->where('user_id', $user->id)->get();
             $user_country = MasterCountry::query()->where('id', $user->country_id)->first();
+            $user_state = MasterState::query()->where('id', $user->state_id)->first();
             $user_age = AgeRange::query()->where('id', $user->age)->first();
             $user_gender = MasterGender::query()->where('id', $user->gender)->first();
             $user_gender_pronouns = MasterGenderPronouns::query()->where('id', $user->gender_pronouns)->first();
@@ -149,7 +150,7 @@ class UserController extends WebController
             // Endorsement
             $user_endorsement = Endorsement::query()->with('endorsementCreater')->where('to',$user->id)->where('status','1')
                                 ->orderByDesc('id')->limit(5)->get();
-            return view('website.user.profile_private_view', compact(['user', 'portfolio', 'experience', 'qualification', 'user_country', 'user_age', 'user_skills', 'user_languages','user_endorsement','user_gender','user_gender_pronouns']));
+            return view('website.user.profile_private_view', compact(['user', 'portfolio', 'experience', 'qualification', 'user_country','user_state', 'user_age', 'user_skills', 'user_languages','user_endorsement','user_gender','user_gender_pronouns']));
         } catch (Exception $e) {
             return back()->with('error', $e->getMessage()."Something went wrong");
         }
@@ -200,12 +201,11 @@ class UserController extends WebController
             $user_languages = UserLanguage::query()
                 ->with('getLanguages')
                 ->where('user_id', $user->id)
-                ->get()
-                ->toArray();
-            // Endorsement
-            $user_endorsement = Endorsement::query()->with('endorsementCreater')->where('to',$user->id)->where('status','1')
-                                ->orderByDesc('id')->limit(5)->get();
-                               
+                ->get();
+                
+            $user_endorsement = Endorsement::query()->with('endorsementCreater')->with('endorsementJob')->where('to',$user->id)
+            ->where('status','1')->orderByDesc('id')->limit(5)->get();
+                           
             return view('website.user.profile_public_view', compact(['user', 'portfolio', 'experience', 'qualification', 'user_country', 'user_age', 'user_skills', 'user_languages','user_endorsement', 'UserProject']));
         } catch (Exception $e) {
             return back()->with('error', 'Something went wrong.');
@@ -888,7 +888,7 @@ class UserController extends WebController
                 }
                 Notification::route('mail', $email)->notify(new ContactUser($collect));                
             }
-            return ['status'=>1,'msg'=>"Email has been sending by contact email."];           
+            return ['status'=>1,'msg'=>"Email has been dispatched."];           
         } catch (Exception $e) {
             return ['status'=>0,'msg'=>"Something went wrong."];
         }

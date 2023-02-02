@@ -371,8 +371,9 @@
             html += '<div class="col-md-2">';
                 html += '<div class="profile_input">';
                     html += '<label>Target Date</label>';
-                    html += '<input value="'+assoEntry.target_date+'" min="'+minDate+'" max="2030-12-31" type="date" class="form-control" name="project_milestone_target_date" placeholder="Target Date">';
+                    html += '<input value="'+assoEntry.target_date+'"  max="2030-12-31" type="date" class="form-control" name="project_milestone_target_date" placeholder="Target Date">';
                 html += '</div>';
+                // min="'+minDate+'"
             html += '</div>';
             html += '<div class="col-md-2 d-flex align-items-end">';
                 html += '<div class="d-flex checkbox_btn mb-2">';

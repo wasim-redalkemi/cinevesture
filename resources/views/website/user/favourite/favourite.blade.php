@@ -79,9 +79,12 @@
                                 <div class="mx-4 px-1">
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex align-items-center">
+                                            @if ($v['profiles']['id'])
                                             <a href="{{route('profile-public-show',['id'=>$v['profiles']['id']])}}" style="outline: none; text-decoration:none">
                                                 <span class="guide_profile_main_text"> {{ !empty($v['profiles']['name'])? ucFirst($v['profiles']['name']) : '-' }}</span>
                                             </a>
+                                                
+                                            @endif
                                             <?php
                                             $show_verified_btn = true;
                                             if (isset($user_endorsement) && count($user_endorsement)<config('constants.PROFILE_VERIFIED_ON_ENDORSE_COUNT')) {
