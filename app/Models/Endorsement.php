@@ -14,9 +14,9 @@ class Endorsement extends Model
         return $this->hasOne(User::class,'id','from');
 
     }
-    public function endorsementJob()
+    public function endorsementorganisation()
     {
-        return $this->hasOne(UserJob::class,'id','from');
+        return $this->hasOne(UserOrganisation::class,'user_id','from');
 
     }
 }

@@ -203,9 +203,8 @@ class UserController extends WebController
                 ->where('user_id', $user->id)
                 ->get();
                 
-            $user_endorsement = Endorsement::query()->with('endorsementCreater')->with('endorsementJob')->where('to',$user->id)
-            ->where('status','1')->orderByDesc('id')->limit(5)->get();
-                           
+            $user_endorsement = Endorsement::query()->with('endorsementCreater')->with('endorsementorganisation')->where('to',$user->id)
+            ->where('status','1')->orderByDesc('id')->limit(5)->get();         
             return view('website.user.profile_public_view', compact(['user', 'portfolio', 'experience', 'qualification', 'user_country', 'user_age', 'user_skills', 'user_languages','user_endorsement', 'UserProject']));
         } catch (Exception $e) {
             return back()->with('error', 'Something went wrong.');
@@ -873,9 +872,9 @@ class UserController extends WebController
                 return ['satus'=>0,'msg'=>$validator->errors()->first()];
             }
             $email = '';
-            if(!$_REQUEST['email_1'] && !$_REQUEST['message'] && !$_REQUEST['subject']){
-                return ['satus'=>0,'msg'=>"Email or message or subject fields can not be empty."];
-            }
+            // if(!$_REQUEST['email_1'] && !$_REQUEST['message'] && !$_REQUEST['subject']){
+            //     return ['satus'=>0,'msg'=>"Email or message or subject fields can not be empty."];
+            // }
             if(!empty($_REQUEST['email_1']) ){
                 $email = $_REQUEST['email_1'];
                 $collect = collect();
