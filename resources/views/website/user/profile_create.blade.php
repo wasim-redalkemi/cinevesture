@@ -89,7 +89,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="profile_input">
-                                    <label>First Name <span style="color:red">*</span></label>
+                                    <label>First Name <p class="m-0" style="color: red;visibility">*</p></label>
                                     {{-- <input type="text" class="outline is-invalid-remove name-only form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name" value="@if(isset($user->first_name){{ $user->first_name}} @endif" --}}
                                     <input type="text" class="outline is-invalid-remove name-only form-control @error('first_name') is-invalid @enderror" placeholder="{{ __('First Name') }}" name="first_name"
                                     value="@if (!empty($user->first_name)){{ucFirst($user->first_name)}}@endif" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
@@ -102,7 +102,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="profile_input">
-                                    <label>Last Name <span style="color:red">*</span></label>
+                                    <label>Last Name <p class="m-0" style="color:red">*</p></label>
                                     <input type="text" class="outline is-invalid-remove name-only form-control @error('last_name') is-invalid @enderror" placeholder="{{ __('Last Name') }}" name="last_name" value="@if (!empty($user->last_name)){{ucFirst($user->last_name)}}@endif" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('last_name')
                                     <span class="invalid-feedback" role="alert">
@@ -366,8 +366,6 @@
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");
     });
-
-    // $('.for_show').css('display', 'none');
     $(document).ready(function() {
         $('.open_file_explorer').click(function(e) {
             $(this).parents('.custom_file_explorer').find('.file_element').val("");
@@ -463,7 +461,7 @@
 
         if (files && files.length > 0) {
             file = files[0];
-            // console.log(file, "file 472");
+            
 
             var file = this.files[0];
             var fileType = file["type"];
@@ -498,7 +496,7 @@
       width: 300,
       height:  300,
     },
-  });
+    });
     }).on('hidden.bs.modal', function() {
         cropper.destroy();
         cropper = null;
@@ -529,7 +527,7 @@
 
         canvas.toBlob(function(blob) {
             url = URL.createObjectURL(blob);
-            // console.log(url, "url");
+            
             var reader = new FileReader();
             reader.readAsDataURL(blob);
             reader.onloadend = function() {
@@ -539,7 +537,7 @@
                 $("#croppedImg").val(base64data);
                 image.src = file;
                 formData.append("document", file)
-                // console.log(formData.append("document", file), "formData.append");
+                
 
                 $('.for_hide').css('display', 'none');
                 $('.for_show').css('display', 'block');

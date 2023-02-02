@@ -30,9 +30,9 @@
                             <td class="w-50">Plan Amount</td>
                             <td class="w-50">
                                 @if($subscription->currency == "USD")
-                                     @if (!empty($subscription->plan_amount)) {{'$'.' '.number_format($subscription->plan_amount, 0,'.',',')}} @else <span><b>-</b></span> @endif
+                                     @if (!empty($subscription->plan_amount)) {{'$'.number_format($subscription->plan_amount, 0,'.',',')}} @else <span><b>-</b></span> @endif
                                 @else
-                                     @if (!empty($subscription->plan_amount)) {{'₹'.' '.number_format($subscription->plan_amount, 0,'.',',')}} @else <span><b>-</b></span> @endif
+                                     @if (!empty($subscription->plan_amount)) {{'₹'.number_format($subscription->plan_amount, 0,'.',',')}} @else <span><b>-</b></span> @endif
                                 
                                 @endif
                                {{-- {{number_format($subscription->plan_amount, 0,'.',',')}} --}}
