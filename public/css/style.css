@@ -538,7 +538,7 @@ label {
 .footer {
     background: #33084C;
     color: #FAF8FB;
-    padding-top: 40px;
+    padding-top: 46px;
     /* margin-top:105px; */
 }
 
@@ -3312,6 +3312,7 @@ input:checked+.slider:before {
     left: 750px !important;
     justify-content: center;
     align-items: center;
+    background-color: #971E9B;
 }
 .portfolio.owl-carousel .owl-nav button.owl-prev span , .portfolio.owl-carousel .owl-nav button.owl-next span {
     font-size: 30px !important;
@@ -3324,7 +3325,13 @@ input:checked+.slider:before {
     right: 60px !important;
     justify-content: center;
     align-items: center;
+    background-color: #971E9B;
 }
+
+.portfolio.owl-carousel .owl-nav button.owl-next:hover, .portfolio.owl-carousel .owl-nav button.owl-prev:hover
+ {
+    background-color: #f0dddd;
+  }
 
 .test.owl-carousel .owl-nav button.owl-prev {
     display: flex !important;
@@ -3493,7 +3500,7 @@ input:checked+.slider:before {
 }
 .playVideoWrap img {
     max-width: 100%;
-    width: auto;
+    width: 100%;
 }
 .VideoWrapforProfile {
     max-width: 100%;

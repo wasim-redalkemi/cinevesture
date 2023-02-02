@@ -245,8 +245,8 @@
                             @if (!empty($projectData[0]['project_only_video']))
                         @foreach ($projectData[0]['project_only_video'] as $v)
                         <div class="mt-2 mr_3">
-                            <div class="playVideoWrap mt-3" video-url="@if(!empty($v['file_link'])){{ $v['file_link']}} @endif">
-                                <img src="{{json_decode($v['media_info'])->thumbnail}}" alt="" width="100%">
+                            <div class="playVideoWrap mt-3" style="min-height: 200px;" video-url="@if(!empty($v['file_link'])){{ $v['file_link']}} @endif">
+                                <img src="{{json_decode($v['media_info'])->thumbnail}}" alt="" width="100%" height="100%">
                             </div>
                         </div>
                         @endforeach
