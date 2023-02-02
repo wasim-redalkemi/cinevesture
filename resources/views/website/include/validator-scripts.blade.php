@@ -693,7 +693,7 @@
                     str += '<div class="profile_input add-new-image">';
                         str += '<input type="text" class="form-control" name="image_title" placeholder="Photo Title">';
                     str += '</div>';
-                    str += '<div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 4MB</div>';
+                    str += '<div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 10MB</div>';
                 str += '</div>';
                 return str;
             }

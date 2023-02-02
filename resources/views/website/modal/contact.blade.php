@@ -4,7 +4,10 @@
         <div class="modal-content bg_3308">
             <div class="modal-body p-0">
                 <div class="p-3 float-end">
-                    <i class="fa fa-times text_fff font_24 pointer" data-dismiss="modal" aria-label="Close"></i>
+                    <!-- <i class="fa fa-times text_fff font_24 pointer" data-dismiss="modal" aria-label="Close"></i> -->
+                    <span class="pointer" data-dismiss="modal" aria-label="Close">
+                        <img src="{{ asset('images/asset/cross_Icon.svg') }}" class="" alt="cross-image" />
+                    </span>
                 </div>
                 <section class="p-0 p-md-3">
                     <div class="container">
@@ -26,11 +29,11 @@
                                         <div class="organisation_cmn_text text_fff">{{$title}}</div>
                                     </div>
                                 </div>
-                                <div class=" form_elem mt-3">
-                                    <div><input type="text" id="subject" class="myText col-md-12 controlTextLength" name="subject" maxlength="30" value=""  text-length = "30" placeholder="Subject" class="modal_input" ></div>
+                                <div class=" form_elem mt-4">
+                                    <div><input type="text" id="subject" class="myText controlTextLength modal_input" name="subject" maxlength="30" value=""  text-length = "30" placeholder="Subject" ></div>
                                 </div>
                                 <div class="form_elem mt-3">
-                                    <textarea name="message" id="message" cols="25" rows="6" class="w-100 controlTextLength" placeholder="Message" text-length = "1200" maxlength="1200" aria-label="With textarea"></textarea>
+                                    <textarea name="message" id="message" cols="25" rows="6" class="w-100 controlTextLength mt-2" placeholder="Message" text-length = "1200" maxlength="1200" aria-label="With textarea"></textarea>
 
                                 </div>
 

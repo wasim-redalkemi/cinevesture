@@ -176,7 +176,7 @@
                             <div class="d-flex my-4 align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
-                                        <button class="cantact-page-cmn-btn mt-2" id="contact_modal" data-toggle="modal" data-target="#contactModal">Contact Now </button>
+                                        <button class="cantact-page-cmn-btn" id="contact_modal" data-toggle="modal" data-target="#contactModal">Contact Now </button>
                                     {{-- <button class="cantact-page-cmn-btn"><a href=""  class="text_decor_none">Contact Now</a></button> --}}
 
                                     @endif
