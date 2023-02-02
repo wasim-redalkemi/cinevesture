@@ -415,7 +415,7 @@
         }
     });
     
-    if($("#located_in").val()=='6') 
+    if($("#located_in option:selected").text() == 'India')
         {
             $("#state-show").show();
        
