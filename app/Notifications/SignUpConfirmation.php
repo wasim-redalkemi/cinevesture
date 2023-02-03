@@ -16,6 +16,7 @@ class SignUpConfirmation extends Notification
      *
      * @return void
      */
+    protected $data;
     public function __construct($data)
     {
         $this->data =$data;
@@ -46,10 +47,7 @@ class SignUpConfirmation extends Notification
         ->line('Welcome to Cinevesture! We’re excited to have you on board.')
         ->line('We’re here to bridge the gap in the film and media industry by helping you build your network and find interesting people and projects to work with.')
         ->line('Cinevesture is about:')
-        ->line("Meeting the right people")        
-        ->line("Sharing interesting projects")        
-        ->line("Finding the right talent")        
-        ->line("Learning new skills")        
+        ->line("&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;  Meeting the right people <br> &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;  Sharing interesting projects <br>  &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;  Finding the right talent<br>  &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;  Learning new skills")               
         ->line('Best,')        
         ->salutation('Team Cinevesture')
         ->action('Login' ,route('plans-view'));

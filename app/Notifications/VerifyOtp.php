@@ -16,6 +16,8 @@ class VerifyOtp extends Notification
      *
      * @return void
      */
+
+    protected $data;
     public function __construct($data)
     {
         $this->data = $data;
@@ -46,12 +48,11 @@ class VerifyOtp extends Notification
         return (new MailMessage)
         ->subject('Your verification code for Cinevesture')
         ->greeting('Hi'.' '.$this->data['first_name'].',')
+        ->line('We received a request to reset your password.')
         ->line('Your email verification code is')
         ->line($this->data['otp'])
-        // ->action('Notification Action', url('/'))
-        ->line('Enter the verification code on the website to complete your registration. If you need to log in again, please click here.')
-        // ->line('If the code does not work, you can use this verification link:')
-        // ->line('Verify email')
+        // ->line('Enter the verification code on the website to complete your registration. If you need to log in again, please click here.')
+        ->line("If you ignore this message, your password will not be changed. If you didn't request a password reset, let us know.")
         ->line('Best,')        
         ->salutation('Team Cinevesture');
     }

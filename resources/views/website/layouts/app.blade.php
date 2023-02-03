@@ -105,7 +105,7 @@
             } else {
                 var char = len;
                 $(this).parents('.form_elem').find('.textlength').text(char + ' / '+max); 
-                $('.textlength').css({"color":"#787885", "text-align":"end"});
+                $(this).parents('.form_elem').find('.textlength').css({"color":"#787885", "text-align":"end"});
             }
         });
 

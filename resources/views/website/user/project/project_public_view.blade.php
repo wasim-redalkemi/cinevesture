@@ -176,7 +176,7 @@
                             <div class="d-flex my-4 align-items-center justify-content-between">
                                 <div class="d-flex align-items-center">
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
-                                        <button class="cantact-page-cmn-btn mt-2" id="contact_modal" data-toggle="modal" data-target="#contactModal">Contact Now </button>
+                                        <button class="cantact-page-cmn-btn" id="contact_modal" data-toggle="modal" data-target="#contactModal">Contact Now </button>
                                     {{-- <button class="cantact-page-cmn-btn"><a href=""  class="text_decor_none">Contact Now</a></button> --}}
 
                                     @endif
@@ -242,8 +242,8 @@
                             @if (!empty($projectData[0]['project_only_video']))
                         @foreach ($projectData[0]['project_only_video'] as $v)
                         <div class="mt-2 mr_3">
-                            <div class="playVideoWrap mt-3" video-url="@if(!empty($v['file_link'])){{ $v['file_link']}} @endif">
-                                <img src="{{json_decode($v['media_info'])->thumbnail}}" alt="" width="100%">
+                            <div class="playVideoWrap mt-3" style="min-height: 200px;" video-url="@if(!empty($v['file_link'])){{ $v['file_link']}} @endif">
+                                <img src="{{json_decode($v['media_info'])->thumbnail}}" alt="" width="100%" height="100%">
                             </div>
                         </div>
                         @endforeach

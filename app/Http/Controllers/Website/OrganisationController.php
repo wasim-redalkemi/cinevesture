@@ -278,6 +278,11 @@ class OrganisationController extends WebController
             if(!$_REQUEST['email_1'] && !$_REQUEST['email_2']){
                 return ['satus'=>0,'msg'=>"Email fields can not be empty."];
             }
+
+            $organisation = UserOrganisation::query()->where('user_id',auth()->user()->id)->first();
+            if(!$organisation){
+                return ['satus'=>0,'msg'=>"Something went wrong. Please try again."];
+            }
             
             $data = [
                 ['user_id'=>auth()->user()->id,'user_organization_id'=>$_REQUEST['organization_id'],'email'=>$_REQUEST['email_1'],'created_at'=>date("Y-m-d h:i:s", time()),'updated_at'=>date("Y-m-d h:i:s", time())],
@@ -291,19 +296,25 @@ class OrganisationController extends WebController
             if(!empty($_REQUEST['email_1']) ){
                 $email = $_REQUEST['email_1'];
                 $collect = collect();
+                $collect->put('name',auth()->user()->name);
+                $collect->put('first_name','Hi Sir/Madam');
+                $collect->put('organisation_name',$organisation->name);
                 $collect->put('url',route('register',['iuid' => convert_uuencode(auth()->user()->id)]));
                 Notification::route('mail', $email)->notify(new TeamInvite($collect));
-                
+
             }
             if(!empty($_REQUEST['email_2']) ){
                 $email = $_REQUEST['email_2'];
                 $collect = collect();
+                $collect->put('name',auth()->user()->name);
+                $collect->put('first_name','Hi Sir/Madam');
+                $collect->put('organisation_name',$organisation->name);
                 $collect->put('url',route('register',['iuid' => convert_uuencode(auth()->user()->id)]));
                 Notification::route('mail', $email)->notify(new TeamInvite($collect));
             }
             return ['status'=>1,'msg'=>"Invite link has been gone by email."];           
         } catch (Exception $e) {
-            return ['status'=>0,'msg'=>"Something went wrong."];
+            return ['status'=>0,'msg'=>$e->getMessage()];
         }
     }
 
