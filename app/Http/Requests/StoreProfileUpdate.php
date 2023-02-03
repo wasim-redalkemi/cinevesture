@@ -24,7 +24,7 @@ class StoreProfileUpdate extends FormRequest
     public function rules()
     {
         return [
-            'profile_image' => 'mimes:jpeg,jpg,png|nullable|max:40000',
+            'profile_image' => 'mimes:jpeg,jpg,png|nullable|max:100000',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'job_title' => 'nullable|max:100',
