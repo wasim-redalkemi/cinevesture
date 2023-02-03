@@ -168,7 +168,7 @@
                                 -
                                 @endif
                             </div>
-                            <div class="preview_headtext lh_54 candy-pink">
+                            <div class="preview_headtext mt-1 lh_54 candy-pink">
                                 @if(isset($user->country))
                                 {{$user->country->name}}
                                 @else
