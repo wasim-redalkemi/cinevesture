@@ -187,6 +187,9 @@
                                         <option value="physically" <?php if ("physically" == $user->available_to_work_in) {
                                                                         echo ('selected');
                                                                     } ?>>Physically</option>
+                                        <option value="hybrid" <?php if ("hybrid" == $user->available_to_work_in) {
+                                                                        echo ('selected');
+                                                                    } ?>>Hybrid</option>
                                     </select>
                                     @error('available_to_work_in')
                                     <span class="invalid-feedback" role="alert">
@@ -219,8 +222,8 @@
                                     <select name="state" id="state" class="outline is-invalid-remove @error('state') is-invalid @enderror" id="lang">
                                         <option value="">Select</option>
                                         @foreach ($state as $k=>$v)
-                                        {{$v}}
-                                        <option value="{{ $v->id }}" <?php if (isset($user->country) && $user->country->id == $v->id) {
+                                        
+                                        <option value="{{ $v->id }}" <?php if (isset($user->state_id) && $user->state_id == $v->id) {
                                             echo ('selected');
                                         } ?>>{{ $v->name }}</option>
                                         @endforeach
@@ -415,7 +418,7 @@
         }
     });
     
-    if($("#located_in").val()=='6') 
+    if($("#located_in option:selected").text() == 'India')
         {
             $("#state-show").show();
        

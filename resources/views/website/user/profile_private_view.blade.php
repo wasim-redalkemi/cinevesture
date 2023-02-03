@@ -54,7 +54,7 @@
                                         {{ (!empty($user->job_title))?$user->job_title:'Job Title'; }}
                                         |
                                         {{ (!empty($user_country->name))?$user_country->name:'Country'; }}
-                                        @if ($user_country->name == 'India')
+                                        @if (isset($user_country->name) && $user_country->name == 'India')
                                         @if (!empty ($user_state))
                                         |
                                             {{$user_state->name}}

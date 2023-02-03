@@ -66,20 +66,11 @@
                                                                     } ?> icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$user->id}}" aria-hidden="true"></i></div>
 
                                                 @endif
-                                                <?php
-                                                $show_verified_btn = true;
-                                                if (count($user_endorsement) < 15) {
-                                                    $show_verified_btn = false;
-                                                }
-
-                                                if ($show_verified_btn) {
-                                                ?>
-                                                    <div>
-                                                        <button class="verified_cmn_btn mx-3"> <i class="fa fa-check-circle hot-pink mx-1" aria-hidden="true"></i> VERIFIED</button>
-                                                    </div>
-                                                <?php
-                                                }
-                                                ?>
+                                                
+                                               
+                                                @if($user->is_profile_verified == '1')<span><button class="verified_cmn_btn mx-3">
+                                                    <img src="{{ asset('images/asset/verified-badge.svg') }}" width="13px"  alt="image"><span class="mx-1"> VERIFIED</span></button></span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -398,27 +389,30 @@
                                     </div>
                                 </div>
                                 @if(!empty($user_endorsement))
-                                @foreach($user_endorsement as $edm)
-                                @if (!empty($edm->endorsementCreater)&& !empty($edm->endorsementJob))
-                                <div class="row mt-3">
-                                    <div class="col-md-3">
-                                        <div class="endorse_person_name">{{!empty($edm->endorsementCreater->name)?$edm->endorsementCreater->name:'-'}}</div>
-                                        <div class="inp_data Aubergine_at_night">{{$edm->endorsementJob->title?$edm->endorsementJob->title:"-"}}</div>
-                                        <div class="guide_profile_main_subtext Aubergine_at_night">{{strtoupper(date('jS F Y',strtotime($edm->created_at)))}}</div>
-                                        <div class="inp_data Aubergine_at_night">{{$edm->endorsementJob->company_name?$edm->endorsementJob->company_name:"-"}}</div>
-                                    </div>
-                                    <div class="col-md-9">
-                                        <div class="inp_data">
-                                            <p>
-                                                {{$edm->comment}} 
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                @endif
-                                @endforeach
+                                    @foreach($user_endorsement as $edm)
+                                            <div class="row mt-3">
+                                                <div class="col-md-3">
+                                                    <div class="endorse_person_name">{{!empty($edm->endorsementCreater->name)?$edm->endorsementCreater->name:'-'}}</div>
+                                                    <div class="inp_data Aubergine_at_night">{{!empty($edm->endorsementCreater->job_title)?$edm->endorsementCreater->job_title:'-'}}</div>
+                                                    <div class="guide_profile_main_subtext Aubergine_at_night">{{strtoupper(date('jS F Y',strtotime($edm->created_at)))}}</div>
+                                                    @if (!empty($edm['endorsementorganisation']))
+                                                    <div class="inp_data Aubergine_at_night">{{$edm['endorsementorganisation']->name?$edm['endorsementorganisation']->name:"-"}}</div>
+                                                        
+                                                    @else
+                                                        {{'-'}}
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-9">
+                                                    <div class="inp_data">
+                                                        <p>
+                                                            {{$edm->comment}} 
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    @endforeach
                                 @else
-                                <span><b>-</b></span>
+                                    <span><b>-</b></span>
                                 @endif
                             </div>
                         </div>
