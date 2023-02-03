@@ -319,6 +319,12 @@
                                         <div class="guide_profile_main_text deep-pink">{{$edm['endorsementCreater']->name}}</div>
                                         <div class="search-head-subtext Aubergine_at_night mt-1">{{$edm['endorsementCreater']->job_title?$edm['endorsementCreater']->job_title:"-"}}</div>
                                         <div class="guide_profile_main_subtext Aubergine_at_night mt-1">{{strtoupper(date('jS F Y',strtotime($edm->created_at)))}}</div>
+                                        @if (!empty($edm['endorsementorganisation']))
+                                        <div class="inp_data Aubergine_at_night">{{$edm['endorsementorganisation']->name?$edm['endorsementorganisation']->name:"-"}}</div>
+                                            
+                                        @else
+                                            {{'-'}}
+                                        @endif
                                     </div>
                                     <div class="col-md-9">
                                         <div class="inp_data Aubergine_at_night">

@@ -59,7 +59,7 @@
                                             </div>
                                             <div class="d-flex pt-3 justify-content-lg-end">
                                                 @if($_REQUEST['id'] != auth()->user()->id )
-                                                <div> <i class="fa <?php if (isset($user->isfavouriteProfile)) {
+                                                <div class="mx-3"> <i class="fa <?php if (isset($user->isfavouriteProfile)) {
                                                                         echo 'fa-heart';
                                                                     } else {
                                                                         echo 'fa-heart-o';
@@ -68,7 +68,7 @@
                                                 @endif
                                                 
                                                
-                                                @if($user->is_profile_verified == '1')<span><button class="verified_cmn_btn mx-3">
+                                                @if($user->is_profile_verified == '1')<span><button class="verified_cmn_btn">
                                                     <img src="{{ asset('images/asset/verified-badge.svg') }}" width="13px"  alt="image"><span class="mx-1"> VERIFIED</span></button></span>
                                                 @endif
                                             </div>

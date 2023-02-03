@@ -56,6 +56,8 @@ Route::prefix('google')->name('google.')->group( function(){
         Route::get('project/public-view', [ProjectController::class, 'publicView'])->name('project-public-view');
 		Route::get('user/profile-public-show', [UserController::class, 'profilePublicShow'])->name('user-profile-public-show');
     });
+    // Route::get('/project-public-view', [ProjectController::class, 'publicView'])->name('project-public-view');
+
     // Route::get('reset-password/{token}',[ResetPasswordController::class,'restPasswordPublicView'])->name('reset-password-view');
 
 Route::group(["middleware"=>["auth","revalidate","verified"]],function(){

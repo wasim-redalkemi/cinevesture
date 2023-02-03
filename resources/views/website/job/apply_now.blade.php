@@ -79,7 +79,7 @@
                             </div>
                             <div class="d-flex justify-content-center mt-5 mb-4">
                                 <button type="button" class="cancel_btn mx-5"><a href="{{route('showJobSearchResults')}}">Back</a></button>
-                                <button class="guide_profile_btn">Submit</button>
+                                <button class="guide_profile_btn" data-toggle="modal" data-target="#job_apply_success_modal">Submit</button>
                             </div>
                         </div>
 
@@ -93,11 +93,11 @@
 
 
 <!-- Modal for Confirmation for account deactivate -->
-<div class="modal fade" id="job_apply_success_modal" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+<div class="modal fade" id="job_apply_success_modal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
          <div class="d-flex justify-content-end m-2">
-             <button type="button" class="simple_cross_btn" data-bs-dismiss="modal" aria-label="Close">  <img src="{{ asset('images/asset/cross_Icon.svg') }}" /> </button>
+             {{-- <button type="button" class="simple_cross_btn" data-bs-dismiss="modal" aria-label="Close">  <img src="{{ asset('images/asset/cross_Icon.svg') }}" /> </button> --}}
          </div>
             <div class="modal-body" style="padding: 0px;">
                 <section>
@@ -192,7 +192,7 @@
                 $submitBtn.prop("disabled", false);
                 $submitBtn.text("Submit");
                 if (resp.status) {
-                    $("#job_apply_success_modal").modal("show");
+                    // $("#job_apply_success_modal").modal("show");
                 } else {
                     let err_content = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong>Warning!</strong> ${resp.message}

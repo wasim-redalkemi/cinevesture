@@ -183,7 +183,7 @@
                                     <!-- <i class="fa fa-share-alt mx-4 icon-size" aria-hidden="true"></i> -->
                                     {{-- <input type="hidden" name="" class="share_link" id="" value=""> --}}
                                     <button onclick="copyToClipboard('#urlcopy')" style="background-color: rgb(28 3 48)" class="clipboard pointer border-0"><img src="{{ asset('images/asset/share_image.svg') }}" class="mx-3" alt="image"></button>
-                                    <p id="urlcopy" class="d-none">http://local.cinevesture.com/project/project-public-view?id={{$UserProject->id}}</p>
+                                    <p id="urlcopy" class="d-none">{{route('public-view')}}?id={{$UserProject->id}}</p>
 
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
                                     <div> <i class="fa <?php if(isset($UserProject->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>

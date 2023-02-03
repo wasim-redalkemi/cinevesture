@@ -31,7 +31,7 @@
                                             } ?>" class="upload_preview for_show croperImg" width="100">
 
                                 <div for="file-input" class="d-none">
-                                    <input name="croppedOrgImg " class=" @error('croppedOrgImg') is-invalid @enderror" id="croppedOrgImg" type="hidden" required>
+                                    <input name="croppedOrgImg" class=" @error('croppedOrgImg') is-invalid @enderror" id="croppedOrgImg" type="hidden" required>
                                     @error('croppedOrgImg')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -48,7 +48,7 @@
                                     <div class="search-head-subtext Aubergine_at_night open_file_explorer pointer">
                                         Upload Profile Picture <span style="color:red">*</span>
                                     </div>
-                                    <div class="pointer search-head-subtext deep-pink delete_image">
+                                    <div class="pointer search-head-subtext open_file_explorer deep-pink delete_image">
                                         Delete
                                     </div>
                                     <input type="file" name="logo" class="d-none @error('logo') is-invalid @enderror file_element image" accept=".jpg,.jpeg,.png" required>
