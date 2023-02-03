@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Helper\SubscriptionUtilityController;
 use App\Models\MasterPlanModule;
 use App\Models\MasterPlanOperation;
 use App\Models\Plans;
@@ -48,19 +49,22 @@ class GoogleController extends Controller
             }
             $saveUser = User::where('email', $user->getEmail())->with('getSubcription')->first();
 
-            Auth::loginUsingId($saveUser->id);            
-            if($user->getSubcription){
-                $plans = Plans::query()->where('id',$user->getSubcription->plan_id)->with('getRelationalData.getModule','getRelationalData.getOperation')
-                ->first();
-                $module = MasterPlanModule::all();
-                $action = MasterPlanOperation::all();
-                $this->session()->put('permission',$plans->getRelationalData);
-                $this->session()->put('module',$module);
-                $this->session()->put('action',$action);
-            }  
-
-            
-            return redirect()->route('home');
+            Auth::loginUsingId($saveUser->id);  
+            $is_subscribed = SubscriptionUtilityController::isSubscribed();
+                    if($is_subscribed){
+                        return redirect('home');
+                        if($user->getSubcription){
+                            $plans = Plans::query()->where('id',$user->getSubcription->plan_id)->with('getRelationalData.getModule','getRelationalData.getOperation')
+                            ->first();
+                            $module = MasterPlanModule::all();
+                            $action = MasterPlanOperation::all();
+                            $this->session()->put('permission',$plans->getRelationalData);
+                            $this->session()->put('module',$module);
+                            $this->session()->put('action',$action);
+                        }  
+                    }else{
+                        return redirect()->route('plans-view')->with('success','Email Verified successfully.');
+                    }              
         } catch (\Throwable $th) {
             return redirect()->route('home')->with('error', 'Something went wrong!');
         }

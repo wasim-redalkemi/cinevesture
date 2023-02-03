@@ -61,7 +61,7 @@
             // password 8 chr
 
                $(".password-only").on("keyup",function(){
-                var EMAIL_REGEXP = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&`.+,/"-])[A-Za-z\d@$!%*#?&`.+,/"-_]{8,}$/;
+                var EMAIL_REGEXP = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&`.+,/"-_])[A-Za-z\d@$!%*#?&`.+,/"-_]{8,}$/;
                 var $el = $(this);
                 var form = $el[0].form;
                 var sdgfsj = $el.val();
