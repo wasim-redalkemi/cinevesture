@@ -194,14 +194,14 @@
                                     <select name="available_to_work_in" class="@error('available_to_work_in') is-invalid @enderror" id="" required autofocus>
                                         <option value="">Select</option>
                                         <option @if(isset($UserOrganisation->available_to_work_in))
-                                            @if ("virtually" == $UserOrganisation->available_to_work_in) {
+                                            @if ("virtually" == $UserOrganisation->available_to_work_in) 
                                             {{'selected'}}
                                             @endif
 
                                             @endif value="virtually">Virtually
                                         </option>
-                                        <option @if(isset($UserOrganisation->available_to_work_in)){
-                                            @if ("physically" == $UserOrganisation->available_to_work_in) {
+                                        <option @if(isset($UserOrganisation->available_to_work_in))
+                                            @if ("physically" == $UserOrganisation->available_to_work_in) 
                                             {{'selected'}}
 
                                             @endif

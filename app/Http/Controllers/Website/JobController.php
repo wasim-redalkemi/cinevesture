@@ -51,7 +51,7 @@ class JobController extends WebController
         $countries = MasterCountry::query()->orderBy('name', 'ASC')->get();
         $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();
         $workspaces = Workspace::query()->get();
-        $employments = MasterEmployement::query()->get();
+        $employments = MasterEmployement::query()->orderBy('name', 'ASC')->get();
         if (!isset($_REQUEST['job_id'])) {
             return view('website.job.post_a_job', compact(['countries', 'skills', 'employments', 'workspaces']));
         }
