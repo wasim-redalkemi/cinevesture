@@ -16,6 +16,7 @@ class TeamInvite extends Notification
      *
      * @return void
      */
+    public $data;
     public function __construct($data)
     {
         $this->data = $data;
@@ -41,9 +42,11 @@ class TeamInvite extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('Team Invite')
-                    ->action('Notification Action',$this->data['url'])
-                    ->line('Thank you for using our application!');
+                    ->subject($this->data['name'].'has invited you to join their organisation on Cinevesture.')
+                    ->greeting('Hi '.$this->data['first_name'].',')
+                    ->line('You have been invited by '.$this->data['name'].' to join '.$this->data['organisation_name'].' on Cinevesture.')
+                    ->action('Accept Action',$this->data['url'])
+                    ->line(' New to Cinevesture? With Cinevesture you can build your network in the media industry to find interesting people and projects to work with.');
     }
 
     /**
