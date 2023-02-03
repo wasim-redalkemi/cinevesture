@@ -1316,6 +1316,7 @@ label {
 
 .public-head-subimage {
     border-radius: 4px;
+    min-height: 340px;
 }
 
 .public-heading-text {
@@ -2678,6 +2679,42 @@ select option:first-child[value='']{
     /* background-color: rgba(0,0,0,.03); */
     /* margin: 2%; */
 }
+
+.project_loader {
+    display: none;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    z-index: 999999999;
+    top: 0%;
+    /* background-color: rgba(255,255,255,0.7); */
+}
+
+.page_loader_wrap
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 200px;
+    width: 200px;
+}
+.test.owl-carousel .owl-stage-outer .owl-stage {
+    margin-top: 12px !important;
+}
+
+.test.owl-carousel .home_img_wrap {
+transition: 0.3s all ease;
+}
+    .test.owl-carousel .home_img_wrap:hover {
+        /* background: rgba(0,0,0,0.2); */
+        transform: translateY(-8px);
+        border-color: #4D0D8A;
+        cursor: pointer;
+        position: absolute;
+        /* box-shadow:0px 0px 42px -13px rgb(220 62 164 / 20%); */
+}
+
 .home_img_wrap {
     width: 350px;
     height: 200px;
@@ -3984,9 +4021,19 @@ input:checked+.slider:before {
         padding-right: 0% !important;
     }
 
+    .fl-main-container .fl-container.fl-flasher .fl-content {
+        /* max-width: 50px; */
+        /* max-height: 40px; */
+    }
+    .fl-main-container .fl-container.fl-flasher.fl-error:not(.fl-rtl) {
+        
+        /* max-width: 250px; */
+    }
+
     .signup-container {
         background: #33084C !important;
-        max-width: 340px;
+        /* max-width: 340px; */
+        max-width: 100%;
         margin: 0 auto;
         /* padding: 0 35%; */
     }
@@ -4139,6 +4186,19 @@ input:checked+.slider:before {
     /* left: 180px !important; */
     left: 70% !important;
 }
+.plan_card { 
+    max-width: 300px;
+    margin: auto;
+}
+.plan_wraper { 
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 124%;
+}
+.currency_togle {
+    display: flex;
+    justify-content: center;
+}
 
 }
 
@@ -4272,9 +4332,16 @@ transition: 2s ease all; */
     margin: 0px;
 }
 
+
+.home_slider a .main_slider_elem_wrap:hover {
+    background-color: rgba(28, 3, 48, 0.01);
+
+}
+
 .main_slider_elem_wrap
 {
     position: absolute;
+    transform: 0.3s all ease;
     top: 0;
     height: 100%;
     width:100%;

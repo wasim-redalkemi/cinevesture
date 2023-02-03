@@ -225,7 +225,7 @@
                         return;
                         //setModal("","This video is a featured video. Do you really want to delete the video?","Yes, Delete","");
                     } else {
-                        setModal("","Do you really want to delete the video?","Yes, Delete","");
+                        setModal("","Do you really want to delete the video?","Delete","");
                     }
                     $(".deactivate_btn").click();
                     $(".modal-body button.delete_btn").off("click").click((e)=>{
