@@ -607,7 +607,7 @@
     //     } else {
     //     console.log("Invalid YouTube URL");
     //     }
-        function validateYouTubeUrl(url) {
+    function validateYouTubeUrl(url) {
      var pattern = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
      return url.match(pattern) ? RegExp.$1 : false;
         }
