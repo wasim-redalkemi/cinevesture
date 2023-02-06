@@ -173,7 +173,11 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="d-flex my-4 align-items-center justify-content-between">
+                          {{-- {{$show}} --}}
+                            @if ($show== true)
+                               
+                            @else
+                            <div class="d-flex my-4 align-items-center  justify-content-between ">
                                 <div class="d-flex align-items-center">
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
                                         <button class="cantact-page-cmn-btn" id="contact_modal" data-toggle="modal" data-target="#contactModal">Contact Now </button>
@@ -183,7 +187,7 @@
                                     <!-- <i class="fa fa-share-alt mx-4 icon-size" aria-hidden="true"></i> -->
                                     {{-- <input type="hidden" name="" class="share_link" id="" value=""> --}}
                                     <button onclick="copyToClipboard('#urlcopy')" style="background-color: rgb(28 3 48)" class="clipboard pointer border-0"><img src="{{ asset('images/asset/share_image.svg') }}" class="mx-3" alt="image"></button>
-                                    <p id="urlcopy" class="d-none">{{route('public-view')}}?id={{$UserProject->id}}</p>
+                                    <p id="urlcopy" class="d-none">{{route('project-public-show')}}?id={{$UserProject->id}}&data={{true}}</p>
 
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
                                     <div> <i class="fa <?php if(isset($UserProject->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
@@ -191,6 +195,8 @@
                                 </div>
                                
                             </div>
+                            @endif
+                            
                         </div>
                     </div>
                 </div>
@@ -487,7 +493,9 @@
                 </div>
             </div>
         </div>
-       
+       @if ($show==true)
+           
+       @else
         <div class="public_subsection">
             <div class="row">
                 <div class="col-md-12">
@@ -528,6 +536,7 @@
                 </div>
             </div>
         </div>
+        @endif
         <!-- Contact modal  -->
         @include('website.modal.contact', [                                         
             'image' => (!empty($projectData[0]['user']['profile_image'])?$projectData[0]['user']['profile_image']:asset('images/asset/user-profile.png')),
@@ -649,7 +658,6 @@
 
                             break;
                         }
-
                     }
                 } else {
 
