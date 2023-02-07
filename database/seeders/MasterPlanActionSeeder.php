@@ -27,7 +27,7 @@ class MasterPlanActionSeeder extends Seeder
         ('11', 'View all listed projects','project-public-view'),
         ('12', 'Apply for unlimited jobs','apply-job'),
         ('13', 'Unlimited job posts','job-create'),
-        ('14', 'View listed jobs','posted-job'),
+        ('14', 'View jobs listed','posted-job'),
         ('15', 'Post # jobs','job-create')"; 
 
         DB::unprepared($query);
