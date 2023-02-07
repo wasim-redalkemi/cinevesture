@@ -29,7 +29,7 @@
         {{ucFirst($job->company_name)}} - {{@$job->jobLocation->name}} - <span style="color: #971E9B"> {{@$job->jobEmployements[0]->name}}</span>
 
     </div>
-    <div class="posted_job_header Aubergine_at_night" style="word-break: break-all;">
+    <div class="posted_job_header Aubergine_at_night forTextBreak" style="word-break: break-all;">
        <span class=""> {{ucFirst($job->description)}}</span>
     </div>
     <div class="d-block d-md-flex justify-content-between mt-2 mt-md-4">

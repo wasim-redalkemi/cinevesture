@@ -345,7 +345,7 @@
                 if(currentVideos.length > 0) {
                     $.each(currentVideos, (i,v) => {
                         let dnone =  "";//(parseInt(v.is_default_marked) == 1 ) ? "display:none" : "";
-                        str += '<div id="vid-'+v.id+'" class="col-md-3">';
+                        str += '<div id="vid-'+v.id+'" class="col-md-3 mt-3 mt-md-0">';
                             str += '<div class="img-container h_66">';
                             str += '<img src="'+v.media_info.thumbnail+'" class="width_inheritence" alt="image">';
                             str += '<div class="title project_card_data w-100 h-100">';

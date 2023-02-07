@@ -21,7 +21,7 @@
                     <p class="plain_header pb-0">Gallery</p>
                     <div id="Videos" class="add_content_wraper">
                         <div class="row video-sec">
-                            <div class="guide_profile_main_text Aubergine_at_night mt-2 mb-2">Videos</div>
+                            <div class="guide_profile_main_text Aubergine_at_night mt-2 mb-0 mb-md-2">Videos</div>
                                 <div class="video-list row col_wrap">
                                     <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
                                     <!-- <div class="col-md-3">

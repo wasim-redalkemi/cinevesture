@@ -154,11 +154,11 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="d-flex justify-content-end mt-4">
-                                        <button class="cancel_btn mx-3">Cancel</button>
+                                    <div class="d-flex justify-content-between justify-content-md-end flex-wrap mt-4">
+                                        <button class="cancel_btn mx-0 mx-md-3">Cancel</button>
                                         <input type="hidden" id="save_btn_value" name="saveButtonType" value="">
                                         <input type="hidden" name="experience_id" value="{{ $UserExperienceData->id }}">
-                                        <button type="submit" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-3">Save</button>
+                                        <button type="submit" name="saveAndNext" value="false" class="portfolio_save_btn guide_profile_btn mx-0 mx-md-3">Save</button>
                                     </div>
                                 </div>
                             </div>

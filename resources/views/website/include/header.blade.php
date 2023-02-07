@@ -68,3 +68,13 @@
     </div>
 </header>
 @endsection
+
+@push('scripts')
+<script>
+  $(document).click(function(e) {
+	if (!$(e.target).is('.navbar_sm')) {
+    	$('.collapse').collapse('hide');	    
+    }
+});
+</script>
+@endpush

@@ -19,7 +19,7 @@
 <div class="sidebar_collapse collapse dont-collapse-sm" id="collapseExample">
   
 <div class="sidebar_data_mobile sidebar" id="sidebar">
-    <hr class="sidebar_content_hr">
+    <hr class="sidebar_content_hr d-none d-md-block">
     <div class="sidebar_content"><a href="{{ route('project-list') }}">Projects</a></div>
     <hr class="sidebar_content_hr">
     {{-- <div class="sidebar_content"><a href="{{ route('profile-create') }}">Profile</a></div>
