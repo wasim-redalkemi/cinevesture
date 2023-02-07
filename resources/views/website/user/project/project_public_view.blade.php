@@ -588,43 +588,43 @@
                  });
    
 
-    $('#contact_btn').click(function(e)
-            {
-                var subject = $('#subject').val();
-                var email_1 = $('#email_1').val();
-                var message = $('#message').val();
-                var checkbox_cc = ($("#checkbox_cc").prop("checked") == true ? '1' : '0');
-                let $btn = $(this);
-                e.preventDefault();
-                e.stopPropagation();
+    // $('#contact_btn').click(function(e)
+    //         {
+    //             var subject = $('#subject').val();
+    //             var email_1 = $('#email_1').val();
+    //             var message = $('#message').val();
+    //             var checkbox_cc = ($("#checkbox_cc").prop("checked") == true ? '1' : '0');
+    //             let $btn = $(this);
+    //             e.preventDefault();
+    //             e.stopPropagation();
 
-                $btn.text("Sending..");
-                $btn.prop('disabled',true);
+    //             $btn.text("Sending..");
+    //             $btn.prop('disabled',true);
                 
-                $.ajax(
-                {
-                    url:"{{ route('contact-user-mail-store') }}",
-                    type:'POST',
-                    dataType:'json',
-                    data:{subject:subject,email_1:email_1,message:message,checkbox_cc:checkbox_cc,"_token": "{{ csrf_token() }}"},
-                    success:function(response)
-                    {   $('#subject').val("");
-                        $('#message').val("");
-                        $btn.text("Send Mail");
-                        $btn.prop('disabled',false);
-                        toastMessage(response.status, response.msg);
-                        $('.modal').hide();
-                        $('.modal-backdrop').remove();
-                    },
-                    error:function(response,status,error)
-                    {     $btn.text("Send Mail");
-                          $btn.prop('disabled',false);
-                        console.log(response);
-                        console.log(status);
-                        console.log(error);
-                    } 
-                });
-            });
+    //             $.ajax(
+    //             {
+    //                 url:"{{ route('contact-user-mail-store') }}",
+    //                 type:'POST',
+    //                 dataType:'json',
+    //                 data:{subject:subject,email_1:email_1,message:message,checkbox_cc:checkbox_cc,"_token": "{{ csrf_token() }}"},
+    //                 success:function(response)
+    //                 {   $('#subject').val("");
+    //                     $('#message').val("");
+    //                     $btn.text("Send Mail");
+    //                     $btn.prop('disabled',false);
+    //                     toastMessage(response.status, response.msg);
+    //                     $('.modal').hide();
+    //                     $('.modal-backdrop').remove();
+    //                 },
+    //                 error:function(response,status,error)
+    //                 {     $btn.text("Send Mail");
+    //                       $btn.prop('disabled',false);
+    //                     console.log(response);
+    //                     console.log(status);
+    //                     console.log(error);
+    //                 } 
+    //             });
+    //         });
 
     $('.like-project').on('click', function(e) {
 
