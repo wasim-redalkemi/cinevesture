@@ -31,7 +31,7 @@
                                             } ?>" class="upload_preview for_show croperImg" width="100">
 
                                 <div for="file-input" class="d-none">
-                                    <input name="croppedOrgImg " class=" @error('croppedOrgImg') is-invalid @enderror" id="croppedOrgImg" type="hidden" required>
+                                    <input name="croppedOrgImg" class=" @error('croppedOrgImg') is-invalid @enderror" id="croppedOrgImg" type="hidden" required>
                                     @error('croppedOrgImg')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -48,7 +48,7 @@
                                     <div class="search-head-subtext Aubergine_at_night open_file_explorer pointer">
                                         Upload Profile Picture <span style="color:red">*</span>
                                     </div>
-                                    <div class="pointer search-head-subtext deep-pink delete_image">
+                                    <div class="pointer search-head-subtext open_file_explorer deep-pink delete_image">
                                         Delete
                                     </div>
                                     <input type="file" name="logo" class="d-none @error('logo') is-invalid @enderror file_element image" accept=".jpg,.jpeg,.png" required>
@@ -207,6 +207,13 @@
                                             @endif
                                             @endif value="physically">Physically
                                         </option>
+                                        <option @if(isset($UserOrganisation->available_to_work_in))
+                                            @if ("hybrid" == $UserOrganisation->available_to_work_in) 
+                                            {{'selected'}}
+
+                                            @endif
+                                            @endif value="hybrid">Hybrid
+                                        </option>
                                     </select>
                                     @error('available_to_work_in')
                                     <span class="invalid-feedback" role="alert">
@@ -256,12 +263,15 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Introduction Video</label>
-                                    <input type="url" class="outline form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="{{(isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:'' }}" aria-label="Username" aria-describedby="basic-addon1" autofocus>
+                                    <input type="url" id="introduction_video" class="outline form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="{{(isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:'' }}" aria-label="Username" aria-describedby="basic-addon1" autofocus>
                                     @error('intro_video_link')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
+                                    <div class="intro-video for_error_msg" style="display:none">
+                                        <strong>Only youtube and vimeo URLs are allowed.</strong>
+                                    </div>
                                 </div>
                             </div>
                             {{-- <div class="col-md-3 d-flex align-items-end">
@@ -391,6 +401,27 @@
 
         $('#lang').change(function() {
             $(".uploadedPdf").text(resume.name)
+        });
+
+        $('button[type="submit"]').removeAttr('disabled');   
+        $('#introduction_video').on('change mouseup keyup',function() {
+            $("div.intro-video").hide();
+            $('button[type="submit"]').removeAttr('disabled');
+            var urlLength= $('#introduction_video').val().length;
+            var url = $('#introduction_video').val();
+            // console.log(urlLength,url);
+            if(url == ""){
+                return true;
+                
+            }
+            var videoId = validateYouTubeUrl(url);
+            // console.log("videoId = ",videoId);
+            if(!videoId){
+                // console.log("true  ");
+                $("div.intro-video").show();
+                $('button[type="submit"]').attr('disabled','disabled');
+            }
+            return false;
         });
     });
 
@@ -587,6 +618,10 @@
         $('.for_show').css('display', 'none');
 
     })
+    function validateYouTubeUrl(url) {
+     var pattern = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+     return url.match(pattern) ? RegExp.$1 : false;
+        }
 
 </script>
 @endpush
