@@ -4266,9 +4266,15 @@ transition: 2s ease all; */
     color: #000;
 }
 
-.validateBeforeSubmit label.error {
+.validateBeforeSubmit label.error, .for_error_msg {
     color: #DD45B3;
     font-weight: 600;
+    margin: 0px;
+}
+.for_error_msg {
+    color: #DD45B3;
+    font-weight: 600;
+    font-size: 14px;
     margin: 0px;
 }
 

@@ -19,7 +19,7 @@ class MasterGenderSeeder extends Seeder
             ['gender' => 'Female'],
             ['gender' => 'Non-Binary'],
             ['gender' => 'Transgender'],
-            ['gender' => 'Gender non-confirming'],
+            ['gender' => 'Gender non-conforming'],
             ['gender' => 'Prefer Not To Say'],
         ]);
     }
