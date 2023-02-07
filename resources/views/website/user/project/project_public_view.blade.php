@@ -6,9 +6,9 @@
 @include('website.include.header')
 @endsection
 
-@section('nav')
+{{-- @section('nav')
 @include('website.include.nav')
-@endsection
+@endsection --}}
 
 @section('content')
 <section class="public-head-section">
