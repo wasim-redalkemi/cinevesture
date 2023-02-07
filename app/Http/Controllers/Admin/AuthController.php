@@ -103,8 +103,8 @@ public function login(Request $request)
     return $this->sendFailedLoginResponse($request);
 } 
 catch (Exception $e)
-{
-    Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+{   
+    Session::flash('response', ['text'=>'Login credentials are incorrect. Please try again.!','type'=>'danger']);
     return back();
 }
 // catch (\Throwable $th) {
