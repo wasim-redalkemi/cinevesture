@@ -269,8 +269,8 @@
     $(".main_slider.owl-carousel").owlCarousel({
       center: true,
       // autoPlay: 500,
-      autoplayTimeout: 3000,
-      autoplay: true,
+      // autoplayTimeout: 3000,
+      autoplay: false,
       loop: true,
       nav: true,
       items: 1,

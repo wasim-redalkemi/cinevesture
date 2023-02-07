@@ -128,17 +128,17 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="d-flex justify-content-end mt-4">
-                                    <a href="{{route('portfolio-create')}}"class="cancel_btn mx-3" style="text-decoration:none">Cancel</a>
+                                    <div class="d-flex justify-content-between justify-content-md-end flex-wrap mt-4">
+                                    <a href="{{route('portfolio-create')}}"class="cancel_btn mx-0 mx-md-3" style="text-decoration:none">Cancel</a>
                                         {{-- <button class="save_add_btn">Save & add another</button> --}}
                                         <button type="submit" name="saveAndAnother" value="false" class="portfolio_save_btn save_add_btn">Save & add another</button>
                                         <input type="hidden" id="save_btn_value" name="saveButtonType" value="">
-                                        {{-- <button type="submit" class="guide_profile_btn mx-3">Save & next</button> --}}
+                                        {{-- <button type="submit" class="guide_profile_btn mx-0 mx-md-3">Save & next</button> --}}
                                     
-                                        <button type="submit" name="saveAndNext" value="false" class="portfolio_save_btn_next guide_profile_btn mx-3">Save & next</button>
+                                        <button type="submit" name="saveAndNext" value="false" class="portfolio_save_btn_next guide_profile_btn mx-0 mx-md-3">Save & next</button>
                                         <input type="hidden" id="save_btn_next" name="flag" value="">
                                     
-                                        <a href="{{route('experience-skip')}}"class="cancel_btn mx-3" style="text-decoration:none">Skip</a>
+                                        <a href="{{route('experience-skip')}}"class="cancel_btn mx-0 mx-md-3" style="text-decoration:none">Skip</a>
                                         
                                     </div>
                                 </div>

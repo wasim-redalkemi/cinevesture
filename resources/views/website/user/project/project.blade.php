@@ -58,7 +58,9 @@
                     </div>
                     @endforeach
                     @else
+                    <div class="col-md-12">
                         {!! config('constants.NO_DATA_FAVOURITE') !!}
+                    </div>
                     @endif
                 </div>
             </div>

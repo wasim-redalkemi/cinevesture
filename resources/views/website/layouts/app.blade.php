@@ -40,6 +40,14 @@
             <div class="main_content">
                 @yield('content')
             </div>
+
+            <div class="project_loader">
+            <div class="page_loader_wrap">
+            <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_41zJLwFKz5.json"  background="transparent"  speed="0.4"   loop  autoplay></lottie-player>
+            <!-- <lottie-player src="{{ asset('public\images\asset\loader.json') }}"  background="transparent"  speed="0.4"   loop  autoplay></lottie-player> -->
+            </div>
+            </div>
+
             @yield('footer')
 
             <!-- Modal for Confirmation for account deactivate -->
@@ -70,8 +78,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
     {{-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> --}}
+
+    <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     
     <script>
+        
+    // $('.project_loader').show()
 
         var BaseUrl = '{{config('app.url')}}';
         var CSRFToken = '{{ csrf_token() }}';
@@ -213,10 +225,14 @@
         });
   </script>
     
-
+<script>
+    $(document).ready(function(){ 
+        $('.project_loader').hide()
+    })
+</script>
     @yield('scripts')
     @stack('scripts')
+    @include('website.include.validator-scripts')
 </body>
-@include('website.include.validator-scripts')
 </html>
 

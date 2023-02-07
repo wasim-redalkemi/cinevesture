@@ -164,14 +164,14 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="d-flex justify-content-start justify-content-md-end flex-wrap mt-4">
-                                    <a href="{{route('profile-create')}}" class="cancel_btn mx-3" style="text-decoration:none">Cancel</a>
+                                <div class="d-flex justify-content-between justify-content-md-end flex-wrap mt-4">
+                                    <a href="{{route('profile-create')}}" class="cancel_btn mx-0 mx-md-3" style="text-decoration:none">Cancel</a>
                                     <button type="button" name="saveAndAnother" value="false" class="portfolio_save_btn save_add_btn">Save & add another</button>
                                     <input type="hidden" id="save_btn_value" name="saveButtonType" value="">
                                     <input type="hidden" name="flag" id="save_btn_next" value="">
-                                    <button type="submit" name="saveAndNext" value="false" class="portfolio_save_btn_next guide_profile_btn mx-3 mt-2 mt-md-0">Save & next</button>
+                                    <button type="submit" name="saveAndNext" value="false" class="portfolio_save_btn_next guide_profile_btn mx-0 mx-md-3 mt-2 mt-md-0">Save & next</button>
 
-                                    <a href="{{route('portfolio-skip')}}"class="cancel_btn mx-3 mt-2 mt-md-0" style="text-decoration:none">Skip</a>
+                                    <a href="{{route('portfolio-skip')}}"class="cancel_btn mx-0 mx-md-3 mt-2 mt-md-0" style="text-decoration:none">Skip</a>
                                 </div>
                             </div>
                         </div>

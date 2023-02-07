@@ -16,8 +16,13 @@
                   <input type="text" name="search" id="search-project"class="searchTerm" placeholder="Search">
                 </div>
               </div>
-              <a class="add-proj-btn my-2 my-sm-0 mr-0 " href="{{ route('project-overview')}}">
-                Add a Project
+              <a class="my-2 my-sm-0 mr-0 " href="{{ route('project-overview')}}">
+                <!-- Add a Project    -->
+
+                <button type="button" class="add-proj-btn text-white">
+                      Add a Project
+                  </button>
+
               </a>
               </div>
               <div class="navbar_mobile">
