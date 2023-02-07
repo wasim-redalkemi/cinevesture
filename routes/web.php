@@ -89,7 +89,7 @@ Route::group(["middleware"=>["auth","revalidate","verified"]],function(){
 	{	Route::get('/plans',[PlanController::class,'showPlans'])->name('plans-view');
         Route::get('/subscription/order-create',[SubscriptionController::class,'createOrder'])->name('subscription-order-create');
         Route::get('/subscription/success',[SubscriptionController::class,'paymentSuccess'])->name('subscription-success');
-        Route::get('/subscription/failed',[SubscriptionController::class,'paymnetFailed'])->name('subscription-failed');
+        Route::get('/subscription/failed',[SubscriptionController::class,'paymentFailed'])->name('subscription-failed');
 
 
 		Route::get('/profile-private-show', [UserController::class, 'profilePrivateShow'])->name('profile-private-show')->middleware('plancheck');

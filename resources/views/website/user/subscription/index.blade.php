@@ -104,7 +104,6 @@
                                             <li class="d-flex align-items-baseline"> @if($relation->limit != 0)
                                                <span class="list"></span>
                                                <span class="mx-2">
-                                                   {{-- {{$relation->limit}} {{$relation->getOperation->name}} --}}
                                                    {{str_replace('#', $relation->limit, $relation->getOperation->name)}}
                                                </span>
                                                @else

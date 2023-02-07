@@ -121,7 +121,7 @@ class SubscriptionController extends Controller
             $order->save();
           
 
-            return back()->with('error', 'Payment Failed. Please try after sometime.');
+            return redirect()->route('plans-view')->with('error', 'Payment Failed. Please try after sometime.');
         } catch (\Exception $e) {
             return back()->with('error', 'Something went wrong, Please try again later.');
         }

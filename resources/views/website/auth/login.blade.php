@@ -13,7 +13,7 @@
 
 <section class="auth_section p-0 mt-0">
     <div class="main_page_wraper">
-        <form method="POST" enctype="multipart/form-data" action="{{ route('login') }}">
+        <form method="POST" id="login-form" enctype="multipart/form-data" action="{{ route('login') }}">
             @csrf
             <div class="container">
                 <div class="row">
@@ -25,26 +25,29 @@
                                 </div>
 
                                 <div class="col-12 mt-4-5 pt-2 pt-lg-5">
-                                    <input type="text" class="is-invalid-remove email-only outline w-100 @error('email') is-invalid @enderror" value="{{old('email')}}" name="email" placeholder="Email" required autocomplete="email" autofocus>
+                                    <input type="text" class="is-invalid-remove email-only outline w-100 @error('email') is-invalid @enderror" value="{{old('email')}}" id="email" name="email" placeholder="Email" required autocomplete="email" autofocus>
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
-
+ 
                                 </div>
                                 <div class="col-12 mt-4-5">
-                                    <input type="password" class="outline w-100 @error('password') is-invalid @enderror" name="password" placeholder="Password" required autocomplete="current-password">
+                                    <input type="password" class="outline w-100 @error('password') is-invalid @enderror" name="password" placeholder="Password" id="password" required autocomplete="current-password">
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
-
-                                <div class="col-12 mt-4 pt-2 pt-md-0 mt-md-5">
-                                    <button type="submit" class="outline w-100 mt-2 mt-md-0">
+                                <div class="col-12 mt-4-5">
+                                  <div class="g-recaptcha" data-callback="imNotARobot" data-sitekey="{{config('constants.site-key-local')}}"></div>
+                                   <div id="captchaError" class=" field-error "></div>
+                                </div>
+                                <div class="col-12 mt-4 pt-2 pt-md-0">
+                                    <button id="login-submit" class="outline w-100 mt-2 mt-md-0">
                                         {{ __('Log In') }}
                                     </button>
                                 </div>
@@ -88,5 +91,23 @@
     </div>
 </section>
 
+@push('script')
+<script>
+	$('#login-submit').on('click', function (e) {
+		if (grecaptcha.getResponse() == "" && $.trim($('#email').val()) != "" && $.trim($('#password').val()) != "" ) {
+			e.preventDefault();
+			$("#captchaError").show().html("Recaptcha is invalid");
+		} else {
+			$("#captchaError").hide();
+			$('#login-form').submit();
+		}
 
+
+	});
+    
+	function imNotARobot(){
+		$("#captchaError").hide();
+	}
+	</script>
+@endpush
 @endsection
