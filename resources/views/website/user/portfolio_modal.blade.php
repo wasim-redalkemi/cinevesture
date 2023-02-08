@@ -60,7 +60,7 @@
         $(".portfolioImage.owl-carousel").owlCarousel({
         center: true,
         // autoPlay: 1000,
-        // autoplay: true,
+        autoplay: true,
         loop: true,
         nav: true,
         margin: 20,
