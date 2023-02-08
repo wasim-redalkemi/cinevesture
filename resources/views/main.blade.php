@@ -181,7 +181,7 @@
                          <span class="white"> {{$v1->projectLanguages[0]['name']}} /</span>
                         @endif
                         @if (isset($v1->genres[0]) && !empty($v1->genres[0]))
-                         <span class="white"> {{$v1->genres[0]['name']}} /</span>
+                         <span class="white"> {{$v1->genres[0]['name']}} </span>
                         @endif
                         {{-- @php
                           $country_data = $v1->toArray();
