@@ -61,7 +61,7 @@
                     <div class="row">
                         <?php $flag = 0; ?>
                        @foreach($plans as $plan)
-                        <div class="col-md-3">
+                        <div class="col-md-3 mb-2 mb-md-0">
                             <div class="plan_card">
                                 <div class="plain_detail">
                                     <div class="plain_header text-center">{{$plan->plan_name}}</div>

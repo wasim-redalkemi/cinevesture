@@ -403,6 +403,15 @@ a {
     color: #FAF8FB;
     text-decoration: none;
 }
+.project-sub-res-text {
+    width: 500px;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 158%;
+    letter-spacing: 0.004em;
+    color: #FAF8FB;
+    text-decoration: none;
+}
 
 .duration-lang-text {
     font-weight: 300;
@@ -773,6 +782,7 @@ label {
     color: #971E9B;
     background-color: transparent !important;
     border-color: #971E9B !important;
+    border: 2px solid;
 }
 
 .search-box-container {
@@ -1321,6 +1331,13 @@ label {
 }
 
 .public-heading-text {
+    font-weight: 600;
+    /* font-size: 34px; */
+    font-size: 2.125rem;
+    line-height: 110%;
+    color: #FAF8FB;
+}
+.public-head-res-text {
     font-weight: 600;
     /* font-size: 34px; */
     font-size: 2.125rem;
@@ -2595,10 +2612,10 @@ select option:first-child[value='']{
     /* width: 6em !important; */
 }
 
- /* .select2-hidden-accessible .select2-container--default .select2-search--inline .select2-search__field::placeholder {
+ .select2-hidden-accessible .select2-container--default .select2-search--inline .select2-search__field::placeholder {
     color: #4D0D8A;
 }
-.profile_input input::placeholder {
+/* .profile_input input::placeholder {
     color: #4D0D8A;
 } */
 
@@ -3848,7 +3865,7 @@ input:checked+.slider:before {
 
     .navbar-toggler {
         position: absolute;
-        right: -10px;
+        right: 0px;
     }
 
     .navbar_sm {
@@ -4043,13 +4060,17 @@ input:checked+.slider:before {
     }
 
     .fl-main-container .fl-container.fl-flasher .fl-content {
-        /* max-width: 50px; */
+        /* max-width: 300px !important; */
         /* max-height: 40px; */
     }
     .fl-main-container .fl-container.fl-flasher.fl-error:not(.fl-rtl) {
         
-        /* max-width: 250px; */
+        /* max-width: 250px;
+        display: flex;
+        align-items: flex-end; */
     }
+
+    
 
     .signup-container {
         background: #33084C !important;
@@ -4285,7 +4306,13 @@ transition: 0;
     padding: 0.25rem 0;
 }
 .search-table-body td {
-
+   font-size: 14px !important;
+}
+.mr_3 {
+    margin-right: 0px;
+}
+.public-head-res-text {
+    font-size: 24px;
 }
 
 }
