@@ -6,9 +6,9 @@
 @include('website.include.header')
 @endsection
 
-@section('nav')
+{{-- @section('nav')
 @include('website.include.nav')
-@endsection
+@endsection --}}
 
 @section('content')
 <section class="public-head-section">
@@ -173,7 +173,11 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="d-flex my-4 align-items-center justify-content-between">
+                          {{-- {{$show}} --}}
+                            @if ($show== true)
+                               
+                            @else
+                            <div class="d-flex my-4 align-items-center  justify-content-between ">
                                 <div class="d-flex align-items-center">
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
                                         <button class="cantact-page-cmn-btn" id="contact_modal" data-toggle="modal" data-target="#contactModal">Contact Now </button>
@@ -183,7 +187,7 @@
                                     <!-- <i class="fa fa-share-alt mx-4 icon-size" aria-hidden="true"></i> -->
                                     {{-- <input type="hidden" name="" class="share_link" id="" value=""> --}}
                                     <button onclick="copyToClipboard('#urlcopy')" style="background-color: rgb(28 3 48)" class="clipboard pointer border-0"><img src="{{ asset('images/asset/share_image.svg') }}" class="mx-3" alt="image"></button>
-                                    <p id="urlcopy" class="d-none">http://local.cinevesture.com/project/project-public-view?id={{$UserProject->id}}</p>
+                                    <p id="urlcopy" class="d-none">{{route('project-public-show')}}?id={{$UserProject->id}}&data={{true}}</p>
 
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id)
                                     <div> <i class="fa <?php if(isset($UserProject->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
@@ -191,6 +195,8 @@
                                 </div>
                                
                             </div>
+                            @endif
+                            
                         </div>
                     </div>
                 </div>
@@ -490,7 +496,9 @@
                 </div>
             </div>
         </div>
-       
+       @if ($show==true)
+           
+       @else
         <div class="public_subsection">
             <div class="row">
                 <div class="col-md-12">
@@ -531,6 +539,7 @@
                 </div>
             </div>
         </div>
+        @endif
         <!-- Contact modal  -->
         @include('website.modal.contact', [                                         
             'image' => (!empty($projectData[0]['user']['profile_image'])?$projectData[0]['user']['profile_image']:asset('images/asset/user-profile.png')),
@@ -582,43 +591,43 @@
                  });
    
 
-    $('#contact_btn').click(function(e)
-            {
-                var subject = $('#subject').val();
-                var email_1 = $('#email_1').val();
-                var message = $('#message').val();
-                var checkbox_cc = ($("#checkbox_cc").prop("checked") == true ? '1' : '0');
-                let $btn = $(this);
-                e.preventDefault();
-                e.stopPropagation();
+    // $('#contact_btn').click(function(e)
+    //         {
+    //             var subject = $('#subject').val();
+    //             var email_1 = $('#email_1').val();
+    //             var message = $('#message').val();
+    //             var checkbox_cc = ($("#checkbox_cc").prop("checked") == true ? '1' : '0');
+    //             let $btn = $(this);
+    //             e.preventDefault();
+    //             e.stopPropagation();
 
-                $btn.text("Sending..");
-                $btn.prop('disabled',true);
+    //             $btn.text("Sending..");
+    //             $btn.prop('disabled',true);
                 
-                $.ajax(
-                {
-                    url:"{{ route('contact-user-mail-store') }}",
-                    type:'POST',
-                    dataType:'json',
-                    data:{subject:subject,email_1:email_1,message:message,checkbox_cc:checkbox_cc,"_token": "{{ csrf_token() }}"},
-                    success:function(response)
-                    {   $('#subject').val("");
-                        $('#message').val("");
-                        $btn.text("Send Mail");
-                        $btn.prop('disabled',false);
-                        toastMessage(response.status, response.msg);
-                        $('.modal').hide();
-                        $('.modal-backdrop').remove();
-                    },
-                    error:function(response,status,error)
-                    {     $btn.text("Send Mail");
-                          $btn.prop('disabled',false);
-                        console.log(response);
-                        console.log(status);
-                        console.log(error);
-                    } 
-                });
-            });
+    //             $.ajax(
+    //             {
+    //                 url:"{{ route('contact-user-mail-store') }}",
+    //                 type:'POST',
+    //                 dataType:'json',
+    //                 data:{subject:subject,email_1:email_1,message:message,checkbox_cc:checkbox_cc,"_token": "{{ csrf_token() }}"},
+    //                 success:function(response)
+    //                 {   $('#subject').val("");
+    //                     $('#message').val("");
+    //                     $btn.text("Send Mail");
+    //                     $btn.prop('disabled',false);
+    //                     toastMessage(response.status, response.msg);
+    //                     $('.modal').hide();
+    //                     $('.modal-backdrop').remove();
+    //                 },
+    //                 error:function(response,status,error)
+    //                 {     $btn.text("Send Mail");
+    //                       $btn.prop('disabled',false);
+    //                     console.log(response);
+    //                     console.log(status);
+    //                     console.log(error);
+    //                 } 
+    //             });
+    //         });
 
     $('.like-project').on('click', function(e) {
 
@@ -652,7 +661,6 @@
 
                             break;
                         }
-
                     }
                 } else {
 

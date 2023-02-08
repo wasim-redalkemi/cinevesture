@@ -322,13 +322,14 @@ class ProjectController extends WebController
                 $details->financing_secured = $request->financing_secured;
                 if($details->update()) {
                     if (!empty($request->category_id)) {
-                        ProjectCategory::query()->where('project_id', $details->id)->delete();
-                        foreach ($request->category_id as $k => $v) {
+                       $projectCategory= ProjectCategory::query()->where('project_id', $details->id)->delete();
+                        // foreach ($request->category_id as $k => $v) {
                             $projectCategory = new ProjectCategory();
                             $projectCategory->project_id = $details->id;
-                            $projectCategory->category_id = $v;
+                            $projectCategory->category_id = $request->category_id;
                             $projectCategory->save();
-                        }
+                        
+                        // }
                     }
                     if (!empty($request->gener)) {
                         ProjectGenre::query()->where('project_id', $details->id)->delete();
@@ -611,6 +612,9 @@ class ProjectController extends WebController
             // {
             //     throw new Exception($validRequest['error_msg']);
             // }
+
+            
+                $show=false;
             if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
             {
                 return back()->with('error','Project Id not found.');
@@ -621,22 +625,36 @@ class ProjectController extends WebController
             $categories = MasterProjectCategory::all();
             $looking_for = MasterLookingFor::all();
             $project_stages = ProjectStage::all();
-             
-            $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->with('isfavouriteProject')->first();
-            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectMarkVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->where(function($q){
-                if(auth()->user()->user_type == 'A'){
-                    $q->where('user_status','!=', 'draft');
-                }
-                else {
-                    $q->where('user_status', 'published')
-                    ->Where('admin_status', 'active');
-                }
-            })
-            ->get();
-            if (empty($projectData)) {
-                return back()->with('error','This Project is Unpublished/Inactive.');
-            }
+           
             
+             if(!empty($_REQUEST['data']) && ($_REQUEST['data']==1)){
+                $show=true;
+                $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
+                $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectMarkVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])
+                ->get();
+                if (empty($projectData)) {
+                    return back()->with('error','This Project is Unpublished/Inactive.');
+                }
+            }else{
+            
+                $UserProject = UserProject::query()->where('id',$_REQUEST['id'])
+                ->with('isfavouriteProject')->first();
+                
+                
+                $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectMarkVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->where(function($q){
+                    if(auth()->user()->user_type == 'A'){
+                        $q->where('user_status','!=', 'draft');
+                    }
+                    else {
+                        $q->where('user_status', 'published')
+                        ->Where('admin_status', 'active');
+                    }
+                })
+                ->get();
+                if (empty($projectData)) {
+                    return back()->with('error','This Project is Unpublished/Inactive.');
+                }
+            }
             $gener=ProjectGenre::query()->where('project_id',$_REQUEST['id'])->get();
             foreach($gener as $generIds){
                 $generid[]=$generIds->gener_id;
@@ -646,22 +664,32 @@ class ProjectController extends WebController
                 $projectIdArray[]=$projectId->project_id;
             }
             $projectIdUnique=array_unique($projectIdArray);
-            $recomProject=UserProject::query()->whereIn('id',$projectIdUnique)
-            ->with(['projectOnlyImage','isfavouriteProject'])
-                          ->where('id','!=',$_REQUEST['id'])
-                          ->where('user_status','published')
-                          ->where('admin_status','active')
-                          
-                          ->orderBy('id','desc')
-                          ->paginate(10);
-                        //   dd($recomProject);
+            if(!empty($_REQUEST['data']) && $_REQUEST['data']== true){
+                $recomProject=UserProject::query()->whereIn('id',$projectIdUnique)
+                ->with(['projectOnlyImage'])
+                            ->where('id','!=',$_REQUEST['id'])
+                            ->where('user_status','published')
+                            ->where('admin_status','active')
+                            
+                            ->orderBy('id','desc')
+                            ->paginate(10);
+            }else{
+                $recomProject=UserProject::query()->whereIn('id',$projectIdUnique)
+                ->with(['projectOnlyImage','isfavouriteProject'])
+                            ->where('id','!=',$_REQUEST['id'])
+                            ->where('user_status','published')
+                            ->where('admin_status','active')
+                            
+                            ->orderBy('id','desc')
+                            ->paginate(10);
+            }
                           
             $projectData = $projectData->toArray();
             if (empty($projectData)) {
                 return back()->with('error','This Project is Unpublished/Inactive.');
             }
 
-            return view('website.user.project.project_public_view', compact(['UserProject','projectData','geners','categories','looking_for','project_stages','countries','languages','recomProject']));
+            return view('website.user.project.project_public_view', compact(['UserProject','projectData','geners','categories','looking_for','project_stages','countries','languages','recomProject','show']));
 
         } catch (Exception $e) {
             return back()->with('error','Something went wrong.');

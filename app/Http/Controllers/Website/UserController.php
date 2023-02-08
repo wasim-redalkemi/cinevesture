@@ -148,7 +148,7 @@ class UserController extends WebController
                 ->get()
                 ->toArray();
             // Endorsement
-            $user_endorsement = Endorsement::query()->with('endorsementCreater')->where('to',$user->id)->where('status','1')
+            $user_endorsement = Endorsement::query()->with('endorsementCreater')->with('endorsementorganisation')->where('to',$user->id)->where('status','1')
                                 ->orderByDesc('id')->limit(5)->get();
             return view('website.user.profile_private_view', compact(['user', 'portfolio', 'experience', 'qualification', 'user_country','user_state', 'user_age', 'user_skills', 'user_languages','user_endorsement','user_gender','user_gender_pronouns']));
         } catch (Exception $e) {
@@ -875,12 +875,17 @@ class UserController extends WebController
             // if(!$_REQUEST['email_1'] && !$_REQUEST['message'] && !$_REQUEST['subject']){
             //     return ['satus'=>0,'msg'=>"Email or message or subject fields can not be empty."];
             // }
+            $user = User::query()->where('email',$request->email_1)->first();
+            if(!$user){
+                return ['status'=>0,'msg'=>"Something went wrong. Please try again later."];
+            }
             if(!empty($_REQUEST['email_1']) ){
                 $email = $_REQUEST['email_1'];
                 $collect = collect();
                 $collect->put('url','https://www.youtube.com/');
                 $collect->put('subject',$request->subject);
                 $collect->put('msg',$request->message);
+                $collect->put('first_name',$user->name);
                 if ($_REQUEST['checkbox_cc'] == 1) {
                     
                     $collect->put('cc_email',auth()->user()->email);

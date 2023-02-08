@@ -22,6 +22,7 @@
     {{-- <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> --}}
 
 
+
     @yield('css')
 </head>
 
@@ -87,7 +88,11 @@
 
         var BaseUrl = '{{config('app.url')}}';
         var CSRFToken = '{{ csrf_token() }}';
-
+        $('select').change(function(){
+            if ($(this).val()!='') {
+                $(this).next('.error').hide();
+            }
+        })
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

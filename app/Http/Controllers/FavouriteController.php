@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Http\Controllers\Controller;
 use App\Models\Endorsement;
 use App\Models\User;
@@ -23,16 +24,21 @@ class FavouriteController extends Controller
      */
     public function index()
     {
-        $user_projects = UserFavouriteProject::query()->with('projects.projectImage')
-                         ->where('user_id',auth()->user()->id)->orderBy('created_at', 'DESC')->paginate(6);
-        $user_profiles = UserFavouriteProfile::query()->with('profiles','profileSkills.getSkills','profileCountry.country')
-                         ->where('user_id',auth()->user()->id)->orderBy('created_at', 'DESC')->paginate(5);
-
-        $user_endorsement = Endorsement::query()->with('endorsementCreater')->where('to',auth()->user()->id)->where('status','1')
-                                ->orderByDesc('id')->get();
-                                // dd($user_endorsement);
-
-        return view('website.user.favourite.favourite',compact(['user_projects','user_profiles','user_endorsement']));
+        $user_projects = UserFavouriteProject::query()
+                        ->with('projects.projectImage')
+                        ->where('user_id', auth()->user()->id)
+                        ->orderBy('created_at', 'DESC')
+                        ->paginate(6);
+                        
+        $user_profiles = UserFavouriteProfile::query()
+                        ->with('profiles', 'profileSkills.getSkills', 'profileCountry.country')
+                        ->where('user_id', auth()->user()->id)
+                        ->orderBy('created_at', 'DESC')
+                        ->paginate(6);
+        $user_profiles->setPageName('user_profile_page');
+        $user_endorsement = Endorsement::query()->with('endorsementCreater')->where('to', auth()->user()->id)->where('status', '1')
+            ->orderByDesc('id')->get();
+        return view('website.user.favourite.favourite', compact(['user_projects', 'user_profiles', 'user_endorsement']));
     }
 
     /**
@@ -87,31 +93,31 @@ class FavouriteController extends Controller
      */
     public function update(Request $request)
     {
-        try{ $validator = Validator::make($request->all(), [
+        try {
+            $validator = Validator::make($request->all(), [
 
-            'id' => 'required|exists:users,id',
-            
-        ]);
+                'id' => 'required|exists:users,id',
 
-        if ($validator->fails()) {
-            return ['status'=>False,'msg'=>"Something went wrong, Please try again later."];
-        }
-             $favourite = UserFavouriteProfile::query()
-                         ->where('user_id',auth()->user()->id)
-                         ->where('profile_id',$request->id)->first();
-             if($favourite){
+            ]);
+
+            if ($validator->fails()) {
+                return ['status' => False, 'msg' => "Something went wrong, Please try again later."];
+            }
+            $favourite = UserFavouriteProfile::query()
+                ->where('user_id', auth()->user()->id)
+                ->where('profile_id', $request->id)->first();
+            if ($favourite) {
                 $favourite->delete();
-                return ['status'=>True,'msg'=>"You have unliked a profile."];
-             }else{
+                return ['status' => True, 'msg' => "You have unliked a profile."];
+            } else {
                 $favourite = new UserFavouriteProfile();
                 $favourite->user_id = auth()->user()->id;
                 $favourite->profile_id = $request->id;
                 $favourite->save();
-                return ['status'=>True,'msg'=>"You have liked a profile."];
-              }
-
-        }catch(Exception $e){
-            return ['status'=>False,'msg'=>"Something went wrong, Please try again later."];
+                return ['status' => True, 'msg' => "You have liked a profile."];
+            }
+        } catch (Exception $e) {
+            return ['status' => False, 'msg' => "Something went wrong, Please try again later."];
         }
     }
 

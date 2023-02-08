@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 class MembershipConfarmation extends Notification
 {
@@ -16,6 +17,7 @@ class MembershipConfarmation extends Notification
      *
      * @return void
      */
+    protected $data;
     public function __construct($data)
     {
         $this->data = $data;

@@ -312,7 +312,7 @@
                                     } ?>" aria-label="Username" aria-describedby="basic-addon1">
                                     @error('linkedin_profile')
                                     <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                        <strong class="for_error_msg">{{ $message }}</strong>
                                     </span>
                                     @enderror
                                 </div>
@@ -334,13 +334,16 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Introduction Video</label>
-                                    <input type="url" class="outline is-invalid-remove form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" 
+                                    <input type="url" class="outline is-invalid-remove form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" id="introduction_video"
                                     value="<?php if (isset($user->intro_video_link)) {echo ($user->intro_video_link);} ?>" aria-label="Username" aria-describedby="basic-addon1">
                                     @error('intro_video_link')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
+                                    <div class="intro-video for_error_msg" style="display:none">
+                                        <strong>Only youtube and vimeo URLs are allowed.</strong>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -385,6 +388,27 @@
             // };
             // reader.readAsDataURL(file[0]);
 
+        });
+       
+        $('button[type="submit"]').removeAttr('disabled');   
+        $('#introduction_video').on('change mouseup keyup',function() {
+            $("div.intro-video").hide();
+            $('button[type="submit"]').removeAttr('disabled');
+            var urlLength= $('#introduction_video').val().length;
+            var url = $('#introduction_video').val();
+            // console.log(urlLength,url);
+            if(url == ""){
+                return true;
+                
+            }
+            var videoId = validateYouTubeUrl(url);
+            // console.log("videoId = ",videoId);
+            if(!videoId){
+                // console.log("true  ");
+                $("div.intro-video").show();
+                $('button[type="submit"]').attr('disabled','disabled');
+            }
+            return false;
         });
     });
 
@@ -572,6 +596,22 @@
         $('.for_show').css('display', 'none');
 
     })
+
+    
+
+    //     var url = $('#introduction_video').val();
+    //     alert(url); 
+    //     var videoId = validateYouTubeUrl(url);
+    //     if (videoId) {
+    //     console.log("Valid YouTube URL, video ID: " + videoId);
+    //     } else {
+    //     console.log("Invalid YouTube URL");
+    //     }
+    function validateYouTubeUrl(url) {
+     var pattern = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+     return url.match(pattern) ? RegExp.$1 : false;
+        }
+
 </script>
 
 

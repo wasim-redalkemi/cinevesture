@@ -4442,9 +4442,15 @@ transition: 2s ease all; */
     color: #000;
 }
 
-.validateBeforeSubmit label.error {
+.validateBeforeSubmit label.error, .for_error_msg {
     color: #DD45B3;
     font-weight: 600;
+    margin: 0px;
+}
+.for_error_msg {
+    color: #DD45B3;
+    font-weight: 600;
+    font-size: 14px;
     margin: 0px;
 }
 
@@ -4527,4 +4533,12 @@ transition: 2s ease all; */
 }
 .tooltip-inner {
     max-width: 100% !important;
+}
+
+.g-recaptcha {
+    transform:scale(0.85);
+    transform-origin:0 0;
+}
+.field-error{
+    color: #DD45B3;
 }

@@ -16,6 +16,7 @@ class ContactUser extends Notification
      *
      * @return void
      */
+    protected $data;
     public function __construct($data)
     {
         $this->data = $data;
@@ -42,11 +43,10 @@ class ContactUser extends Notification
     {
         $mail = (new MailMessage)
                     ->subject($this->data['subject'])
-                    ->greeting('Hello ')
-                    ->line('Team Invite')
+                    ->greeting('Hi '.$this->data['first_name'].',')
+                    ->line('You have received a message from [SenderName] via Cinevesture:')
                     ->line($this->data['msg'])
-                    ->action('Notification Action',$this->data['url'])
-                    ->line('Thank you for using our application!');
+                    ->line('You can respond to them by replying to this email.');
         if (!empty($this->data['cc_email']))
         {
             $mail->cc($this->data['cc_email']);
