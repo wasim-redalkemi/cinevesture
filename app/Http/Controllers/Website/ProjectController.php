@@ -322,13 +322,14 @@ class ProjectController extends WebController
                 $details->financing_secured = $request->financing_secured;
                 if($details->update()) {
                     if (!empty($request->category_id)) {
-                        ProjectCategory::query()->where('project_id', $details->id)->delete();
-                        foreach ($request->category_id as $k => $v) {
+                       $projectCategory= ProjectCategory::query()->where('project_id', $details->id)->delete();
+                        // foreach ($request->category_id as $k => $v) {
                             $projectCategory = new ProjectCategory();
                             $projectCategory->project_id = $details->id;
-                            $projectCategory->category_id = $v;
+                            $projectCategory->category_id = $request->category_id;
                             $projectCategory->save();
-                        }
+                        
+                        // }
                     }
                     if (!empty($request->gener)) {
                         ProjectGenre::query()->where('project_id', $details->id)->delete();

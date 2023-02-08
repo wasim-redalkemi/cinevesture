@@ -28,7 +28,7 @@ return [
     'MAX_TOTAL_BUDGET' => '1000000000',
     "captcha_site_key"=>"6LcY_VgeAAAAANo3BSTKnW3JSVFo9jVH2PTM1XsG", // being pupil
     "captcha_secret_key"=>"6LcY_VgeAAAAAJ6KQueL8BZPCSoIUacJVL832hXc", // being pupil
-    'site-key-local'=>'6LeRKX0cAAAAAMpqgV-7aXhxRPndLl6QeO8FzIdD',
+    'site-key-local'=>'6LekiWEkAAAAAHMJzr3nD092MhN93sxLsdYi4f1m',
 
 ];
 
