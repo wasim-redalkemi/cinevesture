@@ -109,6 +109,9 @@
                                             @endif
                                         </td>
                                     </tr>
+                                    @if ($show== true)
+                               
+                                    @else
                                     <tr>
                                         <td class="public-head-subtext white blackTextShadow text-start">Created By</td>
                                         <td class="aubergine contact-page-subtext candy-pink blackTextShadow text-end text-md-start">
@@ -119,6 +122,7 @@
                                             @endif
                                         </td>
                                     </tr>
+                                    @endif
                                     <tr>
                                         <td class="public-head-subtext white blackTextShadow text-start">Total Budget</td>
                                         <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
@@ -423,7 +427,9 @@
                 </div>
             </div>
         </div>
-
+        @if ($show== true)
+                               
+        @else
         <div class="public_subsection">
             <div class="row">
                 <div class="col-md-7">
@@ -457,6 +463,7 @@
                 </div>
             </div>
         </div>
+        @endif
 
         <div class="guide_profile_subsection">
             <div class="">
@@ -561,16 +568,16 @@
         var $temp = $("<input>");
         var $url = $(location).attr('href');
 
-        $('.clipboard').on('click', function() {
+        // $('.clipboard').on('click', function() {
                                          
-                        toastMessage(response.status, response.msg);
+        //                 toastMessage(response.status, response.msg);
                    
         // $("body").append($temp);
         // toastMessage("success",'copy successfully');
         // toastr.success('Success'."copy");
-        toastr.success('Click Button','done');
+        // toastr.success('Click Button','done');
 
-        toastMessage("success", 'URL copied')
+        // toastMessage("1", 'URL copied')
         // $temp.val($url).select();
         // document.execCommand("copy");
         // $temp.remove();
@@ -580,7 +587,7 @@
         // })
         // $('#forCopy').click(function() {
         //    toastr.success('Click Button');
-        });
+        // });
     });
     $("#contact_modal").on("click", function() {
                     $("#subject").val("");
