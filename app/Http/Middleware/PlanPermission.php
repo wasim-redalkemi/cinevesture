@@ -40,7 +40,10 @@ class PlanPermission
                 $getModule_id = $mod->id; 
              }elseif(in_array('project',$check_module)){
                 $mod = $request->session()->get('module')->sole('name','Projects');
-                $getModule_id = $mod->id; 
+                $getModule_id = $mod->id;
+                if(isset($request->id)){  // for project view and edit give permission free
+                  return $next($request);
+                } 
              }elseif(in_array('job',$check_module)){
                 $mod = $request->session()->get('module')->sole('name','Jobs');
                 $getModule_id = $mod->id; 
@@ -49,20 +52,26 @@ class PlanPermission
           
           if($getModule_id){
               $permissions = $request->session()->get('permission')->where('module_id',$getModule_id);
+              // For JOBS routes
               if($mod->name == 'Jobs'){
-               $key =  $check_module[count($check_module)-2];
-              }else{
-               $key =  $check_module[count($check_module)-1];
-
-              }
+               foreach($check_module as $name){
+                  if(in_array($name,$request->session()->get('action')->pluck('url_key')->toArray()) == true){
+                      $key =  $name;
+                      break;
+                  }
+               }
+               }else{
+                  $key =  $check_module[count($check_module)-1];
+               }
+              
               $selected_action = $request->session()->get('action')->where('url_key',$key)->pluck('id');
-              if($selected_action){ // check current url action in list
+              if(isset($selected_action[0])){ // check current url action in list
                $selected_permission = $permissions->whereIn('action_id',$selected_action)->first();
                if(!$selected_permission){ // view profile
                    return back()->with('error','Sorry, You Are Not Allowed to Access This Page');
                }else{
                   if($selected_permission->limit > 0){
-                     $status = MiddlewareUltilityController::checkActionLimit($selected_permission->id,$selected_permission->limit);
+                     $status = MiddlewareUltilityController::checkActionLimit($selected_permission->id,$selected_permission->limit,$request);
                      if($status == true){
                         return back()->with('error','Sorry, You Are Not Allowed to Access This Page');
                      }
@@ -71,6 +80,6 @@ class PlanPermission
            }
         }
       }
-      return $next($request);
+      return $next($request); 
  }
 }

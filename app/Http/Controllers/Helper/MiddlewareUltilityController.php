@@ -23,7 +23,7 @@ class MiddlewareUltilityController extends Controller
               }elseif($selcted_permission->getOperation->url_key == 'team-email'){
                    $count = UserInvite::query()->where('user_id',auth()->user()->id)->where('accepted','1')->count();
               }
-              if($count > $selcted_permission->limit){
+              if($count >= $selcted_permission->limit){
                 return true;
               }
 
