@@ -2612,7 +2612,7 @@ select option:first-child[value='']{
     /* width: 6em !important; */
 }
 
- .select2-hidden-accessible .select2-container--default .select2-search--inline .select2-search__field::placeholder {
+.country_select2 .select2-container--default .select2-search--inline .select2-search__field::placeholder {
     color: #4D0D8A;
 }
 /* .profile_input input::placeholder {
@@ -3958,7 +3958,8 @@ input:checked+.slider:before {
         width: 100%;
         height: 500px;
         display: flex;
-        align-items: center;
+        /* align-items: center; */
+        align-items: initial;
         justify-content: center;
     }
 
