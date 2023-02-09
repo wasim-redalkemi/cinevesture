@@ -1312,6 +1312,13 @@ label {
     letter-spacing: 0.0075em !important;
     color: #FAF8FB;
 }
+.public-head-res-subtext {
+    font-weight: 600 !important;
+    font-size: 18px !important;
+    line-height: 150% !important;
+    letter-spacing: 0.0075em !important;
+    color: #FAF8FB;
+}
 
 .hours-category {
     font-weight: 400;
@@ -4321,6 +4328,21 @@ transition: 0;
 .public-head-res-text {
     font-size: 24px;
 }
+.project-img-container {
+    display: inline-block;
+    position: relative;
+    /* max-width: 100%; */
+    max-width: 100%;
+    width: 100%;
+    display: flex;
+}
+
+.public-head-res-subtext {
+    font-weight: 600 !important;
+    font-size: 14px !important;
+}
+
+
 
 }
 

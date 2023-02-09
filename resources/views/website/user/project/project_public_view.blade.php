@@ -42,7 +42,7 @@
                                 <button class="verified-btn mx-3"> <img src="{{ asset('images/asset/verified-badge.svg') }}" width=100% alt="Image"> VERIFIED</button>
                                 @endif
                             </div>
-                            <div class="public-head-subtext text-start">
+                            <div class="public-head-res-subtext text-start">
                                 @if (isset($UserProject->logline))
                                 <span class="blackTextShadow">    {{ $UserProject->logline}}</span>
                                 @else
@@ -265,9 +265,11 @@
                     <div class="row">
                         @if (!empty($projectData[0]['banner_image']))
                         <div class="col-md-3 mt-3">
-                            <div class="project_public_img_wrap image_responsive_wrap image_in_full_view">
+                           <div class="d-flex justify-content-center justify-content-md-start">
+                           <div class="project_public_img_wrap image_responsive_wrap image_in_full_view">
                                     <img src="{{ Storage::url($projectData[0]['banner_image']) }}" class="" width=100% alt="image">
                             </div>
+                           </div>
                         </div>
                         @else
                         <span class="text-light"><b>-</b></span>
@@ -275,7 +277,7 @@
                     </div>
 
                     <div class="public-head-subtext mt-3">Photos</div>
-                    <div class="d-flex flex-wrap">
+                    <div class="d-flex flex-wrap justify-content-center justify-content-md-start">
                         @if (!empty($projectData[0]['project_only_image']))
                         @foreach ($projectData[0]['project_only_image'] as $v)
                         <div class="mt-3 mr_3">
