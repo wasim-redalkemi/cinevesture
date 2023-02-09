@@ -257,7 +257,7 @@ class ProjectController extends WebController
             }
             $languages = MasterLanguage::query()->orderBy('name', 'ASC')->get();
             $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
-            $category = MasterProjectCategory::query()->get();
+            $category = MasterProjectCategory::query()->orderBy('name', 'ASC')->get();
             $Genres = MasterProjectGenre::query()->get();    
           
             $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
@@ -505,8 +505,8 @@ class ProjectController extends WebController
            
             $languages = MasterLanguage::query()->orderBy('name', 'ASC')->get();
             $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
-            $projectStage = ProjectStage::query()->get();
-            $lookingFor = MasterLookingFor::query()->get();
+            $projectStage = ProjectStage::query()->orderBy('name', 'ASC')->get();
+            $lookingFor = MasterLookingFor::query()->orderBy('name', 'ASC')->get();
             $projectStageOfFunding = ProjectStageOfFunding::query()->get();
 
             $projectData = [];

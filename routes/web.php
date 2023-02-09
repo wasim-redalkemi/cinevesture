@@ -92,7 +92,7 @@ Route::group(["middleware" => ["auth", "revalidate", "verified"]], function () {
         Route::get('/subscription/failed', [SubscriptionController::class, 'paymentFailed'])->name('subscription-failed');
 
 
-        Route::get('/profile-private-show', [UserController::class, 'profilePrivateShow'])->name('profile-private-show');
+        Route::get('/profile-private-show', [UserController::class, 'profilePrivateShow'])->name('profile-private-show')->middleware('plancheck');
         Route::get('/profile-public-show', [UserController::class, 'profilePublicShow'])->name('profile-public-show')->middleware('plancheck');
         Route::get('/profile-create', [UserController::class, 'profileCreate'])->name('profile-create')->middleware('plancheck');
         Route::post('/profile-store', [UserController::class, 'profileStore'])->name('profile-store');

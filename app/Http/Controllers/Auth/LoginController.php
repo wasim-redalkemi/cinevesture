@@ -8,8 +8,10 @@ use App\Models\MasterPlanModule;
 use App\Models\MasterPlanOperation;
 use App\Models\Plans;
 use App\Models\User;
+use App\Models\UserSubscription;
 use App\Notifications\VerifyOtp;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -110,6 +112,7 @@ class LoginController extends Controller
                     $request->session()->put('permission',$plans->getRelationalData);
                     $request->session()->put('module',$module);
                     $request->session()->put('action',$action);
+                    $this->expirePlan();
                 }  
             }
             return $this->sendLoginResponse($request);
@@ -146,6 +149,15 @@ class LoginController extends Controller
             ? new JsonResponse([], 204)
             : redirect('login');
      
+    }
+
+    protected function expirePlan(){
+        $users=UserSubscription::query()->where('status','active')->get();
+        foreach ($users as $key => $user) {
+            if($user->subscription_end_date< Carbon::now() )
+            $user->status="incative";
+            $user->save();
+        }
     }
 
         /**
