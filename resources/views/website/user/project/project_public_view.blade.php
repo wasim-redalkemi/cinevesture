@@ -213,7 +213,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1 class="public-heading-text"> Synopsis</h1>
+                <h1 class="public-head-res-text"> Synopsis</h1>
                 <div class="public-subheading-text mt-3 mt-md-2">
                     <p>
                         @if (!empty(($UserProject->synopsis)))
@@ -229,7 +229,7 @@
         <div class="public_subsection">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="public-heading-text"> Director Statement</h1>
+                    <h1 class="public-head-res-text"> Director Statement</h1>
                     <div class="public-subheading-text mt-3 mt-md-2">
                         <p>
                             @if (!empty(($UserProject->director_statement)))
@@ -246,9 +246,9 @@
         <div class="public_subsection">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="public-heading-text"> Gallery</h1>
+                    <h1 class="public-head-res-text"> Gallery</h1>
                     <div class="public-head-subtext mt-3">Videos</div>
-                    <div class="d-flex flex-wrap">
+                    <div class="d-flex flex-wrap justify-content-center justify-content-md-start">
                             @if (!empty($projectData[0]['project_only_video']))
                         @foreach ($projectData[0]['project_only_video'] as $v)
                         <div class="mt-2 mr_3">
@@ -321,13 +321,13 @@
         <div class="public_subsection">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="public-heading-text">Requirements & Milestones</h1>
+                    <h1 class="public-head-res-text">Requirements & Milestones</h1>
                     <div class="col-md-9">
                         <table class="table mt-1 require_table_width">
                             <tbody class="search-table-body white">
                                 <tr>
                                     <td class="public-head-subtext white">Looking for</td>
-                                    <td class="project-sub-text white d-flex flex-wrap w-100">
+                                    <td class="public-sub-res-text white d-flex flex-wrap w-100">
                                         @if (!empty($projectData[0]['project_looking_for']))
                                         @foreach ($projectData[0]['project_looking_for'] as $k => $v)
                                         <button class="curv_cmn_btn darkbtn">{{ $v['name'] }}</button>
@@ -339,7 +339,7 @@
                                 </tr>
                                 <tr>
                                     <td class="public-head-subtext white">Start Up Funding Stage</td>
-                                    <td class="aubergine project-sub-text white w-100">
+                                    <td class="aubergine public-sub-res-text white w-100">
                                         @if (!empty($projectData[0]['project_stage_of_funding']['name']))
                                         {{$projectData[0]['project_stage_of_funding']['name']}}
                                         @else
@@ -360,67 +360,70 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="row">
-                        <div class="col-md-11">
-                            <div class="mt-4">
-                                <table class="table">
-                                    <tbody class="search-table-body white">
-                                        <tr class="requirement-table-header">
-                                            <th style="width: 39%;">Milestone Description</th>
-                                            <th style="width: 39%;">Milestone Budget (USD)</th>
-                                            <th style="width: 39%;">Target Date</th>
-                                        </tr>
-                                        <tr>
-                                            <td class="public-head-subtext candy-pink mt-1">Completed Milstones</td>
-                                        </tr>
-                                        @php $isEmpty = true;@endphp
-                                        @if (!empty($projectData[0]['project_milestone']))
-                                        @foreach ($projectData[0]['project_milestone'] as $k => $v)
-                                        @if ($v['complete'] == 1 )
-                                        @php $isEmpty = false;@endphp
-                                        <tr>
-                                            <td class="public-head-subtext white">{{ ucFirst($v['description']) }}</td>
-                                            <td class="aubergine project-sub-text white">{{ '$'.number_format($v['budget'], 0,'.',',') }}</td>
-                                            <td class="aubergine project-sub-text white">{{ strtoupper(date('jS F Y',strtotime($v['target_date']))) }}</td>
-                                        </tr>
-                                        @endif
-                                        @endforeach
-                                        @endif
+                    <div class="conatiner">
 
-                                        @if ($isEmpty == true)
-                                        <tr>
-                                            <td colspan="3">
-                                                <span class="text-white"><b>-</b></span>
-                                            </td>
-                                        </tr>
-                                        @endif
-
-                                        <tr>
-                                            <td class="candy-pink public-head-subtext mt-1">Upcoming Milstones</td>
-                                        </tr>
-                                        @php $isEmpty = true;@endphp
-                                        @if (!empty($projectData[0]['project_milestone']))
-                                        @foreach ($projectData[0]['project_milestone'] as $k => $v)
-                                        @if ($v['complete'] ==0 )
-                                        @php $isEmpty = false;@endphp
-                                        <tr>
-                                            <td class="public-head-subtext white">{{ ucFirst($v['description']) }}</td>
-                                            <td class="aubergine project-sub-text white">{{ '$'.number_format($v['budget'], 0,'.',',') }}</td>
-                                            <td class="aubergine project-sub-text white ">{{ strtoupper(date('jS F Y',strtotime($v['target_date']))) }}</td>
-                                        </tr>
-                                        @endif
-                                        @endforeach
-                                        @endif
-
-                                        @if ($isEmpty == true)
-                                        <tr>
-                                            <td colspan="3">
-                                                <span class="text-white"><b>-</b></span>
-                                            </td>
-                                        </tr>
-                                        @endif
-                                    </tbody>
-                                </table>
+                        <div class="row">
+                            <div class="col-md-11">
+                                <div class="mt-4">
+                                    <table class="table">
+                                        <tbody class="search-table-body white">
+                                            <tr class="requirement-table-header">
+                                                <th style="width: 39%;">Milestone Description</th>
+                                                <th style="width: 39%;">Milestone Budget (USD)</th>
+                                                <th style="width: 39%;">Target Date</th>
+                                            </tr>
+                                            <tr>
+                                                <td class="public-head-subtext candy-pink mt-1">Completed Milstones</td>
+                                            </tr>
+                                            @php $isEmpty = true;@endphp
+                                            @if (!empty($projectData[0]['project_milestone']))
+                                            @foreach ($projectData[0]['project_milestone'] as $k => $v)
+                                            @if ($v['complete'] == 1 )
+                                            @php $isEmpty = false;@endphp
+                                            <tr>
+                                                <td class="public-head-subtext white">{{ ucFirst($v['description']) }}</td>
+                                                <td class="aubergine public-sub-res-text white">{{ '$'.number_format($v['budget'], 0,'.',',') }}</td>
+                                                <td class="aubergine public-sub-res-text white">{{ strtoupper(date('jS F Y',strtotime($v['target_date']))) }}</td>
+                                            </tr>
+                                            @endif
+                                            @endforeach
+                                            @endif
+    
+                                            @if ($isEmpty == true)
+                                            <tr>
+                                                <td colspan="3">
+                                                    <span class="text-white"><b>-</b></span>
+                                                </td>
+                                            </tr>
+                                            @endif
+    
+                                            <tr>
+                                                <td class="candy-pink public-head-subtext mt-1">Upcoming Milstones</td>
+                                            </tr>
+                                            @php $isEmpty = true;@endphp
+                                            @if (!empty($projectData[0]['project_milestone']))
+                                            @foreach ($projectData[0]['project_milestone'] as $k => $v)
+                                            @if ($v['complete'] ==0 )
+                                            @php $isEmpty = false;@endphp
+                                            <tr>
+                                                <td class="public-head-subtext white">{{ ucFirst($v['description']) }}</td>
+                                                <td class="aubergine public-sub-res-text white">{{ '$'.number_format($v['budget'], 0,'.',',') }}</td>
+                                                <td class="aubergine public-sub-res-text white ">{{ strtoupper(date('jS F Y',strtotime($v['target_date']))) }}</td>
+                                            </tr>
+                                            @endif
+                                            @endforeach
+                                            @endif
+    
+                                            @if ($isEmpty == true)
+                                            <tr>
+                                                <td colspan="3">
+                                                    <span class="text-white"><b>-</b></span>
+                                                </td>
+                                            </tr>
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -433,7 +436,7 @@
         <div class="public_subsection">
             <div class="row">
                 <div class="col-md-7">
-                    <h1 class="public-heading-text"> Associated With The Project</h1>
+                    <h1 class="public-head-res-text"> Associated With The Project</h1>
                     <div class="">
                         <table class="table mt-2 table_width">
                             <tbody class="search-table-body white">
@@ -447,7 +450,7 @@
                                 @foreach ($projectData[0]['project_association'] as $v)
                                 <tr>
                                     <td class="public-head-subtext white">{{ucwords($v['project_associate_title'])}}</td>
-                                    <td class="aubergine project-sub-text white">{{ucwords($v['project_associate_name'])}}</td>
+                                    <td class="aubergine public-sub-res-text white">{{ucwords($v['project_associate_name'])}}</td>
                                 </tr>
                                 @endforeach
                                 @else
@@ -506,7 +509,7 @@
         <div class="public_subsection">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="public-heading-text mb-2"> Related</h1>
+                    <h1 class="public-head-res-text mb-2"> Related</h1>
                     
                     <div class="related owl-carousel owl-theme">
                         @if(count($recomProject)>0)

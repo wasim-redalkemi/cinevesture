@@ -1,10 +1,12 @@
 @section('nav')
+<div class="collapse navbar-collapse position-absolute"  id="navbarTogglerDemo02">
+
 <nav class="navbar navbar-expand-lg sub-header">
     <div class="container">
       <div class="row w_100">
         <div class="col-md-12">
           <div class="navbar_wraper_sm">
-          <div class="collapse navbar-collapse justify-content-between" id="navbarTogglerDemo02">
+          <div class=" justify-content-between" >
             <div>
             <form class="" id ="filter" method="GET" action="{{ route('get-project-filter') }}">
                         @csrf
@@ -16,8 +18,13 @@
                   <input type="text" name="search" id="search-project"class="searchTerm" placeholder="Search">
                 </div>
               </div>
-              <a class="add-proj-btn my-2 my-sm-0 mr-0 " href="{{ route('project-overview')}}">
-                Add a Project
+              <a class="my-2 my-sm-0 mr-0 " href="{{ route('project-overview')}}">
+                <!-- Add a Project    -->
+
+                <button type="button" class="add-proj-btn text-white">
+                      Add a Project
+                  </button>
+
               </a>
               </div>
               <div class="navbar_mobile">
@@ -160,6 +167,8 @@
       </div>
     </div>
   </nav>    
+</div>
+
 @endsection
 
 @push('scripts')

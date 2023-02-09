@@ -61,7 +61,7 @@
                     <div class="row">
                         <?php $flag = 0; ?>
                        @foreach($plans as $plan)
-                        <div class="col-md-3">
+                        <div class="col-md-3 mb-2 mb-md-0">
                             <div class="plan_card">
                                 <div class="plain_detail">
                                     <div class="plain_header text-center">{{$plan->plan_name}}</div>
@@ -92,7 +92,7 @@
                                 @foreach($modules as $module)
                                 <div class="plain_industry_guide mb_2" style="position: relative;" id="myDivHeight">
                                     @if($flag == 0)
-                                    <div class="industry_guide_text plan_module_elem" plan_elem = "{{strtolower(str_replace(' ','_',$module->name))}}">
+                                    <div class="industry_guide_text plan_module_elem d-none d-md-block" plan_elem = "{{strtolower(str_replace(' ','_',$module->name))}}">
                                         <span class="movie_name_text">{{$module->name}}</span>
                                     </div>
                                     @endif

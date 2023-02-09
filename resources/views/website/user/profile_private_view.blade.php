@@ -23,7 +23,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="d-flex justify-content-between">
-                                        <div class="search-head-text Aubergine_at_night mx-3 mx-md-0">Profile</div>
+                                        <div class="search-head-text Aubergine_at_night">Profile</div>
                                         
                                         <div class="d-none d-md-block">
                                             <a href="{{ route('profile-create')}}">
@@ -33,7 +33,7 @@
                                     </div>
                                 </div>
                         </div>
-                        <div class="d-flex">
+                        <div class="d-block d-md-flex mt-2">
                                     <div class="user_profile_container">
                                         @if (empty($user->profile_image))
                                         <img src="{{ asset('images/asset/100_no_img.jpg') }}" />
@@ -41,7 +41,7 @@
                                         <img src="{{ Storage::url($user->profile_image) }}" class="prod-img" alt="product-image" style="height:100%;width:100%;object-fit: cover;">
                                         @endif
                                     </div>
-                                <div class="mx-4">
+                                <div class="mx-0 mx-md-4">
                                     <div class="guide_profile_main_text pt-3">
                                         {{ (!empty($user->first_name))?ucfirst($user->first_name).' '.ucfirst($user->last_name):'Name'; }}
                                     </div>
