@@ -569,16 +569,22 @@ label {
     font-feature-settings: 'ss01' on;
     color: #FAF8FB;
 }
+.footer a:hover { 
+  color: #971e9b;
+}
 
 .sub-footer {
     display: flex;
     justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .info-ul {
     float: left;
     margin-left: 2px;
     padding: 0.5rem;
+    margin-bottom: 0;
 }
 
 .info-ul li {
@@ -673,7 +679,7 @@ label {
     letter-spacing: 0.054em;
 }
 
-.help-text {
+.help-text, .help-text a {
     font-weight: 400;
     font-size: 16px;
     line-height: 150%;
