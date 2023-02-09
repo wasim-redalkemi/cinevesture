@@ -1,12 +1,12 @@
 @section('nav')
-<div class="" >
+<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
 
 <nav class="navbar navbar-expand-lg sub-header">
     <div class="container">
       <div class="row w_100">
         <div class="col-md-12">
           <div class="navbar_wraper_sm">
-          <div class="collapse navbar-collapse justify-content-between"  id="navbarTogglerDemo02">
+          <div class=" justify-content-between"  >
             <div>
             <form class="" id ="filter" method="GET" action="{{ route('get-project-filter') }}">
                         @csrf
