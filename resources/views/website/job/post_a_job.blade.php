@@ -170,7 +170,6 @@
                                         <span data-toggle="tooltip" data-placement="bottom" title="Promote your job for a small fee. Our team will get in touch with you when you submit a job promotion"> <i class="fa fa-info-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <div class="mb-5">
-                                <input type="hidden" name="" value="">
                                 <a href="#" class="text-decoration-none"><button class="submit_btn text-light mt-4">Submit your job for promotion</button></a>
                                 </div>
                                 </div>
@@ -293,6 +292,7 @@ $('.select_limit').change(function(event) {
                         $('.js-select2').val(null).trigger('change');
                         $('#publish_job_modal').modal('show');
                     }
+                    job_id = resp.data['id']
                 } else {
                     toastMessage(0, resp.message);
                 }

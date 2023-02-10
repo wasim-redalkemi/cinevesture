@@ -115,12 +115,13 @@ class SubscriptionController extends Controller
     public function paymentFailed(Request $request)
     {
         try {
-            $stripe = new \Stripe\StripeClient(config('constants.SECRET_KEY'));
-            $order = SubscriptionOrder::find($request->order_id);
-            $order->status = 'error';
-            $order->save();
-          
-
+            if(isset($request->order_id)){
+                $stripe = new \Stripe\StripeClient(config('constants.SECRET_KEY'));
+                $order = SubscriptionOrder::find($request->order_id);
+                $order->status = 'error';
+                $order->save();
+            }
+         
             return redirect()->route('plans-view')->with('error', 'Payment Failed. Please try after sometime.');
         } catch (\Exception $e) {
             return back()->with('error', 'Something went wrong, Please try again later.');
