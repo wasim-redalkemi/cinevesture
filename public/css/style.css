@@ -2625,8 +2625,8 @@ select option:first-child[value='']{
     /* width: 6em !important; */
 }
 
-.country_select2 .select2-container--default .select2-search--inline .select2-search__field::placeholder {
-    color: #4D0D8A;
+ .select2-container--default .select2-search--inline .select2-search__field::placeholder {
+    color: #787885;
 }
 /* .profile_input input::placeholder {
     color: #4D0D8A;
@@ -3760,7 +3760,15 @@ input:checked+.slider:before {
 }
 
 
-
+/* .main_slider.owl-carousel .owl-item img
+    {
+        width: 100%;
+    }
+    .main_slider .img-container
+    {
+        overflow: hidden;
+        width: 100%;
+    } */
 
 @media (max-width: 480px) {
 
@@ -3968,12 +3976,21 @@ input:checked+.slider:before {
     }
 
     .home-upper-slider .img-container {
-        width: 100%;
+        /* width: 100%; */
         height: 500px;
         display: flex;
         /* align-items: center; */
         align-items: initial;
         justify-content: center;
+    }
+    .main_slider.owl-carousel .owl-item img
+    {
+        min-width: 100% !important;
+    }
+    .main_slider .img-container
+    {
+        overflow: hidden;
+        min-width: 100%;
     }
 
     .carosel-card-cntainer {
@@ -4336,6 +4353,9 @@ transition: 0;
     width: 100%;
     display: flex;
 }
+.project-img-container img {
+    width: 100%;
+}
 
 .public-head-res-subtext {
     font-weight: 600 !important;
@@ -4348,17 +4368,29 @@ transition: 0;
 }
 
 .project_image_wraper {
-    max-height: 100%;
+    /* max-height: 100%;
     max-width: 100%;
     width: auto;
     height: 100%;
-    min-width: 100%;
+    min-width: 100%; */
+
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+
 }
 
 .project_image_wraper img {
-    max-width: 100%;
-    height: 100%;
     width: auto;
+    max-width: fit-content;
+}
+ .img-container {
+    height: 100%;
+}
+.select2-container { 
+    width: auto !important;
+    max-width: 100% !important;
+    min-width: -webkit-fill-available;
 }
 
 
@@ -4523,6 +4555,7 @@ transition: 2s ease all; */
     position: relative;
     left:20px;
 }
+
 .my_modal
 {
     transform: translate(0,-80px);
