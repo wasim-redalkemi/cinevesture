@@ -307,7 +307,7 @@ class OrganisationController extends WebController
                 $email = $_REQUEST['email_2'];
                 $collect = collect();
                 $collect->put('name',auth()->user()->name);
-                $collect->put('first_name','Hi Sir/Madam');
+                $collect->put('first_name','Hi sir/madam');
                 $collect->put('organisation_name',$organisation->name);
                 $collect->put('url',route('register',['iuid' => convert_uuencode(auth()->user()->id)]));
                 Notification::route('mail', $email)->notify(new TeamInvite($collect));
