@@ -170,6 +170,7 @@
                                         <span data-toggle="tooltip" data-placement="bottom" title="Promote your job for a small fee. Our team will get in touch with you when you submit a job promotion"> <i class="fa fa-info-circle" aria-hidden="true"></i></span>
                                     </div>
                                     <div class="mb-5">
+                                <input type="hidden" name="" value="">
                                 <a href="#" class="text-decoration-none"><button class="submit_btn text-light mt-4">Submit your job for promotion</button></a>
                                 </div>
                                 </div>
@@ -206,6 +207,7 @@ $("#post_job").validate({
 });
 
 limit =10
+var job_id  = null
 var last_valid_selection = null;
 $('.select_limit').change(function(event) {
     if ($(this).val().length > limit) {
@@ -337,7 +339,7 @@ $('.select_limit').change(function(event) {
                 url:"{{route('promotion-job')}}",
                 type:'GET',
                 dataType:'json',
-                data:'',
+                data:{'id': job_id},
                 success:function(response)
                 {  
                     console.log(response);
