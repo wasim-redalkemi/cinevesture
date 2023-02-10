@@ -105,6 +105,9 @@
             {     $btn.text("Send Mail");
                     $btn.prop('disabled',false);
                 console.log(response);
+                toastMessage('Error', 'Sorry, You Are Not Allowed to Access This Page');
+                $('.modal').hide();
+                $('.modal-backdrop').remove();
                 console.log(status);
                 console.log(error);
             } 

@@ -147,13 +147,13 @@ class SubscriptionController extends Controller
             $subscription->platform_subscription_id = '1'; // free plan
             $subscription->plan_id = $data->id;
         } else {
-            if ($data->plan_time == 'm') {
-                $total_days = 30 * $data->plan_time_quntity;
+            // if ($data->plan_time == 'm') {
+            //     $total_days = 30 * $data->plan_time_quntity;
+            //     $end_date  = Carbon::now()->addDays($total_days);
+            // } else {
+                $total_days = $data->plan_time_quntity;
                 $end_date  = Carbon::now()->addDays($total_days);
-            } else {
-                $total_days = 365 * $data->plan_time_quntity;
-                $end_date  = Carbon::now()->addDays($total_days);
-            }
+            // }
             $subscription->subscription_end_date = $end_date;
             $subscription->platform_subscription_id = $data->order_id; // stripe
             $subscription->plan_id = $data->plan_id;

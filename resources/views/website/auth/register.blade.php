@@ -68,7 +68,7 @@
                                 </a>
                             </div>
                             <div class="col col-md-12">
-                                <div class="help-text mt-2 mt-lg-4">Need Help?</div>
+                                <div class="help-text mt-2 mt-lg-4"><a href="https://www.mkt.cinevesture.com/help/"> Need Help?</a></div>
                                 <div class="bottom-container mb-5 mt-4 mt-md-0">
                                     <div class="aleady-text">Already have an account?<a href="{{route('login')}}" class="text_decor_none"><span class="ml_10 sign_now_text">Login here</span></a>
                                     </div>

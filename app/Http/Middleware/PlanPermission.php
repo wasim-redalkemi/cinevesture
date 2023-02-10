@@ -5,6 +5,7 @@ namespace App\Http\Middleware;
 use App\Http\Controllers\Helper\MiddlewareUltilityController;
 use App\Http\Controllers\Helper\SubscriptionUtilityController;
 use Closure;
+use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 
 class PlanPermission
@@ -19,9 +20,9 @@ class PlanPermission
    public function handle(Request $request, Closure $next)
    {
 
-
-      if (isset(auth()->user()->id)) { // check login
-
+      
+      if(isset(auth()->user()->id)){ // check login
+           
          $is_subscribed = SubscriptionUtilityController::isSubscribed();
          if (!$is_subscribed) {
             return redirect()->route('plans-view');
