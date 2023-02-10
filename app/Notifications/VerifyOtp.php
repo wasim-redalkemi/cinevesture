@@ -48,11 +48,9 @@ class VerifyOtp extends Notification
         return (new MailMessage)
         ->subject('Your verification code for Cinevesture')
         ->greeting('Hi'.' '.$this->data['first_name'].',')
-        ->line('We received a request to reset your password.')
         ->line('Your email verification code is')
         ->line($this->data['otp'])
-        // ->line('Enter the verification code on the website to complete your registration. If you need to log in again, please click here.')
-        ->line("If you ignore this message, your password will not be changed. If you didn't request a password reset, let us know.")
+        ->line("Enter the verification code on the website to complete your registration. If you need to log in again, please <a href=".route('login').">click here</a> .")
         ->line('Best,')        
         ->salutation('Team Cinevesture');
     }

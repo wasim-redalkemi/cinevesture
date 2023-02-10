@@ -44,7 +44,7 @@ class ContactUser extends Notification
         $mail = (new MailMessage)
                     ->subject($this->data['subject'])
                     ->greeting('Hi '.$this->data['first_name'].',')
-                    ->line('You have received a message from [SenderName] via Cinevesture:')
+                    ->line('You have received a message from '.auth()->user()->name.' via Cinevesture:')
                     ->line($this->data['msg'])
                     ->line('You can respond to them by replying to this email.');
         if (!empty($this->data['cc_email']))

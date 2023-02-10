@@ -29,7 +29,7 @@ class PlanPermission
          }
      }
         if($request->session()->get('permission')){
-           
+           $key = null;
            $getModule_id = null;
            $check_module = explode('/',$request->url());
            // Get Module Id
@@ -50,7 +50,6 @@ class PlanPermission
                 $getModule_id = $mod->id; 
              }
             
-          
           if($getModule_id){
               $permissions = $request->session()->get('permission')->where('module_id',$getModule_id);
               // For JOBS routes
@@ -64,8 +63,11 @@ class PlanPermission
                }else{
                   $key =  $check_module[count($check_module)-1];
                }
+               // If any key route not found continue the process
+               if($key == null){
+                  return $next($request);
+               }
               
-              $selected_action = $request->session()->get('action')->where('url_key',$key)->pluck('id');
               if(isset($selected_action[0])){ // check current url action in list
                $selected_permission = $permissions->whereIn('action_id',$selected_action)->first();
                if(!$selected_permission){ // view profile

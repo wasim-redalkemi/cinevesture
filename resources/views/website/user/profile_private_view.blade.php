@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="d-block d-md-none">
                                         <a href="{{ route('profile-create')}}">
-                                            <button class="guide_profile_btn mt-2">Edit </button>
+                                            <button class="guide_profile_btn mt-2">EDIT </button>
                                         </a>
                                     </div>
                                 </div>

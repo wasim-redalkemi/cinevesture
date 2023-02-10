@@ -42,8 +42,8 @@ class TeamInvite extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject($this->data['name'].'has invited you to join their organisation on Cinevesture.')
-                    ->greeting('Hi '.$this->data['first_name'].',')
+                    ->subject($this->data['name'].' has invited you to join their organisation on Cinevesture.')
+                    ->greeting($this->data['first_name'].',')
                     ->line('You have been invited by '.$this->data['name'].' to join '.$this->data['organisation_name'].' on Cinevesture.')
                     ->action('Accept Action',$this->data['url'])
                     ->line(' New to Cinevesture? With Cinevesture you can build your network in the media industry to find interesting people and projects to work with.');

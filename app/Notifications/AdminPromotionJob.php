@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class SignUpConfirmation extends Notification
+class AdminPromotionJob extends Notification
 {
     use Queueable;
 
@@ -19,7 +19,7 @@ class SignUpConfirmation extends Notification
     protected $data;
     public function __construct($data)
     {
-        $this->data =$data;
+        $this->data = $data;
     }
 
     /**
@@ -42,14 +42,11 @@ class SignUpConfirmation extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->subject('Welcome to Cinevesture')
-        ->greeting('Hi'.' '.$this->data['first_name'].',')
-        ->line('Welcome to Cinevesture! We’re excited to have you on board.')
-        ->line('We’re here to bridge the gap in the film and media industry by helping you build your network and find interesting people and projects to work with.')
-        ->line('Cinevesture is about:')
-        ->line("&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;  Meeting the right people <br> &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;  Sharing interesting projects <br>  &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;  Finding the right talent<br>  &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;  Learning new skills") 
-        ->action('Login' ,route('plans-view'))                      
-        ->salutation('Best,<br><br>Team Cinevesture');
+                    ->subject('Request to promote  job post is received.')
+                    ->greeting('Hi'.' '.$this->data['first_name'].',')
+                    ->line('You have received a new request to promote [First name] job post: '.$this->data['job_title'])
+                    ->line('Best,')        
+                    ->salutation('Team Cinevesture');
     }
 
     /**
