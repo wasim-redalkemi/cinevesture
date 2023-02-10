@@ -21,6 +21,7 @@ use App\Models\UserFavouriteProfile;
 use App\Models\UserJob;
 use App\Models\UserPortfolio;
 use App\Models\Workspace;
+use App\Notifications\AdminPromotionJob;
 use App\Notifications\PromotionJob;
 use Exception;
 use Illuminate\Http\Request;
@@ -50,7 +51,7 @@ class JobController extends WebController
     {
         $countries = MasterCountry::query()->orderBy('name', 'ASC')->get();
         $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();
-        $workspaces = Workspace::query()->get();
+        $workspaces = Workspace::query()->orderBy('name', 'ASC')->get();
         $employments = MasterEmployement::query()->orderBy('name', 'ASC')->get();
         if (!isset($_REQUEST['job_id'])) {
             return view('website.job.post_a_job', compact(['countries', 'skills', 'employments', 'workspaces']));
@@ -479,11 +480,18 @@ class JobController extends WebController
     {
         try {
             $admin_email_id = config('app.ADMIN_EMAIL_ID');
-            $user = User::query()->where('email',$admin_email_id)->first();
-            $collect  = collect();
-            $collect->put('first_name', UcFirst($user->first_name));
-            $collect->put('job_title', UcFirst($user->job_title));
-            $user->notify(new PromotionJob($collect));
+            $user = User::query()->where('email',auth()->user()->email)->first();
+            $collect_user  = collect();
+            $collect_user->put('first_name', UcFirst($user->first_name));
+            $collect_user->put('job_title', UcFirst($user->job_title));
+            $user->notify(new PromotionJob($collect_user));
+
+            $user_admin = User::query()->where('email',$admin_email_id)->first();
+            $collect_admin = collect();
+            $collect_admin->put('first_name', UcFirst($user_admin->first_name));
+            $collect_admin->put('job_title', UcFirst($user->job_title));
+            $collect_admin->put('user_name',  UcFirst($user->first_name));
+            $user_admin->notify(new AdminPromotionJob($collect_admin));
             return ['status'=>1,'msg'=>"Email has been dispatched."];
             
         } catch (Exception $e) {
