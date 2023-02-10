@@ -297,6 +297,8 @@ $('.select_limit').change(function(event) {
             },
             error: function(error) {                
                 console.log(error);
+                // alert('hello');
+                // toastMessage('Error', 'Sorry, You Are Not Allowed to Access This Page');
                 $btn.text(btnCurrentText);
                 $btn.prop('disabled',false);
                 if (error.status==422) {
