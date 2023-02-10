@@ -2,13 +2,14 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\Helper\MiddlewareUltilityController;
 use App\Http\Controllers\Helper\SubscriptionUtilityController;
 use Closure;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 
-class PlanPermission
+class PlanPermission extends Controller
 {
    /**
     * Handle an incoming request.
@@ -71,11 +72,17 @@ class PlanPermission
             if (isset($selected_action[0])) { // check current url action in list
                $selected_permission = $permissions->whereIn('action_id', $selected_action)->first();
                if (!$selected_permission) { // view profile
+                  if($request->ajax()){
+                     return $this->prepareJsonResp(0,[],"",'ERR300', 'Sorry, You Are Not Allowed to Access This Page');
+                 }
                   return back()->with('error', 'Sorry, You Are Not Allowed to Access This Page');
                } else {
                   if ($selected_permission->limit > 0) {
                      $status = MiddlewareUltilityController::checkActionLimit($selected_permission->id, $selected_permission->limit, $request);
                      if ($status == true) {
+                        if($request->ajax()){
+                           return $this->prepareJsonResp(0,[],"",'ERR300', 'Sorry, You Are Not Allowed to Access This Page');
+                        }
                         return back()->with('error', 'Sorry, You Are Not Allowed to Access This Page');
                      }
                   }
