@@ -140,10 +140,11 @@ class SubscriptionController extends Controller
         $subscription->currency = $data->currency;
         $subscription->plan_time = $data->plan_time;
         $subscription->plan_time_quntity = $data->plan_time_quntity;
+        $total_days = $data->plan_time_quntity;
         $subscription->subscription_start_date = Carbon::now(); // for free plan 
 
         if ($data->plan_amount == 0.00) {
-            $subscription->subscription_end_date = Carbon::now(); // for free plan 
+            $subscription->subscription_end_date = Carbon::now()->addDays($total_days); // for free plan 
             $subscription->platform_subscription_id = '1'; // free plan
             $subscription->plan_id = $data->id;
         } else {
@@ -151,7 +152,7 @@ class SubscriptionController extends Controller
             //     $total_days = 30 * $data->plan_time_quntity;
             //     $end_date  = Carbon::now()->addDays($total_days);
             // } else {
-                $total_days = $data->plan_time_quntity;
+                
                 $end_date  = Carbon::now()->addDays($total_days);
             // }
             $subscription->subscription_end_date = $end_date;

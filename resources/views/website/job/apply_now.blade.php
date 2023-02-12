@@ -192,7 +192,7 @@
                 $submitBtn.prop("disabled", false);
                 $submitBtn.text("Submit");
                 if (resp.status) {
-                    // $("#job_apply_success_modal").modal("show");
+                    $("#job_apply_success_modal").modal("show");
                 } else {
                     let err_content = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
                     <strong>Warning!</strong> ${resp.message}

@@ -34,8 +34,8 @@ class MasterPlanSeeder extends Seeder
              values
             --  ('1', 'stripe','1','Free','USD','0.00','non-recurring','m','0','30','active','Great for those who want to get themselves in front of the right people in the industry'),
                 --    ('2', 'stripe','1','Free','INR','0.00','non-recurring','m','0','30','active','Great for those who want to get themselves in front of the right people in the industry'),
-                   ('3', 'stripe','1','Free','INR','0.00','non-recurring','y','0','365','active','Great for those who want to get themselves in front of the right people in the industry'),
-                   ('4', 'stripe','1','Free','USD','0.00','non-recurring','y','0','365','active','Great for those who want to get themselves in front of the right people in the industry'),
+                   ('3', 'stripe','1','Free','INR','0.00','non-recurring','y','0','3650','active','Great for those who want to get themselves in front of the right people in the industry'),
+                   ('4', 'stripe','1','Free','USD','0.00','non-recurring','y','0','3650','active','Great for those who want to get themselves in front of the right people in the industry'),
                    ('5', 'stripe','1','Basic','USD','99','non-recurring','y','0','365','active','Great for those working on a project close to their heart while the hustle goes on'),
                 --    ('6', 'stripe','1','Basic','USD','9.99','non-recurring','m','0','30','active','Great for those working on a project close to their heart while the hustle goes on'),
                 --    ('7', 'stripe','1','Basic','INR','790','non-recurring','m','0','30','active','Great for those working on a project close to their heart while the hustle goes on'),
