@@ -206,6 +206,7 @@ $("#post_job").validate({
 });
 
 limit =10
+var job_id  = null
 var last_valid_selection = null;
 $('.select_limit').change(function(event) {
     if ($(this).val().length > limit) {
@@ -291,6 +292,7 @@ $('.select_limit').change(function(event) {
                         $('.js-select2').val(null).trigger('change');
                         $('#publish_job_modal').modal('show');
                     }
+                    job_id = resp.data['id']
                 } else {
                     toastMessage(0, resp.message);
                 }
@@ -337,7 +339,7 @@ $('.select_limit').change(function(event) {
                 url:"{{route('promotion-job')}}",
                 type:'GET',
                 dataType:'json',
-                data:'',
+                data:{'id': job_id},
                 success:function(response)
                 {  
                     console.log(response);

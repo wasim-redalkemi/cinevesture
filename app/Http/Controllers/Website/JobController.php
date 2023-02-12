@@ -99,7 +99,7 @@ class JobController extends WebController
             if ($response['status'] == 0) {
                 return $this->jsonResponse(false, $response['msg'], []);
             } else {
-                return $this->jsonResponse(true, $response['msg'], []);
+                return $this->jsonResponse(true, $response['msg'], ['id'=>$response['id']]);
             }
         } catch (Exception $e) {
             return $this->jsonResponse(false, $e->getMessage(), []);
@@ -158,7 +158,7 @@ class JobController extends WebController
             $job = $this->setJobData($job, $request);
             $this->storeJobMetas($request,$job->id,false);
             $message = ($job->save_type == 'published' ? 'Job published successfully.' : 'A draft of your job was successfully saved.');
-            return ['status' => 1, 'msg' => $message];
+            return ['status' => 1, 'msg' => $message,'id'=>$job->id];
         } catch (Exception $e) {
             return ['status' => 0, 'msg' => $e->getMessage()];
         }
@@ -476,23 +476,29 @@ class JobController extends WebController
     }
 
 
-    public function promotionJob()
+    public function promotionJob(Request $request)
     {
         try {
-            $admin_email_id = config('app.ADMIN_EMAIL_ID');
-            $user = User::query()->where('email',auth()->user()->email)->first();
-            $collect_user  = collect();
-            $collect_user->put('first_name', UcFirst($user->first_name));
-            $collect_user->put('job_title', UcFirst($user->job_title));
-            $user->notify(new PromotionJob($collect_user));
+            $user_job = UserJob::query()->where('id',$request->id)->first();
+            if(isset($user_job) && $user_job->user_id == auth()->user()->id){
+                $admin_email_id = config('app.ADMIN_EMAIL_ID');
+                $user = User::query()->where('email',auth()->user()->email)->first();
+                $collect_user  = collect();
+                $collect_user->put('first_name', UcFirst($user->first_name));
+                $collect_user->put('job_title', UcFirst($user_job->title));
+                $user->notify(new PromotionJob($collect_user));
+    
+                $user_admin = User::query()->where('email',$admin_email_id)->first();
+                $collect_admin = collect();
+                $collect_admin->put('first_name', UcFirst($user_admin->first_name));
+                $collect_admin->put('job_title', UcFirst($user_job->title));
+                $collect_admin->put('user_name',  UcFirst($user->first_name));
+                $user_admin->notify(new AdminPromotionJob($collect_admin));
+                return ['status'=>1,'msg'=>"Email has been dispatched."];
+            }else{
+                return ['status'=>0,'msg'=>"Something went wrong, please try again later."];
 
-            $user_admin = User::query()->where('email',$admin_email_id)->first();
-            $collect_admin = collect();
-            $collect_admin->put('first_name', UcFirst($user_admin->first_name));
-            $collect_admin->put('job_title', UcFirst($user->job_title));
-            $collect_admin->put('user_name',  UcFirst($user->first_name));
-            $user_admin->notify(new AdminPromotionJob($collect_admin));
-            return ['status'=>1,'msg'=>"Email has been dispatched."];
+            }
             
         } catch (Exception $e) {
             // return back()->with($e->getmessage());
