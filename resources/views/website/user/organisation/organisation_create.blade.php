@@ -57,6 +57,9 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                    <span class="empty-image d-none" id="img-error">
+                                        This field is required
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -388,6 +391,19 @@
 
         // $('.for_hide').css('display', 'block');
         // $('.for_show').css('display', 'none');
+
+        $('select,input').on('click change',function(){
+            
+            if ($('.file_element').val()=="") {
+                $("#img-error").removeClass("d-none");
+                $('button[type="submit"]').attr('disabled','disabled');
+                
+            }else{
+                $('button[type="submit"]').removeAttr('disabled');
+                $("#img-error").addClass("d-none");
+                
+            }
+        })
         $('.for_show').hide();
         if ($('.upload_preview').attr('src') != '') {
             $('.upload_preview').show();
@@ -403,7 +419,7 @@
             $(".uploadedPdf").text(resume.name)
         });
 
-        $('button[type="submit"]').removeAttr('disabled');   
+        // $('button[type="submit"]').removeAttr('disabled');   
         $('#introduction_video').on('change mouseup keyup',function() {
             $("div.intro-video").hide();
             $('button[type="submit"]').removeAttr('disabled');
@@ -412,12 +428,9 @@
             // console.log(urlLength,url);
             if(url == ""){
                 return true;
-                
             }
             var videoId = validateYouTubeUrl(url);
-            // console.log("videoId = ",videoId);
             if(!videoId){
-                // console.log("true  ");
                 $("div.intro-video").show();
                 $('button[type="submit"]').attr('disabled','disabled');
             }
@@ -445,7 +458,6 @@
 
     $("body").on("change", ".image", function(e) {
         var files = e.target.files;
-        // alert(files)
         var done = function(url) {
             image.src = url;
             $modal.modal('show');

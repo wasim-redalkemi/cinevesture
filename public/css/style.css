@@ -80,7 +80,13 @@ a {
 .invalid-feedback {
     color: #DD45B3 !important;
 }
-
+.empty-image{
+    width: 100%;
+    margin-top: 0.25rem;
+    font-weight: 1000;
+    font-size: 0.875em;
+    color: #DD45B3;
+  }
 .header-search-btn {
     width: 4rem;
     height: 2.5rem;
