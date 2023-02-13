@@ -204,7 +204,7 @@ Route::group(["middleware" => ["auth", "revalidate", "verified"]], function () {
         Route::get('/job-create', [JobController::class, 'create'])->name('job-create-page')->middleware('plancheck');
         Route::get('/apply-job/{jobId}/', [JobController::class, 'showApplyJob'])->name('showApplyJob')->middleware('plancheck');
         Route::post('/apply/{jobId}', [JobController::class, 'storeApplyJob'])->name('storeApplyJob');
-        Route::get('/search/results', [JobController::class, 'showJobSearchResults'])->name('showJobSearchResults');
+        Route::any('/search/results', [JobController::class, 'showJobSearchResults'])->name('showJobSearchResults');
         Route::post('/search/add_to_fav', [JobController::class, 'storeJobToFavList'])->name('addJobToFavList');
         Route::post('/action', [JobController::class, 'store'])->name('job-store');
         Route::post('/job-store-edit', [JobController::class, 'jobStoreEdit'])->name('job-store-edit');
