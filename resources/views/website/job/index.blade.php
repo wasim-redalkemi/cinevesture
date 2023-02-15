@@ -36,7 +36,7 @@
                 <div class="col-md-12">
                     <div class="project-text text-center mt-4">Search Latest Jobs</div>
                     <div class="industry_sub_text mt-3">It is our job to make your search for people in the film and media fraternity, a piece of cake! Here's your slice. </div>
-                    <form method="post" action="{{ route('showJobSearchResults') }}"> 
+                    <form method="get" action="{{ route('showJobSearchResults') }}"> 
                         @csrf                       
                     <div class="input_wraper mt-3">
                         <div class="container">
