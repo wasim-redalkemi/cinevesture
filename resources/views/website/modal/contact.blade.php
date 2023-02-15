@@ -30,7 +30,7 @@
                                     </div>
                                 </div>
                                 <div class=" form_elem mt-4">
-                                    <div><input type="text" id="subject" class="myText controlTextLength modal_input" name="subject" maxlength="30" value=""  text-length = "30" placeholder="Subject" required></div>
+                                    <div><input type="text" id="subject" class="myText controlTextLength modal_input" name="subject" maxlength="50" value=""  text-length = "50" placeholder="Subject" required></div>
                                 </div>
                                 <div class="form_elem mt-3">
                                     <textarea name="message" id="message" cols="25" rows="6" class="w-100 controlTextLength mt-2" placeholder="Message" text-length = "1200" maxlength="1200" aria-label="With textarea" required></textarea>
@@ -66,7 +66,7 @@
         {
                 var text = $(this).val().length;
                 
-                if (text>=30) {
+                if (text>=50) {
                     $(this).parents('.form_elem').find('.textlength').text(' You have reached the limit').css('color', 'red', 'text-align', 'end');
                 }
              

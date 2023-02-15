@@ -46,4 +46,8 @@ class UserJob extends Model
         return $this->hasOne(UserAppliedJob::class,'job_id')->where("user_id",auth()->id());
     }
 
+    public function jobCreater(){
+        return $this->belongsTo(User::class,'user_id');
+    }
+
 }

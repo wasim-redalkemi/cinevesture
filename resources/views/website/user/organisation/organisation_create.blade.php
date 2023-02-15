@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-9">
                 <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
-                    <form role="form" class="validateBeforeSubmit" method="POST" enctype="multipart/form-data" action="{{ route('organisation-store') }}">
+                    <form role="form" class="validateBeforeSubmit" id="form" method="POST" enctype="multipart/form-data" action="{{ route('organisation-store') }}">
                         @csrf
 
                         <div class="profile_text">
@@ -48,10 +48,10 @@
                                     <div class="search-head-subtext Aubergine_at_night open_file_explorer pointer">
                                         Upload Profile Picture <span style="color:red">*</span>
                                     </div>
-                                    <div class="pointer search-head-subtext open_file_explorer deep-pink delete_image">
+                                    <div class="pointer search-head-subtext open_file_explorer deep-pink delete_image" id="delete_img">
                                         Delete
                                     </div>
-                                    <input type="file" name="logo" class="d-none @error('logo') is-invalid @enderror file_element image" accept=".jpg,.jpeg,.png" required>
+                                    <input type="file" name="logo" id="logo" class="d-none @error('logo') is-invalid @enderror file_element image" accept=".jpg,.jpeg,.png" required>
                                     @error('logo')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -369,7 +369,7 @@
             <div class="col-md-12">
                 <div class="d-flex justify-content-end mt-4">
                     <button class="cancel_btn mx-3">Discard</button>
-                    <button type="submit" class="guide_profile_btn mx-3">Save</button>
+                    <button type="submit" id="save_button" class="guide_profile_btn mx-3">Save</button>
                 </div>
             </div>
         </div>
@@ -392,18 +392,34 @@
         // $('.for_hide').css('display', 'block');
         // $('.for_show').css('display', 'none');
 
-        $('select,input').on('click change',function(){
-            
+        $('form,#delete_img').on('submit click change',(function (){
+            // e.preventDefault();
             if ($('.file_element').val()=="") {
-                $("#img-error").removeClass("d-none");
-                $('button[type="submit"]').attr('disabled','disabled');
-                
+                $('#img-error').removeClass("d-none");
+                $('#save_button').attr('disabled','disabled');
             }else{
-                $('button[type="submit"]').removeAttr('disabled');
-                $("#img-error").addClass("d-none");
-                
+                $('#save_button').removeAttr('disabled');
+                $('#img-error').addClass("d-none");
             }
-        })
+        }))
+        
+            
+        // $('form,croppedOrgImg,logo').on('submit change keyup',(function (e) {
+        //     if(($('#croppedOrgImg').val()==""))
+        //     {
+        //         e.preventDefault();
+        //         console.log('up');
+        //         $('#img-error').removeClass("d-none");
+        //     }
+        //     else
+        //     {
+        //         $('#croppedOrgImg').change(function(){
+        //             $('#img-error').addClass("d-none");
+        //         })
+        //         console.log('down');
+        //         $(e).submit();
+        //     }
+        // }));
         $('.for_show').hide();
         if ($('.upload_preview').attr('src') != '') {
             $('.upload_preview').show();

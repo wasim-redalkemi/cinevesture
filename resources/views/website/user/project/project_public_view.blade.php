@@ -734,7 +734,9 @@ function copyToClipboard(element) {
   $temp.val($(element).text()).select();
   document.execCommand("copy");
   $temp.remove();
-  toastMessage("1", 'URL copied')
+  toastr.success('URL copied','Success');
+// toastr.success('Project Update successfull!','success');
+//   toastMessage("1", 'URL copied')
 }
 </script>
 @endpush

@@ -150,7 +150,7 @@ input:checked + .slider:before {
             {   
        
                 toastMessage(response.status, response.msg);
-                location.reload();
+                // location.reload();
               
             },
             error:function(response,status,error)
