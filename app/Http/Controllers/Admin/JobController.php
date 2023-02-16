@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use App\Models\MasterCountry;
+use App\Models\User;
 use App\Models\UserJob;
 use Illuminate\Support\Facades\Session;
 // use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class JobController extends AdminController
 {
@@ -23,7 +25,7 @@ class JobController extends AdminController
             
             $countries=MasterCountry::query()->get();
             $jobs=UserJob::query()
-            ->with('jobLocation','user','jobOrganisation','jobEmployements')
+            ->with(['jobLocation','jobOrganisation','jobEmployements','jobCreater'])
             ->where(function($q) use ($request){
                 if (isset($request->country)) {
                     $q->whereHas('jobLocation', function($q) use($request){
@@ -34,12 +36,18 @@ class JobController extends AdminController
                     $q->where('save_type',$request->status);
                 }
                 if (isset($request->search)) {
-                    $q->where('title',"like","%$request->search%") ;
+                    $q->where('title',"like","%".$request->search."%") ;
                 }
-                 if (isset($request->country)) {
+                if (isset($request->country)) {
                     $q->whereHas('jobLocation', function($q) use($request){
                         $q->where('location_id',$request->country);
                     });
+                }
+            })
+            ->orWhereHas('jobCreater',function($q)use($request)
+            {
+                if (isset($request->search)) {
+                    $q->where('name',"like","%".$request->search."%") ;
                 }
             })
             ->orderByDesc('id')

@@ -78,8 +78,8 @@
                                         @enderror
                             </div>
                             <div class="d-flex justify-content-end justify-content-md-center mt-5 mb-4">
-                                <button type="button" class="cancel_btn mx-2 mx-md-5"><a href="{{route('showJobSearchResults')}}">Back</a></button>
-                                <button class="guide_profile_btn">Submit</button>
+                                <button type="button" class="cancel_btn mx-2 mx-md-5" ><a href="{{route('showJobSearchResults')}}">Back</a></button>
+                                <button type="button" class="guide_profile_btn" data-toggle="modal" data-target="#job_apply_success_modal">Submit</button>
                             </div>
                         </div>
 
