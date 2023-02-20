@@ -34,7 +34,7 @@
                     </div>
                     <div class="sidebar_collapse collapse dont-collapse-sm" id="collapseExample">
                         <div class="sidebar_data_mobile">
-                            <div class="dropend search-page search_page_filters_wrap mt-0 mt-md-3">
+                            {{-- <div class="dropend search-page search_page_filters_wrap mt-0 mt-md-3">
                                 <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Category
                                 </button>
@@ -61,7 +61,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> --}}
                             <div class="dropend search-page search_page_filters_wrap">
                                 <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Employments

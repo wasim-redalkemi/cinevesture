@@ -8,6 +8,7 @@ use App\Http\Controllers\Helper\SubscriptionUtilityController;
 use App\Models\Otp;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\UserInvite;
 use App\Models\UserSubscription;
 use App\Notifications\SignUpConfirmation;
 use Illuminate\Support\Str;   
@@ -69,6 +70,7 @@ class RegisterController extends Controller
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'invited_by' => ['string','nullable'],
         ]);
     }
     
@@ -91,14 +93,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // dd($data);
+        $inviteData=UserInvite::query()->where('user_id',$data['invited_by'])->where('email',$data['email'])->first();
         $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'name' => $data['first_name'] . " " . $data['last_name'],
             'email' => $data['email'],
+            'parent_user_id' => (!empty($inviteData))?$data['invited_by']:0,
             'password' => Hash::make($data['password']),
         ]);
-
+        if ($user && !empty($inviteData)) {
+            $inviteData->accepted = 1;
+            $inviteData->save();
+        }
         return $user;
     }
 
@@ -211,7 +219,7 @@ class RegisterController extends Controller
                     if($is_subscribed){
                         return redirect('home');
                     }else{
-                        return redirect()->route('plans-view')->with('success','Email Verified successfully.');
+                        return redirect()->route('home')->with('success','Email Verified successfully.');
                     }
 
                 }
