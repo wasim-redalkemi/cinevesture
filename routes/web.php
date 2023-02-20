@@ -87,6 +87,7 @@ Route::group(["middleware" => ["auth", "revalidate", "verified"]], function () {
 
     Route::group(['prefix' => 'user'], function () {
         Route::get('/plans', [PlanController::class, 'showPlans'])->name('plans-view');
+        Route::get('/planCreate', [SubscriptionController::class, 'createPlanForChildUser'])->name('master-plan-create');
         Route::get('/subscription/order-create', [SubscriptionController::class, 'createOrder'])->name('subscription-order-create');
         Route::get('/subscription/success', [SubscriptionController::class, 'paymentSuccess'])->name('subscription-success');
         Route::get('/subscription/failed', [SubscriptionController::class, 'paymentFailed'])->name('subscription-failed');
@@ -200,7 +201,7 @@ Route::group(["middleware" => ["auth", "revalidate", "verified"]], function () {
 
 
     Route::group(['prefix' => 'job'], function () {
-        Route::get('/search', [JobController::class, 'index'])->name('job-search-page');
+        Route::get('/search', [JobController::class, 'index'])->name('job-search-page')->middleware('plancheck');
         Route::get('/job-create', [JobController::class, 'create'])->name('job-create-page')->middleware('plancheck');
         Route::get('/apply-job/{jobId}/', [JobController::class, 'showApplyJob'])->name('showApplyJob')->middleware('plancheck');
         Route::post('/apply/{jobId}', [JobController::class, 'storeApplyJob'])->name('storeApplyJob');

@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Helper\MiddlewareUltilityController;
 use App\Http\Controllers\Helper\SubscriptionUtilityController;
+use App\Models\User;
+use App\Models\UserInvite;
 use Closure;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
@@ -20,14 +22,25 @@ class PlanPermission extends Controller
     */
    public function handle(Request $request, Closure $next)
    {
-
-      
       if(isset(auth()->user()->id)){ // check login
-           
          $is_subscribed = SubscriptionUtilityController::isSubscribed();
-         if (!$is_subscribed) {
+         if(!$is_subscribed) 
+         {
+            $user = User::query()->where('id',auth()->user()->id)->first();
+            $invites= UserInvite::query()->where('user_id',$user->parent_user_id)->get();
+            if($user->parent_user_id>0)
+            {
+               foreach ($invites as $key => $invite) {
+                  if($invite->email==$user->email){
+                     return redirect()->route('master-plan-create');
+                  }
+               }
+            }
             return redirect()->route('plans-view');
          }
+         // if (!$is_subscribed) {
+         //    return redirect()->route('plans-view');
+         // }
       }
       if ($request->session()->get('permission')) {
          $key = null;

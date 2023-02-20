@@ -93,8 +93,8 @@
                     <ul class="dropdown-menu nav-drop" id="list-stages">
                     @foreach($project_stages as $pro)
                       <li>
-                        <label class="form-check-label mx-2" for="flexCheckDefault">
                         <input class="form-check-input" type="checkbox" value="{{$pro->id}}"  name="project_stages[]" id="flexCheckDefault">
+                        <label class="form-check-label mx-2" for="flexCheckDefault">
                           {{$pro->name}}
                         </label>
                       </li>

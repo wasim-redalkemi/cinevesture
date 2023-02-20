@@ -394,12 +394,13 @@
 
         $('form,#delete_img').on('submit click change',(function (){
             // e.preventDefault();
-            if ($('.file_element').val()=="") {
-                $('#img-error').removeClass("d-none");
+            if (($('.file_element').val())=='') {
+              
                 $('#save_button').attr('disabled','disabled');
+                $('#img-error').removeClass("d-none");
             }else{
-                $('#save_button').removeAttr('disabled');
                 $('#img-error').addClass("d-none");
+                $('#save_button').removeAttr('disabled');
             }
         }))
         
@@ -431,12 +432,12 @@
             $(this).parents('.custom_file_explorer').find('.file_element').click();
         });
 
-        $('#lang').change(function() {
-            $(".uploadedPdf").text(resume.name)
-        });
+        // $('#lang').change(function() {
+        //     $(".uploadedPdf").text(resume.name)
+        // });
 
         // $('button[type="submit"]').removeAttr('disabled');   
-        $('#introduction_video').on('change mouseup keyup',function() {
+        $('#introduction_video,form').on('change mouseup keyup submit',function() {
             $("div.intro-video").hide();
             $('button[type="submit"]').removeAttr('disabled');
             var urlLength= $('#introduction_video').val().length;
