@@ -26,9 +26,9 @@ class PlanPermission extends Controller
          $is_subscribed = SubscriptionUtilityController::isSubscribed();
          if(!$is_subscribed) 
          {
-            $user = User::query()->where('id',auth()->user()->id)->first();
+            $user = User::find( auth()->user()->id);
             $invites= UserInvite::query()->where('user_id',$user->parent_user_id)->get();
-            if($user->parent_user_id>0)
+            if($user->parent_user_id>0 && !empty($invites))
             {
                foreach ($invites as $key => $invite) {
                   if($invite->email==$user->email){

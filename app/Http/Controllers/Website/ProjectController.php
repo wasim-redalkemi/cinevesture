@@ -54,7 +54,7 @@ class ProjectController extends WebController
                 if(!empty($this->isAdminRequest()['error_msg']))
                 {
                     $this->resetResponse();
-                    $projectData = UserProject::query()->where('user_id',auth()->user()->id)->where('id',$_REQUEST['id'])->get()->toArray();
+                    $projectData = UserProject::query()->where('user_id',$this->getCreatedById())->where('id',$_REQUEST['id'])->get()->toArray();
                     if(empty($projectData))
                     {
                         throw new Exception('Malicious request.');
@@ -78,7 +78,7 @@ class ProjectController extends WebController
             }
 
         try {
-            $UserProject = UserProject::query()->with('projectImage')->where('user_id',auth()->user()->id)->get();
+            $UserProject = UserProject::query()->with('projectImage')->where('user_id',$this->getCreatedById())->get();
             return view('website.user.project.project',compact('UserProject'));
 
         } catch (Exception $e) {
@@ -164,7 +164,7 @@ class ProjectController extends WebController
 
 
             $overview = new UserProject();
-            $overview->user_id = auth()->user()->id;
+            $overview->user_id = $this->getCreatedById();
             $overview->project_name = $request->project_name;
             $overview->project_type_id = $request->project_type_id;
             $overview->listing_project_as = $request->listing_project_as;
@@ -199,7 +199,7 @@ class ProjectController extends WebController
             $request = (object) $_REQUEST;
 
             $overview = UserProject::query()->where('id',$_REQUEST['project_id'])->first();
-            $overview->user_id = auth()->user()->id;
+            $overview->user_id = $this->getCreatedById();
             $overview->project_name = $request->project_name;
             $overview->project_type_id = $request->project_type_id;
             $overview->listing_project_as = $request->listing_project_as;
@@ -819,14 +819,14 @@ class ProjectController extends WebController
                 return ['status'=>False,'msg'=>"Something went wrong, Please try again later."];
             }
                  $favourite = UserFavouriteProject::query()
-                             ->where('user_id',auth()->user()->id)
+                             ->where('user_id',$this->getCreatedById())
                              ->where('project_id',$request->id)->first();
                  if($favourite){
                     $favourite->delete();
                     return ['status'=>True,'msg'=>"You have unliked this project."];
                  }else{
                     $favourite = new UserFavouriteProject();
-                    $favourite->user_id = auth()->user()->id;
+                    $favourite->user_id = $this->getCreatedById();
                     $favourite->project_id = $request->id;
                     $favourite->save();
                     return ['status'=>True,'msg'=>"You have liked this project."];
@@ -902,7 +902,7 @@ class ProjectController extends WebController
             {
                 $this->resetResponse();
                 $projectData =  UserProject::query()->where('id', $id)->first();
-                if($projectData->user_id != auth()->user()->id) 
+                if($projectData->user_id != $this->getCreatedById()) 
                 {
                     throw new Exception('Unauthorized request!');
                 }

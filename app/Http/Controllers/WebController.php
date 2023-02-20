@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Exception;
 use Illuminate\Http\Request;
 
-class WebController extends Controller
+class WebController extends PrimeController
 {
     protected $records_limit;
 

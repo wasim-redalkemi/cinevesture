@@ -84,7 +84,7 @@ class IndustryGuideController extends WebController
             } 
         })
         ->with('skill','country','isfavouriteProfile')
-        ->where('id','!=',auth()->user()->id)
+        ->where('id','!=',$this->getCreatedById())
         ->where('user_type','U')
         ->orderByDesc('id')
         ->paginate(10);
