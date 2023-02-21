@@ -11,7 +11,7 @@ class UserOrganisation extends Model
 
     public function country()
     {
-        return $this->hasOne(MasterCountry::class,'id','location_in');
+        return $this->hasOne(MasterCountry::class,'location_in');
     }
     public function organizationServices()
     {
@@ -25,6 +25,6 @@ class UserOrganisation extends Model
 
     public function organizationType()
     {
-        return $this->hasOne(MasterOrganisationType::class,'id','type');
+        return $this->belongsTo(MasterOrganisationType::class,'type');
     }
 }

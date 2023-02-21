@@ -11,10 +11,10 @@ class ProjectListProjects extends Model
     protected $table = 'project_lists_projects';
     public function lists()
     {
-        return $this->belongsTo(ProjectList::class,'list_id','id');
+        return $this->belongsTo(ProjectList::class,'list_id');
     }
     public function projects()
     {
-        return $this->belongsTo(UserProject::class,'project_id','id');
+        return $this->belongsTo(UserProject::class,'project_id');
     }
 }

@@ -13,7 +13,7 @@ class Plans extends Model
 
     public function getRelationalData()
     {
-        return $this->hasMany(MasterPlanModuleOperationRelation::class,'plan_id','id');
+        return $this->hasMany(MasterPlanModuleOperationRelation::class,'plan_id');
     }
 
 }

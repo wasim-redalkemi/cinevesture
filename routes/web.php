@@ -43,8 +43,8 @@ Auth::routes(['verify' => true]);
 // Google URL
 Route::get('/project-public-show/{parameter?}', [ProjectController::class, 'publicView'])->name('project-public-show');
 Route::prefix('google')->name('google.')->group(function () {
-    Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');
-    Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
+    Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login')->middleware('plancheck');
+    Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback')->middleware('plancheck');
 });
 
 // Admin routes 

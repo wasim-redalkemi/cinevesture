@@ -195,7 +195,7 @@
                 </div>
             </div>
             <div class="col-md-9">
-                @include('website.components.jobtile')
+                @include('website.components.search_jobtile')
             </div>
         </div>
 
