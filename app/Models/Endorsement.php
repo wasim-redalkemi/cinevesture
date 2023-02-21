@@ -11,12 +11,12 @@ class Endorsement extends Model
 
     public function endorsementCreater()
     {
-        return $this->hasOne(User::class,'id','from');
+        return $this->belongsTo(User::class,'from');
 
     }
     public function endorsementorganisation()
     {
-        return $this->hasOne(UserOrganisation::class,'user_id','from');
+        return $this->belongsTo(UserOrganisation::class,'from','user_id');
 
     }
 }

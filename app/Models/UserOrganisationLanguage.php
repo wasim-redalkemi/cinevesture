@@ -11,6 +11,6 @@ class UserOrganisationLanguage extends Model
 
     public function languages()
     {
-        return $this->hasOne(MasterLanguage::class,'id','language_id');
+        return $this->belongsTo(MasterLanguage::class,'language_id');
     }
 }
