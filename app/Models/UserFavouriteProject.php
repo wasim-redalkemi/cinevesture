@@ -11,6 +11,6 @@ class UserFavouriteProject extends Model
 
     public function projects()
     {
-        return $this->hasOne(UserProject::class,'project_id');
+        return $this->belongsTo(UserProject::class,'project_id');
     }
 }
