@@ -11,7 +11,7 @@ class UserOrganisation extends Model
 
     public function country()
     {
-        return $this->hasOne(MasterCountry::class,'location_in');
+        return $this->belongsTo(MasterCountry::class,'location_in');
     }
     public function organizationServices()
     {
