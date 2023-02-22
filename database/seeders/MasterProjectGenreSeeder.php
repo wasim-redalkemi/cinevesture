@@ -49,7 +49,7 @@ class MasterProjectGenreSeeder extends Seeder
                 'name' => 'Film Noir',
             ],
             [
-                'name' => 'Historical/Period Film',
+                'name' => 'Historical/ Period Film',
             ],
             [
                 'name' => 'Horror',

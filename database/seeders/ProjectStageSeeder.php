@@ -20,7 +20,7 @@ class ProjectStageSeeder extends Seeder
         ('3', 'Production'),
         ('4', 'Post-Production'),
         ('5', 'Final Cut'),
-        ('6', 'Planning/Blueprint'),
+        ('6', 'Planning/ Blueprint'),
         ('7', 'Development'),
         ('8', 'Work-in-Progress'),
         ('9', 'Growth & Expansion'),
