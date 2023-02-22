@@ -517,12 +517,17 @@
         dragMode: 'move',
         cropBoxMovable: true,
         cropBoxResizable: true,
-        toggleDragModeOnDblclick: false,
+        // toggleDragModeOnDblclick: false,
+        aspectRatio: 1/1,
+        minCropBoxHeight: 200,
+        minCropBoxWidth: 200,
+        maxCropBoxHeight: 400,
+        maxCropBoxWidth: 400,
         viewMode:1,
-    data:{ //define cropbox size
-      width: 300,
-      height:  300,
-    },
+    // data:{ //define cropbox size
+    //   width: 300,
+    //   height:  300,
+    // },
     });
     }).on('hidden.bs.modal', function() {
         cropper.destroy();

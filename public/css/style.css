@@ -495,7 +495,7 @@ a {
 
 .home-dropdown ul {
     padding: 8px 0px;
-    width: 11rem;
+    width: 12rem;
     background: #33084C;
     box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.25);
     border-radius: 2px;
@@ -795,6 +795,10 @@ label {
     background-color: transparent !important;
     border-color: #971E9B !important;
     border: 2px solid;
+}
+
+.page-item:not(:first-child) .page-link { 
+    margin-left: 0 !important;
 }
 
 .search-box-container {
