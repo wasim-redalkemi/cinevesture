@@ -40,7 +40,7 @@ class JobController extends WebController
 
     public function index()
     {
-        $countries = MasterCountry::query()->orderBy('name','ASC')->get();
+        $countries = MasterCountry::query()->get();
         $skills = MasterSkill::query()->orderBy('name','ASC')->get();
         $employments = MasterEmployement::query()->orderBy('name','ASC')->get();
 
@@ -49,7 +49,7 @@ class JobController extends WebController
 
     public function create()
     {
-        $countries = MasterCountry::query()->orderBy('name', 'ASC')->get();
+        $countries = MasterCountry::query()->get();
         $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();
         $workspaces = Workspace::query()->orderBy('name', 'ASC')->get();
         $employments = MasterEmployement::query()->orderBy('name', 'ASC')->get();
@@ -378,7 +378,7 @@ class JobController extends WebController
         
         $requests = $request->all();
         $employments = MasterEmployement::query()->orderBy('name', 'ASC')->get();
-        $countries = MasterCountry::query()->orderBy('name', 'ASC')->get();
+        $countries = MasterCountry::query()->get();
         $categories = MasterProjectCategory::query()->orderBy('name', 'ASC')->get();
         $workspaces = Workspace::query()->orderBy('name', 'ASC')->get();
         $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();

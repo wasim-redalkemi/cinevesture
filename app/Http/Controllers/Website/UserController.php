@@ -238,9 +238,9 @@ class UserController extends WebController
             $user->skill = $temp_skill;
 
             $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();
-            $languages = MasterLanguage::query()->orderBy('name', 'ASC')->get();
-            $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
-            $state = MasterState::query()->orderBy('name', 'ASC')->get();
+            $languages = MasterLanguage::query()->get();
+            $country = MasterCountry::query()->get();
+            $state = MasterState::query()->get();
             $age = AgeRange::query()->get();
             $gender = MasterGender::query()->get();
             $genderPronouns = MasterGenderPronouns::query()->get();
@@ -369,7 +369,7 @@ class UserController extends WebController
     {
         try {
             $prevPortfolio = $this->userPortfolios(auth()->user()->id);
-            $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
+            $country = MasterCountry::query()->get();
             $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();
             return view('website.user.profile_portfolio', compact('prevPortfolio', 'country', 'skills'));
         } catch (Exception $e) {
@@ -478,7 +478,7 @@ class UserController extends WebController
                 return back()->with('This portfolio is not exist');
             } else {
                 $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();
-                $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
+                $country = MasterCountry::query()->get();
                 $UserPortfolioEdit = UserPortfolio::query()->where('id', $id)->get();
                 $UserPortfolioEdit[0]->video = json_decode($UserPortfolioEdit[0]->video, true);
                 $UserPortfolioImages = UserPortfolioImage::query()->where('portfolio_id', $id)->get();

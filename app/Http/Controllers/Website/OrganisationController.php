@@ -71,8 +71,8 @@ class OrganisationController extends WebController
                     }
                 }
             }
-            $languages = MasterLanguage::query()->orderBy('name', 'ASC')->get();
-            $country = MasterCountry::query()->orderBy('name', 'ASC')->get();
+            $languages = MasterLanguage::query()->get();
+            $country = MasterCountry::query()->get();
             $organisationType = MasterOrganisationType::query()->get();
             $organisationService = MasterOrganisationService::query()->get();
             $UserOrganisation = UserOrganisation::query()->with(['organizationLanguages.languages','organizationServices.services','country'])->where('user_id',auth()->user()->id)->first();

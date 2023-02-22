@@ -182,7 +182,10 @@
                         <div class="row mt-3">
                          <div class="col-md-12 d-flex justify-content-between mt-3">
                             <div>{{'Showing '.$users->firstItem().' to' .' '. $users->lastItem().' of'.' '.$users->total()}}</div>
-                             <div style="float:right;" >{{$users->links()}}</div>
+                             <div style="float:right;" >
+                                {{-- {{$users->links()}} --}}
+                                {{ $users->appends($_GET)->links() }}
+                            </div>
                              </div> 
                          </div>
                     </div>
