@@ -100,17 +100,22 @@
                                             {{ucfirst($job->title)}}
                                         </td>
                                        <td>
-                                        @foreach ($job->jobOrganisation as $organisation)
-                                            {{ucfirst($organisation->name)}}
-                                        @endforeach
+                                        @if ($job->jobOrganisation)
+                                        {{$job->jobOrganisation->name}}
+                                            
+                                        @endif
+                                        {{-- @foreach ($job->jobOrganisation as $organisations=>$organisation)
+                                            {{ucfirst($organisation)}}
+                                        @endforeach --}}
                                         </td>
                                        <td>
                                             {{ucfirst($job->jobLocation->name)}}
                                         </td>
                                         <td>
-                                            @foreach ($job->user as $value)
+                                            {{$job->user->name}}
+                                            {{-- @foreach ($job->user as $value)
                                                 {{ucfirst($value->name)}}
-                                            @endforeach
+                                            @endforeach --}}
                                         </td>
                                         <td>
                                             
@@ -141,7 +146,7 @@
                     </div>
                     <div class="col-md-12 d-flex justify-content-between mt-3">
                         <div>{{'Showing '.($jobs->firstItem()).' to' .' '. ($jobs->lastItem()).' of'.' '.$jobs->total()}}</div>
-                        <div style="float:right;">{{$jobs->links()}}</div>
+                        <div style="float:right;">{{$jobs->appends($_GET)->links()}}</div>
                     </div> 
                 </div>
         </div>
