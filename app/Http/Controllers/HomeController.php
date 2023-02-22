@@ -32,8 +32,8 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {   $countries = MasterCountry::query()->orderBy('name', 'ASC')->get();
-        $languages = MasterLanguage::query()->orderBy('name', 'ASC')->get();
+    {   $countries = MasterCountry::query()->get();
+        $languages = MasterLanguage::query()->get();
         $geners = MasterProjectGenre::query()->orderBy('name', 'ASC')->get();
         $categories = MasterProjectCategory::query()->orderBy('name', 'ASC')->get();
         $looking_for = MasterLookingFor::query()->orderBy('name', 'ASC')->get();
