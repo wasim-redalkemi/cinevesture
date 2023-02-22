@@ -392,17 +392,17 @@
         // $('.for_hide').css('display', 'block');
         // $('.for_show').css('display', 'none');
 
-        $('form,#delete_img').on('submit click change',(function (){
-            // e.preventDefault();
-            if (($('.file_element').val())=='') {
+        // $('form,#delete_img').on('submit click change',(function (){
+        //     // e.preventDefault();
+        //     if (($('.file_element').val())=='') {
               
-                $('#save_button').attr('disabled','disabled');
-                $('#img-error').removeClass("d-none");
-            }else{
-                $('#img-error').addClass("d-none");
-                $('#save_button').removeAttr('disabled');
-            }
-        }))
+        //         // $('#save_button').attr('disabled','disabled');
+        //         $('#img-error').removeClass("d-none");
+        //     }else{
+        //         $('#img-error').addClass("d-none");
+        //         $('#save_button').removeAttr('disabled');
+        //     }
+        // }))
         
             
         // $('form,croppedOrgImg,logo').on('submit change keyup',(function (e) {
@@ -437,7 +437,7 @@
         // });
 
         // $('button[type="submit"]').removeAttr('disabled');   
-        $('#introduction_video,form').on('change mouseup keyup submit',function() {
+        $('#introduction_video,form').on('change mouseup keyup',function() {
             $("div.intro-video").hide();
             $('button[type="submit"]').removeAttr('disabled');
             var urlLength= $('#introduction_video').val().length;

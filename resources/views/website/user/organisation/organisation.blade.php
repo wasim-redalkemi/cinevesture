@@ -210,17 +210,23 @@
                             <div class="col-md-12">
                                 <div class="d-flex align-items-center">
                                     <div class="preview_headtext mb-3">Team size</div>
-                                    <div class="associate_text my-3 mx-3">{{isset($UserOrganisation->team_size)?$UserOrganisation->team_size:'-'}}</div>
+                                    <div class="associate_text my-3 mx-3">{{isset($UserOrganisation->memberUser)?(count($UserOrganisation->memberUser)):'-'}}</div>
                                 </div>
                                 <div class="preview_headtext mb-3">Team members</div>
                                 <div class="row">
+                                    {{-- @foreach ($UserOrganisation->memberUser as $value) --}}
+                                        
+                                    {{-- @php
+                                        dd($value->name)
+                                    @endphp --}}
                                     <div class="col-md-3 col-6">
                                         <div class="organisation_img_warper"><img src="{{ asset('images/asset/67a6c213a22d2ba4c3982a55d828b5c7 1.png') }}" class="root_img"></div>
                                         <div class="d-flex justify-content-between mt-3">
-                                            <div class="organisation_cmn_text">Title</div>
-                                            <div class="icon_container"><i class="fa fa-pencil  deep-pink" aria-hidden="true"></i></div>
+                                            <div class="organisation_cmn_text"></div>
+                                            {{-- <div class="icon_container"><i class="fa fa-pencil  deep-pink" aria-hidden="true"></i></div> --}}
                                         </div>
                                     </div>
+                                    {{-- @endforeach --}}
                                 </div>
                             </div>
                         </div>

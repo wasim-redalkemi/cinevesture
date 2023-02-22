@@ -97,6 +97,7 @@
                                     </div>
                                     @endif
                                     <div class="plan_page_list p-3 plan_module_elem" plan_elem = "{{strtolower(str_replace(' ','_',$module->name))}}">
+                                        @if ($plan->getRelationalData)
                                         <ul>
                                             @foreach($plan->getRelationalData as $relation )
 
@@ -116,6 +117,7 @@
                                                 @endif
                                             @endforeach
                                         </ul>
+                                        @endif
                                     </div>
                                 </div>
                                 @endforeach
