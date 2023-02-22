@@ -25,29 +25,29 @@ class UserJob extends Model
     }
     public function jobLocation()
     {
-        return $this->hasOne(MasterCountry::class,'id','location_id');
+        return $this->belongsTo(MasterCountry::class,'location_id');
     }
     public function jobOrganisation()
     {
-        return $this->hasManyThrough(UserOrganisation::class,User::class,'id','user_id','user_id');
+        return $this->belongsTo(UserOrganisation::class,'user_id','user_id');
     }
     public function user()
     {
-        return $this->hasMany(User::class,'id','user_id');
+        return $this->belongsTo(User::class,'user_id','id');
     }
 
     public function favorite()
     {
-        return $this->hasOne(UserFavoriteJob::class,'job_id')->where("user_id",auth()->id());
+        return $this->hasOne(UserFavoriteJob::class,'job_id');
     }
     
     public function applied()
     {
-        return $this->hasOne(UserAppliedJob::class,'job_id')->where("user_id",auth()->id());
+        return $this->hasOne(UserAppliedJob::class,'job_id');
     }
 
     public function jobCreater(){
-        return $this->belongsTo(User::class,'user_id');
+        return $this->belongsTo(User::class,'user_id','id');
     }
 
 }

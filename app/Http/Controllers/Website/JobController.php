@@ -40,7 +40,7 @@ class JobController extends WebController
 
     public function index()
     {
-        $countries = MasterCountry::query()->orderBy('name','ASC')->get();
+        $countries = MasterCountry::query()->get();
         $skills = MasterSkill::query()->orderBy('name','ASC')->get();
         $employments = MasterEmployement::query()->orderBy('name','ASC')->get();
 
@@ -49,7 +49,7 @@ class JobController extends WebController
 
     public function create()
     {
-        $countries = MasterCountry::query()->orderBy('name', 'ASC')->get();
+        $countries = MasterCountry::query()->get();
         $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();
         $workspaces = Workspace::query()->orderBy('name', 'ASC')->get();
         $employments = MasterEmployement::query()->orderBy('name', 'ASC')->get();
@@ -140,7 +140,7 @@ class JobController extends WebController
     public function setJobData(UserJob $jobObj, $request)
     {
 
-        $jobObj->user_id = auth()->user()->id;
+        $jobObj->user_id = $this->getCreatedById();
         $jobObj->title = $request->job_title;
         $jobObj->company_name = $request->company_name;
         $jobObj->description = $request->description;
@@ -154,7 +154,7 @@ class JobController extends WebController
     {
         try {
             $job = new UserJob();
-            $job->user_id = auth()->user()->id;
+            $job->user_id = $this->getCreatedById();
             $job = $this->setJobData($job, $request);
             $this->storeJobMetas($request,$job->id,false);
             $message = ($job->save_type == 'published' ? 'Job published successfully.' : 'A draft of your job was successfully saved.');
@@ -227,7 +227,7 @@ class JobController extends WebController
     {
         try {
             $status = isset($_REQUEST['status']) ? $_REQUEST['status'] : 'published';
-            $userJob = $this->getUserJobData(auth()->user()->id, $status);
+            $userJob = $this->getUserJobData($this->getCreatedById(), $status);
             return view('website.job.posted_job', compact(['userJob', 'status']));
           
         } catch (Exception $e) {
@@ -238,10 +238,16 @@ class JobController extends WebController
 
     public function savedJob(Request $request)
     {
-        $jobs = UserJob::query()
-            ->has("favorite")
-            ->with(["jobLocation:id,name", "jobSkills:id,name", "favorite", "applied"])
-            ->paginate($this->records_limit);
+        // $jobs = UserJob::query()
+        //     ->has("favorite")
+        //     ->with(["jobLocation:id,name", "jobSkills:id,name", "favorite", "applied"])
+        //     ->paginate($this->records_limit);
+
+        $jobs = UserFavoriteJob::query()
+        ->with(['jobDetails',"jobDetails.jobLocation:id,name", "jobDetails.jobSkills:id,name", "jobDetails.favorite"])
+        ->where('user_id',$this->getCreatedById())
+        ->paginate($this->records_limit);
+
         $notFoundMessage = "You haven't saved any job.";
         return view('website.job.saved_job', compact('jobs', 'notFoundMessage'));
     }
@@ -271,17 +277,19 @@ class JobController extends WebController
 
         $jobTitle = UserJob::query()->where("id", $jobId)->value('title');
 
-        $isLiked = UserFavouriteProfile::query()->where("user_id", auth()->id())->where("profile_id", $userId)->exists();
+        $isLiked = UserFavouriteProfile::query()->where("user_id", $this->getCreatedById())->where("profile_id", $userId)->exists();
 
         return view('website.job.cover_letter', compact('jobTitle', 'applicant', 'coverLetter', 'portfolio', 'isLiked'));
     }
 
     public function appliedJob(Request $request)
     {
-        $jobs = UserJob::query()
-            ->has("applied")
-            ->with(["jobLocation:id,name", "jobSkills:id,name", "favorite", "applied"])
-            ->paginate($this->records_limit);
+
+        $jobs = UserAppliedJob::query()
+        ->with(['jobDetails',"jobDetails.jobLocation:id,name", "jobDetails.jobSkills:id,name", "jobDetails.favorite"])
+        ->where('user_id',$this->getCreatedById())
+        ->paginate($this->records_limit);
+        
         $showApplied = false;
         $notFoundMessage = "You haven't applied to any job, please add.";
         return view('website.job.applied_job', compact('jobs', 'showApplied', 'notFoundMessage'));
@@ -337,7 +345,7 @@ class JobController extends WebController
     {
         try {
             $jobId = $request->get("job_id");
-            $userId = auth()->id();
+            $userId = $this->getCreatedById();
             $favStatus = 0;
             if (UserFavoriteJob::query()->where("user_id", $userId)->where("job_id", $jobId)->exists()) {
                 // remove from the fav list
@@ -370,12 +378,17 @@ class JobController extends WebController
         
         $requests = $request->all();
         $employments = MasterEmployement::query()->orderBy('name', 'ASC')->get();
-        $countries = MasterCountry::query()->orderBy('name', 'ASC')->get();
+        $countries = MasterCountry::query()->get();
         $categories = MasterProjectCategory::query()->orderBy('name', 'ASC')->get();
         $workspaces = Workspace::query()->orderBy('name', 'ASC')->get();
         $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();
         $jobs = UserJob::query()
-            ->with(["jobLocation:id,name", "jobSkills:id,name", "favorite", "applied"])
+            ->with(["jobLocation:id,name", "jobSkills:id,name", "favorite"=>function($q){
+                $q->where('user_id',$this->getCreatedById());
+            } ,
+             "applied"=>function($q){
+                $q->where('user_id',$this->getCreatedById());
+            } ])
             ->where('save_type','published')
             ->where(function ($q) use ($requests) {
                 if (isset($requests["countries"]) && !empty($requests["countries"])) {
@@ -405,7 +418,7 @@ class JobController extends WebController
                 }
             })       
            ->paginate(config('constants.JOB_PAGINATION_LIMIT'));
-        $jobs->appends(request()->query())->links();
+        // $jobs->appends(request()->query())->links();
         $notFoundMessage = "No jobs found, please modify your search.";
         
         return view('website.job.search_result', compact('countries', 'employments', 'skills', 'categories', 'workspaces', 'jobs', 'notFoundMessage','promoteCheck','prevDataReturn'));
@@ -480,9 +493,9 @@ class JobController extends WebController
     {
         try {
             $user_job = UserJob::query()->where('id',$request->id)->first();
-            if(isset($user_job) && $user_job->user_id == auth()->user()->id){
+            if(isset($user_job) && $user_job->user_id == $this->getCreatedById()){
                 $admin_email_id = config('app.ADMIN_EMAIL_ID');
-                $user = User::query()->where('email',auth()->user()->email)->first();
+                $user = User::query()->where('id',$this->getCreatedById())->first();
                 $collect_user  = collect();
                 $collect_user->put('first_name', UcFirst($user->first_name));
                 $collect_user->put('job_title', UcFirst($user_job->title));

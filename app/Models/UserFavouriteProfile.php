@@ -10,7 +10,7 @@ class UserFavouriteProfile extends Model
     use HasFactory;
     public function profiles()
     {
-        return $this->hasOne(User::class,'id','profile_id');
+        return $this->belongsTo(User::class,'profile_id');
     }
     public function profileSkills()
     {
@@ -19,6 +19,6 @@ class UserFavouriteProfile extends Model
 
     public function profileCountry()
     {
-        return $this->hasOne(user::class,'id','profile_id');
+        return $this->belongsTo(User::class,'profile_id');
     }
 }

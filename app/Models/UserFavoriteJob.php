@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class UserFavoriteJob extends Model
 {
     use HasFactory;
+    public function jobDetails()
+    {
+        return $this->belongsTo(UserJob::class,'job_id');
+    }
 }

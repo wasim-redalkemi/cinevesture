@@ -11,6 +11,6 @@ class UserOrganisationService extends Model
 
     public function services()
     {
-        return $this->hasOne(MasterOrganisationService::class,'id','services_id');
+        return $this->belongsTo(MasterOrganisationService::class,'services_id');
     }
 }

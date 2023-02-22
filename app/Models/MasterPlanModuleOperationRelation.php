@@ -13,11 +13,11 @@ class MasterPlanModuleOperationRelation extends Model
 
     public function getModule()
     {
-        return $this->hasOne(MasterPlanModule::class,'id','module_id');
+        return $this->belongsTo(MasterPlanModule::class,'module_id');
     }
 
     public function getOperation()
     {
-        return $this->hasOne(MasterPlanOperation::class,'id','action_id');
+        return $this->belongsTo(MasterPlanOperation::class,'action_id');
     }
 }
