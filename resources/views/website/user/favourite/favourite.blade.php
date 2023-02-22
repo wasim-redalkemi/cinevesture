@@ -55,9 +55,6 @@
                     </div>
                     @endif
                 </div>
-
-                
-
                 <div class="guide_profile_main_text deep-pink mt-5 mb-1">Profiles</div>
                 @php
                     $user_profiles_data = $user_profiles->toArray();

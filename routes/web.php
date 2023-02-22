@@ -43,8 +43,8 @@ Auth::routes(['verify' => true]);
 // Google URL
 Route::get('/project-public-show/{parameter?}', [ProjectController::class, 'publicView'])->name('project-public-show');
 Route::prefix('google')->name('google.')->group(function () {
-    Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login');
-    Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback');
+    Route::get('login', [GoogleController::class, 'loginWithGoogle'])->name('login')->middleware('plancheck');
+    Route::any('callback', [GoogleController::class, 'callbackFromGoogle'])->name('callback')->middleware('plancheck');
 });
 
 // Admin routes 
@@ -87,6 +87,7 @@ Route::group(["middleware" => ["auth", "revalidate", "verified"]], function () {
 
     Route::group(['prefix' => 'user'], function () {
         Route::get('/plans', [PlanController::class, 'showPlans'])->name('plans-view');
+        Route::get('/planCreate', [SubscriptionController::class, 'createPlanForChildUser'])->name('master-plan-create');
         Route::get('/subscription/order-create', [SubscriptionController::class, 'createOrder'])->name('subscription-order-create');
         Route::get('/subscription/success', [SubscriptionController::class, 'paymentSuccess'])->name('subscription-success');
         Route::get('/subscription/failed', [SubscriptionController::class, 'paymentFailed'])->name('subscription-failed');
@@ -200,7 +201,7 @@ Route::group(["middleware" => ["auth", "revalidate", "verified"]], function () {
 
 
     Route::group(['prefix' => 'job'], function () {
-        Route::get('/search', [JobController::class, 'index'])->name('job-search-page');
+        Route::get('/search', [JobController::class, 'index'])->name('job-search-page')->middleware('plancheck');
         Route::get('/job-create', [JobController::class, 'create'])->name('job-create-page')->middleware('plancheck');
         Route::get('/apply-job/{jobId}/', [JobController::class, 'showApplyJob'])->name('showApplyJob')->middleware('plancheck');
         Route::post('/apply/{jobId}', [JobController::class, 'storeApplyJob'])->name('storeApplyJob');
@@ -208,7 +209,7 @@ Route::group(["middleware" => ["auth", "revalidate", "verified"]], function () {
         Route::post('/search/add_to_fav', [JobController::class, 'storeJobToFavList'])->name('addJobToFavList');
         Route::post('/action', [JobController::class, 'store'])->name('job-store');
         Route::post('/job-store-edit', [JobController::class, 'jobStoreEdit'])->name('job-store-edit');
-        Route::post('/validate-job', [JobController::class, 'validatejob'])->name('validate-job');
+        Route::post('/job-create/validate-job', [JobController::class, 'validatejob'])->name('validate-job')->middleware('plancheck');
 
 
         Route::get('/unpublish-job', [JobController::class, 'unPublishJob'])->name('unpublish-job');

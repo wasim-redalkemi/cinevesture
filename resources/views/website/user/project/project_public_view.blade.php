@@ -110,9 +110,18 @@
                                         </td>
                                     </tr>
                                     @if ($show== true)
-                               
-                                    @else
                                     <tr>
+                                        <td class="public-head-subtext white blackTextShadow text-start ">Created By</td>
+                                        <td class="aubergine contact-page-subtext candy-pink blackTextShadow text-end text-md-start">
+                                            @if (!empty($projectData[0]['user']['name']))
+                                            <a href="{{route('profile-public-show',['id'=>$projectData[0]['user']['id']])}}" class="text_decor_none">{{ ucwords($projectData[0]['user']['name'])}}</a>
+                                            @else
+                                            <span><b>-</b></span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    @else
+                                    <tr id="blur">
                                         <td class="public-head-subtext white blackTextShadow text-start">Created By</td>
                                         <td class="aubergine contact-page-subtext candy-pink blackTextShadow text-end text-md-start">
                                             @if (!empty($projectData[0]['user']['name']))
@@ -734,7 +743,9 @@ function copyToClipboard(element) {
   $temp.val($(element).text()).select();
   document.execCommand("copy");
   $temp.remove();
-  toastMessage("1", 'URL copied')
+  toastr.success('URL copied','Success');
+// toastr.success('Project Update successfull!','success');
+//   toastMessage("1", 'URL copied')
 }
 </script>
 @endpush

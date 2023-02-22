@@ -21,7 +21,7 @@ class EndorsementController extends Controller
     public function index()
     {
         $endorsement = Endorsement::query()->with('endorsementCreater.organization')->where('to',auth()->user()->id)
-        ->orderByDesc('id')->paginate(2);
+        ->orderByDesc('id')->paginate(5);
         return view('website.user.endorsement',compact('endorsement'));
     }
 

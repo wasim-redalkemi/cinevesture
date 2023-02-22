@@ -44,7 +44,7 @@ class AdminPromotionJob extends Notification
         return (new MailMessage)
                     ->subject('Request to promote  job post is received.')
                     ->greeting('Hi'.' '.$this->data['first_name'].',')
-                    ->line('You have received a new request to promote [First name] job post: '.$this->data['job_title'])
+                    ->line('You have received a new request to promote '.$this->data['user_name'].' job post: '.$this->data['job_title'])
                     ->line('Best,')        
                     ->salutation('Team Cinevesture');
     }

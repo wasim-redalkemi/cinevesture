@@ -24,7 +24,10 @@
                                         Organisation
                                     </h1>
                                 </div>
-                                <div><button class="guide_profile_btn"><a class="btn-link text_decor_none" href="{{ route('organisation-create')}}">EDIT</a></button></div>
+                                
+                                <div class="@if ($editHide>0)d-none  @endif"><button class="guide_profile_btn"><a class="btn-link text_decor_none" href="{{ route('organisation-create')}}">EDIT</a></button></div>
+                                    
+                               
                             </div>
                         </div>
                         <div class="d-flex mt-2">

@@ -11,7 +11,7 @@ class ProjectGenre extends Model
 
     public function genre()
     {
-        return $this->hasMany(MasterProjectGenre::class,'id','project_id');
+        return $this->hasMany(MasterProjectGenre::class,'project_id');
 
     }
 }

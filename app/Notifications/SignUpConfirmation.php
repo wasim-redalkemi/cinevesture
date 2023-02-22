@@ -48,8 +48,9 @@ class SignUpConfirmation extends Notification
         ->line('We’re here to bridge the gap in the film and media industry by helping you build your network and find interesting people and projects to work with.')
         ->line('Cinevesture is about:')
         ->line("&nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;  Meeting the right people <br> &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;  Sharing interesting projects <br>  &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;  Finding the right talent<br>  &nbsp;&nbsp;&nbsp;-&nbsp;&nbsp;&nbsp;  Learning new skills") 
-        ->action('Login' ,route('plans-view'))                      
-        ->salutation('Best,<br><br>Team Cinevesture');
+        ->action('Login' ,route('login'))  
+        ->line('Best,')                    
+        ->salutation('Team Cinevesture');
     }
 
     /**

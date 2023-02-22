@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-9">
                 <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
-                    <form role="form" class="validateBeforeSubmit" method="POST" enctype="multipart/form-data" action="{{ route('organisation-store') }}">
+                    <form role="form" class="validateBeforeSubmit" id="form" method="POST" enctype="multipart/form-data" action="{{ route('organisation-store') }}">
                         @csrf
 
                         <div class="profile_text">
@@ -48,15 +48,18 @@
                                     <div class="search-head-subtext Aubergine_at_night open_file_explorer pointer">
                                         Upload Profile Picture <span style="color:red">*</span>
                                     </div>
-                                    <div class="pointer search-head-subtext open_file_explorer deep-pink delete_image">
+                                    <div class="pointer search-head-subtext open_file_explorer deep-pink delete_image" id="delete_img">
                                         Delete
                                     </div>
-                                    <input type="file" name="logo" class="d-none @error('logo') is-invalid @enderror file_element image" accept=".jpg,.jpeg,.png" required>
+                                    <input type="file" name="logo" id="logo" class="d-none @error('logo') is-invalid @enderror file_element image" accept=".jpg,.jpeg,.png" required>
                                     @error('logo')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+                                    <span class="empty-image d-none" id="img-error">
+                                        This field is required
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -366,7 +369,7 @@
             <div class="col-md-12">
                 <div class="d-flex justify-content-end mt-4">
                     <button class="cancel_btn mx-3">Discard</button>
-                    <button type="submit" class="guide_profile_btn mx-3">Save</button>
+                    <button type="submit" id="save_button" class="guide_profile_btn mx-3">Save</button>
                 </div>
             </div>
         </div>
@@ -388,6 +391,36 @@
 
         // $('.for_hide').css('display', 'block');
         // $('.for_show').css('display', 'none');
+
+        $('form,#delete_img').on('submit click change',(function (){
+            // e.preventDefault();
+            if (($('.file_element').val())=='') {
+              
+                $('#save_button').attr('disabled','disabled');
+                $('#img-error').removeClass("d-none");
+            }else{
+                $('#img-error').addClass("d-none");
+                $('#save_button').removeAttr('disabled');
+            }
+        }))
+        
+            
+        // $('form,croppedOrgImg,logo').on('submit change keyup',(function (e) {
+        //     if(($('#croppedOrgImg').val()==""))
+        //     {
+        //         e.preventDefault();
+        //         console.log('up');
+        //         $('#img-error').removeClass("d-none");
+        //     }
+        //     else
+        //     {
+        //         $('#croppedOrgImg').change(function(){
+        //             $('#img-error').addClass("d-none");
+        //         })
+        //         console.log('down');
+        //         $(e).submit();
+        //     }
+        // }));
         $('.for_show').hide();
         if ($('.upload_preview').attr('src') != '') {
             $('.upload_preview').show();
@@ -399,12 +432,12 @@
             $(this).parents('.custom_file_explorer').find('.file_element').click();
         });
 
-        $('#lang').change(function() {
-            $(".uploadedPdf").text(resume.name)
-        });
+        // $('#lang').change(function() {
+        //     $(".uploadedPdf").text(resume.name)
+        // });
 
-        $('button[type="submit"]').removeAttr('disabled');   
-        $('#introduction_video').on('change mouseup keyup',function() {
+        // $('button[type="submit"]').removeAttr('disabled');   
+        $('#introduction_video,form').on('change mouseup keyup submit',function() {
             $("div.intro-video").hide();
             $('button[type="submit"]').removeAttr('disabled');
             var urlLength= $('#introduction_video').val().length;
@@ -412,12 +445,9 @@
             // console.log(urlLength,url);
             if(url == ""){
                 return true;
-                
             }
             var videoId = validateYouTubeUrl(url);
-            // console.log("videoId = ",videoId);
             if(!videoId){
-                // console.log("true  ");
                 $("div.intro-video").show();
                 $('button[type="submit"]').attr('disabled','disabled');
             }
@@ -445,7 +475,6 @@
 
     $("body").on("change", ".image", function(e) {
         var files = e.target.files;
-        // alert(files)
         var done = function(url) {
             image.src = url;
             $modal.modal('show');

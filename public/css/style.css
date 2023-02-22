@@ -80,7 +80,13 @@ a {
 .invalid-feedback {
     color: #DD45B3 !important;
 }
-
+.empty-image{
+    width: 100%;
+    margin-top: 0.25rem;
+    font-weight: 1000;
+    font-size: 0.875em;
+    color: #DD45B3;
+  }
 .header-search-btn {
     width: 4rem;
     height: 2.5rem;
@@ -489,7 +495,7 @@ a {
 
 .home-dropdown ul {
     padding: 8px 0px;
-    width: 10rem;
+    width: 11rem;
     background: #33084C;
     box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.25);
     border-radius: 2px;

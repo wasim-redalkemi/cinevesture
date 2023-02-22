@@ -13,30 +13,45 @@ use App\Models\UserSkill;
 use Database\Factories\UserFactory;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\Console\Input\Input;
+use Symfony\Component\HttpFoundation\InputBag;
 
-class FavouriteController extends Controller
+class FavouriteController extends WebController
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index(Request $request)
+    {   
+        $param_profile = 1;
+        $param_project = 1;
         $user_projects = UserFavouriteProject::query()
                         ->with('projects.projectImage')
-                        ->where('user_id', auth()->user()->id)
+                        ->where('user_id', $this->getCreatedById())
                         ->orderBy('created_at', 'DESC')
-                        ->paginate(6);
-                        
+                        ->paginate(6,['*'],'project');
+  
         $user_profiles = UserFavouriteProfile::query()
                         ->with('profiles', 'profileSkills.getSkills', 'profileCountry.country')
-                        ->where('user_id', auth()->user()->id)
+                        ->where('user_id', $this->getCreatedById())
                         ->orderBy('created_at', 'DESC')
-                        ->paginate(6);
-        $user_profiles->setPageName('user_profile_page');
-        $user_endorsement = Endorsement::query()->with('endorsementCreater')->where('to', auth()->user()->id)->where('status', '1')
+                        ->paginate(6,['*'],'profile');
+        if(isset($request->profile)){
+            $param_profile  = $request->profile;
+        }
+        if(isset($request->project)){
+            $param_project  = $request->project;
+        }
+        $user_projects->appends('profile',$param_profile)->links();
+
+        $user_profiles->appends('project',$param_project)->links();
+                        // $vocational->appends(['search' => request('search')]);
+        // $user_profiles->setPageName('user_profile_page');
+        $user_endorsement = Endorsement::query()->with('endorsementCreater')->where('to', $this->getCreatedById())->where('status', '1')
             ->orderByDesc('id')->get();
         return view('website.user.favourite.favourite', compact(['user_projects', 'user_profiles', 'user_endorsement']));
     }
@@ -104,14 +119,14 @@ class FavouriteController extends Controller
                 return ['status' => False, 'msg' => "Something went wrong, Please try again later."];
             }
             $favourite = UserFavouriteProfile::query()
-                ->where('user_id', auth()->user()->id)
+                ->where('user_id', $this->getCreatedById())
                 ->where('profile_id', $request->id)->first();
             if ($favourite) {
                 $favourite->delete();
                 return ['status' => True, 'msg' => "You have unliked a profile."];
             } else {
                 $favourite = new UserFavouriteProfile();
-                $favourite->user_id = auth()->user()->id;
+                $favourite->user_id = $this->getCreatedById();
                 $favourite->profile_id = $request->id;
                 $favourite->save();
                 return ['status' => True, 'msg' => "You have liked a profile."];

@@ -1,17 +1,10 @@
 <?php
 
 namespace App\Models;
-
 use App\Http\Controllers\Helper\OtpUtilityController;
-use App\Http\Controllers\OtpController;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Notifications\InvoicePaid;
-use Laravel\Cashier\Billable;
-use App\Notifications\ResetPasswordNotification;
-use App\Notifications\VerifyOtp;
 use App\Notifications\VerifyOTPForgetPassword;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -25,7 +18,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'name', 'email', 'password',
+        'first_name', 'last_name', 'name', 'email', 'password', 'parent_user_id',
     ];
 
     /**
@@ -48,7 +41,7 @@ class User extends Authenticatable
 
     public function country()
     {
-        return $this->hasOne(MasterCountry::class, 'id', 'country_id');
+        return $this->belongsTo(MasterCountry::class,'country_id');
     }
 
     public function skill()
@@ -73,16 +66,16 @@ class User extends Authenticatable
     }
 
     public function organization(){
-        return $this->hasOne(UserOrganisation::class, 'user_id', 'id');
+        return $this->hasOne(UserOrganisation::class, 'user_id');
     }
 
     public function invites(){
-        return $this->hasOne(UserInvite::class, 'user_id', 'id');
+        return $this->hasOne(UserInvite::class, 'user_id');
     }
 
     public function getSubcription()
     {
-        return $this->hasOne(UserSubscription::class, 'user_id', 'id');
+        return $this->hasOne(UserSubscription::class, 'user_id');
     }
     public function appliedJobs()
     {
@@ -90,7 +83,7 @@ class User extends Authenticatable
     }
 
     public function isfavouriteProfile(){
-        return $this->hasOne(UserFavouriteProfile::class, 'profile_id', 'id')->where('user_id',auth()->user()->id);
+        return $this->hasOne(UserFavouriteProfile::class, 'profile_id');
     }
 
     // public function userPlan(){

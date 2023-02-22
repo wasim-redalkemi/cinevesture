@@ -439,6 +439,12 @@
     <script type="text/javascript">
         $(document).ready(function() {
             $('#endorse_btn').click(function() {
+                let $btn = $(this);
+        // e.preventDefault();
+        // e.stopPropagation();
+
+        $btn.text("Submitting..");
+        $btn.prop('disabled',true);
                 var endorse_email = $('#endorse_email').val();
                 var endorse_message = $('#endorse_message').val();
                 var endorse_to_id = $('#endorse_to_id').val();
@@ -454,17 +460,21 @@
                         "_token": "{{ csrf_token() }}"
                     },
                     success: function(response) {
-                        console.log(response)
-                        console.log('endorse done')
+                        // console.log(response)
+                        // console.log('endorse done')
                         toastMessage(response.status, response.msg);
                         $('.modal').hide();
                         $('.modal-backdrop').remove();
                         location.reload();
                     },
                     error: function(response, status, error) {
-                        console.log(response);
-                        console.log(status);
-                        console.log(error);
+                        // console.log(response);
+                        // console.log(status);
+                        // console.log(error);
+                        
+                        toastMessage('Sorry', 'You Are Not Allowed to Access This Page');
+                        $('.modal').hide();
+                        $('.modal-backdrop').remove();
                     }
                 });
             });

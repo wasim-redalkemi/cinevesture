@@ -62,7 +62,7 @@
         </ul>
       </div>
       <div class="mb-3 help-text">
-      © 2023 Cinvesture. All rights reserved.
+      © 2023 Cinevesture. All rights reserved.
       </div>
     </div>
   </footer>

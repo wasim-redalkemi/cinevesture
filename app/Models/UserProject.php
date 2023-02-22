@@ -11,7 +11,7 @@ class UserProject extends Model
 
     public function projectImage()
     {
-        return $this->hasOne(ProjectMedia::class,'project_id','id')->where('file_type','image')->where('is_default_marked','1');
+        return $this->hasOne(ProjectMedia::class,'project_id')->where('file_type','image')->where('is_default_marked','1');
     }
     public function projectOnlyImage()
     {
@@ -32,7 +32,7 @@ class UserProject extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class,'id','user_id');
+        return $this->belongsTo(User::class,'user_id');
     }
    
     public function genres()
@@ -72,18 +72,18 @@ class UserProject extends Model
     
     public function projectType()
     {
-        return $this->hasOne(ProjectType::class,'id','project_type_id');
+        return $this->belongsTo(ProjectType::class,'project_type_id');
     }
 
     public function projectStageOfFunding()
     {
-        return $this->hasOne(ProjectStageOfFunding::class,'id','stage_of_funding_id');
+        return $this->belongsTo(ProjectStageOfFunding::class,'stage_of_funding_id');
     }
     public function projectStage()
     {
-        return $this->hasOne(ProjectStage::class,'id','project_stage_id');
+        return $this->belongsTo(ProjectStage::class,'project_stage_id');
     }
     public function isfavouriteProject(){
-        return $this->hasOne(UserFavouriteProject::class, 'project_id', 'id')->where('user_id',auth()->user()->id);
+        return $this->belongsTo(UserFavouriteProject::class, 'project_id')->where('user_id',auth()->user()->id);
     }
 }

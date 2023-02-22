@@ -18,20 +18,31 @@ use Illuminate\Support\Facades\Notification;
 class SubscriptionController extends Controller
 {
     // Views 
-
-
-
-
     // Functionality
-
     public function createOrder(Request $request)
     {
         try {
             $plan = Plans::find($request->id);
             $id = auth()->user()->id;
-
             if ($plan->plan_name == 'Free') {
-                $this->createSubscription($plan, $request);
+                
+                $subscriptionData=[
+                    'user_id'=>$id,
+                    'plan_amount'=> $plan->plan_amount,
+                    'plan_name' =>$plan->plan_name,
+                    'currency' =>$plan->currency,
+                    'plan_time' =>$plan->plan_time,
+                    'plan_time_quntity' => $plan->plan_time_quntity,
+                    // 'subscription_start_date' = Carbon::now(), // for free plan 
+                    'total_days' => $plan->plan_time_quntity,
+                    'subscription_end_date' => Carbon::now()->addDays($plan->plan_time_quntity), // for free plan 
+                    'order_id' => '1',
+                    'plan_id' => $plan->plan_id
+            
+                   ];
+                   $subscriptionData = (object) $subscriptionData;
+                $this->createSubscription($subscriptionData, $request);
+                $this->setUserPlanInSession($id);
                 return redirect()->route('home')->with('success', 'Subsription completed Successfully');
             } else {
 
@@ -88,6 +99,21 @@ class SubscriptionController extends Controller
         try {
             $stripe = new \Stripe\StripeClient(config('constants.SECRET_KEY'));
             $order = SubscriptionOrder::find($request->order_id);
+            $subscriptionData=[
+                'user_id'=>$order->user_id,
+                'plan_amount'=> $order->plan_amount,
+                'plan_name' =>$order->plan_name,
+                'currency' =>$order->currency,
+                'plan_time' =>$order->plan_time,
+                'plan_time_quntity' => $order->plan_time_quntity,
+                // 'subscription_start_date' = Carbon::now(), // for free plan 
+                'total_days' => $order->plan_time_quntity,
+                'subscription_end_date' => Carbon::now()->addDays($order->plan_time_quntity), // for free plan 
+                'order_id' => $order->order_id,
+                'plan_id' => $order->plan_id
+        
+               ];
+               $subscriptionData = (object) $subscriptionData;
             $session_id = $order->order_id;
             $checkout_status = $stripe->checkout->sessions->retrieve(
                 $session_id,
@@ -95,7 +121,7 @@ class SubscriptionController extends Controller
             );
 
             if ($checkout_status->payment_status == 'paid') {
-                $subscription = $this->createSubscription($order, $request);
+                $subscription = $this->createSubscription($subscriptionData, $request);
                 
                 $collect  = collect();
                 $collect->put('first_name', ucwords(auth()->user()->first_name));
@@ -115,12 +141,13 @@ class SubscriptionController extends Controller
     public function paymentFailed(Request $request)
     {
         try {
-            $stripe = new \Stripe\StripeClient(config('constants.SECRET_KEY'));
-            $order = SubscriptionOrder::find($request->order_id);
-            $order->status = 'error';
-            $order->save();
-          
-
+            if(isset($request->order_id)){
+                $stripe = new \Stripe\StripeClient(config('constants.SECRET_KEY'));
+                $order = SubscriptionOrder::find($request->order_id);
+                $order->status = 'error';
+                $order->save();
+            }
+         
             return redirect()->route('plans-view')->with('error', 'Payment Failed. Please try after sometime.');
         } catch (\Exception $e) {
             return back()->with('error', 'Something went wrong, Please try again later.');
@@ -141,40 +168,60 @@ class SubscriptionController extends Controller
         $subscription->plan_time = $data->plan_time;
         $subscription->plan_time_quntity = $data->plan_time_quntity;
         $subscription->subscription_start_date = Carbon::now(); // for free plan 
+        $total_days = $data->plan_time_quntity;
+        $subscription->subscription_end_date = $data->subscription_end_date; // for free plan 
+        $subscription->platform_subscription_id = $data->order_id; // free plan
+        $subscription->plan_id = $data->plan_id;
 
-        if ($data->plan_amount == 0.00) {
-            $subscription->subscription_end_date = Carbon::now(); // for free plan 
-            $subscription->platform_subscription_id = '1'; // free plan
-            $subscription->plan_id = $data->id;
-        } else {
-            if ($data->plan_time == 'm') {
-                $total_days = 30 * $data->plan_time_quntity;
-                $end_date  = Carbon::now()->addDays($total_days);
-            } else {
-                $total_days = 365 * $data->plan_time_quntity;
-                $end_date  = Carbon::now()->addDays($total_days);
-            }
-            $subscription->subscription_end_date = $end_date;
-            $subscription->platform_subscription_id = $data->order_id; // stripe
-            $subscription->plan_id = $data->plan_id;
-
-        }
+            // if ($data->plan_time == 'm') {
+            //     $total_days = 30 * $data->plan_time_quntity;
+            //     $end_date  = Carbon::now()->addDays($total_days);
+            // } else {
+                // if (isset($data->id)) {
+        // $subscription->platform_subscription_id = $data->order_id; // stripe
         $subscription->status = "active";
         $subscription->save();
 
-        $user = User::query()->with('getSubcription')->where('id', auth()->user()->id)->first();
+        return $subscription;
+    }
+
+    private function setUserPlanInSession($userId)
+    {
+        $user = User::query()->with('getSubcription')->where('id', $userId)->first();
 
         $plans = Plans::query()->where('id', $user->getSubcription->plan_id)->with('getRelationalData.getModule', 'getRelationalData.getOperation')
             ->first();
         $action = MasterPlanOperation::all();
         $module = MasterPlanModule::all();
-        $request->session()->put('permission', $plans->getRelationalData);
-        $request->session()->put('module', $module);
-        $request->session()->put('action', $action);
-        return $subscription;
+        session()->put('permission', $plans->getRelationalData);
+        session()->put('module', $module);
+        session()->put('action', $action);
     }
 
+    public function createPlanForChildUser()
+    {
+       $user=User::find(auth()->user()->id);
+       $userId=$user->id;
+       $parentUserSubscription=UserSubscription::query()->where('user_id',$user->parent_user_id)->where('status','active')->first();
+       $subscriptionData=[
+        'user_id'=>$userId,
+        'plan_amount'=> $parentUserSubscription->plan_amount,
+        'plan_name' =>$parentUserSubscription->plan_name,
+        'currency' =>$parentUserSubscription->currency,
+        'plan_time' =>$parentUserSubscription->plan_time,
+        'plan_time_quntity' => $parentUserSubscription->plan_time_quntity,
+        // 'subscription_start_date' = Carbon::now(), // for free plan 
+        'total_days' => $parentUserSubscription->plan_time_quntity,
+        'subscription_end_date' => $parentUserSubscription->subscription_end_date,
+        'order_id' => $parentUserSubscription->platform_subscription_id,
+        'plan_id' => $parentUserSubscription->plan_id
 
+       ];
+       $subscriptionData = (object) $subscriptionData;
+       
+       $this->createSubscription($subscriptionData,null);
+       return redirect()->route('home');
+    }
     // Billing details
     public function getBilling(Request $request)
     {
