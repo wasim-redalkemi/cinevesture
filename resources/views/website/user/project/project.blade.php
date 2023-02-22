@@ -24,11 +24,11 @@
                 @if(isset($UserProject) && count($UserProject))
                 @foreach($UserProject as $k=>$v)
                     <div class="col-md-4">                    
-                        <div class="project-img-container">
+                        <div class="project-img-container br_4">
                             @if (empty($v->projectImage->file_link))
-                                <img src="{{ asset('images/asset/download (3) 1.png') }}" style="height: 172px; width: 100%"  />
+                                <img src="{{ asset('images/asset/download (3) 1.png') }}" style="height: 172px; width: 100%" class="br_4"  />
                             @else
-                                <img src="{{ asset('storage/'.$v->projectImage->file_link)}}" class="width_inheritence" alt="image">
+                                <img src="{{ asset('storage/'.$v->projectImage->file_link)}}" class="width_inheritence br_4" alt="image">
                             @endif
                             <div class="project_card_data w-100 h-100">
                                 <div><a href="{{route('project-overview',['id'=>$v->id])}}"><i class="fa fa-pencil mx-2 ancor-link-style" aria-hidden="true"></i></a></div>
@@ -46,12 +46,12 @@
                             <div class="movie_name_text">{{ucFirst($v->project_name)}}</div>
                                 @if(isset($v->user_status))
                                 @if($v->user_status == 'draft')
-                                <div class="published_text mb-5">Draft</div>
+                                <div class="published_text mb-4 mb-md-5">Draft</div>
                                 @else
-                                <div class="published_text mb-5">Published</div>
+                                <div class="published_text mb-4 mb-md-5">Published</div>
                                 @endif
                                 @else
-                                <div class="published_text mb-5">-</div>
+                                <div class="published_text mb-4 mb-md-5">-</div>
                                 @endif
                             </div>
                         </a>
