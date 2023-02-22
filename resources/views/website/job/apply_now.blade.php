@@ -28,8 +28,6 @@
                     <div class="guide_profile_subsection">
                         <div class="contact-page-text deep-aubergine">Apply For {{ucFirst($jobTitle)}}</div>
                     </div>
-
-
                     <form class="validateBeforeSubmit" id="apply_job_form" action="{{route('storeApplyJob',['jobId'=>request('jobId')])}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="guide_profile_subsection" id="Documents">
@@ -79,7 +77,7 @@
                             </div>
                             <div class="d-flex justify-content-end justify-content-md-center mt-5 mb-4">
                                 <button type="button" class="cancel_btn mx-2 mx-md-5" ><a href="{{route('showJobSearchResults')}}">Back</a></button>
-                                <button type="button" class="guide_profile_btn" data-toggle="modal" data-target="#job_apply_success_modal">Submit</button>
+                                <button type="submit" class="guide_profile_btn" data-toggle="modal" data-target="#job_apply_success_modal">Submit</button>
                             </div>
                         </div>
 

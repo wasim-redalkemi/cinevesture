@@ -21,13 +21,12 @@ class ProjectStageSeeder extends Seeder
         ('4', 'Post-Production'),
         ('5', 'Final Cut'),
         ('6', 'Planning/ Blueprint'),
-        ('7', 'Development'),
-        ('8', 'Work-in-Progress'),
-        ('9', 'Growth & Expansion'),
-        ('10', 'Ideation'),
-        ('11', 'Validation'),
-        ('12', 'Early Traction'),
-        ('13', 'Scaling')";
+        ('7', 'Work-in-Progress'),
+        ('8', 'Growth & Expansion'),
+        ('9', 'Ideation'),
+        ('10', 'Validation'),
+        ('11', 'Early Traction'),
+        ('12', 'Scaling')";
 
         DB::unprepared($query);
     }

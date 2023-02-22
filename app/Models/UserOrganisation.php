@@ -27,4 +27,8 @@ class UserOrganisation extends Model
     {
         return $this->belongsTo(MasterOrganisationType::class,'type');
     }
+    public function memberUser()
+    {
+       return $this->hasMany(User::class,'parent_user_id','user_id');
+    }
 }
