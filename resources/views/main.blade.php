@@ -272,7 +272,7 @@
       // autoplayTimeout: 3000,
       autoplay: false,
       loop: true,
-      nav: true,
+      nav: false,
       items: 1,
       margin: 10,
       autoplayHoverPause: true,
