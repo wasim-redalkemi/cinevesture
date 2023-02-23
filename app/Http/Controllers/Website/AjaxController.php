@@ -12,6 +12,7 @@ use App\Models\ProjectAssociation;
 use App\Models\ProjectMilestone;
 use App\Models\UserPortfolioImage;
 use App\Models\UserProject;
+use Illuminate\Support\Facades\Storage;
 
 class AjaxController extends WebController {
     CONST AJAX_CALL_SUCCESS = 1;
@@ -127,7 +128,8 @@ class AjaxController extends WebController {
             if($request->isBanner) {
                 $project = UserProject::query()->find($request->project_id);
                 if(!empty($project->banner_image)){
-                    unlink(storage_path()."\app\public\/".$project->banner_image);
+                    //unlink(storage_path()."\app\public\/".$project->banner_image);
+                    Storage::delete($project->banner_image);
                 }
                 $project->banner_image = $locationPath."/".$newName;
                 $project->save();
