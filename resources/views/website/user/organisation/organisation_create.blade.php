@@ -332,14 +332,14 @@
                                                                 </span>
                                                                 @enderror
                                                             </div>
-                                                            <div class="col-md-12 mt-3">
+                                                            {{-- <div class="col-md-12 mt-3">
                                                                 <input type="email" id="email_2" name="email_2" value="" placeholder="Second email" class="modal_input">
                                                                 @error('email_2')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
                                                                 @enderror
-                                                            </div>
+                                                            </div> --}}
                                                             <div class="col-md-12 py-3">
                                                                 <input type="hidden" id="organization_id" name="organization_id" value="@if (!empty($UserOrganisation->id)) {{$UserOrganisation->id}} @endif">
                                                                 <button type="button" class="invite_btn">Invite</button>

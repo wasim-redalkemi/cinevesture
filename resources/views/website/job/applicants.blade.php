@@ -26,8 +26,8 @@ use Illuminate\Support\Facades\DB;
                             Applicants for “{{$jobTitle}}”
                         </div>
                     </div>
-                    @if (isset($applicants) && count($applicants)>1)                   
-                        
+                    @if (isset($applicants) && count($applicants)>0)                   
+                       
                     @foreach($applicants as $applicant)
                     <div class="border_btm profile_wraper_padding">
                         <div class="d-flex justify-content-between">
@@ -63,7 +63,7 @@ use Illuminate\Support\Facades\DB;
                                     </div>
                                 </div>
                             </div>
-                            <div class="pointer"><i class="fa fa fa-heart-o aubergine icon-size like-profile" aria-hidden="true" data-id="{{$applicant->id}}"></i></div>
+                            <div class="pointer"><i class="fa fa aubergine icon-size like-profile <?php if(isset($applicant->isfavouriteProfile)){echo'fa-heart';}else{echo'fa-heart-o';} ?>" aria-hidden="true" data-id="{{$applicant->id}}"></i></div>
                         </div>
                     </div>
                     @endforeach
