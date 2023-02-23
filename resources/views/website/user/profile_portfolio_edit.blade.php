@@ -136,7 +136,7 @@
                                             <img src="{{asset($UserPortfolioEdit[0]->video['video_thumbnail'])}}" class="width_inheritence" alt="image">
                                         </div>
                                         <input type="url" class="form-control @error('video') is-invalid @enderror" placeholder="Paste link here" name="video_url" value="<?php if(isset($UserPortfolioEdit[0]->video['video_url'])){ echo($UserPortfolioEdit[0]->video['video_url']); }?>" aria-label="Username" aria-describedby="basic-addon1">
-                                        <input type="hidden" class="{{asset($UserPortfolioEdit[0]->video['video_thumbnail'])}}" name="video_thumbnail" value="" aria-label="Video Thumbnail" aria-describedby="basic-addon1">
+                                        <input type="hidden" class="" name="video_thumbnail" value="{{asset($UserPortfolioEdit[0]->video['video_thumbnail'])}}" aria-label="Video Thumbnail" aria-describedby="basic-addon1">
                                         @error('video')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -251,7 +251,35 @@
                 </div>
             </div>
         </div>
-       
+        <div class="col-md-5 mt-2 mt-md-0">
+            <button type="button" class="deactivate_btn" data-bs-toggle="modal" data-bs-target="#staticBackdrop" style="display:none">Deactivate account</button>
+            <!-- Modal for Confirmation for account deactivate -->
+            <div class="modal fade" id="staticBackdrop"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-body" style="padding: 0px;">
+                            <div class="container"style="padding: 0px;" >
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="modal_container">
+                                            <div class="icon_container warning">
+                                                <i class="fa fa-times icon_style" aria-hidden="true"></i>
+                                            </div>
+                                            <div class="head_text mt-4">Are you sure?</div>
+                                            <div class="sub_text mt-4">Do you really want to delete the item?<br>This process cannot be undone.</div>
+                                            <div class="d-flex justify-content-center mt-4">
+                                                <button type="button" class="cancel_btn_modal cancel_btn_text mx-3" data-bs-dismiss="modal">Cancel</button>
+                                                <button class="delete_btn confirm_btn_text mx-3" type="button" data-bs-dismiss="modal">Confirm</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 </section>
 @endsection
@@ -284,10 +312,27 @@
         var maxImgCnt = 15;
 
         let init = function(portfolioData){
-            console.log("portfolioData - ",portfolioData);
             user_id = portfolioData.user_id;
             portfolio_id = portfolioData.id;
             bindActions();
+            updateImageUploadCount();
+            setError();
+        }
+
+        let setError = function (){
+            if($("span.invalid-feedback").length > 0){
+                $('html, body').animate({
+                    scrollTop: ($("span.invalid-feedback")[0].offsetTop - 400)
+                }, 100);
+            }
+            let error = $(parentElemId+" .portfolio-images span.invalid-feedback").length;
+            if($(parentElemId+" .portfolio-images span.invalid-feedback").length > 0){
+                $(parentElemId+" .portfolio-images .profile_upload_container").addClass('error-img-border');
+            }
+        }
+
+        let unsetError = function (){
+            $(parentElemId+" .portfolio-images .profile_upload_container").removeClass('error-img-border');
         }
 
         let doAjax = function(url,reqData,method,callback) {
@@ -318,7 +363,6 @@
         let bindActions = function (){
             $(parentElemId + " #portfolio-video input[name='video_url']").off('blur').on('blur',(e)=>{
                 let link = e.target.value;
-                console.log("link = "+link);
                 if(link && validateUrl(link)){
                     console.log("link blurred - "+link);
                     if(link.indexOf("vimeo.com") > -1){
@@ -344,10 +388,10 @@
                     image.src = url;
                     $modal.modal('show');
                 };
-                console.log("changed ",this);
+                unsetError();
+                $(parentElemId+" .portfolio-images span.invalid-feedback").remove();
                 let imgId = "#"+$(e.target).parents('.img-item').attr('id'); 
                 let croppedImgContainerId = imgId.replace("#portfolio-img","#cropped-upload-img-inp");
-                console.log("e = ",this.files,imgId,croppedImgContainerId );
                 const [file] = this.files
                 uploadedFile = this.files[0];
                 var ImageCropperObj = new ImageCropper(uploadedFile, imgId+" #previewImg");
@@ -369,14 +413,12 @@
 
             $(parentElemId+" .cancel-img-upload.cancel").off("click").on("click",function cancelImgUpload(e) {
                 let imgId = "#"+$(e.target).parents('.img-item').attr('id');
-                console.log("cancelling ",imgId,parentElemId+" "+imgId+" .open_file_explorer label");
                 $(imgId).remove();
             });
 
             $(parentElemId+" .cancel-img-upload.delete").off("click").on("click",function deleteImgUpload(e) {
                 let imgId = "#"+$(e.target).parents('.img-item').attr('id');
                 imgId = imgId.split("-")[2];
-                //console.log("deleting ",imgId);
                 setModal("","","Yes, Delete","");
                 $(".deactivate_btn").click();
                 $(".modal-body button.delete_btn").off("click").click((e)=>{
@@ -392,14 +434,9 @@
             });
 
             $(parentElemId+" .portfolio-images .save_add_btn").off("click").on("click",()=>{
-                console.log("adding elem");
                 addImgUploadElem();
             });
         }
-        
-
-        let imageCnt = $(parentElemId+" .portfolio-images").children('.img-item').length;
-        $('.portfolio_images_count').val(imageCnt);
 
         let getVideoDataCallback = function(req,resp){
             if(resp.status == 1){
@@ -417,8 +454,7 @@
         }
 
         let addImgUploadElem = function(){
-            let imageCnt = $(parentElemId+" .portfolio-images").children('.img-item').length;
-            $('.portfolio_images_count').val(imageCnt);
+            let imageCnt = updateImageUploadCount();
             let lastid = $(parentElemId+" .portfolio-images").children('.img-item').last().attr('id').split("-")[3];
             let newcnt = lastid*1+1;
             if(maxImgCnt == imageCnt){
@@ -450,6 +486,16 @@
             html += '</div>';
             $(html).insertAfter(parentElemId+" #portfolio-img-new-"+lastid);
             bindActions();
+        }
+
+        let updateImageUploadCount = function(){
+            let imageCnt = $(parentElemId+" .portfolio-images").children('.img-item').length;
+            if(imageCnt == 1 && $(parentElemId+" .portfolio-images #previewImg").attr('src') == ""){
+                $('.portfolio_images_count').val(imageCnt - 1);
+            } else {
+                $('.portfolio_images_count').val(imageCnt);
+            }
+            return imageCnt;
         }
 
         return {
