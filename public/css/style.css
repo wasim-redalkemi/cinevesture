@@ -4227,7 +4227,7 @@ input:checked+.slider:before {
     padding: 0rem;
  }
  .pagination {
-    float: left !important;
+    float: left;
     margin-left: 25%;
     margin-top: 15px;
     margin-bottom: 30px;

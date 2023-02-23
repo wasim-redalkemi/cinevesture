@@ -854,7 +854,9 @@ class UserController extends WebController
     public function deactivateAccount()
     {   $user= User::find(auth()->user()->id);
         Auth::logout();
-        $user->delete();
+        // $user->delete();
+        $user->status ='0';
+        $user->save();
         return redirect('/login');
 
     }
