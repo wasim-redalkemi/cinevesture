@@ -48,7 +48,7 @@
     <div class="sidebar_content"><a href="{{route('endorsement-view')}}">Endorsements </a></div>
     <hr class="sidebar_content_hr">
     <div class="sidebar_content"><a href="{{ route('favourite-view') }}">Favourites</a></div>
-    @if (auth()->user()->parent_user_id=0)
+    @if (auth()->user()->parent_user_id==0)
     <hr class="sidebar_content_hr">
     <div class="sidebar_content"><a href="{{route('subscription-billing')}}">Membership & Billing</a></div>
     @endif

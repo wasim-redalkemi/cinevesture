@@ -184,7 +184,8 @@
                             <div>{{'Showing '.$users->firstItem().' to' .' '. $users->lastItem().' of'.' '.$users->total()}}</div>
                              <div style="float:right;" >
                                 {{-- {{$users->links()}} --}}
-                                {{ $users->appends($_GET)->links() }}
+                                {{-- {{ $users->appends($_GET)->links() }} --}}
+                                {{ $users->onEachSide(-1)->appends($_GET)->links() }}
                             </div>
                              </div> 
                          </div>
