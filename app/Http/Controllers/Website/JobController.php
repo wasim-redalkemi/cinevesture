@@ -144,7 +144,7 @@ class JobController extends WebController
         $jobObj->title = $request->job_title;
         $jobObj->company_name = $request->company_name;
         $jobObj->description = $request->description;
-        $jobObj->save_type = ($request->save_type == 'publish' ? 'published' : 'draft');
+        $jobObj->save_type = (($request->save_type == 'publish' || $request->save_type == 'unpublished') ? 'published' : 'draft');
         $jobObj->location_id = $request->countries;
         $jobObj->save();
         return $jobObj;
@@ -169,15 +169,16 @@ class JobController extends WebController
         try {
             $id = $request->job_id;            
             $job = UserJob::query()->find($id);
-            if( $job->save_type=='unpublished')
-            {
-                $message = ($job->save_type == 'unpublished' ? 'Unpublished Job can not be draft.' : 'A draft of your job was successfully saved.');
-                return ['status' => 0, 'msg' => $message];
-            } 
+            // if( $job->save_type=='unpublished')
+            // {
+            //     $message = ($job->save_type == 'unpublished' ? 'Unpublished Job can not be draft.' : 'A draft of your job was successfully saved.');
+            //     return ['status' => 0, 'msg' => $message];
+            // } 
             $job = $this->setJobData($job, $request);
             $this->storeJobMetas($request,$job->id,true);
-            $message = ($job->save_type == 'publish' ? 'Job published successfully.' : 'A draft of your job was successfully saved.');
-            return ['status' => 1, 'msg' => $message];
+            // $message = (($job->save_type == 'publish') || ($job->save_type == 'published') ? 'Job published successfully.' : 'A draft of your job was successfully saved.');
+            $message = (($job->save_type == 'publish') || ($job->save_type == 'published') ? 'Job published successfully.' : 'Job status updated successfully.');
+            return ['status' => 1, 'msg' => $message, 'id'=>$id];
         } catch (Exception $e) {
             return ['status' => 0, 'msg' => $e->getMessage()];
         }
