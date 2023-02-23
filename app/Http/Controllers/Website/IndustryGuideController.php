@@ -56,7 +56,7 @@ class IndustryGuideController extends WebController
         }
         $countries = MasterCountry::query()->orderBy('name','asc')->get();
         $skills = MasterSkill::query()->orderBy('name','asc')->get();
-        $talent_type = User::query()->where('job_title','!=',null)->where('user_type','U')->groupBy('job_title')->get();
+        $talent_type = User::query()->where('job_title','!=',null)->where('user_type','U')->where('job_title','!=',"")->groupBy('job_title')->get();
         $users = User::query()->where(function($query) use($request){
             if (isset($request->search)) { // search name of user
                 $query->where("name", "like", "%$request->search%");
@@ -83,7 +83,10 @@ class IndustryGuideController extends WebController
                 });
             } 
         })
-        ->with('skill','country','isfavouriteProfile')
+        ->with(['skill','country','isfavouriteProfile'=>function($q){
+            $q->where('user_id',$this->getCreatedById());
+        }])
+        
         ->where('id','!=',$this->getCreatedById())
         ->where('user_type','U')
         ->orderByDesc('id')

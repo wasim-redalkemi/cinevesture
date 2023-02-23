@@ -214,19 +214,25 @@
                                 </div>
                                 <div class="preview_headtext mb-3">Team members</div>
                                 <div class="row">
-                                    {{-- @foreach ($UserOrganisation->memberUser as $value) --}}
+                                    @if (!empty($UserOrganisation->memberUser))
                                         
-                                    {{-- @php
-                                        dd($value->name)
-                                    @endphp --}}
+                                    @foreach ($UserOrganisation->memberUser as $value)
                                     <div class="col-md-3 col-6">
-                                        <div class="organisation_img_warper"><img src="{{ asset('images/asset/67a6c213a22d2ba4c3982a55d828b5c7 1.png') }}" class="root_img"></div>
+                                        @if ($value->profile_image)
+                                        <div class="organisation_img_warper"><img src="{{Storage::url($value->profile_image)}}" class="w-80 br_80"></div>
+                                        @else
+                                        {{-- <div class="organisation_img_warper"><img src="{{asset('images/asset/user-profile.png')}}" class="root_img"></div> --}}
+                                        <div ><img src="{{ asset('images/asset/user-profile.png') }}" class="w-80 br_80"></div>
+                                            
+                                        @endif
                                         <div class="d-flex justify-content-between mt-3">
-                                            <div class="organisation_cmn_text"></div>
+                                            <div class="organisation_cmn_text"> {{$value->name}}</div>
                                             {{-- <div class="icon_container"><i class="fa fa-pencil  deep-pink" aria-hidden="true"></i></div> --}}
                                         </div>
                                     </div>
-                                    {{-- @endforeach --}}
+                                    @endforeach
+                                    @endif
+
                                 </div>
                             </div>
                         </div>

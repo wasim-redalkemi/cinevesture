@@ -33,7 +33,13 @@ use Illuminate\Support\Facades\DB;
                         <div class="d-flex justify-content-between">
                             <div class="d-flex">
                                 <div class="user_profile_container">
-                                    <img src="{{asset($applicant->profile_image) }}" />
+                                    {{-- <img src="{{asset($applicant->profile_image) }}" /> --}}
+                                    @if ($applicant->profile_image)
+                                    <img src="{{Storage::url($applicant->profile_image) }}" />
+                                        @else
+                                        <img src="{{ asset('images/asset/user-profile.png') }}" width="100%" height="100%" />
+                                    @endif
+
                                 </div>
                                 <div class="mx-4">
                                     <div class="guide_profile_main_text">

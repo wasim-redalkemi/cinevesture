@@ -1873,6 +1873,8 @@ select,
     min-height: calc(7em + 0.75rem + 2px) !important;
 }
 
+.error-img-border {border: 1px solid red !important}
+
 .profile_dropdown_btn {
     background: #FFFFFF;
     width: 100%;
@@ -4231,7 +4233,7 @@ input:checked+.slider:before {
     padding: 0rem;
  }
  .pagination {
-    float: left !important;
+    float: left;
     margin-left: 25%;
     margin-top: 15px;
     margin-bottom: 30px;

@@ -94,7 +94,7 @@
                             <div class="col-md-6">
                                 <div class="profile_input">
                                     <label>Name <span style="color:red">*</span></label>
-                                    <input type="text" class="outline form-control @error('name') is-invalid @enderror" placeholder="{{ __('Name') }}" name="name" value="{{(isset($UserOrganisation->name))?$UserOrganisation->name:'' }}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                    <input type="text" class="outline form-control @error('name') is-invalid @enderror" placeholder="{{ __('Name') }}" name="name" value="{{old('name',isset($UserOrganisation->name)?$UserOrganisation->name:"")}}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -130,7 +130,7 @@
                             <div class="col-md-12">
                                 <div class="profile_input text_field">
                                     <label>About <span style="color:red">*</span></label>
-                                    <div class="form_elem"> <textarea class="form-control controlTextLength" text-length="600" id="" name="about" maxlength="600" aria-label="With textarea" required autofocus>{{(isset($UserOrganisation->about))?$UserOrganisation->about:'' }}</textarea></div>
+                                    <div class="form_elem"> <textarea class="form-control controlTextLength" text-length="600" id="" name="about" maxlength="600" aria-label="With textarea" required autofocus>{{old('about',isset($UserOrganisation->about)?$UserOrganisation->about:"" )}}</textarea></div>
                                 </div>
                             </div>
                         </div>
@@ -176,12 +176,17 @@
                                     <select name="located_in" class="@error('located_in') is-invalid @enderror" id="" required autofocus>
                                         <option value="">Select</option>
                                         @foreach ($country as $k=>$v)
-                                        <option @php if(isset($UserOrganisation->location_in)){
+                                        <option @php if(isset($UserOrganisation->location_in[0])){
                                             if ($UserOrganisation->location_in == $v->id) {
                                             echo 'selected';
                                             }
                                             }
-                                            @endphp value="{{ $v->id }}">{{ $v->name }}</option>
+                                            else{
+                                                if ($v->id == request('located_name')) {
+                                            echo 'selected';
+                                            }
+                                            }
+                                            @endphp value="{{ $v->id }}">{{old('located_in', $v->name) }}</option>
                                         @endforeach
                                     </select>
                                     @error('located_in')
@@ -231,7 +236,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>IMDB Profile</label>
-                                    <input type="url" class="outline form-control @error('imdb_profile') is-invalid @enderror" placeholder="IMDB Profile" name="imdb_profile" value="{{(isset($UserOrganisation->imdb_profile))?$UserOrganisation->imdb_profile:'' }}" aria-label="Username" aria-describedby="basic-addon1" autofocus>
+                                    <input type="url" class="outline form-control @error('imdb_profile') is-invalid @enderror" placeholder="IMDB Profile" name="imdb_profile" value="{{old('imdb_profile',isset($UserOrganisation->imdb_profile)?$UserOrganisation->imdb_profile:'' )}}" aria-label="Username" aria-describedby="basic-addon1" autofocus>
                                     @error('imdb_profile')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -242,7 +247,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>LinkedIn Profile</label>
-                                    <input type="url" class="outline form-control @error('linkedin_profile') is-invalid @enderror" placeholder="LinkedIn Profile" name="linkedin_profile" value="{{(isset($UserOrganisation->linkedin_profile))?$UserOrganisation->linkedin_profile:'' }}" aria-label="Username" aria-describedby="basic-addon1" autofocus>
+                                    <input type="url" class="outline form-control @error('linkedin_profile') is-invalid @enderror" placeholder="LinkedIn Profile" name="linkedin_profile" value="{{old('linkedin_profile',isset($UserOrganisation->linkedin_profile)?$UserOrganisation->linkedin_profile:'' )}}" aria-label="Username" aria-describedby="basic-addon1" autofocus>
                                     @error('linkedin_profile')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -253,7 +258,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Website</label>
-                                    <input type="url" class="outline form-control @error('website') is-invalid @enderror" placeholder="Website" aria-label="Username" name="website" value="{{(isset($UserOrganisation->website))?$UserOrganisation->website:'' }}" aria-describedby="basic-addon1" autofocus>
+                                    <input type="url" class="outline form-control @error('website') is-invalid @enderror" placeholder="Website" aria-label="Username" name="website" value="{{old('website',isset($UserOrganisation->website)?$UserOrganisation->website:'' )}}" aria-describedby="basic-addon1" autofocus>
                                     @error('website')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -266,7 +271,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Introduction Video</label>
-                                    <input type="url" id="introduction_video" class="outline form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="{{(isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:'' }}" aria-label="Username" aria-describedby="basic-addon1" autofocus>
+                                    <input type="url" id="introduction_video" class="outline form-control @error('intro_video_link') is-invalid @enderror" placeholder="Paste link here" name="intro_video_link" value="{{old('intro_video_link',isset($UserOrganisation->intro_video_link)?$UserOrganisation->intro_video_link:'' )}}" aria-label="Username" aria-describedby="basic-addon1" autofocus>
                                     @error('intro_video_link')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -287,7 +292,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Team size</label>
-                                    <input type="number" class="form-control" name="team_size" value="{{(isset($UserOrganisation->team_size))?$UserOrganisation->team_size:'' }}" placeholder="Team size" aria-label="Username" aria-describedby="basic-addon1">
+                                    <input type="number" class="form-control" name="team_size" value="{{old('team_size',isset($UserOrganisation->team_size)?$UserOrganisation->team_size:'' )}}" placeholder="Team size" aria-label="Username" aria-describedby="basic-addon1">
                                     @error('team_size')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

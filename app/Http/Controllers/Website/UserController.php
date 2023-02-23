@@ -401,7 +401,6 @@ class UserController extends WebController
             $portfolio->description = ucfirst($request->description);
             $portfolio->completion_date = $request->completion_date;
             $portfolio->video = json_encode(['video_url'=>$request->video_url,'video_thumbnail'=>$request->video_thumbnail]);
-
             if ($portfolio->save()) {
                 if (isset($request->project_specific_skills_id)) {
                     UserPortfolioSpecificSkills::query()->where('portfolio_id', $portfolio->id)->delete();
@@ -520,7 +519,6 @@ class UserController extends WebController
             $portfolio->description = ucFirst($request->description);
             $portfolio->completion_date = $request->completion_date;
             $portfolio->video = json_encode(['video_url'=>$request->video_url,'video_thumbnail'=>$request->video_thumbnail]);
-
             if ($portfolio->update()) {
                 if (isset($request->project_specific_skills_id)) {
                     UserPortfolioSpecificSkills::query()->where('portfolio_id', $request->portfolio_id)->delete();
@@ -547,20 +545,6 @@ class UserController extends WebController
             foreach ($request->toArray() as $k => $v) {
                 if (strpos($k, 'cropped-portfolio-image') !== false) {
                     $image_file_name = $k;
-                    // if ($request->hasFile($image_file_name)) {
-                    //     $file = $request->file($image_file_name);
-                    //     $originalFile = $file->getClientOriginalName();
-                    //     $fileExt = pathinfo($originalFile, PATHINFO_EXTENSION);
-                    //     $fileName = pathinfo($originalFile, PATHINFO_FILENAME);
-                    //     $nameStr = date('_YmdHis');
-                    //     $newName = $fileName . $nameStr . '.' . $fileExt;
-                    //     $locationPath  = "project/image";
-                    //     $uploadFile = $this->uploadFile($locationPath, $file, $newName);
-                    //     $data_to_insert[] = [
-                    //         'file_type' => 'image',
-                    //         'file_link' => $uploadFile
-                    //     ];
-                    // }
                     if (isset($image_file_name)) {
                         if (isset($request->$image_file_name)) {
                             $image_64 = $request->$image_file_name; //your base64 encoded data
@@ -854,7 +838,9 @@ class UserController extends WebController
     public function deactivateAccount()
     {   $user= User::find(auth()->user()->id);
         Auth::logout();
-        $user->delete();
+        // $user->delete();
+        $user->status ='0';
+        $user->save();
         return redirect('/login');
 
     }
