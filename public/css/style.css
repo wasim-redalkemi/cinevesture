@@ -2858,8 +2858,11 @@ select option,
 }
 
 .for_drop_img {
-    margin-left: 8px;
+    /* margin-left: 8px;
+    margin-top: 10px; */
+    margin-left: 12px;
     margin-top: 10px;
+    padding: 0 10px;
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {

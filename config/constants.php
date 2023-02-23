@@ -2,7 +2,7 @@
 
 return [
 
-    "GOOGLE_API_KEY" => "AIzaSyCNJqNKLKFTBoLnbrbNtP8MDlz2vBVvNnE", //Suprabhat's account
+    "GOOGLE_API_KEY" => "AIzaSyBkEOi3L-gPBnqSz14DE6zjGYX_Ov1aBwE", //admin@cinevesture.com | gmail.com
     "PLATFORM_YOUTUBE" => "youtube",
     "PLATFORM_VIMEO" => "vimeo",
     "PROJECT_NO_IMAGE" => "",
