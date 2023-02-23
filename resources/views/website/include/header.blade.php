@@ -54,8 +54,8 @@
               ?>
             </div>
               </div>
-              @if (!($currentPath == 'filter') && !($currentPath == 'results') && !($currentPath == 'profile-filter'))
-                
+              {{-- @if (!($currentPath == 'filter') && !($currentPath == 'results') && !($currentPath == 'profile-filter') && !($currentPath == 'search') && !($currentPath == 'profile-show')) --}}
+              @if ($currentPath == 'home')
               <button class="navbar-toggler mt-1" style="right: 40px;" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
               aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"><i class="fa fa-filter text-light" aria-hidden="true"></i></span>
