@@ -2822,6 +2822,14 @@ transition: 0.3s all ease;
     justify-content: center;
 }
 
+.organisation_team_warper {
+    width: 160px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .input_wraper {
     min-height: 143px;
     background: rgba(246, 239, 251, 0.8);
@@ -4407,6 +4415,13 @@ transition: 0;
     width: auto !important;
     max-width: 100% !important;
     min-width: -webkit-fill-available;
+}
+.organisation_team_warper {
+    width: 130px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
