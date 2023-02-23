@@ -50,7 +50,7 @@
                            
                             <div class="col-md-12 d-flex justify-content-between mt-3">
                                  <div>{{'Showing '.$userQuerys->firstItem().' to' .' '. $userQuerys->lastItem().' of'.' '.$userQuerys->total()}}</div>
-                                <div style="float:right;" >{{$userQuerys->links()}}</div>
+                                <div style="float:right;" >{{$userQuerys->appends(request()->except('page'))->links()}}</div>
                                 </div> 
                             </div>
                     </div>

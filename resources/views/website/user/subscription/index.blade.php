@@ -61,7 +61,8 @@
                     <div class="row">
                         <?php $flag = 0; ?>
                        @foreach($plans as $plan)
-                        <div class="col-md-3 mb-2 mb-md-0">
+                       @php if($plan->plan_name == 'Free'){continue;} @endphp
+                        <div class="col-md-4 mb-2 mb-md-0">
                             <div class="plan_card">
                                 <div class="plain_detail">
                                     <div class="plain_header text-center">{{$plan->plan_name}}</div>
