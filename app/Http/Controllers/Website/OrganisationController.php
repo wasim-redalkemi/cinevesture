@@ -44,7 +44,7 @@ class OrganisationController extends WebController
                     }
                 }
             }else{
-                $UserOrganisation = UserOrganisation::query()->with(['organizationLanguages.languages','organizationServices.services','country','organizationType'])->where('user_id',auth()->user()->id)->first();
+                $UserOrganisation = UserOrganisation::query()->with(['organizationLanguages.languages','organizationServices.services','country','organizationType','memberUser'])->where('user_id',auth()->user()->id)->first();
             }
             return view('website.user.organisation.organisation',compact(['UserOrganisation','editHide']));
         } catch (Exception $e) {

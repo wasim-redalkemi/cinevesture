@@ -83,7 +83,7 @@ class User extends Authenticatable
     }
 
     public function isfavouriteProfile(){
-        return $this->hasOne(UserFavouriteProfile::class, 'profile_id');
+        return $this->hasOne(UserFavouriteProfile::class,'profile_id');
     }
 
     // public function userPlan(){

@@ -46,7 +46,7 @@ class FavouriteController extends WebController
         if(isset($request->project)){
             $param_project  = $request->project;
         }
-        $user_projects->appends('profile',$param_profile)->links();
+        // $user_projects->appends('profile',$param_profile)->links();
 
         $user_profiles->appends('project',$param_project)->links();
                         // $vocational->appends(['search' => request('search')]);
