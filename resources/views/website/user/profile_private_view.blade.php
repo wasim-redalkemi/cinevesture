@@ -166,8 +166,8 @@
                                 <div class="col-md-5">
                                     <div class="guide_profile_main_text mb-2">Introduction Video</div>
                                     @if($user->intro_video_link)
-                                    <div class="VideoWrapforProfile" video-url="{{$user->intro_video_link}}">
-                                        <img src="{{$user->intro_video_thumbnail}}" width="100%" height="100%" alt="">
+                                    <div class="playVideoWrap" video-url="{{ (isset($user->intro_video_link))?$user->intro_video_link:''; }}">
+                                        <img src="{{ (isset($user->intro_video_thumbnail))?$user->intro_video_thumbnail:''; }}" width="100%" alt="">
                                     </div>
                                     @else
                                         <span><b>-</b></span>

@@ -44,7 +44,7 @@ class OrganisationController extends WebController
                     }
                 }
             }else{
-                $UserOrganisation = UserOrganisation::query()->with(['organizationLanguages.languages','organizationServices.services','country','organizationType'])->where('user_id',auth()->user()->id)->first();
+                $UserOrganisation = UserOrganisation::query()->with(['organizationLanguages.languages','organizationServices.services','country','organizationType','memberUser'])->where('user_id',auth()->user()->id)->first();
             }
             return view('website.user.organisation.organisation',compact(['UserOrganisation','editHide']));
         } catch (Exception $e) {
@@ -302,7 +302,15 @@ class OrganisationController extends WebController
             if(!$_REQUEST['email_1'] && !$_REQUEST['email_2']){
                 return ['satus'=>0,'msg'=>"Email fields can not be empty."];
             }
-
+            $userIdOnlyTwo=UserInvite::query()->where('user_id',auth()->user()->id)->get();
+            if(count($userIdOnlyTwo)>2){
+                return ['satus'=>0,'msg'=>"Only two team members invite."];
+            }
+            $userexist=UserInvite::query()->where('email',$request->email_1)->get();
+            if(!empty($userexist) || count($userexist)>0){
+                return ['satus'=>0,'msg'=>"This email already exist."];
+            }
+            
             $organisation = UserOrganisation::query()->where('user_id',auth()->user()->id)->first();
             if(!$organisation){
                 return ['satus'=>0,'msg'=>"Something went wrong. Please try again."];
