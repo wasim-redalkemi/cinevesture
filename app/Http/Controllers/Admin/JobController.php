@@ -50,6 +50,12 @@ class JobController extends AdminController
                     $q->where('name',"like","%".$request->search."%") ;
                 }
             })
+            ->orWhereHas('jobOrganisation',function($q)use($request)
+            {
+                if (isset($request->search)) {
+                    $q->where('name',"like","%".$request->search."%") ;
+                }
+            })
             ->orderByDesc('id')
             ->paginate($this->records_limit);
            
