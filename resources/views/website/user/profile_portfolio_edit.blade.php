@@ -423,6 +423,7 @@
                         if(resp.status == 1){
                             createToast("Image deleted successfully.","S");
                             $(parentElemId+" #portfolio-img-"+imgId).remove();
+                            updateImageUploadCount();
                         } else {
                             createToast(resp.error_msg,"E");
                         }
