@@ -2822,6 +2822,14 @@ transition: 0.3s all ease;
     justify-content: center;
 }
 
+.organisation_team_warper {
+    width: 160px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .input_wraper {
     min-height: 143px;
     background: rgba(246, 239, 251, 0.8);
@@ -4265,7 +4273,7 @@ input:checked+.slider:before {
  .test.owl-carousel .owl-nav button.owl-prev {
     display: flex !important;
     position: absolute !important;
-    top: -55px !important;
+    top: -49px !important;
     left: 195px !important;
     justify-content: center;
     align-items: center;
@@ -4273,7 +4281,7 @@ input:checked+.slider:before {
 .test.owl-carousel .owl-nav button.owl-next {
     display: flex !important;
     position: absolute !important;
-    top: -55px !important;
+    top: -49px !important;
     right: 40px !important;
     justify-content: center;
     align-items: center;
@@ -4407,6 +4415,13 @@ transition: 0;
     width: auto !important;
     max-width: 100% !important;
     min-width: -webkit-fill-available;
+}
+.organisation_team_warper {
+    width: 130px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
