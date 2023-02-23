@@ -201,9 +201,6 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                                {{-- <div class="col-md-3 d-flex align-items-end">
-                                    <div class="save_add_btn">Add another</div>
-                                </div> --}}
                             </div>
                             <div class="row">
                                 <div class="col-md-12">
@@ -221,7 +218,7 @@
                                 </div>
                             </div>
                         </form>
-                           <div class="modal fade" id="ImageCropperModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                        <div class="modal fade" id="ImageCropperModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content croper_modal">
                                     <div class="modal-header py-1">
