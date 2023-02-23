@@ -182,27 +182,21 @@
 
     </div>
     <div class="modal fade" id="ImageCropperModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-                                <div class="modal-dialog modal-lg" role="document">
-                                    <div class="modal-content croper_modal">
-                                        <div class="modal-header py-1">
-                                            <h6 class="modal-title tile_text" id="modalLabel"> Image Cropper</h6>
-                                            <div class="d-flex jutify-content-center">
-                                                <button type="button" class="mx-2 btn-danger" id="crop-cancel" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
-                                                <button type="button" class="btn-success" id="crop"><i class="fa fa-check" aria-hidden="true"></i></button>
-                                            </div>
-                                        </div>
-                                        <div class="modal-body overflow-auto">
-                                            <div class="container">
-                                                <div class="row">
-                                                    <div class="col-md-12">
-                                                        <div class="cropperWrap">
-                                                            <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content croper_modal">
+                <div class="modal-header py-1">
+                    <h6 class="modal-title tile_text" id="modalLabel"> Image Cropper</h6>
+                    <div class="d-flex jutify-content-center">
+                        <button type="button" class="mx-2 btn-danger" id="crop-cancel" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        <button type="button" class="btn-success" id="crop"><i class="fa fa-check" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                <div class="modal-body overflow-auto">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="cropperWrap">
+                                    <img id="image" src="https://avatars0.githubusercontent.com/u/3456749">
                                 </div>
                             </div>
                         </div>
@@ -237,6 +231,23 @@
         let init = function(portfolioData) {
             user_id = portfolioData.id;
             bindActions();
+            setError();
+        }
+
+        let setError = function (){
+            if($("span.invalid-feedback").length > 0){
+                $('html, body').animate({
+                    scrollTop: ($("span.invalid-feedback")[0].offsetTop - 400)
+                }, 100);
+            }
+            let error = $(parentElemId+" .portfolio-images span.invalid-feedback").length;
+            if($(parentElemId+" .portfolio-images span.invalid-feedback").length > 0){
+                $(parentElemId+" .portfolio-images .profile_upload_container").addClass('error-img-border');
+            }
+        }
+
+        let unsetError = function (){
+            $(parentElemId+" .portfolio-images .profile_upload_container").removeClass('error-img-border');
         }
 
         let doAjax = function(url, reqData, method, callback) {
@@ -267,9 +278,7 @@
         let bindActions = function() {
             $(parentElemId + " #portfolio-video input[name='video_url']").off('blur').on('blur', (e) => {
                 let link = e.target.value;
-                console.log("link = " + link);
                 if (link && validateUrl(link)) {
-                    console.log("link blurred - " + link);
                     // if (link.indexOf("vimeo.com") > -1) {
                     if (isValidYoutubeUrl(link)) {
                         //let reqData = {'vidUrl': "https://vimeo.com/336812686"};
@@ -285,7 +294,7 @@
                         doAjax("ajax/get-video-details", reqData, "POST", getVideoDataCallback);
                     } else {
                         //show error
-                        alert("Invalid video url. Only Vimeo and Youtube links are allowed.");
+                        //alert("Invalid video url. Only Vimeo and Youtube links are allowed.");
                         console.log("Invalid video url. Only Vimeo and Youtube links are allowed.");
                     }
                 } else if (link != '') {
@@ -295,11 +304,10 @@
 
             $(parentElemId + " input.imgInp").off("change").on("change", function uploadImageFile(e) {
                 $(".imgInp").attr('required',true);
-                console.log("changed ", this);
+                unsetError();
+                $(parentElemId+" .portfolio-images span.invalid-feedback").remove();
                 let imgId = "#" + $(e.target).parents('.img-item').attr('id');
                 let croppedImgContainerId = imgId.replace("#portfolio-img","#cropped-upload-img-inp");
-                console.log("e = ",this.files,imgId,croppedImgContainerId );
-                console.log("e = ", this.files, imgId);
                 const [file] = this.files
                 uploadedFile = this.files[0];
                 var ImageCropperObj = new ImageCropper(uploadedFile, imgId+" #previewImg");
@@ -330,13 +338,11 @@
 
             $(parentElemId + " .cancel-img-upload").off("click").on("click", function cancelImgUpload(e) {
                 let imgId = "#" + $(e.target).parents('.img-item').attr('id');
-                console.log("changed ", imgId);
+                updateImageUploadCount();
                 $(imgId).remove();
-                //console.log("ok",$(parentElemId+" .portfolio-images").html());
             });
 
             $(parentElemId + " .portfolio-images .save_add_btn").off("click").on("click", () => {
-                console.log("adding elem");
                 addImgUploadElem();
             });
         }
@@ -357,8 +363,7 @@
         }
 
         let addImgUploadElem = function() {
-            imageCnt = $(parentElemId + " .portfolio-images").children('.img-item').length;
-            $('.portfolio_images_count').val(imageCnt);
+            let imageCnt = updateImageUploadCount();
             lastid = $(parentElemId + " .portfolio-images").children('.img-item').last().attr('id').split("-")[3];
             let newcnt = lastid*1 + 1;
             if (maxImgCnt == imageCnt) {
@@ -390,6 +395,16 @@
             html += '</div>';
             $(html).insertAfter(parentElemId + " #portfolio-img-new-" + lastid);
             bindActions();
+        }
+
+        let updateImageUploadCount = function(){
+            let imageCnt = $(parentElemId+" .portfolio-images").children('.img-item').length;
+            if(imageCnt == 1 && $(parentElemId+" .portfolio-images #previewImg").attr('src') == ""){
+                $('.portfolio_images_count').val(imageCnt - 1);
+            } else {
+                $('.portfolio_images_count').val(imageCnt);
+            }
+            return imageCnt;
         }
 
         return {

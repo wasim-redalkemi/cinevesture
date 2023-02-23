@@ -72,13 +72,13 @@ use Illuminate\Support\Facades\DB;
                             <div class="guide_profile_main_text">Resume</div>
 
                             <div class="row">
-                                <div class="col-lg-3 col-sm-6 mt-sm-2 mt-2">
-                                    <div class="d-flex doc_container">
+                                <div class="col-lg-4 col-sm-6 mt-sm-2 mt-2">
+                                    <div class="d-flex doc_container docsPreview" docs-url="{{asset('storage/'.$coverLetter->resume)}}">
                                         <div class="icon">
                                             <img src="{{ asset('images/asset/pdf-icon.png') }}">
                                         </div>
-                                        <a href="@if (!empty($coverLetter->resume)){{asset('storage/'.$coverLetter->resume)}} @endif" download="" class="public-subheading-text mx-2">
-                                            <div class="resume-download-txt">{{empty($coverLetter->resume_original_name)?'-':$coverLetter->resume_original_name }}</div>
+                                        <a class="public-subheading-text mx-2">
+                                            <div class="resume-download-txt break_all">{{empty($coverLetter->resume_original_name)?'-':$coverLetter->resume_original_name }}</div>
                                             <div class="resume-download-txt">{{empty($coverLetter->resume_size)?'-':$coverLetter->resume_size }}</div>
                                         </a>
                                     </div>
@@ -88,7 +88,7 @@ use Illuminate\Support\Facades\DB;
                         </div>
 
                         <div class="guide_profile_subsection">
-                            <div class="container">
+                            <div class="">
                                 <div class="row">
                                     <div class="col-md-5">
                                         <div class="guide_profile_main_text deep-pink font_18">
@@ -111,7 +111,7 @@ use Illuminate\Support\Facades\DB;
                         </div>
 
                         <div class="guide_profile_subsection">
-                            <div class="container">
+                            <div class="">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="guide_profile_main_text deep-pink font_18">Portfolio</div>
@@ -128,7 +128,7 @@ use Illuminate\Support\Facades\DB;
                                                 }
                                                 @endphp
                                                 <div class="item portfolio_item" onclick="portfolio_model({{$v['id']}})">
-                                                    <div class="portfolio_item_image">
+                                                    <div class="portfolio_item_image" style="width:280px">
                                                         <img src="<?php echo $img ?>" class="portfolio_img" width="100%">
                                                     </div>
                                                     <div class="d-flex justify-content-between mt-2">
@@ -189,7 +189,7 @@ $(".portfolio.owl-carousel").owlCarousel({
     nav: true,
     margin: 20,
     center: false,
-    // items: 4,
+    items: 1,
     responsive: {
         480: {
             items: 1
@@ -198,7 +198,7 @@ $(".portfolio.owl-carousel").owlCarousel({
             items: 2
         },
         1024: {
-            items: 4
+            items: 3
         }
     },
 });

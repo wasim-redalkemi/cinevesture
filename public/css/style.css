@@ -1873,6 +1873,8 @@ select,
     min-height: calc(7em + 0.75rem + 2px) !important;
 }
 
+.error-img-border {border: 1px solid red !important}
+
 .profile_dropdown_btn {
     background: #FFFFFF;
     width: 100%;
@@ -3392,6 +3394,10 @@ input:checked+.slider:before {
 .main_content {
     position: relative;
     padding-top: 100px;
+}
+
+.test.owl-carousel .owl-nav.disabled { 
+    display: flex !important;
 }
 
 .owl-carousel .owl-nav button.owl-next,

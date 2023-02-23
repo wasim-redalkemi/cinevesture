@@ -120,9 +120,9 @@
                                     Recommended Profile
                                 </label>
                             </div>
-                            <div class="mt-4 d-flex">
+                            <div class="mt-4 d-flex justify-content-between">
                                 <input type="submit" class="filter-button watch-now-btn mt-4" Value="Apply">
-                                <a href="{{route('guide-view')}}"><input type="button" class="clear-filter watch-now-btn mt-4" Value="Clear"></a>
+                                <a href="{{route('guide-view')}}"><input type="button" class="clear-filter watch-now-btn mt-4 w-100" Value="Clear"></a>
                             </div>
 
                         </div>
