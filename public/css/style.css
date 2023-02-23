@@ -4263,7 +4263,7 @@ input:checked+.slider:before {
  .test.owl-carousel .owl-nav button.owl-prev {
     display: flex !important;
     position: absolute !important;
-    top: -55px !important;
+    top: -49px !important;
     left: 195px !important;
     justify-content: center;
     align-items: center;
@@ -4271,7 +4271,7 @@ input:checked+.slider:before {
 .test.owl-carousel .owl-nav button.owl-next {
     display: flex !important;
     position: absolute !important;
-    top: -55px !important;
+    top: -49px !important;
     right: 40px !important;
     justify-content: center;
     align-items: center;
