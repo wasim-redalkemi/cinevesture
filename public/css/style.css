@@ -1077,6 +1077,12 @@ label {
     font-size: 13px;
     font-weight: 600;
     color: #212B36;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.page-link { 
+    padding: 3px !important;
 }
 .page-item:last-child .page-link, .page-item:first-child .page-link { 
     font-size: 24px;
@@ -2850,8 +2856,11 @@ select option,
 }
 
 .for_drop_img {
-    margin-left: 8px;
+    /* margin-left: 8px;
+    margin-top: 10px; */
+    margin-left: 12px;
     margin-top: 10px;
+    padding: 0 10px;
 }
 
 .select2-container--default .select2-selection--multiple .select2-selection__choice__remove {
@@ -4233,8 +4242,8 @@ input:checked+.slider:before {
     padding: 0rem;
  }
  .pagination {
-    float: left;
-    margin-left: 25%;
+    float: left !important;
+    /* margin-left: 25%; */
     margin-top: 15px;
     margin-bottom: 30px;
 }
