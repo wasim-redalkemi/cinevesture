@@ -26,9 +26,9 @@ return [
     'PROFILE_VERIFIED_ON_ENDORSE_COUNT' => '2',
     'MAX_PROJECT_DURATION_IN_MIN' => '60000',
     'MAX_TOTAL_BUDGET' => '1000000000',
-    "captcha_site_key"=>"6LcY_VgeAAAAANo3BSTKnW3JSVFo9jVH2PTM1XsG", // being pupil
-    "captcha_secret_key"=>"6LcY_VgeAAAAAJ6KQueL8BZPCSoIUacJVL832hXc", // being pupil
-    'site-key-local'=>'6LekiWEkAAAAAHMJzr3nD092MhN93sxLsdYi4f1m',
+    "captcha_site_key"=>"6Ldjh6kkAAAAAM3-dCCNBH-znd0XRDAtPHa2CZJy", // admin@cinevesture.com
+    "captcha_secret_key"=>"6Ldjh6kkAAAAAPRiJ_U_UIHbxYD8kVa5RnuikfPv", // admin@cinevesture.com
+    'site-key-local'=>'6Ldjh6kkAAAAAM3-dCCNBH-znd0XRDAtPHa2CZJy',
 
 ];
 

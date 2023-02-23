@@ -94,7 +94,7 @@ use Illuminate\Support\Facades\DB;
                                         <div class="guide_profile_main_text deep-pink font_18">
                                             <h1 class="">About</h1>
                                         </div>
-                                        <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
+                                        <div class="inp_data Aubergine_at_night mt-2">
                                             <p>
                                                {{empty($applicant->about)?'-':ucFirst($applicant->about) }}
                                             </p>
