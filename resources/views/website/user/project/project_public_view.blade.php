@@ -111,10 +111,10 @@
                                     </tr>
                                     @if ($show== true)
                                     <tr>
-                                        <td class="public-head-subtext white blackTextShadow text-start ">Created By</td>
-                                        <td class="aubergine contact-page-subtext candy-pink blackTextShadow text-end text-md-start">
+                                        <td class="public-head-subtext white blackTextShadow text-start">Created By</td>
+                                        <td class="aubergine contact-page-subtext candy-pink blackTextShadow text-end text-md-start blur_text">
                                             @if (!empty($projectData[0]['user']['name']))
-                                            <a href="{{route('profile-public-show',['id'=>$projectData[0]['user']['id']])}}" class="text_decor_none">{{ ucwords($projectData[0]['user']['name'])}}</a>
+                                            <a href="{{route('profile-public-show',['id'=>$projectData[0]['user']['id']])}}" class="text_decor_none blur_text">{{ ucwords($projectData[0]['user']['name'])}}</a>
                                             @else
                                             <span><b>-</b></span>
                                             @endif
@@ -125,7 +125,7 @@
                                         <td class="public-head-subtext white blackTextShadow text-start">Created By</td>
                                         <td class="aubergine contact-page-subtext candy-pink blackTextShadow text-end text-md-start">
                                             @if (!empty($projectData[0]['user']['name']))
-                                            <a href="{{route('profile-public-show',['id'=>$projectData[0]['user']['id']])}}" class="text_decor_none">{{ ucwords($projectData[0]['user']['name'])}}</a>
+                                            <a href="{{route('profile-public-show',['id'=>$projectData[0]['user']['id']])}}" class="text_decor_none ">{{ ucwords($projectData[0]['user']['name'])}}</a>
                                             @else
                                             <span><b>-</b></span>
                                             @endif
@@ -441,9 +441,7 @@
                 </div>
             </div>
         </div>
-        @if ($show== true)
-                               
-        @else
+       
         <div class="public_subsection">
             <div class="row">
                 <div class="col-md-7">
@@ -459,10 +457,18 @@
                                 </tr>
                                 @if (!empty($projectData[0]['project_association']))
                                 @foreach ($projectData[0]['project_association'] as $v)
+                                @if ($show== true)
                                 <tr>
+                                    <td class="public-head-subtext white blur_text">{{ucwords($v['project_associate_title'])}}</td>
+                                    <td class="aubergine public-sub-res-text white blur_text">{{ucwords($v['project_associate_name'])}}</td>
+                                </tr>
+                               @else
+                               <tr>
                                     <td class="public-head-subtext white">{{ucwords($v['project_associate_title'])}}</td>
                                     <td class="aubergine public-sub-res-text white">{{ucwords($v['project_associate_name'])}}</td>
                                 </tr>
+                               @endif
+                                
                                 @endforeach
                                 @else
                                 <tr>
@@ -477,7 +483,7 @@
                 </div>
             </div>
         </div>
-        @endif
+       
 
         <div class="guide_profile_subsection">
             <div class="">

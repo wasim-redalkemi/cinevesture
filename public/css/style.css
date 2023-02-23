@@ -3566,7 +3566,10 @@ input:checked+.slider:before {
     color: #971E9B;
 
 }
-
+.blur_text {
+    color: transparent !important;
+    text-shadow: 0 0 5px #fff !important;
+}
 .search_page_filters_data_active {
     background-color: #971E9B !important;
     color: #fff !important;
