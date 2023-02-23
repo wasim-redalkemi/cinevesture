@@ -3396,6 +3396,10 @@ input:checked+.slider:before {
     padding-top: 100px;
 }
 
+.test.owl-carousel .owl-nav.disabled { 
+    display: flex !important;
+}
+
 .owl-carousel .owl-nav button.owl-next,
 .owl-carousel button.owl-dot {
     /* display: none; */
