@@ -255,7 +255,9 @@ class JobController extends WebController
     public function showJobApplicants($jobId)
     {
         $applicants = User::query()
-            ->with(["skill", "organization.country", "isfavouriteProfile"])
+            ->with(["skill", "organization.country", "isfavouriteProfile"=>function($q){
+                $q->where('user_id',$this->getCreatedById());
+            }])
             ->whereHas('appliedJobs', function ($query) use ($jobId) {
                 $query->where('job_id', $jobId);
             })
@@ -418,8 +420,8 @@ class JobController extends WebController
                 }
             })       
            ->paginate(config('constants.JOB_PAGINATION_LIMIT'));
-        // $jobs->appends(request()->query())->links();
-        $notFoundMessage = "No jobs found, please modify your search.";
+           $jobs->appends(request()->input())->links();
+           $notFoundMessage = "No jobs found, please modify your search.";
         
         return view('website.job.search_result', compact('countries', 'employments', 'skills', 'categories', 'workspaces', 'jobs', 'notFoundMessage','promoteCheck','prevDataReturn'));
     }

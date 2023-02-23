@@ -211,7 +211,7 @@
                     </div>
                     <div class="col-md-12 d-flex justify-content-between mt-3">
                         <div>{{'Showing '.$projects->firstItem().' to' .' '. $projects->lastItem().' of'.' '.$projects->total()}}</div>
-                        <div style="float:right;">{{$projects->appends($_GET)->links()}}</div>
+                        <div style="float:right;">{{$projects->onEachSide(-1)->appends($_GET)->links()}}</div>
                     </div> 
                 </div>
             </div>

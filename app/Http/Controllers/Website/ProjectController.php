@@ -800,7 +800,7 @@ class ProjectController extends WebController
             // ->where('user_id','!=',auth()->user()->id)
             ->orderByDesc('id')
             ->paginate(config('constants.JOB_PAGINATION_LIMIT'));
-            $projects->appends(request()->input())->links();
+            $projects->appends(request()->input())  ;
             return view('website.user.project.search_result',compact(['countries','languages','geners','categories','looking_for','project_stages','projects','prevDataReturn']));                   
            }catch(Exception $e){
             return back()->with('error',$e->getMessage());

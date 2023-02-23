@@ -206,7 +206,9 @@
                 {!! config('constants.NO_DATA_SEARCH') !!}
                 @endif
                 <div>
-                    {!! $users->links() !!}
+                    {{-- {!! $users->links() !!} --}}
+                    {!! $users->onEachSide(-1)->links() !!}
+
                 </div>
 
             </div>

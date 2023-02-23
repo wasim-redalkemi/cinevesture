@@ -47,7 +47,9 @@
                     </div>   
                     @endforeach
                     <div class="col col-md-12">
-                        {!! $user_projects->links() !!}
+                        {{-- {!! $user_projects->links() !!} --}}
+                        {!! $user_projects->onEachSide(-1)->links() !!}
+
                     </div>
                     @else
                     <div class="col col-md-12">
@@ -56,18 +58,27 @@
                     @endif
                 </div>
                 <div class="guide_profile_main_text deep-pink mt-5 mb-1">Profiles</div>
-                @php
+                {{-- @php
                     $user_profiles_data = $user_profiles->toArray();
-                @endphp
-                @if (isset($user_profiles_data['data']) && count($user_profiles_data['data'])>0)
-                    @foreach ($user_profiles_data['data'] as $k => $v)               
+                @endphp --}}
+                
+                {{-- @if (isset($user_profiles_data['data']) && count($user_profiles_data['data'])>0) --}}
+               
+                    @foreach ($user_profiles as $k => $v) 
+                   
+                        
+                       
                     <div class="profile_wraper profile_wraper_padding mt-1">
                         <div class="d-flex justify-content-between">
                             <div class="d-flex">
                                 <div class="">
-                                    <div class="user_profile_container">                                
-                                        @if (!empty($v['profiles']['profile_image']))
-                                            <img src="{{ Storage::url($v['profiles']['profile_image']) }}"  class="" width=100% alt="image">
+                                    <div class="user_profile_container"> 
+                                        {{-- @foreach ($v->profiles as $item) --}}
+                                            
+                                        
+                                        {{-- @endforeach --}}
+                                        @if (!empty($v->profiles->profile_image))
+                                            <img src="{{ Storage::url($v->profiles->profile_image) }}"  class="" width=100% alt="image">
                                         @else
                                         <img src="{{ asset('images/asset/100_no_img.jpg') }}" />
                                         @endif
@@ -76,9 +87,9 @@
                                 <div class="mx-4 px-1">
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex align-items-center">
-                                            @if ($v['profiles']['id'])
-                                            <a href="{{route('profile-public-show',['id'=>$v['profiles']['id']])}}" style="outline: none; text-decoration:none">
-                                                <span class="guide_profile_main_text"> {{ !empty($v['profiles']['name'])? ucFirst($v['profiles']['name']) : '-' }}</span>
+                                            @if (!empty($v->profiles->id))
+                                            <a href="{{route('profile-public-show',['id'=>$v->profiles->id])}}" style="outline: none; text-decoration:none">
+                                                <span class="guide_profile_main_text"> {{ !empty($v->profiles->name)? ucFirst($v->profiles->name) : '-' }}</span>
                                             </a>
                                                 
                                             @endif
@@ -101,36 +112,46 @@
                                         </div>
                                     </div>
                                     <div class="posted_job_header">
-                                        {{ !empty($v['profiles']['job_title'])? ucFirst($v['profiles']['job_title']) : '-' }}
+                                        {{ !empty($v->profiles->job_title)? ucFirst($v->profiles->job_title) : '-' }}
                                     </div>
+                                    
+                                    
                                     <div class="preview_headtext lh_54 candy-pink">
-                                        {{ !empty($v['profile_country']['country']['name'])? ucFirst($v['profile_country']['country']['name']) : '-' }}
+                                        @if (!empty($v->profileCountry))
+                                        {{ !empty($v->profileCountry->country->name)? ucFirst($v->profileCountry->country->name) : '-' }}
+                                        @endif
+                                      
+                                       
                                     </div>
                                     <div class="posted_job_header Aubergine_at_night">
                                         {{ !empty($v['profiles']['about'])? $v['profiles']['about'] : '-' }}
                                     </div>
                                     <div class="mt-3">
-                                        @foreach ($v['profile_skills'] as $k1=>$v1)                           
-                                            <button class="curv_cmn_btn skill_container">{{ !empty($v1['get_skills']['name'])? $v1['get_skills']['name'] : '-' }}</button>
+                                        @foreach ($v->profileSkills as $k=>$value)
+                                            <button class="curv_cmn_btn skill_container">{{ !empty($value->getSkills->name)? $value->getSkills->name : '-' }}</button>
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
-                            
-                            <div> <i class="fa <?php if(isset($v['profiles']['id'])){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$v['profiles']['id']}}" aria-hidden="true"></i></div>
+                            @if(!empty($v->profiles->id))
+                            <div> <i class="fa <?php if(!empty($v->profiles->id)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$v->profiles->id}}" aria-hidden="true"></i></div>
+                        
+                            @endif
                         </div>
                     </div>            
                     @endforeach
                     <div class="col col-md-12">
-                        {!! $user_profiles->links() !!}
+                        {{-- {!! $user_profiles->links() !!} --}}
+                        {!! $user_profiles->onEachSide(-1)->links() !!}
+
                     </div>
-                @else
-                    <div class="row">
+                {{-- @else --}}
+                    {{-- <div class="row">
                         <div class="col col-md-12">
                             {!! config('constants.NO_DATA_FAVOURITE') !!}
                         </div>
                     </div>
-                @endif
+                @endif --}}
             </div>
         </div>
     </div>

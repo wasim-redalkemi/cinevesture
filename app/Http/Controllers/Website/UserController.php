@@ -148,7 +148,7 @@ class UserController extends WebController
                 ->get()
                 ->toArray();
             // Endorsement
-            $user_endorsement = Endorsement::query()->with('endorsementCreater')->with('endorsementorganisation')->where('to',$user->id)->where('status','1')
+            $user_endorsement = Endorsement::query()->with('endorsementCreater')->with('endorsementorganisation')->where('to',$this->getCreatedById())->where('status','1')
                                 ->orderByDesc('id')->limit(5)->get();
             return view('website.user.profile_private_view', compact(['user', 'portfolio', 'experience', 'qualification', 'user_country','user_state', 'user_age', 'user_skills', 'user_languages','user_endorsement','user_gender','user_gender_pronouns']));
         } catch (Exception $e) {
@@ -838,7 +838,9 @@ class UserController extends WebController
     public function deactivateAccount()
     {   $user= User::find(auth()->user()->id);
         Auth::logout();
-        $user->delete();
+        // $user->delete();
+        $user->status ='0';
+        $user->save();
         return redirect('/login');
 
     }
