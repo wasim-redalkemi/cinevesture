@@ -303,11 +303,11 @@ class OrganisationController extends WebController
                 return ['satus'=>0,'msg'=>"Email fields can not be empty."];
             }
             $userIdOnlyTwo=UserInvite::query()->where('user_id',auth()->user()->id)->get();
-            if(count($userIdOnlyTwo)>2){
+            if(count($userIdOnlyTwo)>'1'){
                 return ['satus'=>0,'msg'=>"Only two team members invite."];
             }
             $userexist=UserInvite::query()->where('email',$request->email_1)->get();
-            if(!empty($userexist) || count($userexist)>0){
+            if(count($userexist)>='1'){
                 return ['satus'=>0,'msg'=>"This email already exist."];
             }
             
@@ -319,10 +319,10 @@ class OrganisationController extends WebController
             $data = [
                 ['user_id'=>auth()->user()->id,'user_organization_id'=>$_REQUEST['organization_id'],'email'=>$_REQUEST['email_1'],'created_at'=>date("Y-m-d h:i:s", time()),'updated_at'=>date("Y-m-d h:i:s", time())],
             ];
-            if($_REQUEST['email_2'])
-            {
-                $data[] = ['user_id'=>auth()->user()->id,'user_organization_id'=>$_REQUEST['organization_id'],'email'=>$_REQUEST['email_2'],'created_at'=>date("Y-m-d h:i:s", time()),'updated_at'=>date("Y-m-d h:i:s", time())];
-            }
+            // if($_REQUEST['email_2'])
+            // {
+            //     $data[] = ['user_id'=>auth()->user()->id,'user_organization_id'=>$_REQUEST['organization_id'],'email'=>$_REQUEST['email_2'],'created_at'=>date("Y-m-d h:i:s", time()),'updated_at'=>date("Y-m-d h:i:s", time())];
+            // }
             $UserInvite = $this->teamEmailLogStore($data);
             
             if(!empty($_REQUEST['email_1']) ){
