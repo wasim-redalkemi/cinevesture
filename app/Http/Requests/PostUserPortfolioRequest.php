@@ -32,7 +32,7 @@ class PostUserPortfolioRequest extends FormRequest
             'project_specific_skills_id.*' => 'required|exists:master_skills,id',
             'project_country_id'=> 'required', 
             'project_country_id.*' => 'required|exists:master_countries,id',
-            'portfolio_images_count' => 'required|min:1'
+            'portfolio_images_count' => 'required|numeric|min:1'
 
         ];
     }
@@ -40,6 +40,7 @@ class PostUserPortfolioRequest extends FormRequest
     {
         return [
             'portfolio_images_count.required' => 'This field is required.',
+            'portfolio_images_count.min' => 'Please upload at least one portfolio image.',
             'portfolio_title.required' => 'This field is required.',
             'description.required' => 'This field is required.',
             'completion_datevideo_url.required' => 'This field is required.',

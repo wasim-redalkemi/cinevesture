@@ -118,7 +118,9 @@ input:checked + .slider:before {
                  {!! config('constants.NO_DATA_FAVOURITE') !!}
 
                 @endif
-                {!! $endorsement->links() !!}
+                {{-- {!! $endorsement->links() !!} --}}
+                {!! $endorsement->onEachSide(-1)->links() !!}
+
             </div>
         </div>
     </div>

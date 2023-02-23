@@ -109,7 +109,9 @@
                             </div>
                         @endforeach                    
                         <div>
-                            {!! $userJob->links() !!}
+                            {{-- {!! $userJob->links() !!} --}}
+                            {!! $userJob->onEachSide(-1)->links() !!}
+
                         </div>
                     @endif
                 </div>

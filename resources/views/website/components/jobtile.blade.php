@@ -59,4 +59,5 @@
     </div> --}}
    {!! config('constants.NO_DATA_SEARCH') !!}
     @endif
-{{$jobs->links()}}
+{{-- {{$jobs->links()}} --}}
+{!! $jobs->onEachSide(-1)->links() !!}
