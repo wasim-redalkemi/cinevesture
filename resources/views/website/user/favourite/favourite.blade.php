@@ -62,8 +62,7 @@
                     $user_profiles_data = $user_profiles->toArray();
                 @endphp --}}
                 
-                {{-- @if (isset($user_profiles_data['data']) && count($user_profiles_data['data'])>0) --}}
-               
+                @if (isset($user_profiles) && count($user_profiles)>0)               
                     @foreach ($user_profiles as $k => $v) 
                    
                         
@@ -145,13 +144,11 @@
                         {!! $user_profiles->onEachSide(-1)->links() !!}
 
                     </div>
-                {{-- @else --}}
-                    {{-- <div class="row">
-                        <div class="col col-md-12">
-                            {!! config('constants.NO_DATA_FAVOURITE') !!}
-                        </div>
-                    </div>
-                @endif --}}
+                @else
+                <div class="col col-md-12">
+                    {!! config('constants.NO_DATA_FAVOURITE') !!}
+                </div>
+                @endif
             </div>
         </div>
     </div>
