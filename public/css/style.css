@@ -70,6 +70,29 @@ a {
     position: relative;
 }
 
+.offcanvas-start {
+    top: 95px;
+ }
+ .offcanvas {
+    background: #1C0330 !important;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
+    max-width: 85% !important;
+    z-index: 99999;
+    max-height: 80vh;
+ }
+ .offcanvas-header .btn-close { 
+    margin-right: 0rem;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+ }
+ .offcanvas-header {
+    justify-content: end !important;
+ }
+ .btn-close { 
+    background: transparent !important;
+ }
+
 .active,
 .active a {
     font-weight: 500 !important;
@@ -4092,6 +4115,9 @@ input:checked+.slider:before {
 
     .home-dropdown .nav-link {
         text-align: left;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .navbar_mobile {
@@ -4435,7 +4461,12 @@ transition: 0;
     align-items: center;
     justify-content: center;
 }
-
+.add-proj-btn {
+    width: 7rem; 
+}
+.header-search-btn {
+    width: 7rem;
+}
 
 }
 
