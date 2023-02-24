@@ -28,9 +28,9 @@
                             Posted Jobs
                         </div>
                         <div class="d-flex mt-2">
-                            <div class="posted_job_header"><a href="{{ route('posted-job',['id'=>auth()->user()->id]) }}" class="posted_job_header_link px-3 <?php if($status =='published' ){echo 'active_job_page';}?>"> Published Jobs</a></div>
-                            <div class="posted_job_header"><a href="{{ route('posted-job',['id'=>auth()->user()->id,'status'=>'draft']) }}" class="posted_job_header_link px-3 <?php if($status =='draft' ){echo 'active_job_page';}?>">Draft Job</a></div>
-                            <div class="posted_job_header"><a href="{{ route('posted-job',['id'=>auth()->user()->id,'status'=>'unpublished']) }}" class="posted_job_header_link px-3 <?php if($status =='unpublished' ){echo 'active_job_page';}?>">Unpublished Jobs</a></div>
+                            <div class="posted_job_header"><a href="{{ route('posted-job',['id'=>auth()->user()->id]) }}" class="posted_job_header_link pe-3 <?php if($status =='published' ){echo 'active_job_page';}?>"> Published</a></div>
+                            <div class="posted_job_header"><a href="{{ route('posted-job',['id'=>auth()->user()->id,'status'=>'draft']) }}" class="posted_job_header_link px-3 <?php if($status =='draft' ){echo 'active_job_page';}?>">Draft</a></div>
+                            <div class="posted_job_header"><a href="{{ route('posted-job',['id'=>auth()->user()->id,'status'=>'unpublished']) }}" class="posted_job_header_link px-3 <?php if($status =='unpublished' ){echo 'active_job_page';}?>">Unpublished</a></div>
                         </div>
                     </div>
                     @php
