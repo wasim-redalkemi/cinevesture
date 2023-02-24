@@ -68,5 +68,6 @@ class Kernel extends HttpKernel
         'adminAuth' => \App\Http\Middleware\AdminAuthMiddleware::class,
         'adminWebAuth' => \App\Http\Middleware\AdminWebAuthMiddleware::class,
         'plancheck'=> \App\Http\Middleware\PlanPermission::class,
+        'is_admin'=>\App\Http\Middleware\IsAdmin::class,
     ];
 }

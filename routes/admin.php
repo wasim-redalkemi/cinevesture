@@ -23,10 +23,10 @@ use App\Http\Middleware\AdminAuthMiddleware;
 // Route::get('/admin', function () {
 //     return view('admin.auth.login');
 // });
-Route::get('admin/login', [AuthController::class, 'showLoginAdmin'])->name('admin.loginview');
+Route::get('admin/login', [AuthController::class, 'showLoginAdmin'])->name('admin.loginview')->middleware('is_admin');
 Route::post('admin/login', [AuthController::class, 'login'])->name('admin.login');
 
-Route::group(['prefix'=>'admin','middleware' => 'adminAuth'],function()
+Route::group(['prefix'=>'admin','middleware' => ['adminAuth']],function()
 {	
     Route::get('/dashboard/index', [AuthController::class, 'index'])->name('admin.dashboard');
    
