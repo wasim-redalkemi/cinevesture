@@ -3818,6 +3818,10 @@ input:checked+.slider:before {
     background: none;
 }
 
+.h_100 {
+    height: 100%;
+}
+
 
 /* .main_slider.owl-carousel .owl-item img
     {
@@ -4466,6 +4470,15 @@ transition: 0;
 }
 .header-search-btn {
     width: 7rem;
+}
+.width_in_small {
+    height: 66px;
+    min-height: 66px;
+    width: 66px;
+    min-width: 66px;
+}
+.h_100 {
+    height: auto;
 }
 
 }

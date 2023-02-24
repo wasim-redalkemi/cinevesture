@@ -235,7 +235,8 @@
               </div>
               {{-- <div class="d-flex align-items-center justify-content-between flex-column flex-sm-row mt-4">
                 <p class="mb-3 mb-sm-0">Showing 1 to 20 of 20 entries</p>
-                <nav>
+               <div class="d-flex justify-content-center justify-content-md-end">
+               <nav>
                   <ul class="pagination pagination-primary mb-0">
                     <li class="page-item"><a class="page-link"><i class="mdi mdi-chevron-left"></i></a></li>
                     <li class="page-item active"><a class="page-link">1</a></li>
@@ -245,6 +246,7 @@
                     <li class="page-item"><a class="page-link"><i class="mdi mdi-chevron-right"></i></a></li>
                   </ul>
                 </nav>
+               </div>
               </div> --}}
             </div>
           </div>
