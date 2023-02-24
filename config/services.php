@@ -31,11 +31,9 @@ return [
     ],
 
     'google' => [
-        'client_id' => '404666548764-f1v2kr3th4ip21jkqgq2et4knrt7uau3.apps.googleusercontent.com', //USE FROM GOOGLE DEVELOPER ACCOUNT
-        'client_secret' => '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', //USE FROM GOOGLE DEVELOPER ACCOUNT
-        // 'redirect' => 'http://local.cinevesture.com/google/callback',
-        'redirect' => 'https://app.cinevesture.com/google/callback'
-
+        'client_id' => env('GOOGLE_CLIENT_ID'), //USE FROM FACEBOOK DEVELOPER ACCOUNT
+        'client_secret' => env('GOOGLE_CLIENT_SECRET'), //USE FROM FACEBOOK DEVELOPER ACCOUNT
+        'redirect' => env('GOOGLE_CLIENT_REDIRECT'),
     ],
 
 ];
