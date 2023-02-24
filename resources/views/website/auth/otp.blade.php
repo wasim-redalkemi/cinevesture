@@ -54,7 +54,7 @@
 
 <section class="auth_section p-0 mt-0">
     <div class="main_page_wraper">
-        <form method="POST" class="" enctype="multipart/form-data" action="{{ route('verify-otp') }}">
+        <form method="POST" id="otp_form" enctype="multipart/form-data" action="{{ route('verify-otp') }}">
             @csrf
             <div class="container">
                 <div class="row">
@@ -67,7 +67,7 @@
                                 <div class="col-12 mt-2 mt-lg-5 pt-2">
                                     <input type="hidden" id="email" name="email" value="{{$user->email}}">
                                     <input type="hidden" id="type" name="type" value="{{$type}}">
-                                    <input type="password" class="outline w-100 {{ $errors->has('otp') ? ' is-invalid' : '' }}" name="otp" placeholder="Please Enter OTP" required>
+                                    <input type="password" id="otp" class="outline w-100 {{ $errors->has('otp') ? ' is-invalid' : '' }}" name="otp" placeholder="Please Enter OTP" required>
 
                                     @if ($errors->has('otp'))
                                     <span class="invalid-feedback" style="display: block;" role="alert">
@@ -88,7 +88,7 @@
                                 </div>
 
                                 <div class="col-12 mt-2">
-                                    <button class="w-100">Submit</button>
+                                    <button type="button" id="otp-submit" class="w-100">Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -130,6 +130,18 @@
         }
     });
 
+    $("#otp-submit").on('click',function(e){
+        e.preventDefault();
+        let $btn = $(this);
+        $btn.text("Submitting...");
+        $btn.prop('disabled',true);
+        let otp = $('#otp').val();
+        if (!otp) {
+            toastMessage('error','Please enter otp');
+            return;
+        }
+        $("#otp_form").submit();
+    })
 
 
     $(document).ready(function() {

@@ -66,6 +66,8 @@ class UserController extends AdminController
             })
             ->orderBy('created_at', 'desc')
             ->paginate($this->records_limit);
+            $users->appends(request()->input())->links() ;
+
             return view('admin.user.list',compact('users','UserOrganisation','countries'));
         } 
         catch (Exception  $e) {
@@ -82,7 +84,7 @@ class UserController extends AdminController
        $user->status= $request->status;
        $user->save();
        Session::flash('response', ['text'=>'Status update successfully!','type'=>'success']);
-       return redirect()->route('user-management');
+       return back();
     } catch (Exception $e) {
        
         Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);

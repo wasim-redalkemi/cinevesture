@@ -59,7 +59,7 @@ Route::group(["middleware" => ["adminWebAuth"], "prefix" => "admin"], function (
 });
 // Route::get('reset-password/{token}',[ResetPasswordController::class,'restPasswordPublicView'])->name('reset-password-view');
 
-Route::group(["middleware" => ["auth", "revalidate", "verified"]], function () {
+Route::group(["middleware" => ["auth", "revalidate", "verified",'is_admin']], function () {
 
     // check plans permission
     Route::get('/', function () {

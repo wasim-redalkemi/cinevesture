@@ -27,10 +27,12 @@ class AuthController extends AdminController
      *
      * @return \Illuminate\Http\Response
      */
-
+ 
+    
     public function index()
     {
         try {
+
             $users=User::query()->where('user_type','U')->where('status','1')->orderBy('created_at', 'desc')->limit('5')->get();
             // dd(count($users));
             $totalUsers=User::query()->where('user_type','U')->get();
