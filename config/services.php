@@ -31,10 +31,10 @@ return [
     ],
 
     'google' => [
-        'client_id' => '364859932533-0bkerih8vbt79l5ntbfsonqfetoc8qnf.apps.googleusercontent.com', //USE FROM FACEBOOK DEVELOPER ACCOUNT
-        'client_secret' => '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', //USE FROM FACEBOOK DEVELOPER ACCOUNT
+        'client_id' => '404666548764-f1v2kr3th4ip21jkqgq2et4knrt7uau3.apps.googleusercontent.com', //USE FROM GOOGLE DEVELOPER ACCOUNT
+        'client_secret' => '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', //USE FROM GOOGLE DEVELOPER ACCOUNT
         // 'redirect' => 'http://local.cinevesture.com/google/callback',
-        'redirect' => 'http://devtest1.cinevesture.com/google/callback'
+        'redirect' => 'https://app.cinevesture.com/google/callback'
 
     ],
 

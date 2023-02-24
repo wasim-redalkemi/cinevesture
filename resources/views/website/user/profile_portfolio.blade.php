@@ -152,7 +152,7 @@
                                 </div>
                                 <div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 10MB</div>
                             </div>
-                            <input type="hidden" value="" class="portfolio_images_count @error('portfolio_images_count') is-invalid @enderror" name="portfolio_images_count"/>
+                            <input type="hidden" value="0" class="portfolio_images_count @error('portfolio_images_count') is-invalid @enderror" name="portfolio_images_count"/>
                             @error('portfolio_images_count')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -338,8 +338,8 @@
 
             $(parentElemId + " .cancel-img-upload").off("click").on("click", function cancelImgUpload(e) {
                 let imgId = "#" + $(e.target).parents('.img-item').attr('id');
-                updateImageUploadCount();
                 $(imgId).remove();
+                updateImageUploadCount();
             });
 
             $(parentElemId + " .portfolio-images .save_add_btn").off("click").on("click", () => {
@@ -394,6 +394,7 @@
             html += '<div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 10MB</div>';
             html += '</div>';
             $(html).insertAfter(parentElemId + " #portfolio-img-new-" + lastid);
+            imageCnt = updateImageUploadCount();
             bindActions();
         }
 
