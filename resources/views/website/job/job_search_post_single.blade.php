@@ -154,7 +154,7 @@
                     <div class="guide_profile_subsection">
                         <span class="tile_text">Job Posted By</span>
                         <div class="d-flex mt-3">
-                            <div class="tile_text deep-pink">@if (!empty($Job_data['user'][0]['name'])) {{ucFirst($Job_data['user'][0]['name'])}} @else {{'-'}} @endif</div>
+                            <div class="tile_text deep-pink">@if (!empty($Job_data['user']['name'])) {{ucFirst($Job_data['user']['name'])}} @else {{'-'}} @endif</div>
                             <div class="mx-4 px-3">
                             
                                <div class="organisation_cmn_text">@if (!empty($Job_data['title'])) {{ucFirst($Job_data['title'])}} @else {{'-'}} @endif</div>

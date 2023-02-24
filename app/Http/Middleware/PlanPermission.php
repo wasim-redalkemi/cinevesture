@@ -26,16 +26,16 @@ class PlanPermission extends Controller
          $is_subscribed = SubscriptionUtilityController::isSubscribed();
          if(!$is_subscribed) 
          {
-            $user = User::find( auth()->user()->id);
-            $invites= UserInvite::query()->where('user_id',$user->parent_user_id)->get();
-            if($user->parent_user_id>0 && !empty($invites))
-            {
-               foreach ($invites as $key => $invite) {
-                  if($invite->email==$user->email){
-                     return redirect()->route('master-plan-create');
-                  }
-               }
-            }
+            // $user = User::find( auth()->user()->id);
+            // $invites= UserInvite::query()->where('user_id',$user->parent_user_id)->get();
+            // if($user->parent_user_id>0 && !empty($invites))
+            // {
+            //    foreach ($invites as $key => $invite) {
+            //       if($invite->email==$user->email){
+            //          return redirect()->route('master-plan-create');
+            //       }
+            //    }
+            // }
             return redirect()->route('plans-view');
          }
          // if (!$is_subscribed) {

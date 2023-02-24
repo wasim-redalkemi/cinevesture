@@ -156,11 +156,11 @@ class SubscriptionController extends Controller
 
 
     public function createSubscription($data, $request = null)
-    {   $subscription = UserSubscription::where('user_id',auth()->user()->id)->first();
+    {   $subscription = UserSubscription::where('user_id',$data->user_id)->first();
         if(!$subscription){
             $subscription = new UserSubscription();
         }
-        $subscription->user_id = auth()->user()->id;
+        $subscription->user_id = $data->user_id;
         $subscription->platform_cutomer_id = "1"; //stripe
         $subscription->plan_amount = $data->plan_amount;
         $subscription->plan_name = $data->plan_name;
@@ -198,9 +198,9 @@ class SubscriptionController extends Controller
         session()->put('action', $action);
     }
 
-    public function createPlanForChildUser()
+    public function createPlanForChildUser($user_id)
     {
-       $user=User::find(auth()->user()->id);
+       $user=User::find($user_id);
        $userId=$user->id;
        $parentUserSubscription=UserSubscription::query()->where('user_id',$user->parent_user_id)->where('status','active')->first();
        $subscriptionData=[
@@ -220,7 +220,7 @@ class SubscriptionController extends Controller
        $subscriptionData = (object) $subscriptionData;
        
        $this->createSubscription($subscriptionData,null);
-       return redirect()->route('home');
+       
     }
     // Billing details
     public function getBilling(Request $request)
