@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Helper\OtpUtilityController;
 use App\Http\Controllers\Helper\SubscriptionUtilityController;
+use App\Http\Controllers\Website\SubscriptionController;
 use App\Models\Otp;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -93,8 +94,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // dd($data);
-        $inviteData=UserInvite::query()->where('user_id',$data['invited_by'])->where('email',$data['email'])->first();
+        $inviteData=UserInvite::query()->where('user_id',$data['invited_by'])->where('email',$data['email'])->where('accepted','0')->first();
+        if(($data['invited_by'])){
+            if(empty($inviteData)){
+                return false;
+            }
+
+        }
+        // $inviteParentData=UserInvite::query()->where('user_id',$data['invited_by'])->get();
+       
         $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
@@ -128,8 +136,16 @@ class RegisterController extends Controller
             
         }
         $this->validator($request->all())->validate();
-
-        event(new Registered($user = $this->create($request->all())));
+        $user = $this->create($request->all());
+        if($user==false){
+            return back()->with('error', 'Enter valid email id.');
+        }
+        if(isset($request->invited_by)){
+           $subscription_obj = new SubscriptionController();
+           $subscription_obj->createPlanForChildUser($user->id);
+        }
+       
+        event(new Registered($user));
         $otp_type = 'S'; // S for signup
         $otp = OtpUtilityController::createOtp($user, $otp_type);
         $collect  = collect();

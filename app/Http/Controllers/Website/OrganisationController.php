@@ -60,8 +60,7 @@ class OrganisationController extends WebController
     public function create()
     {
         try {
-            $user=auth()->user()
-            ;
+            $user=auth()->user();
             $invites= UserInvite::query()->where('user_id',$user->parent_user_id)->get();
             if($user->parent_user_id>0 && !empty($invites))
             {
@@ -324,24 +323,25 @@ class OrganisationController extends WebController
             //     $data[] = ['user_id'=>auth()->user()->id,'user_organization_id'=>$_REQUEST['organization_id'],'email'=>$_REQUEST['email_2'],'created_at'=>date("Y-m-d h:i:s", time()),'updated_at'=>date("Y-m-d h:i:s", time())];
             // }
             $UserInvite = $this->teamEmailLogStore($data);
-            
             if(!empty($_REQUEST['email_1']) ){
+                $id = encrypt(auth()->user()->id);
                 $email = $_REQUEST['email_1'];
                 $collect = collect();
                 $collect->put('name',auth()->user()->name);
                 $collect->put('first_name','Hi Sir/Madam');
                 $collect->put('organisation_name',$organisation->name);
-                $collect->put('url',route('register',['iuid' => convert_uuencode(auth()->user()->id)]));
+                $collect->put('url',route('register',['iuid' => $id , 'email'=>$request->email_1]));
                 Notification::route('mail', $email)->notify(new TeamInvite($collect));
 
             }
             if(!empty($_REQUEST['email_2']) ){
+                $id = encrypt(auth()->user()->id);
                 $email = $_REQUEST['email_2'];
                 $collect = collect();
                 $collect->put('name',auth()->user()->name);
                 $collect->put('first_name','Hi sir/madam');
                 $collect->put('organisation_name',$organisation->name);
-                $collect->put('url',route('register',['iuid' => convert_uuencode(auth()->user()->id)]));
+                $collect->put('url',route('register',['iuid' => $id ,'email'=>$request->email_2]));
                 Notification::route('mail', $email)->notify(new TeamInvite($collect));
             }
             return ['status'=>1,'msg'=>"Invite link has been gone by email."];           

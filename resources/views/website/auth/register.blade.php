@@ -36,10 +36,10 @@
                                 @enderror     
                             </div>
                             <div class="col-12 mt-4-5">
-                                <input type="text" class="email-only is-invalid-remove outline w-100 @error('email') is-invalid @enderror" placeholder="Email" id="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input type="text" class="email-only is-invalid-remove outline w-100 @error('email') is-invalid @enderror" placeholder="Email" id="email" name="email" value="@php if(request('email')){echo(request('email'));} @endphp"  required autocomplete="email" autofocus>
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
+                                    <strong>{{ $message }}</strong> 
                                 </span>
                                 @enderror
                             </div>
@@ -59,7 +59,7 @@
                                    <div id="captchaError" class=" field-error "></div>
                             </div>
                             <div class="col-12 mt-4 pt-2 pt-md-0 ">
-                                <input type="hidden" name="invited_by" value="<?php if(isset($_REQUEST['iuid'])){echo convert_uudecode($_REQUEST['iuid']);}?>">
+                                <input type="hidden" name="invited_by" value="<?php if(isset($_REQUEST['iuid'])){echo (decrypt($_REQUEST['iuid']));}?>">
                                 <button id="register-submit" class="outline w-100 mt-2 mt-md-0">{{ __('Create Account') }}</button>
                             </div>
                             <div class="col-12 mt-2">
