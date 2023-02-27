@@ -89,6 +89,8 @@ class IndustryGuideController extends WebController
         
         ->where('id','!=',$this->getCreatedById())
         ->where('user_type','U')
+        ->where('parent_user_id','!=',auth()->user()->id)
+        ->where('id','!=',auth()->user()->id)
         ->orderByDesc('id')
         ->paginate(10);
         $users->appends(request()->input())->links();

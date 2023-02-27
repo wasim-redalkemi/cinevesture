@@ -44,6 +44,7 @@ class PrimeController extends Controller
         ];
         return json_encode($data);
     }
+    
     public function getCreatedById()
     {
         $id = auth()->user()->id;

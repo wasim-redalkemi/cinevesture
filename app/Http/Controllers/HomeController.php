@@ -32,24 +32,35 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {   $countries = MasterCountry::query()->get();
+    { 
+        try {
+            
+        
+        $countries = MasterCountry::query()->get();
         $languages = MasterLanguage::query()->get();
         $geners = MasterProjectGenre::query()->orderBy('name', 'ASC')->get();
         $categories = MasterProjectCategory::query()->orderBy('name', 'ASC')->get();
         $looking_for = MasterLookingFor::query()->orderBy('name', 'ASC')->get();
         $project_stages = ProjectStage::query()->orderBy('name', 'ASC')->get();
         
-        $project_list_project = ProjectList::query()->where('status','published')->with(['lists'=>function($q){
+        $project_list_project = ProjectList::query()->where('status','published')
+        ->with(['lists'=>function($q){
             $q->where('admin_status','active')
             ->where('user_status','published');
-        },'lists.genres','lists.projectCountries','lists.projectLanguages','lists.projectImage'])
+        },
+        'lists.genres',
+        'lists.projectCountries','lists.projectLanguages','lists.projectImage','lists.isfavouriteProject'=>function($q){
+            $q->where('user_id',auth()->user()->id);
+        }])
         ->get();
         $project_lists_carousel = (isset($project_list_project[0]))?$project_list_project[0]:[];
         unset($project_list_project[0]);
         $project_lists_except_carousel = $project_list_project;
-    
+        // dd($project_list_project->toArray());
         return view('main',compact(['countries','languages','geners','categories','looking_for','project_stages','project_lists_carousel','project_lists_except_carousel']));
-       
+    } catch (\Throwable $th) {
+        echo $th;
+    }
     }
 
 }

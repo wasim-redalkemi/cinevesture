@@ -901,7 +901,7 @@ class UserController extends WebController
             }
             
             $data = [
-                ['from'=>auth()->user()->id,'to'=>$_REQUEST['endorse_to_id'],'comment'=>$_REQUEST['endorse_message'] ,'created_at'=>date("Y-m-d h:i:s", time()),'updated_at'=>date("Y-m-d h:i:s", time())],
+                ['from'=>$this->getCreatedById(),'to'=>$_REQUEST['endorse_to_id'],'comment'=>$_REQUEST['endorse_message'] ,'created_at'=>date("Y-m-d h:i:s", time()),'updated_at'=>date("Y-m-d h:i:s", time())],
             ];
             $userEndorsement = Endorsement::query()->where('to',$_REQUEST['endorse_to_id'])->where('status','1')->get();
             if (count($userEndorsement)>=config('constants.PROFILE_VERIFIED_ON_ENDORSE_COUNT')) {
