@@ -7,6 +7,7 @@ use App\Models\MasterPlanModule;
 use App\Models\MasterPlanOperation;
 use App\Models\Plans;
 use App\Models\User;
+use App\Notifications\SignUpConfirmation;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,7 +31,9 @@ class GoogleController extends Controller
 
             // Check Users Email If Already There
             $is_user = User::where('email', $user->getEmail())->first();
+            $isSignUp = false;
             if(!$is_user){
+
 
                 $saveUser = User::updateOrCreate([
                     'google_id' => $user->getId(),
@@ -41,6 +44,7 @@ class GoogleController extends Controller
                     'email' => $user->getEmail(),
                     'email_verified_at' => date('Y-m-d H:i:s'),
                 ]);
+                $isSignUp = true;
             }else{
                 $saveUser = User::where('email',  $user->getEmail())->update([
                     'google_id' => $user->getId(),
@@ -48,7 +52,11 @@ class GoogleController extends Controller
                 // $saveUser = User::where('email', $user->getEmail())->first();
             }
             $saveUser = User::where('email', $user->getEmail())->with('getSubcription')->first();
-
+            if ($isSignUp) {
+                $collect  = collect();
+                $collect->put('first_name', $saveUser->first_name);
+                $saveUser->notify(new SignUpConfirmation($collect));
+            }
             Auth::loginUsingId($saveUser->id);  
             $is_subscribed = SubscriptionUtilityController::isSubscribed();
                     if($is_subscribed){
