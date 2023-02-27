@@ -167,6 +167,16 @@
                     </div>
 
                
+                    <div class="preview_headtext mb-3">Banner Photo</div>
+                    @if (!empty($projectData[0]['banner_image']))
+                        <div class="item home_img_wrap_banner image_in_full_view" style="overflow: hidden;">
+                            <div class="home_img_wrap"> <img src="{{ Storage::url($projectData[0]['banner_image']) }}" alt="image"></div>
+                            
+                        </div>
+                    @else
+                    <span><b>-</b></span>                    
+                    @endif
+                    
                     <div class="preview_headtext mb-3">Photos</div>
                     <div class="video_slider owl-carousel">
                         @if (!empty($projectData[0]['project_only_image']))
