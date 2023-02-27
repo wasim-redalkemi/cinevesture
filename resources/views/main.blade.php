@@ -195,9 +195,7 @@
                     </a>
                   <div class="like_btn_wrapper">
                      <div>
-                      {{-- {{$v1->isfavouriteProject}}  --}}
-                      {{-- <i class="fa fa-heart-o icon-size like-project" style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i> --> --}}
-                    <i class="text-white fa  <?php if(isset($v1->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-project " style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
+                      <i class="text-white fa  <?php if(isset($v1->isfavouriteProject[0]->id)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-project " style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
                     </div>
                   </div>
 
