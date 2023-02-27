@@ -214,15 +214,17 @@
                                     <div class="associate_text my-3 mx-3">{{isset($UserOrganisation->team_size)?($UserOrganisation->team_size):'-'}}</div>
                                 </div>
                                 <div class="preview_headtext mb-3">Team members</div>
-                                <div class="d-flex">
+                                <div class="row">
                                     @if (!empty($UserOrganisation->memberUser))
                                         
                                     @foreach ($UserOrganisation->memberUser as $value)
-                                    <div style="margin-right:15px">
+                                    <div class="col-md-3 col-6">
+                                        <a href="{{route('profile-public-show',['id'=>$value->id])}}">
                                         @if ($value->profile_image)
-                                        <div class="organisation_team_warper"><img src="{{Storage::url($value->profile_image)}}" class="w-100 br_80"></div>
+                                        <div class="organisation_img_warper"><img src="{{Storage::url($value->profile_image)}}" class="w-80 br_80"></div>
                                         @else
-                                        <div class="organisation_team_warper"><img src="{{ asset('images/asset/100_no_img.jpg') }}" class="w-100 br_80"></div>
+                                        {{-- <div class="organisation_img_warper"><img src="{{asset('images/asset/user-profile.png')}}" class="root_img"></div> --}}
+                                        <div ><img src="{{ asset('images/asset/user-profile.png') }}" class="w-80 br_80"></div>
                                             
                                         @endif
                                         <div class="d-flex justify-content-between mt-3">
