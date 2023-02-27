@@ -84,6 +84,9 @@ class UserProject extends Model
         return $this->belongsTo(ProjectStage::class,'project_stage_id');
     }
     public function isfavouriteProject(){
+        return $this->belongsTo(UserFavouriteProject::class, 'project_id')->where('user_id',auth()->user()->id);
+    }
+    public function isfavouriteProjectMain(){
         return $this->hasMany(UserFavouriteProject::class, 'project_id')->where('user_id',auth()->user()->id);
     }
-}
+}   

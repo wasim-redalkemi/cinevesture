@@ -49,7 +49,7 @@ class HomeController extends Controller
             ->where('user_status','published');
         },
         'lists.genres',
-        'lists.projectCountries','lists.projectLanguages','lists.projectImage','lists.isfavouriteProject'=>function($q){
+        'lists.projectCountries','lists.projectLanguages','lists.projectImage','lists.isfavouriteProjectMain','lists.isfavouriteProject'=>function($q){
             $q->where('user_id',auth()->user()->id);
         }])
         ->get();
