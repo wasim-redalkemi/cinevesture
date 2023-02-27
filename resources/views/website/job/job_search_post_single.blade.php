@@ -22,7 +22,7 @@
                                 <div class="contact-page-text deep-aubergine">@if (!empty($Job_data['title'])) {{ucFirst($Job_data['title'])}} @endif</div>
                                                              
                                 <!-- <div class="contact-page-text deep-aubergine"> <span onclick="history.back()"><i class="fa fa-arrow-left" aria-hidden="true"></i></span> @if (!empty($Job_data['title'])) {{$Job_data['title']}} @endif</div> -->
-                                @if($Job_data['user_id']!=auth()->user()->id)
+                                @if($Job_data['user_id']!=auth()->user()->id && $Job_data['user_id']!=auth()->user()->parent_user_id)
                                     <div class="d-block d-md-flex align-items-center">
                                         <div class="d-flex align-items-center">
                                         <div class="associate_text aubergine ml_10">@if (!empty($Job_data['favorite']['job_id'])){{'Job saved'}}@else{{'Save job'}} @endif</div>

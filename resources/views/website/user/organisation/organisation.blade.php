@@ -210,7 +210,8 @@
                             <div class="col-md-12">
                                 <div class="d-flex align-items-center">
                                     <div class="preview_headtext mb-3">Team size</div>
-                                    <div class="associate_text my-3 mx-3">{{isset($UserOrganisation->memberUser)?(count($UserOrganisation->memberUser)):'-'}}</div>
+                                    {{-- {{$UserOrganisation}} --}}
+                                    <div class="associate_text my-3 mx-3">{{isset($UserOrganisation->team_size)?($UserOrganisation->team_size):'-'}}</div>
                                 </div>
                                 <div class="preview_headtext mb-3">Team members</div>
                                 <div class="row">
@@ -218,6 +219,7 @@
                                         
                                     @foreach ($UserOrganisation->memberUser as $value)
                                     <div class="col-md-3 col-6">
+                                        <a href="{{route('profile-public-show',['id'=>$value->id])}}">
                                         @if ($value->profile_image)
                                         <div class="organisation_img_warper"><img src="{{Storage::url($value->profile_image)}}" class="w-80 br_80"></div>
                                         @else
@@ -229,6 +231,7 @@
                                             <div class="organisation_cmn_text"> {{$value->name}}</div>
                                             {{-- <div class="icon_container"><i class="fa fa-pencil  deep-pink" aria-hidden="true"></i></div> --}}
                                         </div>
+                                    </a>
                                     </div>
                                     @endforeach
                                     @endif

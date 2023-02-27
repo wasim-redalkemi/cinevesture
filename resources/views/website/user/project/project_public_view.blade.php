@@ -192,8 +192,8 @@
                             @else
                             <div class="d-flex my-4 align-items-center  justify-content-between ">
                                 <div class="d-flex align-items-center">
-                                    @if ($projectData[0]['user']['id'] != auth()->user()->id)
-                                        <button class="cantact-page-cmn-btn" id="contact_modal" data-toggle="modal" data-target="#contactModal">Contact Now </button>
+                                    @if ($projectData[0]['user']['id'] != auth()->user()->id && (auth()->user()->parent_user_id != $projectData[0]['user']['id'] ))
+                                        <button class="cantact-page-cmn-btn" id="contact_modal" data-toggle="modal" data-target="#contactModal">Contact Now</button>
                                     {{-- <button class="cantact-page-cmn-btn"><a href=""  class="text_decor_none">Contact Now</a></button> --}}
 
                                     @endif
@@ -202,7 +202,7 @@
                                     <button onclick="copyToClipboard('#urlcopy')" style="background-color: transparent" class="clipboard pointer border-0"><img src="{{ asset('images/asset/share_image.svg') }}" class="mx-3" alt="image"></button>
                                     <p id="urlcopy" class="d-none">{{route('project-public-show')}}?id={{$UserProject->id}}&data={{true}}</p>
 
-                                    @if ($projectData[0]['user']['id'] != auth()->user()->id)
+                                    @if ($projectData[0]['user']['id'] != auth()->user()->id && (auth()->user()->parent_user_id != $projectData[0]['user']['id'] ))
                                     <div> <i class="fa <?php if(isset($UserProject->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
                                     @endif
                                 </div>
