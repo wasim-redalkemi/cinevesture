@@ -55,13 +55,10 @@ class MasterProjectGenreSeeder extends Seeder
                 'name' => 'Horror',
             ],
             [
-                'name' => 'Magical Realism',
+                'name' => 'Magic Realism',
             ],
             [
                 'name' => 'Romance',
-            ],
-            [
-                'name' => 'Magical Realism',
             ],
             [
                 'name' => 'Sports',
