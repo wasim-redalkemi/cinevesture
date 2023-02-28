@@ -3453,11 +3453,11 @@ input:checked+.slider:before {
 
 .owl-carousel .owl-nav button.owl-next,
 .owl-carousel button.owl-dot {
-    /* display: none; */
+    display: none;
 }
 
 .owl-carousel .owl-nav button.owl-prev {
-    /* display: none; */
+    display: none;
 }
 
 .portfolio.owl-carousel .owl-nav {

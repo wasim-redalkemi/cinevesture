@@ -527,7 +527,7 @@
             autoPlay: 1000,
             autoplay: true,
             // loop: true,
-            nav: true,
+            nav: false,
             margin: 20,
             center: false,
             items: 1,
@@ -557,7 +557,7 @@
             nav: true,
             margin: 20,
             center: false,
-            // items: 4,
+            items: 1,
             responsive: {
                 480: {
                     items: 1
