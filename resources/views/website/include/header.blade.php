@@ -40,10 +40,14 @@
                 {
 
                 ?>
-                  <div class="navbar_profile_position mt-2 mt-md-0">
-                    <i class="fa fa-user-circle"
-                  style="font-size:25px; color: #DD45B3;background-color: white; border-radius: 50%;border:none"
-                  aria-hidden="true"></i>
+                  <div class="navbar_profile_position mt-2 mt-md-0 d-flex align-items-center">
+                    @if (!empty(auth()->user()) && auth()->user()->profile_image)
+                    <div class="image_wraper_header me-3">
+                      <img  src="{{asset('public/storage/'.auth()->user()->profile_image)}}" alt="" width="100%" height="100%">
+                    </div>
+                    @else                        
+                      <i class="fa fa-user-circle profile_icon me-2" aria-hidden="true"></i>
+                    @endif
                   <a href="{{ route('profile-private-show')}}" class="text_decor_none">
                     <span style="" class="navbar_profile_text">Profile</span>
                   </a>
