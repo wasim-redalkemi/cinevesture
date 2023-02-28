@@ -33,7 +33,8 @@
                             </a>
                         @else
                             {{-- <div class="favourite_img_card"><img src="{{ asset('images/asset/100_no_img.jpg') }}" alt="image""></div> --}}
-                         <div class="favourite_img_card">   <img src="{{ asset('images/asset/100_no_img.jpg') }}" class="root_img" /></div>
+                         <div class="project_img_wrap mx_w_100 w-auto"><img src="{{asset('images/asset/image 3 (1).png')}}" style="z-index: 0;" class="Other_root_img"></div>
+
 
                         @endif
                         <div class="d-flex align-items-center justify-content-between" style="max-width: 300px;">
@@ -79,7 +80,7 @@
                                         @if (!empty($v->profiles->profile_image))
                                             <img src="{{ Storage::url($v->profiles->profile_image) }}"  class="" width=100% alt="image">
                                         @else
-                                        <img src="{{ asset('images/asset/100_no_img.jpg') }}" />
+                                        <img src="{{ asset('images/asset/photo-1595152452543-e5fc28ebc2b8 2.png') }}" />
                                         @endif
                                     </div>
                                 </div>
