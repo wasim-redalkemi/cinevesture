@@ -325,7 +325,7 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 mt-4">
-                                                                <input type="email" id="email_1" name="email_1" value="" placeholder="First email" class="modal_input">
+                                                                <input type="email" id="email_1" name="email_1" value="" placeholder="Email" class="modal_input">
                                                                 @error('email_1')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
@@ -520,6 +520,11 @@
             cropBoxResizable: true,
             toggleDragModeOnDblclick: false,
             viewMode:1,
+            aspectRatio: 1/1,
+            minCropBoxHeight: 200,
+            minCropBoxWidth: 200,
+            maxCropBoxHeight: 400,
+            maxCropBoxWidth: 400,
             data: { //define cropbox size
                 width: 300,
                 height: 300,
