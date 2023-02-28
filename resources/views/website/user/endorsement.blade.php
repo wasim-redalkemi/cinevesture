@@ -81,10 +81,13 @@ input:checked + .slider:before {
                 @include('website.include.profile_sidebar')
             </div>
             <div class="col-md-9">
+              <div class="profile_wraper profile_wraper_padding d-block d-md-none mt-4"> 
                 <div class="profile_text mt-2"><h1>Endorsements</h1></div>
+                </div>
+                <div class="profile_text mt-2 d-md-block d-none"><h1>Endorsements</h1></div>
                 @if(isset($endorsement) && count($endorsement))
                 @foreach($endorsement as $edm)
-                <div class="profile_wraper profile_wraper_padding my-4">
+                <div class="profile_wraper profile_wraper_padding my-0 my-md-4">
                   <div class="d-flex justify-content-between">
                     <div class="d-block d-md-flex justify-content-between">
                     <div class="">
