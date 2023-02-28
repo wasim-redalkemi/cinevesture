@@ -85,24 +85,26 @@ input:checked + .slider:before {
                 @if(isset($endorsement) && count($endorsement))
                 @foreach($endorsement as $edm)
                 <div class="profile_wraper profile_wraper_padding my-4">
-                  <div class="row">
-                    <div class="col-md-3">
+                  <div class="d-flex justify-content-between">
+                    <div class="d-block d-md-flex justify-content-between">
+                    <div class="">
                         <div class="guide_profile_main_text deep-pink">{{!empty($edm['endorsementCreater']->name)?$edm['endorsementCreater']->name:'-'}}</div>
-                        <div class="preview_subtext mt-0">{{!empty($edm['endorsementCreater']->job_title)?$edm['endorsementCreater']->job_title:'-'}} </div>
-                        <div class="profile_upload_text Aubergine_at_night fw_300">{{!empty($edm->created_at)?strtoupper(date('jS F Y',strtotime($edm->created_at))):'-'}}</div>
-                        <div class="preview_subtext mt-0">{{!empty($edm['endorsementCreater']['organization']->name)?$edm['endorsementCreater']['organization']->name:'-'}}</div>
+                        <div class="preview_subtext mt-1">{{!empty($edm['endorsementCreater']->job_title)?$edm['endorsementCreater']->job_title:'-'}} </div>
+                        <div class="profile_upload_text mt-1 Aubergine_at_night">{{!empty($edm->created_at)?strtoupper(date('jS F Y',strtotime($edm->created_at))):'-'}}</div>
+                        <div class="preview_subtext mt-1">{{!empty($edm['endorsementCreater']['organization']->name)?$edm['endorsementCreater']['organization']->name:'-'}}</div>
                     </div>
-                    <div class="col-md-7">
+                    <div class="mx-0 mx-md-5 mt-3 mt-md-0">
                         <div class="guide_profile_main_text Aubergine_at_night">@if ($edm->status == 1)
                           Published
                         @else
                           Unpublished
                         @endif </div>
-                        <div class="guide_profile_main_subtext Aubergine_at_night">
+                        <div class="guide_profile_main_subtext Aubergine_at_night mt-1">
                         {{$edm->comment}}
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    </div>
+                    <div class="">
                       <div class="d-flex justify-content-end">
                     <!-- <input type="checkbox" class="check" <?php if($edm->status == '1'){echo'checked';}?> data-toggle="toggle" value="{{$edm->id}}" data-on="" data-off="" data-style="ios">  -->
                     <label class="switch">

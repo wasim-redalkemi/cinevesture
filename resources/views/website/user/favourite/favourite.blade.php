@@ -71,7 +71,7 @@
                         <div class="d-flex justify-content-between">
                             <div class="d-flex">
                                 <div class="">
-                                    <div class="user_profile_container"> 
+                                    <div class="user_profile_container width_in_small"> 
                                         {{-- @foreach ($v->profiles as $item) --}}
                                             
                                         
@@ -83,7 +83,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="mx-4 px-1">
+                                <div class="mx-1 mx-md-4 px-1">
                                     <div class="d-flex justify-content-between">
                                         <div class="d-flex align-items-center">
                                             @if (!empty($v->profiles->id))

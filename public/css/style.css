@@ -85,6 +85,29 @@ a {
     position: relative;
 }
 
+.offcanvas-start {
+    top: 95px;
+ }
+ .offcanvas {
+    background: #1C0330 !important;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
+    max-width: 85% !important;
+    z-index: 99999;
+    max-height: 80vh;
+ }
+ .offcanvas-header .btn-close { 
+    margin-right: 0rem;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+ }
+ .offcanvas-header {
+    justify-content: end !important;
+ }
+ .btn-close { 
+    background: transparent !important;
+ }
+
 .active,
 .active a {
     font-weight: 500 !important;
@@ -2854,6 +2877,14 @@ transition: 0.3s all ease;
     justify-content: center;
 }
 
+.organisation_team_warper {
+    width: 160px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .input_wraper {
     min-height: 143px;
     background: rgba(246, 239, 251, 0.8);
@@ -3584,7 +3615,10 @@ input:checked+.slider:before {
     color: #971E9B;
 
 }
-
+.blur_text {
+    color: transparent !important;
+    text-shadow: 0 0 5px #fff !important;
+}
 .search_page_filters_data_active {
     background-color: #971E9B !important;
     color: #fff !important;
@@ -3808,6 +3842,10 @@ input:checked+.slider:before {
     color: #4D0D8A;
     border: none;
     background: none;
+}
+
+.h_100 {
+    height: 100%;
 }
 
 
@@ -4107,6 +4145,9 @@ input:checked+.slider:before {
 
     .home-dropdown .nav-link {
         text-align: left;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 
     .navbar_mobile {
@@ -4303,7 +4344,7 @@ input:checked+.slider:before {
  .test.owl-carousel .owl-nav button.owl-prev {
     display: flex !important;
     position: absolute !important;
-    top: -55px !important;
+    top: -49px !important;
     left: 195px !important;
     justify-content: center;
     align-items: center;
@@ -4311,7 +4352,7 @@ input:checked+.slider:before {
 .test.owl-carousel .owl-nav button.owl-next {
     display: flex !important;
     position: absolute !important;
-    top: -55px !important;
+    top: -49px !important;
     right: 40px !important;
     justify-content: center;
     align-items: center;
@@ -4446,7 +4487,28 @@ transition: 0;
     max-width: 100% !important;
     min-width: -webkit-fill-available;
 }
-
+.organisation_team_warper {
+    width: 130px;
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.add-proj-btn {
+    width: 7rem; 
+}
+.header-search-btn {
+    width: 7rem;
+}
+.width_in_small {
+    height: 66px;
+    min-height: 66px;
+    width: 66px;
+    min-width: 66px;
+}
+.h_100 {
+    height: auto;
+}
 
 }
 

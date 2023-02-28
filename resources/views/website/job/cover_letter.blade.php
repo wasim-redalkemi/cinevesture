@@ -133,7 +133,7 @@ use Illuminate\Support\Facades\DB;
                                                     </div>
                                                     <div class="d-flex justify-content-between mt-2">
                                                         <div class="organisation_cmn_text">{{$v['portfolio_title']}}</div>
-                                                        <div class="icon_container"> <a href="{{ route('portfolio-edit', ['id'=>$v['id']]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
+                                                        <!-- <div class="icon_container"> <a href="{{ route('portfolio-edit', ['id'=>$v['id']]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div> -->
                                                     </div>
                                                 </div>
                                                 @endforeach
