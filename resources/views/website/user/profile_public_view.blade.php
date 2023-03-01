@@ -357,10 +357,10 @@
                                                         <div class="p-3 float-end">
                                                             <i class="fa fa-times text_fff font_24 pointer" data-dismiss="modal" aria-label="Close"></i>
                                                         </div>
-                                                        <section class="p-3">
+                                                        <section class="p-0 p-md-3">
                                                             <div class="container">
                                                                 <div class="row">
-                                                                    <div class="col-md-12">
+                                                                    <div class="col-md-12 px-0 px-md-3">
                                                                         <div class="signup-text mb-2 mt-5"> Write Endorsement </div>
                                                                         <div class="guide_profile_main_subtext text-center">
                                                                             <span class="disable-resend">Help identify relevant opportunities and content for {{$user->name}} on Cinevesture</span>
@@ -527,7 +527,7 @@
             autoPlay: 1000,
             autoplay: true,
             // loop: true,
-            nav: true,
+            nav: false,
             margin: 20,
             center: false,
             items: 1,
@@ -557,7 +557,7 @@
             nav: true,
             margin: 20,
             center: false,
-            // items: 4,
+            items: 1,
             responsive: {
                 480: {
                     items: 1

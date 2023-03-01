@@ -1,6 +1,13 @@
 <div class="profile_side_bar">
     <div class="sidebar_content mb-0 mb-md-3 d-flex justify-content-between"  data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-      <div class="d-flex align-items-center">  <i class="fa fa-user-circle profile_icon" aria-hidden="true"></i>
+      <div class="d-flex align-items-center">
+        @if (!empty(auth()->user()) && auth()->user()->profile_image)
+          <div class="image_wraper_header me-3">
+            <img  src="{{asset('public/storage/'.auth()->user()->profile_image)}}" alt="" width="100%" height="100%">
+          </div>
+          @else              
+            <i class="fa fa-user-circle profile_icon" aria-hidden="true"></i>
+          @endif
         <a href="{{ route('profile-private-show')}}" class="mx-2">{{ucwords(auth()->user()->name)}}</a>
       </div>
       <div class="d-flex align-items-center d-block d-md-none">

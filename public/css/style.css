@@ -26,6 +26,21 @@ a {
     display: flex;
 }
 
+.image_wraper_header {
+    border-radius: 100%;
+    display: flex;
+    background: transparent;
+    inline-size: fit-content;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 40px;
+    min-height: 40px;
+    width: 40px;
+    min-width: 40px;
+    /* border: 1px solid; */
+}
+
 .sub-header {
     background: #33084C;
     height: 60px;
@@ -3453,11 +3468,11 @@ input:checked+.slider:before {
 
 .owl-carousel .owl-nav button.owl-next,
 .owl-carousel button.owl-dot {
-    /* display: none; */
+    display: none;
 }
 
 .owl-carousel .owl-nav button.owl-prev {
-    /* display: none; */
+    display: none;
 }
 
 .portfolio.owl-carousel .owl-nav {

@@ -305,41 +305,45 @@ class JobController extends WebController
     }
     public function storeApplyJob(ApplyNowRequest $request, $jobId)
     {
-       // $request->validate(["resume" => "required|file|mimes:pdf,doc,docx", "cover_letter" => "required"]);
-        if (UserAppliedJob::query()->where("user_id", auth()->id())->where("job_id", $jobId)->exists()) {
-            //    throw ValidationException::withMessages([
-            //     'field_name_1' => ['You have been already applied for this job.']            
-            //    ]);
-            return   $this->jsonResponse(false, "You have been already applied for this job.", []);
-        } else {
-            $modelObj = new UserAppliedJob();
-            $modelObj->user_id = auth()->id();
-            $modelObj->job_id = $jobId;
-            $file = $request->file('resume');
-            $fileName = $file->getClientOriginalName();
-            $fileSize = ceil($file->getSize() / 1024);
+        try {
+            // $request->validate(["resume" => "required|file|mimes:pdf,doc,docx", "cover_letter" => "required"]);
+            if (UserAppliedJob::query()->where("user_id", auth()->id())->where("job_id", $jobId)->exists()) {
+                //    throw ValidationException::withMessages([
+                //     'field_name_1' => ['You have been already applied for this job.']            
+                //    ]);
+                return   $this->jsonResponse(false, "You have been already applied for this job.", []);
+            } else {
+                $modelObj = new UserAppliedJob();
+                $modelObj->user_id = auth()->id();
+                $modelObj->job_id = $jobId;
+                $file = $request->file('resume');
+                $fileName = $file->getClientOriginalName();
+                $fileSize = ceil($file->getSize() / 1024);
 
-            if( $fileSize> 5000)
-            {
-                return   $this->jsonResponse(false, "uploaded file cannot be more than 5 MB.", []);
-            }
+                if( $fileSize> 5000)
+                {
+                    return   $this->jsonResponse(false, "uploaded file cannot be more than 5 MB.", []);
+                }
 
-            if ($fileSize > 1024) {
-                $fileSize = ceil($fileSize / 1024) . ' MB';
-            }
-            else
-            {
-                $fileSize=$fileSize. ' KB';
-            }
+                if ($fileSize > 1024) {
+                    $fileSize = ceil($fileSize / 1024) . ' MB';
+                }
+                else
+                {
+                    $fileSize=$fileSize. ' KB';
+                }
 
-            $path = $this->uploadFile("appliedJobResumes", $file);
-            $modelObj->resume = $path;
-            $modelObj->resume_original_name = $fileName;
-            $modelObj->resume_size = $fileSize;
-            $modelObj->cover_letter = $request->get('cover_letter');
-            $modelObj->save();
-            return  $this->jsonResponse(true, "You have successfully applied for this job.", []);
-            // return redirect()->route('showJobSearchResults')->with("success","Job application submitted successfully.");
+                $path = $this->uploadFile("appliedJobResumes", $file);
+                $modelObj->resume = $path;
+                $modelObj->resume_original_name = $fileName;
+                $modelObj->resume_size = $fileSize;
+                $modelObj->cover_letter = $request->get('cover_letter');
+                $modelObj->save();
+                return  $this->jsonResponse(true, "You have successfully applied for this job.", []);
+                // return redirect()->route('showJobSearchResults')->with("success","Job application submitted successfully.");
+            }
+        } catch (\Throwable $th) {
+            return  $this->jsonResponse(true, $th->getMessage(), []);
         }
     }
 

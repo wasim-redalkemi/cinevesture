@@ -193,11 +193,15 @@
                                         if (!empty($v['get_portfolio'][0]['file_link'])) {
                                             $img = Storage::url($v['get_portfolio'][0]['file_link']);
                                         } else {
-                                        $img = asset('images/asset/user-profile.png');
+                                        // $img = asset('images/asset/user-profile.png');
+                                        $img = asset('images/asset/download (3) 2.png');
+                        //  <div class="project_img_wrap mx_w_100 w-auto"><img src="{{asset('images/asset/image 3 (1).png')}}" style="z-index: 0;" class="Other_root_img"></div>
+
                                         }
                                         @endphp
                                         
                                         <div class="item portfolio_item" onclick="portfolio_model({{$v['id']}})">
+
                                             <div class="portfolio_item_image">
                                                 <img src="<?php echo $img ?>" class="portfolio_img" width="100%">
                                             </div>
