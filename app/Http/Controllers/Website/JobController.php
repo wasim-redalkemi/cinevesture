@@ -467,7 +467,9 @@ class JobController extends WebController
         try {
             if (!empty($job_id)) {
                 $Job_data = UserJob::query()
-                ->with(['jobSkills', 'jobWorkSpaces', 'jobEmployements', 'jobLocation','user','favorite', 'applied'])
+                ->with(['jobSkills', 'jobWorkSpaces', 'jobEmployements', 'jobLocation','user','favorite', 'singleJobApplied'=>function($q){
+                    $q->where('user_id',auth()->user()->id);
+                }])
                 ->find($job_id);
                 // dd($Job_data);
                 return view('website.job.job_search_post_single', compact(['Job_data']));

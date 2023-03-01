@@ -30,14 +30,18 @@
                                             <i data-id="@if (!empty($Job_data['id'])){{$Job_data['id']}} @endif" class="fa {{is_null($Job_data['favorite']) ? 'fa-heart-o' : 'fa-heart'}} aubergine icon-size" aria-hidden="true"></i>
                                         </div>
                                         </div>
-                                        @if(!isset($Job_data['applied']) || !empty($Job_data['applied']))
+                                        
+                                        @if(!isset($Job_data['single_job_applied']) || !empty($Job_data['single_job_applied']))
                                         <div class="d-none d-md-block">
-                                            @if(is_null($Job_data['applied']))
+                                            <button disabled class="guide_profile_btn">Applied</button>
+                                            {{-- @if(is_null($Job_data['single_job_applied']))
                                             <button class="guide_profile_btn"><a href="{{route('showApplyJob',['jobId'=>$Job_data['id']])}}" class=""> Apply now</a></button>
                                             @else
                                             <button disabled class="guide_profile_btn">Applied</button>
-                                            @endif
-                                        </div>      
+                                            @endif --}}
+                                        </div>
+                                        @else
+                                        <button class="guide_profile_btn"><a href="{{route('showApplyJob',['jobId'=>$Job_data['id']])}}" class=""> Apply now</a></button>
                                         @endif  
                                     </div>
 
@@ -46,9 +50,9 @@
 
                                 
                             </div>
-                            @if(!isset($Job_data['applied']) || !empty($Job_data['applied']))
+                            @if(!isset($Job_data['single_job_applied']) || !empty($Job_data['single_job_applied']))
                                     <div class="d-block d-md-none mt-2">
-                                        @if(is_null($Job_data['applied']))
+                                        @if(is_null($Job_data['single_job_applied']))
                                         <button class="guide_profile_btn"><a href="{{route('showApplyJob',['jobId'=>$Job_data['id']])}}" class=""> Apply now</a></button>
                                         @else
                                         <button disabled class="guide_profile_btn">Applied</button>
@@ -70,9 +74,9 @@
                                             <i data-id="@if (!empty($Job_data['id'])){{$Job_data['id']}} @endif" class="fa {{is_null($Job_data['favorite']) ? 'fa-heart-o' : 'fa-heart'}} aubergine icon-size" aria-hidden="true"></i>
                                         </div>
                                         </div>
-                                        @if(!isset($Job_data['applied']) || !empty($Job_data['applied']))
+                                        @if(!isset($Job_data['single_job_applied']) || !empty($Job_data['single_job_applied']))
                                         <div>
-                                            @if(is_null($Job_data['applied']))
+                                            @if(is_null($Job_data['single_job_applied']))
                                             <button class="guide_profile_btn"><a href="{{route('showApplyJob',['jobId'=>$Job_data['id']])}}" class=""> Apply now</a></button>
                                             @else
                                             <button disabled class="guide_profile_btn">Applied</button>
