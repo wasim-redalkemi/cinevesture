@@ -185,14 +185,14 @@
                                 if (classList[i] == 'fa-heart-o') {
                                     element.removeClass('fa-heart-o');
                                     element.addClass('fa-heart')
-                                    toastMessage("success", resp.msg);
+                                    // toastMessage("success", resp.msg);
                                     break;
                                 }
                                 if(classList[i] == 'fa-heart')
                                 {
                                     element.removeClass('fa-heart');
                                     element.addClass('fa-heart-o');
-                                    toastMessage("error", resp.msg);
+                                    // toastMessage("error", resp.msg);
 
                                     break;
                                 }
