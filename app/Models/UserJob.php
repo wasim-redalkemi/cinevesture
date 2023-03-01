@@ -45,6 +45,11 @@ class UserJob extends Model
     {
         return $this->hasOne(UserAppliedJob::class,'job_id');
     }
+    
+    public function singleJobApplied()
+    {
+        return $this->hasMany(UserAppliedJob::class,'job_id');
+    }
 
     public function jobCreater(){
         return $this->belongsTo(User::class,'user_id','id');
