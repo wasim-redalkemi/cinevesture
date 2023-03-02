@@ -42,10 +42,13 @@
                                     </span>
                                     @enderror
                                 </div>
-                                <div class="col-12 mt-4-5">
-                                  <div class="g-recaptcha" data-callback="imNotARobot" data-sitekey="{{config('constants.site-key-local')}}"></div>
-                                   <div id="captchaError" class=" field-error "></div>
-                                </div>
+                               
+                                @if (config('app.env') != 'development')                                    
+                                    <div class="col-12 mt-4-5">
+                                    <div class="g-recaptcha" data-callback="imNotARobot" data-sitekey="{{config('constants.site-key-local')}}"></div>
+                                    <div id="captchaError" class=" field-error "></div>
+                                    </div>
+                                @endif
                                 <div class="col-12 mt-4 pt-2 pt-md-0">
                                     <button id="login-submit" class="outline w-100 mt-2 mt-md-0">
                                         {{ __('Log In') }}
