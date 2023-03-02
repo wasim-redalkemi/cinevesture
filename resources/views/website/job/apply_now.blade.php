@@ -164,6 +164,10 @@
              }  
             return false;
         }
+        $("#job_apply_success_modal").modal({
+        show: false,
+        backdrop: 'static'
+        });
       
         let $submitBtn = $(".guide_profile_btn");
         $submitBtn.prop("disabled", true);
