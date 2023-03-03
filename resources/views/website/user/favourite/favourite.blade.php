@@ -49,7 +49,7 @@
                     @endforeach
                     <div class="col col-md-12">
                         {{-- {!! $user_projects->links() !!} --}}
-                        {!! $user_projects->onEachSide(-1)->links() !!}
+                        {!! $user_projects->onEachSide(0)->links() !!}
 
                     </div>
                     @else
@@ -142,7 +142,7 @@
                     @endforeach
                     <div class="col col-md-12">
                         {{-- {!! $user_profiles->links() !!} --}}
-                        {!! $user_profiles->onEachSide(-1)->links() !!}
+                        {!! $user_profiles->onEachSide(0)->links() !!}
 
                     </div>
                 @else

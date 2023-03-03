@@ -60,4 +60,4 @@
    {!! config('constants.NO_DATA_SEARCH') !!}
     @endif
 {{-- {{$jobs->links()}} --}}
-{!! $jobs->onEachSide(-1)->links() !!}
+{!! $jobs->onEachSide(0)->links() !!}

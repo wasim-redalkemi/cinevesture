@@ -124,7 +124,7 @@ input:checked + .slider:before {
 
                 @endif
                 {{-- {!! $endorsement->links() !!} --}}
-                {!! $endorsement->onEachSide(-1)->links() !!}
+                {!! $endorsement->onEachSide(0)->links() !!}
 
             </div>
         </div>
