@@ -185,7 +185,7 @@
                              <div style="float:right;" >
                                 {{-- {{$users->links()}} --}}
                                 {{-- {{ $users->appends($_GET)->links() }} --}}
-                                {{ $users->onEachSide(-1)->appends($_GET)->links() }}
+                                {{ $users->onEachSide(0)->appends($_GET)->links() }}
                             </div>
                              </div> 
                          </div>

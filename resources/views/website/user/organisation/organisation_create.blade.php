@@ -442,22 +442,6 @@
         // });
 
         // $('button[type="submit"]').removeAttr('disabled');   
-        $('#introduction_video,form').on('change mouseup keyup',function() {
-            $("div.intro-video").hide();
-            $('button[type="submit"]').removeAttr('disabled');
-            var urlLength= $('#introduction_video').val().length;
-            var url = $('#introduction_video').val();
-            // console.log(urlLength,url);
-            if(url == ""){
-                return true;
-            }
-            var videoId = validateYouTubeUrl(url);
-            if(!videoId){
-                $("div.intro-video").show();
-                $('button[type="submit"]').attr('disabled','disabled');
-            }
-            return false;
-        });
     });
 
     croperImg = document.querySelector('.croperImg'),
@@ -661,6 +645,23 @@
      var pattern = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
      return url.match(pattern) ? RegExp.$1 : false;
         }
+    $('#introduction_video,form').on('keyup change',function() {
+        $("div.intro-video").hide();
+        $('button[type="submit"]').removeAttr('disabled');
+        var urlLength= $('#introduction_video').val().length;
+        var url = $('#introduction_video').val();
+        // console.log(urlLength,url);
+        if(url == ""){
+            return true;
+        }
+        var videoId = validateYouTubeUrl(url);
+        if(!videoId){
+            $("div.intro-video").show();
+            $('button[type="submit"]').attr('disabled','disabled');
+        }
+    });
+
+   
 
 </script>
 @endpush
