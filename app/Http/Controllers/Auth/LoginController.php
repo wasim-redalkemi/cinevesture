@@ -155,9 +155,14 @@ class LoginController extends Controller
         $users=UserSubscription::query()->where('status','active')->get();
         foreach ($users as $key => $user) {
             if($user->subscription_end_date< Carbon::now() )
-            $user->status="incative";
+            $user->status="inactive";
             $user->save();
         }
+    }
+
+    public function expirePlanForGoogle()
+    {
+       $this->expirePlan();
     }
 
         /**

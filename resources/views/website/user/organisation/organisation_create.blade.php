@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-9">
                 <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
-                    <form role="form" class="validateBeforeSubmit" id="form" method="POST" enctype="multipart/form-data" action="{{ route('organisation-store') }}">
+                    <form role="form" onsubmit="return validateOrganizationForm();return false;" class="validateBeforeSubmit" id="form" method="POST" enctype="multipart/form-data" action="{{ route('organisation-store') }}">
                         @csrf
 
                         <div class="profile_text">
@@ -392,6 +392,19 @@
 
 @push('scripts')
 <script type="text/javascript">
+
+function validateOrganizationForm(){
+    let logo = $("#logo").val();
+    if (!logo) {
+        let errorElem = 
+        $("#img-error").removeClass('d-none');
+        $(window).scrollTop(0);
+        return false;
+    }else{
+        return true;
+    }
+}
+
     $(document).ready(function() {
 
         // $('.for_hide').css('display', 'block');

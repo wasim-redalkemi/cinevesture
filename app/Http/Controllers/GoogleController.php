@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Helper\SubscriptionUtilityController;
 use App\Models\MasterPlanModule;
 use App\Models\MasterPlanOperation;
@@ -60,6 +61,8 @@ class GoogleController extends Controller
             Auth::loginUsingId($saveUser->id);  
             $is_subscribed = SubscriptionUtilityController::isSubscribed();
                     if($is_subscribed){
+                        $checkPlan= new LoginController();
+                        $checkPlan->expirePlanForGoogle();
                         return redirect('home');
                         if($user->getSubcription){
                             $plans = Plans::query()->where('id',$user->getSubcription->plan_id)->with('getRelationalData.getModule','getRelationalData.getOperation')
