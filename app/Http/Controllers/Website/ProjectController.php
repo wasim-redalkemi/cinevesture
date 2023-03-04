@@ -823,13 +823,13 @@ class ProjectController extends WebController
                              ->where('project_id',$request->id)->first();
                  if($favourite){
                     $favourite->delete();
-                    return ['status'=>True,'msg'=>"You have unliked this project."];
+                    return ['status'=>'success','msg'=>"You have unliked this project."];
                  }else{
                     $favourite = new UserFavouriteProject();
                     $favourite->user_id = $this->getCreatedById();
                     $favourite->project_id = $request->id;
                     $favourite->save();
-                    return ['status'=>True,'msg'=>"You have liked this project."];
+                    return ['status'=>'success','msg'=>"You have liked this project."];
                   }
     
             }catch(Exception $e){

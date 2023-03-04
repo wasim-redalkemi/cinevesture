@@ -281,7 +281,7 @@ $('.select_limit').change(function(event) {
                         $(".emp-select2").val(null).trigger('change');
                         $(".work-select2").val(null).trigger('change');
                         $('.js-select2').val(null).trigger('change');
-                        toastMessage(1, resp.message);
+                       new toastMessage("success", resp.message);
                         // location.reload();
                     } else {
                         // modal
@@ -294,7 +294,7 @@ $('.select_limit').change(function(event) {
                     }
                     job_id = resp.data['id']
                 } else {
-                    toastMessage(0, resp.message);
+                   new toastMessage(error, resp.message);
                 }
             },
             error: function(error) {                

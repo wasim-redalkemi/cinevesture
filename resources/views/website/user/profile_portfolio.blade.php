@@ -32,7 +32,7 @@
                             <div class="col-md-6">
                                 <div class="profile_input mb-1">
                                     <label>Portfolio Title <span class = "steric_sign_design">*</span></label>
-                                    <input type="text" class="form-control @error('portfolio_title') is-invalid @enderror" placeholder="Portfolio Title" name="portfolio_title" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
+                                    <input type="text" class="form-control @error('portfolio_title') is-invalid @enderror" placeholder="Portfolio Title" name="portfolio_title" aria-label="Username" value="{{old('portfolio_title')}}" aria-describedby="basic-addon1" autofocus required>
                                     @error('portfolio_title')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -46,7 +46,7 @@
                                 <div class="profile_input">
                                     <label>Description <span class = "steric_sign_design">*</span></label>
                                     <div class="form_elem">
-                                    <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" name="description" aria-label="With textarea" text-length="600" maxlength="600" autofocus required></textarea>
+                                    <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" name="description"  aria-label="With textarea" text-length="600" maxlength="600" autofocus required>{{{ request::old('description') }}}</textarea>
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -96,7 +96,7 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Completion Date <span class = "steric_sign_design">*</span></label>
-                                    <input type="date" class="form-control @error('completion_date') is-invalid @enderror" placeholder="First Name" name="completion_date" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
+                                    <input type="date" class="form-control @error('completion_date') is-invalid @enderror" placeholder="First Name" name="completion_date" aria-label="Username" value="{{old('completion_date')}}" aria-describedby="basic-addon1" autofocus required>
                                     @error('completion_date')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -113,8 +113,8 @@
                                     <div class="img-container h_66 mt-3 mt-md-0">
                                         <img src="{{asset('images/asset/default-video-thumbnail.jpg')}}" class="width_inheritence" alt="image">
                                     </div>
-                                    <input type="text" class="outline is-invalid-remove form-control @error('video_url') is-invalid @enderror mt-3" placeholder="Paste link here" name="video_url" aria-label="Video URL" aria-describedby="basic-addon1" autofocus required>
-                                    <input type="hidden" class="" name="video_thumbnail" value="" aria-label="Video Thumbnail" aria-describedby="basic-addon1">
+                                    <input type="text" class="outline is-invalid-remove form-control @error('video_url') is-invalid @enderror mt-3" placeholder="Paste link here" name="video_url" value="{{old('video_url')}}" aria-label="Video URL" aria-describedby="basic-addon1" autofocus required>
+                                    <input type="hidden" class="" name="video_thumbnail"  aria-label="Video Thumbnail" aria-describedby="basic-addon1">
                                     @error('video_url')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

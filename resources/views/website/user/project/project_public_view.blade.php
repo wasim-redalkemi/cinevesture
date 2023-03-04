@@ -675,13 +675,13 @@
                         if (classList[i] == 'fa-heart-o') {
                             element.removeClass('fa-heart-o');
                             element.addClass('fa-heart')
-                            toastMessage("success", response.msg);
+                            toastMessage("success", resp.msg);
                             break;
                         }
                         if (classList[i] == 'fa-heart') {
                             element.removeClass('fa-heart');
                             element.addClass('fa-heart-o');
-                            toastMessage("error", response.msg);
+                            toastMessage("success", resp.msg);
 
                             break;
                         }
@@ -749,7 +749,8 @@ function copyToClipboard(element) {
   $temp.val($(element).text()).select();
   document.execCommand("copy");
   $temp.remove();
-  toastr.success('URL copied','Success');
+  new toastMessage("Success",'URL copied')
+//   toastr.success('URL copied','Success');
 // toastr.success('Project Update successfull!','success');
 //   toastMessage("1", 'URL copied')
 }

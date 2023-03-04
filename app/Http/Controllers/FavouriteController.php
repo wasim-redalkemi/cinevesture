@@ -129,10 +129,10 @@ class FavouriteController extends WebController
                 $favourite->user_id = $this->getCreatedById();
                 $favourite->profile_id = $request->id;
                 $favourite->save();
-                return ['status' => True, 'msg' => "You have liked a profile."];
+                return ['status' => true, 'msg' => "You have liked a profile."];
             }
         } catch (Exception $e) {
-            return ['status' => False, 'msg' => "Something went wrong, Please try again later."];
+            return ['status' => false, 'msg' => "Something went wrong, Please try again later."];
         }
     }
 

@@ -21,9 +21,10 @@
                 success: function(resp) {
                     if (resp.status) {
                         $elem.toggleClass("fa-heart-o fa-heart");
-                        toastMessage(1, resp.message);
+                        // toastMessage(1, resp.message);
+                        toastMessage("Success",resp.message)
                     } else {
-                        toastMessage("error", resp.message);
+                       toastMessage("error", resp.message);
                     }
                 },
                 error: function(error) {
