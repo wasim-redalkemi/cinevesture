@@ -149,6 +149,11 @@
 
     });
 
+    $('.js-select2, .country_select2').on('select2:select', function (e) {
+    $('.select2-search__field').val('').trigger('change');
+    });
+  
+
     $('.profile_search_btn').on('click', function(e) {
         var countries = $("#countries :selected").length;
         var talent = $("#talentType :selected").length;
@@ -159,12 +164,8 @@
     });
 
     $(document).ready(function() {
-
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");
-
-
-
     });
 </script>
 @endpush

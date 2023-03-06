@@ -3511,8 +3511,8 @@ input:checked+.slider:before {
     display: flex !important;
     position: absolute !important;
     top: -55px !important;
-    /* left: 230px !important; */
-    left: 1260px !important;
+    left: 82% !important;
+    /* left: 1260px !important; */
     justify-content: center;
     align-items: center;
 }
@@ -3540,8 +3540,8 @@ input:checked+.slider:before {
     display: flex !important;
     position: absolute !important;
     top: -55px !important;
-    /* right: 1200px !important; */
-    right: 70px !important;
+    right: 3% !important;
+    /* right: 70px !important; */
     /* right: calc(v) !important; */
     justify-content: center;
     align-items: center;
@@ -4115,7 +4115,8 @@ input:checked+.slider:before {
 
    
     .search_page_filters_wrap .filter_option_wrap {
-        left: -268px;
+        /* left: -268px; */
+        left: -135%;
         top: 45px;
         max-width: 55vw;
         width: fit-content;
@@ -4345,7 +4346,7 @@ input:checked+.slider:before {
     display: flex !important;
     position: absolute !important;
     top: -49px !important;
-    left: 195px !important;
+    left: 68% !important;
     justify-content: center;
     align-items: center;
 }
@@ -4353,7 +4354,7 @@ input:checked+.slider:before {
     display: flex !important;
     position: absolute !important;
     top: -49px !important;
-    right: 40px !important;
+    right: 1% !important;
     justify-content: center;
     align-items: center;
 }
@@ -4561,7 +4562,7 @@ transition: 0;
         position: absolute !important;
         top: -55px !important;
         /* left: 230px !important; */
-        left: 2260px !important;
+        left: 82% !important;
         justify-content: center;
         align-items: center;
     }
@@ -4569,7 +4570,8 @@ transition: 0;
         display: flex !important;
         position: absolute !important;
         top: -55px !important;
-        right: 1200px !important;
+        /* right: 1200px !important; */
+        right: 5% !important;
         justify-content: center;
         align-items: center;
     }
@@ -4591,8 +4593,8 @@ transition: 0;
         display: flex !important;
         position: absolute !important;
         top: -55px !important;
-        /* left: 230px !important; */
-        left: 1670px !important;
+        left: 82% !important;
+        /* left: 1670px !important; */
         justify-content: center;
         align-items: center;
     }
@@ -4600,7 +4602,8 @@ transition: 0;
         display: flex !important;
         position: absolute !important;
         top: -55px !important;
-        right: 75px !important;
+        /* right: 75px !important; */
+        right: 5% !important;
         justify-content: center;
         align-items: center;
     }

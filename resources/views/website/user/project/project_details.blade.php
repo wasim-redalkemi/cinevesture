@@ -260,6 +260,9 @@ $(document).ready(function() {
                 .on('select2:unselecting', e => $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop()))
                 .on('select2:unselect', e => $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop')));
                 
+    $('.js-select2').on('select2:select', function (e) {
+    $('.select2-search__field').val('').trigger('change');
+    });
 
   var ProjectDetails = function () {
     var project_id = null;
