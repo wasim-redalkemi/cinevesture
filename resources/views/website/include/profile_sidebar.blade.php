@@ -2,7 +2,7 @@
     <div class="sidebar_content mb-0 mb-md-3 d-flex justify-content-between"  data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
       <div class="d-flex align-items-center">
         @if (!empty(auth()->user()) && auth()->user()->profile_image)
-          <div class="image_wraper_header me-3">
+          <div class="image_wraper_header me-1">
             <img  src="{{asset('public/storage/'.auth()->user()->profile_image)}}" alt="" width="100%" height="100%">
           </div>
           @else              
@@ -23,7 +23,7 @@
     <button id="submit">Submit</button>
 </div> -->
 
-<div class="sidebar_collapse collapse dont-collapse-sm" id="collapseExample">
+<div class="sidebar_collapse collapse dont-collapse-sm prevent_hide" id="collapseExample">
   
 <div class="sidebar_data_mobile sidebar" id="sidebar">
     <hr class="sidebar_content_hr d-none d-md-block">

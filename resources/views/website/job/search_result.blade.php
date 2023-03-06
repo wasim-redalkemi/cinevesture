@@ -32,7 +32,7 @@
                             <img src="{{ asset('images/asset/dropdown-sidebar.svg') }}" />
                         </div>
                     </div>
-                    <div class="sidebar_collapse collapse dont-collapse-sm" id="collapseExample">
+                    <div class="sidebar_collapse collapse dont-collapse-sm prevent_hide" id="collapseExample">
                         <div class="sidebar_data_mobile">
                             {{-- <div class="dropend search-page search_page_filters_wrap mt-0 mt-md-3">
                                 <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
