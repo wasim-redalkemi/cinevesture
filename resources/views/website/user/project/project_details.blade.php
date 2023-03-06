@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div id="project_details" class="profile_wraper profile_wraper_padding mt-4 mb_100">
-                    <form role="form" class="validateBeforeSubmit" method="POST" enctype="multipart/form-data" action="{{route('validate-project-details')}}">
+                    <form role="form" class="validateBeforeSubmit" onsubmit=" return totalBudgetvalidate();return false;" method="POST" enctype="multipart/form-data" action="{{route('validate-project-details')}}">
                         @csrf
                         <p class="flow_step_text"> Details</p>
                         <div class="row">
@@ -75,9 +75,9 @@
                         </div>
                         <div class="row">
                             <div class="col-md-3 mt-2 mt-md-0">
-                                <div class="profile_input">
+                                <div class="profile_input" id='budgetVal'>
                                     <label>Total Budget (USD) <span class = "steric_sign_design">*</span></label>
-                                    <input type="number" class="form-control no_number_arrows @error('total_budget') is-invalid @enderror" name="total_budget" min="1" max="config('constants.TOTAL_BUDGET')" pattern="[0-9]" placeholder="Total Budget" required 
+                                    <input type="number" class="form-control no_number_arrows @error('total_budget') is-invalid @enderror" name="total_budget" id="total_budget_validate" min="1" max="config('constants.TOTAL_BUDGET')" pattern="[0-9]" placeholder="Total Budget" required 
                                     value="<?php
                                      if(!empty($projectData[0]['total_budget']))
                                     { echo $projectData[0]['total_budget']; }
@@ -85,6 +85,9 @@
                                         echo old('total_budget');
                                     }
                                      ?>">
+                                     <span class="empty-image d-none" id=budgetValidation>
+                                        Total Budget should be less then $1000000000.
+                                    </span>
                                     @error('total_budget')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -95,11 +98,14 @@
                         </div>
                         <div class="row">
                             <div class="col-md-3 mt-2 mt-md-0">
-                                <div class="profile_input">
+                                <div class="profile_input" id="financingSecured">
                                     <label>Financing Secured (USD) <span class = "steric_sign_design">*</span></label>
-                                    <input type="number" class="form-control no_number_arrows @error('financing_secured') is-invalid @enderror" name="financing_secured"  min="1" max="{{config('constants.MAX_TOTAL_BUDGET')}}"  pattern="[0-9]" required placeholder="Financing Secured" value="<?php if(!empty($projectData[0]['financing_secured'])){ echo $projectData[0]['financing_secured']; } else{
+                                    <input type="number" id="financingSec" class="form-control no_number_arrows @error('financing_secured') is-invalid @enderror" name="financing_secured"  min="1" max="{{config('constants.MAX_TOTAL_BUDGET')}}"  pattern="[0-9]" required placeholder="Financing Secured" value="<?php if(!empty($projectData[0]['financing_secured'])){ echo $projectData[0]['financing_secured']; } else{
                                         echo old('financing_secured');
                                     } ?>">
+                                    <span class="empty-image d-none" id=financValidation>
+                                        Financing secured should be less then total budget.
+                                    </span>
                                     @error('financing_secured')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -232,6 +238,36 @@ $(document).ready(function() {
 
 @push('scripts')
 <script>
+   function totalBudgetvalidate() {
+        let total_budget=$('#total_budget_validate').val();
+        
+        if (total_budget>1000000000) {
+            $('#budgetValidation').removeClass('d-none');
+            $(window).scrollTop(0);
+            return false;
+        }else{
+        return true;
+    }}
+    
+   $('#budgetVal').on('change',function () {
+    let total_budget=$('#total_budget_validate').val();
+    if (total_budget<1000000001) {
+            $('#budgetValidation').addClass('d-none');
+        }
+   })
+
+   $('#financingSec').on('change',function(){
+        let total_budget=parseInt($('#total_budget_validate').val());
+        let financing_budget=parseInt($('#financingSec').val()); 
+   
+        if (total_budget<financing_budget) {
+            $('#financValidation').removeClass('d-none');
+            $(window).scrollTop(0);
+            return false;
+        }else{
+            $('#financValidation').addClass('d-none');
+        }
+   })
    
     var projectDetails = [];
     $(document).ready(function(){
@@ -267,7 +303,7 @@ $(document).ready(function() {
     var associate_entriesId = "#associate_entries";
 
     let init = function(projectDetailsObj){
-        console.log("projectDetailsObj = ",projectDetailsObj.id);
+        // console.log("projectDetailsObj = ",projectDetailsObj.id);
         project_id = projectDetailsObj.id;
         bindActions();
     }
