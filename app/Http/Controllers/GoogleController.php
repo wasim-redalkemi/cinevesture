@@ -40,7 +40,7 @@ class GoogleController extends Controller
                     'google_id' => $user->getId(),
                 ],[
                     'first_name' => $user['given_name'],
-                    'last_name' => $user['family_name'],
+                    'last_name' => @$user['family_name'],
                     'name' => $user->getName(),
                     'email' => $user->getEmail(),
                     'email_verified_at' => date('Y-m-d H:i:s'),
