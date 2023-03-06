@@ -45,7 +45,8 @@ class VerifyOTPForgetPassword extends Notification
         ->subject('Reset your password for Cinevesture')
         ->greeting('Hi'.' '.$this->data['first_name'].',')
         ->line('Your reset password  verification code is')
-        ->line($this->data['otp'])
+        ->line("<span class='user_otp'>".$this->data['otp']."</span>")
+
         // ->action('Notification Action', url('/'))
         ->line('Enter the verification code on the website to complete password change.')
         ->line("If you ignore this message, your password will not be changed. If you didn't request a password reset, let us know.")

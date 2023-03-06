@@ -394,9 +394,9 @@
             }
 
             let uploadImage = function(){
-                console.log("uploading file");
+                // console.log("uploading file");
                 var croppedImg = ImageCropperObj.getCropperFile();
-                console.log("croppedImg = "+BaseUrl+"ajax/upload-image",croppedImg);
+                // console.log("croppedImg = "+BaseUrl+"ajax/upload-image",croppedImg);
                 var formData = new FormData();
                 formData.append("file", croppedImg, uploadedFile.name);
                 formData.append("project_id", project_id);
