@@ -821,6 +821,25 @@ label {
     margin-top: 36px;
 }
 
+
+@media screen and ( max-width: 520px ){
+
+    li.page-item {
+
+        display: none;
+    }
+
+    .page-item:first-child,
+    .page-item:last-child,
+    
+    .page-item.active {
+
+        display: block;
+    }
+    
+}
+
+
 .page-link {
     z-index: 3;
     color: #33084C;

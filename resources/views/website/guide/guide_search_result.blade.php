@@ -207,7 +207,7 @@
                 @endif
                 <div>
                     {{-- {!! $users->links() !!} --}}
-                    {!! $users->onEachSide(-1)->links() !!}
+                    {!! $users->onEachSide(0)->links() !!}
 
                 </div>
 

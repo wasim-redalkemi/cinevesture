@@ -77,7 +77,7 @@
                             </div>
                             <div class="d-flex justify-content-end justify-content-md-center mt-5 mb-4">
                                 <button type="button" class="cancel_btn mx-2 mx-md-5" ><a href="{{route('showJobSearchResults')}}">Back</a></button>
-                                <button type="submit" class="guide_profile_btn" data-toggle="modal" data-target="#job_apply_success_modal">Submit</button>
+                                <button type="submit" class="guide_profile_btn">Submit</button>
                             </div>
                         </div>
 
@@ -164,6 +164,10 @@
              }  
             return false;
         }
+        $("#job_apply_success_modal").modal({
+        show: false,
+        backdrop: 'static'
+        });
       
         let $submitBtn = $(".guide_profile_btn");
         $submitBtn.prop("disabled", true);

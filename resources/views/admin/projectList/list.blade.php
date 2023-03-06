@@ -64,7 +64,7 @@
                               <div class="row">
                                <div class="col-md-12 d-flex justify-content-between mt-3">
                                 <div>{{'Showing '.$projects_data->firstItem() .' to' .' '. $projects_data->lastItem().' of'.' '.$projects_data->total()}}</div>
-                               <div style="float:right;" >{{$projects_data->onEachSide(-1)->appends($_GET)->links()}}</div>
+                               <div style="float:right;" >{{$projects_data->onEachSide(0)->appends($_GET)->links()}}</div>
                                </div> 
                               </div>
                     </div>

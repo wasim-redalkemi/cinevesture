@@ -328,7 +328,7 @@
                 {!! config('constants.NO_DATA_SEARCH') !!}
                 @endif
                 <div>
-                    {!! $projects->onEachSide(-1)->links() !!}
+                    {!! $projects->onEachSide(0)->links() !!}
                 </div>
 
     </section>
