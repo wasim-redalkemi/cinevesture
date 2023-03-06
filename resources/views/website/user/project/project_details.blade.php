@@ -240,23 +240,43 @@ $(document).ready(function() {
 <script>
    function totalBudgetvalidate() {
         let total_budget=$('#total_budget_validate').val();
-        
         if (total_budget>1000000000) {
             $('#budgetValidation').removeClass('d-none');
             $(window).scrollTop(0);
+            financingValidation();
             return false;
         }else{
-        return true;
-    }}
+            let finee=financingValidation();
+            if (finee==false) {
+                return false
+            }else{
+                return true;
+            }
+        }}
     
-   $('#budgetVal').on('change',function () {
-    let total_budget=$('#total_budget_validate').val();
-    if (total_budget<1000000001) {
-            $('#budgetValidation').addClass('d-none');
-        }
-   })
+        $('#budgetVal').on('change',function () {
+         let total_budget=$('#total_budget_validate').val();
+         if (total_budget<1000000001) {
+                 $('#budgetValidation').addClass('d-none');
+             }
+        })
 
-   $('#financingSec').on('change',function(){
+//    $('#financingSec').on('change',function(){
+//     debugger
+//         let total_budget=parseInt($('#total_budget_validate').val());
+//         let financing_budget=parseInt($('#financingSec').val()); 
+   
+//         if (total_budget<financing_budget) {
+//             $('#financValidation').removeClass('d-none');
+//             $(window).scrollTop(0);
+//             return false;
+//         }else{
+//             $('#financValidation').addClass('d-none');
+//             $('button[type="submit"]').removeAttr('disabled');
+//         }
+//    })
+
+    function financingValidation() {
         let total_budget=parseInt($('#total_budget_validate').val());
         let financing_budget=parseInt($('#financingSec').val()); 
    
@@ -266,8 +286,17 @@ $(document).ready(function() {
             return false;
         }else{
             $('#financValidation').addClass('d-none');
+            return true
+            // $('button[type="submit"]').removeAttr('disabled');
         }
-   })
+    }
+    $('#financingSec').on('change',function () {
+        let total_budget=parseInt($('#total_budget_validate').val());
+        let financing_budget=parseInt($('#financingSec').val()); 
+    if (total_budget>financing_budget) {
+            $('#financValidation').addClass('d-none');
+        }
+    })
    
     var projectDetails = [];
     $(document).ready(function(){
