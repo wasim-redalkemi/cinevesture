@@ -275,13 +275,16 @@ $(document).ready(function() {
     let bindActions = function () {
         $(associate_entriesId+" .remove-entry").off("click").on("click",(e)=>{
             let id = $(e.target).parents()[1].id.split("-")[1];
-            createToast("Please wait...","S");
+            // createToast("Please wait...","S");
+            // toastMessage("info", "Please wait...");
             $(associate_entriesId+" #asso-"+id).remove();
             doAjax('ajax/delete-proj-association/'+id,{},"DELETE",function(req,resp){
                 if(resp.payload.isDeleted){
-                    createToast(resp.message,"S");
+                    // createToast(resp.message,"S");
+                    // toastMessage("success", resp.message);
                 } else {
-                    createToast(resp.error_msg,"E");
+                    // createToast(resp.error_msg,"E");
+                    toastMessage("error", resp.message);
                 }
             });
         });
@@ -314,7 +317,8 @@ $(document).ready(function() {
             if(emptyFields.length == 0){
                 return true;
             } else {
-                createToast("Please enter a valid title.","E");
+                // createToast("Please enter a valid title.","E");
+                toastMessage("error", "Please enter a valid title.");
             }
         }
         return false;
@@ -324,7 +328,8 @@ $(document).ready(function() {
         if(resp.status && resp.status == '1') {
             addAssoEntry(resp.payload);
         } else {
-            createToast(resp.error_msg,"E");
+            // createToast(resp.error_msg,"E");
+            toastMessage("error", resp.error_msg);
         }
     }
 
@@ -364,13 +369,19 @@ $(document).ready(function() {
             success: function(result){
                 let resp = JSON.parse(result);
                 callback(reqData,resp);
+                if (resp.message=='Success') {
+                    toastMessage("success","Project association add successfully.");
+                }else{
+                toastMessage("success",resp.message);
+            }
             },
             error: function(result){
                 let errorsHtml = "";
                 $.each(result.responseJSON.errors,(i,n)=>{
                     errorsHtml += n+"<br>";
                 });
-                createToast(errorsHtml,"E");
+                // createToast(errorsHtml,"E");
+                toastMessage("error", resp.msg);
             }
         });
     }

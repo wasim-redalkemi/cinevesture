@@ -25,7 +25,7 @@
                             <h1>Organisation</h1>
                         </div>
                         <div class="d-flex custom_file_explorer mt-3">
-                            <div class="upload_img_container">
+                            <div class="upload_img_container imgLogo">
                                 <img src="<?php if (!empty($UserOrganisation->logo)) {
                                                 echo Storage::url($UserOrganisation->logo);
                                             } ?>" class="upload_preview for_show croperImg" width="100">
@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                             <div class="mx-4 d-flex align-items-center">
-                                <div>
+                                <div class="imgLogo">
                                     <div class="search-head-subtext Aubergine_at_night open_file_explorer pointer">
                                         Upload Profile Picture <span style="color:red">*</span>
                                     </div>
@@ -395,7 +395,8 @@
 
 function validateOrganizationForm(){
     let logo = $("#logo").val();
-    if (!logo) {
+    let img = $('.upload_preview').attr('src');
+    if (!logo && !img) {
         let errorElem = 
         $("#img-error").removeClass('d-none');
         $(window).scrollTop(0);
@@ -406,6 +407,13 @@ function validateOrganizationForm(){
 }
 
     $(document).ready(function() {
+        $('.imgLogo').on('change',function () {
+            let logo = $("#logo").val();
+            let img = $('.upload_preview').attr('src');
+            if(logo || img){
+                $("#img-error").addClass('d-none');
+            }
+        })
 
         // $('.for_hide').css('display', 'block');
         // $('.for_show').css('display', 'none');
@@ -639,9 +647,9 @@ function validateOrganizationForm(){
             error: function(response, status, error) {
                 $btn.text("Send Mail");
                     $btn.prop('disabled',false);
-                console.log(response);
-                console.log(status);
-                console.log(error);
+                // console.log(response);
+                // console.log(status);
+                // console.log(error);
             }
         });
     });
