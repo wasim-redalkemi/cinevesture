@@ -516,9 +516,16 @@ class JobController extends WebController
                 $collect_admin->put('job_title', UcFirst($user_job->title));
                 $collect_admin->put('user_name',  UcFirst($user->first_name));
                 $user_admin->notify(new AdminPromotionJob($collect_admin));
-                return ['status'=>1,'msg'=>"Email has been dispatched."];
+                if($request->ajax()){
+                    return ['status'=>'success','msg'=>"Email has been dispatched."];
+                }
+                
+                // return back()->with(['status'=>'success','msg'=>'Email has been dispatched.']);
+                $message='Email has been dispatched.';
+                return redirect()->back()->with("success", $message);
+                
             }else{
-                return ['status'=>0,'msg'=>"Something went wrong, please try again later."];
+                return ['status'=>'error','msg'=>"Something went wrong, please try again later."];
 
             }
             

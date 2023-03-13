@@ -345,11 +345,14 @@ $('.select_limit').change(function(event) {
                     console.log(response);
                     $btn.text("Send Mail");
                     $btn.prop('disabled',false);
-                    if (response.status == 1) {                                
+                    if (response.status == 'success') {                                
                         toastMessage(response.status, response.msg);
                     }
                     $('.modal').hide();
                     $('.modal-backdrop').remove();
+                    // $(".fl-dark-mode").css({ 'overflow' : ''});
+                    $('body').removeAttr('style');
+                    
                 },
                 error:function(response,status,error)
                 {     $btn.text("Send Mail");

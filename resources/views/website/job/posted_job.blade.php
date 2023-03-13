@@ -55,11 +55,14 @@
                                             <span class="dot"></span>
                                         </div>
                                         <ul class="dropdown-menu profile_dropdown_menu p-2 menu_position">
+                                            
+                                            <input type="hidden" name="job_id" value="{{ !empty($v['id']) ? $v['id'] : 'no' }}" id="job_id">
                                             <li>
                                             <a href="{{route('job-create-page',['job_id'=>$v['id']])}}">  Edit Job</a>
                                             </li>
                                             <li>
-                                            <a href="{{route('promotion-job')}}">  Promote Job</a>
+                                            {{-- <a href="{{route('promotion-job',['id'=>$v['id']])}}">  Promote Job</a> --}}
+                                            <a href="#" data-toggle="modal" data-target="#publish_job_modal">  Promote Job</a>
                                             </li>
                                             <li>
                                             <?php $status;  if($v['save_type']=='published'){  $status= "unpublished"; } else {$status="published";}?>
@@ -131,9 +134,82 @@
         </div>
     </div>
 </section>
+<div class="modal fade" id="publish_job_modal"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+         <div class="d-flex justify-content-end m-2">
+             <button type="button" class="simple_cross_btn" data-bs-dismiss="modal" aria-label="Close"> <img src="{{ asset('images/asset/cross_Icon.svg') }}" /></button>
+         </div>
+            <div class="modal-body" style="padding: 0px;">
+                <section>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="modal_container">
 
+                                    <div class="icon_container done">
+                                        <i class="fa fa-check icon_style" aria-hidden="true"></i>
+                                    </div>
+                                    <div class="head_text mt-4">Congratulations!</div>
+                                    <div class="successfullPublish_text sub_text mt-4">
+                                        You have successfuly published a Job. Do you want to promote your job?
+                                        <span data-toggle="tooltip" data-placement="bottom" title="Promote your job for a small fee. Our team will get in touch with you when you submit a job promotion"> <i class="fa fa-info-circle" aria-hidden="true"></i></span>
+                                    </div>
+                                    <div class="mb-5">
+                                <a href="#" class="text-decoration-none"><button class="submit_btn text-light mt-4">Submit your job for promotion</button></a>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
-
 @section('footer')
 @include('website.include.footer')
 @endsection
+@push('scripts')
+   <script>
+    var job_id  = $('#job_id').val();
+    $(document).ready(function() {
+    $('.submit_btn').click(function(e) {  
+    let $btn = $(this);
+    e.preventDefault();
+    e.stopPropagation();
+    $btn.text("Submitting..");
+    $btn.prop('disabled',true);
+    $.ajax(
+    {
+        url:"{{route('promotion-job')}}",
+        type:'GET',
+        dataType:'json',
+        data:{'id': job_id},
+        success:function(response)
+        {  
+            // console.log(response);
+            $btn.text("Send Mail");
+            $btn.prop('disabled',false);
+            if (response.status == 'success') {                                
+                toastMessage(response.status, response.msg);
+            }
+            $('.modal').hide();
+            $('.modal-backdrop').remove();
+            $('body').removeAttr('style');
+        },
+        error:function(response,status,error)
+        {     $btn.text("Send Mail");
+        toastMessage(response.status, response.msg);
+            $btn.prop('disabled',false);
+            // console.log(response);
+            // console.log(status);
+            // console.log(error);
+        } 
+    });
+});
+});
+    </script> 
+    @endpush

@@ -203,7 +203,7 @@
                                     <p id="urlcopy" class="d-none">{{route('project-public-show')}}?id={{$UserProject->id}}&data={{true}}</p>
 
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id && (auth()->user()->parent_user_id != $projectData[0]['user']['id'] ))
-                                    <div> <i class="fa <?php if(isset($UserProject->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
+                                    <div> <i class="fa <?php if(isset($UserProject->isfavouriteProjectOne)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
                                     @endif
                                 </div>
                                
@@ -549,7 +549,7 @@
                                     </div>
                                 </a> 
                                     <div class="like_btn_wrapper">
-                                        <div> <i class="fa <?php if(isset($value->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size text-white like-project" style="cursor: pointer;" data-id="{{$value->id}}" aria-hidden="true"></i></div>
+                                        <div> <i class="fa <?php if(isset($value->isfavouriteProjectOne)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size text-white like-project" style="cursor: pointer;" data-id="{{$value->id}}" aria-hidden="true"></i></div>
                                     </div>  
                                 </div>                            
                                 
