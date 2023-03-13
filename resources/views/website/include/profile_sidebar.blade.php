@@ -1,5 +1,5 @@
 <div class="profile_side_bar">
-    <div class="sidebar_content mb-0 mb-md-3 d-flex justify-content-between"  data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    <div class="sidebar_content mb-0 mb-md-3 d-flex justify-content-between align-items-center">
       <div class="d-flex align-items-center">
         @if (!empty(auth()->user()) && auth()->user()->profile_image)
           <div class="image_wraper_header me-1">
@@ -10,9 +10,11 @@
           @endif
         <a href="{{ route('profile-private-show')}}" class="mx-2">{{ucwords(auth()->user()->name)}}</a>
       </div>
-      <div class="d-flex align-items-center d-block d-md-none">
-          <div class="mx-2">Profile</div>
-          <i class="fa fa-angle-down" aria-hidden="true"></i>
+      <div data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+        <div class="d-flex align-items-center d-block d-md-none">
+            <div class="mx-2">Profile</div>
+            <i class="fa fa-angle-down" aria-hidden="true"></i>
+        </div>
       </div>
     </div>
 
