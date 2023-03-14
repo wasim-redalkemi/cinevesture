@@ -28,7 +28,7 @@
                             <div class="col-md-3">
                                 <div class="profile_input">
                                     <label>Project Name <span class = "steric_sign_design">*</span></label>  
-                                    <input type="text" class="form-control @error('project_name') is-invalid @enderror" name="project_name" placeholder="Project Name" value="@if (!empty($projectData[0]['project_name'])){{$projectData[0]['project_name']}} @endif" aria-label="Username" aria-describedby="basic-addon1" maxlength="100" autofocus required>                                    
+                                    <input type="text" class="form-control @error('project_name') is-invalid @enderror" name="project_name" placeholder="Project Name" value="@if (!empty($projectData[0]['project_name'])){{$projectData[0]['project_name']}} @endif" aria-label="Username" aria-describedby="basic-addon1" maxlength="100" required>                                    
                                     @error('project_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
