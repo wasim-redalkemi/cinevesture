@@ -638,7 +638,7 @@ class ProjectController extends WebController
             }else{
             
                 $UserProject = UserProject::query()->where('id',$_REQUEST['id'])
-                ->with('isfavouriteProject')->first();
+                ->with(['isfavouriteProject','isfavouriteProjectOne'])->first();
                 
                 
                 $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectMarkVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->where(function($q){
@@ -675,7 +675,7 @@ class ProjectController extends WebController
                             ->paginate(10);
             }else{
                 $recomProject=UserProject::query()->whereIn('id',$projectIdUnique)
-                ->with(['projectOnlyImage','isfavouriteProject'])
+                ->with(['projectOnlyImage','isfavouriteProjectOne','isfavouriteProject'])
                             ->where('id','!=',$_REQUEST['id'])
                             ->where('user_status','published')
                             ->where('admin_status','active')
