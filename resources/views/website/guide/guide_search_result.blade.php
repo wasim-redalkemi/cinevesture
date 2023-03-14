@@ -24,8 +24,8 @@
                             <img src="{{ asset('images/asset/dropdown-sidebar.svg') }}" />
                         </div>
                     </div>
-                    <div class="sidebar_collapse collapse dont-collapse-sm" id="collapseExample">
-                        <div class="dropdown search-page sidebar_data_mobile">
+                    <div class="sidebar_collapse collapse dont-collapse-sm prevent_hide" id="collapseExample">
+                        <div class="dropdown search-page sidebar_data_mobile ">
                         <div class="dropend search-page search_page_filters_wrap mt-2">
                                 <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Location
@@ -235,5 +235,12 @@
     });
 
     $(".side-bar-cmn-part").collapse("hide");
+
+//     $(document).click(function(e) {
+// 	if (!$(e.target).is('.for_test')) {
+//         console.log("called");
+//     	$('.collapse').collapse('show');	    
+//     }
+// });
 </script>
 @endpush

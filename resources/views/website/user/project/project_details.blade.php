@@ -26,7 +26,7 @@
                             <div class="col-md-6">
                                 <div class="profile_input select2forError">
                                     <label>Category</label>
-                                    <select name="category_id" id="leadadd_mode_of_enq" name="leadadd_mode_of_enq" class=" @error('category_id') is-invalid @enderror" autofocus>
+                                    <select name="category_id" id="leadadd_mode_of_enq" name="leadadd_mode_of_enq" class=" @error('category_id') is-invalid @enderror" >
                                         <option value="">Select</option>
                                         @foreach ($category as $k=>$v)
                                             <option value="{{ $v->id }}"@if(!empty($projectData[0]['project_category'] )&&(in_array($v->id, $projectData[0]['project_category'])))selected @endif>{{  $v->name }}</option>
@@ -44,7 +44,7 @@
                             <div class="col-md-6">
                                 <div class="mt_16 select2forError">
                                     <label>Genre <span class = "steric_sign_design">*</span></label>
-                                    <select name="gener[]" class="js-select2 @error('gener') is-invalid @enderror" autofocus multiple required>
+                                    <select name="gener[]" class="js-select2 @error('gener') is-invalid @enderror"  multiple required>
                                         @foreach ($Genres as $k=>$v)
                                             <option value="{{ $v->id }}"@if(!empty($projectData[0]['genres'] )&&(in_array($v->id, $projectData[0]['genres'])))selected @endif >{{  $v->name }}</option>
                                         @endforeach
@@ -325,6 +325,9 @@ $(document).ready(function() {
                 .on('select2:unselecting', e => $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop()))
                 .on('select2:unselect', e => $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop')));
                 
+    $('.js-select2').on('select2:select', function (e) {
+    $('.select2-search__field').val('').trigger('change');
+    });
 
   var ProjectDetails = function () {
     var project_id = null;

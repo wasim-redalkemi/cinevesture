@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\DB;
                 @include('website.include.profile_sidebar')
             </div>
             <div class="col-md-9">
-            <div class="content_wraper">
+            <div class="content_wraper mt-3 mt-md-0">
                         <div class="guide_profile_subsection">
                             <div class="profile_text">
                                 <h1>{{empty($jobTitle)?'Job Title':ucwords($jobTitle)}}</h1>
@@ -42,8 +42,8 @@ use Illuminate\Support\Facades\DB;
                                         <div class="guide_profile_main_text pt-3">{{$applicant->first_name.' '.$applicant->last_name}}</div>
                                        <div>
                                         <span class="associate_text deep-pink"><a href="{{route('profile-public-show',['id'=>$applicant->id])}}" class="">View Profile</a></span>
-                                        {{-- <span class="associate_text deep-pink mx-3"><a href="" class="">Contact</a></span> --}}
-                                        <span ><button class=" cover_page_contact deep-pink mx-3" data-toggle="modal" data-target="#contactModal">Contact </button></span>
+                                        {{-- <span class="associate_text deep-pink mx-0 mx-md-3"><a href="" class="">Contact</a></span> --}}
+                                        <span ><button class=" cover_page_contact deep-pink mx-0 mx-md-3" data-toggle="modal" data-target="#contactModal">Contact </button></span>
 
                                         <!-- Contact modal  -->
                                         @include('website.modal.contact', [                                         
@@ -73,11 +73,11 @@ use Illuminate\Support\Facades\DB;
 
                             <div class="row">
                                 <div class="col-lg-4 col-sm-6 mt-sm-2 mt-2">
-                                    <div class="d-flex doc_container docsPreview" docs-url="{{asset('storage/'.$coverLetter->resume)}}">
+                                    <div class="d-flex doc_container docsPreview justify-content-start" docs-url="{{asset('storage/'.$coverLetter->resume)}}">
                                         <div class="icon">
                                             <img src="{{ asset('images/asset/pdf-icon.png') }}">
                                         </div>
-                                        <a class="public-subheading-text mx-2">
+                                        <a class="public-subheading-text mx-3">
                                             <div class="resume-download-txt break_all">{{empty($coverLetter->resume_original_name)?'-':$coverLetter->resume_original_name }}</div>
                                             <div class="resume-download-txt">{{empty($coverLetter->resume_size)?'-':$coverLetter->resume_size }}</div>
                                         </a>

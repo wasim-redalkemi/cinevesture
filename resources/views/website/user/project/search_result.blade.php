@@ -35,7 +35,7 @@
                         </div>
                         <div data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><img src="{{ asset('public/images/asset/dropdown-sidebar.svg') }}" class="d-block d-md-none for_drop_img" /></div>
                     </div>
-                    <div class="sidebar_collapse collapse dont-collapse-sm" id="collapseExample">
+                    <div class="sidebar_collapse collapse dont-collapse-sm prevent_hide" id="collapseExample">
                         <div class="sidebar_data_mobile">
                             <div class="search-page  mt-3 search_page_filters_wrap dropend">
                                 <button type="button" class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">

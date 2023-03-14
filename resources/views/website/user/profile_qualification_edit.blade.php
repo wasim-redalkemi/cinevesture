@@ -36,7 +36,7 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label> Institute <span class = "steric_sign_design">*</span></label>
-                                        <input type="text" class="form-control @error('institue_name') is-invalid @enderror" placeholder="Institute" name="institue_name" value="{{ $UserQualificationData->institue_name}}" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
+                                        <input type="text" class="form-control @error('institue_name') is-invalid @enderror" placeholder="Institute" name="institue_name" value="{{ $UserQualificationData->institue_name}}" aria-label="Username" aria-describedby="basic-addon1"  required>
                                         @error('institue_name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -49,7 +49,7 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Degree <span class = "steric_sign_design">*</span></label>
-                                        <input type="text" class="form-control @error('degree_name') is-invalid @enderror" placeholder="Company" aria-label="Username" name="degree_name" value="{{ $UserQualificationData->degree_name}}" aria-describedby="basic-addon1" autofocus required>
+                                        <input type="text" class="form-control @error('degree_name') is-invalid @enderror" placeholder="Company" aria-label="Username" name="degree_name" value="{{ $UserQualificationData->degree_name}}" aria-describedby="basic-addon1"  required>
                                         @error('degree_name')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -62,7 +62,7 @@
                                 <div class="col-md-6">
                                     <div class="profile_input">
                                         <label>Field of Study <span class = "steric_sign_design">*</span></label>
-                                        <input type="text" class="form-control @error('field_of_study') is-invalid @enderror" placeholder="Feild of study" aria-label="Username" name="field_of_study" value="{{ $UserQualificationData->field_of_study}}" aria-describedby="basic-addon1" autofocus required>
+                                        <input type="text" class="form-control @error('field_of_study') is-invalid @enderror" placeholder="Feild of study" aria-label="Username" name="field_of_study" value="{{ $UserQualificationData->field_of_study}}" aria-describedby="basic-addon1"  required>
                                         @error('field_of_study')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -75,7 +75,7 @@
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>Start Year <span class = "steric_sign_design">*</span></label>
-                                        <input type="number" class="form-control @error('start_year') is-invalid @enderror" placeholder="YYYY" name="start_year" min="<?php echo date('Y',strtotime('-100year'));?>" max="<?php echo date('Y',strtotime('+100year'));?>" step="1" value="{{$UserQualificationData->start_year}}" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
+                                        <input type="number" class="form-control @error('start_year') is-invalid @enderror" placeholder="YYYY" name="start_year" min="<?php echo date('Y',strtotime('-100year'));?>" max="<?php echo date('Y',strtotime('+100year'));?>" step="1" value="{{$UserQualificationData->start_year}}" aria-label="Username" aria-describedby="basic-addon1"  required>
                                         @error('start_year')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -86,7 +86,7 @@
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>End Year <span class = "steric_sign_design">*</span></label>
-                                        <input type="number" class="form-control @error('end_year') is-invalid @enderror" placeholder="YYYY" name="end_year" min="<?php echo date('Y',strtotime('-100year'));?>" max="<?php echo date('Y',strtotime('+100year'));?>" step="1" value="{{ $UserQualificationData->end_year }}" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
+                                        <input type="number" class="form-control @error('end_year') is-invalid @enderror" placeholder="YYYY" name="end_year" min="<?php echo date('Y',strtotime('-100year'));?>" max="<?php echo date('Y',strtotime('+100year'));?>" step="1" value="{{ $UserQualificationData->end_year }}" aria-label="Username" aria-describedby="basic-addon1"  required>
                                         @error('end_year')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -100,7 +100,7 @@
                                     <div class="profile_input">
                                         <label>Description <span class = "steric_sign_design">*</span></label>
                                         <div class="form_elem">
-                                        <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" text-length = "600" maxlength="600" name="description" aria-label="With textarea" autofocus required>{{ $UserQualificationData->description }}</textarea>
+                                        <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" text-length = "600" maxlength="600" name="description" aria-label="With textarea"  required>{{ $UserQualificationData->description }}</textarea>
                                         @error('description')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

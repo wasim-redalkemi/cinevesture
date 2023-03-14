@@ -23,7 +23,7 @@
                     <div class="guide_profile_main_text mt-4 deep-pink">Your Plan</div>
                     <div class="guide_profile_main_subtext Aubergine_at_night">@if (!empty($subscription->plan_name)) {{$subscription->plan_name}} @else <span><b>-</b></span> @endif</div>
                     <div class="guide_profile_main_text mt-4 deep-pink">Payment</div>
-                    <div class="guide_profile_main_subtext Aubergine_at_night">Your Cinevesture 
+                    <div class="guide_profile_main_subtext Aubergine_at_night break_word">Your Cinevesture 
                         @if (!empty($subscription->plan_name)) 
                         {{$subscription->plan_name}} @else <span><b>-</b></span> @endif 
                       @if ($subscription->plan_name=='Free')

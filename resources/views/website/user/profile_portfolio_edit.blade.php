@@ -183,7 +183,7 @@
                                             <div class="fill-progress"></div>
                                         </div>
                                         <div for="file-input input_wrap" class="d-none">
-                                            <input type="file" class="imgInp" id="upload-img-inp-new-{{count($UserPortfolioImages)+1}}" name="portfolio-image-{{count($UserPortfolioImages)+1}}" accept=".jpg,.jpeg,.png"  autofocus required>
+                                            <input type="file" class="imgInp" id="upload-img-inp-new-{{count($UserPortfolioImages)+1}}" name="portfolio-image-{{count($UserPortfolioImages)+1}}" accept=".jpg,.jpeg,.png"   required>
                                             <input type="hidden" class="imgInp" id="cropped-upload-img-inp-new-{{count($UserPortfolioImages)+1}}" name="cropped-portfolio-image-{{count($UserPortfolioImages)+1}}">
                                         </div>
                                         <label for="upload-img-inp-new-{{count($UserPortfolioImages)+1}}">
@@ -518,6 +518,10 @@
                 .on('select2:select', e => $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop')))
                 .on('select2:unselecting', e => $(e.currentTarget).data('scrolltop', $('.select2-results__options').scrollTop()))
                 .on('select2:unselect', e => $('.select2-results__options').scrollTop($(e.currentTarget).data('scrolltop')));
+
+    $('.js-select2').on('select2:select', function (e) {
+    $('.select2-search__field').val('').trigger('change');
+    });
 
 
     $(".portfolio_save_btn").on("click", function () {
