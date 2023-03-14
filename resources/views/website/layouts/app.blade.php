@@ -51,7 +51,7 @@
             
             @if(isset($_REQUEST['src']) && ($_REQUEST['src'] == 'app'))
             @else
-                @yield('footer');
+                @yield('footer')
             @endif
 
             <!-- Modal for Confirmation for account deactivate -->
