@@ -80,7 +80,7 @@
                                                         @if(isset(request('talentType')[0]) && in_array($type->id, request('talentType')))
                                                         <option value="{{$type->job_title}}" data-badge="" selected>{{$type->job_title}}</option>
                                                         @else
-                                                        <option value="{{$type->job_title}}" data-badge="">{{$type->job_title}}</option>
+                                                        <option value="{{$type->job_title}}" data-badge="" >{{$type->job_title}}</option>
                                                         @endif
 
                                                         @endforeach
@@ -162,7 +162,7 @@
 
 
     });
-
+    $(".js-select2,.country_select2").click();
     $(document).ready(function() {
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");

@@ -24,7 +24,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="profile_cmn_head_text">Add Portfolio</div>
                     </div>
-                    <form role="form" class="validateBeforeSubmit" method="POST" enctype="multipart/form-data" action="{{ route('portfolio-store') }}">
+                    <form role="form" class="validateBeforeSubmit" method="POST"  enctype="multipart/form-data" action="{{ route('portfolio-store') }}">
                         <input type="hidden" name="portfolio_id">
                         @csrf
 
@@ -113,13 +113,16 @@
                                     <div class="img-container h_66 mt-3 mt-md-0">
                                         <img src="{{asset('images/asset/default-video-thumbnail.jpg')}}" class="width_inheritence" alt="image">
                                     </div>
-                                    <input type="text" class="outline is-invalid-remove form-control @error('video_url') is-invalid @enderror mt-3" placeholder="Paste link here" name="video_url" value="{{old('video_url')}}" aria-label="Video URL" aria-describedby="basic-addon1"  required>
+                                    <input type="text" id="youtube_video" class="outline is-invalid-remove form-control @error('video_url') is-invalid @enderror mt-3" placeholder="Paste link here" name="video_url" value="{{old('video_url')}}" aria-label="Video URL" aria-describedby="basic-addon1"  required>
                                     <input type="hidden" class="" name="video_thumbnail"  aria-label="Video Thumbnail" aria-describedby="basic-addon1">
                                     @error('video_url')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
+                                </div>
+                                <div class="intro-video for_error_msg" style="display:none">
+                                    <strong>Only youtube and vimeo URLs are allowed.</strong>
                                 </div>
                             </div>
                         </div>
@@ -446,6 +449,25 @@
         $("#save_btn_value").attr("value", $(this).attr("name"))
         $(this).parents('form').submit();
     });
+
+    function validateYouTubeUrl(url) {
+     var pattern = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+     return url.match(pattern) ? RegExp.$1 : false;
+        }
+    $('#youtube_video').on('submit change',function() {
+        $("div.intro-video").hide();
+        $('button[type="submit"]').removeAttr('disabled');
+        var urlLength= $('#youtube_video').val().length;
+        var url = $('#youtube_video').val();
+        var videoId = validateYouTubeUrl(url);
+        console.log(videoId);
+        if(!videoId){
+            $("div.intro-video").show();
+            $('button[type="submit"]').attr('disabled','disabled');
+        }
+       
+    });
+
 </script>
 <script src="{{ asset('js/cropper.js') }}"></script>
 @endpush
