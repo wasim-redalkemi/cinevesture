@@ -58,7 +58,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Who are you listing this project as? <span class = "steric_sign_design">*</span></label>
                                     <div class="checkbox_elem">

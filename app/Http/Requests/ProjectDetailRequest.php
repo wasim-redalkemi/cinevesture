@@ -31,7 +31,9 @@ class ProjectDetailRequest extends FormRequest
             // 'duration' => 'nullable|integer', 
             'total_budget' => 'required|integer|max:'.config('constants.MAX_TOTAL_BUDGET').'|min:1',
             // 'total_budget' => 'required|integer',
-            'financing_secured' => 'required|integer|lt:total_budget|max:'.config('constants.MAX_TOTAL_BUDGET').'|min:1',
+            
+            
+            'financing_secured' => 'required|integer|max:'.config('constants.MAX_TOTAL_BUDGET').'|min:1',
            
         ];
     }
