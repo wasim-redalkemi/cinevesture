@@ -26,7 +26,7 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Project Stage <span class = "steric_sign_design">*</span></label>
-                                    <select name="project_stage_id" class="@error('project_stage_id') is-invalid @enderror" autofocus required>
+                                    <select name="project_stage_id" class="@error('project_stage_id') is-invalid @enderror"  required>
                                         <option value="">Select</option>
                                         @foreach ($projectStage as $k=>$v)                                            
                                             <option @if(!empty($projectData[0]['project_stage'])) @if ($projectData[0]['project_stage']['id'] == $v->id) {{'selected'}} @endif @endif value="{{ $v->id }}">{{ $v->name }}</option>
@@ -44,7 +44,7 @@
                             <div class="col-md-4">
                                 <div class="mt_16 select2forError">
                                     <label>Looking for <span class = "steric_sign_design">*</span></label>
-                                    <select name="loking_for[]" class="js-select2 @error('loking_for') is-invalid @enderror" autofocus multiple select required>
+                                    <select name="loking_for[]" class="js-select2 @error('loking_for') is-invalid @enderror"  multiple select required>
                                         @foreach ($lookingFor as $k=>$v)
                                             <option value="{{ $v->id }}"@if(!empty($projectData[0]['project_looking_for'] )&&(in_array($v->id, $projectData[0]['project_looking_for'])))selected @endif>{{  $v->name }}</option>
                                         @endforeach
@@ -61,7 +61,7 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>If Startup, What stage of funding are you at?</label>
-                                    <select name="stage_of_funding_id" class="@error('stage_of_funding_id') is-invalid @enderror" id="" autofocus>
+                                    <select name="stage_of_funding_id" class="@error('stage_of_funding_id') is-invalid @enderror" id="" >
                                         <option value="">Select</option>
                                         @foreach ($projectStageOfFunding as $k=>$v)                                            
                                             <option @if(!empty($projectData[0]['project_stage_of_funding'])) @if ($projectData[0]['project_stage_of_funding']['id'] == $v->id) {{'selected'}} @endif @endif value="{{ $v->id }}">{{ $v->name }}</option>

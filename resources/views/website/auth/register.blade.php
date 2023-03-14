@@ -20,7 +20,7 @@
                                 <div class="signup-text mt-4 pt-2 pt-md-0 mt-md-5"> Sign Up</div>
                             </div>
                             <div class="col-lg-6 col-sm-6 mt-4-5 pt-2 pt-lg-5">
-                                <input type="text" class="name-only is-invalid-remove alphabets-only outline w-100 @error('first_name') is-invalid @enderror" id="first_name" name="first_name" placeholder="First Name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
+                                <input type="text" class="name-only is-invalid-remove alphabets-only outline w-100 @error('first_name') is-invalid @enderror" id="first_name" name="first_name" placeholder="First Name" value="{{ old('first_name') }}" required autocomplete="first_name">
                                 @error('first_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -28,7 +28,7 @@
                                 @enderror     
                             </div>
                             <div class="col-lg-6 col-sm-6 mt-4-5 pt-0 pt-lg-5">
-                                <input type="text" class="name-only is-invalid-remove alphabets-only outline w-100 @error('last_name') is-invalid @enderror" id="last_name" required name="last_name" placeholder="Last Name" value="{{ old('last_name') }}" autocomplete="last_name" autofocus>
+                                <input type="text" class="name-only is-invalid-remove alphabets-only outline w-100 @error('last_name') is-invalid @enderror" id="last_name" required name="last_name" placeholder="Last Name" value="{{ old('last_name') }}" autocomplete="last_name">
                                 @error('last_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -36,7 +36,7 @@
                                 @enderror     
                             </div>
                             <div class="col-12 mt-4-5">
-                                <input type="text" class="email-only is-invalid-remove outline w-100 @error('email') is-invalid @enderror" placeholder="Email" id="email" name="email" value="@php if(request('email')){echo(request('email'));} @endphp"  required autocomplete="email" autofocus>
+                                <input type="text" class="email-only is-invalid-remove outline w-100 @error('email') is-invalid @enderror" placeholder="Email" id="email" name="email" value="@php if(request('email')){echo(request('email'));} @endphp"  required autocomplete="email">
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong> 
