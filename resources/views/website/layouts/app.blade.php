@@ -51,7 +51,7 @@
             
             @if(isset($_REQUEST['src']) && ($_REQUEST['src'] == 'app'))
             @else
-                @yield('footer');
+                @yield('footer')
             @endif
 
             <!-- Modal for Confirmation for account deactivate -->
@@ -179,6 +179,10 @@
                 $(this).parents('.modal').modal('hide');
             });
 
+            // for stop hide collapse on click inside its data 
+            $(".prevent_hide").on('click', function(){
+            event.stopPropagation()
+            })
             // $('.dropdown-toggle').click(function()
             // {
             //     $('.collapse_hide').not(this).collapse('hide');
