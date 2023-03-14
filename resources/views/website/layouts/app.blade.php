@@ -48,8 +48,10 @@
             <!-- <lottie-player src="{{ asset('public\images\asset\loader.json') }}"  background="transparent"  speed="0.4"   loop  autoplay></lottie-player> -->
             </div>
             </div>
-
-            @yield('footer')
+                @if(isset($_REQUEST['src']) && ($_REQUEST['src'] == 'app'))
+                @else
+                    @yield('footer');
+                @endif
 
             <!-- Modal for Confirmation for account deactivate -->
             @include('website.include.delete_confirmation_modal')

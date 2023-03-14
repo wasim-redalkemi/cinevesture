@@ -127,13 +127,13 @@
                                 <div class="col-md-4">
                                     <div class="profile_input">
                                         <label>Milestone Description</label>
-                                        <input type="text" class="form-control" name="project_milestone_description" placeholder="Description">
+                                        <input type="text" class="form-control" name="project_milestone_description" placeholder="Description" maxlength="100">
                                     </div>
                                 </div>
                                 <div class="col-md-3">
                                     <div class="profile_input">
                                         <label>Milestone Budget (USD)</label>
-                                        <input type="number" class="form-control no_number_arrows" name="project_milestone_budget" placeholder="Budget (USD)">
+                                        <input type="number" class="form-control no_number_arrows" min="0" max="50" name="project_milestone_budget" placeholder="Budget (USD)">
                                     </div>
                                 </div>
                                 <div class="col-md-2">

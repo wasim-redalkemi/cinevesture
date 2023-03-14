@@ -94,7 +94,7 @@
                             <div class="col-md-6">
                                 <div class="profile_input">
                                     <label>Name <span style="color:red">*</span></label>
-                                    <input type="text" class="outline form-control @error('name') is-invalid @enderror" placeholder="{{ __('Name') }}" name="name" value="{{old('name',isset($UserOrganisation->name)?$UserOrganisation->name:"")}}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
+                                    <input type="text" class="outline form-control @error('name') is-invalid @enderror" placeholder="{{ __('Name') }}" maxlength="100" name="name" value="{{old('name',isset($UserOrganisation->name)?$UserOrganisation->name:"")}}" aria-label="Username" aria-describedby="basic-addon1" required autofocus>
                                     @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

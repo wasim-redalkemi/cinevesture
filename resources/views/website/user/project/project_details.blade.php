@@ -122,7 +122,7 @@
                                         <div class="col-md-3 mt-2 mt-md-0">
                                             <div class="profile_input">
                                                 <label>Title</label>
-                                                <input type="text" value="{{$ass['project_associate_title']}}" class="form-control" name="project_associate_title" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
+                                                <input type="text" value="{{$ass['project_associate_title']}}" class="form-control" maxlength="100" name="project_associate_title" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
                                                 @error('project_associate_title')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -133,7 +133,7 @@
                                         <div class="col-10 col-md-3 mt-2 mt-md-0">
                                             <div class="profile_input">
                                                 <label>Name</label>
-                                                <input type="text" value="{{$ass['project_associate_name']}}" class="form-control" name="project_associate_name" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1">
+                                                <input type="text" value="{{$ass['project_associate_name']}}" class="form-control" maxlength="100" name="project_associate_name" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1">
                                                 @error('project_associate_name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -151,7 +151,7 @@
                                 <div class="col-md-3 mt-2 mt-md-0">
                                     <div class="profile_input">
                                         <label>Title</label>
-                                        <input type="text" value="" class="form-control asso-title" name="project_associate_title" placeholder="Title" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" value="" class="form-control asso-title" name="project_associate_title" placeholder="Title" maxlength="100" aria-label="Username" aria-describedby="basic-addon1">
                                         @error('project_associate_title')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -162,7 +162,7 @@
                                 <div class="col-md-3 mt-2 mt-md-0">
                                     <div class="profile_input">
                                         <label>Name</label>
-                                        <input type="text" value="" class="form-control asso-name" name="project_associate_name" placeholder="Name" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="text" value="" class="form-control asso-name" name="project_associate_name" placeholder="Name" aria-label="Username" maxlength="100" aria-describedby="basic-addon1">
                                         @error('project_associate_name')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
