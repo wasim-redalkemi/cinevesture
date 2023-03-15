@@ -177,9 +177,12 @@
             });
 
             // for stop hide collapse on click inside its data 
-            $(".prevent_hide").on('click', function(){
-            event.stopPropagation()
-            })
+            if($(window).width()<=480)
+            {
+                $(".prevent_hide").on('click', function(){
+                    event.stopPropagation()
+                })
+            }
             // $('.dropdown-toggle').click(function()
             // {
             //     $('.collapse_hide').not(this).collapse('hide');
