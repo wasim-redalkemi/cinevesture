@@ -332,7 +332,7 @@
                                     <td class="public-sub-res-text white d-flex flex-wrap w-100">
                                         @if (!empty($projectData[0]['project_looking_for']))
                                         @foreach ($projectData[0]['project_looking_for'] as $k => $v)
-                                        <button class="curv_cmn_btn darkbtn">{{ $v['name'] }}</button>
+                                        <button class="curv_cmn_btn lookingTag">{{ $v['name'] }}</button>
                                         @endforeach
                                         @else
                                         <span><b>-</b></span>

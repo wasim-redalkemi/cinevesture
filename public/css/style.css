@@ -3661,13 +3661,20 @@ input:checked+.slider:before {
     font-size: 12px;
     letter-spacing: 0.018em;
     margin: 2.5px 10px 4px 0 !important;
+    cursor: default !important;
 }
-
+.mb-7 {
+    margin-bottom: 6rem;
+}
 .darkbtn {
     background: #971E9B !important;
     color: #FAF8FB !important;
     display: flex;
     align-items: center;
+}
+.lookingTag {
+    background: #EACDFF !important;
+    color: #4D0D8A;
 }
 
 .select2forError {
