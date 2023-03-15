@@ -467,7 +467,6 @@
         }
        
     });
-
 </script>
 <script src="{{ asset('js/cropper.js') }}"></script>
 @endpush

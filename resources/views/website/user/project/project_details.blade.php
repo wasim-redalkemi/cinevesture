@@ -262,7 +262,6 @@ $(document).ready(function() {
         })
 
 //    $('#financingSec').on('change',function(){
-//     debugger
 //         let total_budget=parseInt($('#total_budget_validate').val());
 //         let financing_budget=parseInt($('#financingSec').val()); 
    
