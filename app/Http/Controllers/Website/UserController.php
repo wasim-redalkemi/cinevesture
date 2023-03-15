@@ -878,9 +878,9 @@ class UserController extends WebController
                 }
                 Notification::route('mail', $email)->notify(new ContactUser($collect));                
             }
-            return ['status'=>1,'msg'=>"Email has been dispatched."];           
+            return ['status'=>"success",'msg'=>"Email has been dispatched."];           
         } catch (Exception $e) {
-            return ['status'=>0,'msg'=>"Something went wrong."];
+            return ['status'=>"error",'msg'=>"Something went wrong."];
         }
     }
 
@@ -915,7 +915,7 @@ class UserController extends WebController
 
             $UserEndorse = $this->userEndorseLogStore($data);
             if ($UserEndorse['status'] ==1) {
-                return ['status'=>1,'msg'=>$UserEndorse['msg']];           
+                return ['status'=>"success",'msg'=>$UserEndorse['msg']];           
 
             }
             return ['status'=>0,'msg'=>"Endorse records updated failed,please try again."];           

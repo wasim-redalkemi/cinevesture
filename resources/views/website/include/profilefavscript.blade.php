@@ -20,14 +20,16 @@
                         if (classList[i] == 'fa-heart-o') {
                             element.removeClass('fa-heart-o');
                             element.addClass('fa-heart')
-                            toastMessage("success", response.msg);
+                            new toastMessage("success", resp.msg);
+                            // new toastMessage("Success",'URL copied');
                             break;
                         }
                         if(classList[i] == 'fa-heart')
                         {
                             element.removeClass('fa-heart');
                             element.addClass('fa-heart-o');
-                            toastMessage("error", response.msg);
+                            // toastMessage("error", response.msg);
+                            new toastMessage("success",resp.msg)
 
                             break;
                         }

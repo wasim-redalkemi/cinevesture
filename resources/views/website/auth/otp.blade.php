@@ -137,7 +137,7 @@
         $btn.prop('disabled',true);
         let otp = $('#otp').val();
         if (!otp) {
-            toastMessage('error','Please enter otp');
+           new toastMessage('error','Please enter otp');
             return;
         }
         $("#otp_form").submit();

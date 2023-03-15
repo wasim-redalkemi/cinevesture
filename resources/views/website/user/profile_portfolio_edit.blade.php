@@ -183,7 +183,7 @@
                                             <div class="fill-progress"></div>
                                         </div>
                                         <div for="file-input input_wrap" class="d-none">
-                                            <input type="file" class="imgInp" id="upload-img-inp-new-{{count($UserPortfolioImages)+1}}" name="portfolio-image-{{count($UserPortfolioImages)+1}}" accept=".jpg,.jpeg,.png"  autofocus required>
+                                            <input type="file" class="imgInp" id="upload-img-inp-new-{{count($UserPortfolioImages)+1}}" name="portfolio-image-{{count($UserPortfolioImages)+1}}" accept=".jpg,.jpeg,.png"   required>
                                             <input type="hidden" class="imgInp" id="cropped-upload-img-inp-new-{{count($UserPortfolioImages)+1}}" name="cropped-portfolio-image-{{count($UserPortfolioImages)+1}}">
                                         </div>
                                         <label for="upload-img-inp-new-{{count($UserPortfolioImages)+1}}">

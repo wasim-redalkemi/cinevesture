@@ -94,7 +94,7 @@
                                 <div class="guide_profile_main_subtext mt-3">IMDB Profile</div>
                                 <div class="guide_profile_main_subtext deep-pink mt-1">
                                 @if (!empty($UserOrganisation->imdb_profile))
-                                    <a href="{{$UserOrganisation->imdb_profile}}" class=" deep-pink">{{empty($UserOrganisation->imdb_profile) ? '-' : $UserOrganisation->imdb_profile  }}</a>
+                                    <a href="{{$UserOrganisation->imdb_profile}}" class=" deep-pink" target="_blank"    >{{empty($UserOrganisation->imdb_profile) ? '-' : $UserOrganisation->imdb_profile  }}</a>
                                
                                 @else 
                                     {{'_'}}
@@ -103,7 +103,7 @@
                                 <div class="guide_profile_main_subtext mt-3">LinkedIn Profile</div>
                                 <div class="guide_profile_main_subtext deep-pink">
                                 @if (!empty($UserOrganisation->linkedin_profile))
-                                    <a href="{{$UserOrganisation->linkedin_profile}}" class=" deep-pink">{{(!empty($UserOrganisation->linkedin_profile))?$UserOrganisation->linkedin_profile:'-'}}</a>
+                                    <a href="{{$UserOrganisation->linkedin_profile}}" class=" deep-pink" target="_blank">{{(!empty($UserOrganisation->linkedin_profile))?$UserOrganisation->linkedin_profile:'-'}}</a>
                                     @else 
                                     {{'_'}}
                                 @endif
@@ -111,7 +111,7 @@
                                 <div class="guide_profile_main_subtext mt-3">Website</div>
                                 <div class="guide_profile_main_subtext deep-pink mt-1">
                                 @if (!empty($UserOrganisation->website))
-                                    <a href="{{$UserOrganisation->website}}" class=" deep-pink">{{(!empty($UserOrganisation->website))?$UserOrganisation->website:'-';}}</a>
+                                    <a href="{{$UserOrganisation->website}}" class=" deep-pink" target="_blank">{{(!empty($UserOrganisation->website))?$UserOrganisation->website:'-';}}</a>
                                     @else 
                                     {{'_'}}
                                 @endif

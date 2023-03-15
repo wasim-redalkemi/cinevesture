@@ -20,7 +20,7 @@
                                 <div class="signup-text mt-4 pt-2 pt-md-0 mt-md-5"> Sign Up</div>
                             </div>
                             <div class="col-lg-6 col-sm-6 mt-4-5 pt-2 pt-lg-5">
-                                <input type="text" class="name-only is-invalid-remove alphabets-only outline w-100 @error('first_name') is-invalid @enderror" id="first_name" name="first_name" placeholder="First Name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
+                                <input type="text" class="name-only is-invalid-remove alphabets-only outline w-100 @error('first_name') is-invalid @enderror" id="first_name" name="first_name" placeholder="First Name" value="{{ old('first_name') }}" required autocomplete="first_name">
                                 @error('first_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -28,7 +28,7 @@
                                 @enderror     
                             </div>
                             <div class="col-lg-6 col-sm-6 mt-4-5 pt-0 pt-lg-5">
-                                <input type="text" class="name-only is-invalid-remove alphabets-only outline w-100 @error('last_name') is-invalid @enderror" id="last_name" required name="last_name" placeholder="Last Name" value="{{ old('last_name') }}" autocomplete="last_name" autofocus>
+                                <input type="text" class="name-only is-invalid-remove alphabets-only outline w-100 @error('last_name') is-invalid @enderror" id="last_name" required name="last_name" placeholder="Last Name" value="{{ old('last_name') }}" autocomplete="last_name">
                                 @error('last_name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -36,7 +36,7 @@
                                 @enderror     
                             </div>
                             <div class="col-12 mt-4-5">
-                                <input type="text" class="email-only is-invalid-remove outline w-100 @error('email') is-invalid @enderror" placeholder="Email" id="email" name="email" value="@php if(request('email')){echo(request('email'));} @endphp"  required autocomplete="email" autofocus>
+                                <input type="text" class="email-only is-invalid-remove outline w-100 @error('email') is-invalid @enderror" placeholder="Email" id="email" name="email" value="@php if(request('email')){echo(request('email'));} @endphp"  required autocomplete="email">
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong> 
@@ -54,10 +54,12 @@
                             <div class="col-12 mt-4-5">
                                 <input type="password" class="password-only is-invalid-remove outline w-100" placeholder="Re Enter Password" name="password_confirmation" id = "password_confirmation" required autocomplete="new-password">
                             </div>
-                            <div class="col-12 mt-4-5">
-                                  <div class="g-recaptcha" data-callback="imNotARobot" data-sitekey="{{config('constants.site-key-local')}}"></div>
-                                   <div id="captchaError" class=" field-error "></div>
-                            </div>
+                            @if (config('app.env') != 'development')
+                                <div class="col-12 mt-4-5">
+                                    <div class="g-recaptcha" data-callback="imNotARobot" data-sitekey="{{config('constants.site-key-local')}}"></div>
+                                    <div id="captchaError" class=" field-error "></div>
+                                </div>
+                            @endif
                             <div class="col-12 mt-4 pt-2 pt-md-0 ">
                                 <input type="hidden" name="invited_by" value="<?php if(isset($_REQUEST['iuid'])){echo (decrypt($_REQUEST['iuid']));}?>">
                                 <button id="register-submit" class="outline w-100 mt-2 mt-md-0">{{ __('Create Account') }}</button>

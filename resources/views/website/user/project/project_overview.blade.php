@@ -149,7 +149,7 @@
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-end mt-4">
                                     <input type="hidden" name="project_id" value="<?php if(isset($_REQUEST['id'])) {echo $_REQUEST['id'];}?>">
-                                    <a href="{{route('home')}}"><button type="button" class="cancel_btn mx-3">Discard</button></a>
+                                    <a href="{{route('project-overview')}}"><button type="button" class="cancel_btn mx-3">Discard</button></a>
                                    <button type="submit" class="guide_profile_btn">Save & Next</button>
                                 </div>
                             </div>

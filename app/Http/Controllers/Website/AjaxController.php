@@ -133,7 +133,7 @@ class AjaxController extends WebController {
                 }
                 $project->banner_image = $locationPath."/".$newName;
                 $project->save();
-                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,["url"=>asset("storage/".$project->banner_image)],"Success","ER000","");
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,["url"=>asset("storage/".$project->banner_image)],"Success","Banner image update successfully");
             } else {
                 $projectMedia = new ProjectMedia();
                 $projectMedia->project_id = $request->project_id;
@@ -144,7 +144,7 @@ class AjaxController extends WebController {
                 $projectMedia->file_link = asset("storage/".$projectMedia->file_link);
                 $projectMedia->media_info = json_decode($projectMedia->media_info, true);
                 //return json_encode($projectMedia);
-                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$projectMedia,"Success","ER000","");
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$projectMedia,"Success","Banner image add successfully");
             }
         } catch (Exception $e) {
             return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
@@ -173,7 +173,7 @@ class AjaxController extends WebController {
             $projectMedia->save();
             $projectMedia->file_link = asset("storage/".$projectMedia->file_link);
             $projectMedia->media_info = json_decode($projectMedia->media_info, true);
-            return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$projectMedia,"Success","ER000","");
+            return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$projectMedia,"Success","");
         } catch (Exception $e) {
             return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER500",$e->getMessage());
         }
@@ -315,7 +315,7 @@ class AjaxController extends WebController {
             $media = UserPortfolioImage::find($img_id);
             if($media){
                 $isDeleted = $media->delete();
-                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,['isDeleted'=>$isDeleted],"Portfolio image deleted successfully.","ER000","");
+                return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,['isDeleted'=>$isDeleted], ['msg'=>"Portfolio image deleted successfully."],"ER000","");
             } else {
                 return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,[],"Failure","ER401","Could not find the resource.");
             }

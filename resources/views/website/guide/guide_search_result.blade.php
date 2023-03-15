@@ -144,7 +144,8 @@
                                 @if(isset($user->profile_image))
                                 <img src="{{Storage::url($user->profile_image)}}" width="100%"/>
                                 @else
-                                <img src="{{ asset('images/asset/user-profile.png') }}" width="100%" height="100%" />
+                                <img src="{{ asset('images/asset/profilepic.png') }}" width="100%" height="100%" />
+                                {{-- <i class="fa fa-user-circle profile_icon me-2" width="100%" height="100%"></i> --}}
                                 @endif
                             </div>
 

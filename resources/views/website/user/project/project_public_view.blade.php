@@ -109,29 +109,20 @@
                                             @endif
                                         </td>
                                     </tr>
-                                    @if ($show== true)
                                     <tr>
-                                        <td class="public-head-subtext white blackTextShadow text-start">Created By</td>
-                                        <td class="aubergine contact-page-subtext candy-pink blackTextShadow text-end text-md-start blur_text">
-                                            @if (!empty($projectData[0]['user']['name']))
-                                            <a href="{{route('profile-public-show',['id'=>$projectData[0]['user']['id']])}}" class="text_decor_none blur_text">{{ ucwords($projectData[0]['user']['name'])}}</a>
-                                            @else
-                                            <span><b>-</b></span>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    @else
-                                    <tr id="blur">
                                         <td class="public-head-subtext white blackTextShadow text-start">Created By</td>
                                         <td class="aubergine contact-page-subtext candy-pink blackTextShadow text-end text-md-start">
                                             @if (!empty($projectData[0]['user']['name']))
-                                            <a href="{{route('profile-public-show',['id'=>$projectData[0]['user']['id']])}}" class="text_decor_none ">{{ ucwords($projectData[0]['user']['name'])}}</a>
+                                                @if($show == true)
+                                                    {{config('constants.HIDE_SOME_INFO')}}
+                                                @else
+                                                    <a href="{{route('profile-public-show',['id'=>$projectData[0]['user']['id']])}}" class="text_decor_none">{{ ucwords($projectData[0]['user']['name'])}}</a>
+                                                @endif
                                             @else
                                             <span><b>-</b></span>
                                             @endif
                                         </td>
                                     </tr>
-                                    @endif
                                     <tr>
                                         <td class="public-head-subtext white blackTextShadow text-start">Total Budget</td>
                                         <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
@@ -203,7 +194,7 @@
                                     <p id="urlcopy" class="d-none">{{route('project-public-show')}}?id={{$UserProject->id}}&data={{true}}</p>
 
                                     @if ($projectData[0]['user']['id'] != auth()->user()->id && (auth()->user()->parent_user_id != $projectData[0]['user']['id'] ))
-                                    <div> <i class="fa <?php if(isset($UserProject->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
+                                    <div> <i class="fa <?php if(isset($UserProject->isfavouriteProjectOne)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size heart-color like-project" style="cursor: pointer;" data-id="{{$UserProject->id}}" aria-hidden="true"></i></div>
                                     @endif
                                 </div>
                                
@@ -459,8 +450,12 @@
                                 @foreach ($projectData[0]['project_association'] as $v)
                                 @if ($show== true)
                                 <tr>
-                                    <td class="public-head-subtext white blur_text">{{ucwords($v['project_associate_title'])}}</td>
-                                    <td class="aubergine public-sub-res-text white blur_text">{{ucwords($v['project_associate_name'])}}</td>
+                                    <td class="public-head-subtext white">
+                                        {{config('constants.HIDE_SOME_INFO')}}
+                                    </td>
+                                    <td class="aubergine public-sub-res-text white">
+                                        {{config('constants.HIDE_SOME_INFO')}}
+                                    </td>
                                 </tr>
                                @else
                                <tr>
@@ -549,7 +544,7 @@
                                     </div>
                                 </a> 
                                     <div class="like_btn_wrapper">
-                                        <div> <i class="fa <?php if(isset($value->isfavouriteProject)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size text-white like-project" style="cursor: pointer;" data-id="{{$value->id}}" aria-hidden="true"></i></div>
+                                        <div> <i class="fa <?php if(isset($value->isfavouriteProjectOne)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size text-white like-project" style="cursor: pointer;" data-id="{{$value->id}}" aria-hidden="true"></i></div>
                                     </div>  
                                 </div>                            
                                 
@@ -675,13 +670,13 @@
                         if (classList[i] == 'fa-heart-o') {
                             element.removeClass('fa-heart-o');
                             element.addClass('fa-heart')
-                            toastMessage("success", response.msg);
+                            toastMessage("success", resp.msg);
                             break;
                         }
                         if (classList[i] == 'fa-heart') {
                             element.removeClass('fa-heart');
                             element.addClass('fa-heart-o');
-                            toastMessage("error", response.msg);
+                            toastMessage("success", resp.msg);
 
                             break;
                         }
@@ -749,7 +744,8 @@ function copyToClipboard(element) {
   $temp.val($(element).text()).select();
   document.execCommand("copy");
   $temp.remove();
-  toastr.success('URL copied','Success');
+  new toastMessage("Success",'URL copied')
+//   toastr.success('URL copied','Success');
 // toastr.success('Project Update successfull!','success');
 //   toastMessage("1", 'URL copied')
 }

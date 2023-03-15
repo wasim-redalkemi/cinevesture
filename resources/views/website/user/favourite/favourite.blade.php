@@ -234,7 +234,7 @@
                                 {
                                     element.removeClass('fa-heart');
                                     element.addClass('fa-heart-o');
-                                    toastMessage("error", resp.msg);
+                                    toastMessage("success", resp.msg);
 
                                     break;
                                 }

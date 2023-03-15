@@ -89,4 +89,7 @@ class UserProject extends Model
     public function isfavouriteProjectMain(){
         return $this->hasMany(UserFavouriteProject::class, 'project_id')->where('user_id',auth()->user()->id);
     }
+    public function isfavouriteProjectOne(){
+        return $this->hasOne(UserFavouriteProject::class, 'project_id')->where('user_id',auth()->user()->id);
+    }
 }   

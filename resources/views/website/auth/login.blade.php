@@ -25,7 +25,7 @@
                                 </div>
 
                                 <div class="col-12 mt-4-5 pt-2 pt-lg-5">
-                                    <input type="text" class="is-invalid-remove email-only outline w-100 @error('email') is-invalid @enderror" value="{{old('email')}}" id="email" name="email" placeholder="Email" required autocomplete="email" autofocus>
+                                    <input type="text" class="is-invalid-remove email-only outline w-100 @error('email') is-invalid @enderror" value="{{old('email')}}" id="email" name="email" placeholder="Email" required autocomplete="email">
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">

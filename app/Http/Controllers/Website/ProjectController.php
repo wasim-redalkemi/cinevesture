@@ -638,7 +638,7 @@ class ProjectController extends WebController
             }else{
             
                 $UserProject = UserProject::query()->where('id',$_REQUEST['id'])
-                ->with('isfavouriteProject')->first();
+                ->with(['isfavouriteProject','isfavouriteProjectOne'])->first();
                 
                 
                 $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectMarkVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->where(function($q){
@@ -675,7 +675,7 @@ class ProjectController extends WebController
                             ->paginate(10);
             }else{
                 $recomProject=UserProject::query()->whereIn('id',$projectIdUnique)
-                ->with(['projectOnlyImage','isfavouriteProject'])
+                ->with(['projectOnlyImage','isfavouriteProjectOne','isfavouriteProject'])
                             ->where('id','!=',$_REQUEST['id'])
                             ->where('user_status','published')
                             ->where('admin_status','active')
@@ -823,13 +823,13 @@ class ProjectController extends WebController
                              ->where('project_id',$request->id)->first();
                  if($favourite){
                     $favourite->delete();
-                    return ['status'=>True,'msg'=>"You have unliked this project."];
+                    return ['status'=>'success','msg'=>"You have unliked this project."];
                  }else{
                     $favourite = new UserFavouriteProject();
                     $favourite->user_id = $this->getCreatedById();
                     $favourite->project_id = $request->id;
                     $favourite->save();
-                    return ['status'=>True,'msg'=>"You have liked this project."];
+                    return ['status'=>'success','msg'=>"You have liked this project."];
                   }
     
             }catch(Exception $e){

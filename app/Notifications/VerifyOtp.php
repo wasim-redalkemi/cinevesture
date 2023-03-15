@@ -49,7 +49,7 @@ class VerifyOtp extends Notification
         ->subject('Your verification code for Cinevesture')
         ->greeting('Hi'.' '.$this->data['first_name'].',')
         ->line('Your email verification code is')
-        ->line($this->data['otp'])
+        ->line("<span class='user_otp'>".$this->data['otp']."</span>")
         ->line("Enter the verification code on the website to complete your registration. If you need to log in again, please <a href=".route('login').">click here</a> .")
         ->line('Best,')        
         ->salutation('Team Cinevesture');

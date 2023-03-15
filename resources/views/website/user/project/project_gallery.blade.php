@@ -394,9 +394,9 @@
             }
 
             let uploadImage = function(){
-                console.log("uploading file");
+                // console.log("uploading file");
                 var croppedImg = ImageCropperObj.getCropperFile();
-                console.log("croppedImg = "+BaseUrl+"ajax/upload-image",croppedImg);
+                // console.log("croppedImg = "+BaseUrl+"ajax/upload-image",croppedImg);
                 var formData = new FormData();
                 formData.append("file", croppedImg, uploadedFile.name);
                 formData.append("project_id", project_id);
@@ -433,13 +433,14 @@
 
             let addPhotoCallback = function(resp){
                 if(resp.status == 1){
-                    createToast("Banner added","S");
+                    // createToast("Banner added","S");
+                    toastMessage("success", "Banner image add successfully");
                     $(parentElemId+" .new-banner-div").hide();
                     $(parentElemId+" .current-banner-div .img-container img").attr('src',resp.payload.url)
                     $(parentElemId+" .current-banner-div").show();
                     $(parentElemId+" .save_add_btn").hide();
                 } else {
-                    createToast("Something went wrong","E");
+                    toastMessage("error", "Something went wrong");
                 }
             }
 

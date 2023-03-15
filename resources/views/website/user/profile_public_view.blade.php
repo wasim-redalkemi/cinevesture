@@ -462,10 +462,12 @@
                     success: function(response) {
                         // console.log(response)
                         // console.log('endorse done')
-                        toastMessage(response.status, response.msg);
+                       
                         $('.modal').hide();
                         $('.modal-backdrop').remove();
                         location.reload();
+                        // $('#list').fadeOut();}, 2000); 
+                        toastMessage(response.status, response.msg);
                     },
                     error: function(response, status, error) {
                         // console.log(response);

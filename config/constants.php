@@ -29,6 +29,7 @@ return [
     "captcha_site_key"=>env('GOOGLE_CAPTCHA_SITE_KEY'), // admin@cinevesture.com
     "captcha_secret_key"=>env('GOOGLE_CAPTCHA_SECRET_KEY'), // admin@cinevesture.com
     'site-key-local'=>env('GOOGLE_CAPTCHA_SITE_KEY'),
+    'HIDE_SOME_INFO' => '*******',
 
 ];
 

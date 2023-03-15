@@ -32,7 +32,7 @@
                             <div class="col-md-6">
                                 <div class="profile_input mb-1">
                                     <label>Portfolio Title <span class = "steric_sign_design">*</span></label>
-                                    <input type="text" class="form-control @error('portfolio_title') is-invalid @enderror" placeholder="Portfolio Title" name="portfolio_title" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
+                                    <input type="text" class="form-control @error('portfolio_title') is-invalid @enderror" placeholder="Portfolio Title" name="portfolio_title" aria-label="Username" value="{{old('portfolio_title')}}" aria-describedby="basic-addon1"  required>
                                     @error('portfolio_title')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -46,7 +46,7 @@
                                 <div class="profile_input">
                                     <label>Description <span class = "steric_sign_design">*</span></label>
                                     <div class="form_elem">
-                                    <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" name="description" aria-label="With textarea" text-length="600" maxlength="600" autofocus required></textarea>
+                                    <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" name="description"  aria-label="With textarea" text-length="600" maxlength="600"  required>{{{ request::old('description') }}}</textarea>
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -61,7 +61,7 @@
                                 <div class="select2forError">
                                     <div class="profile_input">
                                         <label for="lang">Portfolio specific Skills <span class = "steric_sign_design">*</span></label>
-                                        <select name="project_specific_skills_id[]" class="outline is-invalid-remove js-select2 @error('project_specific_skills_id') is-invalid @enderror" multiple autofocus required>
+                                        <select name="project_specific_skills_id[]" class="outline is-invalid-remove js-select2 @error('project_specific_skills_id') is-invalid @enderror" multiple  required>
                                             @foreach ($skills as $k=>$v)
                                             <option value="{{ $v->id }}">{{ $v->name }}</option>
                                             @endforeach
@@ -79,7 +79,7 @@
                             <div class="col-md-6">
                                     <div class="profile_input select2forError">
                                         <label for="lang">Portfolio Location (Where it took place) <span style = "color:red">*</span></label>
-                                        <select name="project_country_id[]" class="js-select2 @error('project_country_id') is-invalid @enderror"  multiple autofocus required>
+                                        <select name="project_country_id[]" class="js-select2 @error('project_country_id') is-invalid @enderror"  multiple  required>
                                             @foreach ($country as $k=>$v)
                                             <option value="{{ $v->id}}">{{ $v->name }}</option>
                                             @endforeach
@@ -96,7 +96,7 @@
                             <div class="col-md-4">
                                 <div class="profile_input">
                                     <label>Completion Date <span class = "steric_sign_design">*</span></label>
-                                    <input type="date" class="form-control @error('completion_date') is-invalid @enderror" placeholder="First Name" name="completion_date" aria-label="Username" aria-describedby="basic-addon1" autofocus required>
+                                    <input type="date" class="form-control @error('completion_date') is-invalid @enderror" placeholder="First Name" name="completion_date" aria-label="Username" value="{{old('completion_date')}}" aria-describedby="basic-addon1"  required>
                                     @error('completion_date')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -113,8 +113,8 @@
                                     <div class="img-container h_66 mt-3 mt-md-0">
                                         <img src="{{asset('images/asset/default-video-thumbnail.jpg')}}" class="width_inheritence" alt="image">
                                     </div>
-                                    <input type="text" class="outline is-invalid-remove form-control @error('video_url') is-invalid @enderror mt-3" placeholder="Paste link here" name="video_url" aria-label="Video URL" aria-describedby="basic-addon1" autofocus required>
-                                    <input type="hidden" class="" name="video_thumbnail" value="" aria-label="Video Thumbnail" aria-describedby="basic-addon1">
+                                    <input type="text" class="outline is-invalid-remove form-control @error('video_url') is-invalid @enderror mt-3" placeholder="Paste link here" name="video_url" value="{{old('video_url')}}" aria-label="Video URL" aria-describedby="basic-addon1"  required>
+                                    <input type="hidden" class="" name="video_thumbnail"  aria-label="Video Thumbnail" aria-describedby="basic-addon1">
                                     @error('video_url')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -135,7 +135,7 @@
                                         <div class="fill-progress"></div>
                                     </div>
                                     <div for="file-input input_wrap" class="d-none">
-                                        <input type="file" class="imgInp @error('video_url') is-invalid @enderror" id="upload-img-inp-1" name="portfolio-image-1" accept=".jpg,.jpeg,.png" autofocus required>
+                                        <input type="file" class="imgInp @error('video_url') is-invalid @enderror" id="upload-img-inp-1" name="portfolio-image-1" accept=".jpg,.jpeg,.png"  required>
                                         <input type="hidden" class="imgInp" id="cropped-upload-img-inp-new-1" name="cropped-portfolio-image-1">
                                         @error('video_url')
                                             <span class="invalid-feedback" role="alert">
