@@ -351,7 +351,7 @@ $('.select_limit').change(function(event) {
                     $('.modal').hide();
                     $('.modal-backdrop').remove();
                     // $(".fl-dark-mode").css({ 'overflow' : ''});
-                    // $('body').removeAttr('style');
+                    $('body').removeAttr('style');
                     
                 },
                 error:function(response,status,error)
