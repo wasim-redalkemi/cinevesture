@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\UserJob;
+use App\Models\UserProject;
 use Exception;
+use Hamcrest\Arrays\IsArray;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class WebController extends PrimeController
 {
@@ -99,4 +104,25 @@ class WebController extends PrimeController
         $this->return_response['error_msg'] = '';
         $this->return_response['success_msg'] = '';
     }
+
+    public function suspendUserEntities($user=[])
+    {
+        if(empty($user))
+        {
+            $user=User::query()->withTrashed()->where('deleted_at','!=',null)->orWhere('status','0')->pluck('id');
+        }
+        $suspendProjects=$this->suspendUserProjects($user);
+        $suspendJob=$this->suspendUserJob($user);
+    }
+
+    public function suspendUserProjects($ids=[])
+    {
+        return $projectUnpublish=UserProject::query()->whereIn('user_id', $ids)->update(['user_status'=>'draft']);
+    }
+
+    public function suspendUserJob($ids=[])
+    {
+        return $jobUnpublish=UserJob::query()->whereIn('user_id', $ids)->update(['save_type' => 'unpublished']);
+    }
+    
 }

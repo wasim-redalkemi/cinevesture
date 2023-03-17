@@ -110,6 +110,9 @@
                                             </div>
                                         </label>
                                     </div>
+                                    <div class="banner-img for_error_msg" style="display:none">
+                                        <strong>Select file must be small then 10 MB.</strong>
+                                    </div>
                                     <div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 10MB</div>
                                 </div>
                                 <div class="col-md-2 mt-2 d-flex align-items-end">
@@ -164,6 +167,9 @@
                                             <button class="save_add_btn">Add another</button>
                                         </div>
                                     </div> -->
+                                </div>
+                                <div class="size-img for_error_msg" style="display:none">
+                                    <strong>Select file must be small then 10 MB.</strong>
                                 </div>
                         </div>
                     </div>
@@ -394,6 +400,15 @@
             }
 
             let uploadImage = function(){
+              
+                    var file_size = ($('.imgInp')[0].files[0].size)/(1024*1024);
+                    console.log(file_size);
+                        if(file_size>10) {
+                            $('.banner-img').show();
+                            return false;
+                        } 
+                        return true;
+                   
                 // console.log("uploading file");
                 var croppedImg = ImageCropperObj.getCropperFile();
                 // console.log("croppedImg = "+BaseUrl+"ajax/upload-image",croppedImg);

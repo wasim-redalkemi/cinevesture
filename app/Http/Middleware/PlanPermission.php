@@ -86,16 +86,41 @@ class PlanPermission extends Controller
                $selected_permission = $permissions->whereIn('action_id', $selected_action)->first();
                if (!$selected_permission) { // view profile
                   if($request->ajax()){
-                     return $this->prepareJsonResp(0,[],"",'ERR300', 'Sorry, You Are Not Allowed to Access This Page');
-                 }
+                     $endorseUrl=route('endorse-user-mail-store');
+                     $divideString=explode('/',$endorseUrl); 
+                     if (end($divideString)=="endorse-user-mail-store") {
+                        return response(['status'=>'error', 'msg'=>'Upgrade your plan to endorse user']);
+                     }
+                     return response(['status'=>'error', 'msg'=>'You Are Not Allowed to Access This Page']);
+                  }
+                        $currenturl = $request->url();
+                        $divideString=explode('/',$currenturl);      
+                        if(end($divideString)=="organisation-create"){
+                           return back()->with('error','Upgrade your plan to create an organisation page');
+                        }elseif(end($divideString)=="project-overview"){
+                           return back()->with('error','Upgrade your plan to create another project');
+                        }elseif(end($divideString)=="job-create"){
+                           return back()->with('error','Upgrade your plan to post a job');
+                        }
                   return back()->with('error', 'Sorry, You Are Not Allowed to Access This Page');
                } else {
                   if ($selected_permission->limit > 0) {
                      $status = MiddlewareUltilityController::checkActionLimit($selected_permission->id, $selected_permission->limit, $request);
                      if ($status == true) {
                         if($request->ajax()){
-                           return $this->prepareJsonResp(0,[],"",'ERR300', 'Sorry, You Are Not Allowed to Access This Page');
+                           
+                           return response(['status'=>'error', 'msg'=>'Sorry, You Are Not Allowed to Access This Page']);
                         }
+                        $currenturl = $request->url();
+                        $divideString=explode('/',$currenturl);
+                        if(end($divideString)=="organisation-create"){
+                           return back()->with('error','Upgrade your plan to create an organisation page');
+                        }elseif(end($divideString)=="project-overview"){
+                           return back()->with('error','Upgrade your plan to create another project');
+                        }elseif(end($divideString)=="job-create"){
+                           return back()->with('error','Upgrade your plan to post a job');
+                        }
+              
                         return back()->with('error', 'Sorry, You Are Not Allowed to Access This Page');
                      }
                   }

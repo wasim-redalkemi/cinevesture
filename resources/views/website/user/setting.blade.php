@@ -30,7 +30,7 @@
                     </div>
                     <div class="guide_profile_main_text mt-4">Password</div>
                     <div class="d-flex align-items-center">
-                        <div class="preview_subtext mt-2">{{$password}}</div> <a class="profile_upload_text aubergine mx-3" href = "{{route('create-reset-otp')}}">Change Password</a>
+                        <div class="preview_subtext mt-2">{{$password}}</div> <a class="profile_upload_text aubergine mx-3" href = "{{route('create-reset-otp')}}"><button class="header-search-btn" style="width: 150px"> Change Password</button></a>
                     </div>
                     <div class="row mt_35">
                         <div class="col-4 col-md-2">

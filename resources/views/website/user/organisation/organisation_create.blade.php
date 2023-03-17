@@ -18,7 +18,7 @@
             </div>
             <div class="col-md-9">
                 <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
-                    <form role="form" onsubmit="return validateOrganizationForm();return false;" class="validateBeforeSubmit" id="form" method="POST" enctype="multipart/form-data" action="{{ route('organisation-store') }}">
+                    <form role="form" name="organizationForm" onsubmit="return validateOrganizationForm();return false;" class="validateBeforeSubmit" id="form" method="POST" enctype="multipart/form-data" action="{{ route('organisation-store') }}">
                         @csrf
 
                         <div class="profile_text">
@@ -60,9 +60,13 @@
                                     <span class="empty-image d-none" id="img-error">
                                         This field is required
                                     </span>
+                                    <div class="size-img for_error_msg" style="display:none">
+                                        <strong>Select file must be small then 10 MB.</strong>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content croper_modal">
@@ -402,7 +406,14 @@ function validateOrganizationForm(){
         $(window).scrollTop(0);
         return false;
     }else{
-        return true;
+        
+        var validationImage=validationImageLessthen10ma();
+        if (validationImage==false) {
+            return false;
+        }else{
+            return true;
+        }
+        
     }
 }
 
@@ -671,7 +682,6 @@ function validateOrganizationForm(){
         $('button[type="submit"]').removeAttr('disabled');
         var urlLength= $('#introduction_video').val().length;
         var url = $('#introduction_video').val();
-        // console.log(urlLength,url);
         if(url == ""){
             return true;
         }
@@ -681,8 +691,22 @@ function validateOrganizationForm(){
             $('button[type="submit"]').attr('disabled','disabled');
         }
     });
-
-   
-
+    var img=document.forms['organizationForm']['logo'];
+        const formate=['jpg','png'];
+        function validationImageLessthen10ma() {
+            if (img.value!="") {
+                var fileNum=img.value.lastIndexOf('.')+1;
+                var fileFormate=img.value.substring(fileNum);
+                var result= formate.includes(fileFormate);
+                if(result==false){
+                    $('.formate-img').show();
+                    return false;
+                }
+                if(parseFloat(img.files[0].size/(1024*1024))>=10) {
+                    $('.size-img').show();
+                    return false;
+                }
+            }
+        }
 </script>
 @endpush
