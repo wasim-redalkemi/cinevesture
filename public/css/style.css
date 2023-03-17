@@ -144,6 +144,12 @@ a {
     outline: none !important;
 
 }
+.does_not_exist
+{
+    color: red;
+    font-size: 20px;
+    display: inline-block;
+}
 
 .link-style {
     color: #971e9b;
