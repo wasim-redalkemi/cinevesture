@@ -118,7 +118,7 @@
                                 <div class="inp_data deep_aubergine mt-3">IMDB Profile</div>
                                 <div class="deep-pink mt-1 pointer break_all">
                                     @if (!empty($user->imdb_profile))
-                                        <a href="{{ $user->imdb_profile }}" class="fs_italian inp_data"  >{{ $user->imdb_profile }}</a>                                      
+                                        <a href="{{ $user->imdb_profile }}" target="_blank" class="fs_italian inp_data"  >{{ $user->imdb_profile }}</a>                                      
                                     @else
                                     <span><b>-</b></span>
                                     @endif
@@ -126,7 +126,7 @@
                                 <div class="inp_data deep_aubergine mt-3">LinkedIn Profile</div>
                                 <div class="deep-pink pointer break_all">
                                     @if (!empty($user->linkedin_profile))
-                                        <a href="{{ $user->linkedin_profile }}" class="fs_italian inp_data" >{{ $user->linkedin_profile }}</a>                                         
+                                        <a href="{{ $user->linkedin_profile }}" target="_blank" class="fs_italian inp_data" >{{ $user->linkedin_profile }}</a>                                         
                                     @else
                                         <span><b>-</b></span>
                                     @endif
@@ -134,7 +134,7 @@
                                 <div class="inp_data deep_aubergine mt-3">Website</div>
                                 <div class="deep-pink mt-1 pointer break_all">
                                     @if (!empty($user->website))     
-                                        <a href="{{ $user->website }}" class="fs_italian inp_data" >{{ $user->website }}</a>                                 
+                                        <a href="{{ $user->website }}" target="_blank" class="fs_italian inp_data" >{{ $user->website }}</a>                                 
                                     @else
                                         <span><b>-</b></span>
                                         @endif

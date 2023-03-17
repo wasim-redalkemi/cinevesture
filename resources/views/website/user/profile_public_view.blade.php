@@ -462,19 +462,22 @@
                     success: function(response) {
                         // console.log(response)
                         // console.log('endorse done')
-                       
+                        // alert('hje');
+                       console.log('hell');
                         $('.modal').hide();
                         $('.modal-backdrop').remove();
-                        location.reload();
                         // $('#list').fadeOut();}, 2000); 
                         toastMessage(response.status, response.msg);
+                        setTimeout(function(){  
+                            location.reload();  
+                        },4000); 
                     },
                     error: function(response, status, error) {
                         // console.log(response);
                         // console.log(status);
                         // console.log(error);
                         
-                        toastMessage('Sorry', 'You Are Not Allowed to Access This Page');
+                        toastMessage('error', 'Upgrade your plan to user endorse');
                         $('.modal').hide();
                         $('.modal-backdrop').remove();
                     }

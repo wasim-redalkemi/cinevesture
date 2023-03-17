@@ -89,7 +89,7 @@ class LoginController extends Controller
                 return back()->with('error','Your account has been suspended,please contact support.');
             }
             if(isset($user) && (empty($user->password))){
-                return back()->with('error','Invalid credentialssdsdcs.');
+                return back()->with('error','Invalid credential.');
             }
             if(!isset($user)){
                 return back()->with('error','Your account does not exist.');

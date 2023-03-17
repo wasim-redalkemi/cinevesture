@@ -841,6 +841,7 @@ class UserController extends WebController
         // $user->delete();
         $user->status ='0';
         $user->save();
+        $this->suspendUserEntities([$user->id]);
         return redirect('/login');
 
     }

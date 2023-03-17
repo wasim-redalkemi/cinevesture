@@ -16,7 +16,7 @@
             </div>
             <div class="col-md-9">
                 <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4 mb-5 mb-md-0">
-                    <form role="form" class="validateBeforeSubmit" method="POST" enctype="multipart/form-data" action="{{ route('profile-store') }}">
+                    <form role="form" class="validateBeforeSubmit" name="validateBefore" method="POST" onsubmit="return validationImageLessthen10ma()" enctype="multipart/form-data" action="{{ route('profile-store') }}">
                         @csrf
 
                         <div class="profile_text">
@@ -30,8 +30,8 @@
                                                 echo asset('public/storage/'.$user->profile_image);
                                             } ?>" class="upload_preview for_show croperImg" width="100%" height="100%">
                                 <div for="file-input" class="d-none">
-                                    <input type="file" name="croperImg" class="@error('profile_image') is-invalid @enderror file_element image" accept=".jpg,.jpeg,.png" required>
-                                    <input type="hidden" id="croppedImg" name="croppedImg">
+                                    <input type="file" name="croperImg"  class="@error('profile_image') is-invalid @enderror file_element image" accept=".jpg,.jpeg,.png" required>
+                                    <input type="hidden" id="croppedImg" id="myFile" name="croppedImg">
                                     @error('profile_image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -55,7 +55,15 @@
                             </div>
                         </div>
                         <div class="profile_upload_text"> Upload JPG or PNG, 400x400 PX</div>
-
+                        {{-- <div class="intro-img for_error_msg" style="display:none">
+                            <strong>Profile image should be less then 10 MB.</strong>
+                        </div> --}}
+                        <div class="formate-img for_error_msg" style="display:none">
+                            <strong>Select file formate should be JPG or PNG.</strong>
+                        </div>
+                        <div class="size-img for_error_msg" style="display:none">
+                            <strong>Select file must be small then 10 MB.</strong>
+                        </div>
 
                         <!-- <input type="file" name="image" class="image d-none"> -->
                         <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -341,9 +349,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                     @enderror
-                                    <div class="intro-video for_error_msg" style="display:none">
-                                        <strong>Only youtube and vimeo URLs are allowed.</strong>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -620,8 +626,24 @@
      var pattern = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
      return url.match(pattern) ? RegExp.$1 : false;
         }
+        
+        var img=document.forms['validateBefore']['croperImg'];
+        const formate=['jpg','png'];
 
+        function validationImageLessthen10ma() {
+            if (img.value!="") {
+                var fileNum=img.value.lastIndexOf('.')+1;
+                var fileFormate=img.value.substring(fileNum);
+                var result= formate.includes(fileFormate);
+                if(result==false){
+                    $('.formate-img').show();
+                    return false;
+                }
+                if(parseFloat(img.files[0].size/(1024*1024))>=10) {
+                    $('.size-img').show();
+                    return false;
+                }
+            }
+        }
 </script>
-
-
 @endpush
