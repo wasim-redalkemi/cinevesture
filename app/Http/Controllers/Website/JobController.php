@@ -471,6 +471,9 @@ class JobController extends WebController
                     $q->where('user_id',auth()->user()->id);
                 }])
                 ->find($job_id);
+                if ($Job_data->save_type=='unpublished') {
+                    return back()->with('error','This job is unpublish/deleted.');
+                }
                 // dd($Job_data);
                 return view('website.job.job_search_post_single', compact(['Job_data']));
             } else {
