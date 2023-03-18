@@ -122,7 +122,7 @@ class SubscriptionController extends Controller
 
             if ($checkout_status->payment_status == 'paid') {
                 $subscription = $this->createSubscription($subscriptionData, $request);
-                
+                $this->setUserPlanInSession(auth()->user()->id);
                 $collect  = collect();
                 $collect->put('first_name', ucwords(auth()->user()->first_name));
                 $collect->put('currency', $subscription->currency);
