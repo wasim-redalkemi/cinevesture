@@ -168,6 +168,26 @@
         </div>
     </div>
 </div>
+
+promote job status 
+<div class="modal fade" id="Promote_job_response"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog mt-4">
+        <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+           <div class="p-4 public-subheading-text">
+           Your request to promote this job has been submitted. Cinevesture team will get in touch with you with further details
+           </div>
+      </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 @section('footer')
 @include('website.include.footer')
@@ -176,7 +196,7 @@
    <script>
     var job_id  = $('#job_id').val();
     $(document).ready(function() {
-    $('.submit_btn').click(function(e) {  
+    $('.submit_btn').click(function(e) {
     let $btn = $(this);
     e.preventDefault();
     e.stopPropagation();
@@ -193,11 +213,12 @@
             // console.log(response);
             $btn.text("Send Mail");
             $btn.prop('disabled',false);
-            if (response.status == 'success') {                                
-                toastMessage(response.status, response.msg);
-            }
+            // if (response.status == 'success') {                                
+            //     toastMessage(response.status, response.msg);
+            // }
             $('.modal').hide();
             $('.modal-backdrop').remove();
+            $('#Promote_job_response').modal('show')
             $('body').removeAttr('style');
         },
         error:function(response,status,error)
@@ -211,5 +232,8 @@
     });
 });
 });
+ $('.close').click( function () {
+    $('#Promote_job_response').modal('hide')
+ } )
     </script> 
     @endpush

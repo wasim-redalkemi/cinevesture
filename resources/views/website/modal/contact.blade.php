@@ -42,7 +42,7 @@
                                     <label class="modal_btm_text mx-2 mt-1">Send a copy to me</label>
                                 </div>
 
-                                <div class="my-4">
+                                <div class="mt-4 mb-7">
                                     <input type="hidden" name="email_1" id="email_1" class="modal_input" value="{{$email}}">
                                     <button type="button" id="contact_btn" class="invite_btn">Send Mail</button>
                                 </div>
