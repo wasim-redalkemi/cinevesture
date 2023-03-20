@@ -169,7 +169,6 @@
     </div>
 </div>
 
-promote job status 
 <div class="modal fade" id="Promote_job_response"   tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog mt-4">
         <div class="modal-content">
