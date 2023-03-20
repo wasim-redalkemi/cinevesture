@@ -234,6 +234,10 @@
             $('#playVideoModal').modal('show');
         });
 
+        $('#playVideoModal').click(function () {
+            $('#playVideoModal .playVideoModalContent iframe').removeAttr('src',$(this).attr('video-url'));
+        })
+
         $('.docsPreview').click(function()
         {
             var doc_url = $(this).attr('docs-url');

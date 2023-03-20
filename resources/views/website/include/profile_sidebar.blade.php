@@ -64,6 +64,14 @@
     <hr class="sidebar_content_hr">
     <div class="sidebar_content"><a href="{{ route('setting-page')}}">Settings</a></div>
     <hr class="sidebar_content_hr">
+    
+    <form method="POST" action="{{ route('logout') }}">
+      @csrf
+      
+      <button class="transparent_logout_btn" style="" type="submit">{{ __('Logout') }} </button>
+    </form>
+    {{-- <div class="sidebar_content">{{ __('Logout') }}Logout</a></div> --}}
+    <hr class="sidebar_content_hr">
 </div>
 </div>
 <!-- <div class="forTransition"></div> -->

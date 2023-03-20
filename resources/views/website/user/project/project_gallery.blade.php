@@ -340,7 +340,7 @@
                         ImageCropperObj.setCropBoxSize({'width':6*300,height:2*300});
                         ImageCropperObj.setAspectRatio(3/1);
                         ImageCropperObj.setAfterCrop(function(){
-                            console.log("after crop called");
+                            // console.log("after crop called");
                             if(ImageCropperObj.getBase64()){
                                 $(parentElemId+" .open_file_explorer label").hide();
                                 $(parentElemId+" .profile_upload_text").hide();
@@ -348,7 +348,7 @@
                                 $(parentElemId+" .cancel-img-upload").show();
                                 $(parentElemId+" .save_add_btn").show();
                             } else {
-                                console.log("cropper cancelled");
+                                // console.log("cropper cancelled");
                             }
                         });
                         let ret = ImageCropperObj.init();
@@ -428,7 +428,8 @@
                     },
                     success: function (data) {
                         let resp = JSON.parse(data);
-                        console.log("success data ",resp);
+                        // console.log("success data ",resp);
+                        toastMessage("success",resp.msg)
                         uploadedFile = null;
                         addPhotoCallback(resp);
                     },
@@ -436,6 +437,7 @@
                         // handle error
                         console.log("AJAX error ",error);
                         createToast("Something went wrong","E");
+                        toastMessage("error",resp.msg)
                     },
                     async: true,
                     data: formData,

@@ -75,8 +75,8 @@
                                     <div class="aleady-text">Already have an account?<a href="{{route('login')}}" class="text_decor_none"><span class="ml_10 sign_now_text">Login here</span></a>
                                     </div>
                                     <div class="my-3">
-                                        This site is protected by reCAPTCHA and with Google Privacy
-                                        Policy and Terms of Service apply.
+                                        This site is protected by reCAPTCHA and with <a href="https://policies.google.com/privacy?hl=en-US"> Google Privacy
+                                            Policy</a> and <a href="https://policies.google.com/privacy?hl=en-US"> Terms of Service apply.</a>
                                     </div>
                                     <div>
                                         By clicking "Create Account", I agree to Cinevesture's TOS
