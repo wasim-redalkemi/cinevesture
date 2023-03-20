@@ -390,7 +390,7 @@ class JobController extends WebController
         $workspaces = Workspace::query()->orderBy('name', 'ASC')->get();
         $skills = MasterSkill::query()->orderBy('name', 'ASC')->get();
         $jobs = UserJob::query()
-            ->with(["jobLocation:id,name", "jobSkills:id,name", "favorite"=>function($q){
+            ->with(["jobLocation:id,name", "user","jobSkills:id,name", "favorite"=>function($q){
                 $q->where('user_id',$this->getCreatedById());
             } ,
              "applied"=>function($q){
@@ -423,7 +423,12 @@ class JobController extends WebController
                 if (isset($requests["skills"]) && !empty($requests["skills"])) {
                     $q->whereIn("skill_id", $requests["skills"]);
                 }
-            })       
+            })
+            ->whereHas("user",function($q){
+                $q->where("status","1");
+                
+            })
+            ->where("save_type","published")      
            ->paginate(config('constants.JOB_PAGINATION_LIMIT'));
            $jobs->appends(request()->input())->links();
            $notFoundMessage = "No jobs found, please modify your search.";

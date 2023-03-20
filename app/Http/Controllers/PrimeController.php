@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\UserJob;
+use App\Models\UserProject;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -52,5 +55,26 @@ class PrimeController extends Controller
         if(auth()->user()->parent_user_id != 0){$id = auth()->user()->parent_user_id;}
         return $id;
     }
+
+    public function suspendUserEntities($user=[])
+    {
+        if(empty($user))
+        {
+            $user=User::query()->withTrashed()->where('deleted_at','!=',null)->orWhere('status','0')->pluck('id');
+        }
+        $suspendProjects=$this->suspendUserProjects($user);
+        $suspendJob=$this->suspendUserJob($user);
+    }
+
+    public function suspendUserProjects($ids=[])
+    {
+        return $projectUnpublish=UserProject::query()->whereIn('user_id', $ids)->update(['user_status'=>'draft']);
+    }
+
+    public function suspendUserJob($ids=[])
+    {
+        return $jobUnpublish=UserJob::query()->whereIn('user_id', $ids)->update(['save_type' => 'unpublished']);
+    }
+    
     
 }

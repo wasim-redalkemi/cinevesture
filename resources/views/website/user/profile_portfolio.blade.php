@@ -24,7 +24,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="profile_cmn_head_text">Add Portfolio</div>
                     </div>
-                    <form role="form" class="validateBeforeSubmit" method="POST"  enctype="multipart/form-data" action="{{ route('portfolio-store') }}">
+                    <form role="form" class="validateBeforeSubmit" name="portfolioCreate" method="POST"  enctype="multipart/form-data" action="{{ route('portfolio-store') }}">
                         <input type="hidden" name="portfolio_id">
                         @csrf
 
@@ -161,6 +161,9 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
+                            {{-- <div class="size-img for_error_msg" style="display:none">
+                                <strong>Select file must be small then 10 MB.</strong>
+                            </div> --}}
                             {{-- <div class="col-md-3 d-flex align-items-end">
                                     <div class="save_add_btn">Add another</div>
                                 </div> --}}
@@ -467,6 +470,30 @@
         }
        
     });
+    // var img=document.forms['portfolioCreate']['portfolio-image-1'];
+    //     const formate=['jpg','png'];
+        
+    //     function validationImageLessthen10mb() {
+    //         // alert(img.value);
+    //         debugger
+    //         // console.log(img.file[]);
+
+    //         if (img.value!="") {
+
+    //             var fileNum=img.value.lastIndexOf('.')+1;
+    //             console.log(fileNum);
+    //             var fileFormate=img.value.substring(fileNum);
+    //             var result= formate.includes(fileFormate);
+    //             if(result==false){
+    //                 $('.formate-img').show();
+    //                 return false;
+    //             }
+    //             if(parseFloat(img.files[0].size/(1024*1024))>=10) {
+    //                 $('.size-img').show();
+    //                 return false;
+    //             }
+    //         }
+    //     }
 </script>
 <script src="{{ asset('js/cropper.js') }}"></script>
 @endpush

@@ -44,7 +44,7 @@
                                 <a href="{{route('public-view',['id'=>$v['projects']['id']])}}" style="outline: none; text-decoration:none">
                                     <div class="movie_name_text">{{ !empty($v['projects']['project_name'])? $v['projects']['project_name'] : '-' }} </div>
                                 </a>
-                                @if ($v['projects']['user_status']=='draft')
+                                @if ($v['projects']['user_status']=='draft' || $v['projects']['admin_status']=='inactive')
                                 <span class="does_not_exist">
                                     <i class="fa fa-info-circle" title="This entity doesn't exist anymore"></i>
                                 </span>

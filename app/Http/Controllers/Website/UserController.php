@@ -177,7 +177,7 @@ class UserController extends WebController
             $id=request('id');
             $user = User::query()->where('id',$id)->with('isfavouriteProfile')->first();   
             if($user->status==0){
-                return back()->with('error', 'This user suspended/deleted.');       
+                return back()->with('error', 'This user is suspended/deleted.');       
 
             } 
             $portfolio = UserPortfolio::query()

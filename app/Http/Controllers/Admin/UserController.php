@@ -82,6 +82,9 @@ class UserController extends AdminController
        try {
        $user=User::find($request->user_id);
        $user->status= $request->status;
+    if($user->status=='0'){
+        $this->suspendUserEntities([$request->user_id]);  
+    }
        $user->save();
        Session::flash('response', ['text'=>'Status update successfully!','type'=>'success']);
        return back();

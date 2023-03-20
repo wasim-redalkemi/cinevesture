@@ -800,6 +800,12 @@ class ProjectController extends WebController
             
             })
             ->with(['projectCountries','projectLanguages','genres','projectCategory','projectLookingFor','projectStage','projectType','user','projectImage'])
+            ->whereHas("user",function($q){
+                $q->where("status","1");
+                // $q->where("deleted_at","NULL");
+                // ->whereNull('deleted_at');
+
+            })
             // ->where('user_id','!=',auth()->user()->id)
             ->orderByDesc('id')
             ->paginate(config('constants.JOB_PAGINATION_LIMIT'));
