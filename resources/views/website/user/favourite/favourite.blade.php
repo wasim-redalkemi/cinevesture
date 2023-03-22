@@ -103,8 +103,7 @@
                                             <a href="{{route('profile-public-show',['id'=>$v->profiles->id])}}" style="outline: none; text-decoration:none">
                                                 <span class="guide_profile_main_text"> {{ !empty($v->profiles->name)? ucFirst($v->profiles->name) : '-' }}</span>
                                             </a>
-                                          
-                                            @if ($v->profiles->status==0 || $v->profiles=="")
+                                            @if ( $v->profiles->status==0 || !is_null($v->profiles->deleted_at))
                                             <span class="does_not_exist">
                                                 <i class="fa fa-info-circle" title="This entity doesn't exist anymore"></i>
                                             </span>

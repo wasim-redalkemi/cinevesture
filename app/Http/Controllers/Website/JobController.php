@@ -245,11 +245,10 @@ class JobController extends WebController
         //     ->paginate($this->records_limit);
 
         $jobs = UserFavoriteJob::query()
-        ->with(['jobDetails',"jobDetails.jobLocation:id,name", "jobDetails.jobSkills:id,name", "jobDetails.favorite"])
+        ->with(['jobDetails',"jobDetails.jobLocation:id,name", "jobDetails.jobSkills:id,name", "jobDetails.favorite","jobDetails.user"])
         ->where('user_id',$this->getCreatedById())
         ->paginate($this->records_limit);
-
-        $notFoundMessage = "You haven't saved any job.";
+               $notFoundMessage = "You haven't saved any job.";
         return view('website.job.saved_job', compact('jobs', 'notFoundMessage'));
     }
 
@@ -476,10 +475,14 @@ class JobController extends WebController
                     $q->where('user_id',auth()->user()->id);
                 }])
                 ->find($job_id);
-                if ($Job_data->save_type=='unpublished') {
-                    return back()->with('error','This job is unpublish/deleted.');
+                if ($Job_data->save_type=='unpublished' || empty($Job_data->user) || $Job_data->user->status==0) {
+                    if($Job_data->save_type=='unpublished'){
+                        return back()->with('error','This job is unpublish/deleted.');
+
+                    }elseif (empty($Job_data->user) || $Job_data->user->status==0) {
+                        return back()->with('error',"This job's user is inactive/deleted.");
+                    }
                 }
-                // dd($Job_data);
                 return view('website.job.job_search_post_single', compact(['Job_data']));
             } else {
                 return back()->with('Something went wrong');

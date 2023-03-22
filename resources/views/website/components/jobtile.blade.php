@@ -10,7 +10,8 @@
             <a href="{{route('after_search-job-single-view',['job_id'=>$job->jobDetails->id])}}" class="guide_profile_main_text">
             {{ucFirst($job->jobDetails->title)}}
         </a>
-        @if ($job->jobDetails->save_type=='unpublished')
+        
+        @if ($job->jobDetails->save_type=='unpublished' || empty($job->jobDetails->user) ||$job->jobDetails->user->status=='0')
             <span class="does_not_exist">
                 <i class="fa fa-info-circle" title="This entity doesn't exist anymore"></i>
             </span>

@@ -36,7 +36,9 @@ class FavouriteController extends WebController
                         ->paginate(6,['*'],'project');
   
         $user_profiles = UserFavouriteProfile::query()
-                        ->with('profiles', 'profileSkills.getSkills', 'profileCountry.country')
+                        ->with(['profiles'=>function($q){
+                            $q->withTrashed();
+                        }, 'profileSkills.getSkills', 'profileCountry.country'])
                         ->where('user_id', $this->getCreatedById())
                         ->orderBy('created_at', 'DESC')
                         ->paginate(6,['*'],'profile');
