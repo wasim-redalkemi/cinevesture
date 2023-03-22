@@ -652,10 +652,13 @@ class ProjectController extends WebController
                         $q->where('user_status', 'published')
                         ->Where('admin_status', 'active');
                     }
-                })
-                ->get();
-                if (empty($projectData)) {
-                    return back()->with('error','This Project is Unpublished/Inactive.');
+                })->get();
+                if (empty($projectData) || (empty($projectData[0]->user))) {
+                        if(empty($projectData[0]) ){
+                            return back()->with('error','This Project is unpublished/inactive.');
+                        }if (empty($projectData[0]->user)) {
+                            return back()->with('error',"This project's uses is inactive.");
+                        }
                 }
             }
             $gener=ProjectGenre::query()->where('project_id',$_REQUEST['id'])->get();
