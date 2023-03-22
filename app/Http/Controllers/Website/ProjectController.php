@@ -760,6 +760,7 @@ class ProjectController extends WebController
             $project_stages = ProjectStage::query()->orderBy('name', 'ASC')->get();
             $projects = UserProject::query()
             ->where('user_status','published')
+            ->where('admin_status','active')
             ->where(function($query) use($request){
                 if (isset($request->search)) { // search name of user
                     $query->where("project_name", "like", "%$request->search%");

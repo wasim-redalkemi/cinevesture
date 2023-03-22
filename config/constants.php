@@ -23,7 +23,7 @@ return [
     'SOCIAL_MEDIA_LINK_FACEBOOK' => 'https://www.facebook.com/cinevesture',
     'SOCIAL_MEDIA_LINK_TWITTER' => 'https://twitter.com/cinevesture',
     'SOCIAL_MEDIA_LINK_YOUTUBE' => 'https://youtube.com/@cinevesture5809',
-    'PROFILE_VERIFIED_ON_ENDORSE_COUNT' => '2',
+    'PROFILE_VERIFIED_ON_ENDORSE_COUNT' => '14',
     'MAX_PROJECT_DURATION_IN_MIN' => '60000',
     'MAX_TOTAL_BUDGET' => '1000000000',
     "captcha_site_key"=>env('GOOGLE_CAPTCHA_SITE_KEY'), // admin@cinevesture.com
