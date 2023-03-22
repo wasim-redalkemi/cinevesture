@@ -31,7 +31,7 @@ class ProfileExperienceRequest extends FormRequest
             'end_date' => 'required|date_format:Y-m-d|after_or_equal:start_date',
             'employement_type_id' => 'required',
             'employement_type_id.*' => 'required|exists:employements,id',
-            'description' => 'required|max:600',
+            'description' => 'required|max:2000',
         ];
     }
     public function messages()

@@ -250,7 +250,7 @@
                                 <div class="profile_input">
                                     <label>About</label>
                                     <div class="form_elem">
-                                    <textarea class="outline form-control controlTextLength is-invalid-remove form-control @error('about') is-invalid @enderror" text-length="200" maxlength="200" name="about" aria-label="With textarea"><?php if (isset($user->about)) { echo ($user->about);} ?></textarea>
+                                    <textarea class="outline form-control controlTextLength is-invalid-remove form-control @error('about') is-invalid @enderror" text-length="500" maxlength="500" name="about" aria-label="With textarea"><?php if (isset($user->about)) { echo ($user->about);} ?></textarea>
                                     @error('about')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

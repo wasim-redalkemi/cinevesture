@@ -25,8 +25,8 @@ class ProjectDescriptionRequest extends FormRequest
     {
         return [
             'logline' => 'required|max:280' ,
-            'synopsis' => 'required|max:600' ,   
-            'director_statement' => 'required|max:600', 
+            'synopsis' => 'required|max:790' ,   
+            'director_statement' => 'required|max:1300', 
         ];
     }
     public function messages()

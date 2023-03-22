@@ -29,7 +29,7 @@ class ProfieQualificationRequest extends FormRequest
             'field_of_study' => 'required|max:50',
             'start_year' => 'required|date_format:Y|before:end_year',
             'end_year' => 'required|date_format:Y|after:start_year',
-            'description' => 'required|max:600',
+            'description' => 'required|max:1000',
         ];
     }
     public function messages()

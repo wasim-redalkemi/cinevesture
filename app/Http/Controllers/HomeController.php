@@ -12,6 +12,7 @@ use App\Models\ProjectList;
 use App\Models\ProjectListProjects;
 use App\Models\ProjectStage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
@@ -42,17 +43,23 @@ class HomeController extends Controller
         $categories = MasterProjectCategory::query()->orderBy('name', 'ASC')->get();
         $looking_for = MasterLookingFor::query()->orderBy('name', 'ASC')->get();
         $project_stages = ProjectStage::query()->orderBy('name', 'ASC')->get();
-        
+        // DB::enableQueryLog();
         $project_list_project = ProjectList::query()->where('status','published')
         ->with(['lists'=>function($q){
             $q->where('admin_status','active')
             ->where('user_status','published');
         },
-        'lists.genres',
+        'lists.genres','lists.user',
         'lists.projectCountries','lists.projectLanguages','lists.projectImage','lists.isfavouriteProjectMain','lists.isfavouriteProject'=>function($q){
             $q->where('user_id',auth()->user()->id);
         }])
+        // ->whereHas('lists.user', function($q){
+        //     $q->where('users.status','1');
+        // })
+       
         ->get();
+
+        // dd(DB::getQueryLog());
         $project_lists_carousel = (isset($project_list_project[0]))?$project_list_project[0]:[];
         unset($project_list_project[0]);
         $project_lists_except_carousel = $project_list_project;

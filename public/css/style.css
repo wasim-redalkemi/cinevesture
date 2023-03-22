@@ -146,9 +146,11 @@ a {
 }
 .does_not_exist
 {
-    color: red;
+    color: #FD841F;
     font-size: 20px;
     display: inline-block;
+    position: relative;
+    left: 5px;
 }
 
 .link-style {
@@ -2128,7 +2130,7 @@ select,
     line-height: 158%;
     letter-spacing: 0.0075em;
     color: #1C0330;
-    margin-top: 5px;
+    /* margin-top: 5px; */
 }
 
 .published_text {

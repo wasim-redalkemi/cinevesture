@@ -32,8 +32,8 @@
         <div class="bottom-container mb-5">
             <div class="aleady-text">Already have an account ?<span class="mx-3 fw-bolder">Login here</span></div>
             <div class="my-3">
-                This site is protected by reCAPTCHA and with <a href="https://policies.google.com/privacy?hl=en-US"> Google Privacy
-                    Policy</a> and <a href="https://policies.google.com/privacy?hl=en-US"> Terms of Service apply.</a>
+                This site is protected by reCAPTCHA and with <a href="https://policies.google.com/privacy?hl=en-US" target="_blank"> Google Privacy
+                    Policy</a> and <a href="https://policies.google.com/privacy?hl=en-US" target="_blank"> Terms of Service apply.</a>
             </div>
             <div>
                 By clicking “Create Account”, I agree to Cinevesture’s TOS

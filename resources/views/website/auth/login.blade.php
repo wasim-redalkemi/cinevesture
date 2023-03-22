@@ -74,8 +74,8 @@
                                             <a class="text_decor_none" href="{{ route('register') }}">{{ __('Sign Up') }}</a>@endif</span>now
                                     </div>
                                     <div class="my-3 proctect_by_capta_text">
-                                        This site is protected by reCAPTCHA and with <a href="https://policies.google.com/privacy?hl=en-US"> Google Privacy
-                                        Policy</a> and <a href="https://policies.google.com/privacy?hl=en-US"> Terms of Service apply.</a> 
+                                        This site is protected by reCAPTCHA and with <a href="https://policies.google.com/privacy?hl=en-US" target="_blank"> Google Privacy
+                                        Policy</a> and <a href="https://policies.google.com/privacy?hl=en-US" target="_blank"> Terms of Service apply.</a> 
                                     </div>
                                 </div>
                             </div>

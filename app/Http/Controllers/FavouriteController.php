@@ -30,7 +30,7 @@ class FavouriteController extends WebController
         $param_profile = 1;
         $param_project = 1;
         $user_projects = UserFavouriteProject::query()
-                        ->with('projects.projectImage')
+                        ->with('projects.projectImage','projects.user')
                         ->where('user_id', $this->getCreatedById())
                         ->orderBy('created_at', 'DESC')
                         ->paginate(6,['*'],'project');
