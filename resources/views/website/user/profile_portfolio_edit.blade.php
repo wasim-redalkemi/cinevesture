@@ -27,7 +27,7 @@
                                 </a>
                             </div>
                         </div>                        
-                        <form role="form" class="validateBeforeSubmit" method="POST" enctype="multipart/form-data" action="{{ route('portfolio-edit-store',['id'=>$UserPortfolioEdit[0]['id']]) }}">
+                        <form role="form" class="validateBeforeSubmit" method="POST" onsubmit="return imgFormValitation()" enctype="multipart/form-data" action="{{ route('portfolio-edit-store',['id'=>$UserPortfolioEdit[0]['id']]) }}">
                             @csrf
                             
                             <div class="row">
@@ -133,15 +133,21 @@
                                 <div class="col-md-4">
                                     <div id="portfolio-video" class="profile_input">
                                         <div class="img-container h_66 mt-3 mt-md-0">
+                                            @if (is_null($UserPortfolioEdit[0]->video['video_thumbnail']))
+                                            <img src="{{asset('images/asset/default-video-thumbnail.jpg')}}" class="width_inheritence" alt="image">
+                                            @endif
                                             <img src="{{asset($UserPortfolioEdit[0]->video['video_thumbnail'])}}" class="width_inheritence" alt="image">
                                         </div>
-                                        <input type="url" class="form-control @error('video') is-invalid @enderror" placeholder="Paste link here" name="video_url" value="<?php if(isset($UserPortfolioEdit[0]->video['video_url'])){ echo($UserPortfolioEdit[0]->video['video_url']); }?>" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="url"   id="videoFormValid" class="form-control @error('video') is-invalid @enderror" placeholder="Paste link here" name="video_url" value="<?php if(isset($UserPortfolioEdit[0]->video['video_url'])){ echo($UserPortfolioEdit[0]->video['video_url']); }?>" aria-label="Username" aria-describedby="basic-addon1">
                                         <input type="hidden" class="" name="video_thumbnail" value="{{asset($UserPortfolioEdit[0]->video['video_thumbnail'])}}" aria-label="Video Thumbnail" aria-describedby="basic-addon1">
                                         @error('video')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
+                                        <div class="intro-video for_error_msg" style="display:none">
+                                            <strong>Only youtube and vimeo URLs are allowed.</strong>
+                                        </div>
                                     </div>
                                 </div>
                                 @else
@@ -150,8 +156,8 @@
                                         <div class="img-container h_66 mt-3 mt-md-0">
                                             <img src="{{asset('images/asset/default-video-thumbnail.jpg')}}" class="width_inheritence" alt="image">
                                         </div>
-                                        <input type="url" class="form-control @error('video') is-invalid @enderror" placeholder="Paste link here" name="video_url" value="<?php if(isset($UserPortfolioEdit[0]->video['video_url'])){ echo($UserPortfolioEdit[0]->video['video_url']); }?>" aria-label="Username" aria-describedby="basic-addon1">
-                                        <input type="hidden" class="" name="video_thumbnail" value="" aria-label="Video Thumbnail" aria-describedby="basic-addon1">
+                                        <input type="url" class="form-control  @error('video') is-invalid @enderror" placeholder="Paste link here" name="video_url" value="<?php if(isset($UserPortfolioEdit[0]->video['video_url'])){ echo($UserPortfolioEdit[0]->video['video_url']); }?>" aria-label="Username" aria-describedby="basic-addon1">
+                                        <input type="hidden" class=""  name="video_thumbnail" value="" aria-label="Video Thumbnail" aria-describedby="basic-addon1">
                                         @error('video')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -194,6 +200,10 @@
                                         </label>
                                     </div>
                                     <div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 10MB</div>
+                                    
+                                </div>
+                                <div class="intro-img for_error_msg" style="display:none">
+                                    <strong>This field is required.</strong>
                                 </div>
                                 <input type="hidden" value="" class="portfolio_images_count @error('portfolio_images_count') is-invalid @enderror" name="portfolio_images_count"/>
                                 @error('portfolio_images_count')
@@ -361,7 +371,7 @@
             $(parentElemId + " #portfolio-video input[name='video_url']").off('blur').on('blur',(e)=>{
                 let link = e.target.value;
                 if(link && validateUrl(link)){
-                    console.log("link blurred - "+link);
+                    // console.log("link blurred - "+link);
                     if(link.indexOf("vimeo.com") > -1){
                         //let reqData = {'vidUrl': "https://vimeo.com/336812686"};
                         let reqData = {'vidUrl': link};
@@ -372,8 +382,8 @@
                         doAjax("ajax/get-video-details",reqData,"POST",getVideoDataCallback);
                     } else {
                         //show error
-                        alert("Invalid video url. Only Vimeo and Youtube links are allowed.");
-                        console.log("Invalid video url. Only Vimeo and Youtube links are allowed.");
+                        // alert("Invalid video url. Only Vimeo and Youtube links are allowed.");
+                        // console.log("Invalid video url. Only Vimeo and Youtube links are allowed.");
                     }
                 } else if (link != ''){
                     createToast("Please enter a valid video your.<br>Only Vimeo and Youtube links are allowed.","E");
@@ -402,7 +412,7 @@
                         addImgUploadElem();
                         $(parentElemId+" "+croppedImgContainerId).val(ImageCropperObj.getBase64());
                     } else {
-                        console.log("cropper cancelled");
+                        // console.log("cropper cancelled");
                     }
                 });
                 let ret = ImageCropperObj.init();
@@ -421,7 +431,8 @@
                 $(".modal-body button.delete_btn").off("click").click((e)=>{
                     doAjax("ajax/delete-portfolio-img/"+imgId,{"imgId":imgId},"DELETE",(req,resp)=>{
                         if(resp.status == 1){
-                            createToast("Image deleted successfully.","S");
+                            // createToast("Image deleted successfully.","S");
+                            toastMessage("success","Image deleted successfully");
                             $(parentElemId+" #portfolio-img-"+imgId).remove();
                             updateImageUploadCount();
                         } else {
@@ -528,8 +539,31 @@
         $("#save_btn_value").attr("value", $(this).attr("name"))
         $(this).parents('form').submit();
     });
-
+    function validateYouTubeUrl(url) {
+     var pattern = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+     return url.match(pattern) ? RegExp.$1 : false;
+        }
+        // $(".portfolio_save_btn ").click(function()
+        // {
+            function imgFormValitation() {
+                // var url="<?php if(isset($UserPortfolioEdit[0]->video['video_url'])){ echo($UserPortfolioEdit[0]->video['video_url']); }?>";
+                var url=$('#videoFormValid').val()
+                var youtubeValid=validateYouTubeUrl(url);
+                if (youtubeValid==false) {
+                    $('.intro-video').show();
+                    return false;
+                }
+                $('.intro-video').hide();
+                var imgLength = $('.img-item').length;
+                // console.log(imgLength);
+                if (imgLength<=1) {
+                    $('.intro-img').show();
+                    return false;
+                }else{
+                    $('.intro-img').hide();
+                }
+            }
+        // });
 </script>
-
 <script src="{{ asset('js/cropper.js') }}"></script>
 @endpush

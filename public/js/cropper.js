@@ -113,8 +113,15 @@ var ImageCropper = function(fileToCrop,previewElem){
                 var reader = new FileReader();
                 reader.readAsDataURL(blob);
                 reader.onloadend = function() {
-                    base64data = reader.result;
-                    var file = dataURLtoFile(base64data, filename);
+                    
+                    let mybase64data = reader.result;
+                    var file = dataURLtoFile(mybase64data, filename);
+                    var cropped_size = parseFloat(file.size/(1024*1024)); //in MB
+                    if(cropped_size>1){
+                        toastMessage('error','your file size is  img greater then 10 MB you need to small cropper')
+                        return false;
+                    }
+                    base64data = mybase64data;
                     if(previewElem)
                         $(previewElem).attr("src",base64data).show();
 
@@ -139,12 +146,4 @@ var ImageCropper = function(fileToCrop,previewElem){
 
     return {init,getCropperFile,setCropBoxSize,getCropBoxSize,setAfterCrop,setAspectRatio,getBase64};
 
-}
-
-function validateSize(input) {
-    const fileSize = input.files[0].size / 1024 / 1024; // in MiB
-    if (fileSize > 10) {
-        alert('The document may not be greater than 10 MB');
-        $('#documents').val(''); //for clearing with Jquery
-    }
 }

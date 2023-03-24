@@ -350,6 +350,7 @@
                             } else {
                                 // console.log("cropper cancelled");
                             }
+                            // console.log(uploadedFile);
                         });
                         let ret = ImageCropperObj.init();
                         // ImageCropperObj.setAfterCrop(AfterCropCallback);
@@ -395,19 +396,21 @@
             }
 
             let AfterCropCallback = function(){
-                console.log("after cropper callback called");
+                // console.log("after cropper callback called");
                 //uploadImage();
             }
 
             let uploadImage = function(){
               
-                    var file_size = ($('.imgInp')[0].files[0].size)/(1024*1024);
-                    console.log(file_size);
-                        if(file_size>10) {
-                            $('.banner-img').show();
-                            return false;
-                        } 
-                        return true;
+                    // var file_size = ($('.imgInp')[0].files[0].size)/(1024*1024);
+                    // console.log(file_size);
+                    //     if(file_size>10) {
+                    //         $('.banner-img').show();
+                    //         toastMessage('error','your img greater then 10 MB you need to small cropper')
+                    //         return false;
+                    //     } 
+                    //     $('.banner-img').hide();
+                    //     // return true;
                    
                 // console.log("uploading file");
                 var croppedImg = ImageCropperObj.getCropperFile();
@@ -428,16 +431,16 @@
                     },
                     success: function (data) {
                         let resp = JSON.parse(data);
-                        // console.log("success data ",resp);
-                        toastMessage("success",resp.msg)
+                        if (resp.error="") {
+                            toastMessage("success",resp.msg);
+                        }
                         uploadedFile = null;
                         addPhotoCallback(resp);
                     },
                     error: function (error) {
                         // handle error
-                        console.log("AJAX error ",error);
-                        createToast("Something went wrong","E");
-                        toastMessage("error",resp.msg)
+                        // console.log("AJAX error ",error);
+                        
                     },
                     async: true,
                     data: formData,

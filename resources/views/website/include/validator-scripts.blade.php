@@ -173,13 +173,15 @@
                         let inputVal = $(this).val();
                         isEmptyField = (inputVal == "" || !validateUrl(inputVal));
                     });
-                    console.log("isEmptyField = ",isEmptyField);
+                    // console.log("isEmptyField = ",isEmptyField);
                     if(!isEmptyField){
                         addVideoElem();
                     } else if ($(".video-link.add").val() != "" ) {
-                        createToast("Please enter a valid video url.","E");
+                        // createToast("Please enter a valid video url.","E");
+                        toastMessage("error","Please enter a valid video url.");
                     } else {
                         createToast("Please enter a video url.","E");
+                        toastMessage("success","Please enter a video url.");
                     }
                 });
 
@@ -195,11 +197,13 @@
                             let reqData = {'vidUrl':link};
                             doAjax("ajax/get-video-details",reqData,"POST",getYouTubeData);
                         } else {
-                            createToast("Invalid video url. Only Vimeo and Youtube links are allowed 1.","E");
+                            // createToast("Invalid video url. Only Vimeo and Youtube links are allowed 1.","E");
+                            toastMessage("error","Invalid video url. Only Vimeo and Youtube links are allowed 1.");
                             $(parentElemId+" .video-link.add").val("");
                         }
                     } else if (link != ''){
-                        createToast("Please enter a valid video your.<br>Only Vimeo and Youtube links are allowed.","E");
+                        // createToast("Please enter a valid video your.<br>Only Vimeo and Youtube links are allowed.","E");
+                        toastMessage("error","Please enter a valid video your.<br>Only Vimeo and Youtube links are allowed.");
                     }
                 });
 
@@ -221,7 +225,9 @@
                     let mediaId = $(e.target).attr('data-id');
                     let featuredOne = isAnyDefaultVideo();
                     if(mediaId == featuredOne){
-                        createToast("You cannot delete a featured video. Please mark another video as featured and try again.","E");
+                        // createToast("You cannot delete a featured video. Please mark another video as featured and try again.","E");
+                        toastMessage("error","You cannot delete a featured video. Please mark another video as featured and try again.");
+                        
                         return;
                         //setModal("","This video is a featured video. Do you really want to delete the video?","Yes, Delete","");
                     } else {
@@ -267,18 +273,22 @@
                         addVideoElem();
                     }
                     $("#vid-"+req.mediaId).remove();
-                    createToast("Video deleted successfully.","S");
+                    // createToast("Video deleted successfully.","S");
+                    toastMessage("success","Video deleted successfully.");
                 } else {
-                    createToast(respArr.error_msg,"E");
+                    // createToast(respArr.error_msg,"E");
+                    toastMessage("error",respArr.error_msg);
                 }
             }
 
             let updateVideoCallback = function (req,resp) {
                 let respArr = JSON.parse(resp);
                 if(respArr.status == 1){
-                    createToast("Video updated successfully.","S");
+                    // createToast("Video updated successfully.","S");
+                    toastMessage("success","Video updated successfully.");
                 } else {
-                    createToast(respArr.error_msg,"E");
+                    // createToast(respArr.error_msg,"E");
+                    toastMessage("error",respArr.error_msg);
                 }
             }
 
@@ -287,7 +297,7 @@
                 //let vimeoResp = '[{"id":336812686,"title":"Direct Links To Video Files","description":"Hi there! Need help? Go to http:\/\/vimeo.com\/help","url":"https:\/\/vimeo.com\/336812686","upload_date":"2019-05-17 09:32:53","thumbnail_small":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_100x75","thumbnail_medium":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_200x150","thumbnail_large":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_640","user_id":90564994,"user_name":"Vimeo Support","user_url":"https:\/\/vimeo.com\/vimeosupport","user_portrait_small":"https:\/\/i.vimeocdn.com\/portrait\/27986607_30x30","user_portrait_medium":"https:\/\/i.vimeocdn.com\/portrait\/27986607_75x75","user_portrait_large":"https:\/\/i.vimeocdn.com\/portrait\/27986607_100x100","user_portrait_huge":"https:\/\/i.vimeocdn.com\/portrait\/27986607_300x300","duration":41,"width":1920,"height":1080,"tags":"","embed_privacy":"anywhere"}]';
                 let respArr = JSON.parse(vimeoResp);
                 let is_default_marked = (isAnyDefaultVideo()) ? "0" : "1";
-                console.log("setting is_default_marked = ",is_default_marked);
+                // console.log("setting is_default_marked = ",is_default_marked);
                 if(respArr.status == 1){
                     let vimeo = respArr.payload;
                     let newVideo = {};
@@ -300,7 +310,8 @@
                     newVideo['src'] = 'vimeo';
                     doAjax('ajax/add-video',newVideo,"POST",addVideoCallback);
                 } else {
-                    createToast(respArr.error_msg,"E");
+                    // createToast(respArr.error_msg,"E");
+                    toastMessage("error",respArr.error_msg);
                 }
             }
 
@@ -309,7 +320,7 @@
                 // let youtubeResp = '{"kind":"youtube#videoListResponse","etag":"NY12d6Sa3mhyYdxx62iuVh0ta50","items":[{"kind":"youtube#video","etag":"BlL66Tqwd6vcpb_0fuUt4YHRBlA","id":"ZdbQ_FvNBZA","snippet":{"publishedAt":"2021-10-03T07:14:26Z","channelId":"UCyzKMNskJwgVy7j_lQ5aP-Q","title":"Session 5: What is Postman? and How to use it? by Suprabhat Sen","description":"Postman is one of the most important tools for any kind of Web and App Development. Learn how Postman works and helps make the job easier for any Software Developer","thumbnails":{"default":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/default.jpg","width":120,"height":90},"medium":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/mqdefault.jpg","width":320,"height":180},"high":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/hqdefault.jpg","width":480,"height":360},"standard":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/sddefault.jpg","width":640,"height":480},"maxres":{"url":"https://i.ytimg.com/vi/ZdbQ_FvNBZA/maxresdefault.jpg","width":1280,"height":720}},"channelTitle":"ScaleupAlly","categoryId":"28","liveBroadcastContent":"none","localized":{"title":"Session 5: What is Postman? and How to use it? by Suprabhat Sen","description":"Postman is one of the most important tools for any kind of Web and App Development. Learn how Postman works and helps make the job easier for any Software Developer"}}}],"pageInfo":{"totalResults":1,"resultsPerPage":1}}';
                 let respArr = JSON.parse(youtubeResp);
                 let is_default_marked = (isAnyDefaultVideo()) ? "0" : "1";
-                console.log("setting is_default_marked = ",is_default_marked);
+                // console.log("setting is_default_marked = ",is_default_marked);
                 if(respArr.status == 1){
                     let youtube = respArr.payload;
                     let newVideo = {};
@@ -322,21 +333,24 @@
                     newVideo['type'] = 'videourl';
                     doAjax('ajax/add-video',newVideo,"POST",addVideoCallback);
                 } else {
-                    createToast(respArr.error_msg,"E");
+                    // createToast(respArr.error_msg,"E");
+                    toastMessage("error",respArr.error_msg);
                 }
             }
 
             let addVideoCallback = function(req,resp){
                 let respArr = JSON.parse(resp);
                 if(respArr.status == 1){
-                    createToast("Video added successfully.","S");
+                    // createToast("Video added successfully.","S");
+                    toastMessage("success","Video added successfully.");
                     let newVideo = respArr.payload;
                     currentVideos.push(newVideo);
                     currentVideoCount = currentVideos.length;
                     loadCurrentVideos();
                     lastVidId = currentVideos[currentVideos.length-1]['id'];
                 } else {
-                    createToast(respArr.error_msg,"E");
+                    // createToast(respArr.error_msg,"E");
+                    toastMessage("error","respArr.error_msg");
                 }
             }
 
@@ -469,6 +483,14 @@
                 $(parentElemId+" input#upload-img-inp").off("change").on("change",function uploadImageFile(e) {
                     const [file] = this.files
                     uploadedFile = this.files[0];
+                    // console.log(parseFloat((uploadedFile.size)/(1024*1024)));
+                    // console.log(uploadedFile.size);
+                    // if (parseFloat((uploadedFile.size)/(1024*1024))>10) {
+                        
+                    //     toastMessage('error','image should be less then 10Mb')
+                    //     return false;
+
+                    // }
                     if (file) {
                         ImageCropperObj = new ImageCropper(uploadedFile,parentElemId+" #previewImg");
                         ImageCropperObj.setCropBoxSize({'width':300*2,height:200*2});
@@ -490,7 +512,8 @@
 
                 $(parentElemId+" input[name=image_title]").off("blur").on("blur",(e)=>{
                     if(e.target.value == ''){
-                        createToast("Please give a title to the image","E");
+                        // createToast("Please give a title to the image","E");
+                        toastMessage("error","Please give a title to the image.");
                         return;
                     }
                     var croppedImg = ImageCropperObj.getCropperFile();
@@ -580,7 +603,8 @@
             let deletePhotoCallback = function (req,resp) {
                 let respArr = JSON.parse(resp);
                 if(respArr.status == 1){
-                    createToast("Image deleted successfully.","S");
+                    // createToast("Image deleted successfully.","S");
+                    toastMessage("success","Image deleted successfully");
                     $("#img-"+req.mediaId).remove();
                     currentMediaList = currentMediaList.filter((item)=>{
                         return item.id != req.mediaId;
@@ -591,16 +615,19 @@
                     }
                     loadcurrentMediaList();
                 } else {
-                    createToast(respArr.error_msg,"E");
+                    // createToast(respArr.error_msg,"E");
+                    toastMessage("error",respArr.error_msg);
                 }
             }
 
             let updateMediaCallback = function (req,resp) {
                 let respArr = JSON.parse(resp);
                 if(respArr.status == 1){
-                    createToast("Image updated successfully.","S");
+                    toastMessage("success","Image updated successfully.");
+                    // createToast("Image updated successfully.","S");
                 } else {
-                    createToast(respArr.error_msg,"E");
+                    // createToast(respArr.error_msg,"E");
+                    toastMessage("error",respArr.error_msg);
                 }
             }
 
@@ -612,9 +639,11 @@
                     currentMediaCount = currentMediaList.length;
                     loadcurrentMediaList();
                     lastVidId = currentMediaList[currentMediaList.length-1]['id'];
-                    createToast("Image updated successfully.","S");
+                    // createToast("Image updated successfully.","S");
+                    toastMessage("success","Image updated successfully.");
                 } else {
-                    createToast(respArr.error_msg,"E");
+                    // createToast(respArr.error_msg,"E");
+                    toastMessage("error",respArr.error_msg);
                 }
             }
 
@@ -752,7 +781,7 @@
                 });
 
                 $(parentElemId+" .delete-doc").off("click").on("click",(e)=>{
-                    console.log("deleting doc ",e.target);
+                    // console.log("deleting doc ",e.target);
                     let mediaId = $(e.target).attr('data-id');
                     setModal("","","Yes, Delete","");
                     $(".modal-body button.delete_btn").off("click").click((e)=>{
@@ -783,7 +812,9 @@
                         uploadDocCallback(null,data);
                     },
                     error: function (error) {
-                        createToast(error.responseJSON.errors.file[0],"E");
+
+                        // createToast(error.responseJSON.errors.file[0],"E");
+                        toastMessage("error",error.responseJSON.errors.file[0]);
                         loadcurrentMediaList();
                     },
                     async: true,
@@ -811,6 +842,7 @@
             let uploadDocCallback = function (req, resp) {
                 let respArr = JSON.parse(resp);
                 if(respArr.status == 1){
+                    toastMessage("success",'Document add successfully');
                     currentMediaList.push(respArr.payload);
                     currentMediaCount = currentMediaList.length;
                     if(currentMediaCount > 0){
@@ -819,7 +851,8 @@
                     loadcurrentMediaList();
                     bindActions();
                 } else {
-                    createToast(respArr.error_msg,"E");
+                    // createToast(respArr.error_msg,"E");
+                    toastMessage("error",respArr.error_msg);
                 }
             }
 
@@ -872,10 +905,12 @@
                             return item.id != req.mediaId;
                         });
                     }
-                    createToast("Document removed successfully.","S");
+                    // createToast("Document removed successfully.","S");
+                    toastMessage("success","Document removed successfully.");
                     addMediaElem();
                 } else {
                     createToast(respArr.error_msg,"E");
+                    toastMessage("error",respArr.error_msg);
                 }
             }
 
@@ -949,7 +984,7 @@
         }
 
     function setModal(head_text, sub_text, confirm_btn_text, cancel_btn_text) {
-        console.log(head_text, sub_text, confirm_btn_text, cancel_btn_text);
+        // console.log(head_text, sub_text, confirm_btn_text, cancel_btn_text);
         if(head_text == ""){
             head_text = "Are you sure?";
         }

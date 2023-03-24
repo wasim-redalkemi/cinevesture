@@ -67,7 +67,7 @@
                             </div>
                         </div>
                         
-                        <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+                        <div class="modal fade" id="modal" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                             <div class="modal-dialog modal-lg" role="document">
                                 <div class="modal-content croper_modal">
                                     <div class="modal-header py-1">
@@ -479,13 +479,11 @@ function validateOrganizationForm(){
     croperImg = document.querySelector('.croperImg'),
         finalImage = document.querySelector('.finalImage'),
 
-        function validateSize(input) {
-            const fileSize = input.files[0].size / 1024 / 1024; // in MiB
-            if (fileSize > 10) {
-                alert('The document may not be greater than 10 MB');
-                $('#documents').val(''); //for clearing with Jquery
-            }
+        function validateSize() {
+            // const fileSize = input.files[0].size / 1024 / 1024; // in MiB
+           
         }
+        
     let result = document.querySelector('.result'),
 
         formData = new FormData()
@@ -498,7 +496,11 @@ function validateOrganizationForm(){
         var files = e.target.files;
         var done = function(url) {
             image.src = url;
-            $modal.modal('show');
+            $modal.modal('show',{
+                backdrop: 'static',
+        keyboard: false,
+       
+        });
         };
         var reader;
         var file;
@@ -582,6 +584,13 @@ function validateOrganizationForm(){
             reader.onloadend = function() {
                 base64data = reader.result;
                 var file = dataURLtoFile(base64data, 'profile_img.png');
+                var cropped_size = parseFloat(file.size/(1024*1024)); //in MB
+                // console.log(cropped_size);
+                if(cropped_size>1){
+                    toastMessage('error','your file size is  img greater then 10 MB you need to small cropper')
+                    return false;
+                }
+                // base64data = mybase64data;
                 croperImg.src = base64data;
                 $("#croppedOrgImg").val(base64data);
                 image.src = file;

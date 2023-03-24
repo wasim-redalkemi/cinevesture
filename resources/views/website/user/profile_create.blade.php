@@ -471,11 +471,7 @@
     finalImage = document.querySelector('.finalImage'),
 
     function validateSize(input) {
-        const fileSize = input.files[0].size / 1024 / 1024; // in MiB
-        if (fileSize > 10) {
-            alert('The document may not be greater than 10 MB');
-            $('#documents').val(''); //for clearing with Jquery
-        }
+       
     }
     let result = document.querySelector('.result'),
 
@@ -575,6 +571,11 @@
             reader.onloadend = function() {
                 base64data = reader.result;
                 var file = dataURLtoFile(base64data, 'profile_img.png');
+                // console.log(file.size/(1024*1024));
+                if (parseFloat(file.size/(1024*1024))>1) {
+                    toastMessage('error','your file size is  img greater then 10 MB you need to small cropper')
+                        return false;
+                }
                 croperImg.src = base64data;
                 $("#croppedImg").val(base64data);
                 image.src = file;
@@ -639,10 +640,10 @@
                     $('.formate-img').show();
                     return false;
                 }
-                if(parseFloat(img.files[0].size/(1024*1024))>=10) {
-                    $('.size-img').show();
-                    return false;
-                }
+                // if(parseFloat(img.files[0].size/(1024*1024))>=10) {
+                //     $('.size-img').show();
+                //     return false;
+                // }
             }
         }
 </script>

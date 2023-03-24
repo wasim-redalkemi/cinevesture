@@ -24,7 +24,7 @@
                     <div class="d-flex justify-content-between">
                         <div class="profile_cmn_head_text">Add Portfolio</div>
                     </div>
-                    <form role="form" class="validateBeforeSubmit" name="portfolioCreate" method="POST"  enctype="multipart/form-data" action="{{ route('portfolio-store') }}">
+                    <form role="form" class="validateBeforeSubmit" name="portfolioCreate" method="POST" onsubmit="return imgFormValitation()"  enctype="multipart/form-data" action="{{ route('portfolio-store') }}">
                         <input type="hidden" name="portfolio_id">
                         @csrf
 
@@ -161,6 +161,9 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
+                            <div class="intro-img for_error_msg" style="display:none">
+                                <strong>This field is required.</strong>
+                            </div>
                             {{-- <div class="size-img for_error_msg" style="display:none">
                                 <strong>Select file must be small then 10 MB.</strong>
                             </div> --}}
@@ -301,7 +304,7 @@
                     } else {
                         //show error
                         //alert("Invalid video url. Only Vimeo and Youtube links are allowed.");
-                        console.log("Invalid video url. Only Vimeo and Youtube links are allowed.");
+                        // console.log("Invalid video url. Only Vimeo and Youtube links are allowed.");
                     }
                 } else if (link != '') {
                     createToast("Please enter a valid video your.<br>Only Vimeo and Youtube links are allowed.", "E");
@@ -328,7 +331,7 @@
                         $(parentElemId+" "+croppedImgContainerId).val(ImageCropperObj.getBase64());
                         $("#croppedImg").val(ImageCropperObj.getBase64());
                     } else {
-                        console.log("cropper cancelled");
+                        // console.log("cropper cancelled");
                     }
                 });
                 let ret = ImageCropperObj.init();
@@ -463,13 +466,31 @@
         var urlLength= $('#youtube_video').val().length;
         var url = $('#youtube_video').val();
         var videoId = validateYouTubeUrl(url);
-        console.log(videoId);
+        // console.log(videoId);
         if(!videoId){
             $("div.intro-video").show();
             $('button[type="submit"]').attr('disabled','disabled');
         }
        
     });
+    function imgFormValitation() {
+        var imgLength = $('.img-item').length;
+                // console.log(imgLength);
+                if (imgLength<=1) {
+                    $('.intro-img').show();
+                    return false;
+                }else{
+                    $('.intro-img').hide();
+                }
+    }
+    
+    $('.portfolio-images').click(function() {
+        var imgLength = $('.img-item').length;
+                if (imgLength>1) {
+                    $('.intro-img').hide();
+                }
+    })
+    
     // var img=document.forms['portfolioCreate']['portfolio-image-1'];
     //     const formate=['jpg','png'];
         
