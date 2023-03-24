@@ -117,7 +117,6 @@ var ImageCropper = function(fileToCrop,previewElem){
                     let mybase64data = reader.result;
                     var file = dataURLtoFile(mybase64data, filename);
                     var cropped_size = parseFloat(file.size/(1024*1024)); //in MB
-                    alert('jhds')
                     if(cropped_size>10){
                         toastMessage('error','your file size is  img greater then 10 MB you need to small cropper')
                         return false;
