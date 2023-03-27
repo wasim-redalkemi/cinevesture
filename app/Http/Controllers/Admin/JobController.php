@@ -25,7 +25,7 @@ class JobController extends AdminController
             
             $countries=MasterCountry::query()->get();
             $jobs=UserJob::query()
-            ->with(['jobLocation','jobOrganisation','jobEmployements','jobCreater'])
+            ->with(['jobLocation','jobOrganisation','jobEmployements','jobCreater','user'])
             ->where(function($q) use ($request){
                 if (isset($request->country)) {
                     $q->whereHas('jobLocation', function($q) use($request){
@@ -58,7 +58,6 @@ class JobController extends AdminController
             })
             ->orderByDesc('id')
             ->paginate($this->records_limit);
-           
             return view('admin.job.index',compact('jobs','countries'));
         } catch (\Throwable $e) {
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);

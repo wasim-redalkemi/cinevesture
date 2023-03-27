@@ -109,10 +109,19 @@
                                         @endforeach --}}
                                         </td>
                                        <td>
-                                            {{ucfirst($job->jobLocation->name)}}
+                                        @if (!empty($job->jobLocation)||!empty($job->jobLocation->name))
+                                        {{ucfirst($job->jobLocation->name)}}
+                                        @else
+                                            {{'-'}}
+                                        @endif
                                         </td>
                                         <td>
+                                            @if (!empty($job->user) || !empty($job->user->name))
                                             {{$job->user->name}}
+                                            @else
+                                                {{'-'}}
+                                            @endif
+                                            
                                             {{-- @foreach ($job->user as $value)
                                                 {{ucfirst($value->name)}}
                                             @endforeach --}}
