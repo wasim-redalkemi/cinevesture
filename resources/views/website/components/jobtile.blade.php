@@ -10,8 +10,7 @@
             <a href="{{route('after_search-job-single-view',['job_id'=>$job->jobDetails->id])}}" class="guide_profile_main_text">
             {{ucFirst($job->jobDetails->title)}}
         </a>
-        
-        @if ($job->jobDetails->save_type=='unpublished' || empty($job->jobDetails->user) ||$job->jobDetails->user->status=='0')
+        @if ($job->jobDetails->save_type=='unpublished' || empty($job->jobDetails->user) ||$job->jobDetails->user->status=='0' || ($job->jobDetails->deleted_at) )
             <span class="does_not_exist">
                 <i class="fa fa-info-circle" title="This entity doesn't exist anymore"></i>
             </span>
@@ -46,7 +45,8 @@
             @endforeach
         </div>
         @if($job->jobDetails->user_id!=auth()->user()->id)
-            @if(!isset($showApplied) || $showApplied)
+     
+            {{-- @if(!isset($showApplied) || $showApplied) --}}
                 <div class="mt-2 mt-md-0">
                     @if(is_null($job->jobDetails->applied))
                 <button class="guide_profile_btn">  <a href="{{route('showApplyJob',['jobId'=>$job->jobDetails->id])}}" class="">Apply now</a></button>
@@ -54,7 +54,7 @@
                     <button disabled class="guide_profile_btn">Applied</button>
                     @endif
                 </div>      
-            @endif
+            {{-- @endif --}}
         @endif
     </div>
     </div>

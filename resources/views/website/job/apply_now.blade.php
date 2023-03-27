@@ -26,7 +26,7 @@
             <div class="col-md-12 mt-sm-0">
                 <div class="content_wraper">
                     <div class="guide_profile_subsection">
-                        <div class="contact-page-text deep-aubergine">Apply For {{ucFirst($jobTitle)}}</div>
+                        <div class="contact-page-text deep-aubergine">Apply For {{ucFirst($jobTitle->title)}}</div>
                     </div>
                     <form class="validateBeforeSubmit" id="apply_job_form" action="{{route('storeApplyJob',['jobId'=>request('jobId')])}}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -40,7 +40,7 @@
                                             <div class="d-flex align-items-center mt-3">
                                                 <div><i class="fa fa-paperclip aubergine icon-size" aria-hidden="true"></i></div>
                                                 <div class="upload_resume_text mx-2">Upload Your Resume/CV</div>
-                                                <input type="file" accept="application/pdf,application/msword" name="resume" class="form-control @error('resume') is-invalid @enderror docInp d-none" id="upload-doc-inp">
+                                                <input type="file"  accept="application/pdf,application/msword" name="resume" class="form-control @error('resume') is-invalid @enderror docInp d-none" id="upload-doc-inp">
                                                 @error('resume')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -61,6 +61,9 @@
                                                 </div>
                                             </div>
         
+                                    </div>
+                                    <div class="resumeFile for_error_msg" style="display:none">
+                                        <strong>Your resume file must be less then 10MB.</strong>
                                     </div>
                                 </div>
                             </div>
@@ -162,6 +165,13 @@
             if ($("#resume_job").parent().find('span').length == 0) {
                 $(`<span class="e-err" style="color: #DD45B3; font-weight:600 ;margin:0px;">Please select resume</span>`).insertAfter($("#resume_job"));    
              }  
+            return false;
+        }
+        var resumeKb = $("#upload-doc-inp")[0].files[0].size;
+        var resumeMb = parseInt(resumeKb/(1024*1024));
+        if (resumeMb>10) {
+            $(".resumeFile").show();
+            $(window).scrollTop(0);
             return false;
         }
         $("#job_apply_success_modal").modal({

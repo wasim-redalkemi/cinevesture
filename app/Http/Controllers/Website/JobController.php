@@ -245,7 +245,9 @@ class JobController extends WebController
         //     ->paginate($this->records_limit);
 
         $jobs = UserFavoriteJob::query()
-        ->with(['jobDetails',"jobDetails.jobLocation:id,name", "jobDetails.jobSkills:id,name", "jobDetails.favorite","jobDetails.user"])
+        ->with(['jobDetails',"jobDetails.jobLocation:id,name", "jobDetails.jobSkills:id,name", "jobDetails.favorite","jobDetails.user","jobDetails.applied"=>function($q){
+            $q->where('user_id',auth()->user()->id);
+        }])
         ->where('user_id',$this->getCreatedById())
         ->paginate($this->records_limit);
                $notFoundMessage = "You haven't saved any job.";
@@ -299,7 +301,14 @@ class JobController extends WebController
 
     public function showApplyJob($jobId)
     {
-        $jobTitle = UserJob::query()->where("id", $jobId)->value('title');
+        $jobTitle = UserJob::query()->with('user')->where('save_type','published')->where("id", $jobId)
+        ->first();
+        if(is_null($jobTitle)){
+            return back()->with('error',"This job is unpublish/deleted.");
+        }
+        if($jobTitle->user==null || $jobTitle->user->status=='0'){
+            return back()->with('error',"This job's user is inactive/deleted.");
+        }
         return view('website.job.apply_now', compact('jobTitle'));
     }
     public function storeApplyJob(ApplyNowRequest $request, $jobId)
@@ -319,9 +328,9 @@ class JobController extends WebController
                 $fileName = $file->getClientOriginalName();
                 $fileSize = ceil($file->getSize() / 1024);
 
-                if( $fileSize> 5000)
+                if( $fileSize> 10000)
                 {
-                    return   $this->jsonResponse(false, "uploaded file cannot be more than 5 MB.", []);
+                    return   $this->jsonResponse(false, "uploaded file cannot be more than 10 MB.", []);
                 }
 
                 if ($fileSize > 1024) {
@@ -475,8 +484,8 @@ class JobController extends WebController
                     $q->where('user_id',auth()->user()->id);
                 }])
                 ->find($job_id);
-                if ($Job_data->save_type=='unpublished' || empty($Job_data->user) || $Job_data->user->status==0) {
-                    if($Job_data->save_type=='unpublished'){
+                if (is_null($Job_data)||$Job_data->save_type=='unpublished' || empty($Job_data->user) || $Job_data->user->status==0 ) {
+                    if( is_null($Job_data) || $Job_data->save_type=='unpublished'){
                         return back()->with('error','This job is unpublish/deleted.');
 
                     }elseif (empty($Job_data->user) || $Job_data->user->status==0) {

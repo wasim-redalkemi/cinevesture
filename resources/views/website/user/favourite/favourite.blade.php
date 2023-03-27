@@ -46,7 +46,7 @@
                                         <div class="movie_name_text">{{ !empty($v['projects']['project_name'])? $v['projects']['project_name'] : '-' }} </div>
                                     </a>
                                     
-                                    @if ($v['projects']['user_status']=='draft' || $v['projects']['admin_status']=='inactive' || $v['projects']['user']=="")
+                                    @if ($v['projects']['user_status']=='draft' || $v['projects']['admin_status']=='inactive' || $v['projects']['user']=="" || $v['projects']['user']['status']=='0')
                                     <span class="does_not_exist">
                                         <i class="fa fa-info-circle" title="This entity doesn't exist anymore"></i>
                                     </span>

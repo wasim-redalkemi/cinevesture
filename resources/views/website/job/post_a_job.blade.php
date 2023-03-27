@@ -290,7 +290,7 @@ $('.select_limit').change(function(event) {
                         $(".emp-select2").val(null).trigger('change');
                         $(".work-select2").val(null).trigger('change');
                         $('.js-select2').val(null).trigger('change');
-                        $('#publish_job_modal').modal('show');
+                        $('#publish_job_modal').modal('show')
                     }
                     job_id = resp.data['id']
                 } else {
