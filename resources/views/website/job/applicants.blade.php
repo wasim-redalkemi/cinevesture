@@ -68,7 +68,10 @@ use Illuminate\Support\Facades\DB;
                     </div>
                     @endforeach
                     @else
-                        {!! config('constants.NO_DATA_FAVOURITE_NO_CARD') !!}                        
+                    <div class="not-found-text">
+                        {!! config('constants.NO_DATA_FAVOURITE_JOB') !!}                        
+                        {{-- {{"No Applicant Found"}} --}}
+                    </div>
                     @endif
                 </div>
             </div>

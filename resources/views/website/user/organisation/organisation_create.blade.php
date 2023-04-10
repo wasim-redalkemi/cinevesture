@@ -329,12 +329,15 @@
                                                                 </div>
                                                             </div>
                                                             <div class="col-md-12 mt-4">
-                                                                <input type="email" id="email_1" name="email_1" value="" placeholder="Email" class="modal_input">
+                                                                <input type="email" id="email_1" name="email_1" value="" placeholder="Email" class="modal_input" required>
                                                                 @error('email_1')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
                                                                 @enderror
+                                                                <div class="email_contact for_error_msg" id="empty_email" style="display:none">
+                                                                    <strong>This field is required.</strong>
+                                                                </div>
                                                             </div>
                                                             {{-- <div class="col-md-12 mt-3">
                                                                 <input type="email" id="email_2" name="email_2" value="" placeholder="Second email" class="modal_input">
@@ -377,7 +380,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="d-flex justify-content-end mt-4">
-                    <button class="cancel_btn mx-3">Discard</button>
+                   <button class="cancel_btn  mx-3" onclick="discard_bth()">Discard</button>
                     <button type="submit" id="save_button" class="guide_profile_btn mx-3">Save</button>
                 </div>
             </div>
@@ -415,6 +418,9 @@ function validateOrganizationForm(){
         }
         
     }
+}
+function discard_bth() {
+    location.reload();
 }
 
     $(document).ready(function() {
@@ -635,7 +641,11 @@ function validateOrganizationForm(){
 
     $('.invite_btn').click(function(e) {
         var email_1 = $('#email_1').val();
-        var email_2 = $('#email_2').val();
+        // var email_2 = $('#email_2').val();
+        if (email_1=="") {
+            $('#empty_email').show();
+            return false;
+        }
         var organization_id = $('#organization_id').val();
 
         let $btn = $(this);
@@ -644,6 +654,11 @@ function validateOrganizationForm(){
 
         $btn.text("Sending..");
         $btn.prop('disabled',true);
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+            }
+        });
 
         $.ajax({
             url: "{{ route('team-email') }}",
@@ -652,15 +667,15 @@ function validateOrganizationForm(){
             data: {
                 organization_id: organization_id,
                 email_1: email_1,
-                email_2: email_2,
-                "_token": "{{ csrf_token() }}"
+                // email_2: email_2,
+                // "_token": "{{ csrf_token() }}"
             },
             success: function(response) {
                 $('#email_1').val("");
-                $('#email_2').val("");
+                // $('#email_2').val("");
                 $btn.text("Send Mail");
                 $btn.prop('disabled',false);
-                toastMessage(response.status, response.msg);
+                toastMessage("error", response.msg);
                 $('.modal').hide();
                 $('.modal-backdrop').remove();
             },

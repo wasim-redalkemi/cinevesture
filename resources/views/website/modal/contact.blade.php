@@ -32,11 +32,16 @@
                                 <div class=" form_elem mt-4">
                                     <div><input type="text" id="subject" class="myText controlTextLength modal_input" name="subject" maxlength="50" value=""  text-length = "50" placeholder="Subject" required></div>
                                 </div>
+                                <div class="email_contact for_error_msg" style="display:none">
+                                    <strong>This field is required.</strong>
+                                </div>
                                 <div class="form_elem mt-3">
                                     <textarea name="message" id="message" cols="25" rows="6" class="w-100 controlTextLength mt-2" placeholder="Message" text-length = "1200" maxlength="1200" aria-label="With textarea" required></textarea>
 
                                 </div>
-
+                                <div class="msg_contact for_error_msg" style="display:none">
+                                    <strong>This field is required.</strong>
+                                </div>
                                 <div class="form-check mt-3 d-flex">
                                     <input class="form-check-input modal_check_input" type="checkbox" id="checkbox_cc">
                                     <label class="modal_btm_text mx-2 mt-1">Send a copy to me</label>
@@ -78,6 +83,25 @@
         
         var email_1 = $('#email_1').val();
         var message = $('#message').val();
+        if(subject==""){
+            
+            $('.email_contact').show();
+            return false;
+        //     e.preventDefault();
+        // e.stopPropagation();
+           
+        }
+        else{
+            $('.email_contact').hide();
+        }
+        if(message==""){
+            $('.msg_contact').show();
+            return false;
+        //     e.preventDefault();
+        // e.stopPropagation();
+        }else{
+            $('.msg_contact').hide();
+        }
         var checkbox_cc = ($("#checkbox_cc").prop("checked") == true ? '1' : '0');
         let $btn = $(this);
         e.preventDefault();

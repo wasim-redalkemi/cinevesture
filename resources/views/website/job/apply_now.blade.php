@@ -168,7 +168,7 @@
             return false;
         }
         var resumeKb = $("#upload-doc-inp")[0].files[0].size;
-        var resumeMb = parseInt(resumeKb/(1024*1024));
+        var resumeMb = (resumeKb/(1024*1024)).toFixed(2);
         if (resumeMb>10) {
             $(".resumeFile").show();
             $(window).scrollTop(0);

@@ -18,6 +18,9 @@ return [
     'NO_DATA_FAVOURITE_NO_CARD' => '<div class="not-found-text">
                                         <h4>No Project Found</h4>
                                     </div>',
+    'NO_DATA_FAVOURITE_JOB' => '<div class="not-found-text">
+                                        <h4>No Applicant Found</h4>
+                                    </div>',
     'SOCIAL_MEDIA_LINK_LINKEDIN' => 'https://www.linkedin.com/in/cinevesture',
     'SOCIAL_MEDIA_LINK_INSTAGRAM' => 'https://instagram.com/cinevesture?igshid=YWJhMjlhZTc=',
     'SOCIAL_MEDIA_LINK_FACEBOOK' => 'https://www.facebook.com/cinevesture',

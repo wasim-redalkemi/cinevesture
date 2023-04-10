@@ -653,6 +653,9 @@ class ProjectController extends WebController
                         ->Where('admin_status', 'active');
                     }
                 })->get();
+               if($projectData[0]->user->status=='0'){
+                return back()->with('error',"This project's uses is inactive.");
+               }
                 if (empty($projectData) || (empty($projectData[0]->user))|| is_null($projectData[0]->user || $projectData[0]->user->status=='0')){
                         if(empty($projectData[0]) ){
                             return back()->with('error','This Project is unpublished/inactive.');

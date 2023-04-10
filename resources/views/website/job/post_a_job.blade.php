@@ -95,7 +95,7 @@
                                             <option value="">Select</option>
                                             @foreach($countries as $country)
                                             <option @if(!empty($userJobData['job_location']))
-                                                @if ($userJobData['job_location']['id']==$country->id) {
+                                                @if ($userJobData['job_location']['id']==$country->id) 
                                                 {{'selected'}}
                                                 @endif    
                                                 @endif  value="{{$country->id}}">{{$country->name}}</option>
@@ -290,7 +290,7 @@ $('.select_limit').change(function(event) {
                         $(".emp-select2").val(null).trigger('change');
                         $(".work-select2").val(null).trigger('change');
                         $('.js-select2').val(null).trigger('change');
-                        $('#publish_job_modal').modal('show')
+                        $('#publish_job_modal').modal('show');
                     }
                     job_id = resp.data['id']
                 } else {

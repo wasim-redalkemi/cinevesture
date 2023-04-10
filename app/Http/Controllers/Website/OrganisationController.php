@@ -298,12 +298,14 @@ class OrganisationController extends WebController
                 return ['satus'=>0,'msg'=>$validator->errors()->first()];
             }
             $email = '';
-            if(!$_REQUEST['email_1'] && !$_REQUEST['email_2']){
+            if(!$_REQUEST['email_1'] 
+            // && !$_REQUEST['email_2']
+             ){
                 return ['satus'=>0,'msg'=>"Email fields can not be empty."];
             }
             $userIdOnlyTwo=UserInvite::query()->where('user_id',auth()->user()->id)->get();
             if(count($userIdOnlyTwo)>'1'){
-                return ['satus'=>0,'msg'=>"Only two team members invite."];
+                return ['satus'=>'error','msg'=>"Only two team members invite."];
             }
             $userexist=UserInvite::query()->where('email',$request->email_1)->get();
             if(count($userexist)>='1'){
