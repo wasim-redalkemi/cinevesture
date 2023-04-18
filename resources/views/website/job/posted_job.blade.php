@@ -138,7 +138,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
          <div class="d-flex justify-content-end m-2">
-             <button type="button" class="simple_cross_btn" data-bs-dismiss="modal" aria-label="Close"> <img src="{{ asset('images/asset/cross_Icon.svg') }}" /></button>
+             <button type="button" class="simple_cross_btn" data-dismiss="modal" aria-label="Close"> <img src="{{ asset('images/asset/cross_Icon.svg') }}" /></button>
          </div>
             <div class="modal-body" style="padding: 0px;">
                 <section>
@@ -231,8 +231,6 @@
     });
 });
 });
- $('.close').click( function () {
-    $('#Promote_job_response').modal('hide')
- } )
+
     </script> 
     @endpush

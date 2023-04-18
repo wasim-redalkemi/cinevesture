@@ -577,8 +577,8 @@
 @push('scripts')
 <script>
     $(document).ready(function() {
-        $("#error-toast").toast("show");
-        $("#success-toast").toast("show");
+        // $("#error-toast").toast("show");
+        // $("#success-toast").toast("show");
 
         var $temp = $("<input>");
         var $url = $(location).attr('href');
