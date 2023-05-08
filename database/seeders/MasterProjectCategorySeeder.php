@@ -16,25 +16,25 @@ class MasterProjectCategorySeeder extends Seeder
     {
         DB::table('master_project_categories')->insert([
             [
-                'name' => 'Features',
+                'name' => 'Book Adaptation',
+            ],
+            [
+                'name' => 'Documentary',
+            ],
+            [
+                'name' => 'Feature',
+            ],
+            [
+                'name' => 'Gaming',
+            ],
+            [
+                'name' => 'Remake',
             ],
             [
                 'name' => 'Series',
             ],
             [
-                'name' => 'Documentaries',
-            ],
-            [
-                'name' => 'Shorts',
-            ],
-            [
-                'name' => 'Remake Rights',
-            ],
-            [
-                'name' => 'Book Adaptation Rights',
-            ],
-            [
-                'name' => 'Gaming',
+                'name' => 'Short',
             ]
         ]);
     }
