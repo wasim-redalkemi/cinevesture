@@ -16,13 +16,16 @@ class MasterProjectGenreSeeder extends Seeder
     {
         DB::table('master_project_genres')->insert([
             [
-                'name' => 'Action & Adventure',
+                'name' => 'Action',
+            ],
+            [
+                'name' => 'Adult',
+            ],
+            [
+                'name' => 'Adventure',
             ],
             [
                 'name' => 'Animation',
-            ],
-            [
-                'name' => 'Award Winners',
             ],
             [
                 'name' => 'Biography',
@@ -40,7 +43,13 @@ class MasterProjectGenreSeeder extends Seeder
                 'name' => 'Dark Humour',
             ],
             [
+                'name' => 'Drama',
+            ],
+            [
                 'name' => 'Dystopia',
+            ],
+            [
+                'name' => 'Family',
             ],
             [
                 'name' => 'Fantasy',
@@ -49,16 +58,31 @@ class MasterProjectGenreSeeder extends Seeder
                 'name' => 'Film Noir',
             ],
             [
-                'name' => 'Historical/ Period Film',
+                'name' => 'Historical/Period',
             ],
             [
                 'name' => 'Horror',
             ],
             [
-                'name' => 'Magic Realism',
+                'name' => 'Magic Realism/Mystery',
+            ],
+            [
+                'name' => 'Music',
+            ],
+            [
+                'name' => 'Musical',
+            ],
+            [
+                'name' => 'News',
+            ],
+            [
+                'name' => 'Reality TV',
             ],
             [
                 'name' => 'Romance',
+            ],
+            [
+                'name' => 'Science Fiction',
             ],
             [
                 'name' => 'Sports',
@@ -67,17 +91,23 @@ class MasterProjectGenreSeeder extends Seeder
                 'name' => 'Spy',
             ],
             [
-                'name' => 'Suspense/ Mystery',
+                'name' => 'Suspense',
+            ],
+            [
+                'name' => 'Talk Show',
             ],
             [
                 'name' => 'Thriller',
+            ],
+            [
+                'name' => 'War',
             ],
             [
                 'name' => 'Western',
             ],
             [
                 'name' => 'Other',
-            ]
+            ],
         ]);
     }
 }
