@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\MasterProjectCategory;
 use App\Models\MasterProjectGenre;
 use App\Models\ProjectList;
+use App\Models\ProjectListCategories;
 use App\Models\ProjectMedia;
 use App\Models\ProjectListProjects;
 use App\Models\UserProject;
@@ -30,7 +31,8 @@ class ProjectListController extends AdminController
        
         try
         {
-             return view('admin.projectList.create');
+            $categories=MasterProjectCategory::query()->get();
+             return view('admin.projectList.create')->with(compact('categories'));
         }
         catch (Exception $e)
         {
@@ -48,10 +50,11 @@ class ProjectListController extends AdminController
     public function create(Request $request)
     {
         try
-        {
+        {   
             $validator = Validator::make($request->all(),[
                 'name' => 'required',
                 'status' => 'required',
+                'type' => 'required',
                   
             ]);
             if ($validator->fails()) {
@@ -61,7 +64,13 @@ class ProjectListController extends AdminController
             $project_list= new ProjectList();
             $project_list->list_name=$request->name;
             $project_list->status=$request->status;
+            $project_list->type=$request->type;
             $project_list->save();
+
+            $project_list_categories = new ProjectListCategories();
+            $project_list_categories->list_id=$project_list->id;
+            $project_list_categories->category_id=$request->categories;
+            $project_list_categories->save();
             // Session::flash('response', ['text'=>'Project create successfully!','type'=>'success']);
              return redirect()->route('show-list');
             }

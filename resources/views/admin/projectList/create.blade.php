@@ -29,6 +29,32 @@
                                         </select>
                                     </div>
                               </div>
+                              <div class="col-md-6">
+                                   <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Type</label required>
+                                        <select  name="type"class="form-control form-control-lg" id="listType" required>
+                                        <option value="">Select</option required>
+                                        <option value="curated">Curated</option>
+                                        <option value="automated">Automated</option>
+                                        </select>
+                                    </div>
+                              </div>
+                              <div class="col-md-6">
+                                   <div class="form-group">
+                                        <label for="exampleFormControlSelect1">Category</label required>
+                                        <select  name="categories"class="form-control form-control-lg" id="listCategory" required>
+                                        <option value="">Select</option required>
+                                            @php
+                                              if($categories && $categories != '')
+                                                foreach ($categories as $key => $value) {
+                                                    @endphp
+                                                    <option value="{{$value->id}}">{{$value->name}}</option>
+                                                   @php
+                                                }
+                                            @endphp
+                                        </select>
+                                    </div>
+                              </div>
                             </div>
                                 <div class="row" style="margin-top:15px">
                                     <div class="col-md-12" style="padding-left: 42%;">
