@@ -42,7 +42,7 @@
                               <div class="col-md-6">
                                    <div class="form-group">
                                         <label for="exampleFormControlSelect1">Category</label required>
-                                        <select  name="categories"class="form-control form-control-lg" id="listCategory" required>
+                                        <select  name="categories[]"class="form-control form-control-lg" id="listCategory" multiple required>
                                         <option value="">Select</option required>
                                             @php
                                               if($categories && $categories != '')

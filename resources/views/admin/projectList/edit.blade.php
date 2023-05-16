@@ -31,6 +31,34 @@
                                      </select>
                                 </div>
                                 </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                     <label for="exampleFormControlSelect1">Type</label required value="{{$projectList->type}}" required>
+                                     <select  name="type"class="form-control form-control-lg" id="listType" required>
+                                     <option value="">Select</option required>
+                                     <option {{ $projectList->type == 'curated' ? 'selected' : '' }}  value="curated">Curated</option>
+                                     <option {{ $projectList->type == 'automated' ? 'selected' : '' }}  value="automated">Automated</option value="{{$projectList->type}}">
+                                     </select>
+                                </div>
+                                </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                     <label for="exampleFormControlSelect1">Category</label required value="{{$projectList->categories}}" required>
+                                     <select  name="categories[]"class="form-control form-control-lg" id="listCategories" multiple required>
+                                     <option value="">Select</option required>
+                                        @php
+                                        if($categories && $categories != '')
+                                        $i=0;
+                                          foreach ($categories as $key => $value) {
+                                              @endphp
+                                              <option value="{{$value->id}}" {{(in_array($value->id, $selectedCategories)) ? 'selected' : ''}} >{{$value->name}}</option>
+                                             @php
+                                          }
+                                          $i++;
+                                      @endphp
+                                     </select>
+                                </div>
+                                </div>
                                 
                             </div>
                             <div class="row" style="margin-top:15px">

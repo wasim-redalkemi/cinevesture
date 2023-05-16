@@ -47,6 +47,7 @@ Route::group(['prefix'=>'admin','middleware' => ['adminAuth']],function()
         Route::post('/search-projects', [ProjectListController::class, 'saveSearchProjects'])->name('save-search-projects');
         Route::get('/change-status/{id}/{status}', [ProjectListController::class, 'changeStatus'])->name('change-status');
         Route::get('/delete-list/{id}', [ProjectListController::class, 'deleteList'])->name('delete-list');
+        Route::get('/list-automation', [ProjectListController::class, 'listAutomation']);
     }); 
     Route::group(['prefix'=>'query-management'],function()
     {

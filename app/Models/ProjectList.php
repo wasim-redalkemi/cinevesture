@@ -20,4 +20,9 @@ protected $table = 'project_lists';
     {
         return $this->belongsToMany(UserProject::class,ProjectListProjects::class,'list_id','project_id');
     }
+
+    public function ProjectListCategory()
+    {
+        return $this->hasMany(ProjectListCategories::class,'list_id','id');
+    }
 }

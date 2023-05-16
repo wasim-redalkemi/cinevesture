@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
 use App\Models\MasterProjectCategory;
 use App\Models\MasterProjectGenre;
+use App\Models\ProjectCategory;
 use App\Models\ProjectList;
 use App\Models\ProjectListCategories;
 use App\Models\ProjectMedia;
@@ -55,7 +56,6 @@ class ProjectListController extends AdminController
                 'name' => 'required',
                 'status' => 'required',
                 'type' => 'required',
-                  
             ]);
             if ($validator->fails()) {
                 Session::flash('response', ['text'=>'Project list name update successfully!','type'=>'danger']);
@@ -66,11 +66,17 @@ class ProjectListController extends AdminController
             $project_list->status=$request->status;
             $project_list->type=$request->type;
             $project_list->save();
-
-            $project_list_categories = new ProjectListCategories();
-            $project_list_categories->list_id=$project_list->id;
-            $project_list_categories->category_id=$request->categories;
-            $project_list_categories->save();
+            
+            $categoriesData=[];
+            foreach($request->categories as $key=>$val)
+            {
+                $categoriesData[] = [
+                    'list_id'=>$project_list->id,
+                    'category_id'=>$val,
+                ];
+            }
+            $projectListCategories = new ProjectListCategories();
+            $projectListCategories->insert($categoriesData);
             // Session::flash('response', ['text'=>'Project create successfully!','type'=>'success']);
              return redirect()->route('show-list');
             }
@@ -293,12 +299,19 @@ class ProjectListController extends AdminController
     }
     public function project_list_edit(request $request,$id)
     {
-        try {
-            
-            $projectList=ProjectList::query()->where('id',$id)->first();
-            return view('/admin.projectList.edit',compact('projectList'));
-        } catch (\Throwable $e) {
-           return back()->with($e->getMessage());        }
+        try{
+            $categories=MasterProjectCategory::query()->get();
+            $projectList=ProjectList::query()->where('id',$id)->with(['ProjectListCategory'])->first();
+            $selectedCategories = [];
+            foreach($projectList['ProjectListCategory'] as $key=> $val)
+            {
+                $selectedCategories[] = $val['category_id'];
+            }
+            return view('/admin.projectList.edit',compact('projectList','categories','selectedCategories'));
+        } 
+        catch(\Throwable $e){
+           return back()->with($e->getMessage());        
+        }
     }
     public function project_list_update(request $request)
     {
@@ -316,17 +329,57 @@ class ProjectListController extends AdminController
             $projectList=ProjectList::query()->where('id',$request->id)->first();
             $projectList->list_name=$request->name;
             $projectList->status=$request->status;
+            $projectList->type=$request->type;
             $projectList->save();
+
+            $deletePrevList = ProjectListCategories::query()->where('list_id',$projectList->id)->delete();
+            $categoriesData=[];
+            foreach($request->categories as $key=>$val)
+            {
+                $categoriesData[] = [
+                    'list_id'=>$projectList->id,
+                    'category_id'=>$val,
+                ];
+            }
+            $projectListCategories = new ProjectListCategories();
+            $projectListCategories->insert($categoriesData);
             
             Session::flash('response', ['text'=>'Project list name update successfully!','type'=>'success']);
             return redirect()->route('show-list');
             // toastr() ->success('Promote update successfully!', 'Congrats');
             
             
-        } catch (\Throwable $e) {
+        } 
+        catch(\Throwable $e){
             $e->getMessage();
         }
     }
+
+    public function listAutomation()
+    {
+       try{
+            $projectListWithCats = ProjectListCategories::query()->with("projectCategories")->Has("projectCategories")->get()->toArray();
+            if (!blank($projectListWithCats)) {
+                foreach ($projectListWithCats as $key => $projectListWithCat) {
+                   $projectListProjectsCount = ProjectListProjects::query()->where("project_id", $projectListWithCat['project_categories']['project_id'])->where("list_id", $projectListWithCat['list_id'])->count();
+                   if ($projectListProjectsCount > 0) {
+                        continue;
+                   }
+                   $projectListObj = new ProjectListProjects();
+                    $projectListObj->list_id=$projectListWithCat['list_id'];
+                    $projectListObj->project_id=$projectListWithCat['project_categories']['project_id'];
+                    $projectListObj->save();
+                }
+                return back()->with('success','list added successfully.');
+            } else {
+                return back()->with('error','list already exists');
+            }
+       }
+       catch(\Throwable $e){
+            return back()->with($e->getMessage());        
+        }
+    }
+
     /**
      * Update the specified resource in storage.
      *
