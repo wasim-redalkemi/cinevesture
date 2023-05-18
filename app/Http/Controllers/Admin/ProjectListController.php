@@ -4,6 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
+use App\Models\ListFilters;
+use App\Models\MasterCountry;
+use App\Models\MasterGender;
+use App\Models\MasterLanguage;
 use App\Models\MasterProjectCategory;
 use App\Models\MasterProjectGenre;
 use App\Models\ProjectCategory;
@@ -33,7 +37,10 @@ class ProjectListController extends AdminController
         try
         {
             $categories=MasterProjectCategory::query()->get();
-             return view('admin.projectList.create')->with(compact('categories'));
+            $genre=MasterGender::query()->get();
+            $language=MasterLanguage::query()->get();
+            $location=MasterCountry::query()->get();
+             return view('admin.projectList.create')->with(compact('categories','genre','language','location'));
         }
         catch (Exception $e)
         {
@@ -67,17 +74,17 @@ class ProjectListController extends AdminController
             $project_list->type=$request->type;
             $project_list->save();
             
-            $categoriesData=[];
-            foreach($request->categories as $key=>$val)
-            {
-                $categoriesData[] = [
-                    'list_id'=>$project_list->id,
-                    'category_id'=>$val,
-                ];
-            }
-            $projectListCategories = new ProjectListCategories();
-            $projectListCategories->insert($categoriesData);
-            // Session::flash('response', ['text'=>'Project create successfully!','type'=>'success']);
+            $projectList = new ListFilters();
+            $projectList->list_id=$project_list->id;
+            $projectList->category_id=implode(',',$request->categories);
+            $projectList->genre_id=implode(',',$request->genre);
+            $projectList->language_id=implode(',',$request->language);
+            $projectList->location_id=implode(',',$request->location);
+            $projectList->recommendation=$request->recommended;
+            $projectList->favorite=$request->favorite;
+
+            $projectList->save();
+            
              return redirect()->route('show-list');
             }
         }
@@ -114,7 +121,6 @@ class ProjectListController extends AdminController
                 $q->select(DB::raw('list_id,COUNT(project_id) as pcount'))->groupby('list_id');
             })            
             ->paginate($this->records_limit);
-          
              return view('admin.projectList.list',compact('projects_data'));
         }
         catch (Exception $e)
@@ -133,7 +139,7 @@ class ProjectListController extends AdminController
     public function search(Request $request)
     {
         try
-        {
+        {   
             $project_data=UserProject::query()
             ->with('projectOnlyImage')
             ->paginate($this->records_limit);
@@ -157,6 +163,7 @@ class ProjectListController extends AdminController
         try
         {
             $id = $request->id;
+            $list_type= ProjectList::query()->where('id',$id)->get();
             $list_name = $request->name;
             $project_list_project = ProjectListProjects::query()->where('list_id',$id)->pluck('project_id')->toArray();
             $project_list_project = array_unique(array_values($project_list_project));
@@ -221,7 +228,8 @@ class ProjectListController extends AdminController
             ->orderBy('created_at', 'desc')
             ->where("user_status","published")
             ->paginate($this->records_limit);
-            return view('/admin.projectList.search',compact('id','project_data','is_added_only','categories','genres','list_name'));
+            // dd($list_name);
+            return view('/admin.projectList.search',compact('id','project_data','is_added_only','categories','genres','list_name','list_type'));
         }
         catch (Exception $e)
         {
@@ -300,14 +308,13 @@ class ProjectListController extends AdminController
     public function project_list_edit(request $request,$id)
     {
         try{
+            $genre=MasterGender::query()->get();
+            $language=MasterLanguage::query()->get();
+            $location=MasterCountry::query()->get();
             $categories=MasterProjectCategory::query()->get();
-            $projectList=ProjectList::query()->where('id',$id)->with(['ProjectListCategory'])->first();
-            $selectedCategories = [];
-            foreach($projectList['ProjectListCategory'] as $key=> $val)
-            {
-                $selectedCategories[] = $val['category_id'];
-            }
-            return view('/admin.projectList.edit',compact('projectList','categories','selectedCategories'));
+            $projectList=ProjectList::query()->where('id',$id)->with(['ProjectListFilters'])->first();
+            // dd();
+            return view('/admin.projectList.edit',compact('projectList','categories','genre','language','location'));
         } 
         catch(\Throwable $e){
            return back()->with($e->getMessage());        
@@ -332,26 +339,28 @@ class ProjectListController extends AdminController
             $projectList->type=$request->type;
             $projectList->save();
 
-            $deletePrevList = ProjectListCategories::query()->where('list_id',$projectList->id)->delete();
-            $categoriesData=[];
-            foreach($request->categories as $key=>$val)
-            {
-                $categoriesData[] = [
-                    'list_id'=>$projectList->id,
-                    'category_id'=>$val,
-                ];
-            }
-            $projectListCategories = new ProjectListCategories();
-            $projectListCategories->insert($categoriesData);
+            $projectListFilters = ListFilters::query()->where('list_id',$projectList->id)->first();
+            $projectListFilters->list_id=$projectList->id;
+            $projectListFilters->category_id=implode(',',$request->categories);
+            $projectListFilters->genre_id=implode(',',$request->genre);
+            $projectListFilters->language_id=implode(',',$request->language);
+            $projectListFilters->location_id=implode(',',$request->location);
+            $projectListFilters->recommendation=$request->recommended;
+            $projectListFilters->favorite=$request->favorite;
+
+            $projectListFilters->save();
             
             Session::flash('response', ['text'=>'Project list name update successfully!','type'=>'success']);
             return redirect()->route('show-list');
+            
+            
             // toastr() ->success('Promote update successfully!', 'Congrats');
             
             
         } 
         catch(\Throwable $e){
-            $e->getMessage();
+            // $e->getMessage();
+            return back()->with($e->getMessage());        
         }
     }
 
@@ -360,18 +369,35 @@ class ProjectListController extends AdminController
        try{
             $projectListWithCats = ProjectListCategories::query()->with("projectCategories")->Has("projectCategories")->get()->toArray();
             if (!blank($projectListWithCats)) {
+                $newProjectsData=[];
+                $listData=[];
+                $projectData=[];
                 foreach ($projectListWithCats as $key => $projectListWithCat) {
-                   $projectListProjectsCount = ProjectListProjects::query()->where("project_id", $projectListWithCat['project_categories']['project_id'])->where("list_id", $projectListWithCat['list_id'])->count();
-                   if ($projectListProjectsCount > 0) {
-                        continue;
-                   }
-                   $projectListObj = new ProjectListProjects();
-                    $projectListObj->list_id=$projectListWithCat['list_id'];
-                    $projectListObj->project_id=$projectListWithCat['project_categories']['project_id'];
-                    $projectListObj->save();
+                    $newProjectsData[] = [
+                        'list_id'=>$projectListWithCat['list_id'],
+                        'project_id'=>$projectListWithCat['project_categories']['project_id'],
+                    ];
+                    $listData[] = $projectListWithCat['list_id'];
+                    $projectData[] = $projectListWithCat['project_categories']['project_id'];
+                }               
+                $existingProjectListObj[] = ProjectListProjects::query()->whereIn("list_id",array_unique($listData))->whereIn("project_id",array_unique($projectData))->get();
+                foreach ($newProjectsData as $k => $v) {
+                    foreach ($existingProjectListObj[0] as $k2 => $v2) {
+                        if ($v['list_id'] == $v2->list_id && $v['project_id'] == $v2->project_id) {
+                            unset($newProjectsData[$k]);
+                        }
+                    }
                 }
-                return back()->with('success','list added successfully.');
-            } else {
+                if (!blank($newProjectsData)) {
+                    // dd($newProjectsData);
+                    $projectListObj = new ProjectListProjects();
+                    $projectListObj->insert($newProjectsData);
+                }
+                Session::flash('response', ['text'=>'list added successfully!','type'=>'success']);
+                return redirect()->route('show-list');
+            } 
+            else 
+            {
                 return back()->with('error','list already exists');
             }
        }

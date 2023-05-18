@@ -48,15 +48,20 @@
             <div class="col-md-12">
               <div id="accordion">
                 <div class="my_card mb-4">
-                    <div class="card-header">
-                        <a class="card-link" data-toggle="collapse" href="#collapseOne">
-                            <div class="text-center d-block">
-                                <button class="btn btn-sm btn-success text-white">
-                                    Apply Filter
-                                </button>
-                            </div>
-                        </a>
-                    </div>
+                  @php
+                    if($list_type[0]->type == 'curated')
+                    { 
+                  @endphp
+                      <div class="card-header">
+                          <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                              <div class="text-center d-block">
+                                  <button class="btn btn-sm btn-success text-white">
+                                      Apply Filter
+                                  </button>
+                              </div>
+                          </a>
+                      </div>
+                 
                     <div id="collapseOne" class="collapse p-3 pt-4" data-parent="#accordion">
                         <form class="" method="get" action="{{ route('list-projects',['id' => request('id') ]) }}">
                             @csrf
@@ -138,6 +143,9 @@
                             </div>
                         </form>
                     </div>
+                    @php  
+                    }
+                  @endphp
                 </div>
             </div>
               <div class="table-responsive">
@@ -158,7 +166,14 @@
                                  <th>Name</th>
                                  <th>Image</th>
                                  <th>Status</th>
+                                  @php
+                                  if($list_type[0]->type == 'curated')
+                                  { 
+                                  @endphp
                                  <th>Select</th>
+                                 @php  
+                                  }
+                                  @endphp
                                 </tr>
                            </thead>
                            
@@ -187,19 +202,24 @@
                                         <td>
                                           {{ucfirst($project->admin_status)}}
                                         </td>
-                                        <td>
-                                           {{-- @if ($project->admin_status=='inactive')
-                                           <input type="checkbox" value="<?php echo $project['id'];?>" name="projects_id[]" id="" @if ($is_added_only)
-                                           uchecked
-                                           @endif disabled>
-                                           @else --}}
-                                           <input type="checkbox" value="<?php echo $project['id'];?>" name="projects_id[]" id="" @if ($is_added_only)
-                                           checked
-                                           @endif>
-                                           {{-- @endif --}}
-                                          
-                                      
-                                        </td>
+                                        @php
+                                        if($list_type[0]->type == 'curated')
+                                        { 
+                                        @endphp
+                                          <td>
+                                            {{-- @if ($project->admin_status=='inactive')
+                                            <input type="checkbox" value="<?php echo $project['id'];?>" name="projects_id[]" id="" @if ($is_added_only)
+                                            uchecked
+                                            @endif disabled>
+                                            @else --}}
+                                            <input type="checkbox" value="<?php echo $project['id'];?>" name="projects_id[]" id="" @if ($is_added_only)
+                                            checked
+                                            @endif>
+                                            {{-- @endif --}}
+                                          </td>
+                                        @php  
+                                        }
+                                        @endphp
                                     </tr>
                                     
                                     @php
@@ -210,11 +230,18 @@
                               </tbody>
                     </table>
                     <div style="text-align: center;" class="m-4">
-                      <input type="hidden" name="list_id" value="{{$_REQUEST['id']}}" id="">
-                      <input type="hidden" name="add_edit" value="{{$is_added_only}}" id="">
-                      <button type="submit" class="btn btn-success btn-icon-text btn_padding">
-                      <i class="mdi mdi-file-check btn-icon-prepend"></i>
-                      Save</button>
+                      @php
+                      if($list_type[0]->type == 'curated')
+                      { 
+                      @endphp
+                        <input type="hidden" name="list_id" value="{{$_REQUEST['id']}}" id="">
+                        <input type="hidden" name="add_edit" value="{{$is_added_only}}" id="">
+                        <button type="submit" class="btn btn-success btn-icon-text btn_padding">
+                        <i class="mdi mdi-file-check btn-icon-prepend"></i>
+                        Save</button>
+                      @php  
+                      }
+                      @endphp
                     </div>
                 </form>
                 <div class="row">

@@ -13,7 +13,7 @@
                    <form role="form" method="Post" action="{{ route('update_project_list')}}">
                             @csrf
                             <div class="row d-flex">
-                              <div class="col-md-6">
+                              <div class="col-md-4">
                                 <div class="form-group">
                                         <label class="">Name</label>
                                         <input type="hidden" name="id" id="id" value="{{$projectList->id}}">
@@ -21,7 +21,7 @@
                                 </div>
                                 
                               </div>
-                              <div class="col-md-6">
+                              <div class="col-md-4">
                                 <div class="form-group">
                                      <label for="exampleFormControlSelect1">Status</label required value="{{$projectList->status}}" required>
                                      <select  name="status"class="form-control form-control-lg" id="listStatus" required>
@@ -31,21 +31,20 @@
                                      </select>
                                 </div>
                                 </div>
-                              <div class="col-md-6">
+                              <div class="col-md-4">
                                 <div class="form-group">
                                      <label for="exampleFormControlSelect1">Type</label required value="{{$projectList->type}}" required>
-                                     <select  name="type"class="form-control form-control-lg" id="listType" required>
-                                     <option value="">Select</option required>
+                                     <select  name="type"class="form-control form-control-lg add_fields_placeholder" required>
                                      <option {{ $projectList->type == 'curated' ? 'selected' : '' }}  value="curated">Curated</option>
                                      <option {{ $projectList->type == 'automated' ? 'selected' : '' }}  value="automated">Automated</option value="{{$projectList->type}}">
                                      </select>
                                 </div>
-                                </div>
-                              <div class="col-md-6">
-                                <div class="form-group">
-                                     <label for="exampleFormControlSelect1">Category</label required value="{{$projectList->categories}}" required>
-                                     <select  name="categories[]"class="form-control form-control-lg" id="listCategories" multiple required>
-                                     <option value="">Select</option required>
+                              </div>
+                              {{-- <div class="col-md-4">
+                                <div class="form-group" id="add_fields_placeholderValue">
+                                     <label for="exampleFormControlSelect1">Category</label value="{{$projectList->categories}}">
+                                     <select  name="categories[]"class="form-control form-control-lg" id="add_fields_placeholderValue" multiple>
+                                     <option value="">Select</option>
                                         @php
                                         if($categories && $categories != '')
                                         $i=0;
@@ -58,8 +57,95 @@
                                       @endphp
                                      </select>
                                 </div>
-                                </div>
-                                
+                                </div> --}}
+                                <div class="row add_fields_placeholderValue">
+                                  <div class="col-md-4">
+                                     <div class="form-group">
+                                          <label for="exampleFormControlSelect1">Category</label>
+                                          <select  name="categories[]"class="form-control form-control-lg" multiple>
+                                          <option value="">Select</option>
+                                              @php
+                                                $pre_cat = explode(',',$projectList->ProjectListFilters[0]->category_id);
+                                                if($categories && $categories != '')
+                                                  foreach ($categories as $key => $value) {
+                                                      @endphp
+                                                      <option value="{{$value->id}}" {{(in_array($value->id,$pre_cat)) ? 'selected' : ''}}>{{$value->name}}</option>
+                                                     @php
+                                                  }
+                                              @endphp
+                                          </select>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="form-group">
+                                          <label for="exampleFormControlSelect1">Genre</label>
+                                          <select  name="genre[]"class="form-control form-control-lg" multiple>
+                                          <option value="">Select</option>
+                                              @php
+                                                $pre_genre = explode(',',$projectList->ProjectListFilters[0]->genre_id);
+                                              if($genre && $genre != '')
+                                                  foreach ($genre as $key => $value) {
+                                                      @endphp
+                                                      <option value="{{$value->id}}" {{(in_array($value->id,$pre_genre)) ? 'selected' : ''}}>{{$value->gender}}</option>
+                                                      @php
+                                                  }
+                                              @endphp
+                                          </select>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="form-group">
+                                          <label for="exampleFormControlSelect1">Language</label>
+                                          <select  name="language[]"class="form-control form-control-lg" multiple>
+                                          <option value="">Select</option>
+                                              @php
+                                                $pre_language = explode(',',$projectList->ProjectListFilters[0]->language_id);
+                                              if($language && $language != '')
+                                                  foreach ($language as $key => $value) {
+                                                      @endphp
+                                                      <option value="{{$value->id}}" {{(in_array($value->id,$pre_language)) ? 'selected' : ''}}>{{$value->name}}</option>
+                                                      @php
+                                                  }
+                                              @endphp
+                                          </select>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="form-group">
+                                          <label for="exampleFormControlSelect1">location</label>
+                                          <select  name="location[]"class="form-control form-control-lg" multiple>
+                                          <option value="">Select</option>
+                                              @php
+                                                $pre_location = explode(',',$projectList->ProjectListFilters[0]->location_id);
+                                              if($location && $location != '')
+                                                  foreach ($location as $key => $value) {
+                                                      @endphp
+                                                      <option value="{{$value->id}}" {{(in_array($value->id,$pre_location)) ? 'selected' : ''}}>{{$value->name}}</option>
+                                                      @php
+                                                  }
+                                              @endphp
+                                          </select>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="form-group">
+                                          <label for="exampleFormControlSelect1">Recommended</label>
+                                          <select  name="recommended"class="form-control form-control-lg">
+                                          <option value="1" {{ $projectList->ProjectListFilters[0]->recommendation == '1' ? 'selected' : '' }}>Yes</option>
+                                          <option value="0" {{ $projectList->ProjectListFilters[0]->recommendation == '0' ? 'selected' : '' }}>No</option>
+                                          </select>
+                                      </div>
+                                  </div>
+                                  <div class="col-md-4">
+                                      <div class="form-group">
+                                          <label for="exampleFormControlSelect1">Favorite</label>
+                                          <select  name="favorite"class="form-control form-control-lg">
+                                          <option value="1" {{ $projectList->ProjectListFilters[0]->favorite == '1' ? 'selected' : '' }}>Yes</option>
+                                          <option value="0" {{ $projectList->ProjectListFilters[0]->favorite == '0' ? 'selected' : '' }}>No</option>
+                                          </select>
+                                      </div>
+                                  </div>
+                              </div>
                             </div>
                             <div class="row" style="margin-top:15px">
                                 <div class="col-md-12" style="padding-left: 42%;">
@@ -73,3 +159,23 @@
     </div>
 </div>
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function()
+    {
+        $(".add_fields_placeholderValue").hide();
+        $(".add_fields_placeholder").change(function() {
+            if($(this).val() == "automated") {
+                $(".add_fields_placeholderValue").show();
+            }
+            else {
+                $(".add_fields_placeholderValue").hide();
+            }
+        });
+        if($(".add_fields_placeholder").val() == "automated") {
+         $(".add_fields_placeholderValue").show();
+        }
+    });
+</script>
+@endpush

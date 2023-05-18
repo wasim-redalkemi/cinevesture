@@ -13,9 +13,10 @@
                        <table class="table order-listing table-sm table-bordered table-hover">
                             <thead>
                                 <tr>
-                                   <th class="col-md-2">Id</th>
+                                   <th class="col-md-2">S no.</th>
                                    <th class="col-md-2">Name</th>
-                                    <th class="col-md-2">Project Count</th>
+                                   <th class="col-md-1">Type</th>
+                                    <th class="col-md-1">Project Count</th>
                                     <th class="col-md-2 notForPrint">Action</th>
                                 </tr>
                             </thead>
@@ -31,6 +32,8 @@
                                     <?php echo $i;?>
                                     </td>
                                         <td>{{ucfirst($project->list_name)}}</td>
+                                        <td>{{ucfirst($project->type)}}</td>
+
                                         <td>
                                             
                                             <a href="{{route('list-projects',['id' => $project->id ,'name' =>$project->list_name,'pcount' => (@$project->lists[0]->pcount) ? @$project->lists[0]->pcount : 0])}}"><button type="button" class="btn btn-primary btn-sm btn-sm mt-10">

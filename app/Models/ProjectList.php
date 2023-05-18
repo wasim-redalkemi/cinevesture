@@ -21,8 +21,12 @@ protected $table = 'project_lists';
         return $this->belongsToMany(UserProject::class,ProjectListProjects::class,'list_id','project_id');
     }
 
-    public function ProjectListCategory()
+    // public function ProjectListCategory()
+    // {
+    //     return $this->hasMany(ProjectListCategories::class,'list_id','id');
+    // }
+    public function ProjectListFilters()
     {
-        return $this->hasMany(ProjectListCategories::class,'list_id','id');
+        return $this->hasMany(ListFilters::class,'list_id','id');
     }
 }
