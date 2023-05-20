@@ -11,6 +11,9 @@ use App\Models\MasterLanguage;
 use App\Models\MasterProjectCategory;
 use App\Models\MasterProjectGenre;
 use App\Models\ProjectCategory;
+use App\Models\ProjectCountry;
+use App\Models\ProjectGenre;
+use App\Models\ProjectLanguage;
 use App\Models\ProjectList;
 use App\Models\ProjectListCategories;
 use App\Models\ProjectMedia;
@@ -367,41 +370,124 @@ class ProjectListController extends AdminController
     public function listAutomation()
     {
        try{
-            $projectListWithCats = ProjectListCategories::query()->with("projectCategories")->Has("projectCategories")->get()->toArray();
-            if (!blank($projectListWithCats)) {
-                $newProjectsData=[];
-                $listData=[];
-                $projectData=[];
-                foreach ($projectListWithCats as $key => $projectListWithCat) {
-                    $newProjectsData[] = [
-                        'list_id'=>$projectListWithCat['list_id'],
-                        'project_id'=>$projectListWithCat['project_categories']['project_id'],
-                    ];
-                    $listData[] = $projectListWithCat['list_id'];
-                    $projectData[] = $projectListWithCat['project_categories']['project_id'];
-                }               
-                $existingProjectListObj[] = ProjectListProjects::query()->whereIn("list_id",array_unique($listData))->whereIn("project_id",array_unique($projectData))->get();
-                foreach ($newProjectsData as $k => $v) {
-                    foreach ($existingProjectListObj[0] as $k2 => $v2) {
-                        if ($v['list_id'] == $v2->list_id && $v['project_id'] == $v2->project_id) {
-                            unset($newProjectsData[$k]);
-                        }
+            $listObj = ListFilters::query()->get();
+            $listData=[];
+            $projectData=[];
+            $newProjectsData=[];
+            foreach($listObj as $key=>$val)
+            {
+                $catArray = !empty($val->category_id) ? explode(',',$val->category_id) : [];
+                $genArray = !empty($val->genre_id) ? explode(',',$val->genre_id) : [];
+                $lanArray = !empty($val->language_id) ? explode(',',$val->language_id) : [];
+                $locArray = !empty($val->location_id) ? explode(',',$val->location_id) : [];
+                $recomm = !empty($val->recommendation) ? $val->recommendation : '';
+                $fav = !empty($val->favorite) ? $val->favorite : '';
+                
+                $catvalues = [];
+                $genvalues = [];
+                $lanvalues = [];
+                $locvalues = [];
+                $recomvalue=[];
+                $favvalue=[];
+
+                if (!empty($catArray)) {
+                    $catQuery = "SELECT (project_id) FROM project_categories WHERE category_id IN (".implode(",",$catArray).") GROUP BY project_id HAVING COUNT(DISTINCT(category_id)) = ".count($catArray);
+                    $catData = DB::select($catQuery);
+                    foreach($catData as $k=>$v){
+                        $catvalues[] = $v->project_id;
                     }
                 }
-                if (!blank($newProjectsData)) {
-                    // dd($newProjectsData);
-                    $projectListObj = new ProjectListProjects();
-                    $projectListObj->insert($newProjectsData);
+                if (!empty($genArray)) {
+                    $genQuery = "SELECT project_id FROM project_genres WHERE gener_id IN (".implode(',',$genArray).") GROUP BY project_id HAVING COUNT(DISTINCT(gener_id)) = ".count($genArray);
+                    $genData = DB::select($genQuery);
+                    foreach($genData as $k=>$v){
+                        $genvalues[] = $v->project_id;
+                    }
                 }
-                Session::flash('response', ['text'=>'list added successfully!','type'=>'success']);
-                return redirect()->route('show-list');
-            } 
-            else 
-            {
-                return back()->with('error','list already exists');
+                if (!empty($lanArray)) {
+                    $lanQuery = "SELECT project_id FROM project_languages WHERE language_id IN (".implode(',',$lanArray).") GROUP BY project_id HAVING COUNT(DISTINCT(language_id)) = ".count($lanArray);
+                    $lanData = DB::select($lanQuery);
+                    foreach($lanData as $k=>$v){
+                        $lanvalues[] = $v->project_id;
+                    }
+                }
+                if (!empty($locArray)) {
+                    $locQuery = "SELECT project_id FROM project_countries WHERE country_id IN (".implode(',',$locArray).") GROUP BY project_id HAVING COUNT(DISTINCT(country_id)) = ".count($locArray);
+                    $locData = DB::select($locQuery);
+                    foreach($locData as $k=>$v){
+                        $locvalues[] = $v->project_id;
+                    }
+                }
+                    $recomData = UserProject::query()
+                    ->where('project_verified',"$recomm")
+                    ->pluck('id');
+                    // dd($recomData);
+                    if(!blank($recomData)){
+                        foreach($recomData as $rk=>$rv)
+                        {
+                            $recomvalue[] = $rv;
+                        }
+                    }
+
+                    $favData = UserProject::query()->where('favorited',"$fav")->pluck('id');
+                    if(!blank($favData)){
+                        foreach($favData as $fk=>$fv)
+                        {
+                            $favvalue[] = $fv;
+                        }
+                    }
+                    // dd(DB::getQueryLog());
+                    // echo '<pre>';
+                    $commonProjectsIds=[];
+                    // print_r($catvalues);
+                    // print_r($genvalues);
+                    // print_r($lanvalues);
+                    // print_r($locvalues);
+                    // print_r($recomvalue);
+                    // print_r($favvalue);
+                    $dataMerge = array_merge($catvalues,$genvalues,$lanvalues,$locvalues,$recomvalue,$favvalue);
+                    // dd($dataMerge);
+                    
+                    foreach($dataMerge as $key => $val)
+                        {
+                            if(in_array($val,$catvalues) && in_array($val,$genvalues) && in_array($val,$lanvalues) && in_array($val,$locvalues) && in_array($val,$recomvalue) && in_array($val,$favvalue) )
+                            {
+                                $commonProjectsIds[] = $val;
+                            }
+                        }
+              
+                    foreach($commonProjectsIds as $key => $value){
+                                $newProjectsData[] = [
+                                    'list_id'=>$val->list_id,
+                                    'project_id'=>$value['project_id'],
+                                ];
+                                $listData[] = $val->list_id;
+                                $projectData[] = $value['project_id'];
+                            }
             }
+                    $existingProjectListObj[] = ProjectListProjects::query()->whereIn("list_id",array_unique($listData))->whereIn("project_id",array_unique($projectData))->get();
+                        foreach ($newProjectsData as $k => $v) {
+                            foreach ($existingProjectListObj[0] as $k2 => $v2) {
+                                if ($v['list_id'] == $v2->list_id && $v['project_id'] == $v2->project_id) {
+                                    unset($newProjectsData[$k]);
+                                }
+                            }
+                        }
+                        // dd($newProjectsData);
+                        if (!blank($newProjectsData)) {
+                            // echo 'dfsd';die;
+                            $projectListObj = new ProjectListProjects();
+                            $projectListObj->insert($newProjectsData);
+                        }
+                        // else{
+                        //     echo 'kkk';die;
+                        // }
+                        Session::flash('response', ['text'=>'list added successfully!','type'=>'success']);
+                        return redirect()->route('show-list');
+            
        }
        catch(\Throwable $e){
+        dd($e->getMessage());
             return back()->with($e->getMessage());        
         }
     }
