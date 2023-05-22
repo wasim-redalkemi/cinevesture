@@ -27,6 +27,6 @@ protected $table = 'project_lists';
     // }
     public function ProjectListFilters()
     {
-        return $this->hasMany(ListFilters::class,'list_id','id');
+        return $this->hasMany(ProjectListFilters::class,'list_id','id');
     }
 }

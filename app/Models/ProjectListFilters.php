@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ListFilters extends Model
+class ProjectListFilters extends Model
 {
-    protected $table ="list_filters";
+    protected $table ="project_list_filters";
     use HasFactory;
 }

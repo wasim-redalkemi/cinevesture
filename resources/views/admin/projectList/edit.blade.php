@@ -62,7 +62,7 @@
                                   <div class="col-md-4">
                                      <div class="form-group select2_wrap">
                                           <label for="exampleFormControlSelect1">Category</label>
-                                          <select  name="categories[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true">
+                                          <select  name="categories[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true" style="width:100%">
                                           <option value="">Select</option>
                                               @php
                                                 $pre_cat = explode(',',$projectList->ProjectListFilters[0]->category_id??'');
@@ -79,24 +79,24 @@
                                   <div class="col-md-4">
                                       <div class="form-group select2_wrap">
                                           <label for="exampleFormControlSelect1">Genre</label>
-                                          <select  name="genre[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true">
+                                          <select  name="genre[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true" style="width:100%">
                                           <option value="">Select</option>
-                                              @php
-                                                $pre_genre = explode(',',$projectList->ProjectListFilters[0]->genre_id??'');
-                                              if($genre && $genre != '')
-                                                  foreach ($genre as $key => $value) {
-                                                      @endphp
-                                                      <option value="{{$value->id}}" {{(in_array($value->id,$pre_genre)) ? 'selected' : ''}}>{{$value->gender}}</option>
-                                                      @php
-                                                  }
-                                              @endphp
+                                          @php
+                                          $pre_genre = explode(',',$projectList->ProjectListFilters[0]->genre_id??'');
+                                          if($genre && $genre != '')
+                                            foreach ($genre as $key => $value) {
+                                                @endphp
+                                                <option value="{{$value->id}}" {{(in_array($value->id,$pre_genre)) ? 'selected' : ''}}>{{$value->gender}}</option>
+                                                @php
+                                            }
+                                          @endphp
                                           </select>
                                       </div>
                                   </div>
                                   <div class="col-md-4">
                                       <div class="form-group select2_wrap">
                                           <label for="exampleFormControlSelect1">Language</label>
-                                          <select  name="language[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true">
+                                          <select  name="language[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true" style="width:100%">
                                           <option value="">Select</option>
                                               @php
                                                 $pre_language = explode(',',$projectList->ProjectListFilters[0]->language_id??'');

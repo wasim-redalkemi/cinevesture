@@ -16,6 +16,7 @@ use App\Models\ProjectGenre;
 use App\Models\ProjectLanguage;
 use App\Models\ProjectList;
 use App\Models\ProjectListCategories;
+use App\Models\ProjectListFilters;
 use App\Models\ProjectMedia;
 use App\Models\ProjectListProjects;
 use App\Models\UserProject;
@@ -79,7 +80,7 @@ class ProjectListController extends AdminController
             
             if($project_list->type == 'automated')
             {
-            $projectList = new ListFilters();
+            $projectList = new ProjectListFilters();
             $projectList->list_id=$project_list->id;
             $projectList->category_id=implode(',',$request->categories);
             $projectList->genre_id=implode(',',$request->genre);
@@ -308,7 +309,7 @@ class ProjectListController extends AdminController
     public function project_list_edit(request $request,$id)
     {
         try
-        {
+        {   
             $genre=MasterGender::query()->get();
             $language=MasterLanguage::query()->get();
             $location=MasterCountry::query()->get();
@@ -342,7 +343,7 @@ class ProjectListController extends AdminController
 
             if( $projectList->type == 'automated')
             {
-                $projectListFilters = ListFilters::query()->where('list_id',$projectList->id)->first();
+                $projectListFilters = ProjectListFilters::query()->where('list_id',$projectList->id)->first();
                 $projectListFilters->list_id=$projectList->id;
                 $projectListFilters->category_id=implode(',',$request->categories);
                 $projectListFilters->genre_id=implode(',',$request->genre);
@@ -365,7 +366,7 @@ class ProjectListController extends AdminController
     public function listAutomation()
     {
        try{
-            $listObj = ListFilters::query()->get();
+            $listObj = ProjectListFilters::query()->get();
             $listData=[];
             $projectData=[];
             $newProjectsData=[];

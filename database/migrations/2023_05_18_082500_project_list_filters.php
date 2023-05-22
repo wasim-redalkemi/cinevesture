@@ -13,7 +13,7 @@ class ProjectListFilters extends Migration
      */
     public function up()
     {
-        Schema::create('list_filters', function (Blueprint $table) {
+        Schema::create('project_list_filters', function (Blueprint $table) {
             $table->id();
             $table->string('list_id',20);
             $table->string('category_id',255)->nullable();
