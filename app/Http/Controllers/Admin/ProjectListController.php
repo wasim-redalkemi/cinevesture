@@ -77,6 +77,8 @@ class ProjectListController extends AdminController
             $project_list->type=$request->type;
             $project_list->save();
             
+            if($project_list->type == 'automated')
+            {
             $projectList = new ListFilters();
             $projectList->list_id=$project_list->id;
             $projectList->category_id=implode(',',$request->categories);
@@ -85,9 +87,9 @@ class ProjectListController extends AdminController
             $projectList->location_id=implode(',',$request->location);
             $projectList->recommendation=$request->recommended;
             $projectList->favorite=$request->favorite;
-
             $projectList->save();
-            
+            }
+
              return redirect()->route('show-list');
             }
         }
@@ -161,6 +163,7 @@ class ProjectListController extends AdminController
     {
         //
     }
+
     public function search_project(Request $request)
     {
         try
@@ -194,7 +197,6 @@ class ProjectListController extends AdminController
             ->where(function($q)use($is_filter_applied,$search_data,$project_list_project,$request){
                 if($is_filter_applied){
                     // $q->where('project_name', 'like' ,"%$search_data%");
-                    
                     if (isset($request->category)) {
                         $q->whereHas('projectCategory', function ($q) use($request){
                         $q->where('category_id',$request->category);
@@ -220,8 +222,6 @@ class ProjectListController extends AdminController
                         $q->where("project_name","like","%$request->search%");
                     }
                     $q->whereNotIn('id', $project_list_project);
-                    
-
                 }
                 else if(!empty($project_list_project))
                 {
@@ -244,28 +244,26 @@ class ProjectListController extends AdminController
     public function saveSearchProjects(Request $request)
     {
        try
-       {
-        
-        if (!empty(request('projects_id'))) {
-            
-            if (isset($request->add_edit)) {
+       {      
+            if (!empty(request('projects_id'))) {
+                if (isset($request->add_edit)) {
+                    $project=ProjectListProjects::where('list_id',$request->list_id);
+                    $project->delete();
+                }
+                foreach (request('projects_id') as $project_id) {
+                $project = new ProjectListProjects();
+                $project->list_id=$request->list_id;
+                $project->project_id=$project_id;
+                $project->save();
+                }
+                Session::flash('response', ['text'=>'Project Update successfull!','type'=>'success']);
+                return back();
+            }
+            else{
                 $project=ProjectListProjects::where('list_id',$request->list_id);
                 $project->delete();
+                return back()->with('messege','Update successfull');
             }
-            foreach (request('projects_id') as $project_id) {
-               $project = new ProjectListProjects();
-               $project->list_id=$request->list_id;
-               $project->project_id=$project_id;
-               $project->save();
-            }
-            Session::flash('response', ['text'=>'Project Update successfull!','type'=>'success']);
-            return back();
-          }else{
-            $project=ProjectListProjects::where('list_id',$request->list_id);
-                    $project->delete();
-                    return back()->with('messege','Update successfull');
-          }
-        
         }
         catch (Exception $e)
         {
@@ -305,12 +303,12 @@ class ProjectListController extends AdminController
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();
         }
-       
-       
     }
+
     public function project_list_edit(request $request,$id)
     {
-        try{
+        try
+        {
             $genre=MasterGender::query()->get();
             $language=MasterLanguage::query()->get();
             $location=MasterCountry::query()->get();
@@ -319,22 +317,22 @@ class ProjectListController extends AdminController
             // dd();
             return view('/admin.projectList.edit',compact('projectList','categories','genre','language','location'));
         } 
-        catch(\Throwable $e){
+        catch(\Throwable $e)
+        {
            return back()->with($e->getMessage());        
         }
     }
     public function project_list_update(request $request)
     {
-        try {
+        try 
+        {
             $validator = Validator::make($request->all(),[
                 'name' => 'required',
                 'status' => 'required',
-                  
             ]);
             if ($validator->fails()) {
                 Session::flash('response', ['text'=>'Project list name update successfully!','type'=>'danger']);
-                
-               return back();
+                return back();
             }
             $projectList=ProjectList::query()->where('id',$request->id)->first();
             $projectList->list_name=$request->name;
@@ -342,27 +340,24 @@ class ProjectListController extends AdminController
             $projectList->type=$request->type;
             $projectList->save();
 
-            $projectListFilters = ListFilters::query()->where('list_id',$projectList->id)->first();
-            $projectListFilters->list_id=$projectList->id;
-            $projectListFilters->category_id=implode(',',$request->categories);
-            $projectListFilters->genre_id=implode(',',$request->genre);
-            $projectListFilters->language_id=implode(',',$request->language);
-            $projectListFilters->location_id=implode(',',$request->location);
-            $projectListFilters->recommendation=$request->recommended;
-            $projectListFilters->favorite=$request->favorite;
-
-            $projectListFilters->save();
-            
+            if( $projectList->type == 'automated')
+            {
+                $projectListFilters = ListFilters::query()->where('list_id',$projectList->id)->first();
+                $projectListFilters->list_id=$projectList->id;
+                $projectListFilters->category_id=implode(',',$request->categories);
+                $projectListFilters->genre_id=implode(',',$request->genre);
+                $projectListFilters->language_id=implode(',',$request->language);
+                $projectListFilters->location_id=implode(',',$request->location);
+                $projectListFilters->recommendation=$request->recommended;
+                $projectListFilters->favorite=$request->favorite;
+                $projectListFilters->save();
+            }
             Session::flash('response', ['text'=>'Project list name update successfully!','type'=>'success']);
             return redirect()->route('show-list');
-            
-            
             // toastr() ->success('Promote update successfully!', 'Congrats');
-            
-            
         } 
-        catch(\Throwable $e){
-            // $e->getMessage();
+        catch(\Throwable $e)
+        {
             return back()->with($e->getMessage());        
         }
     }
@@ -380,8 +375,8 @@ class ProjectListController extends AdminController
                 $genArray = !empty($val->genre_id) ? explode(',',$val->genre_id) : [];
                 $lanArray = !empty($val->language_id) ? explode(',',$val->language_id) : [];
                 $locArray = !empty($val->location_id) ? explode(',',$val->location_id) : [];
-                $recomm = !empty($val->recommendation) ? $val->recommendation : '';
-                $fav = !empty($val->favorite) ? $val->favorite : '';
+                $recomm = $val->recommendation;
+                $fav = $val->favorite;
                 
                 $catvalues = [];
                 $genvalues = [];
@@ -421,7 +416,6 @@ class ProjectListController extends AdminController
                     $recomData = UserProject::query()
                     ->where('project_verified',"$recomm")
                     ->pluck('id');
-                    // dd($recomData);
                     if(!blank($recomData)){
                         foreach($recomData as $rk=>$rv)
                         {
@@ -436,60 +430,38 @@ class ProjectListController extends AdminController
                             $favvalue[] = $fv;
                         }
                     }
-                    // dd(DB::getQueryLog());
-                    // echo '<pre>';
                     $commonProjectsIds=[];
-                    // print_r($catvalues);
-                    // print_r($genvalues);
-                    // print_r($lanvalues);
-                    // print_r($locvalues);
-                    // print_r($recomvalue);
-                    // print_r($favvalue);
                     $dataMerge = array_merge($catvalues,$genvalues,$lanvalues,$locvalues,$recomvalue,$favvalue);
-                    // dd($dataMerge);
-                    
-                    foreach($dataMerge as $key => $val)
+                    $dataMerge = array_unique($dataMerge);
+                    foreach($dataMerge as $dataKey => $dataVal)
+                    {
+                        if(in_array($dataVal,$catvalues) && in_array($dataVal,$genvalues) && in_array($dataVal,$lanvalues) && in_array($dataVal,$locvalues) && in_array($dataVal,$recomvalue) && in_array($dataVal,$favvalue) )
                         {
-                            if(in_array($val,$catvalues) && in_array($val,$genvalues) && in_array($val,$lanvalues) && in_array($val,$locvalues) && in_array($val,$recomvalue) && in_array($val,$favvalue) )
-                            {
-                                $commonProjectsIds[] = $val;
-                            }
+                            $commonProjectsIds[] = $dataVal;
                         }
-              
-                    foreach($commonProjectsIds as $key => $value){
-                                $newProjectsData[] = [
-                                    'list_id'=>$val->list_id,
-                                    'project_id'=>$value['project_id'],
-                                ];
-                                $listData[] = $val->list_id;
-                                $projectData[] = $value['project_id'];
-                            }
+                    }
+                    foreach($commonProjectsIds as $key => $value)
+                    {
+                        $newProjectsData[] = [
+                            'list_id'=>$val->list_id,
+                            'project_id'=>$value,
+                        ];
+                        $listData[] = $val->list_id;
+                        $projectData[] = $value;
+                    }
             }
-                    $existingProjectListObj[] = ProjectListProjects::query()->whereIn("list_id",array_unique($listData))->whereIn("project_id",array_unique($projectData))->get();
-                        foreach ($newProjectsData as $k => $v) {
-                            foreach ($existingProjectListObj[0] as $k2 => $v2) {
-                                if ($v['list_id'] == $v2->list_id && $v['project_id'] == $v2->project_id) {
-                                    unset($newProjectsData[$k]);
-                                }
-                            }
-                        }
-                        // dd($newProjectsData);
-                        if (!blank($newProjectsData)) {
-                            // echo 'dfsd';die;
-                            $projectListObj = new ProjectListProjects();
-                            $projectListObj->insert($newProjectsData);
-                        }
-                        // else{
-                        //     echo 'kkk';die;
-                        // }
-                        Session::flash('response', ['text'=>'list added successfully!','type'=>'success']);
-                        return redirect()->route('show-list');
-            
+            $existingProjectListObj = ProjectListProjects::query()->whereIn("list_id",array_unique($listData))->delete();
+            if (!blank($newProjectsData)) {
+                $projectListObj = new ProjectListProjects();
+                $projectListObj->insert($newProjectsData);
+            }
+            Session::flash('response', ['text'=>'list added successfully!','type'=>'success']);
+            return redirect()->route('show-list');
        }
-       catch(\Throwable $e){
-        dd($e->getMessage());
+       catch(\Throwable $e)
+       {
             return back()->with($e->getMessage());        
-        }
+       }
     }
 
     /**

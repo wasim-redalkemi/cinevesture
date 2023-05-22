@@ -40,9 +40,9 @@
                             </div>
                             <div class="row add_fields_placeholderValue">
                                 <div class="col-md-4">
-                                   <div class="form-group">
+                                   <div class="form-group select2_wrap">
                                         <label for="exampleFormControlSelect1">Category</label>
-                                        <select  name="categories[]"class="form-control form-control-lg" multiple>
+                                        <select name="categories[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true">
                                         <option value="">Select</option>
                                             @php
                                               if($categories && $categories != '')
@@ -56,9 +56,9 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group">
+                                    <div class="form-group select2_wrap">
                                         <label for="exampleFormControlSelect1">Genre</label>
-                                        <select  name="genre[]"class="form-control form-control-lg" multiple>
+                                        <select  name="genre[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true">
                                         <option value="">Select</option>
                                             @php
                                             if($genre && $genre != '')
@@ -72,9 +72,9 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group">
+                                    <div class="form-group select2_wrap">
                                         <label for="exampleFormControlSelect1">Language</label>
-                                        <select  name="language[]"class="form-control form-control-lg" multiple>
+                                        <select  name="language[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true">
                                         <option value="">Select</option>
                                             @php
                                             if($language && $language != '')
@@ -88,9 +88,9 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div class="form-group">
+                                    <div class="form-group select2_wrap">
                                         <label for="exampleFormControlSelect1">location</label>
-                                        <select  name="location[]"class="form-control form-control-lg" multiple>
+                                        <select  name="location[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true">
                                         <option value="">Select</option>
                                             @php
                                             if($location && $location != '')

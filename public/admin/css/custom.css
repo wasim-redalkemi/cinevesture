@@ -1,0 +1,12 @@
+.select2_wrap select{
+    width: 100% !important;
+    /* display:contents !important; */
+}
+.select2-selection__choice{
+    /* margin: 10px!important;
+    padding: 5px!important; */
+    background-color: #ccc !important;
+    border:none!important;
+    border-radius: 4px!important;
+    color:#000!important;
+}

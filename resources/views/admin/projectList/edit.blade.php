@@ -60,12 +60,12 @@
                                 </div> --}}
                                 <div class="row add_fields_placeholderValue">
                                   <div class="col-md-4">
-                                     <div class="form-group">
+                                     <div class="form-group select2_wrap">
                                           <label for="exampleFormControlSelect1">Category</label>
-                                          <select  name="categories[]"class="form-control form-control-lg" multiple>
+                                          <select  name="categories[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true">
                                           <option value="">Select</option>
                                               @php
-                                                $pre_cat = explode(',',$projectList->ProjectListFilters[0]->category_id);
+                                                $pre_cat = explode(',',$projectList->ProjectListFilters[0]->category_id??'');
                                                 if($categories && $categories != '')
                                                   foreach ($categories as $key => $value) {
                                                       @endphp
@@ -77,12 +77,12 @@
                                       </div>
                                   </div>
                                   <div class="col-md-4">
-                                      <div class="form-group">
+                                      <div class="form-group select2_wrap">
                                           <label for="exampleFormControlSelect1">Genre</label>
-                                          <select  name="genre[]"class="form-control form-control-lg" multiple>
+                                          <select  name="genre[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true">
                                           <option value="">Select</option>
                                               @php
-                                                $pre_genre = explode(',',$projectList->ProjectListFilters[0]->genre_id);
+                                                $pre_genre = explode(',',$projectList->ProjectListFilters[0]->genre_id??'');
                                               if($genre && $genre != '')
                                                   foreach ($genre as $key => $value) {
                                                       @endphp
@@ -94,12 +94,12 @@
                                       </div>
                                   </div>
                                   <div class="col-md-4">
-                                      <div class="form-group">
+                                      <div class="form-group select2_wrap">
                                           <label for="exampleFormControlSelect1">Language</label>
-                                          <select  name="language[]"class="form-control form-control-lg" multiple>
+                                          <select  name="language[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true">
                                           <option value="">Select</option>
                                               @php
-                                                $pre_language = explode(',',$projectList->ProjectListFilters[0]->language_id);
+                                                $pre_language = explode(',',$projectList->ProjectListFilters[0]->language_id??'');
                                               if($language && $language != '')
                                                   foreach ($language as $key => $value) {
                                                       @endphp
@@ -111,12 +111,12 @@
                                       </div>
                                   </div>
                                   <div class="col-md-4">
-                                      <div class="form-group">
+                                      <div class="form-group select2_wrap">
                                           <label for="exampleFormControlSelect1">location</label>
-                                          <select  name="location[]"class="form-control form-control-lg" multiple>
+                                          <select  name="location[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true">
                                           <option value="">Select</option>
                                               @php
-                                                $pre_location = explode(',',$projectList->ProjectListFilters[0]->location_id);
+                                                $pre_location = explode(',',$projectList->ProjectListFilters[0]->location_id??'');
                                               if($location && $location != '')
                                                   foreach ($location as $key => $value) {
                                                       @endphp
@@ -131,8 +131,8 @@
                                       <div class="form-group">
                                           <label for="exampleFormControlSelect1">Recommended</label>
                                           <select  name="recommended"class="form-control form-control-lg">
-                                          <option value="1" {{ $projectList->ProjectListFilters[0]->recommendation == '1' ? 'selected' : '' }}>Yes</option>
-                                          <option value="0" {{ $projectList->ProjectListFilters[0]->recommendation == '0' ? 'selected' : '' }}>No</option>
+                                          <option value="1" {{ $projectList->ProjectListFilters[0]->recommendation??'' == '1' ? 'selected' : '' }}>Yes</option>
+                                          <option value="0" {{ $projectList->ProjectListFilters[0]->recommendation??'' == '0' ? 'selected' : '' }}>No</option>
                                           </select>
                                       </div>
                                   </div>
@@ -140,8 +140,8 @@
                                       <div class="form-group">
                                           <label for="exampleFormControlSelect1">Favorite</label>
                                           <select  name="favorite"class="form-control form-control-lg">
-                                          <option value="1" {{ $projectList->ProjectListFilters[0]->favorite == '1' ? 'selected' : '' }}>Yes</option>
-                                          <option value="0" {{ $projectList->ProjectListFilters[0]->favorite == '0' ? 'selected' : '' }}>No</option>
+                                          <option value="1" {{ $projectList->ProjectListFilters[0]->favorite??'' == '1' ? 'selected' : '' }}>Yes</option>
+                                          <option value="0" {{ $projectList->ProjectListFilters[0]->favorite??'' == '0' ? 'selected' : '' }}>No</option>
                                           </select>
                                       </div>
                                   </div>

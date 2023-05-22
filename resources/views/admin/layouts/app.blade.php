@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="{{asset('admin/css/materialdesignicons.min.css')}}">
   <link rel="stylesheet" href="{{asset('admin/css/vendor.bundle.base.css')}}">
   <link rel="stylesheet" href="{{asset('admin/css/vendor.bundle.addons.css')}}">
+  <link rel="stylesheet" href="{{asset('admin/css/custom.css')}}">
   <!-- endinject -->
   <!-- plugin css for this page -->
   <!-- End plugin css for this page -->
@@ -62,6 +63,7 @@
   <!-- Custom js for this page-->
   <script src="{{ asset('admin/js/dashboard.js') }}"></script>
   <script src="{{ asset('admin/js/script.js') }}"></script>
+  <script src="{{ asset('admin/js/select2.js') }}"></script>
 
   {{-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script> --}}
   <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
