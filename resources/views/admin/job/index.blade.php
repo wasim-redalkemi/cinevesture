@@ -136,16 +136,16 @@
                                                 $x=($job->save_type=='published')? 'unpublished':'published';
                                             @endphp
                                             @if ($job->save_type=='published')
-                                            <a href="{{route('status_update')}}?status={{$x}}&job_Id={{$job->id}}"><button type="button" class="btn active-button-color w-80">{{($job->save_type=='published') ?"Active":"Inactive"}}</button>
+                                            <a href="{{route('status_update')}}?status={{$x}}&job_Id={{$job->id}}"><button type="button" class="btn active-button-color action_button">{{($job->save_type=='published') ?"Active":"Inactive"}}</button>
                                             </a>
                                             @else
-                                            <a href="{{route('status_update')}}?status={{$x}}&job_Id={{$job->id}}"><button type="button" class="btn inactive-button-color">{{($job->save_type=='unpublished') ?"Inactive":"Active"}}</button>
+                                            <a href="{{route('status_update')}}?status={{$x}}&job_Id={{$job->id}}"><button type="button" class="btn inactive-button-color action_button">{{($job->save_type=='unpublished') ?"Inactive":"Active"}}</button>
                                             </a>
                                             @endif
                                         </td>
                                         <td>
                                             <a href="{{route('posted-job-single-view',['job_id'=>$job->id])}}"><button class="btn mb-2 view-btn btn btn-primary w-74">View</button></a>
-                                            <a class="confirmAction" href="{{route('job-delete',['id'=>$job->id])}}"><button class="btn mb-2 view-btn btn btn-danger">Delete</button></a>
+                                            <a class="confirmAction" href="{{route('job-delete',['id'=>$job->id])}}"><button class="btn mb-2 action_button btn-danger">Delete</button></a>
                                         </td>
                                     </tr>
                                     @endforeach

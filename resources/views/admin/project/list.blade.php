@@ -175,11 +175,11 @@
 
                                         <td class="" style="width: 100px;">
                                             @if($project->admin_status=='active')
-                                                <a class="btn btn-success btn-fw mb-1 btn-sm mt-10 w-65 view-btn btn_padding text-white w-82" href="{{route('project-list-status',['id' => $project->id , 'status' =>'inactive'])}}">                                            
+                                                <a class="btn btn-success action_button text-white" href="{{route('project-list-status',['id' => $project->id , 'status' =>'inactive'])}}">                                            
                                                     {{ucfirst($project->admin_status)}}
                                                 </a>
                                             @else
-                                                <a class="btn btn-danger btn-fw mb-1 btn-sm mt-10 w-65 view-btn btn_padding text-white w-82" href="{{route('project-list-status',['id' => $project->id , 'status' =>'active'])}}">
+                                                <a class="btn btn-danger text-white action_button" href="{{route('project-list-status',['id' => $project->id , 'status' =>'active'])}}">
                                                     {{ucfirst($project->admin_status)}}
                                                 </a>
                                             @endif
@@ -199,7 +199,7 @@
                                              <input type="checkbox" class="recom_inp" path="{{route('project-list-verified')}}?s={{$verified}}&p={{$project->id}}" name="fav" id="fav" <?php if($project->project_verified == 1){echo 'checked';}?>>
                                         </td>
                                         <td>
-                                            <a href="{{route('project-public-view',['id'=>$project->id])}}"><button class="btn mb-2 view-btn btn btn-primary">View</button></a>
+                                            <a href="{{route('project-public-view',['id'=>$project->id])}}"><button class="btn action_button btn-primary">View</button></a>
                                             {{-- <button class="btn btn-outline-primary w-60 view-btn">Edit</button> --}}
                                         </td>
                                     

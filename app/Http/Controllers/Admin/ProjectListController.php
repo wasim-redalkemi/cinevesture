@@ -41,7 +41,7 @@ class ProjectListController extends AdminController
         try
         {
             $categories=MasterProjectCategory::query()->get();
-            $genre=MasterGender::query()->get();
+            $genre=MasterProjectGenre::query()->get();
             $language=MasterLanguage::query()->get();
             $location=MasterCountry::query()->get();
              return view('admin.projectList.create')->with(compact('categories','genre','language','location'));
@@ -80,15 +80,15 @@ class ProjectListController extends AdminController
             
             if($project_list->type == 'automated')
             {
-            $projectList = new ProjectListFilters();
-            $projectList->list_id=$project_list->id;
-            $projectList->category_id=implode(',',$request->categories);
-            $projectList->genre_id=implode(',',$request->genre);
-            $projectList->language_id=implode(',',$request->language);
-            $projectList->location_id=implode(',',$request->location);
-            $projectList->recommendation=$request->recommended;
-            $projectList->favorite=$request->favorite;
-            $projectList->save();
+                $projectList = new ProjectListFilters();
+                $projectList->list_id=$project_list->id;
+                $projectList->category_id=implode(',',$request->categories);
+                $projectList->genre_id=implode(',',$request->genre);
+                $projectList->language_id=implode(',',$request->language);
+                $projectList->location_id=implode(',',$request->location);
+                $projectList->recommendation=$request->recommended;
+                $projectList->favorite=$request->favorite;
+                $projectList->save();
             }
 
              return redirect()->route('show-list');
@@ -310,7 +310,7 @@ class ProjectListController extends AdminController
     {
         try
         {   
-            $genre=MasterGender::query()->get();
+            $genre=MasterProjectGenre::query()->get();
             $language=MasterLanguage::query()->get();
             $location=MasterCountry::query()->get();
             $categories=MasterProjectCategory::query()->get();

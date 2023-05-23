@@ -2,7 +2,7 @@
         <ul class="nav">
           <li class="nav-item">
             <a class="nav-link" href="{{route('admin.dashboard')}}">
-              <i class="fa fa-dashcube" style="margin-right:25px;"></i>
+              <i class="fa fa-dashboard menu-icon"></i>
               <span class="menu-title">Dashboard</span>
             </a>
           </li>

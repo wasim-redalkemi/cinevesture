@@ -149,8 +149,8 @@
                                         $x=($user->status==1)? 0:1;
                                     @endphp
                                         @if($user->status==1)
-                                        <a href="{{route('user-status-change')}}?status={{$x}}&user_id={{$user->id}}"><button class="btn active-button-color w-82"> {{'Active'}}</button></a>@else
-                                        <a href="{{route('user-status-change')}}?status={{$x}}&user_id={{$user->id}}"><button class="btn inactive-button-color">{{'Inactive'}}</button></a>@endif
+                                        <a href="{{route('user-status-change')}}?status={{$x}}&user_id={{$user->id}}"><button class="btn action_button btn-success text-white"> {{'Active'}}</button></a>@else
+                                        <a href="{{route('user-status-change')}}?status={{$x}}&user_id={{$user->id}}"><button class="btn action_button btn-danger">{{'Inactive'}}</button></a>@endif
                                     </td>
                                     <td>
                                         @foreach ($user->membership as $plan)
@@ -166,11 +166,11 @@
                                     <td><?php echo(date("d-m-Y", strtotime($user->created_at))); ?></td>
                                     <td class="noExport">
                                         <div class="mb-1" >
-                                           <a href="{{route('user-profile-public-show',['id'=>$user->id])}}"><button class="btn btn-info btn-sm w-74">View</button></a>
+                                           <a href="{{route('user-profile-public-show',['id'=>$user->id])}}"><button class="btn btn-info action_button">View</button></a>
                                         </div>
                                        <div>
                                             <a class="confirmAction" href="{{route('user-delete',['id'=>$user->id])}}">
-                                               <button class="btn btn-danger  btn-sm">Delete</button>
+                                               <button class="btn btn-danger action_button">Delete</button>
                                             </a>
                                         </div> 
                                     </td>

@@ -36,25 +36,25 @@
 
                                         <td>
                                             
-                                            <a href="{{route('list-projects',['id' => $project->id ,'name' =>$project->list_name,'pcount' => (@$project->lists[0]->pcount) ? @$project->lists[0]->pcount : 0])}}"><button type="button" class="btn btn-primary btn-sm btn-sm mt-10">
+                                            <a href="{{route('list-projects',['id' => $project->id ,'name' =>$project->list_name,'pcount' => (@$project->lists[0]->pcount) ? @$project->lists[0]->pcount : 0])}}"><button type="button" class="btn btn-primary action_button">
                                             {{(@$project->lists[0]->pcount) ? @$project->lists[0]->pcount : 0}}</button>
                                             <input type="hidden" id="project_count" name="project_count" value="{{(@$project->lists[0]->pcount) ? @$project->lists[0]->pcount : 0}}"></a>
                                         </td>
                                        <td>
                                          @if($project->status=='published')
-                                            <a class="btn btn-success btn-fw mb-1 btn-sm mt-10  @if($project->list_name=='carousel') d-none @endif w-112 view-btn btn_padding text-white" href="{{route('change-status',['id' => $project->id , 'status' =>'unpublished'])}}">                                            
+                                            <a class="btn btn-success action_button text-white  @if($project->list_name=='carousel') d-none @endif" href="{{route('change-status',['id' => $project->id , 'status' =>'unpublished'])}}">                                            
                                                 {{ucfirst($project->status)}}
                                             </a>
                                         @else
-                                            <a class="btn btn-warning btn-fw mb-1 btn-sm mt-10 w-112 view-btn btn_padding text-white" href="{{route('change-status',['id' => $project->id , 'status' =>'published'])}}">
+                                            <a class="btn btn-warning action_button text-white" href="{{route('change-status',['id' => $project->id , 'status' =>'published'])}}">
                                                 {{ucfirst($project->status)}}
                                             </a>
                                         @endif
 
-                                        <a class="confirmAction btn btn-danger btn-fw mb-1 @if($project->list_name=='carousel') d-none @endif  btn-sm mt-10 w-60 view-btn btn_padding" href="{{route('delete-list',['id' =>$project->id ])}}">
+                                        <a class="confirmAction btn btn-danger @if($project->list_name=='carousel') d-none @endif action_button" href="{{route('delete-list',['id' =>$project->id ])}}">
                                             Delete
                                         </a>
-                                        <a class="btn text-white btn-warning @if($project->list_name=='carousel') d-none @endif" href="{{route('projectlistedit',['id'=>$project->id])}}">Edit</a>
+                                        <a class="btn text-white btn-warning action_button @if($project->list_name=='carousel') d-none @endif" href="{{route('projectlistedit',['id'=>$project->id])}}">Edit</a>
                                        </td>
                                     </tr>
                                 @endforeach

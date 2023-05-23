@@ -16,13 +16,13 @@
                               <div class="col-md-4">
                                 <div class="form-group">
                                         <label>Name</label>
-                                        <input type="text" class="form-control form-control-lg" name="name" placeholder="List name" aria-label="Username" required>
+                                        <input type="text" class="form-control radius" name="name" placeholder="List name" aria-label="Username" required>
                                 </div>
                               </div>
                               <div class="col-md-4">
                                    <div class="form-group">
                                         <label for="exampleFormControlSelect1">Status</label required>
-                                        <select  name="status"class="form-control form-control-lg" id="listStatus" required>
+                                        <select  name="status"class="form-control radius" id="listStatus" required>
                                         <option value="unpublished">Unpublish</option>
                                         <option value="published">Publish</option>
                                         </select>
@@ -31,7 +31,7 @@
                               <div class="col-md-4">
                                    <div class="form-group">
                                         <label for="exampleFormControlSelect1">Type</label required>
-                                        <select  name="type"class="form-control form-control-lg add_fields_placeholder" required>
+                                        <select  name="type"class="form-control radius add_fields_placeholder" required>
                                         <option value="curated">Curated</option>
                                         <option value="automated">Automated</option>
                                         </select>
@@ -64,7 +64,7 @@
                                             if($genre && $genre != '')
                                                 foreach ($genre as $key => $value) {
                                                     @endphp
-                                                    <option value="{{$value->id}}">{{$value->gender}}</option>
+                                                    <option value="{{$value->id}}">{{$value->name}}</option>
                                                     @php
                                                 }
                                             @endphp
@@ -106,7 +106,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Recommended</label>
-                                        <select  name="recommended"class="form-control form-control-lg">
+                                        <select  name="recommended"class="form-control radius">
                                         <option value="1">Yes</option>
                                         <option value="0">No</option>
                                         </select>
@@ -115,7 +115,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Favorite</label>
-                                        <select  name="favorite"class="form-control form-control-lg">
+                                        <select  name="favorite"class="form-control radius">
                                         <option value="1">Yes</option>
                                         <option value="0">No</option>
                                         </select>
