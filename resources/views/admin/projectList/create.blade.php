@@ -15,13 +15,13 @@
                             <div class="row">
                               <div class="col-md-4">
                                 <div class="form-group">
-                                        <label>Name</label>
+                                        <label>Name<span class = "text-danger">*</span></label>
                                         <input type="text" class="form-control radius" name="name" placeholder="List name" aria-label="Username" required>
                                 </div>
                               </div>
                               <div class="col-md-4">
                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Status</label required>
+                                        <label for="exampleFormControlSelect1">Status<span class = "text-danger">*</span></label required>
                                         <select  name="status"class="form-control radius" id="listStatus" required>
                                         <option value="unpublished">Unpublish</option>
                                         <option value="published">Publish</option>
@@ -30,7 +30,7 @@
                               </div>
                               <div class="col-md-4">
                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Type</label required>
+                                        <label for="exampleFormControlSelect1">Type<span class = "text-danger">*</span></label required>
                                         <select  name="type"class="form-control radius add_fields_placeholder" required>
                                         <option value="curated">Curated</option>
                                         <option value="automated">Automated</option>
@@ -42,7 +42,7 @@
                                 <div class="col-md-4">
                                    <div class="form-group select2_wrap">
                                         <label for="exampleFormControlSelect1">Category</label>
-                                        <select name="categories[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true">
+                                        <select name="categories[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice radius border-danger" multiple tabindex="-1" aria-hidden="true">
                                         <option value="">Select</option>
                                             @php
                                               if($categories && $categories != '')
@@ -58,7 +58,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group select2_wrap">
                                         <label for="exampleFormControlSelect1">Genre</label>
-                                        <select  name="genre[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true">
+                                        <select  name="genre[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice radius border-secondary " multiple tabindex="-1" aria-hidden="true">
                                         <option value="">Select</option>
                                             @php
                                             if($genre && $genre != '')
@@ -74,7 +74,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group select2_wrap">
                                         <label for="exampleFormControlSelect1">Language</label>
-                                        <select  name="language[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true">
+                                        <select  name="language[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice radius border-secondary " multiple tabindex="-1" aria-hidden="true">
                                         <option value="">Select</option>
                                             @php
                                             if($language && $language != '')
@@ -90,7 +90,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group select2_wrap">
                                         <label for="exampleFormControlSelect1">location</label>
-                                        <select  name="location[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true">
+                                        <select  name="location[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice border-secondary " multiple tabindex="-1" aria-hidden="true">
                                         <option value="">Select</option>
                                             @php
                                             if($location && $location != '')

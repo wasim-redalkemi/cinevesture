@@ -15,14 +15,14 @@
                             <div class="row">
                               <div class="col-md-4">
                                 <div class="form-group">
-                                        <label class="">Name</label>
+                                        <label class="">Name<span class = "text-danger">*</span></label>
                                         <input type="hidden" name="id" id="id" value="{{$projectList->id}}">
                                         <input type="text" class="form-control radius" name="name" placeholder="List name" aria-label="Username" value="{{ucFirst($projectList->list_name)}}" required>
                                 </div>
                               </div>
                               <div class="col-md-4">
                                 <div class="form-group">
-                                     <label for="exampleFormControlSelect1">Status</label required value="{{$projectList->status}}" required>
+                                     <label for="exampleFormControlSelect1">Status<span class = "text-danger">*</span></label required value="{{$projectList->status}}" required>
                                      <select  name="status"class="form-control radius" id="listStatus" required>
                                      <option value="">Select</option required>
                                      <option {{ $projectList->status == 'published' ? 'selected' : '' }}  value="published">Publish</option>
@@ -32,7 +32,7 @@
                                 </div>
                               <div class="col-md-4">
                                 <div class="form-group">
-                                     <label for="exampleFormControlSelect1">Type</label required value="{{$projectList->type}}" required>
+                                     <label for="exampleFormControlSelect1">Type<span class = "text-danger">*</span></label required value="{{$projectList->type}}" required>
                                      <select  name="type"class="form-control radius add_fields_placeholder" required>
                                      <option {{ $projectList->type == 'curated' ? 'selected' : '' }}  value="curated">Curated</option>
                                      <option {{ $projectList->type == 'automated' ? 'selected' : '' }}  value="automated">Automated</option value="{{$projectList->type}}">

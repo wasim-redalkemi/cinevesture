@@ -65,7 +65,7 @@ class HomeController extends Controller
         'lists.projectCountries','lists.projectLanguages','lists.projectImage','lists.isfavouriteProjectMain','lists.isfavouriteProject'=>function($q){
             $q->where('user_id',auth()->user()->id);
         }])
-       
+       ->where('status','published')
        
         ->get();
         $project_lists_carousel = (isset($project_list_project[0]))?$project_list_project[0]:[];
