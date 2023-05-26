@@ -32,11 +32,12 @@
                                 </div>
                               <div class="col-md-4">
                                 <div class="form-group">
-                                     <label for="exampleFormControlSelect1">Type<span class = "text-danger">*</span></label required value="{{$projectList->type}}" required>
-                                     <select  name="type"class="form-control radius add_fields_placeholder" required>
-                                     <option {{ $projectList->type == 'curated' ? 'selected' : '' }}  value="curated">Curated</option>
-                                     <option {{ $projectList->type == 'automated' ? 'selected' : '' }}  value="automated">Automated</option value="{{$projectList->type}}">
-                                     </select>
+                                     <label for="exampleFormControlSelect1">Type</label required value="{{$projectList->type}}">
+                                       <input type="text" class="form-control radius" value="{{ucfirst($projectList->type)}}" name="" id="" readonly>
+                                       
+                                       
+
+                                    
                                 </div>
                               </div>
                               {{-- <div class="col-md-4">
@@ -58,6 +59,7 @@
                                 </div>
                                 </div> --}}
                             </div>
+                            @if($projectList->type == 'automated')
                             <div class="row add_fields_placeholderValue">
                                   <div class="col-md-4">
                                      <div class="form-group select2_wrap">
@@ -131,8 +133,8 @@
                                       <div class="form-group">
                                           <label for="exampleFormControlSelect1">Recommended</label>
                                           <select  name="recommended"class="form-control radius">
-                                          <option value="1" {{ $projectList->ProjectListFilters[0]->recommendation??'' == '1' ? 'selected' : '' }}>Yes</option>
-                                          <option value="0" {{ $projectList->ProjectListFilters[0]->recommendation??'' == '0' ? 'selected' : '' }}>No</option>
+                                          <option value="1" {{ $projectList->ProjectListFilters[0]->recommendation == '1' ? 'selected' : '' }}>Yes</option>
+                                          <option value="0" {{ $projectList->ProjectListFilters[0]->recommendation == '0' ? 'selected' : '' }}>No</option>
                                           </select>
                                       </div>
                                   </div>
@@ -140,12 +142,13 @@
                                       <div class="form-group">
                                           <label for="exampleFormControlSelect1">Favorite</label>
                                           <select  name="favorite"class="form-control radius">
-                                          <option value="1" {{ $projectList->ProjectListFilters[0]->favorite??'' == '1' ? 'selected' : '' }}>Yes</option>
-                                          <option value="0" {{ $projectList->ProjectListFilters[0]->favorite??'' == '0' ? 'selected' : '' }}>No</option>
+                                          <option value="1" {{ $projectList->ProjectListFilters[0]->favorite == '1' ? 'selected' : '' }}>Yes</option>
+                                          <option value="0" {{ $projectList->ProjectListFilters[0]->favorite == '0' ? 'selected' : '' }}>No</option>
                                           </select>
                                       </div>
                                   </div>
                             </div>
+                            @endif
                             <div class="row" style="margin-top:15px">
                                 <div class="col-md-12" style="padding-left: 42%;">
                                     <button type="submit" class="btn btn-success btn-sm mt-10 text-white">Update</button>
@@ -164,6 +167,11 @@
     $(document).ready(function()
     {
         $(".add_fields_placeholderValue").hide();
+        var type = "{{$projectList->type}}";
+        if(type=="automated")
+        {   
+            $(".add_fields_placeholderValue").show();
+        }
         $(".add_fields_placeholder").change(function() {
             if($(this).val() == "automated") {
                 $(".add_fields_placeholderValue").show();

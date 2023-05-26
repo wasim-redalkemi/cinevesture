@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Helper\AppUtilityController;
 use App\Models\ListFilters;
 use App\Models\MasterCountry;
 use App\Models\MasterGender;
@@ -53,6 +54,10 @@ class ProjectListController extends AdminController
         }
 
     }
+    // public function updateAutomatedList()
+    // {
+    //     $listauto=AppUtilityController::listAutomation();
+    // }
 
     /**
      * Show the form for creating a new resource.
@@ -89,6 +94,8 @@ class ProjectListController extends AdminController
                 $projectList->recommendation=$request->recommended;
                 $projectList->favorite=$request->favorite;
                 $projectList->save();
+                $listauto=AppUtilityController::listAutomation();
+                
             }
 
              return redirect()->route('show-list');
@@ -125,8 +132,9 @@ class ProjectListController extends AdminController
         {
             $projects_data = ProjectList::query()->with('lists', function($q){
                 $q->select(DB::raw('list_id,COUNT(project_id) as pcount'))->groupby('list_id');
-            })            
-            ->paginate($this->records_limit);
+            }) 
+                
+            ->paginate($this->records_limit);        
              return view('admin.projectList.list',compact('projects_data'));
         }
         catch (Exception $e)
@@ -195,7 +203,7 @@ class ProjectListController extends AdminController
             $project_data=UserProject::query()
             ->with('projectOnlyImage')
         
-            ->where(function($q)use($is_filter_applied,$search_data,$project_list_project,$request){
+            ->where(function($q)use($is_filter_applied,$search_data,$project_list_project,$request,$list_type){
                 if($is_filter_applied){
                     // $q->where('project_name', 'like' ,"%$search_data%");
                     if (isset($request->category)) {
@@ -228,9 +236,13 @@ class ProjectListController extends AdminController
                 {
                     $q->whereIn('id', $project_list_project);
                 }
+                else if($list_type[0]->type == 'automated')
+                {
+                    $q->whereIn('id', [0]);
+                }
             })
             ->orderBy('created_at', 'desc')
-            ->where("user_status","published")
+            // ->where("user_status","published")
             ->paginate($this->records_limit);
             // dd($list_name);
             return view('/admin.projectList.search',compact('id','project_data','is_added_only','categories','genres','list_name','list_type'));
@@ -315,7 +327,6 @@ class ProjectListController extends AdminController
             $location=MasterCountry::query()->get();
             $categories=MasterProjectCategory::query()->get();
             $projectList=ProjectList::query()->where('id',$id)->with(['ProjectListFilters'])->first();
-            // dd();
             return view('/admin.projectList.edit',compact('projectList','categories','genre','language','location'));
         } 
         catch(\Throwable $e)
@@ -338,7 +349,7 @@ class ProjectListController extends AdminController
             $projectList=ProjectList::query()->where('id',$request->id)->first();
             $projectList->list_name=$request->name;
             $projectList->status=$request->status;
-            $projectList->type=$request->type;
+            // $projectList->type=$request->type;
             $projectList->save();
 
             if( $projectList->type == 'automated')
@@ -353,6 +364,7 @@ class ProjectListController extends AdminController
                 $projectListFilters->recommendation=$request->recommended;
                 $projectListFilters->favorite=$request->favorite;
                 $projectListFilters->save();
+                $listauto=AppUtilityController::listAutomation();
             }
             Session::flash('response', ['text'=>'Project list name update successfully!','type'=>'success']);
             return redirect()->route('show-list');
@@ -364,107 +376,7 @@ class ProjectListController extends AdminController
         }
     }
 
-    public function listAutomation()
-    {
-       try{
-            $listObj = ProjectListFilters::query()->get();
-            $listData=[];
-            $projectData=[];
-            $newProjectsData=[];
-            foreach($listObj as $key=>$val)
-            {
-                $catArray = !empty($val->category_id) ? explode(',',$val->category_id) : [];
-                $genArray = !empty($val->genre_id) ? explode(',',$val->genre_id) : [];
-                $lanArray = !empty($val->language_id) ? explode(',',$val->language_id) : [];
-                $locArray = !empty($val->location_id) ? explode(',',$val->location_id) : [];
-                $recomm = $val->recommendation;
-                $fav = $val->favorite;
-                
-                $catvalues = [];
-                $genvalues = [];
-                $lanvalues = [];
-                $locvalues = [];
-                $recomvalue=[];
-                $favvalue=[];
-
-                if (!empty($catArray)) {
-                    $catQuery = "SELECT (project_id) FROM project_categories WHERE category_id IN (".implode(",",$catArray).") GROUP BY project_id HAVING COUNT(DISTINCT(category_id)) = ".count($catArray);
-                    $catData = DB::select($catQuery);
-                    foreach($catData as $k=>$v){
-                        $catvalues[] = $v->project_id;
-                    }
-                }
-                if (!empty($genArray)) {
-                    $genQuery = "SELECT project_id FROM project_genres WHERE gener_id IN (".implode(',',$genArray).") GROUP BY project_id HAVING COUNT(DISTINCT(gener_id)) = ".count($genArray);
-                    $genData = DB::select($genQuery);
-                    foreach($genData as $k=>$v){
-                        $genvalues[] = $v->project_id;
-                    }
-                }
-                if (!empty($lanArray)) {
-                    $lanQuery = "SELECT project_id FROM project_languages WHERE language_id IN (".implode(',',$lanArray).") GROUP BY project_id HAVING COUNT(DISTINCT(language_id)) = ".count($lanArray);
-                    $lanData = DB::select($lanQuery);
-                    foreach($lanData as $k=>$v){
-                        $lanvalues[] = $v->project_id;
-                    }
-                }
-                if (!empty($locArray)) {
-                    $locQuery = "SELECT project_id FROM project_countries WHERE country_id IN (".implode(',',$locArray).") GROUP BY project_id HAVING COUNT(DISTINCT(country_id)) = ".count($locArray);
-                    $locData = DB::select($locQuery);
-                    foreach($locData as $k=>$v){
-                        $locvalues[] = $v->project_id;
-                    }
-                }
-                    $recomData = UserProject::query()
-                    ->where('project_verified',"$recomm")
-                    ->pluck('id');
-                    if(!blank($recomData)){
-                        foreach($recomData as $rk=>$rv)
-                        {
-                            $recomvalue[] = $rv;
-                        }
-                    }
-
-                    $favData = UserProject::query()->where('favorited',"$fav")->pluck('id');
-                    if(!blank($favData)){
-                        foreach($favData as $fk=>$fv)
-                        {
-                            $favvalue[] = $fv;
-                        }
-                    }
-                    $commonProjectsIds=[];
-                    $dataMerge = array_merge($catvalues,$genvalues,$lanvalues,$locvalues,$recomvalue,$favvalue);
-                    $dataMerge = array_unique($dataMerge);
-                    foreach($dataMerge as $dataKey => $dataVal)
-                    {
-                        if(in_array($dataVal,$catvalues) && in_array($dataVal,$genvalues) && in_array($dataVal,$lanvalues) && in_array($dataVal,$locvalues) && in_array($dataVal,$recomvalue) && in_array($dataVal,$favvalue) )
-                        {
-                            $commonProjectsIds[] = $dataVal;
-                        }
-                    }
-                    foreach($commonProjectsIds as $key => $value)
-                    {
-                        $newProjectsData[] = [
-                            'list_id'=>$val->list_id,
-                            'project_id'=>$value,
-                        ];
-                        $listData[] = $val->list_id;
-                        $projectData[] = $value;
-                    }
-            }
-            $existingProjectListObj = ProjectListProjects::query()->whereIn("list_id",array_unique($listData))->delete();
-            if (!blank($newProjectsData)) {
-                $projectListObj = new ProjectListProjects();
-                $projectListObj->insert($newProjectsData);
-            }
-            Session::flash('response', ['text'=>'list added successfully!','type'=>'success']);
-            return redirect()->route('show-list');
-       }
-       catch(\Throwable $e)
-       {
-            return back()->with($e->getMessage());        
-       }
-    }
+   
 
     /**
      * Update the specified resource in storage.

@@ -39,6 +39,7 @@ Route::group(['prefix'=>'admin','middleware' => ['adminAuth']],function()
     Route::group(['prefix'=>'project-list'],function()
     {
         Route::get('/create', [ProjectListController::class, 'index'])->name('project-list-management');
+        // Route::get('/update-automated-list', [ProjectListController::class, 'updateAutomatedList'])->name('project-list-management');
         Route::post('/list-create', [ProjectListController::class, 'create'])->name('create-list');
         Route::get('/list', [ProjectListController::class, 'project_list_show'])->name('show-list');
         Route::get('/list-projects', [ProjectListController::class, 'search_project'])->name('list-projects');

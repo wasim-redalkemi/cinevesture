@@ -124,11 +124,7 @@
     }
 
     var current = location.pathname.split("/").slice(-2)[0].replace(/^\/|\/$/g, '')+'/'+location.pathname.split("/").slice(-1)[0].replace(/^\/|\/$/g, '');
-    console.log(current)
-    // alert("20000")
-
     $('.sidebar_data_mobile .sidebar_content a').each(function() {
-        // console.log(90);
       var $this = $(this);
       addActiveClass($this);
     

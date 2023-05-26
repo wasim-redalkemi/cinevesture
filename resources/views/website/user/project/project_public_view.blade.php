@@ -485,14 +485,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         {{-- <div class="guide_profile_main_text deep-pink font_18">Related Project</div> --}}
-                        {{-- @php
-                       foreach ($recomProject as $key => $value) {
-                        # code...
-                            echo '<pre>';
-                            print_r($value->project_name);
-                        }
-                        die;
-                        @endphp --}}
+                      
                         @if (count($recomProject)>0)
                         
                         <div class="project owl-carousel owl-theme">

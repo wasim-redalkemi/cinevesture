@@ -4,7 +4,14 @@ namespace App\Http\Controllers\Helper;
 
 use App\Http\Controllers\Controller;
 use App\Models\Otp;
+use App\Models\ProjectListFilters as ModelsProjectListFilters;
+use App\Models\ProjectListProjects;
+use App\Models\UserProject;
 use Carbon\Carbon;
+use Illuminate\Contracts\Session\Session;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session as FacadesSession;
+use ProjectListFilters;
 
 class AppUtilityController extends Controller
 {
@@ -101,5 +108,128 @@ class AppUtilityController extends Controller
         }
 
         return null;
+    }
+
+    //project add automatic add in project list
+    public function listAutomation()
+    {
+       try{
+            $listObj = ModelsProjectListFilters::query()->get();
+            $listData=[];
+            $projectData=[];
+            $newProjectsData=[];
+            foreach($listObj as $key=>$val)
+            {
+                
+
+                $catArray = !empty($val->category_id) ? explode(',',$val->category_id) : [];
+                $genArray = !empty($val->genre_id) ? explode(',',$val->genre_id) : [];
+                $lanArray = !empty($val->language_id) ? explode(',',$val->language_id) : [];
+                $locArray = !empty($val->location_id) ? explode(',',$val->location_id) : [];
+                $recomm = $val->recommendation;
+                $fav = $val->favorite;
+                
+                $catvalues = [];
+                $genvalues = [];
+                $lanvalues = [];
+                $locvalues = [];
+                $recomvalue=[];
+                $favvalue=[];
+                $userStatusValue=[];
+                $adminStatusValue=[];
+
+                if (!empty($catArray)) {
+                    $catQuery = "SELECT (project_id) FROM project_categories WHERE category_id IN (".implode(",",$catArray).") GROUP BY project_id HAVING COUNT(DISTINCT(category_id)) = ".count($catArray);
+                    $catData = DB::select($catQuery);
+                    foreach($catData as $k=>$v){
+                        $catvalues[] = $v->project_id;
+                    }
+                }
+                if (!empty($genArray)) {
+                    $genQuery = "SELECT project_id FROM project_genres WHERE gener_id IN (".implode(',',$genArray).") GROUP BY project_id HAVING COUNT(DISTINCT(gener_id)) = ".count($genArray);
+                    $genData = DB::select($genQuery);
+                    foreach($genData as $k=>$v){
+                        $genvalues[] = $v->project_id;
+                    }
+                }
+                if (!empty($lanArray)) {
+                    $lanQuery = "SELECT project_id FROM project_languages WHERE language_id IN (".implode(',',$lanArray).") GROUP BY project_id HAVING COUNT(DISTINCT(language_id)) = ".count($lanArray);
+                    $lanData = DB::select($lanQuery);
+                    foreach($lanData as $k=>$v){
+                        $lanvalues[] = $v->project_id;
+                    }
+                }
+                if (!empty($locArray)) {
+                    $locQuery = "SELECT project_id FROM project_countries WHERE country_id IN (".implode(',',$locArray).") GROUP BY project_id HAVING COUNT(DISTINCT(country_id)) = ".count($locArray);
+                    $locData = DB::select($locQuery);
+                    foreach($locData as $k=>$v){
+                        $locvalues[] = $v->project_id;
+                    }
+                }
+                    $recomData = UserProject::query()
+                    ->where('project_verified',"$recomm")
+                    ->pluck('id');
+                    if(!blank($recomData)){
+                        foreach($recomData as $rk=>$rv)
+                        {
+                            $recomvalue[] = $rv;
+                        }
+                    }
+
+                    $favData = UserProject::query()->where('favorited',"$fav")->pluck('id');
+                    if(!blank($favData)){
+                        foreach($favData as $fk=>$fv)
+                        {
+                            $favvalue[] = $fv;
+                        }
+                    }
+                    $userStatus = UserProject::query()->where('user_status',"published")->pluck('id');
+                    if(!blank($userStatus)){
+                        foreach($userStatus as $fk=>$usv)
+                        {
+                            $userStatusValue[] = $usv;
+                        }
+                    }
+                    $adminStatus = UserProject::query()->where('admin_status',"active")->pluck('id');
+                    if(!blank($adminStatus)){
+                        foreach($adminStatus as $fk=>$asv)
+                        {
+                            $adminStatusValue[] = $asv;
+                        }
+                    }
+                        $commonProjectsIds=[];
+                    $dataMerge = array_merge($catvalues,$genvalues,$lanvalues,$locvalues,$recomvalue,$favvalue);
+                 
+                    $dataMerge = array_unique($dataMerge);
+                    foreach($dataMerge as $dataKey => $dataVal)
+                    {
+                        if(in_array($dataVal,$catvalues) && in_array($dataVal,$genvalues) && in_array($dataVal,$lanvalues) && in_array($dataVal,$locvalues) && in_array($dataVal,$recomvalue) && in_array($dataVal,$favvalue) )
+                        {
+                            $commonProjectsIds[] = $dataVal;
+                        }
+                    }
+                   
+                    foreach($commonProjectsIds as $key => $value)
+                    {
+                        $newProjectsData[] = [
+                            'list_id'=>$val->list_id,
+                            'project_id'=>$value,
+                        ];
+                        $listData[] = $val->list_id;
+                        $projectData[] = $value;
+                    }
+            }
+            $existingProjectListObj = ProjectListProjects::query()->whereIn("list_id",array_unique($listData))->delete();
+            if (!blank($newProjectsData)) {
+                $projectListObj = new ProjectListProjects();
+                $projectListObj->insert($newProjectsData);
+            }
+            FacadesSession::flash('response', ['text'=>'list added successfully!','type'=>'success']);
+            return true;
+       }
+       catch(\Throwable $e)
+       {
+            return false;        
+       }
     }
 }

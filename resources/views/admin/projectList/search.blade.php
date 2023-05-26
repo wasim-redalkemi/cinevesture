@@ -246,12 +246,7 @@
                 </form>
                 <div class="row">
                   <div class="col-md-12">
-                    <?php
-                    // echo "<pre>";
-                      // print_r($project_data);
-                    // echo "</pre>";
-                    
-                    ?>
+                 
                     <div>{{'Showing '.($project_data->firstItem()).' to' .' '. ($project_data->lastItem()).' of'.' '.$project_data->total()}}</div>
                   <div style="float:right;" >{{$project_data->appends(request()->except('page'))->links()}}</div>
                   

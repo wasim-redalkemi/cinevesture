@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Website;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Helper\AppUtilityController;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\Website\AjaxController;
 use App\Http\Requests\PostUserPortfolioRequest;
@@ -867,6 +868,7 @@ class ProjectController extends WebController
             $project->user_status = $request->user_status;
             if($project->update())
             {
+                $listauto=AppUtilityController::listAutomation();
                 return redirect()->route('project-list')->with("success", "Project status updated successfully.");
             }
             else
