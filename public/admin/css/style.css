@@ -26029,7 +26029,8 @@ body.avgrund-active {
 .select2-container--default .select2-selection--single,
 .select2-container--default .select2-dropdown,
 .select2-container--default .select2-selection--multiple {
-  border-color: #f3f3f3;
+  border-color:  #ccc;
+  padding: 2px 6px;
 }
 
 .select2-container--default .select2-selection--single .select2-search__field,

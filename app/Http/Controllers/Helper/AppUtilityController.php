@@ -183,28 +183,31 @@ class AppUtilityController extends Controller
                             $favvalue[] = $fv;
                         }
                     }
-                    $userStatus = UserProject::query()->where('user_status',"published")->pluck('id');
-                    if(!blank($userStatus)){
-                        foreach($userStatus as $fk=>$usv)
-                        {
-                            $userStatusValue[] = $usv;
-                        }
-                    }
-                    $adminStatus = UserProject::query()->where('admin_status',"active")->pluck('id');
-                    if(!blank($adminStatus)){
-                        foreach($adminStatus as $fk=>$asv)
-                        {
-                            $adminStatusValue[] = $asv;
-                        }
-                    }
+                    // $userStatus = UserProject::query()->where('user_status',"published")->pluck('id');
+                    // if(!blank($userStatus)){
+                    //     foreach($userStatus as $fk=>$usv)
+                    //     {
+                    //         $userStatusValue[] = $usv;
+                    //     }
+                    // }
+                    // $adminStatus = UserProject::query()->where('admin_status',"active")->pluck('id');
+                    // if(!blank($adminStatus)){
+                    //     foreach($adminStatus as $fk=>$asv)
+                    //     {
+                    //         $adminStatusValue[] = $asv;
+                    //     }
+                    // }
                         $commonProjectsIds=[];
                     $dataMerge = array_merge($catvalues,$genvalues,$lanvalues,$locvalues,$recomvalue,$favvalue);
                  
                     $dataMerge = array_unique($dataMerge);
                     foreach($dataMerge as $dataKey => $dataVal)
                     {
-                        if(in_array($dataVal,$catvalues) && in_array($dataVal,$genvalues) && in_array($dataVal,$lanvalues) && in_array($dataVal,$locvalues) && in_array($dataVal,$recomvalue) && in_array($dataVal,$favvalue) )
+                        if(!empty($catvalues) && !in_array($dataVal,$catvalues) || !empty($genvalues) && !in_array($dataVal,$genvalues) ||!empty($lanvalues) && !in_array($dataVal,$lanvalues) || !empty($locvalues) && !in_array($dataVal,$locvalues) ||!empty($recomvalue) && !in_array($dataVal,$recomvalue) || !empty($favvalue) && !in_array($dataVal,$favvalue) )
                         {
+                            continue;
+                        }
+                        else{
                             $commonProjectsIds[] = $dataVal;
                         }
                     }

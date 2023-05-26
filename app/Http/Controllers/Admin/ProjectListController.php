@@ -89,8 +89,8 @@ class ProjectListController extends AdminController
                 $projectList->list_id=$project_list->id;
                 $projectList->category_id=(isset($request->categories) && !empty($request->categories))?implode(',',$request->categories):'';
                 $projectList->genre_id=(isset($request->genre)&& !empty($request->genre))?implode(',',$request->genre):'';
-                $projectList->language_id=(isset($request->genre)&& !empty($request->genre))?implode(',',$request->language):"";
-                $projectList->location_id=(isset($request->genre)&& !empty($request->genre))?implode(',',$request->location):"";
+                $projectList->language_id=(isset($request->language)&& !empty($request->language))?implode(',',$request->language):"";
+                $projectList->location_id=(isset($request->location)&& !empty($request->location))?implode(',',$request->location):"";
                 $projectList->recommendation=$request->recommended;
                 $projectList->favorite=$request->favorite;
                 $projectList->save();

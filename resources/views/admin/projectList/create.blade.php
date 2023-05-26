@@ -42,7 +42,7 @@
                                 <div class="col-md-4">
                                    <div class="form-group select2_wrap">
                                         <label for="exampleFormControlSelect1">Category</label>
-                                        <select name="categories[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice radius border-danger" multiple tabindex="-1" aria-hidden="true">
+                                        <select name="categories[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice radius border-danger js-select2" multiple tabindex="-1" aria-hidden="true">
                                         <option value="">Select</option>
                                             @php
                                               if($categories && $categories != '')
@@ -58,7 +58,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group select2_wrap">
                                         <label for="exampleFormControlSelect1">Genre</label>
-                                        <select  name="genre[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice radius border-secondary " multiple tabindex="-1" aria-hidden="true">
+                                        <select  name="genre[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice radius border-secondary js-select2 " multiple tabindex="-1" aria-hidden="true">
                                         <option value="">Select</option>
                                             @php
                                             if($genre && $genre != '')
@@ -74,7 +74,7 @@
                                 <div class="col-md-4">
                                     <div class="form-group select2_wrap">
                                         <label for="exampleFormControlSelect1">Language</label>
-                                        <select  name="language[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice radius border-secondary " multiple tabindex="-1" aria-hidden="true">
+                                        <select  name="language[]"class="js-select2" multiple tabindex="-1" aria-hidden="true">
                                         <option value="">Select</option>
                                             @php
                                             if($language && $language != '')
@@ -89,8 +89,8 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group select2_wrap">
-                                        <label for="exampleFormControlSelect1">location</label>
-                                        <select  name="location[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice border-secondary " multiple tabindex="-1" aria-hidden="true">
+                                        <label for="exampleFormControlSelect1">Location</label>
+                                        <select  name="location[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice border-secondary js-select2" multiple tabindex="-1" aria-hidden="true">
                                         <option value="">Select</option>
                                             @php
                                             if($location && $location != '')
@@ -114,7 +114,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Favorite</label>
+                                        <label for="exampleFormControlSelect1">Favourite</label>
                                         <select  name="favorite"class="form-control radius">
                                         <option value="1">Yes</option>
                                         <option value="0">No</option>
@@ -149,6 +149,14 @@
         });
         $(".add_fields_placeholderValue").hide();
     });
+
+    $(".js-select2").select2({
+      closeOnSelect: true,
+      placeholder: "Select",
+      allowClear: true,
+      maximumSelectionLength: 20,
+  })
+
 </script>
 @endpush
 
