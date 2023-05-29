@@ -75,7 +75,7 @@ Route::group(['prefix'=>'admin','middleware' => ['adminAuth']],function()
     Route::get('project-status', [AdminProjectController::class, 'changeStatus'])->name('project-list-status'); 
     Route::get('category-update-view', [AdminProjectController::class, 'categoryEdit'])->name('category.update-view');
     Route::post('category-update', [AdminProjectController::class, 'categoryUpdate'])->name('category.update');
-    Route::get('genre-update-view', [AdminProjectController::class, 'genreEdit'])->name('genre.update-view');
+    Route::get('project/genre-update-view', [AdminProjectController::class, 'genreEdit'])->name('genre.update-view');
     Route::post('genre-update', [AdminProjectController::class, 'genreUpdate'])->name('genre.update');
 });
 ?>
