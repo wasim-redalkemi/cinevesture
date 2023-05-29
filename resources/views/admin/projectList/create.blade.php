@@ -43,7 +43,6 @@
                                    <div class="form-group select2_wrap">
                                         <label for="exampleFormControlSelect1">Category</label>
                                         <select name="categories[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice radius border-danger js-select2" multiple tabindex="-1" aria-hidden="true">
-                                        <option value="">Select</option>
                                             @php
                                               if($categories && $categories != '')
                                                 foreach ($categories as $key => $value) {
@@ -59,7 +58,6 @@
                                     <div class="form-group select2_wrap">
                                         <label for="exampleFormControlSelect1">Genre</label>
                                         <select  name="genre[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice radius border-secondary js-select2 " multiple tabindex="-1" aria-hidden="true">
-                                        <option value="">Select</option>
                                             @php
                                             if($genre && $genre != '')
                                                 foreach ($genre as $key => $value) {
@@ -75,7 +73,6 @@
                                     <div class="form-group select2_wrap">
                                         <label for="exampleFormControlSelect1">Language</label>
                                         <select  name="language[]"class="js-select2" multiple tabindex="-1" aria-hidden="true">
-                                        <option value="">Select</option>
                                             @php
                                             if($language && $language != '')
                                                 foreach ($language as $key => $value) {
@@ -91,7 +88,6 @@
                                     <div class="form-group select2_wrap">
                                         <label for="exampleFormControlSelect1">Location</label>
                                         <select  name="location[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice border-secondary js-select2" multiple tabindex="-1" aria-hidden="true">
-                                        <option value="">Select</option>
                                             @php
                                             if($location && $location != '')
                                                 foreach ($location as $key => $value) {
@@ -107,6 +103,7 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Recommended</label>
                                         <select  name="recommended"class="form-control radius">
+                                        <option value="null">Select</option>
                                         <option value="1">Yes</option>
                                         <option value="0">No</option>
                                         </select>
@@ -116,6 +113,7 @@
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Favourite</label>
                                         <select  name="favorite"class="form-control radius">
+                                        <option value="null">Select</option>
                                         <option value="1">Yes</option>
                                         <option value="0">No</option>
                                         </select>

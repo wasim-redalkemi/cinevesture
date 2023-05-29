@@ -223,6 +223,7 @@ class ProjectController extends WebController
                         $projectLanguages->language_id = $v;
                         $projectLanguages->save();    
                     }
+                    AppUtilityController::listAutomation();
                     $this->return_response['success_msg'] = 'Project overview updated successfully.';
                 }
             }
@@ -344,7 +345,7 @@ class ProjectController extends WebController
                             $projectGenres->save();
                         }
                     }
-                   
+                    AppUtilityController::listAutomation();
                     $this->return_response['success_msg'] = 'Project details updated successfully.';                    
                 } else {
                     return back()->with("error","Please overview phase fill.");
@@ -712,8 +713,6 @@ class ProjectController extends WebController
     public function getMediaByProject(Request $request, $project_id = null){
         try {
             $reqData = $request->all();
-            //\Log::info("project_id ".$project_id.", ".$reqData['type']);
-            //\DB::connection()->enableQueryLog();
             $where = ['project_id'=>$project_id];
             if(isset($reqData['type'])){
                 $where['file_type'] = $reqData['type'];
@@ -725,9 +724,6 @@ class ProjectController extends WebController
                     $ProjectVideos[$i]->file_link = asset("storage/".$rec->file_link);
                 }
             } 
-            //$queries = \DB::getQueryLog();
-            //\Log::info("project_id ".json_encode($queries));
-            //return json_encode($ProjectVideos);
             return $this->prepareJsonResp(AjaxController::AJAX_CALL_SUCCESS,$ProjectVideos,"Success","ER000","");
         } catch (Exception $e) {
             return $this->prepareJsonResp(AjaxController::AJAX_CALL_ERROR,$ProjectVideos,"","ER500",$e->getMessage());
@@ -868,7 +864,7 @@ class ProjectController extends WebController
             $project->user_status = $request->user_status;
             if($project->update())
             {
-                $listauto=AppUtilityController::listAutomation();
+                AppUtilityController::listAutomation();
                 return redirect()->route('project-list')->with("success", "Project status updated successfully.");
             }
             else

@@ -54,10 +54,6 @@ class ProjectListController extends AdminController
         }
 
     }
-    // public function updateAutomatedList()
-    // {
-    //     $listauto=AppUtilityController::listAutomation();
-    // }
 
     /**
      * Show the form for creating a new resource.
@@ -94,7 +90,7 @@ class ProjectListController extends AdminController
                 $projectList->recommendation=$request->recommended;
                 $projectList->favorite=$request->favorite;
                 $projectList->save();
-                $listauto=AppUtilityController::listAutomation();
+                AppUtilityController::listAutomation();
                 
             }
 
@@ -106,6 +102,12 @@ class ProjectListController extends AdminController
             Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
             return back();
         }
+    }
+
+    
+    public function listAutomation()
+    {
+        AppUtilityController::listAutomation();
     }
 
     /**
@@ -364,7 +366,7 @@ class ProjectListController extends AdminController
                 $projectListFilters->recommendation=$request->recommended;
                 $projectListFilters->favorite=$request->favorite;
                 $projectListFilters->save();
-                $listauto=AppUtilityController::listAutomation();
+                AppUtilityController::listAutomation();
             }
             Session::flash('response', ['text'=>'Project list name update successfully!','type'=>'success']);
             return redirect()->route('show-list');

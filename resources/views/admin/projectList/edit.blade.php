@@ -64,7 +64,7 @@
                                   <div class="col-md-4">
                                      <div class="form-group select2_wrap">
                                           <label for="exampleFormControlSelect1">Category</label>
-                                          <select  name="categories[]"class=" radius js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true" style="width:100%">
+                                          <select  name="categories[]"class=" js-select2 radius js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true" style="width:100%">
                                           <option value="">Select</option>
                                               @php
                                                 $pre_cat = explode(',',$projectList->ProjectListFilters[0]->category_id??'');
@@ -81,7 +81,7 @@
                                   <div class="col-md-4">
                                       <div class="form-group select2_wrap">
                                           <label for="exampleFormControlSelect1">Genre</label>
-                                          <select  name="genre[]"class="radius js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true" style="width:100%">
+                                          <select  name="genre[]"class=" js-select2 radius js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true" style="width:100%">
                                           <option value="">Select</option>
                                           @php
                                           $pre_genre = explode(',',$projectList->ProjectListFilters[0]->genre_id??'');
@@ -98,7 +98,7 @@
                                   <div class="col-md-4">
                                       <div class="form-group select2_wrap">
                                           <label for="exampleFormControlSelect1">Language</label>
-                                          <select  name="language[]"class="radius js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true" style="width:100%">
+                                          <select  name="language[]"class="js-select2 radius js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true" style="width:100%">
                                           <option value="">Select</option>
                                               @php
                                                 $pre_language = explode(',',$projectList->ProjectListFilters[0]->language_id??'');
@@ -114,8 +114,8 @@
                                   </div>
                                   <div class="col-md-4">
                                       <div class="form-group select2_wrap">
-                                          <label for="exampleFormControlSelect1">location</label>
-                                          <select  name="location[]"class="radius js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true">
+                                          <label for="exampleFormControlSelect1">Location</label>
+                                          <select  name="location[]"class="js-select2 radius js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true">
                                           <option value="">Select</option>
                                               @php
                                                 $pre_location = explode(',',$projectList->ProjectListFilters[0]->location_id??'');
@@ -133,6 +133,7 @@
                                       <div class="form-group">
                                           <label for="exampleFormControlSelect1">Recommended</label>
                                           <select  name="recommended"class="form-control radius">
+                                          <option value="null" {{ $projectList->ProjectListFilters[0]->recommendation == 'null' ? 'selected' : '' }}>Select</option>
                                           <option value="1" {{ $projectList->ProjectListFilters[0]->recommendation == '1' ? 'selected' : '' }}>Yes</option>
                                           <option value="0" {{ $projectList->ProjectListFilters[0]->recommendation == '0' ? 'selected' : '' }}>No</option>
                                           </select>
@@ -140,8 +141,9 @@
                                   </div>
                                   <div class="col-md-4">
                                       <div class="form-group">
-                                          <label for="exampleFormControlSelect1">Favorite</label>
+                                          <label for="exampleFormControlSelect1">Favourite</label>
                                           <select  name="favorite"class="form-control radius">
+                                          <option value="null" {{ $projectList->ProjectListFilters[0]->favorite == 'null' ? 'selected' : '' }}>Select</option>
                                           <option value="1" {{ $projectList->ProjectListFilters[0]->favorite == '1' ? 'selected' : '' }}>Yes</option>
                                           <option value="0" {{ $projectList->ProjectListFilters[0]->favorite == '0' ? 'selected' : '' }}>No</option>
                                           </select>
@@ -184,5 +186,13 @@
          $(".add_fields_placeholderValue").show();
         }
     });
+
+    
+    $(".js-select2").select2({
+    //   closeOnSelect: true,
+      placeholder: "Select",
+    //   allowClear: true,
+    //   maximumSelectionLength: 20,
+  })
 </script>
 @endpush

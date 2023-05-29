@@ -120,14 +120,14 @@ class AppUtilityController extends Controller
             $newProjectsData=[];
             foreach($listObj as $key=>$val)
             {
-                
-
+                $listData[] = $val->list_id;
                 $catArray = !empty($val->category_id) ? explode(',',$val->category_id) : [];
                 $genArray = !empty($val->genre_id) ? explode(',',$val->genre_id) : [];
                 $lanArray = !empty($val->language_id) ? explode(',',$val->language_id) : [];
                 $locArray = !empty($val->location_id) ? explode(',',$val->location_id) : [];
-                $recomm = $val->recommendation;
-                $fav = $val->favorite;
+                $recomm = "$val->recommendation";
+                $fav = "$val->favorite";
+                
                 
                 $catvalues = [];
                 $genvalues = [];
@@ -166,61 +166,59 @@ class AppUtilityController extends Controller
                         $locvalues[] = $v->project_id;
                     }
                 }
-                    $recomData = UserProject::query()
-                    ->where('project_verified',"$recomm")
-                    ->pluck('id');
-                    if(!blank($recomData)){
-                        foreach($recomData as $rk=>$rv)
-                        {
-                            $recomvalue[] = $rv;
-                        }
+                $recomData = UserProject::query()
+                ->where('project_verified',"$recomm")
+                ->pluck('id');
+                if(!blank($recomData)){
+                    foreach($recomData as $rk=>$rv)
+                    {
+                        $recomvalue[] = $rv;
                     }
+                }
 
-                    $favData = UserProject::query()->where('favorited',"$fav")->pluck('id');
-                    if(!blank($favData)){
-                        foreach($favData as $fk=>$fv)
-                        {
-                            $favvalue[] = $fv;
-                        }
-                    }
-                    // $userStatus = UserProject::query()->where('user_status',"published")->pluck('id');
-                    // if(!blank($userStatus)){
-                    //     foreach($userStatus as $fk=>$usv)
-                    //     {
-                    //         $userStatusValue[] = $usv;
-                    //     }
-                    // }
-                    // $adminStatus = UserProject::query()->where('admin_status',"active")->pluck('id');
-                    // if(!blank($adminStatus)){
-                    //     foreach($adminStatus as $fk=>$asv)
-                    //     {
-                    //         $adminStatusValue[] = $asv;
-                    //     }
-                    // }
-                        $commonProjectsIds=[];
-                    $dataMerge = array_merge($catvalues,$genvalues,$lanvalues,$locvalues,$recomvalue,$favvalue);
-                 
-                    $dataMerge = array_unique($dataMerge);
-                    foreach($dataMerge as $dataKey => $dataVal)
+                $favData = UserProject::query()->where('favorited',"$fav")->pluck('id');
+                if(!blank($favData)){
+                    foreach($favData as $fk=>$fv)
                     {
-                        if(!empty($catvalues) && !in_array($dataVal,$catvalues) || !empty($genvalues) && !in_array($dataVal,$genvalues) ||!empty($lanvalues) && !in_array($dataVal,$lanvalues) || !empty($locvalues) && !in_array($dataVal,$locvalues) ||!empty($recomvalue) && !in_array($dataVal,$recomvalue) || !empty($favvalue) && !in_array($dataVal,$favvalue) )
-                        {
-                            continue;
-                        }
-                        else{
-                            $commonProjectsIds[] = $dataVal;
-                        }
+                        $favvalue[] = $fv;
                     }
-                   
-                    foreach($commonProjectsIds as $key => $value)
+                }
+                // $userStatus = UserProject::query()->where('user_status',"published")->pluck('id');
+                // if(!blank($userStatus)){
+                //     foreach($userStatus as $fk=>$usv)
+                //     {
+                //         $userStatusValue[] = $usv;
+                //     }
+                // }
+                // $adminStatus = UserProject::query()->where('admin_status',"active")->pluck('id');
+                // if(!blank($adminStatus)){
+                //     foreach($adminStatus as $fk=>$asv)
+                //     {
+                //         $adminStatusValue[] = $asv;
+                //     }
+                // }
+                $commonProjectsIds=[];
+                $dataMerge = array_merge($catvalues,$genvalues,$lanvalues,$locvalues,$recomvalue,$favvalue);
+                
+                $dataMerge = array_unique($dataMerge);
+                foreach($dataMerge as $dataKey => $dataVal)
+                {
+                    if((!empty($catArray) && !in_array($dataVal,$catvalues)) || (!empty($genArray) && !in_array($dataVal,$genvalues)) || (!empty($lanArray) && !in_array($dataVal,$lanvalues)) || (!empty($locArray) && !in_array($dataVal,$locvalues)) || (($recomm == '0' || $recomm == '1') && !in_array($dataVal,$recomvalue)) || (($fav == '0' || $fav == '1') && !in_array($dataVal,$favvalue)))
                     {
-                        $newProjectsData[] = [
-                            'list_id'=>$val->list_id,
-                            'project_id'=>$value,
-                        ];
-                        $listData[] = $val->list_id;
-                        $projectData[] = $value;
+                        continue;
                     }
+                    else{
+                        $commonProjectsIds[] = $dataVal;
+                    }
+                }
+                foreach($commonProjectsIds as $key => $value)
+                {
+                    $newProjectsData[] = [
+                        'list_id'=>$val->list_id,
+                        'project_id'=>$value,
+                    ];
+                    $projectData[] = $value;
+                }
             }
             $existingProjectListObj = ProjectListProjects::query()->whereIn("list_id",array_unique($listData))->delete();
             if (!blank($newProjectsData)) {
