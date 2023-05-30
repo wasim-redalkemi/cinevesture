@@ -21,6 +21,21 @@
     text-align:center;font-size:20px !important;font-weight:bold;
 }
 
+/* ul.select2-choices {
+    padding-right: 30px !important;
+}
+
+ul.select2-choices:after {
+    content: "";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-top: 5px solid #333;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+} */
+
 .form-group label 
 {
 /* height: 30px !important;

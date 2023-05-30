@@ -10330,6 +10330,7 @@ pre code {
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 
+
 @media screen and (prefers-reduced-motion: reduce) {
   .form-control, .asColorPicker-input, .dataTables_wrapper select, .jsgrid .jsgrid-table .jsgrid-filter-row input[type=text],
   .jsgrid .jsgrid-table .jsgrid-filter-row select, .jsgrid .jsgrid-table .jsgrid-filter-row input[type=number], .select2-container--default .select2-selection--single, .select2-container--default .select2-selection--single .select2-search__field, .typeahead,
@@ -21176,8 +21177,12 @@ code {
 .tt-query,
 .tt-hint {
   border: 1px solid #ccc;
+
   font-weight: 400;
   font-size: 0.875rem;
+}
+.form-control:focus {
+  border: 1px solid #efe7e763;
 }
 
 select.form-control, select.asColorPicker-input, .dataTables_wrapper select,
@@ -21199,12 +21204,15 @@ select.tt-hint
   outline: 1px solid #ccc;
   color: #000000;
 }
+select.form-control:focus {
+  border: 1px solid #efe7e763;
+}
 
 select.form-control:focus, select.asColorPicker-input:focus, .dataTables_wrapper select:focus,
 .jsgrid .jsgrid-table .jsgrid-filter-row select:focus, .select2-container--default select.select2-selection--single:focus, .select2-container--default .select2-selection--single select.select2-search__field:focus, select.typeahead:focus,
 select.tt-query:focus,
 select.tt-hint:focus {
-  outline: 1px solid #f3f3f3;
+  outline: 1px solid #efe7e763;
 }
 
 select.form-control.border-primary, select.border-primary.asColorPicker-input, .dataTables_wrapper select.border-primary,
@@ -26022,6 +26030,36 @@ body.avgrund-active {
 }
 
 /* Select2 */
+
+/* for dropdown arrow in select 2 */
+
+.select2-container--default .select2-selection--multiple::after {
+  position: absolute;
+  right: 3px;
+  top: 12px;
+  -webkit-font-smoothing: antialiased !important;
+  content: "\F140";
+  font-family: "Material Design Icons";
+  font-style: normal;
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  }
+/* .select2-container--default .select2-selection--multiple:focus {
+  border: 1px solid #aaa;
+  background: red;
+ } */
+
+ .select2.select2-container.select2-container--default.select2-container--above:focus {
+  border: 1px solid #aaa !important;
+  background: red !important;
+}
+
+/* .select2-container--default .select2-selection--single, .select2-container--default .select2-dropdown, .select2-container--default .select2-selection--multiple:focus {
+  border: 1px solid #aaa;
+  background: red;
+} */
+
 .select2-container--default .select2-results__option--highlighted[aria-selected] {
   background: #7571f9;
 }
