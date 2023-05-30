@@ -211,7 +211,12 @@ class AppUtilityController extends Controller
                         $commonProjectsIds[] = $dataVal;
                     }
                 }
-                foreach($commonProjectsIds as $key => $value)
+                $filteredProjects = UserProject::query()
+                ->whereIn('id',$commonProjectsIds)
+                ->where('user_status','published')
+                ->where('admin_status','active')
+                ->pluck('id');
+                foreach($filteredProjects as $key => $value)
                 {
                     $newProjectsData[] = [
                         'list_id'=>$val->list_id,
