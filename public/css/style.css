@@ -4789,3 +4789,6 @@ transition: 2s ease all; */
 .field-error{
     color: #DD45B3;
 }
+.pd-30{
+    padding: 30px;
+}

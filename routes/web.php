@@ -91,6 +91,7 @@ Route::group(["middleware" => ["auth", "revalidate", "verified",'is_admin']], fu
         Route::get('/subscription/order-create', [SubscriptionController::class, 'createOrder'])->name('subscription-order-create');
         Route::get('/subscription/success', [SubscriptionController::class, 'paymentSuccess'])->name('subscription-success');
         Route::get('/subscription/failed', [SubscriptionController::class, 'paymentFailed'])->name('subscription-failed');
+        Route::get('/subscription/free', [SubscriptionController::class, 'createFreeOrder'])->name('subscription-free');
 
 
         Route::get('/profile-private-show', [UserController::class, 'profilePrivateShow'])->name('profile-private-show')->middleware('plancheck');

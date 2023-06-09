@@ -156,7 +156,8 @@ class SubscriptionController extends Controller
 
 
     public function createSubscription($data, $request = null)
-    {   $subscription = UserSubscription::where('user_id',$data->user_id)->first();
+    {   
+        $subscription = UserSubscription::where('user_id',$data->user_id)->first();
         if(!$subscription){
             $subscription = new UserSubscription();
         }
@@ -231,5 +232,43 @@ class SubscriptionController extends Controller
         }catch(Exception $e){
 
         }
+    }
+
+    public function createFreeOrder(Request $request)
+    {
+        $subscriptionOrder=SubscriptionOrder::query()->where('user_id',auth()->user()->id)->first();
+         if (!empty($subscriptionOrder)) {
+           return back()->with('error',"something want wrong");
+         }
+         $plan = Plans::find($request->id);
+         $order = new SubscriptionOrder();
+                $order->plan_id = $plan->id;
+                $order->user_id = auth()->user()->id;
+                $order->plan_name = $plan->plan_name;
+                $order->plan_amount = $plan->plan_amount;
+                $order->currency = $plan->currency;
+                $order->plan_time = "m";
+                $order->plan_time_quntity = 30;
+                $order->status = 'pending';
+                $order->save();
+
+                $subscriptionData=[
+                    'user_id'=>$order->user_id,
+                    'plan_amount'=> $order->plan_amount,
+                    'plan_name' =>$order->plan_name,
+                    'currency' =>$order->currency,
+                    'plan_time' =>"m",
+                    'plan_time_quntity' => 30,
+                    // 'subscription_start_date' = Carbon::now(), // for free plan 
+                    'total_days' => 30,
+                    'subscription_end_date' => Carbon::now()->addDays(30), // for free plan 
+                    'order_id' => 0,
+                    'plan_id' => $order->plan_id
+            
+                   ];
+                   $subscriptionData = (object) $subscriptionData;
+                   $subscription = $this->createSubscription($subscriptionData, $request);
+                   return redirect()->route('home')->with('success', '30 day Free trial completed Successfully');
+
     }
 }

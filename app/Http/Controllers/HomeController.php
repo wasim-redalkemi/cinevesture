@@ -11,6 +11,7 @@ use App\Models\MasterSkill;
 use App\Models\ProjectList;
 use App\Models\ProjectListProjects;
 use App\Models\ProjectStage;
+use App\Models\UserSubscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
@@ -35,8 +36,12 @@ class HomeController extends Controller
     public function index()
     { 
         try {
-            
-        
+            $sub=false;
+        $subscription=UserSubscription::query()->where('user_id',auth()->user()->id)->first();
+        if($subscription->platform_subscription_id==0){
+            $sub=true;
+        };
+
         $countries = MasterCountry::query()->get();
         $languages = MasterLanguage::query()->get();
         $geners = MasterProjectGenre::query()->orderBy('name', 'ASC')->get();
@@ -71,7 +76,7 @@ class HomeController extends Controller
         $project_lists_carousel = (isset($project_list_project[0]))?$project_list_project[0]:[];
         unset($project_list_project[0]);
         $project_lists_except_carousel = $project_list_project;
-        return view('main',compact(['countries','languages','geners','categories','looking_for','project_stages','project_lists_carousel','project_lists_except_carousel']));
+        return view('main',compact(['countries','languages','geners','categories','looking_for','project_stages','project_lists_carousel','project_lists_except_carousel',"sub"]));
     } catch (\Throwable $th) {
         echo $th;
     }
