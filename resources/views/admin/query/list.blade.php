@@ -11,13 +11,13 @@
                         <table id="order-listing" class="table order-listing table-sm table-bordered table-hover">
                             <thead>
                                 <tr>
-                                    <th class="col-md-1">Id</th>
-                                    <th class="col-md-1">Name</th>
-                                    <th class="col-md-1">Email</th>
-                                    <th class="col-md-1">Subject</th>
-                                    <th class="col-md-1">Date</th>
-                                    <th class="col-md-1">Time</th>
-                                    <th class="col-md-2 notForPrint">Action</th>
+                                    <th>SN</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Subject</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th class="notForPrint">Action</th>
                                 </tr>
                             </thead>
                             <tbody>

@@ -13,7 +13,7 @@
                        <table class="table order-listing table-sm table-bordered table-hover">
                             <thead>
                                 <tr>
-                                   <th class="col-md-2">S no.</th>
+                                   <th class="col-md-2">SN</th>
                                    <th class="col-md-2">Name</th>
                                    <th class="col-md-1">Type</th>
                                     <th class="col-md-1">Project Count</th>

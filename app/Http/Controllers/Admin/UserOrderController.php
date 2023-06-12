@@ -2,19 +2,35 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\AdminController;
+use App\Models\SubscriptionOrder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class UsreOrderController extends Controller
+class UserOrderController extends AdminController
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.userorder');
+        $dataObj = [];
+        DB::enableQueryLog();
+        $search_data=(!empty($request->search))?$request->search:'';
+        $orders = SubscriptionOrder::query()
+        ->with(['plan'])
+        ->whereHas('user',function($q)use($search_data)
+        {
+            if(!empty($search_data)) {
+                $q->where("name","like","%$search_data%");
+                $q->orWhere("email","like","%$search_data%");
+            }
+        })
+        ->paginate($this->records_limit);     
+        $dataObj = $orders;
+        return view('admin.userorder',compact('dataObj'));
     }
 
     /**
