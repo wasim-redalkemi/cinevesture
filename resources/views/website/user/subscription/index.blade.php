@@ -384,6 +384,8 @@
         $("[plan_elem="+k+"]").css('height',v+'px');
     })
 
+    var isPlanPage=true;
+
 
 </script>
 

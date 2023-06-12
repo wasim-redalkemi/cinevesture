@@ -14,6 +14,7 @@ use App\Models\ProjectStage;
 use App\Models\UserSubscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
@@ -33,15 +34,16 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     { 
         try {
-            $sub=false;
+            $freeSub=0;
         $subscription=UserSubscription::query()->where('user_id',auth()->user()->id)->first();
-        if($subscription->platform_subscription_id==0){
-            $sub=true;
-        };
-
+        $freeSub=$subscription->platform_subscription_id;
+        if(isset($freeSub)){
+            Session::put('freeSubscription', $freeSub);
+        }
+        $value = $request->session()->get('freeToastmsg');
         $countries = MasterCountry::query()->get();
         $languages = MasterLanguage::query()->get();
         $geners = MasterProjectGenre::query()->orderBy('name', 'ASC')->get();
@@ -76,7 +78,8 @@ class HomeController extends Controller
         $project_lists_carousel = (isset($project_list_project[0]))?$project_list_project[0]:[];
         unset($project_list_project[0]);
         $project_lists_except_carousel = $project_list_project;
-        return view('main',compact(['countries','languages','geners','categories','looking_for','project_stages','project_lists_carousel','project_lists_except_carousel',"sub"]));
+        
+        return view('main',compact(['countries','languages','geners','categories','looking_for','project_stages','project_lists_carousel','project_lists_except_carousel']));
     } catch (\Throwable $th) {
         echo $th;
     }

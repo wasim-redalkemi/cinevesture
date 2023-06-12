@@ -4792,3 +4792,15 @@ transition: 2s ease all; */
 .pd-30{
     padding: 30px;
 }
+.free_trial_wrap
+{
+    /* background-color: red; */
+    padding: 20px;
+    position: fixed;
+    top: 12%;
+    z-index: 9999999;
+    width: 100%;
+    display: none;
+
+}
+

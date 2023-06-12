@@ -64,6 +64,8 @@
             @include('website.include.video_modal')
             @include('website.include.image_in_full_view_modal')
             @include('website.include.docs_preview_modal')
+            @include('website.include.free_trial_modal')
+           
             
         </main>
     </div>
@@ -251,6 +253,7 @@
                 window.location.href=doc_url;
             }
         });
+        
 
         $('.image_in_full_view').click(function()
         {
@@ -272,6 +275,23 @@
     @yield('scripts')
     @stack('scripts')
     @include('website.include.validator-scripts')
+    <script>
+         $('document').ready(function () {
+          
+            let freesubtrial="{{ Session::get('freeSubscription')}}";
+            let setsessionfree=sessionStorage.getItem("freeToastMSG")
+            if (setsessionfree==undefined) {
+                sessionStorage.setItem("freeToastMSG", "0"); 
+            }
+            if(typeof(isPlanPage) != "undefined")
+            {
+                setsessionfree = 1;
+            }
+            if ((setsessionfree!=undefined) && (setsessionfree==0)) {
+                $(".free_trial_msg").show();
+            }
+        })
+    </script>
 </body>
 </html>
 

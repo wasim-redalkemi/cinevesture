@@ -68,7 +68,7 @@
     <form method="POST" action="{{ route('logout') }}">
       @csrf
       
-      <button class="transparent_logout_btn" style="" type="submit">{{ __('Logout') }} </button>
+      <button class="transparent_logout_btn" onclick="freeremoveseccion()" style="" type="submit">{{ __('Logout') }} </button>
     </form>
     {{-- <div class="sidebar_content">{{ __('Logout') }}Logout</a></div> --}}
     <hr class="sidebar_content_hr">
@@ -144,5 +144,9 @@
 //         container.hide();
 //     }
 // });
+function freeremoveseccion() {
+    
+    sessionStorage.removeItem('freeToastMSG');
+  }
 </script>
 @endpush

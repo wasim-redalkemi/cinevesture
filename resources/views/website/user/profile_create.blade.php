@@ -18,7 +18,6 @@
                 <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4 mb-5 mb-md-0">
                     <form role="form" class="validateBeforeSubmit" name="validateBefore" method="POST" onsubmit="return validationImageLessthen10ma()" enctype="multipart/form-data" action="{{ route('profile-store') }}">
                         @csrf
-
                         <div class="profile_text">
                             <h1>Profile</h1>
                         </div>

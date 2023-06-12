@@ -251,6 +251,7 @@ class SubscriptionController extends Controller
                 $order->plan_time_quntity = 30;
                 $order->status = 'pending';
                 $order->save();
+                $request->session()->put('freeToastmsg',true);
 
                 $subscriptionData=[
                     'user_id'=>$order->user_id,
@@ -262,12 +263,12 @@ class SubscriptionController extends Controller
                     // 'subscription_start_date' = Carbon::now(), // for free plan 
                     'total_days' => 30,
                     'subscription_end_date' => Carbon::now()->addDays(30), // for free plan 
-                    'order_id' => 0,
+                    'order_id' => 'free',
                     'plan_id' => $order->plan_id
             
                    ];
                    $subscriptionData = (object) $subscriptionData;
-                   $subscription = $this->createSubscription($subscriptionData, $request);
+                   $subscription = $this->createSubscription($subscriptionData);
                    return redirect()->route('home')->with('success', '30 day Free trial completed Successfully');
 
     }
