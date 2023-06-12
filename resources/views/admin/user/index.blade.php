@@ -11,7 +11,7 @@
                         <table id="order-listing" class="table">
                             <thead>
                                 <tr>
-                                    <th>Id</th>
+                                    <th>SN</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Title</th>

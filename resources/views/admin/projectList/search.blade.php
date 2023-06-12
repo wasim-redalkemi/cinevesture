@@ -162,7 +162,7 @@
                               </tr>
                                <tr>
                                 
-                                 <th>Id</th>
+                                 <th>SN</th>
                                  <th>Name</th>
                                  <th>Image</th>
                                  <th>Status</th>
