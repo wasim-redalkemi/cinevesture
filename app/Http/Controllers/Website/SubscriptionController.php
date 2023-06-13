@@ -251,7 +251,7 @@ class SubscriptionController extends Controller
                 $order->plan_time_quntity = 30;
                 $order->status = 'pending';
                 $order->save();
-                $request->session()->put('freeToastmsg',true);
+                // $request->session()->put('freeToastmsg',true);
 
                 $subscriptionData=[
                     'user_id'=>$order->user_id,

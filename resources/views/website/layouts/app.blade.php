@@ -279,16 +279,20 @@
          $('document').ready(function () {
           
             let freesubtrial="{{ Session::get('freeSubscription')}}";
+            if (freesubtrial=="free") {
             let setsessionfree=sessionStorage.getItem("freeToastMSG")
             if (setsessionfree==undefined) {
                 sessionStorage.setItem("freeToastMSG", "0"); 
             }
+             setsessionfree=sessionStorage.getItem("freeToastMSG");
+             console.log(setsessionfree);
             if(typeof(isPlanPage) != "undefined")
             {
                 setsessionfree = 1;
             }
             if ((setsessionfree!=undefined) && (setsessionfree==0)) {
                 $(".free_trial_msg").show();
+            }
             }
         })
     </script>

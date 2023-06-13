@@ -84,6 +84,7 @@
                                     @if($plan->plan_time == "y")                                           
                                         <div class="search-head-subtext Aubergine_at_night mt-3">(@if($plan->currency == "USD")$@else₹@endif{{ number_format($plan->plan_amount/12, 2,'.',',')}}/month)</div>
                                     @endif
+                                    <div>(inclusive gst tax)</div>
                                     @if ($freeTrail==true)
                                     <div class="d-flex justify-content-center"><a  href="{{route('subscription-free',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2 pd-30">Start 30-days<br>Free Trail</button></a></div>
                                     @else

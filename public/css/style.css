@@ -4803,4 +4803,12 @@ transition: 2s ease all; */
     display: none;
 
 }
+.alert-warning-theam {
+    color: #664d03;
+    background-color: #fff3cd;
+    border-color: #ffecb5;
+  }
+  .bg_color_theam{
+    background: #412d51;
+  }
 

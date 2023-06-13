@@ -43,7 +43,6 @@ class HomeController extends Controller
         if(isset($freeSub)){
             Session::put('freeSubscription', $freeSub);
         }
-        $value = $request->session()->get('freeToastmsg');
         $countries = MasterCountry::query()->get();
         $languages = MasterLanguage::query()->get();
         $geners = MasterProjectGenre::query()->orderBy('name', 'ASC')->get();

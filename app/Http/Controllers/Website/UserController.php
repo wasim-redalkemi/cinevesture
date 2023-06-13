@@ -964,5 +964,14 @@ class UserController extends WebController
             return ['status'=>0,'msg'=>"Something went wrong."];
         }
     }
+
+    public function addGstAndBillingAddress(Request $request)
+    {
+        try{
+        }
+        catch(Exception $e){
+            return ['status'=>0,'msg'=>"Something went wrong."];
+        }
+    }
 }
 

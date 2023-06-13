@@ -145,7 +145,7 @@
 //     }
 // });
 function freeremoveseccion() {
-    
+
     sessionStorage.removeItem('freeToastMSG');
   }
 </script>

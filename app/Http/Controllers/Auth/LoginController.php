@@ -115,7 +115,7 @@ class LoginController extends Controller
                     $request->session()->put('permission',$plans->getRelationalData);
                     $request->session()->put('module',$module);
                     $request->session()->put('action',$action);
-                    $request->session()->put('freeToastmsg',false);
+                    // $request->session()->put('freeToastmsg',false);
                     $subscription=UserSubscription::query()->where('user_id',auth()->user()->id)->first();
                     $isFreeTrial=$subscription->platform_subscription_id;
                     // if(!empty($subscription && $subscription!='0')){
@@ -151,7 +151,7 @@ class LoginController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
-        $request->session()->forget('freeToastmsg');
+        // $request->session()->forget('freeToastmsg');
 
         if ($response = $this->loggedOut($request)) {
             return $response;

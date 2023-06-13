@@ -130,6 +130,7 @@ Route::group(["middleware" => ["auth", "revalidate", "verified",'is_admin']], fu
 
         Route::get('/billing', [SubscriptionController::class, 'getBilling'])->name('subscription-billing');
         Route::post('/deactivate', [UserController::class, 'deactivateAccount'])->name('user-deactivate');
+        Route::post('/gst-billing', [UserController::class, 'addGstAndBillingAddress'])->name('gst-billing');
     });
 
     Route::group(['prefix' => 'project'], function () {
