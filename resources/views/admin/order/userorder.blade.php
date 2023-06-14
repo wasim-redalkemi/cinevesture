@@ -76,7 +76,7 @@
                                             <td>{{$data->plan_amount}}</td>
                                             <td>{{date('d-M-Y',strtotime($data->created_at))}}</td>
                                             <td>
-                                                <a href="#" class="btn btn-sm btn-primary action_button">Download</a>
+                                                <a href="{{route('download_invoice')}}" class="btn btn-sm btn-primary action_button">Download</a>
                                             </td>
                                         </tr>
                                     @endforeach

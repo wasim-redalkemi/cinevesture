@@ -70,6 +70,7 @@ Route::group(['prefix'=>'admin','middleware' => ['adminAuth']],function()
     Route::group(['prefix'=>'order'],function()
     {
         Route::get('/list', [UserOrderController::class, 'index'])->name('user_order');
+        Route::get('/download-invoice', [UserOrderController::class, 'downloadInvoicePdf'])->name('download_invoice');
     }); 
    
 
