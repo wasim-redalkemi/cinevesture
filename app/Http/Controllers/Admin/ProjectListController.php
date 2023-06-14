@@ -136,7 +136,7 @@ class ProjectListController extends AdminController
                 $q->select(DB::raw('list_id,COUNT(project_id) as pcount'))->groupby('list_id');
             }) 
                 
-            ->paginate($this->records_limit);        
+            ->paginate(30);        
              return view('admin.projectList.list',compact('projects_data'));
         }
         catch (Exception $e)
