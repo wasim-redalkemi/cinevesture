@@ -40,6 +40,9 @@ class HomeController extends Controller
             $freeSub=0;
         $subscription=UserSubscription::query()->where('user_id',auth()->user()->id)->first();
         $freeSub=$subscription->platform_subscription_id;
+        $endsub=round((strtotime($subscription->subscription_end_date)-time()) / (60 * 60 * 24));
+        Session::put('freeEndDateSub', $endsub);
+        $value = $request->session()->get('freeEndDateSub');
         if(isset($freeSub)){
             Session::put('freeSubscription', $freeSub);
         }

@@ -11,4 +11,9 @@ class UserSubscription extends Model
 
     protected $table = 'user_subcriptions';
 
+    public function user()
+    {
+        return $this->belongsTo(user::class,'user_id','id');
+    }
+
 }

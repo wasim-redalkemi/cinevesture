@@ -301,7 +301,31 @@
         </div>
     </div>
 </section>
-
+<div class="modal fade expire_modal ">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg_3308">
+            <div class="modal-body p-0">
+                <section class="p-3">
+                    <div class="container">
+                        <div class="row">
+                            
+                            <div class="col-md-12">
+                                <div class="signup-text  mt-5 mt-md-5">Your free trial has ended</div>
+                            </div>
+                            <div class="col-md-12 mt-4">
+                                <p class="text-white">Lorem ipsum dolor, sit amet consectetur adipisicing elit. At aperiam ipsum nobis suscipit eveniet illum, rerum neque perferendis corrupti harum, mollitia inventore consectetur officiis! Officiis in autem deleniti accusamus ex!</p>
+                            </div>
+                            <div class="col-md-12 py-3">
+                                <button type="button" class="invite_btn" data-dismiss="modal">Upgrade Plan</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection
 
@@ -387,7 +411,10 @@
 
     var isPlanPage=true;
 
-
+    var isnotfree="{{$freeTrail}}";
+    if (isnotfree==false) {
+        $('.expire_modal').modal('show');
+    };
 </script>
 
 @endpush
