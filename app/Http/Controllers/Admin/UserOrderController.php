@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Models\SubscriptionOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use PDF;
 
 class UserOrderController extends AdminController
 {
@@ -30,7 +31,7 @@ class UserOrderController extends AdminController
         })
         ->paginate($this->records_limit);     
         $dataObj = $orders;
-        return view('admin.userorder',compact('dataObj'));
+        return view('admin.order.userorder',compact('dataObj'));
     }
 
     /**
@@ -97,5 +98,35 @@ class UserOrderController extends AdminController
     public function destroy($id)
     {
         //
+    }
+
+    public function downloadInvoicePdf(Request $request)
+    {
+        // $challan_id = $request->id;
+        // $challan=Challan::query()
+        // ->with(['ewayBillDetails','petrolPumpOwner.petrolPump','fleetOwner.fleetOwner','truck'])
+        // ->find($challan_id); 
+        // $id = $challan->supervisor_user_id;
+        // $role = 4;
+        // $transporterAdmin = '';
+        // for($i=0;$i<=2;$i++)
+        // {
+        //     $modelObj = User::find($id);
+        //     $id = $modelObj->parent_user_id;
+        //     $transporterAdmin = $modelObj;
+        // }
+        // $transporterAdmin=User::query()->with(['transporters'])->where('id',$transporterAdmin->id)->first();
+        // $data = ['challan'=>'','transporterAdmin'=>''];
+        // $data['challan'] = $challan;
+        $data['transporterAdmin'] = ['hi'];
+        $html = view('admin.order.pdf',compact(['data']));
+        
+        // $file_name=date('siHdmY').'_'.$data['challan']->ewayBillDetails->ewb_eway_bill_no;
+        $pdf = PDF::loadHtml($html);
+        $pdf->setPaper('A4');
+        return $pdf->stream('users_list.pdf',array("Attachment" => true));
+        // return $pdf->download($file_name.'.pdf');
+        // return view('admin.challan.pdf',compact(['data']));
+
     }
 }
