@@ -10,6 +10,7 @@ use App\Models\UserInvite;
 use Closure;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class PlanPermission extends Controller
 {
@@ -23,7 +24,9 @@ class PlanPermission extends Controller
    public function handle(Request $request, Closure $next)
    {
       if(isset(auth()->user()->id)){ // check login
-         $is_subscribed = SubscriptionUtilityController::isSubscribed();
+         // if (!($request->session()->has('subscription_end_date'))) {
+            $is_subscribed = SubscriptionUtilityController::isUserSubscribe();
+      // }
          if(!$is_subscribed) 
          {
             // $user = User::find( auth()->user()->id);
@@ -38,9 +41,6 @@ class PlanPermission extends Controller
             // }
             return redirect()->route('plans-view');
          }
-         // if (!$is_subscribed) {
-         //    return redirect()->route('plans-view');
-         // }
       }
       if ($request->session()->get('permission')) {
          $key = null;

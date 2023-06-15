@@ -645,5 +645,10 @@
                 // }
             }
         }
+        var hasUserSubscription= "{{ Session::get('freeSubscription')}}";
+    console.log(hasUserSubscription);
+    if (hasUserSubscription!='free') {
+      sessionStorage.setItem("freeToastMSG", "1"); 
+    }
 </script>
 @endpush

@@ -37,7 +37,7 @@
                       <div class="project-text mt-5 pt-2">
                        
                         @if (!empty($v->project_name))
-                      <span class="blackTextShadow">  {{$v->project_name}} </span>
+                      <span class="blackTextShadow">  {{$v->project_name}}</span>
                         @endif
                       </div>
                       
@@ -320,6 +320,11 @@
         }
       },
     });
+    var hasUserSubscription= "{{ Session::get('freeSubscription')}}";
+    console.log(hasUserSubscription);
+    if (hasUserSubscription!='free') {
+      sessionStorage.setItem("freeToastMSG", "1"); 
+    }
 
     var slider_elem_title = $('.slider_elem_title').offset();
     var slider_elem_child = $('.owl_item_at_0').offset();

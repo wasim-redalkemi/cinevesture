@@ -163,7 +163,15 @@ class SubscriptionController extends Controller
         }
         $subscription->user_id = $data->user_id;
         $subscription->platform_cutomer_id = "1"; //stripe
-        $subscription->plan_amount = $data->plan_amount;
+        if ($data->currency=='INR') {
+            $gstamt=$data->plan_amount*18/100;
+            $withoutgst=$data->plan_amount-$gstamt;
+            $subscription->plan_amount = $withoutgst;
+            // $subscription->gst = $gstamt;
+        }else{
+            $subscription->plan_amount = $data->plan_amount;
+        }
+       
         $subscription->plan_name = $data->plan_name;
         $subscription->currency = $data->currency;
         $subscription->plan_time = $data->plan_time;
@@ -182,6 +190,9 @@ class SubscriptionController extends Controller
         // $subscription->platform_subscription_id = $data->order_id; // stripe
         $subscription->status = "active";
         $subscription->save();
+        session()->put('user_subscription_end_date',$subscription->subscription_end_date);
+        // $value = $request->session()->pull('key', 'default');
+
 
         return $subscription;
     }
@@ -238,7 +249,7 @@ class SubscriptionController extends Controller
     {
         $subscriptionOrder=SubscriptionOrder::query()->where('user_id',auth()->user()->id)->first();
          if (!empty($subscriptionOrder)) {
-           return back()->with('error',"something want wrong");
+           return back()->with('error',"something went wrong");
          }
          $plan = Plans::find($request->id);
          $order = new SubscriptionOrder();

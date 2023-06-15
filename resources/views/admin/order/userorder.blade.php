@@ -89,8 +89,8 @@
                                     {{'Showing '.$dataObj->firstItem().' to' .' '. $dataObj->lastItem().' of'.' '.$dataObj->total()}}
                                 </div>
                                 <div style="float:right;" >
-                                    {{$dataObj->links()}}
-                                    {{ $dataObj->appends($_GET)->links() }}
+                                    {{-- {{$dataObj->links()}} --}}
+                                    {{-- {{ $dataObj->appends($_GET)->links() }} --}}
                                     {{ $dataObj->onEachSide(0)->appends($_GET)->links() }}
                                 </div>
                             </div> 

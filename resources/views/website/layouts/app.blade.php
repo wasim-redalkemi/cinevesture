@@ -285,7 +285,6 @@
                 sessionStorage.setItem("freeToastMSG", "0"); 
             }
              setsessionfree=sessionStorage.getItem("freeToastMSG");
-             console.log(setsessionfree);
             if(typeof(isPlanPage) != "undefined")
             {
                 setsessionfree = 1;

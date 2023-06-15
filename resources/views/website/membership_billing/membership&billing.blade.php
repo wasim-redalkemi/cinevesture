@@ -211,7 +211,7 @@
                  toastMessage("success","Billing details update successfully.");
              },
              error: function(response) {
-                 toastMessage("error","Some thing want wrong");
+                 toastMessage("error","Something went wrong");
              }
             })
         })

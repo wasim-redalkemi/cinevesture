@@ -29,18 +29,47 @@
         {
             width: 21cm; 
             height:29.7cm;
-            /* border:1px solid red; */
+            background: rgb(245, 241, 241);
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            text-align: center;
         }
         .sub_wrap{
             position: relative;
-            padding: 10px;
             border:1px solid yellow;
-
         }
         .inner_wrap{
             border:1px solid green;
-            padding:25px;
+            background-color: #1c0330;
+            widows: 100%;
+            color: aliceblue;
+            padding: 10 auto;
         }
+       .inner_wrap .trans_wrap {
+         /* margin: 0 auto;
+        padding-left: 50%; */
+        /* position: absolute;
+        top: 0%;
+        left: 50%;
+        transform: translate(0%, -50%); */
+        text-align: center
+             }
+             .body_wrap {
+              height: 80%;
+              background: #ffffff;
+              width: 80%;
+              text-align: left;
+              padding: 2%;
+              
+            margin: 0 auto;
+             }
+             .footer_wrap{
+                width: 100%; 
+            }
+            .footer_text{
+                margin:48px auto ;
+             }
     </style>
 </head>
 <body>
@@ -48,18 +77,14 @@
         <div class="sub_wrap"> 
             <div class="inner_wrap"> 
                <div class="trans_wrap">
-                    <h2>Cinevesture</h2>
-                    {{-- <h4>{{$data['transporterAdmin']->transporters->company_address??'-'}} </h4> --}}
+                    <img  class="" style="width: 130px;"; src="{{asset('/images/asset/Logo-white.jpg')}}" alt="logo">
                 </div> 
-               
                <div class="table_wrap">
                    <div class="table_wrap_tables">
-                        
                     </div>
                     <div class="table_gap">
                     </div>
                     <div class="table_wrap_tables">
-                       
                     </div>
                     <div class="clear_float"></div>
                 </div> 
@@ -69,6 +94,18 @@
                     </div>
                 </div> 
             </div>
+        </div>
+        <div class="body_wrap">
+           <div class="form">
+                Hello 
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo, ex. Repellendus quae aspernatur tempora optio. Ipsam adipisci dolore ullam fugit pariatur. Iste, distinctio animi harum consequuntur eveniet nulla facere quia.
+           </div>
+           <div>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Neque, soluta pariatur commodi necessitatibus ab maiores provident magni quasi quisquam recusandae! Nam officia quisquam dolorum quibusdam accusamus nihil deserunt maiores cupiditate!
+           </div>
+        </div>
+        <div class="footer_wrap">
+            <div class="footer_text">© 2023 Cinevesture. All rights reserved.</div>
         </div>
     </div>
 </body>
