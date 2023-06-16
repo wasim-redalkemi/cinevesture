@@ -51,6 +51,12 @@ class SubscriptionController extends Controller
                 $order->user_id = auth()->user()->id;
                 $order->plan_name = $plan->plan_name;
                 $order->plan_amount = $plan->plan_amount;
+                if ($plan->currency=='INR') {
+                    $gstamt=$plan->plan_amount*18/100;
+                    $withoutgst=$plan->plan_amount-$gstamt;
+                    $order->taxable = $withoutgst;
+                    $order->gst = $gstamt;
+                }
                 $order->currency = $plan->currency;
                 $order->plan_time = $plan->plan_time;
                 $order->plan_time_quntity = $plan->plan_time_quntity;
@@ -123,6 +129,8 @@ class SubscriptionController extends Controller
             if ($checkout_status->payment_status == 'paid') {
                 $subscription = $this->createSubscription($subscriptionData, $request);
                 $this->setUserPlanInSession(auth()->user()->id);
+                $order->status='success';
+                $order->save();
                 $collect  = collect();
                 $collect->put('first_name', ucwords(auth()->user()->first_name));
                 $collect->put('currency', $subscription->currency);
@@ -163,14 +171,8 @@ class SubscriptionController extends Controller
         }
         $subscription->user_id = $data->user_id;
         $subscription->platform_cutomer_id = "1"; //stripe
-        if ($data->currency=='INR') {
-            $gstamt=$data->plan_amount*18/100;
-            $withoutgst=$data->plan_amount-$gstamt;
-            $subscription->plan_amount = $withoutgst;
-            // $subscription->gst = $gstamt;
-        }else{
-            $subscription->plan_amount = $data->plan_amount;
-        }
+   
+        $subscription->plan_amount = $data->plan_amount;
        
         $subscription->plan_name = $data->plan_name;
         $subscription->currency = $data->currency;
