@@ -408,11 +408,13 @@
     {
         $("[plan_elem="+k+"]").css('height',v+'px');
     })
-
+    let freesubtrial="{{ Session::get('freeSubscription')}}";
+    // console.log(freesubtrial);
     var isPlanPage=true;
-
+    // console.log(sessionStorage.getItem("freeToastMSG"));
+    
     var isnotfree="{{$freeTrail}}";
-    if (isnotfree==false) {
+    if (isnotfree==false && freesubtrial!="free") {
         $('.expire_modal').modal('show');
     };
 </script>

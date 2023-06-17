@@ -29,7 +29,11 @@ class PlanPermission extends Controller
          // if (!($request->session()->has('subscription_end_date'))) {
       // // }
       if(session()->get('user_subscription_end_date')< Carbon::now() ){
+         
          $subscriptionorder=SubscriptionOrder::query()->where('user_id',auth()->user()->id)->where("is_used_for_subscription",'0')->first();
+         if(!empty ($subscriptionorder)){
+
+        
          $subscriptionorder->is_used_for_subscription="1";
          $subscriptionorder->save();
          if(!empty($subscriptionorder)){
@@ -51,6 +55,7 @@ class PlanPermission extends Controller
            $subscriptionData = (object) $subscriptionData;
 
          SubscriptionController::createSubscription($subscriptionData,null);
+         }
          }
 
       }
@@ -157,6 +162,7 @@ class PlanPermission extends Controller
             }
          }
       }
+
       return $next($request);
    }
 }
