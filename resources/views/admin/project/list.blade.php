@@ -108,7 +108,7 @@
                             <table id="order-listing" class="table order-listing table-sm table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
+                                        <th>SN</th>
                                         <th>Name</th>
                                         <th>Category</th>
                                         <th>Genre</th>

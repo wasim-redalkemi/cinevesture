@@ -28,16 +28,19 @@
                 @endif
                 {{-- <img src="{{ asset('public/images/asset/Screenshot 2021-05-28 at 11.48 1.png') }}" class="root_img" alt="image"> --}}
               </div>
+             {{-- <input type="hidden" name="freeToast" id="freeToast" value="{{$sub}}"> --}}
               <div class="carosel-card-cntainer">
                 <div class="carosel-card-cntainer-two">
                 <div class="container">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="project-text mt-5 pt-2">
+                       
                         @if (!empty($v->project_name))
                       <span class="blackTextShadow">  {{$v->project_name}}</span>
                         @endif
                       </div>
+                      
                       <div class="project-sub-text mt-1">
                         @if (!empty($v->logline))
                         <span class="blackTextShadow">  {{$v->logline}}</span>
@@ -97,6 +100,7 @@
                         </div>
                       <div class="duration-lang-text mt-1">2hr 5min | English | Horror</div>
                       <button class="watch-now-btn mt-4">View Project</button>
+                      
                     </div>
                   </div>
                 </div>
@@ -265,7 +269,7 @@
     });
 
     });
-  });
+  });  
 
     $(".main_slider.owl-carousel").owlCarousel({
       center: true,
@@ -316,13 +320,18 @@
         }
       },
     });
+    var hasUserSubscription= "{{ Session::get('freeSubscription')}}";
+    console.log(hasUserSubscription);
+    if (hasUserSubscription!='free') {
+      sessionStorage.setItem("freeToastMSG", "1"); 
+    }
 
     var slider_elem_title = $('.slider_elem_title').offset();
     var slider_elem_child = $('.owl_item_at_0').offset();
     var leftLen = slider_elem_title.left;
     var childLeftLen = slider_elem_child.left;  
-    console.log(leftLen);
-    console.log(childLeftLen);
+    // console.log(leftLen);
+    // console.log(childLeftLen);
     var newLeftLen = ((leftLen-childLeftLen)+15);
     
     $('.test.owl-carousel .owl-item').css({"position": "relative","left":newLeftLen+"px"});

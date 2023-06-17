@@ -68,7 +68,7 @@
     <form method="POST" action="{{ route('logout') }}">
       @csrf
       
-      <button class="transparent_logout_btn" style="" type="submit">{{ __('Logout') }} </button>
+      <button class="transparent_logout_btn" onclick="freeremoveseccion()" style="" type="submit">{{ __('Logout') }} </button>
     </form>
     {{-- <div class="sidebar_content">{{ __('Logout') }}Logout</a></div> --}}
     <hr class="sidebar_content_hr">
@@ -91,7 +91,7 @@
       if (current === "") {
         //for root url
         if (element.attr('href').indexOf("index.html") !== -1) {
-            console.log(element.attr('href'));
+            // console.log(element.attr('href'));
 
           element.parents('.sidebar_content').last().addClass('active');
           element.parents('.sidebar_content').last().addClass('forTesting');
@@ -103,10 +103,10 @@
         }
       } 
     else {
-        console.log(71);
+        // console.log(71);
         //for other url
         if (element.attr('href').indexOf(current) !== -1) {
-            console.log(element.attr('href'));
+            // console.log(element.attr('href'));
           element.parents('.sidebar_content').last().addClass('active');
           elem =  element.parents('.sidebar_content').last();
             $('.inp_data').text(elem.find('a').text());
@@ -144,5 +144,9 @@
 //         container.hide();
 //     }
 // });
+function freeremoveseccion() {
+
+    sessionStorage.removeItem('freeToastMSG');
+  }
 </script>
 @endpush

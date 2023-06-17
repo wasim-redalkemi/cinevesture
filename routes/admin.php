@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ProjectController as AdminProjectController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\ProjectListController;
 use App\Http\Controllers\Admin\QueryController;
+use App\Http\Controllers\Admin\UserOrderController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\AdminAuthMiddleware;
 
@@ -65,6 +66,11 @@ Route::group(['prefix'=>'admin','middleware' => ['adminAuth']],function()
         Route::get('status_update', [JobController::class, 'status_update'])->name('status_update');
         Route::get('promote_update', [JobController::class, 'promoteUpdate'])->name('promote_update');
 
+    }); 
+    Route::group(['prefix'=>'order'],function()
+    {
+        Route::get('/list', [UserOrderController::class, 'index'])->name('user_order');
+        Route::get('/download-invoice', [UserOrderController::class, 'downloadInvoicePdf'])->name('download_invoice');
     }); 
    
 

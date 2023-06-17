@@ -5,11 +5,14 @@ namespace App\Http\Middleware;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Helper\MiddlewareUltilityController;
 use App\Http\Controllers\Helper\SubscriptionUtilityController;
+use App\Http\Controllers\Website\SubscriptionController;
+use App\Models\SubscriptionOrder;
 use App\Models\User;
 use App\Models\UserInvite;
 use Closure;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 
 class PlanPermission extends Controller
 {
@@ -22,9 +25,43 @@ class PlanPermission extends Controller
     */
    public function handle(Request $request, Closure $next)
    {
-      if(isset(auth()->user()->id)){ // check login
-         $is_subscribed = SubscriptionUtilityController::isSubscribed();
-         if(!$is_subscribed) 
+         if(isset(auth()->user()->id)){ // check login
+         // if (!($request->session()->has('subscription_end_date'))) {
+      // // }
+      if(session()->get('user_subscription_end_date')< Carbon::now() ){
+         
+         $subscriptionorder=SubscriptionOrder::query()->where('user_id',auth()->user()->id)->where("is_used_for_subscription",'0')->first();
+         if(!empty ($subscriptionorder)){
+
+        
+         $subscriptionorder->is_used_for_subscription="1";
+         $subscriptionorder->save();
+         if(!empty($subscriptionorder)){
+         $subscriptionData=[
+            'user_id'=>$subscriptionorder->user_id,
+            'plan_amount'=> $subscriptionorder->plan_amount,
+            'plan_name' =>$subscriptionorder->plan_name,
+            'currency' =>$subscriptionorder->currency,
+            'plan_time' =>$subscriptionorder->plan_time,
+            'plan_time_quntity' => $subscriptionorder->plan_time_quntity,
+            // 'subscription_start_date' = Carbon::now(), // for free plan 
+            'total_days' => $subscriptionorder->plan_time_quntity,
+            'subscription_end_date' => Carbon::now()->addDays($subscriptionorder->plan_time_quntity), // for free plan 
+            'order_id' => $subscriptionorder->order_id,
+            'plan_id' => $subscriptionorder->plan_id
+    
+           ];
+           
+           $subscriptionData = (object) $subscriptionData;
+
+         SubscriptionController::createSubscription($subscriptionData,null);
+         }
+         }
+
+      }
+      $is_subscribed = SubscriptionUtilityController::isUserSubscribe();
+
+         if($is_subscribed == false) 
          {
             // $user = User::find( auth()->user()->id);
             // $invites= UserInvite::query()->where('user_id',$user->parent_user_id)->get();
@@ -38,9 +75,6 @@ class PlanPermission extends Controller
             // }
             return redirect()->route('plans-view');
          }
-         // if (!$is_subscribed) {
-         //    return redirect()->route('plans-view');
-         // }
       }
       if ($request->session()->get('permission')) {
          $key = null;
@@ -128,6 +162,7 @@ class PlanPermission extends Controller
             }
          }
       }
+
       return $next($request);
    }
 }

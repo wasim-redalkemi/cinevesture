@@ -964,5 +964,19 @@ class UserController extends WebController
             return ['status'=>0,'msg'=>"Something went wrong."];
         }
     }
+
+    public function addGstAndBillingAddress(Request $request)
+    {
+        try{
+            $user= User::find(auth()->user()->id);
+            $user->gst=$request->gst;
+            $user->billing_address=$request->billing_address;
+            $user->save();
+            return response()->json(["status"=>'success',"message"=>"billng details update successfully"]);
+        }
+        catch(Exception $e){
+            return response()->json(['status'=>0,'msg'=>"Something went wrong."]);
+        }
+    }
 }
 

@@ -90,21 +90,15 @@
                 <li class="nav-item"><a class="nav-link" href="pages/forms/wizard.html">Wizard</a></li> --}}
               </ul>
             </div>
-          </li>
-          {{-- <li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#editors" aria-expanded="false" aria-controls="editors">
-              <i class="mdi mdi-pencil-box-outline menu-icon"></i>
-              <span class="menu-title">Editors</span>
-              <i class="menu-arrow"></i>
-            </a>
-            <div class="collapse" id="editors">
-              <ul class="nav flex-column sub-menu">
-                <li class="nav-item"><a class="nav-link" href="pages/forms/text_editor.html">Text editors</a></li>
-                <li class="nav-item"><a class="nav-link" href="pages/forms/code_editor.html">Code editors</a></li>
-              </ul>
-            </div>
+            
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{{route('user_order')}}">
+              <i class="fa fa fa-money menu-icon"></i>
+              <span class="menu-title">Orders</span>
+            </a>
+          </li>
+          {{-- <li class="nav-item">
             <a class="nav-link" data-toggle="collapse" href="#charts" aria-expanded="false" aria-controls="charts">
               <i class="fa fa-line-chart" style="margin-right:25px;"></i>
               <span class="menu-title">Charts</span>
@@ -270,6 +264,7 @@
               <i class="mdi mdi-file-document-box-outline menu-icon"></i>
               <span class="menu-title">Documentation</span>
             </a>
-          </li>
-        </ul> --}}
+          </li> --}}
+        </ul>
       </nav>
+

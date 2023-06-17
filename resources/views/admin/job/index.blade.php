@@ -76,14 +76,14 @@
                             <table id="order-listing" class="table order-listing table-sm table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th class="col-md-2">Id</th>
-                                        <th class="col-md-2">Title </th>
-                                        <th class="col-md-2">Organization</th>
-                                        <th class="col-md-2">Location</th>
-                                        <th class="col-md-2">Created by</th>
-                                        <th class="col-md-2 notForPrint">Promote</th>
-                                        <th class="col-md-2 notForPrint">Status </th>
-                                        <th class="col-md-2 notForPrint">Action</th>
+                                        <th>SN</th>
+                                        <th>Title </th>
+                                        <th>Organization</th>
+                                        <th>Location</th>
+                                        <th>Created by</th>
+                                        <th class="notForPrint">Promote</th>
+                                        <th class="notForPrint">Status </th>
+                                        <th class="notForPrint">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>

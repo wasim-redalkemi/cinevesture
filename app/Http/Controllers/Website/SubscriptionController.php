@@ -46,11 +46,37 @@ class SubscriptionController extends Controller
                 return redirect()->route('home')->with('success', 'Subsription completed Successfully');
             } else {
 
+                // }
+                $is_used_for_subscription="1";
+                $userSubscription=UserSubscription::query()->where('user_id',auth()->user()->id)->first();
+                if(isset($userSubscription) && $userSubscription->order_id==NULL && $userSubscription->plan_time=='m' && $userSubscription->subscription_end_date > carbon::now()){
+                        // dd($userSubscription->subscription_end_date);
+                    if(($userSubscription->plan_name=='Basic' && $plan->plan_name=="Pro") 
+                    || ($userSubscription->plan_name=='Basic' && $plan->plan_name=="Enterprise") ||
+                     ($userSubscription->plan_name=='Pro' && $plan->plan_name=="Enterprise")){
+                        //nothing to do
+                    }
+                    elseif(($userSubscription->plan_name=='Enterprise' && $plan->plan_name=="Pro") 
+                    || ($userSubscription->plan_name=='Enterprise' && $plan->plan_name=="Basic") ||
+                     ($userSubscription->plan_name=='Pro' && $plan->plan_name=="Basic")|| 
+                     ($userSubscription->plan_name== $plan->plan_name)){
+                        $is_used_for_subscription="0";
+                    }
+                }
                 $order = new SubscriptionOrder();
                 $order->plan_id = $plan->id;
                 $order->user_id = auth()->user()->id;
                 $order->plan_name = $plan->plan_name;
                 $order->plan_amount = $plan->plan_amount;
+                // if(isset($is_used_for_subscription) && !empty($is_used_for_subscription)){
+                $order->is_used_for_subscription = $is_used_for_subscription;
+                // }
+                if ($plan->currency=='INR') {
+                    $gstamt=$plan->plan_amount*18/100;
+                    $withoutgst=$plan->plan_amount-$gstamt;
+                    $order->taxable = $withoutgst;
+                    $order->gst = $gstamt;
+                }
                 $order->currency = $plan->currency;
                 $order->plan_time = $plan->plan_time;
                 $order->plan_time_quntity = $plan->plan_time_quntity;
@@ -78,8 +104,6 @@ class SubscriptionController extends Controller
                     ]
                 );
             }
-
-
             $order->payment_intent = $checkoutSesssion->payment_intent;
             $order->order_id = $checkoutSesssion->id;
             $order->save();
@@ -121,8 +145,14 @@ class SubscriptionController extends Controller
             );
 
             if ($checkout_status->payment_status == 'paid') {
+                if($order->is_used_for_subscription=="1"){
                 $subscription = $this->createSubscription($subscriptionData, $request);
+                }else{
+                $subscription = UserSubscription::query()->where('user_id',auth()->user()->id)->first();
+                }
                 $this->setUserPlanInSession(auth()->user()->id);
+                $order->status='success';
+                $order->save();
                 $collect  = collect();
                 $collect->put('first_name', ucwords(auth()->user()->first_name));
                 $collect->put('currency', $subscription->currency);
@@ -130,11 +160,11 @@ class SubscriptionController extends Controller
                 $collect->put('plan_name', $subscription->plan_name);
                 Notification::route('mail', auth()->user()->email)->notify(new MembershipConfarmation($collect));
             }
-        
-
             return redirect()->route('profile-create')->with('success', 'Subcription completed Successfully');
+
+
         } catch (\Exception $e) {
-            return back()->with('error', 'Something went wrong, Please try again later.');
+            return back()->with('error', 'Something went wrong, Please try again later. '.$e->getMessage());
         }
     }
 
@@ -156,13 +186,16 @@ class SubscriptionController extends Controller
 
 
     public function createSubscription($data, $request = null)
-    {   $subscription = UserSubscription::where('user_id',$data->user_id)->first();
+    {   
+        $subscription = UserSubscription::where('user_id',$data->user_id)->first();
         if(!$subscription){
             $subscription = new UserSubscription();
         }
         $subscription->user_id = $data->user_id;
         $subscription->platform_cutomer_id = "1"; //stripe
+   
         $subscription->plan_amount = $data->plan_amount;
+       
         $subscription->plan_name = $data->plan_name;
         $subscription->currency = $data->currency;
         $subscription->plan_time = $data->plan_time;
@@ -181,6 +214,9 @@ class SubscriptionController extends Controller
         // $subscription->platform_subscription_id = $data->order_id; // stripe
         $subscription->status = "active";
         $subscription->save();
+        session()->put('user_subscription_end_date',$subscription->subscription_end_date);
+        // $value = $request->session()->pull('key', 'default');
+
 
         return $subscription;
     }
@@ -226,10 +262,49 @@ class SubscriptionController extends Controller
     public function getBilling(Request $request)
     {
         try{
-                $subscription = UserSubscription::query()->where('user_id',auth()->user()->id)->first();
+                $subscription = UserSubscription::query()->where('user_id',auth()->user()->id)->with('user')->first();
                 return view('website.membership_billing.membership&billing',compact('subscription'));
         }catch(Exception $e){
 
         }
+    }
+
+    public function createFreeOrder(Request $request)
+    {
+        $subscriptionOrder=SubscriptionOrder::query()->where('user_id',auth()->user()->id)->first();
+         if (!empty($subscriptionOrder)) {
+           return back()->with('error',"something went wrong");
+         }
+         $plan = Plans::find($request->id);
+         $order = new SubscriptionOrder();
+                $order->plan_id = $plan->id;
+                $order->user_id = auth()->user()->id;
+                $order->plan_name = $plan->plan_name;
+                $order->plan_amount = $plan->plan_amount;
+                $order->currency = $plan->currency;
+                $order->plan_time = "m";
+                $order->plan_time_quntity = 30;
+                $order->status = 'pending';
+                $order->save();
+                // $request->session()->put('freeToastmsg',true);
+
+                $subscriptionData=[
+                    'user_id'=>$order->user_id,
+                    'plan_amount'=> $order->plan_amount,
+                    'plan_name' =>$order->plan_name,
+                    'currency' =>$order->currency,
+                    'plan_time' =>"m",
+                    'plan_time_quntity' => 30,
+                    // 'subscription_start_date' = Carbon::now(), // for free plan 
+                    'total_days' => 30,
+                    'subscription_end_date' => Carbon::now()->addDays(30), // for free plan 
+                    'order_id' => 'free',
+                    'plan_id' => $order->plan_id
+            
+                   ];
+                   $subscriptionData = (object) $subscriptionData;
+                   $subscription = $this->createSubscription($subscriptionData);
+                   return redirect()->route('home')->with('success', '30 day Free trial completed Successfully');
+
     }
 }

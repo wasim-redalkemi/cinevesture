@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Website;
 use App\Http\Controllers\Controller;
 use App\Models\MasterPlanModule;
 use App\Models\Plans;
+use App\Models\SubscriptionOrder;
 use Illuminate\Http\Request;
 
 class PlanController extends Controller
@@ -12,7 +13,8 @@ class PlanController extends Controller
     //view 
     
     public function showPlans(Request $request)
-    {                    
+    {    
+        $freeTrail=false;                
         $plans = Plans::query()->with('getRelationalData.getModule','getRelationalData.getOperation')
                  ->where(function($q) use($request){
                     // if(isset($request->plan_time)){
@@ -30,8 +32,13 @@ class PlanController extends Controller
                  })
               
                  ->get();
+         $subscriptionOrder=SubscriptionOrder::query()->where('user_id',auth()->user()->id)->first();
+         if (empty($subscriptionOrder)) {
+            $freeTrail=true; 
+         }
+          
         $modules = MasterPlanModule::all();
-        return view('website.user.subscription.index',compact('plans','modules'));
+        return view('website.user.subscription.index',compact('plans','modules','freeTrail'));
     }
 
 

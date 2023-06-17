@@ -84,8 +84,14 @@
                                     @if($plan->plan_time == "y")                                           
                                         <div class="search-head-subtext Aubergine_at_night mt-3">(@if($plan->currency == "USD")$@else₹@endif{{ number_format($plan->plan_amount/12, 2,'.',',')}}/month)</div>
                                     @endif
-
+                                    <div>(inclusive gst tax)</div>
+                                    @if ($freeTrail==true)
+                                    <div class="d-flex justify-content-center"><a  href="{{route('subscription-free',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2 pd-30">Start 30-days<br>Free Trail</button></a></div>
+                                    @else
                                     <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
+                                    @endif
+                                    {{-- <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
+                                    <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2 pd-30">Start 30-days<br>Free Trail</button></a></div> --}}
                                 </div>
                                 @php 
                                    $lc = 0;
@@ -145,9 +151,15 @@
                                 </div> -->
 
                                 <div class="py-4 px-3">
+                                    @if ($freeTrail==true)
+                                    <a  href="{{route('subscription-free',['id'=>$plan->id])}}" style="text-decoration:none;">
+                                    <button class="job_search_btn"> Start 30-days Free Trail</button>
+                                    </a>
+                                    @else
                                     <a  href="{{route('subscription-order-create',['id'=>$plan->id])}}" style="text-decoration:none;">
                                     <button class="job_search_btn">Select {{$plan->plan_name}} Plan</button>
                                     </a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -289,7 +301,31 @@
         </div>
     </div>
 </section>
-
+<div class="modal fade expire_modal ">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content bg_3308">
+            <div class="modal-body p-0">
+                <section class="p-3">
+                    <div class="container">
+                        <div class="row">
+                            
+                            <div class="col-md-12">
+                                <div class="signup-text  mt-5 mt-md-5">Your free trial has ended</div>
+                            </div>
+                            <div class="col-md-12 mt-4">
+                                <p class="text-white">Lorem ipsum dolor, sit amet consectetur adipisicing elit. At aperiam ipsum nobis suscipit eveniet illum, rerum neque perferendis corrupti harum, mollitia inventore consectetur officiis! Officiis in autem deleniti accusamus ex!</p>
+                            </div>
+                            <div class="col-md-12 py-3">
+                                <button type="button" class="invite_btn" data-dismiss="modal">Upgrade Plan</button>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection
 
@@ -372,8 +408,15 @@
     {
         $("[plan_elem="+k+"]").css('height',v+'px');
     })
-
-
+    let freesubtrial="{{ Session::get('freeSubscription')}}";
+    // console.log(freesubtrial);
+    var isPlanPage=true;
+    // console.log(sessionStorage.getItem("freeToastMSG"));
+    
+    var isnotfree="{{$freeTrail}}";
+    if (isnotfree==false && freesubtrial!="free") {
+        $('.expire_modal').modal('show');
+    };
 </script>
 
 @endpush

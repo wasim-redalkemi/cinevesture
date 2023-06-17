@@ -64,12 +64,14 @@
             @include('website.include.video_modal')
             @include('website.include.image_in_full_view_modal')
             @include('website.include.docs_preview_modal')
+            @include('website.include.free_trial_modal')
+           
             
         </main>
     </div>
     
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.2.1/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -251,6 +253,7 @@
                 window.location.href=doc_url;
             }
         });
+        
 
         $('.image_in_full_view').click(function()
         {
@@ -272,6 +275,26 @@
     @yield('scripts')
     @stack('scripts')
     @include('website.include.validator-scripts')
+    <script>
+         $('document').ready(function () {
+          
+            let freesubtrial="{{ Session::get('freeSubscription')}}";
+            if (freesubtrial=="free") {
+            let setsessionfree=sessionStorage.getItem("freeToastMSG")
+            if (setsessionfree==undefined) {
+                sessionStorage.setItem("freeToastMSG", "0"); 
+            }
+             setsessionfree=sessionStorage.getItem("freeToastMSG");
+            if(typeof(isPlanPage) != "undefined")
+            {
+                setsessionfree = 1;
+            }
+            if ((setsessionfree!=undefined) && (setsessionfree==0)) {
+                $(".free_trial_msg").show();
+            }
+            }
+        })
+    </script>
 </body>
 </html>
 
