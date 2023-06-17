@@ -262,8 +262,10 @@ class SubscriptionController extends Controller
     public function getBilling(Request $request)
     {
         try{
+             $order=NULL;
                 $subscription = UserSubscription::query()->where('user_id',auth()->user()->id)->with('user')->first();
-                return view('website.membership_billing.membership&billing',compact('subscription'));
+                $order = SubscriptionOrder::query()->where('user_id',auth()->user()->id)->where('is_used_for_subscription','0')->first();
+                return view('website.membership_billing.membership&billing',compact('subscription',"order"));
         }catch(Exception $e){
 
         }

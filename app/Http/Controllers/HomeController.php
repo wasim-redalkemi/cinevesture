@@ -11,6 +11,7 @@ use App\Models\MasterSkill;
 use App\Models\ProjectList;
 use App\Models\ProjectListProjects;
 use App\Models\ProjectStage;
+use App\Models\SubscriptionOrder;
 use App\Models\UserSubscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -37,14 +38,23 @@ class HomeController extends Controller
     public function index(Request $request)
     { 
         try {
-            $freeSub=0;
-        $subscription=UserSubscription::query()->where('user_id',auth()->user()->id)->first();
+            // $freeSub='paid';
+        $subscription=UserSubscription::query()->where('user_id',auth()->user()->id)->where('status','active')->first();
         $freeSub=$subscription->platform_subscription_id;
         $endsub=round((strtotime($subscription->subscription_end_date)-time()) / (60 * 60 * 24));
         Session::put('freeEndDateSub', $endsub);
         $value = $request->session()->get('freeEndDateSub');
-        if(isset($freeSub)){
+        $order=SubscriptionOrder::query()->where('user_id',auth()->user()->id)->where('is_used_for_subscription','0')->first();
+
+        // if(isset($freeSub) && !isset($order) && empty($order)){
+        //     Session::put('freeSubscription', $freeSub);
+        // }else{
+        //     Session::put('freeSubscription', $freeSub);
+        // }
+        if($subscription->platform_subscription_id=="free" && !isset($order) && empty($order)){
             Session::put('freeSubscription', $freeSub);
+        }else{
+            Session::put('freeSubscription', "paid");
         }
         $countries = MasterCountry::query()->get();
         $languages = MasterLanguage::query()->get();
