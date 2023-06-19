@@ -80,20 +80,29 @@
                             </table>
                         </div>
                         {{-- side data  --}}
-
+                        
                         <div class="m-auto">
                             <div class="mx-auto  profile_wraper  align-items-center wh_250">
                                 <div class="d-block card_text_center">
                                     <div class="text-center mt-3">
-                                        <button class="btn btn-sm bg_color_theam btn-round">
-                                            <b class="p-3 font_size_5">
+                                        <button class="btn btn-sm bg_color_theam btn-round m-0 p-0">
+                                            <b class=" font_size_5">
+                                               
                                                 <?php 
                                          echo round((strtotime($subscription->subscription_end_date)-time()) / (60 * 60 * 24));
                                          ?>
                                          </b>
                                         </button>
+
                                         <br><label class="guide_profile_main_text m-2 d-flex justify-content-center " style="font-size:25px"> <b> Days left</b></label>
                                     </div>
+                                    @if ($order!=null)
+                                    <div class="guide_profile_main_text align-items-center d-flex text-center" style="margin: 0px auto">
+                                        You have {{$order->plan_time_quntity}} days extra of {{$order->plan_name}} plan
+                                    </div>
+                                    
+                                        
+                                    @endif
                                 </div>
                             </div>
                             @if ( (Session::get('freeSubscription'))=='free')

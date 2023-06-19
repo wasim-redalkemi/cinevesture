@@ -26,7 +26,7 @@ class SubscriptionUtilityController extends Controller
     {
         $resp = true;
         if(!session()->has('user_subscription_end_date')) {
-            $userSubScription=UserSubscription::query()->where('user_id',auth()->user()->id)->first();
+            $userSubScription=UserSubscription::query()->where('user_id',auth()->user()->id)->where('status','active')->first();
             if(!empty($userSubScription)){
                 Session::put('user_subscription_end_date',$userSubScription->subscription_end_date);
             }
