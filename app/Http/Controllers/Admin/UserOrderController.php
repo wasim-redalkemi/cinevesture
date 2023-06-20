@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\AdminController;
 use App\Models\SubscriptionOrder;
+use App\Models\UserSubscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use PDF;
@@ -102,6 +103,8 @@ class UserOrderController extends AdminController
 
     public function downloadInvoicePdf(Request $request)
     {
+        $userOrder=SubscriptionOrder::query()->with('user')->find($request->id);
+        // dd($userOrder);
         // $challan_id = $request->id;
         // $challan=Challan::query()
         // ->with(['ewayBillDetails','petrolPumpOwner.petrolPump','fleetOwner.fleetOwner','truck'])
@@ -119,7 +122,7 @@ class UserOrderController extends AdminController
         // $data = ['challan'=>'','transporterAdmin'=>''];
         // $data['challan'] = $challan;
         $data['transporterAdmin'] = ['hi'];
-        $html = view('admin.order.pdf',compact(['data']));
+        $html = view('admin.order.pdf',compact(['data','userOrder']));
         
         // $file_name=date('siHdmY').'_'.$data['challan']->ewayBillDetails->ewb_eway_bill_no;
         $pdf = PDF::loadHtml($html);
