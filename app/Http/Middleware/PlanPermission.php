@@ -46,7 +46,7 @@ class PlanPermission extends Controller
             'plan_time_quntity' => $subscriptionorder->plan_time_quntity,
             // 'subscription_start_date' = Carbon::now(), // for free plan 
             'total_days' => $subscriptionorder->plan_time_quntity,
-            'subscription_end_date' => Carbon::now()->addDays($subscriptionorder->plan_time_quntity), // for free plan 
+            'subscription_end_date' => date('Y-m-d 23:59:59',strtotime('+'.$subscriptionorder->plan_time_quntity.'days')),//Carbon::now()->addDays($subscriptionorder->plan_time_quntity), // for free plan 
             'order_id' => $subscriptionorder->order_id,
             'plan_id' => $subscriptionorder->plan_id
     

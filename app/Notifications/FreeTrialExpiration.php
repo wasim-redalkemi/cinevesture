@@ -46,7 +46,7 @@ class FreeTrialExpiration extends Notification
         ->greeting('Dear'.' '.$this->data['first_name'].',')
         ->line("The trial period for Cinevesture.com has ended, but your progress has been saved and is still available. Everyone gets busy, and you may not have had enough time to evaluate Cinevesture." )
         ->line(' <b>Ready to Upgrade?</b>')
-        ->line(' Upgrading your membership is simple. Our plans start at' .$this->data['amount_type'] .$this->data['plan_amount'].'/year and includes 24/7 support.')
+        ->line(' Upgrading your membership is simple. Our plans start at ₹9000 /year and includes 24/7 support.')
         ->line('UPGRADE NOW')        
         ->salutation('Team Cinevesture');
                     // ->line('The introduction to the notification.')
