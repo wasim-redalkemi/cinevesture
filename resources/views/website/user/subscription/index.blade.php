@@ -335,14 +335,14 @@
 @push('scripts')
 
 <script>
-    // var addclass = 'card_highlight';
-    // var forHead = 'active_plain_detail';
-    // var $cols = $('.plan_card').click(function(e) {
-    //     $cols.removeClass(addclass);
-    //     $(this).addClass(addclass);
-    //     $('.plain_detail').removeClass(forHead);
-    //     $(this).find('.plain_detail').addClass(forHead);
-    // });
+    $(document).ready(function()
+    {
+        $("#updateBillingAddressModal").modal({
+            backdrop: 'static',
+            keyboard: false
+        });
+        $('#updateBillingAddressModal').modal('show');
+    });
     var addclass = 'card_highlight';
     var forHead = 'active_plain_detail';
     var forButton = 'active_plain_button';

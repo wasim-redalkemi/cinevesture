@@ -30,6 +30,7 @@ class UserOrderController extends AdminController
                 $q->orWhere("email","like","%$search_data%");
             }
         })
+        ->whereNotNull('order_id')
         ->paginate($this->records_limit);     
         $dataObj = $orders;
         return view('admin.order.userorder',compact('dataObj'));
@@ -104,32 +105,15 @@ class UserOrderController extends AdminController
     public function downloadInvoicePdf(Request $request)
     {
         $userOrder=SubscriptionOrder::query()->with('user')->find($request->id);
-        // dd($userOrder);
-        // $challan_id = $request->id;
-        // $challan=Challan::query()
-        // ->with(['ewayBillDetails','petrolPumpOwner.petrolPump','fleetOwner.fleetOwner','truck'])
-        // ->find($challan_id); 
-        // $id = $challan->supervisor_user_id;
-        // $role = 4;
-        // $transporterAdmin = '';
-        // for($i=0;$i<=2;$i++)
-        // {
-        //     $modelObj = User::find($id);
-        //     $id = $modelObj->parent_user_id;
-        //     $transporterAdmin = $modelObj;
-        // }
-        // $transporterAdmin=User::query()->with(['transporters'])->where('id',$transporterAdmin->id)->first();
-        // $data = ['challan'=>'','transporterAdmin'=>''];
-        // $data['challan'] = $challan;
-        $data['transporterAdmin'] = ['hi'];
-        $html = view('admin.order.pdf',compact(['data','userOrder']));
         
-        // $file_name=date('siHdmY').'_'.$data['challan']->ewayBillDetails->ewb_eway_bill_no;
+        $html = view('admin.order.pdf',compact(['userOrder']));
+        
+        $file_name=date('siHdmY').'_'.$userOrder->id.'.pdf';
         $pdf = PDF::loadHtml($html);
         $pdf->setPaper('A4');
-        return $pdf->stream('users_list.pdf',array("Attachment" => true));
+        return $pdf->stream($file_name,array("Attachment" => true));
         // return $pdf->download($file_name.'.pdf');
-        // return view('admin.challan.pdf',compact(['data']));
+        // return view('admin.order.pdf',compact(['data','userOrder']));
 
     }
 }

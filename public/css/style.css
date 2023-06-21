@@ -4841,4 +4841,7 @@ transition: 2s ease all; */
   .card_text_center{
     margin: 0 auto;
   }
-
+  .billing_modal_btn:hover
+  {
+    cursor: pointer;
+  }

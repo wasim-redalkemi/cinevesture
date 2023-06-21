@@ -65,8 +65,7 @@
             @include('website.include.image_in_full_view_modal')
             @include('website.include.docs_preview_modal')
             @include('website.include.free_trial_modal')
-           
-            
+            @include('website.modal.update_billing_detail')
         </main>
     </div>
     
