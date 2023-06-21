@@ -8,7 +8,7 @@ use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 use Symfony\Component\VarDumper\Cloner\Data;
 
-class MembershipConfarmation extends Notification
+class MembershipConfirmation extends Notification
 {
     use Queueable;
 

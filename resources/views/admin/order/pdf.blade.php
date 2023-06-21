@@ -180,7 +180,7 @@
                 </div>
                 <div class="address float_left">
                     <div class="" style="margin: 0 20rem"> <nobr> BILLED TO</nobr></div>
-                    <div style="margin: 0 20rem">{{$userOrder->user->name}} ,<br> {{$userOrder->user->billing_address}}</div>
+                    <div style="margin: 0 20rem; width:30%;">{{$userOrder->user->name}} ,<br> {{$userOrder->user->billing_address}}</div>
                 </div>
            </div>
            <div class="invoice_no_wrap" style="margin: 40px 0;">

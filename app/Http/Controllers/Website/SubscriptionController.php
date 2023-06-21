@@ -9,7 +9,8 @@ use App\Models\Plans;
 use App\Models\SubscriptionOrder;
 use App\Models\User;
 use App\Models\UserSubscription;
-use App\Notifications\MembershipConfarmation;
+use App\Notifications\FreeTrialDetail;
+use App\Notifications\MembershipConfirmation;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
@@ -158,7 +159,7 @@ class SubscriptionController extends Controller
                 $collect->put('currency', $subscription->currency);
                 $collect->put('plan_amount', $subscription->plan_amount);
                 $collect->put('plan_name', $subscription->plan_name);
-                Notification::route('mail', auth()->user()->email)->notify(new MembershipConfarmation($collect));
+                Notification::route('mail', auth()->user()->email)->notify(new MembershipConfirmation($collect));
             }
             return redirect()->route('profile-create')->with('success', 'Subcription completed Successfully');
 
@@ -274,6 +275,7 @@ class SubscriptionController extends Controller
     public function createFreeOrder(Request $request)
     {
         $subscriptionOrder=SubscriptionOrder::query()->where('user_id',auth()->user()->id)->first();
+       
          if (!empty($subscriptionOrder)) {
            return back()->with('error',"something went wrong");
          }
@@ -306,6 +308,14 @@ class SubscriptionController extends Controller
                    ];
                    $subscriptionData = (object) $subscriptionData;
                    $subscription = $this->createSubscription($subscriptionData);
+                   $collect  = collect();
+                    $collect->put('first_name', ucwords(auth()->user()->first_name));
+                    $collect->put('currency', $order->currency);
+                    $collect->put('plan_amount', $order->plan_amount);
+                    $collect->put('amount_type', $order->currency);
+                    $collect->put('plan_name', $order->plan_name);
+                    $collect->put('Start_date', date('d-m-Y', strtotime($order->created_at)));
+                Notification::route('mail', auth()->user()->email)->notify(new FreeTrialDetail($collect));
                    return redirect()->route('home')->with('success', '30 day Free trial completed Successfully');
 
     }
