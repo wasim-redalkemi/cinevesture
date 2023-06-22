@@ -13,6 +13,7 @@ use App\Notifications\FreeTrialDetail;
 use App\Notifications\MembershipConfirmation;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
@@ -155,6 +156,7 @@ class SubscriptionController extends Controller
                 $this->setUserPlanInSession(auth()->user()->id);
                 $order->status='success';
                 $order->save();
+                Session()->put('freeSubscription', "paid");
                 $collect  = collect();
                 $collect->put('first_name', ucwords(auth()->user()->first_name));
                 $collect->put('currency', $subscription->currency);
@@ -301,7 +303,7 @@ class SubscriptionController extends Controller
                     'plan_time_quntity' => 30,
                     // 'subscription_start_date' = Carbon::now(), // for free plan 
                     'total_days' => 30,
-                    'subscription_end_date' => date('Y-m-d 23:59:59',strtotime('+30days')),//Carbon::now()->addDays(30), // for free plan 
+                    'subscription_end_date' => date('Y-m-d 23:59:59',strtotime('+29days')),//Carbon::now()->addDays(30), // for free plan 
                     'order_id' => 'free',
                     'plan_id' => $order->plan_id
             
@@ -316,7 +318,7 @@ class SubscriptionController extends Controller
                     $collect->put('plan_name', $order->plan_name);
                     $collect->put('Start_date', date('Y-m-d', strtotime($order->created_at)));
                     Notification::route('mail', auth()->user()->email)->notify(new FreeTrialDetail($collect));
-                    return redirect()->route('home')->with('success', '30 day Free trial completed Successfully');
+                    return redirect()->route('home')->with('success', '30 days Free trail plan started successfully');
 
     }
 
