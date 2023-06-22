@@ -327,7 +327,7 @@ class SubscriptionController extends Controller
         return true;
     }
 
-    public function FreePlanExp() {
+    private function FreePlanExp() {
         $userSubs=UserSubscription::query()->where('platform_subscription_id','free')
         ->whereBetween('subscription_end_date',[date('Y-m-d 00:00:00',strtotime('-1days')),date('Y-m-d 23:59:59',strtotime('-1days'))])->pluck('user_id');
         foreach ($userSubs as $key => $id) {
@@ -335,10 +335,9 @@ class SubscriptionController extends Controller
             $notification->freeSubExpired($id);
         }
         return true;
-        
     }
 
-    static function beforeSubExpire() {
+    private function beforeSubExpire() {
         $userSubs=UserSubscription::query()
         ->whereBetween('subscription_end_date',[date('Y-m-d 00:00:00',strtotime('+5days')),date('Y-m-d 23:59:59',strtotime('+5days'))])
         ->pluck('user_id');
@@ -349,7 +348,7 @@ class SubscriptionController extends Controller
         return true;
     }
 
-    static function afterSubExpire() {
+    private function afterSubExpire() {
         $userSubs=UserSubscription::query()
         ->where('platform_subscription_id','!=',"free")
         ->whereBetween('subscription_end_date',[date('Y-m-d 00:00:00',strtotime('-1days')),date('Y-m-d 23:59:59',strtotime('-1days'))])
