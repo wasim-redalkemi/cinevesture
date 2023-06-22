@@ -57,6 +57,7 @@
                                     <th>Currency</th>
                                     <th>Amount</th>
                                     <th>Date</th>
+                                    <th>Status</th>
                                     <th>Receipt</th>
                                 </tr>
                             </thead>
@@ -76,7 +77,22 @@
                                             <td>{{$data->plan_amount}}</td>
                                             <td>{{date('d-M-Y',strtotime($data->created_at))}}</td>
                                             <td>
-                                                <a href="{{route('download_invoice')}}" class="btn btn-sm btn-primary action_button">Download</a>
+                                                @if($data->status == 'success')
+                                                    <button class="btn_challan_approved action_button">
+                                                        @php echo ucfirst($data->status); @endphp
+                                                    </button>
+                                                @elseif($data->status == 'pending')
+                                                <button class="btn_challan_pending action_button">
+                                                    @php echo ucfirst($data->status); @endphp
+                                                </button>
+                                                @else
+                                                    <button class="btn_challan_rejected action_button">
+                                                        @php echo ucfirst($data->status); @endphp
+                                                    </button>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a href="{{route('download_invoice',['id'=>$data->id])}}" class="btn btn-sm btn-primary action_button">Download</a>
                                             </td>
                                         </tr>
                                     @endforeach

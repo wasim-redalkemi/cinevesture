@@ -14,6 +14,7 @@ use App\Http\Controllers\Website\IndustryGuideController;
 use App\Http\Controllers\Website\ProjectController;
 use App\Http\Controllers\Website\SettingController;
 use App\Http\Controllers\Website\AjaxController;
+use App\Http\Controllers\Website\CustomNotification;
 use App\Http\Controllers\Website\JobController;
 use App\Http\Controllers\Website\OtpController;
 use App\Http\Controllers\Website\PlanController;
@@ -37,7 +38,8 @@ Route::get('/test', function () {
     return view('website.job.myjob');
 });
 Auth::routes(['verify' => true]);
-
+//subscription empire mail
+Route::get('/manage-subscription-and-notification', [SubscriptionController::class, 'expMail']);
 
 
 // Google URL

@@ -19,7 +19,7 @@
                     for (var i = 0; i < classList.length; i++) {
                         if (classList[i] == 'fa-heart-o') {
                             element.removeClass('fa-heart-o');
-                            element.addClass('fa-heart')
+                            element.addClass('fa-heart');
                             new toastMessage("success", resp.msg);
                             // new toastMessage("Success",'URL copied');
                             break;

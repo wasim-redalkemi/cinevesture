@@ -95,7 +95,7 @@
           <li class="nav-item">
             <a class="nav-link" href="{{route('user_order')}}">
               <i class="fa fa fa-money menu-icon"></i>
-              <span class="menu-title">Orders</span>
+              <span class="menu-title">Order Management</span>
             </a>
           </li>
           {{-- <li class="nav-item">

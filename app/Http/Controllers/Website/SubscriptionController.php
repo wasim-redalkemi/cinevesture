@@ -9,10 +9,13 @@ use App\Models\Plans;
 use App\Models\SubscriptionOrder;
 use App\Models\User;
 use App\Models\UserSubscription;
-use App\Notifications\MembershipConfarmation;
+use App\Notifications\FreeTrialDetail;
+use App\Notifications\MembershipConfirmation;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 
 class SubscriptionController extends Controller
@@ -132,7 +135,7 @@ class SubscriptionController extends Controller
                 'plan_time_quntity' => $order->plan_time_quntity,
                 // 'subscription_start_date' = Carbon::now(), // for free plan 
                 'total_days' => $order->plan_time_quntity,
-                'subscription_end_date' => Carbon::now()->addDays($order->plan_time_quntity), // for free plan 
+                'subscription_end_date' => date('Y-m-d 23:59:59',strtotime('+'.$order->plan_time_quntity.'days')),//Carbon::now()->addDays($order->plan_time_quntity), // for free plan 
                 'order_id' => $order->order_id,
                 'plan_id' => $order->plan_id
         
@@ -153,12 +156,13 @@ class SubscriptionController extends Controller
                 $this->setUserPlanInSession(auth()->user()->id);
                 $order->status='success';
                 $order->save();
+                Session()->put('freeSubscription', "paid");
                 $collect  = collect();
                 $collect->put('first_name', ucwords(auth()->user()->first_name));
                 $collect->put('currency', $subscription->currency);
                 $collect->put('plan_amount', $subscription->plan_amount);
                 $collect->put('plan_name', $subscription->plan_name);
-                Notification::route('mail', auth()->user()->email)->notify(new MembershipConfarmation($collect));
+                Notification::route('mail', auth()->user()->email)->notify(new MembershipConfirmation($collect));
             }
             return redirect()->route('profile-create')->with('success', 'Subcription completed Successfully');
 
@@ -265,7 +269,7 @@ class SubscriptionController extends Controller
              $order=NULL;
                 $subscription = UserSubscription::query()->where('user_id',auth()->user()->id)->with('user')->first();
                 $order = SubscriptionOrder::query()->where('user_id',auth()->user()->id)->where('is_used_for_subscription','0')->first();
-                return view('website.membership_billing.membership&billing',compact('subscription',"order"));
+                return view('website.membership_billing.membership_billing',compact('subscription',"order"));
         }catch(Exception $e){
 
         }
@@ -274,6 +278,7 @@ class SubscriptionController extends Controller
     public function createFreeOrder(Request $request)
     {
         $subscriptionOrder=SubscriptionOrder::query()->where('user_id',auth()->user()->id)->first();
+       
          if (!empty($subscriptionOrder)) {
            return back()->with('error',"something went wrong");
          }
@@ -289,7 +294,6 @@ class SubscriptionController extends Controller
                 $order->status = 'pending';
                 $order->save();
                 // $request->session()->put('freeToastmsg',true);
-
                 $subscriptionData=[
                     'user_id'=>$order->user_id,
                     'plan_amount'=> $order->plan_amount,
@@ -299,14 +303,62 @@ class SubscriptionController extends Controller
                     'plan_time_quntity' => 30,
                     // 'subscription_start_date' = Carbon::now(), // for free plan 
                     'total_days' => 30,
-                    'subscription_end_date' => Carbon::now()->addDays(30), // for free plan 
+                    'subscription_end_date' => date('Y-m-d 23:59:59',strtotime('+29days')),//Carbon::now()->addDays(30), // for free plan 
                     'order_id' => 'free',
                     'plan_id' => $order->plan_id
             
                    ];
                    $subscriptionData = (object) $subscriptionData;
                    $subscription = $this->createSubscription($subscriptionData);
-                   return redirect()->route('home')->with('success', '30 day Free trial completed Successfully');
+                   $collect  = collect();
+                    $collect->put('first_name', ucwords(auth()->user()->first_name));
+                    $collect->put('currency', $order->currency);
+                    $collect->put('plan_amount', $order->plan_amount);
+                    $collect->put('amount_type', $order->currency);
+                    $collect->put('plan_name', $order->plan_name);
+                    $collect->put('Start_date', date('Y-m-d', strtotime($order->created_at)));
+                    Notification::route('mail', auth()->user()->email)->notify(new FreeTrialDetail($collect));
+                    return redirect()->route('home')->with('success', '30 days Free trail plan started successfully');
 
+    }
+
+    public function expMail() {
+        $free=$this->FreePlanExp();
+        $exp=$this->beforeSubExpire();
+        $after=$this->afterSubExpire();
+        return true;
+    }
+
+    private function FreePlanExp() {
+        $userSubs=UserSubscription::query()->where('platform_subscription_id','free')
+        ->whereBetween('subscription_end_date',[date('Y-m-d 00:00:00',strtotime('-1days')),date('Y-m-d 23:59:59',strtotime('-1days'))])->pluck('user_id');
+        foreach ($userSubs as $key => $id) {
+            $notification= new CustomNotification();
+            $notification->freeSubExpired($id);
+        }
+        return true;
+    }
+
+    private function beforeSubExpire() {
+        $userSubs=UserSubscription::query()
+        ->whereBetween('subscription_end_date',[date('Y-m-d 00:00:00',strtotime('+5days')),date('Y-m-d 23:59:59',strtotime('+5days'))])
+        ->pluck('user_id');
+        foreach ($userSubs as $key => $id) {
+           $notification  = new CustomNotification(); 
+           $notification->subscriptionBeforeExpire($id);      
+        }
+        return true;
+    }
+
+    private function afterSubExpire() {
+        $userSubs=UserSubscription::query()
+        ->where('platform_subscription_id','!=',"free")
+        ->whereBetween('subscription_end_date',[date('Y-m-d 00:00:00',strtotime('-1days')),date('Y-m-d 23:59:59',strtotime('-1days'))])
+        ->pluck('user_id');
+        foreach ($userSubs as $key => $id) {
+           $notification  = new CustomNotification(); 
+           $notification->subscriptionAfterExpire($id);      
+        }
+        return true;
     }
 }

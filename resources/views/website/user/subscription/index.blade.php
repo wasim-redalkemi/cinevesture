@@ -84,7 +84,10 @@
                                     @if($plan->plan_time == "y")                                           
                                         <div class="search-head-subtext Aubergine_at_night mt-3">(@if($plan->currency == "USD")$@else₹@endif{{ number_format($plan->plan_amount/12, 2,'.',',')}}/month)</div>
                                     @endif
-                                    <div>(inclusive gst tax)</div>
+                                    @if ($plan->currency == 'INR')
+                                    <div>(Inclusive GST Tax)</div>
+                                    @endif
+                                    
                                     @if ($freeTrail==true)
                                     <div class="d-flex justify-content-center"><a  href="{{route('subscription-free',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2 pd-30">Start 30-days<br>Free Trail</button></a></div>
                                     @else
@@ -313,7 +316,7 @@
                                 <div class="signup-text  mt-5 mt-md-5">Your free trial has ended</div>
                             </div>
                             <div class="col-md-12 mt-4">
-                                <p class="text-white">Lorem ipsum dolor, sit amet consectetur adipisicing elit. At aperiam ipsum nobis suscipit eveniet illum, rerum neque perferendis corrupti harum, mollitia inventore consectetur officiis! Officiis in autem deleniti accusamus ex!</p>
+                                <p class="text-white">We hope you enjoyed experiencing our services during your trial period. To continue enjoying our premium features and exclusive benefits, we invite you to upgrade to a full membership. Don't miss out on the opportunity to unlock the full potential of our platform.</p>
                             </div>
                             <div class="col-md-12 py-3">
                                 <button type="button" class="invite_btn" data-dismiss="modal">Upgrade Plan</button>
@@ -335,14 +338,18 @@
 @push('scripts')
 
 <script>
-    // var addclass = 'card_highlight';
-    // var forHead = 'active_plain_detail';
-    // var $cols = $('.plan_card').click(function(e) {
-    //     $cols.removeClass(addclass);
-    //     $(this).addClass(addclass);
-    //     $('.plain_detail').removeClass(forHead);
-    //     $(this).find('.plain_detail').addClass(forHead);
-    // });
+    $(document).ready(function()
+    {
+        var billingAddress='{{auth()->user()->billing_address}}';
+        if (billingAddress == '') {
+            $("#updateBillingAddressModal").modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+            $('#updateBillingAddressModal').modal('show');
+        }
+       
+    });
     var addclass = 'card_highlight';
     var forHead = 'active_plain_detail';
     var forButton = 'active_plain_button';

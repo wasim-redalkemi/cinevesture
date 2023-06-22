@@ -65,8 +65,7 @@
             @include('website.include.image_in_full_view_modal')
             @include('website.include.docs_preview_modal')
             @include('website.include.free_trial_modal')
-           
-            
+            @include('website.modal.update_billing_detail')
         </main>
     </div>
     
@@ -289,7 +288,9 @@
             {
                 setsessionfree = 1;
             }
-            if ((setsessionfree!=undefined) && (setsessionfree==0)) {
+            var backendPlansession='{{session()->get('freeSubscription')}}'
+            console.log(backendPlansession);
+            if ((setsessionfree!=undefined) && (setsessionfree==0) && backendPlansession== 'free') {
                 $(".free_trial_msg").show();
             }
             }
