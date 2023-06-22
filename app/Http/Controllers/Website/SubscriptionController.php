@@ -322,14 +322,15 @@ class SubscriptionController extends Controller
 
     }
 
-    public function expMail() {
-        $free=$this->FreePlanExp();
-        $exp=$this->beforeSubExpire();
-        $after=$this->afterSubExpire();
+    public function subscriptionexpireMail() {
+        $free=$this->notifyOnfreeTrialExpire();
+        $exp=$this->notifyBeforePaidSubscriptionExpire();
+        $after=$this->notifyBeforeFreeTrialExpire();
+        $after=$this->notifyAfterPaidSubscriptionExpire();
         return true;
     }
 
-    private function FreePlanExp() {
+    private function notifyOnfreeTrialExpire() {
         $userSubs=UserSubscription::query()->where('platform_subscription_id','free')
         ->whereBetween('subscription_end_date',[date('Y-m-d 00:00:00',strtotime('-1days')),date('Y-m-d 23:59:59',strtotime('-1days'))])->pluck('user_id');
         foreach ($userSubs as $key => $id) {
@@ -339,7 +340,7 @@ class SubscriptionController extends Controller
         return true;
     }
 
-    private function beforeSubExpire() {
+    private function notifyBeforePaidSubscriptionExpire() {
         $userSubs=UserSubscription::query()
         ->whereBetween('subscription_end_date',[date('Y-m-d 00:00:00',strtotime('+5days')),date('Y-m-d 23:59:59',strtotime('+5days'))])
         ->pluck('user_id');
@@ -350,7 +351,19 @@ class SubscriptionController extends Controller
         return true;
     }
 
-    private function afterSubExpire() {
+    private function notifyBeforeFreeTrialExpire() {
+        $userSubs=UserSubscription::query()
+        ->where('platform_subscription_id','free')
+        ->whereBetween('subscription_end_date',[date('Y-m-d 00:00:00',strtotime('+5days')),date('Y-m-d 23:59:59',strtotime('+5days'))])
+        ->pluck('user_id');
+        foreach ($userSubs as $key => $id) {
+           $notification  = new CustomNotification(); 
+           $notification->freeSubscriptionBeforeExpire($id);      
+        }
+        return true;
+    }
+
+    private function notifyAfterPaidSubscriptionExpire() {
         $userSubs=UserSubscription::query()
         ->where('platform_subscription_id','!=',"free")
         ->whereBetween('subscription_end_date',[date('Y-m-d 00:00:00',strtotime('-1days')),date('Y-m-d 23:59:59',strtotime('-1days'))])
