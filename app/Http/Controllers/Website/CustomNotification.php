@@ -81,9 +81,17 @@ class CustomNotification extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function freeSubscriptionBeforeExpire($id)
     {
-        //
+        $user=User::find($id);
+        $userSubScription=UserSubscription::query()->where('user_id',$id)->first();
+        $collect  = collect();
+        $collect->put('first_name', ucwords($user->name));
+        $collect->put('currency', $userSubScription->currency);
+        $collect->put('plan_amount', $userSubScription->plan_amount);
+        $collect->put('plan_start_date', date("d-m-Y",strtotime($userSubScription->subscription_start_date))) ;
+        Notification::route('mail',$user->email)->notify(new SubRenewalBeforeExpiration($collect));
+        return true;
     }
 
     /**
