@@ -59,20 +59,22 @@
         });
         $('.billing_form').submit(function (event) {
             // event.preventDefault();
-            // debugger
             var gstfill=$("#gst").val();
             var billing_addressfill=$("#billing_address").val();
-            if ((gstfill).length != 15 || billing_addressfill.length > 70) {
-                event.preventDefault();
-                if ((gstfill).length != 15) {
-                    $('.valid_gst').show();
-                }
+            var gstcount=(gstfill).length;
+            if ((gstfill).length > 15 || (billing_addressfill).length > 70) {
+                if ((gstfill).length > 15) {
+                        $('.valid_gst').show();
+                        event.preventDefault();
+                    }
                 if ((billing_addressfill).length > 70) {
                     $('.valid_address').show();
+                    event.preventDefault();
                 }
-            }else{
+            }
+            else{
                 $(".invite_btn").text("Submiting..");
-                event.preventDefault();
+                // event.preventDefault();
                 var formdata={
                     gst: $("#gst").val(),
                     billing_address: $("#billing_address").val(),
