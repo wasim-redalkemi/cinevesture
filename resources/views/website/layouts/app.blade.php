@@ -288,7 +288,9 @@
             {
                 setsessionfree = 1;
             }
-            if ((setsessionfree!=undefined) && (setsessionfree==0)) {
+            var backendPlansession='{{session()->get('freeSubscription')}}'
+            console.log(backendPlansession);
+            if ((setsessionfree!=undefined) && (setsessionfree==0) && backendPlansession== 'free') {
                 $(".free_trial_msg").show();
             }
             }

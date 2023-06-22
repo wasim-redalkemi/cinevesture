@@ -65,11 +65,11 @@
                             </div>
                             <table>
                                 <tr class="guide_profile_main_subtext Aubergine_at_night">
-                                    <td class="w-50">GST No.:</td>
-                                    <td class="w-50 gst-val">{{$subscription->user->gst??'-'}}</td>
+                                    <td class="w-25">GST No.:</td>
+                                    <td class="w-50 gst-val">{{strtoupper($subscription->user->gst)??'-'}}</td>
                                 </tr>
                                 <tr class="guide_profile_main_subtext Aubergine_at_night">
-                                    <td class="w-50">Billing Address:</td>
+                                    <td class="d-flex align-items-start">Billing Address:</td>
                                     <td class="w-50 billing-val">{{$subscription->user->billing_address??'-'}}</td>
 
                                 </tr>
