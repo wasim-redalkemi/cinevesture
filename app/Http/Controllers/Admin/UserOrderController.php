@@ -31,6 +31,7 @@ class UserOrderController extends AdminController
             }
         })
         ->whereNotNull('order_id')
+        ->orderBy('created_at','desc')
         ->paginate($this->records_limit);     
         $dataObj = $orders;
         return view('admin.order.userorder',compact('dataObj'));
