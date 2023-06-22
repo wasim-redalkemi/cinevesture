@@ -258,7 +258,6 @@ class SubscriptionController extends Controller
 
        ];
        $subscriptionData = (object) $subscriptionData;
-       
        $this->createSubscription($subscriptionData,null);
        
     }
@@ -278,47 +277,47 @@ class SubscriptionController extends Controller
     public function createFreeOrder(Request $request)
     {
         $subscriptionOrder=SubscriptionOrder::query()->where('user_id',auth()->user()->id)->first();
-       
-         if (!empty($subscriptionOrder)) {
-           return back()->with('error',"something went wrong");
-         }
-         $plan = Plans::find($request->id);
-         $order = new SubscriptionOrder();
-                $order->plan_id = $plan->id;
-                $order->user_id = auth()->user()->id;
-                $order->plan_name = $plan->plan_name;
-                $order->plan_amount = $plan->plan_amount;
-                $order->currency = $plan->currency;
-                $order->plan_time = "m";
-                $order->plan_time_quntity = 30;
-                $order->status = 'pending';
-                $order->save();
-                // $request->session()->put('freeToastmsg',true);
-                $subscriptionData=[
-                    'user_id'=>$order->user_id,
-                    'plan_amount'=> $order->plan_amount,
-                    'plan_name' =>$order->plan_name,
-                    'currency' =>$order->currency,
-                    'plan_time' =>"m",
-                    'plan_time_quntity' => 30,
-                    // 'subscription_start_date' = Carbon::now(), // for free plan 
-                    'total_days' => 30,
-                    'subscription_end_date' => date('Y-m-d 23:59:59',strtotime('+29days')),//Carbon::now()->addDays(30), // for free plan 
-                    'order_id' => 'free',
-                    'plan_id' => $order->plan_id
-            
-                   ];
-                   $subscriptionData = (object) $subscriptionData;
-                   $subscription = $this->createSubscription($subscriptionData);
-                   $collect  = collect();
-                    $collect->put('first_name', ucwords(auth()->user()->first_name));
-                    $collect->put('currency', $order->currency);
-                    $collect->put('plan_amount', $order->plan_amount);
-                    $collect->put('amount_type', $order->currency);
-                    $collect->put('plan_name', $order->plan_name);
-                    $collect->put('Start_date', date('Y-m-d', strtotime($order->created_at)));
-                    Notification::route('mail', auth()->user()->email)->notify(new FreeTrialDetail($collect));
-                    return redirect()->route('home')->with('success', '30 days Free trail plan started successfully');
+        if (!empty($subscriptionOrder)) {
+            return back()->with('error',"something went wrong");
+        }
+        $plan = Plans::find($request->id);
+        $order = new SubscriptionOrder();
+        $order->plan_id = $plan->id;
+        $order->user_id = auth()->user()->id;
+        $order->plan_name = $plan->plan_name;
+        $order->plan_amount = $plan->plan_amount;
+        $order->currency = $plan->currency;
+        $order->plan_time = "m";
+        $order->plan_time_quntity = 30;
+        $order->status = 'pending';
+        $order->save();
+        // $request->session()->put('freeToastmsg',true);
+        $subscriptionData=[
+            'user_id'=>$order->user_id,
+            'plan_amount'=> $order->plan_amount,
+            'plan_name' =>$order->plan_name,
+            'currency' =>$order->currency,
+            'plan_time' =>"m",
+            'plan_time_quntity' => 30,
+            // 'subscription_start_date' = Carbon::now(), // for free plan 
+            'total_days' => 30,
+            'subscription_end_date' => date('Y-m-d 23:59:59',strtotime('+29days')),//Carbon::now()->addDays(30), // for free plan 
+            'order_id' => 'free',
+            'plan_id' => $order->plan_id
+    
+        ];
+        $subscriptionData = (object) $subscriptionData;
+        $subscription = $this->createSubscription($subscriptionData);
+        $collect  = collect();
+        $collect->put('first_name', ucwords(auth()->user()->first_name));
+        $collect->put('currency', $order->currency);
+        $collect->put('plan_amount', $order->plan_amount);
+        $collect->put('amount_type', $order->currency);
+        $collect->put('plan_name', $order->plan_name);
+        $collect->put('Start_date', date('Y-m-d', strtotime($order->created_at)));
+        Notification::route('mail', auth()->user()->email)->notify(new FreeTrialDetail($collect));
+        Session()->put('freeSubscription', "paid");
+        return redirect()->route('home')->with('success', '30 days Free trail plan started successfully');
 
     }
 

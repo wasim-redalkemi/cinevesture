@@ -32,30 +32,28 @@ class PlanPermission extends Controller
          
          $subscriptionorder=SubscriptionOrder::query()->where('user_id',auth()->user()->id)->where("is_used_for_subscription",'0')->first();
          if(!empty ($subscriptionorder)){
+            $subscriptionorder->is_used_for_subscription="1";
+            $subscriptionorder->save();
+            if(!empty($subscriptionorder)){
+            $subscriptionData=[
+               'user_id'=>$subscriptionorder->user_id,
+               'plan_amount'=> $subscriptionorder->plan_amount,
+               'plan_name' =>$subscriptionorder->plan_name,
+               'currency' =>$subscriptionorder->currency,
+               'plan_time' =>$subscriptionorder->plan_time,
+               'plan_time_quntity' => $subscriptionorder->plan_time_quntity,
+               // 'subscription_start_date' = Carbon::now(), // for free plan 
+               'total_days' => $subscriptionorder->plan_time_quntity,
+               'subscription_end_date' => date('Y-m-d 23:59:59',strtotime('+'.$subscriptionorder->plan_time_quntity.'days')),//Carbon::now()->addDays($subscriptionorder->plan_time_quntity), // for free plan 
+               'order_id' => $subscriptionorder->order_id,
+               'plan_id' => $subscriptionorder->plan_id
+      
+            ];
+            
+            $subscriptionData = (object) $subscriptionData;
 
-        
-         $subscriptionorder->is_used_for_subscription="1";
-         $subscriptionorder->save();
-         if(!empty($subscriptionorder)){
-         $subscriptionData=[
-            'user_id'=>$subscriptionorder->user_id,
-            'plan_amount'=> $subscriptionorder->plan_amount,
-            'plan_name' =>$subscriptionorder->plan_name,
-            'currency' =>$subscriptionorder->currency,
-            'plan_time' =>$subscriptionorder->plan_time,
-            'plan_time_quntity' => $subscriptionorder->plan_time_quntity,
-            // 'subscription_start_date' = Carbon::now(), // for free plan 
-            'total_days' => $subscriptionorder->plan_time_quntity,
-            'subscription_end_date' => date('Y-m-d 23:59:59',strtotime('+'.$subscriptionorder->plan_time_quntity.'days')),//Carbon::now()->addDays($subscriptionorder->plan_time_quntity), // for free plan 
-            'order_id' => $subscriptionorder->order_id,
-            'plan_id' => $subscriptionorder->plan_id
-    
-           ];
-           
-           $subscriptionData = (object) $subscriptionData;
-
-         SubscriptionController::createSubscription($subscriptionData,null);
-         }
+            SubscriptionController::createSubscription($subscriptionData,null);
+            }
          }
 
       }
