@@ -20,14 +20,6 @@ class CustomNotification extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
-    // public function userSubExpire()
-    // {
-    //     $date=(Carbon::now());
-    //     $date1=($date->toDateString());
-    //     $userSubscription=UserSubscription::query()->where('subscription_end_date','=', $date1)->get();
-    //     return true;
-    // }
 
     /**
      * Show the form for creating a new resource.
