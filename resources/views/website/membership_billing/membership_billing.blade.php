@@ -127,11 +127,13 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="d-block">
-                            <div class="guide_profile_main_text mt-4">
-                                Your chosen plan <b class=" deep-pink">{{$order->plan_name}}</b> will commence on @php echo date('d-M-Y',strtotime($subscription->subscription_end_date)); @endphp, and will remain valid for a period of <b class=" deep-pink">{{$order->plan_time_quntity}}</b> days.
+                        @if(isset($order->plan_name) && !empty($order->plan_name))
+                            <div class="d-block">
+                                <div class="guide_profile_main_text mt-4">
+                                    Your chosen plan <b class=" deep-pink">{{$order->plan_name}}</b> will commence on @php echo date('d-M-Y',strtotime($subscription->subscription_end_date)); @endphp, and will remain valid for a period of <b class=" deep-pink">{{$order->plan_time_quntity}}</b> days.
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
