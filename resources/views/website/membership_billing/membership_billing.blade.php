@@ -58,7 +58,7 @@
                                 
                                 <table>
                                     <tr class="guide_profile_main_subtext Aubergine_at_night">
-                                        <td class="w-50">Plan Amount:</td>
+                                        <td class="w-75 ">Plan Amount:</td>
                                         <td class="w-50">
                                             @if(($subscription->platform_subscription_id != 'free')) 
                                                 @if($subscription->currency == "USD")
@@ -127,11 +127,13 @@
                                 @endif
                             </div>
                         </div>
+                        @if (!empty($order))
                         <div class="d-block">
                             <div class="guide_profile_main_text mt-4">
                                 Your chosen plan <b class=" deep-pink">{{$order->plan_name}}</b> will commence on @php echo date('d-M-Y',strtotime($subscription->subscription_end_date)); @endphp, and will remain valid for a period of <b class=" deep-pink">{{$order->plan_time_quntity}}</b> days.
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

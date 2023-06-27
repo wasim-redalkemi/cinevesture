@@ -79,7 +79,8 @@ class ProjectController extends AdminController
             $project=UserProject::where('id',$request->p)->first();
             $project->favorited = $request->s;
             $project->save();
-            AppUtilityController::listAutomation();
+            $aa=new AppUtilityController();
+            $aa->listAutomation();
             Session::flash('response', ['text'=>'Favorite update sucessfully','type'=>'success']);
         } 
         catch (Exception $e)
@@ -95,7 +96,9 @@ class ProjectController extends AdminController
             $project=UserProject::where('id',$request->p)->first();
             $project->project_verified = $request->s;
             $project->save();
-            AppUtilityController::listAutomation();
+            // AppUtilityController::listAutomation();
+            $aa=new AppUtilityController();
+            $aa->listAutomation();
             Session::flash('response', ['text'=>'Verified update sucessfully','type'=>'success']);
         } 
         catch (Exception $e)
@@ -111,7 +114,9 @@ class ProjectController extends AdminController
             $project=UserProject::where('id',$request->id)->first();
             $project->admin_status = $request->status;
             $project->save();
-            AppUtilityController::listAutomation();
+            $aa=new AppUtilityController();
+            $aa->listAutomation();
+            // AppUtilityController::listAutomation();
             Session::flash('response', ['text'=>'Status update sucessfully','type'=>'success']);
         } 
         catch (Exception $e)
@@ -223,7 +228,9 @@ class ProjectController extends AdminController
              $project->save();
              
           }
-          AppUtilityController::listAutomation();
+        //   AppUtilityController::listAutomation();
+          $aa=new AppUtilityController();
+            $aa->listAutomation();
           Session::flash('response', ['text'=>'Category update sucessfully','type'=>'success']);
           return redirect(route('admin-project-list'));
         }
@@ -274,7 +281,9 @@ class ProjectController extends AdminController
                  $project->gener_id=$genre;
                  $project->save();
               }
-              AppUtilityController::listAutomation();
+            //   AppUtilityController::listAutomation();
+              $aa=new AppUtilityController();
+                $aa->listAutomation();
               Session::flash('response', ['text'=>'Genre update successfully','type'=>'success']);
               return redirect(route('admin-project-list'));
               

@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Lang;
 
 class SubRenewalBeforeExpiration extends Notification
 {
@@ -41,7 +42,7 @@ class SubRenewalBeforeExpiration extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->line("Subject: Cinevesture.com Subscription Confirmation" )
+                    ->subject(('Cinevesture.com Subscription Confirmation'))
                     ->line(" <h2> SUBSCRIPTION CONFIRMATION </h2> " )
                     ->greeting('Dear'.' '.$this->data['first_name'].',')
                     ->line("We hope you are enjoying your subscription, which will renew soon." )

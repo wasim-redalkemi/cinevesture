@@ -85,11 +85,11 @@
                                         <div class="search-head-subtext Aubergine_at_night mt-3">(@if($plan->currency == "USD")$@else₹@endif{{ number_format($plan->plan_amount/12, 2,'.',',')}}/month)</div>
                                     @endif
                                     @if ($plan->currency == 'INR')
-                                    <div>(Inclusive GST Tax)</div>
+                                    <div>(Inclusive of GST)</div>
                                     @endif
                                     
                                     @if ($freeTrail==true)
-                                    <div class="d-flex justify-content-center"><a  href="{{route('subscription-free',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2 pd-30">Start 30-days<br>Free Trail</button></a></div>
+                                    <div class="d-flex justify-content-center"><a  href="{{route('subscription-free',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2 free_button pd-30">Start 30-days<br>Free Trail</button></a></div>
                                     @else
                                     <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
                                     @endif
@@ -341,8 +341,9 @@
     $(document).ready(function()
     {
         var plan_type = "{{auth()->user()->freeSubscription}}";
+       
         var billingAddress='{{auth()->user()->billing_address}}';
-        if ((!(plan_type == '') || !(plan_type == 'free')) && (billingAddress == '')) {
+        if (((!plan_type == '') || (!plan_type == 'free')) && (billingAddress == '')) {
             $("#updateBillingAddressModal").modal({
                 backdrop: 'static',
                 keyboard: false
@@ -422,9 +423,13 @@
     // console.log(sessionStorage.getItem("freeToastMSG"));
     
     var isnotfree="{{$freeTrail}}";
-    if (isnotfree==false && freesubtrial!="free") {
+    var plan_type = "{{auth()->user()->freeSubscription}}";
+    if (isnotfree==false && freesubtrial!="free" && plan_type== "paid") {
         $('.expire_modal').modal('show');
     };
+    $('.free_button').click(function () {
+        $(this).attr('disabled', 'true'); 
+    })
 </script>
 
 @endpush

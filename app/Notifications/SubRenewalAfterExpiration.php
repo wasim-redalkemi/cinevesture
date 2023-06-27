@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Lang;
 
 class SubRenewalAfterExpiration extends Notification
 {
@@ -42,7 +43,7 @@ class SubRenewalAfterExpiration extends Notification
     {
 
         return (new MailMessage)
-                    ->line("Subject: Cinevesture.com Subscription Confirmation" )
+                    ->subject(('Cinevesture.com Subscription Confirmation'))
                     ->line(" <h2> SUBSCRIPTION EXPIRATION</h2> " )
                     ->greeting('Dear'.' '.$this->data['first_name'].',')
                     ->line("Your Cinevesture.com membership has been cancelled. To avoid losing access to your service, please update your payment method." )

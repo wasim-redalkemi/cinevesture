@@ -223,7 +223,9 @@ class ProjectController extends WebController
                         $projectLanguages->language_id = $v;
                         $projectLanguages->save();    
                     }
-                    AppUtilityController::listAutomation();
+                    // AppUtilityController::listAutomation();
+                    $aa=new AppUtilityController();
+                    $aa->listAutomation();
                     $this->return_response['success_msg'] = 'Project overview updated successfully.';
                 }
             }
@@ -345,7 +347,9 @@ class ProjectController extends WebController
                             $projectGenres->save();
                         }
                     }
-                    AppUtilityController::listAutomation();
+                    // AppUtilityController::listAutomation();
+                    $aa=new AppUtilityController();
+                    $aa->listAutomation();
                     $this->return_response['success_msg'] = 'Project details updated successfully.';                    
                 } else {
                     return back()->with("error","Please overview phase fill.");
@@ -864,7 +868,9 @@ class ProjectController extends WebController
             $project->user_status = $request->user_status;
             if($project->update())
             {
-                AppUtilityController::listAutomation();
+                // AppUtilityController::listAutomation();
+                $aa=new AppUtilityController();
+                $aa->listAutomation();
                 return redirect()->route('project-list')->with("success", "Project status updated successfully.");
             }
             else

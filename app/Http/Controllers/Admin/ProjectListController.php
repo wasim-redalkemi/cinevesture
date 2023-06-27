@@ -90,7 +90,9 @@ class ProjectListController extends AdminController
                 $projectList->recommendation=$request->recommended;
                 $projectList->favorite=$request->favorite;
                 $projectList->save();
-                AppUtilityController::listAutomation();
+                $aa=new AppUtilityController();
+                $aa->listAutomation();
+                // AppUtilityController::listAutomation();
                 
             }
 
@@ -107,7 +109,9 @@ class ProjectListController extends AdminController
     
     public function listAutomation()
     {
-        AppUtilityController::listAutomation();
+        // AppUtilityController::listAutomation();
+        $aa=new AppUtilityController();
+            $aa->listAutomation();
     }
 
     /**
@@ -366,7 +370,9 @@ class ProjectListController extends AdminController
                 $projectListFilters->recommendation=$request->recommended;
                 $projectListFilters->favorite=$request->favorite;
                 $projectListFilters->save();
-                AppUtilityController::listAutomation();
+                // AppUtilityController::listAutomation();
+                $aa=new AppUtilityController();
+                $aa->listAutomation();
             }
             Session::flash('response', ['text'=>'Project list name update successfully!','type'=>'success']);
             return redirect()->route('show-list');
