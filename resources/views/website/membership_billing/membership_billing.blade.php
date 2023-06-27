@@ -58,7 +58,7 @@
                                 
                                 <table>
                                     <tr class="guide_profile_main_subtext Aubergine_at_night">
-                                        <td class="w-50">Plan Amount:</td>
+                                        <td class="w-75 ">Plan Amount:</td>
                                         <td class="w-50">
                                             @if(($subscription->platform_subscription_id != 'free')) 
                                                 @if($subscription->currency == "USD")

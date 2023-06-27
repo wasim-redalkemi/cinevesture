@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Lang;
 
 class FreeTrialExpiration extends Notification
 {
@@ -41,7 +42,7 @@ class FreeTrialExpiration extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->line("Subject: Cinevesture.com Free Trial Expiration" )
+        ->subject(('Cinevesture.com Free Trial Expiration'))
         ->line(" <h2> YOUR FREE TRIAL HAS EXPIRED</h2> " )
         ->greeting('Dear'.' '.$this->data['first_name'].',')
         ->line("The trial period for Cinevesture.com has ended, but your progress has been saved and is still available. Everyone gets busy, and you may not have had enough time to evaluate Cinevesture." )
