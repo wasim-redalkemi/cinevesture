@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Website;
 
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\WebController;
 use App\Http\Controllers\FavouriteController;
 
@@ -11,7 +10,7 @@ use App\Http\Controllers\FavouriteController;
 use App\Models\UserFavourite;
 use Illuminate\Http\Request;
 
-class UserFavouriteController extends Controller
+class UserFavouriteController extends WebController
 {
     /**
      * Display a listing of the resource.

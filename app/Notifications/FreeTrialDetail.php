@@ -42,8 +42,8 @@ class FreeTrialDetail extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->subject(('Cinevesture.com Subscription Confirmation'))
-                    ->line(" <h2> SUBSCRIPTION CONFIRMATION </h2> " )
+                    ->subject(('Free trial activation confirmation'))
+                    ->line(" <h2> Free Trial Activation </h2> " )
                     ->greeting('Dear'.' '.$this->data['first_name'].',')
                     ->line("You have accepted the following offer:" )
                     ->line(' <b>Subscription</b>'." ".$this->data['plan_name']. " ".'Plan.')

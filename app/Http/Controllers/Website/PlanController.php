@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Website;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\WebController;
 use App\Models\MasterPlanModule;
 use App\Models\Plans;
 use App\Models\SubscriptionOrder;
 use Illuminate\Http\Request;
 
-class PlanController extends Controller
+class PlanController extends WebController
 {
     //view 
     

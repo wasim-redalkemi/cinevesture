@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Website;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\WebController;
 use App\Models\MasterCountry;
 use App\Models\MasterSkill;

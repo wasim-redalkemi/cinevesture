@@ -43,8 +43,8 @@ class SubRenewalAfterExpiration extends Notification
     {
 
         return (new MailMessage)
-                    ->subject(('Cinevesture.com Subscription Confirmation'))
-                    ->line(" <h2> SUBSCRIPTION EXPIRATION</h2> " )
+                    ->subject(('Your '.$this->data['plan_name'].' has expired'))
+                    ->line("")
                     ->greeting('Dear'.' '.$this->data['first_name'].',')
                     ->line("Your Cinevesture.com membership has been cancelled. To avoid losing access to your service, please update your payment method." )
                     ->line('Sincerely, ')        

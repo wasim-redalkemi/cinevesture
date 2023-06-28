@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Website;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\WebController;
 use App\Models\Endorsement;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class EndorsementController extends Controller
+class EndorsementController extends WebController
 {   // views 
 
 
