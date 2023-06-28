@@ -43,7 +43,7 @@ class SubRenewalBeforeExpiration extends Notification
     {
         return (new MailMessage)
                     ->subject(('Your '.$this->data['plan_name'].' subscription expiring soon.'))
-                    ->line(" <h2> SUBSCRIPTION CONFIRMATION </h2> " )
+                    ->line("" )
                     ->greeting('Dear'.' '.$this->data['first_name'].',')
                     ->line("We hope you are enjoying your subscription, which will renew soon." )
                     ->line('Starting from '.$this->data['plan_start_date'].' , your subscription automatically renews for '.' ' .$this->data['currency'] .$this->data['plan_amount'].' '.'/year. To avoid being charged, you must cancel at least one day before each renewal date.')
