@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Website;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\WebController;
 use App\Models\MasterPlanModule;
 use App\Models\MasterPlanOperation;
 use App\Models\Plans;
@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 
-class SubscriptionController extends Controller
+class SubscriptionController extends WebController
 {
     // Views 
     // Functionality
@@ -157,7 +157,7 @@ class SubscriptionController extends Controller
                 $order->status='success';
                 $order->save();
                 Session()->put('freeSubscription', "paid");
-                $collect  = collect();
+                $collect = collect();
                 $collect->put('first_name', ucwords(auth()->user()->first_name));
                 $collect->put('currency', $subscription->currency);
                 $collect->put('plan_amount', $subscription->plan_amount);
@@ -265,11 +265,16 @@ class SubscriptionController extends Controller
     public function getBilling(Request $request)
     {
         try{
-             $order=NULL;
-                $subscription = UserSubscription::query()->where('user_id',auth()->user()->id)->with('user')->first();
-                $order = SubscriptionOrder::query()->where('user_id',auth()->user()->id)->where('is_used_for_subscription','0')->first();
-                return view('website.membership_billing.membership_billing',compact('subscription',"order"));
-        }catch(Exception $e){
+            $order=NULL;
+            $subscription = UserSubscription::query()->where('user_id',auth()->user()->id)->with('user')->first();
+            $order = SubscriptionOrder::query()->where('user_id',auth()->user()->id)
+            ->where('status','success')
+            ->where('is_used_for_subscription','0')
+            ->first();
+            return view('website.membership_billing.membership_billing',compact('subscription',"order"));
+        }
+        catch(Exception $e)
+        {
 
         }
     }
@@ -321,15 +326,15 @@ class SubscriptionController extends Controller
 
     }
 
-    public function subscriptionexpireMail() {
-        $free=$this->notifyOnfreeTrialExpire();
+    public function subscriptionExpireMail() {
+        $free=$this->notifyOnFreeTrialExpire();
         $exp=$this->notifyBeforePaidSubscriptionExpire();
         $after=$this->notifyBeforeFreeTrialExpire();
         $after=$this->notifyAfterPaidSubscriptionExpire();
         return true;
     }
 
-    private function notifyOnfreeTrialExpire() {
+    private function notifyOnFreeTrialExpire() {
         $userSubs=UserSubscription::query()->where('platform_subscription_id','free')
         ->whereBetween('subscription_end_date',[date('Y-m-d 00:00:00',strtotime('-1days')),date('Y-m-d 23:59:59',strtotime('-1days'))])->pluck('user_id');
         foreach ($userSubs as $key => $id) {
