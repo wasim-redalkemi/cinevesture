@@ -335,17 +335,19 @@ class SubscriptionController extends WebController
     }
 
     private function notifyOnFreeTrialExpire() {
-        $userSubs=UserSubscription::query()->where('platform_subscription_id','free')
+        $userSubs=UserSubscription::query()
+        ->where('platform_subscription_id','free')
         ->whereBetween('subscription_end_date',[date('Y-m-d 00:00:00',strtotime('-1days')),date('Y-m-d 23:59:59',strtotime('-1days'))])->pluck('user_id');
         foreach ($userSubs as $key => $id) {
             $notification= new CustomNotification();
-            $notification->freeSubExpired($id);
+            $notification->freeTrialExpired($id);
         }
         return true;
     }
 
     private function notifyBeforePaidSubscriptionExpire() {
         $userSubs=UserSubscription::query()
+        ->where('platform_subscription_id','!=','free')
         ->whereBetween('subscription_end_date',[date('Y-m-d 00:00:00',strtotime('+5days')),date('Y-m-d 23:59:59',strtotime('+5days'))])
         ->pluck('user_id');
         foreach ($userSubs as $key => $id) {

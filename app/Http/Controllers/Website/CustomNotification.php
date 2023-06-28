@@ -27,7 +27,7 @@ class CustomNotification extends WebController
      *
      * @return \Illuminate\Http\Response
      */
-    public function freeSubExpired($id)
+    public function freeTrialExpired($id)
     {
         $user=User::find($id);
         $userSubScription=UserSubscription::query()->where('user_id',$id)->first();
@@ -57,7 +57,7 @@ class CustomNotification extends WebController
         $collect->put('currency', $userSubScription->currency);
         $collect->put('plan_amount', $userSubScription->plan_amount);
         $collect->put('plan_start_date', date("d-m-Y",strtotime($userSubScription->subscription_start_date))) ;
-        $collect->put('plan_name', date("d-m-Y",strtotime($userSubScription->plan_name))) ;
+        $collect->put('plan_name',$userSubScription->plan_name) ;
         Notification::route('mail',$user->email)->notify(new SubRenewalBeforeExpiration($collect));
         return true;
     }
