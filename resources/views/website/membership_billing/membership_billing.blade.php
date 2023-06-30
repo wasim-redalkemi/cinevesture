@@ -25,10 +25,13 @@
                             <div>
                                 <div class="guide_profile_main_text mt-4 deep-pink">Your Plan</div>
                                 <div class="guide_profile_main_subtext Aubergine_at_night">
+                                    <?php 
+                                        $days_left = round((strtotime($subscription->subscription_end_date)-time()) / (60 * 60 * 24));
+                                    ?>
                                     @if (($subscription->platform_subscription_id == 'free')) 
-                                        Free Trial 
+                                        Free Trial - {{$days_left}} days left
                                     @elseif(!empty($subscription->plan_name)) 
-                                        {{$subscription->plan_name}} 
+                                        {{$subscription->plan_name}} - {{$days_left}} days left
                                     @else 
                                         <span><b>-</b></span> 
                                     @endif
@@ -104,7 +107,7 @@
                                 </div>
                             </div>
                             
-                            <div class="m-auto">
+                            {{-- <div class="m-auto">
                                 <div class="mx-auto  profile_wraper  align-items-center wh_250">
                                     <div class="d-block card_text_center">
                                         <div class="text-center mt-3">
@@ -125,7 +128,7 @@
                                         <div><a href="{{route('plans-view')}}"><BUtton class="buy_plan_btn ">Buy Plan</BUtton></a></div>
                                     </div>
                                 @endif
-                            </div>
+                            </div> --}}
                         </div>
                         @if (!empty($order))
                         <div class="d-block">

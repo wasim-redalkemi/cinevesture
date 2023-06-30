@@ -4845,3 +4845,10 @@ transition: 2s ease all; */
   {
     cursor: pointer;
   }
+  .plan_trial_notify
+  {
+    position: relative;
+    top: 10px;
+    font-size: 12px;
+    line-height: 14px;
+  }
