@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Website;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\WebController;
 use App\Models\MasterPlanModule;
 use App\Models\MasterPlanOperation;
 use App\Models\Plans;
@@ -18,7 +18,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Notification;
 
-class SubscriptionController extends Controller
+class SubscriptionController extends WebController
 {
     // Views 
     // Functionality
@@ -157,11 +157,14 @@ class SubscriptionController extends Controller
                 $order->status='success';
                 $order->save();
                 Session()->put('freeSubscription', "paid");
-                $collect  = collect();
+
+                $is_taxable = ($order->currency == "INR")?"Basic amount: ".$order->currency.' '.$order->taxable." <br> GST amount: ".$order->currency.' '.$order->gst."<br>":'';
+                $collect = collect();
                 $collect->put('first_name', ucwords(auth()->user()->first_name));
                 $collect->put('currency', $subscription->currency);
                 $collect->put('plan_amount', $subscription->plan_amount);
                 $collect->put('plan_name', $subscription->plan_name);
+                $collect->put('is_taxable', $is_taxable);
                 Notification::route('mail', auth()->user()->email)->notify(new MembershipConfirmation($collect));
             }
             return redirect()->route('profile-create')->with('success', 'Subcription completed Successfully');
@@ -227,9 +230,9 @@ class SubscriptionController extends Controller
 
     private function setUserPlanInSession($userId)
     {
-        $user = User::query()->with('getSubcription')->where('id', $userId)->first();
+        $user = User::query()->with('getSubscription')->where('id', $userId)->first();
 
-        $plans = Plans::query()->where('id', $user->getSubcription->plan_id)->with('getRelationalData.getModule', 'getRelationalData.getOperation')
+        $plans = Plans::query()->where('id', $user->getSubscription->plan_id)->with('getRelationalData.getModule', 'getRelationalData.getOperation')
             ->first();
         $action = MasterPlanOperation::all();
         $module = MasterPlanModule::all();
@@ -265,11 +268,16 @@ class SubscriptionController extends Controller
     public function getBilling(Request $request)
     {
         try{
-             $order=NULL;
-                $subscription = UserSubscription::query()->where('user_id',auth()->user()->id)->with('user')->first();
-                $order = SubscriptionOrder::query()->where('user_id',auth()->user()->id)->where('is_used_for_subscription','0')->first();
-                return view('website.membership_billing.membership_billing',compact('subscription',"order"));
-        }catch(Exception $e){
+            $order=NULL;
+            $subscription = UserSubscription::query()->where('user_id',auth()->user()->id)->with('user')->first();
+            $order = SubscriptionOrder::query()->where('user_id',auth()->user()->id)
+            ->where('status','success')
+            ->where('is_used_for_subscription','0')
+            ->first();
+            return view('website.membership_billing.membership_billing',compact('subscription',"order"));
+        }
+        catch(Exception $e)
+        {
 
         }
     }
@@ -308,6 +316,8 @@ class SubscriptionController extends Controller
         ];
         $subscriptionData = (object) $subscriptionData;
         $subscription = $this->createSubscription($subscriptionData);
+        $this->setUserPlanInSession(auth()->user()->id);
+        
         $collect  = collect();
         $collect->put('first_name', ucwords(auth()->user()->first_name));
         $collect->put('currency', $order->currency);
@@ -321,26 +331,28 @@ class SubscriptionController extends Controller
 
     }
 
-    public function subscriptionexpireMail() {
-        $free=$this->notifyOnfreeTrialExpire();
+    public function subscriptionExpireMail() {
+        $free=$this->notifyOnFreeTrialExpire();
         $exp=$this->notifyBeforePaidSubscriptionExpire();
         $after=$this->notifyBeforeFreeTrialExpire();
         $after=$this->notifyAfterPaidSubscriptionExpire();
         return true;
     }
 
-    private function notifyOnfreeTrialExpire() {
-        $userSubs=UserSubscription::query()->where('platform_subscription_id','free')
+    private function notifyOnFreeTrialExpire() {
+        $userSubs=UserSubscription::query()
+        ->where('platform_subscription_id','free')
         ->whereBetween('subscription_end_date',[date('Y-m-d 00:00:00',strtotime('-1days')),date('Y-m-d 23:59:59',strtotime('-1days'))])->pluck('user_id');
         foreach ($userSubs as $key => $id) {
             $notification= new CustomNotification();
-            $notification->freeSubExpired($id);
+            $notification->freeTrialExpired($id);
         }
         return true;
     }
 
     private function notifyBeforePaidSubscriptionExpire() {
         $userSubs=UserSubscription::query()
+        ->where('platform_subscription_id','!=','free')
         ->whereBetween('subscription_end_date',[date('Y-m-d 00:00:00',strtotime('+5days')),date('Y-m-d 23:59:59',strtotime('+5days'))])
         ->pluck('user_id');
         foreach ($userSubs as $key => $id) {

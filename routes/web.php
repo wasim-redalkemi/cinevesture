@@ -39,7 +39,7 @@ Route::get('/test', function () {
 });
 Auth::routes(['verify' => true]);
 //subscription empire mail
-Route::get('/manage-subscription-and-notification', [SubscriptionController::class, 'subscriptionexpireMail']);
+Route::get('/manage-subscription-and-notification', [SubscriptionController::class, 'subscriptionExpireMail']);
 
 
 // Google URL

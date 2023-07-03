@@ -25,10 +25,18 @@
                             <div>
                                 <div class="guide_profile_main_text mt-4 deep-pink">Your Plan</div>
                                 <div class="guide_profile_main_subtext Aubergine_at_night">
+                                    <?php 
+                                        $days_left = round((strtotime($subscription->subscription_end_date)-time()) / (60 * 60 * 24));
+                                    ?>
                                     @if (($subscription->platform_subscription_id == 'free')) 
-                                        Free Trial 
+                                        Free Trial - {{$days_left}} days left
+                                        <div class="mt-1">
+                                            <a href="{{route('plans-view')}}">
+                                                <button class="buy_plan_btn_sm ">Buy Plan</button>
+                                            </a>
+                                        </div>
                                     @elseif(!empty($subscription->plan_name)) 
-                                        {{$subscription->plan_name}} 
+                                        {{$subscription->plan_name}} - {{$days_left}} days left
                                     @else 
                                         <span><b>-</b></span> 
                                     @endif
@@ -58,7 +66,7 @@
                                 
                                 <table>
                                     <tr class="guide_profile_main_subtext Aubergine_at_night">
-                                        <td class="w-50">Plan Amount:</td>
+                                        <td class="w-75 ">Plan Amount:</td>
                                         <td class="w-50">
                                             @if(($subscription->platform_subscription_id != 'free')) 
                                                 @if($subscription->currency == "USD")
@@ -104,7 +112,7 @@
                                 </div>
                             </div>
                             
-                            <div class="m-auto">
+                            {{-- <div class="m-auto">
                                 <div class="mx-auto  profile_wraper  align-items-center wh_250">
                                     <div class="d-block card_text_center">
                                         <div class="text-center mt-3">
@@ -125,13 +133,15 @@
                                         <div><a href="{{route('plans-view')}}"><BUtton class="buy_plan_btn ">Buy Plan</BUtton></a></div>
                                     </div>
                                 @endif
-                            </div>
+                            </div> --}}
                         </div>
+                        @if (!empty($order))
                         <div class="d-block">
                             <div class="guide_profile_main_text mt-4">
                                 Your chosen plan <b class=" deep-pink">{{$order->plan_name}}</b> will commence on @php echo date('d-M-Y',strtotime($subscription->subscription_end_date)); @endphp, and will remain valid for a period of <b class=" deep-pink">{{$order->plan_time_quntity}}</b> days.
                             </div>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>

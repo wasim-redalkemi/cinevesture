@@ -46,7 +46,7 @@ class MembershipConfirmation extends Notification
         ->subject('Your Cinevesture membership is now active!')
         ->greeting('Hi'.' '.$this->data['first_name'].',')
         ->line('Welcome to Cinevesture! Your membership is now active')
-        ->line('Plan name:     '.$this->data['plan_name'].'<br>Billed to:     '.$this->data['first_name'].'<br>Total charged:     '.$this->data['currency'].' '. number_format($this->data['plan_amount']),2)
+        ->line('Plan name:     '.$this->data['plan_name'].'<br>Billed to:     '.$this->data['first_name'].'<br>'.$this->data['is_taxable'].'Total charged:     '.$this->data['currency'].' '. number_format($this->data['plan_amount']),2)
         ->line("Your Cinevesture membership is active today, so you can get started whenever you're ready. Just a few reminders about your membership")
         ->line('<h4>Create your profile</h4>')
         ->line("You can create your profile by writing about your experience, showcasing your portfolio, asking your friends and colleagues on Cinevesture to endorse you and uploading an introduction video")

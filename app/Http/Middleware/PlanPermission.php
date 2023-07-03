@@ -51,8 +51,8 @@ class PlanPermission extends Controller
             ];
             
             $subscriptionData = (object) $subscriptionData;
-
-            SubscriptionController::createSubscription($subscriptionData,null);
+            $subscription=new SubscriptionController();
+            $subscription1 = $subscription->createSubscription($subscriptionData,null);
             }
          }
 
@@ -136,6 +136,11 @@ class PlanPermission extends Controller
                         }
                   return back()->with('error', 'Sorry, You Are Not Allowed to Access This Page');
                } else {
+                  // // check organisation
+                  // if($selected_permission->get_operation->url_key == "organisation-create"){
+                  //    return back()->with('error','Upgrade your plan to create an organisation page');
+                  // }
+                  // limits of action check
                   if ($selected_permission->limit > 0) {
                      $status = MiddlewareUltilityController::checkActionLimit($selected_permission->id, $selected_permission->limit, $request);
                      if ($status == true) {
@@ -145,9 +150,7 @@ class PlanPermission extends Controller
                         }
                         $currenturl = $request->url();
                         $divideString=explode('/',$currenturl);
-                        if(end($divideString)=="organisation-create"){
-                           return back()->with('error','Upgrade your plan to create an organisation page');
-                        }elseif(end($divideString)=="project-overview"){
+                        if(end($divideString)=="project-overview"){
                            return back()->with('error','Upgrade your plan to create another project');
                         }elseif(end($divideString)=="job-create"){
                            return back()->with('error','Upgrade your plan to post a job');
