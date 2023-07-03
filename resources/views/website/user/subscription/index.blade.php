@@ -92,7 +92,7 @@
                                     <div class="d-flex justify-content-center">
                                         <a  href="{{route('subscription-free',['id'=>$plan->id])}}" style="text-decoration:none;">
                                             <button class="cantact-page-cmn-btn mt-2 free_button pd-20">
-                                                Start 30-days Free Trail
+                                                Try for free
                                             </button>
                                         </a>
                                     </div>
