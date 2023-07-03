@@ -52,7 +52,7 @@ class GoogleController extends Controller
                 ]);
                 // $saveUser = User::where('email', $user->getEmail())->first();
             }
-            $saveUser = User::where('email', $user->getEmail())->with('getSubcription')->first();
+            $saveUser = User::where('email', $user->getEmail())->with('getSubscription')->first();
             if ($isSignUp) {
                 $collect  = collect();
                 $collect->put('first_name', $saveUser->first_name);
@@ -64,8 +64,8 @@ class GoogleController extends Controller
                         $checkPlan= new LoginController();
                         $checkPlan->expirePlanForGoogle();
                         return redirect('home');
-                        if($user->getSubcription){
-                            $plans = Plans::query()->where('id',$user->getSubcription->plan_id)->with('getRelationalData.getModule','getRelationalData.getOperation')
+                        if($user->getSubscription){
+                            $plans = Plans::query()->where('id',$user->getSubscription->plan_id)->with('getRelationalData.getModule','getRelationalData.getOperation')
                             ->first();
                             $module = MasterPlanModule::all();
                             $action = MasterPlanOperation::all();

@@ -73,7 +73,7 @@ class User extends Authenticatable
         return $this->hasOne(UserInvite::class, 'user_id');
     }
 
-    public function getSubcription()
+    public function getSubscription()
     {
         return $this->hasOne(UserSubscription::class, 'user_id');
     }

@@ -230,9 +230,9 @@ class SubscriptionController extends WebController
 
     private function setUserPlanInSession($userId)
     {
-        $user = User::query()->with('getSubcription')->where('id', $userId)->first();
+        $user = User::query()->with('getSubscription')->where('id', $userId)->first();
 
-        $plans = Plans::query()->where('id', $user->getSubcription->plan_id)->with('getRelationalData.getModule', 'getRelationalData.getOperation')
+        $plans = Plans::query()->where('id', $user->getSubscription->plan_id)->with('getRelationalData.getModule', 'getRelationalData.getOperation')
             ->first();
         $action = MasterPlanOperation::all();
         $module = MasterPlanModule::all();
@@ -316,6 +316,8 @@ class SubscriptionController extends WebController
         ];
         $subscriptionData = (object) $subscriptionData;
         $subscription = $this->createSubscription($subscriptionData);
+        $this->setUserPlanInSession(auth()->user()->id);
+        
         $collect  = collect();
         $collect->put('first_name', ucwords(auth()->user()->first_name));
         $collect->put('currency', $order->currency);
