@@ -157,11 +157,14 @@ class SubscriptionController extends WebController
                 $order->status='success';
                 $order->save();
                 Session()->put('freeSubscription', "paid");
+
+                $is_taxable = ($order->currency == "INR")?"Basic amount: ".$order->currency.' '.$order->taxable." <br> GST amount: ".$order->currency.' '.$order->gst."<br>":'';
                 $collect = collect();
                 $collect->put('first_name', ucwords(auth()->user()->first_name));
                 $collect->put('currency', $subscription->currency);
                 $collect->put('plan_amount', $subscription->plan_amount);
                 $collect->put('plan_name', $subscription->plan_name);
+                $collect->put('is_taxable', $is_taxable);
                 Notification::route('mail', auth()->user()->email)->notify(new MembershipConfirmation($collect));
             }
             return redirect()->route('profile-create')->with('success', 'Subcription completed Successfully');

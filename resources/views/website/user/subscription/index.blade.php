@@ -85,11 +85,20 @@
                                         <div class="search-head-subtext Aubergine_at_night mt-3">(@if($plan->currency == "USD")$@else₹@endif{{ number_format($plan->plan_amount/12, 2,'.',',')}}/month)</div>
                                     @endif
                                     @if ($plan->currency == 'INR')
-                                    <div>(Inclusive of GST)</div>
+                                    <div>(Inclusive of all applicable taxes)</div>
                                     @endif
                                     
                                     @if ($freeTrail==true)
-                                    <div class="d-flex justify-content-center"><a  href="{{route('subscription-free',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2 free_button pd-30">Start 30-days<br>Free Trail</button></a></div>
+                                    <div class="d-flex justify-content-center">
+                                        <a  href="{{route('subscription-free',['id'=>$plan->id])}}" style="text-decoration:none;">
+                                            <button class="cantact-page-cmn-btn mt-2 free_button pd-20">
+                                                Start 30-days Free Trail
+                                            </button>
+                                        </a>
+                                    </div>
+                                    <div class="plan_trial_notify">
+                                        Get a free 30-day trial, <br>no credit card details required
+                                    </div>
                                     @else
                                     <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
                                     @endif
@@ -156,7 +165,7 @@
                                 <div class="py-4 px-3">
                                     @if ($freeTrail==true)
                                     <a  href="{{route('subscription-free',['id'=>$plan->id])}}" style="text-decoration:none;">
-                                    <button class="job_search_btn"> Start 30-days Free Trail</button>
+                                    <button class="job_search_btn"> Start 30-day trial</button>
                                     </a>
                                     @else
                                     <a  href="{{route('subscription-order-create',['id'=>$plan->id])}}" style="text-decoration:none;">
