@@ -347,19 +347,7 @@
 @push('scripts')
 
 <script>
-    $(document).ready(function()
-    {
-        var plan_type = "{{session()->get('freeSubscription')}}";
-        var billingAddress='{{auth()->user()->billing_address}}';
-        if (((plan_type == 'free')) && (billingAddress == '')) {
-            $("#updateBillingAddressModal").modal({
-                backdrop: 'static',
-                keyboard: false
-            });
-            $('#updateBillingAddressModal').modal('show');
-        }
-       
-    });
+    
     var addclass = 'card_highlight';
     var forHead = 'active_plain_detail';
     var forButton = 'active_plain_button';
@@ -430,12 +418,26 @@
     
     var isnotfree="{{$freeTrial}}";
     var plan_type = "{{session()->get('freeSubscription')}}";
-    if (isnotfree==false && plan_type== "free") {
+    var free_status = "{{session()->get('subscription_status')}}";
+    if (isnotfree==false && plan_type== "free" && free_status =='inactive') {
         $('.expire_modal').modal('show');
     };
     $('.free_button').click(function () {
         $(this).attr('disabled', 'true'); 
     })
+    $(document).ready(function()
+    {
+        var plan_type = "{{session()->get('freeSubscription')}}";
+        var billingAddress='{{auth()->user()->billing_address}}';
+        if (((plan_type == 'free')) && (billingAddress == '')) {
+            $("#updateBillingAddressModal").modal({
+                backdrop: 'static',
+                keyboard: false
+            });
+            $('#updateBillingAddressModal').modal('show');
+        }
+       
+    });
 </script>
 
 @endpush

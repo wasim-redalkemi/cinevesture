@@ -119,6 +119,7 @@ class LoginController extends Controller
                     $subscription=UserSubscription::query()->where('user_id',auth()->user()->id)->first();
                    
                     $request->session()->put('user_subscription_end_date',$subscription->subscription_end_date??"");
+                    $request->session()->put('subscription_status',$subscription->status??"inactive");
                     if(!empty($subscription) && $subscription->platform_subscription_id=='free' ){
                         $request->Session()->put('freeSubscription', "free");
                     }
