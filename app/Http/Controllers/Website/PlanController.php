@@ -14,7 +14,7 @@ class PlanController extends WebController
     
     public function showPlans(Request $request)
     {    
-        $freeTrail=false;                
+        $freeTrial=false;                
         $plans = Plans::query()->with('getRelationalData.getModule','getRelationalData.getOperation')
                  ->where(function($q) use($request){
                     // if(isset($request->plan_time)){
@@ -34,11 +34,11 @@ class PlanController extends WebController
                  ->get();
          $subscriptionOrder=SubscriptionOrder::query()->where('user_id',auth()->user()->id)->first();
          if (empty($subscriptionOrder)) {
-            $freeTrail=true; 
+            $freeTrial=true; 
          }
           
         $modules = MasterPlanModule::all();
-        return view('website.user.subscription.index',compact('plans','modules','freeTrail'));
+        return view('website.user.subscription.index',compact('plans','modules','freeTrial'));
     }
 
 

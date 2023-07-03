@@ -37,14 +37,15 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     { 
-        try {
+        try 
+        {
             // $freeSub='paid';
-        $subscription=UserSubscription::query()->where('user_id',auth()->user()->id)->where('status','active')->first();
-        $freeSub=$subscription->platform_subscription_id;
-        $endsub=round((strtotime($subscription->subscription_end_date)-time()) / (60 * 60 * 24));
-        Session::put('freeEndDateSub', $endsub);
-        $value = $request->session()->get('freeEndDateSub');
-        $order=SubscriptionOrder::query()->where('user_id',auth()->user()->id)->where('is_used_for_subscription','0')->first();
+            $subscription=UserSubscription::query()->where('user_id',auth()->user()->id)->where('status','active')->first();
+            $freeSub=$subscription->platform_subscription_id;
+            $endsub=round((strtotime($subscription->subscription_end_date)-time()) / (60 * 60 * 24));
+            Session::put('freeEndDateSub', $endsub);
+            $value = $request->session()->get('freeEndDateSub');
+            $order=SubscriptionOrder::query()->where('user_id',auth()->user()->id)->where('is_used_for_subscription','0')->first();
 
         // if(isset($freeSub) && !isset($order) && empty($order)){
         //     Session::put('freeSubscription', $freeSub);
