@@ -349,7 +349,7 @@
 <script>
     $(document).ready(function()
     {
-        var plan_type = "{{auth()->user()->freeSubscription}}";
+        var plan_type = "{{session()->get('freeSubscription')}}";
         var billingAddress='{{auth()->user()->billing_address}}';
         if (((plan_type == 'free')) && (billingAddress == '')) {
             $("#updateBillingAddressModal").modal({
