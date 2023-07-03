@@ -81,7 +81,7 @@ class LoginController extends Controller
             return $this->sendLockoutResponse($request);
         }
        
-            $user = User::query()->with('getSubcription')->where('email',$request->email)->first();
+            $user = User::query()->with('getSubscription')->where('email',$request->email)->first();
             if(isset($user->user_type) && $user->user_type == 'A'){
                 return back()->with('error','Invalid credentials.');
             }
@@ -106,8 +106,8 @@ class LoginController extends Controller
         if ($this->attemptLogin($request)) {
             if ($request->hasSession()) {
                 $request->session()->put('auth.password_confirmed_at', time());
-                if($user->getSubcription){
-                    $plans = Plans::query()->where('id',$user->getSubcription->plan_id)->with('getRelationalData.getModule','getRelationalData.getOperation')
+                if($user->getSubscription){
+                    $plans = Plans::query()->where('id',$user->getSubscription->plan_id)->with('getRelationalData.getModule','getRelationalData.getOperation')
                     ->first();
                     $module = MasterPlanModule::all();
                     $action = MasterPlanOperation::all();
@@ -115,7 +115,6 @@ class LoginController extends Controller
                     $request->session()->put('permission',$plans->getRelationalData);
                     $request->session()->put('module',$module);
                     $request->session()->put('action',$action);
-                    // $request->session()->put('freeToastmsg',false);
                     $subscription=UserSubscription::query()->where('user_id',auth()->user()->id)->first();
                    
                     $request->session()->put('user_subscription_end_date',$subscription->subscription_end_date??"");
