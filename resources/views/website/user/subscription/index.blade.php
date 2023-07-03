@@ -88,7 +88,7 @@
                                     <div>(Inclusive of all applicable taxes)</div>
                                     @endif
                                     
-                                    @if ($freeTrail==true)
+                                    @if ($freeTrial==true)
                                     <div class="d-flex justify-content-center">
                                         <a  href="{{route('subscription-free',['id'=>$plan->id])}}" style="text-decoration:none;">
                                             <button class="cantact-page-cmn-btn mt-2 free_button pd-20">
@@ -163,7 +163,7 @@
                                 </div> -->
 
                                 <div class="py-4 px-3">
-                                    @if ($freeTrail==true)
+                                    @if ($freeTrial==true)
                                     <a  href="{{route('subscription-free',['id'=>$plan->id])}}" style="text-decoration:none;">
                                     <button class="job_search_btn"> Start 30-day trial</button>
                                     </a>
@@ -426,13 +426,11 @@
         $("[plan_elem="+k+"]").css('height',v+'px');
     })
     let freesubtrial="{{ Session::get('freeSubscription')}}";
-    // console.log(freesubtrial);
     var isPlanPage=true;
-    // console.log(sessionStorage.getItem("freeToastMSG"));
     
-    var isnotfree="{{$freeTrail}}";
-    var plan_type = "{{auth()->user()->freeSubscription}}";
-    if (isnotfree==false && freesubtrial!="free" && plan_type== "paid") {
+    var isnotfree="{{$freeTrial}}";
+    var plan_type = "{{session()->get('freeSubscription')}}";
+    if (isnotfree==false && plan_type== "free") {
         $('.expire_modal').modal('show');
     };
     $('.free_button').click(function () {
