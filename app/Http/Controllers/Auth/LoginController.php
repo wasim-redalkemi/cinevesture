@@ -12,6 +12,7 @@ use App\Models\UserSubscription;
 use App\Notifications\VerifyOtp;
 use App\Providers\RouteServiceProvider;
 use Carbon\Carbon;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -119,10 +120,10 @@ class LoginController extends Controller
                     $subscription=UserSubscription::query()->where('user_id',auth()->user()->id)->first();
                    
                     $request->session()->put('user_subscription_end_date',$subscription->subscription_end_date??"");
-                    $isFreeTrial=$subscription->platform_subscription_id;
-                    // if(!empty($subscription && $subscription!='0')){
-                    //     $request->session()->put('freeToastmsg',true);
-                    // }
+                    if(!empty($subscription) && $subscription->platform_subscription_id=='free' ){
+                        $request->Session()->put('freeSubscription', "free");
+                    }
+
                     
 
                     $this->expirePlan();
