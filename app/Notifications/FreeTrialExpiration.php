@@ -42,8 +42,8 @@ class FreeTrialExpiration extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-        ->subject(('Your free trial is expiring soon.'))
-        ->line(" <h2> YOUR FREE TRIAL EXPIRING</h2> " )
+        ->subject(('Your free trial subscription is expired.'))
+        ->line(" <h2> YOUR FREE TRIAL SUBSCRIPTION EXPIRED</h2> " )
         ->greeting('Dear'.' '.$this->data['first_name'].',')
         ->line("The trial period for Cinevesture.com has ended, but your progress has been saved and is still available. Everyone gets busy, and you may not have had enough time to evaluate Cinevesture." )
         ->line(' <b>Ready to Upgrade?</b>')
