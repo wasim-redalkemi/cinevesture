@@ -30,11 +30,13 @@
                                     ?>
                                     @if (($subscription->platform_subscription_id == 'free')) 
                                         Free Trial - {{$days_left}} days left
-                                        <div class="mt-1">
-                                            <a href="{{route('plans-view')}}">
-                                                <button class="buy_plan_btn_sm ">Buy Plan</button>
-                                            </a>
-                                        </div>
+                                        @if(!isset($order->plan_name) && empty($order->plan_name))
+                                            <div class="mt-1">
+                                                <a href="{{route('plans-view')}}">
+                                                    <button class="buy_plan_btn_sm ">Buy Plan</button>
+                                                </a>
+                                            </div>
+                                        @endif
                                     @elseif(!empty($subscription->plan_name)) 
                                         {{$subscription->plan_name}} - {{$days_left}} days left
                                     @else 
