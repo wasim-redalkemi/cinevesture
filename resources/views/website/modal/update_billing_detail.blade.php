@@ -58,18 +58,17 @@
             
         });
         $('.billing_form').submit(function (event) {
-            // event.preventDefault();
+            event.preventDefault();
             var gstfill=$("#gst").val();
             var billing_addressfill=$("#billing_address").val();
             var gstcount=(gstfill).length;
             if ((gstfill).length > 15 || (billing_addressfill).length > 70) {
-                if ((gstfill).length > 15) {
-                        $('.valid_gst').show();
-                        event.preventDefault();
-                    }
+                if ((gstfill).length > 15) 
+                {
+                    $('.valid_gst').show();
+                }
                 if ((billing_addressfill).length > 70) {
                     $('.valid_address').show();
-                    event.preventDefault();
                 }
             }
             else{
@@ -89,7 +88,7 @@
                         $('.billing-val').text(billing_addressfill);
                         $('#updateBillingAddressModal').modal('hide');
                         $(".invite_btn").text("Submit");
-                        toastMessage("success","billng details update successfully");
+                        toastMessage("success","billng details update successfully.");
                     },
                     error: function(response) {
                         toastMessage("error","Something went wrong");
