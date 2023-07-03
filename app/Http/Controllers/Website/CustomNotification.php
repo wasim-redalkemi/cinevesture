@@ -93,7 +93,7 @@ class CustomNotification extends WebController
         $collect->put('first_name', ucwords($user->name));
         $collect->put('currency', $userSubScription->currency);
         $collect->put('plan_amount', $userSubScription->plan_amount);
-        $collect->put('plan_start_date', date("d-m-Y",strtotime($userSubScription->subscription_start_date))) ;
+        $collect->put('plan_end_date', date("d-m-Y",strtotime($userSubScription->subscription_end_date))) ;
         Notification::route('mail',$user->email)->notify(new FreeSubRenewalBeforeExpiration($collect));
         return true;
     }

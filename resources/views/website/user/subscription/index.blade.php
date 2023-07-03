@@ -348,6 +348,13 @@
 
 <script>
     
+    
+    /*
+    is_plan_page var is to control the modal of billing address to make it mandatory for a paid-subscribed user
+    but not show the that modal in plan page-
+    */
+    var from_plan_page = true;
+    
     var addclass = 'card_highlight';
     var forHead = 'active_plain_detail';
     var forButton = 'active_plain_button';
@@ -425,19 +432,6 @@
     $('.free_button').click(function () {
         $(this).attr('disabled', 'true'); 
     })
-    $(document).ready(function()
-    {
-        var plan_type = "{{session()->get('freeSubscription')}}";
-        var billingAddress='{{auth()->user()->billing_address}}';
-        if (((plan_type == 'free')) && (billingAddress == '')) {
-            $("#updateBillingAddressModal").modal({
-                backdrop: 'static',
-                keyboard: false
-            });
-            $('#updateBillingAddressModal').modal('show');
-        }
-       
-    });
 </script>
 
 @endpush
