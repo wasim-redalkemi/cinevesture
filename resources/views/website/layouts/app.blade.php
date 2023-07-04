@@ -301,7 +301,7 @@
             */
             var is_plan_page = (from_plan_page != undefined) ? true : false;
             var plan_type = "{{session()->get('freeSubscription')}}";
-            var billingAddress='{{auth()->user()->billing_address}}';
+            var billingAddress='{{auth()->user()->billing_address??""}}';
             if (((plan_type == 'paid')) && (billingAddress == '') && is_plan_page == false) {
                 $("#updateBillingAddressModal").modal({
                     backdrop: 'static',
