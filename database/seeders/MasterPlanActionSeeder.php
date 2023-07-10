@@ -23,7 +23,7 @@ class MasterPlanActionSeeder extends Seeder
         ('7', 'Additional # memberships','create-team'),
         ('8', 'Create organisation','organisation-create'),
         ('9', 'Create unlimited projects','project-overview'),
-        ('10', 'Create # project','project-overview'),
+        ('10', 'Create # projects','project-overview'),
         ('11', 'View all listed projects','project-public-view'),
         ('12', 'Apply for unlimited jobs','apply-job'),
         ('13', 'Unlimited Active job posts','job-create'),
