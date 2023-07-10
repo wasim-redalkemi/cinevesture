@@ -88,7 +88,7 @@
                         $('.billing-val').text(billing_addressfill);
                         $('#updateBillingAddressModal').modal('hide');
                         $(".invite_btn").text("Submit");
-                        toastMessage("success","billng details update successfully.");
+                        toastMessage("success","Billing details update successfully.");
                     },
                     error: function(response) {
                         toastMessage("error","Something went wrong");

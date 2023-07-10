@@ -972,7 +972,7 @@ class UserController extends WebController
             $user->gst=$request->gst;
             $user->billing_address=$request->billing_address;
             $user->save();
-            return response()->json(["status"=>'success',"message"=>"billng details update successfully"]);
+            return response()->json(["status"=>'success',"message"=>"Billing details update successfully"]);
         }
         catch(Exception $e){
             return response()->json(['status'=>0,'msg'=>"Something went wrong."]);
