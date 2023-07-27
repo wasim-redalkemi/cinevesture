@@ -224,7 +224,7 @@
                                         <div class="organisation_img_warper"><img src="{{Storage::url($value->profile_image)}}" class="w-80 br_80"></div>
                                         @else
                                         {{-- <div class="organisation_img_warper"><img src="{{asset('images/asset/user-profile.png')}}" class="root_img"></div> --}}
-                                        <div ><img src="{{ asset('images/asset/user-profile.png') }}" class="w-80 br_80"></div>
+                                        <div ><img src="{{ asset('images/asset/no_image_160.png') }}" class="w-80 br_80"></div>
                                             
                                         @endif
                                         <div class="d-flex justify-content-between mt-3">
