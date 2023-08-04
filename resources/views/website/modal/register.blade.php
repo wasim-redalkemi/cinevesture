@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-12">
             <button class="w-100"> <img src="{{asset('images/asset/google.png')}}" width="24" width="24" class="mx-3">Sign up
-                with google</button>
+                with Google</button>
         </div>
         <div class="col-lg-6 col-sm-6 my-lg-5 my-sm-4">
             <input type="text" class="w-100" placeholder="First Name">

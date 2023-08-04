@@ -12,7 +12,7 @@
             <div class="container">
                 <div class="row">
                     <div class="class-md-12">
-                        <div class="mt-4">SETUP YOUR PLAN</div>
+                        <div class="mt-4">SETUP YOUR PLANjd</div>
                         <div class="mt-4">
                           
                             <div class="currency_togle">
@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="Plain_price">
                                     @if($plan->plan_name == "Free")
-                                    <div class="search-head-subtext Aubergine_at_night mt-3">Free forever</div>
+                                        <div class="search-head-subtext Aubergine_at_night mt-3">Free forever</div>
                                     @else
                                     <div class="search-head-subtext Aubergine_at_night mt-3">Paid 
                                         @if($plan->plan_time == 'm')
@@ -85,22 +85,22 @@
                                         <div class="search-head-subtext Aubergine_at_night mt-3">(@if($plan->currency == "USD")$@else₹@endif{{ number_format($plan->plan_amount/12, 2,'.',',')}}/month)</div>
                                     @endif
                                     @if ($plan->currency == 'INR')
-                                    <div>(Inclusive of all applicable taxes)</div>
+                                        <div>(Inclusive of all applicable taxes)</div>
                                     @endif
                                     
                                     @if ($freeTrail==true)
-                                    <div class="d-flex justify-content-center">
-                                        <a  href="{{route('subscription-free',['id'=>$plan->id])}}" style="text-decoration:none;">
-                                            <button class="cantact-page-cmn-btn mt-2 free_button pd-20">
-                                                Try for free
-                                            </button>
-                                        </a>
-                                    </div>
-                                    <div class="plan_trial_notify">
-                                        Get a free 30-day trial, <br>no credit card details required
-                                    </div>
+                                        <div class="d-flex justify-content-center">
+                                            <a  href="{{route('subscription-free',['id'=>$plan->id])}}" style="text-decoration:none;">
+                                                <button class="cantact-page-cmn-btn mt-2 free_button pd-20">
+                                                    Try for free
+                                                </button>
+                                            </a>
+                                        </div>
+                                        <div class="plan_trial_notify">
+                                            Get a free 30-day trial, <br>No credit card details required
+                                        </div>
                                     @else
-                                    <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
+                                        <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
                                     @endif
                                     {{-- <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
                                     <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2 pd-30">Start 30-days<br>Free Trail</button></a></div> --}}
@@ -124,7 +124,10 @@
                                             <li class="d-flex align-items-baseline"> @if($relation->limit != 0)
                                                <span class="list"></span>
                                                <span class="mx-2">
-                                                   {{str_replace('#', $relation->limit, $relation->getOperation->name)}}
+                                                {{-- {{$relation->limit>1?'s':''}} --}}
+                                                
+                                                {{-- {{$multiple}}jhbj --}}
+                                                   {{str_replace('#', $relation->limit, $relation->getOperation->name)}}{{$relation->limit>1?'s':''}}
                                                </span>
                                                @else
                                                <span class="list"></span>

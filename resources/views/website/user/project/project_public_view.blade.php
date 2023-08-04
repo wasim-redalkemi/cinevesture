@@ -229,7 +229,7 @@
         <div class="public_subsection">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="public-head-res-text"> Director Statement</h1>
+                    <h1 class="public-head-res-text">Director's Statement</h1>
                     <div class="public-subheading-text mt-3 mt-md-2">
                         <p>
                             @if (!empty(($UserProject->director_statement)))
@@ -375,7 +375,7 @@
                                                 <th style="width: 39%;">Target Date</th>
                                             </tr>
                                             <tr>
-                                                <td class="public-head-subtext candy-pink mt-1">Completed Milstones</td>
+                                                <td class="public-head-subtext candy-pink mt-1">Completed Milestones</td>
                                             </tr>
                                             @php $isEmpty = true;@endphp
                                             @if (!empty($projectData[0]['project_milestone']))
@@ -400,7 +400,7 @@
                                             @endif
     
                                             <tr>
-                                                <td class="candy-pink public-head-subtext mt-1">Upcoming Milstones</td>
+                                                <td class="candy-pink public-head-subtext mt-1">Upcoming Milestones</td>
                                             </tr>
                                             @php $isEmpty = true;@endphp
                                             @if (!empty($projectData[0]['project_milestone']))

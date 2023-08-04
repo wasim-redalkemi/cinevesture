@@ -113,7 +113,7 @@
                                     <div class="banner-img for_error_msg" style="display:none">
                                         <strong>Select file must be small then 10 MB.</strong>
                                     </div>
-                                    <div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 10MB</div>
+                                    <div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 10 MB</div>
                                 </div>
                                 <div class="col-md-2 mt-2 d-flex align-items-end">
                                     <div class="save_add_btn" style="display:none">Save</div>
@@ -160,7 +160,7 @@
                                         <div class="profile_input add-new-image">
                                             <input type="text" class="form-control" name="image_title" placeholder="Photo Title">
                                         </div>
-                                        <div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 10MB</div>
+                                        <div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 10 MB</div>
                                     </div>
                                     <div id="add-photo-btn-div" class="col-md-2 add_image_btn d-flex align-items-end">
                                         <div class="add_img_field mb-5">
