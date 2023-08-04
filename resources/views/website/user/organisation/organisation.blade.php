@@ -42,7 +42,7 @@
                             </div>
                             <div class="mx-4">
                                 <div class="preview_headtext">{{ (isset($UserOrganisation->name))?ucFirst($UserOrganisation->name):'Name'; }}</div>
-                                <div class="organisation_cmn_text">{{ (!empty($UserOrganisation->organizationType->name))?$UserOrganisation->organizationType->name:'Organisation type'; }}</div>
+                                <div class="organisation_cmn_text">{{ (!empty($UserOrganisation->organizationType->name))?$UserOrganisation->organizationType->name:'Organization type'; }}</div>
                                 <div class="organisation_cmn_text">{{ (isset($UserOrganisation['country']['name']))?$UserOrganisation['country']['name']:'Located In'; }}</div>
                             </div>
                         </div>

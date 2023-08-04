@@ -77,10 +77,10 @@
                     if ($el.parent().find('span').length == 0) {
                         if($(this).attr("name") == 'password_confirmation'){
                             if($(this).val() != $('#password').val()){
-                                $(`<span class="e-err" style="color: #DD45B3; font-weight:600 ;;margin:0px;">The passwords you entered do not match. Please re-enter your password.</span>`).insertAfter($el);
+                                $(`<span class="e-err" style="color: #DD45B3; font-weight:600 ;;margin:0px;">The passwords you entered do not match. Please re-enter your password</span>`).insertAfter($el);
                             }
                         }else{
-                           $(`<span class="e-err" style="color: #DD45B3; font-weight:600 ;;margin:0px;">Use 8 or more characters with a mix of letters, numbers & symbols.</span>`).insertAfter($el);
+                           $(`<span class="e-err" style="color: #DD45B3; font-weight:600 ;;margin:0px;">Use 8 or more characters with a mix of letters, numbers & symbols</span>`).insertAfter($el);
                         }
                         
                         // $el.parent().append('<p class="e-err" style="color: red;">Please provide a valid email id.</p>')
@@ -722,7 +722,7 @@
                     str += '<div class="profile_input add-new-image">';
                         str += '<input type="text" class="form-control" name="image_title" placeholder="Photo Title">';
                     str += '</div>';
-                    str += '<div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 10 MB</div>';
+                    str += '<div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 10MB</div>';
                 str += '</div>';
                 return str;
             }

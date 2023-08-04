@@ -199,7 +199,7 @@
                                             </div>
                                         </label>
                                     </div>
-                                    <div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 10 MB</div>
+                                    <div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 10MB</div>
                                     
                                 </div>
                                 <div class="intro-img for_error_msg" style="display:none">
@@ -491,7 +491,7 @@
                     html += '</div>';
                 html += '</label>';
                 html += '</div>';
-                html += '<div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 10 MB</div>';
+                html += '<div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 10MB</div>';
             html += '</div>';
             $(html).insertAfter(parentElemId+" #portfolio-img-new-"+lastid);
             bindActions();

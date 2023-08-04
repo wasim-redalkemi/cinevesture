@@ -82,7 +82,7 @@ class PlanPermission extends Controller
          if (in_array('user', $check_module)) {
             $mod = $request->session()->get('module')->sole('name', 'Industry Guide');
             $getModule_id = $mod->id;
-         } elseif (in_array('industry-guide', $check_module)) {
+         } elseif (in_array('industiry-guide', $check_module)) {
             $mod = $request->session()->get('module')->sole('name', 'Industry Guide');
             $getModule_id = $mod->id;
          } elseif (in_array('project', $check_module)) {

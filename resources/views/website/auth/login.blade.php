@@ -21,7 +21,7 @@
                         <div class="signup-container">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="signup-text mt-4 pt-2 pt-md-0 mt-md-5"> Log In</div>
+                                    <div class="signup-text mt-4 pt-2 pt-md-0 mt-md-5"> Log in</div>
                                 </div>
 
                                 <div class="col-12 mt-4-5 pt-2 pt-lg-5">
@@ -56,7 +56,7 @@
                                 </div>
                                 <div class="col-12 mt-2">
                                     <a href="{{ route('google.login') }}">
-                                        <button class="with_google_btn" type="button"> <img src="{{asset('images/asset/google.png')}}" width="24" width="24" class="mx-3">Log In with Google</button>
+                                        <button class="with_google_btn" type="button"> <img src="{{asset('images/asset/google.png')}}" width="24" width="24" class="mx-3">Log In with google</button>
                                     </a>
                                 </div>
 

@@ -40,7 +40,7 @@ class MasterProjectGenreSeeder extends Seeder
                 'name' => 'Crime',
             ],
             [
-                'name' => 'Dark Humor',
+                'name' => 'Dark Humour',
             ],
             [
                 'name' => 'Drama',
