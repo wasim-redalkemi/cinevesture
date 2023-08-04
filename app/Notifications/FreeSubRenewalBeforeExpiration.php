@@ -45,9 +45,10 @@ class FreeSubRenewalBeforeExpiration extends Notification
                     ->subject(("Your free trial subscription is expiring soon"))
                     ->line(" " )
                     ->greeting('Dear'.' '.$this->data['first_name'].',')
-                    ->line("We hope you are enjoying your subscription, which will renew soon." )
-                    ->line('Starting from '.$this->data['plan_start_date'].' , your subscription automatically renews for '.' ' .$this->data['currency'] .$this->data['plan_amount'].' '.'/year. To avoid being charged, you must cancel at least one day before each renewal date.')
-                    ->line('To keep your subscription, no further action is needed.')
+                    ->line("We hope you are enjoying your subscription." )
+                    ->line('Your trial is ending on '.$this->data['plan_end_date'])
+                    ->line('To continue using Cinevesture you need to purchase the membership.')
+                    ->line('[Login]('.route('login').') to subscribe and continue using Cinevesture.')
                     ->line('Sincerely, ')        
                       ->salutation('Team Cinevesture');
                     // ->line('The introduction to the notification.')

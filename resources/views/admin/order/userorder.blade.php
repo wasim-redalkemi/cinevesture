@@ -92,7 +92,9 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{route('download_invoice',['id'=>$data->id])}}" target="_blank" class="btn btn-sm btn-primary action_button">Download</a>
+                                                @if($data->status == 'success')
+                                                    <a href="{{route('download_invoice',['id'=>$data->id])}}"   target="_blank" class="btn btn-sm btn-primary action_button">Download</a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

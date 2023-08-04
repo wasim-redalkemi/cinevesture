@@ -88,6 +88,7 @@
 
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script>
+        var from_plan_page = undefined;
         $(document).ready(function() {
 			toastr.options = {
                 
@@ -275,24 +276,38 @@
     @stack('scripts')
     @include('website.include.validator-scripts')
     <script>
-         $('document').ready(function () {
-          
+        $('document').ready(function () 
+        {
             let freesubtrial="{{ Session::get('freeSubscription')}}";
             if (freesubtrial=="free") {
-            let setsessionfree=sessionStorage.getItem("freeToastMSG")
-            if (setsessionfree==undefined) {
-                sessionStorage.setItem("freeToastMSG", "0"); 
+                let setsessionfree=sessionStorage.getItem("freeToastMSG")
+                if (setsessionfree==undefined) {
+                    sessionStorage.setItem("freeToastMSG", "0"); 
+                }
+                setsessionfree=sessionStorage.getItem("freeToastMSG");
+                if(typeof(isPlanPage) != "undefined")
+                {
+                    setsessionfree = 1;
+                }
+                var backendPlansession='{{session()->get('freeSubscription')}}'
+                console.log(backendPlansession);
+                if ((setsessionfree!=undefined) && (setsessionfree==0) && backendPlansession== 'free') {
+                    $(".free_trial_msg").show();
+                }
             }
-             setsessionfree=sessionStorage.getItem("freeToastMSG");
-            if(typeof(isPlanPage) != "undefined")
-            {
-                setsessionfree = 1;
-            }
-            var backendPlansession='{{session()->get('freeSubscription')}}'
-            console.log(backendPlansession);
-            if ((setsessionfree!=undefined) && (setsessionfree==0) && backendPlansession== 'free') {
-                $(".free_trial_msg").show();
-            }
+            /*
+            is_plan_page var is to control the modal of billing address to make it mandatory for a paid-subscribed user
+            but not show the that modal in plan page-
+            */
+            var is_plan_page = (from_plan_page != undefined) ? true : false;
+            var plan_type = "{{session()->get('freeSubscription')}}";
+            var billingAddress='{{auth()->user()->billing_address??""}}';
+            if (((plan_type == 'paid')) && (billingAddress == '') && is_plan_page == false) {
+                $("#updateBillingAddressModal").modal({
+                    backdrop: 'static',
+                    keyboard: false
+                });
+                $('#updateBillingAddressModal').modal('show');
             }
         })
     </script>
