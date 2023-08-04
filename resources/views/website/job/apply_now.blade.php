@@ -111,7 +111,7 @@
                                     </div>
                                     <div class="head_text mt-4">Congratulations!</div>
                                     <div class="successfullPublish_text sub_text mt-4">
-                                        You have successfuly applied for this job.
+                                        You have successfully applied for this job.
                                     </div>
                                     <div class="pb-4">
                                         <a href="{{route('showJobSearchResults')}}" class="submit_btn mt-4 text-decoration-none text-light" style="width: 40%;">Apply More</a>
