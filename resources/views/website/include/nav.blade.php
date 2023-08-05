@@ -33,7 +33,7 @@
                   <div class="dropdown home-dropdown">
                     <a class="btn dropdown-toggle nav-link" href="#" role="button" data-bs-toggle="dropdown"
                       aria-expanded="false">
-                      Genres
+                      Genre
                     </a>
                     <ul class="dropdown-menu nav-drop" id="list-gener">
                       @foreach($geners as $gen)
@@ -203,7 +203,7 @@
                   <div class="dropdown home-dropdown">
                     <a class="btn dropdown-toggle nav-link" href="#" role="button" data-bs-toggle="dropdown"
                       aria-expanded="false">
-                      Genres
+                      Genre
                     </a>
                     <ul class="dropdown-menu nav-drop" id="list-gener">
                       @foreach($geners as $gen)

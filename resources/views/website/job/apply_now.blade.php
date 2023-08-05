@@ -63,7 +63,7 @@
         
                                     </div>
                                     <div class="resumeFile for_error_msg" style="display:none">
-                                        <strong>Your resume file must be less then 10MB.</strong>
+                                        <strong>Your resume file must be less then 10 MB.</strong>
                                     </div>
                                 </div>
                             </div>

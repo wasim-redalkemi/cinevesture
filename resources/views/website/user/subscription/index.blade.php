@@ -97,7 +97,7 @@
                                         </a>
                                     </div>
                                     <div class="plan_trial_notify">
-                                        Get a free 30-day trial, <br>no credit card details required
+                                        Get a free 30-day trial, <br>No credit card details required
                                     </div>
                                     @else
                                     <div class="d-flex justify-content-center"><a  href="{{route('subscription-order-create',['id'=>$plan->id])}}" style="text-decoration:none;"><button class="cantact-page-cmn-btn mt-2">Get Started</button></a></div>
@@ -124,7 +124,7 @@
                                             <li class="d-flex align-items-baseline"> @if($relation->limit != 0)
                                                <span class="list"></span>
                                                <span class="mx-2">
-                                                   {{str_replace('#', $relation->limit, $relation->getOperation->name)}}
+                                                   {{str_replace('#', $relation->limit, $relation->getOperation->name)}}{{$relation->limit>1?'s':''}}
                                                </span>
                                                @else
                                                <span class="list"></span>
