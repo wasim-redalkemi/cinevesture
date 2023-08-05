@@ -169,10 +169,10 @@ Route::group(["middleware" => ["auth", "revalidate", "verified",'is_admin']], fu
     });
 
 
-    Route::group(['prefix' => 'industiry-guide'], function () {
+    Route::group(['prefix' => 'industry-guide'], function () {
         Route::get('/profile-filter', [IndustryGuideController::class, 'index'])->name('guide-view');
         Route::get('/profile-show', [IndustryGuideController::class, 'show'])->middleware('plancheck')->name('show-guide');
-        Route::group(['prefix' => 'endorsement'], function () {
+        Route::group(['prefix' => 'endorsements'], function () {
             Route::get('/', [EndorsementController::class, 'index'])->name('endorsement-view');
             Route::post('/status', [EndorsementController::class, 'changeStatus'])->name('endorsement-status-change');
         });
@@ -188,7 +188,7 @@ Route::group(["middleware" => ["auth", "revalidate", "verified",'is_admin']], fu
             Route::post('/team-email-log', [OrganisationController::class, 'teamEmailLogStore'])->name('team-email-log');
         });
 
-        Route::group(['prefix' => 'favourite'], function () {
+        Route::group(['prefix' => 'favourites'], function () {
             Route::get('/view', [FavouriteController::class, 'index'])->name('favourite-view');
             Route::post('/profile-save', [FavouriteController::class, 'update'])->name('favourite-update')->middleware('plancheck');
         });

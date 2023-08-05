@@ -202,7 +202,7 @@
                     </div>
 
                 
-                    <div class="preview_headtext mb-3">Pdf</div>
+                    <div class="preview_headtext mb-3">PDF</div>
                     <div class="row">
                         @if (!empty($projectData[0]['project_only_doc']))
                         @foreach ($projectData[0]['project_only_doc'] as $v)
