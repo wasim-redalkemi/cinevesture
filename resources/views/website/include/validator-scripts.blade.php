@@ -296,6 +296,10 @@
                 //https://vimeo.com/336812686
                 //let vimeoResp = '[{"id":336812686,"title":"Direct Links To Video Files","description":"Hi there! Need help? Go to http:\/\/vimeo.com\/help","url":"https:\/\/vimeo.com\/336812686","upload_date":"2019-05-17 09:32:53","thumbnail_small":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_100x75","thumbnail_medium":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_200x150","thumbnail_large":"https:\/\/i.vimeocdn.com\/video\/783757833-369ed61d5dd1e7a6a095543c901a1c4a656e6bc1e0471c1629d03f7fdd36d436-d_640","user_id":90564994,"user_name":"Vimeo Support","user_url":"https:\/\/vimeo.com\/vimeosupport","user_portrait_small":"https:\/\/i.vimeocdn.com\/portrait\/27986607_30x30","user_portrait_medium":"https:\/\/i.vimeocdn.com\/portrait\/27986607_75x75","user_portrait_large":"https:\/\/i.vimeocdn.com\/portrait\/27986607_100x100","user_portrait_huge":"https:\/\/i.vimeocdn.com\/portrait\/27986607_300x300","duration":41,"width":1920,"height":1080,"tags":"","embed_privacy":"anywhere"}]';
                 let respArr = JSON.parse(vimeoResp);
+                let vimeo = respArr.payload.url;
+                var url = new URL(vimeo);
+                var pathSegments = url.pathname.split('/');
+                var playVideoUrl= 'https://player.vimeo.com/video/'+pathSegments[1]
                 let is_default_marked = (isAnyDefaultVideo()) ? "0" : "1";
                 // console.log("setting is_default_marked = ",is_default_marked);
                 if(respArr.status == 1){
@@ -305,7 +309,7 @@
                     newVideo['id'] = lastVidId+1;
                     newVideo['title'] = vimeo.title;
                     newVideo['thumbnail'] = vimeo.thumbnail_medium;
-                    newVideo['url'] = vimeo.url;
+                    newVideo['url'] = playVideoUrl;
                     newVideo['is_default_marked'] = is_default_marked;
                     newVideo['src'] = 'vimeo';
                     doAjax('ajax/add-video',newVideo,"POST",addVideoCallback);
