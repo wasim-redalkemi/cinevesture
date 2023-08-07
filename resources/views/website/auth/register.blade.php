@@ -66,7 +66,7 @@
                             </div>
                             <div class="col-12 mt-2">
                                 <a href="{{ route('google.login') }}">
-                                    <button class="with_google_btn" type="button"> <img src="{{ asset('images/asset/google.png') }}" width="24" width="24" class="mx-3">Sign Up with google</button>
+                                    <button class="with_google_btn" type="button"> <img src="{{ asset('images/asset/google.png') }}" width="24" width="24" class="mx-3">Sign Up with Google</button>
                                 </a>
                             </div>
                             <div class="col col-md-12">

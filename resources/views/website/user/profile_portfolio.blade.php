@@ -153,7 +153,7 @@
                                         </div>
                                     </label>
                                 </div>
-                                <div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 10MB</div>
+                                <div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 10 MB</div>
                             </div>
                             <input type="hidden" value="0" class="portfolio_images_count @error('portfolio_images_count') is-invalid @enderror" name="portfolio_images_count"/>
                             @error('portfolio_images_count')
@@ -400,7 +400,7 @@
             html += '</div>';
             html += '</label>';
             html += '</div>';
-            html += '<div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 10MB</div>';
+            html += '<div class="profile_upload_text">Upload JPG or PNG, 1600x900 PX, max size 10 MB</div>';
             html += '</div>';
             $(html).insertAfter(parentElemId + " #portfolio-img-new-" + lastid);
             imageCnt = updateImageUploadCount();
