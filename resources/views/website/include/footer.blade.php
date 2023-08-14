@@ -8,19 +8,19 @@
         <div class="col-lg-9 col-md-8">
           <div class="row">
             <div class="col-lg-3 text-md-start text-center">
-              <div> <a href="https://www.mkt.cinevesture.com/about-us/"> About Us</a></div>
-              <div class="mt-1"> <a href="https://www.mkt.cinevesture.com/contact-us/"> Contact Us</a></div>
+              <div> <a href="https://cinevesture.com/about-us/"> About Us</a></div>
+              <div class="mt-1"> <a href="https://cinevesture.com/contact-us/"> Contact Us</a></div>
             </div>
             <!-- <div class="col-lg-3 text-md-start text-center mt-3 mt-md-0">
               <div> <a href="#">Press</a></div>
               <div class="mt-1"> <a href="#"> Resources</a></div>
             </div> -->
             <div class="col-lg-3 text-md-start text-center mt-3 mt-md-0">
-              <div  class=""> <a class="pointer" href="https://www.mkt.cinevesture.com/terms-of-use/"> Terms and Conditions</a></div>
-              <div class="mt-1"> <a class="pointer" href="https://www.mkt.cinevesture.com/privacy-policy/"> Privacy Policy</a></div>
+              <div  class=""> <a class="pointer" href="https://cinevesture.com/terms-of-use/"> Terms and Conditions</a></div>
+              <div class="mt-1"> <a class="pointer" href="https://cinevesture.com/privacy-policy/"> Privacy Policy</a></div>
             </div>
             <div class="col-lg-3">
-              <div class="text-md-start text-center"> <a href="https://www.mkt.cinevesture.com/help/"> Help</a></div>
+              <div class="text-md-start text-center"> <a href="https://cinevesture.com/help/"> Help</a></div>
             </div>
             <!-- <div class="col-lg-3"></div> -->
           </div>
