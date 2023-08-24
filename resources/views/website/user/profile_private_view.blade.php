@@ -74,7 +74,7 @@
                     <div class="guide_profile_subsection">
                         <div class="container px-0">
                             <div class="row">
-                                <div class="col-md-12 contact-page-text deep-pink">
+                                <div class="col-md-4 contact-page-text deep-pink">
                                     Overview
                                 </div>
                             </div>
@@ -111,7 +111,18 @@
                                 </div>
                                 </div>
                                 <div class="col-md-2"></div>
-                            <div class="col-md-5">
+                                <div class="col-md-5">
+                                    
+                                    <div class="guide_profile_main_text mb-2">Introduction Video</div>
+                                    @if($user->intro_video_link)
+                                    <div class="playVideoWrap" video-url="{{ (isset($user->intro_video_link))?$user->intro_video_link:''; }}">
+                                        <img src="{{ (isset($user->intro_video_thumbnail))?$user->intro_video_thumbnail:''; }}" width="100%" alt="">
+                                    </div>
+                                    @else
+                                        <span><b>-</b></span>
+                                    @endif
+                                </div>
+                            {{-- <div class="col-md-5">
                                 <div class="guide_profile_main_text mt-3">
                                     <p> Social Profile</p>
                                 </div>
@@ -138,9 +149,9 @@
                                     @else
                                         <span><b>-</b></span>
                                         @endif
-                                    </div>
-
                                 </div>
+
+                            </div> --}}
                             </div>
                         </div>
                     </div>
@@ -148,7 +159,7 @@
                     <div class="guide_profile_subsection">
                         <div class="container px-0">
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-md-12">
                                     <div class="contact-page-text deep-pink">
                                         About
                                     </div>
@@ -163,16 +174,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-2"></div>
-                                <div class="col-md-5">
-                                    <div class="guide_profile_main_text mb-2">Introduction Video</div>
-                                    @if($user->intro_video_link)
-                                    <div class="playVideoWrap" video-url="{{ (isset($user->intro_video_link))?$user->intro_video_link:''; }}">
-                                        <img src="{{ (isset($user->intro_video_thumbnail))?$user->intro_video_thumbnail:''; }}" width="100%" alt="">
-                                    </div>
-                                    @else
-                                        <span><b>-</b></span>
-                                    @endif
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
