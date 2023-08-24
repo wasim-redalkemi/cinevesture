@@ -4789,3 +4789,18 @@ transition: 2s ease all; */
 .field-error{
     color: #DD45B3;
 }
+.dot {
+    text-align: center;
+    height: 15px;
+    width: 15px;
+    background-color: whitesmoke;
+    border-radius: 50%;
+    display: inline-block;
+  }
+.p-9{
+    color: #ccc;
+    font-size: 12px;
+    /* padding: 1px 7.5px; */
+    position: relative;
+    top: -5.5px;
+}  

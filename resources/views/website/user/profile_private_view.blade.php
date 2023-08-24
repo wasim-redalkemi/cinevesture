@@ -1,8 +1,8 @@
 @extends('website.layouts.app',['class' => 'bg_white'])
 
 {{-- @section('title','Cinevesture-private-view') --}}
-
-@section('header')
+    
+    @section('header')
 @include('website.include.header')
 @endsection
 
@@ -183,6 +183,14 @@
                                 <div class="col-md-12">
                                     <div class="d-flex">
                                         <div class="contact-page-text deep-pink mb-2">Portfolio</div>
+                                      
+                                        <div>
+                                            <span data-toggle='tooltip' title='A portfolio showcases your skills and abilities through completed projects and samples.'>
+                                                <span class="dot">
+                                                    <i class="fa fa-info p-9" aria-hidden="true"></i>
+                                                </span>
+                                            </span>
+                                        </div>
                                         <div class="mx-3 icon_container"><a href="{{ route('portfolio-create',['flag'=>'privateView']) }}"><i class="fa fa-plus deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                     </div>
                                     @if (count($portfolio)>0)
@@ -251,6 +259,14 @@
                                         <div class="contact-page-text deep-pink font_18">
                                             Experiences
                                         </div>
+                                        <div>
+                                            <span data-toggle='tooltip' title='Employees gain work experience in a job, field, or profession. Record companies and job titles.'>
+                                                <span class="dot">
+                                                    <i class="fa fa-info p-9" aria-hidden="true"></i>
+                                                </span>
+                                            </span>
+                                        </div>
+
                                         <div class="mx-3 icon_container"><a href="{{ route('experience-create',['flag'=>'privateView']) }}"><i class="fa fa-plus deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                     </div>
                                     @if (count($experience)>0)
