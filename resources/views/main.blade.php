@@ -293,7 +293,7 @@
     $(".test.owl-carousel").owlCarousel({
       autoplayTimeout: 3000,
       autoplay: true,
-      loop: true,
+      loop: false,
       nav: true,
       margin: 20,
       center: false,
