@@ -4852,3 +4852,15 @@ transition: 2s ease all; */
     font-size: 12px;
     line-height: 14px;
   }
+  .social_icon{
+    font-size:20px;
+    color: #33084C  !important;
+    margin-right: 10px;
+}
+.imdb_color{
+    color: #33084C  !important;
+}
+
+.social_profile_icon_wraper{
+    margin-top: 2px;
+}
