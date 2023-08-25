@@ -4864,3 +4864,18 @@ transition: 2s ease all; */
 .social_profile_icon_wraper{
     margin-top: 2px;
 }
+.dot {
+    text-align: center;
+    height: 15px;
+    width: 15px;
+    background-color: whitesmoke;
+    border-radius: 50%;
+    display: inline-block;
+  }
+.p-9{
+    color: #ccc;
+    font-size: 12px;
+    /* padding: 1px 7.5px; */
+    position: relative;
+    top: -5.5px;
+}  
