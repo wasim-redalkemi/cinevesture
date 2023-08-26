@@ -209,6 +209,9 @@ class ProjectController extends WebController
             $overview->project_type_id = $request->project_type_id;
             $overview->listing_project_as = $request->listing_project_as;
             $overview->location = $request->location;
+            if ($overview->project_step<1) {
+                $overview->project_step = '1';
+            }
             if($overview->update()) {
                 if (!empty($request->countries)) {
                     ProjectCountry::query()->where('project_id', $_REQUEST['project_id'])->delete();
