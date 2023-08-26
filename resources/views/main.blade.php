@@ -59,7 +59,7 @@
                         @endforeach  --}}
 
                         @if (isset($v->projectLanguages) && !empty($v->projectLanguages))
-                        |xtdtxt
+                        |
                         {{$v->projectLanguages[0]['name']}}
                         @endif
 
