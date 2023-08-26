@@ -1,4 +1,4 @@
-<div class="mb_2 mt-2 mt-md-0">{{($jobs->total())}} Results Founds</div>
+{{-- <div class="mb_2 mt-2 mt-md-0">{{($jobs->total())}} Results Founds</div> --}}
 
 <div class="white_bg_wraper my-3 my-md-0 mb-xl-4">
     @foreach($jobs as $job)

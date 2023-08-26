@@ -189,6 +189,14 @@
                                 <input type="submit" class="filter-button watch-now-btn mt-4" Value="Apply">
                                 <a href="{{route('showJobSearchResults')}}"><input type="button" class="clear-filter watch-now-btn mt-4" Value="Clear"></a>
                             </div>
+
+                            <div class ="row pb_100">
+                                <div class=" mb-3" >
+                                <a href="{{route('job-create-page')}}"><button type = "button" class="job_search_btn_search mt-4 btn post-job" style="margin-right:30px">Post A Job</button></a>
+                                <a href="{{ route('posted-job') }}"><button type = "button" class="job_search_btn_search mt-3 post-job">My Jobs</button></a>
+                        {{-- <button type = "button"class="job_search_btn  post-job">My Jobs</button> --}}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </form>
