@@ -4793,12 +4793,12 @@ transition: 2s ease all; */
     text-align: center;
     height: 15px;
     width: 15px;
-    background-color: whitesmoke;
+    background-color: transparent;
     border-radius: 50%;
     display: inline-block;
   }
 .p-9{
-    color: #ccc;
+    color: black;
     font-size: 12px;
     /* padding: 1px 7.5px; */
     position: relative;
