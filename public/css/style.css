@@ -4852,3 +4852,9 @@ transition: 2s ease all; */
     font-size: 12px;
     line-height: 14px;
   }
+  a {
+    color: inherit;
+  }
+  a:hover, a:focus {
+    color: black;
+}
