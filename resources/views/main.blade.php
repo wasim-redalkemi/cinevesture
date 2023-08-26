@@ -49,8 +49,9 @@
                       <div class="duration-lang-text mt-1">
                         <span class="blackTextShadow">
                         @if (!empty($v->duration))
+                        {{$v->duration.' min'}}
                         {{-- {{date('H:i', mktime(0,$v->duration)).' min'}} | --}}
-                        <?php echo ((intdiv($v->duration, 60)>0)?sprintf(intdiv($v->duration, 60).' hr'):'') .' '. ((($v->duration % 60)>0)?( sprintf($v->duration % 60).' min'):'');?>
+                        {{-- <?php echo ((intdiv($v->duration, 60)>0)?sprintf(intdiv($v->duration, 60).' hr'):'') .' '. ((($v->duration % 60)>0)?( sprintf($v->duration % 60).' min'):'');?> --}}
                         @endif
                         
                         {{-- @foreach ($v->projectLanguages as $k1=>$v1)
@@ -98,7 +99,7 @@
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                         labore
                         </div>
-                      <div class="duration-lang-text mt-1">2hr 5min | English | Horror</div>
+                      <div class="duration-lang-text mt-1">125 min | English | Horror</div>
                       <button class="watch-now-btn mt-4">View Project</button>
                       
                     </div>
@@ -123,7 +124,7 @@
                         et
                         dolore magna aliqua.
                         Ut enim ad minim veniam, quis nostrud exercitation.</div>
-                      <div class="duration-lang-text mt-1">1hr 10min | English | Horror</div>
+                      <div class="duration-lang-text mt-1">74 min | English | Horror</div>
                       <button class="watch-now-btn mt-4">View Project</button>
                     </div>
                   </div>
@@ -179,7 +180,8 @@
                       <div class="secondry-card-bottom-container">
   
                         @if (isset($v1->duration) && !empty($v1->duration))
-                        <span class="white"><?php echo sprintf(intdiv($v1->duration, 60).' hr') .' '. ( sprintf($v1->duration % 60).' min');?> /</span>
+                        {{$v1->duration.' min'}}
+                        {{-- <span class="white"><?php echo sprintf(intdiv($v1->duration, 60).' hr') .' '. ( sprintf($v1->duration % 60).' min');?> /</span> --}}
                         @endif
                         @if (isset($v1->projectLanguages[0]) && !empty($v1->projectLanguages[0]))
                          <span class="white"> {{$v1->projectLanguages[0]['name']}} /</span>
