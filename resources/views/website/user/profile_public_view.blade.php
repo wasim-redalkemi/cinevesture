@@ -282,7 +282,9 @@
                                             {{$v->company}} | {{$v->employement_type_id}}
                                         </div>
                                         <div class="preview_subtext Aubergine_at_night mt-1">
-                                            <p>{{$v->description}}</p>
+                                            <p>@php
+                                                echo {{$v->description}}
+                                            @endphp</p>
                                         </div>
                                         @endforeach
                                         <div class="clearfix"></div>
@@ -310,7 +312,9 @@
                                             {{$v->degree_name}} | {{$v->field_of_study}} | {{$v->start_year}} | {{$v->end_year}}
                                         </div>
                                         <div class="inp_data Aubergine_at_night mt-2">
-                                            <p>{{$v->description}}</p>
+                                            <p>@php
+                                                echo {{$v->description}}
+                                            @endphp</p>
                                         </div>
                                         @endforeach
                                         <div class="clearfix"></div>
@@ -367,7 +371,7 @@
                                                                         </div>
 
                                                                         <div class="form_elem mt-5">
-                                                                            <textarea name="endorse_message" id="endorse_message" cols="25" rows="6" class="controlTextLength w-100" placeholder="Message" text-length="600" maxlength="600" name="about" aria-label="With textarea"></textarea>
+                                                                            <textarea name="endorse_message" id="endorse_message" cols="25" rows="6" class="controlTextLength w-100 text_editor" placeholder="Message" text-length="600" maxlength="600" name="about" aria-label="With textarea"></textarea>
                                                                         </div>
 
                                                                         <div class="my-5">

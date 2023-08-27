@@ -113,7 +113,7 @@
                         <div class="guide_profile_subsection pb-4">
                             <div class="guide_profile_main_text mt-3">Job Description <span class = "steric_sign_design">*</span></div>
                             <div class="profile_input form_elem">
-                                <textarea class="form-control controlTextLength" text-length="2600" maxlength="2600" name="description" required aria-label="With textarea" placeholder="Your answer here">@if (!empty($userJobData['description'])) {{$userJobData['description']}} @endif</textarea>
+                                <textarea class="form-control controlTextLength " id="editor" text-length="2600" maxlength="2600" name="description" required aria-label="With textarea" placeholder="Your answer here">@if (!empty($userJobData['description'])) {{$userJobData['description']}} @endif</textarea>
                             </div>
                         </div>
                         <div class="guide_profile_subsection">

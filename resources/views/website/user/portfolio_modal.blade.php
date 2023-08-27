@@ -28,7 +28,9 @@
 @else
 <span><b>-</b></span>
 @endif
-<div class="mt-3 guide_profile_main_subtext">@if (!empty($data['description'])) {{ $data['description']}} @else <span><b>-</b></span>  @endif</div>
+<div class="mt-3 guide_profile_main_subtext">@if (!empty($data['description'])) @php
+    $data['description']
+@endphp @else <span><b>-</b></span>  @endif</div>
 <div class="guide_profile_main_subtext deep-pink my-2">
     @if (!empty($data['video']))
     <a href="{{json_decode($data['video'])->video_url}}" class="" target="_blank">

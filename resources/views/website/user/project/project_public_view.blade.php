@@ -233,7 +233,9 @@
                     <div class="public-subheading-text mt-3 mt-md-2">
                         <p>
                             @if (!empty(($UserProject->director_statement)))
-                            {{ ucFirst($UserProject->director_statement)}}
+                            @php
+                               echo ucFirst($UserProject->director_statement)
+                            @endphp
                             @else
                             <span><b>-</b></span>
                             @endif

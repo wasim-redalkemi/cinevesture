@@ -247,9 +247,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="profile_input">
-                                    <label>About</label>
+                                    <label>Abouts   </label>
                                     <div class="form_elem">
-                                    <textarea class="outline form-control controlTextLength is-invalid-remove form-control @error('about') is-invalid @enderror" text-length="500" maxlength="500" name="about" aria-label="With textarea"><?php if (isset($user->about)) { echo ($user->about);} ?></textarea>
+                                    <textarea class="outline form-control controlTextLength text_editor is-invalid-remove form-control text_editor @error('about') is-invalid @enderror" text-length="500" maxlength="500" name="about" aria-label="With textarea"><?php if (isset($user->about)) { echo ($user->about);} ?></textarea>
                                     @error('about')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -372,7 +372,7 @@
 @include('website.include.footer')
 @endsection
 @push('scripts')
-<script type="text/javascript">    
+<script type="text/javascript">
     $(document).ready(function() {
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");
@@ -650,5 +650,5 @@
     if (hasUserSubscription!='free') {
       sessionStorage.setItem("freeToastMSG", "1"); 
     }
-</script>
+    </script>
 @endpush

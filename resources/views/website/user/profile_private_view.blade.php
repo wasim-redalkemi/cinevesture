@@ -155,7 +155,9 @@
                                     <div class="inp_data Aubergine_at_night mt-2">
                                         <p>
                                             @if (!empty($user->about))
-                                            {{ $user->about }}
+                                            @php
+                                                echo $user->about
+                                            @endphp
                                             @else
                                             <span><b>-</b></span>
                                             @endif
@@ -265,7 +267,10 @@
                                         {{$v->company}} | {{$v->employement_type_id}}
                                     </div>
                                     <div class="inp_data Aubergine_at_night mt-2">
-                                        <p>{{$v->description}}</p>
+                                        <p>
+                                        @php
+                                            $v->description
+                                        @endphp</p>
                                     </div>
                                     @endforeach
                                     <div class="clearfix"></div>
@@ -297,7 +302,9 @@
                                             {{$v->degree_name}} | {{$v->field_of_study}} | {{$v->start_year}} | {{$v->end_year}}
                                         </div>
                                         <div class="inp_data Aubergine_at_night mt-2">
-                                            <p>{{$v->description}}</p>
+                                            <p>@php
+                                                $v->description
+                                            @endphp</p>
                                         </div>
                                         @endforeach
                                     <div class="clearfix"></div>

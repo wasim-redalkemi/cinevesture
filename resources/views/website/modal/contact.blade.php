@@ -36,7 +36,7 @@
                                     <strong>This field is required.</strong>
                                 </div>
                                 <div class="form_elem mt-3">
-                                    <textarea name="message" id="message" cols="25" rows="6" class="w-100 controlTextLength mt-2" placeholder="Message" text-length = "1200" maxlength="1200" aria-label="With textarea" required></textarea>
+                                    <textarea name="message" id="message" cols="25" rows="6" class="w-100 text_editor controlTextLength mt-2" placeholder="Message" text-length = "1200" maxlength="1200" aria-label="With textarea" required></textarea>
 
                                 </div>
                                 <div class="msg_contact for_error_msg" style="display:none">

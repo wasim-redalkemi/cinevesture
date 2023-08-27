@@ -28,7 +28,7 @@
   <link rel="shortcut icon" href="admin/images/favicon.png" />
 </head>
 <body>
-  <div class="container-scroller">
+    <div class="container-scroller">
     @include('admin.include.nav')
     <div class="container-fluid page-body-wrapper">
       @include('admin.include.right-sidebar')
@@ -73,6 +73,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.html5.min.js"></script>
   <script src="https://cdn.datatables.net/buttons/2.3.2/js/buttons.print.min.js"></script>
+  <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
 
   <script src="{{ asset('admin/js/export.js') }}"></script>
 
@@ -89,6 +90,17 @@
         });
         $(".sidebar .nav-item").not('.active').find('.collapse.show').removeClass('show');
       })
+    </script>
+    <script>
+      console.log('sqlll');
+      ClassicEditor
+              .create( document.querySelector( '#editor' ) )
+              .then( editor => {
+                      console.log( editor );
+              } )
+              .catch( error => {
+                      console.error( error );
+              } );
     </script>
 </body>
 </html>
