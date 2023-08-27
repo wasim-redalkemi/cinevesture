@@ -120,7 +120,7 @@
                    echo ucFirst($projectData[0]['synopsis'])
                 @endphp @else <span><b>-</b></span> @endif</div>
                 <div class="preview_headtext">Creator/Founder’s Statement</div>
-                <div class="preview_subtext pr_10">@if (!empty($projectData[0]['director_statement'])) <?php echo $projectData[0]['director_statement'] ?> @else <span><b>-</b></span> @endif</div>
+                <div class="preview_subtext pr_10">@if (!empty($projectData[0]['director_statement'])) <?php echo ucFirst( $projectData[0]['director_statement']) ?> @else <span><b>-</b></span> @endif</div>
                 <div class="row">
                     <div class="com-md-12">
                         <div class="justify-content-end mt-3 mt-md-0"><button class="save_add_btn float-end"><a class="ancor-link-style" href="{{ route('project-description') }}?id={{$_REQUEST['id']}}">Edit</a></button></div>
