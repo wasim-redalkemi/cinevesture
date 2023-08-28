@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\UserRequest;
 use Illuminate\Validation\ValidationException;
 use App\Models\MasterCountry;
 use App\Models\User;
@@ -102,7 +103,11 @@ class UserController extends AdminController
      */
     public function create()
     {
-        //
+        try {
+            return view('admin.user.create');
+        } catch (\Throwable $th) {
+            //throw $th;
+        }
     }
 
     /**
@@ -111,9 +116,20 @@ class UserController extends AdminController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        try {
+            $user=new User();
+            $user->name=$request->first_name.' '.$request->last_name;
+            $user->first_name=$request->first_name;
+            $user->last_name=$request->last_name;
+            $user->email=$request->email;
+            $user->password=$request->password;
+            $user->save();
+            return redirect()->route('user-management');
+        } catch (\Throwable $e) {
+            $e->getMessage();
+        }
     }
 
     /**
