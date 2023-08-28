@@ -4852,3 +4852,9 @@ transition: 2s ease all; */
     font-size: 12px;
     line-height: 14px;
   }
+  .a_default a:link, .a_default a:visited {
+    color: black;
+}
+.a_default a:hover {
+    color: black;
+}
