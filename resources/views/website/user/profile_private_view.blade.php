@@ -1,8 +1,8 @@
 @extends('website.layouts.app',['class' => 'bg_white'])
 
 {{-- @section('title','Cinevesture-private-view') --}}
-
-@section('header')
+    
+    @section('header')
 @include('website.include.header')
 @endsection
 
@@ -59,6 +59,29 @@
                                         |
                                             {{$user_state->name}}
                                         @endif
+                                        @endif
+                                    </div>
+                                    <div class="social_profile_icon_wraper">
+                                        @if (!empty($user->imdb_profile))
+                                            <a href="{{ $user->imdb_profile }}" target="_blank" class="fs_italian inp_data">
+                                                <span class=" social_icon ">
+                                                    <i class="fa fa-imdb imdb_color" aria-hidden="true"></i>
+                                                </span>
+                                            </a>                                      
+                                        @endif
+                                        @if (!empty($user->linkedin_profile))
+                                            <a href="{{ $user->linkedin_profile }}" target="_blank" class="fs_italian inp_data" >
+                                                <span class="social_icon"> 
+                                                    <i class=" fa fa-linkedin" style="font-size:20px"></i>
+                                                </span>
+                                            </a>                                         
+                                        @endif
+                                        @if (!empty($user->website))     
+                                            <a href="{{ $user->website }}" target="_blank" class="fs_italian inp_data" >
+                                                <span class="social_icon">
+                                                    <i class="fa fa-globe" aria-hidden="true" style="font-size:20px"></i>
+                                                </span>
+                                            </a>                                 
                                         @endif
                                     </div>
                                     <div class="d-block d-md-none">
@@ -185,6 +208,14 @@
                                 <div class="col-md-12">
                                     <div class="d-flex">
                                         <div class="contact-page-text deep-pink mb-2">Portfolio</div>
+                                      
+                                        <div>
+                                            <span data-toggle='tooltip' title='A portfolio showcases your skills and abilities through completed projects and samples.'>
+                                                <span class="dot">
+                                                    <i class="fa fa-info p-9" aria-hidden="true"></i>
+                                                </span>
+                                            </span>
+                                        </div>
                                         <div class="mx-3 icon_container"><a href="{{ route('portfolio-create',['flag'=>'privateView']) }}"><i class="fa fa-plus deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                     </div>
                                     @if (count($portfolio)>0)
@@ -253,6 +284,14 @@
                                         <div class="contact-page-text deep-pink font_18">
                                             Experiences
                                         </div>
+                                        <div>
+                                            <span data-toggle='tooltip' title='Employees gain work experience in a job, field, or profession. Record companies and job titles.'>
+                                                <span class="dot">
+                                                    <i class="fa fa-info p-9" aria-hidden="true"></i>
+                                                </span>
+                                            </span>
+                                        </div>
+
                                         <div class="mx-3 icon_container"><a href="{{ route('experience-create',['flag'=>'privateView']) }}"><i class="fa fa-plus deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                     </div>
                                     @if (count($experience)>0)
