@@ -43,7 +43,9 @@
                       
                       <div class="project-sub-text mt-1">
                         @if (!empty($v->logline))
-                        <span class="blackTextShadow">  {{$v->logline}}</span>
+                        <span class="blackTextShadow">  @php
+                            echo $v->logline
+                        @endphp</span>
                         @endif
                       </div>
                       <div class="duration-lang-text mt-1">

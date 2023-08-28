@@ -164,7 +164,7 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-md-2"></div>
+                                <div class="col-md-1"></div>
                                 <div class="col-md-5">
                                     <div class="guide_profile_main_text mb-2">Introduction Video</div>
                                     @if($user->intro_video_link)
