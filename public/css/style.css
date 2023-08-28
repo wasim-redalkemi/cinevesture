@@ -4898,3 +4898,15 @@ transition: 2s ease all; */
     position: relative;
     top: -5.5px;
 }  
+  .social_icon{
+    font-size:20px;
+    color: #33084C  !important;
+    margin-right: 10px;
+}
+.imdb_color{
+    color: #33084C  !important;
+}
+
+.social_profile_icon_wraper{
+    margin-top: 2px;
+}

@@ -61,6 +61,29 @@
                                         @endif
                                         @endif
                                     </div>
+                                    <div class="social_profile_icon_wraper">
+                                        @if (!empty($user->imdb_profile))
+                                            <a href="{{ $user->imdb_profile }}" target="_blank" class="fs_italian inp_data">
+                                                <span class=" social_icon ">
+                                                    <i class="fa fa-imdb imdb_color" aria-hidden="true"></i>
+                                                </span>
+                                            </a>                                      
+                                        @endif
+                                        @if (!empty($user->linkedin_profile))
+                                            <a href="{{ $user->linkedin_profile }}" target="_blank" class="fs_italian inp_data" >
+                                                <span class="social_icon"> 
+                                                    <i class=" fa fa-linkedin" style="font-size:20px"></i>
+                                                </span>
+                                            </a>                                         
+                                        @endif
+                                        @if (!empty($user->website))     
+                                            <a href="{{ $user->website }}" target="_blank" class="fs_italian inp_data" >
+                                                <span class="social_icon">
+                                                    <i class="fa fa-globe" aria-hidden="true" style="font-size:20px"></i>
+                                                </span>
+                                            </a>                                 
+                                        @endif
+                                    </div>
                                     <div class="d-block d-md-none">
                                         <a href="{{ route('profile-create')}}">
                                             <button class="guide_profile_btn mt-2">EDIT </button>
