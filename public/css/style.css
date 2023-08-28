@@ -4883,3 +4883,18 @@ transition: 2s ease all; */
 .a_default a:hover {
     color: black;
 }
+.dot {
+    text-align: center;
+    height: 15px;
+    width: 15px;
+    background-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+  }
+.p-9{
+    color: black;
+    font-size: 12px;
+    /* padding: 1px 7.5px; */
+    position: relative;
+    top: -5.5px;
+}  

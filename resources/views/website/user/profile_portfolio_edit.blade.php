@@ -19,7 +19,14 @@
                     @endif
                     <div id="edit-portfolio-div" class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
                         <div class="d-flex justify-content-between">
-                            <div class="profile_cmn_head_text">Edit Portfolio</div>
+                            <div class="profile_cmn_head_text">Edit Portfolio
+                                    <span data-toggle='tooltip' title='A portfolio showcases your skills and abilities through completed projects and samples.'>
+                                        <span class="dot">
+                                            <i class="fa fa-info p-9" aria-hidden="true"></i>
+                                        </span>
+                                    </span>
+                            </div>
+                            
                             <div>
                                 <a class="confirmAction" href="{{route('portfolio-delete',['id'=>$UserPortfolioEdit[0]['id']])}}">
                                     <img src="{{ asset('images/asset/delete-icon.svg') }}"/>

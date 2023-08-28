@@ -21,8 +21,15 @@
                     @include('website.user.include.previously_added_portfolio',['prevData'=>$prevPortfolio])
                 @endif
                 <div id="user-profile-div" class="profile_wraper profile_wraper_padding mt-md-0 my-4">
-                    <div class="d-flex justify-content-between">
+                    <div class="d-flex">
                         <div class="profile_cmn_head_text">Add Portfolio</div>
+                        <div>
+                            <span data-toggle='tooltip' title='A portfolio showcases your skills and abilities through completed projects and samples.'>
+                                <span class="dot">
+                                    <i class="fa fa-info p-9" aria-hidden="true"></i>
+                                </span>
+                            </span>
+                        </div>
                     </div>
                     <form role="form" class="validateBeforeSubmit" name="portfolioCreate" method="POST" onsubmit="return imgFormValitation()"  enctype="multipart/form-data" action="{{ route('portfolio-store') }}">
                         <input type="hidden" name="portfolio_id">

@@ -19,7 +19,13 @@
                     @endif
                     <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
                         <div class="d-flex justify-content-between">
-                            <div class="profile_cmn_head_text">Edit Experience</div>
+                            <div class="profile_cmn_head_text">Edit Experience
+                                <span data-toggle='tooltip' title='Employees gain work experience in a job, field, or profession. Record companies and job titles.'>
+                                    <span class="dot">
+                                        <i class="fa fa-info p-9" aria-hidden="true"></i>
+                                    </span>
+                                </span>
+                            </div>
                             <div>
                                 <a class="confirmAction" href="{{route('experience-delete',['id'=>$UserExperienceData->id])}}">
                                     <img src="{{ asset('images/asset/delete-icon.svg') }}"/>
