@@ -87,6 +87,7 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
     <script>
         var from_plan_page = undefined;
         $(document).ready(function() {
@@ -311,6 +312,28 @@
             }
         })
     </script>
-</body>
+     <script>
+        ClassicEditor
+        .create(document.querySelector('.text_editor'), {
+            // toolbar: [],  // This removes the toolbar
+            removePlugins: ['Title'],  // This removes the title plugin
+        })
+        .catch(error => {
+            console(error);
+        });
+                
+    </script>
+    <script>
+        ClassicEditor
+        .create(document.querySelector('.text_editor1'), {
+            // toolbar: [],  // This removes the toolbar
+            removePlugins: ['Title'],  // This removes the title plugin
+        })
+        .catch(error => {
+            console(error);
+        });
+                
+    </script>
+    </body>
 </html>
 
