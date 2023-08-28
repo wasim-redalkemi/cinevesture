@@ -185,7 +185,7 @@
                                     Promoted Jobs
                                 </label>
                             </div>
-                            <div class="mt-4 d-flex">
+                            <div class="mt-4 d-flex justify-content-between">
                                 <input type="submit" class="filter-button-search watch-now-btn mt-4" Value="Apply">
                                 <a href="{{route('showJobSearchResults')}}"><input type="button" class="clear-filter watch-now-btn mt-4" Value="Clear"></a>
                             </div>
