@@ -269,7 +269,7 @@
                                     <div class="inp_data Aubergine_at_night mt-2">
                                         <p>
                                         @php
-                                            $v->description
+                                           echo $v->description
                                         @endphp</p>
                                     </div>
                                     @endforeach
@@ -303,7 +303,7 @@
                                         </div>
                                         <div class="inp_data Aubergine_at_night mt-2">
                                             <p>@php
-                                                $v->description
+                                                echo $v->description
                                             @endphp</p>
                                         </div>
                                         @endforeach
@@ -340,7 +340,9 @@
                                     <div class="col-md-9">
                                         <div class="inp_data Aubergine_at_night">
                                             <p>
-                                                {{$edm->comment}}
+                                                @php
+                                                    echo $edm->comment
+                                                @endphp
                                             </p>
                                         </div>
                                     </div>

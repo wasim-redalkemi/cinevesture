@@ -247,7 +247,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="profile_input">
-                                    <label>Abouts</label>
+                                    <label>About</label>
                                     <div class="form_elem">
                                     <textarea class="outline form-control controlTextLength  is-invalid-remove form-control text_editor @error('about') is-invalid @enderror" text-length="500" maxlength="500" name="about" aria-label="With textarea"><?php if (isset($user->about)) { echo ($user->about);} ?></textarea>
                                     @error('about')
