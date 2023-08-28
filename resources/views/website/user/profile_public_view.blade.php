@@ -45,7 +45,29 @@
                                                     <div class="guide_profile_main_text pt-3">{{empty($user->first_name)?'Name':ucfirst($user->first_name).' '.ucfirst($user->last_name);}}</div>
                                                     <div class="preview_subtext deep_aubergine mt-0">{{empty($user->job_title)?'Job Title':ucfirst($user->job_title);}}</div>
                                                     <div><button class="guide_profile_btn mt-2" data-toggle="modal" data-target="#contactModal">Contact </button></div>
-
+                                                    <div class="social_profile_icon_wraper">
+                                                        @if (!empty($user->imdb_profile))
+                                                            <a href="{{ $user->imdb_profile }}" target="_blank" class="fs_italian inp_data">
+                                                                <span class=" social_icon ">
+                                                                    <i class="fa fa-imdb imdb_color" aria-hidden="true"></i>
+                                                                </span>
+                                                            </a>                                      
+                                                        @endif
+                                                        @if (!empty($user->linkedin_profile))
+                                                            <a href="{{ $user->linkedin_profile }}" target="_blank" class="fs_italian inp_data" >
+                                                                <span class="social_icon"> 
+                                                                    <i class=" fa fa-linkedin" style="font-size:20px"></i>
+                                                                </span>
+                                                            </a>                                         
+                                                        @endif
+                                                        @if (!empty($user->website))     
+                                                            <a href="{{ $user->website }}" target="_blank" class="fs_italian inp_data" >
+                                                                <span class="social_icon">
+                                                                    <i class="fa fa-globe" aria-hidden="true" style="font-size:20px"></i>
+                                                                </span>
+                                                            </a>                                 
+                                                        @endif
+                                                    </div>
                                                     <!-- Contact modal  -->
                                                     @include('website.modal.contact', [
                                                     'image' => (!empty($user->profile_image)?$user->profile_image:''),
@@ -56,7 +78,9 @@
 
 
                                                 </div>
+                                                
                                             </div>
+                                            
                                             <div class="d-flex pt-3 justify-content-lg-end">
                                                 @if($_REQUEST['id'] != auth()->user()->id )
                                                 <div class="mx-3"> <i class="fa <?php if (isset($user->isfavouriteProfile)) {
@@ -123,7 +147,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-2"></div>
-                                    <div class="col-md-5">
+                                    {{-- <div class="col-md-5">
                                         <div class="guide_profile_main_text mt-3">
                                             <p> Social Profile</p>
                                         </div>
@@ -152,7 +176,7 @@
                                             @endif
                                         </div>
 
-                                    </div>
+                                    </div> --}}
                                 </div>
                             </div>
                         </div>
