@@ -122,36 +122,12 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="col-md-2"></div>
-                                    <div class="col-md-5">
-                                        <div class="guide_profile_main_text mt-3">
-                                            <p> Social Profile</p>
+                                    <div class="col-md-1"></div>
+                                    <div class="col-md-5 ">
+                                        <div class="guide_profile_main_text mb-2">Introduction Video</div>
+                                        <div class="playVideoWrap" video-url="{{$user->intro_video_link}}">
+                                            <img src="{{$user->intro_video_thumbnail}}" alt="" width="100%">
                                         </div>
-                                        <div class="inp_data deep_aubergine mt-3">IMDB Profile</div>
-                                        <div class="deep-pink mt-1 pointer break_all">
-                                            @if (isset($user->imdb_profile))
-                                            <a href="{{ $user->imdb_profile }}" class="fs_italian inp_data" target="_blank">{{ $user->imdb_profile }}</a>
-                                            @else
-                                            <span><b>-</b></span>
-                                            @endif
-                                        </div>
-                                        <div class="inp_data deep_aubergine mt-3">LinkedIn Profile</div>
-                                        <div class="inp_data deep-pink pointer break_all">
-                                            @if (isset($user->linkedin_profile))
-                                            <a href="{{ $user->linkedin_profile }}" class="fs_italian inp_data" target="_blank">{{ $user->linkedin_profile }}</a>
-                                            @else
-                                            <span><b>-</b></span>
-                                            @endif
-                                        </div>
-                                        <div class="inp_data deep_aubergine mt-3">Website</div>
-                                        <div class="deep-pink pointer break_all">
-                                            @if (isset($user->website))
-                                            <a href="{{ $user->website }}" class="fs_italian inp_data" target="_blank">{{ $user->website }}</a>
-                                            @else
-                                            <span><b>-</b></span>
-                                            @endif
-                                        </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -160,7 +136,7 @@
                         <div class="guide_profile_subsection">
                             <div class="container px-0">
                                 <div class="row">
-                                    <div class="col-md-5">
+                                    <div class="col-md-12">
                                         <div class="guide_profile_main_text deep-pink font_18">
                                             About
                                         </div>
@@ -175,12 +151,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-2"></div>
-                                    <div class="col-md-5 ">
-                                        <div class="guide_profile_main_text mb-2">Introduction Video</div>
-                                        <div class="playVideoWrap" video-url="{{$user->intro_video_link}}">
-                                            <img src="{{$user->intro_video_thumbnail}}" alt="" width="100%">
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
