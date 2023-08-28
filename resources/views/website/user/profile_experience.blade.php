@@ -22,8 +22,15 @@
                         @include('website.user.include.previously_added_experience',['prevData'=>$prevExperience])
                     @endif
                     <div class="profile_wraper profile_wraper_padding mt-md-0 mt-4">
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex ">
                             <div class="profile_cmn_head_text">Add Experience</div>
+                            <div>
+                                <span data-toggle='tooltip' title='Employees gain work experience in a job, field, or profession. Record companies and job titles.'>
+                                    <span class="dot">
+                                        <i class="fa fa-info p-9" aria-hidden="true"></i>
+                                    </span>
+                                </span>
+                            </div>
                         </div>
                         <form role="form" class="validateBeforeSubmit" method="POST" enctype="multipart/form-data" action="{{ route('experience-store') }}">
                             @csrf
@@ -115,6 +122,7 @@
                                 <div class="col-md-12">
                                     <div class="profile_input">
                                         <label>Description <span class = "steric_sign_design">*</span></label>
+                                        
                                         <div class="form_elem">
                                         <textarea class="form-control text_editor controlTextLength @error('description') is-invalid @enderror" text-length = "2000" maxlength="2000" name="description" aria-label="With textarea" required ></textarea>
                                         @error('description')
