@@ -114,7 +114,9 @@
                     <p class="flow_step_text"> Description</p>
                 </div>
                 <div class="preview_headtext mt-4">Logline</div>
-                <div class="preview_subtext pr_10">@if (!empty($projectData[0]['logline'])) {{ucFirst($projectData[0]['logline'])}} @else <span><b>-</b></span> @endif</div>
+                <div class="preview_subtext pr_10">@if (!empty($projectData[0]['logline'])) @php
+                   echo ucFirst($projectData[0]['logline'])
+                    @endphp @else <span><b>-</b></span> @endif</div>
                 <div class="preview_headtext">Synopsis/Brief Description</div>
                 <div class="preview_subtext pr_10">@if (!empty($projectData[0]['synopsis'])) @php
                    echo ucFirst($projectData[0]['synopsis'])

@@ -312,9 +312,20 @@
             }
         })
     </script>
-     <script>
+    <script>
         ClassicEditor
         .create(document.querySelector('.text_editor'), {
+            // toolbar: [],  // This removes the toolbar
+            removePlugins: ['Title'],  // This removes the title plugin
+        })
+        .catch(error => {
+            console(error);
+        });
+                
+    </script>
+    <script>
+        ClassicEditor
+        .create(document.querySelector('.text_editor2'), {
             // toolbar: [],  // This removes the toolbar
             removePlugins: ['Title'],  // This removes the title plugin
         })
