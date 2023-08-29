@@ -7,9 +7,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\UserRequest;
 use Illuminate\Validation\ValidationException;
 use App\Models\MasterCountry;
+use App\Models\Plans;
 use App\Models\User;
 use App\Models\UserInvite;
 use App\Models\UserOrganisation;
+use App\Models\UserSubscription;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
@@ -25,16 +28,11 @@ class UserController extends AdminController
     {
         try
         {
-           
             $countries=MasterCountry::query()->orderBy('name','ASC')->get();
             $UserOrganisation = UserOrganisation::query()->get();
             $users=User::query()->where('user_type','U')
             ->with(['organization','country','membership'])
-            
-            
-            
             ->where(function ($q) use ($request) {
-            
                 if (isset($request->search)) {
                     $q->where("name","like","%$request->search%");
                 }
@@ -119,6 +117,10 @@ class UserController extends AdminController
     public function store(UserRequest $request)
     {
         try {
+           if ($request->password!=$request->cpassword) {
+            Session::flash('response', ['text'=>'Password and confirm password should be match','type'=>'danger']);
+            return back();
+           }
             $user=new User();
             $user->name=$request->first_name.' '.$request->last_name;
             $user->first_name=$request->first_name;
@@ -126,9 +128,11 @@ class UserController extends AdminController
             $user->email=$request->email;
             $user->password=$request->password;
             $user->save();
+            Session::flash('response', ['text'=>'User add successfully!','type'=>'success']);
             return redirect()->route('user-management');
         } catch (\Throwable $e) {
-            $e->getMessage();
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
         }
     }
 
@@ -165,7 +169,55 @@ class UserController extends AdminController
     {
         //
     }
+    public function editPlan($id)
+    {
+        try {
+            $user=User::find($id);
+            $subscription=UserSubscription::query()->where('user_id',$id)->first();
+            return view('admin.user.plan_edit',compact(['user','subscription']));
+        } catch (\Throwable $e) {
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
+        }
+    }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function planUpdate(Request $request)
+    {
+        $plan=Plans::find($request->plan_type);
+        $expiryDate = date("Y-m-d 23:59:59", strtotime($request->end_date));
+        $subscription=UserSubscription::query()->where('user_id',$request->user_id)->first();
+        if (empty($subscription)) {
+            if (($request->plan_type=='#')) {
+                Session::flash('response', ['text'=>'Please enter plan type','type'=>'danger']);
+                return back();
+            }
+            if (empty($request->end_date)) {
+                Session::flash('response', ['text'=>'Please enter expiry date','type'=>'danger']);
+                return back();
+            }
+            $subscription=new UserSubscription();
+            $subscription->subscription_start_date=date("Y-m-d 00:00:00");
+        }
+        $subscription->user_id=$request->user_id;
+        $subscription->plan_id=$request->plan_type;
+        $subscription->plan_time=$plan->plan_time;
+        $subscription->plan_time_quntity=$plan->plan_time_quntity;
+        $subscription->plan_name=$plan->plan_name;
+        $subscription->plan_amount=$plan->plan_amount;
+        $subscription->subscription_end_date=$expiryDate;
+        $subscription->platform_subscription_id="plan extended by admin";
+        $subscription->save();
+        Session::flash('response', ['text'=>'User add successfully!','type'=>'success']);
+        return redirect()->route('user-management');
+    }
+        
     /**
      * Remove the specified resource from storage.
      *

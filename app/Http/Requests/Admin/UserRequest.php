@@ -13,7 +13,7 @@ class UserRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,25 @@ class UserRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+            // 'cpassowrd' => 'required|required_with:password|same:password|min:6',
+            
         ];
     }
+
+    public function messages()
+    {
+        return [
+            "first_name.required" => "This field is required",
+            "last_name.required" => "This field is required",
+            "email.required" => "This field is required",
+            "email.email" => "please enter correct email address",
+            "password.required" => "This field is required",
+            "password.min" => "Please enter min. 6 charactor",
+        ];            
+    }
+    
 }

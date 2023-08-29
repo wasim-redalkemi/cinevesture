@@ -28,21 +28,21 @@
                               
                               <div class="col-md-4">
                                 <div class="form-group">
-                                     <label for="exampleFormControlSelect1">Email</label required value="">
+                                     <label for="exampleFormControlSelect1">Email<span class = "text-danger">*</span></label required value="">
                                        <input type="email" class="form-control radius" placeholder="Email" value="" name="email" id="" >
                                 </div>
                               </div>
                             
                                   <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Password</label required value="">
+                                        <label for="exampleFormControlSelect1">Password<span class = "text-danger">*</span></label required value="">
                                           <input type="password" class="form-control radius" placeholder="password" value="" name="password" id="" >
                                    </div>
                                   </div>
                                   
                                   <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Confirm Password</label required value="">
+                                        <label for="exampleFormControlSelect1">Confirm Password<span class = "text-danger">*</span></label required value="">
                                           <input type="password" class="form-control radius" placeholder="Confirm Password" value="" name="cpassword" id="" >
                                    </div>
                                   </div>
