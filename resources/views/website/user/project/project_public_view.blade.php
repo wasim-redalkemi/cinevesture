@@ -44,7 +44,8 @@
                             </div>
                             <div class="public-head-res-subtext text-start">
                                 @if (isset($UserProject->logline))
-                                <span class="blackTextShadow">    {{ $UserProject->logline}}</span>
+                                <span class="blackTextShadow">    @php echo $UserProject->logline @endphp
+                                </span>
                                 @else
                                 <span><b>-</b></span>
                                 @endif
