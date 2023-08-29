@@ -315,8 +315,8 @@
     <script>
         ClassicEditor
         .create(document.querySelector('.text_editor'), {
-            // toolbar: [],  // This removes the toolbar
             removePlugins: ['Title'],  // This removes the title plugin
+            toolbar: [ 'undo','redo', 'heading', 'bold', 'italic', 'numberedList', 'bulletedList' ]
         })
         .catch(error => {
             console(error);
