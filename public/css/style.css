@@ -4885,9 +4885,8 @@ transition: 2s ease all; */
 .imdb_color{
     color: #33084C  !important;
 }
-
-.social_profile_icon_wraper{
-    margin-top: 2px;
+.a_default a:hover {
+    color: black;
 }
 .dot {
     text-align: center;
@@ -4907,6 +4906,10 @@ transition: 2s ease all; */
   .a_default a:link, .a_default a:visited {
     color: black;
 }
-.a_default a:hover {
-    color: black;
+.imdb_color{
+    color: #33084C  !important;
+}
+
+.social_profile_icon_wraper{
+    margin-top: 2px;
 }
