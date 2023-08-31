@@ -185,9 +185,21 @@
                                     Promoted Jobs
                                 </label>
                             </div>
-                            <div class="mt-4 d-flex">
-                                <input type="submit" class="filter-button watch-now-btn mt-4" Value="Apply">
+                            <div class="mt-4 d-flex justify-content-between">
+                                <input type="submit" class="filter-button-search watch-now-btn mt-4" Value="Apply">
                                 <a href="{{route('showJobSearchResults')}}"><input type="button" class="clear-filter watch-now-btn mt-4" Value="Clear"></a>
+                            </div>
+
+                            <div class ="row pb_100">
+                                <div class=" d-flex justify-content-between mb-3 mt-4" >
+                                    <div>
+                                        <a href="{{route('job-create-page')}}"><button type = "button" class="filter-button-search post_job_search">Post A Job</button></a>
+                                    </div>
+                                    <div>
+                                        <a href="{{ route('posted-job') }}"><button type = "button" class="filter-button-search  post_job_search">My Jobs</button></a>
+                                    </div>
+                                    {{-- <button type = "button"class="job_search_btn  post-job">My Jobs</button> --}}
+                                </div>
                             </div>
                         </div>
                     </div>

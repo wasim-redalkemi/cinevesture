@@ -52,7 +52,8 @@
                             </div>
                             <div class="hours-category my-md-4 blackTextShadow text-start">
                                 @if (!empty(($UserProject->duration)))
-                                <?php echo ((intdiv($UserProject->duration, 60)>0)?sprintf(intdiv($UserProject->duration, 60).' hr'):'') .' '. ((($UserProject->duration % 60)>0)?( sprintf($UserProject->duration % 60).' min'):'');?>
+                                    {{$UserProject->duration.' min'}}
+                                {{-- <?php echo ((intdiv($UserProject->duration, 60)>0)?sprintf(intdiv($UserProject->duration, 60).' hr'):'') .' '. ((($UserProject->duration % 60)>0)?( sprintf($UserProject->duration % 60).' min'):'');?> --}}
                                 @else
                                 {{'Duration'}}                                    
                                 @endif 

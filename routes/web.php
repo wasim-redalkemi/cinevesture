@@ -205,7 +205,7 @@ Route::group(["middleware" => ["auth", "revalidate", "verified",'is_admin']], fu
 
 
     Route::group(['prefix' => 'job'], function () {
-        Route::get('/search', [JobController::class, 'index'])->name('job-search-page')->middleware('plancheck');
+        Route::get('/search', [JobController::class, 'showJobSearchResults'])->name('job-search-page')->middleware('plancheck');
         Route::get('/job-create', [JobController::class, 'create'])->name('job-create-page')->middleware('plancheck');
         Route::get('/apply-job/{jobId}/', [JobController::class, 'showApplyJob'])->name('showApplyJob')->middleware('plancheck');
         Route::post('/apply/{jobId}', [JobController::class, 'storeApplyJob'])->name('storeApplyJob');

@@ -105,6 +105,7 @@ class ProjectController extends WebController
                 return view('website.user.project.project_overview', compact(['languages','country','project_types']));
             }
             $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
+           
             $projectData = UserProject::query()->with(['projectLanguages','projectCountries','projectType'])->where('id',$_REQUEST['id'])->get();
             $projectData = $projectData->toArray();
 
@@ -170,6 +171,9 @@ class ProjectController extends WebController
             $overview->project_type_id = $request->project_type_id;
             $overview->listing_project_as = $request->listing_project_as;
             $overview->location = $request->location;
+            if ($overview->project_step<1) {
+                $overview->project_step = '1';
+            }
             if($overview->save()) {
                 if (!empty($request->countries)) {
                     foreach ($request->countries as $k => $v) {
@@ -205,6 +209,9 @@ class ProjectController extends WebController
             $overview->project_type_id = $request->project_type_id;
             $overview->listing_project_as = $request->listing_project_as;
             $overview->location = $request->location;
+            if ($overview->project_step<1) {
+                $overview->project_step = '1';
+            }
             if($overview->update()) {
                 if (!empty($request->countries)) {
                     ProjectCountry::query()->where('project_id', $_REQUEST['project_id'])->delete();
@@ -249,6 +256,7 @@ class ProjectController extends WebController
     public function projectDetails()
     {
         try {
+            $project_step=1;
             $validRequest = $this->checkValidRequest();
             if(!empty($validRequest['error_msg']))
             {
@@ -265,6 +273,9 @@ class ProjectController extends WebController
             $Genres = MasterProjectGenre::query()->get();    
           
             $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
+            if ($project_step > $UserProject->project_step) {
+                throw new Exception('Please fill previous data.');
+            }
             $projectData = UserProject::query()->with(['genres','projectCategory','projectAssociation'])->where('id',$_REQUEST['id'])->get();
             $projectData = $projectData->toArray();
 
@@ -286,7 +297,7 @@ class ProjectController extends WebController
             return view('website.user.project.project_details', compact('UserProject','projectData','languages','country','category','Genres'));
 
         } catch (Exception $e) {
-            return back()->with('error','Something went wrong.');
+            return back()->with('error',$e->getMessage());
         }
     }
     
@@ -321,12 +332,14 @@ class ProjectController extends WebController
         try {
             $request = (object) $_REQUEST;
             $id = $request->project_id;
-
             $details = UserProject::query()->find($id);
             if (isset($details)) {                
                 $details->duration = $request->duration;
                 $details->total_budget = $request->total_budget;
                 $details->financing_secured = $request->financing_secured;
+                if ($details->project_step<2) {
+                    $details->project_step = '2';
+                }
                 if($details->update()) {
                     if (!empty($request->category_id)) {
                        $projectCategory= ProjectCategory::query()->where('project_id', $details->id)->delete();
@@ -364,22 +377,25 @@ class ProjectController extends WebController
     public function projectDescription()
     {
         try {
+            $project_step='2';
             $validRequest = $this->checkValidRequest();
+           
             if(!empty($validRequest['error_msg']))
             {
                 throw new Exception($validRequest['error_msg']);
             }
-
             if(!isset($_REQUEST['id']) || empty($_REQUEST['id']))
             {
                 return back()->with('error','Project Id not found.');
-            }                
+            }   
             $projectDescription = [];
             $projectDescription = UserProject::query()->where('id',$_REQUEST['id'])->get();
-
+            if ($project_step > $projectDescription[0]->project_step) {
+                throw new Exception('Please fill previous data.');
+            }
             return view('website.user.project.project_description', compact('projectDescription'));
         } catch (Exception $e) {
-            return back()->with('error','Something went wrong.');
+            return back()->with('error',$e->getMessage());
         } 
     }
 
@@ -415,6 +431,9 @@ class ProjectController extends WebController
                 $description->logline = $request->logline;
                 $description->synopsis = $request->synopsis;
                 $description->director_statement = $request->director_statement;
+                if ($description->project_step<3) {
+                    $description->project_step = '3';
+                }
                 if($description->update()) {
                     $this->return_response['success_msg'] = 'Project description updated successfully.';
                 } else {
@@ -430,6 +449,7 @@ class ProjectController extends WebController
     public function projectGallery()
     {
         try {
+            $project_step=3;
             $validRequest = $this->checkValidRequest();
             if(!empty($validRequest['error_msg']))
             {
@@ -444,12 +464,15 @@ class ProjectController extends WebController
             $country = MasterCountry::query()->get();    
             $projectgallery = [];
             $projectgallery = UserProject::query()->where('id',$projectId)->get();
+            if ($project_step > $projectgallery[0]->project_step) {
+                throw new Exception('Please fill previous data.');
+            }
             if(!empty($projectgallery[0]->banner_image)){
                 $projectgallery[0]->banner_image = asset("storage/".$projectgallery[0]->banner_image);
             }
             return view('website.user.project.project_gallery', compact('projectgallery','languages','country'));
         } catch (Exception $e) {
-            return back()->with('error','Something went wrong.');
+            return back()->with('error',$e->getMessage());
         } 
     }
 
@@ -457,7 +480,7 @@ class ProjectController extends WebController
     {
         try {
                 $project = UserProject::query()->find($id);
-                if(!empty($project)) 
+                 if(!empty($project)) 
                 {
                     $data_to_insert = [];
                     $i=0;
@@ -500,8 +523,9 @@ class ProjectController extends WebController
     }
 
     public function projectMilestone()
-    {        
-        try {
+    {      
+            try {
+            $project_step='4';
             $validRequest = $this->checkValidRequest();
             if(!empty($validRequest['error_msg']))
             {
@@ -520,9 +544,11 @@ class ProjectController extends WebController
 
             $projectData = [];
             $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
+            if (($project_step > $UserProject->project_step) &&($UserProject->project_step!=3)) {
+                throw new Exception('Please fill previous data.');
+            }
             $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage'])->where('id',$_REQUEST['id'])->get();
             $projectData = $projectData->toArray();
-            
             $temp_looking_for = [];
             if (!empty($projectData[0]['project_looking_for'])) {
                 foreach ($projectData[0]['project_looking_for'] as $k => $v){
@@ -535,7 +561,7 @@ class ProjectController extends WebController
         } 
         catch (Exception $e) 
         {
-            return back()->with('error','Something went wrong.');
+            return back()->with('error',$e->getMessage());
         }
     }
 
@@ -561,6 +587,7 @@ class ProjectController extends WebController
     public function milestoneStore()
     {
         try {
+            
             $request = (object) $_REQUEST;
             $id = $request->project_id;
 
@@ -570,6 +597,9 @@ class ProjectController extends WebController
                 $requirements->project_stage_id = $request->project_stage_id;
                 $requirements->stage_of_funding_id = $request->stage_of_funding_id;
                 $requirements->crowdfund_link = $request->crowdfund_link;
+                if ($requirements->project_step<5) {
+                    $requirements->project_step = '5';
+                }
                 if($requirements->update()) {
                     if (!empty($request->loking_for)) {
                         ProjectLookingFor::query()->where('project_id', $requirements->id)->delete();
@@ -604,12 +634,15 @@ class ProjectController extends WebController
                 return back()->with('error','Project Id not found.');
             }           
             $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
+            if ($UserProject->project_step<5) {
+                throw new Exception('Please fill previous data.');
+            }
             $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectOnlyImage','projectOnlyVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->get();
             $projectData = $projectData->toArray();
 
             return view('website.user.project.project_preview', compact('UserProject','projectData'));
         } catch (Exception $e) {
-            return back()->with('error','Something went wrong.');
+            return back()->with('error',$e->getMessage());
         }
     }
 
