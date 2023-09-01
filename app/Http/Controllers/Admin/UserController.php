@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\UserRequest;
+// use App\Http\Requests\Admin\UserRequest as AdminUserRequest;
+use App\Http\Requests\admin\UserRequest;
 use Illuminate\Validation\ValidationException;
 use App\Models\MasterCountry;
 use App\Models\Plans;
@@ -12,7 +13,6 @@ use App\Models\User;
 use App\Models\UserInvite;
 use App\Models\UserOrganisation;
 use App\Models\UserSubscription;
-use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
@@ -117,10 +117,15 @@ class UserController extends AdminController
     public function store(UserRequest $request)
     {
         try {
-           if ($request->password!=$request->cpassword) {
-            Session::flash('response', ['text'=>'Password and confirm password should be match','type'=>'danger']);
-            return back();
-           }
+            $user=User::query()->where('email',$request->email)->first();
+            if (!empty($user)) {
+                Session::flash('response', ['text'=>'This user already exist','type'=>'danger']);
+                return back();
+            }
+        //    if ($request->password!=$request->confirmed) {
+        //     Session::flash('response', ['text'=>'Password and confirm password should be match','type'=>'danger']);
+        //     return back();
+        //    }
             $user=new User();
             $user->name=$request->first_name.' '.$request->last_name;
             $user->first_name=$request->first_name;
