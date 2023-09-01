@@ -29,7 +29,7 @@
                               <br>
                               <div class="col-md-3">
                                 <div class="form-group">
-                                     <label for="exampleFormControlSelect1">Plan type</label required>
+                                     <label for="exampleFormControlSelect1">Plan type<span class = "text-danger">*</span></label required>
                                      <select  name="plan_type"class="form-control radius" id="listStatus" >
                                      <option value="#">Select plan</option>
                                      <option  value=8 @if ($subscription && $subscription->plan_id == 8) selected @endif >Basic</option>
@@ -40,8 +40,8 @@
                                 </div>
                                   <div class="col-md-3">
                                     <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Expiry date</label>
-                                        <input type="date" class="form-control radius"  placeholder="Select end date" @if ($subscription)
+                                        <label for="exampleFormControlSelect1">Expiry date<span class = "text-danger">*</span></label>
+                                        <input type="date" min="{{date('Y-m-d')}}" class="form-control radius"  placeholder="Select end date" @if ($subscription)
                                             
                                          value="{{date('Y-m-d',strtotime($subscription->subscription_end_date))}}" @endif name="end_date" id="" >
                                    </div>
