@@ -18,7 +18,7 @@
                                         <label class="">First Name<span class = "text-danger">*</span></label>
                                         <input type="text" class="form-control radius" maxlength="40" name="first_name" placeholder="First name" aria-label="Username" value="{{old('first_name')}}" required >
                                         @if($errors->has('first_name'))
-                                          <li class="mt-2 text-danger">{{ $errors->first('first_name') }}</li>
+                                          <div class="mt-2 text-danger">{{ $errors->first('first_name') }}</div>
                                         @endif
                                 </div>
                               </div>
@@ -28,7 +28,7 @@
                                         <label class="">Last Name<span class = "text-danger">*</span></label>
                                         <input type="text" class="form-control radius" maxlength="40" name="last_name" placeholder="Last name" aria-label="Username" value="{{old('last_name')}}" required>
                                         @if($errors->has('last_name'))
-                                          <li class="mt-2 text-danger">{{ $errors->first('last_name') }}</li>
+                                          <div class="mt-2 text-danger">{{ $errors->first('last_name') }}</div>
                                         @endif
                                 </div>
                                
@@ -39,7 +39,7 @@
                                      <label for="exampleFormControlSelect1">Email<span class = "text-danger">*</span></label required value="">
                                        <input type="email" name="email" class="form-control radius" maxlength="50" placeholder="Email" value="{{old('email')}}" id="email" required>
                                        @if($errors->has('email'))
-                                         <li class="mt-2 text-danger">{{ $errors->first('email') }}</li>
+                                         <div class="mt-2 text-danger">{{ $errors->first('email') }}</div>
                                        @endif
                                 </div>
                               </div>
@@ -49,7 +49,7 @@
                                     <label for="exampleFormControlSelect1">Password<span class = "text-danger">*</span></label required value="">
                                       <input type="Password" class="form-control radius" maxlength="20" placeholder="Password" value="" name="password" id="" required>
                                       @if($errors->has('password'))
-                                        <li class="mt-2 text-danger">{{ $errors->first('password') }}</li>
+                                        <div class="mt-2 text-danger">{{ $errors->first('password') }}</div>
                                       @endif
                                 </div>
                               </div>
@@ -59,7 +59,7 @@
                                         <label for="exampleFormControlSelect1">Confirm Password<span class = "text-danger">*</span></label required value="">
                                           <input type="password" class="form-control  radius" maxlength="20 " placeholder="Confirm password"  name="confirmed" id="" required>
                                           @if($errors->has('confirmed'))
-                                           <li class="mt-2 text-danger">{{ $errors->first('confirmed') }}</li>
+                                           <div class="mt-2 text-danger">{{ $errors->first('confirmed') }}</div>
                                            @endif
                                    </div>
                                   </div>
