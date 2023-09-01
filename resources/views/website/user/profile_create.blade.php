@@ -249,7 +249,8 @@
                                 <div class="profile_input">
                                     <label>About</label>
                                     <div class="form_elem">
-                                    <textarea class="outline form-control controlTextLength  is-invalid-remove form-control text_editor @error('about') is-invalid @enderror" text-length="500" maxlength="500" name="about" aria-label="With textarea"><?php if (isset($user->about)) { echo ($user->about);} ?></textarea>
+                                    <textarea class="outline form-control controlTextLength  is-invalid-remove form-control text_editor @error('about') is-invalid @enderror" text-length="500" id="text_editor" maxlength="500" name="about" aria-label="With textarea"><?php if (isset($user->about)) { echo ($user->about);} ?></textarea>
+                                    <div id="word-count"></div>
                                     @error('about')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -651,4 +652,4 @@
       sessionStorage.setItem("freeToastMSG", "1"); 
     }
     </script>
-@endpush
+    @endpush

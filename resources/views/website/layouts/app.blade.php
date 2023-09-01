@@ -87,7 +87,8 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
+
     <script>
         var from_plan_page = undefined;
         $(document).ready(function() {
@@ -312,39 +313,100 @@
             }
         })
     </script>
+    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
     <script>
-        ClassicEditor
-        .create(document.querySelector('.text_editor'), {
-            removePlugins: ['Title'],  // This removes the title plugin
-            toolbar: [ 'undo','redo', 'heading', 'bold', 'italic', 'numberedList', 'bulletedList' ]
-        })
-        .catch(error => {
-            console(error);
-        });
-                
+        tinymce.init({
+        selector: '.text_editor',
+        toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist',
+        plugins: ' anchor pagebreak visualchars wordcount',
+        menubar: false,
+        setup: function(editor) {
+            var max = $('.text_editor').attr('text-length');
+	    editor.on('KeyDown', function(event) {
+		  var numChars = tinymce.activeEditor.plugins.wordcount.body.getCharacterCount();
+          $('.textlength').text(numChars+'/'+max);
+          tinymce.init({
+              selector: 'textarea',  // change this value according to your HTML
+              branding: false
+            });
+		  if (numChars >= max) {
+            if (event.key === 'Backspace') {
+                    return;
+                }
+            $('.textlength').text(numChars+'/'+max);
+            $('.textlength').text(' You have reached the limit').css('color', 'red', 'text-align', 'end');
+			event.preventDefault();
+			return false;
+		  }else {
+                $('.textlength').css('color', 'black'); // Reset color if characters are within limit
+            }
+		})}
+      });
+
     </script>
-    <script>
-        ClassicEditor
-        .create(document.querySelector('.text_editor2'), {
-            // toolbar: [],  // This removes the toolbar
-            removePlugins: ['Title'],  // This removes the title plugin
-        })
-        .catch(error => {
-            console(error);
+
+<script>
+    tinymce.init({
+    selector: '.text_editor1',
+    toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist',
+    plugins: ' anchor pagebreak visualchars wordcount',
+    menubar: false,
+    setup: function(editor) {
+        var max = $('.text_editor1').attr('maxlength');
+    editor.on('KeyDown', function(event) {
+      var numChars = tinymce.activeEditor.plugins.wordcount.body.getCharacterCount();
+      $('.textlength').text(numChars+'/'+max);
+      tinymce.init({
+          selector: 'textarea',  // change this value according to your HTML
+          branding: false
         });
-                
-    </script>
-    <script>
-        ClassicEditor
-        .create(document.querySelector('.text_editor1'), {
-            // toolbar: [],  // This removes the toolbar
-            removePlugins: ['Title'],  // This removes the title plugin
-        })
-        .catch(error => {
-            console(error);
+      if (numChars >= max) {
+        if (event.key === 'Backspace') {
+                return;
+            }
+        $('.textlength').text(numChars+'/'+max);
+        $('.textlength').text(' You have reached the limit').css('color', 'red', 'text-align', 'end');
+        event.preventDefault();
+        return false;
+      }else {
+            $('.textlength').css('color', 'black'); // Reset color if characters are within limit
+        }
+    })}
+  });
+
+</script>
+
+<script>
+    tinymce.init({
+    selector: '.text_editor2',
+    toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist',
+    plugins: ' anchor pagebreak visualchars wordcount',
+    menubar: false,
+    setup: function(editor) {
+        var max = $('.text_editor2').attr('text-length2');
+    editor.on('KeyDown', function(event) {
+      var numChars = tinymce.activeEditor.plugins.wordcount.body.getCharacterCount();
+      $('.textlength').text(numChars+'/'+max);
+      tinymce.init({
+          selector: 'textarea',  // change this value according to your HTML
+          branding: false
         });
-                
-    </script>
-    </body>
+      if (numChars >= max) {
+        if (event.key === 'Backspace') {
+                return;
+            }
+        $('.textlength').text(numChars+'/'+max);
+        $('.textlength').text(' You have reached the limit').css('color', 'red', 'text-align', 'end');
+        event.preventDefault();
+        return false;
+      }else {
+            $('.textlength').css('color', 'black'); // Reset color if characters are within limit
+        }
+    })}
+  });
+
+</script>
+       </body>
 </html>
 
