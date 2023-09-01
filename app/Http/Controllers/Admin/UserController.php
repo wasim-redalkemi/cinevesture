@@ -219,7 +219,7 @@ class UserController extends AdminController
         $subscription->subscription_end_date=$expiryDate;
         $subscription->platform_subscription_id="plan extended by admin";
         $subscription->save();
-        Session::flash('response', ['text'=>'User add successfully!','type'=>'success']);
+        Session::flash('response', ['text'=>'Membership updated successfully','type'=>'success']);
         return redirect()->route('user-management');
     }
         
