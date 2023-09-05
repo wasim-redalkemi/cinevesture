@@ -357,7 +357,7 @@
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-end mt-md-0 mt-4">
                                     <a href="{{route('profile-private-show')}}" class="cancel_btn mx-3" style="text-decoration:none">Cancel</a>
-                                    <button type="submit" class="guide_profile_btn">Save</button>
+                                    <button type="submit" class="guide_profile_btn limit_btn">Save</button>
                                 </div>
                             </div>
                         </div>

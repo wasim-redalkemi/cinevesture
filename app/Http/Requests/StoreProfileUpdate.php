@@ -32,7 +32,7 @@ class StoreProfileUpdate extends FormRequest
             'gender' => 'nullable|string',
             'gender_pronouns' => 'nullable|string',
             'located_in' => 'nullable|string',
-            'about' => 'nullable|string|max:500',
+            'about' => 'nullable|string',
             'available_to_work_in' => 'nullable|string',
             'languages.*'=>'nullable|exists:master_languages,id',
             'skills.*'=>'nullable|exists:master_skills,id',

@@ -134,10 +134,6 @@
             }
         });
 
-        $('.controlTextLength').each(function(){
-            $(this).after("<span class=textlength for_alert text-end>"+ $(this).val().length +" / "+$(this).attr('text-length')+"</span>");
-            $('.textlength').css({"color":"#787885", "text-align":"end", "float":"end"})
-        });
 
         $('.controlTextLength').keyup(function ()
         {
@@ -316,97 +312,90 @@
     <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
     <script>
-        tinymce.init({
-        selector: '.text_editor',
-        toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist',
-        plugins: ' anchor pagebreak visualchars wordcount',
-        menubar: false,
-        setup: function(editor) {
-            var max = $('.text_editor').attr('text-length');
-	    editor.on('KeyDown', function(event) {
-		  var numChars = tinymce.activeEditor.plugins.wordcount.body.getCharacterCount();
-          $('.textlength').text(numChars+'/'+max);
-          tinymce.init({
-              selector: 'textarea',  // change this value according to your HTML
-              branding: false
-            });
-		  if (numChars >= max) {
-            if (event.key === 'Backspace') {
-                    return;
+        $(document).ready(function()
+        {
+            $('.text_editor').click();
+        });
+        function apply_text_editor(select_elem)
+        {
+            var numChars; 
+            // var select_elem = '.text_editor';
+            tinymce.init({
+            selector: select_elem,
+            toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist paste',
+            plugins: ' anchor pagebreak visualchars wordcount paste',
+            paste_as_text:true,
+            menubar: false,
+            branding: false,
+            setup: function(editor) {
+                var text_elem = $(select_elem).parents('.form_elem').find('.textlength');
+                var max = $(select_elem).attr('text-length');
+                function updateCharacterCount(numChars) {
+                    text_elem.text(numChars + '/' + max);
+                    if (numChars >= max) {
+                        text_elem.text(' You have reached the limit').css('color', 'red');
+                    } else {
+                        text_elem.css('color', 'black'); // Reset color if characters are within limit
+                    }
                 }
-            $('.textlength').text(numChars+'/'+max);
-            $('.textlength').text(' You have reached the limit').css('color', 'red', 'text-align', 'end');
-			event.preventDefault();
-			return false;
-		  }else {
-                $('.textlength').css('color', 'black'); // Reset color if characters are within limit
-            }
-		})}
-      });
+                editor.on('init', function () {
+                    var numChars = editor.plugins.wordcount.body.getCharacterCount();
 
+                    updateCharacterCount(numChars);
+                    editor.on('KeyDown', function(event) {
+                        var numChars = editor.plugins.wordcount.body.getCharacterCount();
+                        if (numChars == max ) {
+                            if(event.keyCode === 8 || event.keyCode === 37 || event.keyCode === 38|| event.keyCode === 39|| event.keyCode === 40 || event.keyCode === 116)
+                            {
+                            }
+                            else
+                            {
+                                event.preventDefault();
+                                return false;
+                            }
+                        }
+                        updateCharacterCount(numChars);
+                    });
+                    editor.on('KeyUp', function(event) {
+                        var numChars = editor.plugins.wordcount.body.getCharacterCount();
+                        if (numChars > max ) {
+                            if(event.keyCode === 8 || event.keyCode === 37|| event.keyCode === 38|| event.keyCode === 39|| event.keyCode === 40 || event.keyCode === 116)
+                            {
+                            }
+                            else
+                            {
+                                event.preventDefault();
+                                return false;
+                            }
+                        }
+                        updateCharacterCount(numChars);
+                    });
+                })
+            },
+            paste_preprocess: function(plugin, args) {
+                var clipboard_data = args.content;
+                // var max = $('.text_editor').attr('text-length');
+                var max = $(select_elem).attr('text-length');
+                var counts=(clipboard_data).length;
+                var numChars = tinymce.activeEditor.plugins.wordcount.body.getCharacterCount();
+
+                if (counts+numChars>max) {
+                    var extraChar=counts+numChars-max;
+                    var fillVal=counts-extraChar;
+                    let result = clipboard_data.substring(0, fillVal);
+                    args.content = result;
+                    $(select_elem).text(' You have reached the limit').css('color', 'red');
+                } 
+            }
+        });
+        }
+        $('.controlTextLength').each(function(){
+           var thclass=  $(this).prop('class').split(' ')[2];
+            apply_text_editor('.'+thclass);
+            $(this).after("<span class=textlength for_alert text-end>"+ $(this).val().length +" / "+$(this).attr('text-length')+"</span>");
+            $('.textlength').css({"color":"#787885", "text-align":"end", "float":"end"})
+        });
     </script>
-
-<script>
-    tinymce.init({
-    selector: '.text_editor1',
-    toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist',
-    plugins: ' anchor pagebreak visualchars wordcount',
-    menubar: false,
-    setup: function(editor) {
-        var max = $('.text_editor1').attr('maxlength');
-    editor.on('KeyDown', function(event) {
-      var numChars = tinymce.activeEditor.plugins.wordcount.body.getCharacterCount();
-      $('.textlength').text(numChars+'/'+max);
-      tinymce.init({
-          selector: 'textarea',  // change this value according to your HTML
-          branding: false
-        });
-      if (numChars >= max) {
-        if (event.key === 'Backspace') {
-                return;
-            }
-        $('.textlength').text(numChars+'/'+max);
-        $('.textlength').text(' You have reached the limit').css('color', 'red', 'text-align', 'end');
-        event.preventDefault();
-        return false;
-      }else {
-            $('.textlength').css('color', 'black'); // Reset color if characters are within limit
-        }
-    })}
-  });
-
-</script>
-
-<script>
-    tinymce.init({
-    selector: '.text_editor2',
-    toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist',
-    plugins: ' anchor pagebreak visualchars wordcount',
-    menubar: false,
-    setup: function(editor) {
-        var max = $('.text_editor2').attr('text-length2');
-    editor.on('KeyDown', function(event) {
-      var numChars = tinymce.activeEditor.plugins.wordcount.body.getCharacterCount();
-      $('.textlength').text(numChars+'/'+max);
-      tinymce.init({
-          selector: 'textarea',  // change this value according to your HTML
-          branding: false
-        });
-      if (numChars >= max) {
-        if (event.key === 'Backspace') {
-                return;
-            }
-        $('.textlength').text(numChars+'/'+max);
-        $('.textlength').text(' You have reached the limit').css('color', 'red', 'text-align', 'end');
-        event.preventDefault();
-        return false;
-      }else {
-            $('.textlength').css('color', 'black'); // Reset color if characters are within limit
-        }
-    })}
-  });
-
-</script>
-       </body>
+</body>
 </html>
 
