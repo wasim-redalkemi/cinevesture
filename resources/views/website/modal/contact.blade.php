@@ -30,7 +30,7 @@
                                     </div>
                                 </div>
                                 <div class=" form_elem mt-4">
-                                    <div><input type="text" id="subject" class="myText controlTextLength modal_input" name="subject" maxlength="50" value=""  text-length = "50" placeholder="Subject" required></div>
+                                    <div><input type="text" id="subject" class="myText  modal_input" name="subject" maxlength="50" value=""  text-length = "50" placeholder="Subject" required></div>
                                 </div>
                                 <div class="email_contact for_error_msg" style="display:none">
                                     <strong>This field is required.</strong>

@@ -309,7 +309,7 @@
             }
         })
     </script>
-    <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="https://cdn.tiny.cloud/1/pd5jow5xgpemmx81h7x21gg7ge06vdk0b9fgtuiqxjorhlx0/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
     <script>
         $(document).ready(function()
@@ -322,7 +322,7 @@
             // var select_elem = '.text_editor';
             tinymce.init({
             selector: select_elem,
-            toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist paste',
+            toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist',
             plugins: ' anchor pagebreak visualchars wordcount paste',
             paste_as_text:true,
             menubar: false,
