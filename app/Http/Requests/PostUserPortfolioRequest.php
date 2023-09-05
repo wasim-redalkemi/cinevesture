@@ -25,7 +25,7 @@ class PostUserPortfolioRequest extends FormRequest
     {
         return [
             'portfolio_title' => 'required',
-            'description' => 'required|max:600',
+            'description' => 'required|max:3500',
             'completion_date' => 'required',
             'video_url' => 'required|url',
             'project_specific_skills_id'=> 'required', 
