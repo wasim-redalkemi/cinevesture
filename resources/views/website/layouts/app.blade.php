@@ -390,8 +390,11 @@
         });
         }
         $('.controlTextLength').each(function(){
-           var thclass=  $(this).prop('class').split(' ')[2];
-            apply_text_editor('.'+thclass);
+           var text_editor=$(this).attr("no-text-editor");
+            if (text_editor==undefined) {
+                var thclass=  $(this).prop('class').split(' ')[2];
+                apply_text_editor('.'+thclass);   
+            }
             $(this).after("<span class=textlength for_alert text-end>"+ $(this).val().length +" / "+$(this).attr('text-length')+"</span>");
             $('.textlength').css({"color":"#787885", "text-align":"end", "float":"end"})
         });
