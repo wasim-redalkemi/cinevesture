@@ -389,9 +389,8 @@
             }
         });
         }
-                $('.controlTextLength').each(function(){
+        $('.controlTextLength').each(function(){
            var text_editor=$(this).attr("no-text-editor");
-           console.log(text_editor);
             if (text_editor==undefined) {
                 var thclass=  $(this).prop('class').split(' ')[2];
                 apply_text_editor('.'+thclass);   
