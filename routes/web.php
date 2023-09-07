@@ -179,6 +179,8 @@ Route::group(["middleware" => ["auth", "revalidate", "verified",'is_admin']], fu
 
         Route::group(['prefix' => 'organisation'], function () {
             Route::get('/private-view', [OrganisationController::class, 'index'])->name('organisation-private-view');
+            Route::get('/public-view', [OrganisationController::class, 'publicIndex'])->name('organisation-public-view');
+
             Route::get('/organisation-create', [OrganisationController::class, 'create'])->name('organisation-create')->middleware('plancheck');
             Route::post('/organisation-store', [OrganisationController::class, 'store'])->name('organisation-store');
             // Route::get('/edit/{id}', [OrganisationController::class, 'edit'])->name('organisation-edit');

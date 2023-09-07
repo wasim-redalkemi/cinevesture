@@ -52,6 +52,28 @@ class OrganisationController extends WebController
         }
     }
 
+    public function publicIndex()
+    {
+        try {
+            $editHide=0;
+            $user = auth()->user();
+            $invites= UserInvite::query()->where('user_id',$user->parent_user_id)->get();
+            if($user->parent_user_id>0 && !empty($invites))
+            {
+                foreach ($invites as $key => $invite) {
+                    if($invite->email==$user->email){
+                        $UserOrganisation = UserOrganisation::query()->with(['organizationLanguages.languages','organizationServices.services','country','organizationType'])->where('user_id',$user->parent_user_id)->first();
+                        $editHide=$user->parent_user_id;
+                    }
+                }
+            }else{
+                $UserOrganisation = UserOrganisation::query()->with(['organizationLanguages.languages','organizationServices.services','country','organizationType','memberUser'])->where('user_id',auth()->user()->id)->first();
+            }
+            return view('website.user.organisation.public_organisation',compact(['UserOrganisation','editHide']));
+        } catch (Exception $e) {
+            return back()->with('error', 'Something went wrong.');
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *

@@ -6,6 +6,7 @@ use App\Models\MasterCountry;
 use App\Models\MasterOrganisationService;
 use App\Models\MasterSkill;
 use App\Models\User;
+use App\Models\UserOrganisation;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -41,6 +42,8 @@ class IndustryGuideController extends WebController
     {
        try{ 
         $userType='profile';
+        $organisations='';
+        // dd($request);
         // dd($request->currency);
         $validator = Validator::make($request->all(), [
             'search' => 'nullable',
@@ -54,10 +57,32 @@ class IndustryGuideController extends WebController
         }
        if ($request->currency=='organ') {
         $userType='organ';
+        $organisations=UserOrganisation::query()->with('country','services')->where(function($query) use($request){
+            if (isset($request->search)) { // search name of user
+                $query->where("name", "like", "%$request->search%");
+            }
+        }) 
+        ->where(function($subQuery) use($request)
+        {   
+            if (isset($request->countries)) { // search name of user
+            $subQuery->whereHas('country',function ($q) use($request){
+                    $q->whereIn('id',$request->countries);
+                    
+                });
+            } 
+            if (isset($request->services)) { // search name of user
+                $subQuery->whereHas('services', function ($q) use($request){
+                    $q->whereIn('services_id',$request->services);
+                });
+            } 
+        })
+            ->paginate(10);    
+        // dd($organisations);
        }
         if(!empty($request)){
             $prevDataReturn=['countries'=>$request->countries,'talentType'=>$request->talentType,'skills'=>$request->skills];
         }
+       
         $countries = MasterCountry::query()->orderBy('name','asc')->get();
         $skills = MasterSkill::query()->orderBy('name','asc')->get();
         $services = MasterOrganisationService::query()->orderBy('name','asc')->get();
@@ -100,7 +125,7 @@ class IndustryGuideController extends WebController
         ->orderByDesc('id')
         ->paginate(10);
         $users->appends(request()->input())->links();
-        return view('website.guide.guide_search_result',compact(['countries','skills','users','talent_type','prevDataReturn','services','userType']));                   
+        return view('website.guide.guide_search_result',compact(['countries','skills','users','talent_type','prevDataReturn','services','userType','organisations']));                   
        }catch(Exception $e){
         return back()->with('error', 'Something went wrong.');
        }

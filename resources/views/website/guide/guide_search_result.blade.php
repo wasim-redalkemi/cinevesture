@@ -15,6 +15,17 @@
                 <div class="side-bar-cmn-part">
                 <form class="pb-0 pb-md-5" method="Get" action="{{ route('guide-view') }}">
                     @csrf
+                    <div class="currency_togle justify-content-start mt-4  mb-4">
+                        {{-- <div class="togle_text  mt-0">Profile</div> --}}
+                        <label class="switch mx-3">
+                            <input type="checkbox" id="currency" class="check" 
+                                <?php if($userType=='organ') {echo'checked';} elseif(request('userType')=='profile')
+                                    {echo 'checked';} 
+                                ?> value="{{$userType}}" name="currency">
+                            <span class="slider round"></span>
+                        </label>
+                        <div class="toggle_btn  mt-0">Organisation  </div>
+                    </div>
                     <div class="search-box-container">
                         <div class="search-container w-100">
                             <input type="search" name="search" value="{{request('search')}}" class="w-100 search-box" placeholder="Search">
@@ -26,7 +37,7 @@
                     </div>
                     <div class="sidebar_collapse collapse dont-collapse-sm prevent_hide" id="collapseExample">
                         <div class="dropdown search-page sidebar_data_mobile ">
-                        <div class="dropend search-page search_page_filters_wrap mt-2">
+                        <div class="dropend search-page search_page_filters_wrap mt-2"> 
                                 <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Location
                                 </button>
@@ -55,6 +66,7 @@
                                 </div>
                             </div>
                             <!-- Modal for Confirmation for account deactivate -->
+                            @if ($userType=='profile')
                             <div class="dropend search-page search_page_filters_wrap">
                                 <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Talent Type
@@ -113,6 +125,10 @@
                                 </div>
                             </div>
 
+                            @endif
+                           @if ($userType!='profile')
+                               
+                           
                             <div class="dropend search-page search_page_filters_wrap">
                                 <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Service
@@ -142,28 +158,10 @@
                                     </div>
                                 </div>
                             </div>
-                                <div class="currency_togle justify-content-start mt-4  mb-4">
-                                <div class="togle_text  mt-0">Profile</div>
-                                <label class="switch mx-3">
-                                    <input type="checkbox" id="currency" class="check" 
-                                   
-                                     <?php 
-                                    if($userType=='profile')
-                                        {echo'checked';}
-                                    elseif(request('userType')=='organ')
-                                        {echo 'checked';} 
-                                     ?>
-                                     {{-- value="<?php 
-                                     if($userType=='profile')
-                                         {echo'checked';}
-                                     elseif(request('userType')=='organ')
-                                         {echo 'checked';} 
-                                      ?>" --}}
-                                     name="currency">
-                                    <span class="slider round"></span>
-                                </label>
-                                <div class="togle_text  mt-0">Organisation {{$userType}}</div>
-                            </div>
+                            @endif
+                           
+                            @if ($userType=='profile')
+                                
                             
                             <div class="form-check mt-4">
                                 <input class="form-check-input" <?php if (request('verified') == '1') {
@@ -173,6 +171,7 @@
                                     Recommended Profile
                                 </label>
                             </div>
+                            @endif
                             <div class="mt-4 d-flex justify-content-between">
                                 <input type="submit" class="filter-button watch-now-btn mt-4" Value="Apply">
                                 <a href="{{route('guide-view')}}"><input type="button" class="clear-filter watch-now-btn mt-4 w-100" Value="Clear"></a>
@@ -271,21 +270,19 @@
             </div>
             @else
             <div class="col-md-9">
-                <div class="mb_2 mt-2 mt-md-0">{{($users->total())}} Results Found</div>
+                {{-- <div class="mb_2 mt-2 mt-md-0">{{($organisations->total())}} Results Found</div> --}}
                 <div class="profile_wraper mb-5">
-                @if(count($users) >= 1)
-                @foreach($users as $user)
+                @if(count($organisations) >= 1)
+                @foreach($organisations as $organisation)
                 <div class="border_btm profile_wraper_padding my-3 my-md-0">
                     <div class="d-flex justify-content-between">
                         <div class="d-block d-md-flex">
                         <div class="">
                             <div class="user_profile_container wh_66">
-                                <!-- <img src="{{ asset('images/asset/user-profile.png') }}" /> -->
-                                @if(isset($user->profile_image))
-                                <img src="{{Storage::url($user->profile_image)}}" width="100%"/>
+                                @if(isset($organisations->logo))
+                                <img src="{{Storage::url($user->logo)}}" width="100%"/>
                                 @else
                                 <img src="{{ asset('images/asset/profilepic.png') }}" width="100%" height="100%" />
-                                {{-- <i class="fa fa-user-circle profile_icon me-2" width="100%" height="100%"></i> --}}
                                 @endif
                             </div>
 
@@ -293,41 +290,43 @@
                         <div class="mx-2 mx-md-3 mt-2 mt-md-0">
                             <div class="d-flex align-items-center">
                                 <div class="guide_profile_main_text">
-                                    <a href="{{route('profile-public-show',['id'=>$user->id])}}" class="btn-link text_user_name">{{empty($user->first_name)?'Name':ucfirst($user->first_name).' '.ucfirst($user->last_name);}}</a>
+                                    <a href="{{route('organisation-public-view',['id'=>$organisation->id])}}" class="btn-link text_user_name">{{empty($organisation->name)?'Name':ucfirst($organisation->name);}}</a>
                                 </div>
-                                @if($user->is_profile_verified == '1')<span><button class="verified_cmn_btn mx-3">
+                                {{-- @if($user->is_profile_verified == '1')<span><button class="verified_cmn_btn mx-3">
                                     <img src="{{ asset('images/asset/verified-badge.svg') }}" width="13px"  alt="image"><span class="mx-1"> VERIFIED</span></button></span>
-                                @endif
+                                @endif --}}
                                 
 
                             </div>
 
                             <div class="posted_job_header">
-                                @if(isset($user->job_title))
-                                {{$user->job_title}}
+                                @if(isset($organisation->available_to_work_in))
+                                {{$organisation->available_to_work_in}}
                                 @else
                                 -
                                 @endif
                             </div>
                             <div class="preview_headtext mt-1 lh_54 candy-pink">
-                                @if(isset($user->country))
-                                {{$user->country->name}}
+                                @if(isset($organisation->location_in))
+                                {{$organisation->country->name}}
                                 @else
                                 -
                                 @endif
                             </div>
                             <div class="posted_job_header Aubergine_at_night">
-                                @if(isset($user->about))
-                                {{$user->about}}
+                                @if(isset($organisation->about))
+                                @php
+                                  echo  $organisation->about
+                                @endphp
                                 @else
                                 -
                                 @endif
                             </div>
-                            <div class="d-flex justify-content-between mt-4">
+                            <div class="d-flex justify-content-between mt-1">
                                 <div class="">
-                                    @if(isset($user->skill[0]))
-                                    @foreach($user->skill as $skill)
-                                    <button class="curv_cmn_btn">{{$skill->name}}</button>
+                                    @if(isset($organisation->services[0]))
+                                    @foreach($organisation->services as $service)
+                                    <button class="curv_cmn_btn">{{$service->name}}</button>
                                     @endforeach
                                     @else
                                     -
@@ -336,9 +335,9 @@
                             </div>
                         </div>
                         </div>
-                        <div class="">
+                        {{-- <div class="">
                             <div> <i class="fa <?php if(isset($user->isfavouriteProfile)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$user->id}}" aria-hidden="true"></i></div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
                 @endforeach
@@ -347,8 +346,8 @@
                 {!! config('constants.NO_DATA_SEARCH') !!}
                 @endif
                 <div>
-                    {{-- {!! $users->links() !!} --}}
-                    {!! $users->onEachSide(0)->links() !!}
+                    {!! $organisations->links() !!}
+                    {{-- {!! $users->onEachSide(0)->links() !!} --}}
 
                 </div>
 
@@ -391,14 +390,14 @@
         plan = $(this).val();
         console.log(plan);
         // return false
-        currency = 'profile';
+        currency = 'organ';
         link = "{{route('show-guide')}}";
           if(this.checked) { 
-            currency = 'profile';
+            currency = 'organ';
             params = '?plan_time='+plan+'&currency='+currency
             window.location.href = link+params;
           } else{
-            currency = 'organ';
+            currency = 'profile';
             params = '?plan_time='+plan+'&currency='+currency
             window.location.href = link+params;
           }
