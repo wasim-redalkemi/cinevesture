@@ -14,7 +14,7 @@ class PlanController extends WebController
     
     public function showPlans(Request $request)
     {    
-        $freeTrial=false;                
+        $freeTrial=false;    
         $plans = Plans::query()->with('getRelationalData.getModule','getRelationalData.getOperation')
                  ->where(function($q) use($request){
                     // if(isset($request->plan_time)){

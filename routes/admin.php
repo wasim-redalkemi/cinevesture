@@ -34,6 +34,11 @@ Route::group(['prefix'=>'admin','middleware' => ['adminAuth']],function()
     Route::group(['prefix'=>'user-management'],function()
     {
         Route::get('/list', [AdminUserController::class, 'index'])->name('user-management');
+        Route::get('/create', [AdminUserController::class, 'create'])->name('user-create');
+        Route::post('/', [AdminUserController::class, 'store'])->name('user-store');
+        Route::get('/user-plan-edit/{id}', [AdminUserController::class, 'editPlan'])->name('user-plan');
+        Route::post('/user-plan', [AdminUserController::class, 'planUpdate'])->name('user-plan-update');
+
         Route::get('/delete/{id}', [AdminUserController::class, 'destroy'])->name('user-delete');
         Route::get('/user_status', [AdminUserController::class, 'changeStatus'])->name('user-status-change');
     });  

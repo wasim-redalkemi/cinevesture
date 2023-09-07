@@ -32,7 +32,7 @@ class ProfieQualificationRequest extends FormRequest
             'description' => 'required|max:4000',
         ];
     }
-    public function messages()
+   public function messages()
     {
         return [
            'start_year.before_or_equal' => 'The start year must be before or equal to end year.',
