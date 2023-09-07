@@ -270,7 +270,7 @@
             </div>
             @else
             <div class="col-md-9">
-                {{-- <div class="mb_2 mt-2 mt-md-0">{{($organisations->total())}} Results Found</div> --}}
+                <div class="mb_2 mt-2 mt-md-0">{{($organisations->total())}} Results Found</div>
                 <div class="profile_wraper mb-5">
                 @if(count($organisations) >= 1)
                 @foreach($organisations as $organisation)

@@ -49,6 +49,8 @@ class IndustryGuideController extends WebController
             'search' => 'nullable',
             'locations.*' => 'nullable|exists:countries,id',
             'skills.*' => 'nullable|exists:master_skills,id',
+            'services.*' => 'nullable|exists:master_organisation_services,id',
+
             // 'talent.*' => 'nullable|exists:master_skils,name',
         ]);
     
@@ -77,7 +79,6 @@ class IndustryGuideController extends WebController
             } 
         })
             ->paginate(10);    
-        // dd($organisations);
        }
         if(!empty($request)){
             $prevDataReturn=['countries'=>$request->countries,'talentType'=>$request->talentType,'skills'=>$request->skills];
