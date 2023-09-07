@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Website;
 use App\Http\Controllers\WebController;
 use App\Models\MasterCountry;
+use App\Models\MasterOrganisationService;
 use App\Models\MasterSkill;
 use App\Models\User;
 use Exception;
@@ -39,6 +40,8 @@ class IndustryGuideController extends WebController
     public function index(Request $request)
     {
        try{ 
+        $userType='profile';
+        // dd($request->currency);
         $validator = Validator::make($request->all(), [
             'search' => 'nullable',
             'locations.*' => 'nullable|exists:countries,id',
@@ -49,12 +52,15 @@ class IndustryGuideController extends WebController
         if ($validator->fails()) {
             return back()->with($validator)->withInput();
         }
-       
+       if ($request->currency=='organ') {
+        $userType='organ';
+       }
         if(!empty($request)){
             $prevDataReturn=['countries'=>$request->countries,'talentType'=>$request->talentType,'skills'=>$request->skills];
         }
         $countries = MasterCountry::query()->orderBy('name','asc')->get();
         $skills = MasterSkill::query()->orderBy('name','asc')->get();
+        $services = MasterOrganisationService::query()->orderBy('name','asc')->get();
         $talent_type = User::query()->where('job_title','!=',null)->where('user_type','U')->where('job_title','!=',"")->groupBy('job_title')->get();
         $users = User::query()->where(function($query) use($request){
             if (isset($request->search)) { // search name of user
@@ -94,7 +100,7 @@ class IndustryGuideController extends WebController
         ->orderByDesc('id')
         ->paginate(10);
         $users->appends(request()->input())->links();
-        return view('website.guide.guide_search_result',compact(['countries','skills','users','talent_type','prevDataReturn']));                   
+        return view('website.guide.guide_search_result',compact(['countries','skills','users','talent_type','prevDataReturn','services','userType']));                   
        }catch(Exception $e){
         return back()->with('error', 'Something went wrong.');
        }

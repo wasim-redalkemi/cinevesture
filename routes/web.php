@@ -171,7 +171,7 @@ Route::group(["middleware" => ["auth", "revalidate", "verified",'is_admin']], fu
 
     Route::group(['prefix' => 'industry-guide'], function () {
         Route::get('/profile-filter', [IndustryGuideController::class, 'index'])->name('guide-view');
-        Route::get('/profile-show', [IndustryGuideController::class, 'show'])->middleware('plancheck')->name('show-guide');
+        Route::get('/profile-show', [IndustryGuideController::class, 'index'])->middleware('plancheck')->name('show-guide');
         Route::group(['prefix' => 'endorsements'], function () {
             Route::get('/', [EndorsementController::class, 'index'])->name('endorsement-view');
             Route::post('/status', [EndorsementController::class, 'changeStatus'])->name('endorsement-status-change');

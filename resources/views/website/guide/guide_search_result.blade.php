@@ -112,6 +112,59 @@
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="dropend search-page search_page_filters_wrap">
+                                <button class="btn dropdown-toggle w-100" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Service
+                                </button>
+                                <!-- Modal for Category List -->
+
+                                <div class="dropdown-menu filter_modal_wrap">
+                                    <div class="filter_option_wrap">
+                                        <div class="container no-padding">
+                                            <div class="d-flex flex-wrap">
+                                                @foreach($services as $service)
+                                                @php
+                                                    $is_elem_ex = false;
+                                                    if(in_array('skills',array_keys($prevDataReturn)) && !empty($prevDataReturn['services']) && in_array($service->id,$prevDataReturn['services'])){
+                                                        $is_elem_ex = true;
+                                                    }
+                                                @endphp
+                                                <div class="mx-2 for_active">
+                                                    <label class="d-flex align-items-center search_page_filters_data @if($is_elem_ex) search_page_filters_data_active @endif ">
+                                                        <input class="form-check-input me-1 d-none" type="checkbox" @if($is_elem_ex) checked @endif name="services[]" value="{{$service->id}}">
+                                                        {{$service->name}}
+                                                    </label>
+                                                </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class="currency_togle justify-content-start mt-4  mb-4">
+                                <div class="togle_text  mt-0">Profile</div>
+                                <label class="switch mx-3">
+                                    <input type="checkbox" id="currency" class="check" 
+                                   
+                                     <?php 
+                                    if($userType=='profile')
+                                        {echo'checked';}
+                                    elseif(request('userType')=='organ')
+                                        {echo 'checked';} 
+                                     ?>
+                                     {{-- value="<?php 
+                                     if($userType=='profile')
+                                         {echo'checked';}
+                                     elseif(request('userType')=='organ')
+                                         {echo 'checked';} 
+                                      ?>" --}}
+                                     name="currency">
+                                    <span class="slider round"></span>
+                                </label>
+                                <div class="togle_text  mt-0">Organisation {{$userType}}</div>
+                            </div>
+                            
                             <div class="form-check mt-4">
                                 <input class="form-check-input" <?php if (request('verified') == '1') {
                                                                     echo 'checked';
@@ -130,6 +183,7 @@
                 </form>
                 </div>
             </div>
+            @if ($userType=='profile')
             <div class="col-md-9">
                 <div class="mb_2 mt-2 mt-md-0">{{($users->total())}} Results Found</div>
                 <div class="profile_wraper mb-5">
@@ -213,6 +267,93 @@
                 </div>
 
             </div>
+            @else
+            <div class="col-md-9">
+                <div class="mb_2 mt-2 mt-md-0">{{($users->total())}} Results Found</div>
+                <div class="profile_wraper mb-5">
+                @if(count($users) >= 1)
+                @foreach($users as $user)
+                <div class="border_btm profile_wraper_padding my-3 my-md-0">
+                    <div class="d-flex justify-content-between">
+                        <div class="d-block d-md-flex">
+                        <div class="">
+                            <div class="user_profile_container wh_66">
+                                <!-- <img src="{{ asset('images/asset/user-profile.png') }}" /> -->
+                                @if(isset($user->profile_image))
+                                <img src="{{Storage::url($user->profile_image)}}" width="100%"/>
+                                @else
+                                <img src="{{ asset('images/asset/profilepic.png') }}" width="100%" height="100%" />
+                                {{-- <i class="fa fa-user-circle profile_icon me-2" width="100%" height="100%"></i> --}}
+                                @endif
+                            </div>
+
+                        </div>
+                        <div class="mx-2 mx-md-3 mt-2 mt-md-0">
+                            <div class="d-flex align-items-center">
+                                <div class="guide_profile_main_text">
+                                    <a href="{{route('profile-public-show',['id'=>$user->id])}}" class="btn-link text_user_name">{{empty($user->first_name)?'Name':ucfirst($user->first_name).' '.ucfirst($user->last_name);}}</a>
+                                </div>
+                                @if($user->is_profile_verified == '1')<span><button class="verified_cmn_btn mx-3">
+                                    <img src="{{ asset('images/asset/verified-badge.svg') }}" width="13px"  alt="image"><span class="mx-1"> VERIFIED</span></button></span>
+                                @endif
+                                
+
+                            </div>
+
+                            <div class="posted_job_header">
+                                @if(isset($user->job_title))
+                                {{$user->job_title}}
+                                @else
+                                -
+                                @endif
+                            </div>
+                            <div class="preview_headtext mt-1 lh_54 candy-pink">
+                                @if(isset($user->country))
+                                {{$user->country->name}}
+                                @else
+                                -
+                                @endif
+                            </div>
+                            <div class="posted_job_header Aubergine_at_night">
+                                @if(isset($user->about))
+                                {{$user->about}}
+                                @else
+                                -
+                                @endif
+                            </div>
+                            <div class="d-flex justify-content-between mt-4">
+                                <div class="">
+                                    @if(isset($user->skill[0]))
+                                    @foreach($user->skill as $skill)
+                                    <button class="curv_cmn_btn">{{$skill->name}}</button>
+                                    @endforeach
+                                    @else
+                                    -
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="">
+                            <div> <i class="fa <?php if(isset($user->isfavouriteProfile)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-profile" style="cursor: pointer;" data-id="{{$user->id}}" aria-hidden="true"></i></div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+                @else
+                </div>
+                {!! config('constants.NO_DATA_SEARCH') !!}
+                @endif
+                <div>
+                    {{-- {!! $users->links() !!} --}}
+                    {!! $users->onEachSide(0)->links() !!}
+
+                </div>
+
+            </div>
+            @endif
+           
+            
         </div>
 </section>
 
@@ -242,5 +383,23 @@
 //     	$('.collapse').collapse('show');	    
 //     }
 // });
+
+    $('#currency').change(function() { 
+        // debugger
+        plan = $(this).val();
+        console.log(plan);
+        // return false
+        currency = 'profile';
+        link = "{{route('show-guide')}}";
+          if(this.checked) { 
+            currency = 'profile';
+            params = '?plan_time='+plan+'&currency='+currency
+            window.location.href = link+params;
+          } else{
+            currency = 'organ';
+            params = '?plan_time='+plan+'&currency='+currency
+            window.location.href = link+params;
+          }
+    });
 </script>
 @endpush
