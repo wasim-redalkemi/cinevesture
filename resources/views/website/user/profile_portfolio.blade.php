@@ -51,9 +51,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="profile_input">
-                                    <label>Description <span class = "steric_sign_design">*</span></label>
+                                    <label>Description <span class = "steric_sign_design ">*</span></label>
                                     <div class="form_elem">
-                                    <textarea class="form-control controlTextLength @error('description') is-invalid @enderror" name="description"  aria-label="With textarea" text-length="600" maxlength="600"  required>{{{ request::old('description') }}}</textarea>
+                                    <textarea class="form-control controlTextLength text_editor @error('description') is-invalid @enderror" name="description"  aria-label="With textarea" text-length="600" maxlength="600"  required>{{{ request::old('description') }}}</textarea>
                                     @error('description')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

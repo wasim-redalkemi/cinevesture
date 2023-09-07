@@ -103,7 +103,9 @@ input:checked + .slider:before {
                           Unpublished
                         @endif </div>
                         <div class="guide_profile_main_subtext Aubergine_at_night mt-1">
-                        {{$edm->comment}}
+                          @php
+                              echo $edm->comment
+                          @endphp
                         </div>
                     </div>
                     </div>

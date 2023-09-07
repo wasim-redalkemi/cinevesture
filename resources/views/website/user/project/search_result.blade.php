@@ -268,7 +268,9 @@
                                         $small_logline  = $project->logline;
                                     } 
                                 @endphp
-                                <div class="search-head-subtext">@if (isset($small_logline)){{ucFirst($small_logline)}} @endif</div>
+                                <div class="search-head-subtext">@if (isset($small_logline))@php
+                                    echo ucFirst($small_logline)
+                                @endphp  @endif</div>
                                 <table class="table mt-1 lookingfor_table_width">
                                     <tbody class="search-table-body">
                                         <tr>

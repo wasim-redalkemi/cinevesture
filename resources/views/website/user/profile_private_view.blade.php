@@ -189,15 +189,26 @@
                                     <div class="inp_data Aubergine_at_night mt-2">
                                         <p>
                                             @if (!empty($user->about))
-                                            {{ $user->about }}
+                                            @php
+                                                echo $user->about
+                                            @endphp
                                             @else
                                             <span><b>-</b></span>
                                             @endif
                                         </p>
                                     </div>
                                 </div>
-                                <div class="col-md-2"></div>
-                                
+                                <div class="col-md-1"></div>
+                                <div class="col-md-5">
+                                    <div class="guide_profile_main_text mb-2">Introduction Video</div>
+                                    @if($user->intro_video_link)
+                                    <div class="playVideoWrap" video-url="{{ (isset($user->intro_video_link))?$user->intro_video_link:''; }}">
+                                        <img src="{{ (isset($user->intro_video_thumbnail))?$user->intro_video_thumbnail:''; }}" width="100%" alt="">
+                                    </div>
+                                    @else
+                                        <span><b>-</b></span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -306,7 +317,10 @@
                                         {{$v->company}} | {{$v->employement_type_id}}
                                     </div>
                                     <div class="inp_data Aubergine_at_night mt-2">
-                                        <p>{{$v->description}}</p>
+                                        <p>
+                                        @php
+                                           echo $v->description
+                                        @endphp</p>
                                     </div>
                                     @endforeach
                                     <div class="clearfix"></div>
@@ -338,7 +352,9 @@
                                             {{$v->degree_name}} | {{$v->field_of_study}} | {{$v->start_year}} | {{$v->end_year}}
                                         </div>
                                         <div class="inp_data Aubergine_at_night mt-2">
-                                            <p>{{$v->description}}</p>
+                                            <p>@php
+                                                echo $v->description
+                                            @endphp</p>
                                         </div>
                                         @endforeach
                                     <div class="clearfix"></div>
@@ -374,7 +390,9 @@
                                     <div class="col-md-9">
                                         <div class="inp_data Aubergine_at_night">
                                             <p>
-                                                {{$edm->comment}}
+                                                @php
+                                                    echo $edm->comment
+                                                @endphp
                                             </p>
                                         </div>
                                     </div>

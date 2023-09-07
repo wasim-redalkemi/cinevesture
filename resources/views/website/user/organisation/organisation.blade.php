@@ -131,7 +131,9 @@
                                 <div class="guide_profile_main_subtext Aubergine_at_night mt-2 pr_35">
                                     <p>
                                         @if (!empty($UserOrganisation->about))
-                                        {{ucFirst($UserOrganisation->about) }}
+                                        @php
+                                            echo ucFirst($UserOrganisation->about)
+                                        @endphp
                                         @else
                                         <span><b>-</b></span>
                                         @endif

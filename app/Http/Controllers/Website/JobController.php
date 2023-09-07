@@ -88,8 +88,8 @@ class JobController extends WebController
     }
 
     public function validatejob(CreateJobRequest $request)
-    {        
-        $id  = request('job_id');
+    {     
+                $id  = request('job_id');
         try {
             if (!is_null($id)) {
                 $response = $this->jobStoreEdit( $request);
