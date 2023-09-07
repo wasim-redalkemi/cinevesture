@@ -10,9 +10,9 @@ use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CreateJobRequest extends FormRequest
 {
-    
-    use Utils;
 
+    use Utils;
+    
     protected function failedValidation(Validator $validator)
     {        
         throw new HttpResponseException($this->jsonResponse(false,$validator->errors(),[]));
@@ -36,13 +36,14 @@ class CreateJobRequest extends FormRequest
      */
     public function rules()
     {
+        
         return [
             'save_type'=>'required',
             'job_title' => 'required|max:100',                    
             'employments.*' => 'required',                    
             'workspaces.*' => 'required',
             'company_name' => 'required',
-            'description' => 'required|max:2600',                     
+            'description' => 'required|max:5500',                     
             'skills.*' => 'required'
         ];
     }

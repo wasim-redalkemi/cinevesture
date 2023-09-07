@@ -29,10 +29,10 @@ class ProfieQualificationRequest extends FormRequest
             'field_of_study' => 'required|max:50',
             'start_year' => 'required|date_format:Y|before:end_year',
             'end_year' => 'required|date_format:Y|after:start_year',
-            'description' => 'required|max:1000',
+            'description' => 'required|max:4000',
         ];
     }
-    public function messages()
+   public function messages()
     {
         return [
            'start_year.before_or_equal' => 'The start year must be before or equal to end year.',

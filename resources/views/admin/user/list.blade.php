@@ -162,6 +162,7 @@
                                                 {{'-'}}
                                         @endif
                                         @endforeach
+                                        <a href="{{route('user-plan',['id'=>$user->id])}}"><i class="fa fa-edit text-black"></i></a>
                                     </td>
                                     <td><?php echo(date("d-m-Y", strtotime($user->created_at))); ?></td>
                                     <td class="noExport">

@@ -44,7 +44,8 @@
                             </div>
                             <div class="public-head-res-subtext text-start">
                                 @if (isset($UserProject->logline))
-                                <span class="blackTextShadow">    {{ $UserProject->logline}}</span>
+                                <span class="blackTextShadow">    @php echo $UserProject->logline @endphp
+                                </span>
                                 @else
                                 <span><b>-</b></span>
                                 @endif
@@ -218,7 +219,10 @@
                 <div class="public-subheading-text mt-3 mt-md-2">
                     <p>
                         @if (!empty(($UserProject->synopsis)))
-                        {{ ucFirst($UserProject->synopsis)}}
+                        @php
+                            
+                            echo ucFirst($UserProject->synopsis)
+                        @endphp
                         @else
                         <span><b>-</b></span>
                         @endif
@@ -234,7 +238,9 @@
                     <div class="public-subheading-text mt-3 mt-md-2">
                         <p>
                             @if (!empty(($UserProject->director_statement)))
-                            {{ ucFirst($UserProject->director_statement)}}
+                            @php
+                               echo ucFirst($UserProject->director_statement)
+                            @endphp
                             @else
                             <span><b>-</b></span>
                             @endif

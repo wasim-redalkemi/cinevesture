@@ -37,7 +37,7 @@
                 <div class="col-md-8">
                     <div>
                         <div><label for="">Message</label></div>
-                       <div class="form_elem"> <textarea class="radius form-control" type="text-field" style="height: 150px;" value="{{$query->message}}" name="" id="" disabled>{{$query->message}}</textarea></div>
+                       <div class="form_elem"> <textarea class="radius form-control text_editor" type="text-field" style="height: 150px;" value="{{$query->message}}" name=""  disabled>{{$query->message}}</textarea></div>
                        
                     </div>
                 </div>

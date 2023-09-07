@@ -232,7 +232,9 @@
                             </div>
                             <div class="posted_job_header Aubergine_at_night">
                                 @if(isset($user->about))
-                                {{$user->about}}
+                                @php
+                                    echo $user->about
+                                @endphp
                                 @else
                                 -
                                 @endif
