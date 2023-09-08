@@ -57,8 +57,8 @@ class IndustryGuideController extends WebController
         if ($validator->fails()) {
             return back()->with($validator)->withInput();
         }
-       if ($request->currency=='organ') {
-        $userType='organ';
+       if ($request->type=='organisation') {
+        $userType='organisation';
         $organisations=UserOrganisation::query()->with('country','services')->where(function($query) use($request){
             if (isset($request->search)) { // search name of user
                 $query->where("name", "like", "%$request->search%");
@@ -80,7 +80,7 @@ class IndustryGuideController extends WebController
         })
             ->paginate(10);    
        }
-        if(!empty($request)){
+            if(!empty($request)){
             $prevDataReturn=['countries'=>$request->countries,'talentType'=>$request->talentType,'skills'=>$request->skills];
         }
        

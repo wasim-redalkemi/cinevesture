@@ -15,17 +15,23 @@
                 <div class="side-bar-cmn-part">
                 <form class="pb-0 pb-md-5" method="Get" action="{{ route('guide-view') }}">
                     @csrf
-                    <div class="currency_togle justify-content-start mt-4  mb-4">
-                        {{-- <div class="togle_text  mt-0">Profile</div> --}}
-                        <label class="switch mx-3">
-                            <input type="checkbox" id="currency" class="check" 
-                                <?php if($userType=='organ') {echo'checked';} elseif(request('userType')=='profile')
-                                    {echo 'checked';} 
-                                ?> value="{{$userType}}" name="currency">
-                            <span class="slider round"></span>
-                        </label>
-                        <div class="toggle_btn  mt-0">Organisation  </div>
+                    <div class="toggle_container">
+                        <div class="switches-container mb-4">
+                            <input type="radio" id="switchMonthly" <?php if($userType=='profile') {echo'checked';} ?> name="type"  value="Profile"  />
+
+                            <input type="radio" id="switchYearly" <?php if($userType=='organisation') {echo'checked';}?>  name="type" value="organisation" />
+                            <label for="switchMonthly">Profile</label>
+                            <label for="switchYearly">Organization</label>
+                            <div class="switch-wrapper">
+                            <div class="switch">
+                                <div>Profile</div>
+                                <div>Organization</div>
+                            </div>
+                            </div>
+                        </div>
+
                     </div>
+                   
                     <div class="search-box-container">
                         <div class="search-container w-100">
                             <input type="search" name="search" value="{{request('search')}}" class="w-100 search-box" placeholder="Search">
@@ -378,6 +384,36 @@
 
     $(".side-bar-cmn-part").collapse("hide");
 
+    // $('#currency').change(function() { 
+    //     plan = $(this).val();
+    //     console.log(plan);
+    //     currency = 'organ';
+    //     link = "{{route('show-guide')}}";
+    //       if(this.checked) { 
+    //         currency = 'organ';
+    //         params = '?currency='+currency
+    //         window.location.href = link+params;
+    //       } else{
+    //         currency = 'profile';
+    //         params = '?currency='+currency
+    //         window.location.href = link+params;
+    //       }
+    // });
+
+    $('#switchYearly,#switchMonthly').change(function() { 
+        plan = $(this).val();
+        link = "{{route('show-guide')}}";
+          if(this.checked) { 
+            // currency = 'profile';
+            params = '?type='+plan
+            window.location.href = link+params;
+          } else{
+            // currency = 'organisation';
+            params = '?type='+plan
+            window.location.href = link+params;
+          }
+    });
+    
 //     $(document).click(function(e) {
 // 	if (!$(e.target).is('.for_test')) {
 //         console.log("called");
@@ -385,22 +421,6 @@
 //     }
 // });
 
-    $('#currency').change(function() { 
-        // debugger
-        plan = $(this).val();
-        console.log(plan);
-        // return false
-        currency = 'organ';
-        link = "{{route('show-guide')}}";
-          if(this.checked) { 
-            currency = 'organ';
-            params = '?plan_time='+plan+'&currency='+currency
-            window.location.href = link+params;
-          } else{
-            currency = 'profile';
-            params = '?plan_time='+plan+'&currency='+currency
-            window.location.href = link+params;
-          }
-    });
+   
 </script>
 @endpush
