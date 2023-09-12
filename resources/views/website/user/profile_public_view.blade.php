@@ -538,22 +538,24 @@
             center: false,
             items: 1,
             responsive: {
-                480: {
-                    items: 1
-                },
-                768: {
-                    items: 2
-                },
-                1024: {
-                    items: 3
+                480: { items: 1 },
+                768: { items: 2 },
+                1080: {
+                items: 4.5
                 },
                 1225: {
-                    items: 3
+                items: 4.8
                 },
                 1400: {
-                    items: 3.75
+                items: 5.8
+                },
+                1900: {
+                items: 7.8
+                },
+                1925: {
+                items: 8
                 }
-            },
+        },
         });
 
         $(".project.owl-carousel").owlCarousel({

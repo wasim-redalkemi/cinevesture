@@ -16,6 +16,7 @@ use App\Models\UserSubscription;
 use Exception;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends AdminController
 {
@@ -131,7 +132,7 @@ class UserController extends AdminController
             $user->first_name=$request->first_name;
             $user->last_name=$request->last_name;
             $user->email=$request->email;
-            $user->password=$request->password;
+            $user->password=Hash::make($request->password);
             $user->save();
             Session::flash('response', ['text'=>'User add successfully!','type'=>'success']);
             return redirect()->route('user-management');
@@ -195,7 +196,8 @@ class UserController extends AdminController
      */
     public function planUpdate(Request $request)
     {
-        $plan=Plans::find($request->plan_type);
+        try {
+            $plan=Plans::find($request->plan_type);
         $expiryDate = date("Y-m-d 23:59:59", strtotime($request->end_date));
         $subscription=UserSubscription::query()->where('user_id',$request->user_id)->first();
         if (empty($subscription)) {
@@ -216,11 +218,16 @@ class UserController extends AdminController
         $subscription->plan_time_quntity=$plan->plan_time_quntity;
         $subscription->plan_name=$plan->plan_name;
         $subscription->plan_amount=$plan->plan_amount;
+        $subscription->status='active';
         $subscription->subscription_end_date=$expiryDate;
         $subscription->platform_subscription_id="plan extended by admin";
         $subscription->save();
         Session::flash('response', ['text'=>'Membership updated successfully','type'=>'success']);
         return redirect()->route('user-management');
+        } catch (\Throwable $e) {
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
+        }
     }
         
     /**

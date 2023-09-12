@@ -405,27 +405,31 @@ a {
     padding: 20px;
     display: flex;
     justify-content: space-between;
-    font-size: 18px;
+    font-size: 15px;
     color: #FAF8FB !important;
 }
 .like_btn_wrapper {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 110px;
+    right: 10px;
     /* padding: 20px; */
     display: flex;
     z-index: 100;
 }
-
+.b_r{
+    border-radius: 5px;
+}
+.c_red{
+    color: red!important;
+}
 .secondry-card-bottom-container {
     position: absolute;
     bottom: 0px;
     left: 0px;
-    font-size: 18px;
     color: #FAF8FB;
     padding: 20px;
     font-weight: 400 !important;
-    font-size: 16px !important;
+    font-size: 14px !important;
     line-height: 150%;
 }
 
@@ -1512,6 +1516,9 @@ label {
 
 .icon-size {
     font-size: 22px !important;
+}
+.icon-size-heart {
+    font-size: 18px !important;
 }
 .plus-icon-size {
     font-size: 26px !important;
@@ -2896,8 +2903,8 @@ transition: 0.3s all ease;
 }
 
 .home_img_wrap {
-    width: 350px;
-    height: 200px;
+    width: 230px;
+    height: 150px;
     position: relative;
     overflow: hidden;
     display: flex;
@@ -2931,8 +2938,8 @@ transition: 0.3s all ease;
 }
 
 .related .home_img_wrap {
-    width: 300px;
-    height: 200px;
+    width: 230px;
+    height: 150px;
     position: relative;
     overflow: hidden;
     display: flex;

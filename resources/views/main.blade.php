@@ -151,7 +151,7 @@
               </div>
               <div class="test owl-carousel owl-theme">
                 @foreach ($v->lists as $k1=>$v1)
-                <div class="home_img_wrap owl_item_at_{{$k1}}">
+                <div class="home_img_wrap b_r owl_item_at_{{$k1}}">
                   <div class="home_slider">
                     <div class="main_img_elem_wrap">
                       <div class="img-container">
@@ -188,9 +188,9 @@
                         @if (isset($v1->projectLanguages[0]) && !empty($v1->projectLanguages[0]))
                          <span class="white"> {{$v1->projectLanguages[0]['name']}} /</span>
                         @endif
-                        @if (isset($v1->genres[0]) && !empty($v1->genres[0]))
+                        {{-- @if (isset($v1->genres[0]) && !empty($v1->genres[0]))
                          <span class="white"> {{$v1->genres[0]['name']}} </span>
-                        @endif
+                        @endif --}}
                         {{-- @php
                           $country_data = $v1->toArray();
                         @endphp
@@ -203,7 +203,7 @@
                     </a>
                   <div class="like_btn_wrapper">
                      <div>
-                      <i class="text-white fa  <?php if(isset($v1->isfavouriteProjectMain[0]->id)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-project " style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
+                      <i class="text-white fa c_red icon-size-heart <?php if(isset($v1->isfavouriteProjectMain[0]->id)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-project " style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
                     </div>
                   </div>
 
@@ -299,28 +299,28 @@
       autoplay: true,
       loop: false,
       nav: true,
-      margin: 20,
+      margin: 0,
       center: false,
       items: 1,
       autoplayHoverPause: true,
-      stagePadding: 50,
+      stagePadding: 00,
       responsive: {
         480: { items: 1 },
         768: { items: 2 },
         1080: {
-          items: 2.75
+          items: 4.5
         },
         1225: {
-          items: 3.5
+          items: 5.1
         },
         1400: {
-          items: 4
+          items: 5.8
         },
         1900: {
-          items: 5
+          items: 7.8
         },
         1925: {
-          items: 5.5
+          items: 8
         }
       },
     });

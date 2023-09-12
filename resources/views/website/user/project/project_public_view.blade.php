@@ -544,7 +544,7 @@
                                     </div>
                                 </a> 
                                     <div class="like_btn_wrapper">
-                                        <div> <i class="fa <?php if(isset($value->isfavouriteProjectOne)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size text-white like-project" style="cursor: pointer;" data-id="{{$value->id}}" aria-hidden="true"></i></div>
+                                        <div> <i class="fa c_red icon-size-heart <?php if(isset($value->isfavouriteProjectOne)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size text-white like-project" style="cursor: pointer;" data-id="{{$value->id}}" aria-hidden="true"></i></div>
                                     </div>  
                                 </div>                            
                                 
@@ -706,16 +706,19 @@
         480: { items: 1 },
         768: { items: 2 },
         1080: {
-          items: 3
+          items: 4.5
         },
         1225: {
-          items: 3
+          items: 4.8
         },
         1400: {
-          items: 4
+          items: 5.8
+        },
+        1900: {
+          items: 7.8
         },
         1925: {
-          items: 5.5
+          items: 8
         }
       },
     });
