@@ -834,7 +834,8 @@ class ProjectController extends WebController
                 if (isset($request->geners)) { // search name of user
                     $subQuery->whereHas('genres', function ($q) use($request){
                         $q->whereIn('gener_id',$request->geners);
-                    });
+                    })
+                    ->orWhereIn("primary_genre_id",$request->geners);
                 } 
                 if (isset($request->categories)) { // search name of user
                     $subQuery->whereHas('projectCategory', function ($q) use($request){

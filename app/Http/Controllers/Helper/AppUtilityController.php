@@ -146,10 +146,10 @@ class AppUtilityController extends Controller
                     }
                 }
                 if (!empty($genArray)) {
-                    $genQuery = "SELECT project_id FROM project_genres WHERE gener_id IN (".implode(',',$genArray).") GROUP BY project_id HAVING COUNT(DISTINCT(gener_id)) = ".count($genArray);
+                    $genQuery = "SELECT id FROM user_projects WHERE primary_genre_id IN (".implode(',',$genArray).") GROUP BY id HAVING COUNT(DISTINCT(primary_genre_id)) = ".count($genArray);
                     $genData = DB::select($genQuery);
                     foreach($genData as $k=>$v){
-                        $genvalues[] = $v->project_id;
+                        $genvalues[] = $v->id;
                     }
                 }
                 if (!empty($lanArray)) {
@@ -199,7 +199,6 @@ class AppUtilityController extends Controller
                 // }
                 $commonProjectsIds=[];
                 $dataMerge = array_merge($catvalues,$genvalues,$lanvalues,$locvalues,$recomvalue,$favvalue);
-                
                 $dataMerge = array_unique($dataMerge);
                 foreach($dataMerge as $dataKey => $dataVal)
                 {
