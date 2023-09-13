@@ -88,7 +88,7 @@
                                  @endforeach --}}
                                  {{implode(', ',$temp_all_data)}}
                              @else
-                                 <span><b>'Empty genres'</b></span>
+                                 {{-- <span><b>'Empty genres'</b></span> --}}
                              @endif
 
                                 @if (!empty($projectData[0]['genres']))
@@ -98,7 +98,7 @@
                                  @endforeach
                                  {{implode(', ',$temp_all_data)}}
                              @else
-                                 <span><b>'Empty genres'</b></span>
+                                 {{-- <span><b>'Empty genres'</b></span> --}}
                              @endif
                              
                                 @if (!empty($projectData[0]['project_category']))
