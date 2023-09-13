@@ -526,17 +526,17 @@
                     <div class="related owl-carousel owl-theme">
                         @if(count($recomProject)>0)
                             @foreach ($recomProject as $value)
-                            <div class="home_img_wrap">
-                            
+                            <div class="home_img_wrap b_r">
                                 <div class="slider">
                                 <a href="{{route('public-view',['id'=>$value->id])}}">
-                                
                                     {{-- {{$value->projectOnlyImage[0]->file_link}} --}}
                                     <div class="img-container gradient"> 
                                         @if (!empty($value->projectOnlyImage[0]->file_link))
-                                        <img src="{{ Storage::url($value->projectOnlyImage[0]->file_link) }}" alt="image"> 
+                                            <img src="{{ Storage::url($value->projectOnlyImage[0]->file_link) }}" alt="image"> 
                                         @else
-                                        <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">    
+                                            <div class="home_img_wrap">
+                                                <img src="{{ asset('images/asset/20230803084958wallpaperflare.com_wallpaper_(1).jpg') }}" alt="image">   
+                                            </div> 
                                         @endif
                                     </div>
                                     <div class="secondry-card-top-container w-100">

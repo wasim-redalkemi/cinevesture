@@ -23,7 +23,7 @@
                 @if (!empty($v->banner_image) || isset($v->banner_image))
                 <img src="{{ Storage::url($v->banner_image) }}" alt="image">
                 @else
-                <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">
+                <img src="{{ asset('images/asset/20230803084958wallpaperflare.com_wallpaper_(1).jpg') }}" alt="image">
                     
                 @endif
                 {{-- <img src="{{ asset('public/images/asset/Screenshot 2021-05-28 at 11.48 1.png') }}" class="root_img" alt="image"> --}}
@@ -158,7 +158,7 @@
                         @if (!empty($v1->projectImage) || isset($v1->projectImage))                            
                         <img src="{{ Storage::url($v1->projectImage->file_link) }}" alt="image">
                         @else
-                        <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">                            
+                        <img src="{{ asset('images/asset/20230803084958wallpaperflare.com_wallpaper_(1).jpg') }}" alt="image">                            
                         @endif                            
                       </div>
                     </div>
@@ -185,9 +185,9 @@
                         {{$v1->duration.' min'}}
                         {{-- <span class="white"><?php echo sprintf(intdiv($v1->duration, 60).' hr') .' '. ( sprintf($v1->duration % 60).' min');?> /</span> --}}
                         @endif
-                        @if (isset($v1->projectLanguages[0]) && !empty($v1->projectLanguages[0]))
+                        {{-- @if (isset($v1->projectLanguages[0]) && !empty($v1->projectLanguages[0]))
                          <span class="white"> {{$v1->projectLanguages[0]['name']}} /</span>
-                        @endif
+                        @endif --}}
                         {{-- @if (isset($v1->genres[0]) && !empty($v1->genres[0]))
                          <span class="white"> {{$v1->genres[0]['name']}} </span>
                         @endif --}}
@@ -231,7 +231,7 @@
     // console.log( "ready!" );
 
     $('.like-project').on('click', function(e) {
-      console.log('jscn');
+      // console.log('jscn');
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
