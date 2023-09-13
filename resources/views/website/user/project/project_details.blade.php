@@ -43,9 +43,31 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mt_16 select2forError">
-                                    <label>Genre <span class = "steric_sign_design">*</span></label>
-                                    <select name="gener[]" class="js-select2 @error('gener') is-invalid @enderror"  multiple required>
+                                    <label>Primary Genre <span class = "steric_sign_design">*</span></label>
+                                    <select name="primary_gener_id" class=" @error('gener') is-invalid @enderror"  required>
+                                        <option value="">Select</option>
                                         @foreach ($Genres as $k=>$v)
+                                        <option value="{{ $v->id }}"
+                                        @if(!empty($projectData[0]['primary_genre_id'] )&& ( $projectData[0]['primary_genre_id'])&& $projectData[0]['primary_genre_id']==$v->id)
+                                        selected 
+                                        @endif >{{$v->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('gener')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mt_16 select2forError">
+                                    <label>Secondary Genre</label>
+                                    <select name="gener[]" class="js-select2 @error('gener') is-invalid @enderror"  multiple >
+                                        @foreach ($Genres as $k=>$v)
+                                        
                                             <option value="{{ $v->id }}"@if(!empty($projectData[0]['genres'] )&&(in_array($v->id, $projectData[0]['genres'])))selected @endif >{{  $v->name }}</option>
                                         @endforeach
                                     </select>
