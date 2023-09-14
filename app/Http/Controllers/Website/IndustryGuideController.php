@@ -43,47 +43,44 @@ class IndustryGuideController extends WebController
        try{ 
         $userType='profile';
         $organisations='';
-        // dd($request);
-        // dd($request->currency);
         $validator = Validator::make($request->all(), [
             'search' => 'nullable',
             'locations.*' => 'nullable|exists:countries,id',
             'skills.*' => 'nullable|exists:master_skills,id',
             'services.*' => 'nullable|exists:master_organisation_services,id',
-
             // 'talent.*' => 'nullable|exists:master_skils,name',
         ]);
     
         if ($validator->fails()) {
             return back()->with($validator)->withInput();
         }
-       if ($request->type=='organisation') {
-        $userType='organisation';
-        $organisations=UserOrganisation::query()->with('country','services')->where(function($query) use($request){
-            if (isset($request->search)) { // search name of user
-                $query->where("name", "like", "%$request->search%");
-            }
-        }) 
-        ->where(function($subQuery) use($request)
-        {   
-            if (isset($request->countries)) { // search name of user
-            $subQuery->whereHas('country',function ($q) use($request){
-                    $q->whereIn('id',$request->countries);
-                    
-                });
-            } 
-            if (isset($request->services)) { // search name of user
-                $subQuery->whereHas('services', function ($q) use($request){
-                    $q->whereIn('services_id',$request->services);
-                });
-            } 
-        })
-            ->paginate(10);    
-       }
+        if ($request->type=='organisation') {
+            $userType='organisation';
+            $organisations=UserOrganisation::query()->with('country','services')->where(function($query) use($request){
+                if (isset($request->search)) { // search name of user
+                    $query->where("name", "like", "%$request->search%");
+                }
+            }) 
+            ->where(function($subQuery) use($request)
+            {   
+                if (isset($request->countries)) { // search name of user
+                $subQuery->whereHas('country',function ($q) use($request){
+                        $q->whereIn('id',$request->countries);
+
+                    });
+                } 
+                if (isset($request->services)) { // search name of user
+                    $subQuery->whereHas('services', function ($q) use($request){
+                        $q->whereIn('services_id',$request->services);
+                    });
+                } 
+            })
+            ->paginate(10);   
+                    }
             if(!empty($request)){
-            $prevDataReturn=['countries'=>$request->countries,'talentType'=>$request->talentType,'skills'=>$request->skills];
+            $prevDataReturn=['countries'=>$request->countries,'talentType'=>$request->talentType,'skills'=>$request->skills,'services'=>$request->services,'type'=>$request->type];
         }
-       
+    
         $countries = MasterCountry::query()->orderBy('name','asc')->get();
         $skills = MasterSkill::query()->orderBy('name','asc')->get();
         $services = MasterOrganisationService::query()->orderBy('name','asc')->get();
