@@ -16,14 +16,14 @@
                 <form class="pb-0 pb-md-5" method="Get" action="{{ route('guide-view') }}">
                     @csrf
                     <div class="toggle_container">
-                        <div class="switches-container mb-4">
-                            <input type="radio" id="switchMonthly" <?php if($userType=='profile') {echo'checked';} ?> name="type"  value="Profile"  />
+                        <div class="switches-container-profile br-4 mb-4">
+                            <input type="radio" id="switchMonthly" <?php if($userType=='profile') {echo'checked';} ?> name="type" value="Profile"  />
 
                             <input type="radio" id="switchYearly" <?php if($userType=='organisation') {echo'checked';}?>  name="type" value="organisation" />
-                            <label for="switchMonthly">Profile</label>
-                            <label for="switchYearly">Organization</label>
+                            <label for="switchMonthly" class="p-12" >Profile</label>
+                            <label for="switchYearly" class="m-0">Organization</label>
                             <div class="switch-wrapper">
-                            <div class="switch">
+                            <div class="switch-toggle">
                                 <div>Profile</div>
                                 <div>Organization</div>
                             </div>
@@ -35,7 +35,7 @@
                     <div class="search-box-container">
                         <div class="search-container w-100">
                             <input type="search" name="search" value="{{request('search')}}" class="w-100 search-box" placeholder="Search">
-                            <button class="search-btn"><i class="fa fa-search"></i></button>
+                            <button class="search-btn"><i  class="fa fa-search"></i></button>
                         </div>
                         <div class="d-block d-md-none for_drop_img" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                             <img src="{{ asset('images/asset/dropdown-sidebar.svg') }}" />
@@ -148,15 +148,15 @@
                                                 @foreach($services as $service)
                                                 @php
                                                     $is_elem_ex = false;
-                                                    if(in_array('skills',array_keys($prevDataReturn)) && !empty($prevDataReturn['services']) && in_array($service->id,$prevDataReturn['services'])){
+                                                    if(in_array('services',array_keys($prevDataReturn)) && !empty($prevDataReturn['services']) && in_array($service->id,$prevDataReturn['services'])){
                                                         $is_elem_ex = true;
-                                                    }
+                                                                                                            }
                                                 @endphp
-                                                <div class="mx-2 for_active">
+                                                                                                <div class="mx-2 for_active">
                                                     <label class="d-flex align-items-center search_page_filters_data @if($is_elem_ex) search_page_filters_data_active @endif ">
                                                         <input class="form-check-input me-1 d-none" type="checkbox" @if($is_elem_ex) checked @endif name="services[]" value="{{$service->id}}">
                                                         {{$service->name}}
-                                                    </label>
+                                                                                                            </label>
                                                 </div>
                                                 @endforeach
                                             </div>
@@ -180,7 +180,7 @@
                             @endif
                             <div class="mt-4 d-flex justify-content-between">
                                 <input type="submit" class="filter-button watch-now-btn mt-4" Value="Apply">
-                                <a href="{{route('guide-view')}}"><input type="button" class="clear-filter watch-now-btn mt-4 w-100" Value="Clear"></a>
+                                <a href="{{route('guide-view')}}?type={{$userType}}"><input type="button" class="clear-filter watch-now-btn mt-4 w-100" Value="Clear"></a>
                             </div>
 
                         </div>

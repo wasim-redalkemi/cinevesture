@@ -81,7 +81,7 @@ class IndustryGuideController extends WebController
             ->paginate(10);    
        }
             if(!empty($request)){
-            $prevDataReturn=['countries'=>$request->countries,'talentType'=>$request->talentType,'skills'=>$request->skills];
+            $prevDataReturn=['countries'=>$request->countries,'talentType'=>$request->talentType,'skills'=>$request->skills,'services'=>$request->services];
         }
        
         $countries = MasterCountry::query()->orderBy('name','asc')->get();
