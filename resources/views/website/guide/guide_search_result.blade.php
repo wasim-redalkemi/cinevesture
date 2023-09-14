@@ -21,11 +21,11 @@
 
                             <input type="radio" id="switchYearly" <?php if($userType=='organisation') {echo'checked';}?>  name="type" value="organisation" />
                             <label for="switchMonthly" class="p-12" >Profile</label>
-                            <label for="switchYearly" class="m-0">Organization</label>
+                            <label for="switchYearly" class="m-0">Organisation</label>
                             <div class="switch-wrapper">
                             <div class="switch-toggle">
                                 <div>Profile</div>
-                                <div>Organization</div>
+                                <div>Organisation</div>
                             </div>
                             </div>
                         </div>
@@ -280,13 +280,13 @@
                 <div class="profile_wraper mb-5">
                 @if(count($organisations) >= 1)
                 @foreach($organisations as $organisation)
-                <div class="border_btm profile_wraper_padding my-3 my-md-0">
+                                <div class="border_btm profile_wraper_padding my-3 my-md-0">
                     <div class="d-flex justify-content-between">
                         <div class="d-block d-md-flex">
                         <div class="">
                             <div class="user_profile_container wh_66">
-                                @if(isset($organisations->logo))
-                                <img src="{{Storage::url($user->logo)}}" width="100%"/>
+                                @if(!empty($organisation->logo))
+                                <img src="{{ Storage::url($organisation->logo) }}" width="100%"/>
                                 @else
                                 <img src="{{ asset('images/asset/profilepic.png') }}" width="100%" height="100%" />
                                 @endif
@@ -307,14 +307,14 @@
 
                             <div class="posted_job_header">
                                 @if(isset($organisation->available_to_work_in))
-                                {{$organisation->available_to_work_in}}
+                                    {{ucfirst($organisation->available_to_work_in)}}
                                 @else
                                 -
                                 @endif
                             </div>
                             <div class="preview_headtext mt-1 lh_54 candy-pink">
                                 @if(isset($organisation->location_in))
-                                {{$organisation->country->name}}
+                                                              {{$organisation->country->name}}
                                 @else
                                 -
                                 @endif
@@ -352,8 +352,8 @@
                 {!! config('constants.NO_DATA_SEARCH') !!}
                 @endif
                 <div>
-                    {!! $organisations->links() !!}
-                    {{-- {!! $users->onEachSide(0)->links() !!} --}}
+                    {{-- {!! $organisations->links() !!} --}}
+                    {!! $organisations->appends(['type' => 'organisation'])->onEachSide(0)->links() !!}
 
                 </div>
 
