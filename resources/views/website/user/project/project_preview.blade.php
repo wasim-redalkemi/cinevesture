@@ -70,7 +70,7 @@
                 @endif  
                 <div class="preview_headtext">Primary Genre</div>
                 <div class="mt-2 d-flex flex-wrap">
-                @if (!empty($projectData[0]['primaryGenres']))
+                @if (!empty($projectData[0]['primary_genres']))
                    
                     {{$projectData[0]['primary_genres']['name']}}
                 @else
