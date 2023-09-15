@@ -311,22 +311,22 @@
           items: 4.5
         },
         1225: {
-          items: 5.1
+          items: 5.4
         },
         1400: {
           items: 6.0
         },
         1500: {
-          items: 6.2
+          items: 6.3
         },
         1600: {
-          items: 6.4
+          items: 6.7
         },
         1700: {
-          items: 6.6
+          items: 7.1
         },
         1800: {
-          items: 7.0
+          items: 7.5
         },
         1900: {
           items: 7.8
