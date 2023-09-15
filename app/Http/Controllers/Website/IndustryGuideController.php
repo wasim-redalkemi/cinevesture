@@ -56,7 +56,7 @@ class IndustryGuideController extends WebController
         }
         if ($request->type=='organisation') {
             $userType='organisation';
-            $organisations=UserOrganisation::query()->with('country','services')->where(function($query) use($request){
+            $organisations=UserOrganisation::query()->with('country','services','organizationType')->where(function($query) use($request){
                 if (isset($request->search)) { // search name of user
                     $query->where("name", "like", "%$request->search%");
                 }
@@ -76,7 +76,7 @@ class IndustryGuideController extends WebController
                 } 
             })
             ->paginate(10);   
-                    }
+        }
             if(!empty($request)){
             $prevDataReturn=['countries'=>$request->countries,'talentType'=>$request->talentType,'skills'=>$request->skills,'services'=>$request->services,'type'=>$request->type];
         }
