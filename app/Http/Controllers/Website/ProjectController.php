@@ -308,7 +308,6 @@ class ProjectController extends WebController
             // dd($request->gener);
             $detailsResponse = $this->detailsStore();
             $tot="$request->total_budget"+1;
-            // dd(intval($request->financing_secured));
 
             if($tot<intval($request->financing_secured)){    
                 return back()->with('error','Financing Secured should small then total budget.');

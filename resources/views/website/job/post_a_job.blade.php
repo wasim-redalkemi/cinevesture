@@ -197,8 +197,6 @@
 //   debug: true,
 //   success: "valid"
 // });
-
-
 $("#post_job").validate({
   errorPlacement: function(error, element) {  
     error.insertAfter( element.closest('.profile_input') );   
@@ -285,7 +283,7 @@ $('.select_limit').change(function(event) {
                         // location.reload();
                     } else {
                         // modal
-                        $('.toast').hide()
+                        // $('.toast').hide()
                         $('#post_job')[0].reset();
                         $(".emp-select2").val(null).trigger('change');
                         $(".work-select2").val(null).trigger('change');
@@ -298,7 +296,6 @@ $('.select_limit').change(function(event) {
                 }
             },
             error: function(error) {                
-                console.log(error);
                 $btn.text(btnCurrentText);
                 $btn.prop('disabled',false);
                 if (error.status==422) {
@@ -316,17 +313,12 @@ $('.select_limit').change(function(event) {
        } catch (error) {           
         $btn.text(btnCurrentText);
         $btn.prop('disabled',false);
-        
-        console.log(error);
        }
        
 
     });
     $(document).ready(function() {
-
         $('.submit_btn').click(function(e) {
-                          
-                    
             let $btn = $(this);
             e.preventDefault();
             e.stopPropagation();

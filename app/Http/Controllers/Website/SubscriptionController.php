@@ -53,11 +53,9 @@ class SubscriptionController extends WebController
                 $is_used_for_subscription="1";
                 $userSubscription=UserSubscription::query()->where('user_id',auth()->user()->id)->first();
                 if(isset($userSubscription) && $userSubscription->order_id==NULL && $userSubscription->plan_time=='m' && $userSubscription->subscription_end_date > carbon::now()){
-                        // dd($userSubscription->subscription_end_date);
                     if(($userSubscription->plan_name=='Basic' && $plan->plan_name=="Pro") 
                     || ($userSubscription->plan_name=='Basic' && $plan->plan_name=="Enterprise") ||
                      ($userSubscription->plan_name=='Pro' && $plan->plan_name=="Enterprise")){
-                        //nothing to do
                     }
                     elseif(($userSubscription->plan_name=='Enterprise' && $plan->plan_name=="Pro") 
                     || ($userSubscription->plan_name=='Enterprise' && $plan->plan_name=="Basic") ||
