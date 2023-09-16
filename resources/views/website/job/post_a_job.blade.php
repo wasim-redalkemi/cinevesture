@@ -285,7 +285,7 @@ $('.select_limit').change(function(event) {
                         // location.reload();
                     } else {
                         // modal
-                        $('.toast').hide()
+                        // $('.toast').hide()
                         $('#post_job')[0].reset();
                         $(".emp-select2").val(null).trigger('change');
                         $(".work-select2").val(null).trigger('change');

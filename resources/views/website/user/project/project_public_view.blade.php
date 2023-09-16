@@ -526,28 +526,29 @@
                     <div class="related owl-carousel owl-theme">
                         @if(count($recomProject)>0)
                             @foreach ($recomProject as $value)
-                            <div class="home_img_wrap b_r">
-                                <div class="slider">
-                                <a href="{{route('public-view',['id'=>$value->id])}}">
-                                    {{-- {{$value->projectOnlyImage[0]->file_link}} --}}
-                                    <div class="img-container gradient"> 
-                                        @if (!empty($value->projectOnlyImage[0]->file_link))
-                                            <img src="{{ Storage::url($value->projectOnlyImage[0]->file_link) }}" alt="image"> 
-                                        @else
-                                            <div class="home_img_wrap">
-                                                <img src="{{ asset('images/asset/20230803084958wallpaperflare.com_wallpaper_(1).jpg') }}" alt="image">   
-                                            </div> 
-                                        @endif
-                                    </div>
-                                    <div class="secondry-card-top-container w-100">
-                                        <div>{{$value->project_name}}</div>
-                                    </div>
-                                </a> 
-                                    <div class="like_btn_wrapper">
-                                        <div> <i class="fa c_red icon-size-heart <?php if(isset($value->isfavouriteProjectOne)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size text-white like-project" style="cursor: pointer;" data-id="{{$value->id}}" aria-hidden="true"></i></div>
-                                    </div>  
-                                </div>                            
-                                
+                            <div class="home_img_wrap b_r owl_item_at">
+                                <div class="home_slider">
+                                    <div class="slider">
+                                        <a href="{{route('public-view',['id'=>$value->id])}}">
+                                            {{-- {{$value->projectOnlyImage[0]->file_link}} --}}
+                                            <div class="img-container gradient"> 
+                                                @if (!empty($value->projectOnlyImage[0]->file_link))
+                                                    <img src="{{ Storage::url($value->projectOnlyImage[0]->file_link) }}" alt="image"> 
+                                                @else
+                                                    <div class="home_img_wrap">
+                                                        <img src="{{ asset('images/asset/20230803084958wallpaperflare.com_wallpaper_(1).jpg') }}" alt="image">   
+                                                    </div> 
+                                                @endif
+                                            </div>
+                                            <div class="secondry-card-top-container w-100">
+                                                <div>{{$value->project_name}}</div>
+                                            </div>
+                                        </a> 
+                                            <div class="like_btn_wrapper">
+                                                <div> <i class="fa c_red icon-size-heart <?php if(isset($value->isfavouriteProjectOne)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size text-white like-project" style="cursor: pointer;" data-id="{{$value->id}}" aria-hidden="true"></i></div>
+                                            </div>  
+                                    </div>                            
+                                </div>
                             </div> 
                             @endforeach 
                         @else
@@ -703,26 +704,14 @@
       autoplayHoverPause: true,
       stagePadding: 0,
       responsive: {
-        480: { items: 1 },
-        768: { items: 2 },
-        1080: {
-          items: 4
-        },
-        1080: {
-          items: 4.5
-        },
-        1225: {
-          items: 4.8
-        },
-        1400: {
-          items: 5.5
-        },
-        1900: {
-          items: 7.8
-        },
-        1925: {
-          items: 8
-        }
+        360: { items: 1.51 },
+        390: { items: 1.64 },
+        393: { items: 1.64},
+        412: { items: 1.73 },
+        1280: {items: 5.40 },
+        1366: {items: 5.76 },
+        1536: {items: 6.48 },
+        1920: {items: 8.10 },
       },
     });
 </script>
@@ -750,10 +739,7 @@ function copyToClipboard(element) {
   $temp.val($(element).text()).select();
   document.execCommand("copy");
   $temp.remove();
-  new toastMessage("Success",'URL copied')
-//   toastr.success('URL copied','Success');
-// toastr.success('Project Update successfull!','success');
-//   toastMessage("1", 'URL copied')
+  new toastMessage("success",'URL copied')
 }
 </script>
 @endpush

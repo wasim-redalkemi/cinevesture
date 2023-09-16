@@ -250,7 +250,6 @@ class ProjectListController extends AdminController
             ->orderBy('created_at', 'desc')
             // ->where("user_status","published")
             ->paginate($this->records_limit);
-            // dd($list_name);
             return view('/admin.projectList.search',compact('id','project_data','is_added_only','categories','genres','list_name','list_type'));
         }
         catch (Exception $e)

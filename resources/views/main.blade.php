@@ -151,7 +151,7 @@
               </div>
               <div class="test owl-carousel owl-theme">
                 @foreach ($v->lists as $k1=>$v1)
-                <div class="home_img_wrap b_r owl_item_at_{{$k1}}">
+                <div class="home_img_wrap b_r owl_item_at{{$k1}}">
                   <div class="home_slider">
                     <div class="main_img_elem_wrap">
                       <div class="img-container">
@@ -199,7 +199,7 @@
                         @endif --}}
                       </div>
                       
-                    </div>
+                  </div>
                     </a>
                   <div class="like_btn_wrapper">
                      <div>
@@ -305,35 +305,14 @@
       autoplayHoverPause: true,
       stagePadding: 00,
       responsive: {
-        480: { items: 1 },
-        768: { items: 2 },
-        1080: {
-          items: 4.5
-        },
-        1225: {
-          items: 5.4
-        },
-        1400: {
-          items: 6.0
-        },
-        1500: {
-          items: 6.3
-        },
-        1600: {
-          items: 6.7
-        },
-        1700: {
-          items: 7.1
-        },
-        1800: {
-          items: 7.5
-        },
-        1900: {
-          items: 7.8
-        },
-        1925: {
-          items: 8
-        }
+        360: { items: 1.51 },
+        390: { items: 1.64 },
+        393: { items: 1.64},
+        412: { items: 1.73 },
+        1280: {items: 5.40 },
+        1366: {items: 5.76 },
+        1536: {items: 6.48 },
+        1920: {items: 8.10 },
       },
     });
     var hasUserSubscription= "{{ Session::get('freeSubscription')}}";
@@ -345,7 +324,7 @@
     var slider_elem_title = $('.slider_elem_title').offset();
     var slider_elem_child = $('.owl_item_at_0').offset();
     var leftLen = slider_elem_title.left;
-    var childLeftLen = slider_elem_child.left;  
+    var childLeftLen = 0;//slider_elem_child.left;  
     // console.log(leftLen);
     // console.log(childLeftLen);
     var newLeftLen = ((leftLen-childLeftLen)+15);
