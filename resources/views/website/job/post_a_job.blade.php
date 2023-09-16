@@ -113,7 +113,7 @@
                         <div class="guide_profile_subsection pb-4">
                             <div class="guide_profile_main_text mt-3">Job Description <span class = "steric_sign_design">*</span></div>
                             <div class="profile_input form_elem">
-                                <textarea class="form-control controlTextLength text_editor" text-length="2600" maxlength="2600" name="description" required aria-label="With textarea" placeholder="Your answer here">@if (!empty($userJobData['description'])) {{$userJobData['description']}} @endif</textarea>
+                                <textarea class="form-control controlTextLength text_editor" text-length="2600" id="description" maxlength="2600" name="description" required aria-label="With textarea" placeholder="Your answer here">@if (!empty($userJobData['description'])) {{$userJobData['description']}} @endif</textarea>
                             </div>
                         </div>
                         <div class="guide_profile_subsection">
@@ -219,8 +219,8 @@ $('.select_limit').change(function(event) {
 </script>
 
 <script>
-    $(".js-select2").select2({
-        closeOnSelect: false,
+        $(".js-select2").select2({
+                closeOnSelect: false,
         placeholder: "Select",
         allowClear: true,
         language: {
@@ -247,7 +247,6 @@ $('.select_limit').change(function(event) {
         e.stopPropagation();
 
         let btnCurrentText = $btn.text();
-
         $btn.text("Submitting");
         $btn.prop('disabled',true);
 
@@ -256,15 +255,16 @@ $('.select_limit').change(function(event) {
             $('#save_type').val('save');           
         } else {
             $('#save_type').val('publish');
-
         }
-
+        var descriptionEditor = tinymce.get('description'); // Replace 'your-textarea-id' with the actual ID of your textarea element
+        $('textarea[name="description"]').val(descriptionEditor.getContent());
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-       try {
+        try {
+        $('#publish_job_modal').modal('hide');
         $.ajax({
             type: 'post',
             data: $('#post_job').serialize(),
@@ -272,7 +272,6 @@ $('.select_limit').change(function(event) {
             success: function(resp) {
                 $btn.text(btnCurrentText);
                 $btn.prop('disabled',false);
-
                 if (resp.status == true) {
                     if (button == "save") {
                         $('#post_job')[0].reset();
@@ -280,32 +279,34 @@ $('.select_limit').change(function(event) {
                         $(".work-select2").val(null).trigger('change');
                         $('.js-select2').val(null).trigger('change');
                        new toastMessage("success", resp.message);
-                        // location.reload();
+                       
+                       $('#publish_job_modal').modal('show');
                     } else {
-                        // modal
-                        // $('.toast').hide()
+                        $('.toast').hide()
                         $('#post_job')[0].reset();
                         $(".emp-select2").val(null).trigger('change');
                         $(".work-select2").val(null).trigger('change');
                         $('.js-select2').val(null).trigger('change');
+                        $('#publish_job_modal').modal('hide');
                         $('#publish_job_modal').modal('show');
                     }
                     job_id = resp.data['id']
                 } else {
-                   new toastMessage(error, resp.message);
+                //    new toastMessage('error', resp.message);
+                    toastMessage('error', 'some thing want wrong');
                 }
             },
             error: function(error) {                
                 $btn.text(btnCurrentText);
                 $btn.prop('disabled',false);
                 if (error.status==422) {
-            let errors = error.responseJSON.errors
-            // errors.Obj.forEach(element => {            
-            //     toastMessage(0, element);
-            // });          
-                    }else{
-            toastMessage('Error', 'Sorry, You Are Not Allowed to Access This Page');
-            // toastMessage(0, "Server Error");
+                    let errors = error.responseJSON.errors
+                    // errors.Obj.forEach(element => {            
+                    //     toastMessage(0, element);
+                    // });          
+                }else{
+                    toastMessage('Error', 'Sorry, You Are Not Allowed to Access This Page');
+                    // toastMessage(0, "Server Error");
         }
             }
         });
@@ -314,8 +315,6 @@ $('.select_limit').change(function(event) {
         $btn.text(btnCurrentText);
         $btn.prop('disabled',false);
        }
-       
-
     });
     $(document).ready(function() {
         $('.submit_btn').click(function(e) {
@@ -325,7 +324,7 @@ $('.select_limit').change(function(event) {
 
             $btn.text("Submitting..");
             $btn.prop('disabled',true);
-            
+           
             $.ajax(
             {
                 url:"{{route('promotion-job')}}",
@@ -334,11 +333,11 @@ $('.select_limit').change(function(event) {
                 data:{'id': job_id},
                 success:function(response)
                 {  
-                    console.log(response);
-                    $btn.text("Send Mail");
+                    $btn.text("Submit your job for promotion");
                     $btn.prop('disabled',false);
-                    if (response.status == 'success') {                                
+                    if (response.status == 'success') { 
                         toastMessage(response.status, response.msg);
+                      
                     }
                     $('.modal').hide();
                     $('.modal-backdrop').remove();
@@ -347,11 +346,10 @@ $('.select_limit').change(function(event) {
                     
                 },
                 error:function(response,status,error)
-                {     $btn.text("Send Mail");
+                {     
+                    // $btn.text("Send Mail");
                     $btn.prop('disabled',false);
-                    console.log(response);
-                    console.log(status);
-                    console.log(error);
+                  
                 } 
             });
         });
