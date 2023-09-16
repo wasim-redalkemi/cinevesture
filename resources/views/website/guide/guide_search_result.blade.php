@@ -306,8 +306,8 @@
                             </div>
 
                             <div class="posted_job_header">
-                                @if(isset($organisation->available_to_work_in))
-                                    {{ucfirst($organisation->available_to_work_in)}}
+                                @if(isset($organisation->organizationType))
+                                    {{ucfirst($organisation->organizationType->name)}}
                                 @else
                                 -
                                 @endif
