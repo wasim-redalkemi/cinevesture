@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Website;
 use App\Http\Controllers\WebController;
 use App\Models\MasterCountry;
+use App\Models\MasterOrganisationService;
 use App\Models\MasterSkill;
 use App\Models\User;
+use App\Models\UserOrganisation;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -39,22 +41,49 @@ class IndustryGuideController extends WebController
     public function index(Request $request)
     {
        try{ 
+        $userType='profile';
+        $organisations='';
         $validator = Validator::make($request->all(), [
             'search' => 'nullable',
             'locations.*' => 'nullable|exists:countries,id',
             'skills.*' => 'nullable|exists:master_skills,id',
+            'services.*' => 'nullable|exists:master_organisation_services,id',
             // 'talent.*' => 'nullable|exists:master_skils,name',
         ]);
     
         if ($validator->fails()) {
             return back()->with($validator)->withInput();
         }
-       
-        if(!empty($request)){
-            $prevDataReturn=['countries'=>$request->countries,'talentType'=>$request->talentType,'skills'=>$request->skills];
+        if ($request->type=='organisation') {
+            $userType='organisation';
+            $organisations=UserOrganisation::query()->with('country','services','organizationType')->where(function($query) use($request){
+                if (isset($request->search)) { // search name of user
+                    $query->where("name", "like", "%$request->search%");
+                }
+            }) 
+            ->where(function($subQuery) use($request)
+            {   
+                if (isset($request->countries)) { // search name of user
+                $subQuery->whereHas('country',function ($q) use($request){
+                        $q->whereIn('id',$request->countries);
+
+                    });
+                } 
+                if (isset($request->services)) { // search name of user
+                    $subQuery->whereHas('services', function ($q) use($request){
+                        $q->whereIn('services_id',$request->services);
+                    });
+                } 
+            })
+            ->paginate(10);   
         }
+            if(!empty($request)){
+            $prevDataReturn=['countries'=>$request->countries,'talentType'=>$request->talentType,'skills'=>$request->skills,'services'=>$request->services,'type'=>$request->type];
+        }
+    
         $countries = MasterCountry::query()->orderBy('name','asc')->get();
         $skills = MasterSkill::query()->orderBy('name','asc')->get();
+        $services = MasterOrganisationService::query()->orderBy('name','asc')->get();
         $talent_type = User::query()->where('job_title','!=',null)->where('user_type','U')->where('job_title','!=',"")->groupBy('job_title')->get();
         $users = User::query()->where(function($query) use($request){
             if (isset($request->search)) { // search name of user
@@ -94,7 +123,7 @@ class IndustryGuideController extends WebController
         ->orderByDesc('id')
         ->paginate(10);
         $users->appends(request()->input())->links();
-        return view('website.guide.guide_search_result',compact(['countries','skills','users','talent_type','prevDataReturn']));                   
+        return view('website.guide.guide_search_result',compact(['countries','skills','users','talent_type','prevDataReturn','services','userType','organisations']));                   
        }catch(Exception $e){
         return back()->with('error', 'Something went wrong.');
        }

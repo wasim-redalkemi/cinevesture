@@ -276,9 +276,8 @@ class ProjectController extends WebController
             if ($project_step > $UserProject->project_step) {
                 throw new Exception('Please fill previous data.');
             }
-            $projectData = UserProject::query()->with(['genres','projectCategory','projectAssociation'])->where('id',$_REQUEST['id'])->get();
+            $projectData = UserProject::query()->with(['genres','projectCategory','projectAssociation',"primaryGenres"])->where('id',$_REQUEST['id'])->get();
             $projectData = $projectData->toArray();
-
             $temp_genres = [];
             if (!empty($projectData[0]['genres'])) {
                 foreach ($projectData[0]['genres'] as $k => $v){
@@ -307,7 +306,6 @@ class ProjectController extends WebController
         try {
             $detailsResponse = $this->detailsStore();
             $tot="$request->total_budget"+1;
-            // dd(intval($request->financing_secured));
 
             if($tot<intval($request->financing_secured)){    
                 return back()->with('error','Financing Secured should small then total budget.');
@@ -330,6 +328,7 @@ class ProjectController extends WebController
     public function detailsStore()
     {
         try {
+            
             $request = (object) $_REQUEST;
             $id = $request->project_id;
             $details = UserProject::query()->find($id);
@@ -337,6 +336,7 @@ class ProjectController extends WebController
                 $details->duration = $request->duration;
                 $details->total_budget = $request->total_budget;
                 $details->financing_secured = $request->financing_secured;
+                $details->primary_genre_id = $request->primary_gener_id;
                 if ($details->project_step<2) {
                     $details->project_step = '2';
                 }
@@ -351,15 +351,16 @@ class ProjectController extends WebController
                         
                         // }
                     }
+                   
+                    ProjectGenre::query()->where('project_id', $details->id)->delete();
                     if (!empty($request->gener)) {
-                        ProjectGenre::query()->where('project_id', $details->id)->delete();
                         foreach ($request->gener as $k => $v) {
                             $projectGenres = new ProjectGenre();
                             $projectGenres->project_id = $details->id;
                             $projectGenres->gener_id = $v;
                             $projectGenres->save();
+                            }
                         }
-                    }
                     // AppUtilityController::listAutomation();
                     $aa=new AppUtilityController();
                     $aa->listAutomation();
@@ -637,7 +638,7 @@ class ProjectController extends WebController
             if ($UserProject->project_step<5) {
                 throw new Exception('Please fill previous data.');
             }
-            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectOnlyImage','projectOnlyVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->get();
+            $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectOnlyImage','projectOnlyVideo','projectOnlyDoc','primaryGenres'])->where('id',$_REQUEST['id'])->get();
             $projectData = $projectData->toArray();
 
             return view('website.user.project.project_preview', compact('UserProject','projectData'));
@@ -672,7 +673,7 @@ class ProjectController extends WebController
              if(!empty($_REQUEST['data']) && ($_REQUEST['data']==1)){
                 $show=true;
                 $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
-                $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectMarkVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])
+                $projectData = UserProject::query()->with(['user','genres','primaryGenres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectMarkVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])
                 ->get();
                 if (empty($projectData)) {
                     return back()->with('error','This Project is Unpublished/Inactive.');
@@ -683,7 +684,7 @@ class ProjectController extends WebController
                 ->with(['isfavouriteProject','isfavouriteProjectOne'])->first();
                 
                 
-                $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectMarkVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->where(function($q){
+                $projectData = UserProject::query()->with(['user','genres','primaryGenres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectMarkVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->where(function($q){
                     if(auth()->user()->user_type == 'A'){
                         $q->where('user_status','!=', 'draft');
                     }
@@ -827,7 +828,8 @@ class ProjectController extends WebController
                 if (isset($request->geners)) { // search name of user
                     $subQuery->whereHas('genres', function ($q) use($request){
                         $q->whereIn('gener_id',$request->geners);
-                    });
+                    })
+                    ->orWhereIn("primary_genre_id",$request->geners);
                 } 
                 if (isset($request->categories)) { // search name of user
                     $subQuery->whereHas('projectCategory', function ($q) use($request){

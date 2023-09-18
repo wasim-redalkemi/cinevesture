@@ -197,8 +197,6 @@
 //   debug: true,
 //   success: "valid"
 // });
-
-
 $("#post_job").validate({
   errorPlacement: function(error, element) {  
     error.insertAfter( element.closest('.profile_input') );   
@@ -316,7 +314,6 @@ $('.select_limit').change(function(event) {
        } catch (error) {           
         $btn.text(btnCurrentText);
         $btn.prop('disabled',false);
-        
        }
     });
     $(document).ready(function() {

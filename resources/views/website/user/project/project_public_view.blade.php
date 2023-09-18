@@ -79,16 +79,28 @@
                                 @endif
 
                                 <br>
-                                @if (!empty($projectData[0]['genres']))
-                                    @php $temp_all_data = [] @endphp
-                                    @foreach ($projectData[0]['genres'] as $k => $v)
-                                        @php $temp_all_data[] = $v['name'] @endphp
-                                    @endforeach
-                                    {{implode(', ',$temp_all_data)}}
-                                @else
-                                    <span><b>'Empty genres'</b></span>
-                                @endif
+                                @if (!empty($projectData[0]['primary_genres']))
+                                |@php $temp_all_data = [] @endphp
+                                 {{$projectData[0]['primary_genres']['name']}}
+                                
+                                 {{-- @foreach ($projectData[0]['primary_genres'] as $k => $v)
+                                     @php $temp_all_data[] = $v['name'] @endphp
+                                 @endforeach --}}
+                                 {{implode(', ',$temp_all_data)}}
+                             @else
+                                 {{-- <span><b>'Empty genres'</b></span> --}}
+                             @endif
 
+                                @if (!empty($projectData[0]['genres']))
+                                |@php $temp_all_data = [] @endphp
+                                 @foreach ($projectData[0]['genres'] as $k => $v)
+                                     @php $temp_all_data[] = $v['name'] @endphp
+                                 @endforeach
+                                 {{implode(', ',$temp_all_data)}}
+                             @else
+                                 {{-- <span><b>'Empty genres'</b></span> --}}
+                             @endif
+                             
                                 @if (!empty($projectData[0]['project_category']))
                                     |@php $temp_all_data = [] @endphp
                                     @foreach ($projectData[0]['project_category'] as $k => $v)
@@ -526,28 +538,29 @@
                     <div class="related owl-carousel owl-theme">
                         @if(count($recomProject)>0)
                             @foreach ($recomProject as $value)
-                            <div class="home_img_wrap">
-                            
-                                <div class="slider">
-                                <a href="{{route('public-view',['id'=>$value->id])}}">
-                                
-                                    {{-- {{$value->projectOnlyImage[0]->file_link}} --}}
-                                    <div class="img-container gradient"> 
-                                        @if (!empty($value->projectOnlyImage[0]->file_link))
-                                        <img src="{{ Storage::url($value->projectOnlyImage[0]->file_link) }}" alt="image"> 
-                                        @else
-                                        <img src="{{ asset('images/asset/ba947a848086b8f90238636dcf7efdb5 1.png') }}" alt="image">    
-                                        @endif
-                                    </div>
-                                    <div class="secondry-card-top-container w-100">
-                                        <div>{{$value->project_name}}</div>
-                                    </div>
-                                </a> 
-                                    <div class="like_btn_wrapper">
-                                        <div> <i class="fa <?php if(isset($value->isfavouriteProjectOne)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size text-white like-project" style="cursor: pointer;" data-id="{{$value->id}}" aria-hidden="true"></i></div>
-                                    </div>  
-                                </div>                            
-                                
+                            <div class="home_img_wrap b_r owl_item_at">
+                                <div class="home_slider">
+                                    <div class="slider">
+                                        <a href="{{route('public-view',['id'=>$value->id])}}">
+                                            {{-- {{$value->projectOnlyImage[0]->file_link}} --}}
+                                            <div class="img-container gradient"> 
+                                                @if (!empty($value->projectOnlyImage[0]->file_link))
+                                                    <img src="{{ Storage::url($value->projectOnlyImage[0]->file_link) }}" alt="image"> 
+                                                @else
+                                                    <div class="home_img_wrap">
+                                                        <img src="{{ asset('images/asset/20230803084958wallpaperflare.com_wallpaper_(1).jpg') }}" alt="image">   
+                                                    </div> 
+                                                @endif
+                                            </div>
+                                            <div class="secondry-card-top-container w-100">
+                                                <div>{{$value->project_name}}</div>
+                                            </div>
+                                        </a> 
+                                            <div class="like_btn_wrapper">
+                                                <div> <i class="fa c_red icon-size-heart <?php if(isset($value->isfavouriteProjectOne)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size text-white like-project" style="cursor: pointer;" data-id="{{$value->id}}" aria-hidden="true"></i></div>
+                                            </div>  
+                                    </div>                            
+                                </div>
                             </div> 
                             @endforeach 
                         @else
@@ -703,20 +716,14 @@
       autoplayHoverPause: true,
       stagePadding: 0,
       responsive: {
-        480: { items: 1 },
-        768: { items: 2 },
-        1080: {
-          items: 3
-        },
-        1225: {
-          items: 3
-        },
-        1400: {
-          items: 4
-        },
-        1925: {
-          items: 5.5
-        }
+        360: { items: 1.51 },
+        390: { items: 1.64 },
+        393: { items: 1.64},
+        412: { items: 1.73 },
+        1280: {items: 4.80 },
+        1366: {items: 4.8},
+        1536: {items: 5.5 },
+        1920: {items: 5.5 },
       },
     });
 </script>
@@ -744,10 +751,7 @@ function copyToClipboard(element) {
   $temp.val($(element).text()).select();
   document.execCommand("copy");
   $temp.remove();
-  new toastMessage("Success",'URL copied')
-//   toastr.success('URL copied','Success');
-// toastr.success('Project Update successfull!','success');
-//   toastMessage("1", 'URL copied')
+  new toastMessage("success",'URL copied')
 }
 </script>
 @endpush
