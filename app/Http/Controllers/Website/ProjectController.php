@@ -278,7 +278,6 @@ class ProjectController extends WebController
             }
             $projectData = UserProject::query()->with(['genres','projectCategory','projectAssociation',"primaryGenres"])->where('id',$_REQUEST['id'])->get();
             $projectData = $projectData->toArray();
-            // dd($projectData[]);
             $temp_genres = [];
             if (!empty($projectData[0]['genres'])) {
                 foreach ($projectData[0]['genres'] as $k => $v){
@@ -305,7 +304,6 @@ class ProjectController extends WebController
     public function validateProjectDetails(ProjectDetailRequest $request)
     {
         try {
-            // dd($request->gener);
             $detailsResponse = $this->detailsStore();
             $tot="$request->total_budget"+1;
 
@@ -642,7 +640,6 @@ class ProjectController extends WebController
             }
             $projectData = UserProject::query()->with(['user','genres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectOnlyImage','projectOnlyVideo','projectOnlyDoc','primaryGenres'])->where('id',$_REQUEST['id'])->get();
             $projectData = $projectData->toArray();
-            // dd($projectData);
 
             return view('website.user.project.project_preview', compact('UserProject','projectData'));
         } catch (Exception $e) {
@@ -678,7 +675,6 @@ class ProjectController extends WebController
                 $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
                 $projectData = UserProject::query()->with(['user','genres','primaryGenres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectMarkVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])
                 ->get();
-                dd($projectData);
                 if (empty($projectData)) {
                     return back()->with('error','This Project is Unpublished/Inactive.');
                 }
@@ -740,7 +736,6 @@ class ProjectController extends WebController
             }
                           
             $projectData = $projectData->toArray();
-            // dd($projectData);
             if (empty($projectData)) {
                 return back()->with('error','This Project is Unpublished/Inactive.');
             }
