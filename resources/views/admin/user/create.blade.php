@@ -7,7 +7,7 @@
 <div class="content-wrapper">
     <div class="card col-md-12">
         <div class="card-body">
-            <h1 class="card-title">Project List Management</h1>
+            <h1 class="card-title">Add new user</h1>
             <div class="row">
                 <div class="col-md-12">
                    <form role="form" method="Post" action="{{route('user-store')}}">
@@ -16,37 +16,54 @@
                               <div class="col-md-4">
                                 <div class="form-group">
                                         <label class="">First Name<span class = "text-danger">*</span></label>
-                                        <input type="text" class="form-control radius" name="first_name" placeholder="First name" aria-label="Username" value="" required>
+                                        <input type="text" class="form-control radius" maxlength="40" name="first_name" placeholder="First name" aria-label="Username" value="{{old('first_name')}}" required >
+                                        @if($errors->has('first_name'))
+                                          <div class="mt-2 text-danger">{{ $errors->first('first_name') }}</div>
+                                        @endif
                                 </div>
                               </div>
+                             
                               <div class="col-md-4">
                                 <div class="form-group">
                                         <label class="">Last Name<span class = "text-danger">*</span></label>
-                                        <input type="text" class="form-control radius" name="last_name" placeholder="List name" aria-label="Username" value="" required>
+                                        <input type="text" class="form-control radius" maxlength="40" name="last_name" placeholder="Last name" aria-label="Username" value="{{old('last_name')}}" required>
+                                        @if($errors->has('last_name'))
+                                          <div class="mt-2 text-danger">{{ $errors->first('last_name') }}</div>
+                                        @endif
                                 </div>
+                               
                               </div>
                               
                               <div class="col-md-4">
                                 <div class="form-group">
                                      <label for="exampleFormControlSelect1">Email<span class = "text-danger">*</span></label required value="">
-                                       <input type="email" class="form-control radius" placeholder="Email" value="" name="email" id="" >
+                                       <input type="email" name="email" class="form-control radius" maxlength="50" placeholder="Email" value="{{old('email')}}" id="email" required>
+                                       @if($errors->has('email'))
+                                         <div class="mt-2 text-danger">{{ $errors->first('email') }}</div>
+                                       @endif
                                 </div>
                               </div>
                             
-                                  <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Password<span class = "text-danger">*</span></label required value="">
-                                          <input type="password" class="form-control radius" placeholder="password" value="" name="password" id="" >
-                                   </div>
-                                  </div>
+                              <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="exampleFormControlSelect1">Password<span class = "text-danger">*</span></label required value="">
+                                      <input type="Password" class="form-control radius" maxlength="20" placeholder="Password" value="" name="password" id="" required>
+                                      @if($errors->has('password'))
+                                        <div class="mt-2 text-danger">{{ $errors->first('password') }}</div>
+                                      @endif
+                                </div>
+                              </div>
                                   
                                   <div class="col-md-4">
                                     <div class="form-group">
                                         <label for="exampleFormControlSelect1">Confirm Password<span class = "text-danger">*</span></label required value="">
-                                          <input type="password" class="form-control radius" placeholder="Confirm Password" value="" name="cpassword" id="" >
+                                          <input type="password" class="form-control  radius" maxlength="20 " placeholder="Confirm password"  name="confirmed" id="" required>
+                                          @if($errors->has('confirmed'))
+                                           <div class="mt-2 text-danger">{{ $errors->first('confirmed') }}</div>
+                                           @endif
                                    </div>
                                   </div>
-                                </div>
+                            </div>
                                  
                             <div class="row" style="margin-top:15px">
                                 <div class="col-md-12" style="padding-left: 42%;">

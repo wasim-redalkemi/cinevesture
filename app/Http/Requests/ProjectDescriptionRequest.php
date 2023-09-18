@@ -24,17 +24,17 @@ class ProjectDescriptionRequest extends FormRequest
     public function rules()
     {
         return [
-            'logline' => 'required|max:280' ,
-            'synopsis' => 'required|max:790' ,   
-            'director_statement' => 'required|max:1300', 
+            'logline' => 'required|max:1500' ,
+            'synopsis' => 'required|max:3000' ,   
+            'director_statement' => 'required|max:4000', 
         ];
     }
     public function messages()
     {
         return [
-            'logline.max' => 'Maximum 280 character are allowed',
-            'synopsis.max' => 'Maximum 600 character are allowed',
-            'director_statement.max' => 'Maximum 600 character are allowed',
+            'logline.max' => 'Maximum 1500 character are allowed',
+            'synopsis.max' => 'Maximum 3000 character are allowed',
+            'director_statement.max' => 'Maximum 4000 character are allowed',
         ];            
     }
 }

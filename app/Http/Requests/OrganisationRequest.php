@@ -45,7 +45,7 @@ class OrganisationRequest extends FormRequest
             'logo' => 'required|mimes:jpeg,jpg,png|nullable|max:40000',
             'name' => 'required',
             'organisation_type' => 'required',
-            'about' => 'required|max:600',
+            'about' => 'required|max:2000',
             'service_id' => 'required',
             'service_id.*' => 'required|exists:master_organisation_services,id',
             'language_id' => 'required',

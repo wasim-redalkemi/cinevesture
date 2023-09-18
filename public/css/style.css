@@ -3763,7 +3763,7 @@ input:checked+.slider:before {
 
 .playVideoWrapForheader {
     max-width: 600px !important;
-    min-width: 500px !important;
+    min-width: 100% !important;
     /* height: 200px; */
 }
 .playVideoWrap {

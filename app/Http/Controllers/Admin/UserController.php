@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
+// use App\Http\Requests\Admin\UserRequest as AdminUserRequest;
 use App\Http\Requests\Admin\UserRequest;
 use Illuminate\Validation\ValidationException;
 use App\Models\MasterCountry;
@@ -12,10 +13,10 @@ use App\Models\User;
 use App\Models\UserInvite;
 use App\Models\UserOrganisation;
 use App\Models\UserSubscription;
-use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends AdminController
 {
@@ -117,16 +118,21 @@ class UserController extends AdminController
     public function store(UserRequest $request)
     {
         try {
-           if ($request->password!=$request->cpassword) {
-            Session::flash('response', ['text'=>'Password and confirm password should be match','type'=>'danger']);
-            return back();
-           }
+            $user=User::query()->where('email',$request->email)->first();
+            if (!empty($user)) {
+                Session::flash('response', ['text'=>'This user already exist','type'=>'danger']);
+                return back();
+            }
+        //    if ($request->password!=$request->confirmed) {
+        //     Session::flash('response', ['text'=>'Password and confirm password should be match','type'=>'danger']);
+        //     return back();
+        //    }
             $user=new User();
             $user->name=$request->first_name.' '.$request->last_name;
             $user->first_name=$request->first_name;
             $user->last_name=$request->last_name;
             $user->email=$request->email;
-            $user->password=$request->password;
+            $user->password=Hash::make($request->password);
             $user->save();
             Session::flash('response', ['text'=>'User add successfully!','type'=>'success']);
             return redirect()->route('user-management');
@@ -190,7 +196,8 @@ class UserController extends AdminController
      */
     public function planUpdate(Request $request)
     {
-        $plan=Plans::find($request->plan_type);
+        try {
+            $plan=Plans::find($request->plan_type);
         $expiryDate = date("Y-m-d 23:59:59", strtotime($request->end_date));
         $subscription=UserSubscription::query()->where('user_id',$request->user_id)->first();
         if (empty($subscription)) {
@@ -211,11 +218,16 @@ class UserController extends AdminController
         $subscription->plan_time_quntity=$plan->plan_time_quntity;
         $subscription->plan_name=$plan->plan_name;
         $subscription->plan_amount=$plan->plan_amount;
+        $subscription->status='active';
         $subscription->subscription_end_date=$expiryDate;
         $subscription->platform_subscription_id="plan extended by admin";
         $subscription->save();
-        Session::flash('response', ['text'=>'User add successfully!','type'=>'success']);
+        Session::flash('response', ['text'=>'Membership updated successfully','type'=>'success']);
         return redirect()->route('user-management');
+        } catch (\Throwable $e) {
+            Session::flash('response', ['text'=>$this->getError($e),'type'=>'danger']);
+            return back();
+        }
     }
         
     /**

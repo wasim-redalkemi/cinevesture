@@ -87,7 +87,8 @@
 	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
+
+
     <script>
         var from_plan_page = undefined;
         $(document).ready(function() {
@@ -133,10 +134,6 @@
             }
         });
 
-        $('.controlTextLength').each(function(){
-            $(this).after("<span class=textlength for_alert text-end>"+ $(this).val().length +" / "+$(this).attr('text-length')+"</span>");
-            $('.textlength').css({"color":"#787885", "text-align":"end", "float":"end"})
-        });
 
         $('.controlTextLength').keyup(function ()
         {
@@ -312,39 +309,96 @@
             }
         })
     </script>
+    <script src="https://cdn.tiny.cloud/1/pd5jow5xgpemmx81h7x21gg7ge06vdk0b9fgtuiqxjorhlx0/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
     <script>
-        ClassicEditor
-        .create(document.querySelector('.text_editor'), {
-            removePlugins: ['Title'],  // This removes the title plugin
-            toolbar: [ 'undo','redo', 'heading', 'bold', 'italic', 'numberedList', 'bulletedList' ]
-        })
-        .catch(error => {
-            console(error);
+        $(document).ready(function()
+        {
+            $('.text_editor').click();
         });
-                
-    </script>
-    <script>
-        ClassicEditor
-        .create(document.querySelector('.text_editor2'), {
-            // toolbar: [],  // This removes the toolbar
-            removePlugins: ['Title'],  // This removes the title plugin
-        })
-        .catch(error => {
-            console(error);
+        function apply_text_editor(select_elem)
+        {
+            var numChars; 
+            // var select_elem = '.text_editor';
+            tinymce.init({
+            selector: select_elem,
+            toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist',
+            plugins: ' anchor pagebreak visualchars wordcount paste',
+            paste_as_text:true,
+            menubar: false,
+            branding: false,
+            setup: function(editor) {
+                var text_elem = $(select_elem).parents('.form_elem').find('.textlength');
+                var max = $(select_elem).attr('text-length');
+                function updateCharacterCount(numChars) {
+                    text_elem.text(numChars + '/' + max);
+                    if (numChars >= max) {
+                        text_elem.text(' You have reached the limit').css('color', 'red');
+                    } else {
+                        text_elem.css('color', 'black'); // Reset color if characters are within limit
+                    }
+                }
+                editor.on('init', function () {
+                    var numChars = editor.plugins.wordcount.body.getCharacterCount();
+
+                    updateCharacterCount(numChars);
+                    editor.on('KeyDown', function(event) {
+                        var numChars = editor.plugins.wordcount.body.getCharacterCount();
+                        if (numChars == max ) {
+                            if(event.keyCode === 8 || event.keyCode === 37 || event.keyCode === 38|| event.keyCode === 39|| event.keyCode === 40 || event.keyCode === 116)
+                            {
+                            }
+                            else
+                            {
+                                event.preventDefault();
+                                return false;
+                            }
+                        }
+                        updateCharacterCount(numChars);
+                    });
+                    editor.on('KeyUp', function(event) {
+                        var numChars = editor.plugins.wordcount.body.getCharacterCount();
+                        if (numChars > max ) {
+                            if(event.keyCode === 8 || event.keyCode === 37|| event.keyCode === 38|| event.keyCode === 39|| event.keyCode === 40 || event.keyCode === 116)
+                            {
+                            }
+                            else
+                            {
+                                event.preventDefault();
+                                return false;
+                            }
+                        }
+                        updateCharacterCount(numChars);
+                    });
+                })
+            },
+            paste_preprocess: function(plugin, args) {
+                var clipboard_data = args.content;
+                // var max = $('.text_editor').attr('text-length');
+                var max = $(select_elem).attr('text-length');
+                var counts=(clipboard_data).length;
+                var numChars = tinymce.activeEditor.plugins.wordcount.body.getCharacterCount();
+
+                if (counts+numChars>max) {
+                    var extraChar=counts+numChars-max;
+                    var fillVal=counts-extraChar;
+                    let result = clipboard_data.substring(0, fillVal);
+                    args.content = result;
+                    $(select_elem).text(' You have reached the limit').css('color', 'red');
+                } 
+            }
         });
-                
-    </script>
-    <script>
-        ClassicEditor
-        .create(document.querySelector('.text_editor1'), {
-            // toolbar: [],  // This removes the toolbar
-            removePlugins: ['Title'],  // This removes the title plugin
-        })
-        .catch(error => {
-            console(error);
+        }
+        $('.controlTextLength').each(function(){
+           var text_editor=$(this).attr("no-text-editor");
+            if (text_editor==undefined) {
+                var thclass=  $(this).prop('class').split(' ')[2];
+                apply_text_editor('.'+thclass);   
+            }
+            $(this).after("<span class=textlength for_alert text-end>"+ $(this).val().length +" / "+$(this).attr('text-length')+"</span>");
+            $('.textlength').css({"color":"#787885", "text-align":"end", "float":"end"})
         });
-                
     </script>
-    </body>
+</body>
 </html>
 
