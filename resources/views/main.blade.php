@@ -163,51 +163,46 @@
                       </div>
                     </div>
                     
-                    
                     <a href="{{ route('public-view', ['id'=>$v1->id]) }}">
-                    <div class="main_slider_elem_wrap">
-                      <div class="secondry-card-top-container w-100">
-                        <div>
-                        <!-- <a href="{{ route('public-view', ['id'=>$v1->id]) }}" > -->
-                          @if (isset($v1->project_name) && !empty($v1->project_name))
-                        <span class="white">{{$v1->project_name}}</span> 
-                          @endif
-                        <!-- </a> -->
+                      <div class="main_slider_elem_wrap">
+                        <div class="secondry-card-top-container w-100">
+                          <div>
+                            <!-- <a href="{{ route('public-view', ['id'=>$v1->id]) }}" > -->
+                              @if (isset($v1->project_name) && !empty($v1->project_name))
+                            <span class="white">{{$v1->project_name}}</span> 
+                              @endif
+                            <!-- </a> -->
+                          </div>
+                          <!-- <div>
+                              <i class="fa fa-heart-o icon-size like-project" style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
+                          </div> -->
                         </div>
-                        <!-- <div>
-                            <i class="fa fa-heart-o icon-size like-project" style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
-                        </div> -->
-                       
+                        <div class="secondry-card-bottom-container">
+                        
+                          @if (isset($v1->duration) && !empty($v1->duration))
+                          {{$v1->duration.' min'}}
+                          {{-- <span class="white"><?php echo sprintf(intdiv($v1->duration, 60).' hr') .' '. ( sprintf($v1->duration % 60).' min');?> /</span> --}}
+                          @endif
+                          {{-- @if (isset($v1->projectLanguages[0]) && !empty($v1->projectLanguages[0]))
+                           <span class="white"> {{$v1->projectLanguages[0]['name']}} /</span>
+                          @endif --}}
+                          {{-- @if (isset($v1->genres[0]) && !empty($v1->genres[0]))
+                           <span class="white"> {{$v1->genres[0]['name']}} </span>
+                          @endif --}}
+                          {{-- @php
+                            $country_data = $v1->toArray();
+                          @endphp
+                          @if (isset($country_data['project_countries'][0]) && !empty($country_data['project_countries'][0]))
+                          <span class="white"> {{$country_data['project_countries'][0]['name']}}</span>
+                          @endif --}}
+                        </div>
                       </div>
-                      <div class="secondry-card-bottom-container">
-  
-                        @if (isset($v1->duration) && !empty($v1->duration))
-                        {{$v1->duration.' min'}}
-                        {{-- <span class="white"><?php echo sprintf(intdiv($v1->duration, 60).' hr') .' '. ( sprintf($v1->duration % 60).' min');?> /</span> --}}
-                        @endif
-                        {{-- @if (isset($v1->projectLanguages[0]) && !empty($v1->projectLanguages[0]))
-                         <span class="white"> {{$v1->projectLanguages[0]['name']}} /</span>
-                        @endif --}}
-                        {{-- @if (isset($v1->genres[0]) && !empty($v1->genres[0]))
-                         <span class="white"> {{$v1->genres[0]['name']}} </span>
-                        @endif --}}
-                        {{-- @php
-                          $country_data = $v1->toArray();
-                        @endphp
-                        @if (isset($country_data['project_countries'][0]) && !empty($country_data['project_countries'][0]))
-                        <span class="white"> {{$country_data['project_countries'][0]['name']}}</span>
-                        @endif --}}
-                      </div>
-                      
-                  </div>
                     </a>
-                  <div class="like_btn_wrapper">
+                    <div class="like_btn_wrapper">
                      <div>
                       <i class="text-white fa c_red icon-size-heart <?php if(isset($v1->isfavouriteProjectMain[0]->id)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-project " style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
                     </div>
                   </div>
-
-
                   </div>            
                 </div>
                 @endforeach
@@ -309,10 +304,22 @@
         390: { items: 1.64 },
         393: { items: 1.64},
         412: { items: 1.73 },
+        768: {items: 3.30 },
+        1080: {items: 4.65 },
         1280: {items: 5.40 },
         1366: {items: 5.76 },
-        1536: {items: 6.48 },
-        1920: {items: 8.10 },
+        1440: {items: 6.15 },
+        1536: {items: 6.55 },
+        1600: {items: 6.80 },
+        1680: {items: 7.19 },
+        1920: {items: 8.15 },
+        2160: {items: 9.20 },
+        2304: {items: 9.80 },
+        2560: {items: 11.00 },
+        2880: {items: 12.25 },
+        3000: {items: 12.80 },
+        3840: {items: 16.40 },
+        4096: {items: 17.50 },
       },
     });
     var hasUserSubscription= "{{ Session::get('freeSubscription')}}";

@@ -544,9 +544,9 @@
                                                 <div>{{$value->project_name}}</div>
                                             </div>
                                         </a> 
-                                            <div class="like_btn_wrapper">
-                                                <div> <i class="fa c_red icon-size-heart <?php if(isset($value->isfavouriteProjectOne)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size text-white like-project" style="cursor: pointer;" data-id="{{$value->id}}" aria-hidden="true"></i></div>
-                                            </div>  
+                                        <div class="like_btn_wrapper">
+                                            <div> <i class="fa c_red icon-size-heart <?php if(isset($value->isfavouriteProjectOne)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size text-white like-project" style="cursor: pointer;" data-id="{{$value->id}}" aria-hidden="true"></i></div>
+                                        </div>  
                                     </div>                            
                                 </div>
                             </div> 
@@ -708,10 +708,22 @@
         390: { items: 1.64 },
         393: { items: 1.64},
         412: { items: 1.73 },
-        1280: {items: 4.80 },
+        768: {items: 3.05 },
+        1080: {items: 4.10 },
+        1280: {items: 4.85 },
         1366: {items: 4.8},
-        1536: {items: 5.5 },
+        1440: {items: 5.60 },
+        1536: {items: 5.6 },
+        1600: {items: 6.80 },
+        1680: {items: 7.19 },
         1920: {items: 5.5 },
+        2160: {items: 9.20 },
+        2304: {items: 9.80 },
+        2560: {items: 11.00 },
+        2880: {items: 12.25 },
+        3000: {items: 12.80 },
+        3840: {items: 16.40 },
+        4096: {items: 17.50 },
       },
     });
 </script>
