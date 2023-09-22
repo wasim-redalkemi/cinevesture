@@ -316,10 +316,13 @@
       stagePadding: 00,
       responsive: {
         360: { items: 1.51 },
+        375: { items: 1.60 },
+        425: { items: 1.83 },
         390: { items: 1.64 },
         393: { items: 1.64},
         412: { items: 1.73 },
         768: {items: 3.30 },
+        1024: {items: 4.42 },
         1080: {items: 4.65 },
         1280: {items: 5.47 },
         1366: {items: 5.87 },
