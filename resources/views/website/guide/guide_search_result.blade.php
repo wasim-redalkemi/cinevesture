@@ -305,16 +305,16 @@
 
                             </div>
 
-                            <div class="posted_job_header">
+                            {{-- <div class="posted_job_header">
                                 @if(isset($organisation->organizationType))
                                     {{ucfirst($organisation->organizationType->name)}}
                                 @else
                                 -
                                 @endif
-                            </div>
+                            </div> --}}
                             <div class="preview_headtext mt-1 lh_54 candy-pink">
                                 @if(isset($organisation->location_in))
-                                                              {{$organisation->country->name}}
+                                    {{$organisation->country->name}}
                                 @else
                                 -
                                 @endif
