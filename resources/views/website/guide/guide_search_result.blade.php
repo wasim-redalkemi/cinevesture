@@ -17,11 +17,11 @@
                     @csrf
                     <div class="toggle_container">
                         <div class="switches-container-profile br-4 mb-4">
-                            <input type="radio" id="switchMonthly" <?php if($userType=='profile') {echo'checked';} ?> name="type" value="Profile"  />
+                            <input type="radio" id="switchMonthly" <?php if($userType=='profile') {echo'checked';} ?> name="type" value="Profile"/>
 
-                            <input type="radio" id="switchYearly" <?php if($userType=='organisation') {echo'checked';}?>  name="type" value="organisation" />
-                            <label for="switchMonthly" class="p-12" >Profile</label>
-                            <label for="switchYearly" class="m-0">Organisation</label>
+                            <input type="radio" id="switchYearly" <?php if($userType=='organisation') {echo'checked';}?>  name="type" value="organisation"/>
+                            <label for="switchMonthly" class="p-12 nobr" >Profile</label>
+                            <label for="switchYearly" class="m-0 nobr">Organisation</label>
                             <div class="switch-wrapper">
                             <div class="switch-toggle">
                                 <div>Profile</div>
@@ -305,16 +305,16 @@
 
                             </div>
 
-                            <div class="posted_job_header">
+                            {{-- <div class="posted_job_header">
                                 @if(isset($organisation->organizationType))
                                     {{ucfirst($organisation->organizationType->name)}}
                                 @else
                                 -
                                 @endif
-                            </div>
+                            </div> --}}
                             <div class="preview_headtext mt-1 lh_54 candy-pink">
                                 @if(isset($organisation->location_in))
-                                                              {{$organisation->country->name}}
+                                    {{$organisation->country->name}}
                                 @else
                                 -
                                 @endif
