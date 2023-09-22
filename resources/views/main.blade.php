@@ -24,7 +24,6 @@
                 <img src="{{ Storage::url($v->banner_image) }}" alt="image">
                 @else
                 <img src="{{ asset('images/asset/20230803084958wallpaperflare.com_wallpaper_(1).jpg') }}" alt="image">
-                    
                 @endif
                 {{-- <img src="{{ asset('public/images/asset/Screenshot 2021-05-28 at 11.48 1.png') }}" class="root_img" alt="image"> --}}
               </div>
@@ -35,17 +34,17 @@
                   <div class="row">
                     <div class="col-md-12">
                       <div class="project-text mt-5 pt-2">
-                       
                         @if (!empty($v->project_name))
-                      <span class="blackTextShadow">  {{$v->project_name}}</span>
+                          <span class="blackTextShadow">  {{$v->project_name}}</span>
                         @endif
                       </div>
                       
                       <div class="project-sub-text mt-1">
                         @if (!empty($v->logline))
-                        <span class="blackTextShadow">  @php
+                          <span class="blackTextShadow">  @php
                             echo $v->logline
-                        @endphp</span>
+                            @endphp
+                          </span>
                         @endif
                       </div>
                       <div class="duration-lang-text mt-1">
@@ -62,12 +61,12 @@
 
                         @if (isset($v->projectLanguages) && !empty($v->projectLanguages))
                         |
-                        {{$v->projectLanguages[0]['name']}}
+                          {{$v->projectLanguages[0]['name']}}
                         @endif
 
                         @if (isset($v->genres[0]) && !empty($v->genres[0]))
                         |
-                        {{$v->genres[0]['name']}}
+                          {{$v->genres[0]['name']}}
                         @endif
 
                         </span>
@@ -166,10 +165,10 @@
                     <a href="{{ route('public-view', ['id'=>$v1->id]) }}">
                       <div class="main_slider_elem_wrap">
                         <div class="secondry-card-top-container w-100">
-                          <div>
+                          <div class="proj_name" id="proj_name">
                             <!-- <a href="{{ route('public-view', ['id'=>$v1->id]) }}" > -->
                               @if (isset($v1->project_name) && !empty($v1->project_name))
-                            <span class="white">{{$v1->project_name}}</span> 
+                                <span class="white">{{$v1->project_name}}</span> 
                               @endif
                             <!-- </a> -->
                           </div>
@@ -177,7 +176,7 @@
                               <i class="fa fa-heart-o icon-size like-project" style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
                           </div> -->
                         </div>
-                        <div class="secondry-card-bottom-container">
+                        <div class="secondry-card-bottom-container proj_name">
                         
                           @if (isset($v1->duration) && !empty($v1->duration))
                           {{$v1->duration.' min'}}
@@ -199,7 +198,7 @@
                       </div>
                     </a>
                     <div class="like_btn_wrapper">
-                     <div>
+                     <div class="proj_name">
                       <i class="text-white fa c_red icon-size-heart <?php if(isset($v1->isfavouriteProjectMain[0]->id)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-project " style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
                     </div>
                   </div>
@@ -221,7 +220,7 @@
   
 @section('scripts')
 
-  <script type="text/javascript">
+<script type="text/javascript">
   $( document ).ready(function() {
     // console.log( "ready!" );
 
@@ -269,6 +268,22 @@
 
     });
   });  
+
+    $(document).ready(function () {
+      // Initially hide the time and heart icons
+      $('.proj_name').hide();
+      // Handle hover events
+      $('.home_slider').hover(
+        function () {
+          // Show the name on hover
+          $(this).find('.proj_name').show();
+        },
+        function () {
+          // Hide the name when the hover is removed
+          $(this).find('.proj_name').hide();
+        }
+      );
+    });
 
     $(".main_slider.owl-carousel").owlCarousel({
       center: true,

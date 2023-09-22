@@ -4920,3 +4920,11 @@ transition: 2s ease all; */
 .social_profile_icon_wraper{
     margin-top: 2px;
 }
+
+.tile .proj_name {
+    display: none; /* Initially hide the name */
+  }
+  
+  .tile:hover .proj_name {
+    display: block; /* Show the name on hover */
+  }
