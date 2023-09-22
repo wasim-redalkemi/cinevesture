@@ -3411,10 +3411,13 @@ select::after
     left: 0;
     right: 0;
     bottom: 0; */
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0,0,0,0.2);
     -webkit-transition: .4s;
     transition: .4s;
     /* z-index: 9999; */
+}
+.slider:hover{
+    background-color: rgba(0,0,0,0.0);
 }
 
 /* .currency_togle .slider:after {
@@ -5167,3 +5170,10 @@ transition: 2s ease all; */
 .switches-container-profile input:nth-of-type(2):checked~.switch-wrapper .switch-toggle div:nth-of-type(2) {
     opacity: 1;
 }
+.tile .proj_name {
+    display: none; /* Initially hide the name */
+  }
+  
+  .tile:hover .proj_name {
+    display: block; /* Show the name on hover */
+  }

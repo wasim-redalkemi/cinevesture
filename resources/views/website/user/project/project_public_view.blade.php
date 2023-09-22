@@ -552,13 +552,13 @@
                                                     </div> 
                                                 @endif
                                             </div>
-                                            <div class="secondry-card-top-container w-100">
+                                            <div class="secondry-card-top-container w-100 proj_name">
                                                 <div>{{$value->project_name}}</div>
                                             </div>
                                         </a> 
-                                            <div class="like_btn_wrapper">
-                                                <div> <i class="fa c_red icon-size-heart <?php if(isset($value->isfavouriteProjectOne)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size text-white like-project" style="cursor: pointer;" data-id="{{$value->id}}" aria-hidden="true"></i></div>
-                                            </div>  
+                                        <div class="like_btn_wrapper proj_name">
+                                            <div> <i class="fa c_red icon-size-heart <?php if(isset($value->isfavouriteProjectOne)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size text-white like-project" style="cursor: pointer;" data-id="{{$value->id}}" aria-hidden="true"></i></div>
+                                        </div>  
                                     </div>                            
                                 </div>
                             </div> 
@@ -589,6 +589,7 @@
 
 @push('scripts')
 <script>
+     $('.proj_name').hide();
     $(document).ready(function() {
         // $("#error-toast").toast("show");
         // $("#success-toast").toast("show");
@@ -704,7 +705,25 @@
         });
 
     });
-
+    $(document).ready(function () {
+        // Initially hide the time and heart icons
+        $('.proj_name').hide();
+        // Handle hover events
+        $('.home_slider').hover(
+            function () {
+            // Show the name on hover
+            $(this).find('.proj_name').show();
+            $(this).find('.img-container').removeClass('gradient');
+            $(this).addClass("hovered").css("background-color", "rgba(0, 0, 0, 0.0)");
+            },
+            function () {
+            // Hide the name when the hover is removed
+            $(this).find('.proj_name').hide();
+            $(this).find('.img-container').addClass('gradient');
+            $(this).removeClass("hovered").css("background-color", "rgba(0, 0, 0, 0.2)");
+            }
+        );
+    });
     $(".related.owl-carousel").owlCarousel({
         //   center: true,
         autoPlay: 1000,
@@ -720,10 +739,22 @@
         390: { items: 1.64 },
         393: { items: 1.64},
         412: { items: 1.73 },
-        1280: {items: 4.80 },
-        1366: {items: 4.8},
-        1536: {items: 5.5 },
+        768: {items: 3.05 },
+        1080: {items: 4.10 },
+        1280: {items: 4.90 },
+        1366: {items: 5.20},
+        1440: {items: 5.65 },
+        1536: {items: 5.6 },
+        1600: {items: 6.80 },
+        1680: {items: 7.19 },
         1920: {items: 5.5 },
+        2160: {items: 5.62 },
+        2304: {items: 9.80 },
+        2560: {items: 11.00 },
+        2880: {items: 12.25 },
+        3000: {items: 12.80 },
+        3840: {items: 16.40 },
+        4096: {items: 17.50 },
       },
     });
 </script>
