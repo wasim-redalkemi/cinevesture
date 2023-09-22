@@ -5040,8 +5040,8 @@ transition: 2s ease all; */
 
 .switches-container-profile label {
     /* padding:0.5rem 8%; */
-    /* width: 50%; */
-    padding-left: 14%;
+    width: 50%;
+    /* padding-left: 14%; */
     font-size: 80%;
     margin: 0;
     text-align: center;
@@ -5106,6 +5106,10 @@ transition: 2s ease all; */
     position: absolute;
     top: 0;
     left: 0;
+}
+
+.nobr{
+    white-space: nowrap;
 }
 
 /* slide the switch box from right to left */
