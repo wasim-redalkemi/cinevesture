@@ -165,7 +165,7 @@
                     <a href="{{ route('public-view', ['id'=>$v1->id]) }}">
                       <div class="main_slider_elem_wrap">
                         <div class="secondry-card-top-container w-100">
-                          <div class="proj_name" id="proj_name">
+                          <div class="" id="proj_name">
                             <!-- <a href="{{ route('public-view', ['id'=>$v1->id]) }}" > -->
                               @if (isset($v1->project_name) && !empty($v1->project_name))
                                 <span class="white">{{$v1->project_name}}</span> 
@@ -177,17 +177,23 @@
                           </div> -->
                         </div>
                         <div class="secondry-card-bottom-container proj_name">
-                        
-                          @if (isset($v1->duration) && !empty($v1->duration))
-                          {{$v1->duration.' min'}}
-                          {{-- <span class="white"><?php echo sprintf(intdiv($v1->duration, 60).' hr') .' '. ( sprintf($v1->duration % 60).' min');?> /</span> --}}
+                          @if (isset($v1->projectCategory[0]) && !empty($v1->projectCategory[0]))
+                            <span class="white"> {{$v1->projectCategory[0]['name']}} | </span>
                           @endif
-                          {{-- @if (isset($v1->projectLanguages[0]) && !empty($v1->projectLanguages[0]))
-                           <span class="white"> {{$v1->projectLanguages[0]['name']}} /</span>
-                          @endif --}}
+                          
+                          @if (isset($v1->duration) && !empty($v1->duration))
+                            {{$v1->duration.' min | '}}
+                            {{-- <span class="white"><?php echo sprintf(intdiv($v1->duration, 60).' hr') .' '. ( sprintf($v1->duration % 60).' min');?> /</span> --}}
+                          @endif
+
+                          @if (isset($v1->projectLanguages[0]) && !empty($v1->projectLanguages[0]))
+                           <span class="white"> {{$v1->projectLanguages[0]['name']}}</span>
+                          @endif
+
                           {{-- @if (isset($v1->genres[0]) && !empty($v1->genres[0]))
                            <span class="white"> {{$v1->genres[0]['name']}} </span>
                           @endif --}}
+
                           {{-- @php
                             $country_data = $v1->toArray();
                           @endphp

@@ -552,7 +552,7 @@
                                                     </div> 
                                                 @endif
                                             </div>
-                                            <div class="secondry-card-top-container w-100 proj_name">
+                                            <div class="secondry-card-top-container w-100">
                                                 <div>{{$value->project_name}}</div>
                                             </div>
                                         </a> 
