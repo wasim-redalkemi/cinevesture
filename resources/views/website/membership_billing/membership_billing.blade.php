@@ -86,11 +86,13 @@
                                     <tr class="guide_profile_main_subtext Aubergine_at_night">
                                         <td class="w-50">Date:</td>
                                         <td class="w-50"> 
-                                            @if(($subscription->platform_subscription_id != 'free')) 
-                                                @if (!empty($subscription->subscription_start_date)) {{strtoupper(date('jS F Y',strtotime($subscription->subscription_start_date)))}} @else <span><b>-</b></span> @endif
-                                            @else 
-                                                <span><b>NA</b></span> 
-                                            @endif
+                                            <nobr>
+                                                @if(($subscription->platform_subscription_id != 'free')) 
+                                                    @if (!empty($subscription->subscription_start_date)) {{strtoupper(date('jS F Y',strtotime($subscription->subscription_start_date)))}} @else <span><b>-</b></span> @endif
+                                                @else 
+                                                    <span><b>NA</b></span> 
+                                                @endif
+                                            </nobr>
                                         </td>
                                     </tr>
                                 </table>
