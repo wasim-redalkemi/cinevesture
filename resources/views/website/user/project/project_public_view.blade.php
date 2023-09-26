@@ -79,16 +79,28 @@
                                 @endif
 
                                 <br>
-                                @if (!empty($projectData[0]['genres']))
-                                    @php $temp_all_data = [] @endphp
-                                    @foreach ($projectData[0]['genres'] as $k => $v)
-                                        @php $temp_all_data[] = $v['name'] @endphp
-                                    @endforeach
-                                    {{implode(', ',$temp_all_data)}}
-                                @else
-                                    <span><b>'Empty genres'</b></span>
-                                @endif
+                                @if (!empty($projectData[0]['primary_genres']))
+                                |@php $temp_all_data = [] @endphp
+                                 {{$projectData[0]['primary_genres']['name']}}
+                                
+                                 {{-- @foreach ($projectData[0]['primary_genres'] as $k => $v)
+                                     @php $temp_all_data[] = $v['name'] @endphp
+                                 @endforeach --}}
+                                 {{implode(', ',$temp_all_data)}}
+                             @else
+                                 {{-- <span><b>'Empty genres'</b></span> --}}
+                             @endif
 
+                                @if (!empty($projectData[0]['genres']))
+                                |@php $temp_all_data = [] @endphp
+                                 @foreach ($projectData[0]['genres'] as $k => $v)
+                                     @php $temp_all_data[] = $v['name'] @endphp
+                                 @endforeach
+                                 {{implode(', ',$temp_all_data)}}
+                             @else
+                                 {{-- <span><b>'Empty genres'</b></span> --}}
+                             @endif
+                             
                                 @if (!empty($projectData[0]['project_category']))
                                     |@php $temp_all_data = [] @endphp
                                     @foreach ($projectData[0]['project_category'] as $k => $v)
@@ -540,7 +552,7 @@
                                                     </div> 
                                                 @endif
                                             </div>
-                                            <div class="secondry-card-top-container w-100 proj_name">
+                                            <div class="secondry-card-top-container w-100">
                                                 <div>{{$value->project_name}}</div>
                                             </div>
                                         </a> 

@@ -81,8 +81,7 @@ class HomeController extends Controller
         'lists.user'=>function($q){
             $q->where('status','1');
         },
-        'lists.genres',
-        'lists.projectCountries','lists.projectLanguages','lists.projectImage','lists.isfavouriteProjectMain','lists.isfavouriteProject'=>function($q){
+        'lists.genres','lists.projectCountries','lists.projectLanguages','lists.projectImage','lists.isfavouriteProjectMain','lists.projectCategory','lists.isfavouriteProject'=>function($q){
             $q->where('user_id',auth()->user()->id);
         }])
        ->where('status','published')

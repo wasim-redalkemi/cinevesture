@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Controller;
@@ -41,7 +41,8 @@ class ProjectController extends AdminController
                     if (isset($request->genre)) { // search name of user
                         $q->whereHas('genres', function ($q) use($request){
                             $q->where('gener_id',$request->genre);
-                        });
+                        })
+                        ->orWhere("primary_genre_id",$request->genre);
                     }
                     if(isset($request->from_date) && isset($request->to_date)){
                         $from=$request->from_date.' '.'00:00:00';
