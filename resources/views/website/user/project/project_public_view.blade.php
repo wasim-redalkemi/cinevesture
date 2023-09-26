@@ -537,31 +537,39 @@
                     
                     <div class="related owl-carousel owl-theme">
                         @if(count($recomProject)>0)
-                            @foreach ($recomProject as $value)
-                            <div class="home_img_wrap b_r owl_item_at">
-                                <div class="home_slider">
-                                    <div class="slider">
-                                        <a href="{{route('public-view',['id'=>$value->id])}}">
-                                            {{-- {{$value->projectOnlyImage[0]->file_link}} --}}
-                                            <div class="img-container gradient"> 
-                                                @if (!empty($value->projectOnlyImage[0]->file_link))
-                                                    <img src="{{ Storage::url($value->projectOnlyImage[0]->file_link) }}" alt="image"> 
-                                                @else
-                                                    <div class="home_img_wrap">
-                                                        <img src="{{ asset('images/asset/20230803084958wallpaperflare.com_wallpaper_(1).jpg') }}" alt="image">   
-                                                    </div> 
-                                                @endif
+                            @foreach ($recomProject as $v1)
+                                <div class="home_img_wrap b_r owl_item_at">
+                                    <div class="home_slider">
+                                        <div class="main_img_elem_wrap">
+                                        <div class="img-container">
+                                            @if (!empty($v1->projectImage) || isset($v1->projectImage))                            
+                                            <img src="{{ Storage::url($v1->projectImage->file_link) }}" alt="image">
+                                            @else
+                                            <img src="{{ asset('images/asset/20230803084958wallpaperflare.com_wallpaper_(1).jpg') }}" alt="image">                            
+                                            @endif                            
+                                        </div>
+                                        </div>
+                                        
+                                        <a href="{{ route('public-view', ['id'=>$v1->id]) }}">
+                                            <div class="main_slider_elem_wrap">
+                                                <div class="secondry-card-top-container w-100">
+                                                    <div class="" id="proj_name">
+                                                        <!-- <a href="{{ route('public-view', ['id'=>$v1->id]) }}" > -->
+                                                        @if (isset($v1->project_name) && !empty($v1->project_name))
+                                                            <span class="white">{{$v1->project_name}}</span> 
+                                                        @endif
+                                                        <!-- </a> -->
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="secondry-card-top-container w-100">
-                                                <div>{{$value->project_name}}</div>
+                                        </a>
+                                        <div class="like_btn_wrapper">
+                                            <div class="proj_name">
+                                            <i class="text-white fa c_red icon-size-heart <?php if(isset($v1->isfavouriteProjectMain[0]->id)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-project " style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
                                             </div>
-                                        </a> 
-                                        <div class="like_btn_wrapper proj_name">
-                                            <div> <i class="fa c_red icon-size-heart <?php if(isset($value->isfavouriteProjectOne)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size text-white like-project" style="cursor: pointer;" data-id="{{$value->id}}" aria-hidden="true"></i></div>
-                                        </div>  
-                                    </div>                            
+                                        </div>
+                                    </div>            
                                 </div>
-                            </div> 
                             @endforeach 
                         @else
                             <span class="text-white"><b>-</b></span>
