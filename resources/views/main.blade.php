@@ -358,7 +358,7 @@
     var childLeftLen = 0;//slider_elem_child.left;  
     // console.log(leftLen);
     // console.log(childLeftLen);
-    var newLeftLen = ((leftLen-childLeftLen)+15);
+    var newLeftLen = ((leftLen-childLeftLen)+0);
     
     $('.test.owl-carousel .owl-item').css({"position": "relative","left":newLeftLen+"px"});
   </script>
