@@ -778,11 +778,18 @@
     // });
 
     $(".related.owl-carousel").owlCarousel({
-        //   center: true,
-        autoPlay: 1000,
+        autoplayTimeout: 2000,
+      autoplay: true,
+      loop: false,
+      nav: true,
+      margin: 40,
+
+         //   center: true,
+        //  autoPlay: 1000,
         // autoplay: true,
         //   loop: true,
-        margin: 30,
+        // margin: 30,
+
       center: false,
       items: 1,
       autoplayHoverPause: true,
