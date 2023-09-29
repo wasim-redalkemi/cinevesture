@@ -555,6 +555,21 @@
                                             <div class="secondry-card-top-container w-100">
                                                 <div>{{$value->project_name}}</div>
                                             </div>
+                                            <div class="secondry-card-bottom-container proj_name">
+                                                @if (isset($value->projectCategory[0]) && !empty($value->projectCategory[0]))
+                                                  <span class="white"> {{$value->projectCategory[0]['name']}} | </span>
+                                                @endif
+                                                
+                                                @if (isset($value->duration) && !empty($value->duration))
+                                                  {{$value->duration.' min | '}}
+                                                @endif
+                      
+                                                @if (isset($value->projectLanguages[0]) && !empty($value->projectLanguages[0]))
+                                                 <span class="white"> {{$value->projectLanguages[0]['name']}}</span>
+                                                @endif
+                                            </div>
+
+                                           
                                         </a> 
                                         <div class="like_btn_wrapper proj_name">
                                             <div> <i class="fa c_red icon-size-heart <?php if(isset($value->isfavouriteProjectOne)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size text-white like-project" style="cursor: pointer;" data-id="{{$value->id}}" aria-hidden="true"></i></div>
@@ -591,8 +606,6 @@
 <script>
      $('.proj_name').hide();
     $(document).ready(function() {
-        // $("#error-toast").toast("show");
-        // $("#success-toast").toast("show");
 
         var $temp = $("<input>");
         var $url = $(location).attr('href');
@@ -705,35 +718,38 @@
         });
 
     });
+
     $(document).ready(function () {
-        // Initially hide the time and heart icons
-        $('.proj_name').hide();
-        // Handle hover events
-        $('.home_slider').hover(
-            function () {
-            // Show the name on hover
-            $(this).find('.proj_name').show();
-            $(this).find('.img-container').removeClass('gradient');
+      // Initially hide the time and heart icons
+      $('.proj_name').hide();
+      // Handle hover events
+      $('.home_slider').hover(
+        function () {
+          // Show the name on hover
+          $(this).find('.proj_name').show();
+          $(this).find('.img-container').removeClass('gradient');
+          
             $(this).addClass("hovered").css("background-color", "rgba(0, 0, 0, 0.0)");
-            },
-            function () {
-            // Hide the name when the hover is removed
-            $(this).find('.proj_name').hide();
-            $(this).find('.img-container').addClass('gradient');
-            $(this).removeClass("hovered").css("background-color", "rgba(0, 0, 0, 0.2)");
-            }
-        );
+        },
+        function () {
+          // Hide the name when the hover is removed
+          $(this).find('.proj_name').hide();
+          $(this).find('.img-container').addClass('gradient');
+        $(this).removeClass("hovered").css("background-color", "rgba(0, 0, 0, 0.2)");
+        }
+      );
     });
+
     $(".related.owl-carousel").owlCarousel({
         //   center: true,
         autoPlay: 1000,
         // autoplay: true,
         //   loop: true,
-        margin: 20,
+        margin: 30,
       center: false,
       items: 1,
       autoplayHoverPause: true,
-      stagePadding: 0,
+      stagePadding: 00,
       responsive: {
         360: { items: 1.51 },
         390: { items: 1.64 },
