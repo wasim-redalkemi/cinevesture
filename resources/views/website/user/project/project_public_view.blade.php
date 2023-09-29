@@ -538,56 +538,66 @@
                     <div class="related owl-carousel owl-theme">
                         @if(count($recomProject)>0)
                             @foreach ($recomProject as $v1)
-                                <div class="home_img_wrap b_r owl_item_at">
-                                    <div class="home_slider">
-                                        <div class="main_img_elem_wrap">
-                                        <div class="img-container">
-                                            @if (!empty($v1->projectImage) || isset($v1->projectImage))                            
-                                            <img src="{{ Storage::url($v1->projectImage->file_link) }}" alt="image">
-                                            @else
-                                            <img src="{{ asset('images/asset/20230803084958wallpaperflare.com_wallpaper_(1).jpg') }}" alt="image">                            
-                                            @endif                            
+                            <div class="home_img_wrap b_r owl_item_at">
+                                <div class="home_slider">
+                                  <div class="main_img_elem_wrap">
+                                    <div class="img-container">
+                                      @if (!empty($v1->projectImage) || isset($v1->projectImage))                            
+                                      <img src="{{ Storage::url($v1->projectImage->file_link) }}" alt="image">
+                                      @else
+                                      <img src="{{ asset('images/asset/20230803084958wallpaperflare.com_wallpaper_(1).jpg') }}" alt="image">                            
+                                      @endif                            
+                                    </div>
+                                  </div>
+                                  
+                                  <a href="{{ route('public-view', ['id'=>$v1->id]) }}">
+                                    <div class="main_slider_elem_wrap">
+                                      <div class="secondry-card-top-container w-100">
+                                        <div class="" id="proj_name">
+                                          <!-- <a href="{{ route('public-view', ['id'=>$v1->id]) }}" > -->
+                                            @if (isset($v1->project_name) && !empty($v1->project_name))
+                                              <span class="white">{{$v1->project_name}}</span> 
+                                            @endif
+                                          <!-- </a> -->
                                         </div>
-                                        </div>
+                                        <!-- <div>
+                                            <i class="fa fa-heart-o icon-size like-project" style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
+                                        </div> -->
+                                      </div>
+                                      <div class="secondry-card-bottom-container proj_name">
+                                        @if (isset($v1->projectCategory[0]) && !empty($v1->projectCategory[0]))
+                                          <span class="white"> {{$v1->projectCategory[0]['name']}} | </span>
+                                        @endif
                                         
-                                        <a href="{{ route('public-view', ['id'=>$v1->id]) }}">
-                                            <div class="main_slider_elem_wrap">
-                                                <div class="secondry-card-top-container w-100">
-                                                    <div class="" id="proj_name">
-                                                        <!-- <a href="{{ route('public-view', ['id'=>$v1->id]) }}" > -->
-                                                        @if (isset($v1->project_name) && !empty($v1->project_name))
-                                                            <span class="white">{{$v1->project_name}}</span> 
-                                                        @endif
-                                                        <!-- </a> -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="like_btn_wrapper">
-                                            <div class="proj_name">
-                                            <i class="text-white fa c_red icon-size-heart <?php if(isset($v1->isfavouriteProjectMain[0]->id)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-project " style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="secondry-card-bottom-container proj_name">
-                                                @if (isset($value->projectCategory[0]) && !empty($value->projectCategory[0]))
-                                                  <span class="white"> {{$value->projectCategory[0]['name']}} | </span>
-                                                @endif
-                                                
-                                                @if (isset($value->duration) && !empty($value->duration))
-                                                  {{$value->duration.' min | '}}
-                                                @endif
-                      
-                                                @if (isset($value->projectLanguages[0]) && !empty($value->projectLanguages[0]))
-                                                 <span class="white"> {{$value->projectLanguages[0]['name']}}</span>
-                                                @endif
-                                            </div>
-
-                                           
-                                        </a> 
-                                        <div class="like_btn_wrapper proj_name">
-                                            <div> <i class="fa c_red icon-size-heart <?php if(isset($value->isfavouriteProjectOne)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size text-white like-project" style="cursor: pointer;" data-id="{{$value->id}}" aria-hidden="true"></i></div>
-                                        </div>  
-                                    </div>                            
-                                </div>
+                                        @if (isset($v1->duration) && !empty($v1->duration))
+                                          {{$v1->duration.' min | '}}
+                                          {{-- <span class="white"><?php echo sprintf(intdiv($v1->duration, 60).' hr') .' '. ( sprintf($v1->duration % 60).' min');?> /</span> --}}
+                                        @endif
+              
+                                        @if (isset($v1->projectLanguages[0]) && !empty($v1->projectLanguages[0]))
+                                         <span class="white"> {{$v1->projectLanguages[0]['name']}}</span>
+                                        @endif
+              
+                                        {{-- @if (isset($v1->genres[0]) && !empty($v1->genres[0]))
+                                         <span class="white"> {{$v1->genres[0]['name']}} </span>
+                                        @endif --}}
+              
+                                        {{-- @php
+                                          $country_data = $v1->toArray();
+                                        @endphp
+                                        @if (isset($country_data['project_countries'][0]) && !empty($country_data['project_countries'][0]))
+                                        <span class="white"> {{$country_data['project_countries'][0]['name']}}</span>
+                                        @endif --}}
+                                      </div>
+                                    </div>
+                                  </a>
+                                  <div class="like_btn_wrapper">
+                                      <div class="proj_name">
+                                       <i class="text-white fa c_red icon-size-heart <?php if(isset($v1->isfavouriteProjectMain[0]->id)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-project " style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
+                                       </div>
+                                  </div>
+                                </div>            
+                              </div>
                             @endforeach 
                         @else
                             <span class="text-white"><b>-</b></span>
@@ -738,18 +748,34 @@
         function () {
           // Show the name on hover
           $(this).find('.proj_name').show();
-          $(this).find('.img-container').removeClass('gradient');
-          
-            $(this).addClass("hovered").css("background-color", "rgba(0, 0, 0, 0.0)");
         },
         function () {
           // Hide the name when the hover is removed
           $(this).find('.proj_name').hide();
-          $(this).find('.img-container').addClass('gradient');
-        $(this).removeClass("hovered").css("background-color", "rgba(0, 0, 0, 0.2)");
         }
       );
     });
+
+    // $(document).ready(function () {
+    //   // Initially hide the time and heart icons
+    //   $('.proj_name').hide();
+    //   // Handle hover events
+    //   $('.home_slider').hover(
+    //     function () {
+    //       // Show the name on hover
+    //       $(this).find('.proj_name').show();
+    //       $(this).find('.img-container').removeClass('gradient');
+          
+    //         $(this).addClass("hovered").css("background-color", "rgba(0, 0, 0, 0.0)");
+    //     },
+    //     function () {
+    //       // Hide the name when the hover is removed
+    //       $(this).find('.proj_name').hide();
+    //       $(this).find('.img-container').addClass('gradient');
+    //     $(this).removeClass("hovered").css("background-color", "rgba(0, 0, 0, 0.2)");
+    //     }
+    //   );
+    // });
 
     $(".related.owl-carousel").owlCarousel({
         //   center: true,
