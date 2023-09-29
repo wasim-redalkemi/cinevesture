@@ -5177,7 +5177,7 @@ transition: 2s ease all; */
 }
 .tile .proj_name {
     display: none; /* Initially hide the name */
-  }
+      }
   
   .tile:hover .proj_name {
     display: block; /* Show the name on hover */

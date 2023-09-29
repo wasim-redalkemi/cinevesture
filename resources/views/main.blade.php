@@ -204,10 +204,10 @@
                       </div>
                     </a>
                     <div class="like_btn_wrapper">
-                     <div class="proj_name">
-                      <i class="text-white fa c_red icon-size-heart <?php if(isset($v1->isfavouriteProjectMain[0]->id)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-project " style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
+                        <div class="proj_name">
+                         <i class="text-white fa c_red icon-size-heart <?php if(isset($v1->isfavouriteProjectMain[0]->id)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-project " style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
+                         </div>
                     </div>
-                  </div>
                   </div>            
                 </div>
                 @endforeach
