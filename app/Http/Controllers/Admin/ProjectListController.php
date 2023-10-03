@@ -364,7 +364,7 @@ class ProjectListController extends AdminController
                 $projectListFilters = ProjectListFilters::query()->where('list_id',$projectList->id)->first();
                 $projectListFilters->list_id=$projectList->id;
                 $projectListFilters->category_id=(isset($request->categories)&& !empty($request->categories))?implode(',',$request->categories):"";
-                $projectListFilters->genre_id=(isset($request->genre)&& !empty($request->genre))?implode(',',$request->genre):"";
+                $projectListFilters->genre_id=$request->genre;
                 $projectListFilters->language_id=(isset($request->language)&& !empty($request->language))?implode(',',$request->language):"";
                 $projectListFilters->location_id=(isset($request->location)&& !empty($request->location))?implode(',',$request->location):"";
                 $projectListFilters->recommendation=$request->recommended;
