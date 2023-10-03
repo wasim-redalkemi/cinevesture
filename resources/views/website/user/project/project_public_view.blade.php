@@ -533,77 +533,78 @@
         <div class="public_subsection">
             <div class="row">
                 <div class="col-md-12">
-                    <h1 class="public-head-res-text mb-2"> Related</h1>
-                    
-                    <div class="related owl-carousel owl-theme">
-                        @if(count($recomProject)>0)
-                            @foreach ($recomProject as $v1)
-                            <div class="home_img_wrap b_r owl_item_at">
-                                <div class="home_slider">
-                                  <div class="main_img_elem_wrap">
-                                    <div class="img-container">
-                                      @if (!empty($v1->projectImage) || isset($v1->projectImage))                            
-                                      <img src="{{ Storage::url($v1->projectImage->file_link) }}" alt="image">
-                                      @else
-                                      <img src="{{ asset('images/asset/20230803084958wallpaperflare.com_wallpaper_(1).jpg') }}" alt="image">                            
-                                      @endif                            
-                                    </div>
-                                  </div>
-                                  
-                                  <a href="{{ route('public-view', ['id'=>$v1->id]) }}">
-                                    <div class="main_slider_elem_wrap">
-                                      <div class="secondry-card-top-container w-100">
-                                        <div class="" id="proj_name">
-                                          <!-- <a href="{{ route('public-view', ['id'=>$v1->id]) }}" > -->
-                                            @if (isset($v1->project_name) && !empty($v1->project_name))
-                                              <span class="white">{{$v1->project_name}}</span> 
-                                            @endif
-                                          <!-- </a> -->
+                    <div class="sub_wraper">
+                        <h1 class="public-head-res-text mb-2"> Related</h1>
+                        
+                        <div class="related owl-carousel owl-theme ">
+                            @if(count($recomProject)>0)
+                                @foreach ($recomProject as $v1)
+                                <div class="home_img_wrap b_r owl_item_at">
+                                    <div class="home_slider">
+                                    <div class="main_img_elem_wrap">
+                                        <div class="img-container">
+                                        @if (!empty($v1->projectImage) || isset($v1->projectImage))                            
+                                        <img src="{{ Storage::url($v1->projectImage->file_link) }}" alt="image">
+                                        @else
+                                        <img src="{{ asset('images/asset/20230803084958wallpaperflare.com_wallpaper_(1).jpg') }}" alt="image">                            
+                                        @endif                            
                                         </div>
-                                        <!-- <div>
-                                            <i class="fa fa-heart-o icon-size like-project" style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
-                                        </div> -->
-                                      </div>
-                                      <div class="secondry-card-bottom-container proj_name">
-                                        @if (isset($v1->projectCategory[0]) && !empty($v1->projectCategory[0]))
-                                          <span class="white"> {{$v1->projectCategory[0]['name']}} | </span>
-                                        @endif
-                                        
-                                        @if (isset($v1->duration) && !empty($v1->duration))
-                                          {{$v1->duration.' min | '}}
-                                          {{-- <span class="white"><?php echo sprintf(intdiv($v1->duration, 60).' hr') .' '. ( sprintf($v1->duration % 60).' min');?> /</span> --}}
-                                        @endif
-              
-                                        @if (isset($v1->projectLanguages[0]) && !empty($v1->projectLanguages[0]))
-                                         <span class="white"> {{$v1->projectLanguages[0]['name']}}</span>
-                                        @endif
-              
-                                        {{-- @if (isset($v1->genres[0]) && !empty($v1->genres[0]))
-                                         <span class="white"> {{$v1->genres[0]['name']}} </span>
-                                        @endif --}}
-              
-                                        {{-- @php
-                                          $country_data = $v1->toArray();
-                                        @endphp
-                                        @if (isset($country_data['project_countries'][0]) && !empty($country_data['project_countries'][0]))
-                                        <span class="white"> {{$country_data['project_countries'][0]['name']}}</span>
-                                        @endif --}}
-                                      </div>
                                     </div>
-                                  </a>
-                                  <div class="like_btn_wrapper">
-                                      <div class="proj_name">
-                                       <i class="text-white fa c_red icon-size-heart <?php if(isset($v1->isfavouriteProjectMain[0]->id)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-project " style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
-                                       </div>
-                                  </div>
-                                </div>            
-                              </div>
-                            @endforeach 
-                        @else
-                            <span class="text-white"><b>-</b></span>
-                        @endif 
+                                    
+                                    <a href="{{ route('public-view', ['id'=>$v1->id]) }}">
+                                        <div class="main_slider_elem_wrap">
+                                        <div class="secondry-card-top-container w-100">
+                                            <div class="" id="proj_name">
+                                            <!-- <a href="{{ route('public-view', ['id'=>$v1->id]) }}" > -->
+                                                @if (isset($v1->project_name) && !empty($v1->project_name))
+                                                <span class="white">{{$v1->project_name}}</span> 
+                                                @endif
+                                            <!-- </a> -->
+                                            </div>
+                                            <!-- <div>
+                                                <i class="fa fa-heart-o icon-size like-project" style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
+                                            </div> -->
+                                        </div>
+                                        <div class="secondry-card-bottom-container proj_name">
+                                            @if (isset($v1->projectCategory[0]) && !empty($v1->projectCategory[0]))
+                                            <span class="white"> {{$v1->projectCategory[0]['name']}} | </span>
+                                            @endif
+                                            
+                                            @if (isset($v1->duration) && !empty($v1->duration))
+                                            {{$v1->duration.' min | '}}
+                                            {{-- <span class="white"><?php echo sprintf(intdiv($v1->duration, 60).' hr') .' '. ( sprintf($v1->duration % 60).' min');?> /</span> --}}
+                                            @endif
+                
+                                            @if (isset($v1->projectLanguages[0]) && !empty($v1->projectLanguages[0]))
+                                            <span class="white"> {{$v1->projectLanguages[0]['name']}}</span>
+                                            @endif
+                
+                                            {{-- @if (isset($v1->genres[0]) && !empty($v1->genres[0]))
+                                            <span class="white"> {{$v1->genres[0]['name']}} </span>
+                                            @endif --}}
+                
+                                            {{-- @php
+                                            $country_data = $v1->toArray();
+                                            @endphp
+                                            @if (isset($country_data['project_countries'][0]) && !empty($country_data['project_countries'][0]))
+                                            <span class="white"> {{$country_data['project_countries'][0]['name']}}</span>
+                                            @endif --}}
+                                        </div>
+                                        </div>
+                                    </a>
+                                    <div class="like_btn_wrapper">
+                                        <div class="proj_name">
+                                        <i class="text-white fa c_red icon-size-heart <?php if(isset($v1->isfavouriteProjectMain[0]->id)){echo'fa-heart';}else{echo'fa-heart-o';} ?> icon-size Aubergine like-project " style="cursor: pointer;" data-id="{{$v1->id}}" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                    </div>            
+                                </div>
+                                @endforeach 
+                            @else
+                                <span class="text-white"><b>-</b></span>
+                            @endif 
+                        </div>
                     </div>
-                    
                 </div>
             </div>
         </div>
@@ -776,38 +777,39 @@
     //     }
     //   );
     // });
-
+    var tiles_width = $('.sub_wraper').width()/232;
     $(".related.owl-carousel").owlCarousel({
-        //   center: true,
-        autoPlay: 1000,
-        // autoplay: true,
-        //   loop: true,
-        margin: 30,
+        autoplayTimeout: 2000,
+      autoplay: true,
+      loop: false,
+      nav: true,
+      margin: 0,
       center: false,
       items: 1,
       autoplayHoverPause: true,
       stagePadding: 00,
       responsive: {
-        360: { items: 1.51 },
-        390: { items: 1.64 },
-        393: { items: 1.64},
-        412: { items: 1.73 },
-        768: {items: 3.05 },
-        1080: {items: 4.10 },
-        1280: {items: 4.90 },
-        1366: {items: 5.20},
-        1440: {items: 5.65 },
-        1536: {items: 5.6 },
-        1600: {items: 6.80 },
-        1680: {items: 7.19 },
-        1920: {items: 5.5 },
-        2160: {items: 5.62 },
-        2304: {items: 9.80 },
-        2560: {items: 11.00 },
-        2880: {items: 12.25 },
-        3000: {items: 12.80 },
-        3840: {items: 16.40 },
-        4096: {items: 17.50 },
+       
+        360: { items: tiles_width },
+        390: { items: tiles_width },
+        393: { items: tiles_width },
+        412: { items: tiles_width },
+        768: {items:  tiles_width },
+        1080: {items: tiles_width },
+        1280: {items: tiles_width },
+        1366: {items: tiles_width },
+        1440: {items: tiles_width },
+        1536: {items: tiles_width },
+        1600: {items: tiles_width },
+        1680: {items: tiles_width },
+        1920: {items: tiles_width },
+        2160: {items: tiles_width },
+        2304: {items: tiles_width },
+        2560: {items: tiles_width },
+        2880: {items: tiles_width },
+        3000: {items: tiles_width },
+        3840: {items: tiles_width },
+        4096: {items: tiles_width },
       },
     });
 </script>
