@@ -1,3 +1,9 @@
+:root {
+    --switches-bg-color: #4D0D8A;
+    --switches-label-color: #fff ;
+    --switch-bg-color: #fff;
+    --switch-text-color: #4D0D8A ;
+}
 body {
     background: rgb(28, 3, 48) !important;
     font-family: 'Open Sans' !important;
@@ -206,6 +212,12 @@ a {
 
     padding-right: 10px;
 
+}
+.p4{
+    padding-left: 0.3rem;
+}
+.p-12{
+    margin: 0px 14px!important;
 }
 
 .display-none {
@@ -1906,6 +1918,16 @@ select option[value=""]{
     margin-top: 8px;
     text-decoration: none;
 }
+.toggle_btn {
+    font-weight: 500;
+    font-size: 16px;
+    align-items: center;
+    line-height: 126%;
+    letter-spacing: 0.033em;
+    color: #000000;
+    margin-top: 8px;
+    text-decoration: none;
+}
 
 .upload_img_container {
     border: 1px dashed #4D0D8A;
@@ -3326,10 +3348,28 @@ select::after
     position: relative;
     display: inline-block;
     width: 42px;
-    height: 20px;
+    height: 22px;
 }
 
+.currency_togle .switch-toggle {
+    position: relative;
+    display: inline-block;
+    width: 42px;
+    height: 22px;
+} 
 .currency_togle .switch .slider{
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #C13D4F;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.currency_togle .switch-toggle .slider{
     position: absolute;
     cursor: pointer;
     top: 0;
@@ -3347,10 +3387,24 @@ select::after
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: grey;
+    /* background-color: #971E9B!important; */
     -webkit-transition: .4s;
     transition: .4s;
 }
+
+
+.switch-toggle .slider{
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* background-color: #971E9B!important; */
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
 .home_slider {
     /* position: absolute; */
     /* top: 0;
@@ -3397,8 +3451,20 @@ select::after
     width: 220px;
     height: 42px;
 }
+.time_togle .switch-toggle {
+    position: relative;
+    display: inline-block;
+    width: 220px;
+    height: 42px;
+}
 
 .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.switch-toggle input {
     opacity: 0;
     width: 0;
     height: 0;
@@ -4921,6 +4987,191 @@ transition: 2s ease all; */
     margin-top: 2px;
 }
 
+
+/* a container - decorative, not required */
+.toggle_container {
+    width: 100%;
+}
+/* container for all of the switch elements 
+    - adjust "width" to fit the content accordingly 
+*/
+.switches-container {
+    width: 100%;
+    height: 40px;
+    position: relative;
+    display: flex;
+    padding: 0;
+    position: relative;
+    background: var(--switches-bg-color);
+    line-height: 37px;
+    border-radius: 4px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.switches-container-profile {
+    width: 100%;
+    height: 40px;
+    position: relative;
+    display: flex;
+    padding: 0;
+    position: relative;
+    background: var(--switches-bg-color);
+    line-height: 37px;
+    border-radius: 4px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.br-14{
+    border-radius: 14px;
+}
+
+/* input (radio) for toggling. hidden - use labels for clicking on */
+.switches-container input {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+}
+
+.switches-container-profile input {
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+}
+
+/* labels for the input (radio) boxes - something to click on */
+.switches-container label {
+    padding:0px 8%;
+    width: 50%;
+    margin: 0;
+    text-align: center;
+    cursor: pointer;
+    color: var(--switches-label-color);
+}
+
+.switches-container-profile label {
+    /* padding:0.5rem 8%; */
+    width: 50%;
+    /* padding-left: 14%; */
+    font-size: 80%;
+    margin: 0;
+    text-align: center;
+    align-items: center;
+    cursor: pointer;
+    color: var(--switches-label-color);
+}
+
+/* switch highlighters wrapper (sliding left / right) 
+    - need wrapper to enable the even margins around the highlight box
+*/
+.switch-wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 50%;
+    padding: 0.15rem;
+    z-index: 3;
+    transition: transform .5s cubic-bezier(.77, 0, .175, 1);
+    /* transition: transform 1s; */
+}
+
+
+
+/* switch box highlighter */
+.switch {
+    border-radius: 12px;
+    background: var(--switch-bg-color);
+    height: 100%;
+}
+.switch-toggle {
+    border-radius: 4px;
+    background: var(--switch-bg-color);
+    height: 100%;
+}
+
+/* switch box labels
+    - default setup
+    - toggle afterwards based on radio:checked status 
+*/
+.switch div {
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    display: block;
+    color: var(--switch-text-color) ;
+    transition: opacity .2s cubic-bezier(.77, 0, .175, 1) .125s;
+    will-change: opacity;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.switch-toggle div {
+    width: 100%;
+    text-align: center;
+    opacity: 0;
+    display: block;
+    color: var(--switch-text-color) ;
+    transition: opacity .2s cubic-bezier(.77, 0, .175, 1) .125s;
+    will-change: opacity;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.nobr{
+    white-space: nowrap;
+}
+
+/* slide the switch box from right to left */
+.switches-container input:nth-of-type(1):checked~.switch-wrapper {
+    transform: translateX(0%);
+}
+
+
+/* slide the switch box from left to right */
+.switches-container input:nth-of-type(2):checked~.switch-wrapper {
+    transform: translateX(100%);
+}
+
+/* toggle the switch box labels - first checkbox:checked - show first switch div */
+.switches-container input:nth-of-type(1):checked~.switch-wrapper .switch div:nth-of-type(1) {
+    opacity: 1;
+}
+
+/* toggle the switch box labels - second checkbox:checked - show second switch div */
+.switches-container input:nth-of-type(2):checked~.switch-wrapper .switch div:nth-of-type(2) {
+    opacity: 1;
+}
+
+/* slide the switch box from right to left */
+.switches-container-profile input:nth-of-type(1):checked~.switch-wrapper {
+    transform: translateX(0%);
+}
+
+
+/* slide the switch box from left to right */
+.switches-container-profile input:nth-of-type(2):checked~.switch-wrapper {
+    transform: translateX(100%);
+}
+
+/* toggle the switch box labels - first checkbox:checked - show first switch div */
+.switches-container-profile input:nth-of-type(1):checked~.switch-wrapper .switch div:nth-of-type(1) {
+    opacity: 1;
+}
+
+.switches-container-profile input:nth-of-type(1):checked~.switch-wrapper .switch-toggle div:nth-of-type(1) {
+    opacity: 1;
+}
+
+/* toggle the switch box labels - second checkbox:checked - show second switch div */
+.switches-container-profile input:nth-of-type(2):checked~.switch-wrapper .switch div:nth-of-type(2) {
+    opacity: 1;
+}
+
+/* toggle the switch box labels - second checkbox:checked - show second switch div */
+.switches-container-profile input:nth-of-type(2):checked~.switch-wrapper .switch-toggle div:nth-of-type(2) {
+    opacity: 1;
+}
 .tile .proj_name {
     display: none; /* Initially hide the name */
       }

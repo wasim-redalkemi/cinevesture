@@ -52,6 +52,18 @@ class OrganisationController extends WebController
         }
     }
 
+    public function publicIndex(Request $request)
+    {
+        try {
+            if (empty($request->id)) {
+                return back()->with('error', 'Something went wrong.');
+            }
+            $UserOrganisation = UserOrganisation::query()->with(['organizationLanguages.languages','organizationServices.services','country','organizationType','memberUser'])->where('id',$request->id)->first();
+            return view('website.user.organisation.public_organisation',compact(['UserOrganisation']));
+        } catch (Exception $e) {
+            return back()->with('error', 'Something went wrong.');
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
