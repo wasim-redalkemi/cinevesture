@@ -68,7 +68,16 @@
                 @else
                     <span><b>-</b></span>
                 @endif  
-                <div class="preview_headtext">Genre</div>
+                <div class="preview_headtext">Primary Genre</div>
+                <div class="mt-2 d-flex flex-wrap">
+                @if (!empty($projectData[0]['primary_genres']))
+                   
+                    {{$projectData[0]['primary_genres']['name']}}
+                @else
+                    <span><b>-</b></span>
+                @endif 
+                </div>
+                <div class="preview_headtext">Secondary Genre</div>
                 <div class="mt-2 d-flex flex-wrap">
                     @if (!empty($projectData[0]['genres']))
                     @foreach ($projectData[0]['genres'] as $v)

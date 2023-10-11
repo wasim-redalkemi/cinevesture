@@ -84,7 +84,7 @@ class ProjectListController extends AdminController
                 $projectList = new ProjectListFilters();
                 $projectList->list_id=$project_list->id;
                 $projectList->category_id=(isset($request->categories) && !empty($request->categories))?implode(',',$request->categories):'';
-                $projectList->genre_id=(isset($request->genre)&& !empty($request->genre))?implode(',',$request->genre):'';
+                $projectList->genre_id=$request->genre;
                 $projectList->language_id=(isset($request->language)&& !empty($request->language))?implode(',',$request->language):"";
                 $projectList->location_id=(isset($request->location)&& !empty($request->location))?implode(',',$request->location):"";
                 $projectList->recommendation=$request->recommended;
@@ -220,7 +220,7 @@ class ProjectListController extends AdminController
                     if (isset($request->genre)) {
                         $q->whereHas('genres', function ($q) use($request){
                             $q->where('gener_id',$request->genre);
-                        });
+                        })->orWhere("primary_genre_id",$request->genre);
                     }
                     if(isset($request->from_date) && isset($request->to_date)){
                         $from=$request->from_date.' '.'00:00:00';
@@ -363,7 +363,7 @@ class ProjectListController extends AdminController
                 $projectListFilters = ProjectListFilters::query()->where('list_id',$projectList->id)->first();
                 $projectListFilters->list_id=$projectList->id;
                 $projectListFilters->category_id=(isset($request->categories)&& !empty($request->categories))?implode(',',$request->categories):"";
-                $projectListFilters->genre_id=(isset($request->genre)&& !empty($request->genre))?implode(',',$request->genre):"";
+                $projectListFilters->genre_id=$request->genre;
                 $projectListFilters->language_id=(isset($request->language)&& !empty($request->language))?implode(',',$request->language):"";
                 $projectListFilters->location_id=(isset($request->location)&& !empty($request->location))?implode(',',$request->location):"";
                 $projectListFilters->recommendation=$request->recommended;

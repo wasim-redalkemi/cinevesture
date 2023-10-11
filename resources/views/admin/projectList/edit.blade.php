@@ -78,23 +78,24 @@
                                           </select>
                                       </div>
                                   </div>
-                                  <div class="col-md-4">
-                                      <div class="form-group select2_wrap">
-                                          <label for="exampleFormControlSelect1">Genre</label>
-                                          <select  name="genre[]"class=" js-select2 radius js-example-basic-multiple select2-hidden-accessible .select2-selection__choice" multiple tabindex="-1" aria-hidden="true" style="width:100%">
-                                          <option value="">Select</option>
-                                          @php
-                                          $pre_genre = explode(',',$projectList->ProjectListFilters[0]->genre_id??'');
-                                          if($genre && $genre != '')
-                                            foreach ($genre as $key => $value) {
-                                                @endphp
-                                                <option value="{{$value->id}}" {{(in_array($value->id,$pre_genre)) ? 'selected' : ''}}>{{$value->name}}</option>
+                                  {{-- @dd($projectList->ProjectListFilters[0]->genre_id) --}}
+                                    <div class="col-md-4">
+                                        <div class="form-group ">
+                                            <label for="exampleFormControlSelect1">Primary Genre</label>
+                                            <select  name="genre"class="form-control radius" tabindex="-1" aria-hidden="true">
+                                                <option value="">Select</option>
                                                 @php
-                                            }
-                                          @endphp
-                                          </select>
-                                      </div>
-                                  </div>
+                                                // $pre_genre = explode(',',$projectList->ProjectListFilters[0]->genre_id??'');
+                                                if($genre && $genre != '')
+                                                foreach ($genre as $key => $value) {
+                                                     @endphp
+                                                        <option value="{{$value->id}}" {{$projectList->ProjectListFilters[0]->genre_id == $value->id ? 'selected' : ''}}>{{$value->name}}</option>
+                                                        @php
+                                                    }
+                                                @endphp
+                                            </select>
+                                        </div>
+                                    </div>
                                   <div class="col-md-4">
                                       <div class="form-group select2_wrap">
                                           <label for="exampleFormControlSelect1">Language</label>

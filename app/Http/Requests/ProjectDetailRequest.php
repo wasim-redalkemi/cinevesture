@@ -26,7 +26,8 @@ class ProjectDetailRequest extends FormRequest
         return [
             'duration' => 'nullable|integer|max:'.config('constants.MAX_PROJECT_DURATION_IN_MIN').'|min:1',
             'category_id' => 'nullable|exists:master_project_categories,id',  
-            'gener' => 'required' ,
+            // 'gener' => '' ,
+            'primary_gener_id' => 'required',
             'gener.*' => 'required|exists:master_project_genres,id' ,   
             // 'duration' => 'nullable|integer', 
             'total_budget' => 'required|integer|max:'.config('constants.MAX_TOTAL_BUDGET').'|min:1',

@@ -39,6 +39,10 @@ class UserProject extends Model
     {
         return $this->belongsToMany(MasterProjectGenre::class,ProjectGenre::class,'project_id','gener_id');
     }
+    public function primaryGenres()
+    {
+        return $this->belongsTo(MasterProjectGenre::class,'primary_genre_id');
+    }
 
     public function projectCategory()
     {

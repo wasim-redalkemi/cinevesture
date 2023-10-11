@@ -56,12 +56,13 @@
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group select2_wrap">
-                                        <label for="exampleFormControlSelect1">Genre</label>
-                                        <select  name="genre[]"class="js-example-basic-multiple select2-hidden-accessible .select2-selection__choice radius border-secondary js-select2 " multiple tabindex="-1" aria-hidden="true">
+                                        <label for="exampleFormControlSelect1">Primary Genre</label>
+                                        <select  name="genre"class="form-control radius" tabindex="-1" aria-hidden="true">
+                                            <option value="">Select</option>
                                             @php
                                             if($genre && $genre != '')
-                                                foreach ($genre as $key => $value) {
-                                                    @endphp
+                                            foreach ($genre as $key => $value) {
+                                                @endphp
                                                     <option value="{{$value->id}}">{{$value->name}}</option>
                                                     @php
                                                 }
