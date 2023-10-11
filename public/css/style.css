@@ -2920,7 +2920,7 @@ transition: 0.3s all ease;
         transform: translateY(-8px);
         border-color: #4D0D8A;
         cursor: pointer;
-        position: absolute;
+        /* position: absolute; */
         /* box-shadow:0px 0px 42px -13px rgb(220 62 164 / 20%); */
 }
 
