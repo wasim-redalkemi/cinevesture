@@ -78,7 +78,6 @@
                                           </select>
                                       </div>
                                   </div>
-                                  {{-- @dd($projectList->ProjectListFilters[0]->genre_id) --}}
                                     <div class="col-md-4">
                                         <div class="form-group ">
                                             <label for="exampleFormControlSelect1">Primary Genre</label>

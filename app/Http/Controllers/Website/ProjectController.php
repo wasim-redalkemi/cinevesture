@@ -668,8 +668,7 @@ class ProjectController extends WebController
             $categories = MasterProjectCategory::all();
             $looking_for = MasterLookingFor::all();
             $project_stages = ProjectStage::all();
-           
-            
+
              if(!empty($_REQUEST['data']) && ($_REQUEST['data']==1)){
                 $show=true;
                 $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
@@ -693,7 +692,7 @@ class ProjectController extends WebController
                         ->Where('admin_status', 'active');
                     }
                 })->get();
-               if($projectData[0]->user->status=='0'){
+                               if($projectData[0]->user->status=='0'){
                 return back()->with('error',"This project's uses is inactive.");
                }
                 if (empty($projectData) || (empty($projectData[0]->user))|| is_null($projectData[0]->user || $projectData[0]->user->status=='0')){
@@ -707,8 +706,13 @@ class ProjectController extends WebController
                 }
             }
             $gener=ProjectGenre::query()->where('project_id',$_REQUEST['id'])->get();
-            foreach($gener as $generIds){
-                $generid[]=$generIds->gener_id;
+            if (!blank($gener)) {
+                foreach($gener as $generIds){
+                    $generid[]=$generIds->gener_id;
+                }
+            } 
+            else {
+                    $generid[]=$UserProject->primary_genre_id;
             }
             $projects=ProjectGenre::query()->whereIn('gener_id',$generid)->get();
             foreach($projects as $projectId){
@@ -739,9 +743,7 @@ class ProjectController extends WebController
             if (empty($projectData)) {
                 return back()->with('error','This Project is Unpublished/Inactive.');
             }
-
             return view('website.user.project.project_public_view', compact(['UserProject','projectData','geners','categories','looking_for','project_stages','countries','languages','recomProject','show']));
-
         } catch (Exception $e) {
             return back()->with('error','Something went wrong.');
         }
