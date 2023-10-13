@@ -20,11 +20,11 @@
                             <input type="radio" id="switchMonthly" <?php if($userType=='profile') {echo'checked';} ?> name="type" value="Profile"/>
 
                             <input type="radio" id="switchYearly" <?php if($userType=='organisation') {echo'checked';}?>  name="type" value="organisation"/>
-                            <label for="switchMonthly" class="p-12 nobr" >Profile</label>
+                            <label for="switchMonthly" class="p-12 nobr" >individual</label>
                             <label for="switchYearly" class="m-0 nobr">Organisation</label>
                             <div class="switch-wrapper">
                             <div class="switch-toggle">
-                                <div>Profile</div>
+                                <div>Individual</div>
                                 <div>Organisation</div>
                             </div>
                             </div>
