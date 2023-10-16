@@ -2,7 +2,7 @@
 
 {{-- @section('title','Cinevesture-private-view') --}}
     
-    @section('header')
+@section('header')
 @include('website.include.header')
 @endsection
 
@@ -66,21 +66,21 @@
                                     </div>
                                     <div class="social_profile_icon_wraper">
                                         @if (!empty($user->imdb_profile))
-                                            <a href="{{ $user->imdb_profile }}" target="_blank" class="fs_italian inp_data">
+                                            <a href="{{ $user->imdb_profile }}" target="_blank" class="fs_italian ">
                                                 <span class=" social_icon ">
                                                     <i class="fa fa-imdb imdb_color" aria-hidden="true"></i>
                                                 </span>
                                             </a>                                      
                                         @endif
                                         @if (!empty($user->linkedin_profile))
-                                            <a href="{{ $user->linkedin_profile }}" target="_blank" class="fs_italian inp_data" >
+                                            <a href="{{ $user->linkedin_profile }}" target="_blank" class="fs_italian " >
                                                 <span class="social_icon"> 
                                                     <i class=" fa fa-linkedin" style="font-size:20px"></i>
                                                 </span>
                                             </a>                                         
                                         @endif
                                         @if (!empty($user->website))     
-                                            <a href="{{ $user->website }}" target="_blank" class="fs_italian inp_data" >
+                                            <a href="{{ $user->website }}" target="_blank" class="fs_italian" >
                                                 <span class="social_icon">
                                                     <i class="fa fa-globe" aria-hidden="true" style="font-size:20px"></i>
                                                 </span>
