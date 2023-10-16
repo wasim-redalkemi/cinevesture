@@ -137,28 +137,33 @@
                                             @endif
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td class="public-head-subtext white blackTextShadow text-start">Total Budget</td>
-                                        <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
-                                            @if (!empty($UserProject->total_budget))
-                                            {{-- $ {{ $UserProject->total_budget}} --}}
-                                            ${{ number_format($UserProject->total_budget, 0,'.',',') }}
+                                    @if (!empty($UserProject->total_budget))
+                                        <tr>
+                                            <td class="public-head-subtext white blackTextShadow text-start">Total Budget</td>
+                                            <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
+                                                @if (!empty($UserProject->total_budget))
+                                                {{-- $ {{ $UserProject->total_budget}} --}}
+                                                ${{ number_format($UserProject->total_budget, 0,'.',',') }}
 
-                                            @else
-                                            <span><b>-</b></span>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="public-head-subtext white blackTextShadow text-start">Financing Secured</td>
-                                        <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
-                                            @if (!empty($UserProject->financing_secured))
-                                            ${{ number_format($UserProject->financing_secured, 0,'.',',')}}
-                                            @else
-                                            <span><b>-</b></span>
-                                            @endif
-                                        </td>
-                                    </tr>
+                                                @else
+                                                <span><b>-</b></span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    @if (!empty($UserProject->financing_secured))
+                                        <tr>
+                                            <td class="public-head-subtext white blackTextShadow text-start">Financing Secured</td>
+                                            <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
+                                                @if (!empty($UserProject->financing_secured))
+                                                ${{ number_format($UserProject->financing_secured, 0,'.',',')}}
+                                                @else
+                                                <span><b>-</b></span>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endif
+                                    
                                     <tr>
                                         <td class="public-head-subtext white blackTextShadow text-start">Project Stage</td>
                                         <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
