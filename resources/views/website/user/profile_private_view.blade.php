@@ -47,7 +47,10 @@
                                     </div>
                                     <div class="guide_profile_main_subtext aubergine">
                                         <i>{{empty($user_age->range)?'Age':$user_age->range;}} </i>
+                                        @if (empty($user_gender->gender) || $user_gender->gender!=='Prefer Not To Say')
                                         | <i>{{empty($user_gender->gender)?'Gender':$user_gender->gender;}}  </i>
+                                        @endif
+                                       
                                         | <i>{{empty($user_gender_pronouns->gender_pronouns)?'Gender Pronouns':$user_gender_pronouns->gender_pronouns;}}</i>
                                     </div>
                                     <div class="guide_profile_main_subtext">
