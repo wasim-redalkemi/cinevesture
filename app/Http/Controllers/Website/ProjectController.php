@@ -31,6 +31,7 @@ use App\Models\ProjectStageOfFunding;
 use App\Models\ProjectType;
 use App\Models\User;
 use App\Models\UserFavouriteProject;
+use App\Models\UserOrganisation;
 use App\Models\UserProject;
 use Exception;
 use Illuminate\Http\Request;
@@ -668,6 +669,7 @@ class ProjectController extends WebController
             $categories = MasterProjectCategory::all();
             $looking_for = MasterLookingFor::all();
             $project_stages = ProjectStage::all();
+            $organisation=UserOrganisation::query()->where('user_id',auth()->user()->id)->first();
 
              if(!empty($_REQUEST['data']) && ($_REQUEST['data']==1)){
                 $show=true;
@@ -705,6 +707,7 @@ class ProjectController extends WebController
                         }
                 }
             }
+            
             $gener=ProjectGenre::query()->where('project_id',$_REQUEST['id'])->get();
             if (!blank($gener)) {
                 foreach($gener as $generIds){
@@ -743,7 +746,7 @@ class ProjectController extends WebController
             if (empty($projectData)) {
                 return back()->with('error','This Project is Unpublished/Inactive.');
             }
-            return view('website.user.project.project_public_view', compact(['UserProject','projectData','geners','categories','looking_for','project_stages','countries','languages','recomProject','show']));
+            return view('website.user.project.project_public_view', compact(['UserProject','projectData','geners','categories','looking_for','project_stages','countries','languages','recomProject','show','organisation']));
         } catch (Exception $e) {
             return back()->with('error','Something went wrong.');
         }

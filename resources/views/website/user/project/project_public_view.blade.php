@@ -130,7 +130,12 @@
                                                 @if($show == true)
                                                     {{config('constants.HIDE_SOME_INFO')}}
                                                 @else
-                                                    <a href="{{route('profile-public-show',['id'=>$projectData[0]['user']['id']])}}" class="text_decor_none">{{ ucwords($projectData[0]['user']['name'])}}</a>
+                                                    @if (isset($organisation->name))
+                                                    <a href="{{route('organisation-public-view',['id'=>$organisation->id])}}"
+                                                         class="text_decor_none">{{ ucwords($organisation->name)}}</a>
+                                                    @else
+                                                        <a href="{{route('profile-public-show',['id'=>$projectData[0]['user']['id']])}}" class="text_decor_none">{{ ucwords($projectData[0]['user']['name'])}}</a>
+                                                    @endif
                                                 @endif
                                             @else
                                             <span><b>-</b></span>
