@@ -304,13 +304,12 @@ class ProjectController extends WebController
     public function validateProjectDetails(ProjectDetailRequest $request)
     {
         try {
-            $detailsResponse = $this->detailsStore();
-            $tot="$request->total_budget"+1;
-
-            if($tot<intval($request->financing_secured)){    
+                       $detailsResponse = $this->detailsStore();
+            
+            // $tot="$request->total_budget"+1;
+            if($request->total_budget<intval($request->financing_secured)){    
                 return back()->with('error','Financing Secured should small then total budget.');
             }
-
             if(!empty($detailsResponse['error_msg']))
             {
                 return back()->with('error',$detailsResponse['error_msg']);
@@ -321,7 +320,7 @@ class ProjectController extends WebController
             }
             
         } catch (Exception $e) {
-            return back()->with('error','Something went wrong.');
+                        return back()->with('error','Something went wrong.');
         }    
     }
 

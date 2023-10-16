@@ -23,18 +23,18 @@ class ProjectDetailRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+                return [
             'duration' => 'nullable|integer|max:'.config('constants.MAX_PROJECT_DURATION_IN_MIN').'|min:1',
             'category_id' => 'nullable|exists:master_project_categories,id',  
             // 'gener' => '' ,
             'primary_gener_id' => 'required',
             'gener.*' => 'required|exists:master_project_genres,id' ,   
             // 'duration' => 'nullable|integer', 
-            'total_budget' => 'required|integer|max:'.config('constants.MAX_TOTAL_BUDGET').'|min:1',
+            'total_budget' => 'nullable|integer|max:'.config('constants.MAX_TOTAL_BUDGET').'',
             // 'total_budget' => 'required|integer',
             
             
-            'financing_secured' => 'required|integer|max:'.config('constants.MAX_TOTAL_BUDGET').'|min:1',
+            'financing_secured' => 'nullable|integer|max:'.config('constants.MAX_TOTAL_BUDGET').'', 
            
         ];
     }

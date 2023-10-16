@@ -98,14 +98,14 @@
                         <div class="row">
                             <div class="col-md-3 mt-2 mt-md-0">
                                 <div class="profile_input" id='budgetVal'>
-                                    <label>Total Budget (USD) <span class = "steric_sign_design">*</span></label>
-                                    <input type="number" class="form-control no_number_arrows @error('total_budget') is-invalid @enderror" name="total_budget" id="total_budget_validate" min="1" max="config('constants.TOTAL_BUDGET')" pattern="[0-9]" placeholder="Total Budget" required 
+                                    <label>Total Budget (USD) </label>
+                                    <input type="number" class="form-control no_number_arrows @error('total_budget') is-invalid @enderror" name="total_budget" id="total_budget_validate" min="0" max="config('constants.TOTAL_BUDGET')" pattern="[0-9]" placeholder="Total Budget"
                                     value="<?php
-                                     if(!empty($projectData[0]['total_budget']))
-                                    { echo $projectData[0]['total_budget']; }
-                                    else{
-                                        echo old('total_budget');
-                                    }
+                                            if(!empty($projectData[0]['total_budget'])) {
+                                                echo $projectData[0]['total_budget'];
+                                            } else {
+                                                echo old('total_budget');
+                                            }
                                      ?>">
                                      <span class="empty-image d-none" id=budgetValidation>
                                         Total Budget should be less then $1000000000.
@@ -121,10 +121,20 @@
                         <div class="row">
                             <div class="col-md-3 mt-2 mt-md-0">
                                 <div class="profile_input" id="financingSecured">
-                                    <label>Financing Secured (USD) <span class = "steric_sign_design">*</span></label>
-                                    <input type="number" id="financingSec" class="form-control no_number_arrows @error('financing_secured') is-invalid @enderror" name="financing_secured"  min="1" max="{{config('constants.MAX_TOTAL_BUDGET')}}"  pattern="[0-9]" required placeholder="Financing Secured" value="<?php if(!empty($projectData[0]['financing_secured'])){ echo $projectData[0]['financing_secured']; } else{
-                                        echo old('financing_secured');
-                                    } ?>">
+                                    <label>Financing Secured (USD) </label>
+                                    <input type="number" id="financingSec" class="form-control no_number_arrows @error('financing_secured') is-invalid @enderror" name="financing_secured"  min="0" max="{{config('constants.MAX_TOTAL_BUDGET')}}"  pattern="[0-9]" placeholder="Financing Secured" 
+                                    value="
+                                    <?php 
+                                      if(!empty($projectData[0]['financing_secured'])) {
+                                                echo $projectData[0]['financing_secured'];
+                                            } else {
+                                                if (old('financing_secured') !== null) {
+                                                    echo old('financing_secured');
+                                                } else {
+                                                    echo '0'; // Set to zero when it's null
+                                                }
+                                            }
+                                    ?>">
                                     <span class="empty-image d-none" id=financValidation>
                                         Financing secured should be less then total budget.
                                     </span>
@@ -263,16 +273,16 @@ $(document).ready(function() {
    function totalBudgetvalidate() {
         let total_budget=$('#total_budget_validate').val();
         if (total_budget>1000000000) {
-            $('#budgetValidation').removeClass('d-none');
+                        $('#budgetValidation').removeClass('d-none');
             $(window).scrollTop(0);
             financingValidation();
             return false;
         }else{
-            let finee=financingValidation();
+                       let finee=financingValidation();
             if (finee==false) {
-                return false
+                                return false
             }else{
-                return true;
+                                return true;
             }
         }}
     
