@@ -317,7 +317,12 @@
                                         </tr>
                                         <tr>
                                             <td>Created By</td>
+                                            @if (isset($project->organisation) && !empty($project->organisation))
+                                                <td class="aubergine">{{ucwords($project->organisation->name)}}</td>
+                                            @else
                                             <td class="aubergine">@if (!empty($project->user->name)){{ucwords($project->user->name)}} @endif</td>
+                                                
+                                            @endif
                                         </tr>
                                     </tbody>
                                 </table>
