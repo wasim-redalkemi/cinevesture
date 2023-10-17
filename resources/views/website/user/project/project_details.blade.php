@@ -123,16 +123,11 @@
                                 <div class="profile_input" id="financingSecured">
                                     <label>Financing Secured (USD) </label>
                                     <input type="number" id="financingSec" class="form-control no_number_arrows @error('financing_secured') is-invalid @enderror" name="financing_secured"  min="0" max="{{config('constants.MAX_TOTAL_BUDGET')}}"  pattern="[0-9]" placeholder="Financing Secured" 
-                                    value="
-                                    <?php 
+                                    value="<?php 
                                       if(!empty($projectData[0]['financing_secured'])) {
                                                 echo $projectData[0]['financing_secured'];
                                             } else {
-                                                if (old('financing_secured') !== null) {
-                                                    echo old('financing_secured');
-                                                } else {
-                                                    echo '0'; // Set to zero when it's null
-                                                }
+                                                echo old('financing_secured');
                                             }
                                     ?>">
                                     <span class="empty-image d-none" id=financValidation>
