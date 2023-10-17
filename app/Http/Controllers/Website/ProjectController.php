@@ -292,7 +292,7 @@ class ProjectController extends WebController
                 }
                 $projectData[0]['project_category'] = $temp_categories;
             }
-            
+                        
             return view('website.user.project.project_details', compact('UserProject','projectData','languages','country','category','Genres'));
 
         } catch (Exception $e) {
@@ -307,9 +307,9 @@ class ProjectController extends WebController
                        $detailsResponse = $this->detailsStore();
             
             // $tot="$request->total_budget"+1;
-            if($request->total_budget<intval($request->financing_secured)){    
-                return back()->with('error','Financing Secured should small then total budget.');
-            }
+            // if($request->total_budget<intval($request->financing_secured)){    
+            //     return back()->with('error','Financing Secured should small then total budget.');
+            // }
             if(!empty($detailsResponse['error_msg']))
             {
                 return back()->with('error',$detailsResponse['error_msg']);
