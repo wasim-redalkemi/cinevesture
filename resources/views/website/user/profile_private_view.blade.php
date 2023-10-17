@@ -50,8 +50,10 @@
                                         @if (empty($user_gender->gender) || $user_gender->gender!=='Prefer Not To Say')
                                         | <i>{{empty($user_gender->gender)?'Gender':$user_gender->gender;}}  </i>
                                         @endif
-                                       
-                                        | <i>{{empty($user_gender_pronouns->gender_pronouns)?'Gender Pronouns':$user_gender_pronouns->gender_pronouns;}}</i>
+                                       @if (empty($user_gender_pronouns->gender_pronouns) || $user_gender_pronouns->gender_pronouns!=='Prefer Not To Say')
+                                       | <i>{{empty($user_gender_pronouns->gender_pronouns)?'Gender Pronouns':$user_gender_pronouns->gender_pronouns;}}</i>
+                                           
+                                       @endif
                                     </div>
                                     <div class="guide_profile_main_subtext">
                                         {{ (!empty($user->job_title))?$user->job_title:'Job Title'; }}
