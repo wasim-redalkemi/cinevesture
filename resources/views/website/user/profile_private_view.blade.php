@@ -303,7 +303,11 @@
                                         <div class="icon_container mx-3"><a href="{{ route('experience-edit', ['id'=>$v->id]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                     </div>
                                     <div class="preview_subtext candy-pink mt-2">
-                                        {{$v->country_id}} | {{date('d-m-Y',strtotime($v->start_date))}} | {{date('d-m-Y',strtotime($v->end_date))}} <br>
+                                        {{$v->country_id}} | {{date('d-m-Y',strtotime($v->start_date))}} | @if ($v->is_present==1)
+                                            Present
+                                        @else
+                                        {{date('d-m-Y',strtotime($v->end_date))}}
+                                        @endif  <br>
                                         {{$v->company}} | {{$v->employement_type_id}}
                                     </div>
                                     <div class="inp_data Aubergine_at_night mt-2">

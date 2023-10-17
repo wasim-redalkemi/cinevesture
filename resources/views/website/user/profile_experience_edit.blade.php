@@ -89,7 +89,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3 end_date">
                                     <div class="profile_input">
                                         <label>End Date <span class = "steric_sign_design">*</span></label>
                                         <input type="date" class="form-control @error('end_date') is-invalid @enderror" placeholder="DD/MM/YY" name="end_date" value="{{ date("Y-m-d",strtotime($UserExperienceData->end_date)) }}" aria-label="Username" aria-describedby="basic-addon1"  required>
@@ -98,6 +98,13 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                         @enderror
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mt-3">
+                                        <label>Present</label>
+                                        <input type="checkbox"  class="present_checkbox" @if($UserExperienceData->is_present==1) checked  @endif
+                                        name="present" id="present">
                                     </div>
                                 </div>
                             </div>
@@ -204,7 +211,12 @@
 
 @push('scripts')
 <script>
-    
+     var isPresent = <?php echo "$UserExperienceData->is_present"; ?>;
+    if (isPresent==1 ) {
+            $(".end_date").addClass("hidden");
+        } else {
+            $(".end_date").removeClass("hidden");
+        }
         // just for the demos, avoids form submit
     // jQuery.validator.setDefaults({
     // debug: true,
@@ -219,7 +231,7 @@
     //         $( "#profile_experience_edit_form" ).submit();
     //     }
     // });
-
+   
     $(document).ready(function(){
         $("#error-toast").toast("show");
         $("#success-toast").toast("show");
@@ -228,6 +240,15 @@
     $(".portfolio_save_btn").on("click", function () {
         $("#save_btn_value").attr("value", $(this).attr("name"))
         $(this).parents('form').submit();
+    });
+
+    $("#present").on("click", function () {
+        var pre = $("#present").prop("checked") ? 1 : 0;
+        if (pre==1 ) {
+            $(".end_date").addClass("hidden");
+        } else {
+            $(".end_date").removeClass("hidden");
+        }
     });
 </script>
 @endpush

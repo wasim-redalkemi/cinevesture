@@ -5185,3 +5185,11 @@ transition: 2s ease all; */
   .tile:hover .proj_name {
     display: block; /* Show the name on hover */
   }
+.present_checkbox{
+    width: 28px;
+    height: 24px;
+    margin-top: 8px;
+} 
+.hidden {
+    display: none;
+  } 
