@@ -54,8 +54,7 @@
                                 @if (!empty(($UserProject->duration)))
                                     {{$UserProject->duration.' min'}}
                                 {{-- <?php echo ((intdiv($UserProject->duration, 60)>0)?sprintf(intdiv($UserProject->duration, 60).' hr'):'') .' '. ((($UserProject->duration % 60)>0)?( sprintf($UserProject->duration % 60).' min'):'');?> --}}
-                                @else
-                                {{'Duration'}}                                    
+                                                                   
                                 @endif 
 
                                 @if (!empty($projectData[0]['project_languages']))
@@ -64,8 +63,7 @@
                                         @php $temp_all_data[] = $v['name'] @endphp
                                     @endforeach
                                     {{implode(', ',$temp_all_data)}}
-                                @else
-                                    <span><b>'Empty Project Language'</b></span>
+                                
                                 @endif
 
                                 @if (!empty($projectData[0]['project_countries']))
@@ -74,8 +72,7 @@
                                         @php $temp_all_data[] = $v['name'] @endphp
                                     @endforeach
                                     {{implode(', ',$temp_all_data)}}
-                                @else
-                                    <span><b>'Empty Project country'</b></span>
+                                
                                 @endif
 
                                 <br>
@@ -107,8 +104,7 @@
                                         @php $temp_all_data[] = $v['name'] @endphp
                                     @endforeach
                                     {{implode(', ',$temp_all_data)}}
-                                @else
-                                    <span><b>'Empty Project Category'</b></span>
+                                
                                 @endif
                             </div>
                             <table class="table mt-1 table_width">

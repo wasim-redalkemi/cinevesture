@@ -669,13 +669,15 @@ class ProjectController extends WebController
             $categories = MasterProjectCategory::all();
             $looking_for = MasterLookingFor::all();
             $project_stages = ProjectStage::all();
-            $organisation=UserOrganisation::query()->where('user_id',auth()->user()->id)->first();
-
-             if(!empty($_REQUEST['data']) && ($_REQUEST['data']==1)){
+            
+            
+            if(!empty($_REQUEST['data']) && ($_REQUEST['data']==1)){
                 $show=true;
                 $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
                 $projectData = UserProject::query()->with(['user','genres','primaryGenres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectMarkVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])
                 ->get();
+                $organisation=UserOrganisation::query()->where('user_id',$UserProject->user_id)->first();
+                // dd($organisation);
                 if (empty($projectData)) {
                     return back()->with('error','This Project is Unpublished/Inactive.');
                 }
@@ -683,6 +685,7 @@ class ProjectController extends WebController
             
                 $UserProject = UserProject::query()->where('id',$_REQUEST['id'])
                 ->with(['isfavouriteProject','isfavouriteProjectOne'])->first();
+                $organisation=UserOrganisation::query()->where('user_id',$UserProject->user_id)->first();
                 
                 
                 $projectData = UserProject::query()->with(['user','genres','primaryGenres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectMarkVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->where(function($q){
@@ -849,7 +852,7 @@ class ProjectController extends WebController
             
             
             })
-            ->with(['projectCountries','projectLanguages','genres','projectCategory','projectLookingFor','projectStage','projectType','user','projectImage'])
+            ->with(['projectCountries','projectLanguages','genres','projectCategory','projectLookingFor','projectStage','projectType','user','projectImage','organisation'])
             ->whereHas("user",function($q){
                 $q->where("status","1");
                 // $q->where("deleted_at","NULL");
