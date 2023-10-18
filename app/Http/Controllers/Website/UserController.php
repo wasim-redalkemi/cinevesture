@@ -649,7 +649,9 @@ class UserController extends WebController
             $experience->company = ucFirst($request->company);
             $experience->country_id = $request->country_id;
             $experience->start_date = $request->start_date;
-            $experience->end_date = $request->end_date;
+            // $experience->end_date = $request->end_date;
+            $experience->end_date = (isset($request->present) ? '' : $request->end_date) ;
+            $experience->is_present =  (isset($request->present) ? 1 : 0) ;
             $experience->employement_type_id = $request->employement_type_id;
             $experience->description = ucFirst($request->description);
 
@@ -696,7 +698,8 @@ class UserController extends WebController
             $experience->company = ucFirst($request->company);
             $experience->country_id = $request->country_id;
             $experience->start_date = $request->start_date;
-            $experience->end_date = $request->end_date;
+            $experience->end_date = (isset($request->present) ? '' : $request->end_date) ;
+            $experience->is_present =  (isset($request->present) ? 1 : 0) ;
             $experience->employement_type_id = $request->employement_type_id;
             $experience->description = ucFirst($request->description);
             if ($experience->update()) {

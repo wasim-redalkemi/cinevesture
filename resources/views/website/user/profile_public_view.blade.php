@@ -185,47 +185,49 @@
                         <div class="guide_profile_subsection">
                             <div class="container px-0">
                                 <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="guide_profile_main_text deep-pink font_18 mb-2">Portfolio</div>
-                                        @if (count($portfolio)>0)
-                                        <div class="portfolio owl-carousel">
-                                            @foreach ($portfolio as $k=>$v)
-                                            @php
-                                            $img = '';
-                                            if (!empty($v['get_portfolio'][0]['file_link'])) {
-                                            $img = Storage::url($v['get_portfolio'][0]['file_link']);
-                                            } else {
-                                            $img = asset('images/asset/user-profile.png');
-                                            }
-                                            @endphp
-                                            <div class="item portfolio_item" onclick="portfolio_model({{$v['id']}})">
-                                                <div class="portfolio_item_image">
-                                                    <img src="<?php echo $img ?>" class="portfolio_img" width="100%">
+                                    <div class="col-md-12 sub_wraper ">
+                                        <div class="">
+                                            <div class="guide_profile_main_text deep-pink font_18 mb-2">Portfolio</div>
+                                            @if (count($portfolio)>0)
+                                            <div class="portfolio owl-carousel ">
+                                                @foreach ($portfolio as $k=>$v)
+                                                @php
+                                                $img = '';
+                                                if (!empty($v['get_portfolio'][0]['file_link'])) {
+                                                $img = Storage::url($v['get_portfolio'][0]['file_link']);
+                                                } else {
+                                                $img = asset('images/asset/user-profile.png');
+                                                }
+                                                @endphp
+                                                <div class="item portfolio_item" onclick="portfolio_model({{$v['id']}})">
+                                                    <div class="portfolio_item_image">
+                                                        <img src="<?php echo $img ?>" class="portfolio_img" width="100%">
+                                                    </div>
+                                                    <div class="d-flex justify-content-between mt-2">
+                                                        <div class="organisation_cmn_text">{{$v['portfolio_title']}}</div>
+                                                        {{-- <div class="icon_container"> <a href="{{ route('portfolio-edino-text-editor="true"t', ['id'=>$v['id']]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div> --}}
+                                                    </div>
                                                 </div>
-                                                <div class="d-flex justify-content-between mt-2">
-                                                    <div class="organisation_cmn_text">{{$v['portfolio_title']}}</div>
-                                                    {{-- <div class="icon_container"> <a href="{{ route('portfolio-edino-text-editor="true"t', ['id'=>$v['id']]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div> --}}
-                                                </div>
+                                                @endforeach
                                             </div>
-                                            @endforeach
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        @else
-                                        <span><b>-</b></span>
-                                        @endif
-                                        <!-- modal  -->
-                                        <div>
-                                            <div class="modal fade" id="portfolioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content croper_modal">
-                                                        <div class="modal-body">
-                                                            <div class="float-end">
-                                                                <button type="button" class="close normal_btn" data-dismiss="modal" aria-label="Close">
-                                                                    <img src="{{ asset('images/asset/cros-modal-Icon.svg') }}" />
-                                                                </button>
-                                                            </div>
-                                                            <div class="modal_content">
+                                            <div class="clearfix"></div>
+                                            @else
+                                            <span><b>-</b></span>
+                                            @endif
+                                            <!-- modal  -->
+                                            <div>
+                                                <div class="modal fade" id="portfolioModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content croper_modal">
+                                                            <div class="modal-body">
+                                                                <div class="float-end">
+                                                                    <button type="button" class="close normal_btn" data-dismiss="modal" aria-label="Close">
+                                                                        <img src="{{ asset('images/asset/cros-modal-Icon.svg') }}" />
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal_content">
 
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -275,7 +277,11 @@
                                             <div class="duration-lang-text Aubergine_at_night mt-1">{{ $v->job_title }}</div>
                                         </div>
                                         <div class="preview_subtext candy-pink mt-1">
-                                            {{$v->country_id}} | {{date('d-m-Y',strtotime($v->start_date))}} | {{date('d-m-Y',strtotime($v->end_date))}} <br>
+                                            {{$v->country_id}} | {{date('d-m-Y',strtotime($v->start_date))}} | @if ($v->is_present==1)
+                                            Present
+                                        @else
+                                        {{date('d-m-Y',strtotime($v->end_date))}}
+                                        @endif  <br>
                                             {{$v->company}} | {{$v->employement_type_id}}
                                         </div>
                                         <div class="preview_subtext Aubergine_at_night mt-1">
@@ -528,36 +534,42 @@
             });
         });
 
-        $(".portfolio.owl-carousel").owlCarousel({
-            center: true,
-            autoPlay: 1000,
-            autoplay: true,
-            // loop: true,
-            nav: false,
-            margin: 20,
-            center: false,
-            items: 1,
-            responsive: {
-                480: { items: 1 },
-                768: { items: 2 },
-                1080: {
-                items: 4.5
-                },
-                1225: {
-                items: 4.8
-                },
-                1400: {
-                items: 5.8
-                },
-                1900: {
-                items: 7.8
-                },
-                1925: {
-                items: 8
-                }
-        },
-        });
-
+    var tiles_width = $('.sub_wraper').width()/310;
+    $(".portfolio.owl-carousel").owlCarousel({
+        // autoplayTimeout: 2000,
+        //   autoplay: true,
+      loop: false,
+      nav: true,
+      margin: 0,
+      center: false,
+      items: 1,
+      autoplayHoverPause: true,
+      stagePadding: 00,
+      responsive: {
+       
+        360: { items: tiles_width },
+        390: { items: tiles_width },
+        393: { items: tiles_width },
+        412: { items: tiles_width },
+        768: {items:  tiles_width },
+        1080: {items: tiles_width },
+        1280: {items: tiles_width },
+        1366: {items: tiles_width },
+        1440: {items: tiles_width },
+        1536: {items: tiles_width },
+        1600: {items: tiles_width },
+        1680: {items: tiles_width },
+        1920: {items: tiles_width },
+        2160: {items: tiles_width },
+        2304: {items: tiles_width },
+        2560: {items: tiles_width },
+        2880: {items: tiles_width },
+        3000: {items: tiles_width },
+        3840: {items: tiles_width },
+        4096: {items: tiles_width },
+      },
+    });
+        
         $(".project.owl-carousel").owlCarousel({
             autoPlay: 1000,
             autoplay: true,
