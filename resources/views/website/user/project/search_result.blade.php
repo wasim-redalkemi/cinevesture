@@ -291,10 +291,13 @@
                                                 </div>
                                             </td>
                                         </tr>
+                                        @if (!empty($project->total_budget))
                                         <tr>
                                             <td>Total Budget</td>
                                             <td class="aubergine">@if (!empty($project->total_budget)){{'$'.number_format($project->total_budget, 0,'.',',')}} @endif</td>
                                         </tr>
+                                        @endif
+                                       
                                         <tr>
                                             <td>Type</td>
                                             <td class="aubergine">@if (!empty($project->projectType->name)){{ucFirst($project->projectType->name)}} @endif</td>
