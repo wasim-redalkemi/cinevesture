@@ -73,7 +73,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-7">
                                 <div class="guide_profile_main_text mt-3">
                                     <p> Services</p>
                                 </div>
@@ -103,7 +103,7 @@
                                 <div class="search-head-subtext Aubergine_at_night mt-2">{{ (isset($UserOrganisation->available_to_work_in))?ucFirst($UserOrganisation->available_to_work_in):'-'; }}</div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-5">
                                 <div class="guide_profile_main_text deep-pink mb-2">Introduction Video</div>
                                 <div class="playVideoWrap" video-url="{{ (isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:''; }}">
                                     <img src="{{ (isset($UserOrganisation->intro_video_thumbnail))?$UserOrganisation->intro_video_thumbnail:''; }}" width="100%" alt="">
@@ -150,7 +150,7 @@
                                 <div class="guide_profile_main_text deep-pink">
                                     About
                                 </div>
-                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2 pr_35">
+                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
                                     <p>
                                         @if (!empty($UserOrganisation->about))
                                         @php

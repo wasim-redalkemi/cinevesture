@@ -84,7 +84,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-md-7">
                                 <div class="guide_profile_main_text mt-3">
                                     <p> Services</p>
                                 </div>
@@ -144,7 +144,7 @@
                                 @endif
                                 </div>
                             </div> --}}
-                            <div class="col-md-2"></div>
+                            {{-- <div class="col-md-2"></div> --}}
                             <div class="col-md-5">
                                 <div class="guide_profile_main_text deep-pink mb-2">Introduction Video</div>
                                 <div class="playVideoWrap" video-url="{{ (isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:''; }}">
@@ -162,7 +162,7 @@
                                 <div class="guide_profile_main_text deep-pink">
                                     About
                                 </div>
-                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2 pr_35">
+                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
                                     <p>
                                         @if (!empty($UserOrganisation->about))
                                         @php
