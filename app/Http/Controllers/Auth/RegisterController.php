@@ -233,9 +233,9 @@ class RegisterController extends Controller
                     
                     $is_subscribed = SubscriptionUtilityController::isSubscribed();
                     if($is_subscribed){
-                        return redirect('home');
+                        return redirect('profile-private-show');
                     }else{
-                        return redirect()->route('home')->with('success','Email Verified successfully.');
+                        return redirect()->route('profile-private-show')->with('success','Email Verified successfully.');
                     }
 
                 }
