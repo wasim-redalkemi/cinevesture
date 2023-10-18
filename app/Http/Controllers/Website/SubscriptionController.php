@@ -46,7 +46,7 @@ class SubscriptionController extends WebController
                    $subscriptionData = (object) $subscriptionData;
                 $this->createSubscription($subscriptionData, $request);
                 $this->setUserPlanInSession($id);
-                return redirect()->route('home')->with('success', 'Subsription completed Successfully');
+                return redirect()->route('profile-private-show')->with('success', 'Subsription completed Successfully');
             } else {
 
                 // }
@@ -325,7 +325,7 @@ class SubscriptionController extends WebController
         $collect->put('Start_date', date('Y-m-d', strtotime($order->created_at)));
         Notification::route('mail', auth()->user()->email)->notify(new FreeTrialDetail($collect));
         Session()->put('freeSubscription', "paid");
-        return redirect()->route('home')->with('success', '30 days Free trail plan started successfully');
+        return redirect()->route('profile-private-show')->with('success', '30 days Free trail plan started successfully');
 
     }
 
