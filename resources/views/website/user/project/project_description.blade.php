@@ -28,7 +28,7 @@
                                         <!-- <input type="text" class="form-control" name="logline"  placeholder="Logline" required> -->
                                     </div>
                                     <div class="form_elem texteditor_wrap">
-                                        <textarea class="form-control controlTextLength text_editor1 " id="text_editor" text-length = "250" maxlength="250" placeholder="Write Logline" name="logline" aria-label="With textarea" style="border: 1px solid #4D0D8A;" rows="1" required>@if (!empty($projectDescription[0]->logline)){{ $projectDescription[0]->logline }}@endif</textarea>
+                                        <textarea class="form-control controlTextLength text_editor1 " id="text_editor" text-length = "50" maxlength="250" placeholder="Write Logline" name="logline" aria-label="With textarea" style="border: 1px solid #4D0D8A;" rows="1" required>@if (!empty($projectDescription[0]->logline)){{ $projectDescription[0]->logline }}@endif</textarea>
                                         @error('Logline')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -42,7 +42,7 @@
                                     <div class="profile_input">
                                         <label>Synopsis/Brief Description <span class = "steric_sign_design">*</span></label>
                                         <div class="form_elem texteditor_wrap">
-                                            <textarea class="form-control controlTextLength text_editor2" id="text_editor1" placeholder="Write Synopsis" text-length = "790" maxlength="790" name="synopsis" aria-label="With textarea" required>@if (!empty($projectDescription[0]->synopsis))@php
+                                            <textarea class="form-control controlTextLength text_editor2" id="text_editor1" placeholder="Write Synopsis" text-length = "250"  name="synopsis" aria-label="With textarea" required>@if (!empty($projectDescription[0]->synopsis))@php
                                             echo  $projectDescription[0]->synopsis
                                             @endphp @endif</textarea>
                                             @error('synopsis')
@@ -60,7 +60,7 @@
                                         <label>Director/Creator/Founder’s Statement <span class = "steric_sign_design">*</span></label>
                                     </div>
                                     <div class="form_elem texteditor_wrap">
-                                        <textarea class="form-control controlTextLength text_editor3" id="text_editor2" placeholder="Write Statement" text-length = "1300" maxlength="1300" name="director_statement" style="border: 1px solid #4D0D8A;" id="textAreaExample3" rows="1" required>@if (!empty($projectDescription[0]->director_statement)){{ $projectDescription[0]->director_statement }}@endif</textarea>
+                                        <textarea class="form-control controlTextLength text_editor3" id="text_editor2" placeholder="Write Statement" text-length = "250" name="director_statement" style="border: 1px solid #4D0D8A;" id="textAreaExample3" rows="1" required>@if (!empty($projectDescription[0]->director_statement)){{ $projectDescription[0]->director_statement }}@endif</textarea>
                                         @error('director_statement')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
