@@ -5,7 +5,7 @@
 @section('header')
     @include('website.include.header')
 @endsection
-
+    
 @section('nav')
     @include('website.include.nav')
 @endsection
@@ -71,6 +71,13 @@
 
                         </span>
                       </div>
+                      <div id="countdown">
+                        <div id="countdown-num " class="countdown-num"></div>
+                        <svg class="svg">
+                            <circle class="circle2" r="18" cx="20" cy="20"></circle>
+                            <circle class="circle" r="18" cx="20" cy="20"></circle>
+                        </svg>
+                        </div>
                       <button class="watch-now-btn mt-4"><a href="{{ route('public-view', ['id'=>$v->id]) }}" style="color:white !important;">View Project</a></button>
                       {{-- @else
                         <div class="not-found-text">
@@ -223,7 +230,7 @@
 @section('footer')
   @include('website.include.footer')      
 @endsection
-  
+
 @section('scripts')
 
 <script type="text/javascript">
@@ -293,9 +300,9 @@
     var tiles_width = $('.test.owl-carousel').width()/232;
     $(".main_slider.owl-carousel").owlCarousel({
       center: true,
-      // autoPlay: 500,
+      // autoPlay: 1000,
       // autoplayTimeout: 3000,
-      autoplay: true,
+      autoplay: false,
       loop: true,
       nav: false,
       items: 1,
@@ -362,4 +369,18 @@
     
     $('.test.owl-carousel .owl-item').css({"position": "relative","left":newLeftLen+"px"});
   </script>
+   <script>
+    var countdown = 5;
+    $('.countdown-num').text(countdown);
+    setInterval(function() {
+      countdown = --countdown < 1 ? 5 : countdown;
+      $('.countdown-num').text(countdown);
+      console.log('get countdown here', countdown)
+      if(countdown === 5){
+        var owl = $('.main_slider.owl-carousel').data('owl.carousel');
+          // Go to the next slide
+          owl.next();
+      }
+    }, 1000);
+</script>
 @endsection
