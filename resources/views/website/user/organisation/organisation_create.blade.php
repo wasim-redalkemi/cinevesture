@@ -134,7 +134,7 @@
                             <div class="col-md-12">
                                 <div class="profile_input text_field">
                                     <label>About <span style="color:red">*</span></label>
-                                    <div class="form_elem"> <textarea class="form-control controlTextLength text_editor" text-length="600" id="" name="about" maxlength="600" aria-label="With textarea" required >{{old('about',isset($UserOrganisation->about)?$UserOrganisation->about:"" )}}</textarea></div>
+                                    <div class="form_elem"> <textarea class="form-control controlTextLength text_editor" text-length="500" id="" name="about"  aria-label="With textarea" required >{{old('about',isset($UserOrganisation->about)?$UserOrganisation->about:"" )}}</textarea></div>
                                 </div>
                             </div>
                         </div>

@@ -55,7 +55,7 @@
                                     <div class="profile_input">
                                         <label>Description <span class = "steric_sign_design">*</span></label>
                                         <div class="form_elem">
-                                    <textarea class="form-control text_editor controlTextLength @error('description') is-invalid @enderror" text-length = "600" maxlength="600" name="description" aria-label="With textarea"><?php if(isset($UserPortfolioEdit[0]->description)){ echo($UserPortfolioEdit[0]->description); }?></textarea>
+                                    <textarea class="form-control text_editor controlTextLength @error('description') is-invalid @enderror" text-length = "250"  name="description" aria-label="With textarea"><?php if(isset($UserPortfolioEdit[0]->description)){ echo($UserPortfolioEdit[0]->description); }?></textarea>
                                     @error('description')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
