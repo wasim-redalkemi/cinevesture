@@ -140,7 +140,7 @@
         {
             var max = $(this).attr('text-length');
             var len = $(this).val().length;
-            if (len >= max) {
+                        if (len >= max) {
                 $(this).parents('.form_elem').find('.textlength').text(' You have reached the limit').css('color', 'red', 'text-align', 'end');
                 // $(this).next('.textlength').css('color', 'red', 'text-align', 'end');
             } else {
@@ -330,7 +330,7 @@
             branding: false,
             setup: function(editor) {
                 var text_elem = $(select_elem).parents('.form_elem').find('.textlength');
-                var max = $(select_elem).attr('text-length');
+                                var max = $(select_elem).attr('text-length');
                 function updateCharacterCount(numChars) {
                     text_elem.text(numChars + '/' + max);
                     if (numChars >= max) {
@@ -378,7 +378,7 @@
                     });
                 })
             },
-            paste_preprocess: function(plugin, args) {
+                        paste_preprocess: function(plugin, args) {
                 var clipboard_data = args.content;
                 // var max = $('.text_editor').attr('text-length');
                 var max = $(select_elem).attr('text-length');
@@ -402,7 +402,7 @@
                 var thclass=  $(this).prop('class').split(' ')[2];
                 apply_text_editor('.'+thclass);   
             }
-            $(this).after("<span class=textlength for_alert text-end>"+ $(this).val().length +" / "+$(this).attr('text-length')+"</span>");
+                        $(this).after("<span class=textlength for_alert text-end>"+ $(this).val().length +" / "+$(this).attr('text-length')+"</span>");
             $('.textlength').css({"color":"#787885", "text-align":"end", "float":"end"})
         });
     </script>

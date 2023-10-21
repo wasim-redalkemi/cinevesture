@@ -30,7 +30,10 @@
 
     </div>
     <div class="posted_job_header Aubergine_at_night forTextBreak" style="word-break: break-all;">
-       <span class=""> {{ucFirst($job->description)}}</span>
+       <span class=""> 
+       @php
+        echo $job->description
+    @endphp</span>
     </div>
     <div class="d-block d-md-flex justify-content-between mt-2 mt-md-4">
         <div class="w_75">
