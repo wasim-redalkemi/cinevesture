@@ -362,4 +362,4 @@
     
     $('.test.owl-carousel .owl-item').css({"position": "relative","left":newLeftLen+"px"});
   </script>
-@endsection
+  @endsection
