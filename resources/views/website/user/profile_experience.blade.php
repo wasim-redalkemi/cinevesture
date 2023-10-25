@@ -75,6 +75,16 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-6 ">
+                                <div class="mt-3 d-flex">
+                                   <div>
+                                    <input type="checkbox" class="present_checkbox" name="present" id="present">
+                                </div>
+                                <div class="m-3">
+                                     <label>I am currently working in this role</label>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="profile_input">
@@ -91,7 +101,7 @@
                                     <div class="col-md-3 end_date">
                                         <div class="profile_input">
                                             <label>End Date </label>
-                                            <input type="date" id="endDate" class="form-control @error('end_date') is-invalid @enderror" placeholder="DD/MM/YY" name="end_date" aria-label="Username" aria-describedby="basic-addon1"  required>
+                                            <input type="date" id="endDate" class="form-control @error('end_date') is-invalid @enderror" placeholder="DD/MM/YY" name="end_date" aria-label="Username" aria-describedby="basic-addon1">
                                             @error('end_date')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -100,12 +110,7 @@
                                         </div>
                                     </div>
                           
-                                <div class="col-md-3">
-                                    <div class="mt-3">
-                                        <label>Present</label>
-                                        <input type="checkbox" class="present_checkbox" name="present" id="present">
-                                    </div>
-                                </div>
+                                
 
                             </div>
                             <div class="row">
@@ -233,10 +238,10 @@
 
     $("#present").on("click", function () {
         var pre = $("#present").prop("checked") ? 1 : 0;
-        if (pre==1) {
-            $(".end_date").addClass("hidden");
+        if (pre === 1) {
+        $("#endDate").prop("disabled", true);
         } else {
-            $(".end_date").removeClass("hidden");
+            $("#endDate").prop("disabled", false);
         }
     });
 
