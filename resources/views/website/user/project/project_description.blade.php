@@ -43,8 +43,8 @@
                                         <label>Synopsis/Brief Description <span class = "steric_sign_design">*</span></label>
                                         <div class="form_elem texteditor_wrap">
                                             <textarea class="form-control controlTextLength text_editor2" id="text_editor1" placeholder="Write Synopsis" text-length = "250"  name="synopsis" aria-label="With textarea" required>@if (!empty($projectDescription[0]->synopsis))@php
-                                            echo  $projectDescription[0]->synopsis
-                                            @endphp @endif</textarea>
+                                                echo  $projectDescription[0]->synopsis
+                                                @endphp @endif</textarea>
                                             @error('synopsis')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
