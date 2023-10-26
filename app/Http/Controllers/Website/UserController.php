@@ -691,6 +691,11 @@ class UserController extends WebController
     public function experienceEditStore(ProfileExperienceRequest $request)
     {
         try {
+            if ($request->present==null) {
+                if ($request->end_date==null) {
+                    return back()->with('error', 'Please select end date.');
+                }
+            }
             $user = User::query()->find(auth()->user()->id);
             $experience = UserExperience::query()->where('id', $request->experience_id)->first();
             $experience->user_id = $user->id;

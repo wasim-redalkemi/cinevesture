@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="m-3">
                                      <label>I am currently working in this role</label>
-                                    </div>
+                                </div>
                                 </div>
                             </div>
                             <div class="row">
