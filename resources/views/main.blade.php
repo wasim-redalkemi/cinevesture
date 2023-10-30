@@ -375,8 +375,8 @@
     setInterval(function() {
       countdown = --countdown < 1 ? 5 : countdown;
       $('.countdown-num').text(countdown);
-      console.log('get countdown here', countdown)
-      if(countdown === 5){
+      // console.log('get countdown here', countdown)
+      if(countdown >=5){
         var owl = $('.main_slider.owl-carousel').data('owl.carousel');
           // Go to the next slide
           owl.next();
