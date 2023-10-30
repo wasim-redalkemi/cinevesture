@@ -32,7 +32,7 @@
                             <div class="verified-text-area">
                                 <div class="public-head-text">
                                     @if (!empty(($UserProject->project_name)))
-                                    <span class="blackTextShadow">    {{ ucfirst($UserProject->project_name) }}</span>
+                                    <span class="blackTextShadow">{{ ucfirst($UserProject->project_name) }}</span>
                                     @else
                                     <span><b>-</b></span>
                                     @endif
@@ -164,7 +164,6 @@
                                             </td>
                                         </tr>
                                     @endif
-                                    
                                     <tr>
                                         <td class="public-head-subtext white blackTextShadow text-start">Project Stage</td>
                                         <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
@@ -175,16 +174,16 @@
                                             @endif
                                         </td>
                                     </tr>
+                                    @if (!empty($UserProject->location))
                                     <tr>
                                         <td class="public-head-subtext white blackTextShadow text-start">Locations</td>
                                         <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
                                             @if (!empty($UserProject->location))
                                             {{ ucFirst($UserProject->location)}}
-                                            @else
-                                            <span><b>-</b></span>
                                             @endif
                                         </td>
                                     </tr>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
