@@ -81,7 +81,7 @@
                                     <input type="checkbox" class="present_checkbox" name="present" id="present">
                                 </div>
                                 <div class="m-3">
-                                     <label>I am currently working in this role</label>
+                                     <label>I am currently working for this job title</label>
                                 </div>
                                 </div>
                             </div>
