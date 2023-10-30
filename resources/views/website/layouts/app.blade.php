@@ -88,6 +88,8 @@
 
     <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@flasher/flasher@1.2.4/dist/flasher.min.js"></script>
+    <script src="https://cdn.tiny.cloud/1/pd5jow5xgpemmx81h7x21gg7ge06vdk0b9fgtuiqxjorhlx0/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+
 
 
     <script>
@@ -310,7 +312,6 @@
             }
         })
     </script>
-    <script src="https://cdn.tiny.cloud/1/pd5jow5xgpemmx81h7x21gg7ge06vdk0b9fgtuiqxjorhlx0/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 
     <script>
         $(document).ready(function()
