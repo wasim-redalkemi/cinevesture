@@ -5235,10 +5235,9 @@ transition: 2s ease all; */
     stroke-dashoffset: 0px;
     stroke-linecap: round;
     stroke-width: 3px;
-    /* stroke: red; */
     stroke: #DD45B3 !important;
     fill: none;
-    animation: countdown 5s linear infinite forwards;
+    /* animation: countdown 5s linear infinite forwards; */
     }
     .circle2 {
     z-index:  0;
@@ -5250,11 +5249,11 @@ transition: 2s ease all; */
     fill: none;
     }
 
-    @keyframes countdown {
+    /* @keyframes countdown {
     from {
         stroke-dashoffset: 0px;
     }
     to {
         stroke-dashoffset: 113px;
     }
-    }
+    } */
