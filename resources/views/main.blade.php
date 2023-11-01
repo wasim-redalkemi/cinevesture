@@ -152,7 +152,6 @@
                 <div class="row">
                   <div class="col-md-12 carousel-header-text">
                     <h1 class="slider_elem_title">{{$v->list_name}}</h1>
-                    
                   </div>
                 </div>
               </div>
@@ -233,18 +232,10 @@
 @endsection
 
 @section('scripts')
-<script>
-    
-</script>
+
 <script type="text/javascript">
   $( document ).ready(function() {
     // console.log( "ready!" );
-    var countdown=5;
-    function resetCarouselTimer() {
-      console.log('hel');
-        countdown = 5;
-        $('.countdown-num').text(countdown);
-    }
 
     $('.like-project').on('click', function(e) {
       // console.log('jscn');
@@ -266,6 +257,7 @@
                     if (classList[i] == 'fa-heart-o') {
                         element.removeClass('fa-heart-o');
                         element.addClass('fa-heart')
+                        // toastMessage("success", resp.msg);
                         break;
                     }
                     if(classList[i] == 'fa-heart')
@@ -273,9 +265,13 @@
                         element.removeClass('fa-heart');
                         element.addClass('fa-heart-o');
                         // toastMessage("success", resp.msg);
+
                         break;
                     }
+
                 }
+            } else {
+
             }
         },
         error: function(error) {
@@ -318,39 +314,6 @@
         1024: {
           items: 1
         }
-      },
-      onChanged: function(event) {
-        // resetCarouselTimer();
-        countdown = 5;
-        $('.countdown-num').text(countdown);
-
-        // Create a new <style> element
-      // Create a new <style> element
-        var style = document.createElement('style');
-        style.type = 'text/css';
-
-        // Define your keyframes animation
-        var keyframes = `
-          @keyframes countdown {
-            from {
-              stroke-dashoffset: 0px;
-            }
-            to {
-              stroke-dashoffset: 113px;
-            }
-          }
-        `;
-
-        // Add the keyframes animation rule to the <style> element
-        style.appendChild(document.createTextNode(keyframes));
-
-        // Add the <style> element to the document's <head>
-        document.head.appendChild(style);
-
-        // Add a class to the element with the "circle" class
-        var element = document.querySelector('.circle');
-        element.classList.add('countdown-animation');
-
       },
     });
 
@@ -406,15 +369,16 @@
     
     $('.test.owl-carousel .owl-item').css({"position": "relative","left":newLeftLen+"px"});
   </script>
-   <script>   
-   
+   <script>
+    var countdown = 5;
     $('.countdown-num').text(countdown);
     setInterval(function() {
       countdown = --countdown < 1 ? 5 : countdown;
       $('.countdown-num').text(countdown);
       // console.log('get countdown here', countdown)
-      if(countdown ==5){
+      if(countdown >=5){
         var owl = $('.main_slider.owl-carousel').data('owl.carousel');
+          // Go to the next slide
           owl.next();
       }
     }, 1000);
