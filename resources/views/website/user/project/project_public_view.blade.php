@@ -32,7 +32,7 @@
                             <div class="verified-text-area">
                                 <div class="public-head-text">
                                     @if (!empty(($UserProject->project_name)))
-                                    <span class="blackTextShadow">{{ ucfirst($UserProject->project_name) }}</span>
+                                    <span class="blackTextShadow">    {{ ucfirst($UserProject->project_name) }}</span>
                                     @else
                                     <span><b>-</b></span>
                                     @endif
@@ -54,7 +54,8 @@
                                 @if (!empty(($UserProject->duration)))
                                     {{$UserProject->duration.' min'}}
                                 {{-- <?php echo ((intdiv($UserProject->duration, 60)>0)?sprintf(intdiv($UserProject->duration, 60).' hr'):'') .' '. ((($UserProject->duration % 60)>0)?( sprintf($UserProject->duration % 60).' min'):'');?> --}}
-                                                                   
+                                @else
+                                {{'Duration'}}                                    
                                 @endif 
 
                                 @if (!empty($projectData[0]['project_languages']))
@@ -63,7 +64,8 @@
                                         @php $temp_all_data[] = $v['name'] @endphp
                                     @endforeach
                                     {{implode(', ',$temp_all_data)}}
-                                
+                                @else
+                                    <span><b>'Empty Project Language'</b></span>
                                 @endif
 
                                 @if (!empty($projectData[0]['project_countries']))
@@ -72,7 +74,8 @@
                                         @php $temp_all_data[] = $v['name'] @endphp
                                     @endforeach
                                     {{implode(', ',$temp_all_data)}}
-                                
+                                @else
+                                    <span><b>'Empty Project country'</b></span>
                                 @endif
 
                                 <br>
@@ -104,7 +107,8 @@
                                         @php $temp_all_data[] = $v['name'] @endphp
                                     @endforeach
                                     {{implode(', ',$temp_all_data)}}
-                                
+                                @else
+                                    <span><b>'Empty Project Category'</b></span>
                                 @endif
                             </div>
                             <table class="table mt-1 table_width">
@@ -126,44 +130,35 @@
                                                 @if($show == true)
                                                     {{config('constants.HIDE_SOME_INFO')}}
                                                 @else
-                                                    @if (isset($organisation->name))
-                                                    <a href="{{route('organisation-public-view',['id'=>$organisation->id])}}"
-                                                         class="text_decor_none">{{ ucwords($organisation->name)}}</a>
-                                                    @else
-                                                        <a href="{{route('profile-public-show',['id'=>$projectData[0]['user']['id']])}}" class="text_decor_none">{{ ucwords($projectData[0]['user']['name'])}}</a>
-                                                    @endif
+                                                    <a href="{{route('profile-public-show',['id'=>$projectData[0]['user']['id']])}}" class="text_decor_none">{{ ucwords($projectData[0]['user']['name'])}}</a>
                                                 @endif
                                             @else
                                             <span><b>-</b></span>
                                             @endif
                                         </td>
                                     </tr>
-                                    @if (!empty($UserProject->total_budget))
-                                        <tr>
-                                            <td class="public-head-subtext white blackTextShadow text-start">Total Budget</td>
-                                            <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
-                                                @if (!empty($UserProject->total_budget))
-                                                {{-- $ {{ $UserProject->total_budget}} --}}
-                                                ${{ number_format($UserProject->total_budget, 0,'.',',') }}
+                                    <tr>
+                                        <td class="public-head-subtext white blackTextShadow text-start">Total Budget</td>
+                                        <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
+                                            @if (!empty($UserProject->total_budget))
+                                            {{-- $ {{ $UserProject->total_budget}} --}}
+                                            ${{ number_format($UserProject->total_budget, 0,'.',',') }}
 
-                                                @else
-                                                <span><b>-</b></span>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @endif
-                                    @if (!empty($UserProject->financing_secured))
-                                        <tr>
-                                            <td class="public-head-subtext white blackTextShadow text-start">Financing Secured</td>
-                                            <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
-                                                @if (!empty($UserProject->financing_secured))
-                                                ${{ number_format($UserProject->financing_secured, 0,'.',',')}}
-                                                @else
-                                                <span><b>-</b></span>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @endif
+                                            @else
+                                            <span><b>-</b></span>
+                                            @endif
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="public-head-subtext white blackTextShadow text-start">Financing Secured</td>
+                                        <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
+                                            @if (!empty($UserProject->financing_secured))
+                                            ${{ number_format($UserProject->financing_secured, 0,'.',',')}}
+                                            @else
+                                            <span><b>-</b></span>
+                                            @endif
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td class="public-head-subtext white blackTextShadow text-start">Project Stage</td>
                                         <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
@@ -174,16 +169,16 @@
                                             @endif
                                         </td>
                                     </tr>
-                                    @if (!empty($UserProject->location))
                                     <tr>
                                         <td class="public-head-subtext white blackTextShadow text-start">Locations</td>
                                         <td class="contact-page-subtext white blackTextShadow text-end text-md-start">
                                             @if (!empty($UserProject->location))
                                             {{ ucFirst($UserProject->location)}}
+                                            @else
+                                            <span><b>-</b></span>
                                             @endif
                                         </td>
                                     </tr>
-                                    @endif
                                 </tbody>
                             </table>
                         </div>

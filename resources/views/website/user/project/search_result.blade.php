@@ -291,13 +291,10 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        @if (!empty($project->total_budget))
                                         <tr>
                                             <td>Total Budget</td>
                                             <td class="aubergine">@if (!empty($project->total_budget)){{'$'.number_format($project->total_budget, 0,'.',',')}} @endif</td>
                                         </tr>
-                                        @endif
-                                       
                                         <tr>
                                             <td>Type</td>
                                             <td class="aubergine">@if (!empty($project->projectType->name)){{ucFirst($project->projectType->name)}} @endif</td>
@@ -320,12 +317,7 @@
                                         </tr>
                                         <tr>
                                             <td>Created By</td>
-                                            @if (isset($project->organisation) && !empty($project->organisation))
-                                                <td class="aubergine">{{ucwords($project->organisation->name)}}</td>
-                                            @else
                                             <td class="aubergine">@if (!empty($project->user->name)){{ucwords($project->user->name)}} @endif</td>
-                                                
-                                            @endif
                                         </tr>
                                     </tbody>
                                 </table>

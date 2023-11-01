@@ -129,11 +129,7 @@
                                 <div class="col-md-12">
                                     <div class="guide_profile_main_text">Description</div>
                                     <div class="posted_job_header">
-                                        @if (!empty($Job_data['description']))
-                                        @php
-                                            echo $Job_data['description']
-                                        @endphp
-                                     @endif
+                                        @if (!empty($Job_data['description'])) {{$Job_data['description']}} @endif
                                     </div>
                                 </div>
                             </div>

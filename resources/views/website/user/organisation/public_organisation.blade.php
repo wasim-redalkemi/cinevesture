@@ -37,29 +37,6 @@
                                 <div class="preview_headtext">{{ (isset($UserOrganisation->name))?ucFirst($UserOrganisation->name):'Name'; }}</div>
                                 <div class="organisation_cmn_text">{{ (!empty($UserOrganisation->organizationType->name))?$UserOrganisation->organizationType->name:'Organisation type'; }}</div>
                                 <div class="organisation_cmn_text">{{ (isset($UserOrganisation['country']['name']))?$UserOrganisation['country']['name']:'Located In'; }}</div>
-                                <div class="social_profile_icon_wraper">
-                                    @if (!empty($UserOrganisation->imdb_profile))
-                                        <a href="{{ $UserOrganisation->imdb_profile }}" target="_blank" class="fs_italian">
-                                            <span class=" social_icon ">
-                                                <i class="fa fa-imdb imdb_color" aria-hidden="true"></i>
-                                            </span>
-                                        </a>                                      
-                                    @endif
-                                    @if (!empty($UserOrganisation->linkedin_profile))
-                                        <a href="{{ $UserOrganisation->linkedin_profile }}" target="_blank" class="fs_italian">
-                                            <span class="social_icon"> 
-                                                <i class=" fa fa-linkedin" style="font-size:20px"></i>
-                                            </span>
-                                        </a>                                         
-                                    @endif
-                                    @if (!empty($UserOrganisation->website))     
-                                        <a href="{{ $UserOrganisation->website }}" target="_blank" class="fs_italian" >
-                                            <span class="social_icon">
-                                                <i class="fa fa-globe" aria-hidden="true" style="font-size:20px"></i>
-                                            </span>
-                                        </a>                                 
-                                    @endif
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -73,7 +50,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-7">
+                            <div class="col-md-6">
                                 <div class="guide_profile_main_text mt-3">
                                     <p> Services</p>
                                 </div>
@@ -103,13 +80,7 @@
                                 <div class="search-head-subtext Aubergine_at_night mt-2">{{ (isset($UserOrganisation->available_to_work_in))?ucFirst($UserOrganisation->available_to_work_in):'-'; }}</div>
                                 </div>
                             </div>
-                            <div class="col-md-5">
-                                <div class="guide_profile_main_text deep-pink mb-2">Introduction Video</div>
-                                <div class="playVideoWrap" video-url="{{ (isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:''; }}">
-                                    <img src="{{ (isset($UserOrganisation->intro_video_thumbnail))?$UserOrganisation->intro_video_thumbnail:''; }}" width="100%" alt="">
-                                </div>
-                            </div>
-                            {{-- <div class="col-md-6">
+                            <div class="col-md-6">
                                 <div class="guide_profile_main_text mt-3">
                                     <p> Social Profile</p>
                                 </div>
@@ -138,7 +109,7 @@
                                     {{'_'}}
                                 @endif
                                 </div>
-                            </div> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -146,11 +117,11 @@
                 <div class="guide_profile_subsection">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <div class="guide_profile_main_text deep-pink">
                                     About
                                 </div>
-                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2">
+                                <div class="guide_profile_main_subtext Aubergine_at_night mt-2 pr_35">
                                     <p>
                                         @if (!empty($UserOrganisation->about))
                                         @php
@@ -163,7 +134,12 @@
                                 </div>
                             </div>
                             {{-- <div class="col-md-2"></div> --}}
-                            
+                            <div class="col-md-6">
+                                <div class="guide_profile_main_text deep-pink mb-2">Introduction Video</div>
+                                <div class="playVideoWrap" video-url="{{ (isset($UserOrganisation->intro_video_link))?$UserOrganisation->intro_video_link:''; }}">
+                                    <img src="{{ (isset($UserOrganisation->intro_video_thumbnail))?$UserOrganisation->intro_video_thumbnail:''; }}" width="100%" alt="">
+                                </div>
+                            </div>
                            
                         </div>
                     </div>

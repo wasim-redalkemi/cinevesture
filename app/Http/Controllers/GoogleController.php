@@ -63,7 +63,7 @@ class GoogleController extends Controller
                     if($is_subscribed){
                         $checkPlan= new LoginController();
                         $checkPlan->expirePlanForGoogle();
-                        return redirect('user/profile-private-show');
+                        return redirect('home');
                         if($user->getSubscription){
                             $plans = Plans::query()->where('id',$user->getSubscription->plan_id)->with('getRelationalData.getModule','getRelationalData.getOperation')
                             ->first();

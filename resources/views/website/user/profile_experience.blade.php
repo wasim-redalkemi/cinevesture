@@ -75,16 +75,6 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 ">
-                                <div class="mt-3 d-flex">
-                                   <div>
-                                    <input type="checkbox" class="present_checkbox" name="present" id="present">
-                                </div>
-                                <div class="m-3">
-                                     <label>I am currently working for this job title</label>
-                                </div>
-                                </div>
-                            </div>
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="profile_input">
@@ -97,21 +87,17 @@
                                         @enderror
                                     </div>
                                 </div>
-                                
-                                    <div class="col-md-3 end_date">
-                                        <div class="profile_input">
-                                            <label>End Date </label>
-                                            <input type="date" id="endDate" class="form-control @error('end_date') is-invalid @enderror" placeholder="DD/MM/YY" name="end_date" aria-label="Username" aria-describedby="basic-addon1">
-                                            @error('end_date')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                        </div>
+                                <div class="col-md-3">
+                                    <div class="profile_input">
+                                        <label>End Date <span class = "steric_sign_design">*</span></label>
+                                        <input type="date" id="endDate" class="form-control @error('end_date') is-invalid @enderror" placeholder="DD/MM/YY" name="end_date" aria-label="Username" aria-describedby="basic-addon1"  required>
+                                        @error('end_date')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                        @enderror
                                     </div>
-                          
-                                
-
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
@@ -234,17 +220,5 @@
             
         });
     });
-
-
-    $("#present").on("click", function () {
-        var pre = $("#present").prop("checked") ? 1 : 0;
-        if (pre === 1) {
-        $("#endDate").prop("disabled", true);
-        } else {
-            $("#endDate").prop("disabled", false);
-        }
-    });
-
-
 </script>
 @endpush

@@ -31,7 +31,6 @@ use App\Models\ProjectStageOfFunding;
 use App\Models\ProjectType;
 use App\Models\User;
 use App\Models\UserFavouriteProject;
-use App\Models\UserOrganisation;
 use App\Models\UserProject;
 use Exception;
 use Illuminate\Http\Request;
@@ -293,7 +292,7 @@ class ProjectController extends WebController
                 }
                 $projectData[0]['project_category'] = $temp_categories;
             }
-                        
+            
             return view('website.user.project.project_details', compact('UserProject','projectData','languages','country','category','Genres'));
 
         } catch (Exception $e) {
@@ -305,12 +304,13 @@ class ProjectController extends WebController
     public function validateProjectDetails(ProjectDetailRequest $request)
     {
         try {
-                       $detailsResponse = $this->detailsStore();
-            
-            // $tot="$request->total_budget"+1;
-            // if($request->total_budget<intval($request->financing_secured)){    
-            //     return back()->with('error','Financing Secured should small then total budget.');
-            // }
+            $detailsResponse = $this->detailsStore();
+            $tot="$request->total_budget"+1;
+
+            if($tot<intval($request->financing_secured)){    
+                return back()->with('error','Financing Secured should small then total budget.');
+            }
+
             if(!empty($detailsResponse['error_msg']))
             {
                 return back()->with('error',$detailsResponse['error_msg']);
@@ -321,7 +321,7 @@ class ProjectController extends WebController
             }
             
         } catch (Exception $e) {
-                        return back()->with('error','Something went wrong.');
+            return back()->with('error','Something went wrong.');
         }    
     }
 
@@ -668,15 +668,12 @@ class ProjectController extends WebController
             $categories = MasterProjectCategory::all();
             $looking_for = MasterLookingFor::all();
             $project_stages = ProjectStage::all();
-            
-            
-            if(!empty($_REQUEST['data']) && ($_REQUEST['data']==1)){
+
+             if(!empty($_REQUEST['data']) && ($_REQUEST['data']==1)){
                 $show=true;
                 $UserProject = UserProject::query()->where('id',$_REQUEST['id'])->first();
                 $projectData = UserProject::query()->with(['user','genres','primaryGenres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectMarkVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])
                 ->get();
-                $organisation=UserOrganisation::query()->where('user_id',$UserProject->user_id)->first();
-                // dd($organisation);
                 if (empty($projectData)) {
                     return back()->with('error','This Project is Unpublished/Inactive.');
                 }
@@ -684,7 +681,6 @@ class ProjectController extends WebController
             
                 $UserProject = UserProject::query()->where('id',$_REQUEST['id'])
                 ->with(['isfavouriteProject','isfavouriteProjectOne'])->first();
-                $organisation=UserOrganisation::query()->where('user_id',$UserProject->user_id)->first();
                 
                 
                 $projectData = UserProject::query()->with(['user','genres','primaryGenres','projectCategory','projectLookingFor','projectLanguages','projectCountries','projectMilestone','projectAssociation','projectType','projectStageOfFunding','projectStage','projectImage','projectOnlyImage','projectOnlyVideo','projectMarkVideo','projectOnlyDoc'])->where('id',$_REQUEST['id'])->where(function($q){
@@ -709,7 +705,6 @@ class ProjectController extends WebController
                         }
                 }
             }
-            
             $gener=ProjectGenre::query()->where('project_id',$_REQUEST['id'])->get();
             if (!blank($gener)) {
                 foreach($gener as $generIds){
@@ -748,7 +743,7 @@ class ProjectController extends WebController
             if (empty($projectData)) {
                 return back()->with('error','This Project is Unpublished/Inactive.');
             }
-            return view('website.user.project.project_public_view', compact(['UserProject','projectData','geners','categories','looking_for','project_stages','countries','languages','recomProject','show','organisation']));
+            return view('website.user.project.project_public_view', compact(['UserProject','projectData','geners','categories','looking_for','project_stages','countries','languages','recomProject','show']));
         } catch (Exception $e) {
             return back()->with('error','Something went wrong.');
         }
@@ -851,7 +846,7 @@ class ProjectController extends WebController
             
             
             })
-            ->with(['projectCountries','projectLanguages','genres','projectCategory','projectLookingFor','projectStage','projectType','user','projectImage','organisation'])
+            ->with(['projectCountries','projectLanguages','genres','projectCategory','projectLookingFor','projectStage','projectType','user','projectImage'])
             ->whereHas("user",function($q){
                 $q->where("status","1");
                 // $q->where("deleted_at","NULL");

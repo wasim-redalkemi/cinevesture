@@ -112,10 +112,5 @@ class UserProject extends Model
     {
         return $this->hasMany(ProjectCountry::class, 'project_id','id');
     }
-    public function organisation()
-    {
-        return $this->hasOne(UserOrganisation::class,'user_id','user_id');
-    }
-
 
 }   

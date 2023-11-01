@@ -2,7 +2,7 @@
 
 {{-- @section('title','Cinevesture-private-view') --}}
     
-@section('header')
+    @section('header')
 @include('website.include.header')
 @endsection
 
@@ -47,13 +47,8 @@
                                     </div>
                                     <div class="guide_profile_main_subtext aubergine">
                                         <i>{{empty($user_age->range)?'Age':$user_age->range;}} </i>
-                                        @if (empty($user_gender->gender) || $user_gender->gender!=='Prefer Not To Say')
                                         | <i>{{empty($user_gender->gender)?'Gender':$user_gender->gender;}}  </i>
-                                        @endif
-                                       @if (empty($user_gender_pronouns->gender_pronouns) || $user_gender_pronouns->gender_pronouns!=='Prefer Not To Say')
-                                       | <i>{{empty($user_gender_pronouns->gender_pronouns)?'Gender Pronouns':$user_gender_pronouns->gender_pronouns;}}</i>
-                                           
-                                       @endif
+                                        | <i>{{empty($user_gender_pronouns->gender_pronouns)?'Gender Pronouns':$user_gender_pronouns->gender_pronouns;}}</i>
                                     </div>
                                     <div class="guide_profile_main_subtext">
                                         {{ (!empty($user->job_title))?$user->job_title:'Job Title'; }}
@@ -68,21 +63,21 @@
                                     </div>
                                     <div class="social_profile_icon_wraper">
                                         @if (!empty($user->imdb_profile))
-                                            <a href="{{ $user->imdb_profile }}" target="_blank" class="fs_italian ">
+                                            <a href="{{ $user->imdb_profile }}" target="_blank" class="fs_italian inp_data">
                                                 <span class=" social_icon ">
                                                     <i class="fa fa-imdb imdb_color" aria-hidden="true"></i>
                                                 </span>
                                             </a>                                      
                                         @endif
                                         @if (!empty($user->linkedin_profile))
-                                            <a href="{{ $user->linkedin_profile }}" target="_blank" class="fs_italian " >
+                                            <a href="{{ $user->linkedin_profile }}" target="_blank" class="fs_italian inp_data" >
                                                 <span class="social_icon"> 
                                                     <i class=" fa fa-linkedin" style="font-size:20px"></i>
                                                 </span>
                                             </a>                                         
                                         @endif
                                         @if (!empty($user->website))     
-                                            <a href="{{ $user->website }}" target="_blank" class="fs_italian" >
+                                            <a href="{{ $user->website }}" target="_blank" class="fs_italian inp_data" >
                                                 <span class="social_icon">
                                                     <i class="fa fa-globe" aria-hidden="true" style="font-size:20px"></i>
                                                 </span>
@@ -138,7 +133,7 @@
                                     @endif
                                 </div>
                                 </div>
-                                <div class="col-md-1"></div>
+                                <div class="col-md-2"></div>
                                 <div class="col-md-5">
                                     
                                     <div class="guide_profile_main_text mb-2">Introduction Video</div>
@@ -308,11 +303,7 @@
                                         <div class="icon_container mx-3"><a href="{{ route('experience-edit', ['id'=>$v->id]) }}"><i class="fa fa-pencil deep-pink pointer font_12" aria-hidden="true"></i></a></div>
                                     </div>
                                     <div class="preview_subtext candy-pink mt-2">
-                                        {{$v->country_id}} | {{date('d-m-Y',strtotime($v->start_date))}} | @if ($v->is_present==1)
-                                            Present
-                                        @else
-                                        {{date('d-m-Y',strtotime($v->end_date))}}
-                                        @endif  <br>
+                                        {{$v->country_id}} | {{date('d-m-Y',strtotime($v->start_date))}} | {{date('d-m-Y',strtotime($v->end_date))}} <br>
                                         {{$v->company}} | {{$v->employement_type_id}}
                                     </div>
                                     <div class="inp_data Aubergine_at_night mt-2">
