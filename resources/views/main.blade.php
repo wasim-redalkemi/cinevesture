@@ -74,8 +74,8 @@
                       <div id="countdown">
                         <!-- <div id="countdown-num " class="countdown-num"></div> -->
                         <svg class="svg">
-                            <circle class="circle2" r="10" cx="20" cy="20"></circle>
-                            <circle class="circle" r="10" cx="20" cy="20"></circle>
+                            <circle class="circle2" r="8" cx="20" cy="20"></circle>
+                            <circle class="circle" r="8" cx="20" cy="20"></circle>
                         </svg>
                         </div>
                       <button class="watch-now-btn mt-4"><a href="{{ route('public-view', ['id'=>$v->id]) }}" style="color:white !important;">View Project</a></button>
@@ -283,11 +283,10 @@
   });  
 
   function startProgressBar() {
-    console.log('bi in start| ');
       // apply keyframe animation
       $(".circle").css({
-        "stroke-dasharray": "62.8px",
-        "stroke-dashoffset": "62.8px",
+        "stroke-dasharray": "50px",
+        "stroke-dashoffset": "50px",
         "transition": "stroke-dasharray,stroke-dashoffset 5000ms ease-in-out"
       });
     }
