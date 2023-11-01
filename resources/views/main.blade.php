@@ -72,10 +72,10 @@
                         </span>
                       </div>
                       <div id="countdown">
-                        <div id="countdown-num " class="countdown-num"></div>
+                        <!-- <div id="countdown-num " class="countdown-num"></div> -->
                         <svg class="svg">
-                            <circle class="circle2" r="18" cx="20" cy="20"></circle>
-                            <circle class="circle" r="18" cx="20" cy="20"></circle>
+                            <circle class="circle2" r="10" cx="20" cy="20"></circle>
+                            <circle class="circle" r="10" cx="20" cy="20"></circle>
                         </svg>
                         </div>
                       <button class="watch-now-btn mt-4"><a href="{{ route('public-view', ['id'=>$v->id]) }}" style="color:white !important;">View Project</a></button>
@@ -152,7 +152,6 @@
                 <div class="row">
                   <div class="col-md-12 carousel-header-text">
                     <h1 class="slider_elem_title">{{$v->list_name}}</h1>
-                    
                   </div>
                 </div>
               </div>
@@ -233,18 +232,10 @@
 @endsection
 
 @section('scripts')
-<script>
-    
-</script>
+
 <script type="text/javascript">
   $( document ).ready(function() {
     // console.log( "ready!" );
-    var countdown=5;
-    function resetCarouselTimer() {
-      console.log('hel');
-        countdown = 5;
-        $('.countdown-num').text(countdown);
-    }
 
     $('.like-project').on('click', function(e) {
       // console.log('jscn');
@@ -266,6 +257,7 @@
                     if (classList[i] == 'fa-heart-o') {
                         element.removeClass('fa-heart-o');
                         element.addClass('fa-heart')
+                        // toastMessage("success", resp.msg);
                         break;
                     }
                     if(classList[i] == 'fa-heart')
@@ -273,9 +265,13 @@
                         element.removeClass('fa-heart');
                         element.addClass('fa-heart-o');
                         // toastMessage("success", resp.msg);
+
                         break;
                     }
+
                 }
+            } else {
+
             }
         },
         error: function(error) {
@@ -286,6 +282,23 @@
     });
   });  
 
+  function startProgressBar() {
+    console.log('bi in start| ');
+      // apply keyframe animation
+      $(".circle").css({
+        "stroke-dasharray": "62.8px",
+        "stroke-dashoffset": "62.8px",
+        "transition": "stroke-dasharray,stroke-dashoffset 5000ms ease-in-out"
+      });
+    }
+
+    function resetProgressBar() {
+      $(".circle").css({
+        "stroke-dasharray": "0px",
+        "stroke-dashoffset": "0px",
+        "transition": "stroke-dasharray,stroke-dashoffset 0ms ease-in-out"
+      });
+    }
     $(document).ready(function () {
       // Initially hide the time and heart icons
       $('.proj_name').hide();
@@ -305,13 +318,13 @@
     $(".main_slider.owl-carousel").owlCarousel({
       center: true,
       // autoPlay: 1000,
-      // autoplayTimeout: 3000,
-      autoplay: false,
+      autoplayTimeout: 5000,
+      autoplay: true,
       loop: true,
       nav: false,
       items: 1,
       margin: 10,
-      autoplayHoverPause: true,
+      // autoplayHoverPause: true,
       responsive: {
         480: { items: 1 },
         768: { items: 1 },
@@ -319,39 +332,9 @@
           items: 1
         }
       },
-      onChanged: function(event) {
-        // resetCarouselTimer();
-        countdown = 5;
-        $('.countdown-num').text(countdown);
-
-        // Create a new <style> element
-      // Create a new <style> element
-        var style = document.createElement('style');
-        style.type = 'text/css';
-
-        // Define your keyframes animation
-        var keyframes = `
-          @keyframes countdown {
-            from {
-              stroke-dashoffset: 0px;
-            }
-            to {
-              stroke-dashoffset: 113px;
-            }
-          }
-        `;
-
-        // Add the keyframes animation rule to the <style> element
-        style.appendChild(document.createTextNode(keyframes));
-
-        // Add the <style> element to the document's <head>
-        document.head.appendChild(style);
-
-        // Add a class to the element with the "circle" class
-        var element = document.querySelector('.circle');
-        element.classList.add('countdown-animation');
-
-      },
+      onInitialized: startProgressBar,
+      onTranslate: resetProgressBar,
+      onTranslated: startProgressBar
     });
 
     $(".test.owl-carousel").owlCarousel({
@@ -406,17 +389,4 @@
     
     $('.test.owl-carousel .owl-item').css({"position": "relative","left":newLeftLen+"px"});
   </script>
-   <script>   
-   
-    $('.countdown-num').text(countdown);
-    setInterval(function() {
-      countdown = --countdown < 1 ? 5 : countdown;
-      $('.countdown-num').text(countdown);
-      // console.log('get countdown here', countdown)
-      if(countdown ==5){
-        var owl = $('.main_slider.owl-carousel').data('owl.carousel');
-          owl.next();
-      }
-    }, 1000);
-</script>
 @endsection

@@ -5230,30 +5230,39 @@ transition: 2s ease all; */
     }
 
     .circle {
-      z-index: 11;
-    stroke-dasharray: 113px;
-    stroke-dashoffset: 0px;
-    stroke-linecap: round;
-    stroke-width: 3px;
-    stroke: #DD45B3 !important;
-    fill: none;
-    /* animation: countdown 5s linear infinite forwards; */
-    }
-    .circle2 {
-    z-index:  0;
-    position: relative;
-    stroke-dashoffset: 0px;
-    stroke-linecap: round;
-    stroke-width: 3px;
-    stroke: #fffffe ;
-    fill: none;
-    }
-
-    /* @keyframes countdown {
-    from {
-        stroke-dashoffset: 0px;
-    }
-    to {
-        stroke-dashoffset: 113px;
-    }
-    } */
+        z-index: 11;
+      stroke-dasharray: 113px;
+      stroke-dashoffset: 0px;
+      stroke-linecap: round;
+      stroke-width: 3px;
+      /* stroke: red; */
+      stroke: #DD45B3 !important;
+      fill: none;
+      animation: countdown 5s linear infinite forwards;
+      }
+      .circle2 {
+      z-index:  0;
+      position: relative;
+      stroke-dashoffset: 0px;
+      stroke-linecap: round;
+      stroke-width: 3px;
+      stroke: #fffffe ;
+      fill: none;
+      }
+  
+      @keyframes countdown {
+      from {
+          stroke-dashoffset: 0px;
+      }
+      to {
+          stroke-dashoffset: 113px;
+      }
+      }
+  .present_checkbox{
+      width: 28px;
+      height: 24px;
+      margin-top: 8px;
+  } 
+  .hidden {
+      display: none;
+    } 
