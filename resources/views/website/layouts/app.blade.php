@@ -360,9 +360,7 @@
                         updateCharacterCount(numChars);
                     });
                     editor.on('KeyUp', function(event) {
-                        // var numChars = editor.plugins.wordcount.body.getCharacterCount();
-                    var numChars = tinymce.activeEditor.plugins.wordcount.body.getWordCount();
-
+                    var numChars = editor.plugins.wordcount.body.getWordCount();
                         if (numChars > max ) {
                             if(event.keyCode === 8 || event.keyCode === 37|| event.keyCode === 38|| event.keyCode === 39|| event.keyCode === 40 || event.keyCode === 116)
                             {
@@ -381,14 +379,15 @@
                 var clipboard_data = args.content;
                 // var max = $('.text_editor').attr('text-length');
                 var max = $(select_elem).attr('text-length');
-                var counts=(clipboard_data).length;
+                var copied_data_array = (clipboard_data).split(' ');
+                var counts=copied_data_array.length;
                 // var numChars = tinymce.activeEditor.plugins.wordcount.body.getCharacterCount();
                 var numChars = tinymce.activeEditor.plugins.wordcount.body.getWordCount();
 
                 if (counts+numChars>max) {
-                    var extraChar=counts+numChars-max;
+                    var extraChar=(counts+(numChars-max));
                     var fillVal=counts-extraChar;
-                    let result = clipboard_data.substring(0, fillVal);
+                    let result = (copied_data_array.splice(0, fillVal)).join(" ");
                     args.content = result;
                     $(select_elem).text(' You have reached the limit').css('color', 'red');
                 } 
