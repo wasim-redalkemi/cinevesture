@@ -5208,18 +5208,6 @@ transition: 2s ease all; */
     color: red;
     }
 
-    .countdown-num {
-    /* color: red;
-     */
-     color: #DD45B3;
-    display: inline-block;
-    line-height: 40px;
-    /* margin-top:1px;  */
-    font-weight: 300;
-    font-size: 20px;
-    
-    }
-
     .svg {
     position: absolute;
     top: 0;
@@ -5231,14 +5219,13 @@ transition: 2s ease all; */
 
     .circle {
         z-index: 11;
-      stroke-dasharray: 113px;
+      stroke-dasharray: 0px;
       stroke-dashoffset: 0px;
       stroke-linecap: round;
       stroke-width: 3px;
       /* stroke: red; */
       stroke: #DD45B3 !important;
       fill: none;
-      animation: countdown 5s linear infinite forwards;
       }
       .circle2 {
       z-index:  0;
@@ -5250,14 +5237,6 @@ transition: 2s ease all; */
       fill: none;
       }
   
-      @keyframes countdown {
-      from {
-          stroke-dashoffset: 0px;
-      }
-      to {
-          stroke-dashoffset: 113px;
-      }
-      }
   .present_checkbox{
       width: 28px;
       height: 24px;
