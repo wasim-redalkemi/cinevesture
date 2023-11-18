@@ -344,7 +344,7 @@
       margin: 0,
       center: false,
       items: 1,
-      autoplayHoverPause: true,
+      // autoplayHoverPause: true,
       stagePadding: 00,
       responsive: {
         360: { items: tiles_width},
@@ -385,7 +385,6 @@
     // console.log(leftLen);
     // console.log(childLeftLen);
     var newLeftLen = ((leftLen-childLeftLen)+0);
-    
     $('.test.owl-carousel .owl-item').css({"position": "relative","left":newLeftLen+"px"});
   </script>
 @endsection

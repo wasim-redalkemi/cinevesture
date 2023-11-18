@@ -340,9 +340,7 @@
                     }
                 }
                 editor.on('init', function () {
-                    // var numChars = editor.plugins.wordcount.body.getCharacterCount();
-                    var numChars = tinymce.activeEditor.plugins.wordcount.body.getWordCount();
-
+                    var numChars = editor.plugins.wordcount.body.getWordCount();
                     updateCharacterCount(numChars);
                     editor.on('KeyDown', function(event) {
                         // var numChars = editor.plugins.wordcount.body.getCharacterCount();
@@ -361,9 +359,7 @@
                         updateCharacterCount(numChars);
                     });
                     editor.on('KeyUp', function(event) {
-                        // var numChars = editor.plugins.wordcount.body.getCharacterCount();
-                    var numChars = tinymce.activeEditor.plugins.wordcount.body.getWordCount();
-
+                    var numChars = editor.plugins.wordcount.body.getWordCount();
                         if (numChars > max ) {
                             if(event.keyCode === 8 || event.keyCode === 37|| event.keyCode === 38|| event.keyCode === 39|| event.keyCode === 40 || event.keyCode === 116)
                             {
@@ -382,14 +378,15 @@
                 var clipboard_data = args.content;
                 // var max = $('.text_editor').attr('text-length');
                 var max = $(select_elem).attr('text-length');
-                var counts=(clipboard_data).length;
+                var copied_data_array = (clipboard_data).split(' ');
+                var counts=copied_data_array.length;
                 // var numChars = tinymce.activeEditor.plugins.wordcount.body.getCharacterCount();
                 var numChars = tinymce.activeEditor.plugins.wordcount.body.getWordCount();
 
                 if (counts+numChars>max) {
-                    var extraChar=counts+numChars-max;
+                    var extraChar=(counts+(numChars-max));
                     var fillVal=counts-extraChar;
-                    let result = clipboard_data.substring(0, fillVal);
+                    let result = (copied_data_array.splice(0, fillVal)).join(" ");
                     args.content = result;
                     $(select_elem).text(' You have reached the limit').css('color', 'red');
                 } 
@@ -406,224 +403,6 @@
             $('.textlength').css({"color":"#787885", "text-align":"end", "float":"end"})
         });
     </script>
-    {{-- <script>
-                $(document).ready(function () {
-            $('.text_editor').click();
-            });
-
-        function apply_text_editor(select_elem) {
-            var numChars;
-            var numWords; // Add this variable for word count
-
-            tinymce.init({
-                selector: select_elem,
-                toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist',
-                plugins: 'anchor pagebreak visualchars wordcount paste',
-                paste_as_text: true,
-                menubar: false,
-                branding: false,
-                setup: function (editor) {
-                    var text_elem = $(select_elem).parents('.form_elem').find('.textlength');
-                    var word_elem = $(select_elem).parents('.form_elem').find('.wordcount'); // Target the word count element
-                    var max = $(select_elem).attr('text-length');
-                    function updateCharacterCount(numChars) {
-                        text_elem.text(numChars + '/' + max);
-                        if (numChars >= max) {
-                            text_elem.text(' You have reached the limit').css('color', 'red');
-                        } else {
-                            text_elem.css('color', 'black');
-                        }
-                    }
-
-                    function updateWordCount(numWords) {
-                        word_elem.text(numWords + ' words');
-
-                    }
-
-                    editor.on('init', function () {
-                        numChars = editor.plugins.wordcount.body.getCharacterCount();
-                        numWords = editor.plugins.wordcount.body.getWordCount();
-                        // console.log(numChars);
-                        // console.log(numWords);
-                        updateCharacterCount(numChars);
-                        updateWordCount(numWords);
-
-                        editor.on('KeyDown', function (event) {
-                            numChars = editor.plugins.wordcount.body.getCharacterCount();
-                            if (numChars == max) {
-                                if (event.keyCode === 8 || event.keyCode === 37 || event.keyCode === 38 || event.keyCode === 39 || event.keyCode === 40 || event.keyCode === 116) {}
-                                else {
-                                    event.preventDefault();
-                                    return false;
-                                }
-                            }
-                            updateCharacterCount(numChars);
-                        });
-
-                        editor.on('KeyUp', function (event) {
-                            numChars = editor.plugins.wordcount.body.getCharacterCount();
-                            if (numChars > max) {
-                                if (event.keyCode === 8 || event.keyCode === 37 || event.keyCode === 38 || event.keyCode === 39 || event.keyCode === 40 || event.keyCode === 116) {}
-                                else {
-                                    event.preventDefault();
-                                    return false;
-                                }
-                            }
-                            updateCharacterCount(numChars);
-                        });
-
-                        // Add an event listener for Word Count
-                        editor.on('wordCountUpdate', function (event) {
-                            numWords = event.wordCount;
-                            updateWordCount(numWords);
-                        });
-                    });
-
-                },
-                paste_preprocess: function (plugin, args) {
-                    var clipboard_data = args.content;
-                    var max = $(select_elem).attr('text-length');
-                    var counts = clipboard_data.length;
-                    console.log(counts);
-                    numChars = tinymce.activeEditor.plugins.wordcount.body.getwordCount();
-                    console.log(numChars);
-                    if (counts + numChars > max) {
-                        var extraChar = counts + numChars - max;
-                        var fillVal = counts - extraChar;
-                        let result = clipboard_data.substring(0, fillVal);
-                        args.content = result;
-                        text_elem.text(' You have reached the limit').css('color', 'red');
-                    }
-                }
-            });
-        }
-
-        $('.controlTextLength').each(function () {
-            var text_editor = $(this).attr("no-text-editor");
-            if (text_editor == undefined) {
-                var thclass = $(this).prop('class').split(' ')[2];
-                apply_text_editor('.' + thclass);
-            }
-            $(this).after("<span class=textlength for_alert text-end>" + $(this).val().length + " / " + $(this).attr('text-length') + "</span>");
-            $(this).after("<span class=wordcount for_alert text-end>0 words</span>"); // Add word count element
-            $('.textlength, .wordcount').css({
-                "color": "#787885",
-                "text-align": "end",
-                "float": "end"
-            });
-        });
-
-    </script> --}}
-
-    {{-- <script>
-                $(document).ready(function () {
-            $('.text_editor').click();
-        });
-
-        function apply_text_editor(select_elem) {
-            var numChars;
-            var numWords;
-
-            tinymce.init({
-                selector: select_elem,
-                toolbar: 'undo redo styleselect bold italic alignleft aligncenter alignright bullist',
-                plugins: 'anchor pagebreak visualchars wordcount paste',
-                paste_as_text: true,
-                menubar: false,
-                branding: false,
-                setup: function (editor) {
-                    var text_elem = $(select_elem).parents('.form_elem').find('.textlength');
-                    var word_elem = $(select_elem).parents('.form_elem').find('.wordcount');
-                    var max = $(select_elem).attr('text-length');
-
-                    function updateCharacterCount(numChars) {
-                        text_elem.text(numChars + '/' + max);
-                        if (numChars >= max) {
-                            text_elem.text(' You have reached the limit').css('color', 'red');
-                        } else {
-                            text_elem.css('color', 'black');
-                        }
-                    }
-
-                    function updateWordCount(numWords) {
-                        word_elem.text(numWords + ' words');
-                        if (numWords > max) {
-                            word_elem.text(' You have reached the word limit').css('color', 'red');
-                        } else {
-                            word_elem.css('color', 'black');
-                        }
-                    }
-
-                    editor.on('init', function () {
-                        numChars = editor.plugins.wordcount.body.getCharacterCount();
-                        numWords = editor.plugins.wordcount.body.getWordCount();
-                        updateCharacterCount(numChars);
-                        updateWordCount(numWords);
-
-                        editor.on('KeyDown', function (event) {
-                            numChars = editor.plugins.wordcount.body.getCharacterCount();
-                            if (numChars == max) {
-                                if (event.keyCode === 8 || event.keyCode === 37 || event.keyCode === 38 || event.keyCode === 39 || event.keyCode === 40 || event.keyCode === 116) {}
-                                else {
-                                    event.preventDefault();
-                                    return false;
-                                }
-                            }
-                            updateCharacterCount(numChars);
-                        });
-
-                        editor.on('KeyUp', function (event) {
-                            numChars = editor.plugins.wordcount.body.getCharacterCount();
-                            if (numChars > max) {
-                                if (event.keyCode === 8 || event.keyCode === 37 || event.keyCode === 38 || event.keyCode === 39 || event.keyCode === 40 || event.keyCode === 116) {}
-                                else {
-                                    event.preventDefault();
-                                    return false;
-                                }
-                            }
-                            updateCharacterCount(numChars);
-                        });
-
-                        editor.on('wordCountUpdate', function (event) {
-                            numWords = event.wordCount;
-                            updateWordCount(numWords);
-                        });
-                    });
-
-                },
-                paste_preprocess: function (plugin, args) {
-                    var clipboard_data = args.content;
-                    var max = $(select_elem).attr('text-length');
-                    var counts = clipboard_data.length;
-                    numChars = tinymce.activeEditor.plugins.wordcount.body.getCharacterCount();
-                    if (counts + numChars > max) {
-                        var extraChar = counts + numChars - max;
-                        var fillVal = counts - extraChar;
-                        let result = clipboard_data.substring(0, fillVal);
-                        args.content = result;
-                        text_elem.text(' You have reached the limit').css('color', 'red');
-                        word_elem.text(' You have reached the word limit').css('color', 'red');
-                    }
-                }
-            });
-        }
-
-        $('.controlTextLength').each(function () {
-            var text_editor = $(this).attr("no-text-editor");
-            if (text_editor == undefined) {
-                var thclass = $(this).prop('class').split(' ')[2];
-                apply_text_editor('.' + thclass);
-            }
-            $(this).after("<span class=textlength for_alert text-end>" + $(this).val().length + " / " + $(this).attr('text-length') + "</span>");
-            $(this).after("<span class=wordcount for_alert text-end>0 words</span>");
-            $('.textlength, .wordcount').css({
-                "color": "#787885",
-                "text-align": "end",
-                "float": "end"
-            });
-        });
-
-    </script> --}}
 </body>
 </html>
 

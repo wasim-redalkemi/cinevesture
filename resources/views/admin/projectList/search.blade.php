@@ -165,7 +165,8 @@
                                  <th>SN</th>
                                  <th>Name</th>
                                  <th>Image</th>
-                                 <th>Status</th>
+                                 <th>Admin Status</th>
+                                 <th>User Status</th>
                                   @php
                                   if($list_type[0]->type == 'curated')
                                   { 
@@ -201,6 +202,9 @@
                                         </td>
                                         <td>
                                           {{ucfirst($project->admin_status)}}
+                                        </td>
+                                        <td>
+                                          {{ucfirst($project->user_status)}}
                                         </td>
                                         @php
                                         if($list_type[0]->type == 'curated')

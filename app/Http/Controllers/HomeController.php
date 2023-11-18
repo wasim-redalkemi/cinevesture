@@ -90,7 +90,6 @@ class HomeController extends Controller
         $project_lists_carousel = (isset($project_list_project[0]))?$project_list_project[0]:[];
         unset($project_list_project[0]);
         $project_lists_except_carousel = $project_list_project;
-        
         return view('main',compact(['countries','languages','geners','categories','looking_for','project_stages','project_lists_carousel','project_lists_except_carousel']));
     } catch (\Throwable $th) {
         echo $th;

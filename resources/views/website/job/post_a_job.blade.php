@@ -272,12 +272,14 @@ $('.select_limit').change(function(event) {
             success: function(resp) {
                 $btn.text(btnCurrentText);
                 $btn.prop('disabled',false);
+                var total_len = $('.controlTextLength').attr('text-length');
                 if (resp.status == true) {
                     if (button == "save") {
                         $('#post_job')[0].reset();
                         $(".emp-select2").val(null).trigger('change');
                         $(".work-select2").val(null).trigger('change');
                         $('.js-select2').val(null).trigger('change');
+                        $('.textlength').html('0/'+total_len);
                        new toastMessage("success", resp.message);
                        
                        $('#publish_job_modal').modal('show');
@@ -287,6 +289,7 @@ $('.select_limit').change(function(event) {
                         $(".emp-select2").val(null).trigger('change');
                         $(".work-select2").val(null).trigger('change');
                         $('.js-select2').val(null).trigger('change');
+                        $('.textlength').html('0/'+total_len);
                         $('#publish_job_modal').modal('hide');
                         $('#publish_job_modal').modal('show');
                     }
