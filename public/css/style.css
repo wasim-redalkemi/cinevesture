@@ -2965,6 +2965,11 @@ transition: 0.3s all ease;
     z-index: 0 !important;
 }
 
+.home_img_wrap_banner img {
+    width: inherit; height:inherit;object-fit:cover;
+}
+
+
 .related .home_img_wrap {
     width: 227px;
     height: 130px;
@@ -4404,6 +4409,11 @@ input:checked+.slider:before {
     .home_img_wrap_banner { 
     width: auto;
     }
+
+    .banner_photo{
+        width: inherit; height:inherit;object-fit:cover;
+    }
+   
     .main_slider .item .home-upper-slider {
         max-height: 400px;
     }

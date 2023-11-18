@@ -537,7 +537,7 @@
                         <h1 class="public-head-res-text mb-2"> Related</h1>
                         
                         <div class="related owl-carousel owl-theme ">
-                            @if(count($recomProject)>0)
+                            @if($recomProject[0]!='' && count($recomProject)>0)
                                 @foreach ($recomProject as $v1)
                                 <div class="home_img_wrap b_r owl_item_at">
                                     <div class="home_slider">
@@ -603,6 +603,7 @@
                             @else
                                 <span class="text-white"><b>-</b></span>
                             @endif 
+                            {{-- @endif --}}
                         </div>
                     </div>
                 </div>
